@@ -1,0 +1,28 @@
+/data2/gb/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/helpers.py:7: FutureWarning: Importing from timm.models.helpers is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/data2/gb/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/data2/gb/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+using Transformer_type: ViT-B-16 as a backbone
+Resized position embedding: %s to %s torch.Size([197, 768]) torch.Size([129, 768])
+Position embedding resize to height:16 width: 8
+Successfully load ckpt!
+<All keys matched successfully>
+Loading pretrained model from CLIP
+camera number is : 4
+using soft triplet loss for training
+label smooth on, numclasses: 141
+EPOCH {"epoch": 1, "steps": 42, "loss": 8.22951839083717, "seconds": 31.058067798614502, "mAP": 23.21027839769129, "Rank-1": 20.727272727272727, "Rank-5": 36.0, "Rank-10": 47.03030303030303} BEST {"mAP": 23.21027839769129, "Rank-1": 20.727272727272727, "Rank-5": 36.0, "Rank-10": 47.03030303030303, "query_count": 825, "gallery_count": 825, "descriptor_dim": 5632, "epoch": 1}
+EPOCH {"epoch": 2, "steps": 84, "loss": 5.982196751095, "seconds": 28.445831537246704, "mAP": 35.130082462088815, "Rank-1": 35.63636363636364, "Rank-5": 51.87878787878788, "Rank-10": 60.60606060606061} BEST {"mAP": 35.130082462088815, "Rank-1": 35.63636363636364, "Rank-5": 51.87878787878788, "Rank-10": 60.60606060606061, "query_count": 825, "gallery_count": 825, "descriptor_dim": 5632, "epoch": 2}
+EPOCH {"epoch": 3, "steps": 126, "loss": 4.599289332117353, "seconds": 28.76200580596924, "mAP": 51.25173385679508, "Rank-1": 52.24242424242425, "Rank-5": 63.63636363636363, "Rank-10": 68.96969696969697} BEST {"mAP": 51.25173385679508, "Rank-1": 52.24242424242425, "Rank-5": 63.63636363636363, "Rank-10": 68.96969696969697, "query_count": 825, "gallery_count": 825, "descriptor_dim": 5632, "epoch": 3}
+EPOCH {"epoch": 4, "steps": 168, "loss": 3.557973935490563, "seconds": 28.733673095703125, "mAP": 49.36068921227978, "Rank-1": 48.848484848484844, "Rank-5": 61.45454545454545, "Rank-10": 72.36363636363636} BEST {"mAP": 51.25173385679508, "Rank-1": 52.24242424242425, "Rank-5": 63.63636363636363, "Rank-10": 68.96969696969697, "query_count": 825, "gallery_count": 825, "descriptor_dim": 5632, "epoch": 3}
+EPOCH {"epoch": 5, "steps": 210, "loss": 3.282166429928371, "seconds": 29.399736881256104, "mAP": 39.22055406892606, "Rank-1": 39.27272727272727, "Rank-5": 51.030303030303024, "Rank-10": 57.21212121212121} BEST {"mAP": 51.25173385679508, "Rank-1": 52.24242424242425, "Rank-5": 63.63636363636363, "Rank-10": 68.96969696969697, "query_count": 825, "gallery_count": 825, "descriptor_dim": 5632, "epoch": 3}
+Traceback (most recent call last):
+  File "/data2/gb/Re-ID/DeMo-DualAxis/run_experiment.py", line 197, in <module>
+    main()
+  File "/data2/gb/Re-ID/DeMo-DualAxis/run_experiment.py", line 171, in main
+    loss, names = step(model, batch, optimizer, scaler, loss_fn)
+  File "/data2/gb/Re-ID/DeMo-DualAxis/run_experiment.py", line 85, in step
+    assert not nonfinite, nonfinite
+AssertionError: ['BACKBONE.base.conv1.weight']

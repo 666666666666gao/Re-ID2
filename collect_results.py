@@ -93,6 +93,7 @@ def collect_once():
                     copy_file(host, f'{root}/runs/{CAMPAIGN}/{name}/{key}{suffix}', destination / (key + suffix))
                 if epoch:
                     copy_file(host, f'{root}/runs/{CAMPAIGN}/{name}/epochs.csv', destination / 'epochs.csv')
+                    copy_file(host, f'{root}/runs/{CAMPAIGN}/{name}/batch_orders.jsonl', destination / 'batch_orders.jsonl')
                 (destination / 'intake.json').write_text(json.dumps({'collected_at': now, 'status': phase}), encoding='utf-8')
         if phase == 'COMPLETE':
             completed.append(name)
@@ -132,7 +133,9 @@ def collect_once():
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--watch', action='store_true')
+    parser.add_argument('--initial-delay', type=float, default=0)
     args = parser.parse_args()
+    time.sleep(args.initial_delay)
     while True:
         snapshots, complete, failed = collect_once()
         if not args.watch or failed or len(complete) == 9:
