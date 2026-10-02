@@ -1,0 +1,392 @@
+{
+  "observed_at": 1790970898.0828564,
+  "runs": {
+    "MSVR310_axis_collaboration_s42": {
+      "launch": {
+        "pid": 1196537,
+        "gpu": 0,
+        "started": 1790970469.4132688,
+        "command": [
+          "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+          "-u",
+          "run_experiment.py",
+          "--dataset",
+          "MSVR310",
+          "--variant",
+          "axis_collaboration",
+          "--seed",
+          "42",
+          "--mode",
+          "train",
+          "--contribution-weight",
+          "0.05",
+          "--data-root",
+          "/data2/gb/Re-ID/dataset",
+          "--pretrained",
+          "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+          "--output",
+          "runs/axis_collaboration_v3_development/MSVR310_axis_collaboration_s42"
+        ]
+      },
+      "run": {
+        "arguments": {
+          "dataset": "MSVR310",
+          "variant": "axis_collaboration",
+          "data_root": "/data2/gb/Re-ID/dataset",
+          "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+          "output": "runs/axis_collaboration_v3_development/MSVR310_axis_collaboration_s42",
+          "seed": 42,
+          "contribution_weight": 0.05,
+          "mode": "train"
+        },
+        "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+        "classes": 103,
+        "camera_embeddings": 8,
+        "fit_records": 672,
+        "dev_records": 360,
+        "dev_queries": 210,
+        "parameters": 99681414,
+        "trainable_parameters": 99669638,
+        "descriptor_dim": 5632,
+        "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+        "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+        "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+        "torch": "2.5.1+cu121",
+        "gpu": "NVIDIA GeForce RTX 3090",
+        "started": 1790970476.400764,
+        "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+        "method_revision": "axis_collaboration_v3: separate source/band constrained experts or parameter-matched unrestricted ordinary twins; full DeMo base; one simultaneous query-condition round; stopped-gradient four-state retrieval-contribution calibration",
+        "loss_weights": [
+          0.25,
+          1.0,
+          0.1,
+          0.1,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "contribution_loss_weight": 0.05,
+        "missing_protocol": "exactly zero normalized inputs determine availability; structured relations require all their members available; no modality-dropout training in this stage"
+      },
+      "status": {
+        "status": "RUNNING",
+        "epoch": 30,
+        "steps": 271,
+        "latest": {
+          "epoch": 30,
+          "steps": 271,
+          "optimizer_steps": 271,
+          "amp_skipped_steps": 0,
+          "amp_scale": 512.0,
+          "loss": 2.2812414699130588,
+          "seconds": 13.37645959854126,
+          "mAP": 48.19915721583998,
+          "Rank-1": 60.0,
+          "Rank-5": 71.9047619047619,
+          "Rank-10": 76.19047619047619
+        },
+        "best": {
+          "mAP": 48.19915721583998,
+          "Rank-1": 60.0,
+          "Rank-5": 71.9047619047619,
+          "Rank-10": 76.19047619047619,
+          "query_count": 210,
+          "gallery_count": 360,
+          "descriptor_dim": 5632,
+          "epoch": 30
+        }
+      },
+      "log_tail": "1\": 56.19047619047619, \"Rank-5\": 72.38095238095238, \"Rank-10\": 79.04761904761905, \"query_count\": 210, \"gallery_count\": 360, \"descriptor_dim\": 5632, \"epoch\": 19}\nEPOCH {\"epoch\": 27, \"steps\": 244, \"optimizer_steps\": 244, \"amp_skipped_steps\": 0, \"amp_scale\": 512.0, \"loss\": 2.4926519923739963, \"seconds\": 13.978681325912476, \"mAP\": 45.371043686485216, \"Rank-1\": 57.14285714285714, \"Rank-5\": 69.04761904761905, \"Rank-10\": 74.76190476190476} BEST {\"mAP\": 46.7170058239879, \"Rank-1\": 56.19047619047619, \"Rank-5\": 72.38095238095238, \"Rank-10\": 79.04761904761905, \"query_count\": 210, \"gallery_count\": 360, \"descriptor_dim\": 5632, \"epoch\": 19}\nEPOCH {\"epoch\": 28, \"steps\": 253, \"optimizer_steps\": 253, \"amp_skipped_steps\": 0, \"amp_scale\": 512.0, \"loss\": 2.3216581609514026, \"seconds\": 14.128101587295532, \"mAP\": 47.1206287730732, \"Rank-1\": 59.04761904761905, \"Rank-5\": 70.95238095238095, \"Rank-10\": 75.23809523809524} BEST {\"mAP\": 47.1206287730732, \"Rank-1\": 59.04761904761905, \"Rank-5\": 70.95238095238095, \"Rank-10\": 75.23809523809524, \"query_count\": 210, \"gallery_count\": 360, \"descriptor_dim\": 5632, \"epoch\": 28}\nEPOCH {\"epoch\": 29, \"steps\": 262, \"optimizer_steps\": 262, \"amp_skipped_steps\": 0, \"amp_scale\": 512.0, \"loss\": 2.3272400167253284, \"seconds\": 13.346017360687256, \"mAP\": 48.053974673661095, \"Rank-1\": 60.0, \"Rank-5\": 71.9047619047619, \"Rank-10\": 76.19047619047619} BEST {\"mAP\": 48.053974673661095, \"Rank-1\": 60.0, \"Rank-5\": 71.9047619047619, \"Rank-10\": 76.19047619047619, \"query_count\": 210, \"gallery_count\": 360, \"descriptor_dim\": 5632, \"epoch\": 29}\nEPOCH {\"epoch\": 30, \"steps\": 271, \"optimizer_steps\": 271, \"amp_skipped_steps\": 0, \"amp_scale\": 512.0, \"loss\": 2.2812414699130588, \"seconds\": 13.37645959854126, \"mAP\": 48.19915721583998, \"Rank-1\": 60.0, \"Rank-5\": 71.9047619047619, \"Rank-10\": 76.19047619047619} BEST {\"mAP\": 48.19915721583998, \"Rank-1\": 60.0, \"Rank-5\": 71.9047619047619, \"Rank-10\": 76.19047619047619, \"query_count\": 210, \"gallery_count\": 360, \"descriptor_dim\": 5632, \"epoch\": 30}\n"
+    },
+    "RGBNT100_plain_twins_s42": {
+      "launch": {
+        "pid": 1196535,
+        "gpu": 2,
+        "started": 1790970469.410385,
+        "command": [
+          "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+          "-u",
+          "run_experiment.py",
+          "--dataset",
+          "RGBNT100",
+          "--variant",
+          "plain_twins",
+          "--seed",
+          "42",
+          "--mode",
+          "train",
+          "--contribution-weight",
+          "0.05",
+          "--data-root",
+          "/data2/gb/Re-ID/dataset",
+          "--pretrained",
+          "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+          "--output",
+          "runs/axis_collaboration_v3_development/RGBNT100_plain_twins_s42"
+        ]
+      },
+      "run": {
+        "arguments": {
+          "dataset": "RGBNT100",
+          "variant": "plain_twins",
+          "data_root": "/data2/gb/Re-ID/dataset",
+          "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+          "output": "runs/axis_collaboration_v3_development/RGBNT100_plain_twins_s42",
+          "seed": 42,
+          "contribution_weight": 0.05,
+          "mode": "train"
+        },
+        "config": "DATALOADER:\n  NUM_INSTANCE: 16\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT100\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 5\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+        "classes": 33,
+        "camera_embeddings": 8,
+        "fit_records": 5550,
+        "dev_records": 3125,
+        "dev_queries": 3125,
+        "parameters": 98857094,
+        "trainable_parameters": 98845318,
+        "descriptor_dim": 5632,
+        "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+        "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+        "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+        "torch": "2.5.1+cu121",
+        "gpu": "NVIDIA GeForce RTX 3090",
+        "started": 1790970476.6134079,
+        "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+        "method_revision": "axis_collaboration_v3: separate source/band constrained experts or parameter-matched unrestricted ordinary twins; full DeMo base; one simultaneous query-condition round; stopped-gradient four-state retrieval-contribution calibration",
+        "loss_weights": [
+          0.25,
+          1.0,
+          0.1,
+          0.1,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "contribution_loss_weight": 0.05,
+        "missing_protocol": "exactly zero normalized inputs determine availability; structured relations require all their members available; no modality-dropout training in this stage"
+      },
+      "status": {
+        "status": "RUNNING",
+        "epoch": 5,
+        "steps": 405,
+        "latest": {
+          "epoch": 5,
+          "steps": 405,
+          "optimizer_steps": 404,
+          "amp_skipped_steps": 1,
+          "amp_scale": 256.0,
+          "loss": 1.4540557044523734,
+          "seconds": 77.63083696365356,
+          "mAP": 87.6200380175206,
+          "Rank-1": 96.256,
+          "Rank-5": 96.736,
+          "Rank-10": 97.696
+        },
+        "best": {
+          "mAP": 87.6200380175206,
+          "Rank-1": 96.256,
+          "Rank-5": 96.736,
+          "Rank-10": 97.696,
+          "query_count": 3125,
+          "gallery_count": 3125,
+          "descriptor_dim": 5632,
+          "epoch": 5
+        }
+      },
+      "log_tail": "s\": 7.5490995630805875, \"seconds\": 79.33278584480286, \"mAP\": 80.13401262289987, \"Rank-1\": 94.016, \"Rank-5\": 95.26400000000001, \"Rank-10\": 95.904} BEST {\"mAP\": 80.13401262289987, \"Rank-1\": 94.016, \"Rank-5\": 95.26400000000001, \"Rank-10\": 95.904, \"query_count\": 3125, \"gallery_count\": 3125, \"descriptor_dim\": 5632, \"epoch\": 1}\nEPOCH {\"epoch\": 2, \"steps\": 162, \"optimizer_steps\": 161, \"amp_skipped_steps\": 1, \"amp_scale\": 256.0, \"loss\": 4.742892768647936, \"seconds\": 78.90953993797302, \"mAP\": 82.22762810137738, \"Rank-1\": 91.392, \"Rank-5\": 92.22399999999999, \"Rank-10\": 93.856} BEST {\"mAP\": 82.22762810137738, \"Rank-1\": 91.392, \"Rank-5\": 92.22399999999999, \"Rank-10\": 93.856, \"query_count\": 3125, \"gallery_count\": 3125, \"descriptor_dim\": 5632, \"epoch\": 2}\nEPOCH {\"epoch\": 3, \"steps\": 243, \"optimizer_steps\": 242, \"amp_skipped_steps\": 1, \"amp_scale\": 256.0, \"loss\": 3.2968748719603926, \"seconds\": 79.1422791481018, \"mAP\": 79.63326484574897, \"Rank-1\": 91.36, \"Rank-5\": 92.512, \"Rank-10\": 93.504} BEST {\"mAP\": 82.22762810137738, \"Rank-1\": 91.392, \"Rank-5\": 92.22399999999999, \"Rank-10\": 93.856, \"query_count\": 3125, \"gallery_count\": 3125, \"descriptor_dim\": 5632, \"epoch\": 2}\nEPOCH {\"epoch\": 4, \"steps\": 324, \"optimizer_steps\": 323, \"amp_skipped_steps\": 1, \"amp_scale\": 256.0, \"loss\": 1.9673275064539026, \"seconds\": 76.72701168060303, \"mAP\": 85.80724946302477, \"Rank-1\": 92.73599999999999, \"Rank-5\": 93.92, \"Rank-10\": 94.336} BEST {\"mAP\": 85.80724946302477, \"Rank-1\": 92.73599999999999, \"Rank-5\": 93.92, \"Rank-10\": 94.336, \"query_count\": 3125, \"gallery_count\": 3125, \"descriptor_dim\": 5632, \"epoch\": 4}\nEPOCH {\"epoch\": 5, \"steps\": 405, \"optimizer_steps\": 404, \"amp_skipped_steps\": 1, \"amp_scale\": 256.0, \"loss\": 1.4540557044523734, \"seconds\": 77.63083696365356, \"mAP\": 87.6200380175206, \"Rank-1\": 96.256, \"Rank-5\": 96.736, \"Rank-10\": 97.696} BEST {\"mAP\": 87.6200380175206, \"Rank-1\": 96.256, \"Rank-5\": 96.736, \"Rank-10\": 97.696, \"query_count\": 3125, \"gallery_count\": 3125, \"descriptor_dim\": 5632, \"epoch\": 5}\n"
+    },
+    "RGBNT201_axis_collaboration_s42": {
+      "launch": {
+        "pid": 1196536,
+        "gpu": 3,
+        "started": 1790970469.4124005,
+        "command": [
+          "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+          "-u",
+          "run_experiment.py",
+          "--dataset",
+          "RGBNT201",
+          "--variant",
+          "axis_collaboration",
+          "--seed",
+          "42",
+          "--mode",
+          "train",
+          "--contribution-weight",
+          "0.05",
+          "--data-root",
+          "/data2/gb/Re-ID/dataset",
+          "--pretrained",
+          "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+          "--output",
+          "runs/axis_collaboration_v3_development/RGBNT201_axis_collaboration_s42"
+        ]
+      },
+      "run": {
+        "arguments": {
+          "dataset": "RGBNT201",
+          "variant": "axis_collaboration",
+          "data_root": "/data2/gb/Re-ID/dataset",
+          "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+          "output": "runs/axis_collaboration_v3_development/RGBNT201_axis_collaboration_s42",
+          "seed": 42,
+          "contribution_weight": 0.05,
+          "mode": "train"
+        },
+        "config": "DATALOADER:\n  NUM_INSTANCE: 8\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT201\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 256\n  - 128\n  SIZE_TRAIN:\n  - 256\n  - 128\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 1\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 4\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+        "classes": 141,
+        "camera_embeddings": 4,
+        "fit_records": 3126,
+        "dev_records": 825,
+        "dev_queries": 825,
+        "parameters": 100355206,
+        "trainable_parameters": 100343430,
+        "descriptor_dim": 5632,
+        "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+        "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+        "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+        "torch": "2.5.1+cu121",
+        "gpu": "NVIDIA GeForce RTX 3090",
+        "started": 1790970476.5473986,
+        "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+        "method_revision": "axis_collaboration_v3: separate source/band constrained experts or parameter-matched unrestricted ordinary twins; full DeMo base; one simultaneous query-condition round; stopped-gradient four-state retrieval-contribution calibration",
+        "loss_weights": [
+          0.25,
+          1.0,
+          0.1,
+          0.1,
+          1.0
+        ],
+        "contribution_loss_weight": 0.05,
+        "missing_protocol": "exactly zero normalized inputs determine availability; structured relations require all their members available; no modality-dropout training in this stage"
+      },
+      "status": {
+        "status": "RUNNING",
+        "epoch": 12,
+        "steps": 504,
+        "latest": {
+          "epoch": 12,
+          "steps": 504,
+          "optimizer_steps": 504,
+          "amp_skipped_steps": 0,
+          "amp_scale": 512.0,
+          "loss": 0.6689166298934391,
+          "seconds": 33.3450243473053,
+          "mAP": 62.65888266985752,
+          "Rank-1": 63.272727272727266,
+          "Rank-5": 74.3030303030303,
+          "Rank-10": 80.84848484848484
+        },
+        "best": {
+          "mAP": 63.25767731332297,
+          "Rank-1": 64.96969696969697,
+          "Rank-5": 76.84848484848484,
+          "Rank-10": 82.3030303030303,
+          "query_count": 825,
+          "gallery_count": 825,
+          "descriptor_dim": 5632,
+          "epoch": 4
+        }
+      },
+      "log_tail": "4848484, \"Rank-10\": 82.3030303030303, \"query_count\": 825, \"gallery_count\": 825, \"descriptor_dim\": 5632, \"epoch\": 4}\nEPOCH {\"epoch\": 9, \"steps\": 378, \"optimizer_steps\": 378, \"amp_skipped_steps\": 0, \"amp_scale\": 512.0, \"loss\": 0.7711479422591981, \"seconds\": 34.00602197647095, \"mAP\": 60.372425304823196, \"Rank-1\": 63.030303030303024, \"Rank-5\": 72.72727272727273, \"Rank-10\": 78.18181818181819} BEST {\"mAP\": 63.25767731332297, \"Rank-1\": 64.96969696969697, \"Rank-5\": 76.84848484848484, \"Rank-10\": 82.3030303030303, \"query_count\": 825, \"gallery_count\": 825, \"descriptor_dim\": 5632, \"epoch\": 4}\nEPOCH {\"epoch\": 10, \"steps\": 420, \"optimizer_steps\": 420, \"amp_skipped_steps\": 0, \"amp_scale\": 512.0, \"loss\": 0.7179267775444758, \"seconds\": 32.97317433357239, \"mAP\": 60.65250201703153, \"Rank-1\": 61.81818181818181, \"Rank-5\": 73.93939393939394, \"Rank-10\": 80.24242424242424} BEST {\"mAP\": 63.25767731332297, \"Rank-1\": 64.96969696969697, \"Rank-5\": 76.84848484848484, \"Rank-10\": 82.3030303030303, \"query_count\": 825, \"gallery_count\": 825, \"descriptor_dim\": 5632, \"epoch\": 4}\nEPOCH {\"epoch\": 11, \"steps\": 462, \"optimizer_steps\": 462, \"amp_skipped_steps\": 0, \"amp_scale\": 512.0, \"loss\": 0.6825708534036364, \"seconds\": 33.93016457557678, \"mAP\": 61.22429667194488, \"Rank-1\": 62.54545454545455, \"Rank-5\": 73.57575757575758, \"Rank-10\": 80.12121212121212} BEST {\"mAP\": 63.25767731332297, \"Rank-1\": 64.96969696969697, \"Rank-5\": 76.84848484848484, \"Rank-10\": 82.3030303030303, \"query_count\": 825, \"gallery_count\": 825, \"descriptor_dim\": 5632, \"epoch\": 4}\nEPOCH {\"epoch\": 12, \"steps\": 504, \"optimizer_steps\": 504, \"amp_skipped_steps\": 0, \"amp_scale\": 512.0, \"loss\": 0.6689166298934391, \"seconds\": 33.3450243473053, \"mAP\": 62.65888266985752, \"Rank-1\": 63.272727272727266, \"Rank-5\": 74.3030303030303, \"Rank-10\": 80.84848484848484} BEST {\"mAP\": 63.25767731332297, \"Rank-1\": 64.96969696969697, \"Rank-5\": 76.84848484848484, \"Rank-10\": 82.3030303030303, \"query_count\": 825, \"gallery_count\": 825, \"descriptor_dim\": 5632, \"epoch\": 4}\n"
+    },
+    "RGBNT100_axis_collaboration_s42": {
+      "launch": {
+        "pid": 1196534,
+        "gpu": 1,
+        "started": 1790970469.410114,
+        "command": [
+          "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+          "-u",
+          "run_experiment.py",
+          "--dataset",
+          "RGBNT100",
+          "--variant",
+          "axis_collaboration",
+          "--seed",
+          "42",
+          "--mode",
+          "train",
+          "--contribution-weight",
+          "0.05",
+          "--data-root",
+          "/data2/gb/Re-ID/dataset",
+          "--pretrained",
+          "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+          "--output",
+          "runs/axis_collaboration_v3_development/RGBNT100_axis_collaboration_s42"
+        ]
+      },
+      "run": {
+        "arguments": {
+          "dataset": "RGBNT100",
+          "variant": "axis_collaboration",
+          "data_root": "/data2/gb/Re-ID/dataset",
+          "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+          "output": "runs/axis_collaboration_v3_development/RGBNT100_axis_collaboration_s42",
+          "seed": 42,
+          "contribution_weight": 0.05,
+          "mode": "train"
+        },
+        "config": "DATALOADER:\n  NUM_INSTANCE: 16\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT100\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 5\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+        "classes": 33,
+        "camera_embeddings": 8,
+        "fit_records": 5550,
+        "dev_records": 3125,
+        "dev_queries": 3125,
+        "parameters": 98857094,
+        "trainable_parameters": 98845318,
+        "descriptor_dim": 5632,
+        "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+        "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+        "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+        "torch": "2.5.1+cu121",
+        "gpu": "NVIDIA GeForce RTX 3090",
+        "started": 1790970476.5414436,
+        "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+        "method_revision": "axis_collaboration_v3: separate source/band constrained experts or parameter-matched unrestricted ordinary twins; full DeMo base; one simultaneous query-condition round; stopped-gradient four-state retrieval-contribution calibration",
+        "loss_weights": [
+          0.25,
+          1.0,
+          0.1,
+          0.1,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "contribution_loss_weight": 0.05,
+        "missing_protocol": "exactly zero normalized inputs determine availability; structured relations require all their members available; no modality-dropout training in this stage"
+      },
+      "status": {
+        "status": "RUNNING",
+        "epoch": 5,
+        "steps": 405,
+        "latest": {
+          "epoch": 5,
+          "steps": 405,
+          "optimizer_steps": 405,
+          "amp_skipped_steps": 0,
+          "amp_scale": 512.0,
+          "loss": 1.4538144815115281,
+          "seconds": 78.71366953849792,
+          "mAP": 84.84298715402208,
+          "Rank-1": 92.57600000000001,
+          "Rank-5": 93.76,
+          "Rank-10": 94.49600000000001
+        },
+        "best": {
+          "mAP": 85.07271311452504,
+          "Rank-1": 92.416,
+          "Rank-5": 93.34400000000001,
+          "Rank-10": 94.39999999999999,
+          "query_count": 3125,
+          "gallery_count": 3125,
+          "descriptor_dim": 5632,
+          "epoch": 4
+        }
+      },
+      "log_tail": "79.8984534740448, \"mAP\": 76.70398392206121, \"Rank-1\": 88.064, \"Rank-5\": 90.304, \"Rank-10\": 91.744} BEST {\"mAP\": 76.70398392206121, \"Rank-1\": 88.064, \"Rank-5\": 90.304, \"Rank-10\": 91.744, \"query_count\": 3125, \"gallery_count\": 3125, \"descriptor_dim\": 5632, \"epoch\": 1}\nEPOCH {\"epoch\": 2, \"steps\": 162, \"optimizer_steps\": 162, \"amp_skipped_steps\": 0, \"amp_scale\": 512.0, \"loss\": 4.764095756742689, \"seconds\": 75.76089453697205, \"mAP\": 77.08547330444446, \"Rank-1\": 91.424, \"Rank-5\": 92.896, \"Rank-10\": 93.664} BEST {\"mAP\": 77.08547330444446, \"Rank-1\": 91.424, \"Rank-5\": 92.896, \"Rank-10\": 93.664, \"query_count\": 3125, \"gallery_count\": 3125, \"descriptor_dim\": 5632, \"epoch\": 2}\nEPOCH {\"epoch\": 3, \"steps\": 243, \"optimizer_steps\": 243, \"amp_skipped_steps\": 0, \"amp_scale\": 512.0, \"loss\": 3.2912870836846624, \"seconds\": 78.04942226409912, \"mAP\": 79.57982758821754, \"Rank-1\": 91.616, \"Rank-5\": 93.05600000000001, \"Rank-10\": 93.44} BEST {\"mAP\": 79.57982758821754, \"Rank-1\": 91.616, \"Rank-5\": 93.05600000000001, \"Rank-10\": 93.44, \"query_count\": 3125, \"gallery_count\": 3125, \"descriptor_dim\": 5632, \"epoch\": 3}\nEPOCH {\"epoch\": 4, \"steps\": 324, \"optimizer_steps\": 324, \"amp_skipped_steps\": 0, \"amp_scale\": 512.0, \"loss\": 1.9636470785847417, \"seconds\": 77.86326575279236, \"mAP\": 85.07271311452504, \"Rank-1\": 92.416, \"Rank-5\": 93.34400000000001, \"Rank-10\": 94.39999999999999} BEST {\"mAP\": 85.07271311452504, \"Rank-1\": 92.416, \"Rank-5\": 93.34400000000001, \"Rank-10\": 94.39999999999999, \"query_count\": 3125, \"gallery_count\": 3125, \"descriptor_dim\": 5632, \"epoch\": 4}\nEPOCH {\"epoch\": 5, \"steps\": 405, \"optimizer_steps\": 405, \"amp_skipped_steps\": 0, \"amp_scale\": 512.0, \"loss\": 1.4538144815115281, \"seconds\": 78.71366953849792, \"mAP\": 84.84298715402208, \"Rank-1\": 92.57600000000001, \"Rank-5\": 93.76, \"Rank-10\": 94.49600000000001} BEST {\"mAP\": 85.07271311452504, \"Rank-1\": 92.416, \"Rank-5\": 93.34400000000001, \"Rank-10\": 94.39999999999999, \"query_count\": 3125, \"gallery_count\": 3125, \"descriptor_dim\": 5632, \"epoch\": 4}\n"
+    }
+  },
+  "gpu": "0, 68, 13717\n1, 75, 13699\n2, 100, 13723\n3, 95, 13721\n"
+}
