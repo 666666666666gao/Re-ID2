@@ -1,0 +1,24 @@
+{
+  "stage": "V3 implementation and development, no official-test efficacy claim",
+  "user_goal": "Three datasets individually: mAP and Rank-1 gains of at least 2 percentage points over DeMo, with six missing-modality conditions covered; retain all metrics and negative results",
+  "datasets": ["RGBNT201", "RGBNT100", "MSVR310"],
+  "development_protocol": "Existing fixed identity-disjoint fit/dev split, public CLIP ViT-B/16 initialization, B64, 50 epochs, highest dev mAP selects checkpoint, earliest tie",
+  "input": "Spatial patch grid with fixed symmetric complete low/mid/high FFT masks at .125/.25 cycles per patch, preserving spatial positions",
+  "modality_expert": "Seven source sets; shared rank64 value/attention/output with seven queries and lightweight band query tags. Each structured query reads only its source set and band",
+  "frequency_expert": "Three band-specific rank64 value/attention units share across modalities; a cross-band operation stays inside each modality. Source index retained until collaboration",
+  "base_path": "Original full DeMo PIFE/HDM/ATMoE and original identity heads retained; corrections are small residual projections",
+  "conditions": "One simultaneous query-condition round derived from independent U0/V0, with each updated expert still reading its own values. Lightweight conditions use FP32 after actual native AMP smoke and same-recipe diagnostic observed two zero LN gradients; main experts remain AMP",
+  "routing": "21-entry joint softmax a_S+c_b+psi(U,V), not 21 expert networks; independent marginal product when psi is removed",
+  "contribution": "Four same-dimensional states, same detached current-batch base reference gallery and positive/negative indices; targets Delta_M_given_F, Delta_F_given_M, empirical interaction. Target stops gradient, predictor reads detached contexts. No EMA reference, information-theory claim, causal claim, or full mAP target",
+  "closed_states": "Use independent M0/F0, absent predictor input zero, no conditional update, psi, or interaction projection. Shared original DeMo base remains in all states",
+  "inference": "Normal full forward and predictor only; no controlled-state comparison or labels",
+  "loss_weights": {"fused": 0.25, "original_moe": 1.0, "modality_group": 0.1, "frequency_group": 0.1, "original_global_heads": 1.0, "contribution": 0.05},
+  "matched_controls": {
+    "plain_twins": "Same actual parameter set, initial state, descriptor5632D, heads, losses and collaboration/calibration. Two attention experts access all full-frequency modalities/positions instead of source/band restrictions",
+    "ordinary_frequency": "Same actual parameters and5632D. All extra matching capacity processes the bands inside the added ordinary frequency branch; original DeMo first5120D is unchanged at initialization and by fusion construction"
+  },
+  "missing": "Zero normalized input is the existing benchmark interface. Availability makes invalid structured source sets ineligible and masks unavailable values; six actual cases tested. No modality-dropout training in this first V3 stage",
+  "M0_required": "Three actual-data structural verifications plus ten separate three-update nativeAMP/reload smokes (nine main and MSVR contribution-off), on GPU0 only after previous RGBNT201 dual residual50 finishes; no reuse of M0 weights",
+  "development_queue": "Ten fresh seed42 50epoch runs: three datasets x axis_collaboration/plain_twins/ordinary_frequency plus MSVR axis contribution-weight0. Jobs redistributed as2/2/2/4 across four cards to reduce waiting behind three long RGBNT100 runs; GPU3 gets three RGBNT201 runs then MSVR contribution-off. Each card waits its exact previous V2 exits and free GPU; no test scoring. M0 prerequisite root is axis_collaboration_v3_preflight_fp32, preserving original failed M0",
+  "efficacy_status": "Unproven. V1 test failures and V2 development failures retained; this architecture must still establish all main and missing metrics with repeated seeds and integrity audit"
+}

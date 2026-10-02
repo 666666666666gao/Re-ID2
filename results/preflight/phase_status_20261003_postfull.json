@@ -1,0 +1,3462 @@
+{
+  "2025": {
+    "time": 1790969653.2972631,
+    "controllers": {
+      "full_evaluation_controller_result.json": {
+        "count": 13,
+        "exit_codes": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "stress_controller_result.json": {
+        "count": 13,
+        "exit_codes": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "missing_controller_result.json": {
+        "count": 13,
+        "exit_codes": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "runs": {
+      "RGBNT201_dual_s42": {
+        "launch": {
+          "host": "2025",
+          "gpu": 2,
+          "pid": 625973,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT201",
+            "--variant",
+            "dual",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/dynamic_amp_comparison/RGBNT201_dual_s42"
+          ],
+          "started": 1790953075.5043623
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT201",
+            "variant": "dual",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/dynamic_amp_comparison/RGBNT201_dual_s42",
+            "seed": 42,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 8\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT201\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 256\n  - 128\n  SIZE_TRAIN:\n  - 256\n  - 128\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 1\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 4\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 141,
+          "camera_embeddings": 4,
+          "fit_records": 3126,
+          "dev_records": 825,
+          "dev_queries": 825,
+          "parameters": 105113730,
+          "trainable_parameters": 105102466,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790953082.6244593,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 2100,
+          "best": {
+            "mAP": 64.60840142524629,
+            "Rank-1": 63.272727272727266,
+            "Rank-5": 73.81818181818181,
+            "Rank-10": 81.0909090909091,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632,
+            "epoch": 10
+          },
+          "strict_reload": {
+            "mAP": 64.60840142524629,
+            "Rank-1": 63.272727272727266,
+            "Rank-5": 73.81818181818181,
+            "Rank-10": 81.0909090909091,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 2100,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13728086528,
+          "finished": 1790954645.0929344
+        },
+        "best": {
+          "mAP": 64.60840142524629,
+          "Rank-1": 63.272727272727266,
+          "Rank-5": 73.81818181818181,
+          "Rank-10": 81.0909090909091,
+          "query_count": 825,
+          "gallery_count": 825,
+          "descriptor_dim": 5632,
+          "epoch": 10
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790954646.3549767
+        },
+        "missing_launch": {
+          "gpu": 2,
+          "pid": 943416,
+          "started": 1790962858.5397398,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "missing_evaluation.py",
+            "--run-dir",
+            "runs/dynamic_amp_comparison/RGBNT201_dual_s42"
+          ]
+        },
+        "missing_exit": {
+          "exit_code": 0,
+          "finished": 1790962951.792356
+        }
+      },
+      "RGBNT201_demo_s42": {
+        "launch": {
+          "host": "2025",
+          "gpu": 0,
+          "pid": 625972,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT201",
+            "--variant",
+            "demo",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/dynamic_amp_comparison/RGBNT201_demo_s42"
+          ],
+          "started": 1790953075.5045905
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT201",
+            "variant": "demo",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/dynamic_amp_comparison/RGBNT201_demo_s42",
+            "seed": 42,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 8\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT201\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 256\n  - 128\n  SIZE_TRAIN:\n  - 256\n  - 128\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 1\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 4\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 141,
+          "camera_embeddings": 4,
+          "fit_records": 3126,
+          "dev_records": 825,
+          "dev_queries": 825,
+          "parameters": 98644480,
+          "trainable_parameters": 98639360,
+          "descriptor_dim": 5120,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790953082.6086028,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 2100,
+          "best": {
+            "mAP": 64.4467656152785,
+            "Rank-1": 63.515151515151516,
+            "Rank-5": 75.75757575757575,
+            "Rank-10": 83.03030303030303,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5120,
+            "epoch": 25
+          },
+          "strict_reload": {
+            "mAP": 64.4467656152785,
+            "Rank-1": 63.515151515151516,
+            "Rank-5": 75.75757575757575,
+            "Rank-10": 83.03030303030303,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5120
+          },
+          "optimizer_steps": 2100,
+          "amp_skipped_steps": 0,
+          "peak_memory": 12187793920,
+          "finished": 1790954895.1798108
+        },
+        "best": {
+          "mAP": 64.4467656152785,
+          "Rank-1": 63.515151515151516,
+          "Rank-5": 75.75757575757575,
+          "Rank-10": 83.03030303030303,
+          "query_count": 825,
+          "gallery_count": 825,
+          "descriptor_dim": 5120,
+          "epoch": 25
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790954896.602896
+        },
+        "missing_launch": {
+          "gpu": 0,
+          "pid": 933603,
+          "started": 1790962546.5045214,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "missing_evaluation.py",
+            "--run-dir",
+            "runs/dynamic_amp_comparison/RGBNT201_demo_s42"
+          ]
+        },
+        "missing_exit": {
+          "exit_code": 0,
+          "finished": 1790962644.476467
+        }
+      },
+      "MSVR310_demo_s42": {
+        "launch": {
+          "host": "2025",
+          "gpu": 3,
+          "pid": 625975,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "MSVR310",
+            "--variant",
+            "demo",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/dynamic_amp_comparison/MSVR310_demo_s42"
+          ],
+          "started": 1790953075.5064125
+        },
+        "status": {
+          "arguments": {
+            "dataset": "MSVR310",
+            "variant": "demo",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/dynamic_amp_comparison/MSVR310_demo_s42",
+            "seed": 42,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 103,
+          "camera_embeddings": 8,
+          "fit_records": 672,
+          "dev_records": 360,
+          "dev_queries": 210,
+          "parameters": 98223616,
+          "trainable_parameters": 98218496,
+          "descriptor_dim": 5120,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790953082.317295,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 453,
+          "best": {
+            "mAP": 47.60779210388089,
+            "Rank-1": 59.04761904761905,
+            "Rank-5": 69.04761904761905,
+            "Rank-10": 76.66666666666667,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5120,
+            "epoch": 29
+          },
+          "strict_reload": {
+            "mAP": 47.60779210388089,
+            "Rank-1": 59.04761904761905,
+            "Rank-5": 69.04761904761905,
+            "Rank-10": 76.66666666666667,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5120
+          },
+          "optimizer_steps": 453,
+          "amp_skipped_steps": 0,
+          "peak_memory": 12183131648,
+          "finished": 1790953571.9230483
+        },
+        "best": {
+          "mAP": 47.60779210388089,
+          "Rank-1": 59.04761904761905,
+          "Rank-5": 69.04761904761905,
+          "Rank-10": 76.66666666666667,
+          "query_count": 210,
+          "gallery_count": 360,
+          "descriptor_dim": 5120,
+          "epoch": 29
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790953573.141498
+        },
+        "missing_launch": {
+          "gpu": 3,
+          "pid": 943417,
+          "started": 1790962858.554069,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "missing_evaluation.py",
+            "--run-dir",
+            "runs/dynamic_amp_comparison/MSVR310_demo_s42"
+          ]
+        },
+        "missing_exit": {
+          "exit_code": 0,
+          "finished": 1790962951.5957732
+        }
+      },
+      "RGBNT201_ordinary_s42": {
+        "launch": {
+          "host": "2025",
+          "gpu": 1,
+          "pid": 625974,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT201",
+            "--variant",
+            "ordinary",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/dynamic_amp_comparison/RGBNT201_ordinary_s42"
+          ],
+          "started": 1790953075.5051098
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT201",
+            "variant": "ordinary",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/dynamic_amp_comparison/RGBNT201_ordinary_s42",
+            "seed": 42,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 8\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT201\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 256\n  - 128\n  SIZE_TRAIN:\n  - 256\n  - 128\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 1\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 4\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 141,
+          "camera_embeddings": 4,
+          "fit_records": 3126,
+          "dev_records": 825,
+          "dev_queries": 825,
+          "parameters": 105113730,
+          "trainable_parameters": 105102466,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790953082.5459476,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 2100,
+          "best": {
+            "mAP": 59.167067009600046,
+            "Rank-1": 59.27272727272728,
+            "Rank-5": 72.72727272727273,
+            "Rank-10": 78.66666666666666,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632,
+            "epoch": 21
+          },
+          "strict_reload": {
+            "mAP": 59.167067009600046,
+            "Rank-1": 59.27272727272728,
+            "Rank-5": 72.72727272727273,
+            "Rank-10": 78.66666666666666,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 2099,
+          "amp_skipped_steps": 1,
+          "peak_memory": 13080204288,
+          "finished": 1790954556.4468915
+        },
+        "best": {
+          "mAP": 59.167067009600046,
+          "Rank-1": 59.27272727272728,
+          "Rank-5": 72.72727272727273,
+          "Rank-10": 78.66666666666666,
+          "query_count": 825,
+          "gallery_count": 825,
+          "descriptor_dim": 5632,
+          "epoch": 21
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790954557.6342633
+        },
+        "missing_launch": {
+          "gpu": 1,
+          "pid": 943414,
+          "started": 1790962858.5355237,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "missing_evaluation.py",
+            "--run-dir",
+            "runs/dynamic_amp_comparison/RGBNT201_ordinary_s42"
+          ]
+        },
+        "missing_exit": {
+          "exit_code": 0,
+          "finished": 1790962946.0962915
+        }
+      },
+      "RGBNT201_demo_s44": {
+        "launch": {
+          "host": "2025",
+          "gpu": 0,
+          "pid": 749900,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT201",
+            "--variant",
+            "demo",
+            "--seed",
+            "44",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/RGBNT201_demo_s44"
+          ],
+          "started": 1790956894.219786
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT201",
+            "variant": "demo",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/RGBNT201_demo_s44",
+            "seed": 44,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 8\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT201\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 256\n  - 128\n  SIZE_TRAIN:\n  - 256\n  - 128\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 1\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 4\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 44\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 141,
+          "camera_embeddings": 4,
+          "fit_records": 3126,
+          "dev_records": 825,
+          "dev_queries": 825,
+          "parameters": 98644480,
+          "trainable_parameters": 98639360,
+          "descriptor_dim": 5120,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790956900.853313,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 2100,
+          "best": {
+            "mAP": 53.7789323215083,
+            "Rank-1": 51.87878787878788,
+            "Rank-5": 66.42424242424242,
+            "Rank-10": 73.45454545454545,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5120,
+            "epoch": 19
+          },
+          "strict_reload": {
+            "mAP": 53.7789323215083,
+            "Rank-1": 51.87878787878788,
+            "Rank-5": 66.42424242424242,
+            "Rank-10": 73.45454545454545,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5120
+          },
+          "optimizer_steps": 2100,
+          "amp_skipped_steps": 0,
+          "peak_memory": 12187793920,
+          "finished": 1790958676.4799943
+        },
+        "best": {
+          "mAP": 53.7789323215083,
+          "Rank-1": 51.87878787878788,
+          "Rank-5": 66.42424242424242,
+          "Rank-10": 73.45454545454545,
+          "query_count": 825,
+          "gallery_count": 825,
+          "descriptor_dim": 5120,
+          "epoch": 19
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790958677.7248955
+        },
+        "missing_launch": {
+          "gpu": 0,
+          "pid": 947917,
+          "started": 1790962957.9961193,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "missing_evaluation.py",
+            "--run-dir",
+            "runs/three_seed_extension/RGBNT201_demo_s44"
+          ]
+        },
+        "missing_exit": {
+          "exit_code": 0,
+          "finished": 1790963085.3286042
+        }
+      },
+      "RGBNT201_dual_s43": {
+        "launch": {
+          "host": "2025",
+          "gpu": 2,
+          "pid": 680206,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT201",
+            "--variant",
+            "dual",
+            "--seed",
+            "43",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/RGBNT201_dual_s43"
+          ],
+          "started": 1790954797.7297392
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT201",
+            "variant": "dual",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/RGBNT201_dual_s43",
+            "seed": 43,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 8\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT201\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 256\n  - 128\n  SIZE_TRAIN:\n  - 256\n  - 128\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 1\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 4\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 43\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 141,
+          "camera_embeddings": 4,
+          "fit_records": 3126,
+          "dev_records": 825,
+          "dev_queries": 825,
+          "parameters": 105113730,
+          "trainable_parameters": 105102466,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790954804.475462,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 2100,
+          "best": {
+            "mAP": 62.09786523515524,
+            "Rank-1": 62.787878787878796,
+            "Rank-5": 72.72727272727273,
+            "Rank-10": 76.48484848484848,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632,
+            "epoch": 19
+          },
+          "strict_reload": {
+            "mAP": 62.09786523515524,
+            "Rank-1": 62.787878787878796,
+            "Rank-5": 72.72727272727273,
+            "Rank-10": 76.48484848484848,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 2100,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13728086528,
+          "finished": 1790956369.2724028
+        },
+        "best": {
+          "mAP": 62.09786523515524,
+          "Rank-1": 62.787878787878796,
+          "Rank-5": 72.72727272727273,
+          "Rank-10": 76.48484848484848,
+          "query_count": 825,
+          "gallery_count": 825,
+          "descriptor_dim": 5632,
+          "epoch": 19
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790956370.406503
+        },
+        "missing_launch": {
+          "gpu": 2,
+          "pid": 947558,
+          "started": 1790962951.8619423,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "missing_evaluation.py",
+            "--run-dir",
+            "runs/three_seed_extension/RGBNT201_dual_s43"
+          ]
+        },
+        "missing_exit": {
+          "exit_code": 0,
+          "finished": 1790963048.657826
+        }
+      },
+      "MSVR310_demo_s43": {
+        "launch": {
+          "host": "2025",
+          "gpu": 3,
+          "pid": 663836,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "MSVR310",
+            "--variant",
+            "demo",
+            "--seed",
+            "43",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/MSVR310_demo_s43"
+          ],
+          "started": 1790954317.5306535
+        },
+        "status": {
+          "arguments": {
+            "dataset": "MSVR310",
+            "variant": "demo",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/MSVR310_demo_s43",
+            "seed": 43,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 43\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 103,
+          "camera_embeddings": 8,
+          "fit_records": 672,
+          "dev_records": 360,
+          "dev_queries": 210,
+          "parameters": 98223616,
+          "trainable_parameters": 98218496,
+          "descriptor_dim": 5120,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790954323.962171,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 452,
+          "best": {
+            "mAP": 47.2689442106852,
+            "Rank-1": 59.04761904761905,
+            "Rank-5": 70.0,
+            "Rank-10": 75.23809523809524,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5120,
+            "epoch": 36
+          },
+          "strict_reload": {
+            "mAP": 47.2689442106852,
+            "Rank-1": 59.04761904761905,
+            "Rank-5": 70.0,
+            "Rank-10": 75.23809523809524,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5120
+          },
+          "optimizer_steps": 452,
+          "amp_skipped_steps": 0,
+          "peak_memory": 12183131648,
+          "finished": 1790954823.735127
+        },
+        "best": {
+          "mAP": 47.2689442106852,
+          "Rank-1": 59.04761904761905,
+          "Rank-5": 70.0,
+          "Rank-10": 75.23809523809524,
+          "query_count": 210,
+          "gallery_count": 360,
+          "descriptor_dim": 5120,
+          "epoch": 36
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790954825.1003685
+        },
+        "missing_launch": {
+          "gpu": 3,
+          "pid": 947553,
+          "started": 1790962951.6588492,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "missing_evaluation.py",
+            "--run-dir",
+            "runs/three_seed_extension/MSVR310_demo_s43"
+          ]
+        },
+        "missing_exit": {
+          "exit_code": 0,
+          "finished": 1790963043.513313
+        }
+      },
+      "RGBNT201_ordinary_s44": {
+        "launch": {
+          "host": "2025",
+          "gpu": 1,
+          "pid": 731361,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT201",
+            "--variant",
+            "ordinary",
+            "--seed",
+            "44",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/RGBNT201_ordinary_s44"
+          ],
+          "started": 1790956256.1170776
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT201",
+            "variant": "ordinary",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/RGBNT201_ordinary_s44",
+            "seed": 44,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 8\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT201\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 256\n  - 128\n  SIZE_TRAIN:\n  - 256\n  - 128\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 1\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 4\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 44\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 141,
+          "camera_embeddings": 4,
+          "fit_records": 3126,
+          "dev_records": 825,
+          "dev_queries": 825,
+          "parameters": 105113730,
+          "trainable_parameters": 105102466,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790956262.3384843,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 2100,
+          "best": {
+            "mAP": 62.207786220940555,
+            "Rank-1": 64.24242424242425,
+            "Rank-5": 75.27272727272727,
+            "Rank-10": 84.0,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632,
+            "epoch": 13
+          },
+          "strict_reload": {
+            "mAP": 62.207786220940555,
+            "Rank-1": 64.24242424242425,
+            "Rank-5": 75.27272727272727,
+            "Rank-10": 84.0,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 2100,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13080204288,
+          "finished": 1790957736.1766846
+        },
+        "best": {
+          "mAP": 62.207786220940555,
+          "Rank-1": 64.24242424242425,
+          "Rank-5": 75.27272727272727,
+          "Rank-10": 84.0,
+          "query_count": 825,
+          "gallery_count": 825,
+          "descriptor_dim": 5632,
+          "epoch": 13
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790957737.6182468
+        },
+        "missing_launch": {
+          "gpu": 1,
+          "pid": 950875,
+          "started": 1790963034.221763,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "missing_evaluation.py",
+            "--run-dir",
+            "runs/three_seed_extension/RGBNT201_ordinary_s44"
+          ]
+        },
+        "missing_exit": {
+          "exit_code": 0,
+          "finished": 1790963123.498019
+        }
+      },
+      "RGBNT201_dual_s44": {
+        "launch": {
+          "host": "2025",
+          "gpu": 2,
+          "pid": 734717,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT201",
+            "--variant",
+            "dual",
+            "--seed",
+            "44",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/RGBNT201_dual_s44"
+          ],
+          "started": 1790956370.4082108
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT201",
+            "variant": "dual",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/RGBNT201_dual_s44",
+            "seed": 44,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 8\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT201\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 256\n  - 128\n  SIZE_TRAIN:\n  - 256\n  - 128\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 1\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 4\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 44\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 141,
+          "camera_embeddings": 4,
+          "fit_records": 3126,
+          "dev_records": 825,
+          "dev_queries": 825,
+          "parameters": 105113730,
+          "trainable_parameters": 105102466,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790956376.8874424,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 2100,
+          "best": {
+            "mAP": 66.37349623289859,
+            "Rank-1": 68.0,
+            "Rank-5": 80.0,
+            "Rank-10": 84.48484848484848,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632,
+            "epoch": 20
+          },
+          "strict_reload": {
+            "mAP": 66.37349623289859,
+            "Rank-1": 68.0,
+            "Rank-5": 80.0,
+            "Rank-10": 84.48484848484848,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 2100,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13728086528,
+          "finished": 1790957937.325428
+        },
+        "best": {
+          "mAP": 66.37349623289859,
+          "Rank-1": 68.0,
+          "Rank-5": 80.0,
+          "Rank-10": 84.48484848484848,
+          "query_count": 825,
+          "gallery_count": 825,
+          "descriptor_dim": 5632,
+          "epoch": 20
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790957938.496848
+        },
+        "missing_launch": {
+          "gpu": 2,
+          "pid": 951685,
+          "started": 1790963048.726423,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "missing_evaluation.py",
+            "--run-dir",
+            "runs/three_seed_extension/RGBNT201_dual_s44"
+          ]
+        },
+        "missing_exit": {
+          "exit_code": 0,
+          "finished": 1790963143.6703858
+        }
+      },
+      "MSVR310_dual_s43": {
+        "launch": {
+          "host": "2025",
+          "gpu": 3,
+          "pid": 699497,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "MSVR310",
+            "--variant",
+            "dual",
+            "--seed",
+            "43",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/MSVR310_dual_s43"
+          ],
+          "started": 1790955343.0346963
+        },
+        "status": {
+          "arguments": {
+            "dataset": "MSVR310",
+            "variant": "dual",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/MSVR310_dual_s43",
+            "seed": 43,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 43\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 103,
+          "camera_embeddings": 8,
+          "fit_records": 672,
+          "dev_records": 360,
+          "dev_queries": 210,
+          "parameters": 104459394,
+          "trainable_parameters": 104448130,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790955349.3679566,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 452,
+          "best": {
+            "mAP": 46.58524353585058,
+            "Rank-1": 60.0,
+            "Rank-5": 69.52380952380952,
+            "Rank-10": 72.85714285714285,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632,
+            "epoch": 14
+          },
+          "strict_reload": {
+            "mAP": 46.58524353585058,
+            "Rank-1": 60.0,
+            "Rank-5": 69.52380952380952,
+            "Rank-10": 72.85714285714285,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 452,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13722119680,
+          "finished": 1790955889.4130073
+        },
+        "best": {
+          "mAP": 46.58524353585058,
+          "Rank-1": 60.0,
+          "Rank-5": 69.52380952380952,
+          "Rank-10": 72.85714285714285,
+          "query_count": 210,
+          "gallery_count": 360,
+          "descriptor_dim": 5632,
+          "epoch": 14
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790955890.665458
+        },
+        "missing_launch": {
+          "gpu": 3,
+          "pid": 955325,
+          "started": 1790963137.1669655,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "missing_evaluation.py",
+            "--run-dir",
+            "runs/three_seed_extension/MSVR310_dual_s43"
+          ]
+        },
+        "missing_exit": {
+          "exit_code": 0,
+          "finished": 1790963234.2864976
+        }
+      },
+      "RGBNT201_demo_s43": {
+        "launch": {
+          "host": "2025",
+          "gpu": 0,
+          "pid": 689234,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT201",
+            "--variant",
+            "demo",
+            "--seed",
+            "43",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/RGBNT201_demo_s43"
+          ],
+          "started": 1790955037.812883
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT201",
+            "variant": "demo",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/RGBNT201_demo_s43",
+            "seed": 43,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 8\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT201\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 256\n  - 128\n  SIZE_TRAIN:\n  - 256\n  - 128\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 1\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 4\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 43\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 141,
+          "camera_embeddings": 4,
+          "fit_records": 3126,
+          "dev_records": 825,
+          "dev_queries": 825,
+          "parameters": 98644480,
+          "trainable_parameters": 98639360,
+          "descriptor_dim": 5120,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790955044.9554603,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 2100,
+          "best": {
+            "mAP": 63.38537379425745,
+            "Rank-1": 63.15151515151515,
+            "Rank-5": 76.60606060606061,
+            "Rank-10": 84.60606060606061,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5120,
+            "epoch": 24
+          },
+          "strict_reload": {
+            "mAP": 63.38537379425745,
+            "Rank-1": 63.15151515151515,
+            "Rank-5": 76.60606060606061,
+            "Rank-10": 84.60606060606061,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5120
+          },
+          "optimizer_steps": 2100,
+          "amp_skipped_steps": 0,
+          "peak_memory": 12187793920,
+          "finished": 1790956893.004649
+        },
+        "best": {
+          "mAP": 63.38537379425745,
+          "Rank-1": 63.15151515151515,
+          "Rank-5": 76.60606060606061,
+          "Rank-10": 84.60606060606061,
+          "query_count": 825,
+          "gallery_count": 825,
+          "descriptor_dim": 5120,
+          "epoch": 24
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790956894.218014
+        },
+        "missing_launch": {
+          "gpu": 0,
+          "pid": 943415,
+          "started": 1790962858.5389268,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "missing_evaluation.py",
+            "--run-dir",
+            "runs/three_seed_extension/RGBNT201_demo_s43"
+          ]
+        },
+        "missing_exit": {
+          "exit_code": 0,
+          "finished": 1790962957.9088023
+        }
+      },
+      "MSVR310_ordinary_s43": {
+        "launch": {
+          "host": "2025",
+          "gpu": 3,
+          "pid": 681520,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "MSVR310",
+            "--variant",
+            "ordinary",
+            "--seed",
+            "43",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/MSVR310_ordinary_s43"
+          ],
+          "started": 1790954825.1021714
+        },
+        "status": {
+          "arguments": {
+            "dataset": "MSVR310",
+            "variant": "ordinary",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/MSVR310_ordinary_s43",
+            "seed": 43,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 43\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 103,
+          "camera_embeddings": 8,
+          "fit_records": 672,
+          "dev_records": 360,
+          "dev_queries": 210,
+          "parameters": 104459394,
+          "trainable_parameters": 104448130,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790954831.8813877,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 452,
+          "best": {
+            "mAP": 47.1016294096892,
+            "Rank-1": 57.61904761904761,
+            "Rank-5": 72.85714285714285,
+            "Rank-10": 78.0952380952381,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632,
+            "epoch": 14
+          },
+          "strict_reload": {
+            "mAP": 47.1016294096892,
+            "Rank-1": 57.61904761904761,
+            "Rank-5": 72.85714285714285,
+            "Rank-10": 78.0952380952381,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 452,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13077186560,
+          "finished": 1790955341.8503993
+        },
+        "best": {
+          "mAP": 47.1016294096892,
+          "Rank-1": 57.61904761904761,
+          "Rank-5": 72.85714285714285,
+          "Rank-10": 78.0952380952381,
+          "query_count": 210,
+          "gallery_count": 360,
+          "descriptor_dim": 5632,
+          "epoch": 14
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790955343.0328326
+        },
+        "missing_launch": {
+          "gpu": 3,
+          "pid": 951278,
+          "started": 1790963043.5808089,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "missing_evaluation.py",
+            "--run-dir",
+            "runs/three_seed_extension/MSVR310_ordinary_s43"
+          ]
+        },
+        "missing_exit": {
+          "exit_code": 0,
+          "finished": 1790963137.117405
+        }
+      },
+      "RGBNT201_ordinary_s43": {
+        "launch": {
+          "host": "2025",
+          "gpu": 1,
+          "pid": 680205,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT201",
+            "--variant",
+            "ordinary",
+            "--seed",
+            "43",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/RGBNT201_ordinary_s43"
+          ],
+          "started": 1790954797.7090542
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT201",
+            "variant": "ordinary",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/RGBNT201_ordinary_s43",
+            "seed": 43,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 8\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT201\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 256\n  - 128\n  SIZE_TRAIN:\n  - 256\n  - 128\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 1\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 4\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 43\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 141,
+          "camera_embeddings": 4,
+          "fit_records": 3126,
+          "dev_records": 825,
+          "dev_queries": 825,
+          "parameters": 105113730,
+          "trainable_parameters": 105102466,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790954804.5977573,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 2100,
+          "best": {
+            "mAP": 62.3104238073078,
+            "Rank-1": 64.36363636363637,
+            "Rank-5": 77.0909090909091,
+            "Rank-10": 81.93939393939394,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632,
+            "epoch": 11
+          },
+          "strict_reload": {
+            "mAP": 62.3104238073078,
+            "Rank-1": 64.36363636363637,
+            "Rank-5": 77.0909090909091,
+            "Rank-10": 81.93939393939394,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 2100,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13080204288,
+          "finished": 1790956254.957338
+        },
+        "best": {
+          "mAP": 62.3104238073078,
+          "Rank-1": 64.36363636363637,
+          "Rank-5": 77.0909090909091,
+          "Rank-10": 81.93939393939394,
+          "query_count": 825,
+          "gallery_count": 825,
+          "descriptor_dim": 5632,
+          "epoch": 11
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790956256.1153398
+        },
+        "missing_launch": {
+          "gpu": 1,
+          "pid": 947342,
+          "started": 1790962946.1471918,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "missing_evaluation.py",
+            "--run-dir",
+            "runs/three_seed_extension/RGBNT201_ordinary_s43"
+          ]
+        },
+        "missing_exit": {
+          "exit_code": 0,
+          "finished": 1790963034.1729767
+        }
+      },
+      "MSVR310_dual_residual_s42": {
+        "launch": {
+          "gpu": 2,
+          "pid": 976207,
+          "started": 1790963338.7426047,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "MSVR310",
+            "--variant",
+            "dual_residual",
+            "--seed",
+            "42",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/residual_development_v2/MSVR310_dual_residual_s42"
+          ]
+        },
+        "status": {
+          "arguments": {
+            "dataset": "MSVR310",
+            "variant": "dual_residual",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/residual_development_v2/MSVR310_dual_residual_s42",
+            "seed": 42,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 103,
+          "camera_embeddings": 8,
+          "fit_records": 672,
+          "dev_records": 360,
+          "dev_queries": 210,
+          "parameters": 103936902,
+          "trainable_parameters": 103925638,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790963345.8118665,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "method_revision": "residual_v2: full DeMo HDM anchor, rank64 frequency values/band adapter, small learned residual scales; no contribution loss or modality-dropout training",
+          "loss_weights": [
+            0.25,
+            1.0,
+            0.1,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 453,
+          "best": {
+            "mAP": 48.53433838672813,
+            "Rank-1": 60.952380952380956,
+            "Rank-5": 70.95238095238095,
+            "Rank-10": 75.23809523809524,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632,
+            "epoch": 37
+          },
+          "strict_reload": {
+            "mAP": 48.53433838672813,
+            "Rank-1": 60.952380952380956,
+            "Rank-5": 70.95238095238095,
+            "Rank-10": 75.23809523809524,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 453,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13085741568,
+          "finished": 1790963897.4296963
+        },
+        "best": {
+          "mAP": 48.53433838672813,
+          "Rank-1": 60.952380952380956,
+          "Rank-5": 70.95238095238095,
+          "Rank-10": 75.23809523809524,
+          "query_count": 210,
+          "gallery_count": 360,
+          "descriptor_dim": 5632,
+          "epoch": 37
+        },
+        "exit": {
+          "run": "MSVR310_dual_residual_s42",
+          "exit_code": 0,
+          "finished": 1790963898.8586037
+        },
+        "log_tail": "it_records\": 672, \"dev_records\": 360, \"dev_queries\": 210, \"parameters\": 103936902, \"trainable_parameters\": 103925638, \"descriptor_dim\": 5632, \"pretraining\": \"public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints\", \"checkpoint_rule\": \"highest development mAP; ties keep earliest epoch; official test not used\", \"evaluation_scope\": \"identity-heldout development only, not full-training paper reproduction\", \"torch\": \"2.5.1+cu121\", \"gpu\": \"NVIDIA GeForce RTX 3090\", \"started\": 1790963345.8118665, \"amp_policy\": \"native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts\", \"method_revision\": \"residual_v2: full DeMo HDM anchor, rank64 frequency values/band adapter, small learned residual scales; no contribution loss or modality-dropout training\", \"loss_weights\": [0.25, 1.0, 0.1, 1.0, 1.0, 1.0], \"status\": \"COMPLETE\", \"epochs\": 50, \"steps\": 453, \"best\": {\"mAP\": 48.53433838672813, \"Rank-1\": 60.952380952380956, \"Rank-5\": 70.95238095238095, \"Rank-10\": 75.23809523809524, \"query_count\": 210, \"gallery_count\": 360, \"descriptor_dim\": 5632, \"epoch\": 37}, \"strict_reload\": {\"mAP\": 48.53433838672813, \"Rank-1\": 60.952380952380956, \"Rank-5\": 70.95238095238095, \"Rank-10\": 75.23809523809524, \"query_count\": 210, \"gallery_count\": 360, \"descriptor_dim\": 5632}, \"optimizer_steps\": 453, \"amp_skipped_steps\": 0, \"peak_memory\": 13085741568, \"finished\": 1790963897.4296963}\n"
+      },
+      "RGBNT201_ordinary_residual_s42": {
+        "launch": {
+          "gpu": 2,
+          "pid": 1023702,
+          "started": 1790964646.9672256,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT201",
+            "--variant",
+            "ordinary_residual",
+            "--seed",
+            "42",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/residual_development_v2/RGBNT201_ordinary_residual_s42"
+          ]
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT201",
+            "variant": "ordinary_residual",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/residual_development_v2/RGBNT201_ordinary_residual_s42",
+            "seed": 42,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 8\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT201\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 256\n  - 128\n  SIZE_TRAIN:\n  - 256\n  - 128\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 1\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 4\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 141,
+          "camera_embeddings": 4,
+          "fit_records": 3126,
+          "dev_records": 825,
+          "dev_queries": 825,
+          "parameters": 104591238,
+          "trainable_parameters": 104579974,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790964653.6112475,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "method_revision": "residual_v2: full DeMo HDM anchor, rank64 frequency values/band adapter, small learned residual scales; no contribution loss or modality-dropout training",
+          "loss_weights": [
+            0.25,
+            1.0,
+            0.1,
+            1.0
+          ],
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 2100,
+          "best": {
+            "mAP": 63.85350986084087,
+            "Rank-1": 64.12121212121212,
+            "Rank-5": 75.63636363636364,
+            "Rank-10": 81.21212121212122,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632,
+            "epoch": 36
+          },
+          "strict_reload": {
+            "mAP": 63.85350986084087,
+            "Rank-1": 64.12121212121212,
+            "Rank-5": 75.63636363636364,
+            "Rank-10": 81.21212121212122,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 2100,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13091118080,
+          "finished": 1790966167.852906
+        },
+        "best": {
+          "mAP": 63.85350986084087,
+          "Rank-1": 64.12121212121212,
+          "Rank-5": 75.63636363636364,
+          "Rank-10": 81.21212121212122,
+          "query_count": 825,
+          "gallery_count": 825,
+          "descriptor_dim": 5632,
+          "epoch": 36
+        },
+        "exit": {
+          "run": "RGBNT201_ordinary_residual_s42",
+          "exit_code": 0,
+          "finished": 1790966169.210731
+        },
+        "log_tail": "gs\": 4, \"fit_records\": 3126, \"dev_records\": 825, \"dev_queries\": 825, \"parameters\": 104591238, \"trainable_parameters\": 104579974, \"descriptor_dim\": 5632, \"pretraining\": \"public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints\", \"checkpoint_rule\": \"highest development mAP; ties keep earliest epoch; official test not used\", \"evaluation_scope\": \"identity-heldout development only, not full-training paper reproduction\", \"torch\": \"2.5.1+cu121\", \"gpu\": \"NVIDIA GeForce RTX 3090\", \"started\": 1790964653.6112475, \"amp_policy\": \"native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts\", \"method_revision\": \"residual_v2: full DeMo HDM anchor, rank64 frequency values/band adapter, small learned residual scales; no contribution loss or modality-dropout training\", \"loss_weights\": [0.25, 1.0, 0.1, 1.0], \"status\": \"COMPLETE\", \"epochs\": 50, \"steps\": 2100, \"best\": {\"mAP\": 63.85350986084087, \"Rank-1\": 64.12121212121212, \"Rank-5\": 75.63636363636364, \"Rank-10\": 81.21212121212122, \"query_count\": 825, \"gallery_count\": 825, \"descriptor_dim\": 5632, \"epoch\": 36}, \"strict_reload\": {\"mAP\": 63.85350986084087, \"Rank-1\": 64.12121212121212, \"Rank-5\": 75.63636363636364, \"Rank-10\": 81.21212121212122, \"query_count\": 825, \"gallery_count\": 825, \"descriptor_dim\": 5632}, \"optimizer_steps\": 2100, \"amp_skipped_steps\": 0, \"peak_memory\": 13091118080, \"finished\": 1790966167.852906}\n"
+      },
+      "RGBNT100_ordinary_residual_s42": {
+        "launch": {
+          "gpu": 3,
+          "pid": 1023703,
+          "started": 1790964646.969039,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "ordinary_residual",
+            "--seed",
+            "42",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/residual_development_v2/RGBNT100_ordinary_residual_s42"
+          ]
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT100",
+            "variant": "ordinary_residual",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/residual_development_v2/RGBNT100_ordinary_residual_s42",
+            "seed": 42,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 16\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT100\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 5\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 33,
+          "camera_embeddings": 8,
+          "fit_records": 5550,
+          "dev_records": 3125,
+          "dev_queries": 3125,
+          "parameters": 103148422,
+          "trainable_parameters": 103137158,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790964654.261113,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "method_revision": "residual_v2: full DeMo HDM anchor, rank64 frequency values/band adapter, small learned residual scales; no contribution loss or modality-dropout training",
+          "loss_weights": [
+            0.25,
+            1.0,
+            0.1,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 4035,
+          "best": {
+            "mAP": 87.75601508031635,
+            "Rank-1": 97.21600000000001,
+            "Rank-5": 97.63199999999999,
+            "Rank-10": 98.24000000000001,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632,
+            "epoch": 15
+          },
+          "strict_reload": {
+            "mAP": 87.75601508031635,
+            "Rank-1": 97.21600000000001,
+            "Rank-5": 97.63199999999999,
+            "Rank-10": 98.24000000000001,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 4035,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13074663424,
+          "finished": 1790967967.6207385
+        },
+        "best": {
+          "mAP": 87.75601508031635,
+          "Rank-1": 97.21600000000001,
+          "Rank-5": 97.63199999999999,
+          "Rank-10": 98.24000000000001,
+          "query_count": 3125,
+          "gallery_count": 3125,
+          "descriptor_dim": 5632,
+          "epoch": 15
+        },
+        "exit": {
+          "run": "RGBNT100_ordinary_residual_s42",
+          "exit_code": 0,
+          "finished": 1790967968.8910904
+        },
+        "log_tail": "ords\": 5550, \"dev_records\": 3125, \"dev_queries\": 3125, \"parameters\": 103148422, \"trainable_parameters\": 103137158, \"descriptor_dim\": 5632, \"pretraining\": \"public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints\", \"checkpoint_rule\": \"highest development mAP; ties keep earliest epoch; official test not used\", \"evaluation_scope\": \"identity-heldout development only, not full-training paper reproduction\", \"torch\": \"2.5.1+cu121\", \"gpu\": \"NVIDIA GeForce RTX 3090\", \"started\": 1790964654.261113, \"amp_policy\": \"native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts\", \"method_revision\": \"residual_v2: full DeMo HDM anchor, rank64 frequency values/band adapter, small learned residual scales; no contribution loss or modality-dropout training\", \"loss_weights\": [0.25, 1.0, 0.1, 1.0, 1.0, 1.0], \"status\": \"COMPLETE\", \"epochs\": 50, \"steps\": 4035, \"best\": {\"mAP\": 87.75601508031635, \"Rank-1\": 97.21600000000001, \"Rank-5\": 97.63199999999999, \"Rank-10\": 98.24000000000001, \"query_count\": 3125, \"gallery_count\": 3125, \"descriptor_dim\": 5632, \"epoch\": 15}, \"strict_reload\": {\"mAP\": 87.75601508031635, \"Rank-1\": 97.21600000000001, \"Rank-5\": 97.63199999999999, \"Rank-10\": 98.24000000000001, \"query_count\": 3125, \"gallery_count\": 3125, \"descriptor_dim\": 5632}, \"optimizer_steps\": 4035, \"amp_skipped_steps\": 0, \"peak_memory\": 13074663424, \"finished\": 1790967967.6207385}\n"
+      },
+      "MSVR310_ordinary_residual_s42": {
+        "launch": {
+          "gpu": 3,
+          "pid": 976191,
+          "started": 1790963338.6981986,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "MSVR310",
+            "--variant",
+            "ordinary_residual",
+            "--seed",
+            "42",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/residual_development_v2/MSVR310_ordinary_residual_s42"
+          ]
+        },
+        "status": {
+          "arguments": {
+            "dataset": "MSVR310",
+            "variant": "ordinary_residual",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/residual_development_v2/MSVR310_ordinary_residual_s42",
+            "seed": 42,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 103,
+          "camera_embeddings": 8,
+          "fit_records": 672,
+          "dev_records": 360,
+          "dev_queries": 210,
+          "parameters": 103936902,
+          "trainable_parameters": 103925638,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790963345.5542612,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "method_revision": "residual_v2: full DeMo HDM anchor, rank64 frequency values/band adapter, small learned residual scales; no contribution loss or modality-dropout training",
+          "loss_weights": [
+            0.25,
+            1.0,
+            0.1,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 453,
+          "best": {
+            "mAP": 45.645041927482566,
+            "Rank-1": 58.57142857142858,
+            "Rank-5": 69.52380952380952,
+            "Rank-10": 74.76190476190476,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632,
+            "epoch": 44
+          },
+          "strict_reload": {
+            "mAP": 45.645041927482566,
+            "Rank-1": 58.57142857142858,
+            "Rank-5": 69.52380952380952,
+            "Rank-10": 74.76190476190476,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 453,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13085736960,
+          "finished": 1790963878.6785212
+        },
+        "best": {
+          "mAP": 45.645041927482566,
+          "Rank-1": 58.57142857142858,
+          "Rank-5": 69.52380952380952,
+          "Rank-10": 74.76190476190476,
+          "query_count": 210,
+          "gallery_count": 360,
+          "descriptor_dim": 5632,
+          "epoch": 44
+        },
+        "exit": {
+          "run": "MSVR310_ordinary_residual_s42",
+          "exit_code": 0,
+          "finished": 1790963880.1175907
+        },
+        "log_tail": "it_records\": 672, \"dev_records\": 360, \"dev_queries\": 210, \"parameters\": 103936902, \"trainable_parameters\": 103925638, \"descriptor_dim\": 5632, \"pretraining\": \"public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints\", \"checkpoint_rule\": \"highest development mAP; ties keep earliest epoch; official test not used\", \"evaluation_scope\": \"identity-heldout development only, not full-training paper reproduction\", \"torch\": \"2.5.1+cu121\", \"gpu\": \"NVIDIA GeForce RTX 3090\", \"started\": 1790963345.5542612, \"amp_policy\": \"native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts\", \"method_revision\": \"residual_v2: full DeMo HDM anchor, rank64 frequency values/band adapter, small learned residual scales; no contribution loss or modality-dropout training\", \"loss_weights\": [0.25, 1.0, 0.1, 1.0, 1.0, 1.0], \"status\": \"COMPLETE\", \"epochs\": 50, \"steps\": 453, \"best\": {\"mAP\": 45.645041927482566, \"Rank-1\": 58.57142857142858, \"Rank-5\": 69.52380952380952, \"Rank-10\": 74.76190476190476, \"query_count\": 210, \"gallery_count\": 360, \"descriptor_dim\": 5632, \"epoch\": 44}, \"strict_reload\": {\"mAP\": 45.645041927482566, \"Rank-1\": 58.57142857142858, \"Rank-5\": 69.52380952380952, \"Rank-10\": 74.76190476190476, \"query_count\": 210, \"gallery_count\": 360, \"descriptor_dim\": 5632}, \"optimizer_steps\": 453, \"amp_skipped_steps\": 0, \"peak_memory\": 13085736960, \"finished\": 1790963878.6785212}\n"
+      },
+      "RGBNT100_dual_residual_s42": {
+        "launch": {
+          "gpu": 1,
+          "pid": 976205,
+          "started": 1790963338.7345953,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "dual_residual",
+            "--seed",
+            "42",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/residual_development_v2/RGBNT100_dual_residual_s42"
+          ]
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT100",
+            "variant": "dual_residual",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/residual_development_v2/RGBNT100_dual_residual_s42",
+            "seed": 42,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 16\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT100\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 5\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 33,
+          "camera_embeddings": 8,
+          "fit_records": 5550,
+          "dev_records": 3125,
+          "dev_queries": 3125,
+          "parameters": 103148422,
+          "trainable_parameters": 103137158,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790963345.8150373,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "method_revision": "residual_v2: full DeMo HDM anchor, rank64 frequency values/band adapter, small learned residual scales; no contribution loss or modality-dropout training",
+          "loss_weights": [
+            0.25,
+            1.0,
+            0.1,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 4035,
+          "best": {
+            "mAP": 87.65627206072996,
+            "Rank-1": 95.136,
+            "Rank-5": 95.584,
+            "Rank-10": 96.288,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632,
+            "epoch": 10
+          },
+          "strict_reload": {
+            "mAP": 87.65627206072996,
+            "Rank-1": 95.136,
+            "Rank-5": 95.584,
+            "Rank-10": 96.288,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 4035,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13074668032,
+          "finished": 1790966808.0627613
+        },
+        "best": {
+          "mAP": 87.65627206072996,
+          "Rank-1": 95.136,
+          "Rank-5": 95.584,
+          "Rank-10": 96.288,
+          "query_count": 3125,
+          "gallery_count": 3125,
+          "descriptor_dim": 5632,
+          "epoch": 10
+        },
+        "exit": {
+          "run": "RGBNT100_dual_residual_s42",
+          "exit_code": 0,
+          "finished": 1790966809.3419032
+        },
+        "log_tail": "n  WEIGHT: ''\\n\", \"classes\": 33, \"camera_embeddings\": 8, \"fit_records\": 5550, \"dev_records\": 3125, \"dev_queries\": 3125, \"parameters\": 103148422, \"trainable_parameters\": 103137158, \"descriptor_dim\": 5632, \"pretraining\": \"public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints\", \"checkpoint_rule\": \"highest development mAP; ties keep earliest epoch; official test not used\", \"evaluation_scope\": \"identity-heldout development only, not full-training paper reproduction\", \"torch\": \"2.5.1+cu121\", \"gpu\": \"NVIDIA GeForce RTX 3090\", \"started\": 1790963345.8150373, \"amp_policy\": \"native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts\", \"method_revision\": \"residual_v2: full DeMo HDM anchor, rank64 frequency values/band adapter, small learned residual scales; no contribution loss or modality-dropout training\", \"loss_weights\": [0.25, 1.0, 0.1, 1.0, 1.0, 1.0], \"status\": \"COMPLETE\", \"epochs\": 50, \"steps\": 4035, \"best\": {\"mAP\": 87.65627206072996, \"Rank-1\": 95.136, \"Rank-5\": 95.584, \"Rank-10\": 96.288, \"query_count\": 3125, \"gallery_count\": 3125, \"descriptor_dim\": 5632, \"epoch\": 10}, \"strict_reload\": {\"mAP\": 87.65627206072996, \"Rank-1\": 95.136, \"Rank-5\": 95.584, \"Rank-10\": 96.288, \"query_count\": 3125, \"gallery_count\": 3125, \"descriptor_dim\": 5632}, \"optimizer_steps\": 4035, \"amp_skipped_steps\": 0, \"peak_memory\": 13074668032, \"finished\": 1790966808.0627613}\n"
+      },
+      "RGBNT201_dual_residual_s42": {
+        "launch": {
+          "gpu": 0,
+          "pid": 976206,
+          "started": 1790963338.7386508,
+          "command": [
+            "/data2/gb/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT201",
+            "--variant",
+            "dual_residual",
+            "--seed",
+            "42",
+            "--data-root",
+            "/data2/gb/Re-ID/dataset",
+            "--pretrained",
+            "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/residual_development_v2/RGBNT201_dual_residual_s42"
+          ]
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT201",
+            "variant": "dual_residual",
+            "data_root": "/data2/gb/Re-ID/dataset",
+            "pretrained": "/data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/residual_development_v2/RGBNT201_dual_residual_s42",
+            "seed": 42,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 8\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT201\n  ROOT_DIR: /data2/gb/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 256\n  - 128\n  SIZE_TRAIN:\n  - 256\n  - 128\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 1\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 4\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data2/gb/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 141,
+          "camera_embeddings": 4,
+          "fit_records": 3126,
+          "dev_records": 825,
+          "dev_queries": 825,
+          "parameters": 104591238,
+          "trainable_parameters": 104579974,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790963345.7529216,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "method_revision": "residual_v2: full DeMo HDM anchor, rank64 frequency values/band adapter, small learned residual scales; no contribution loss or modality-dropout training",
+          "loss_weights": [
+            0.25,
+            1.0,
+            0.1,
+            1.0
+          ],
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 2100,
+          "best": {
+            "mAP": 61.28665511955922,
+            "Rank-1": 60.60606060606061,
+            "Rank-5": 74.3030303030303,
+            "Rank-10": 81.6969696969697,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632,
+            "epoch": 7
+          },
+          "strict_reload": {
+            "mAP": 61.28665511955922,
+            "Rank-1": 60.60606060606061,
+            "Rank-5": 74.3030303030303,
+            "Rank-10": 81.6969696969697,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 2100,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13091646976,
+          "finished": 1790965361.3997083
+        },
+        "best": {
+          "mAP": 61.28665511955922,
+          "Rank-1": 60.60606060606061,
+          "Rank-5": 74.3030303030303,
+          "Rank-10": 81.6969696969697,
+          "query_count": 825,
+          "gallery_count": 825,
+          "descriptor_dim": 5632,
+          "epoch": 7
+        },
+        "exit": {
+          "run": "RGBNT201_dual_residual_s42",
+          "exit_code": 0,
+          "finished": 1790965362.8131292
+        },
+        "log_tail": "ddings\": 4, \"fit_records\": 3126, \"dev_records\": 825, \"dev_queries\": 825, \"parameters\": 104591238, \"trainable_parameters\": 104579974, \"descriptor_dim\": 5632, \"pretraining\": \"public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints\", \"checkpoint_rule\": \"highest development mAP; ties keep earliest epoch; official test not used\", \"evaluation_scope\": \"identity-heldout development only, not full-training paper reproduction\", \"torch\": \"2.5.1+cu121\", \"gpu\": \"NVIDIA GeForce RTX 3090\", \"started\": 1790963345.7529216, \"amp_policy\": \"native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts\", \"method_revision\": \"residual_v2: full DeMo HDM anchor, rank64 frequency values/band adapter, small learned residual scales; no contribution loss or modality-dropout training\", \"loss_weights\": [0.25, 1.0, 0.1, 1.0], \"status\": \"COMPLETE\", \"epochs\": 50, \"steps\": 2100, \"best\": {\"mAP\": 61.28665511955922, \"Rank-1\": 60.60606060606061, \"Rank-5\": 74.3030303030303, \"Rank-10\": 81.6969696969697, \"query_count\": 825, \"gallery_count\": 825, \"descriptor_dim\": 5632, \"epoch\": 7}, \"strict_reload\": {\"mAP\": 61.28665511955922, \"Rank-1\": 60.60606060606061, \"Rank-5\": 74.3030303030303, \"Rank-10\": 81.6969696969697, \"query_count\": 825, \"gallery_count\": 825, \"descriptor_dim\": 5632}, \"optimizer_steps\": 2100, \"amp_skipped_steps\": 0, \"peak_memory\": 13091646976, \"finished\": 1790965361.3997083}\n"
+      }
+    },
+    "gpu": "0, 0, 12\n1, 0, 12\n2, 0, 12\n3, 0, 12\n",
+    "processes": []
+  },
+  "2026": {
+    "time": 1790969653.6376774,
+    "controllers": {
+      "full_evaluation_controller_result.json": {
+        "count": 14,
+        "exit_codes": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "stress_controller_result.json": {
+        "count": 14,
+        "exit_codes": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "runs": {
+      "RGBNT100_ordinary_s42": {
+        "launch": {
+          "host": "2026",
+          "gpu": 1,
+          "pid": 1874709,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "ordinary",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/dynamic_amp_comparison/RGBNT100_ordinary_s42"
+          ],
+          "started": 1790953082.043966
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT100",
+            "variant": "ordinary",
+            "data_root": "/data/gaob/Re-ID/dataset",
+            "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/dynamic_amp_comparison/RGBNT100_ordinary_s42",
+            "seed": 42,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 16\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT100\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 5\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 33,
+          "camera_embeddings": 8,
+          "fit_records": 5550,
+          "dev_records": 3125,
+          "dev_queries": 3125,
+          "parameters": 103670914,
+          "trainable_parameters": 103659650,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790953091.4366398,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 4035,
+          "best": {
+            "mAP": 89.30213932133606,
+            "Rank-1": 96.32,
+            "Rank-5": 96.96000000000001,
+            "Rank-10": 97.344,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632,
+            "epoch": 38
+          },
+          "strict_reload": {
+            "mAP": 89.30213932133606,
+            "Rank-1": 96.32,
+            "Rank-5": 96.96000000000001,
+            "Rank-10": 97.344,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 4033,
+          "amp_skipped_steps": 2,
+          "peak_memory": 13064212480,
+          "finished": 1790956510.4877563
+        },
+        "best": {
+          "mAP": 89.30213932133606,
+          "Rank-1": 96.32,
+          "Rank-5": 96.96000000000001,
+          "Rank-10": 97.344,
+          "query_count": 3125,
+          "gallery_count": 3125,
+          "descriptor_dim": 5632,
+          "epoch": 38
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790956511.7552903
+        }
+      },
+      "MSVR310_dual_s42": {
+        "launch": {
+          "host": "2026",
+          "gpu": 3,
+          "pid": 1891497,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "MSVR310",
+            "--variant",
+            "dual",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/dynamic_amp_comparison/MSVR310_dual_s42"
+          ],
+          "started": 1790953672.5417109
+        },
+        "status": {
+          "arguments": {
+            "dataset": "MSVR310",
+            "variant": "dual",
+            "data_root": "/data/gaob/Re-ID/dataset",
+            "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/dynamic_amp_comparison/MSVR310_dual_s42",
+            "seed": 42,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 103,
+          "camera_embeddings": 8,
+          "fit_records": 672,
+          "dev_records": 360,
+          "dev_queries": 210,
+          "parameters": 104459394,
+          "trainable_parameters": 104448130,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790953680.633622,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 453,
+          "best": {
+            "mAP": 41.684188829385704,
+            "Rank-1": 55.23809523809524,
+            "Rank-5": 67.14285714285714,
+            "Rank-10": 74.76190476190476,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632,
+            "epoch": 28
+          },
+          "strict_reload": {
+            "mAP": 41.684188829385704,
+            "Rank-1": 55.23809523809524,
+            "Rank-5": 67.14285714285714,
+            "Rank-10": 74.76190476190476,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 453,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13722119680,
+          "finished": 1790954285.5374935
+        },
+        "best": {
+          "mAP": 41.684188829385704,
+          "Rank-1": 55.23809523809524,
+          "Rank-5": 67.14285714285714,
+          "Rank-10": 74.76190476190476,
+          "query_count": 210,
+          "gallery_count": 360,
+          "descriptor_dim": 5632,
+          "epoch": 28
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790954286.8262095
+        }
+      },
+      "RGBNT100_demo_s42": {
+        "launch": {
+          "host": "2026",
+          "gpu": 0,
+          "pid": 1874707,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "demo",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/dynamic_amp_comparison/RGBNT100_demo_s42"
+          ],
+          "started": 1790953082.0415618
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT100",
+            "variant": "demo",
+            "data_root": "/data/gaob/Re-ID/dataset",
+            "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/dynamic_amp_comparison/RGBNT100_demo_s42",
+            "seed": 42,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 16\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT100\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 5\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 33,
+          "camera_embeddings": 8,
+          "fit_records": 5550,
+          "dev_records": 3125,
+          "dev_queries": 3125,
+          "parameters": 97865216,
+          "trainable_parameters": 97860096,
+          "descriptor_dim": 5120,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790953091.018798,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 4035,
+          "best": {
+            "mAP": 88.65372164553196,
+            "Rank-1": 95.776,
+            "Rank-5": 96.576,
+            "Rank-10": 97.344,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5120,
+            "epoch": 49
+          },
+          "strict_reload": {
+            "mAP": 88.65372164553196,
+            "Rank-1": 95.776,
+            "Rank-5": 96.576,
+            "Rank-10": 97.344,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5120
+          },
+          "optimizer_steps": 4035,
+          "amp_skipped_steps": 0,
+          "peak_memory": 12174978560,
+          "finished": 1790956525.3164196
+        },
+        "best": {
+          "mAP": 88.65372164553196,
+          "Rank-1": 95.776,
+          "Rank-5": 96.576,
+          "Rank-10": 97.344,
+          "query_count": 3125,
+          "gallery_count": 3125,
+          "descriptor_dim": 5120,
+          "epoch": 49
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790956526.6625185
+        }
+      },
+      "MSVR310_ordinary_s42": {
+        "launch": {
+          "host": "2026",
+          "gpu": 3,
+          "pid": 1874711,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "MSVR310",
+            "--variant",
+            "ordinary",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/dynamic_amp_comparison/MSVR310_ordinary_s42"
+          ],
+          "started": 1790953082.04733
+        },
+        "status": {
+          "arguments": {
+            "dataset": "MSVR310",
+            "variant": "ordinary",
+            "data_root": "/data/gaob/Re-ID/dataset",
+            "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/dynamic_amp_comparison/MSVR310_ordinary_s42",
+            "seed": 42,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 103,
+          "camera_embeddings": 8,
+          "fit_records": 672,
+          "dev_records": 360,
+          "dev_queries": 210,
+          "parameters": 104459394,
+          "trainable_parameters": 104448130,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790953090.8024678,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 453,
+          "best": {
+            "mAP": 46.75519502956051,
+            "Rank-1": 56.19047619047619,
+            "Rank-5": 70.0,
+            "Rank-10": 77.14285714285715,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632,
+            "epoch": 31
+          },
+          "strict_reload": {
+            "mAP": 46.75519502956051,
+            "Rank-1": 56.19047619047619,
+            "Rank-5": 70.0,
+            "Rank-10": 77.14285714285715,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 453,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13077186560,
+          "finished": 1790953671.0934055
+        },
+        "best": {
+          "mAP": 46.75519502956051,
+          "Rank-1": 56.19047619047619,
+          "Rank-5": 70.0,
+          "Rank-10": 77.14285714285715,
+          "query_count": 210,
+          "gallery_count": 360,
+          "descriptor_dim": 5632,
+          "epoch": 31
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790953672.5394413
+        }
+      },
+      "RGBNT100_dual_s42": {
+        "launch": {
+          "host": "2026",
+          "gpu": 2,
+          "pid": 1874710,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "dual",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/dynamic_amp_comparison/RGBNT100_dual_s42"
+          ],
+          "started": 1790953082.0456836
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT100",
+            "variant": "dual",
+            "data_root": "/data/gaob/Re-ID/dataset",
+            "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/dynamic_amp_comparison/RGBNT100_dual_s42",
+            "seed": 42,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 16\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT100\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 5\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 33,
+          "camera_embeddings": 8,
+          "fit_records": 5550,
+          "dev_records": 3125,
+          "dev_queries": 3125,
+          "parameters": 103670914,
+          "trainable_parameters": 103659650,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790953090.6892686,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 4035,
+          "best": {
+            "mAP": 88.25414560996401,
+            "Rank-1": 95.00800000000001,
+            "Rank-5": 95.776,
+            "Rank-10": 96.608,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632,
+            "epoch": 9
+          },
+          "strict_reload": {
+            "mAP": 88.25414560996401,
+            "Rank-1": 95.00800000000001,
+            "Rank-5": 95.776,
+            "Rank-10": 96.608,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 4035,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13715109376,
+          "finished": 1790957983.1345234
+        },
+        "best": {
+          "mAP": 88.25414560996401,
+          "Rank-1": 95.00800000000001,
+          "Rank-5": 95.776,
+          "Rank-10": 96.608,
+          "query_count": 3125,
+          "gallery_count": 3125,
+          "descriptor_dim": 5632,
+          "epoch": 9
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790957984.383221
+        }
+      },
+      "RGBNT100_demo_s44": {
+        "launch": {
+          "host": "2026",
+          "gpu": 0,
+          "pid": 2081732,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "demo",
+            "--seed",
+            "44",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/RGBNT100_demo_s44"
+          ],
+          "started": 1790960123.343422
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT100",
+            "variant": "demo",
+            "data_root": "/data/gaob/Re-ID/dataset",
+            "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/RGBNT100_demo_s44",
+            "seed": 44,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 16\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT100\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 44\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 5\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 33,
+          "camera_embeddings": 8,
+          "fit_records": 5550,
+          "dev_records": 3125,
+          "dev_queries": 3125,
+          "parameters": 97865216,
+          "trainable_parameters": 97860096,
+          "descriptor_dim": 5120,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790960131.6210597,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 4034,
+          "best": {
+            "mAP": 89.25155588223474,
+            "Rank-1": 97.088,
+            "Rank-5": 97.536,
+            "Rank-10": 98.08,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5120,
+            "epoch": 20
+          },
+          "strict_reload": {
+            "mAP": 89.25155588223474,
+            "Rank-1": 97.088,
+            "Rank-5": 97.536,
+            "Rank-10": 98.08,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5120
+          },
+          "optimizer_steps": 4034,
+          "amp_skipped_steps": 0,
+          "peak_memory": 12174978560,
+          "finished": 1790963502.7270515
+        },
+        "best": {
+          "mAP": 89.25155588223474,
+          "Rank-1": 97.088,
+          "Rank-5": 97.536,
+          "Rank-10": 98.08,
+          "query_count": 3125,
+          "gallery_count": 3125,
+          "descriptor_dim": 5120,
+          "epoch": 20
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790963503.9689157
+        }
+      },
+      "RGBNT100_dual_s43": {
+        "launch": {
+          "host": "2026",
+          "gpu": 2,
+          "pid": 2017533,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "dual",
+            "--seed",
+            "43",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/RGBNT100_dual_s43"
+          ],
+          "started": 1790958163.387488
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT100",
+            "variant": "dual",
+            "data_root": "/data/gaob/Re-ID/dataset",
+            "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/RGBNT100_dual_s43",
+            "seed": 43,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 16\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT100\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 43\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 5\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 33,
+          "camera_embeddings": 8,
+          "fit_records": 5550,
+          "dev_records": 3125,
+          "dev_queries": 3125,
+          "parameters": 103670914,
+          "trainable_parameters": 103659650,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790958172.3068612,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 4035,
+          "best": {
+            "mAP": 89.31206727201008,
+            "Rank-1": 97.248,
+            "Rank-5": 97.408,
+            "Rank-10": 97.568,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632,
+            "epoch": 44
+          },
+          "strict_reload": {
+            "mAP": 89.31206727201008,
+            "Rank-1": 97.248,
+            "Rank-5": 97.408,
+            "Rank-10": 97.568,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 4035,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13715109376,
+          "finished": 1790963183.9197302
+        },
+        "best": {
+          "mAP": 89.31206727201008,
+          "Rank-1": 97.248,
+          "Rank-5": 97.408,
+          "Rank-10": 97.568,
+          "query_count": 3125,
+          "gallery_count": 3125,
+          "descriptor_dim": 5632,
+          "epoch": 44
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790963185.3640752
+        }
+      },
+      "MSVR310_demo_s44": {
+        "launch": {
+          "host": "2026",
+          "gpu": 3,
+          "pid": 1909487,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "MSVR310",
+            "--variant",
+            "demo",
+            "--seed",
+            "44",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/MSVR310_demo_s44"
+          ],
+          "started": 1790954321.9020076
+        },
+        "status": {
+          "arguments": {
+            "dataset": "MSVR310",
+            "variant": "demo",
+            "data_root": "/data/gaob/Re-ID/dataset",
+            "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/MSVR310_demo_s44",
+            "seed": 44,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 44\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 103,
+          "camera_embeddings": 8,
+          "fit_records": 672,
+          "dev_records": 360,
+          "dev_queries": 210,
+          "parameters": 98223616,
+          "trainable_parameters": 98218496,
+          "descriptor_dim": 5120,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790954329.9682205,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 452,
+          "best": {
+            "mAP": 45.92426067643267,
+            "Rank-1": 62.857142857142854,
+            "Rank-5": 69.04761904761905,
+            "Rank-10": 74.76190476190476,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5120,
+            "epoch": 10
+          },
+          "strict_reload": {
+            "mAP": 45.92426067643267,
+            "Rank-1": 62.857142857142854,
+            "Rank-5": 69.04761904761905,
+            "Rank-10": 74.76190476190476,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5120
+          },
+          "optimizer_steps": 452,
+          "amp_skipped_steps": 0,
+          "peak_memory": 12183131648,
+          "finished": 1790954877.5444794
+        },
+        "best": {
+          "mAP": 45.92426067643267,
+          "Rank-1": 62.857142857142854,
+          "Rank-5": 69.04761904761905,
+          "Rank-10": 74.76190476190476,
+          "query_count": 210,
+          "gallery_count": 360,
+          "descriptor_dim": 5120,
+          "epoch": 10
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790954878.8661919
+        }
+      },
+      "MSVR310_ordinary_s44": {
+        "launch": {
+          "host": "2026",
+          "gpu": 3,
+          "pid": 1925966,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "MSVR310",
+            "--variant",
+            "ordinary",
+            "--seed",
+            "44",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/MSVR310_ordinary_s44"
+          ],
+          "started": 1790954878.8678052
+        },
+        "status": {
+          "arguments": {
+            "dataset": "MSVR310",
+            "variant": "ordinary",
+            "data_root": "/data/gaob/Re-ID/dataset",
+            "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/MSVR310_ordinary_s44",
+            "seed": 44,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 44\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 103,
+          "camera_embeddings": 8,
+          "fit_records": 672,
+          "dev_records": 360,
+          "dev_queries": 210,
+          "parameters": 104459394,
+          "trainable_parameters": 104448130,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790954887.0477746,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 452,
+          "best": {
+            "mAP": 44.00331845689493,
+            "Rank-1": 57.14285714285714,
+            "Rank-5": 68.57142857142857,
+            "Rank-10": 74.76190476190476,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632,
+            "epoch": 29
+          },
+          "strict_reload": {
+            "mAP": 44.00331845689493,
+            "Rank-1": 57.14285714285714,
+            "Rank-5": 68.57142857142857,
+            "Rank-10": 74.76190476190476,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 452,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13077186560,
+          "finished": 1790955463.5507174
+        },
+        "best": {
+          "mAP": 44.00331845689493,
+          "Rank-1": 57.14285714285714,
+          "Rank-5": 68.57142857142857,
+          "Rank-10": 74.76190476190476,
+          "query_count": 210,
+          "gallery_count": 360,
+          "descriptor_dim": 5632,
+          "epoch": 29
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790955465.1464167
+        }
+      },
+      "RGBNT100_demo_s43": {
+        "launch": {
+          "host": "2026",
+          "gpu": 0,
+          "pid": 1978675,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "demo",
+            "--seed",
+            "43",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/RGBNT100_demo_s43"
+          ],
+          "started": 1790956722.782478
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT100",
+            "variant": "demo",
+            "data_root": "/data/gaob/Re-ID/dataset",
+            "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/RGBNT100_demo_s43",
+            "seed": 43,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 16\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT100\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 43\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 5\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 33,
+          "camera_embeddings": 8,
+          "fit_records": 5550,
+          "dev_records": 3125,
+          "dev_queries": 3125,
+          "parameters": 97865216,
+          "trainable_parameters": 97860096,
+          "descriptor_dim": 5120,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790956731.590548,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 4035,
+          "best": {
+            "mAP": 88.66097886178439,
+            "Rank-1": 95.296,
+            "Rank-5": 95.488,
+            "Rank-10": 95.968,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5120,
+            "epoch": 7
+          },
+          "strict_reload": {
+            "mAP": 88.66097886178439,
+            "Rank-1": 95.296,
+            "Rank-5": 95.488,
+            "Rank-10": 95.968,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5120
+          },
+          "optimizer_steps": 4035,
+          "amp_skipped_steps": 0,
+          "peak_memory": 12174978560,
+          "finished": 1790960121.8698165
+        },
+        "best": {
+          "mAP": 88.66097886178439,
+          "Rank-1": 95.296,
+          "Rank-5": 95.488,
+          "Rank-10": 95.968,
+          "query_count": 3125,
+          "gallery_count": 3125,
+          "descriptor_dim": 5120,
+          "epoch": 7
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790960123.3424702
+        }
+      },
+      "RGBNT100_ordinary_s44": {
+        "launch": {
+          "host": "2026",
+          "gpu": 1,
+          "pid": 2082139,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "ordinary",
+            "--seed",
+            "44",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/RGBNT100_ordinary_s44"
+          ],
+          "started": 1790960135.915334
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT100",
+            "variant": "ordinary",
+            "data_root": "/data/gaob/Re-ID/dataset",
+            "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/RGBNT100_ordinary_s44",
+            "seed": 44,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 16\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT100\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 44\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 5\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 33,
+          "camera_embeddings": 8,
+          "fit_records": 5550,
+          "dev_records": 3125,
+          "dev_queries": 3125,
+          "parameters": 103670914,
+          "trainable_parameters": 103659650,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790960144.5544407,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 4034,
+          "best": {
+            "mAP": 87.79983135927662,
+            "Rank-1": 94.592,
+            "Rank-5": 95.16799999999999,
+            "Rank-10": 95.93599999999999,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632,
+            "epoch": 6
+          },
+          "strict_reload": {
+            "mAP": 87.79983135927662,
+            "Rank-1": 94.592,
+            "Rank-5": 95.16799999999999,
+            "Rank-10": 95.93599999999999,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 4034,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13064212480,
+          "finished": 1790963559.1369164
+        },
+        "best": {
+          "mAP": 87.79983135927662,
+          "Rank-1": 94.592,
+          "Rank-5": 95.16799999999999,
+          "Rank-10": 95.93599999999999,
+          "query_count": 3125,
+          "gallery_count": 3125,
+          "descriptor_dim": 5632,
+          "epoch": 6
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790963560.539704
+        }
+      },
+      "RGBNT100_dual_s44": {
+        "launch": {
+          "host": "2026",
+          "gpu": 2,
+          "pid": 2160172,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "dual",
+            "--seed",
+            "44",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/RGBNT100_dual_s44"
+          ],
+          "started": 1790963185.365905
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT100",
+            "variant": "dual",
+            "data_root": "/data/gaob/Re-ID/dataset",
+            "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/RGBNT100_dual_s44",
+            "seed": 44,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 16\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT100\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 44\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 5\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 33,
+          "camera_embeddings": 8,
+          "fit_records": 5550,
+          "dev_records": 3125,
+          "dev_queries": 3125,
+          "parameters": 103670914,
+          "trainable_parameters": 103659650,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790963194.309776,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 4034,
+          "best": {
+            "mAP": 88.52759342902183,
+            "Rank-1": 96.992,
+            "Rank-5": 97.568,
+            "Rank-10": 98.048,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632,
+            "epoch": 13
+          },
+          "strict_reload": {
+            "mAP": 88.52759342902183,
+            "Rank-1": 96.992,
+            "Rank-5": 97.568,
+            "Rank-10": 98.048,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 4034,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13715109376,
+          "finished": 1790967872.9615128
+        },
+        "best": {
+          "mAP": 88.52759342902183,
+          "Rank-1": 96.992,
+          "Rank-5": 97.568,
+          "Rank-10": 98.048,
+          "query_count": 3125,
+          "gallery_count": 3125,
+          "descriptor_dim": 5632,
+          "epoch": 13
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790967874.5820353
+        }
+      },
+      "MSVR310_dual_s44": {
+        "launch": {
+          "host": "2026",
+          "gpu": 3,
+          "pid": 1942988,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "MSVR310",
+            "--variant",
+            "dual",
+            "--seed",
+            "44",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/MSVR310_dual_s44"
+          ],
+          "started": 1790955465.147741
+        },
+        "status": {
+          "arguments": {
+            "dataset": "MSVR310",
+            "variant": "dual",
+            "data_root": "/data/gaob/Re-ID/dataset",
+            "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/MSVR310_dual_s44",
+            "seed": 44,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 44\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 103,
+          "camera_embeddings": 8,
+          "fit_records": 672,
+          "dev_records": 360,
+          "dev_queries": 210,
+          "parameters": 104459394,
+          "trainable_parameters": 104448130,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790955473.350492,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 452,
+          "best": {
+            "mAP": 42.94846283519845,
+            "Rank-1": 55.714285714285715,
+            "Rank-5": 66.19047619047619,
+            "Rank-10": 69.52380952380952,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632,
+            "epoch": 26
+          },
+          "strict_reload": {
+            "mAP": 42.94846283519845,
+            "Rank-1": 55.714285714285715,
+            "Rank-5": 66.19047619047619,
+            "Rank-10": 69.52380952380952,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 452,
+          "amp_skipped_steps": 0,
+          "peak_memory": 13722119680,
+          "finished": 1790956093.9754052
+        },
+        "best": {
+          "mAP": 42.94846283519845,
+          "Rank-1": 55.714285714285715,
+          "Rank-5": 66.19047619047619,
+          "Rank-10": 69.52380952380952,
+          "query_count": 210,
+          "gallery_count": 360,
+          "descriptor_dim": 5632,
+          "epoch": 26
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790956095.2927353
+        }
+      },
+      "RGBNT100_ordinary_s43": {
+        "launch": {
+          "host": "2026",
+          "gpu": 1,
+          "pid": 1978676,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_experiment.py",
+            "--mode",
+            "train",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "ordinary",
+            "--seed",
+            "43",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--output",
+            "runs/three_seed_extension/RGBNT100_ordinary_s43"
+          ],
+          "started": 1790956722.8096955
+        },
+        "status": {
+          "arguments": {
+            "dataset": "RGBNT100",
+            "variant": "ordinary",
+            "data_root": "/data/gaob/Re-ID/dataset",
+            "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "output": "runs/three_seed_extension/RGBNT100_ordinary_s43",
+            "seed": 43,
+            "mode": "train"
+          },
+          "config": "DATALOADER:\n  NUM_INSTANCE: 16\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT100\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 43\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 5\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+          "classes": 33,
+          "camera_embeddings": 8,
+          "fit_records": 5550,
+          "dev_records": 3125,
+          "dev_queries": 3125,
+          "parameters": 103670914,
+          "trainable_parameters": 103659650,
+          "descriptor_dim": 5632,
+          "pretraining": "public CLIP ViT-B/16; fresh ReID heads; no earlier research checkpoints",
+          "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+          "evaluation_scope": "identity-heldout development only, not full-training paper reproduction",
+          "torch": "2.5.1+cu121",
+          "gpu": "NVIDIA GeForce RTX 3090",
+          "started": 1790956731.6947787,
+          "amp_policy": "native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts",
+          "status": "COMPLETE",
+          "epochs": 50,
+          "steps": 4035,
+          "best": {
+            "mAP": 90.6830535139137,
+            "Rank-1": 96.512,
+            "Rank-5": 98.72,
+            "Rank-10": 99.104,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632,
+            "epoch": 7
+          },
+          "strict_reload": {
+            "mAP": 90.6830535139137,
+            "Rank-1": 96.512,
+            "Rank-5": 98.72,
+            "Rank-10": 99.104,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632
+          },
+          "optimizer_steps": 4034,
+          "amp_skipped_steps": 1,
+          "peak_memory": 13064212480,
+          "finished": 1790960134.592185
+        },
+        "best": {
+          "mAP": 90.6830535139137,
+          "Rank-1": 96.512,
+          "Rank-5": 98.72,
+          "Rank-10": 99.104,
+          "query_count": 3125,
+          "gallery_count": 3125,
+          "descriptor_dim": 5632,
+          "epoch": 7
+        },
+        "exit": {
+          "exit_code": 0,
+          "finished": 1790960135.9135907
+        }
+      }
+    },
+    "gpu": "0, 100, 12637\n1, 100, 12636\n2, 100, 12179\n3, 100, 12729\n",
+    "processes": [
+      "2152152       1 /data/gaob/Re-ID/conda-envs/tri_reid/bin/python -u launch_missing.py --host 2026"
+    ]
+  }
+}

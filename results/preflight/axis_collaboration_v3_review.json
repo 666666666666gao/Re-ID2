@@ -1,0 +1,608 @@
+{
+  "status": "PASS_STATIC_AND_CPU_AST_MOCK",
+  "review_stage": "experiment-bridge CODE_REVIEW; source and stdlib CPU control-flow only",
+  "reviewed_at": "2026-10-03T03:10:56.783030+08:00",
+  "reviewer": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "max",
+    "fork_turns": "none"
+  },
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "blockers": [],
+  "summary": "No blocking implementation error found in the final reviewed source scope. Actual stdlib AST mocks cover 13-check M0 construction, 10-run development scheduling, closed-state/inference control flow, smoke failure gates, legacy step equivalence, and collection. Proceeding to M0 is supported; actual M0, tensor/AMP/gradient/reload/missing checks, training, and efficacy remain unproven.",
+  "scope": {
+    "files": [
+      "axis_collaboration.py",
+      "verify_axis_collaboration.py",
+      "preflight_axis_collaboration.py",
+      "run_experiment.py",
+      "dual_axis.py",
+      "modeling/make_model.py",
+      "experiment_data.py",
+      "results/preflight/axis_collaboration_v3_contract.json",
+      "residual_dual_axis.py",
+      "launch_axis_collaboration_development.py",
+      "collect_axis_collaboration_development.py",
+      "launch_runs.py",
+      "collect_results.py",
+      "launch_residual_development.py",
+      "results/preflight/residual_controls_launch.json",
+      "results/preflight/phase_status_20261003_0308.json"
+    ],
+    "legacy_comparison_revision": "2e93a4dd9aee7c6f3f7b72f7defd783d76e381d0",
+    "legacy_comparison_files": [
+      "run_experiment.py",
+      "dual_axis.py",
+      "residual_dual_axis.py"
+    ],
+    "additional_read_scope": "The parent explicitly expanded the scope to residual_dual_axis.py and the historical Git sources, then the final 13-check preflight, V3 development launcher/collector, and V2 launcher plus available controls launch receipt. Direct stdlib launch/collect helpers were read to verify actual imports and copy/write behavior.",
+    "execution": "Standard-library AST extraction, in-memory compilation, and mocked dependencies using E:/python.exe 3.12.6. No torch was installed or run. No SSH, SCP, GPU, subprocess training, source edit, or deployment was performed.",
+    "written_artifact": "results/preflight/axis_collaboration_v3_review.json",
+    "contract_handling": "The author contract was treated as specification only. Hardcoded receipt booleans were not treated as observed numerical evidence.",
+    "final_planned_M0": {
+      "structural_verifications": 3,
+      "three_update_main_variant_smokes": 9,
+      "MSVR310_axis_contribution_weight_zero_smokes": 1,
+      "total_checks": 13,
+      "device": "GPU0 after exact V2 predecessor COMPLETE50/exit0 and memory.used<500"
+    },
+    "final_development_scope": {
+      "runs": 10,
+      "epochs_per_run": 50,
+      "seed": 42,
+      "slots": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "per_slot_job_counts": {
+        "0": 3,
+        "1": 3,
+        "2": 3,
+        "3": 1
+      },
+      "root": "runs/axis_collaboration_v3_development",
+      "official_test_scoring": false
+    }
+  },
+  "source_findings": [
+    {
+      "check": "Structured modality value access",
+      "status": "PASS_SOURCE",
+      "locations": [
+        "axis_collaboration.py:22",
+        "axis_collaboration.py:26"
+      ],
+      "evidence": "prepare applies channel-local value maps and masks unavailable sources. Structured read uses values[:, subset, band]; no other modality or band is put into that attention key/value set. Conditions affect only the query."
+    },
+    {
+      "check": "Frequency source retention and within-source cross-band access",
+      "status": "PASS_SOURCE",
+      "locations": [
+        "axis_collaboration.py:60",
+        "axis_collaboration.py:75"
+      ],
+      "evidence": "In structured mode, the first attention folds only batch and source into independent rows. The subsequent B*groups by bands reshape performs cross-band attention separately for each retained source. Unavailable-source evidence is masked after read."
+    },
+    {
+      "check": "Exact parameter-set and initialization construction of matched controls",
+      "status": "PASS_SOURCE_PENDING_TENSOR_WITNESS",
+      "locations": [
+        "axis_collaboration.py:162",
+        "axis_collaboration.py:194",
+        "axis_collaboration.py:239",
+        "run_experiment.py:43",
+        "verify_axis_collaboration.py:25"
+      ],
+      "evidence": "All three variants use the same constructor and allocation order; variant flags affect access/fusion, not registered parameter creation. build reseeds before construction. plain_twins repeats full-frequency spatial tokens and uses unrestricted source access. ordinary_frequency applies all added residual capacity to the final frequency coordinates; its first 10*dim coordinates are algebraically the original DeMo base. With the specified dim=512, output is 5632D. All added modules have a training-loss path; the independent pooling scorers feed their own identity losses, rather than existing solely for detached targets.",
+      "limit": "Actual state equality, counts, 5632D tensors, and nonzero finite gradients have not been run locally. The runtime checks are present in verify and the ten smokes."
+    },
+    {
+      "check": "Original DeMo anchor and identity heads",
+      "status": "PASS_SOURCE",
+      "locations": [
+        "axis_collaboration.py:164",
+        "axis_collaboration.py:229",
+        "axis_collaboration.py:235",
+        "axis_collaboration.py:277",
+        "modeling/make_model.py:13",
+        "modeling/make_model.py:103"
+      ],
+      "evidence": "The subclass keeps the inherited backbone, reductions, generalFusion, classifier_moe/bottleneck_moe, and original direct or separate identity heads. It executes full generalFusion on original patches/globals. Base concatenates the original 3*dim and 7*dim paths, then a zero frequency slot. Training retains original identity objectives at weight 1. The original GeneralFusion is configured with reg_weight=0; no new regularization recipe was inferred from its uninspected internals."
+    },
+    {
+      "check": "One simultaneous condition round and joint routing degeneration",
+      "status": "PASS_SOURCE_AND_CONTROL_FLOW",
+      "locations": [
+        "axis_collaboration.py:106",
+        "axis_collaboration.py:113",
+        "axis_collaboration.py:249"
+      ],
+      "evidence": "The actual forward AST calls conditions exactly once on m0/f0, then reads m1/f1 from the same original own values with the two conditions. It routes only m1/f1. Logits are a_S+c_b+psi and the mask removes whole relation rows; when psi is excluded, softmax factorizes over eligible relations and bands. The denominator substitutes one only for invalid rows, preventing their zero/zero division.",
+      "limit": "Factorization and finite-value assertions are source-verified; numerical errors were not measured here."
+    },
+    {
+      "check": "Four controlled states, closed-expert isolation, and stopped targets",
+      "status": "PASS_SOURCE_AND_CONTROL_FLOW",
+      "locations": [
+        "axis_collaboration.py:136",
+        "axis_collaboration.py:141",
+        "axis_collaboration.py:194",
+        "axis_collaboration.py:214"
+      ],
+      "evidence": "Targets use one normalized 00 reference, one positive/negative index pair per sample selected from it, and the same direction for all four states. The entire target method is no_grad; predictor context is detached. The actual controlled_states AST used the same base object, m0/f0 pools, zero absent predictor inputs, fuse flags True/False and False/True, and precomputed full 11. No conditions, route, backbone, psi, PI, or interaction-projection path is invoked by the closed states. Source fuse gates the interaction projection on both experts enabled.",
+      "limit": "No real autograd run occurred. The verify script includes a separate requires_grad target check and CPU score recomputation for the future actual-data execution."
+    },
+    {
+      "check": "Inference excludes counterfactuals",
+      "status": "PASS_SOURCE_AND_CONTROL_FLOW",
+      "locations": [
+        "axis_collaboration.py:261"
+      ],
+      "evidence": "The actual inference forward AST returned fused before controlled_states and target creation. It used three backbone calls. A forbidden controlled_states stub was never called."
+    },
+    {
+      "check": "Six missing-modality paths",
+      "status": "PASS_SOURCE_PENDING_TENSOR_WITNESS",
+      "locations": [
+        "axis_collaboration.py:22",
+        "axis_collaboration.py:60",
+        "axis_collaboration.py:81",
+        "axis_collaboration.py:85",
+        "axis_collaboration.py:119",
+        "axis_collaboration.py:225",
+        "axis_collaboration.py:243",
+        "verify_axis_collaboration.py:90"
+      ],
+      "evidence": "Availability is derived from exactly-zero normalized inputs. Structured relations require all members present; unavailable values and frequency outputs are masked. Every specified case retains at least one source and thus at least one eligible singleton, so the source-level softmax support is nonempty. Invalid relation conditional pooling uses denominator one. The actual verification script enumerates r/n/t/rn/rt/nt and asserts finite descriptors, zero invalid relation mass, and unit total mass.",
+      "limit": "No real missing-modality tensor or perturbation case was executed in this review. The original shared DeMo base remains in all states, as explicitly required by the contract."
+    },
+    {
+      "check": "Legacy DeMo/V1/V2 recipes",
+      "status": "PASS_DIFF_AND_CPU_AST_MOCK",
+      "locations": [
+        "run_experiment.py:43",
+        "run_experiment.py:81"
+      ],
+      "evidence": "Compared with the authorized historical revision, dual_axis.py and residual_dual_axis.py have no working-tree diff. run_experiment.py adds the new import/build branch, new variants and contribution CLI, the Axis class in the weighted-loss isinstance tuple, and V3-only receipt fields. The legacy model choices, weighting, odd auxiliary scalar handling, optimizer-step flow, GradScaler policy, train loop, and evaluation code are unchanged. Actual old/new step ASTs produced identical return values and operation order for direct/separate DeMo, ordinary/dual V1, and ordinary/dual residual V2 mocks."
+    },
+    {
+      "check": "13-check M0 includes the contribution-weight-zero training path",
+      "status": "PASS_SOURCE_AND_CPU_AST_MOCK",
+      "locations": [
+        "preflight_axis_collaboration.py:32",
+        "preflight_axis_collaboration.py:37",
+        "preflight_axis_collaboration.py:51",
+        "axis_collaboration.py:259",
+        "axis_collaboration.py:286"
+      ],
+      "evidence": "Final preflight constructs three access checks, nine main-variant smokes, and a separate MSVR310 axis_collaboration --contribution-weight 0 smoke. Every output is unique and all use GPU0. A failure injected into the thirteenth child recorded its failed exit and raised before M0 PASS. Weight zero removes the auxiliary contribution objective only; the same calibrator still participates through gates in the fused identity path, so the source does not intentionally park its parameters.",
+      "limit": "No real zero-weight gradient or AMP tensor was tested locally."
+    },
+    {
+      "check": "V3 predecessor mapping matches actual V2 launcher scope",
+      "status": "PASS_SOURCE_AND_CPU_AST_COMPARISON",
+      "locations": [
+        "launch_residual_development.py:13",
+        "launch_residual_development.py:15",
+        "launch_axis_collaboration_development.py:19",
+        "results/preflight/residual_controls_launch.json"
+      ],
+      "evidence": "AST-literal extraction of the V2 SCHEDULE and CONTROLS produced exactly the V3 PREDECESSORS map: GPU0 RGBNT201 dual; GPU1 RGBNT100 dual; GPU2 MSVR310 dual plus RGBNT201 ordinary; GPU3 MSVR310 ordinary plus RGBNT100 ordinary. The existing local controls launch receipt names the V2 launcher with --controls on the 2025 project.",
+      "limit": "The receipt proves prior launch scope only. No current remote completion or capacity observation occurred in this review."
+    },
+    {
+      "check": "Ten-run development launcher waits, isolation, budget, and no retries",
+      "status": "PASS_SOURCE_AND_CPU_AST_MOCK",
+      "locations": [
+        "launch_axis_collaboration_development.py:13",
+        "launch_axis_collaboration_development.py:37",
+        "launch_axis_collaboration_development.py:45",
+        "launch_axis_collaboration_development.py:78",
+        "run_experiment.py:36",
+        "run_experiment.py:190"
+      ],
+      "evidence": "M0 requires status PASS, exactly 13 rows, and all exit codes zero before creating the new root. Each slot reads every exact V2 predecessor exit and COMPLETE/50 result before capacity checks. Each job requires memory.used<500, receives one explicit GPU, --mode train, seed42, independent output, and its specified contribution weight. ThreadPoolExecutor has four workers. The fixed run_experiment training loop is 50 epochs. Existing campaign root raises before any new child, preventing duplicate launcher invocation. Child failure stops that slot without retry and blocks final controller output; other already-authorized slots may finish. No checkpoint reuse or official-test command is present."
+    },
+    {
+      "check": "Local collector import chain and terminal intake",
+      "status": "PASS_SOURCE_ACTUAL_IMPORT_AND_CPU_AST_MOCK",
+      "locations": [
+        "collect_axis_collaboration_development.py:7",
+        "collect_axis_collaboration_development.py:18",
+        "collect_axis_collaboration_development.py:31",
+        "collect_axis_collaboration_development.py:42",
+        "collect_axis_collaboration_development.py:54",
+        "collect_results.py:23",
+        "collect_results.py:27",
+        "collect_results.py:50",
+        "launch_runs.py:17"
+      ],
+      "evidence": "The collector imports only stdlib helpers/schedule definitions; actual local import with external-command functions forbidden succeeded without torch or run_experiment in sys.modules. Its remote script only reads fixed V3 run JSON/text names. Completed or failed runs copy present terminal text evidence once, then write intake markers and the V3 status JSON. Repeat mock collection did not repeat any of the 90 file-copy requests. Pending-then-complete used one 240-second wait, and failure preserved a FAILED row. It never invokes the legacy helper module main, handoff synchronization, Git, training, or test scoring."
+    }
+  ],
+  "executed_cpu_checks": [
+    {
+      "name": "Syntax compilation",
+      "result": "PASS",
+      "detail": "All 13 Python files in final expanded scope parsed and compiled in memory; no pycache writes."
+    },
+    {
+      "name": "Final actual preflight main AST success flow",
+      "result": "PASS",
+      "verification_count": 3,
+      "smoke_count": 10,
+      "check_count": 13,
+      "unique_output_count": 13,
+      "detail": "Final source capacities 1200,500,499 produced two mocked waits of 240 seconds, proving 500 is still busy. All 13 child commands used CUDA_VISIBLE_DEVICES=0; every child waited before the next. The last was MSVR310 axis_collaboration --contribution-weight 0. No actual wait, nvidia-smi, child process, or GPU access occurred."
+    },
+    {
+      "name": "Actual preflight main AST failure flow",
+      "result": "PASS",
+      "cases": {
+        "failed_predecessor": {
+          "children": 0,
+          "PASS_written": false
+        },
+        "49_epoch_predecessor": {
+          "children": 0,
+          "PASS_written": false
+        },
+        "third_child_failed": {
+          "children": 3,
+          "PASS_written": false
+        },
+        "final_13th_child_failed": {
+          "children": 13,
+          "PASS_written": false,
+          "failed_exit_recorded": true,
+          "retries": 0
+        }
+      },
+      "detail": "The initial 12-check source failure gates were exercised for failed predecessor, 49-epoch predecessor, and failed third child; those guards remain identical in final source. The final 13-check source was additionally executed with the thirteenth no-contribution child failing; its exit1 was written and M0 PASS was not written."
+    },
+    {
+      "name": "Actual smoke main AST acceptance and rejection flow",
+      "result": "PASS",
+      "cases": {
+        "normal": {
+          "step_calls": 3,
+          "SMOKE_PASS_written": true,
+          "operations": [
+            "save",
+            "load",
+            "strict_model_load",
+            "optimizer_load"
+          ]
+        },
+        "skipped_update": {
+          "step_calls": 1,
+          "SMOKE_PASS_written": false
+        },
+        "none_gradient": {
+          "step_calls": 3,
+          "SMOKE_PASS_written": false
+        },
+        "zero_gradient": {
+          "step_calls": 3,
+          "SMOKE_PASS_written": false
+        },
+        "nonfinite_gradient": {
+          "step_calls": 3,
+          "SMOKE_PASS_written": false
+        },
+        "reload_output_mismatch": {
+          "step_calls": 3,
+          "SMOKE_PASS_written": false
+        }
+      },
+      "detail": "main itself was extracted and executed; dependencies, steps, tensors, optimizer, filesystem, and checkpoint were mocks. These results establish control-flow gates, not true gradient or reload correctness."
+    },
+    {
+      "name": "Actual legacy and current step AST equivalence",
+      "result": "PASS",
+      "mock_losses": {
+        "demo_direct": 3.7,
+        "demo_separate": 10.7,
+        "ordinary": 10.0,
+        "dual": 10.0,
+        "ordinary_residual": 6.55,
+        "dual_residual": 6.55
+      },
+      "new_axis_mock_loss": 8.649999999999999,
+      "detail": "Both historical and current functions executed against standard-library scalar mocks, matching loss, zero_grad, scale/backward, unscale, step, and scaler-update order for all legacy cases. No actual optimization."
+    },
+    {
+      "name": "Actual model inference and controlled-state AST",
+      "result": "PASS",
+      "detail": "Symbolic dependencies recorded exactly m0/f0 -> one conditions call -> m1/f1 using unchanged own value objects -> route -> calibration -> fuse. Inference skipped counterfactuals. Closed states used independent evidence, zero absent contexts, same base, and correct fuse enable flags; forbidden router stubs were untouched."
+    },
+    {
+      "name": "Final actual development launcher AST",
+      "result": "PASS",
+      "backend": "Real stdlib ThreadPoolExecutor with filesystem, nvidia-smi, subprocess children, clocks and sleeps mocked. No actual external execution. A barrier exercised four concurrent mock children.",
+      "cases": {
+        "success": {
+          "children": 10,
+          "per_gpu": [
+            3,
+            3,
+            3,
+            1
+          ],
+          "maximum_mock_concurrency": 4,
+          "unique_names": 10,
+          "terminal_written": true,
+          "second_invocation_children": 0
+        },
+        "M0_only_12_checks": {
+          "children": 0,
+          "terminal_written": false
+        },
+        "GPU1_failed_predecessor": {
+          "children": 7,
+          "per_gpu": [
+            3,
+            0,
+            3,
+            1
+          ],
+          "terminal_written": false
+        },
+        "GPU2_49_epoch_predecessor": {
+          "children": 7,
+          "per_gpu": [
+            3,
+            3,
+            0,
+            1
+          ],
+          "terminal_written": false
+        },
+        "GPU0_first_child_failed": {
+          "children": 8,
+          "per_gpu": [
+            1,
+            3,
+            3,
+            1
+          ],
+          "terminal_written": false
+        }
+      },
+      "detail": "All actual source predecessor reads were observed before the corresponding first spawn. All mocked waits were 240 seconds. Failed slots did not retry or run their remaining jobs."
+    },
+    {
+      "name": "V2-to-V3 predecessor AST mapping",
+      "result": "PASS",
+      "detail": "The V3 literal PREDECESSORS dictionary exactly equaled the six names derived from V2 SCHEDULE plus CONTROLS. The local actual controls launcher receipt includes --controls."
+    },
+    {
+      "name": "Final actual collector main AST",
+      "result": "PASS",
+      "backend": "stdlib with remote_python, copy_file, filesystem and wait mocks; no real SSH/SCP",
+      "cases": {
+        "complete_twice": {
+          "observations": 2,
+          "copies_total": 90,
+          "unique_copied_files": 90,
+          "intake_markers": 10,
+          "complete": 10,
+          "failed": 0,
+          "waits": []
+        },
+        "one_failure": {
+          "observations": 1,
+          "copies_total": 90,
+          "intake_markers": 10,
+          "complete": 9,
+          "failed": 1,
+          "waits": []
+        },
+        "pending_then_complete": {
+          "observations": 2,
+          "copies_total": 90,
+          "intake_markers": 10,
+          "complete": 10,
+          "failed": 0,
+          "waits": [
+            240
+          ]
+        }
+      },
+      "detail": "Only V3 results intake/status paths were written by mock execution. The remote-read script was compiled and contained no remote writes/subprocess invocation."
+    },
+    {
+      "name": "Actual local collector import",
+      "result": "PASS",
+      "external_commands": 0,
+      "torch_imported": false,
+      "run_experiment_imported": false,
+      "planned_schedule_runs": 10,
+      "bytecode_writes": false,
+      "detail": "Imported the final real collector module with subprocess.run/Popen/check_output replaced by forbidden functions. No forbidden function was called."
+    }
+  ],
+  "verification_scope_notes": [
+    "The source smoke checks every requires_grad parameter tensor for a non-None, finite, nonzero aggregate gradient at the final smoke step. It does not claim every scalar coordinate has nonzero gradient.",
+    "Smoke reload checks strict model/optimizer deserialization and exact FP32 output before/after reloading the same model instance. This is not a fresh-process reproducibility or resumed-training-equivalence test.",
+    "The actual-data verifier uses up to eight dev records plus one training batch, normal finite outputs for the three new variants, six missing cases for structured axis_collaboration, and source/band perturbations. It does not establish complete-dataset parity, missing-case accuracy, learned utility, or every architecture operation under AMP.",
+    "Native CUDA fp16 GradScaler construction, autocast, all actual gradient tensors, FFT reconstruction, matched states/counts, structural perturbation outputs, six missing tensors, and strict checkpoint outputs remain unexecuted locally.",
+    "No local torch environment was available. The broken default python launcher and the absence of torch in E:/python.exe were observed; no installation or environmental workaround was introduced.",
+    "Final M0 coverage is 13 checks: 3 structural checks and 10 independent three-update smokes, including contribution weight zero. Only command/control-flow mock evidence exists here.",
+    "The source launcher verifies existing V2 terminal records and free capacity at runtime. CPU mocks and the old controls launch receipt do not certify that those prerequisites are currently true.",
+    "The collector is a status/text intake tool. Its terminal labels rely on the training script COMPLETE/exit outputs; this does not replace later metric, budget, sample-order, multi-seed, or integrity audits.",
+    "Per-file SHA256 values below record the final read-only review version because the parent explicitly requested them. No new integrity scheme or source modification was introduced."
+  ],
+  "non_blocking_findings": [],
+  "required_before_full_training": [
+    "Execute and inspect all 13 actual M0 checks: three data structural verifications and ten independent native-AMP three-update smoke/reload runs, including MSVR contribution weight zero. Do not treat mock receipts or constructed commands as actual checks.",
+    "Require actual M0 PASS13 and the exact completed V2 predecessors plus each released GPU capacity before each of the ten fixed development runs, as implemented in the reviewed launcher.",
+    "Treat any real M0 failure as new evidence requiring a narrow fix and re-review; do not reuse M0 weights for the 50-epoch comparison."
+  ],
+  "milestones": {
+    "M0": "NOT_DEPLOYED_OR_EXECUTED_BY_THIS_REVIEW",
+    "native_tensor_checks": "PENDING",
+    "training": "NOT_RUN_BY_THIS_REVIEW",
+    "efficacy": "UNPROVEN",
+    "full_training_acceptance": "PENDING_ACTUAL_M0",
+    "development_queue": "IMPLEMENTED_AND_AST_MOCKED_ONLY; no launch by this review",
+    "collector": "IMPORT_AND_AST_MOCKED_ONLY; no remote intake by this review"
+  },
+  "review_revisions": [
+    {
+      "reviewed_at": "2026-10-03T02:59:59.013509+08:00",
+      "scope": "Initial model/verification/legacy recipe review with 12-check preflight; superseded by this final 13-check M0 and 10-run development scope."
+    },
+    {
+      "reviewed_at": "2026-10-03T03:09:32.730406+08:00",
+      "scope": "Final saved model files, 13 M0 checks, 10 development runs, collection helper import chain, and V2 predecessor mapping."
+    }
+  ],
+  "source_versions": {
+    "axis_collaboration.py": {
+      "sha256": "6fd1a25a5845402d465b2c85c11a2241d755a6ebf8dc6455f2b5bd2f63881e81",
+      "bytes": 16632
+    },
+    "verify_axis_collaboration.py": {
+      "sha256": "ded3d25dda7d66848c3dfbff42935787db50b7586b712dc7a81053390f4cf3e7",
+      "bytes": 10617
+    },
+    "preflight_axis_collaboration.py": {
+      "sha256": "e1fcdc2daff8184db267af70bb947464b91288ce138d660c4be8e8c8f649f51e",
+      "bytes": 2754
+    },
+    "run_experiment.py": {
+      "sha256": "b395d5cc13d8c8ea372391c15cf5e28da1b209bd315362521053afbcd288d830",
+      "bytes": 13258
+    },
+    "dual_axis.py": {
+      "sha256": "0c6090fe5b8b15cc021bf1809860f0675187288dc2145d0129ce89a5eb78a330",
+      "bytes": 8500
+    },
+    "modeling/make_model.py": {
+      "sha256": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+      "bytes": 10473
+    },
+    "experiment_data.py": {
+      "sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+      "bytes": 4032
+    },
+    "results/preflight/axis_collaboration_v3_contract.json": {
+      "sha256": "32c6612f7387ef1f81fbc0cd0702bcde7398a7f196715594be540dd5817eb462",
+      "bytes": 3622
+    },
+    "residual_dual_axis.py": {
+      "sha256": "4a22801f014e971786402a477a33e7f86ecf608e786ab4c2f3c796abc033c91c",
+      "bytes": 5293
+    },
+    "launch_axis_collaboration_development.py": {
+      "sha256": "a9711226a6d984604115567ad9ccd091befbd31f3ae31d8a4e7f2774521a24da",
+      "bytes": 3998
+    },
+    "collect_axis_collaboration_development.py": {
+      "sha256": "9811c51e40cf7cb70c7f6ec7475b332498e5eca7fdfdb75773a98fc2d79e2176",
+      "bytes": 3165
+    },
+    "launch_runs.py": {
+      "sha256": "8593a3a56f379605295e8d885e3fcfcdfece19b69209c2e9e05bf3ac5b75c101",
+      "bytes": 2845
+    },
+    "collect_results.py": {
+      "sha256": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+      "bytes": 9129
+    },
+    "launch_residual_development.py": {
+      "sha256": "d6773d4acb80403077d939c93ee2ac661cc0460450cb74946dcae6317c098a31",
+      "bytes": 3333
+    },
+    "results/preflight/residual_controls_launch.json": {
+      "sha256": "5bd8bf5f7b2ca85432014e6af0cf9f5cae2c83d7700eea4b196e4695a01755f5",
+      "bytes": 404
+    },
+    "results/preflight/phase_status_20261003_0308.json": {
+      "sha256": "2cb60ac947732785b641c6a535d9e2fc3b96f3845be92e1307873804bf6ae3ac",
+      "bytes": 185594
+    }
+  },
+  "observed_local_snapshot_context": {
+    "file": "results/preflight/phase_status_20261003_0308.json",
+    "host": "2025",
+    "snapshot_unix_time": 1790967996.7041705,
+    "six_predecessors": [
+      {
+        "run": "RGBNT201_dual_residual_s42",
+        "gpu": 0,
+        "status": "COMPLETE",
+        "epochs": 50,
+        "exit_code": 0,
+        "terminal_source_key": "status"
+      },
+      {
+        "run": "RGBNT100_dual_residual_s42",
+        "gpu": 1,
+        "status": "COMPLETE",
+        "epochs": 50,
+        "exit_code": 0,
+        "terminal_source_key": "status"
+      },
+      {
+        "run": "MSVR310_dual_residual_s42",
+        "gpu": 2,
+        "status": "COMPLETE",
+        "epochs": 50,
+        "exit_code": 0,
+        "terminal_source_key": "status"
+      },
+      {
+        "run": "RGBNT201_ordinary_residual_s42",
+        "gpu": 2,
+        "status": "COMPLETE",
+        "epochs": 50,
+        "exit_code": 0,
+        "terminal_source_key": "status"
+      },
+      {
+        "run": "MSVR310_ordinary_residual_s42",
+        "gpu": 3,
+        "status": "COMPLETE",
+        "epochs": 50,
+        "exit_code": 0,
+        "terminal_source_key": "status"
+      },
+      {
+        "run": "RGBNT100_ordinary_residual_s42",
+        "gpu": 3,
+        "status": "COMPLETE",
+        "epochs": 50,
+        "exit_code": 0,
+        "terminal_source_key": "status"
+      }
+    ],
+    "gpu_snapshot_rows_index_utilization_memoryMiB": [
+      [
+        0,
+        0,
+        12
+      ],
+      [
+        1,
+        0,
+        12
+      ],
+      [
+        2,
+        0,
+        12
+      ],
+      [
+        3,
+        0,
+        12
+      ]
+    ],
+    "limit": "Read-only historical local snapshot. It contains terminal status records, not copied result.json for these six runs. It is not a fresh remote observation, proof of current capacity, or proof of V3 M0. Runtime result.json and capacity guards still apply."
+  }
+}

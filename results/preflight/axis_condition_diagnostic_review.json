@@ -1,0 +1,130 @@
+{
+  "reviewed_at": "2026-10-03T03:25:53.910443+08:00",
+  "reviewer_agent": "/root/review_axis_amp_rescue_v3",
+  "reviewer": "Native Codex secondary reviewer; backend invocation attribution belongs to parent host",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "verdict": "PASS_STATIC_AND_STDLIB_AST_MOCK",
+  "blockers": [],
+  "diagnostic_deployment": "APPROVED_FOR_TWO_FRESH_THREE_UPDATE_RGBNT201_CONDITIONS_ONLY",
+  "formal_deployment": "NOT_APPROVED_BY_THIS_REVIEW; original actual M0 remains failed",
+  "scope": "Bounded review of observed V3 M0 gradient failure and a six-update precision diagnostic. No SSH, GPU, network, package installation, training, or project source edits by this reviewer.",
+  "reviewed_sources": [
+    "diagnose_axis_condition_amp.py",
+    "axis_collaboration.py",
+    "run_experiment.py",
+    "experiment_data.py",
+    "solver/make_optimizer.py",
+    "solver/scheduler_factory.py",
+    "solver/cosine_lr.py",
+    "solver/scheduler.py",
+    "layers/make_loss.py",
+    "data/datasets/sampler.py",
+    "configs/RGBNT201/DeMo.yml",
+    "config/defaults.py"
+  ],
+  "reviewed_actual_artifacts": [
+    "results/preflight/axis_collaboration_v3_actual/observed_status.json",
+    "results/preflight/axis_collaboration_v3_actual/RGBNT201_access/verification.json",
+    "results/preflight/axis_collaboration_v3_actual/RGBNT201_axis_collaboration.log",
+    "results/preflight/axis_collaboration_v3_actual/controller_stdout.log"
+  ],
+  "actual_observation": {
+    "structural_verification": "RGBNT201 actual PASS, zero optimizer updates in structural check",
+    "smoke": "Three successful native-AMP updates; subsequent aggregate gradient assertion failed; exit1; no terminal M0 PASS",
+    "losses": [
+      11.1119384765625,
+      6.4300384521484375,
+      6.115511894226074
+    ],
+    "failed_gradient_predicates": [
+      "router.to_frequency_query.0.weight",
+      "router.to_frequency_query.0.bias"
+    ],
+    "qualification": "Original assertion combines missing, nonfinite, and zero-gradient checks. Its log does not contain gradient counts or dtypes. Successful scaler steps argue against nonfinite gradients, but exact zero versus missing is to be resolved by diagnostic output, not inferred as measured.",
+    "originals": "Read only and preserved"
+  },
+  "resolved_blocking_findings": [
+    {
+      "id": "D1",
+      "title": "Diagnostic omitted the original smoke scheduler initialization",
+      "evidence": "run_experiment.py:147 constructs the scheduler. RGBNT201 BASE_LR=0.00035 and WARMUP_ITERS=10; solver/cosine_lr.py:61-63 writes 0.1*BASE_LR to every parameter group during construction. Initial diagnostic omitted this and used base optimizer rates (e.g. ordinary weight0.00035 and bias0.0007).",
+      "impact": "After the first update the diagnostic followed a different parameter trajectory from the actual failed smoke, confounding a targeted numerical reproduction.",
+      "parent_fix_verified": "Final diagnose_axis_condition_amp.py imports create_scheduler, constructs it at line54 in each mode immediately after make_optimizer, makes no scheduler.step call, records optimizer_learning_rates, and deletes the scheduler after the mode.",
+      "status": "RESOLVED_BEFORE_DIAGNOSTIC_DEPLOYMENT"
+    }
+  ],
+  "static_findings": [
+    "Each mode builds a fresh float32 CUDA model through the same build helper, which reseeds42 before construction. Both modes use the same configuration, fixed fit split, loss, Adam helper, scheduler initialization, init_scale512 and three-step helper as original smoke.",
+    "Both modes reseed42 again before constructing an independent loader. The source loader uses the same identity sampler, fixed generator seed and training transformations. Actual input/initial-state equality has not been measured locally.",
+    "Only the second mode replaces that model instance router.conditions with a closure calling its original bound method under autocast disabled and casting both incoming evidence tensors to float. No detach, parameter substitution, altered query scale, altered loss, or change to expert values is introduced.",
+    "Forward hooks on all six condition-sequence modules register observational tensor-gradient hooks and implicitly return None. They do not replace forward output or gradient.",
+    "Parameter gradients are inspected after existing step has unscaled gradients, attempted the optimizer update, and updated the scaler. Updated is asserted on each step. Hook gradients are from scaled loss backward and are correctly named scaled_output_gradient.",
+    "The diagnostic creates an exclusive output directory and writes two condition reports plus a combined report. It makes no checkpoint save/load or evaluation calls, and does not start formal training."
+  ],
+  "tests": [
+    {
+      "name": "In-memory source compilation",
+      "result": "PASS",
+      "files": 8,
+      "detail": "Parsed and compiled diagnostic, model, training helper, data helper, optimizer, scheduler factory, cosine scheduler and base scheduler. No imports or pycache writes."
+    },
+    {
+      "name": "Actual scheduler class/factory AST execution",
+      "result": "PASS",
+      "backend": "stdlib with mock optimizer groups; actual Scheduler, CosineLRScheduler and create_scheduler definitions",
+      "initial_lrs": [
+        0.00035,
+        0.0007,
+        5e-06
+      ],
+      "after_constructor_lrs": [
+        3.5000000000000004e-05,
+        3.5000000000000004e-05,
+        3.5000000000000004e-05
+      ],
+      "scheduler_step_calls": 0,
+      "note": "First harness equality used an exact decimal literal and failed on binary float representation. Corrected only the harness to 1e-20 tolerance; final actual-source check passed."
+    },
+    {
+      "name": "Actual final condition wrapper AST execution",
+      "result": "PASS",
+      "backend": "stdlib context and input stubs; no torch tensors",
+      "events": [
+        [
+          "enter",
+          false
+        ],
+        [
+          "original_bound_method",
+          "same_router"
+        ],
+        [
+          "exit",
+          true
+        ]
+      ],
+      "input_float_calls": [
+        1,
+        1
+      ],
+      "detail": "Original method stayed bound to the same mocked router, both conversions happened inside disabled context, returned pair identity was preserved, and autocast context was restored."
+    },
+    {
+      "name": "Final diagnostic static scope checks",
+      "result": "PASS",
+      "detail": "Exactly two literal modes, fresh build/loss/optimizer/scheduler within each mode in source order, update assertion and break after3, no scheduler.step, no checkpoint operations."
+    }
+  ],
+  "non_blocking_findings": [],
+  "interpretation_limits": [
+    "Local Python has no torch. No tensor, CUDA, AMP, dtype, gradient magnitude, training, numerical reproduction, or efficacy test was run by this reviewer.",
+    "Reports contain three losses but final-step parameter gradients and final-step forward/backward hook witnesses only; observed entries are replaced on every forward. Do not describe them as a per-step gradient history.",
+    "Hook gradients are loss-scaled, while parameter.grad summaries are unscaled. Compare dtypes/nonzero patterns and account for recorded scaler values when comparing magnitudes.",
+    "FP32 condition execution is a controlled numerical intervention, not proof of the precise underflow location. Dtype hooks and actual gradient reports must establish the observed effect.",
+    "Because each mode makes three updates, later parameters can diverge in response to precision differences. Results test the paired three-step recipe; they are not a fixed-weight backward-only ablation.",
+    "The native branch should first be compared with original losses and failed predicate names. Exact repeatability is an actual deployment observation, not proven by matching source recipe.",
+    "Diagnostic success cannot satisfy the complete M0 gate or authorize50-epoch development. Any production fix requires narrow review and actual fresh exclusive M0 receipts, preserving the original failure."
+  ],
+  "status": "PASS_STATIC_AND_STDLIB_AST_MOCK"
+}
