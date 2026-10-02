@@ -1,0 +1,687 @@
+{
+  "schema": "demo-dual-axis-experiment-integrity-stage-audit-v1",
+  "audit_skill": "experiment-audit",
+  "agent_id": "/root/evaluation_integrity_audit",
+  "verdict_id": "/root/evaluation_integrity_audit",
+  "generated_at": "2026-10-02T15:48:33.838843+00:00",
+  "date": "2026-10-02",
+  "verdict": "WARN",
+  "overall_verdict": "WARN",
+  "integrity_status": "warn",
+  "reason_code": "stage_scope_incomplete_and_unused_diagnostic_defect",
+  "summary": "现有六个seed42开发终态使用真实数据集GT，数字与CPU复算一致；完整27组及官方测试尚未完成，不能提前验收。闲置相似度绘图的Before/After标签互换，不影响本轮检索分数。",
+  "reviewer_model": "gpt-6-astra",
+  "reviewer_reasoning": "max",
+  "reviewer_family": "openai",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "model_attribution_boundary": "Model and effort are attributed to the parent orchestration request, not independently attested by Python. No cross-family acceptance is claimed.",
+  "review_role": "Fresh artifact-reading integrity reviewer; implementation read-only.",
+  "human_handoff_path": "docs/实验交接.md",
+  "separate_markdown_report_created": false,
+  "hash_binding_scheme_added": false,
+  "observations": {
+    "first_comparison_snapshot": "2026-10-02T23:29:14+08:00",
+    "full_suite_snapshot": "2026-10-02T23:40:11+08:00",
+    "independent_remote_array_and_inventory_readback_utc": {
+      "2025": "2026-10-02T15:41:06.575684+00:00",
+      "2026": "2026-10-02T15:41:06.364872+00:00"
+    },
+    "current_full_suite_snapshot_counts": {
+      "WAIT_EVALUATION": 10,
+      "TRAINING": 8,
+      "QUEUED": 9,
+      "COMPLETE": 0,
+      "FAILED": 0
+    },
+    "full_metrics_files_in_both_remote_inventories": 0,
+    "final_verified_aggregate_exists": false,
+    "first_comparison_verified_comparison_exists": false
+  },
+  "audited_primary_artifacts": [
+    "run_experiment.py",
+    "full_evaluation.py",
+    "experiment_data.py",
+    "dual_axis.py",
+    "utils/reid_evaluation.py",
+    "utils/metrics.py",
+    "analyze_comparison.py",
+    "collect_results.py",
+    "collect_full_suite.py",
+    "check_full_metrics.py",
+    "splits.json",
+    "docs/实验交接.md",
+    "review.json",
+    "collector_review.json",
+    "extended_review.json",
+    "configs/RGBNT201/DeMo.yml",
+    "configs/RGBNT100/DeMo.yml",
+    "configs/MSVR310/DeMo.yml",
+    "results/preflight/checks/MSVR310_demo/run.json",
+    "results/preflight/checks/MSVR310_demo/smoke.json",
+    "results/preflight/checks/MSVR310_dual/run.json",
+    "results/preflight/checks/MSVR310_dual/smoke.json",
+    "results/preflight/checks/MSVR310_ordinary/run.json",
+    "results/preflight/checks/MSVR310_ordinary/smoke.json",
+    "results/preflight/checks/MSVR310_pair/pair.json",
+    "results/preflight/checks/RGBNT100_demo/run.json",
+    "results/preflight/checks/RGBNT100_demo/smoke.json",
+    "results/preflight/checks/RGBNT100_dual/run.json",
+    "results/preflight/checks/RGBNT100_dual/smoke.json",
+    "results/preflight/checks/RGBNT100_ordinary/run.json",
+    "results/preflight/checks/RGBNT100_ordinary/smoke.json",
+    "results/preflight/checks/RGBNT100_pair/pair.json",
+    "results/preflight/checks/RGBNT201_demo/run.json",
+    "results/preflight/checks/RGBNT201_demo/smoke.json",
+    "results/preflight/checks/RGBNT201_dual/run.json",
+    "results/preflight/checks/RGBNT201_dual/smoke.json",
+    "results/preflight/checks/RGBNT201_ordinary/run.json",
+    "results/preflight/checks/RGBNT201_ordinary/smoke.json",
+    "results/preflight/checks/RGBNT201_pair/pair.json",
+    "results/preflight/dynamic_amp_RGBNT100_smoke.json",
+    "results/preflight/dynamic_amp_RGBNT201_smoke.json",
+    "results/preflight/server2025_full_metric_cpu.json",
+    "results/preflight/server2026_full_metric_cpu.json",
+    "results/preflight/server2026_smoke.json",
+    "results/first_comparison/summary.csv",
+    "results/first_comparison/collection.json",
+    "results/first_comparison/latest_snapshot.json",
+    "results/first_comparison/RGBNT201_demo_s42/run.json",
+    "results/first_comparison/RGBNT201_demo_s42/best.json",
+    "results/first_comparison/RGBNT201_demo_s42/result.json",
+    "results/first_comparison/RGBNT201_demo_s42/exit.json",
+    "results/first_comparison/RGBNT201_demo_s42/epochs.csv",
+    "results/first_comparison/RGBNT201_demo_s42/batch_orders.jsonl",
+    "results/first_comparison/RGBNT201_ordinary_s42/run.json",
+    "results/first_comparison/RGBNT201_ordinary_s42/best.json",
+    "results/first_comparison/RGBNT201_ordinary_s42/result.json",
+    "results/first_comparison/RGBNT201_ordinary_s42/exit.json",
+    "results/first_comparison/RGBNT201_ordinary_s42/epochs.csv",
+    "results/first_comparison/RGBNT201_ordinary_s42/batch_orders.jsonl",
+    "results/first_comparison/RGBNT201_dual_s42/run.json",
+    "results/first_comparison/RGBNT201_dual_s42/best.json",
+    "results/first_comparison/RGBNT201_dual_s42/result.json",
+    "results/first_comparison/RGBNT201_dual_s42/exit.json",
+    "results/first_comparison/RGBNT201_dual_s42/epochs.csv",
+    "results/first_comparison/RGBNT201_dual_s42/batch_orders.jsonl",
+    "results/first_comparison/MSVR310_demo_s42/run.json",
+    "results/first_comparison/MSVR310_demo_s42/best.json",
+    "results/first_comparison/MSVR310_demo_s42/result.json",
+    "results/first_comparison/MSVR310_demo_s42/exit.json",
+    "results/first_comparison/MSVR310_demo_s42/epochs.csv",
+    "results/first_comparison/MSVR310_demo_s42/batch_orders.jsonl",
+    "results/first_comparison/MSVR310_ordinary_s42/run.json",
+    "results/first_comparison/MSVR310_ordinary_s42/best.json",
+    "results/first_comparison/MSVR310_ordinary_s42/result.json",
+    "results/first_comparison/MSVR310_ordinary_s42/exit.json",
+    "results/first_comparison/MSVR310_ordinary_s42/epochs.csv",
+    "results/first_comparison/MSVR310_ordinary_s42/batch_orders.jsonl",
+    "results/first_comparison/MSVR310_dual_s42/run.json",
+    "results/first_comparison/MSVR310_dual_s42/best.json",
+    "results/first_comparison/MSVR310_dual_s42/result.json",
+    "results/first_comparison/MSVR310_dual_s42/exit.json",
+    "results/first_comparison/MSVR310_dual_s42/epochs.csv",
+    "results/first_comparison/MSVR310_dual_s42/batch_orders.jsonl"
+  ],
+  "supporting_artifacts": [
+    "AGENTS.md",
+    "data/datasets/RGBNT201.py",
+    "data/datasets/RGBNT100.py",
+    "data/datasets/msvr310.py",
+    "verify_pair.py",
+    "engine/processor.py (call-site search)",
+    "results/full_suite/snapshot.json",
+    "results/full_suite/status.csv",
+    "results/initial_attempt/server2025/runs/first_comparison/*/{result.json,exit.json,epochs.csv,batch_orders.jsonl}",
+    "results/initial_attempt/server2026/runs/first_comparison/*/{result.json,exit.json,epochs.csv,batch_orders.jsonl}"
+  ],
+  "checks": {
+    "A": {
+      "name": "Ground truth provenance",
+      "status": "PASS",
+      "details": "The executed development retrieval pipeline uses identity/camera/scene annotations parsed from installed dataset filenames. Heldout identities are fixed by splits.json; gallery distractors remain, and queries require a legal same-ID positive. On both hosts, the installed train/test identity sets are disjoint and every listed modality path exists. All six saved development arrays exactly match current installed IDs, cameras, scenes, filenames and query indices. No model-derived reference labels were found. Official-test source uses the native dataset directory conventions, but its future runtime scores are not certified by this stage audit.",
+      "evidence": [
+        "experiment_data.py:24-45",
+        "data/datasets/RGBNT201.py:61-87",
+        "data/datasets/RGBNT100.py:63-85",
+        "data/datasets/msvr310.py:67-88",
+        "run_experiment.py:49-69",
+        "utils/reid_evaluation.py:31-48",
+        "full_evaluation.py:68-79",
+        "full_evaluation.py:127-146",
+        "results/preflight/server2025_full_metric_cpu.json:3-24",
+        "results/preflight/server2026_full_metric_cpu.json:3-24"
+      ],
+      "official_protocol_boundary": "Rules match the installed original dataset readers and the MSVR same-ID/same-scene rule at utils/metrics.py:68. The scorer is a local implementation, not an execution of an untouched external official evaluation package; historical dataset archive provenance was not independently certified."
+    },
+    "B": {
+      "name": "Score normalization",
+      "status": "PASS",
+      "details": "mAP averages precision at true-positive ranks; CMC averages true-ID hit indicators; INP is the number of relevant gallery samples divided by the last relevant rank after the same junk exclusion. Reporting multiplies fractions by 100. No reported retrieval metric is divided by prediction maxima/minima/means. Per-feature L2 normalization and internal router softmax/conditional probabilities are descriptor/model operations, not self-normalization of the reported accuracy.",
+      "evidence": [
+        "utils/reid_evaluation.py:27-55",
+        "run_experiment.py:56-66",
+        "full_evaluation.py:20-60",
+        "full_evaluation.py:88",
+        "dual_axis.py:69-94"
+      ],
+      "primary_reference": {
+        "url": "https://raw.githubusercontent.com/JDAI-CV/fast-reid/master/fastreid/evaluation/rank.py",
+        "accessed_at_date": "2026-10-02",
+        "support": "eval_market1501 computes INP from cumulative relevant matches at the last positive, lines 122-127 (web line numbering)."
+      }
+    },
+    "C": {
+      "name": "Result existence and numeric consistency",
+      "status": "PASS",
+      "details": "Every current seed42 number in the handoff table matches summary.csv and its recorded snapshot. The six archived COMPLETE runs have exit0, exactly 50 epoch rows, correct earliest maximum-mAP selection, matching best/result/reload fields, and consistent batch/update accounting. Independent read-only CPU recomputation from their existing remote arrays reproduces all four reported retrieval metrics exactly. Existing CPU mINP/Rank20 preflight values and engineering witness numbers match the handoff. The current full-suite status records zero completed full evaluations and does not invent final three-seed scores. Prior review PASS labels are explicitly static, not fabricated runtime executions.",
+      "evidence": [
+        "docs/实验交接.md:50-64",
+        "results/first_comparison/summary.csv:1-10",
+        "results/first_comparison/collection.json:2-11",
+        "results/first_comparison/RGBNT201_ordinary_s42/result.json:27-50",
+        "results/first_comparison/MSVR310_dual_s42/result.json:27-50",
+        "results/preflight/server2025_full_metric_cpu.json:26-32",
+        "results/preflight/server2026_full_metric_cpu.json:26-32",
+        "review.json:11-13",
+        "collector_review.json:125-131",
+        "extended_review.json:77-82",
+        "docs/实验交接.md:112-142",
+        "results/full_suite/status.csv:1-28"
+      ],
+      "historical_attempt_check": {
+        "recorded_batch_rows": 4794,
+        "RGBNT201_ordinary_recorded_before_failure": 242,
+        "RGBNT100_ordinary_recorded_before_failure": 18,
+        "both_failure_exit_codes": 1,
+        "two_complete_historical_MSVR_metrics_match_handoff": true,
+        "evidence": [
+          "docs/实验交接.md:100-106",
+          "results/initial_attempt/server2025/runs/first_comparison/RGBNT201_ordinary_s42/exit.json:2",
+          "results/initial_attempt/server2026/runs/first_comparison/RGBNT100_ordinary_s42/exit.json:2"
+        ],
+        "boundary": "Counted preserved batch records; unrecorded in-flight work is not asserted."
+      }
+    },
+    "D": {
+      "name": "Metric call and output coverage",
+      "status": "WARN",
+      "details": "The active evaluate_reid call is reached by the per-epoch and strict-reload paths, with actual epoch/result outputs and independently checked arrays. full_metrics has actual CPU saved-array preflight outputs, and source calls for future development/official-test reporting. No full_evaluation/metrics.json existed in either host inventory at the audit observation, and no final verified_aggregate.json exists in the inspected local snapshot; those future paths have not passed runtime acceptance. Repository search also finds inherited visualization helpers without pipeline call sites. One dormant similarity visualization reverses its Before/After legend labels; this does not affect active retrieval scores.",
+      "evidence": [
+        "run_experiment.py:64-70",
+        "run_experiment.py:183-204",
+        "check_full_metrics.py:36-44",
+        "full_evaluation.py:131-143",
+        "collect_full_suite.py:109-183",
+        "collect_full_suite.py:241-243",
+        "utils/metrics.py:323-344",
+        "utils/metrics.py:367-423"
+      ],
+      "dormant_plot_defect": {
+        "status": "CONFIRMED_SOURCE_DEFECT_IN_UNUSED_PATH",
+        "evidence": [
+          "utils/metrics.py:412-413",
+          "utils/metrics.py:422-423"
+        ],
+        "details": "similarities_ori is computed from pre-fusion tokens; similarities from post-fusion tokens. The post-fusion array is labeled Before and the pre-fusion array After. No call to visualize_similarity is present outside its definition in the inspected repository."
+      }
+    },
+    "E": {
+      "name": "Scope and claim ceiling",
+      "status": "WARN",
+      "details": "This is a stage report, not terminal acceptance of the requested 27-run study. Six seed42 development terminals (two datasets, three variants each) receive full artifact/array checks here. The later full-suite snapshot has 10 training COMPLETE+exit0 receipts, eight training slots, nine queued runs, and zero completed development-plus-official-test evaluations. The additional four repeat terminals are observed status evidence, not part of this audit's six-array verification. Three-seed aggregate results, final budget audit, robustness, contribution-supervision efficacy, psi-only attribution and SOTA remain unverified. Current text explicitly limits these claims; the warning is incomplete evidence, not detected scope inflation. The original first-stage no-test sentence should be labeled historical to avoid ambiguity with the authorized extension.",
+      "evidence": [
+        "docs/实验交接.md:7-9",
+        "docs/实验交接.md:23-25",
+        "docs/实验交接.md:70-78",
+        "docs/实验交接.md:112-142",
+        "results/first_comparison/summary.csv:2-10",
+        "results/full_suite/status.csv:2-28",
+        "analyze_comparison.py:68-72",
+        "collect_full_suite.py:177-182"
+      ],
+      "terminal_budget_audit": {
+        "status": "PENDING",
+        "passed": false,
+        "reason": "A complete 27-run result set and final full-suite aggregate were not present at this stage."
+      }
+    },
+    "F": {
+      "name": "Evaluation type classification",
+      "status": "PASS",
+      "classification": "real_gt",
+      "details": "The executed retrieval accuracy is real_gt. CPU recomputation of saved development arrays is also real_gt; it is not synthetic-proxy consistency. The official-test implementation is real_gt by source, with no official-test runtime result accepted here. Synthetic random patch and routing probes are labeled engineering diagnostics and do not serve as retrieval ground truth.",
+      "evidence": [
+        "experiment_data.py:24-45",
+        "run_experiment.py:49-70",
+        "check_full_metrics.py:21-43",
+        "full_evaluation.py:68-79",
+        "full_evaluation.py:135-158",
+        "verify_pair.py:32-47",
+        "docs/实验交接.md:92-94"
+      ],
+      "per_evaluation": [
+        {
+          "pipeline": "run_experiment.evaluate",
+          "type": "real_gt",
+          "execution_evidence": "Six completed seed42 development arrays independently verified."
+        },
+        {
+          "pipeline": "check_full_metrics real_dev",
+          "type": "real_gt",
+          "execution_evidence": "Two existing CPU_RUNTIME_PASS receipts; metrics reproduced from corresponding saved arrays."
+        },
+        {
+          "pipeline": "full_evaluation official_test",
+          "type": "real_gt",
+          "execution_evidence": "Source only at this stage; complete runtime metrics absent at the observed snapshot."
+        },
+        {
+          "pipeline": "verify_pair random FFT/routing witnesses",
+          "type": "simulation_only",
+          "execution_evidence": "Engineering-only PAIR_PASS receipts, expressly not retrieval improvement."
+        },
+        {
+          "pipeline": "run_experiment smoke",
+          "type": "real_gt",
+          "execution_evidence": "Real labeled-data optimizer/reload sanity, not retrieval accuracy."
+        }
+      ]
+    }
+  },
+  "deterministic_terminal_evidence": {
+    "scope": "Six archived seed42 development runs only",
+    "verification": "PASS",
+    "runs": [
+      {
+        "run": "RGBNT201_demo_s42",
+        "evaluation_type": "real_gt",
+        "epochs": 50,
+        "batch_attempts": 2100,
+        "optimizer_updates": 2100,
+        "amp_skips": 0,
+        "selected": {
+          "mAP": 64.4467656152785,
+          "Rank-1": 63.515151515151516,
+          "Rank-5": 75.75757575757575,
+          "Rank-10": 83.03030303030303,
+          "query_count": 825,
+          "gallery_count": 825,
+          "descriptor_dim": 5120,
+          "epoch": 25
+        },
+        "parameters": 98644480,
+        "trainable_parameters": 98639360,
+        "verification": "PASS",
+        "verified_checks": [
+          "COMPLETE_and_exit0",
+          "epoch_sequence_1_to_50",
+          "finite_epoch_metrics_and_loss",
+          "earliest_maximum_development_mAP",
+          "best_json_and_result_agree",
+          "strict_reload_metrics_agree",
+          "all_batch_attempt_numbers_and_B64",
+          "all_per_epoch_update_and_skip_counts",
+          "run_metadata_equals_result_metadata"
+        ],
+        "readonly_saved_array_cpu_recompute": {
+          "executed": true,
+          "execution_host": "2025",
+          "remote_path": "/data2/gb/Re-ID/DeMo-DualAxis/runs/dynamic_amp_comparison/RGBNT201_demo_s42/best_dev_arrays.npz",
+          "ids_cameras_scenes_names_and_query_indices_match_installed_dataset": true,
+          "features_and_distances_finite": true,
+          "four_reported_metrics_max_absolute_error": 0.0,
+          "additional_audit_only_development_mINP": 53.336009770410264,
+          "additional_audit_only_development_Rank20": 88.48484848484848,
+          "boundary": "CPU read-only calculation from existing arrays; not a model forward, checkpoint reload, official-test evaluation, or full-suite result."
+        }
+      },
+      {
+        "run": "RGBNT201_ordinary_s42",
+        "evaluation_type": "real_gt",
+        "epochs": 50,
+        "batch_attempts": 2100,
+        "optimizer_updates": 2099,
+        "amp_skips": 1,
+        "selected": {
+          "mAP": 59.167067009600046,
+          "Rank-1": 59.27272727272728,
+          "Rank-5": 72.72727272727273,
+          "Rank-10": 78.66666666666666,
+          "query_count": 825,
+          "gallery_count": 825,
+          "descriptor_dim": 5632,
+          "epoch": 21
+        },
+        "parameters": 105113730,
+        "trainable_parameters": 105102466,
+        "verification": "PASS",
+        "verified_checks": [
+          "COMPLETE_and_exit0",
+          "epoch_sequence_1_to_50",
+          "finite_epoch_metrics_and_loss",
+          "earliest_maximum_development_mAP",
+          "best_json_and_result_agree",
+          "strict_reload_metrics_agree",
+          "all_batch_attempt_numbers_and_B64",
+          "all_per_epoch_update_and_skip_counts",
+          "run_metadata_equals_result_metadata"
+        ],
+        "readonly_saved_array_cpu_recompute": {
+          "executed": true,
+          "execution_host": "2025",
+          "remote_path": "/data2/gb/Re-ID/DeMo-DualAxis/runs/dynamic_amp_comparison/RGBNT201_ordinary_s42/best_dev_arrays.npz",
+          "ids_cameras_scenes_names_and_query_indices_match_installed_dataset": true,
+          "features_and_distances_finite": true,
+          "four_reported_metrics_max_absolute_error": 0.0,
+          "additional_audit_only_development_mINP": 48.20741335376193,
+          "additional_audit_only_development_Rank20": 89.6969696969697,
+          "boundary": "CPU read-only calculation from existing arrays; not a model forward, checkpoint reload, official-test evaluation, or full-suite result."
+        }
+      },
+      {
+        "run": "RGBNT201_dual_s42",
+        "evaluation_type": "real_gt",
+        "epochs": 50,
+        "batch_attempts": 2100,
+        "optimizer_updates": 2100,
+        "amp_skips": 0,
+        "selected": {
+          "mAP": 64.60840142524629,
+          "Rank-1": 63.272727272727266,
+          "Rank-5": 73.81818181818181,
+          "Rank-10": 81.0909090909091,
+          "query_count": 825,
+          "gallery_count": 825,
+          "descriptor_dim": 5632,
+          "epoch": 10
+        },
+        "parameters": 105113730,
+        "trainable_parameters": 105102466,
+        "verification": "PASS",
+        "verified_checks": [
+          "COMPLETE_and_exit0",
+          "epoch_sequence_1_to_50",
+          "finite_epoch_metrics_and_loss",
+          "earliest_maximum_development_mAP",
+          "best_json_and_result_agree",
+          "strict_reload_metrics_agree",
+          "all_batch_attempt_numbers_and_B64",
+          "all_per_epoch_update_and_skip_counts",
+          "run_metadata_equals_result_metadata"
+        ],
+        "readonly_saved_array_cpu_recompute": {
+          "executed": true,
+          "execution_host": "2025",
+          "remote_path": "/data2/gb/Re-ID/DeMo-DualAxis/runs/dynamic_amp_comparison/RGBNT201_dual_s42/best_dev_arrays.npz",
+          "ids_cameras_scenes_names_and_query_indices_match_installed_dataset": true,
+          "features_and_distances_finite": true,
+          "four_reported_metrics_max_absolute_error": 0.0,
+          "additional_audit_only_development_mINP": 54.186839214896175,
+          "additional_audit_only_development_Rank20": 89.45454545454545,
+          "boundary": "CPU read-only calculation from existing arrays; not a model forward, checkpoint reload, official-test evaluation, or full-suite result."
+        }
+      },
+      {
+        "run": "MSVR310_demo_s42",
+        "evaluation_type": "real_gt",
+        "epochs": 50,
+        "batch_attempts": 453,
+        "optimizer_updates": 453,
+        "amp_skips": 0,
+        "selected": {
+          "mAP": 47.60779210388089,
+          "Rank-1": 59.04761904761905,
+          "Rank-5": 69.04761904761905,
+          "Rank-10": 76.66666666666667,
+          "query_count": 210,
+          "gallery_count": 360,
+          "descriptor_dim": 5120,
+          "epoch": 29
+        },
+        "parameters": 98223616,
+        "trainable_parameters": 98218496,
+        "verification": "PASS",
+        "verified_checks": [
+          "COMPLETE_and_exit0",
+          "epoch_sequence_1_to_50",
+          "finite_epoch_metrics_and_loss",
+          "earliest_maximum_development_mAP",
+          "best_json_and_result_agree",
+          "strict_reload_metrics_agree",
+          "all_batch_attempt_numbers_and_B64",
+          "all_per_epoch_update_and_skip_counts",
+          "run_metadata_equals_result_metadata"
+        ],
+        "readonly_saved_array_cpu_recompute": {
+          "executed": true,
+          "execution_host": "2025",
+          "remote_path": "/data2/gb/Re-ID/DeMo-DualAxis/runs/dynamic_amp_comparison/MSVR310_demo_s42/best_dev_arrays.npz",
+          "ids_cameras_scenes_names_and_query_indices_match_installed_dataset": true,
+          "features_and_distances_finite": true,
+          "four_reported_metrics_max_absolute_error": 0.0,
+          "additional_audit_only_development_mINP": 33.521766571761695,
+          "additional_audit_only_development_Rank20": 80.0,
+          "boundary": "CPU read-only calculation from existing arrays; not a model forward, checkpoint reload, official-test evaluation, or full-suite result."
+        }
+      },
+      {
+        "run": "MSVR310_ordinary_s42",
+        "evaluation_type": "real_gt",
+        "epochs": 50,
+        "batch_attempts": 453,
+        "optimizer_updates": 453,
+        "amp_skips": 0,
+        "selected": {
+          "mAP": 46.75519502956051,
+          "Rank-1": 56.19047619047619,
+          "Rank-5": 70.0,
+          "Rank-10": 77.14285714285715,
+          "query_count": 210,
+          "gallery_count": 360,
+          "descriptor_dim": 5632,
+          "epoch": 31
+        },
+        "parameters": 104459394,
+        "trainable_parameters": 104448130,
+        "verification": "PASS",
+        "verified_checks": [
+          "COMPLETE_and_exit0",
+          "epoch_sequence_1_to_50",
+          "finite_epoch_metrics_and_loss",
+          "earliest_maximum_development_mAP",
+          "best_json_and_result_agree",
+          "strict_reload_metrics_agree",
+          "all_batch_attempt_numbers_and_B64",
+          "all_per_epoch_update_and_skip_counts",
+          "run_metadata_equals_result_metadata"
+        ],
+        "readonly_saved_array_cpu_recompute": {
+          "executed": true,
+          "execution_host": "2026",
+          "remote_path": "/data/gaob/Re-ID/DeMo-DualAxis/runs/dynamic_amp_comparison/MSVR310_ordinary_s42/best_dev_arrays.npz",
+          "ids_cameras_scenes_names_and_query_indices_match_installed_dataset": true,
+          "features_and_distances_finite": true,
+          "four_reported_metrics_max_absolute_error": 0.0,
+          "additional_audit_only_development_mINP": 31.45428490411944,
+          "additional_audit_only_development_Rank20": 81.9047619047619,
+          "boundary": "CPU read-only calculation from existing arrays; not a model forward, checkpoint reload, official-test evaluation, or full-suite result."
+        }
+      },
+      {
+        "run": "MSVR310_dual_s42",
+        "evaluation_type": "real_gt",
+        "epochs": 50,
+        "batch_attempts": 453,
+        "optimizer_updates": 453,
+        "amp_skips": 0,
+        "selected": {
+          "mAP": 41.684188829385704,
+          "Rank-1": 55.23809523809524,
+          "Rank-5": 67.14285714285714,
+          "Rank-10": 74.76190476190476,
+          "query_count": 210,
+          "gallery_count": 360,
+          "descriptor_dim": 5632,
+          "epoch": 28
+        },
+        "parameters": 104459394,
+        "trainable_parameters": 104448130,
+        "verification": "PASS",
+        "verified_checks": [
+          "COMPLETE_and_exit0",
+          "epoch_sequence_1_to_50",
+          "finite_epoch_metrics_and_loss",
+          "earliest_maximum_development_mAP",
+          "best_json_and_result_agree",
+          "strict_reload_metrics_agree",
+          "all_batch_attempt_numbers_and_B64",
+          "all_per_epoch_update_and_skip_counts",
+          "run_metadata_equals_result_metadata"
+        ],
+        "readonly_saved_array_cpu_recompute": {
+          "executed": true,
+          "execution_host": "2026",
+          "remote_path": "/data/gaob/Re-ID/DeMo-DualAxis/runs/dynamic_amp_comparison/MSVR310_dual_s42/best_dev_arrays.npz",
+          "ids_cameras_scenes_names_and_query_indices_match_installed_dataset": true,
+          "features_and_distances_finite": true,
+          "four_reported_metrics_max_absolute_error": 0.0,
+          "additional_audit_only_development_mINP": 27.238056103155177,
+          "additional_audit_only_development_Rank20": 78.0952380952381,
+          "boundary": "CPU read-only calculation from existing arrays; not a model forward, checkpoint reload, official-test evaluation, or full-suite result."
+        }
+      }
+    ],
+    "totals": {
+      "runs": 6,
+      "epochs": 300,
+      "batch_attempts": 7659,
+      "optimizer_updates": 7658,
+      "amp_skips": 1
+    },
+    "paired_sampling_and_capacity": {
+      "RGBNT201": {
+        "all_three_complete_batch_sequences_equal": true,
+        "ordinary_dual_parameters_and_trainable_parameters_equal": true,
+        "ordinary_dual_descriptor_dim": 5632,
+        "dual_minus_ordinary_mAP": 5.441334415646239,
+        "dual_minus_ordinary_Rank1": 3.999999999999986
+      },
+      "MSVR310": {
+        "all_three_complete_batch_sequences_equal": true,
+        "ordinary_dual_parameters_and_trainable_parameters_equal": true,
+        "ordinary_dual_descriptor_dim": 5632,
+        "dual_minus_ordinary_mAP": -5.071006200174807,
+        "dual_minus_ordinary_Rank1": -0.952380952380949
+      }
+    }
+  },
+  "installed_ground_truth_readback": {
+    "execution": "Read-only SSH via aliases 2025 and 2026; BatchMode=yes, ClearAllForwardings=yes. Executed isolated native parser functions with standard-library dependencies and NumPy CPU array calculations; no torch/model import.",
+    "dataset_roots": {
+      "2025": "/data2/gb/Re-ID/dataset",
+      "2026": "/data/gaob/Re-ID/dataset"
+    },
+    "both_hosts_same_counts": {
+      "RGBNT201": {
+        "source_ids": 171,
+        "source_records": 3951,
+        "fit_ids": 141,
+        "fit_records": 3126,
+        "dev_ids": 30,
+        "dev_gallery": 825,
+        "dev_queries": 825,
+        "official_query": 836,
+        "official_gallery": 836,
+        "official_valid_queries": 836
+      },
+      "RGBNT100": {
+        "source_ids": 50,
+        "source_records": 8675,
+        "fit_ids": 33,
+        "fit_records": 5550,
+        "dev_ids": 17,
+        "dev_gallery": 3125,
+        "dev_queries": 3125,
+        "official_query": 1715,
+        "official_gallery": 8575,
+        "official_valid_queries": 1715
+      },
+      "MSVR310": {
+        "source_ids": 155,
+        "source_records": 1032,
+        "fit_ids": 103,
+        "fit_records": 672,
+        "dev_ids": 52,
+        "dev_gallery": 360,
+        "dev_queries": 210,
+        "official_query": 591,
+        "official_gallery": 1055,
+        "official_valid_queries": 591
+      }
+    },
+    "all_train_test_identity_overlaps_empty": true,
+    "all_referenced_modality_paths_exist": true
+  },
+  "findings": [
+    {
+      "id": "I1",
+      "severity": "stage_limit",
+      "status": "OPEN",
+      "title": "The comprehensive 27-run evaluation and terminal budget are not yet evidenced.",
+      "evidence": [
+        "results/full_suite/status.csv:1-28",
+        "docs/实验交接.md:112"
+      ],
+      "action": "Keep the report explicitly provisional; audit all actual terminal/evaluation artifacts after the existing jobs finish. Do not mark future metrics or the terminal budget audit PASS."
+    },
+    {
+      "id": "I2",
+      "severity": "minor_documentation",
+      "status": "OPEN_AT_READ",
+      "title": "First-stage no-test wording needs temporal scope.",
+      "evidence": [
+        "docs/实验交接.md:25",
+        "docs/实验交接.md:70-78"
+      ],
+      "action": "Describe line25 as the original first-stage scope and point to the authorized later fixed-checkpoint official-test extension."
+    },
+    {
+      "id": "I3",
+      "severity": "minor_unused_code",
+      "status": "OPEN",
+      "title": "Inherited similarity visualization reverses Before/After labels.",
+      "evidence": [
+        "utils/metrics.py:412-423"
+      ],
+      "action": "Do not use that plot as scientific evidence in its current form. It is outside the active scoring route and requires no change to the current experiment."
+    }
+  ],
+  "claims": [
+    {
+      "claim": "The six archived seed42 development scores are dataset-GT retrieval results.",
+      "impact": "supported"
+    },
+    {
+      "claim": "Within the verified seed42 panel, dual improves RGBNT201 over ordinary but worsens MSVR310.",
+      "impact": "supported_with_development_single_seed_qualifier"
+    },
+    {
+      "claim": "The 27-run three-seed study and official-test metrics are complete.",
+      "impact": "unsupported_at_this_stage"
+    },
+    {
+      "claim": "Joint routing alone causes the gain, contribution supervision is effective, or the method is broadly stable/SOTA.",
+      "impact": "unsupported"
+    }
+  ],
+  "not_performed": [
+    "No GPU training/evaluation/model forward started or stopped.",
+    "No checkpoint tensor reload executed by this auditor. Existing strict-reload output claims were checked against saved arrays and source, not rerun on a model.",
+    "No implementation, evaluator, dataset, weight or human-handoff file edited.",
+    "No collector/analyzer/launcher main executed by this auditor.",
+    "No final all-27 budget or metric audit claimed.",
+    "No private SSH credential or private connection file read."
+  ],
+  "trace_owner": "Parent /root should preserve this delegated request/response per the skill review-tracing policy; this JSON is the sole reviewer-written audit report."
+}

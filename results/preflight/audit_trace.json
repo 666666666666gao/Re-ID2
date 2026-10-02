@@ -1,0 +1,21 @@
+{
+  "trace_kind": "Native reviewer request and returned findings; not a full subagent tool transcript",
+  "skill": "C:/Users/gb/.codex/skills/experiment-audit/SKILL.md",
+  "reviewer_agent": "/root/evaluation_integrity_audit",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning": "max",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "request": "Fresh read-only audit of evaluation/data/collection scripts, installed dataset ground truth, completed result records and the single handoff. Check dataset-derived GT, prediction-based score normalization, result existence/numeric claims, actual metric calls, scope and evaluation type. Do not launch or stop GPU jobs. Save machine JSON only; human report goes into existing handoff.",
+  "returned_verdict": "WARN",
+  "checks": {"A": "PASS", "B": "PASS", "C": "PASS", "D": "WARN", "E": "WARN", "F": "PASS"},
+  "returned_evidence": [
+    "Six completed seed42 development runs: 300 epochs, 7659 attempts, 7658 optimizer updates, one AMP skip; all CSV, earliest-best and full paired sample-order checks passed.",
+    "Six saved development arrays independently matched installed identity/camera/scene/name/query_indices; CPU recomputed mAP and Rank1/5/10 with maximum error zero.",
+    "At 23:40:11, full-suite snapshot contained ten WAIT_EVALUATION, eight TRAINING and nine QUEUED; zero complete full evaluations. Remote inventory at23:41 also found no complete official-test metric files.",
+    "Unused upstream utils/metrics.py similarity plot Before/After labels are swapped; it is not used by current scoring.",
+    "The initial-stage test-scope sentence needed clarification after the user's expanded evaluation request."
+  ],
+  "machine_report": "results/preflight/integrity_audit.json",
+  "terminal_budget_audit_at_this_review": "PENDING"
+}
