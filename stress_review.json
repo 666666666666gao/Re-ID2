@@ -1,0 +1,90 @@
+{
+  "schema": "demo-dual-axis-stress-review-v1",
+  "reviewed_at": "2026-10-03",
+  "reviewer": {
+    "agent": "/root/review_demo_dual_axis",
+    "attribution": "same-family/provisional",
+    "review_independence": "same-family",
+    "acceptance_status": "provisional",
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "max",
+    "runtime_model_attestation": "Requested orchestration labels; no independent runtime model attestation."
+  },
+  "verdict": "PASS_STATIC_SANITY_PENDING",
+  "blocking_findings_remaining": [],
+  "resolved_findings": [
+    {
+      "title": "The full launcher would rerun its completed sanity checkpoint",
+      "evidence": "The original pending list included all scheduled checkpoints without recognizing stress receipts. The proposed MSVR310 dual seed42 sanity would then be executed again, failing at exclusive stdout creation or the existing stress output directory.",
+      "resolution": "launch_stress.py now has --sanity-run to execute one actual scheduled run through the same launcher. The full launcher accepts an existing run only with stress exit_code 0 and stress result status COMPLETE, includes it in its results and removes it from pending. Failed or incomplete artifacts are not retried."
+    },
+    {
+      "title": "Decimal condition names were truncated by Path.with_suffix",
+      "evidence": "full_metrics writes output.with_suffix('.csv') and '.json'. The original RGB_blur_sigma1.5 path produced RGB_blur_sigma1.csv/json, inconsistent with the recorded condition name; NI and TI had the same defect.",
+      "resolution": "Condition identifiers are now sigma1p5 and sigma3, while the actual Gaussian sigma arguments remain 1.5 and 3.0. All condition names preserve their complete identifier when full_metrics appends an extension."
+    }
+  ],
+  "file_verdicts": {
+    "stress_evaluation.py": {
+      "verdict": "PASS_STATIC_RUNTIME_SANITY_PENDING",
+      "checks": [
+        "Requires the existing training result COMPLETE and exit code 0. Reconstructs the original fit class count and camera embeddings, then loads the dev-selected best.pth strictly and enters eval mode.",
+        "Uses the same official query/gallery parsers, camera-or-scene junk exclusion, stable query names and full_metrics ground-truth evaluator as the reviewed full evaluation.",
+        "Clean evaluation and six single-modality blur conditions use exactly the same clean gallery feature tensor. Each query condition reloads clean inputs and changes only its named RGB, NI or TI tensor with kernel 9 and sigma 1.5 or 3.0 after resize/normalization.",
+        "Query and gallery feature extraction are under no_grad and use normalized FP32 descriptors. No optimizer, training-mode pass, checkpoint save or training-process operation is introduced.",
+        "The dual-only psi_off_frozen condition runs last, binds interaction=False to the existing joint method, and recomputes both gallery and query features under that same altered encoder. The source preserves the cross-axis messages, outer gates and all trained weights.",
+        "The psi-off route must match its marginal-product distribution within 1e-6. This checks factorization of the inference route, not retrieval benefit or independently trained-router performance.",
+        "Each condition writes all six retrieval metrics, CMC and group summaries through full_metrics, plus a per-query CSV. Route diagnostics are aggregate mean routes and joint-versus-marginal-product distance; they are not per-query causal explanations.",
+        "Where an ordinary full-evaluation result already exists, clean stress metrics must match it for all six metrics. The terminal result is written atomically only after all conditions and applicable parity checks succeed.",
+        "The protocol explicitly labels fixed fit-subset training and frozen-weight inference diagnostics, with no contribution-supervision or trained-independent-ablation claim."
+      ],
+      "primary_api_reference": "https://raw.githubusercontent.com/pytorch/vision/v0.20.1/torchvision/transforms/_functional_tensor.py",
+      "api_check": "The primary torchvision tensor implementation retains NCHW input, constructs the kernel on img.device, reflection-pads it and applies grouped conv2d. The reviewed batched FP32 CUDA call is supported by that implementation. Actual installed-environment execution remains the sanity gate."
+    },
+    "launch_stress.py": {
+      "verdict": "PASS",
+      "checks": [
+        "The derived schedules cover all 27 unique checkpoints: 13 on host 2025 and 14 on host 2026, nine per seed and nine per variant.",
+        "Before any work, host 2025 requires the final GPU3 MSVR310 dual seed43 full-evaluation exit 0; host 2026 requires dual seed44. These are the last entries in the existing sequential GPU3 evaluation queues.",
+        "Only completed training runs with exit 0 and result COMPLETE become ready. A ready run is selected without waiting behind an unfinished earlier run. No-ready periods sleep for 240 seconds.",
+        "Each new subprocess requires physical GPU3 memory below 500 MiB and receives CUDA_VISIBLE_DEVICES=3. Jobs run sequentially on that GPU and do not stop or alter work assigned to other GPUs.",
+        "Separate exclusive stress stdout and atomic launch/exit receipts preserve the actual invocation and failure. Nonzero exits stop the launcher without automatic rerun.",
+        "The planned sanity invocation creates the same legitimate per-run receipts as the full queue, so its successful result can be counted once by the later full launcher."
+      ]
+    },
+    "collect_full_suite.py": {
+      "verdict": "PASS_STRESS_EXTENSION",
+      "checks": [
+        "Reads atomic stress result/launch/exit receipts and inventories the actual JSON/CSV filenames. Terminal intake preserves stdout, receipts and all present condition artifacts, including partial artifacts after a failed stress run.",
+        "COMPLETE now requires both the original full-test terminal condition and stress result COMPLETE with stress exit 0. Any nonzero training, evaluation or stress exit takes precedence and reports FAILED.",
+        "Full-test artifacts are copied when test_done independently of stress completion, avoiding an intake marker before the original metrics have been copied.",
+        "Final audit requires stress exit 0, stress result COMPLETE, the same dev-selected epoch and all six clean metrics equal to ordinary official-test evaluation. This also checks parity for stress runs that finished before the original full evaluation.",
+        "The final stress audit requires seven conditions for demo/ordinary and eight for dual, totaling 198 checkpoint-condition rows. Every aggregate requires exactly seeds 42/43/44 and reports mean plus sample standard deviation for all six metrics.",
+        "All 198 individual rows and all condition aggregates are retained, including negative results. The existing 1350-epoch, sample-order, parameter/dimension and AMP-accounting audit remains in place.",
+        "The canonical handoff includes the full condition table and the explicit frozen-inference limitation. Existing primary-publication receipt gating, byte-identical mirror synchronization and terminal Git publication are preserved."
+      ]
+    }
+  },
+  "performed_checks": [
+    "Read stress_evaluation.py, launch_stress.py, the complete updated collect_full_suite.py and their existing model/data/evaluation/launcher interfaces.",
+    "Compiled the final stress evaluator, launcher, collector and analyzer sources, plus the generated remote-reader source, without importing model code or executing main functions.",
+    "Evaluated only the static schedules to verify 27 unique jobs, host counts 13/14 and nine jobs per seed.",
+    "Evaluated only the condition construction to verify seven/seven/eight conditions, the six exact modality/sigma combinations and lossless CSV/JSON filenames.",
+    "Evaluated 12 collector state-expression cases, including missing stress receipts, stress-before-full-test completion and each of the three failure exits. All matched the intended completion/failure precedence.",
+    "Verified the Gaussian-blur batched tensor call against the primary torchvision tensor implementation. No installed torch runtime was available locally and no GPU evaluation was run by this reviewer."
+  ],
+  "reviewer_actions": {
+    "implementation_files_edited": false,
+    "training_started_or_stopped": false,
+    "gpu_work_executed": false,
+    "remote_commands_executed": false,
+    "collector_or_analyzer_main_executed": false,
+    "only_written_artifact": "stress_review.json"
+  },
+  "remaining_execution_gate": "Run the planned host-2026 GPU3 sanity through launch_stress.py --host 2026 --sanity-run MSVR310_dual_s42. Require actual stress exit 0, result COMPLETE, all eight conditions, all-six clean metric parity and the existing psi-off factorization assertion before launching the remaining queues. Reload only the local suite watcher with the reviewed collector source and the current primary stdout receipt path.",
+  "boundaries": [
+    "This is source approval with runtime sanity pending; it does not assert that the 198 evaluations have executed or passed.",
+    "Query-only Gaussian blur at two fixed severities is a defined stress test, not a general robustness or deployment guarantee.",
+    "Psi-off changes inference routing on already-trained weights while preserving conditional messages. It does not substitute for a separately trained independent-router ablation."
+  ]
+}

@@ -75,6 +75,7 @@ def analyze():
         writer = csv.DictWriter(table, fieldnames=list(rows[0])); writer.writeheader(); writer.writerows(rows)
     handoff = ROOT / 'docs/实验交接.md'
     original = handoff.read_text(encoding='utf-8')
+    original = original.replace('正式官方测试调用次数为0。', '首批训练不调用官方测试；独立官方测试结果见完整评测阶段。')
     original += '\n### 完整结果确定性核验\n\n'
     original += f"九端450epoch全部完成且exit0。每端best是50行CSV中开发mAP最高、并列最早的epoch，四项指标与strict reload一致。三个数据集各三模型的完整batch文件名及顺序完全一致，ordinary/dual参数与5632D描述子匹配。总batch尝试{report['batch_attempts']}，成功optimizer更新{report['optimizer_updates']}，AMP跳过{report['amp_skips']}。逐端明细见results/first_comparison/verified_metrics.csv；核验见verified_comparison.json。\n\n"
     for r in rows:

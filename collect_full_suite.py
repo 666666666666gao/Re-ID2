@@ -29,11 +29,14 @@ records={{}}
 for campaign in ['dynamic_amp_comparison','three_seed_extension']:
     for folder in sorted((root/'runs'/campaign).glob('*_s*')):
         record={{}}
-        for key in ['launch','run','status','best','exit','result','evaluation_launch','evaluation_exit']:
+        for key in ['launch','run','status','best','exit','result','evaluation_launch','evaluation_exit','stress_launch','stress_exit']:
             p=folder/(key+'.json')
             if p.exists(): record[key]=json.loads(p.read_text())
         p=folder/'full_evaluation/metrics.json'
         if p.exists(): record['full_metrics']=json.loads(p.read_text())
+        p=folder/'stress_evaluation/result.json'
+        if p.exists(): record['stress_result']=json.loads(p.read_text())
+        record['stress_text_files']=[p.name for p in sorted((folder/'stress_evaluation').glob('*')) if p.suffix in ['.json','.csv']]
         record['training_text_files']=[f for f in ['epochs.csv','batch_orders.jsonl'] if (folder/f).exists()]
         records[folder.name]=record
 print(json.dumps(records))
@@ -52,10 +55,25 @@ def collect():
         record = snapshots[host].get(name, {})
         train_exit = record.get('exit', {}).get('exit_code')
         eval_exit = record.get('evaluation_exit', {}).get('exit_code')
-        done = record.get('result', {}).get('status') == 'COMPLETE' and record.get('full_metrics') and eval_exit == 0 and train_exit == 0
-        failed = train_exit not in (None, 0) or eval_exit not in (None, 0)
-        phase = 'FAILED' if failed else ('COMPLETE' if done else ('EVALUATING' if 'evaluation_launch' in record else
-                ('WAIT_EVALUATION' if train_exit == 0 else ('TRAINING' if 'launch' in record else 'QUEUED'))))
+        stress_exit = record.get('stress_exit', {}).get('exit_code')
+        test_done = record.get('result', {}).get('status') == 'COMPLETE' and record.get('full_metrics') and eval_exit == 0 and train_exit == 0
+        stress_done = record.get('stress_result', {}).get('status') == 'COMPLETE' and stress_exit == 0
+        done = test_done and stress_done
+        failed = any(code not in (None, 0) for code in (train_exit, eval_exit, stress_exit))
+        if failed:
+            phase = 'FAILED'
+        elif done:
+            phase = 'COMPLETE'
+        elif 'evaluation_launch' in record and eval_exit is None:
+            phase = 'EVALUATING'
+        elif 'stress_launch' in record and stress_exit is None:
+            phase = 'STRESSING'
+        elif test_done:
+            phase = 'WAIT_STRESS'
+        elif train_exit == 0:
+            phase = 'WAIT_EVALUATION'
+        else:
+            phase = 'TRAINING' if 'launch' in record else 'QUEUED'
         row = {'dataset': dataset, 'variant': variant, 'seed': seed, 'host': host, 'gpu': gpu, 'status': phase,
                'epoch': record.get('status', {}).get('epochs', record.get('status', {}).get('epoch', 0))}
         metrics = record.get('full_metrics', {})
@@ -77,13 +95,20 @@ def collect():
             for key in ('evaluation_launch', 'evaluation_exit'):
                 copy_file(host, f'{remote}/{key}.json', destination / f'{key}.json')
             copy_file(host, f'{remote}/evaluation_stdout.log', destination / 'evaluation_stdout.log')
-            if done:
+            if test_done:
                 for filename in ('metrics.json', 'dev_per_query.json', 'dev_per_query.csv', 'test_per_query.json', 'test_per_query.csv'):
                     copy_file(host, f'{remote}/full_evaluation/{filename}', destination / 'full_evaluation' / filename)
             (destination / 'eval_intake.json').write_text(json.dumps({'time': now, 'exit_code': eval_exit}), encoding='utf-8')
+        if stress_exit is not None and not (destination / 'stress_intake.json').exists():
+            for key in ('stress_launch', 'stress_exit'):
+                copy_file(host, f'{remote}/{key}.json', destination / f'{key}.json')
+            copy_file(host, f'{remote}/stress_stdout.log', destination / 'stress_stdout.log')
+            for filename in record['stress_text_files']:
+                copy_file(host, f'{remote}/stress_evaluation/{filename}', destination / 'stress_evaluation' / filename)
+            (destination / 'stress_intake.json').write_text(json.dumps({'time': now, 'exit_code': stress_exit}), encoding='utf-8')
     with (BASE / 'status.csv').open('w', encoding='utf-8', newline='') as table:
         writer = csv.DictWriter(table, fieldnames=list(rows[0])); writer.writeheader(); writer.writerows(rows)
-    text = f'\n## 三种子完整评测进度\n\n实际采集：{now}。完整训练及开发/官方测试评测完成{sum(r["status"] == "COMPLETE" for r in rows)}/27，失败{len(failures)}。等待状态不是已完成指标。\n\n'
+    text = f'\n## 三种子完整评测进度\n\n实际采集：{now}。训练、开发/官方测试及固定权重鲁棒诊断全部完成{sum(r["status"] == "COMPLETE" for r in rows)}/27，失败{len(failures)}。等待状态不是已完成指标。\n\n'
     text += '|数据集|模型|seed|GPU|epoch|状态|开发mAP|官方测试mAP|\n|---|---|---|---|---|---|---|---|\n'
     for row in rows:
         display = lambda key: '—' if row[key] is None else f'{row[key]:.4f}'
@@ -115,6 +140,7 @@ def audit_and_aggregate():
         assert result['status'] == 'COMPLETE' and result['epochs'] == 50
         assert json.loads((folder / 'exit.json').read_text())['exit_code'] == 0
         assert json.loads((folder / 'evaluation_exit.json').read_text())['exit_code'] == 0
+        assert json.loads((folder / 'stress_exit.json').read_text())['exit_code'] == 0
         with (folder / 'epochs.csv').open(encoding='utf-8', newline='') as table:
             epochs = list(csv.DictReader(table))
         assert [int(r['epoch']) for r in epochs] == list(range(1, 51))
@@ -181,6 +207,30 @@ def audit_and_aggregate():
               'amp_skips': sum(r['amp_skipped_steps'] for r in results.values()),
               'limits': 'Fixed fit subset; not full official-train reproduction. Three seeds do not establish broad stability or SOTA. No contribution supervision. Structural+router combination, not psi-only attribution.'}
     (BASE / 'verified_aggregate.json').write_text(json.dumps(report, indent=2), encoding='utf-8')
+    stress_rows, stress_aggregates = [], []
+    for dataset, variant, seed in results:
+        folder = BASE / f'{dataset}_{variant}_s{seed}'
+        stress = json.loads((folder / 'stress_evaluation/result.json').read_text())
+        assert stress['status'] == 'COMPLETE' and stress['selected_epoch'] == results[(dataset, variant, seed)]['best']['epoch']
+        assert len(stress['measurements']) == (8 if variant == 'dual' else 7)
+        assert all(abs(stress['measurements']['clean']['metrics'][m] - metrics[(dataset, variant, seed)]['official_test'][m]) < 1e-8 for m in METRICS)
+        for condition, measurement in stress['measurements'].items():
+            stress_rows.append({'dataset': dataset, 'variant': variant, 'seed': seed, 'condition': condition,
+                                **{m: measurement['metrics'][m] for m in METRICS}})
+    assert len(stress_rows) == 198
+    for dataset in ('RGBNT201', 'RGBNT100', 'MSVR310'):
+        for variant in ('demo', 'ordinary', 'dual'):
+            conditions = sorted({r['condition'] for r in stress_rows if r['dataset'] == dataset and r['variant'] == variant})
+            for condition in conditions:
+                row = {'dataset': dataset, 'variant': variant, 'condition': condition}
+                group = [r for r in stress_rows if (r['dataset'], r['variant'], r['condition']) == (dataset, variant, condition)]
+                assert sorted(r['seed'] for r in group) == [42, 43, 44]
+                row.update({m: {'mean': statistics.mean(r[m] for r in group), 'sample_std': statistics.stdev(r[m] for r in group)} for m in METRICS})
+                stress_aggregates.append(row)
+    (BASE / 'stress_aggregate.json').write_text(json.dumps({'conditions': 198, 'rows': stress_aggregates,
+         'limits': 'Predefined query-only blur on clean gallery; psi-off changes BOTH query/gallery encoders at frozen weights, not an independently trained-router ablation.'}, indent=2), encoding='utf-8')
+    with (BASE / 'stress_metrics_per_run.csv').open('w', encoding='utf-8', newline='') as table:
+        writer = csv.DictWriter(table, fieldnames=list(stress_rows[0])); writer.writeheader(); writer.writerows(stress_rows)
     flat_rows = []
     for dataset in ('RGBNT201', 'RGBNT100', 'MSVR310'):
         for variant in ('demo', 'ordinary', 'dual'):
@@ -213,6 +263,10 @@ def audit_and_aggregate():
             values = '|'.join(f'{row[f"{scope}_{m}"]:.4f}' for m in METRICS)
             text += f'|{row["dataset"]}|{row["variant"]}|{row["seed"]}|{row["best_epoch"]}|{values}|\n'
     text += f'\n总batch尝试{report["batch_attempts"]}，真实optimizer更新{report["optimizer_updates"]}，AMP跳过{report["amp_skips"]}。推理增加的时间与显存、FLOPs覆盖限制按前述实测和各run metrics.json原样报告。三个种子的全部结果及退步/恢复数均保留，不能只选某数据集或某指标建立结论。\n'
+    text += '\n### 单模态模糊和冻结权重路由诊断\n\n全部198项条件实际完成。模糊只作用于query的一种模态，kernel9、sigma1.5/3像素，gallery图像及原编码保持一致。psi_off_frozen同时用关闭psi后的模型编码query和gallery，保留条件消息，是冻结权重推理诊断，不是独立路由重新训练消融。以下全部为三个种子的均值±样本标准差；198个原始分数见stress_metrics_per_run.csv，路由表及逐query见各stress_evaluation。\n\n|数据集|模型|条件|mAP|mINP|Rank-1|Rank-5|Rank-10|Rank-20|\n|---|---|---|---|---|---|---|---|---|\n'
+    for row in stress_aggregates:
+        values = '|'.join(f'{row[m]["mean"]:.4f}±{row[m]["sample_std"]:.4f}' for m in METRICS)
+        text += f'|{row["dataset"]}|{row["variant"]}|{row["condition"]}|{values}|\n'
     update_handoff(text)
     print('FULL_SUITE_AUDIT_PASS', json.dumps({'runs': 27, 'epochs': 1350, 'batch_attempts': report['batch_attempts']}), flush=True)
 
