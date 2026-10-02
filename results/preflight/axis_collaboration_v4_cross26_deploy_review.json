@@ -1,0 +1,391 @@
+{
+  "status": "PASS",
+  "verdict": "PASS_STATIC_AND_CPU_MOCK",
+  "reviewed_at": "2026-10-02T22:32:09.932118+00:00",
+  "reviewer": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "max",
+    "context": "same fresh delegated reviewer continuing a narrow local deployment-helper rescue review"
+  },
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "scope": "Fixed private cross-2026 deployment helper and its five generated Python payloads; source transfer, original completed MSVR310 input preservation, predecessor and source checks, two-stage frozen diagnostic controller, and truthful launch receipt. No experimental-model reimplementation or runtime acceptance.",
+  "helper_path": "C:/Users/gb/.codex_tmp/demo_axis_v4_cross26_deploy_20261003.py",
+  "blockers": [],
+  "required_fixes": [],
+  "code_edits_by_reviewer": [],
+  "prior_diagnostic_review": {
+    "path": "results/preflight/axis_collaboration_v4_four_state_review.json",
+    "sha256": "0379165a42ea0bdb043d33507fa791d854828399b6bdae34078a2dfee62957b0",
+    "check_count": 54,
+    "preserved_byte_exact": true,
+    "status": "PASS",
+    "limit": "Existing same-family provisional source/CPU review retained unchanged; no new diagnostic GPU PASS is added."
+  },
+  "resolved_issue": {
+    "status": "RESOLVED",
+    "classification": "LOCAL_HELPER_PARSE_ERROR",
+    "archived_path": "C:/Users/gb/.codex_tmp/demo_axis_v4_cross26_deploy_20261003_syntax_failed.py",
+    "archived_sha256": "533d6197bf34a8c2f3c1c6d756ccddcc16c1975d7531a5ab6eac70913aab95db",
+    "actual_reproduced_error": {
+      "type": "SyntaxError",
+      "line": 66,
+      "offset": 22,
+      "message": "invalid syntax"
+    },
+    "cause": "A triple-single-quoted remote launch f-string contained another unescaped triple-single-quoted controller literal, terminating the outer string at line 66.",
+    "implemented_fix": "controller_code is built separately and embedded with repr into the remote launch script; entry is independently quoted with repr.",
+    "verified": "The fixed outer helper and all five evaluated generated payloads compile. The archived original still reproduces its SyntaxError.",
+    "execution_consequence": "Python must parse the full outer module before executing it. This archived parse failure therefore could not reach imports, SSH/SCP, remote directory creation or GPU work in that invocation. This is not a model M0 or diagnostic smoke failure."
+  },
+  "findings": [
+    {
+      "status": "PASS",
+      "area": "Exact current diagnostic review gate",
+      "sources": [
+        "../../.codex_tmp/demo_axis_v4_cross26_deploy_20261003.py:9"
+      ],
+      "detail": "Before any external call, the helper requires the existing review status to start with PASS, no blockers, and every listed source SHA to equal the reviewed bytes. CPU execution of the actual outer AST confirmed FAIL, a nonempty blocker list and an altered reviewed source each stop with zero mock remote/SCP calls. This review JSON itself remains unchanged."
+    },
+    {
+      "status": "PASS",
+      "area": "2026 predecessor and existing dependency gate",
+      "sources": [
+        "../../.codex_tmp/demo_axis_v4_cross26_deploy_20261003.py:20",
+        "launch_missing.py:63",
+        "missing_evaluation.py:107"
+      ],
+      "detail": "The generated guard requires the existing 2026 missing-controller terminal to contain 14 zero exits, original controller PID 2152152 to be absent, run_experiment.py to match the evidenced old b395d5cc... source, and all nine declared common dependencies to match local source. The known producer writes this terminal only after its children return zero; missing_evaluation writes COMPLETE before returning. The input root is created exclusively and an existing diagnostic output root is rejected. Positive and count/exit/PID/source/dependency/existing-root negative fixtures all behaved as intended."
+    },
+    {
+      "status": "PASS",
+      "area": "Source staging stays on 2026",
+      "sources": [
+        "../../.codex_tmp/demo_axis_v4_cross26_deploy_20261003.py:13",
+        "../../.codex_tmp/demo_axis_v4_cross26_deploy_20261003.py:35",
+        "collect_results.py:23",
+        "collect_results.py:27"
+      ],
+      "detail": "Five fixed source paths plus the unchanged prior review are copied to 2026 after the live guard succeeds. Existing command() passes argument lists to subprocess with check=True and a 300-second timeout; remote_python quotes its fixed interpreter path and Python source with shlex.quote. No helper write targets 2025. The actual outer AST mock produced exactly the intended six source/review SCP operations followed by four scp -3 input copies, without executing a transport."
+    },
+    {
+      "status": "PASS",
+      "area": "Completed frozen input proof and byte preservation",
+      "sources": [
+        "../../.codex_tmp/demo_axis_v4_cross26_deploy_20261003.py:39",
+        "../../.codex_tmp/demo_axis_v4_cross26_deploy_20261003.py:50",
+        "../../.codex_tmp/demo_axis_v4_cross26_deploy_20261003.py:83"
+      ],
+      "detail": "2025 is read only: the source result must be COMPLETE50 and its outer exit0. best.pth, best_dev_arrays.npz, result.json and the outer exit are each measured by size and SHA, copied using scp -3 into the exclusive 2026 input tree, and rechecked there before any controller spawn. The outer exit retains its required sibling location. No result arguments or original checkpoint are rewritten. Representative checkpoint/NPZ bytes and real local result/exit text passed; wrong byte count or same-size wrong contents rejected launch; proof negatives preserved all original fixture bytes."
+    },
+    {
+      "status": "PASS",
+      "area": "Generated launch, entry and controller syntax",
+      "sources": [
+        "../../.codex_tmp/demo_axis_v4_cross26_deploy_20261003.py:54",
+        "../../.codex_tmp/demo_axis_v4_cross26_deploy_20261003.py:77",
+        "../../.codex_tmp/demo_axis_v4_cross26_deploy_20261003.py:78"
+      ],
+      "detail": "All generated strings were obtained from their actual AST expressions with real source digests and representative input proof values, then compiled separately. A local mapped launch fixture verified that controller.py contains the exact generated controller, the entry sets the project import path and runs that file, cwd is the target project, and exactly one controller process is requested after all source/input checks and exclusive output creation."
+    },
+    {
+      "status": "PASS",
+      "area": "GPU3 wait and smoke before full",
+      "sources": [
+        "../../.codex_tmp/demo_axis_v4_cross26_deploy_20261003.py:60",
+        "launch_axis_scaled.py:23"
+      ],
+      "detail": "Each of the two stages calls the existing GPU3 idle helper, requiring memory.used<500 MiB and sleeping 240 seconds while busy. Both commands pin CUDA_VISIBLE_DEVICES=3 and pass both explicit 2026 dataset/pretrained paths. Each child is waited and its exit written; smoke must exit0 before full is launched. Actual generated-controller mocks exercised busy 1200/500/499 then 800/0, successful smoke/full, smoke failure with no full child, and full failure without controller PASS. No retry loop or other job cancellation exists."
+    },
+    {
+      "status": "PASS",
+      "area": "Truthful stage receipts",
+      "sources": [
+        "../../.codex_tmp/demo_axis_v4_cross26_deploy_20261003.py:69",
+        "../../.codex_tmp/demo_axis_v4_cross26_deploy_20261003.py:95",
+        "../../.codex_tmp/demo_axis_v4_cross26_deploy_20261003.py:97"
+      ],
+      "detail": "The immediate helper receipt is FROZEN_CONTROLLER_STARTED_SMOKE_AND_FULL_PENDING, with PID/host/GPU/time/output/source digests/input proof and prior review path. It does not imply that smoke or full has passed. The generated controller writes stage launch and exit records separately and writes its final PASS/optimizer_updates0 only after both waited stages exit0. The zero-update diagnostic implementation remains the unchanged previously reviewed source."
+    }
+  ],
+  "existing_artifact_check": {
+    "artifact": "results/preflight/axis_collaboration_v4_source26_before.json",
+    "status": "PASS",
+    "observed_at": "2026-10-03T06:21:15",
+    "common_dependencies_equal": 9,
+    "missing": [
+      "diagnose_axis_collaboration.py",
+      "launch_axis_scaled.py",
+      "launch_scaled_diagnostic.py",
+      "scaled_axis_collaboration.py"
+    ],
+    "old_run_sha256": "b395d5cc13d8c8ea372391c15cf5e28da1b209bd315362521053afbcd288d830",
+    "scope": "Read and compared the parent's saved 2026 inventory against local files. No live remote inventory was obtained by this reviewer."
+  },
+  "validation": {
+    "process_exit_code": 0,
+    "method": "Inline stdlib Python AST harness; external imports and process/network interfaces injected; all generated scripts tested in isolated local mapped fixtures.",
+    "python": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13.12-windows-x86_64-none/python.exe",
+    "case_count": 25,
+    "checks": [
+      {
+        "name": "fixed_outer_and_five_generated_scripts_compile",
+        "status": "PASS",
+        "scripts": [
+          "guard",
+          "proof_code",
+          "controller_code",
+          "entry",
+          "code"
+        ]
+      },
+      {
+        "name": "archived_local_parse_failure_reproduced",
+        "status": "PASS",
+        "error": {
+          "type": "SyntaxError",
+          "line": 66,
+          "offset": 22,
+          "message": "invalid syntax"
+        }
+      },
+      {
+        "name": "generated_guard_pass",
+        "status": "PASS",
+        "caught": null,
+        "mock_ps_calls": 1
+      },
+      {
+        "name": "generated_guard_count13",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_ps_calls": 0
+      },
+      {
+        "name": "generated_guard_nonzero_exit",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_ps_calls": 0
+      },
+      {
+        "name": "generated_guard_old_pid_live",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_ps_calls": 1
+      },
+      {
+        "name": "generated_guard_wrong_old_source",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_ps_calls": 1
+      },
+      {
+        "name": "generated_guard_wrong_dependency",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_ps_calls": 1
+      },
+      {
+        "name": "generated_guard_input_exists",
+        "status": "PASS",
+        "caught": "FileExistsError",
+        "mock_ps_calls": 1
+      },
+      {
+        "name": "generated_guard_output_exists",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_ps_calls": 1
+      },
+      {
+        "name": "generated_proof_pass",
+        "status": "PASS",
+        "caught": null,
+        "original_inputs_unchanged": true
+      },
+      {
+        "name": "generated_proof_epoch49",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "original_inputs_unchanged": true
+      },
+      {
+        "name": "generated_proof_incomplete",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "original_inputs_unchanged": true
+      },
+      {
+        "name": "generated_proof_exit_nonzero",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "original_inputs_unchanged": true
+      },
+      {
+        "name": "generated_launch_pass",
+        "status": "PASS",
+        "caught": null,
+        "mock_controller_spawns": 1
+      },
+      {
+        "name": "generated_launch_source_changed",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_controller_spawns": 0
+      },
+      {
+        "name": "generated_launch_wrong_input_size",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_controller_spawns": 0
+      },
+      {
+        "name": "generated_launch_wrong_input_hash",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_controller_spawns": 0
+      },
+      {
+        "name": "generated_controller_pass",
+        "status": "PASS",
+        "caught": null,
+        "mock_children": [
+          "smoke",
+          "full"
+        ],
+        "mock_sleep_seconds": [
+          240,
+          240,
+          240
+        ]
+      },
+      {
+        "name": "generated_controller_smoke_fails",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_children": [
+          "smoke"
+        ],
+        "mock_sleep_seconds": [
+          240,
+          240
+        ]
+      },
+      {
+        "name": "generated_controller_full_fails",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_children": [
+          "smoke",
+          "full"
+        ],
+        "mock_sleep_seconds": [
+          240,
+          240,
+          240
+        ]
+      },
+      {
+        "name": "actual_outer_orchestration_pass",
+        "status": "PASS",
+        "caught": null,
+        "mock_remote_hosts": [
+          "2026",
+          "2025",
+          "2026"
+        ],
+        "mock_scp_count": 10
+      },
+      {
+        "name": "actual_outer_orchestration_review_FAIL",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_remote_hosts": [],
+        "mock_scp_count": 0
+      },
+      {
+        "name": "actual_outer_orchestration_review_blocker",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_remote_hosts": [],
+        "mock_scp_count": 0
+      },
+      {
+        "name": "actual_outer_orchestration_review_hash_changed",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_remote_hosts": [],
+        "mock_scp_count": 0
+      }
+    ],
+    "additional_saved_inventory_check": {
+      "status": "PASS",
+      "observed_at": "2026-10-03T06:21:15",
+      "common_dependencies_equal": 9,
+      "missing": [
+        "diagnose_axis_collaboration.py",
+        "launch_axis_scaled.py",
+        "launch_scaled_diagnostic.py",
+        "scaled_axis_collaboration.py"
+      ],
+      "old_run_sha256": "b395d5cc13d8c8ea372391c15cf5e28da1b209bd315362521053afbcd288d830"
+    },
+    "generated_script_line_counts": {
+      "guard": 14,
+      "proof_code": 9,
+      "controller_code": 22,
+      "entry": 1,
+      "code": 18
+    },
+    "old_source_blob_check": {
+      "git_object": "3d9be5c:run_experiment.py",
+      "sha256": "b395d5cc13d8c8ea372391c15cf5e28da1b209bd315362521053afbcd288d830",
+      "status": "PASS"
+    },
+    "limitations": "No SSH, SCP, GPU, real checkpoint or real NumPy-array processing. Actual generated code executed only with local mapped fixtures and injected process/network interfaces. Weight and NPZ proof fixtures are representative bytes; original local result/exit text copied verbatim. Exact prior review JSON unchanged."
+  },
+  "source_sha256": {
+    "../../.codex_tmp/demo_axis_v4_cross26_deploy_20261003.py": "86e7f7ac6f7bcbb1099de1f5c82eb659c4bbbe2cef2e08bc1f970d3c079f9ef7",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "collect_results.py": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+    "configs/MSVR310/DeMo.yml": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+    "diagnose_axis_collaboration.py": "60f3c6217cdebb347ab13501bb0013ca52925b139ba333cc2f2f6ec90c3e6729",
+    "dual_axis.py": "0c6090fe5b8b15cc021bf1809860f0675187288dc2145d0129ce89a5eb78a330",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "launch_axis_scaled.py": "b0e069299966790340d9aaba55c1318ac18183a6def169d9cc5e9de655b58e9f",
+    "launch_missing.py": "02664bf0803edd7aaef08cc2638b284167b1e6292821c59e90d27d38eb3402d6",
+    "launch_runs.py": "8593a3a56f379605295e8d885e3fcfcdfece19b69209c2e9e05bf3ac5b75c101",
+    "launch_scaled_diagnostic.py": "ca865b0204806a0f391d18fe4d91710a90d006a981d1585958e473488c612a1b",
+    "missing_evaluation.py": "e04e16dbb4ec486f28065102b5d7301c68e7d1cef62cdd5fcfa99b3dac222089",
+    "modeling/make_model.py": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+    "residual_dual_axis.py": "4a22801f014e971786402a477a33e7f86ecf608e786ab4c2f3c796abc033c91c",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "scaled_axis_collaboration.py": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+    "splits.json": "66f6ee8f1c07f4fb97bf48ed8189b60859ab2f5f207ceea6b28a90c4ee1f9377",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2"
+  },
+  "source_scope_note": "Repository-relative keys identify helper/dependency bytes read or used by the review. Existing model/backbone dependencies were checked for equality and continuity with the prior diagnostic review/inventory, not re-audited as a new model in this rescue.",
+  "non_blocking_notes": [
+    {
+      "status": "WARN",
+      "area": "No remote or neural runtime result",
+      "detail": "All SSH/SCP and subprocess actions in validation were mocks. No actual transfer, GPU availability query, checkpoint load, NumPy feature calculation, actual controller startup, smoke or full diagnostic ran in this review. The helper must produce actual transfer/launch receipts and the diagnostic must pass its strict numerical guards before runtime success is reported."
+    },
+    {
+      "status": "WARN",
+      "area": "Historical state versus execution-time state",
+      "detail": "The saved inventory is an observation at 2026-10-03T06:21:15; the parent also supplied M2 publication/resource observations. This review does not independently certify live remote state. The helper's live predecessor/source guard and per-stage GPU wait remain the execution checks."
+    }
+  ],
+  "action_counts_by_reviewer": {
+    "ssh": 0,
+    "scp": 0,
+    "gpu_queries": 0,
+    "remote_process_spawns": 0,
+    "optimizer_updates": 0,
+    "experiment_source_edits": 0,
+    "helper_source_edits": 0
+  },
+  "conclusion": "No concrete blocker found. The fixed private helper passes this narrow same-family provisional source and CPU-control-flow rescue review. The archived defect is classified as a local parse failure, and all remote/diagnostic runtime outcomes remain pending actual execution."
+}

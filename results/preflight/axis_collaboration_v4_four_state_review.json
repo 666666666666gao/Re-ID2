@@ -1,0 +1,795 @@
+{
+  "status": "PASS",
+  "verdict": "PASS_STATIC_AND_CPU_MOCK",
+  "reviewed_at": "2026-10-02T22:16:36.163516+00:00",
+  "reviewer": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "max",
+    "context": "fresh delegated code review; exact local source read directly"
+  },
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "implementation_state": "PREPARED_LOCAL_ONLY",
+  "scope": "Review current local changes in diagnose_axis_collaboration.py and new launch_scaled_diagnostic.py, including the subsequently requested explicit paired cross-host path overrides and pre-model frozen metadata checks. Necessary unchanged dependencies were read in the relevant execution paths; this is not a new full-backbone audit.",
+  "modified_sources": [
+    "diagnose_axis_collaboration.py",
+    "launch_scaled_diagnostic.py"
+  ],
+  "blockers": [],
+  "required_fixes": [],
+  "reviewer_experiment_source_edits": [],
+  "substantive_findings": [
+    {
+      "status": "PASS",
+      "area": "Actual V4 variant, class, and exit schema",
+      "sources": [
+        "diagnose_axis_collaboration.py:89",
+        "scaled_axis_collaboration.py:8",
+        "run_experiment.py:44",
+        "launch_axis_scaled.py:32"
+      ],
+      "detail": "All five actual V4 variants use the producer's outer <run>_exit.json and must have exit_code 0. Legacy axis_collaboration keeps its inner exit.json path and unsupported variants fail. The model is constructed from terminal arguments through build(), which selects ScaledAxisCollaborationDeMo for every V4 variant and AxisCollaborationDeMo for V3; the best state is loaded strictly. Actual AST mocks exercised all six dispatches and both receipt locations."
+    },
+    {
+      "status": "PASS",
+      "area": "Explicit cross-host paths and unchanged training record",
+      "sources": [
+        "diagnose_axis_collaboration.py:83",
+        "diagnose_axis_collaboration.py:96",
+        "diagnose_axis_collaboration.py:124",
+        "diagnose_axis_collaboration.py:201"
+      ],
+      "detail": "--data-root and --pretrained are accepted only as a pair. Omitting both preserves the training paths. Overrides change only the new argparse Namespace, while original_paths remains separately recorded; both smoke and full outputs record original_paths and execution_paths. CPU mocks confirmed the data/config/build path selection for all three dataset formats and byte-identical original result.json. This implements an evidenced cross-host filesystem difference rather than an automatic fallback."
+    },
+    {
+      "status": "PASS",
+      "area": "Installed ground truth and record order checked before model creation",
+      "sources": [
+        "diagnose_axis_collaboration.py:103",
+        "experiment_data.py:24",
+        "experiment_data.py:33",
+        "data/datasets/RGBNT201.py:61",
+        "data/datasets/RGBNT100.py:63",
+        "data/datasets/msvr310.py:67"
+      ],
+      "detail": "The complete actual heldout dev sequence must equal frozen query_indices, ids, cameras, scenes and basenames before build() runs, including during first64 smoke. ReID identity labels and camera/scene fields come from installed dataset parsers and fixed splits. Each of the five injected metadata mismatches stopped before mock model construction; paired-override cases passed for tuple triplets and single montage paths."
+    },
+    {
+      "status": "PASS",
+      "area": "Frozen inference with no training or official-test access",
+      "sources": [
+        "diagnose_axis_collaboration.py:20",
+        "diagnose_axis_collaboration.py:110",
+        "diagnose_axis_collaboration.py:119",
+        "run_experiment.py:44",
+        "experiment_data.py:33"
+      ],
+      "detail": "extract_states runs under torch.no_grad; the loaded model is set to eval, every module is checked, and state tensor versions must remain unchanged. The diagnostic never creates an optimizer, calls a training step, or selects a checkpoint using official test data. It consumes only the fixed identity-heldout development records and the already selected best.pth. The zero-update claim is supported by source paths, not by an actual model execution in this review."
+    },
+    {
+      "status": "PASS",
+      "area": "Shared normal forward and independent controlled states",
+      "sources": [
+        "diagnose_axis_collaboration.py:25",
+        "diagnose_axis_collaboration.py:43",
+        "diagnose_axis_collaboration.py:52",
+        "axis_collaboration.py:218",
+        "axis_collaboration.py:253",
+        "scaled_axis_collaboration.py:43"
+      ],
+      "detail": "One normal model forward per batch supplies the shared base and captures m0/f0 as the first of exactly two reads per expert; the backbone is not rerun for each state. That normal multimodal forward itself contains the existing per-modality backbone calls. controlled_states uses independent m0/f0 pooling for 10/01, with disabled expert features zeroed and no query-condition, psi or joint interaction projection in those two states. 11 is the untouched normal output, and fuse dispatch retains the trained V4 residual normalization/full-reference configuration."
+    },
+    {
+      "status": "PASS",
+      "area": "Strict normal11 parity and no premature smoke success",
+      "sources": [
+        "diagnose_axis_collaboration.py:117",
+        "diagnose_axis_collaboration.py:121",
+        "diagnose_axis_collaboration.py:135",
+        "run_experiment.py:61",
+        "experiment_data.py:88"
+      ],
+      "detail": "First64 smoke uses the same 64-record inference batch shape as saved FP32 arrays, requires exact zero normal11 feature error, finite features/routes/gates/predictions/norms, unchanged state versions and already checked complete dev metadata. Full mode requires exact feature equality for all dev records and agreement with terminal mAP/Rank-1/5/10. These guards were source-reviewed; the actual CUDA values remain unmeasured by this reviewer."
+    },
+    {
+      "status": "PASS",
+      "area": "Ground-truth metrics, harm/rescue and calibration",
+      "sources": [
+        "diagnose_axis_collaboration.py:63",
+        "diagnose_axis_collaboration.py:138",
+        "diagnose_axis_collaboration.py:146",
+        "diagnose_axis_collaboration.py:187",
+        "full_evaluation.py:20",
+        "utils/reid_evaluation.py:8"
+      ],
+      "detail": "All four states receive mAP, mINP, Rank-1/5/10/20, CMC through 50, per-query rows and camera/scene/identity groups. Ground-truth same-ID/same-camera exclusion is used for RGBNT and same-ID/same-scene for MSVR310. Both normalized base00 and full11 fixed galleries separately select valid hardest positive/negative indices and reuse them across all four scores. Features are detached by extraction, so these diagnostic reference computations create no training gradients. Calibration uses full11 predictions captured before controlled-state calls; paired harm/rescue is computed for 00/10/01 against 11."
+    },
+    {
+      "status": "PASS",
+      "area": "Whole original11 gate and all smoke before all full",
+      "sources": [
+        "launch_scaled_diagnostic.py:18",
+        "launch_scaled_diagnostic.py:23",
+        "launch_scaled_diagnostic.py:32",
+        "launch_axis_scaled.py:14",
+        "launch_axis_scaled.py:23",
+        "launch_axis_scaled.py:87"
+      ],
+      "detail": "The batch launcher requires a COMPLETE controller with exactly the 11 original expected names and zero exits, plus COMPLETE50 and outer exit0 for every run, including variants it will not diagnose. Only then does the existing idle helper require memory.used <500 MiB with 240-second waits. A new exclusive root and exclusive logs precede six sequential waited children: three first64 smoke children followed by three full axis_scaled_fullref diagnostics. Any child failure writes its exit receipt and stops without controller PASS, retries, restarts, or preemption. The actual source AST was exercised across GPU0..3, incomplete/missing/wrong/duplicate names, unselected-run failures, 1200/500/499 MiB, all six child-failure positions and existing output."
+    },
+    {
+      "status": "PASS",
+      "area": "Single completed-run entry point and unchanged legacy behavior",
+      "sources": [
+        "diagnose_axis_collaboration.py:86",
+        "launch_scaled_diagnostic.py:18"
+      ],
+      "detail": "As explicitly requested in the review follow-up, direct CLI diagnosis of the completed MSVR310 run gates only that run's COMPLETE50/exit0; it need not wait for the other ten V4 jobs. The separate batch launcher still enforces the whole original11 completion gate. The shared extract_states and reference_contributions functions are AST-identical to the original V3 version; the V3 receipt path and no-override path behavior remain intact."
+    }
+  ],
+  "non_blocking_notes": [
+    {
+      "status": "WARN",
+      "area": "Runtime acceptance is pending",
+      "detail": "No CUDA model, dataset images, best checkpoint tensor load, full metric computation or remote subprocess was executed in this review. Actual target-host first64 parity/finite/state-version smoke and subsequent full diagnostic must provide their own runtime evidence. No actual V4 four-state smoke/full PASS is asserted here."
+    },
+    {
+      "status": "WARN",
+      "area": "Scientific interpretation",
+      "detail": "00 is the base descriptor of the jointly trained checkpoint, not a separately trained DeMo baseline. Frozen state interventions are not separately trained ablations, causal effects, information-theoretic synergy or mutual information. Full dev gallery/reference exclusions differ from stopped current-training-batch targets. Base00 has a zero frequency tail, so its calibration alone is not evidence about frequency-tail direction; the explicit full11 gallery diagnostic is needed alongside it. The code records both references and these interpretation limits."
+    },
+    {
+      "status": "WARN",
+      "area": "Deployment boundary",
+      "detail": "This review performed no deployment. Preserve the currently observer-bound 2025 diagnose_axis_collaboration.py at SHA256 0caffc9647193eb88d4c600d25c7707b533a4abe39e37a25003d5013dfd41f36 while that observer still binds it. The separately requested 2026 single-MSVR diagnostic uses copied completed artifacts and explicit paired target-host paths after real resource availability is established; the whole-set launcher remains gated on original11 completion. The parent's remote capacity observations were not independently repeated by this reviewer."
+    }
+  ],
+  "evidence_reviewed": {
+    "existing_v3_analysis": {
+      "artifact": "results/preflight/axis_v3_four_state_actual_analysis.json",
+      "queries": 4160,
+      "all_six_metrics_equal_all_states": true,
+      "per_query_changes": 0
+    },
+    "existing_v4_m0": {
+      "artifact": "results/preflight/axis_collaboration_v4_actual_m0_audit.json",
+      "observed_at": "2026-10-03T05:51:05",
+      "status": "PASS_ACTUAL_M0",
+      "actual_checks": 14,
+      "actual_smoke_optimizer_updates": 33,
+      "trainable_tensor_gradient_checks": 5515,
+      "limit": "Previously collected tensor/smoke evidence, read here; it does not certify this new trained-state diagnostic."
+    },
+    "completed_msvr_local_artifacts": {
+      "result_path": "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/result.json",
+      "exit_path": "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42_exit.json",
+      "status": "COMPLETE",
+      "epochs": 50,
+      "variant": "axis_scaled_fullref",
+      "dev_records": 360,
+      "dev_queries": 210,
+      "contribution_reference": "stopped current-batch full11 gallery",
+      "exit_code": 0,
+      "best": {
+        "mAP": 45.883485151688944,
+        "Rank-1": 58.0952380952381,
+        "Rank-5": 68.57142857142857,
+        "Rank-10": 74.76190476190476,
+        "query_count": 210,
+        "gallery_count": 360,
+        "descriptor_dim": 5632,
+        "epoch": 37
+      }
+    }
+  },
+  "validation": {
+    "syntax": "14 Python files parsed and compiled in memory; no experiment module imports or GPU calls",
+    "git_diff_check": {
+      "status": "PASS",
+      "exit_code": 0
+    },
+    "preserved_legacy_function_AST": {
+      "extract_states": true,
+      "reference_contributions": true
+    },
+    "harness": {
+      "path": "C:/Users/gb/.codex_tmp/axis_scaled_four_state_review/review_checks.py",
+      "command": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13.12-windows-x86_64-none/python.exe -X utf8 C:/Users/gb/.codex_tmp/axis_scaled_four_state_review/review_checks.py",
+      "process_exit_code": 0,
+      "scope": "Actual source AST executed with stdlib temporary fixtures and stubbed neural, NumPy, GPU and child-process interfaces. These checks exercise dispatch/guards/order, not real tensors or metric numerics.",
+      "status": "PASS_STATIC_AND_CPU_MOCK",
+      "cases": 54,
+      "checks": [
+        {
+          "name": "all11_gate_and_six_children_gpu0",
+          "status": "PASS",
+          "mock_children": [
+            "MSVR310_smoke",
+            "RGBNT201_smoke",
+            "RGBNT100_smoke",
+            "MSVR310_full",
+            "RGBNT201_full",
+            "RGBNT100_full"
+          ],
+          "mock_gpu_queries": 3,
+          "mock_wait_seconds": [
+            240,
+            240
+          ],
+          "caught": null
+        },
+        {
+          "name": "all11_gate_and_six_children_gpu1",
+          "status": "PASS",
+          "mock_children": [
+            "MSVR310_smoke",
+            "RGBNT201_smoke",
+            "RGBNT100_smoke",
+            "MSVR310_full",
+            "RGBNT201_full",
+            "RGBNT100_full"
+          ],
+          "mock_gpu_queries": 3,
+          "mock_wait_seconds": [
+            240,
+            240
+          ],
+          "caught": null
+        },
+        {
+          "name": "all11_gate_and_six_children_gpu2",
+          "status": "PASS",
+          "mock_children": [
+            "MSVR310_smoke",
+            "RGBNT201_smoke",
+            "RGBNT100_smoke",
+            "MSVR310_full",
+            "RGBNT201_full",
+            "RGBNT100_full"
+          ],
+          "mock_gpu_queries": 3,
+          "mock_wait_seconds": [
+            240,
+            240
+          ],
+          "caught": null
+        },
+        {
+          "name": "all11_gate_and_six_children_gpu3",
+          "status": "PASS",
+          "mock_children": [
+            "MSVR310_smoke",
+            "RGBNT201_smoke",
+            "RGBNT100_smoke",
+            "MSVR310_full",
+            "RGBNT201_full",
+            "RGBNT100_full"
+          ],
+          "mock_gpu_queries": 3,
+          "mock_wait_seconds": [
+            240,
+            240
+          ],
+          "caught": null
+        },
+        {
+          "name": "missing_controller",
+          "status": "PASS",
+          "mock_children": [],
+          "mock_gpu_queries": 0,
+          "mock_wait_seconds": [],
+          "caught": "FileNotFoundError"
+        },
+        {
+          "name": "incomplete_controller",
+          "status": "PASS",
+          "mock_children": [],
+          "mock_gpu_queries": 0,
+          "mock_wait_seconds": [],
+          "caught": "AssertionError"
+        },
+        {
+          "name": "only10_runs",
+          "status": "PASS",
+          "mock_children": [],
+          "mock_gpu_queries": 0,
+          "mock_wait_seconds": [],
+          "caught": "AssertionError"
+        },
+        {
+          "name": "wrong_run_name",
+          "status": "PASS",
+          "mock_children": [],
+          "mock_gpu_queries": 0,
+          "mock_wait_seconds": [],
+          "caught": "AssertionError"
+        },
+        {
+          "name": "duplicate_run_name",
+          "status": "PASS",
+          "mock_children": [],
+          "mock_gpu_queries": 0,
+          "mock_wait_seconds": [],
+          "caught": "AssertionError"
+        },
+        {
+          "name": "nonzero_controller_exit",
+          "status": "PASS",
+          "mock_children": [],
+          "mock_gpu_queries": 0,
+          "mock_wait_seconds": [],
+          "caught": "AssertionError"
+        },
+        {
+          "name": "unselected_run_incomplete",
+          "status": "PASS",
+          "mock_children": [],
+          "mock_gpu_queries": 0,
+          "mock_wait_seconds": [],
+          "caught": "AssertionError"
+        },
+        {
+          "name": "unselected_run_epoch49",
+          "status": "PASS",
+          "mock_children": [],
+          "mock_gpu_queries": 0,
+          "mock_wait_seconds": [],
+          "caught": "AssertionError"
+        },
+        {
+          "name": "unselected_run_exit_nonzero",
+          "status": "PASS",
+          "mock_children": [],
+          "mock_gpu_queries": 0,
+          "mock_wait_seconds": [],
+          "caught": "AssertionError"
+        },
+        {
+          "name": "unselected_run_exit_missing",
+          "status": "PASS",
+          "mock_children": [],
+          "mock_gpu_queries": 0,
+          "mock_wait_seconds": [],
+          "caught": "FileNotFoundError"
+        },
+        {
+          "name": "exclusive_output",
+          "status": "PASS",
+          "mock_children": [],
+          "mock_gpu_queries": 3,
+          "mock_wait_seconds": [
+            240,
+            240
+          ],
+          "caught": "FileExistsError"
+        },
+        {
+          "name": "invalid_gpu-1",
+          "status": "PASS",
+          "mock_children": [],
+          "mock_gpu_queries": 0,
+          "mock_wait_seconds": [],
+          "caught": "AssertionError"
+        },
+        {
+          "name": "invalid_gpu4",
+          "status": "PASS",
+          "mock_children": [],
+          "mock_gpu_queries": 0,
+          "mock_wait_seconds": [],
+          "caught": "AssertionError"
+        },
+        {
+          "name": "child_failure_at_MSVR310_smoke",
+          "status": "PASS",
+          "mock_children": [
+            "MSVR310_smoke"
+          ],
+          "mock_gpu_queries": 3,
+          "mock_wait_seconds": [
+            240,
+            240
+          ],
+          "caught": "AssertionError"
+        },
+        {
+          "name": "child_failure_at_RGBNT201_smoke",
+          "status": "PASS",
+          "mock_children": [
+            "MSVR310_smoke",
+            "RGBNT201_smoke"
+          ],
+          "mock_gpu_queries": 3,
+          "mock_wait_seconds": [
+            240,
+            240
+          ],
+          "caught": "AssertionError"
+        },
+        {
+          "name": "child_failure_at_RGBNT100_smoke",
+          "status": "PASS",
+          "mock_children": [
+            "MSVR310_smoke",
+            "RGBNT201_smoke",
+            "RGBNT100_smoke"
+          ],
+          "mock_gpu_queries": 3,
+          "mock_wait_seconds": [
+            240,
+            240
+          ],
+          "caught": "AssertionError"
+        },
+        {
+          "name": "child_failure_at_MSVR310_full",
+          "status": "PASS",
+          "mock_children": [
+            "MSVR310_smoke",
+            "RGBNT201_smoke",
+            "RGBNT100_smoke",
+            "MSVR310_full"
+          ],
+          "mock_gpu_queries": 3,
+          "mock_wait_seconds": [
+            240,
+            240
+          ],
+          "caught": "AssertionError"
+        },
+        {
+          "name": "child_failure_at_RGBNT201_full",
+          "status": "PASS",
+          "mock_children": [
+            "MSVR310_smoke",
+            "RGBNT201_smoke",
+            "RGBNT100_smoke",
+            "MSVR310_full",
+            "RGBNT201_full"
+          ],
+          "mock_gpu_queries": 3,
+          "mock_wait_seconds": [
+            240,
+            240
+          ],
+          "caught": "AssertionError"
+        },
+        {
+          "name": "child_failure_at_RGBNT100_full",
+          "status": "PASS",
+          "mock_children": [
+            "MSVR310_smoke",
+            "RGBNT201_smoke",
+            "RGBNT100_smoke",
+            "MSVR310_full",
+            "RGBNT201_full",
+            "RGBNT100_full"
+          ],
+          "mock_gpu_queries": 3,
+          "mock_wait_seconds": [
+            240,
+            240
+          ],
+          "caught": "AssertionError"
+        },
+        {
+          "name": "diagnostic_exit_selection",
+          "variant": "axis_scaled_base",
+          "outer_receipt": true,
+          "exit_code": 0,
+          "epochs": 50,
+          "run_status": "COMPLETE",
+          "status": "PASS",
+          "caught": "BeforeNeuralSetup"
+        },
+        {
+          "name": "diagnostic_exit_selection",
+          "variant": "axis_raw_fullref",
+          "outer_receipt": true,
+          "exit_code": 0,
+          "epochs": 50,
+          "run_status": "COMPLETE",
+          "status": "PASS",
+          "caught": "BeforeNeuralSetup"
+        },
+        {
+          "name": "diagnostic_exit_selection",
+          "variant": "axis_scaled_fullref",
+          "outer_receipt": true,
+          "exit_code": 0,
+          "epochs": 50,
+          "run_status": "COMPLETE",
+          "status": "PASS",
+          "caught": "BeforeNeuralSetup"
+        },
+        {
+          "name": "diagnostic_exit_selection",
+          "variant": "plain_scaled_fullref",
+          "outer_receipt": true,
+          "exit_code": 0,
+          "epochs": 50,
+          "run_status": "COMPLETE",
+          "status": "PASS",
+          "caught": "BeforeNeuralSetup"
+        },
+        {
+          "name": "diagnostic_exit_selection",
+          "variant": "frequency_scaled_fullref",
+          "outer_receipt": true,
+          "exit_code": 0,
+          "epochs": 50,
+          "run_status": "COMPLETE",
+          "status": "PASS",
+          "caught": "BeforeNeuralSetup"
+        },
+        {
+          "name": "diagnostic_exit_selection",
+          "variant": "axis_collaboration",
+          "outer_receipt": false,
+          "exit_code": 0,
+          "epochs": 50,
+          "run_status": "COMPLETE",
+          "status": "PASS",
+          "caught": "BeforeNeuralSetup"
+        },
+        {
+          "name": "diagnostic_exit_selection",
+          "variant": "axis_scaled_fullref",
+          "outer_receipt": false,
+          "exit_code": 0,
+          "epochs": 50,
+          "run_status": "COMPLETE",
+          "status": "PASS",
+          "caught": "FileNotFoundError"
+        },
+        {
+          "name": "diagnostic_exit_selection",
+          "variant": "axis_collaboration",
+          "outer_receipt": true,
+          "exit_code": 0,
+          "epochs": 50,
+          "run_status": "COMPLETE",
+          "status": "PASS",
+          "caught": "FileNotFoundError"
+        },
+        {
+          "name": "diagnostic_exit_selection",
+          "variant": "ordinary",
+          "outer_receipt": false,
+          "exit_code": 0,
+          "epochs": 50,
+          "run_status": "COMPLETE",
+          "status": "PASS",
+          "caught": "AssertionError"
+        },
+        {
+          "name": "diagnostic_exit_selection",
+          "variant": "axis_scaled_fullref",
+          "outer_receipt": true,
+          "exit_code": 1,
+          "epochs": 50,
+          "run_status": "COMPLETE",
+          "status": "PASS",
+          "caught": "AssertionError"
+        },
+        {
+          "name": "diagnostic_exit_selection",
+          "variant": "axis_collaboration",
+          "outer_receipt": false,
+          "exit_code": 1,
+          "epochs": 50,
+          "run_status": "COMPLETE",
+          "status": "PASS",
+          "caught": "AssertionError"
+        },
+        {
+          "name": "diagnostic_exit_selection",
+          "variant": "axis_scaled_fullref",
+          "outer_receipt": true,
+          "exit_code": 0,
+          "epochs": 49,
+          "run_status": "COMPLETE",
+          "status": "PASS",
+          "caught": "AssertionError"
+        },
+        {
+          "name": "diagnostic_exit_selection",
+          "variant": "axis_scaled_fullref",
+          "outer_receipt": true,
+          "exit_code": 0,
+          "epochs": 50,
+          "run_status": "RUNNING",
+          "status": "PASS",
+          "caught": "AssertionError"
+        },
+        {
+          "name": "original_paths_preserved_without_override",
+          "dataset": "MSVR310",
+          "status": "PASS",
+          "metadata_mismatch": null,
+          "mock_model_build_reached": true,
+          "original_result_bytes_unchanged": true,
+          "caught": "BeforeNeuralSetup"
+        },
+        {
+          "name": "paired_override_reaches_actual_build_MSVR310",
+          "dataset": "MSVR310",
+          "status": "PASS",
+          "metadata_mismatch": null,
+          "mock_model_build_reached": true,
+          "original_result_bytes_unchanged": true,
+          "caught": "BeforeNeuralSetup"
+        },
+        {
+          "name": "paired_override_reaches_actual_build_RGBNT201",
+          "dataset": "RGBNT201",
+          "status": "PASS",
+          "metadata_mismatch": null,
+          "mock_model_build_reached": true,
+          "original_result_bytes_unchanged": true,
+          "caught": "BeforeNeuralSetup"
+        },
+        {
+          "name": "paired_override_reaches_actual_build_RGBNT100",
+          "dataset": "RGBNT100",
+          "status": "PASS",
+          "metadata_mismatch": null,
+          "mock_model_build_reached": true,
+          "original_result_bytes_unchanged": true,
+          "caught": "BeforeNeuralSetup"
+        },
+        {
+          "name": "reject_data_root_without_pretrained",
+          "dataset": "MSVR310",
+          "status": "PASS",
+          "metadata_mismatch": null,
+          "mock_model_build_reached": false,
+          "original_result_bytes_unchanged": true,
+          "caught": "AssertionError"
+        },
+        {
+          "name": "reject_pretrained_without_data_root",
+          "dataset": "MSVR310",
+          "status": "PASS",
+          "metadata_mismatch": null,
+          "mock_model_build_reached": false,
+          "original_result_bytes_unchanged": true,
+          "caught": "AssertionError"
+        },
+        {
+          "name": "reject_installed_query_indices_mismatch_before_model",
+          "dataset": "MSVR310",
+          "status": "PASS",
+          "metadata_mismatch": "query_indices",
+          "mock_model_build_reached": false,
+          "original_result_bytes_unchanged": true,
+          "caught": "AssertionError"
+        },
+        {
+          "name": "reject_installed_ids_mismatch_before_model",
+          "dataset": "MSVR310",
+          "status": "PASS",
+          "metadata_mismatch": "ids",
+          "mock_model_build_reached": false,
+          "original_result_bytes_unchanged": true,
+          "caught": "AssertionError"
+        },
+        {
+          "name": "reject_installed_cameras_mismatch_before_model",
+          "dataset": "MSVR310",
+          "status": "PASS",
+          "metadata_mismatch": "cameras",
+          "mock_model_build_reached": false,
+          "original_result_bytes_unchanged": true,
+          "caught": "AssertionError"
+        },
+        {
+          "name": "reject_installed_scenes_mismatch_before_model",
+          "dataset": "MSVR310",
+          "status": "PASS",
+          "metadata_mismatch": "scenes",
+          "mock_model_build_reached": false,
+          "original_result_bytes_unchanged": true,
+          "caught": "AssertionError"
+        },
+        {
+          "name": "reject_installed_names_mismatch_before_model",
+          "dataset": "MSVR310",
+          "status": "PASS",
+          "metadata_mismatch": "names",
+          "mock_model_build_reached": false,
+          "original_result_bytes_unchanged": true,
+          "caught": "AssertionError"
+        },
+        {
+          "name": "actual_build_dispatch",
+          "variant": "axis_scaled_base",
+          "model_class": "ScaledAxisCollaborationDeMo",
+          "status": "PASS"
+        },
+        {
+          "name": "actual_build_dispatch",
+          "variant": "axis_raw_fullref",
+          "model_class": "ScaledAxisCollaborationDeMo",
+          "status": "PASS"
+        },
+        {
+          "name": "actual_build_dispatch",
+          "variant": "axis_scaled_fullref",
+          "model_class": "ScaledAxisCollaborationDeMo",
+          "status": "PASS"
+        },
+        {
+          "name": "actual_build_dispatch",
+          "variant": "plain_scaled_fullref",
+          "model_class": "ScaledAxisCollaborationDeMo",
+          "status": "PASS"
+        },
+        {
+          "name": "actual_build_dispatch",
+          "variant": "frequency_scaled_fullref",
+          "model_class": "ScaledAxisCollaborationDeMo",
+          "status": "PASS"
+        },
+        {
+          "name": "actual_build_dispatch",
+          "variant": "axis_collaboration",
+          "model_class": "AxisCollaborationDeMo",
+          "status": "PASS"
+        },
+        {
+          "name": "source_parse_compile",
+          "status": "PASS",
+          "files": [
+            "diagnose_axis_collaboration.py",
+            "launch_scaled_diagnostic.py",
+            "scaled_axis_collaboration.py",
+            "axis_collaboration.py",
+            "run_experiment.py",
+            "launch_axis_scaled.py",
+            "launch_runs.py",
+            "experiment_data.py",
+            "full_evaluation.py",
+            "utils/reid_evaluation.py",
+            "data/datasets/RGBNT201.py",
+            "data/datasets/RGBNT100.py",
+            "data/datasets/msvr310.py",
+            "dual_axis.py"
+          ]
+        }
+      ]
+    },
+    "earlier_attempt": {
+      "command": "E:/Scripts/python.exe -X utf8 C:/Users/gb/.codex_tmp/axis_scaled_four_state_review/review_checks.py",
+      "exit_code": 1,
+      "output": "No pyvenv.cfg file",
+      "interpretation": "The PATH launcher could not start Python. No check ran in that attempt; the successful final harness uses the directly discovered installed CPython runtime."
+    }
+  },
+  "source_sha256": {
+    "diagnose_axis_collaboration.py": "60f3c6217cdebb347ab13501bb0013ca52925b139ba333cc2f2f6ec90c3e6729",
+    "launch_scaled_diagnostic.py": "ca865b0204806a0f391d18fe4d91710a90d006a981d1585958e473488c612a1b",
+    "scaled_axis_collaboration.py": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "launch_axis_scaled.py": "b0e069299966790340d9aaba55c1318ac18183a6def169d9cc5e9de655b58e9f",
+    "launch_runs.py": "8593a3a56f379605295e8d885e3fcfcdfece19b69209c2e9e05bf3ac5b75c101",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+    "data/datasets/RGBNT201.py": "1a3dda88f26efc2891322e2726c4f3591bfd0c040cdf5c717d0aabc55f349272",
+    "data/datasets/RGBNT100.py": "cef47b0a1dcc9bc434f6c3612e547db41fd8af2b1d7e953323ea80ffb6eb705f",
+    "data/datasets/msvr310.py": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+    "dual_axis.py": "0c6090fe5b8b15cc021bf1809860f0675187288dc2145d0129ce89a5eb78a330",
+    "configs/RGBNT201/DeMo.yml": "bfee0de623885a38cce974c1c5d74abf47c54e14852cc266b8f69c70a858c51d",
+    "configs/RGBNT100/DeMo.yml": "e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c",
+    "configs/MSVR310/DeMo.yml": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+    "splits.json": "66f6ee8f1c07f4fb97bf48ed8189b60859ab2f5f207ceea6b28a90c4ee1f9377"
+  },
+  "requested_runtime_result": {
+    "status": "NOT_RUN_BY_REVIEWER",
+    "optimizer_updates_by_reviewer": 0,
+    "remote_connections_by_reviewer": 0
+  },
+  "conclusion": "No concrete blockers or source fixes found. The current local implementation passes this same-family provisional source/CPU-control-flow review. Runtime acceptance remains subject to its strict actual smoke and full diagnostic guards."
+}

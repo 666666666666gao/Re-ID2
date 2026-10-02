@@ -14,6 +14,7 @@ from dual_axis import RELATIONS
 from experiment_data import make_loader, split_records
 from full_evaluation import distance, full_metrics
 from run_experiment import build, configuration, write_json
+from scaled_axis_collaboration import VARIANTS
 
 
 @torch.no_grad()
@@ -79,17 +80,33 @@ def main():
     parser.add_argument('--run-dir', required=True)
     parser.add_argument('--output', required=True)
     parser.add_argument('--smoke', action='store_true')
+    parser.add_argument('--data-root')
+    parser.add_argument('--pretrained')
     args = parser.parse_args()
     run, output = Path(args.run_dir), Path(args.output)
     terminal = json.loads((run / 'result.json').read_text())
     assert terminal['status'] == 'COMPLETE' and terminal['epochs'] == 50
-    assert json.loads((run / 'exit.json').read_text())['exit_code'] == 0
     arguments = argparse.Namespace(**terminal['arguments'])
-    assert arguments.variant == 'axis_collaboration'
+    if arguments.variant in VARIANTS:
+        exit_file = run.parent / (run.name + '_exit.json')
+    else:
+        assert arguments.variant == 'axis_collaboration'
+        exit_file = run / 'exit.json'
+    assert json.loads(exit_file.read_text())['exit_code'] == 0
+    assert (args.data_root is None) == (args.pretrained is None), 'cross-host data and pretrained paths must be supplied together'
+    original_paths = {'data_root': arguments.data_root, 'pretrained': arguments.pretrained}
+    if args.data_root is not None:
+        arguments.data_root, arguments.pretrained = args.data_root, args.pretrained
     output.mkdir(exist_ok=False)
     torch.set_num_threads(4)
     cfg = configuration(arguments)
     _, dev, query, classes, cameras = split_records(arguments.data_root, arguments.dataset)
+    saved = np.load(run / 'best_dev_arrays.npz')
+    assert np.array_equal(saved['query_indices'], query)
+    assert np.array_equal(saved['ids'], [row[1] for row in dev])
+    assert np.array_equal(saved['cameras'], [row[2] for row in dev])
+    assert np.array_equal(saved['scenes'], [row[3] for row in dev])
+    assert np.array_equal(saved['names'], [Path(row[0] if isinstance(row[0], str) else row[0][0]).name for row in dev])
     model = build(arguments, cfg, classes, cameras)
     model.load_state_dict(torch.load(run / 'best.pth', map_location='cuda', weights_only=True), strict=True)
     model.eval()
@@ -101,13 +118,15 @@ def main():
     features, routes, gates, predictions, norms = extract_states(model, records, cfg, arguments.seed)
     assert versions == {name: value._version for name, value in model.state_dict().items()}
     assert all(torch.isfinite(value).all() for value in (*features.values(), routes, gates, predictions, norms))
-    saved = np.load(run / 'best_dev_arrays.npz')
     if args.smoke:
         parity = float(np.abs(features['11'].numpy() - saved['features'][:64]).max())
         assert parity == 0
         write_json(output / 'smoke.json', {'status': 'PASS', 'triplets': len(records), 'normal_feature_max_error': parity,
                                          'all_states_finite': True, 'state_tensor_versions_unchanged': True,
-                                         'optimizer_updates': 0, 'scope': 'Actual first64 clean development triplets, same inference batch shape as frozen arrays, no metric inference'})
+                                         'optimizer_updates': 0, 'installed_ground_truth_order_equal': True,
+                                         'original_paths': original_paths,
+                                         'execution_paths': {'data_root': arguments.data_root, 'pretrained': arguments.pretrained},
+                                         'scope': 'Actual first64 clean development triplets, same inference batch shape as frozen arrays, no metric inference'})
         print('FOUR_STATE_SMOKE_PASS', arguments.dataset, flush=True)
         return
     query = np.asarray(query)
@@ -179,7 +198,10 @@ def main():
                         ids=ids, cameras=cameras_, scenes=scenes, names=names, contribution_targets=targets,
                         positive_indices=pos, negative_indices=neg, full_reference_targets=full_targets,
                         full_reference_positive_indices=full_pos, full_reference_negative_indices=full_neg)
-    report = {'dataset': arguments.dataset, 'seed': arguments.seed, 'best_epoch': terminal['best']['epoch'],
+    report = {'dataset': arguments.dataset, 'variant': arguments.variant, 'seed': arguments.seed, 'best_epoch': terminal['best']['epoch'],
+              'trained_contribution_reference': terminal.get('contribution_reference', 'base00'),
+              'installed_ground_truth_order_equal': True, 'original_paths': original_paths,
+              'execution_paths': {'data_root': arguments.data_root, 'pretrained': arguments.pretrained},
               'checkpoint_sha256': hashlib.sha256((run / 'best.pth').read_bytes()).hexdigest(),
               'scope': 'Frozen identity-heldout development diagnostic, zero updates, no official test, one shared backbone inference per batch',
               'states': '00 base;10 independent M only;01 independent F only;11 both, query conditions, joint psi and interaction projection. Disabled experts have no conditional messages/psi in10/01.',
