@@ -1,0 +1,23 @@
+{
+  "phase": "PREPARED_NOT_DEPLOYED",
+  "objective": "All RGBNT201/RGBNT100/MSVR310 mAP and Rank-1 >=2pp over matched DeMo, complete normal and missing-modality metrics. Current V3 has not achieved this.",
+  "evidence": "results/preflight/axis_v3_four_state_actual_analysis.json: all4160 queries unchanged in00/10/01/11; M residual/base1e-14..1e-6, F1e-9..1e-5; gates~0.5 and100contribution targets zero. Base00 reference tail512 is zero.",
+  "interventions": {
+    "relative_residual": "Normalize PM/PF/PI directions in FP32. M/I use stopped per-relation original DeMo norms; F uses stopped full-base norm. Preserve learned scales [.1,.05,.05] and independent gates; no additional parameters.",
+    "full_reference": "One detached current-batch full11 gallery, fixed hard-positive and hard-negative indices reused for00/10/01/11; ground-truth train identities with self excluded from positives. No EMA or information-theoretic/causal interpretation. Infer normal forward only.",
+    "matrix_MSVR": ["raw/base: completed V3 axis_collaboration", "scaled/base: axis_scaled_base", "raw/full: axis_raw_fullref", "scaled/full: axis_scaled_fullref"],
+    "matched_controls": "axis_scaled_fullref / plain_scaled_fullref / frequency_scaled_fullref on all three datasets have identical parameter allocation, initialization, 5632D descriptors, losses, budget and input sampling. Plain controls read the full unrestricted spatial tokens; ordinary frequency preserves original DeMo prefix and folds added capacity into its frequency tail."
+  },
+  "preserved": ["DeMo backbone/PIFE/HDM/ATMoE and identity heads", "rank64 expert parameterization", "fixed FFT bands0.125/0.25", "one simultaneous query-condition round", "joint a+c+psi routing", "all auxiliary loss weights and contribution lambda0.05", "no modality-dropout training", "public CLIP fresh initialization", "seed42 B64 nativeAMP init512", "50 epochs with maximum dev mAP and earliest tie"],
+  "training_scope": "Same fixed identity-disjoint fit/dev as previous controls. No official test tunes variants or selects checkpoints. Not a full official-train paper reproduction.",
+  "M0": "3 real-data tensor checks plus11 fresh3-update smoke checks, all finite/nonzero trainable gradients and strict optimizer/model reload. All14 exit0 before any development training.",
+  "schedule": {
+    "GPU0": ["MSVR310_axis_scaled_fullref", "RGBNT100_frequency_scaled_fullref", "MSVR310_axis_raw_fullref"],
+    "GPU1": ["RGBNT100_axis_scaled_fullref", "MSVR310_frequency_scaled_fullref"],
+    "GPU2": ["RGBNT100_plain_scaled_fullref", "MSVR310_plain_scaled_fullref"],
+    "GPU3": ["RGBNT201_axis_scaled_fullref", "RGBNT201_plain_scaled_fullref", "RGBNT201_frequency_scaled_fullref", "MSVR310_axis_scaled_base"]
+  },
+  "resource_contract": "Only2025 GPUs0-3/max4. Do not replace liveV3 source. Deploy only after actual entire old10-job controller COMPLETE50/exit0 and actual6diagnostic PASS. New launcher repeats predecessor gates, waits memory<500 at240s, uses new exclusive roots/logs, no retry/preemption.",
+  "report": "Every run all6 mAP/mINP/R1/5/10/20, CMC/perquery/groups, actual AMP attempts/updates/skips, all comparisons/negative results. Verify four-state efficacy, contribution calibration and expert accesses; gate totals do not imply mechanism efficacy. Eventual repeated fixed official-test and missing evaluation required for final acceptance.",
+  "documentation": "Only docs/实验交接.md mirrored byte-identically Desktop/document/DeMo双轴实验交接.md and2025/2026; code and text evidence Re-ID2 GitHub, no weights/images/credentials."
+}

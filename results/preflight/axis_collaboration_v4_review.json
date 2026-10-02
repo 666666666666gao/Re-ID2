@@ -1,0 +1,378 @@
+{
+  "status": "PASS",
+  "verdict": "PASS_STATIC_AND_STDLIB_MOCK",
+  "reviewed_at": "2026-10-03T05:43:17.779830+08:00",
+  "reviewer": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "max",
+    "context": "fresh delegated code review"
+  },
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "workflow": "experiment-bridge CODE_REVIEW=true / SANITY_FIRST=true",
+  "scope": "Pre-deployment review of the V4 residual-direction normalization and stopped full11-reference implementation, real-data verifier, unchanged legacy runner behavior, and gated 11-job development launcher.",
+  "blockers": [],
+  "non_blocking_findings": [],
+  "summary": "The implementation matches the two independent interventions and the fixed capacity/budget controls. No concrete source defect was found. The source and stdlib mock PASS does not constitute actual CUDA M0, deployment, predecessor completion, training, or efficacy acceptance.",
+  "evidence_reviewed": {
+    "artifact": "results/preflight/axis_v3_four_state_actual_analysis.json",
+    "queries": 4160,
+    "all_four_state_six_metrics_identical": true,
+    "all_query_AP_INP_rank_change_counts_zero": true,
+    "base_reference_tail512_max_abs": {
+      "RGBNT201": 0.0,
+      "RGBNT100": 0.0,
+      "MSVR310": 0.0
+    },
+    "M_F_residual_to_base_ratios": {
+      "RGBNT201": [
+        2.1865235928740805e-09,
+        3.685013660834093e-05
+      ],
+      "RGBNT100": [
+        7.955664465560028e-14,
+        3.5488981854139734e-09
+      ],
+      "MSVR310": [
+        3.328964096987235e-06,
+        3.580913755693228e-05
+      ]
+    },
+    "interpretation": "These local actual V3 diagnostic records motivate testing scale and reference separately. They do not establish V4 efficacy or current resource availability."
+  },
+  "source_findings": [
+    {
+      "status": "PASS",
+      "source": "scaled_axis_collaboration.py:17",
+      "detail": "The full-reference target uses one normalized full11 current-batch gallery and one hard-positive/hard-negative index pair for all four scores. Ground-truth fit identities determine positives/negatives and diagonal positives are excluded. The entire function is decorated no_grad; changing the initial reference lookup from 11 to 00 makes its body AST-identical to the inherited V3 target."
+    },
+    {
+      "status": "PASS",
+      "source": "scaled_axis_collaboration.py:41",
+      "detail": "Assigning full_reference_targets to the calibrator instance preserves a two-argument callable; it does not insert self. The actual constructor/function AST binding test entered the target body with states and labels. Assignment is per instance and the base-reference variant keeps the inherited static target."
+    },
+    {
+      "status": "PASS",
+      "source": "axis_collaboration.py:218",
+      "detail": "Controlled 10/01 states inherit independent m0/f0 evidence, supply zeros for the absent expert context, and call fuse with only the corresponding enable flag. Actual controlled_states AST execution with forbidden router/psi/expert-read stubs made no forbidden calls and retained the same base/full objects. Inference returns before counterfactual-state computation."
+    },
+    {
+      "status": "PASS",
+      "source": "scaled_axis_collaboration.py:48",
+      "detail": "Scaled fusion casts base/evidence/gates to FP32 under disabled autocast. M and interaction directions use detached per-relation original DeMo norms; F uses a detached whole-base norm. Only anchors detach: projection directions, learned scales, gate predictions, and the direct base sum remain differentiable. Direction normalization removes radial magnitude sensitivity but retains tangential derivative paths; actual finite/nonzero gradients remain a native-AMP M0 requirement."
+    },
+    {
+      "status": "PASS",
+      "source": "scaled_axis_collaboration.py:55",
+      "detail": "Disabled M/F projections and the interaction projection are protected by their enable flags. Interaction is used only in state11. Invalid structured relations are masked after normalization. Frequency-only folding resets delta_m and places all added capacity in the frequency tail, preserving the original 5120-coordinate prefix."
+    },
+    {
+      "status": "PASS",
+      "source": "scaled_axis_collaboration.py:35",
+      "detail": "V4 calls the unchanged common superclass constructor and adds only two booleans plus an optional ordinary function attribute; no parameters, heads, loss weights, random initialization draws, or hyperweights are added. Matched axis/plain/frequency variants share module allocation, seed-reset construction and 5632D output layout. All five flags match the contract, including raw/full exact superclass fuse delegation."
+    },
+    {
+      "status": "PASS",
+      "source": "run_experiment.py:44",
+      "detail": "After removing only the new import, new build dispatch, CLI choice expansion and V4 metadata block, the complete runner AST is identical to git 6ab35fb:run_experiment.py. Existing model branches, optimization, loss weighting, fit/dev selection, per-epoch sample seeding, AMP update accounting, 50 epochs, earliest maximum-dev-mAP selection and reload behavior are unchanged."
+    },
+    {
+      "status": "PASS",
+      "source": "experiment_data.py:33",
+      "detail": "Training uses the existing identity-disjoint fit/dev split. B64 with four samples per identity supplies same-identity positives and different-identity negatives for contribution targets. Evaluation retains dataset ground-truth IDs and the existing RGBNT same-camera/MSVR same-scene exclusion. The official test does not select V4 checkpoints."
+    },
+    {
+      "status": "PASS",
+      "source": "verify_axis_scaled.py:29",
+      "detail": "The verifier checks common initial parameter/state tensors for the three matched controls and original DeMo, normalized base00 parity, zero-scale parity, dimensions/finite outputs, the F-only relative-norm identity, six missing-modality finite/masked outputs for the structured model, and a native training forward with a stopped finite nonzero target plus an independent float64 CPU score recomputation. These are planned actual-data checks, not checks executed by this review."
+    },
+    {
+      "status": "PASS",
+      "source": "launch_axis_scaled.py:50",
+      "detail": "Before creating V4 preflight output, the launcher requires the original 10-entry controller success record, COMPLETE/50 for every listed predecessor, and PASS/6 successful diagnostic exits. Old launcher source confirms the expected record schemas. All nine mocked incomplete/failed/existing-preflight gate cases created zero children."
+    },
+    {
+      "status": "PASS",
+      "source": "launch_axis_scaled.py:61",
+      "detail": "The launcher runs three actual-data tensor commands followed by eleven fresh smoke commands sequentially on logical slot1, and writes PASS14 before creating/starting the development queue. Each smoke path uses the unchanged runner three-update, non-skipped-step, finite/nonzero trainable-gradient, strict model/optimizer reload checks. Tensor/smoke failure mocks did not start any development command."
+    },
+    {
+      "status": "PASS",
+      "source": "launch_axis_scaled.py:14",
+      "detail": "The fixed schedule contains eleven unique seed42/50-epoch development runs: matched axis/plain/frequency on all three datasets and the remaining scaled/base and raw/full MSVR cells, with completed V3 raw/base supplying the fourth 2x2 cell. Each actual child is preceded by memory.used<500 with 240-second waits; roots and logs are exclusive; four slots cap concurrency at four. No retry or preemption path exists."
+    }
+  ],
+  "executed_local_checks": {
+    "syntax": {
+      "status": "PASS",
+      "files": [
+        "scaled_axis_collaboration.py",
+        "verify_axis_scaled.py",
+        "launch_axis_scaled.py",
+        "run_experiment.py",
+        "axis_collaboration.py",
+        "diagnose_axis_collaboration.py",
+        "experiment_data.py",
+        "launch_axis_collaboration_development.py",
+        "launch_axis_diagnostic.py"
+      ]
+    },
+    "legacy_runner_AST": {
+      "status": "PASS",
+      "baseline": "6ab35fb:run_experiment.py",
+      "detail": "Removing only the V4 import, dispatch branch, CLI expansion and V4 metadata gives an identical complete AST."
+    },
+    "variant_and_target_binding": {
+      "status": "PASS",
+      "variants": {
+        "axis_scaled_base": [
+          "axis_collaboration",
+          true,
+          false
+        ],
+        "axis_raw_fullref": [
+          "axis_collaboration",
+          false,
+          true
+        ],
+        "axis_scaled_fullref": [
+          "axis_collaboration",
+          true,
+          true
+        ],
+        "plain_scaled_fullref": [
+          "plain_twins",
+          true,
+          true
+        ],
+        "frequency_scaled_fullref": [
+          "ordinary_frequency",
+          true,
+          true
+        ]
+      },
+      "instance_function_no_self": true,
+      "raw_fuse_exact_super_delegation": true,
+      "limit": "Actual class/function AST with a stand-in base and fake no_grad decorator, not torch/autograd execution."
+    },
+    "schedule_contract": {
+      "status": "PASS",
+      "jobs": 11,
+      "tensor_checks": 3,
+      "smokes": 11,
+      "planned_smoke_updates": 33,
+      "MSVR_2x2_with_existing_raw_base": true
+    },
+    "actual_launcher_AST_mock": {
+      "status": "PASS",
+      "cases": {
+        "old_missing": {
+          "children": 0,
+          "tensor": 0,
+          "smoke": 0,
+          "train": 0,
+          "maximum_mock_concurrency": 0,
+          "sleeps": [],
+          "error": "FileNotFoundError",
+          "preflight_PASS_written": false,
+          "development_COMPLETE_written": false
+        },
+        "old_short": {
+          "children": 0,
+          "tensor": 0,
+          "smoke": 0,
+          "train": 0,
+          "maximum_mock_concurrency": 0,
+          "sleeps": [],
+          "error": "AssertionError",
+          "preflight_PASS_written": false,
+          "development_COMPLETE_written": false
+        },
+        "old_exit_failed": {
+          "children": 0,
+          "tensor": 0,
+          "smoke": 0,
+          "train": 0,
+          "maximum_mock_concurrency": 0,
+          "sleeps": [],
+          "error": "AssertionError",
+          "preflight_PASS_written": false,
+          "development_COMPLETE_written": false
+        },
+        "old_epochs_49": {
+          "children": 0,
+          "tensor": 0,
+          "smoke": 0,
+          "train": 0,
+          "maximum_mock_concurrency": 0,
+          "sleeps": [],
+          "error": "AssertionError",
+          "preflight_PASS_written": false,
+          "development_COMPLETE_written": false
+        },
+        "old_not_complete": {
+          "children": 0,
+          "tensor": 0,
+          "smoke": 0,
+          "train": 0,
+          "maximum_mock_concurrency": 0,
+          "sleeps": [],
+          "error": "AssertionError",
+          "preflight_PASS_written": false,
+          "development_COMPLETE_written": false
+        },
+        "diagnostic_not_pass": {
+          "children": 0,
+          "tensor": 0,
+          "smoke": 0,
+          "train": 0,
+          "maximum_mock_concurrency": 0,
+          "sleeps": [],
+          "error": "AssertionError",
+          "preflight_PASS_written": false,
+          "development_COMPLETE_written": false
+        },
+        "diagnostic_short": {
+          "children": 0,
+          "tensor": 0,
+          "smoke": 0,
+          "train": 0,
+          "maximum_mock_concurrency": 0,
+          "sleeps": [],
+          "error": "AssertionError",
+          "preflight_PASS_written": false,
+          "development_COMPLETE_written": false
+        },
+        "diagnostic_exit_failed": {
+          "children": 0,
+          "tensor": 0,
+          "smoke": 0,
+          "train": 0,
+          "maximum_mock_concurrency": 0,
+          "sleeps": [],
+          "error": "AssertionError",
+          "preflight_PASS_written": false,
+          "development_COMPLETE_written": false
+        },
+        "preflight_exists": {
+          "children": 0,
+          "tensor": 0,
+          "smoke": 0,
+          "train": 0,
+          "maximum_mock_concurrency": 0,
+          "sleeps": [],
+          "error": "FileExistsError",
+          "preflight_PASS_written": false,
+          "development_COMPLETE_written": false
+        },
+        "tensor_failed": {
+          "children": 1,
+          "tensor": 1,
+          "smoke": 0,
+          "train": 0,
+          "maximum_mock_concurrency": 1,
+          "sleeps": [],
+          "error": "AssertionError",
+          "preflight_PASS_written": false,
+          "development_COMPLETE_written": false
+        },
+        "smoke_failed": {
+          "children": 4,
+          "tensor": 3,
+          "smoke": 1,
+          "train": 0,
+          "maximum_mock_concurrency": 1,
+          "sleeps": [],
+          "error": "AssertionError",
+          "preflight_PASS_written": false,
+          "development_COMPLETE_written": false
+        },
+        "development_first_failed": {
+          "children": 23,
+          "tensor": 3,
+          "smoke": 11,
+          "train": 9,
+          "maximum_mock_concurrency": 4,
+          "sleeps": [],
+          "error": "AssertionError",
+          "preflight_PASS_written": true,
+          "development_COMPLETE_written": false
+        },
+        "success_busy_repeat": {
+          "children": 25,
+          "tensor": 3,
+          "smoke": 11,
+          "train": 11,
+          "maximum_mock_concurrency": 4,
+          "sleeps": [
+            240,
+            240
+          ],
+          "error": null,
+          "preflight_PASS_written": true,
+          "development_COMPLETE_written": true,
+          "second_invocation_new_children": 0
+        }
+      },
+      "scope": "Actual idle/execute/main AST; real stdlib ThreadPoolExecutor and temporary files; all nvidia-smi/Popen/clock/sleep calls replaced. No real GPU query, subprocess child or training."
+    },
+    "harness_note": "First attempt stopped at a test-harness NameError (missing fake F namespace) before source target-body instrumentation; repaired the mock only. No experiment source changed.",
+    "full_target_AST_delta": {
+      "status": "PASS",
+      "detail": "The complete V4 target function body is identical to the V3 no-grad target after changing only the first reference lookup from 11 to 00. Both use one gallery and one positive/negative index pair for all states."
+    },
+    "controlled_states_actual_AST": {
+      "status": "PASS",
+      "detail": "Executed inherited production controlled_states with identity tokens: same base/full objects, independent pooled evidence, zero absent contexts, M-only and F-only fuse flags. Forbidden conditions/route/psi/expert-read stubs were never called. Symbolic control flow only; no tensors."
+    }
+  },
+  "runtime_limits": [
+    "The specified offline local Python reports torch unavailable. No tensor execution, native CUDA/AMP gradient, GPU memory query, SSH/SCP, dataset loading, training, or deployment was performed by this reviewer.",
+    "The binding and controlled-state witnesses execute actual source AST against stand-ins. They establish Python binding and control-flow/dataflow, not PyTorch numerical or autograd behavior.",
+    "The launcher tests use mocked GPU/process/time dependencies. The successful case contains 25 mock children, not 25 executed experiments.",
+    "M0 checks parameter-tensor aggregate gradients on the final smoke step, not every scalar coordinate. Reload uses the same model instance; it is not a fresh-process training-continuation equivalence test.",
+    "Tensor verification uses eight clean dev records and one fit batch. The semantic training forward updates BN buffers in that disposable verifier process, with zero optimizer updates. Smoke weights are not reused for the fresh full runs.",
+    "The verifier CPU calculation reuses production positive/negative indices to validate the common-direction score arithmetic; hardest-index selection is established by direct source inspection, not an independent float64 argmin/argmax check.",
+    "Normal/missing accuracy, four-state retrieval utility, contribution calibration after training, repeated-seed stability and official-test acceptance remain unproven. Learned scales can still shrink; no success is inferred from normalization or M0 alone.",
+    "The runner saves four checkpoint-selection metrics plus best-dev features/distances/labels. The promised six-metric/per-query/group reporting must still be produced from those outputs after completed runs.",
+    "Current production source, terminal state of the old remote controller, and current GPU availability were not observed by this review."
+  ],
+  "required_runtime_gates": [
+    "Before replacing production run_experiment.py, observe the actual old V3 controller terminal with all 10 COMPLETE/50/exit0 and actual six diagnostic PASS; preserve existing V3 logs and results.",
+    "Use the reviewed launcher on authorized server2025 GPUs0-3 only. Its predecessor, capacity, exclusivity and maximum-four guards must remain enabled.",
+    "Require and inspect all 14 actual M0 exits and their tensor/smoke receipts, including all 33 actual successful smoke optimizer updates, before treating the full-development gate as passed.",
+    "On an actual M0 failure, retain the failure evidence and make only an evidenced fix with a fresh review; do not retry unchanged or reuse failed M0 outputs.",
+    "Interpret the fixed 2x2 and matched controls using all results, including negatives, and recheck four-state mechanism behavior before claiming contribution or conditional-collaboration efficacy."
+  ],
+  "milestones": {
+    "source_review": "PASS_STATIC_AND_STDLIB_MOCK",
+    "actual_V4_tensor_checks": "NOT_RUN_BY_REVIEWER",
+    "actual_V4_smoke_checks": "NOT_RUN_BY_REVIEWER",
+    "deployment": "NOT_PERFORMED_BY_REVIEWER",
+    "full_training_acceptance": "PENDING_ACTUAL_M0",
+    "efficacy": "UNPROVEN"
+  },
+  "source_sha256": {
+    "scaled_axis_collaboration.py": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+    "verify_axis_scaled.py": "cc0584bf2ba97f58cbb14c799f167b97524ee48d939cebb1752627e748ca3126",
+    "launch_axis_scaled.py": "b0e069299966790340d9aaba55c1318ac18183a6def169d9cc5e9de655b58e9f",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "diagnose_axis_collaboration.py": "0caffc9647193eb88d4c600d25c7707b533a4abe39e37a25003d5013dfd41f36",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "dual_axis.py": "0c6090fe5b8b15cc021bf1809860f0675187288dc2145d0129ce89a5eb78a330",
+    "modeling/make_model.py": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+    "layers/make_loss.py": "232ef86081a76665225db4360ea67650230b1d5986818cabc23ce5db36340dec",
+    "solver/make_optimizer.py": "09e8e36c78c78cda75daad52bbc48f77f4dc33b96568a06bc1c193132ffbeafc",
+    "solver/scheduler_factory.py": "c5e20bdffec4b5360faa04f823639c8e5fd8672914813fb96148927c9ee19abc",
+    "data/datasets/sampler.py": "579b45b767960b7ca8a373808d890493e6ac8d152c0fe13dbe0f4dc02ed9f068",
+    "configs/MSVR310/DeMo.yml": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+    "launch_runs.py": "8593a3a56f379605295e8d885e3fcfcdfece19b69209c2e9e05bf3ac5b75c101",
+    "launch_axis_collaboration_development.py": "81a07b5f5a584395237a14d50cd47d36a4409becf5c9cc09e271513eb0af8b60",
+    "launch_axis_diagnostic.py": "79d718b87fd860f7c0e45fb1e79909e720f3778a226047da60b732712cf6de53",
+    "results/preflight/axis_collaboration_v4_contract.json": "b88e99410d1e9ccb65aedc363411419ee1078d5ae20ee8bc031f3d350342309a",
+    "results/preflight/axis_v3_four_state_actual_analysis.json": "22715e5d155319f43737c24b065d7c28d2e7c59f33fc6a5d01d6dbd1b21dc9ca",
+    "results/preflight/axis_v3_msvr_weight_descriptor_statistics.json": "8bec11ac519a01405b0ab719fa1e1ba193f166703b0befd8c205eb06145016df"
+  },
+  "hash_note": "Exact per-file review-version hashes are included because the delegated task explicitly requested them; no new source-integrity mechanism was introduced."
+}

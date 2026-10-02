@@ -13,6 +13,7 @@ from modeling.make_model import make_model
 from dual_axis import AugmentedDeMo
 from residual_dual_axis import ResidualAugmentedDeMo
 from axis_collaboration import AxisCollaborationDeMo
+from scaled_axis_collaboration import ScaledAxisCollaborationDeMo, VARIANTS as SCALED_VARIANTS
 from experiment_data import split_records, make_loader, seed_all
 from layers.make_loss import make_loss
 from solver.make_optimizer import make_optimizer
@@ -48,6 +49,10 @@ def build(args, cfg, classes, cameras):
         return ResidualAugmentedDeMo(classes, cfg, cameras, args.variant.removesuffix('_residual')).float().cuda()
     if args.variant in ('axis_collaboration', 'plain_twins', 'ordinary_frequency'):
         model = AxisCollaborationDeMo(classes, cfg, cameras, args.variant).float().cuda()
+        model.contribution_loss_weight = args.contribution_weight
+        return model
+    if args.variant in SCALED_VARIANTS:
+        model = ScaledAxisCollaborationDeMo(classes, cfg, cameras, args.variant).float().cuda()
         model.contribution_loss_weight = args.contribution_weight
         return model
     return AugmentedDeMo(classes, cfg, cameras, args.variant).float().cuda()
@@ -104,7 +109,7 @@ def step(model, batch, optimizer, scaler, loss_fn):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset', choices=['RGBNT201', 'RGBNT100', 'MSVR310'], required=True)
-    parser.add_argument('--variant', choices=['demo', 'ordinary', 'dual', 'ordinary_residual', 'dual_residual', 'axis_collaboration', 'plain_twins', 'ordinary_frequency'], required=True)
+    parser.add_argument('--variant', choices=['demo', 'ordinary', 'dual', 'ordinary_residual', 'dual_residual', 'axis_collaboration', 'plain_twins', 'ordinary_frequency', *SCALED_VARIANTS], required=True)
     parser.add_argument('--data-root', required=True)
     parser.add_argument('--pretrained', required=True)
     parser.add_argument('--output', required=True)
@@ -137,6 +142,11 @@ def main():
         info['loss_weights'] = model.loss_weights
         info['contribution_loss_weight'] = model.contribution_loss_weight
         info['missing_protocol'] = 'exactly zero normalized inputs determine availability; structured relations require all their members available; no modality-dropout training in this stage'
+    if isinstance(model, ScaledAxisCollaborationDeMo):
+        info['method_revision'] = 'axis_collaboration_v4: independent residual-direction normalization and stopped full11 reference interventions; same V3 experts/parameters/loss weights'
+        info['residual_direction_normalization'] = model.normalize_residual
+        info['residual_anchor'] = 'stopped per-relation original DeMo norms for M/I; stopped whole-base norm for F; unchanged learned scales and independent gates' if model.normalize_residual else 'original raw V3 projection amplitudes'
+        info['contribution_reference'] = 'stopped current-batch full11 gallery' if model.full_reference else 'stopped current-batch base00 gallery'
     write_json(out / 'run.json', info)
     if args.mode == 'prepare':
         torch.save(model.state_dict(), out / 'initial.pth')
