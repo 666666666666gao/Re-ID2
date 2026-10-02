@@ -1,0 +1,1128 @@
+{
+  "reviewed_at": "2026-10-03T05:04:48.568815+08:00",
+  "reviewer_agent": "/root/review_axis_four_state_diagnostic",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "max",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "status": "PASS_STATIC_AND_STDLIB_AST_MOCK",
+  "verdict": "PASS",
+  "blockers": [],
+  "source_sha256": {
+    "diagnose_axis_collaboration.py": "0caffc9647193eb88d4c600d25c7707b533a4abe39e37a25003d5013dfd41f36",
+    "launch_axis_diagnostic.py": "79d718b87fd860f7c0e45fb1e79909e720f3778a226047da60b732712cf6de53",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "run_experiment.py": "b395d5cc13d8c8ea372391c15cf5e28da1b209bd315362521053afbcd288d830",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "launch_axis_collaboration_development.py": "81a07b5f5a584395237a14d50cd47d36a4409becf5c9cc09e271513eb0af8b60",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+    "launch_runs.py": "8593a3a56f379605295e8d885e3fcfcdfece19b69209c2e9e05bf3ac5b75c101"
+  },
+  "scope": {
+    "primary_sources": [
+      "diagnose_axis_collaboration.py",
+      "launch_axis_diagnostic.py"
+    ],
+    "phase": "Frozen seed42 identity-heldout development checkpoints only; zero optimizer updates; no official test.",
+    "final_launcher_contract": "Revised per-card scheduling: selected GPU final SCHEDULE job must exit0 and COMPLETE/50; all three selected axis checkpoints must separately exit0 and COMPLETE/50; selected GPU memory.used must be strictly below500 MiB. Other GPU slots may still run.",
+    "final_smoke_contract": "Three actual first64-triplet smokes, preserving the saved evaluation first-batch shape, all before three complete diagnostics. Initial eight-triplet proposal was revised by the parent after batch-shape review.",
+    "reference_contract": "Original common00 base-gallery diagnostic plus a separately labelled common11 full-gallery diagnostic. Each anchor selects one fixed positive/negative pair per valid query and reuses it for all four states.",
+    "excluded": "No production source edits, SSH, CUDA, checkpoint load, training, optimizer call, external network call, package install, or launch by this reviewer. Deployment helper was not included in this source review."
+  },
+  "checks": [
+    {
+      "status": "PASS",
+      "name": "Frozen state extraction and no conditional leakage into10/01",
+      "locations": [
+        "diagnose_axis_collaboration.py:19",
+        "diagnose_axis_collaboration.py:43",
+        "diagnose_axis_collaboration.py:51",
+        "axis_collaboration.py:218",
+        "axis_collaboration.py:255"
+      ],
+      "evidence": "One original forward captures first unconditioned M/F reads separately from second conditioned reads, and captures the original calibrator base input. Controlled10/01 consume only those first reads, pool independently, zero the absent expert context, and call fuse with exactly one enabled expert. They do not call router.conditions, router.route, psi, or the interaction projection.11 is the untouched original forward output. Full route/gates/predictions are captured before controlled calls. Actual extract_states plus controlled_states AST execution over two mocked batches verified provenance, three calibrator calls per batch, and method/hook restoration.",
+      "limit": "Trace objects validate actual Python control flow and value provenance, not torch operations or numerical identity."
+    },
+    {
+      "status": "PASS",
+      "name": "Checkpoint freeze and original11 parity gates",
+      "locations": [
+        "diagnose_axis_collaboration.py:84",
+        "diagnose_axis_collaboration.py:94",
+        "diagnose_axis_collaboration.py:100",
+        "diagnose_axis_collaboration.py:117"
+      ],
+      "evidence": "Strict best.pth load, model.eval for every module, no_grad extraction, unchanged state-dict version counters, and finite outputs. No optimizer/backward/step path occurs in either diagnostic entry point. Smoke uses64 records and compares exactly against saved[:64]; full uses the original dev loader batch64 and compares the entire11 feature array exactly. Full query indices and identities are checked against frozen saved arrays before metric work. Matching original four metrics is additionally asserted.",
+      "limit": "Presence and ordering of guards are verified. Actual exact equality on CUDA is still unmeasured by this reviewer."
+    },
+    {
+      "status": "PASS",
+      "name": "Development-only ground truth and gallery-only records",
+      "locations": [
+        "diagnose_axis_collaboration.py:92",
+        "diagnose_axis_collaboration.py:119",
+        "diagnose_axis_collaboration.py:122",
+        "experiment_data.py:24",
+        "experiment_data.py:33",
+        "full_evaluation.py:25"
+      ],
+      "evidence": "split_records reads only installed training directories and heldout dev IDs. Valid queries require another same-ID record with a different camera for RGBNT or different scene for MSVR. The entire dev feature set remains the gallery, including MSVR rows excluded from the query list. Both retrieval and contribution positives apply the same same-ID/same-camera-or-scene exclusion; negatives use different identity. No official_records or full_evaluation.main call exists. Actual completed MSVR artifact confirms360 gallery records versus210 queries; the RGBNT201 artifact confirms825 dev records."
+    },
+    {
+      "status": "PASS",
+      "name": "Common frozen reference and contribution arithmetic",
+      "locations": [
+        "diagnose_axis_collaboration.py:62",
+        "diagnose_axis_collaboration.py:127",
+        "diagnose_axis_collaboration.py:186"
+      ],
+      "evidence": "Normalized no-grad CPU features supply each stopped reference. For each anchor00/11, hardest valid positive and nearest different-ID negative are chosen once from that anchor and the exact same reference direction is dotted with all four state queries. Targets are R11-R01, R11-R10, and R11-R10-R01+R00. Actual function AST executed with stdlib list-backed numerical mocks matched an independent scalar oracle for both anchors, including same-ID exclusion and a gallery-only hard negative. CSV and NPZ preserve both reference index sets and target arrays."
+    },
+    {
+      "status": "PASS",
+      "name": "Six retrieval metrics, per-query CMC, calibration, and harm/rescue",
+      "locations": [
+        "diagnose_axis_collaboration.py:121",
+        "diagnose_axis_collaboration.py:132",
+        "diagnose_axis_collaboration.py:149",
+        "diagnose_axis_collaboration.py:168",
+        "full_evaluation.py:20",
+        "full_evaluation.py:43"
+      ],
+      "evidence": "Each state calls the existing full_metrics routine: GT-filtered mAP, mINP, R1/R5/R10/R20, CMC1..50, per-query CSV, and camera/scene/identity groups. Common query order makes00/10/01-to11 Rank1 harm/rescue pairing aligned. Both anchors save predictor-versus-target MAE, RMSE, moments, signs, covariance, and complete per-query scores/targets/predictions. Full11 original mAP/R1/R5/R10 is checked against the completed dev result.",
+      "limit": "The existing full_metrics function was source-reviewed, not executed with real arrays locally; the new diagnostic was not run on images."
+    },
+    {
+      "status": "PASS",
+      "name": "Released-card schedule, resource guard, exclusive outputs, and fail-stop",
+      "locations": [
+        "launch_axis_diagnostic.py:11",
+        "launch_axis_diagnostic.py:20",
+        "launch_axis_diagnostic.py:27",
+        "launch_axis_diagnostic.py:32",
+        "launch_axis_diagnostic.py:38",
+        "launch_axis_diagnostic.py:42",
+        "launch_axis_collaboration_development.py:55"
+      ],
+      "evidence": "Launcher derives the exact final run name from the existing SCHEDULE for the selected card. That producer writes exit.json only after child.wait and schedules no later job on that slot. The launcher separately requires three frozen axis checkpoints, then memory.used<500. It creates one exclusive campaign directory, exclusive log files, and three smoke children before any full child, with sequential child.wait and no retries or preemption. Actual main AST mock passed all four GPU final-slot choices while the whole-queue marker was absent; busy1200 and500 each caused240-second waits before499 admitted launch. Failed/49-epoch predecessor or selected checkpoint blocked all GPU calls; existing output blocked all children; injected smoke/full failures wrote failed receipts and stopped without a PASS marker."
+    }
+  ],
+  "resolved_findings": [
+    {
+      "id": "R1",
+      "status": "RESOLVED",
+      "title": "Smoke originally compared an8-record batch to features saved from a64-record batch",
+      "initial_diagnostic_sha256": "12e28257e84eeb4c0de57ee77ddd1f54b6e79e2fa9ccb4293664344a1e5c760f",
+      "evidence": "Initial diagnostic used dev[:8] and exact saved[:8] equality; experiment_data.py fixes inference batch64 and run_experiment saves full dev inference. Known dev sizes360/825 exceed64. Different GEMM/attention batch shapes need not be bit-identical; no actual CUDA mismatch was claimed.",
+      "resolution": "Current source evaluates first64 records, compares saved[:64], and reports64 accurately. Actual smoke execution remains required."
+    }
+  ],
+  "warnings": [
+    {
+      "id": "W1",
+      "status": "WARN",
+      "blocking": false,
+      "title": "Base-reference contribution has an existing zero frequency tail",
+      "locations": [
+        "axis_collaboration.py:241",
+        "axis_collaboration.py:206",
+        "axis_collaboration.py:150",
+        "diagnose_axis_collaboration.py:191"
+      ],
+      "detail": "Base00 appends512 zeros. Isolated01 changes only that frequency tail, so its dot product against a00 gallery can change through feature normalization but cannot directly measure frequency-direction identity evidence. This is a current production-target design limitation, not hook leakage. Diagnostic reports the zero-tail magnitude and adds a clearly labelled common11 gallery to describe that missing direction without modifying production training.",
+      "interpretation": "Do not claim00-anchor calibration establishes F-direction usefulness.11-anchor margins are supplementary descriptive statistics, not the supervised training target or evidence that its training limitation was repaired."
+    },
+    {
+      "id": "W2",
+      "status": "WARN",
+      "blocking": false,
+      "title": "Calibration targets and frozen interventions have a limited interpretation",
+      "detail": "Training uses a stopped current-training-batch base gallery without the evaluation camera/scene exclusion. This diagnostic uses the complete heldout development gallery and valid evaluation exclusions; the supplementary anchor uses full11. Their errors are diagnostic reference shifts, not a reproduction of the training loss.00 is the base descriptor from the jointly trained axis checkpoint, not a separately trained DeMo checkpoint. These frozen interventions do not substitute for separately trained ablations or establish causal/information-theoretic synergy."
+    },
+    {
+      "id": "W3",
+      "status": "WARN",
+      "blocking": false,
+      "title": "Real CUDA smoke and full diagnostics remain pending",
+      "detail": "Working Python3.13.12 has neither torch nor numpy. All executed checks are stdlib AST/control-flow/list-backed arithmetic mocks. No real model output, checkpoint parity, GPU memory, tensor version, metric result, or optimizer behavior was measured. Review PASS authorizes the guarded diagnostic workflow only; it is not GPU_PASS or scientific acceptance."
+    }
+  ],
+  "actual_validation": {
+    "runtime": "3.13.12 (main, Feb  3 2026, 22:53:26) [MSC v.1944 64 bit (AMD64)]",
+    "torch_available": false,
+    "numpy_available": false,
+    "source_hashes": {
+      "diagnose_axis_collaboration.py": "0caffc9647193eb88d4c600d25c7707b533a4abe39e37a25003d5013dfd41f36",
+      "launch_axis_diagnostic.py": "79d718b87fd860f7c0e45fb1e79909e720f3778a226047da60b732712cf6de53",
+      "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+      "run_experiment.py": "b395d5cc13d8c8ea372391c15cf5e28da1b209bd315362521053afbcd288d830",
+      "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+      "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+      "launch_axis_collaboration_development.py": "81a07b5f5a584395237a14d50cd47d36a4409becf5c9cc09e271513eb0af8b60",
+      "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+      "launch_runs.py": "8593a3a56f379605295e8d885e3fcfcdfece19b69209c2e9e05bf3ac5b75c101"
+    },
+    "checks": [
+      {
+        "name": "syntax",
+        "status": "PASS",
+        "details": {
+          "compiled_without_execution": [
+            "diagnose_axis_collaboration.py",
+            "launch_axis_diagnostic.py",
+            "axis_collaboration.py",
+            "run_experiment.py",
+            "experiment_data.py",
+            "full_evaluation.py",
+            "launch_axis_collaboration_development.py",
+            "utils/reid_evaluation.py",
+            "launch_runs.py"
+          ]
+        }
+      },
+      {
+        "name": "launcher_success_after_slot_wait_gpu_0",
+        "status": "PASS",
+        "details": {
+          "events": [
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              1200
+            ],
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              500
+            ],
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              499
+            ],
+            [
+              "spawn",
+              0,
+              true
+            ],
+            [
+              "wait",
+              0,
+              0
+            ],
+            [
+              "spawn",
+              1,
+              true
+            ],
+            [
+              "wait",
+              1,
+              0
+            ],
+            [
+              "spawn",
+              2,
+              true
+            ],
+            [
+              "wait",
+              2,
+              0
+            ],
+            [
+              "spawn",
+              3,
+              false
+            ],
+            [
+              "wait",
+              3,
+              0
+            ],
+            [
+              "spawn",
+              4,
+              false
+            ],
+            [
+              "wait",
+              4,
+              0
+            ],
+            [
+              "spawn",
+              5,
+              false
+            ],
+            [
+              "wait",
+              5,
+              0
+            ]
+          ],
+          "child_count": 6,
+          "gpu": 0,
+          "guarded_slot_final_run": "RGBNT100_ordinary_frequency_s42",
+          "whole_queue_marker_absent": true,
+          "caught": null,
+          "controller_receipt_written": true,
+          "real_processes_or_gpu_calls": 0
+        }
+      },
+      {
+        "name": "launcher_success_after_slot_wait_gpu_1",
+        "status": "PASS",
+        "details": {
+          "events": [
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              1200
+            ],
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              500
+            ],
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              499
+            ],
+            [
+              "spawn",
+              0,
+              true
+            ],
+            [
+              "wait",
+              0,
+              0
+            ],
+            [
+              "spawn",
+              1,
+              true
+            ],
+            [
+              "wait",
+              1,
+              0
+            ],
+            [
+              "spawn",
+              2,
+              true
+            ],
+            [
+              "wait",
+              2,
+              0
+            ],
+            [
+              "spawn",
+              3,
+              false
+            ],
+            [
+              "wait",
+              3,
+              0
+            ],
+            [
+              "spawn",
+              4,
+              false
+            ],
+            [
+              "wait",
+              4,
+              0
+            ],
+            [
+              "spawn",
+              5,
+              false
+            ],
+            [
+              "wait",
+              5,
+              0
+            ]
+          ],
+          "child_count": 6,
+          "gpu": 1,
+          "guarded_slot_final_run": "MSVR310_ordinary_frequency_s42",
+          "whole_queue_marker_absent": true,
+          "caught": null,
+          "controller_receipt_written": true,
+          "real_processes_or_gpu_calls": 0
+        }
+      },
+      {
+        "name": "launcher_success_after_slot_wait_gpu_2",
+        "status": "PASS",
+        "details": {
+          "events": [
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              1200
+            ],
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              500
+            ],
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              499
+            ],
+            [
+              "spawn",
+              0,
+              true
+            ],
+            [
+              "wait",
+              0,
+              0
+            ],
+            [
+              "spawn",
+              1,
+              true
+            ],
+            [
+              "wait",
+              1,
+              0
+            ],
+            [
+              "spawn",
+              2,
+              true
+            ],
+            [
+              "wait",
+              2,
+              0
+            ],
+            [
+              "spawn",
+              3,
+              false
+            ],
+            [
+              "wait",
+              3,
+              0
+            ],
+            [
+              "spawn",
+              4,
+              false
+            ],
+            [
+              "wait",
+              4,
+              0
+            ],
+            [
+              "spawn",
+              5,
+              false
+            ],
+            [
+              "wait",
+              5,
+              0
+            ]
+          ],
+          "child_count": 6,
+          "gpu": 2,
+          "guarded_slot_final_run": "MSVR310_plain_twins_s42",
+          "whole_queue_marker_absent": true,
+          "caught": null,
+          "controller_receipt_written": true,
+          "real_processes_or_gpu_calls": 0
+        }
+      },
+      {
+        "name": "launcher_success_after_slot_wait_gpu_3",
+        "status": "PASS",
+        "details": {
+          "events": [
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              1200
+            ],
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              500
+            ],
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              499
+            ],
+            [
+              "spawn",
+              0,
+              true
+            ],
+            [
+              "wait",
+              0,
+              0
+            ],
+            [
+              "spawn",
+              1,
+              true
+            ],
+            [
+              "wait",
+              1,
+              0
+            ],
+            [
+              "spawn",
+              2,
+              true
+            ],
+            [
+              "wait",
+              2,
+              0
+            ],
+            [
+              "spawn",
+              3,
+              false
+            ],
+            [
+              "wait",
+              3,
+              0
+            ],
+            [
+              "spawn",
+              4,
+              false
+            ],
+            [
+              "wait",
+              4,
+              0
+            ],
+            [
+              "spawn",
+              5,
+              false
+            ],
+            [
+              "wait",
+              5,
+              0
+            ]
+          ],
+          "child_count": 6,
+          "gpu": 3,
+          "guarded_slot_final_run": "MSVR310_axis_collaboration_no_contribution_s42",
+          "whole_queue_marker_absent": true,
+          "caught": null,
+          "controller_receipt_written": true,
+          "real_processes_or_gpu_calls": 0
+        }
+      },
+      {
+        "name": "launcher_reject_failed_predecessor",
+        "status": "PASS",
+        "details": {
+          "events": [],
+          "child_count": 0,
+          "gpu": 1,
+          "guarded_slot_final_run": "MSVR310_ordinary_frequency_s42",
+          "whole_queue_marker_absent": true,
+          "caught": "AssertionError",
+          "controller_receipt_written": false,
+          "real_processes_or_gpu_calls": 0
+        }
+      },
+      {
+        "name": "launcher_reject_49_epochs",
+        "status": "PASS",
+        "details": {
+          "events": [],
+          "child_count": 0,
+          "gpu": 1,
+          "guarded_slot_final_run": "MSVR310_ordinary_frequency_s42",
+          "whole_queue_marker_absent": true,
+          "caught": "AssertionError",
+          "controller_receipt_written": false,
+          "real_processes_or_gpu_calls": 0
+        }
+      },
+      {
+        "name": "launcher_reject_failed_axis_checkpoint",
+        "status": "PASS",
+        "details": {
+          "events": [],
+          "child_count": 0,
+          "gpu": 1,
+          "guarded_slot_final_run": "MSVR310_ordinary_frequency_s42",
+          "whole_queue_marker_absent": true,
+          "caught": "AssertionError",
+          "controller_receipt_written": false,
+          "real_processes_or_gpu_calls": 0
+        }
+      },
+      {
+        "name": "launcher_reject_49_epoch_axis_checkpoint",
+        "status": "PASS",
+        "details": {
+          "events": [],
+          "child_count": 0,
+          "gpu": 1,
+          "guarded_slot_final_run": "MSVR310_ordinary_frequency_s42",
+          "whole_queue_marker_absent": true,
+          "caught": "AssertionError",
+          "controller_receipt_written": false,
+          "real_processes_or_gpu_calls": 0
+        }
+      },
+      {
+        "name": "launcher_reject_existing_output",
+        "status": "PASS",
+        "details": {
+          "events": [
+            [
+              "capacity",
+              1200
+            ],
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              500
+            ],
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              499
+            ]
+          ],
+          "child_count": 0,
+          "gpu": 1,
+          "guarded_slot_final_run": "MSVR310_ordinary_frequency_s42",
+          "whole_queue_marker_absent": true,
+          "caught": "FileExistsError",
+          "controller_receipt_written": false,
+          "real_processes_or_gpu_calls": 0
+        }
+      },
+      {
+        "name": "launcher_abort_second_smoke",
+        "status": "PASS",
+        "details": {
+          "events": [
+            [
+              "capacity",
+              1200
+            ],
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              500
+            ],
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              499
+            ],
+            [
+              "spawn",
+              0,
+              true
+            ],
+            [
+              "wait",
+              0,
+              0
+            ],
+            [
+              "spawn",
+              1,
+              true
+            ],
+            [
+              "wait",
+              1,
+              7
+            ]
+          ],
+          "child_count": 2,
+          "gpu": 1,
+          "guarded_slot_final_run": "MSVR310_ordinary_frequency_s42",
+          "whole_queue_marker_absent": true,
+          "caught": "AssertionError",
+          "controller_receipt_written": false,
+          "real_processes_or_gpu_calls": 0
+        }
+      },
+      {
+        "name": "launcher_abort_first_full",
+        "status": "PASS",
+        "details": {
+          "events": [
+            [
+              "capacity",
+              1200
+            ],
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              500
+            ],
+            [
+              "sleep",
+              240
+            ],
+            [
+              "capacity",
+              499
+            ],
+            [
+              "spawn",
+              0,
+              true
+            ],
+            [
+              "wait",
+              0,
+              0
+            ],
+            [
+              "spawn",
+              1,
+              true
+            ],
+            [
+              "wait",
+              1,
+              0
+            ],
+            [
+              "spawn",
+              2,
+              true
+            ],
+            [
+              "wait",
+              2,
+              0
+            ],
+            [
+              "spawn",
+              3,
+              false
+            ],
+            [
+              "wait",
+              3,
+              7
+            ]
+          ],
+          "child_count": 4,
+          "gpu": 1,
+          "guarded_slot_final_run": "MSVR310_ordinary_frequency_s42",
+          "whole_queue_marker_absent": true,
+          "caught": "AssertionError",
+          "controller_receipt_written": false,
+          "real_processes_or_gpu_calls": 0
+        }
+      },
+      {
+        "name": "actual_extract_and_controlled_state_AST",
+        "status": "PASS",
+        "details": {
+          "batches": 2,
+          "events": [
+            [
+              "read",
+              "M",
+              true
+            ],
+            [
+              "read",
+              "F",
+              true
+            ],
+            [
+              "read",
+              "M",
+              false
+            ],
+            [
+              "read",
+              "F",
+              false
+            ],
+            [
+              "calibrator",
+              [
+                "base",
+                "joint_M",
+                "joint_F"
+              ]
+            ],
+            [
+              "pool_independent",
+              "M"
+            ],
+            [
+              "pool_independent",
+              "F"
+            ],
+            [
+              "calibrator",
+              [
+                "base",
+                [
+                  "pool",
+                  [
+                    "M",
+                    "independent"
+                  ]
+                ],
+                [
+                  "zero",
+                  [
+                    "pool",
+                    [
+                      "F",
+                      "independent"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "calibrator",
+              [
+                "base",
+                [
+                  "zero",
+                  [
+                    "pool",
+                    [
+                      "M",
+                      "independent"
+                    ]
+                  ]
+                ],
+                [
+                  "pool",
+                  [
+                    "F",
+                    "independent"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "fuse",
+              true,
+              false
+            ],
+            [
+              "fuse",
+              false,
+              true
+            ],
+            [
+              "read",
+              "M",
+              true
+            ],
+            [
+              "read",
+              "F",
+              true
+            ],
+            [
+              "read",
+              "M",
+              false
+            ],
+            [
+              "read",
+              "F",
+              false
+            ],
+            [
+              "calibrator",
+              [
+                "base",
+                "joint_M",
+                "joint_F"
+              ]
+            ],
+            [
+              "pool_independent",
+              "M"
+            ],
+            [
+              "pool_independent",
+              "F"
+            ],
+            [
+              "calibrator",
+              [
+                "base",
+                [
+                  "pool",
+                  [
+                    "M",
+                    "independent"
+                  ]
+                ],
+                [
+                  "zero",
+                  [
+                    "pool",
+                    [
+                      "F",
+                      "independent"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "calibrator",
+              [
+                "base",
+                [
+                  "zero",
+                  [
+                    "pool",
+                    [
+                      "M",
+                      "independent"
+                    ]
+                  ]
+                ],
+                [
+                  "pool",
+                  [
+                    "F",
+                    "independent"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "fuse",
+              true,
+              false
+            ],
+            [
+              "fuse",
+              false,
+              true
+            ]
+          ],
+          "first_read_selected": true,
+          "reads_and_hook_restored": true,
+          "tensor_math_executed": false
+        }
+      },
+      {
+        "name": "reference_contributions_00_AST",
+        "status": "PASS",
+        "details": {
+          "query_indices": [
+            0,
+            2,
+            3,
+            4
+          ],
+          "gallery_only_indices": [
+            1,
+            5
+          ],
+          "positive_indices": [
+            2,
+            0,
+            4,
+            3
+          ],
+          "negative_indices": [
+            4,
+            3,
+            5,
+            5
+          ],
+          "same_identity_same_exclusion_is_junk": true,
+          "independent_scalar_oracle_equal": true,
+          "targets": [
+            [
+              0.0,
+              -1.2,
+              -1.2
+            ],
+            [
+              0.0,
+              -1.2,
+              -1.2
+            ],
+            [
+              0.0,
+              0.24,
+              0.08000000000000007
+            ],
+            [
+              0.12,
+              0.24,
+              0.12
+            ]
+          ],
+          "backend": "stdlib list-backed arithmetic mock, no torch/numpy"
+        }
+      },
+      {
+        "name": "reference_contributions_11_AST",
+        "status": "PASS",
+        "details": {
+          "query_indices": [
+            0,
+            2,
+            3,
+            4
+          ],
+          "gallery_only_indices": [
+            1,
+            5
+          ],
+          "positive_indices": [
+            2,
+            0,
+            4,
+            3
+          ],
+          "negative_indices": [
+            4,
+            3,
+            5,
+            0
+          ],
+          "same_identity_same_exclusion_is_junk": true,
+          "independent_scalar_oracle_equal": true,
+          "targets": [
+            [
+              -0.16000000000000014,
+              -1.6,
+              -1.12
+            ],
+            [
+              -0.12000000000000004,
+              -0.84,
+              -0.96
+            ],
+            [
+              0.0,
+              0.35999999999999993,
+              -0.24000000000000005
+            ],
+            [
+              -0.04000000000000002,
+              0.6799999999999999,
+              0.7999999999999999
+            ]
+          ],
+          "backend": "stdlib list-backed arithmetic mock, no torch/numpy"
+        }
+      },
+      {
+        "name": "diagnostic_static_scope_and_parity",
+        "status": "PASS",
+        "details": {
+          "smoke_records": 64,
+          "evaluation_loader_batch": 64,
+          "strict_checkpoint_load": true,
+          "eval_no_grad": true,
+          "no_optimizer_backward_or_official_record_calls": true,
+          "all_state_and_full_parity_checks_present": true
+        }
+      }
+    ]
+  },
+  "validation_harness": {
+    "path": "C:\\Users\\gb\\.codex_tmp\\axis_four_state_review\\review_checks.py",
+    "sha256": "85c206ebd1b2f63fbfac0954e6fa80b6dbc1f03b9676efc3ee598d28c5c3f3d0",
+    "command": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe -X utf8 C:/Users/gb/.codex_tmp/axis_four_state_review/review_checks.py",
+    "exit_code": 0,
+    "checks_passed": 16,
+    "real_gpu_calls": 0,
+    "real_training_or_optimizer_calls": 0,
+    "scope_changes": "Initial entire-queue checks are preserved as checks.initial_whole_queue.json. Only current per-card checks.json and current source hashes form this final verdict."
+  },
+  "deployment_assessment": "SOURCE_REVIEW_PASS_FOR_SINGLE_GUARDED_DIAGNOSTIC_CONTROLLER. It must honor the selected-card final-job guard and all three frozen checkpoints; every actual smoke must pass before complete diagnostics. No authorization for production model changes, new training, official test, retries, or preemption is supplied by this review."
+}
