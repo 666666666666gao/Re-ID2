@@ -1,0 +1,234 @@
+{
+  "schema": "demo-dual-axis-missing-code-review-v1",
+  "reviewed_at": "2026-10-03",
+  "reviewer": {
+    "agent": "/root/review_missing_modalities",
+    "configured_model": "gpt-6-astra",
+    "configured_reasoning_effort": "max",
+    "fork_turns": "none",
+    "attribution_basis": "Executor-provided actual spawn_agent arguments: model=gpt-6-astra, reasoning_effort=max, fork_turns=none. Runtime model identity was not independently introspected.",
+    "review_independence": "same-family",
+    "acceptance_status": "provisional"
+  },
+  "verdict": "PASS_STATIC_AND_CPU_MOCK",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "scope": "Fixed dev-selected checkpoints for the exact 3 datasets x 3 variants x 3 seeds schedule; clean plus six same-set query/gallery masks and six query-only masks. Scheduling, collection, aggregation and handoff publication were reviewed. This is not an execution or accuracy audit of the future missing-modality results.",
+  "reviewed_files": [
+    "AGENTS.md",
+    "missing_evaluation.py",
+    "launch_missing.py",
+    "collect_missing.py",
+    "full_evaluation.py",
+    "run_experiment.py",
+    "experiment_data.py",
+    "modeling/make_model.py",
+    "dual_axis.py",
+    "residual_dual_axis.py (narrow import/dispatch impact only; candidate method reviewed separately)",
+    "launch_runs.py",
+    "launch_repeats.py",
+    "launch_full_evaluation.py",
+    "launch_stress.py",
+    "collect_results.py",
+    "collect_full_suite.py",
+    "utils/reid_evaluation.py",
+    "data/datasets/RGBNT201.py",
+    "data/datasets/RGBNT100.py",
+    "data/datasets/msvr310.py",
+    "configs/RGBNT201/DeMo.yml",
+    "configs/RGBNT100/DeMo.yml",
+    "configs/MSVR310/DeMo.yml",
+    "config/defaults.py"
+  ],
+  "resolved_findings": [
+    {
+      "severity_before_fix": "BLOCKING",
+      "finding": "The initial launcher released a GPU after only the current run's normal and stress receipts. Existing full-evaluation queues still advance through later runs on that GPU; GPU3 also executes the host-wide stress queue. A temporary free-memory reading did not establish those known queues had ended.",
+      "evidence": [
+        "Initial launch_missing.py waited inside the per-run loop only.",
+        "launch_full_evaluation.py:33 advances through first + repeat jobs on each GPU.",
+        "launch_stress.py:37 advances through all host stress jobs on GPU3.",
+        "The existing handoff records pending RGBNT100 normal/stress work on host 2026."
+      ],
+      "fix_verified": "launch_missing.py:20-31 now waits for both existing host controller result lists, requires all exit codes to be zero, and requires the scheduled 13 or 14 result count before creating missing-evaluation slots. Per-run receipt and free-memory checks remain.",
+      "status": "RESOLVED"
+    },
+    {
+      "severity_before_fix": "REPORTING",
+      "finding": "The initial collector calculated harm/rescue counts only against DeMo while its handoff sentence also named ordinary.",
+      "fix_verified": "collect_missing.py:109-118 now records distinct rank1_harms/rescues_vs_demo and rank1_harms/rescues_vs_ordinary. CPU fixtures distinguish the two baselines and produce the expected different counts.",
+      "status": "RESOLVED"
+    },
+    {
+      "severity_before_fix": "REPORTING",
+      "finding": "The initial handoff bitwise-parity sentence did not specify the tested batch size.",
+      "fix_verified": "The final handoff text explicitly limits original-branch versus external-mask parity to the first eight real query samples for each of the nine DeMo checkpoints, rather than claiming all test tensors were checked bitwise.",
+      "status": "RESOLVED"
+    }
+  ],
+  "source_findings": [
+    "The schedule contains exactly 27 unique dataset/variant/seed combinations: RGBNT201, RGBNT100 and MSVR310; demo, ordinary and dual; seeds 42, 43 and 44. Host 2025 has 13 and host 2026 has 14.",
+    "missing_evaluation.py:15-22 zeros exactly RGB, NI, TI, RGB+NI, RGB+TI or NI+TI. It operates after the normal loader has converted and normalized the inputs. Clean masking is a no-op.",
+    "The six mappings agree with the original DeMo evaluation branches in modeling/make_model.py:142-156. verify_original_mask compares real raw descriptors with torch.equal, restores miss_type after each successful comparison, and fails on a discrepancy.",
+    "missing_evaluation.py requires training COMPLETE and exit0, reconstructs the existing configuration, strictly loads best.pth, and calls model.eval(). Extraction and mask verification use torch.no_grad(). No optimizer, training step, checkpoint update or official-test selection is introduced.",
+    "The existing training entry selects the earliest maximal development-mAP checkpoint over 50 epochs. Missing evaluation reads that checkpoint and selected epoch; it does not choose among test conditions or seeds.",
+    "Official records come from the existing dataset parsers. Retrieval metrics compare against dataset identity labels and exclude same-ID/same-camera entries for RGBNT and same-ID/same-scene entries for MSVR310. The same full_metrics and distance implementations are reused.",
+    "Each run recomputes clean query/gallery features, checks all six clean metrics against the completed normal full evaluation, then scores both-missing with the same missing set on each side and query-only against the reused clean gallery. Exactly 13 conditions are required.",
+    "The launcher waits 240 seconds for predecessor receipts and busy GPUs, launches only below 500 MiB, and uses at most four slots per host. There is no kill, preemption, checkpoint migration or failed-run retry path.",
+    "Existing missing results are reused only with missing_exit exit0 and result status COMPLETE. Exclusive stdout creation and exclusive result-directory creation preserve partial attempts; failed receipts stop their slot.",
+    "The collector retains all 351 raw six-metric rows, 117 three-seed aggregates with sample standard deviations, 117 per-seed comparisons, and 39 mean comparisons. It aligns query identity, name, camera, scene, index and validity before both harm/rescue comparisons.",
+    "The collector requires every condition, selected-epoch consistency, original-mask checks for all nine DeMo checkpoints, identical query/gallery counts, and all six clean-metric matches. It publishes only after the existing full-suite writer's terminal marker. Incomplete one-shot collection and failed runs do not invoke publication.",
+    "The recorded protocol explicitly describes zero-input robustness of checkpoints trained with full modalities on the fit subset. It does not claim learned availability masking, missing-modality training, a full official-train reproduction, or test-time adaptation.",
+    "The later residual candidate edit adds an import and new variant dispatch in run_experiment.py. Actual saved build() AST still dispatches demo to make_model and ordinary/dual to AugmentedDeMo with the original arguments, seed and float/cuda sequence. Configuration and evaluation are unchanged in the diff. The new imported module contains imports and class/function definitions only; its model constructors are not called at import. Its training loss changes are not reached by missing evaluation. The residual candidate method itself is outside this review."
+  ],
+  "performed_checks": {
+    "syntax": {
+      "status": "PASS",
+      "method": "Parsed and compiled saved source with Python AST; no project module imports, bytecode writes or model initialization."
+    },
+    "mask_semantics": {
+      "status": "PASS_CPU_STUB_ONLY",
+      "method": "Executed the actual saved mask_images function and original DeMo.forward AST with tuple tensors and a stub backbone. This checks branch mappings and input preservation, not numerical neural-network parity.",
+      "masks": ["r", "n", "t", "rn", "rt", "nt"],
+      "all_six_match_original_branch_inputs": true,
+      "clean_no_op": true,
+      "source_input_preserved": true,
+      "real_torch_or_weights_executed": false
+    },
+    "scheduler": {
+      "status": "PASS",
+      "method": "Executed the actual final main() AST and actual schedule assignments. Filesystem, subprocess, executor and clock interfaces were in-memory fakes; no nvidia-smi or evaluation child was actually launched.",
+      "schedule_runs": 27,
+      "total_conditions": 351,
+      "completed_reuse": {
+        "host2025_unchanged_log_exit_result_artifacts": 39,
+        "host2026_unchanged_log_exit_result_artifacts": 42,
+        "gpu_queries": 0,
+        "child_spawns": 0
+      },
+      "predecessor_and_capacity_wait": {
+        "individual_predecessor_waits_seconds": [240, 240],
+        "memory_readings_mib": [2410, 500, 0],
+        "busy_waits_seconds": [240, 240],
+        "stdout_created_while_busy": false,
+        "spawns_while_busy": 0,
+        "spawns_after_free": 1
+      },
+      "host_queue_gate": {
+        "host": "2026",
+        "initial_full_controller_result": "ABSENT",
+        "initial_stress_result_count": 8,
+        "required_result_count_each": 14,
+        "waits_seconds": [240, 240],
+        "spawn_before_both_terminal": false,
+        "spawn_after_both_terminal_and_free": 1
+      },
+      "fail_stop_cases": [
+        "Existing missing exit1: no spawn and artifact unchanged.",
+        "Existing missing exit0 with RUNNING result: no spawn and artifacts unchanged.",
+        "Normal predecessor exit1: no spawn.",
+        "Stress predecessor exit1: no spawn.",
+        "Existing partial stdout: FileExistsError before spawn; contents unchanged.",
+        "New child exit1: exactly one spawn and exit1 receipt; no retry.",
+        "Host normal controller contains nonzero exit: no spawn.",
+        "Host stress controller contains nonzero exit: no spawn."
+      ]
+    },
+    "collector": {
+      "status": "PASS_SYNTHETIC_AST",
+      "method": "Executed the saved audit_and_publish() and main() AST with 27 synthetic result sets and in-memory paths. Remote copies, Git commands and handoff synchronization were not executed.",
+      "raw_metric_rows": 351,
+      "aggregate_rows": 117,
+      "per_seed_comparisons": 117,
+      "mean_comparisons": 39,
+      "sample_std_for_seed_offsets_0_1_2": 1,
+      "fixture_valid_queries": 4,
+      "fixture_invalid_queries_excluded": 1,
+      "fixture_harm_rescue_vs_demo": [1, 2],
+      "fixture_harm_rescue_vs_ordinary": [1, 1],
+      "negative_all_six_2pp_result_retained": true,
+      "rejected_before_handoff_or_publication": [
+        "Missing condition",
+        "Selected epoch differs from training best",
+        "Clean metric differs from normal evaluation",
+        "Original-mask check incomplete",
+        "Query identity/name alignment differs"
+      ],
+      "publication_gate": "With all 27 synthetic results ready, actual main() waited 240 seconds for FULL_SUITE_TERMINAL_PUBLISHED before invoking the mocked publisher. Failure and non-watch cases returned without publication."
+    },
+    "original_variant_dispatch_after_residual_import": {
+      "status": "PASS_CPU_STUB_ONLY",
+      "method": "Executed actual final build() AST with fake constructors and a residual constructor that raises if called. Inspected the new module's top-level AST and the run_experiment.py diff.",
+      "demo_constructor": "make_model(cfg, classes, cameras)",
+      "ordinary_constructor": "AugmentedDeMo(classes, cfg, cameras, ordinary)",
+      "dual_constructor": "AugmentedDeMo(classes, cfg, cameras, dual)",
+      "seed_and_float_cuda_sequence_preserved": true,
+      "residual_constructor_called_for_original_variants": false,
+      "top_level_model_execution_in_new_module": false,
+      "actual_model_import_or_construction": false
+    },
+    "harness_note": "An initial scheduler mock overlapped the author's launcher edit and read the newly added host gate without corresponding fake host receipts. Only that owned local CPU mock process was stopped after checking its exact command. It produced no successful test claim. The final source was then checked with explicit finite in-memory receipt fixtures, as reported above."
+  },
+  "supplemental_reviews": [
+    {
+      "reviewed_at": "2026-10-03",
+      "scope": "Added equal-six-condition macro reporting in collect_missing.py:129-144 and the corresponding table at lines 151-154. This follow-up uses the same native reviewer session and original spawn attribution above.",
+      "verdict": "PASS_SYNTHETIC_AST",
+      "blocking_findings": [],
+      "source_findings": [
+        "Each dataset/variant has separate both and query protocol rows. Prefix filtering selects exactly six missing conditions and excludes clean.",
+        "For each metric, the implementation first takes the equal-weight mean of six conditions within seed 42, 43 and 44. It retains those three values, then reports their mean and sample standard deviation.",
+        "There are 18 macro rows: 3 datasets x 3 variants x 2 protocols. The existing 27 runs, 351 raw condition rows, 117 per-condition aggregates and 39 strict condition comparisons remain unchanged.",
+        "The two global two-percentage-point acceptance flags still depend on every per-condition comparison, not on the macro averages. The handoff table explicitly describes the averaging order and states that macro averages do not replace individual-condition acceptance.",
+        "The change adds a report field and table only; it does not change inputs, checkpoints, masks, metrics, seed selection or evaluation scheduling."
+      ],
+      "performed_checks": {
+        "syntax": "PASS",
+        "method": "Executed actual saved mean_comparisons, macro_aggregates and report AST nodes with a synthetic measurements dictionary covering all 27 runs and 13 conditions. No publisher, filesystem-output, SSH or GPU code was executed.",
+        "macro_rows": 18,
+        "metric_cells_checked": 108,
+        "unique_dataset_variant_protocol_grid": true,
+        "conditions_per_protocol": 6,
+        "clean_excluded": true,
+        "fixture_example": {
+          "dataset": "RGBNT201",
+          "variant": "demo",
+          "scope": "both",
+          "metric": "mAP",
+          "expected_and_actual_per_seed_means": [35, 37, 39],
+          "expected_and_actual_macro_mean": 37,
+          "expected_and_actual_sample_std": 2,
+          "incorrect_average_of_condition_standard_deviations": 3.6666666666666665,
+          "distinguishes_correct_averaging_order": true
+        },
+        "condition_gate_fixture": {
+          "strict_comparison_count": 39,
+          "single_failing_condition": "RGBNT201 / both_missing_r",
+          "dual_minus_demo_macro_mAP_gain_pp": 2.3333333333333357,
+          "mAP_Rank1_2pp_every_dataset_and_condition": false,
+          "all_six_2pp_every_dataset_and_condition": false,
+          "macro_gain_does_not_override_condition_failure": true
+        },
+        "reported_runs": 27,
+        "reported_conditions": 351,
+        "real_results_or_publication_generated": false
+      },
+      "execution_boundary": "The existing source-review verdict remains PASS_STATIC_AND_CPU_MOCK, same-family/provisional. Real model sanity and terminal result audits remain required; this synthetic reporting check is not experimental evidence.",
+      "only_written_artifact": "results/preflight/missing_code_review.json"
+    }
+  ],
+  "remaining_execution_gates": [
+    "Run the real sanity evaluation on a completed dev-selected DeMo checkpoint before the full missing-modality campaign. It must return exit0 and COMPLETE, pass all six torch.equal original-mask comparisons on eight actual queries, and match all six normal full-test clean metrics.",
+    "Every eventual run must independently pass its clean six-metric check; all nine DeMo runs must retain the original-mask batch check. Require all 27 exit0/COMPLETE results and all 351 conditions before claiming campaign completion.",
+    "Run the collector's actual terminal audit after collection and after the previous full-suite writer finishes. The synthetic audit here is not a claim that remote results, aggregate accuracy or publication already exist."
+  ],
+  "reviewer_actions": {
+    "implementation_files_edited": false,
+    "ssh_or_remote_commands_executed": false,
+    "gpu_or_training_work_executed": false,
+    "real_evaluation_or_controller_started": false,
+    "existing_job_stopped_or_preempted": false,
+    "real_git_or_publication_actions": false,
+    "only_written_artifact": "results/preflight/missing_code_review.json"
+  }
+}

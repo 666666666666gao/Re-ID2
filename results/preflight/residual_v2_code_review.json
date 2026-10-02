@@ -1,0 +1,384 @@
+{
+  "schema": "demo-dual-axis-residual-v2-code-review-v1",
+  "reviewed_at": "2026-10-03",
+  "reviewer": {
+    "agent": "/root/review_residual_v2",
+    "configured_model": "gpt-6-astra",
+    "configured_reasoning_effort": "max",
+    "configured_fork_turns": "none",
+    "attribution_basis": "The executor explicitly confirmed these exact spawn_agent arguments in its message. Runtime model identity is not independently exposed or attested.",
+    "review_independence": "same-family",
+    "acceptance_status": "provisional"
+  },
+  "skill": "C:/Users/gb/.codex/skills/experiment-bridge/SKILL.md",
+  "verdict": "PASS_STATIC_AND_CPU_MOCK",
+  "blocking_findings": [],
+  "non_blocking_findings": [],
+  "scope": "V2 residual model, initialization/anchor/factorization witness, nine-check preflight runner, shared run_experiment variant and loss dispatch, first four-run development launcher, inherited DeMo/frequency components, fixed train/development split, normal and missing evaluation paths. This is code review before real-model sanity, not a training or efficacy result.",
+  "contract": {
+    "eventual_target": "For each RGBNT201, RGBNT100 and MSVR310, mAP and Rank-1 must each improve by at least 2 percentage points over the controlled DeMo reference, including the missing-modality conditions; retain all other metric reporting.",
+    "first_deployment": "Only host 2025: GPU0 RGBNT201 dual_residual seed42; GPU1 RGBNT100 dual_residual seed42; GPU2 MSVR310 dual_residual seed42; GPU3 MSVR310 ordinary_residual seed42.",
+    "training": "Public CLIP initialization, fixed fit/development partition, B64, full 50 epochs, highest development mAP with earliest tie retained. No earlier ReID checkpoint, contribution loss, teacher, modality-dropout training or official-test checkpoint selection.",
+    "eventual_seeds": [
+      42,
+      43,
+      44
+    ],
+    "original_campaign": "Existing 27 original runs and their evaluations remain untouched."
+  },
+  "reviewed_files": [
+    "AGENTS.md",
+    "residual_dual_axis.py",
+    "verify_residual.py",
+    "launch_residual_development.py",
+    "preflight_residual.py",
+    "run_experiment.py",
+    "dual_axis.py",
+    "modeling/make_model.py",
+    "modeling/moe/AttnMOE.py",
+    "modeling/meta_arch.py",
+    "modeling/make_model_clipreid.py",
+    "experiment_data.py",
+    "splits.json",
+    "full_evaluation.py",
+    "missing_evaluation.py",
+    "launch_missing.py",
+    "utils/reid_evaluation.py",
+    "layers/make_loss.py",
+    "solver/make_optimizer.py",
+    "configs/RGBNT201/DeMo.yml",
+    "configs/RGBNT100/DeMo.yml",
+    "configs/MSVR310/DeMo.yml"
+  ],
+  "source_findings": [
+    {
+      "topic": "Original identity anchor and proposal fidelity",
+      "evidence": "residual_dual_axis.py:54-75; modeling/make_model.py:103-178; modeling/moe/AttnMOE.py:153-224",
+      "finding": "Both V2 variants use the original backbone, global/local reductions and full-frequency seven-relation HDM call. Ordinary sends these original relation slots directly into ATMoE. Dual constructs U[S,b] from the original full-frequency relation plus band_scale times the shared band adapter of V[S,b], then pools back to seven relation slots before the unchanged ATMoE."
+    },
+    {
+      "topic": "Source provenance and frequency processing",
+      "evidence": "dual_axis.py:8-55; residual_dual_axis.py:40-45,60-72",
+      "finding": "The same three complementary 2D spatial FFT masks are retained. Rank-64 value MLPs operate on each source's tokens; frequency attention and cross-band attention run independently for each source. V[S,b] averages only the modalities named by RELATIONS[S]. Cross-band processing is within source. The discarded tokens list introduces no additional registered parameters."
+    },
+    {
+      "topic": "Joint routing and residual output",
+      "evidence": "residual_dual_axis.py:13-32,46-48,69-79",
+      "finding": "Joint logits are a[S]+c[b]+psi[S,b] with a single softmax across 21 cells. Conditional band weights retain seven relation slots; the frequency output uses the joint weights. The two learned message scales initialize to 0.1, band_scale to 0.1 and frequency_scale to 0.05. The output is 1536D original features plus 3584D ATMoE plus 512D scaled frequency, totaling 5632D."
+    },
+    {
+      "topic": "Matched active capacity and initialization",
+      "evidence": "dual_axis.py:97-115; residual_dual_axis.py:35-50,63-87; run_experiment.py:42-48; verify_residual.py:25-34",
+      "finding": "The V2 constructor is identical for ordinary and dual apart from the non-state variant string. Replacing frequency.values and collaboration unregisters the old modules. Both branches use the same new adapter, source/frequency modules, scores, interaction, gates, message transforms, scales, and all applicable classifier heads; ordinary's added capacity stays inside its frequency branch. build resets the seed before each constructor. The witness compares all state_dict entries, shared original DeMo entries and total parameter counts. Actual full-state equality and every trainable tensor's gradient remain real-sanity gates, not claims made by this static review."
+    },
+    {
+      "topic": "Original losses and dispatch preserved",
+      "evidence": "run_experiment.py:42-48,76-96,126-128; residual_dual_axis.py:49-50,80-88; layers/make_loss.py:37-72",
+      "finding": "The old demo, ordinary and dual constructors retain their original seed and float/cuda sequence. Loss weights are selected only with isinstance(model, ResidualAugmentedDeMo). V2 retains weight 1 for the original ATMoE and direct/separate modality objectives, adds fused 0.25 and frequency 0.1, and keeps the existing per-head identity/triplet loss. The old variants still use weight 1 for every head and preserve an odd trailing regularizer. The inherited ATMoE regularizer is exactly zero in this repo, so dropping result[1] in the residual forward does not omit an active original loss."
+    },
+    {
+      "topic": "Zero-residual witness",
+      "evidence": "verify_residual.py:21-72",
+      "finding": "For the chosen dataset configuration, the script builds fresh demo/ordinary_residual/dual_residual models, compares full initial state, evaluates eight actual development samples and checks finite 5632D features. It requires the initial joint route to differ from its marginal product by more than 1e-8, temporarily disables psi and requires factorization error below 1e-6, then restores the bound joint method. It requires ordinary's first 5120 dimensions to equal original DeMo bitwise and dual with all residual scales zero to match original DeMo within 1e-5 with an exactly zero frequency tail. No optimizer update occurs. This is an initialization/structure witness on eight samples, not an independently trained psi ablation or retrieval result."
+    },
+    {
+      "topic": "Nine-check preflight runner",
+      "evidence": "preflight_residual.py:19-49; run_experiment.py:139-168",
+      "finding": "The runner allocates only GPUs 1, 2 and 3 to RGBNT201, RGBNT100 and MSVR310 respectively, with at most three concurrent slots. Each slot checks initial memory below 500 MiB, then waits for its anchor child, ordinary_residual smoke child and dual_residual smoke child in that order. Commands are verification or smoke only. Every child gets an exclusive log, launch and exit receipt; a failed child prevents later work in that slot and prevents terminal PASS. Other already-running independent slots may finish. Nine exit0 checks precede the PASS receipt. The stated 18 updates must be corroborated by the six actual smoke receipts, each with steps=3; the mock does not supply that evidence. A busy card fails before launching its slot rather than polling. The executor must reserve GPU0 for the simultaneous missing sanity and defer the full missing controller until both sanity controllers have succeeded."
+    },
+    {
+      "topic": "Data, budget and checkpoint selection",
+      "evidence": "experiment_data.py:24-45,88-93; run_experiment.py:29-39,139-168,177-207; full_evaluation.py:68-79,115-151",
+      "finding": "Training records come from the installed official training directories and are separated by fixed held-out identities. Fitting labels are relabeled independently; eligible development queries require a same-ID partner from a different camera, or scene for MSVR310. All variants force B64 and 50 epochs, with matched per-epoch sampler/worker seeding. Only development mAP selects the earliest best epoch. The smoke path requires three successful scaler updates, nonzero finite gradients for every trainable tensor at its final checked step, and strict model/optimizer deserialization with bitwise descriptor replay. Official test loading and evaluation occur separately after a COMPLETE, exit0 training result."
+    },
+    {
+      "topic": "Ground truth and missing-modality compatibility",
+      "evidence": "run_experiment.py:65-68; full_evaluation.py:20-65,135-151; missing_evaluation.py:15-22,63-112; utils/reid_evaluation.py",
+      "finding": "Metrics compare retrieval rankings to the dataset identity ground truth, with same-ID/same-camera exclusion for RGBNT and same-ID/same-scene exclusion for MSVR310. The additional metric implementation cross-checks mAP/CMC against the existing evaluator. Existing normal and missing evaluators reconstruct models via build, so the new variant names are supported without changing official-test selection. Missing evaluation zeros normalized inputs before calling either variant, covers six both-missing plus six query-only cases and clean, strictly reloads the dev-selected checkpoint, and never updates the model. The fit-subset limitation is retained."
+    },
+    {
+      "topic": "Scheduler preservation and resource order",
+      "evidence": "launch_residual_development.py:13-56; launch_missing.py:69-74",
+      "finding": "The launcher waits for the host's terminal missing-controller receipt, requires exactly 13 exit0 rows, then checks each of four cards independently for memory below 500 MiB. The current missing controller emits that receipt only after all expected jobs succeed. Both waits are 240 seconds. Each scheduled output directory/log is exclusive, each slot starts exactly one fixed seed42 train command, and exit status is saved. No original job is stopped, retried, migrated or overwritten. Host 2025 selection and prior real sanity are executor-side gates; the launcher itself does not perform them."
+    },
+    {
+      "topic": "Claim limits",
+      "evidence": "residual_dual_axis.py; run_experiment.py:121-128; executor-supplied plan",
+      "finding": "The implementation is seven original HDM relations with three band-conditioned routing cells per relation, not 21 independent experts. FFT masking does not establish information orthogonality after learned nonlinear/cross-band processing. This first four-run development launch cannot establish the three-dataset, three-seed or missing-modality +2-point target."
+    }
+  ],
+  "performed_checks": {
+    "preflight_cpu_mock": {
+      "status": "PASS_CPU_MOCK",
+      "schedule": [
+        [
+          1,
+          "RGBNT201",
+          "anchor"
+        ],
+        [
+          1,
+          "RGBNT201",
+          "ordinary_residual"
+        ],
+        [
+          1,
+          "RGBNT201",
+          "dual_residual"
+        ],
+        [
+          2,
+          "RGBNT100",
+          "anchor"
+        ],
+        [
+          2,
+          "RGBNT100",
+          "ordinary_residual"
+        ],
+        [
+          2,
+          "RGBNT100",
+          "dual_residual"
+        ],
+        [
+          3,
+          "MSVR310",
+          "anchor"
+        ],
+        [
+          3,
+          "MSVR310",
+          "ordinary_residual"
+        ],
+        [
+          3,
+          "MSVR310",
+          "dual_residual"
+        ]
+      ],
+      "success_checks": 9,
+      "reported_planned_updates_when_all_children_pass": 18,
+      "busy_card_500_mib_spawns": 0,
+      "gpu0_used": false,
+      "failed_anchor_exit_recorded": true,
+      "same_slot_smoke_started_after_failed_anchor": false,
+      "controller_PASS_written_after_failed_anchor": false,
+      "concurrency_limit_source": 3,
+      "limits": "Actual saved main AST with sequential in-memory fake futures. No real subprocesses, GPU calls, writes, model verification or optimizer updates."
+    },
+    "syntax": {
+      "status": "PASS",
+      "files": [
+        "residual_dual_axis.py",
+        "verify_residual.py",
+        "launch_residual_development.py",
+        "preflight_residual.py",
+        "run_experiment.py",
+        "dual_axis.py",
+        "experiment_data.py",
+        "full_evaluation.py",
+        "missing_evaluation.py",
+        "modeling/make_model.py",
+        "modeling/moe/AttnMOE.py"
+      ]
+    },
+    "scheduler_cpu_mock": {
+      "predecessor_absent_waits": 2,
+      "gpu0_memory_mib": [
+        2410,
+        500,
+        0
+      ],
+      "gpu_busy_waits": 2,
+      "all_waits_seconds": [
+        240,
+        240,
+        240,
+        240
+      ],
+      "spawns_while_predecessor_absent_or_gpu_busy": 0,
+      "schedule": [
+        [
+          "RGBNT201",
+          "dual_residual"
+        ],
+        [
+          "RGBNT100",
+          "dual_residual"
+        ],
+        [
+          "MSVR310",
+          "dual_residual"
+        ],
+        [
+          "MSVR310",
+          "ordinary_residual"
+        ]
+      ],
+      "successful_spawns": 4,
+      "controller_rows": 4,
+      "failed_predecessor": "AssertionError",
+      "incomplete_predecessor": "AssertionError",
+      "existing_output_root": "FileExistsError",
+      "rejected_scenarios_spawns": 0
+    },
+    "loss_dispatch_cpu_stub": [
+      {
+        "case": "original_demo_direct",
+        "loss": 3.125
+      },
+      {
+        "case": "original_demo_separate",
+        "loss": 10.125
+      },
+      {
+        "case": "original_augmented_direct",
+        "loss": 10
+      },
+      {
+        "case": "original_augmented_separate",
+        "loss": 21
+      },
+      {
+        "case": "residual_direct",
+        "loss": 6.55
+      },
+      {
+        "case": "residual_separate",
+        "loss": 17.55
+      }
+    ],
+    "constructor_dispatch_cpu_stub": {
+      "demo": [
+        [
+          "seed",
+          42
+        ],
+        [
+          "make_model",
+          "mock-cfg",
+          141,
+          8
+        ],
+        "float",
+        "cuda"
+      ],
+      "ordinary": [
+        [
+          "seed",
+          42
+        ],
+        [
+          "AugmentedDeMo",
+          141,
+          "mock-cfg",
+          8,
+          "ordinary"
+        ],
+        "float",
+        "cuda"
+      ],
+      "dual": [
+        [
+          "seed",
+          42
+        ],
+        [
+          "AugmentedDeMo",
+          141,
+          "mock-cfg",
+          8,
+          "dual"
+        ],
+        "float",
+        "cuda"
+      ],
+      "ordinary_residual": [
+        [
+          "seed",
+          42
+        ],
+        [
+          "ResidualAugmentedDeMo",
+          141,
+          "mock-cfg",
+          8,
+          "ordinary"
+        ],
+        "float",
+        "cuda"
+      ],
+      "dual_residual": [
+        [
+          "seed",
+          42
+        ],
+        [
+          "ResidualAugmentedDeMo",
+          141,
+          "mock-cfg",
+          8,
+          "dual"
+        ],
+        "float",
+        "cuda"
+      ]
+    },
+    "identity_split_cpu_fixture": {
+      "RGBNT201": {
+        "fit_labels": [
+          0,
+          1
+        ],
+        "dev_queries": [
+          0,
+          1
+        ],
+        "query_selector": "camera"
+      },
+      "RGBNT100": {
+        "fit_labels": [
+          0,
+          1
+        ],
+        "dev_queries": [
+          0,
+          1
+        ],
+        "query_selector": "camera"
+      },
+      "MSVR310": {
+        "fit_labels": [
+          0,
+          1
+        ],
+        "dev_queries": [
+          2,
+          3
+        ],
+        "query_selector": "scene"
+      }
+    },
+    "mock_method": "Executed actual saved Python AST. Constructor/tensor operations and all launcher filesystem writes, subprocesses, GPU queries, executor and clock were in-memory fakes. The scheduler executor was sequential in the mock; four-worker concurrency was inspected in source. No model forward, gradient computation, real dataset read or actual launch was performed.",
+    "local_environment": "The PATH python shim failed with 'No pyvenv.cfg file'. The available E:/python.exe interpreter, invoked through uv without installation, successfully ran the stdlib-only checks; it does not have torch or numpy. No environment or package was changed."
+  },
+  "remaining_execution_gates": [
+    "Before any full V2 train command, run preflight_residual.py once on host 2025 GPUs 1/2/3 after confirming those cards are free. Keep GPU0 for the separately reviewed missing sanity. Require its nine-check terminal PASS and inspect all three actual verification receipts for initial-state equality, dimensions, joint/psi-off factorization checks and zero-residual anchors.",
+    "Before any full V2 train command, run ordinary_residual and dual_residual --mode smoke for each of the three configurations: six fresh runs, three actual non-skipped updates each, all trainable tensors with finite nonzero gradients, strict model/optimizer restore and bitwise replay. Preserve any failure and diagnose it rather than retrying unchanged.",
+    "Start the full original missing campaign only after both real sanity controllers succeed. Only after all V2 preflight gates pass, execute the reviewed first four-run development launcher once on host 2025. It must then observe all 13 original missing evaluations as exit0 and each selected card below 500 MiB. Do not start a duplicate controller or use host 2026 for this first V2 stage.",
+    "Each full run must complete all 50 epochs and retain the earliest development-mAP-selected checkpoint and exact reload metrics. Make subsequent method decisions from development evidence; do not tune from official normal/missing test scores.",
+    "The eventual +2-percentage-point acceptance requires mAP and Rank-1 evidence on each dataset and required missing conditions, with seeds 42/43/44 and the matched ordinary control. Preserve negative results, all other metrics, per-query harms/rescues and cost reporting. None of those efficacy results exists as a consequence of this code review."
+  ],
+  "execution_boundary": "Source review PASS permits the planned real initialization and smoke verification. It is not a full-training readiness certificate until all three initialization witnesses and six real smoke runs pass. It does not permit test-based method selection or claim achieved improvement.",
+  "reviewer_actions": {
+    "implementation_files_edited": false,
+    "ssh_or_remote_commands_executed": false,
+    "real_subprocess_from_launcher_executed": false,
+    "gpu_or_training_work_executed": false,
+    "real_controller_started_or_stopped": false,
+    "existing_job_preempted": false,
+    "environment_or_packages_changed": false,
+    "only_written_artifact": "results/preflight/residual_v2_code_review.json"
+  }
+}

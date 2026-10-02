@@ -1,0 +1,196 @@
+{
+  "schema": "demo-dual-axis-residual-collector-review-v1",
+  "reviewed_at": "2026-10-03",
+  "reviewer": {
+    "agent": "/root/review_residual_v2",
+    "configured_model": "gpt-6-astra",
+    "configured_reasoning_effort": "max",
+    "configured_fork_turns": "none",
+    "attribution_basis": "Executor-provided exact arguments for this reviewer's original spawn_agent call. This is a follow-up in that same reviewer session, not an additional fresh review. Runtime model identity was not independently introspected.",
+    "review_independence": "same-family",
+    "acceptance_status": "provisional"
+  },
+  "verdict": "PASS_STATIC_AND_CPU_MOCK",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "scope": "Read-only collect_residual_development.py observer, its fixed four-run schedule and imported transport helpers. No training, evaluator, checkpoint selection, handoff publication or Git change.",
+  "reviewed_files": [
+    "collect_residual_development.py",
+    "collect_results.py",
+    "launch_residual_development.py",
+    "results/preflight/collector_transport_review.json",
+    "results/preflight/m2_v2_actual_sanity.json"
+  ],
+  "source_findings": [
+    {
+      "evidence": "collect_residual_development.py:18-31",
+      "finding": "The remote payload only enumerates the fixed host-2025 residual_development_v2 directory, reads six named JSON metadata files and checks existence of three named text logs. It performs no remote write, GPU query, model import, training, test evaluation or process control."
+    },
+    {
+      "evidence": "collect_residual_development.py:33-39; launch_residual_development.py:13-14",
+      "finding": "Rows are restricted to the exact four scheduled seed42 runs. A nonzero exit yields FAILED; COMPLETE requires both exit0 and result.status COMPLETE; a launch receipt yields TRAINING otherwise. An unlaunched run yields WAIT_MISSING_QUEUE. Epochs comes from the terminal epochs field or running epoch field, and best remains the producer's development best."
+    },
+    {
+      "evidence": "collect_residual_development.py:40-48; collect_results.py:50-52",
+      "finding": "Text intake occurs after an exit receipt and only when no local intake marker exists. The six JSON names and three text log names are allowlisted; weights, image data and feature arrays are not requested. copy_file creates destination parents. The intake marker is written only after the requested copies return, so an interrupted copy is not marked as a completed intake."
+    },
+    {
+      "evidence": "collect_residual_development.py:49-55",
+      "finding": "Each iteration writes only the local residual status summary and logs it. One-shot mode returns after one snapshot. Watch mode sleeps 240 seconds and ends when all four rows are COMPLETE or any row is FAILED. Failure is reported in status and retained text; the observer contains no automatic retry or experiment restart."
+    },
+    {
+      "evidence": "collect_residual_development.py:7-8; collect_results.py:23-29,50-52",
+      "finding": "The observer imports only PROJECT, HOSTS, copy_file and remote_python from the shared collector, plus the fixed SCHEDULE. It calls no handoff, Git or publication function. SSH reads and SCP downloads use the already reviewed shared command helper with check=True and timeout=300; exceptions propagate. That transport deadline does not run or time-limit GPU work."
+    },
+    {
+      "evidence": "collect_residual_development.py:37,49-50",
+      "finding": "This is an observation and text-intake tool, not the final experiment integrity/efficacy audit. WAIT_MISSING_QUEUE denotes an unlaunched run and does not distinguish queue waiting from GPU-capacity waiting. The summary explicitly limits scope to four fixed-budget development runs and makes no official-test or success claim."
+    }
+  ],
+  "performed_checks": {
+    "status": "PASS_STATIC_AND_CPU_MOCK",
+    "method": "Compiled the actual saved collector main AST and executed its exact embedded remote-read payload with read-only fake remote paths. All local writes, SSH/SCP functions and waits used memory fakes; no real network or child process.",
+    "one_shot_empty": {
+      "queries": 1,
+      "rows": 4,
+      "copies": 0,
+      "sleeps": 0
+    },
+    "watch_progress": {
+      "queries": 4,
+      "waits_seconds": [
+        240,
+        240,
+        240
+      ],
+      "phases": [
+        [
+          "WAIT_MISSING_QUEUE",
+          "WAIT_MISSING_QUEUE",
+          "WAIT_MISSING_QUEUE",
+          "WAIT_MISSING_QUEUE"
+        ],
+        [
+          "TRAINING",
+          "TRAINING",
+          "TRAINING",
+          "TRAINING"
+        ],
+        [
+          "COMPLETE",
+          "TRAINING",
+          "TRAINING",
+          "TRAINING"
+        ],
+        [
+          "COMPLETE",
+          "COMPLETE",
+          "COMPLETE",
+          "COMPLETE"
+        ]
+      ],
+      "text_copies": 36,
+      "copies_each_complete_run": 9,
+      "unique_text_destinations": 36,
+      "intakes": 4,
+      "training_epoch": 7,
+      "terminal_epoch": 50,
+      "result_without_exit_not_COMPLETE": true
+    },
+    "repeated_complete_intake": {
+      "queries": 1,
+      "copies": 0
+    },
+    "failed_child": {
+      "status": "FAILED",
+      "queries": 1,
+      "text_copies": 4,
+      "exits_without_sleep": true,
+      "failed_exit_saved": true
+    },
+    "transport_failure": {
+      "exception_propagated": "TimeoutExpired",
+      "queries": 1,
+      "failed_copy_attempts": 1,
+      "retry_count": 0,
+      "intake_created": false,
+      "new_summary_created": false
+    },
+    "remote_hosts": [
+      "2025"
+    ],
+    "gpu_calls": 0,
+    "model_or_test_calls": 0,
+    "publication_calls": 0
+  },
+  "local_runtime_receipt_audit": {
+    "path": "results/preflight/m2_v2_actual_sanity.json",
+    "checks": {
+      "local_receipt": "PASS",
+      "anchors": {
+        "RGBNT201": {
+          "parameters_each": 104591238,
+          "max_anchor_error": 7.450580596923828e-9
+        },
+        "RGBNT100": {
+          "parameters_each": 103148422,
+          "max_anchor_error": 5.587935447692871e-9
+        },
+        "MSVR310": {
+          "parameters_each": 103936902,
+          "max_anchor_error": 9.313225746154785e-9
+        }
+      },
+      "smokes": {
+        "RGBNT201_ordinary_residual": {
+          "steps": 3,
+          "gradient_tensors": 382,
+          "all_gradients_pass": true,
+          "strict_reload": true
+        },
+        "RGBNT201_dual_residual": {
+          "steps": 3,
+          "gradient_tensors": 382,
+          "all_gradients_pass": true,
+          "strict_reload": true
+        },
+        "RGBNT100_ordinary_residual": {
+          "steps": 3,
+          "gradient_tensors": 498,
+          "all_gradients_pass": true,
+          "strict_reload": true
+        },
+        "RGBNT100_dual_residual": {
+          "steps": 3,
+          "gradient_tensors": 498,
+          "all_gradients_pass": true,
+          "strict_reload": true
+        },
+        "MSVR310_ordinary_residual": {
+          "steps": 3,
+          "gradient_tensors": 498,
+          "all_gradients_pass": true,
+          "strict_reload": true
+        },
+        "MSVR310_dual_residual": {
+          "steps": 3,
+          "gradient_tensors": 498,
+          "all_gradients_pass": true,
+          "strict_reload": true
+        }
+      },
+      "sum_steps": 18,
+      "limits": "Only the saved local receipt was audited; no remote run re-executed or verified live."
+    },
+    "interpretation": "The saved local evidence satisfies the previously specified three initialization witnesses and six three-update smoke/reload records. All nine controller exits are zero; the six recorded step counts sum to 18. The reviewer did not repeat these runs, inspect live GPU processes, or independently deserialize their model weights."
+  },
+  "execution_boundary": "No source blocker remains for starting this single read-only local observer against the already deployed host-2025 development controller. It does not launch, restart, stop or authorize additional GPU jobs. Actual COMPLETE observations remain distinct from the later budget, test, missing-modality and +2-point acceptance audits.",
+  "reviewer_actions": {
+    "implementation_files_edited": false,
+    "ssh_scp_or_remote_commands_executed": false,
+    "gpu_or_model_or_test_work_executed": false,
+    "real_collector_or_controller_started_or_stopped": false,
+    "handoff_or_git_or_publication_executed": false,
+    "only_written_artifact_this_followup": "results/preflight/residual_collector_review.json"
+  }
+}

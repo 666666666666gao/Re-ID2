@@ -1,0 +1,84 @@
+{
+  "schema": "demo-dual-axis-collector-transport-review-v1",
+  "reviewed_at": "2026-10-03",
+  "reviewer": {
+    "agent": "/root/review_missing_modalities",
+    "configured_model": "gpt-6-astra",
+    "configured_reasoning_effort": "max",
+    "fork_turns": "none",
+    "attribution_basis": "Executor-provided actual arguments for this reviewer's original spawn_agent call. This is a follow-up in the same reviewer session; runtime model identity was not independently introspected.",
+    "review_independence": "same-family",
+    "acceptance_status": "provisional"
+  },
+  "verdict": "PASS_STATIC_AND_CPU_MOCK",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "scope": "Final saved one-line addition of timeout=300 to collect_results.command(), and its use by collect_full_suite.py and collect_missing.py. No model, metric, training, scheduler or checkpoint-selection change is under review.",
+  "change": {
+    "path": "collect_results.py",
+    "line": 24,
+    "before": "subprocess.run(argv, check=True, capture_output=True, text=True, encoding='utf-8', **kwargs).stdout",
+    "after": "subprocess.run(argv, check=True, capture_output=True, text=True, encoding='utf-8', timeout=300, **kwargs).stdout",
+    "diff_scope_verified": "git diff -- collect_results.py contains only this one-line change. OPTIONS retains BatchMode=yes, ClearAllForwardings=yes and ConnectTimeout=15. No ServerAlive option remains in the final patch."
+  },
+  "observed_failure_evidence": {
+    "executor_report": "The read-only SSH child 22476 of observer 37904/uv20316 had been waiting since 01:09:47 on the remote handoff digest read. An independent server inspection at 01:23 found no corresponding digest query while other read-only SSH worked. The executor reported checking command and parent, stopping only that local SSH child at 01:24, and subsequently confirming all three old local PIDs absent.",
+    "independently_read_local_artifact": "C:/Users/gb/.codex_tmp/demo_dual_axis_suite_20261003.stderr.log",
+    "artifact_finding": "The preserved stderr ends with CalledProcessError, exit status 4294967295, in collect_full_suite.collect -> sync_handoff -> remote_python -> command, for SSH to host 2025 running only a handoff-file SHA256 read. This supports the stated observer failure location. Historical process lifetime and socket observations were not independently repeated by this reviewer.",
+    "reviewer_did_not_stop_processes": true
+  },
+  "source_findings": [
+    "The added timeout bounds communication with each local child used for SSH reads, SCP transfers and Git metadata/publication commands. It directly addresses an established read-only command that otherwise had no subprocess deadline.",
+    "Python subprocess.run passes this timeout to communicate; on expiry it terminates and waits for the invoked child, then raises TimeoutExpired. The documented timer does not promise an interruptible initial process-creation phase.",
+    "check=True remains in place. A nonzero child exit propagates CalledProcessError. Neither command(), its transport wrappers, nor the collector call sites add a retry, fallback or exception-suppression path.",
+    "collect_full_suite.py and collect_missing.py import the same command, copy_file, remote_python and sync_handoff functions from collect_results.py. A fresh observer process will therefore use the 300-second deadline for both collector workflows, including the digest-read path that failed.",
+    "The repository call-site search found these command() uses are collection, synchronization and Git operations. Training and evaluation controllers use their own Popen paths and do not call this helper. The change imposes no training-epoch, GPU-job or model-evaluation time budget.",
+    "The existing 240-second collector polling and the missing launcher's predecessor/resource gates are unchanged. The deadline applies to an individual transport child, not to the duration of the overall experiment or observer.",
+    "A transport exception exits the observer without creating a successful terminal-publication marker. There is no automatic process restart or experiment retry. Existing receipt, intake and exclusive-output rules remain intact."
+  ],
+  "performed_checks": {
+    "syntax": "PASS for collect_results.py, collect_full_suite.py and collect_missing.py.",
+    "mock_method": "Compiled actual saved function and constant AST nodes. subprocess.run, destination mkdir and all remote operations were replaced by in-memory fakes; no SSH, SCP or Git child was launched.",
+    "success_paths": [
+      "remote_python constructs the existing SSH argv and passes timeout=300/check=True to the mocked run.",
+      "copy_file constructs the existing SCP argv and passes timeout=300/check=True.",
+      "A Git command passes timeout=300/check=True while retaining its supplied cwd.",
+      "Actual collect_full_suite.read_host reaches the same bounded command helper.",
+      "Actual collect_missing.read_host reaches the same bounded command helper."
+    ],
+    "OPTIONS_unchanged": true,
+    "failure_paths": [
+      {
+        "injected_error": "TimeoutExpired",
+        "propagated_to_collect_missing_read_host": true,
+        "subprocess_call_count": 1,
+        "retry_count": 0
+      },
+      {
+        "injected_error": "CalledProcessError",
+        "propagated_to_collect_missing_read_host": true,
+        "subprocess_call_count": 1,
+        "retry_count": 0
+      }
+    ],
+    "real_network_timeout_test": "NOT_RUN",
+    "real_observer_restart": "NOT_RUN_BY_REVIEWER"
+  },
+  "execution_boundary": "No source blocker remains for the executor's deliberate collector restart after the recorded prior observer termination, using a new unique log while preserving the old stderr/stdout and experiment receipts. This review does not approve or perform a GPU job, training-controller or evaluation-controller restart. Actual collection and publication still require their existing result and terminal gates.",
+  "sources": [
+    {
+      "title": "Python 3.13 subprocess.run documentation",
+      "url": "https://docs.python.org/3.13/library/subprocess.html#subprocess.run",
+      "supports": "TimeoutExpired behavior, termination/wait of the invoked child, process-creation limitation, and CalledProcessError with check=True."
+    }
+  ],
+  "reviewer_actions": {
+    "implementation_files_edited": false,
+    "ssh_scp_or_remote_commands_executed": false,
+    "gpu_or_training_work_executed": false,
+    "processes_started_or_stopped_for_runtime_validation": false,
+    "existing_jobs_stopped_or_preempted": false,
+    "publication_executed": false,
+    "only_written_artifact_this_followup": "results/preflight/collector_transport_review.json"
+  }
+}

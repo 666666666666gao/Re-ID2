@@ -11,6 +11,7 @@ from torch.nn import functional as F
 from config import cfg as default_cfg
 from modeling.make_model import make_model
 from dual_axis import AugmentedDeMo
+from residual_dual_axis import ResidualAugmentedDeMo
 from experiment_data import split_records, make_loader, seed_all
 from layers.make_loss import make_loss
 from solver.make_optimizer import make_optimizer
@@ -42,6 +43,8 @@ def build(args, cfg, classes, cameras):
     seed_all(args.seed)
     if args.variant == 'demo':
         return make_model(cfg, classes, cameras).float().cuda()
+    if args.variant in ('ordinary_residual', 'dual_residual'):
+        return ResidualAugmentedDeMo(classes, cfg, cameras, args.variant.removesuffix('_residual')).float().cuda()
     return AugmentedDeMo(classes, cfg, cameras, args.variant).float().cuda()
 
 
@@ -78,7 +81,9 @@ def step(model, batch, optimizer, scaler, loss_fn):
     with torch.autocast('cuda'):
         output = model(images, label=target, cam_label=cam, view_label=scene)
         end = len(output) - len(output) % 2
-        loss = sum(loss_fn(output[i], output[i + 1], target, cam) for i in range(0, end, 2))
+        weights = model.loss_weights if isinstance(model, ResidualAugmentedDeMo) else [1.] * (end // 2)
+        assert len(weights) == end // 2
+        loss = sum(weights[i // 2] * loss_fn(output[i], output[i + 1], target, cam) for i in range(0, end, 2))
         if len(output) % 2:
             loss = loss + output[-1]
     assert torch.isfinite(loss), 'non-finite training loss'
@@ -94,7 +99,7 @@ def step(model, batch, optimizer, scaler, loss_fn):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset', choices=['RGBNT201', 'RGBNT100', 'MSVR310'], required=True)
-    parser.add_argument('--variant', choices=['demo', 'ordinary', 'dual'], required=True)
+    parser.add_argument('--variant', choices=['demo', 'ordinary', 'dual', 'ordinary_residual', 'dual_residual'], required=True)
     parser.add_argument('--data-root', required=True)
     parser.add_argument('--pretrained', required=True)
     parser.add_argument('--output', required=True)
@@ -118,6 +123,9 @@ def main():
             'evaluation_scope': 'identity-heldout development only, not full-training paper reproduction',
             'torch': torch.__version__, 'gpu': torch.cuda.get_device_name(), 'started': time.time()}
     info['amp_policy'] = 'native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts'
+    if isinstance(model, ResidualAugmentedDeMo):
+        info['method_revision'] = 'residual_v2: full DeMo HDM anchor, rank64 frequency values/band adapter, small learned residual scales; no contribution loss or modality-dropout training'
+        info['loss_weights'] = model.loss_weights
     write_json(out / 'run.json', info)
     if args.mode == 'prepare':
         torch.save(model.state_dict(), out / 'initial.pth')

@@ -21,7 +21,7 @@ CAMPAIGN = 'dynamic_amp_comparison'
 
 
 def command(argv, **kwargs):
-    return subprocess.run(argv, check=True, capture_output=True, text=True, encoding='utf-8', **kwargs).stdout
+    return subprocess.run(argv, check=True, capture_output=True, text=True, encoding='utf-8', timeout=300, **kwargs).stdout
 
 
 def remote_python(host, code):
