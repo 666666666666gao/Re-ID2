@@ -155,6 +155,8 @@ def main():
               'parameters': terminal['parameters'], 'descriptor_dim': q.shape[1],
               'train_peak_memory_bytes': terminal['peak_memory'], 'eval_peak_memory_bytes': torch.cuda.max_memory_allocated(),
               'optimizer_updates': terminal['optimizer_steps'], 'amp_skips': terminal['amp_skipped_steps']}
+    result['batch_attempts'] = terminal['steps']
+    result['training_wall_seconds'] = terminal['finished'] - terminal['started']
     write_json(out / 'metrics.json', result)
     print('FULL_EVALUATION_COMPLETE', json.dumps(result), flush=True)
 

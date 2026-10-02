@@ -1,0 +1,84 @@
+{
+  "schema": "demo-dual-axis-full-suite-collector-review-v1",
+  "reviewed_at": "2026-10-02",
+  "reviewer": {
+    "agent": "/root/review_demo_dual_axis",
+    "attribution": "same-family/provisional",
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "max",
+    "runtime_model_attestation": "Requested orchestration labels, not an independently attested cross-model review."
+  },
+  "verdict": "PASS_STATIC",
+  "blocking_findings_remaining": [],
+  "resolved_findings": [
+    {
+      "title": "Concurrent read of the primary collector's truncate-in-place collection.json",
+      "evidence": "collect_results.py writes collection.json with Path.write_text while its watcher is active; the earlier suite watcher repeatedly parsed that file during writes.",
+      "resolution": "collect_full_suite.py now requires --primary-receipt in watch mode, waits 240 seconds between reads until the existing primary stdout contains TERMINAL_PUBLISHED, then reads collection.json once and requires nine completed runs and no failures."
+    },
+    {
+      "title": "Overlapping canonical-handoff and Git publication",
+      "evidence": "The primary collector writes completed==9 before its final git add, commit and push. The earlier suite gate therefore allowed analyze() and the second publisher to begin while the first publisher was still active.",
+      "resolution": "TERMINAL_PUBLISHED is emitted only after the primary collector's successful push. The suite now waits for that marker before analyze(), handoff updates or publication. The running primary collector is unchanged."
+    },
+    {
+      "title": "First-epoch failure evidence omitted by the completed-epoch condition",
+      "evidence": "The preserved initial RGBNT100 ordinary failure has exit_code 1, no status.json and 18 batch_orders.jsonl rows. The earlier if row['epoch'] intake condition would skip both training text files and still mark intake complete.",
+      "evidence_path": "results/initial_attempt/server2026/runs/first_comparison/RGBNT100_ordinary_s42",
+      "resolution": "read_host now records the existing epochs.csv and batch_orders.jsonl filenames. Terminal intake copies every present training text file regardless of the completed epoch count."
+    }
+  ],
+  "file_verdicts": {
+    "collect_full_suite.py": {
+      "verdict": "PASS",
+      "checks": [
+        "The schedule covers exactly 27 unique dataset/variant/seed tuples: all three datasets, all three variants and seeds 42/43/44; 13 checkpoints on host 2025 and 14 on host 2026.",
+        "Remote state intake reads existing files only. Training and evaluation exit receipts gate terminal intake; either nonzero exit takes precedence over available metrics and marks FAILED.",
+        "COMPLETE requires full metrics plus both exit codes zero. The reviewed full_evaluation producer writes those metrics only after requiring a COMPLETE training result, loading the dev-selected checkpoint strictly, and completing all evaluations. The final aggregate independently requires result.COMPLETE, 50 epochs and both exit codes zero.",
+        "Per-run receipts and stdout are preserved. Existing training CSV and sample-order logs are retained even for a failure before the first completed epoch. There is no rerun or training-process control path.",
+        "All 27 result audits require epoch rows 1 through 50, earliest maximum development mAP, consistent selected metrics, consecutive batch-attempt numbering, B64 filenames, optimizer-update and AMP-skip totals, and their per-epoch cumulative accounting.",
+        "Full sample order is compared among all three variants within every dataset and seed. Ordinary and dual total/trainable parameter counts and 5632-dimensional evaluation descriptors must agree.",
+        "Development evaluation metrics must agree with the saved strict-reload metrics, and the evaluated checkpoint epoch must match the development selection. Official test never participates in checkpoint selection.",
+        "All six metrics are aggregated over exactly three seeds with statistics.mean and statistics.stdev, giving sample standard deviation. All variants and both development/official-test scopes are retained, including negative differences.",
+        "Paired-query joins require equal query index, filename, identity, camera, scene and validity. Rank-1 harms and rescues are counted in opposite directions over the same valid queries; percentages explicitly use all valid queries as denominator.",
+        "The FULL_SUITE marker replaces only the suite section in the canonical handoff. Every collection synchronizes the same document bytes through the existing mirror function; the final audited text is synchronized again before Git commit and push.",
+        "A failure stops this watcher after preserving and publishing the failed state; it does not fabricate a 27-run aggregate. Waiting uses 240-second intervals and does not modify existing training or evaluation processes."
+      ]
+    },
+    "check_full_metrics.py": {
+      "verdict": "PASS_SOURCE_AND_EXISTING_CPU_RECEIPTS",
+      "checks": [
+        "Uses the real official dataset parsers, checks camera-embedding coverage, decodes the first query/gallery triplets, and records actual valid-query counts.",
+        "Recomputes full metrics from an existing best_dev_arrays.npz and requires agreement with the saved best mAP and Rank-1/5/10 before writing its PASS receipt. The script does not build a model or run GPU inference.",
+        "Both existing host receipts report all queries valid: RGBNT201 836/836 query/gallery, RGBNT100 1715/8575, and MSVR310 591/1055.",
+        "The two receipts retain distinct real MSVR310 development results: host 2025 mAP 47.60779210388089 and mINP 33.521766571761695; host 2026 mAP 46.75519502956051 and mINP 31.45428490411944. These are CPU preflight evidence, not completed three-seed results."
+      ],
+      "evidence_paths": [
+        "results/preflight/server2025_full_metric_cpu.json",
+        "results/preflight/server2026_full_metric_cpu.json"
+      ]
+    }
+  },
+  "performed_checks": [
+    "Read both new scripts and their existing collector, launcher, evaluator, analyzer and training-log interfaces.",
+    "Compiled both final Python sources and the generated remote-reader source without executing their main functions.",
+    "Evaluated only the static schedule expressions: 27 unique jobs, nine per seed, host counts 13 and 14.",
+    "Evaluated seven status-expression cases covering QUEUED, TRAINING, WAIT_EVALUATION, EVALUATING, COMPLETE and both training/evaluation failures; all matched the intended precedence.",
+    "Read the two saved CPU preflight receipts and confirmed the reported complete query-validity counts.",
+    "Verified the preserved real first-epoch failure has both training text files, no status.json and 18 persisted batch records, then inspected the corrected existence-based intake."
+  ],
+  "reviewer_actions": {
+    "implementation_files_edited": false,
+    "training_started_or_stopped": false,
+    "model_or_gpu_evaluation_executed": false,
+    "collector_or_analyzer_main_executed": false,
+    "remote_commands_executed": false,
+    "only_written_artifact": "collect_suite_review.json"
+  },
+  "execution_condition": "Launch the watcher with --primary-receipt pointing to the existing current primary collector stdout. Its terminal publication marker, nine collected primary completions and no primary failures are required before the suite begins collection and analysis.",
+  "boundaries": [
+    "This verdict approves the reviewed orchestration source. It does not state that all 27 runs, all evaluations or the 1350-epoch audit have already completed.",
+    "The CPU receipts establish real parser/metric preflight results; the reviewer did not rerun them or execute model inference.",
+    "The final scientific interpretation remains a three-seed comparison trained on fixed fit subsets, not full-official-training paper reproduction, SOTA proof or isolated attribution to the joint interaction term."
+  ]
+}
