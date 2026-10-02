@@ -1,0 +1,158 @@
+{
+  "schema": "demo-dual-axis-code-review-v1",
+  "reviewed_at": "2026-10-02",
+  "reviewer": {
+    "agent": "/root/review_demo_dual_axis",
+    "attribution": "same-family/provisional",
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "max",
+    "verification_boundary": "Fresh delegated Codex review. Model and effort labels follow the orchestrated review request; they are not independently attested by the local Python runtime."
+  },
+  "verdict": "STATIC_PASS_RUNTIME_GATES_PENDING",
+  "blocking_findings_remaining": [],
+  "approved_next_action": "Run the planned actual-data B64 smoke and pair verification in the existing server environments. This static review does not certify those runtime gates or authorize claiming retrieval results.",
+  "scope": {
+    "files": [
+      "AGENTS.md",
+      "docs/实验交接.md",
+      "README.md",
+      "dual_axis.py",
+      "experiment_data.py",
+      "run_experiment.py",
+      "verify_pair.py",
+      "launch_runs.py",
+      "splits.json"
+    ],
+    "supporting_sources": [
+      "modeling/make_model.py",
+      "modeling/meta_arch.py",
+      "modeling/moe/AttnMOE.py",
+      "modeling/clip/model.py",
+      "modeling/make_model_clipreid.py",
+      "data/datasets/RGBNT201.py",
+      "data/datasets/RGBNT100.py",
+      "data/datasets/msvr310.py",
+      "data/datasets/bases.py",
+      "data/datasets/make_dataloader.py",
+      "data/datasets/sampler.py",
+      "layers/make_loss.py",
+      "layers/triplet_loss.py",
+      "layers/softmax_loss.py",
+      "solver/make_optimizer.py",
+      "solver/scheduler_factory.py",
+      "solver/cosine_lr.py",
+      "solver/scheduler.py",
+      "utils/reid_evaluation.py",
+      "configs/RGBNT201/DeMo.yml",
+      "configs/RGBNT100/DeMo.yml",
+      "configs/MSVR310/DeMo.yml",
+      "protocols/rgbnt201_dev_v1.json",
+      "protocols/rgbnt100_train_oof_v1.json",
+      "protocols/msvr310_train_oof_v1.json"
+    ],
+    "code_edits_by_reviewer": false,
+    "training_started_by_reviewer": false,
+    "only_reviewer_written_artifact": "review.json"
+  },
+  "resolved_findings": [
+    {
+      "id": "R1",
+      "severity": "blocking",
+      "status": "FIX_VERIFIED_STATIC",
+      "title": "RGBNT100 inherited B128 and a 30-epoch scheduler despite the B64/50 contract",
+      "evidence": "configs/RGBNT100/DeMo.yml retains the author's IMS_PER_BATCH=128 and MAX_EPOCHS=30. The initial configuration() did not override these while the runner always looped for 50 epochs.",
+      "resolution": "run_experiment.py:31-32 now explicitly sets IMS_PER_BATCH=64 and MAX_EPOCHS=50 before freezing the configuration. The inherited author file remains unchanged, and the handoff records the recipe change."
+    },
+    {
+      "id": "R2",
+      "severity": "blocking",
+      "status": "FIX_VERIFIED_STATIC",
+      "title": "Three new scalar score biases were mathematically inactive under softmax",
+      "evidence": "relation_score.bias, band_score.bias and the final interaction bias each added the same scalar to all logits of an example. Softmax removes these constants in both ordinary and joint routing, violating the no-idle-parameter requirement and making strict nonzero-gradient checks depend on floating-point residue.",
+      "resolution": "dual_axis.py:64-66 now sets bias=False on these three final score projections in the common constructor. Both variants lose the same three inactive scalar parameters."
+    },
+    {
+      "id": "R3",
+      "severity": "nonblocking_validation",
+      "status": "FIX_VERIFIED_STATIC",
+      "title": "The initial high-band witness could pass on output bias alone",
+      "evidence": "The original values[2].mean(2).std()>0 also holds for a zero high-band input because the nonlinear head contains a nonconstant linear bias across channels.",
+      "resolution": "verify_pair.py:35-39 now compares pooled high-band outputs with pooled zero-input outputs of the same head. The recorded witness names that input-dependent difference."
+    },
+    {
+      "id": "R4",
+      "severity": "runtime_failure",
+      "status": "FIX_VERIFIED_STATIC",
+      "title": "Pair verification did not create a fresh output directory",
+      "evidence": "write_json(Path(args.output)/'pair.json', ...) cannot write to a new --output directory unless its parent has been created.",
+      "resolution": "verify_pair.py:19 now creates the output directory before verification."
+    }
+  ],
+  "clarified_scope": {
+    "base_path": "The parent clarified that the common z0 is the 1536D three-modality PIFE representation. Ordinary retains full original unfiltered HDM/ATMoE. Dual preserves the same seven relation modules and ATMoE hierarchy but changes their input access to filtered band values. An additional unfiltered HDM bypass is not part of this first comparison.",
+    "disposition": "The preliminary concern that dual must also run an unfiltered 3584D DeMo MoE path was withdrawn under this clarified contract. docs/实验交接.md:34 explicitly records the distinction.",
+    "claim_boundary": "This compares combined axis specialization and joint routing. It does not isolate psi, establish information-theoretic synergy, or reproduce the full official-training paper recipe."
+  },
+  "static_checks": [
+    {
+      "check": "Architecture and source preservation",
+      "status": "PASS",
+      "evidence": "SpatialBands reshapes actual 128 patch tokens into configured 16x8 or 8x16 grids, performs FP32 2D FFT, and partitions all frequencies with three disjoint radial masks. FrequencyEvidence retains B x modality x band x D and applies cross-band attention within each modality. V(S,b) averages only the modalities in S. The seven original HDM modules are called once per band and are shared across those calls."
+    },
+    {
+      "check": "Joint routing",
+      "status": "PASS",
+      "evidence": "Collaboration.joint constructs a_S from relation evidence averaged across bands, c_b from frequency evidence averaged across relations, and psi from each paired U(S,b),V(S,b). One softmax covers all 21 cells. Setting interaction=False yields additive logits and therefore a separable product distribution. Two sigmoid outer gates are retained."
+    },
+    {
+      "check": "Parameter and loss fairness",
+      "status": "PASS_STATIC_RUNTIME_PENDING",
+      "evidence": "Ordinary and dual instantiate exactly the same class and parameter objects; variant only selects forward behavior. Both use 5632D concatenated descriptors, the same fused/frequency/MoE/PIFE supervision pairs, the inherited label-smoothed CE plus soft Triplet, Adam grouping, fixed B64 and 50-epoch scheduler. No contribution supervision is present. All added capacity is referenced by both forward branches. Measured active gradients and actual counts are still runtime gates."
+    },
+    {
+      "check": "Original module participation",
+      "status": "PASS_STATIC_RUNTIME_PENDING",
+      "evidence": "The shared CLIP visual backbone, PIFE reductions, original seven HDM attentions, ATMoE, original classifiers and necks all remain on the corresponding training loss paths. PIFE local pooling now uses the original AdaptiveAvgPool1d path. No new detach cuts those gradients; only saved route/gate diagnostics are detached."
+    },
+    {
+      "check": "Training and development split identity sets",
+      "status": "PASS",
+      "evidence": "Parsed splits.json and the existing protocol JSON files using local standard-library/Powershell checks. RGBNT201's 30 dev IDs exactly match rgbnt201_dev_v1.json; its recorded protocol has 141 fit IDs and 825 dev records. RGBNT100 and MSVR310 dev ID sets exactly match fold0 heldout IDs (17 and 52 identities). Their protocol galleries contain 3125 and 360 records respectively. Installed image inventories were not reread by this reviewer."
+    },
+    {
+      "check": "Ground-truth evaluation and checkpoint selection",
+      "status": "PASS",
+      "evidence": "The new parser reads only installed training-source directories. Development gallery retains every heldout record; queries require a same-ID different-camera positive for RGBNT or a same-ID different-scene positive for MSVR310. evaluate_reid compares distances with dataset identity labels, excludes same-ID/same-selector entries, and retains different-ID distractors. The strict > best-mAP update keeps earliest ties. Official test data is not read for selection."
+    },
+    {
+      "check": "Sampling and augmentations",
+      "status": "PASS_STATIC_RUNTIME_PENDING",
+      "evidence": "Records and labels are sorted deterministically; Python, NumPy and torch seeds are reset per epoch; DataLoader has a fixed per-epoch generator. Modalities restore the same Python/torch augmentation state and use the same crop, flip and erasing draws. Both variants save filename batch sequences for direct comparison. Actual matching execution traces remain to be observed."
+    },
+    {
+      "check": "State and reload design",
+      "status": "PASS_STATIC_RUNTIME_PENDING",
+      "evidence": "Smoke saves and reloads model plus optimizer, requires strict model load and exact FP32 descriptor equality. Formal runs retain full best model, terminal model/optimizer/scheduler/scaler state, and recompute best metrics after strict reload while saving development arrays. Actual serialization and FP32 repeatability have not yet run."
+    },
+    {
+      "check": "Resources and scheduling",
+      "status": "PASS_STATIC_RUNTIME_PENDING",
+      "evidence": "launch_runs.py schedules four single-GPU slots per host; MSVR310 ordinary and dual are sequential in 2026 GPU3. It checks current GPU memory before launching, preserves per-run logs and exit status, and stops the affected slot when a job fails. verify_pair labels supported-profiler FLOPs as partial and measures latency separately. B64 CUDA memory and AMP execution must be measured by the smoke stage."
+    },
+    {
+      "check": "Syntax",
+      "status": "PASS",
+      "evidence": "Local standard-library ast.parse succeeded for dual_axis.py, experiment_data.py, run_experiment.py, verify_pair.py and launch_runs.py. The final reviewed additions are simple bias flags, an output mkdir, and the input-dependent high-band witness."
+    }
+  ],
+  "required_runtime_gates_before_formal_training": [
+    "Run actual installed-data B64 smoke for each dataset/variant combination that will be launched. Confirm finite loss, finite nonzero gradients for every trainable parameter tensor including original modules, actual descriptor shape, and acceptable peak memory.",
+    "Run verify_pair.py for each dataset. Require actual common initial state equality, equal parameter count, 5632D outputs, spectral reconstruction, input-dependent high-band response, factorization with psi disabled, and nonfactorization with psi enabled.",
+    "Require strict model/optimizer reload and exact FP32 descriptor equality to pass in the existing environments before starting the full 50-epoch jobs.",
+    "Use the existing batch-order records and run metadata to confirm ordinary/dual sampling and optimizer budgets agree. Preserve any failed smoke evidence; do not report engineering probes as retrieval improvements."
+  ],
+  "runtime_limitations": [
+    "The local managed Python environment lacks torch and numpy; no local installed-image inventory was inspected. This reviewer did not import or execute the models, perform CUDA/AMP probes, load pretrained weights, evaluate retrieval features, or start training.",
+    "No numerical parameter count, measured gradient coverage, profiler FLOP total, latency, GPU memory result or retrieval metric is asserted by this static review."
+  ]
+}
