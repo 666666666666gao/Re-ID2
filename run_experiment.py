@@ -19,7 +19,10 @@ from utils.reid_evaluation import evaluate_reid
 
 
 def write_json(path, value):
-    Path(path).write_text(json.dumps(value, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+    path = Path(path)
+    temporary = path.with_suffix(path.suffix + '.tmp')
+    temporary.write_text(json.dumps(value, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+    temporary.replace(path)
 
 
 def configuration(args):
@@ -81,11 +84,11 @@ def step(model, batch, optimizer, scaler, loss_fn):
     assert torch.isfinite(loss), 'non-finite training loss'
     scaler.scale(loss).backward()
     scaler.unscale_(optimizer)
-    nonfinite = [name for name, p in model.named_parameters() if p.grad is not None and not torch.isfinite(p.grad).all()]
-    assert not nonfinite, nonfinite
+    previous_scale = scaler.get_scale()
     scaler.step(optimizer)
     scaler.update()
-    return float(loss.detach()), list(names)
+    updated = scaler.get_scale() >= previous_scale
+    return float(loss.detach()), list(names), updated, scaler.get_scale()
 
 
 def main():
@@ -114,6 +117,7 @@ def main():
             'checkpoint_rule': 'highest development mAP; ties keep earliest epoch; official test not used',
             'evaluation_scope': 'identity-heldout development only, not full-training paper reproduction',
             'torch': torch.__version__, 'gpu': torch.cuda.get_device_name(), 'started': time.time()}
+    info['amp_policy'] = 'native DeMo fp16 GradScaler; skipped updates counted separately from batch attempts'
     write_json(out / 'run.json', info)
     if args.mode == 'prepare':
         torch.save(model.state_dict(), out / 'initial.pth')
@@ -129,7 +133,8 @@ def main():
         model.train()
         losses = []
         for batch in make_loader(fit, cfg, True, args.seed):
-            loss, names = step(model, batch, optimizer, scaler, loss_fn)
+            loss, names, updated, scale = step(model, batch, optimizer, scaler, loss_fn)
+            assert updated, 'smoke optimizer step skipped'
             steps += 1; losses.append(loss)
             print('SMOKE_STEP', steps, loss, flush=True)
             if steps == 3:
@@ -157,8 +162,9 @@ def main():
     assert not (out / 'epochs.csv').exists(), 'use a new training output directory'
     val_loader = make_loader(dev, cfg, False, args.seed)
     best = {'mAP': -1}
+    optimizer_steps = 0
     with (out / 'epochs.csv').open('w', newline='', encoding='utf-8') as table, (out / 'batch_orders.jsonl').open('w', encoding='utf-8') as orders:
-        writer = csv.DictWriter(table, fieldnames=['epoch', 'steps', 'loss', 'mAP', 'Rank-1', 'Rank-5', 'Rank-10', 'seconds'])
+        writer = csv.DictWriter(table, fieldnames=['epoch', 'steps', 'optimizer_steps', 'amp_skipped_steps', 'amp_scale', 'loss', 'mAP', 'Rank-1', 'Rank-5', 'Rank-10', 'seconds'])
         writer.writeheader()
         for epoch in range(1, 51):
             start = time.time()
@@ -168,11 +174,16 @@ def main():
             model.train(); scheduler.step(epoch)
             losses = []
             for batch in loader:
-                loss, names = step(model, batch, optimizer, scaler, loss_fn)
+                loss, names, updated, scale = step(model, batch, optimizer, scaler, loss_fn)
                 steps += 1; losses.append(loss)
-                orders.write(json.dumps({'epoch': epoch, 'step': steps, 'names': names}) + '\n')
+                optimizer_steps += int(updated)
+                orders.write(json.dumps({'epoch': epoch, 'step': steps, 'optimizer_updated': updated, 'amp_scale': scale, 'names': names}) + '\n')
+                if not updated:
+                    print('AMP_SKIPPED', epoch, steps, 'scale', scale, flush=True)
             metrics = evaluate(model, val_loader, queries, args.dataset)
-            row = {'epoch': epoch, 'steps': steps, 'loss': float(np.mean(losses)), 'seconds': time.time() - start,
+            row = {'epoch': epoch, 'steps': steps, 'optimizer_steps': optimizer_steps,
+                   'amp_skipped_steps': steps - optimizer_steps, 'amp_scale': scaler.get_scale(),
+                   'loss': float(np.mean(losses)), 'seconds': time.time() - start,
                    **{k: metrics[k] for k in ('mAP', 'Rank-1', 'Rank-5', 'Rank-10')}}
             writer.writerow(row); table.flush(); orders.flush()
             if metrics['mAP'] > best['mAP']:
@@ -182,11 +193,12 @@ def main():
             write_json(out / 'status.json', {'status': 'RUNNING', 'epoch': epoch, 'steps': steps, 'latest': row, 'best': best})
             print('EPOCH', json.dumps(row), 'BEST', json.dumps(best), flush=True)
         torch.save({'model': model.state_dict(), 'optimizer': optimizer.state_dict(), 'scheduler': scheduler.state_dict(),
-                    'scaler': scaler.state_dict(), 'epoch': 50, 'steps': steps}, out / 'last.pth')
+                    'scaler': scaler.state_dict(), 'epoch': 50, 'steps': steps, 'optimizer_steps': optimizer_steps}, out / 'last.pth')
     model.load_state_dict(torch.load(out / 'best.pth', map_location='cuda', weights_only=True), strict=True)
     reloaded = evaluate(model, val_loader, queries, args.dataset, out / 'best_dev_arrays.npz')
     assert all(abs(reloaded[k] - best[k]) < 1e-8 for k in ('mAP', 'Rank-1', 'Rank-5', 'Rank-10'))
     terminal = {**info, 'status': 'COMPLETE', 'epochs': 50, 'steps': steps, 'best': best, 'strict_reload': reloaded,
+                'optimizer_steps': optimizer_steps, 'amp_skipped_steps': steps - optimizer_steps,
                 'peak_memory': torch.cuda.max_memory_allocated(), 'finished': time.time()}
     write_json(out / 'result.json', terminal)
     write_json(out / 'status.json', terminal)

@@ -14,13 +14,19 @@ SCHEDULE = {
 }
 
 
+def write_json(path, value):
+    temporary = path.with_suffix(path.suffix + '.tmp')
+    temporary.write_text(json.dumps(value, indent=2))
+    temporary.replace(path)
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('--host', choices=list(SCHEDULE), required=True)
     p.add_argument('--data-root', required=True)
     p.add_argument('--pretrained', required=True)
     args = p.parse_args()
-    root = Path('runs/first_comparison')
+    root = Path('runs/dynamic_amp_comparison')
     root.mkdir(parents=True, exist_ok=False)
     gpu_rows = subprocess.check_output(['nvidia-smi', '--query-gpu=index,memory.used', '--format=csv,noheader,nounits'], text=True)
     assert all(int(row.split(',')[1]) < 500 for row in gpu_rows.strip().splitlines()), gpu_rows
@@ -36,9 +42,9 @@ def main():
                        '--data-root', args.data_root, '--pretrained', args.pretrained, '--output', str(output)]
             with (output / 'stdout.log').open('w') as log:
                 process = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT, env=env)
-                (output / 'launch.json').write_text(json.dumps({'host': args.host, 'gpu': gpu, 'pid': process.pid, 'command': command, 'started': time.time()}, indent=2))
+                write_json(output / 'launch.json', {'host': args.host, 'gpu': gpu, 'pid': process.pid, 'command': command, 'started': time.time()})
                 code = process.wait()
-            (output / 'exit.json').write_text(json.dumps({'exit_code': code, 'finished': time.time()}))
+            write_json(output / 'exit.json', {'exit_code': code, 'finished': time.time()})
             results.append({'run': name, 'exit_code': code})
             if code != 0:
                 return results
@@ -47,7 +53,7 @@ def main():
     with ThreadPoolExecutor(max_workers=4) as workers:
         futures = [workers.submit(slot, gpu, jobs) for gpu, jobs in SCHEDULE[args.host].items()]
         results = [result for future in futures for result in future.result()]
-    (root / 'controller_result.json').write_text(json.dumps(results, indent=2))
+    write_json(root / 'controller_result.json', results)
     assert len(results) == sum(len(j) for j in SCHEDULE[args.host].values()) and all(r['exit_code'] == 0 for r in results), results
 
 

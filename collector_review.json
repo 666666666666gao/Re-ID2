@@ -1,0 +1,132 @@
+{
+  "schema": "demo-dual-axis-collector-and-amp-rescue-review-v1",
+  "reviewed_at": "2026-10-02",
+  "reviewer": {
+    "agent": "/root/review_demo_dual_axis",
+    "attribution": "same-family/provisional",
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "max",
+    "verification_boundary": "Fresh delegated Codex review, with model/effort labels taken from the orchestration request rather than independently attested by a local runtime."
+  },
+  "verdict": "PASS_STATIC_TARGETED_RESCUE_SMOKE_PENDING",
+  "blocking_findings_remaining": [],
+  "scope": {
+    "primary_file": "collect_results.py",
+    "explicitly_added_rescue_files": [
+      "run_experiment.py",
+      "launch_runs.py"
+    ],
+    "supporting_sources": [
+      "engine/processor.py",
+      "AGENTS.md",
+      "docs/实验交接.md",
+      ".gitignore"
+    ],
+    "reviewer_executed_collection": false,
+    "reviewer_executed_gpu_or_training": false,
+    "reviewer_changed_training_processes": false,
+    "reviewer_changed_source_files": false,
+    "reviewer_written_artifact": "collector_review.json",
+    "remote_activity": "Read only the preserved stdout tails and exit.json for the two failed initial ordinary runs. Later confirmed the same error and exit evidence in their local archives."
+  },
+  "resolved_findings": [
+    {
+      "id": "C1",
+      "severity": "blocking",
+      "title": "COMPLETE was assigned before process exit and masked a nonzero exit",
+      "original_evidence": "The original collector prioritized result.status==COMPLETE. run_experiment writes result.json before final status/print and before the launcher returns from process.wait(). The collector could create its permanent intake.json before exit.json and final stdout existed. Direct evaluation of the original AST yielded COMPLETE for both result+no exit and result+exit1.",
+      "fix": "collect_results.py:79-80 gives nonzero exit precedence and requires both result.status==COMPLETE and exit_code==0 for COMPLETE. A result written before exit remains RUNNING.",
+      "verification": "Evaluated the corrected actual AST for six states: empty=PENDING; launched=RUNNING; complete result without exit=RUNNING; complete result plus exit0=COMPLETE; complete result plus exit1=FAILED; exit1 without result=FAILED.",
+      "status": "FIX_VERIFIED"
+    },
+    {
+      "id": "C2",
+      "severity": "blocking",
+      "title": "Live JSON was truncated in place while the reader parsed it",
+      "original_evidence": "read_host calls json.loads(path.read_text()) on active status/best metadata. The old run_experiment.write_json used Path.write_text, which truncates the existing destination before writing; launcher launch.json/exit.json also exposed a partial first write. This could terminate the sole watcher with JSONDecodeError during an ordinary concurrent write.",
+      "fix": "run_experiment.py:21-25 and launch_runs.py:17-20 now write a same-directory .tmp file and replace the final path only after write_text returns. Every JSON file read from the new campaign is produced through these helpers.",
+      "verification": "Reviewed all relevant producer calls: run, status, best and result use the run helper; launch and exit use the launcher helper. The collector reads final .json names only. No reader fallback or retry layer was added, and the correction is confined to the new campaign.",
+      "status": "FIX_VERIFIED"
+    },
+    {
+      "id": "C3",
+      "severity": "incorrect_provenance",
+      "title": "The collector still displayed controller PIDs from the stopped initial attempt",
+      "original_evidence": "After switching to dynamic_amp_comparison, the handoff refresh still hardcoded controller PIDs590590 and1843253 from first_comparison.",
+      "fix": "collect_results.py:109 now identifies dynamic_amp_comparison and its fixed schedule without stale current-controller IDs.",
+      "status": "FIX_VERIFIED"
+    },
+    {
+      "id": "A1",
+      "severity": "blocking_actual_failure",
+      "title": "A per-step nonfinite-gradient assertion prevented native GradScaler recovery",
+      "primary_evidence": [
+        {
+          "run": "RGBNT201_ordinary_s42",
+          "archive": "results/initial_attempt/server2025/runs/first_comparison/RGBNT201_ordinary_s42/stdout.log",
+          "exit_archive": "results/initial_attempt/server2025/runs/first_comparison/RGBNT201_ordinary_s42/exit.json",
+          "observation": "Five complete epoch rows precede the traceback. step() stopped at assert not nonfinite with BACKBONE.base.conv1.weight. exit_code is1."
+        },
+        {
+          "run": "RGBNT100_ordinary_s42",
+          "archive": "results/initial_attempt/server2026/runs/first_comparison/RGBNT100_ordinary_s42/stdout.log",
+          "exit_archive": "results/initial_attempt/server2026/runs/first_comparison/RGBNT100_ordinary_s42/exit.json",
+          "observation": "step() stopped at assert not nonfinite with BACKBONE.base.positional_embedding and BACKBONE.base.conv1.weight. exit_code is1."
+        }
+      ],
+      "diagnosis": "The finite-loss assertion had already passed. The added gradient assertion ran after unscale_ but before scaler.step/update, aborting instead of allowing the existing GradScaler to skip the overflowing optimizer update and lower its scale. The original engine/processor.py lets GradScaler perform that handling.",
+      "fix": "run_experiment.py:84-91 retains finite-loss validation, removes the premature gradient assertion, then calls scaler.step and scaler.update. A scale decrease identifies a skipped update. Initial scale512, fp16 autocast, model, losses, dataset, batches and optimizer policy are unchanged by this correction.",
+      "accounting": "The runner records attempted batches as steps, successful optimizer updates as optimizer_steps, and the difference as amp_skipped_steps. These are written to epoch CSV, per-batch records and terminal results. Smoke still requires all three updates to succeed, finite nonzero gradients for every trainable tensor, and strict FP32 reload equality.",
+      "status": "FIX_VERIFIED_STATIC_TARGETED_SMOKE_REQUIRED"
+    }
+  ],
+  "accepted_checks": [
+    {
+      "check": "Read-only remote evidence intake",
+      "status": "PASS_STATIC",
+      "evidence": "Remote Python imports only json and pathlib, reads the selected campaign's metadata, and prints JSON. It does not import a model, execute a scorer, load a checkpoint, run a sampler, create a process, or alter a training file."
+    },
+    {
+      "check": "Filename and campaign consistency",
+      "status": "PASS_STATIC",
+      "evidence": "The fixed nine RUNS match the launch schedule. launch/run/status/best/exit/result map to .json; stdout maps to stdout.log, which also contains stderr because the launcher merges it. Terminal epochs.csv paths point to runs/dynamic_amp_comparison, matching the new launcher root."
+    },
+    {
+      "check": "Stable terminal intake",
+      "status": "PASS_STATIC",
+      "evidence": "COMPLETE requires the launcher exit receipt after the child has terminated and stdout has closed. Terminal text is copied before intake.json is written. Failed runs also retain their actual exit and available evidence. No training replay or checkpoint transfer occurs."
+    },
+    {
+      "check": "Single handoff and exact mirrors",
+      "status": "PASS_STATIC",
+      "evidence": "The collector updates only the current-status section of docs/实验交接.md, copies its raw bytes to the existing Desktop/document file and both remote docs paths, verifies the existing remote byte-digest checks and direct Desktop byte equality, and retains the rest of the handoff content."
+    },
+    {
+      "check": "Git publication target and line endings",
+      "status": "PASS_ENVIRONMENT_INSPECTION",
+      "evidence": "Local read-only Git inspection reports origin=https://github.com/666666666666gao/Re-ID2.git, core.autocrlf=false, and no text/eol attributes for the handoff or summary.csv. Therefore staging these handoff bytes does not introduce an automatic newline conversion. The collector stages the handoff and text result directory, commits, and pushes origin main after the watch loop stops."
+    },
+    {
+      "check": "Observation timing and no automatic rerun",
+      "status": "PASS_STATIC_AND_PURE_EXPRESSION_CHECK",
+      "evidence": "The next observation is based on the shortest remaining-epoch estimate minus180 seconds, with a minimum240 seconds. Evaluated examples: no estimate=>240;50 seconds remaining=>240;[1000,5000] remaining=>820. Neither collector path relaunches, retrains, retunes or reevaluates a model."
+    },
+    {
+      "check": "Syntax",
+      "status": "PASS",
+      "evidence": "ast.parse passed for collect_results.py, run_experiment.py and launch_runs.py after the reviewed changes. The actual state and delay expressions were evaluated without importing or executing the collector."
+    },
+    {
+      "check": "Fresh uniform restart boundary",
+      "status": "PASS_STATIC",
+      "evidence": "The launcher writes only to the new runs/dynamic_amp_comparison directory, requires that campaign root to be new, uses the same nine fixed runs and original public-CLIP build path, and does not load initial-attempt checkpoints. The locally preserved initial-attempt failure logs and exit receipts remain separate."
+    }
+  ],
+  "important_interpretation": [
+    "Identical sampler batches and a common optimizer policy do not guarantee the same number of successfully applied updates when native AMP skips differ. Report the recorded successful and skipped counts rather than claiming those counts are equal.",
+    "With --watch, the collector stops on either the first observed failure or all nine completions. A failure publication may still contain other RUNNING or PENDING rows; it is an interrupted-campaign snapshot, not evidence that all nine runs terminated.",
+    "The fixed local results/first_comparison directory is the collector's output for the new campaign. The preserved initial attempt is stored separately in results/initial_attempt; do not place old intake.json markers into the collector's active output directories.",
+    "This review confirms source behavior and the primary failure cause. It does not certify unseen successful post-correction GPU updates, a new controller launch, completed collection, byte mirrors actually produced by the collector, or a completed GitHub push."
+  ],
+  "next_authorized_gate": "Deploy only the reviewed minimal corrections, run the planned targeted numeric-entry smoke on RGBNT201 ordinary and RGBNT100 ordinary, and require those checks to pass before launching the uniform fresh nine-run campaign. Retain initial-attempt evidence; no model, loss, split, frequency-band or scientific hyperparameter change is needed for this rescue."
+}
