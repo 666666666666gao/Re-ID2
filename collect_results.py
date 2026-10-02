@@ -122,7 +122,7 @@ def collect_once():
         text += '\n这是单seed开发比较，尚不构成稳定提升或最终测试结论。不根据此结果自动改变频带、学习率、种子或重启训练。\n'
     if failed:
         text += '\n实际失败端：' + ', '.join(failed) + '。原日志和失败状态保留；控制器不自动重试，后续处理须基于真实错误。\n'
-    handoff.write_text(before + text + '\n## 证据和下一步' + after, encoding='utf-8')
+    handoff.write_bytes((before + text + '\n## 证据和下一步' + after).encode('utf-8'))
     digest = sync_handoff()
     result = {'observed_at': now, 'completed': completed, 'failed': failed, 'handoff_sha256': digest}
     (output / 'collection.json').write_text(json.dumps(result, indent=2), encoding='utf-8')
