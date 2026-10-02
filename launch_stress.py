@@ -47,7 +47,10 @@ def main():
             continue
         run = ready[0]
         used = subprocess.check_output(['nvidia-smi', '-i', '3', '--query-gpu=memory.used', '--format=csv,noheader,nounits'], text=True)
-        assert int(used.strip()) < 500, used
+        if int(used.strip()) >= 500:
+            print(f'WAIT_GPU3 memory_used_mib={used.strip()}', flush=True)
+            time.sleep(240)
+            continue
         env = dict(os.environ, CUDA_VISIBLE_DEVICES='3', OMP_NUM_THREADS='4', MKL_NUM_THREADS='4', OPENBLAS_NUM_THREADS='4')
         command = [sys.executable, '-u', 'stress_evaluation.py', '--run-dir', str(run)]
         with (run / 'stress_stdout.log').open('x') as log:

@@ -1,0 +1,56 @@
+{
+  "schema": "demo-dual-axis-stress-resource-review-v1",
+  "reviewed_at": "2026-10-03",
+  "reviewer": {
+    "agent": "/root/review_demo_dual_axis",
+    "configured_model": "gpt-6-astra",
+    "configured_reasoning_effort": "max",
+    "attribution_basis": "Parent-provided reviewer configuration; runtime model identity is not independently exposed or attested.",
+    "review_independence": "same-family",
+    "acceptance_status": "provisional"
+  },
+  "scope": "Only the GPU3 busy-resource branch in launch_stress.py and its interaction with existing receipt reuse and exclusive logging.",
+  "verdict": "PASS_STATIC_AND_CPU_MOCK",
+  "blocking_findings": [],
+  "change": {
+    "path": "launch_stress.py",
+    "line": 50,
+    "before": "assert int(used.strip()) < 500, used",
+    "after": "When memory.used is at least 500 MiB, print WAIT_GPU3, sleep 240 seconds and continue the pending-job loop.",
+    "evidence": "The parent reported an existing unrelated GPU3 job using 2410 MiB on host 2026, while this stress controller had no active child. This is the concrete resource condition addressed by the change."
+  },
+  "source_findings": [
+    "The busy branch occurs before exclusive stdout creation, environment setup, subprocess creation or launch-receipt writing. It therefore neither launches a stress child nor reserves that run's log while GPU3 is busy.",
+    "The branch leaves pending unchanged. A later iteration rechecks readiness and GPU3 memory, then follows the same single-process sequential launcher path when memory is below 500 MiB.",
+    "Completed stress receipts are still accepted only with exit_code 0 and result status COMPLETE. Those runs are removed from pending and counted as existing_completed, preserving their logs and results.",
+    "Existing failed receipts still stop the controller. Exclusive logs still reject an incomplete previous invocation. The change adds no retry of a failed evaluation and no process-stop or training operation.",
+    "CUDA_VISIBLE_DEVICES remains 3, and both no-ready-job and busy-GPU waits use 240 seconds. The diff contains no training, model, metric, dataset or checkpoint-selection change."
+  ],
+  "performed_checks": {
+    "syntax": "PASS",
+    "diff_review": "Only the free-memory assertion was replaced by the four-line busy-resource wait branch.",
+    "mock_method": "Compiled and executed the actual saved main() AST with the actual host schedules. Path operations, subprocess calls, clock, output and JSON writes were replaced by in-memory fakes. No launcher source copy or real subprocess was used.",
+    "busy_then_free": {
+      "memory_readings_mib": [2410, 500, 0],
+      "waits_seconds": [240, 240],
+      "spawns_while_busy": 0,
+      "exclusive_logs_while_busy": 0,
+      "spawns_after_free": 1,
+      "exclusive_logs_after_free": 1,
+      "launched_run": "runs/three_seed_extension/RGBNT100_ordinary_s44",
+      "cuda_visible_devices": "3",
+      "completed_runs_preserved_unchanged": 13,
+      "controller_result_entries": 14,
+      "new_exit_code": 0
+    },
+    "existing_failed_receipt": "The actual main() stopped with AssertionError before any GPU query or subprocess creation; no automatic retry occurred."
+  },
+  "execution_boundary": "This approves the minimal scheduler change and restart of the identified idle stress controller. It does not authorize stopping an evaluation child, training process, full-test process or another owner's GPU job. No new model-evaluation sanity run is required for this resource-only branch; the existing stress evaluation review and runtime evidence remain applicable.",
+  "reviewer_actions": {
+    "implementation_files_edited": false,
+    "ssh_or_remote_commands_executed": false,
+    "gpu_or_training_work_executed": false,
+    "real_controller_started_or_stopped": false,
+    "only_written_artifact": "results/preflight/stress_resource_review.json"
+  }
+}
