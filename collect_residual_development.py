@@ -5,14 +5,16 @@ import json
 import time
 
 from collect_results import PROJECT, HOSTS, copy_file, remote_python
-from launch_residual_development import SCHEDULE
+from launch_residual_development import SCHEDULE, CONTROLS
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--watch', action='store_true')
+    parser.add_argument('--controls', action='store_true')
     args = parser.parse_args()
-    base = PROJECT/'results/residual_development_v2'
+    schedule = CONTROLS if args.controls else SCHEDULE
+    base = PROJECT/('results/residual_controls_v2' if args.controls else 'results/residual_development_v2')
     base.mkdir(parents=True, exist_ok=True)
     while True:
         code = '''import json
@@ -30,7 +32,7 @@ print(json.dumps(records))
 '''
         records = json.loads(remote_python('2025', code))
         rows = []
-        for gpu, (dataset, variant) in SCHEDULE.items():
+        for gpu, (dataset, variant) in schedule.items():
             name = f'{dataset}_{variant}_s42'
             record = records.get(name, {})
             exit_code = record.get('exit', {}).get('exit_code')
@@ -47,7 +49,7 @@ print(json.dumps(records))
                     copy_file('2025', f'{source}/{filename}', folder/filename)
                 (folder/'intake.json').write_text(json.dumps({'exit_code': exit_code}), encoding='utf-8')
         summary = {'time': datetime.now().astimezone().isoformat(timespec='seconds'), 'rows': rows,
-                   'scope': 'Four seed42 fixed-budget development runs. No official-test scoring or success claim.'}
+                   'scope': f'{len(schedule)} seed42 fixed-budget development runs. No official-test scoring or success claim.'}
         (base/'status.json').write_text(json.dumps(summary, indent=2), encoding='utf-8')
         print('RESIDUAL_DEVELOPMENT_COLLECTED', json.dumps(summary), flush=True)
         if all(r['status'] == 'COMPLETE' for r in rows) or any(r['status'] == 'FAILED' for r in rows) or not args.watch:

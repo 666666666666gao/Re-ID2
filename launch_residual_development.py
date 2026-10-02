@@ -12,12 +12,14 @@ from launch_runs import write_json
 
 SCHEDULE = {0: ('RGBNT201', 'dual_residual'), 1: ('RGBNT100', 'dual_residual'),
             2: ('MSVR310', 'dual_residual'), 3: ('MSVR310', 'ordinary_residual')}
+CONTROLS = {2: ('RGBNT201', 'ordinary_residual'), 3: ('RGBNT100', 'ordinary_residual')}
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--data-root', required=True)
     parser.add_argument('--pretrained', required=True)
+    parser.add_argument('--controls', action='store_true')
     args = parser.parse_args()
     predecessor = Path('runs/missing_controller_result.json')
     while not predecessor.exists():
@@ -25,7 +27,16 @@ def main():
     terminal = json.loads(predecessor.read_text())
     assert len(terminal) == 13 and all(row['exit_code'] == 0 for row in terminal)
     root = Path('runs/residual_development_v2')
-    root.mkdir(exist_ok=False)
+    if args.controls:
+        assert root.is_dir()
+        for name in ('MSVR310_dual_residual_s42', 'MSVR310_ordinary_residual_s42'):
+            assert json.loads((root/name/'exit.json').read_text())['exit_code'] == 0
+            result = json.loads((root/name/'result.json').read_text())
+            assert result['status'] == 'COMPLETE' and result['epochs'] == 50
+        schedule = CONTROLS
+    else:
+        root.mkdir(exist_ok=False)
+        schedule = SCHEDULE
 
     def slot(gpu, dataset, variant):
         while True:
@@ -50,9 +61,9 @@ def main():
         return row
 
     with ThreadPoolExecutor(max_workers=4) as workers:
-        futures = [workers.submit(slot, gpu, dataset, variant) for gpu, (dataset, variant) in SCHEDULE.items()]
+        futures = [workers.submit(slot, gpu, dataset, variant) for gpu, (dataset, variant) in schedule.items()]
         results = [future.result() for future in futures]
-    write_json(root/'controller_result.json', results)
+    write_json(root/('controls_controller_result.json' if args.controls else 'controller_result.json'), results)
     assert all(row['exit_code'] == 0 for row in results)
 
 

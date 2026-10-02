@@ -1,0 +1,266 @@
+{
+  "schema": "demo-dual-axis-residual-controls-review-v1",
+  "reviewed_at": "2026-10-03",
+  "reviewer": {
+    "agent": "/root/review_residual_v2",
+    "configured_model": "gpt-6-astra",
+    "configured_reasoning_effort": "max",
+    "configured_fork_turns": "none",
+    "attribution_basis": "Exact executor-provided parameters for the original spawn_agent call. This is a follow-up in the same reviewer session, not a new independent-context review. Runtime model identity was not independently introspected.",
+    "review_independence": "same-family",
+    "acceptance_status": "provisional"
+  },
+  "verdict": "PASS_STATIC_AND_CPU_MOCK",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "scope": "Only the new --controls branches in launch_residual_development.py and collect_residual_development.py, their effect on the previously reviewed default mode, the actual schedules and unchanged training configuration used by the two added controls.",
+  "reviewed_files": [
+    "launch_residual_development.py",
+    "collect_residual_development.py",
+    "run_experiment.py",
+    "results/preflight/residual_v2_code_review.json",
+    "results/preflight/residual_collector_review.json"
+  ],
+  "diff_review": {
+    "launcher": "Adds CONTROLS, --controls, two MSVR terminal checks, schedule selection and a separate controls_controller_result.json name. The per-card free-memory loop, exclusive output/log creation, child command and exit handling are unchanged.",
+    "collector": "Imports CONTROLS, adds --controls, chooses the matching schedule and separate local result directory, and derives the scope count from that schedule. The read payload, text intake, status rules, stop conditions and 240-second polling are unchanged."
+  },
+  "source_findings": [
+    {
+      "topic": "Both MSVR predecessors gate the entire controls launch",
+      "evidence": "launch_residual_development.py:24-36",
+      "finding": "Both modes first require the existing 13-row missing-controller result with every exit code zero. Controls also requires the existing campaign directory, then separately reads exit.json and result.json for MSVR310_dual_residual_s42 and MSVR310_ordinary_residual_s42. Each must have exit_code 0, status COMPLETE and epochs 50 before the executor or any GPU-query slot is created. Missing/invalid MSVR receipts fail immediately; this branch does not poll for unfinished MSVR training."
+    },
+    {
+      "topic": "Two released cards and exact control identities",
+      "evidence": "launch_residual_development.py:13-15,41-64",
+      "finding": "CONTROLS is exactly GPU2 RGBNT201 ordinary_residual and GPU3 RGBNT100 ordinary_residual. Only these two futures are submitted in controls mode, despite retaining the four-worker upper bound. Each selected card must report memory.used below 500 MiB before output creation or child spawn; busy cards wait 240 seconds. GPUs0/1 and the original two remaining training slots are not queried or controlled by the controls schedule."
+    },
+    {
+      "topic": "Fixed training protocol",
+      "evidence": "launch_residual_development.py:52-54; run_experiment.py:29-48,177-207",
+      "finding": "The two commands are run_experiment.py --mode train --variant ordinary_residual --seed 42 with the supplied data-root and pretrained arguments forwarded unchanged. The actual configuration function forces B64 and 50 epochs for both datasets, including RGBNT100, and the actual epoch loop is range(1,51). The existing residual constructor starts fresh through the public-CLIP configuration path. The wrapper does not inspect pretrained-file contents, so execution must use the already established public CLIP argument, not an older research checkpoint."
+    },
+    {
+      "topic": "Original artifacts and receipt isolation",
+      "evidence": "launch_residual_development.py:29-39,49-66",
+      "finding": "Default mode still creates the campaign root exclusively and uses the original four-entry SCHEDULE. Controls reuses only the parent campaign directory and creates the new RGBNT201_ordinary_residual_s42 and RGBNT100_ordinary_residual_s42 directories without exist_ok. Existing control directories reject that slot before its child starts; stdout creation is also exclusive. Controls writes controls_controller_result.json, while default mode keeps controller_result.json. The original four run directories and original controller receipt have no controls write path."
+    },
+    {
+      "topic": "Failure handling without retries",
+      "evidence": "launch_residual_development.py:55-67; collect_residual_development.py:43-57",
+      "finding": "A new child's exit status is recorded and retained in the corresponding controller receipt; the final all-exit0 assertion rejects a failed control. There is no retry, process kill or original-job restart. A directory conflict affects that slot; another already submitted independent fresh slot may still run. Collector transport exceptions propagate without retry and without creating a completed intake marker for an interrupted copy."
+    },
+    {
+      "topic": "Collector mode isolation",
+      "evidence": "collect_residual_development.py:8,12-18,33-53",
+      "finding": "Default collection still selects the original four names and writes results/residual_development_v2. Controls collection selects only the two ordinary controls and writes results/residual_controls_v2. Both read the same host-2025 campaign directory but intake only their selected names. Their local status files and per-run intake markers therefore do not overwrite the other mode's records. Scope text reports four or two runs accordingly."
+    },
+    {
+      "topic": "No added scoring or checkpoint choice",
+      "evidence": "collect_residual_development.py:20-57; launch_residual_development.py:32-35,52-54",
+      "finding": "The new wrappers read metadata, launch the defined development training commands and collect text. They do not launch official-test or missing-test scoring, select another checkpoint, compare utility or publish a success claim. The training script retains its previously reviewed earliest-best development-mAP checkpoint rule; controls adds no new checkpoint-selection rule. Both collector modes keep the existing completion/failed gates and 240-second watch interval."
+    }
+  ],
+  "performed_checks": {
+    "launcher": {
+      "status": "PASS_STATIC_AND_CPU_MOCK",
+      "method": "Actual saved main/constants AST and actual configuration AST, with all path writes, process/GPU calls, executor and clock replaced by in-memory fakes. Sequential mock futures; real concurrency inspected in source.",
+      "original_mode": {
+        "schedule": [
+          [
+            0,
+            "RGBNT201",
+            "dual_residual"
+          ],
+          [
+            1,
+            "RGBNT100",
+            "dual_residual"
+          ],
+          [
+            2,
+            "MSVR310",
+            "dual_residual"
+          ],
+          [
+            3,
+            "MSVR310",
+            "ordinary_residual"
+          ]
+        ],
+        "waits_seconds": [
+          240,
+          240,
+          240
+        ],
+        "controller_receipt": "controller_result.json"
+      },
+      "controls_mode": {
+        "schedule": [
+          [
+            2,
+            "RGBNT201",
+            "ordinary_residual"
+          ],
+          [
+            3,
+            "RGBNT100",
+            "ordinary_residual"
+          ]
+        ],
+        "waits_seconds": [
+          240,
+          240,
+          240
+        ],
+        "controller_receipt": "controls_controller_result.json",
+        "all_original_artifacts_preserved": true,
+        "gpus_0_1_queried": false,
+        "spawns": 2
+      },
+      "precondition_rejections_before_any_gpu_query_or_spawn": {
+        "missing13_count": "AssertionError",
+        "missing13_exit": "AssertionError",
+        "root_absent": "AssertionError",
+        "msvr0:exit_missing": "FileNotFoundError",
+        "msvr0:exit_nonzero": "AssertionError",
+        "msvr0:result_missing": "FileNotFoundError",
+        "msvr0:not_complete": "AssertionError",
+        "msvr0:epochs49": "AssertionError",
+        "msvr1:exit_missing": "FileNotFoundError",
+        "msvr1:exit_nonzero": "AssertionError",
+        "msvr1:result_missing": "FileNotFoundError",
+        "msvr1:not_complete": "AssertionError",
+        "msvr1:epochs49": "AssertionError"
+      },
+      "existing_control_output": {
+        "outcome": "FileExistsError",
+        "conflicting_slot_spawns": 0,
+        "prior_files_preserved": true,
+        "limit": "Sequential fake executor; in real concurrency another independent fresh slot may proceed."
+      },
+      "child_exit1": {
+        "exit_recorded": true,
+        "controller_failure_recorded": true,
+        "outcome": "AssertionError",
+        "total_spawns": 2,
+        "retry_count": 0
+      },
+      "training_configuration": {
+        "RGBNT201": {
+          "epochs": 50,
+          "batch": 64,
+          "seed": 42,
+          "pretrained_forwarded_unchanged": true
+        },
+        "RGBNT100": {
+          "epochs": 50,
+          "batch": 64,
+          "seed": 42,
+          "pretrained_forwarded_unchanged": true
+        }
+      },
+      "actual_epoch_loop": "range(1,51)",
+      "real_network_gpu_or_training_calls": 0
+    },
+    "collector": {
+      "status": "PASS_STATIC_AND_CPU_MOCK",
+      "method": "Actual collector main AST and its embedded remote-read payload with in-memory remote/local paths, copies, clock and transport. Both schedules taken from saved launcher AST.",
+      "original_mode": {
+        "rows": 4,
+        "names": [
+          "RGBNT201_dual_residual_s42",
+          "RGBNT100_dual_residual_s42",
+          "MSVR310_dual_residual_s42",
+          "MSVR310_ordinary_residual_s42"
+        ],
+        "local_directory": "results/residual_development_v2",
+        "copies": 36,
+        "ignores_running_controls": true,
+        "queries": 1
+      },
+      "controls_mode": {
+        "rows": 2,
+        "names": [
+          "RGBNT201_ordinary_residual_s42",
+          "RGBNT100_ordinary_residual_s42"
+        ],
+        "gpus": [
+          2,
+          3
+        ],
+        "local_directory": "results/residual_controls_v2",
+        "copies": 18,
+        "queries": 2,
+        "waits_seconds": [
+          240
+        ],
+        "phases": [
+          [
+            "TRAINING",
+            "TRAINING"
+          ],
+          [
+            "COMPLETE",
+            "COMPLETE"
+          ]
+        ],
+        "original_local_artifacts_preserved": true,
+        "scope_count": 2
+      },
+      "one_shot_empty_modes": {
+        "False": {
+          "rows": 4,
+          "queries": 1,
+          "copies": 0,
+          "waits": 0
+        },
+        "True": {
+          "rows": 2,
+          "queries": 1,
+          "copies": 0,
+          "waits": 0
+        }
+      },
+      "repeated_controls_intake_copies": 0,
+      "failed_control": {
+        "status": "FAILED",
+        "exit1_intake_recorded": true,
+        "queries": 1,
+        "waits": 0,
+        "other_mode_artifacts_preserved": true
+      },
+      "transport_failure": {
+        "exception": "TimeoutExpired",
+        "queries": 1,
+        "retries": 0,
+        "intake_created": false,
+        "new_summary_created": false,
+        "other_mode_artifacts_preserved": true
+      },
+      "network_gpu_test_or_publication_calls": 0
+    },
+    "syntax": {
+      "status": "PASS",
+      "files": [
+        "launch_residual_development.py",
+        "collect_residual_development.py",
+        "run_experiment.py"
+      ],
+      "method": "Parsed saved source directly with Python AST; no project-module execution or bytecode write."
+    },
+    "independence": "These mocks were newly executed from the current saved source in this follow-up. Earlier review results were context, not substituted for current branch execution.",
+    "limits": "All remote reads, GPU queries, subprocesses, paths, writes and waits were in-memory fakes. Mock futures were sequential; actual concurrency is bounded by the inspected schedule. No current remote receipt, resource state, pretrained weights, training result or retrieval utility was verified live."
+  },
+  "execution_boundary": "No source blocker remains for one deliberate --controls launch on host 2025 after both actual MSVR seed42 main runs have exit0, COMPLETE and 50 epochs, using the established public CLIP/data arguments and fresh control output directories. The launcher still checks the existing missing receipt and card capacity. Start the corresponding observer with --controls so its local results remain separate. This review neither launches work nor claims either control has run or improved accuracy.",
+  "reviewer_actions": {
+    "implementation_files_edited": false,
+    "network_ssh_scp_or_remote_commands_executed": false,
+    "real_gpu_query_or_training_or_test_executed": false,
+    "real_controller_or_observer_started_or_stopped": false,
+    "existing_training_or_results_modified": false,
+    "handoff_git_or_publication_executed": false,
+    "only_written_artifact_this_followup": "results/preflight/residual_controls_review.json"
+  }
+}
