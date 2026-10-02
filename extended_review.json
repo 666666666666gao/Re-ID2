@@ -1,0 +1,84 @@
+{
+  "schema": "demo-dual-axis-extended-code-review-v1",
+  "reviewed_at": "2026-10-02",
+  "reviewer": {
+    "agent": "/root/review_demo_dual_axis",
+    "attribution": "same-family/provisional",
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "max"
+  },
+  "verdict": "PASS_STATIC",
+  "blocking_findings_remaining": [],
+  "file_verdicts": {
+    "launch_repeats.py": {
+      "verdict": "PASS",
+      "checks": [
+        "Actual schedule expression contains18 unique jobs: all3 datasets x3 variants x seeds43/44;9 jobs per seed and9 per host.",
+        "Every slot waits its own final existing seed42 exit receipt, with240-second waits and exit_code0 required. In particular2026 GPU3 waits MSVR310_dual_s42, not ordinary_s42.",
+        "Each slot starts independently in a thread after its predecessor and a per-GPU memory<500MiB check. Idle2025 GPU3 can start while the other GPU threads remain waiting.",
+        "--seed is passed to the existing validated runner; output is isolated under runs/three_seed_extension. There is no stop, resume, checkpoint reuse or automatic retry path."
+      ]
+    },
+    "analyze_comparison.py": {
+      "verdict": "PASS",
+      "checks": [
+        "Requires actual COMPLETE result plus exit0 for each of the nine seed42 runs before writing its report.",
+        "Requires the exact epoch1..50 sequence, finite metrics/loss, earliest maximum-dev-mAP checkpoint and agreement of all four selected metrics with strict_reload.",
+        "Checks B64 filename orders, sequential batch-attempt numbers, successful optimizer-update and AMP-skip totals, and per-epoch cumulative accounting.",
+        "Compares complete sampling sequences across all three variants per dataset and validates ordinary/dual total/trainable parameter counts,5632D output and existing common-initialization proof.",
+        "Reports all three pairwise model differences and labels itself as seed42 development analysis, without claiming multi-seed stability, SOTA or a psi-only effect."
+      ],
+      "orchestration_action": "The script appends the canonical handoff but deliberately does not publish it. After it runs, the caller must invoke the existing sync_handoff and final Git publication so Desktop, remote and GitHub copies include the appended verification. This does not block repeat-job deployment."
+    },
+    "full_evaluation.py": {
+      "verdict": "PASS_STATIC_CPU_GROUND_TRUTH_PREFLIGHT_PENDING",
+      "checks": [
+        "Loads only a dev-selected best.pth using strict=True after the training result is COMPLETE and exit_code is0. Official test scores never select a checkpoint.",
+        "Official directories match the existing dataset classes: RGBNT201 test/test, RGBNT100 query/bounding_box_test and MSVR310 query3/bounding_box_test.",
+        "Uses same-ID/same-camera junk exclusion for RGBNT and same-ID/same-scene for MSVR310, while retaining different-ID distractors.",
+        "Per-query AP and INP are computed after that exclusion; AP and CMC are checked against the existing evaluator. mINP follows the FastReID primary implementation's relevant-count divided by last-positive-rank definition.",
+        "Produces mAP, mINP, CMC1..50, Rank1/5/10/20, validity counts and query-weighted camera/scene/identity groups, plus per-query CSVs and saved test arrays.",
+        "Checks stored development query_indices and IDs against the fixed parser before reusing the saved best development distances.",
+        "Stable query filenames now match Triplets naming across hosts. Route entropy uses torch.special.entr, and joint-vs-product L1 is a distribution diagnostic rather than a causal retrieval claim.",
+        "Output explicitly states training used the fixed fit subset and is not full-official-training paper reproduction."
+      ],
+      "resolved_finding": {
+        "title": "Absolute query paths prevented direct cross-host paired-query joins",
+        "evidence": "MSVR310 demo seed42 is on2025 while ordinary/dual are on2026; serializing absolute source paths gave different names for the same query.",
+        "resolution": "full_evaluation.py:141 now uses Path(paths if string else paths[0]).name, matching Triplets."
+      },
+      "primary_reference": "https://github.com/JDAI-CV/fast-reid/blob/master/fastreid/evaluation/rank.py"
+    },
+    "launch_full_evaluation.py": {
+      "verdict": "PASS",
+      "checks": [
+        "Derived schedule contains27 unique dataset/variant/seed checkpoints:9 per seed42/43/44;13 evaluations on2025 and14 on2026.",
+        "Each GPU waits its final repeat-job exit0, then checks its own GPU memory and evaluates its seed42 plus repeat jobs sequentially. Dependencies are RGBNT201/RGBNT100 variant seed44 on GPU0..2; MSVR310 dual43 on2025 GPU3 and dual44 on2026 GPU3.",
+        "No evaluation starts on a slot before that slot's training sequence has ended. Evaluator subprocesses inherit a single GPU via CUDA_VISIBLE_DEVICES.",
+        "Per-run evaluation stdout is opened exclusively, and launch/exit receipts are written separately from training receipts. A failed evaluation stops its slot without retry or training mutation.",
+        "The controller requires the expected full job count and all evaluation exit codes0 before reporting success."
+      ]
+    }
+  },
+  "performed_checks": [
+    "Parsed all four reviewed scripts with ast.parse using explicit UTF-8.",
+    "Evaluated only the static schedule expressions to verify18-repeat and27-evaluation counts, uniqueness, seed coverage, host coverage and final dependencies; no launcher main function was run.",
+    "Read the two already-collected current MSVR310 demo/ordinary batch logs: both contain453 batch attempts and453 applied updates, and their complete epoch/step/filename sequences match. This is a partial evidence check, not a nine-run result.",
+    "Read FastReID's official rank.py through web tools and verified the mINP definition against full_metrics.",
+    "Inspected the current collector intake: batch_orders.jsonl is now copied, and both existing terminal intake folders contain it."
+  ],
+  "reviewer_actions": {
+    "implementation_files_edited": false,
+    "training_started_or_stopped": false,
+    "model_or_gpu_evaluation_executed": false,
+    "collector_or_analyzer_main_executed": false,
+    "only_written_artifact": "extended_review.json"
+  },
+  "remaining_execution_gate": "Run the planned CPU ground-truth numeric preflight for full_evaluation before its deployment. Run analyze_comparison only after all nine current seed42 terminals have been collected; then mirror and publish its amended handoff. The seed43/44 launcher has no remaining review blocker.",
+  "boundaries": [
+    "These verdicts are source reviews and schedule checks, not assertions that the new jobs or official evaluations have completed.",
+    "analyze_comparison intentionally covers seed42 only. The final three-seed synthesis must consume all27 finished runs and evaluation outputs; do not present the seed42 report alone as the requested comprehensive three-seed conclusion.",
+    "The existing author noise-cosine scheduler keeps noise_seed42 for all runs; model initialization, data sampling and augmentation use the requested run seed. This preserves the fixed optimizer schedule across repetitions and is not an implementation defect.",
+    "Per-query paired rescue/error summaries and across-seed aggregation are downstream analysis of the exported records; full_evaluation itself provides the individual checkpoint metrics and diagnostics."
+  ]
+}
