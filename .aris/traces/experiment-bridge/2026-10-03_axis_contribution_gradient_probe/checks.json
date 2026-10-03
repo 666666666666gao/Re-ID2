@@ -1,0 +1,264 @@
+{
+  "status": "PASS_SOURCE_AND_STDLIB_MOCKS",
+  "observed_at": "2026-10-03T05:09:03.993044+00:00",
+  "checks_count": 26,
+  "checks": [
+    {
+      "check": "new_two_leaves_helper_collector_compile",
+      "status": "PASS",
+      "evidence": "Compilation only; no neural imports."
+    },
+    {
+      "check": "existing_frozen_launch26_sources_unchanged",
+      "status": "PASS",
+      "evidence": "Reuses the existing receipt; no source framework added and no old experiment rerun."
+    },
+    {
+      "check": "actual_completed_V5_V6_same_MSVR_config",
+      "status": "PASS",
+      "evidence": "Existing completed run metadata only; same configuration, seed42 and MSVR data, no new checkpoint selection."
+    },
+    {
+      "check": "task_loss_sum_AST_exact_original_step_without_C",
+      "status": "PASS",
+      "evidence": "Original full weighted head-pair sum matches exactly after variable-name normalization. Odd output assertion makes end=len-1 equal native len-len%2; finalC excluded."
+    },
+    {
+      "check": "weighted_C_is_exact_returned_last_scalar_once",
+      "status": "PASS",
+      "evidence": "Both models already weightC in output[-1]; the probe neither drops that coefficient nor multiplies it twice."
+    },
+    {
+      "check": "strict_saved_best_and_one_seeded_training_B64",
+      "status": "PASS",
+      "evidence": "Strict existing dev-best state load; actual fit split and training augmentations; one seed42 B64 forward per checkpoint, no dev/test evaluation."
+    },
+    {
+      "check": "four_inputs_hashed_before_and_after_diagnostic",
+      "status": "PASS",
+      "evidence": "Original model, dev arrays, result and exit receipt are byte/size checked before and after; only a new output JSON is written."
+    },
+    {
+      "check": "both_predictor_gradients_same_forward_scale512",
+      "status": "PASS",
+      "evidence": "Two autograd.grad calls select only predictor parameters; first retains the shared graph, both losses scaled by512, no extra model forward."
+    },
+    {
+      "check": "no_optimizer_or_checkpoint_writer_training_BN_scope_explicit",
+      "status": "PASS",
+      "evidence": "No optimizer construction/step, backward accumulation or checkpoint save. TrainingBN buffer changes are explicitly temporary; four checkpoint/input files must remain identical."
+    },
+    {
+      "check": "actual_unscale_norm_ratio_cosine_formulas_stdlib_numeric_witness",
+      "status": "PASS",
+      "evidence": "Actual expressions evaluated on synthetic scaled vectors: division by512 occurs before global norm/dot; unit ratio and orthogonal cosine recovered. This is not an autograd test."
+    },
+    {
+      "check": "per_parameter_gradnorms_and_statistics_are_correct_scope",
+      "status": "PASS",
+      "evidence": "Per-parameter L2 is unscaled once; mean/biased-population std/MAE uses64x3 targets/predictions; no convergence or causal claim."
+    },
+    {
+      "check": "controller_compares_all_five_input_proofs",
+      "status": "PASS",
+      "evidence": "Identity order, labels, camera, scene and exact augmented CPU image tensor bytes are compared across cases before COMPLETE."
+    },
+    {
+      "check": "controller_mock_both_pass",
+      "status": "PASS",
+      "evidence": {
+        "events": [
+          "spawn_V5",
+          "spawn_V6",
+          "wait_V5",
+          "wait_V6"
+        ],
+        "exit_receipts": [
+          0,
+          0
+        ],
+        "both_children_reaped_before_failure": true,
+        "complete": true,
+        "mock_only": true
+      }
+    },
+    {
+      "check": "controller_mock_first_child_fails_still_wait_second",
+      "status": "PASS",
+      "evidence": {
+        "events": [
+          "spawn_V5",
+          "spawn_V6",
+          "wait_V5",
+          "wait_V6"
+        ],
+        "exit_receipts": [
+          1,
+          0
+        ],
+        "both_children_reaped_before_failure": true,
+        "complete": false,
+        "mock_only": true
+      }
+    },
+    {
+      "check": "controller_mock_second_child_fails_both_exits_saved",
+      "status": "PASS",
+      "evidence": {
+        "events": [
+          "spawn_V5",
+          "spawn_V6",
+          "wait_V5",
+          "wait_V6"
+        ],
+        "exit_receipts": [
+          0,
+          1
+        ],
+        "both_children_reaped_before_failure": true,
+        "complete": false,
+        "mock_only": true
+      }
+    },
+    {
+      "check": "controller_mock_different_image_batch_rejected",
+      "status": "PASS",
+      "evidence": {
+        "events": [
+          "spawn_V5",
+          "spawn_V6",
+          "wait_V5",
+          "wait_V6"
+        ],
+        "exit_receipts": [
+          0,
+          0
+        ],
+        "both_children_reaped_before_failure": true,
+        "complete": false,
+        "mock_only": true
+      }
+    },
+    {
+      "check": "controller_mock_optimizer_update_misreport_rejected",
+      "status": "PASS",
+      "evidence": {
+        "events": [
+          "spawn_V5",
+          "spawn_V6",
+          "wait_V5",
+          "wait_V6"
+        ],
+        "exit_receipts": [
+          0,
+          0
+        ],
+        "both_children_reaped_before_failure": true,
+        "complete": false,
+        "mock_only": true
+      }
+    },
+    {
+      "check": "helper_mock_success",
+      "status": "PASS",
+      "evidence": {
+        "uploads": [
+          "probe_contribution_gradients.py",
+          "launch_contribution_gradient_probe.py"
+        ],
+        "controller_starts": 1,
+        "all_original26_sources_and8_checkpoint_inputs_unchanged": true,
+        "real_remote_actions": 0
+      }
+    },
+    {
+      "check": "helper_mock_GPU0_busy_before_upload",
+      "status": "PASS",
+      "evidence": {
+        "uploads": [],
+        "controller_starts": 0,
+        "all_original26_sources_and8_checkpoint_inputs_unchanged": true,
+        "real_remote_actions": 0
+      }
+    },
+    {
+      "check": "helper_mock_GPU1_busy_before_upload",
+      "status": "PASS",
+      "evidence": {
+        "uploads": [],
+        "controller_starts": 0,
+        "all_original26_sources_and8_checkpoint_inputs_unchanged": true,
+        "real_remote_actions": 0
+      }
+    },
+    {
+      "check": "helper_mock_GPU0_busy_after_upload",
+      "status": "PASS",
+      "evidence": {
+        "uploads": [
+          "probe_contribution_gradients.py",
+          "launch_contribution_gradient_probe.py"
+        ],
+        "controller_starts": 0,
+        "all_original26_sources_and8_checkpoint_inputs_unchanged": true,
+        "real_remote_actions": 0
+      }
+    },
+    {
+      "check": "helper_mock_GPU1_busy_after_upload",
+      "status": "PASS",
+      "evidence": {
+        "uploads": [
+          "probe_contribution_gradients.py",
+          "launch_contribution_gradient_probe.py"
+        ],
+        "controller_starts": 0,
+        "all_original26_sources_and8_checkpoint_inputs_unchanged": true,
+        "real_remote_actions": 0
+      }
+    },
+    {
+      "check": "helper_mock_wrong_checkpoint_variant",
+      "status": "PASS",
+      "evidence": {
+        "uploads": [],
+        "controller_starts": 0,
+        "all_original26_sources_and8_checkpoint_inputs_unchanged": true,
+        "real_remote_actions": 0
+      }
+    },
+    {
+      "check": "helper_mock_new_leaf_already_exists",
+      "status": "PASS",
+      "evidence": {
+        "uploads": [],
+        "controller_starts": 0,
+        "all_original26_sources_and8_checkpoint_inputs_unchanged": true,
+        "real_remote_actions": 0
+      }
+    },
+    {
+      "check": "collector_archives_raw_and_intake_before_failure_assert",
+      "status": "PASS",
+      "evidence": "Static scan: both case raw siblings and byte proofs are written before failed-exit assertion; existing intake markers prevent payload overwrite."
+    },
+    {
+      "check": "collector_240_seconds_only_read_remote_no_retry",
+      "status": "PASS",
+      "evidence": "240-second polling; COMPLETE or live-controller requirement; logs retained on failure; no NN, retry or upload operation in collector."
+    }
+  ],
+  "checked_source_sha256": {
+    "probe_contribution_gradients.py": "0bb55de3dcf66f4dbab1cb60eb774083bf9662f00369340bf596f22dc3067316",
+    "launch_contribution_gradient_probe.py": "1efcb86a0cfc5c2764e2a317fbfcf6081d4d1a4bccc0bf9ca9625fa15ce1ba87"
+  },
+  "helper_path": "C:\\Users\\gb\\.codex_tmp\\demo_axis_contribution_probe26_deploy_20261003.py",
+  "helper_sha256": "aacb861b3a27528d892d9fc850964bc8b0a9c362e2c5a5ede87bfaeeb58341d3",
+  "collector_path": "C:\\Users\\gb\\.codex_tmp\\demo_axis_contribution_probe26_observe_20261003.py",
+  "collector_sha256": "46c2a95d795788456280084c3fc03dceca35d762e9b022afac53cea5802f4f0f",
+  "no_NN_model_import": true,
+  "real_SSH_calls": 0,
+  "real_GPU_calls": 0,
+  "real_optimizer_updates": 0,
+  "scope": "Two one-forward diagnostic leaves, loss/gradient formulas, child exit semantics, resource/source guards and collector static scan. No old61/24 reruns."
+}
