@@ -1,0 +1,96 @@
+{
+  "status": "ACTUAL_TWO_PREFLIGHTS_PASS_FRESH50_STARTED",
+  "observed_at": "2026-10-03T11:28:20",
+  "hypothesis": "Projection directions used for retrieval receive weak identity gradients through small fused residuals, while current auxiliary ReID heads supervise pre-projection expert vectors. Move only the group auxiliary taps after existing normalized PM/PF to test identity geometry alignment.",
+  "evidence": {
+    "MSVR310": {
+      "joint_vs_base": {
+        "mAP": -0.015797809668626428,
+        "mINP": -0.05304621430848755,
+        "Rank-1": 0.0,
+        "Rank-5": 0.0,
+        "Rank-10": 0.0,
+        "Rank-20": 0.0
+      },
+      "mean_norms": [
+        38.98893356323242,
+        0.5815694332122803,
+        1.075553059577942,
+        1.2834529876708984
+      ]
+    },
+    "RGBNT201": {
+      "joint_vs_base": {
+        "mAP": -0.003924670360731852,
+        "mINP": -0.003474166975777848,
+        "Rank-1": 0.0,
+        "Rank-5": 0.12121212121212466,
+        "Rank-10": 0.0,
+        "Rank-20": 0.0
+      },
+      "mean_norms": [
+        33.97985076904297,
+        0.409963995218277,
+        0.18802115321159363,
+        0.678652286529541
+      ]
+    }
+  },
+  "single_changed_factor": "Two group auxiliary CE/Triplet input feature taps; no new loss/head/parameter or routing changes",
+  "unchanged": "V5 initial parameters, 5632D, encoders/sharedbands, jointpi/aS relationmass, oneconditionround, all retrieved11/00/10/01 computations, gates/scales/full11 stopped references, lossweights, publicCLIP freshseed42/B64/50earliestbestdevmAP, sampler/optimizer/GT splits",
+  "first_dataset": "MSVR310",
+  "proposed_gpu": "2026 GPU1 if idle; original validated warm environment, no preemption",
+  "sanity": "V5 full tensor contract plus nonzero finite auxiliary CE gradient into PM/PF; then native3AMPupdates/all gradients/fullmodeloptimizer strictreload. No smoke checkpoint reused.",
+  "efficacy": "One fresh50 MSVR experiment only after real preflights PASS. Compare V5 samecapacity/sampling sixmetrics and frozen fourstates/13missing; if promising expand datasets and train controls with matched new auxiliary protocol before dual-axis superiority claim.",
+  "limits": "A different auxiliary supervision point is a changed optimization protocol. Existing plain/frequency V4 controls remain context, not matched-V6 training-loss ablations. No improvement assumed.",
+  "budget_epochs": 50,
+  "source_sha256": {
+    "projected_mass_axis_collaboration.py": "559c9512b47c48b5047743177b1d1454595876852fa644aa8440f2720f17ae0a",
+    "run_projected_mass_experiment.py": "4471f8eb6507e5562242765ac6833859a1bf0be208db7b4364cc2215f24ec98e",
+    "verify_projected_axis_mass.py": "00149ff5bcc4d8d99d5ce85a13ecc1bb6ff4d45f6884154aa358a97eb71e2c2f",
+    "launch_projected_mass_trial.py": "67a09be049d6ea95347c691950145527b43e2ab4f31b1c11188b2494fd47212c"
+  },
+  "resource_change": {
+    "observed_at": "2026-10-03T11:59:48",
+    "reason": "V5all3lastCOMPLETE now. Omit only Adam moments from new completed50 terminal last, keep full smoke model+optimizer strictreload, best weights/scheduler/scaler/counters. 1.995GB trial+282MB V5frozenstates+323MB buffer, min2.6GB. No deletion of existing checkpoints.",
+    "minimum_free_bytes": 2600000000
+  },
+  "resource_history": [
+    {
+      "observed_at": "2026-10-03T11:40:02",
+      "reason": "Actual26free4.417GB and optimizer checkpoints1.2GB; preserve room for V5RGB100 last and frozen4states. No26deployment occurred. Explicit warm27GPU0 choice, not automatic fallback.",
+      "minimum_free_bytes": 3200000000
+    },
+    {
+      "observed_at": "2026-10-03T11:59:48",
+      "reason": "Actual27initialGPU0guard stopped before any SCP or controller:1304MiB, desktop+anotherPython. Allfour newfiles absent and outputabsent; no environment/source changes."
+    }
+  ],
+  "storage_only_change": "End-of50 last serialization omits optimizer moments, still model+scheduler+scaler+epoch/step counters. Not a training-method factor; no last-optimizer resume support claimed. Smoke optimizer exact reload remains unchanged.",
+  "actual_failure": {
+    "observed_at": "2026-10-03T12:12:39",
+    "stage": "tensor training AMP forward, zero optimizer updates",
+    "reason": "FP32 pooling layer received Half input; float cast was after pooling",
+    "launch": "axis_collaboration_v6_projected_launch.json",
+    "snapshot": "axis_collaboration_v6_projected_latest_snapshot.json",
+    "correction": "Cast m0/f0 to float before their pooling within existing disabled-autocast block; only two expressions changed",
+    "old_trial": "runs/axis_collaboration_v6_projected_mass_trial",
+    "new_trial": "runs/axis_collaboration_v6_projected_mass_trial_ampfix"
+  },
+  "actual_preflight": {
+    "observed_at": "2026-10-03T12:29:51",
+    "launch_receipt": "axis_collaboration_v6_projected_ampfix_launch.json",
+    "controller_pid": 3121142,
+    "host": "2026",
+    "gpu": 1,
+    "tensor_optimizer_updates": 0,
+    "engineering_updates": 3,
+    "strict_model_optimizer_reload_equal": true,
+    "projected_auxiliary_CE_gradient_abs_sum_PM_PF": [
+      377.99493408203125,
+      386.9696044921875
+    ],
+    "training_run": "MSVR310_axis_mass_projected_fullref_s42",
+    "official_test_uses": 0
+  }
+}

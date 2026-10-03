@@ -1,0 +1,521 @@
+{
+  "status": "PASS",
+  "review_kind": "SOURCE_AND_STDLIB_MOCKS_ONLY",
+  "observed_at": "2026-10-03T03:46:29.689433+00:00",
+  "blockers": [],
+  "non_blocking_findings": [],
+  "checks_count": 41,
+  "checked_source_sha256": {
+    "projected_mass_axis_collaboration.py": "ae0cbd086495af52ed3461f5cd8719a982b1e8ffcc77ff924a21e6c99455de70",
+    "run_projected_mass_experiment.py": "c69aceab6a719411daad2d1d8b7df3bcf008a0f640e9196c034dbc9157acab39",
+    "verify_projected_axis_mass.py": "00149ff5bcc4d8d99d5ce85a13ecc1bb6ff4d45f6884154aa358a97eb71e2c2f",
+    "launch_projected_mass_trial.py": "52257682d6f97a622734f4d3a895d054e36b7b63f9a2d275bae8606782281885"
+  },
+  "helper_path": "C:\\Users\\gb\\.codex_tmp\\demo_axis_v6_projected27_deploy_20261003.py",
+  "helper_sha256": "442cebfca11dccd691fdd5bc6a3c6b38a0aad729d3006779d7938ec601559c16",
+  "reviewer_task": "/root/review_v6_projected_aux",
+  "requested_route": {
+    "tool": "collaboration.spawn_agent",
+    "fork_turns": "none",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "max"
+  },
+  "serving_identity": "Requested routing parameters only; actual provider execution identity was not independently introspected.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "scope": "One fresh MSVR310 seed42 B64 50-epoch auxiliary-tap trial on explicitly selected READY2027 GPU0, only after the real tensor and native3AMP smoke gates pass. No other dataset or old experiment rerun.",
+  "conclusions": [
+    "V6 inherits all V5 parameters/state initialization, projections, 512D auxiliary heads, 5632D retrieval descriptor and loss weights. Entire forward AST is unchanged except the two training auxiliary feature taps; evaluation returns before those taps.",
+    "The M tap applies existing PM to independent Bx7x512 pooled evidence in FP32, normalizes each relation direction and averages seven relations into512D. The F tap applies existing PF to its independent512D evidence and normalizes in FP32. Gradients remain attached; no new loss, parameter, reconstruction term, gate or route was introduced.",
+    "The full runner AST matches V5 after normalizing only the new class/import/variant and descriptive metadata. Configuration, sampler seeds, optimizer, nativeAMP, CE/Triplet weights, FP32 evaluation and fixed50 earliest-max-dev-mAP selection remain exact.",
+    "Evaluation uses actual dataset identity/scene ground truth and fixed identity-disjoint development data. For MSVR, same-identity/same-scene matches are excluded. No official-test selection or execution is added.",
+    "The retained real tensor contract checks initial state/capacity,8 dev triplets, six missing masks, closed-expert isolation, uniform-V4 equivalence and one B64 semantic forward with zero optimizer updates. The new auxiliary-CE-only autograd probe requires both final PM/PF weights to receive finite nonzero gradients.",
+    "The native smoke requires three effective updates, finite nonzero gradients for every trainable tensor, strict model load, optimizer restoration and exactly equal reloaded evaluation features. The controller preserves logs and exit receipts and prevents training if either prior process or result gate fails.",
+    "Final controller changes only three GPU literals to physicalGPU0. Deployment uses the exact READY2027 interpreter, project cwd, dataset root and publicCLIP path; uploads exactly four absent new sources and verifies all15 relevant existing dependencies without overwriting the ongoing2026 work.",
+    "The new helper checks READY and exact reviewed bytes, then currentGPU0 memory<500MiB and free disk>3.2GB before upload and before start. Historical measured MSVR smoke/best/last total2,792,932,497B, leaving407,067,503B above those three files at this threshold on the separate host."
+  ],
+  "resolved_blockers": [
+    {
+      "id": "initial_host26_checkpoint_disk_budget",
+      "initial_helper_sha256": "3c0630a1be8dca9da1f5a6400e632e3eb47cc175176f08389054da5d9fe8130f",
+      "issue": "The initial>2.8GB budget counted last checkpoints as model-only although the runner serializes full Adam state. Initial real26 free4,416,991,232B also had pendingV5 RGBNT100 last and frozen arrays to preserve.",
+      "primary_evidence": "results/preflight/axis_collaboration_v6_actual_disk_probe.json; run_projected_mass_experiment.py last serialization; observed V5 MSVR trainable99,669,638 and Adam config.",
+      "resolution": "Explicitly choose alreadyREADY2027 GPU0 and reviewed new helper27, use>3.2GB for this single trial without the2026 pending writes, correct the budget explanation, retain current-resource checks twice. No automatic fallback, deletion, environment mutation or old2026-source change.",
+      "status": "RESOLVED",
+      "original_failure_preserved": ".aris/traces/experiment-bridge/2026-10-03_axis_v6_projected_aux/initial_resource_blocker.json"
+    }
+  ],
+  "runtime_acceptance": {
+    "actual_V6_tensor_gate": "NOT_RUN_BY_REVIEWER; mandatory before smoke/train",
+    "actual_V6_native3AMP_smoke": "NOT_RUN_BY_REVIEWER; mandatory before full50",
+    "actual_V6_efficacy": "NOT_RUN_BY_REVIEWER; no improvement or completed-training claim",
+    "real_SSH_calls_by_reviewer": 0,
+    "real_GPU_calls_by_reviewer": 0,
+    "NN_model_imports_by_reviewer": 0,
+    "optimizer_updates_by_reviewer": 0,
+    "official_test_uses_by_reviewer": 0
+  },
+  "interpretation_limits": [
+    "The auxiliary-CE gradient probe checks loss connectivity, not optimization benefit or mechanism efficacy.",
+    "Moving the two auxiliary taps changes the optimization protocol. Existing V4 ordinary/frequency controls are contextual and cannot establish matched-V6 superiority; matched new controls remain necessary before that claim.",
+    "V5 first-two-dataset evidence is already recorded and was not rerun. Weak frozen four-state deltas motivate this hypothesis but do not prove projection supervision is the cause.",
+    "A source/mock PASS permits the controller to perform its real gates; it does not replace current capacity checks or assert that tensor/smoke/training has completed."
+  ],
+  "checks": [
+    {
+      "check": "original_18_source_bytes_match_V5_launch",
+      "status": "PASS",
+      "detail": "Read-only comparison against the existing V5 launch manifest; no hash framework added.",
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "V6_inherits_V5_with_no_initializer_or_extra_modules",
+      "status": "PASS",
+      "detail": "Identical inherited parameter initialization, heads, state keys, scales, fuse and controlled_states.",
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "entire_forward_AST_equal_except_two_auxiliary_taps",
+      "status": "PASS",
+      "detail": "All base, conditions, route, gates, 00/10/01/11, contribution target/loss, output pairing and eval return are unchanged.",
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "projected_taps_use_FP32_normalization_then_512D_heads",
+      "status": "PASS",
+      "detail": "M preserves seven independent relation vectors through PM then normalizes each and averages; F normalizes PF pooled independent evidence.",
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "V5_runner_configuration_AST_identical",
+      "status": "PASS",
+      "detail": "Exact full-function AST equality, not a selected-line check.",
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "V5_runner_write_json_AST_identical",
+      "status": "PASS",
+      "detail": "Exact full-function AST equality, not a selected-line check.",
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "V5_runner_evaluate_AST_identical",
+      "status": "PASS",
+      "detail": "Exact full-function AST equality, not a selected-line check.",
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "V5_runner_step_AST_identical",
+      "status": "PASS",
+      "detail": "Exact full-function AST equality, not a selected-line check.",
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "V6_runner_only_class_variant_and_metadata_changes",
+      "status": "PASS",
+      "detail": "Entire runner equal after normalizing its new class/import, variant string and descriptive run metadata.",
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "V5_tensor_contract_retained_with_only_aux_CE_probe_added",
+      "status": "PASS",
+      "detail": "Retains actual8 dev, six masks, initial V4 state/capacity equality, uniform fusion, routing gradient, closed-expert isolation and semantic B64/zero-update checks.",
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "auxiliary_gradient_probe_isolated_from_fused_loss",
+      "status": "PASS",
+      "detail": "CE of the two group heads alone must connect to both final projection weights with finite nonzero derivatives; this does not claim efficacy.",
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "GT_identity_dev_only_and_scene_filter",
+      "status": "PASS",
+      "detail": "Actual dataset identity/scene ground truth; fixed identity-held-out training split; no model teacher labels or official test access.",
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "fixed50_earliest_dev_mAP_and_strict_best_reload",
+      "status": "PASS",
+      "detail": "Fixed 50 epochs, no early stopping, earliest tie retention and same FP32 evaluation after selected-checkpoint reload.",
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "native_smoke_three_effective_steps_all_gradients_reload",
+      "status": "PASS",
+      "detail": "Source contains three effective native AMP updates, every trainable tensor finite/nonzero and strict model/optimizer load plus equal eval output.",
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "controller_mock_tensor_process_failure",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor"
+        ],
+        "exit_receipts_retained": 1,
+        "gate_read_before_train": [],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      },
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "controller_mock_tensor_status_failure",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor"
+        ],
+        "exit_receipts_retained": 1,
+        "gate_read_before_train": [],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      },
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "controller_mock_tensor_optimizer_nonzero",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor"
+        ],
+        "exit_receipts_retained": 1,
+        "gate_read_before_train": [],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      },
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "controller_mock_tensor_aux_gradient_zero",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor"
+        ],
+        "exit_receipts_retained": 1,
+        "gate_read_before_train": [],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      },
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "controller_mock_smoke_process_failure",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor",
+          "smoke"
+        ],
+        "exit_receipts_retained": 2,
+        "gate_read_before_train": [],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      },
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "controller_mock_smoke_steps_wrong",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor",
+          "smoke"
+        ],
+        "exit_receipts_retained": 2,
+        "gate_read_before_train": [],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      },
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "controller_mock_smoke_gradient_failure",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor",
+          "smoke"
+        ],
+        "exit_receipts_retained": 2,
+        "gate_read_before_train": [],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      },
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "controller_mock_smoke_reload_failure",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor",
+          "smoke"
+        ],
+        "exit_receipts_retained": 2,
+        "gate_read_before_train": [],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      },
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "controller_mock_development_process_failure",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor",
+          "smoke",
+          "development"
+        ],
+        "exit_receipts_retained": 3,
+        "gate_read_before_train": [
+          true
+        ],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      },
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "controller_mock_development_incomplete",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor",
+          "smoke",
+          "development"
+        ],
+        "exit_receipts_retained": 3,
+        "gate_read_before_train": [
+          true
+        ],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      },
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "existing_GPU_idle_poll_240_seconds",
+      "status": "PASS",
+      "detail": "Busy observation waits 240 seconds and resumes only on memory.used<500; mock does not sleep.",
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "actual_controller_imports_resolve_with_project_script_path",
+      "status": "PASS",
+      "detail": "Real controller module executed with heavy dependencies mocked; remote Popen cwd and script argument separately checked below.",
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "checkpoint_budget_primary_code_and_observed_trainable_count",
+      "status": "PASS",
+      "detail": {
+        "V5_MSVR_parameters": 99681414,
+        "V5_MSVR_trainable_parameters": 99669638,
+        "FP32_parameter_bytes_lower_bound": 398725656,
+        "Adam_two_moment_bytes_lower_bound": 797357104,
+        "model_and_optimizer_bytes_lower_bound": 1196082760,
+        "V6_smoke_best_last_parameter_state_bytes_lower_bound": 2790891176,
+        "last_serialization_includes_optimizer": true,
+        "pending_V5_RGB100_last_requires_its_own_model_and_optimizer_budget": true
+      },
+      "verification": "initial_source_or_gate_check_reused_after_final_byte_or_AST_equivalence"
+    },
+    {
+      "check": "three_neural_sources_unchanged_reuse_completed_AST_review",
+      "status": "PASS",
+      "detail": "No repeat tensor/model execution or repeat source-equivalence work; all three exact bytes retain their earlier successful review.",
+      "verification": "final_host27_resource_revision"
+    },
+    {
+      "check": "launcher_only_three_physical_GPU_literal_changes",
+      "status": "PASS",
+      "detail": "Only idle(1)->idle(0), CUDA_VISIBLE_DEVICES=1->0 and launch receipt GPU1->0 changed; all existing engineering gates remain identical.",
+      "verification": "final_host27_resource_revision"
+    },
+    {
+      "check": "final_launcher_and_host27_helper_compile",
+      "status": "PASS",
+      "detail": "Compilation only; no imported NN or remote operation.",
+      "verification": "final_host27_resource_revision"
+    },
+    {
+      "check": "all_original18_local_sources_still_unchanged",
+      "status": "PASS",
+      "detail": "Preserves ongoing V5 training and frozen evaluation inputs on the original host; reviewer writes no source files.",
+      "verification": "final_host27_resource_revision"
+    },
+    {
+      "check": "host27_protected15_match_existing_profile_sources",
+      "status": "PASS",
+      "detail": "The 15 protected dependencies include mass_axis_collaboration.py already uploaded for completed V5 profiling. Old run_mass/verify_mass and irrelevant missing_development are not required, uploaded or overwritten.",
+      "verification": "final_host27_resource_revision"
+    },
+    {
+      "check": "existing_host27_READY_real_witness_and_profile_receipts",
+      "status": "PASS",
+      "detail": "Read actual existing artifacts only: matching environment package ledger, MSVR GT split/CUDA/model witness and all15 completed profile cases.",
+      "verification": "final_host27_resource_revision"
+    },
+    {
+      "check": "plan_final_source_bytes_and_explicit_host27_scope",
+      "status": "PASS",
+      "detail": "Explicit one-host choice, one MSVR seed42/B64/freshCLIP50; no automatic fallback or scope expansion.",
+      "verification": "final_host27_resource_revision"
+    },
+    {
+      "check": "corrected_disk_budget_covers_measured_smoke_best_last",
+      "status": "PASS",
+      "detail": {
+        "actual_MSVR_smoke_best_last_bytes": 2792932497,
+        "minimum_free_bytes": 3200000000,
+        "space_beyond_these_three_files_bytes": 407067503,
+        "host26_pending_V5_outputs_preserved": true,
+        "host27_no_pending_own_job": "Parent explicit scope; actual deployment rechecks current free space before upload and start."
+      },
+      "verification": "final_host27_resource_revision"
+    },
+    {
+      "check": "controller_mock_final_GPU0_all_pass",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor",
+          "smoke",
+          "development"
+        ],
+        "exit_receipts_retained": 3,
+        "gate_read_before_train": [
+          true
+        ],
+        "controller_complete": true,
+        "mock_only_no_process_created": true
+      },
+      "verification": "final_host27_resource_revision"
+    },
+    {
+      "check": "deployment_helper_mock_success",
+      "status": "PASS",
+      "detail": {
+        "uploads": [
+          "projected_mass_axis_collaboration.py",
+          "run_projected_mass_experiment.py",
+          "verify_projected_axis_mass.py",
+          "launch_projected_mass_trial.py"
+        ],
+        "starts": 1,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 60,
+            "free_bytes": 10000000000
+          },
+          {
+            "stage": "start",
+            "used_MiB": 60,
+            "free_bytes": 10000000000
+          }
+        ],
+        "protected15_unchanged": true,
+        "no_real_remote_operations": true
+      },
+      "verification": "final_host27_resource_revision"
+    },
+    {
+      "check": "deployment_helper_mock_GPU_busy_before_upload",
+      "status": "PASS",
+      "detail": {
+        "uploads": [],
+        "starts": 0,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 1500,
+            "free_bytes": 10000000000
+          }
+        ],
+        "protected15_unchanged": true,
+        "no_real_remote_operations": true
+      },
+      "verification": "final_host27_resource_revision"
+    },
+    {
+      "check": "deployment_helper_mock_disk_below_corrected_gate_before_upload",
+      "status": "PASS",
+      "detail": {
+        "uploads": [],
+        "starts": 0,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 60,
+            "free_bytes": 3000000000
+          }
+        ],
+        "protected15_unchanged": true,
+        "no_real_remote_operations": true
+      },
+      "verification": "final_host27_resource_revision"
+    },
+    {
+      "check": "deployment_helper_mock_GPU_busy_after_upload",
+      "status": "PASS",
+      "detail": {
+        "uploads": [
+          "projected_mass_axis_collaboration.py",
+          "run_projected_mass_experiment.py",
+          "verify_projected_axis_mass.py",
+          "launch_projected_mass_trial.py"
+        ],
+        "starts": 0,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 60,
+            "free_bytes": 10000000000
+          },
+          {
+            "stage": "start",
+            "used_MiB": 1500,
+            "free_bytes": 10000000000
+          }
+        ],
+        "protected15_unchanged": true,
+        "no_real_remote_operations": true
+      },
+      "verification": "final_host27_resource_revision"
+    },
+    {
+      "check": "deployment_helper_mock_READY_required_before_upload",
+      "status": "PASS",
+      "detail": {
+        "uploads": [],
+        "starts": 0,
+        "resources": [],
+        "protected15_unchanged": true,
+        "no_real_remote_operations": true
+      },
+      "verification": "final_host27_resource_revision"
+    }
+  ],
+  "trace": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_axis_v6_projected_aux",
+  "trace_artifacts": [
+    "review_static_mock.py",
+    "initial_checks.json",
+    "initial_helper_budget_2p8GB.py",
+    "initial_resource_blocker.json",
+    "first_check_stdout.txt",
+    "first_check_stderr.txt",
+    "review_resource_revision.py",
+    "resource_revision_checks.json",
+    "resource_revision_stdout.txt",
+    "resource_revision_stderr.txt",
+    "run.meta.json",
+    "001-review.request.json",
+    "002-resource-revision.request.json"
+  ]
+}

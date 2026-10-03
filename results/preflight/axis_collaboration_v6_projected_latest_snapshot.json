@@ -1,0 +1,47 @@
+{
+  "controller_live": false,
+  "rows": [
+    {
+      "stage": "preflight",
+      "name": "MSVR310_tensor",
+      "gpu": 1,
+      "launch": {
+        "pid": 3100699,
+        "gpu": 1,
+        "command": [
+          "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+          "-u",
+          "verify_projected_axis_mass.py",
+          "--dataset",
+          "MSVR310",
+          "--data-root",
+          "/data/gaob/Re-ID/dataset",
+          "--pretrained",
+          "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+          "--output",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/axis_collaboration_v6_projected_mass_trial/preflight/MSVR310_tensor.json"
+        ],
+        "started": 1791000727.7645807
+      },
+      "exit": {
+        "stage": "tensor",
+        "name": "MSVR310_tensor",
+        "exit_code": 1,
+        "finished": 1791000757.3403716
+      },
+      "log_tail": "on embedding resize to height:8 width: 16\nSuccessfully load ckpt!\n<All keys matched successfully>\nLoading pretrained model from CLIP\ncamera number is : 8\nusing Transformer_type: ViT-B-16 as a backbone\nResized position embedding: %s to %s torch.Size([197, 768]) torch.Size([129, 768])\nPosition embedding resize to height:8 width: 16\nSuccessfully load ckpt!\n<All keys matched successfully>\nLoading pretrained model from CLIP\ncamera number is : 8\nusing Transformer_type: ViT-B-16 as a backbone\nResized position embedding: %s to %s torch.Size([197, 768]) torch.Size([129, 768])\nPosition embedding resize to height:8 width: 16\nSuccessfully load ckpt!\n<All keys matched successfully>\nLoading pretrained model from CLIP\ncamera number is : 8\nTraceback (most recent call last):\n  File \"/data/gaob/Re-ID/DeMo-DualAxis/verify_projected_axis_mass.py\", line 127, in <module>\n    main()\n  File \"/data/gaob/Re-ID/DeMo-DualAxis/verify_projected_axis_mass.py\", line 106, in main\n    output = model(train_images, label=labels.cuda(), cam_label=train_cam.cuda(), view_label=train_scene.cuda())\n  File \"/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/torch/nn/modules/module.py\", line 1736, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/torch/nn/modules/module.py\", line 1747, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"/data/gaob/Re-ID/DeMo-DualAxis/projected_mass_axis_collaboration.py\", line 64, in forward\n    standalone_m = F.normalize(self.modality_projection(self.modality_expert.pool(m0, eligible).float()), dim=-1).mean(1)\n  File \"/data/gaob/Re-ID/DeMo-DualAxis/axis_collaboration.py\", line 45, in pool\n    weights = self.pool_score(evidence).squeeze(-1).softmax(2)\n  File \"/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/torch/nn/modules/module.py\", line 1736, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/torch/nn/modules/module.py\", line 1747, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/torch/nn/modules/linear.py\", line 125, in forward\n    return F.linear(input, self.weight, self.bias)\nRuntimeError: expected mat1 and mat2 to have the same dtype, but got: c10::Half != float\n"
+    },
+    {
+      "stage": "preflight",
+      "name": "MSVR310_axis_mass_projected_fullref_s42_smoke",
+      "gpu": 1
+    },
+    {
+      "stage": "development",
+      "name": "MSVR310_axis_mass_projected_fullref_s42",
+      "gpu": 1
+    }
+  ],
+  "controller_log_tail": "/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/helpers.py:7: FutureWarning: Importing from timm.models.helpers is deprecated, please import via timm.models\n  warnings.warn(f\"Importing from {__name__} is deprecated, please import via timm.models\", FutureWarning)\n/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models\n  warnings.warn(f\"Importing from {__name__} is deprecated, please import via timm.models\", FutureWarning)\n/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers\n  warnings.warn(f\"Importing from {__name__} is deprecated, please import via timm.layers\", FutureWarning)\nTraceback (most recent call last):\n  File \"/data/gaob/Re-ID/DeMo-DualAxis/launch_projected_mass_trial.py\", line 53, in <module>\n    main()\n  File \"/data/gaob/Re-ID/DeMo-DualAxis/launch_projected_mass_trial.py\", line 36, in main\n    assert code==0,(stage,job)\nAssertionError: ('tensor', 'MSVR310_tensor')\n",
+  "observed_at": "2026-10-03T12:12:39"
+}

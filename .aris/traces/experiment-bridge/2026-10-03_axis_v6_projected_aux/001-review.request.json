@@ -1,0 +1,19 @@
+{
+  "call_number": 1,
+  "purpose": "V6 projected auxiliary single-factor implementation and deployment review",
+  "tool": "collaboration.spawn_agent",
+  "fork_turns": "none",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "max",
+  "model_attribution": "Requested routing parameters; does not infer provider execution identity.",
+  "files_referenced": [
+    "projected_mass_axis_collaboration.py",
+    "run_projected_mass_experiment.py",
+    "verify_projected_axis_mass.py",
+    "launch_projected_mass_trial.py",
+    "C:/Users/gb/.codex_tmp/demo_axis_v6_projected26_deploy_20261003.py",
+    "results/preflight/axis_collaboration_v6_projected_plan.json",
+    "results/preflight/axis_collaboration_v5_first2_frozen_analysis.json"
+  ],
+  "prompt": "依已应用 experiment-bridge SKILL CODE_REVIEW=true 审查新的单因素V6试验。请读 C:/Users/gb/.codex/skills/experiment-bridge/SKILL.md 及 shared-references/local-codex-policy.md 对应规则，仅窄范围，不重复V5完整旧50/grid。root=C:/Users/gb/projects/demo_dual_axis_20261002，新4文件 projected_mass_axis_collaboration.py, run_projected_mass_experiment.py, verify_projected_axis_mass.py, launch_projected_mass_trial.py；private helper C:/Users/gb/.codex_tmp/demo_axis_v6_projected26_deploy_20261003.py。机器plan results/preflight/axis_collaboration_v6_projected_plan.json。实际证据 V5首2四状态/26missing结果在 axis_collaboration_v5_first2_frozen_analysis.json：201已50 mAP67.429/R167.636 对DeMo+2.982/+4.121过门槛，MSVR48.008/R159.048 +.400/0失败；但joint→ownbase mAP201-.003925/MSVR-.015798/R1both0，贡献correlation弱，actualmean residual/base small。目标先验证辅助identitytap位置：V5辅助 CE/Triplet 放投影前 independent M/F pooled features；V6只移到现有 PM/PF projection+FP32 direction normalization后，M按7关系mean成512D，F512D；同原head/params/512heads/5632D/lossweights，route/conditioning/gates/scales/full11stoppedreferences及00/10/01/11retrievedfeatures计算全不改。newclass继承Mass，只复制forward仅2aux taps变化；newrunner复制V5只newimport/variant/build/info；配置/step/train/evaluate原样。无新loss/params/reconstruction/fallback/compat。verify复制V5真实8dev/6masks/关expert隔离/uniformoldV4 equality/真实B64semantic0update，新增辅助CE到PM/PF最后层非零有限autograd（只验证loss连接，不声称效果）。之后native3AMPsmoke全grad/strictmodeloptimizer reload。只有两真实gates PASS才一个MSVR freshCLIP seed42B64 50，2026 GPU1，其他dataset暂不扩展。旧V5 18源保持SHA及100训练/冻结controller不改；先实际检查GPU1闲+free>2.8GB（已知400MB模型best/last，smoke模型optimizer约1.2GB，留pending100last400MB），只新增4文件。若未达标结果也保留，未准备匹配新版aux监督的ordinarycontrols，因此不能把旧controls当新优化protocol完全对等或宣称dualaxis更好。检查method等价范围、初始参数shape/归一化/损失梯度路径、真实metricGT/采样/50选点、controller实际sys.path/cwd/日志exit前后gates、资源安全和0test。可做stdlib AST/mock，不实际SSH/GPU或NN模型，不改源码/doc。不制造findings/新hashframework/防御逻辑；实际blocker立即告诉root。输出 results/preflight/axis_collaboration_v6_projected_review.json，status PASS/BLOCKED，blockers[],helper_sha256,checked_source_sha256恰好新4source,checks_count；trace .aris/traces/experiment-bridge/2026-10-03_axis_v6_projected_aux（机器JSON/py/stdout/stderr，不新增humanMD）。请求路由forknone/modelgpt-6-astra/reasoning_effortmax明确记录same-family/provisional，不能推断供应执行身份。"
+}

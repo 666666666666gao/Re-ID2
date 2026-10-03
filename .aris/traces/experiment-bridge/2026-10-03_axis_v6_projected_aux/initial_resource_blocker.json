@@ -1,0 +1,24 @@
+{
+  "status": "BLOCKED_PENDING_MINIMAL_HELPER_FIX",
+  "observed_date": "2026-10-03",
+  "helper_sha256": "3c0630a1be8dca9da1f5a6400e632e3eb47cc175176f08389054da5d9fe8130f",
+  "file": "C:/Users/gb/.codex_tmp/demo_axis_v6_projected26_deploy_20261003.py",
+  "lines": [27, 28, 38],
+  "issue": "Disk gate of >2.8GB counts best+last as ~0.8GB and pending V5 RGBNT100 last as ~0.4GB, although last.pth serializes model plus full Adam optimizer state.",
+  "source_evidence": [
+    "run_projected_mass_experiment.py saves last.pth with model, optimizer, scheduler and scaler state after epoch50.",
+    "solver/make_optimizer.py includes every requires_grad parameter in Adam groups.",
+    "Existing actual V5 MSVR smoke.json records 99,681,414 parameters, 99,669,638 trainable parameters, float32 model initialization and Adam configuration."
+  ],
+  "arithmetic_lower_bounds_bytes": {
+    "MSVR_model_parameter_bytes": 398725656,
+    "Adam_exp_avg_plus_exp_avg_sq_bytes": 797357104,
+    "one_model_plus_optimizer": 1196082760,
+    "V6_smoke_plus_best_plus_last": 2790891176
+  },
+  "additional_required_space": "Pending V5 RGBNT100 model+optimizer last checkpoint is roughly another1.2GB, plus arrays, logs and serialization overhead.",
+  "requested_minimal_fix": "Correct only both private-helper disk thresholds and budget description using measured retained checkpoint sizes; no training-source edits or new framework.",
+  "notified_parent_immediately": true,
+  "source_and_stdlib_mocks_otherwise_passed": 33,
+  "review_scope": "No SSH, GPU, NN model import or optimizer update."
+}

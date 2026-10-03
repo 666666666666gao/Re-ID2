@@ -1,0 +1,270 @@
+{
+  "status": "PASS_SOURCE_AND_STDLIB_MOCKS",
+  "observed_at": "2026-10-03T04:23:14.827881+00:00",
+  "checks_count": 24,
+  "checks": [
+    {
+      "check": "original61_report_and_failed4_sources_preserved",
+      "status": "PASS",
+      "detail": "Original61 PASS and failed exact four source files are retained; this revision writes a distinct review artifact."
+    },
+    {
+      "check": "only_model_changes_other3_source_bytes_equal_failed_launch",
+      "status": "PASS",
+      "detail": "Runner including compact terminal, full optimizer smoke, verifier and controller remain exact bytes."
+    },
+    {
+      "check": "model_exact_two_cast_position_changes_only",
+      "status": "PASS",
+      "detail": "Moving only m0/f0.float() from after to before each auxiliary pool recovers the exact failed model bytes; no parameter, routing, inference or loss change."
+    },
+    {
+      "check": "actual_primary_half_float_failure_and_no_later_stage_launch",
+      "status": "PASS",
+      "detail": "Actual failure is inside pooling Linear during the zero-optimizer semantic AMP tensor forward; smoke/fresh50 did not launch."
+    },
+    {
+      "check": "both_casts_inside_disabled_autocast_before_pool_and_projection",
+      "status": "PASS",
+      "detail": "Both pool_score Linear calls, subsequent PM/PF, normalization and relation mean execute on FP32 evidence inside the existing disabled-autocast region."
+    },
+    {
+      "check": "retrieval_eval_returns_before_training_auxiliary_casts",
+      "status": "PASS",
+      "detail": "Eval/retrieval is byte-preserved and returns before changed training expressions. Casts do not detach; real autograd remains for the unchanged actual tensor gate."
+    },
+    {
+      "check": "old_M_late_cast_failure_order_reproduced_without_torch",
+      "status": "PASS",
+      "detail": {
+        "tagged_mock_events": [
+          "M.pool_score:half"
+        ],
+        "scope": "Symbolic dtype/call order only, not a numerical or actual AMP test."
+      }
+    },
+    {
+      "check": "old_F_late_cast_failure_order_reproduced_without_torch",
+      "status": "PASS",
+      "detail": {
+        "tagged_mock_events": [
+          "F.pool_score:half"
+        ],
+        "scope": "Symbolic dtype/call order only, not a numerical or actual AMP test."
+      }
+    },
+    {
+      "check": "new_M_F_actual_pool_AST_receives_FP32_before_linear",
+      "status": "PASS",
+      "detail": {
+        "tagged_mock_events": [
+          "m0.float",
+          "M.pool_score:float32",
+          "PM:float32",
+          "normalize:m0",
+          "f0.float",
+          "F.pool_score:float32",
+          "PF:float32",
+          "normalize:f0"
+        ],
+        "scope": "Executes actual pool/tap AST with tagged values; real PyTorch gradient and AMP verification is still pending."
+      }
+    },
+    {
+      "check": "helper_exact_failed22_sources_and_both_recorded_PIDs",
+      "status": "PASS",
+      "detail": "Pre-upload guard is anchored to the actual failed22-source receipt and recorded controller/tensor PIDs; no guessed process identifiers."
+    },
+    {
+      "check": "original18_local_source_hashes_unchanged",
+      "status": "PASS",
+      "detail": "Original V5 source files preserved; only V6 model file is authorized for replacement after the two failed processes are gone."
+    },
+    {
+      "check": "plan_failure_correction_new_directory_and_final_four_bytes",
+      "status": "PASS",
+      "detail": "Failure is retained in the machine plan; source and scope refer to the corrected new trial, not a relabeling of the failed run."
+    },
+    {
+      "check": "changed_model_helper_observer_compile",
+      "status": "PASS",
+      "detail": "Compilation only; no torch/model import or external command."
+    },
+    {
+      "check": "deployment_helper_mock_success",
+      "status": "PASS",
+      "detail": {
+        "uploads": [
+          "projected_mass_axis_collaboration.py"
+        ],
+        "starts": 1,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 60,
+            "free_bytes": 10000000000
+          },
+          {
+            "stage": "start",
+            "used_MiB": 60,
+            "free_bytes": 10000000000
+          }
+        ],
+        "old18_unchanged": true,
+        "no_real_remote_operations": true
+      }
+    },
+    {
+      "check": "deployment_helper_mock_ampfix_controller_still_alive",
+      "status": "PASS",
+      "detail": {
+        "uploads": [],
+        "starts": 0,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 60,
+            "free_bytes": 10000000000
+          }
+        ],
+        "old18_unchanged": true,
+        "no_real_remote_operations": true
+      }
+    },
+    {
+      "check": "deployment_helper_mock_ampfix_tensor_still_alive",
+      "status": "PASS",
+      "detail": {
+        "uploads": [],
+        "starts": 0,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 60,
+            "free_bytes": 10000000000
+          }
+        ],
+        "old18_unchanged": true,
+        "no_real_remote_operations": true
+      }
+    },
+    {
+      "check": "deployment_helper_mock_ampfix_GPU1_busy_before_upload",
+      "status": "PASS",
+      "detail": {
+        "uploads": [],
+        "starts": 0,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 1500,
+            "free_bytes": 10000000000
+          }
+        ],
+        "old18_unchanged": true,
+        "no_real_remote_operations": true
+      }
+    },
+    {
+      "check": "deployment_helper_mock_ampfix_disk_low_before_upload",
+      "status": "PASS",
+      "detail": {
+        "uploads": [],
+        "starts": 0,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 60,
+            "free_bytes": 2500000000
+          }
+        ],
+        "old18_unchanged": true,
+        "no_real_remote_operations": true
+      }
+    },
+    {
+      "check": "deployment_helper_mock_ampfix_GPU1_busy_after_upload",
+      "status": "PASS",
+      "detail": {
+        "uploads": [
+          "projected_mass_axis_collaboration.py"
+        ],
+        "starts": 0,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 60,
+            "free_bytes": 10000000000
+          },
+          {
+            "stage": "start",
+            "used_MiB": 1500,
+            "free_bytes": 10000000000
+          }
+        ],
+        "old18_unchanged": true,
+        "no_real_remote_operations": true
+      }
+    },
+    {
+      "check": "deployment_helper_mock_ampfix_disk_low_after_upload",
+      "status": "PASS",
+      "detail": {
+        "uploads": [
+          "projected_mass_axis_collaboration.py"
+        ],
+        "starts": 0,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 60,
+            "free_bytes": 3000000000
+          },
+          {
+            "stage": "start",
+            "used_MiB": 60,
+            "free_bytes": 2500000000
+          }
+        ],
+        "old18_unchanged": true,
+        "no_real_remote_operations": true
+      }
+    },
+    {
+      "check": "observer_only_new_receipt_output_and_snapshot_paths",
+      "status": "PASS",
+      "detail": "Observer logic is unchanged and all three output/input namespaces have distinct ampfix names; old failure records remain separate."
+    },
+    {
+      "check": "observer_ampfix_failure_archived_before_assert",
+      "status": "PASS",
+      "detail": "Actual collect() and generated remote read code executed with synthetic files: preserves old namespace; failed logs/intake saved before stop, or completed intake recollects without duplicate file writes."
+    },
+    {
+      "check": "observer_ampfix_complete_idempotent_intake",
+      "status": "PASS",
+      "detail": "Actual collect() and generated remote read code executed with synthetic files: preserves old namespace; failed logs/intake saved before stop, or completed intake recollects without duplicate file writes."
+    },
+    {
+      "check": "observer_poll_has_240_second_floor_and_no_retry_launch",
+      "status": "PASS",
+      "detail": "Observer only reads/collects and uses existing expected-milestone cadence; it does not restart the failed or new trial."
+    }
+  ],
+  "checked_source_sha256": {
+    "projected_mass_axis_collaboration.py": "559c9512b47c48b5047743177b1d1454595876852fa644aa8440f2720f17ae0a",
+    "run_projected_mass_experiment.py": "4471f8eb6507e5562242765ac6833859a1bf0be208db7b4364cc2215f24ec98e",
+    "verify_projected_axis_mass.py": "00149ff5bcc4d8d99d5ce85a13ecc1bb6ff4d45f6884154aa358a97eb71e2c2f",
+    "launch_projected_mass_trial.py": "67a09be049d6ea95347c691950145527b43e2ab4f31b1c11188b2494fd47212c"
+  },
+  "helper_path": "C:\\Users\\gb\\.codex_tmp\\demo_axis_v6_projected26_ampfix_deploy_20261003.py",
+  "helper_sha256": "f117c72e16f6655cdedd8ff912b9726d3508c904439c77b3e84535a0762d09b4",
+  "observer_path": "C:\\Users\\gb\\.codex_tmp\\demo_axis_v6_projected_ampfix_observe_20261003.py",
+  "observer_sha256": "4ce337f3a9a564225e3b79e20b27f6a6146d5444690f56b34f3ec8fce5acd49a",
+  "no_NN_model_import": true,
+  "real_SSH_calls": 0,
+  "real_GPU_calls": 0,
+  "real_optimizer_updates": 0,
+  "prior61_report_unchanged": true,
+  "scope": "Captured AMP failure correction, single-file redeploy and observer isolation; not actual AMP acceptance."
+}

@@ -1,0 +1,54 @@
+/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/helpers.py:7: FutureWarning: Importing from timm.models.helpers is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+using Transformer_type: ViT-B-16 as a backbone
+Resized position embedding: %s to %s torch.Size([197, 768]) torch.Size([129, 768])
+Position embedding resize to height:8 width: 16
+Successfully load ckpt!
+<All keys matched successfully>
+Loading pretrained model from CLIP
+camera number is : 8
+using Transformer_type: ViT-B-16 as a backbone
+Resized position embedding: %s to %s torch.Size([197, 768]) torch.Size([129, 768])
+Position embedding resize to height:8 width: 16
+Successfully load ckpt!
+<All keys matched successfully>
+Loading pretrained model from CLIP
+camera number is : 8
+using Transformer_type: ViT-B-16 as a backbone
+Resized position embedding: %s to %s torch.Size([197, 768]) torch.Size([129, 768])
+Position embedding resize to height:8 width: 16
+Successfully load ckpt!
+<All keys matched successfully>
+Loading pretrained model from CLIP
+camera number is : 8
+using Transformer_type: ViT-B-16 as a backbone
+Resized position embedding: %s to %s torch.Size([197, 768]) torch.Size([129, 768])
+Position embedding resize to height:8 width: 16
+Successfully load ckpt!
+<All keys matched successfully>
+Loading pretrained model from CLIP
+camera number is : 8
+Traceback (most recent call last):
+  File "/data/gaob/Re-ID/DeMo-DualAxis/verify_projected_axis_mass.py", line 127, in <module>
+    main()
+  File "/data/gaob/Re-ID/DeMo-DualAxis/verify_projected_axis_mass.py", line 106, in main
+    output = model(train_images, label=labels.cuda(), cam_label=train_cam.cuda(), view_label=train_scene.cuda())
+  File "/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/gaob/Re-ID/DeMo-DualAxis/projected_mass_axis_collaboration.py", line 64, in forward
+    standalone_m = F.normalize(self.modality_projection(self.modality_expert.pool(m0, eligible).float()), dim=-1).mean(1)
+  File "/data/gaob/Re-ID/DeMo-DualAxis/axis_collaboration.py", line 45, in pool
+    weights = self.pool_score(evidence).squeeze(-1).softmax(2)
+  File "/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: expected mat1 and mat2 to have the same dtype, but got: c10::Half != float

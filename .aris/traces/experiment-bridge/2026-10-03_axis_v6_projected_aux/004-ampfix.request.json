@@ -1,0 +1,10 @@
+{
+  "call_number": 4,
+  "purpose": "Narrow post-failure AMP correction review",
+  "tool": "collaboration.followup_task",
+  "same_reviewer_context": true,
+  "initial_requested_route": {"fork_turns": "none", "model": "gpt-6-astra", "reasoning_effort": "max"},
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "prompt": "实际tensorAMP门发生Half/Float失败，controller3100567和tensor3100699已exit1/dead，0optimizer、smoke/fresh50未launch。原61PASS四源及report已保存在trace/failed_amp_source和review61_before_actual_amp.json，raw/receipt已收集。请按experiment-bridge CODE_REVIEW做窄复审，不做SSH/GPU/NN。仅model两式把m0/f0.float()移到pool前（原pool(...).float()在disabledautocast内太晚），其余3source不变。model SHA559c9512b47c48b5047743177b1d1454595876852fa644aa8440f2720f17ae0a。新private helper C:/Users/gb/.codex_tmp/demo_axis_v6_projected26_ampfix_deploy_20261003.py SHA f117c72e16f6655cdedd8ff912b9726d3508c904439c77b3e84535a0762d09b4。前guard精确检查原22源及两PIDdead、新output不存在/GPU1<500/space>2.6G，只SCP修改model一文件，后guard检查新22源，再启动不同目录 runs/axis_collaboration_v6_projected_mass_trial_ampfix，不覆盖失败记录；新receipt axis_collaboration_v6_projected_ampfix_launch.json；新observer ...demo_axis_v6_projected_ampfix_observe_20261003.py。请核对FP32cast确实在所有pool linear之前、dtype关闭autocast作用域、单factor/不改变检索forward/旧源、helper/observer失败档案隔离，做stdlib AST/mock，输出新results/preflight/axis_collaboration_v6_projected_ampfix_review.json绑定新4SHA+helper，不改原61report。trace同目录新machine文件，结论provisional，真实AMP还待root。"
+}

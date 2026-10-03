@@ -1,0 +1,371 @@
+{
+  "status": "PASS_SOURCE_AND_STDLIB_MOCKS",
+  "observed_at": "2026-10-03T03:36:20.280798+00:00",
+  "checks_count": 33,
+  "checks": [
+    {
+      "check": "all_new_sources_and_private_helper_compile",
+      "status": "PASS",
+      "detail": [
+        "projected_mass_axis_collaboration.py",
+        "run_projected_mass_experiment.py",
+        "verify_projected_axis_mass.py",
+        "launch_projected_mass_trial.py",
+        "C:\\Users\\gb\\.codex_tmp\\demo_axis_v6_projected26_deploy_20261003.py"
+      ]
+    },
+    {
+      "check": "original_18_source_bytes_match_V5_launch",
+      "status": "PASS",
+      "detail": "Read-only comparison against the existing V5 launch manifest; no hash framework added."
+    },
+    {
+      "check": "V6_inherits_V5_with_no_initializer_or_extra_modules",
+      "status": "PASS",
+      "detail": "Identical inherited parameter initialization, heads, state keys, scales, fuse and controlled_states."
+    },
+    {
+      "check": "entire_forward_AST_equal_except_two_auxiliary_taps",
+      "status": "PASS",
+      "detail": "All base, conditions, route, gates, 00/10/01/11, contribution target/loss, output pairing and eval return are unchanged."
+    },
+    {
+      "check": "projected_taps_use_FP32_normalization_then_512D_heads",
+      "status": "PASS",
+      "detail": "M preserves seven independent relation vectors through PM then normalizes each and averages; F normalizes PF pooled independent evidence."
+    },
+    {
+      "check": "V5_runner_configuration_AST_identical",
+      "status": "PASS",
+      "detail": "Exact full-function AST equality, not a selected-line check."
+    },
+    {
+      "check": "V5_runner_write_json_AST_identical",
+      "status": "PASS",
+      "detail": "Exact full-function AST equality, not a selected-line check."
+    },
+    {
+      "check": "V5_runner_evaluate_AST_identical",
+      "status": "PASS",
+      "detail": "Exact full-function AST equality, not a selected-line check."
+    },
+    {
+      "check": "V5_runner_step_AST_identical",
+      "status": "PASS",
+      "detail": "Exact full-function AST equality, not a selected-line check."
+    },
+    {
+      "check": "V6_runner_only_class_variant_and_metadata_changes",
+      "status": "PASS",
+      "detail": "Entire runner equal after normalizing its new class/import, variant string and descriptive run metadata."
+    },
+    {
+      "check": "V5_tensor_contract_retained_with_only_aux_CE_probe_added",
+      "status": "PASS",
+      "detail": "Retains actual8 dev, six masks, initial V4 state/capacity equality, uniform fusion, routing gradient, closed-expert isolation and semantic B64/zero-update checks."
+    },
+    {
+      "check": "auxiliary_gradient_probe_isolated_from_fused_loss",
+      "status": "PASS",
+      "detail": "CE of the two group heads alone must connect to both final projection weights with finite nonzero derivatives; this does not claim efficacy."
+    },
+    {
+      "check": "GT_identity_dev_only_and_scene_filter",
+      "status": "PASS",
+      "detail": "Actual dataset identity/scene ground truth; fixed identity-held-out training split; no model teacher labels or official test access."
+    },
+    {
+      "check": "fixed50_earliest_dev_mAP_and_strict_best_reload",
+      "status": "PASS",
+      "detail": "Fixed 50 epochs, no early stopping, earliest tie retention and same FP32 evaluation after selected-checkpoint reload."
+    },
+    {
+      "check": "native_smoke_three_effective_steps_all_gradients_reload",
+      "status": "PASS",
+      "detail": "Source contains three effective native AMP updates, every trainable tensor finite/nonzero and strict model/optimizer load plus equal eval output."
+    },
+    {
+      "check": "controller_mock_all_pass",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor",
+          "smoke",
+          "development"
+        ],
+        "exit_receipts_retained": 3,
+        "gate_read_before_train": [
+          true
+        ],
+        "controller_complete": true,
+        "mock_only_no_process_created": true
+      }
+    },
+    {
+      "check": "controller_mock_tensor_process_failure",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor"
+        ],
+        "exit_receipts_retained": 1,
+        "gate_read_before_train": [],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      }
+    },
+    {
+      "check": "controller_mock_tensor_status_failure",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor"
+        ],
+        "exit_receipts_retained": 1,
+        "gate_read_before_train": [],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      }
+    },
+    {
+      "check": "controller_mock_tensor_optimizer_nonzero",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor"
+        ],
+        "exit_receipts_retained": 1,
+        "gate_read_before_train": [],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      }
+    },
+    {
+      "check": "controller_mock_tensor_aux_gradient_zero",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor"
+        ],
+        "exit_receipts_retained": 1,
+        "gate_read_before_train": [],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      }
+    },
+    {
+      "check": "controller_mock_smoke_process_failure",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor",
+          "smoke"
+        ],
+        "exit_receipts_retained": 2,
+        "gate_read_before_train": [],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      }
+    },
+    {
+      "check": "controller_mock_smoke_steps_wrong",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor",
+          "smoke"
+        ],
+        "exit_receipts_retained": 2,
+        "gate_read_before_train": [],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      }
+    },
+    {
+      "check": "controller_mock_smoke_gradient_failure",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor",
+          "smoke"
+        ],
+        "exit_receipts_retained": 2,
+        "gate_read_before_train": [],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      }
+    },
+    {
+      "check": "controller_mock_smoke_reload_failure",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor",
+          "smoke"
+        ],
+        "exit_receipts_retained": 2,
+        "gate_read_before_train": [],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      }
+    },
+    {
+      "check": "controller_mock_development_process_failure",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor",
+          "smoke",
+          "development"
+        ],
+        "exit_receipts_retained": 3,
+        "gate_read_before_train": [
+          true
+        ],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      }
+    },
+    {
+      "check": "controller_mock_development_incomplete",
+      "status": "PASS",
+      "detail": {
+        "spawned_stages": [
+          "tensor",
+          "smoke",
+          "development"
+        ],
+        "exit_receipts_retained": 3,
+        "gate_read_before_train": [
+          true
+        ],
+        "controller_complete": false,
+        "mock_only_no_process_created": true
+      }
+    },
+    {
+      "check": "existing_GPU_idle_poll_240_seconds",
+      "status": "PASS",
+      "detail": "Busy observation waits 240 seconds and resumes only on memory.used<500; mock does not sleep."
+    },
+    {
+      "check": "actual_controller_imports_resolve_with_project_script_path",
+      "status": "PASS",
+      "detail": "Real controller module executed with heavy dependencies mocked; remote Popen cwd and script argument separately checked below."
+    },
+    {
+      "check": "deployment_helper_mock_success",
+      "status": "PASS",
+      "detail": {
+        "uploads": [
+          "projected_mass_axis_collaboration.py",
+          "run_projected_mass_experiment.py",
+          "verify_projected_axis_mass.py",
+          "launch_projected_mass_trial.py"
+        ],
+        "starts": 1,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 60,
+            "free_bytes": 10000000000
+          },
+          {
+            "stage": "start",
+            "used_MiB": 60,
+            "free_bytes": 10000000000
+          }
+        ],
+        "old18_unchanged": true,
+        "no_real_remote_operations": true
+      }
+    },
+    {
+      "check": "deployment_helper_mock_GPU_busy_before_upload",
+      "status": "PASS",
+      "detail": {
+        "uploads": [],
+        "starts": 0,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 1500,
+            "free_bytes": 10000000000
+          }
+        ],
+        "old18_unchanged": true,
+        "no_real_remote_operations": true
+      }
+    },
+    {
+      "check": "deployment_helper_mock_disk_low_before_upload",
+      "status": "PASS",
+      "detail": {
+        "uploads": [],
+        "starts": 0,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 60,
+            "free_bytes": 2000000000
+          }
+        ],
+        "old18_unchanged": true,
+        "no_real_remote_operations": true
+      }
+    },
+    {
+      "check": "deployment_helper_mock_GPU_busy_after_upload",
+      "status": "PASS",
+      "detail": {
+        "uploads": [
+          "projected_mass_axis_collaboration.py",
+          "run_projected_mass_experiment.py",
+          "verify_projected_axis_mass.py",
+          "launch_projected_mass_trial.py"
+        ],
+        "starts": 0,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 60,
+            "free_bytes": 10000000000
+          },
+          {
+            "stage": "start",
+            "used_MiB": 1500,
+            "free_bytes": 10000000000
+          }
+        ],
+        "old18_unchanged": true,
+        "no_real_remote_operations": true
+      }
+    },
+    {
+      "check": "checkpoint_budget_primary_code_and_observed_trainable_count",
+      "status": "PASS",
+      "detail": {
+        "V5_MSVR_parameters": 99681414,
+        "V5_MSVR_trainable_parameters": 99669638,
+        "FP32_parameter_bytes_lower_bound": 398725656,
+        "Adam_two_moment_bytes_lower_bound": 797357104,
+        "model_and_optimizer_bytes_lower_bound": 1196082760,
+        "V6_smoke_best_last_parameter_state_bytes_lower_bound": 2790891176,
+        "last_serialization_includes_optimizer": true,
+        "pending_V5_RGB100_last_requires_its_own_model_and_optimizer_budget": true
+      }
+    }
+  ],
+  "checked_source_sha256": {
+    "projected_mass_axis_collaboration.py": "ae0cbd086495af52ed3461f5cd8719a982b1e8ffcc77ff924a21e6c99455de70",
+    "run_projected_mass_experiment.py": "c69aceab6a719411daad2d1d8b7df3bcf008a0f640e9196c034dbc9157acab39",
+    "verify_projected_axis_mass.py": "00149ff5bcc4d8d99d5ce85a13ecc1bb6ff4d45f6884154aa358a97eb71e2c2f",
+    "launch_projected_mass_trial.py": "67a09be049d6ea95347c691950145527b43e2ab4f31b1c11188b2494fd47212c"
+  },
+  "helper_sha256": "3c0630a1be8dca9da1f5a6400e632e3eb47cc175176f08389054da5d9fe8130f",
+  "no_NN_model_import": true,
+  "real_SSH_calls": 0,
+  "real_GPU_calls": 0,
+  "real_optimizer_updates": 0,
+  "scope": "Source equivalence and scheduling/deployment mocks; does not authorize bypassing actual tensor and AMP smoke gates. Disk-budget adjudication is in the reviewer report."
+}

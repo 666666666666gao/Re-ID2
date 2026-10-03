@@ -1,0 +1,218 @@
+{
+  "status": "PASS_SOURCE_AND_STDLIB_MOCKS",
+  "observed_at": "2026-10-03T04:06:06.942484+00:00",
+  "checks_count": 20,
+  "checks": [
+    {
+      "check": "compact26_model_and_tensor_verifier_bytes_unchanged",
+      "status": "PASS",
+      "detail": "Reuse prior forward/parameter/shape/normalization/gradient-path review without importing any neural model."
+    },
+    {
+      "check": "compact26_controller_bytes_restore_original_reviewed_GPU1_controller",
+      "status": "PASS",
+      "detail": "Exact full-file equality to the initially reviewed GPU1 controller and its eleven failure/success mocks; no gate change."
+    },
+    {
+      "check": "compact26_runner_exact_only_metadata_and_last_optimizer_omission",
+      "status": "PASS",
+      "detail": "Reversing only the one metadata line and one terminal-dictionary optimizer entry recovers the exact prior reviewed runner bytes."
+    },
+    {
+      "check": "compact26_full50_training_evaluation_best_loop_identical",
+      "status": "PASS",
+      "detail": "Entire50-epoch loop AST unchanged: loss/optimizer updates, sampling seeds, FP32 dev evaluation, earliest-max best save and all logs."
+    },
+    {
+      "check": "compact26_last_serialization_runs_only_after_all50",
+      "status": "PASS",
+      "detail": "Terminal save is the statement after the completed full50 for-loop, before selected-best reload and COMPLETE outputs."
+    },
+    {
+      "check": "compact26_terminal_payload_model_scheduler_scaler_counters_only",
+      "status": "PASS",
+      "detail": "Omits only optimizer moments at the already completed run end; model, scheduler, scaler, epoch50 and attempt/effective-step counters remain."
+    },
+    {
+      "check": "compact26_native3AMP_full_optimizer_smoke_AST_identical",
+      "status": "PASS",
+      "detail": "Unchanged complete model+optimizer save/restore, strict model load, all-gradients check, three effective steps and equal reloaded features."
+    },
+    {
+      "check": "compact26_terminal_metadata_discloses_no_optimizer_resume",
+      "status": "PASS",
+      "detail": "Checkpoint is explicitly documented as model/scheduler/scaler/counters only; optimizer-resume support is not claimed."
+    },
+    {
+      "check": "compact26_post50_save_reload_and_COMPLETE_stdlib_witness",
+      "status": "PASS",
+      "detail": "Executed actual post50 AST using sentinels: compact terminal saves, selected best strictly reloads, dev equality gate executes and both completion records remain COMPLETE."
+    },
+    {
+      "check": "compact26_original18_sources_unchanged",
+      "status": "PASS",
+      "detail": "Original V5 training/frozen input source bytes untouched."
+    },
+    {
+      "check": "compact26_actual_V5_three_training_terminals_already_COMPLETE",
+      "status": "PASS",
+      "detail": "Read existing result/exit records only. Their unchanged runner saves last before result COMPLETE, so no pending1.2GB V5 training terminal remains."
+    },
+    {
+      "check": "compact26_prior27_guard_failure_retained_no_upload_or_output",
+      "status": "PASS",
+      "detail": "Primary historical failure explicitly shows GPU0 occupied and all4 sources/output absent; no retry or preemption inferred."
+    },
+    {
+      "check": "compact26_budget_uses_measured_full_smoke_and_two_model_states",
+      "status": "PASS",
+      "detail": {
+        "compact_trial_estimate_bytes": 1995123480,
+        "pending_V5_RGB100_four_state_raw_feature_bytes": 281600000,
+        "remaining_margin_bytes": 323276520,
+        "minimum_free_bytes": 2600000000,
+        "notes": "Margin covers terminal metadata, feature archive metadata, V6 dev arrays and text outputs; V5 missing evaluator writes metrics/text, not additional feature archives. Actual disk availability must pass both runtime guards."
+      }
+    },
+    {
+      "check": "compact26_plan_source_bytes_storage_limit_and_explicit_history",
+      "status": "PASS",
+      "detail": "Single factor method remains auxiliary taps; separate post-training storage choice and26->27 guard failure->26 selection are explicit."
+    },
+    {
+      "check": "compact26_changed_runner_launcher_helper_compile",
+      "status": "PASS",
+      "detail": "Compilation only, no model imports."
+    },
+    {
+      "check": "deployment_helper_mock_success",
+      "status": "PASS",
+      "detail": {
+        "uploads": [
+          "projected_mass_axis_collaboration.py",
+          "run_projected_mass_experiment.py",
+          "verify_projected_axis_mass.py",
+          "launch_projected_mass_trial.py"
+        ],
+        "starts": 1,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 60,
+            "free_bytes": 10000000000
+          },
+          {
+            "stage": "start",
+            "used_MiB": 60,
+            "free_bytes": 10000000000
+          }
+        ],
+        "old18_unchanged": true,
+        "no_real_remote_operations": true
+      }
+    },
+    {
+      "check": "deployment_helper_mock_compact26_GPU1_busy_before_upload",
+      "status": "PASS",
+      "detail": {
+        "uploads": [],
+        "starts": 0,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 1500,
+            "free_bytes": 10000000000
+          }
+        ],
+        "old18_unchanged": true,
+        "no_real_remote_operations": true
+      }
+    },
+    {
+      "check": "deployment_helper_mock_compact26_disk_below2p6_before_upload",
+      "status": "PASS",
+      "detail": {
+        "uploads": [],
+        "starts": 0,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 60,
+            "free_bytes": 2500000000
+          }
+        ],
+        "old18_unchanged": true,
+        "no_real_remote_operations": true
+      }
+    },
+    {
+      "check": "deployment_helper_mock_compact26_GPU1_busy_after_upload",
+      "status": "PASS",
+      "detail": {
+        "uploads": [
+          "projected_mass_axis_collaboration.py",
+          "run_projected_mass_experiment.py",
+          "verify_projected_axis_mass.py",
+          "launch_projected_mass_trial.py"
+        ],
+        "starts": 0,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 60,
+            "free_bytes": 10000000000
+          },
+          {
+            "stage": "start",
+            "used_MiB": 1500,
+            "free_bytes": 10000000000
+          }
+        ],
+        "old18_unchanged": true,
+        "no_real_remote_operations": true
+      }
+    },
+    {
+      "check": "deployment_helper_mock_compact26_disk_below2p6_after_upload",
+      "status": "PASS",
+      "detail": {
+        "uploads": [
+          "projected_mass_axis_collaboration.py",
+          "run_projected_mass_experiment.py",
+          "verify_projected_axis_mass.py",
+          "launch_projected_mass_trial.py"
+        ],
+        "starts": 0,
+        "resources": [
+          {
+            "stage": "guard",
+            "used_MiB": 60,
+            "free_bytes": 3000000000
+          },
+          {
+            "stage": "start",
+            "used_MiB": 60,
+            "free_bytes": 2500000000
+          }
+        ],
+        "old18_unchanged": true,
+        "no_real_remote_operations": true
+      }
+    }
+  ],
+  "checked_source_sha256": {
+    "projected_mass_axis_collaboration.py": "ae0cbd086495af52ed3461f5cd8719a982b1e8ffcc77ff924a21e6c99455de70",
+    "run_projected_mass_experiment.py": "4471f8eb6507e5562242765ac6833859a1bf0be208db7b4364cc2215f24ec98e",
+    "verify_projected_axis_mass.py": "00149ff5bcc4d8d99d5ce85a13ecc1bb6ff4d45f6884154aa358a97eb71e2c2f",
+    "launch_projected_mass_trial.py": "67a09be049d6ea95347c691950145527b43e2ab4f31b1c11188b2494fd47212c"
+  },
+  "helper_sha256": "f5f23e47639ea390390e6116df46c941a38b9e49112605c84e23b0c94d09dba2",
+  "helper_path": "C:\\Users\\gb\\.codex_tmp\\demo_axis_v6_projected26_compact_deploy_20261003.py",
+  "no_NN_model_import": true,
+  "real_SSH_calls": 0,
+  "real_GPU_calls": 0,
+  "real_optimizer_updates": 0,
+  "previous_review_archive": "previous_host27_review_PASS41.json",
+  "previous_review_checks_count": 41,
+  "scope": "Only terminal serialization/metadata, explicit GPU1/resource/scheduling/deployment changes; original model/verifier checks reused."
+}
