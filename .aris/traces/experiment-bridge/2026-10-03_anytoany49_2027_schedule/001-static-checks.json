@@ -1,0 +1,180 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "original_reviewed_files_match",
+      "status": "PASS",
+      "detail": {
+        "leaf": "f4eca39c3bf5d41148bfcd715e77fad19e29109c98bee1301b64ae2640677975",
+        "original_controller": "dac49755976540ab24026c1de9d8755bab7baa399d714d0ed02fbecaf80be361",
+        "original_helper": "072eb1a3be211601fce5be75906d60e219cdddcb6d45fdc6beadf2f08d891996"
+      }
+    },
+    {
+      "name": "controller_changes_exactly_requested_schedule",
+      "status": "PASS",
+      "detail": {
+        "groups": {
+          "2": [
+            [
+              "MSVR310",
+              2
+            ],
+            [
+              "RGBNT201",
+              2
+            ]
+          ],
+          "1": [
+            [
+              "RGBNT100",
+              1
+            ]
+          ]
+        },
+        "workers": 2,
+        "slot_AST_identical": true,
+        "all_non_schedule_text_identical": true
+      }
+    },
+    {
+      "name": "helper_changes_exactly_requested_27_only_schedule",
+      "status": "PASS",
+      "detail": {
+        "hosts": [
+          "2027"
+        ],
+        "variant": "demo",
+        "source_bindings": {
+          "missing_anytoany_development.py": "f4eca39c3bf5d41148bfcd715e77fad19e29109c98bee1301b64ae2640677975",
+          "launch_anytoany_frozen27.py": "f8a261c751b13a6380e995428482a0b6e32c0891a0071b802ccf15bd1023518d"
+        },
+        "all_non_schedule_text_identical": true,
+        "dependency_hashes_equal_existing26_receipt": 14
+      }
+    },
+    {
+      "name": "known_failed_guard_state",
+      "status": "PASS",
+      "detail": {
+        "diagnostic": {
+          "gpu": "0, 4176, 45\n1, 20, 0\n2, 20, 0\n3, 853, 41\n",
+          "input_differences": {
+            "MSVR310_demo_s42": [],
+            "RGBNT201_demo_s42": [],
+            "RGBNT100_demo_s42": []
+          },
+          "output_exists": false,
+          "new_sources_exist": []
+        },
+        "existing26_pid": 3301608,
+        "receipt27_absent_at_review": true,
+        "no_new_runtime_observation": true
+      }
+    },
+    {
+      "name": "unchanged_clean_GT_and49_prerequisites",
+      "status": "PASS",
+      "detail": {
+        "leaf_exact_previous_review_hash": true,
+        "saved_query_ids_cameras_scenes_names_checked": true,
+        "exact_clean_feature_parity_before_grid": true,
+        "all49_required": true,
+        "previous_review_evidence_reused": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_anytoany49\\004-semantic-checks.json"
+      }
+    }
+  ],
+  "launcher_diff": [
+    "--- launch_anytoany_frozen.py",
+    "+++ launch_anytoany_frozen27.py",
+    "@@ -1,4 +1,4 @@",
+    "-\"\"\"Three independent frozen dataset jobs on idle cards; smoke before full49.\"\"\"",
+    "+\"\"\"Frozen jobs on two currently idle 2027 cards; serialize MSVR and201 onGPU2.\"\"\"",
+    " import argparse",
+    " from concurrent.futures import ThreadPoolExecutor",
+    " import hashlib",
+    "@@ -22,7 +22,7 @@",
+    "     parser.add_argument('--pretrained',required=True)",
+    "     args=parser.parse_args()",
+    "     output=Path(args.output);output.mkdir(exist_ok=False)",
+    "-    jobs=[('MSVR310',0),('RGBNT201',2),('RGBNT100',3)]",
+    "+    groups={2:[('MSVR310',2),('RGBNT201',2)],1:[('RGBNT100',1)]}",
+    " ",
+    "     def slot(job):",
+    "         dataset,gpu=job",
+    "@@ -62,7 +62,10 @@",
+    "         write_json(folder/'controller_result.json',record)",
+    "         return record",
+    " ",
+    "-    with ThreadPoolExecutor(max_workers=3) as pool:runs=list(pool.map(slot,jobs))",
+    "+    def worker(jobs):return [slot(job) for job in jobs]",
+    "+",
+    "+    with ThreadPoolExecutor(max_workers=2) as pool:groups_done=list(pool.map(worker,groups.values()))",
+    "+    runs=[run for group in groups_done for run in group]",
+    "     write_json(output/'controller_result.json',dict(status='COMPLETE',runs=runs,availability_pairs=147,",
+    "         optimizer_updates=0,official_test_uses=0,scope='Frozen seed42 development full7x7 availability evaluation, no missing-input retraining'))",
+    " "
+  ],
+  "helper_diff": [
+    "--- demo_anytoany_deploy_20261003.py",
+    "+++ demo_anytoany27_deploy_20261003.py",
+    "@@ -8,10 +8,10 @@",
+    " from collect_results import PROJECT, HOSTS, OPTIONS, command, remote_python",
+    " HOSTS['2027']=('/data/gb/Re-ID/DeMo-DualAxis','/data/gb/Re-ID/conda-envs/tri_reid/bin/python')",
+    " ",
+    "-review=json.loads((PROJECT/'results/preflight/anytoany49_review.json').read_text(encoding='utf-8'))",
+    "+review=json.loads((PROJECT/'results/preflight/anytoany49_2027_schedule_review.json').read_text(encoding='utf-8'))",
+    " assert review['status']=='PASS' and not review['blockers']",
+    " assert review['helper_sha256']==hashlib.sha256(Path(__file__).read_bytes()).hexdigest()",
+    "-files=('missing_anytoany_development.py','launch_anytoany_frozen.py')",
+    "+files=('missing_anytoany_development.py','launch_anytoany_frozen27.py')",
+    " new_sources={name:hashlib.sha256((PROJECT/name).read_bytes()).hexdigest() for name in files}",
+    " assert review['checked_source_sha256']==new_sources",
+    " dependencies=('run_experiment.py','experiment_data.py','full_evaluation.py','missing_evaluation.py','scaled_axis_collaboration.py',",
+    "@@ -21,8 +21,7 @@",
+    " proofs={name:proof for name,proof in prior['input_files'].items() if name.endswith('_demo_s42')}",
+    " assert len(proofs)==3",
+    " launches=[]",
+    "-for host,variant,training in [('2026','axis_mass_fullref','runs/axis_collaboration_v5_mass/development'),",
+    "-                               ('2027','demo','runs/axis_collaboration_v4_missing_development27_input')]:",
+    "+for host,variant,training in [('2027','demo','runs/axis_collaboration_v4_missing_development27_input')]:",
+    "     root,python=HOSTS[host]",
+    "     output=root+'/runs/anytoany49_'+variant+'_20261003'",
+    "     sources={name:hashlib.sha256((PROJECT/name).read_bytes()).hexdigest() for name in dependencies}",
+    "@@ -34,7 +33,7 @@",
+    " assert all(hashlib.sha256((root/name).read_bytes()).hexdigest()==sha for name,sha in {sources!r}.items())",
+    " assert not Path({output!r}).exists() and all(not (root/name).exists() for name in {files!r})",
+    " used={{int(line.split(',')[0]):int(line.split(',')[1]) for line in subprocess.check_output(['nvidia-smi','--query-gpu=index,memory.used','--format=csv,noheader,nounits'],text=True).strip().splitlines()}}",
+    "-assert all(used[gpu]<500 for gpu in (0,2,3));assert shutil.disk_usage(root).free>1000000000",
+    "+assert all(used[gpu]<500 for gpu in (1,2));assert shutil.disk_usage(root).free>1000000000",
+    " inputs={{}}",
+    " for dataset in ('MSVR310','RGBNT201','RGBNT100'):",
+    "  name=dataset+'_'+{variant!r}+'_s42';run=training/name",
+    "@@ -45,7 +44,7 @@",
+    "  paths=(run/'best.pth',run/'best_dev_arrays.npz',run/'result.json',exit)",
+    "  inputs[name]={{path.name:{{'bytes':path.stat().st_size,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}} for path in paths}}",
+    "  if {variant!r}=='demo':assert inputs[name]=={proofs!r}[name]['files']",
+    "-print(json.dumps(dict(inputs=inputs,gpus={{str(gpu):used[gpu] for gpu in (0,2,3)}},disk_free_bytes=shutil.disk_usage(root).free)))",
+    "+print(json.dumps(dict(inputs=inputs,gpus={{str(gpu):used[gpu] for gpu in (1,2)}},disk_free_bytes=shutil.disk_usage(root).free)))",
+    " '''",
+    "     availability=json.loads(remote_python(host,guard))",
+    "     for name in files:command(['scp',*OPTIONS,str(PROJECT/name),host+':'+root+'/'+name])",
+    "@@ -57,8 +56,8 @@",
+    " root=Path({root!r});output=Path({output!r});assert not output.exists()",
+    " assert all(hashlib.sha256((root/name).read_bytes()).hexdigest()==sha for name,sha in {all_sources!r}.items())",
+    " used={{int(line.split(',')[0]):int(line.split(',')[1]) for line in subprocess.check_output(['nvidia-smi','--query-gpu=index,memory.used','--format=csv,noheader,nounits'],text=True).strip().splitlines()}}",
+    "-assert all(used[gpu]<500 for gpu in (0,2,3))",
+    "-argv=[{python!r},'-u','launch_anytoany_frozen.py','--training-root',str(root/{training!r}),'--variant',{variant!r},'--output',str(output),'--data-root',{data!r},'--pretrained',{pretrained!r}]",
+    "+assert all(used[gpu]<500 for gpu in (1,2))",
+    "+argv=[{python!r},'-u','launch_anytoany_frozen27.py','--training-root',str(root/{training!r}),'--variant',{variant!r},'--output',str(output),'--data-root',{data!r},'--pretrained',{pretrained!r}]",
+    " log=Path(str(output)+'.log')",
+    " with log.open('x') as handle:child=subprocess.Popen(argv,cwd=root,start_new_session=True,stdout=handle,stderr=subprocess.STDOUT,env=dict(os.environ,OMP_NUM_THREADS='4',MKL_NUM_THREADS='4',OPENBLAS_NUM_THREADS='4'))",
+    " print(json.dumps(dict(host={host!r},pid=child.pid,output=str(output),log=str(log),source_sha256={all_sources!r},variant={variant!r},started=time.time(),command=argv)))",
+    "@@ -66,4 +65,4 @@",
+    "     receipt=json.loads(remote_python(host,start));receipt.update(availability=availability,observed_at=datetime.now().isoformat(timespec='seconds'))",
+    "     target=PROJECT/('results/preflight/anytoany49_'+host+'_launch.json');assert not target.exists()",
+    "     target.write_bytes(json.dumps(receipt,indent=2).encode('utf-8'));launches.append(receipt)",
+    "-    print('ANYTOANY49_FROZEN_STARTED',json.dumps(dict(host=host,pid=receipt['pid'],gpu=[0,2,3],pairs=147)),flush=True)",
+    "+    print('ANYTOANY49_FROZEN_STARTED',json.dumps(dict(host=host,pid=receipt['pid'],gpu=[1,2],pairs=147)),flush=True)"
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "status": "PASS",
+  "checked_source_sha256": {
+    "missing_anytoany_development.py": "f4eca39c3bf5d41148bfcd715e77fad19e29109c98bee1301b64ae2640677975",
+    "launch_rgbnt100_anytoany_recheck.py": "d1f48a04f645773383fa3dc40941dd97ebc662bfc6de005286c8b84bf2be0fe4"
+  },
+  "helper_sha256": "b88da8811ad50c644b455a0e8afb70a4b9d92184249462686c5e18cf97335f80",
+  "retained_source_receipt_hashes": {
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "configs/MSVR310/DeMo.yml": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+    "configs/RGBNT100/DeMo.yml": "e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c",
+    "configs/RGBNT201/DeMo.yml": "bfee0de623885a38cce974c1c5d74abf47c54e14852cc266b8f69c70a858c51d",
+    "dual_axis.py": "0c6090fe5b8b15cc021bf1809860f0675187288dc2145d0129ce89a5eb78a330",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "mass_axis_collaboration.py": "1312c8b993dcd16b1db1a8845a247afd4b1eff13255832644dd30e029e268f8d",
+    "missing_anytoany_development.py": "f4eca39c3bf5d41148bfcd715e77fad19e29109c98bee1301b64ae2640677975",
+    "missing_evaluation.py": "e04e16dbb4ec486f28065102b5d7301c68e7d1cef62cdd5fcfa99b3dac222089",
+    "modeling/make_model.py": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+    "residual_dual_axis.py": "4a22801f014e971786402a477a33e7f86ecf608e786ab4c2f3c796abc033c91c",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "run_mass_experiment.py": "ad3351c5ca83c21b57ce1454c0ad00673396ce5cbcfd0ccfaaa63f7eecb7e07b",
+    "scaled_axis_collaboration.py": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+    "splits.json": "66f6ee8f1c07f4fb97bf48ed8189b60859ab2f5f207ceea6b28a90c4ee1f9377",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2"
+  },
+  "retained_source_count": 17,
+  "controller_slot_ast_identical": true,
+  "only_controller_changes": [
+    "docstring",
+    "one RGBNT100 job on GPU0",
+    "max_workers=1",
+    "total availability_pairs=49"
+  ],
+  "controller_diff": [
+    "--- launch_anytoany_frozen.py",
+    "+++ launch_rgbnt100_anytoany_recheck.py",
+    "@@ -1,4 +1,4 @@",
+    "-\"\"\"Three independent frozen dataset jobs on idle cards; smoke before full49.\"\"\"",
+    "+\"\"\"One same-host RGBNT100 DeMo recheck after observed cross-host AP/INP drift.\"\"\"",
+    " import argparse",
+    " from concurrent.futures import ThreadPoolExecutor",
+    " import hashlib",
+    "@@ -22,7 +22,7 @@",
+    "     parser.add_argument('--pretrained',required=True)",
+    "     args=parser.parse_args()",
+    "     output=Path(args.output);output.mkdir(exist_ok=False)",
+    "-    jobs=[('MSVR310',0),('RGBNT201',2),('RGBNT100',3)]",
+    "+    jobs=[('RGBNT100',0)]",
+    " ",
+    "     def slot(job):",
+    "         dataset,gpu=job",
+    "@@ -62,8 +62,8 @@",
+    "         write_json(folder/'controller_result.json',record)",
+    "         return record",
+    " ",
+    "-    with ThreadPoolExecutor(max_workers=3) as pool:runs=list(pool.map(slot,jobs))",
+    "-    write_json(output/'controller_result.json',dict(status='COMPLETE',runs=runs,availability_pairs=147,",
+    "+    with ThreadPoolExecutor(max_workers=1) as pool:runs=list(pool.map(slot,jobs))",
+    "+    write_json(output/'controller_result.json',dict(status='COMPLETE',runs=runs,availability_pairs=49,",
+    "         optimizer_updates=0,official_test_uses=0,scope='Frozen seed42 development full7x7 availability evaluation, no missing-input retraining'))",
+    " ",
+    " "
+  ],
+  "original_frozen_input_manifest": {
+    "source_host": "2026",
+    "source_path": "/data/gaob/Re-ID/DeMo-DualAxis/runs/dynamic_amp_comparison/RGBNT100_demo_s42",
+    "files": {
+      "best.pth": {
+        "sha256": "a53c9aba1d7a675aa71ba380fd0b533aa63f9830366856bcbd68891f04d5a01e",
+        "bytes": 391737905
+      },
+      "best_dev_arrays.npz": {
+        "sha256": "faf903ba490aeb8140012ae40fee8d7e8b640be6f7b198780a614aa17bf2754d",
+        "bytes": 93349575
+      },
+      "result.json": {
+        "sha256": "1c812cc985ebc29eb0703bba904f15974c2f32c5670a91bb65e71d4ac57aabde",
+        "bytes": 3313
+      },
+      "exit.json": {
+        "sha256": "7acb960a44ecfea92ab60a8a4b1c5f84f16f0941baa7afcd7511e65d27378598",
+        "bytes": 54
+      }
+    }
+  },
+  "original_terminal": {
+    "status": "COMPLETE",
+    "epochs": 50,
+    "seed": 42,
+    "selected_epoch": 49,
+    "query_count": 3125
+  },
+  "historical_26_and_27_four_input_proofs_equal": true,
+  "historical_26_and_27_clean_parity_zero": true,
+  "actual_fixed_paths": {
+    "host": "2026",
+    "root": "/data/gaob/Re-ID/DeMo-DualAxis",
+    "python": "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+    "training": "/data/gaob/Re-ID/DeMo-DualAxis/runs/dynamic_amp_comparison",
+    "input_run": "/data/gaob/Re-ID/DeMo-DualAxis/runs/dynamic_amp_comparison/RGBNT100_demo_s42",
+    "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/anytoany49_demo_RGBNT100_samehost_recheck_20261003",
+    "data_root": "/data/gaob/Re-ID/dataset",
+    "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt"
+  },
+  "diagnostic": {
+    "changed_conditions": 12,
+    "max_abs_mAP_mINP_pp": 0.00012587849522560646,
+    "all_four_rank_metrics_unchanged": true,
+    "cause": "Difference magnitude only; source not yet proven, no widened acceptance tolerance"
+  },
+  "scientific_protocol_changed": false,
+  "acceptance_tolerance_changed": false
+}

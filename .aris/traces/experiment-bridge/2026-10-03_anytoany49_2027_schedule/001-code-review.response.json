@@ -1,0 +1,87 @@
+{
+  "status": "PASS",
+  "blockers": [],
+  "non_blocking_issues": [],
+  "review_model": "gpt-6-astra",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "max",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer_task": "/root/review_anytoany27_resource_schedule",
+  "reviewed_at": "2026-10-03T15:35:06+08:00",
+  "scope": "SOURCE_AND_STDLIB_AST_MOCK_ONLY",
+  "checked_source_sha256": {
+    "missing_anytoany_development.py": "f4eca39c3bf5d41148bfcd715e77fad19e29109c98bee1301b64ae2640677975",
+    "launch_anytoany_frozen27.py": "f8a261c751b13a6380e995428482a0b6e32c0891a0071b802ccf15bd1023518d"
+  },
+  "helper_path": "C:/Users/gb/.codex_tmp/demo_anytoany27_deploy_20261003.py",
+  "helper_sha256": "3c8f279d6d2729553f5e05a38aa6c702fca10ebb3685f4494ca48f8aae49f722",
+  "no_nn": true,
+  "torch_imported": false,
+  "numpy_imported": false,
+  "nn_or_gpu_execution": false,
+  "actual_remote_calls": 0,
+  "installs": 0,
+  "implementation_edits": false,
+  "findings": [
+    {
+      "topic": "Exact schedule-only source changes",
+      "result": "PASS",
+      "evidence": "New launcher equals the original after only the requested docstring, fixed GPU groups, two workers, serial worker function and three-record flattening. The complete slot AST is identical. New helper equals the original after only the requested 2027 loop, review/source/launcher names and GPU 1/2 guards."
+    },
+    {
+      "topic": "GPU 2 serialization and complete aggregation",
+      "result": "PASS",
+      "evidence": "Executed actual main AST with real stdlib ThreadPoolExecutor(max_workers=2), mocked children and a two-thread rendezvous. Each GPU had maximum one active child. MSVR310 smoke/full and PASS record precede RGBNT201 smoke on GPU 2; RGBNT100 uses GPU 1. Successful root result contains exactly three PASS records and 147 availability pairs. MSVR smoke failure prevents RGBNT201 and root COMPLETE."
+    },
+    {
+      "topic": "2027-only deployment and 2026 preservation",
+      "result": "PASS",
+      "evidence": "Only loop entry is host 2027/demo and every mocked remote call, source copy and controller start targets 2027. Existing host 2026 receipt, including PID 3301608, and mocked remote controller state remain byte-identical in all 23 deployment cases. No resumption or launch route to 2026 is executed."
+    },
+    {
+      "topic": "Busy-card gates and preservation of GPUs 0/3",
+      "result": "PASS",
+      "evidence": "Both generated guard and start scripts require GPU 1 and 2 memory below 500 MiB. Each card at 500 MiB rejects before copying and again immediately before controller start; no launch follows rejection. The success case retains GPU 0 at 4176 MiB and GPU 3 at 853 MiB and schedules neither. Inherited per-stage idle waiting is unchanged; there is no dynamic reassignment or fallback."
+    },
+    {
+      "topic": "Exact review binding and disk/input gates",
+      "result": "PASS",
+      "evidence": "Review requires PASS/no blockers, exact helper SHA and exact two-key source mapping. Wrong, missing and extra bindings reject before remote calls. Existing dependency hashes equal the 2026 launch receipt. Guard retains completed-50/exit0/dataset/variant and all four input-file proofs against the existing 2027 mirror manifest; changed mirror/checkpoint and terminal faults reject. Free disk must exceed 1000000000 bytes; equality is rejected. Only the two .py files are copied; no weights or original inputs are written."
+    },
+    {
+      "topic": "Smoke, 49-pair results and scientific prerequisites",
+      "result": "PASS",
+      "evidence": "Leaf SHA equals the original PASS-reviewed leaf and slot AST is unchanged. Static inspection confirms development query order, IDs, camera, scene and names against installed GT and exact clean-feature parity before the full grid. All smoke/full exit/status, zero optimizer updates, state versions, 49 measurements and four input hashes remain enforced. Nineteen actual-slot mocks cover success and rejection paths. The previous exact-hash review supplies the unchanged 49-pair, 7-bank, metric and GT semantics; neural behavior was not re-executed."
+    },
+    {
+      "topic": "Exclusive receipts and no duplicate start",
+      "result": "PASS",
+      "evidence": "The helper writes only anytoany49_2027_launch.json and asserts absence before receipt write; output/source absence and exclusive remote log creation prevent the exercised repeat deployment. After one successful mocked deployment, re-entry rejects before copying or starting and preserves both receipts. Existing log collision rejects startup."
+    }
+  ],
+  "checks": {
+    "static_check_groups": 5,
+    "controller_slot_mock_cases": 19,
+    "controller_real_threadpool_mock_cases": 2,
+    "deployment_mock_cases": 23,
+    "actual_NN_forwards": 0,
+    "actual_GPU_checks": 0,
+    "actual_SSH_calls": 0
+  },
+  "trace_path": "C:/Users/gb/projects/demo_dual_axis_20261002/.aris/traces/experiment-bridge/2026-10-03_anytoany49_2027_schedule",
+  "evidence_artifacts": [
+    "001-static-checks.json",
+    "002-controller-mock-checks.json",
+    "003-deployment-mock-checks.json",
+    "004-generated-remote-AST.json",
+    "005-verification-summary.json",
+    "review_harness.py"
+  ],
+  "baseline_review": "results/preflight/anytoany49_review.json",
+  "limitations": [
+    "This PASS certifies source and synthetic control-flow behavior only; it does not certify remote availability, runtime numerical output or current liveness of controller 3301608.",
+    "The guard and every dataset smoke/full run must satisfy their actual runtime gates. No new GPU, SSH, tensor or neural execution was performed by this reviewer.",
+    "Unchanged leaf science/metrics inherit the previous exact-hash source review. Same-family fresh review is provisional; no official-test, multi-seed, missing-training or scientific acceptance claim is supported."
+  ]
+}
