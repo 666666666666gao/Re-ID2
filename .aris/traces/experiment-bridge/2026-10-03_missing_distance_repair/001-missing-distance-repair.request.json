@@ -1,0 +1,17 @@
+{
+  "call_number": 1,
+  "purpose": "fresh-narrow-missing-distance-repair",
+  "timestamp": "2026-10-03T01:32:09.393237+00:00",
+  "tool": "spawn_agent",
+  "agent_id": "/root/review_v4_missing_distance_repair",
+  "model_policy": "gpt-6-astra / max per installed local-codex-policy; runtime model metadata not exposed inside reviewer",
+  "files_referenced": [
+    "C:\\Users\\gb\\.codex_tmp\\demo_axis_v4_missing_dev27_repaired_deploy_20261003.py",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\missing_development.py",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\axis_collaboration_v4_missing_development_original.py",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\axis_collaboration_v4_distance27_cpu_probe.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\axis_collaboration_v4_missing_development27_failure_snapshot.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\axis_collaboration_v4_missing_development27_launch.json"
+  ],
+  "prompt": "按 C:/Users/gb/.agents/skills/experiment-bridge/SKILL.md 的 CODE_REVIEW，对真实失败后的最小修复做 fresh narrow 审查，不重跑原80/51全套。项目 C:/Users/gb/projects/demo_dual_axis_20261002。只审：(1) missing_development.py 对已提交原 results/preflight/axis_collaboration_v4_missing_development_original.py 的 delta：clean 用 saved distances，正常features parity==0 +strict metric1e-8保留，所有missing仍同一distance；(2) C:/Users/gb/.codex_tmp/demo_axis_v4_missing_dev27_repaired_deploy_20261003.py 新继续helper。背景实际证据只读 results/preflight/axis_collaboration_v4_distance27_cpu_probe.json、axis_collaboration_v4_missing_development27_failure_snapshot.json、原 axis_collaboration_v4_missing_development27_launch.json。旧队列已dead，两baseline完整13条件（MSVR/201），axisMSVR/demo100 full1正常距离断言、axis201/100未启动；同保存特征float32CPU重算触发AP微差，不能放宽容差或重选checkpoint。新helper应保留26已完成条件，GPU2 axisMSVR→axis201；GPU3 demo100→axis100四任务smoke→full，52+26=78；只上传补丁module，不动14训练源码；旧controllerdead/sourceold15/24输入proof/reused两completed/2卡free/outputabsent guards先行，无retry/额外tryexcept。执行 AST/纯stdlib delta mock检查，确保actualAPI signatures、strictfeature/metric guard和新schema/sourcehash/failure-stop/wait gates符合。禁止真实SSH/GPU/信号/修改源码/修改人类doc/进一步委派/安装包。产物 results/preflight/axis_collaboration_v4_missing_development27_repaired_review.json，包含 status PASS/BLOCKED,blockers,helper_sha256,module_sha256,checks实际数量与日志；trace .aris/traces/experiment-bridge/2026-10-03_missing_distance_repair。报告 same-family/provisional。请聚焦最小delta，完成后及时返回，不扩展未请求的审查。"
+}

@@ -1,0 +1,199 @@
+{
+  "status": "PASS",
+  "blockers": [],
+  "helper_sha256": "7e0aad81611f6cd526bfe3b5bff85cfd47e5b18ef22f8b46e3ba73e00d17d8d0",
+  "module_sha256": "9cbb3440b61ecf3bddfe88bf071328632c9ad3903b2d02aa0bf5a36d57cf8973",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer_route": "fresh Codex review",
+  "scope": "Narrow post-failure module delta and new repaired continuation helper only; original 80/51 suites not rerun.",
+  "checks_count": 25,
+  "passed_checks": 25,
+  "checks": [
+    {
+      "name": "actual_failure_evidence",
+      "status": "PASS",
+      "detail": "Archive: two full failures at clean strict metric assertion; two completed baselines/26 conditions; one AP query changed from same saved float32 features."
+    },
+    {
+      "name": "original_15_source_and_24_input_manifest",
+      "status": "PASS",
+      "detail": "Original module equals launch hash; all other 14 source entries match; original manifest has 24 input proofs."
+    },
+    {
+      "name": "module_exact_narrow_AST_delta",
+      "status": "PASS",
+      "detail": "Only measure distance argument, clean saved distance, two missing call sites and provenance field changed; every other AST node unchanged."
+    },
+    {
+      "name": "unchanged_feature_parity_zero_guard",
+      "status": "PASS",
+      "detail": "Actual unchanged parity assertion accepts zero and rejects 1e-15."
+    },
+    {
+      "name": "unchanged_strict_metric_1e_8_guard",
+      "status": "PASS",
+      "detail": "All four actual metric guards reject equality to 1e-8; evidenced AP drift also rejects. Tolerance was not relaxed."
+    },
+    {
+      "name": "clean_saved_and_all_12_missing_distance_wiring",
+      "status": "PASS",
+      "detail": "Actual AST: clean forwards exact saved object; all 12 missing conditions use original distance(q,g), including clean gallery for query-only."
+    },
+    {
+      "name": "actual_API_signatures",
+      "status": "PASS",
+      "detail": {
+        "command": [
+          "argv"
+        ],
+        "remote_python": [
+          "host",
+          "code"
+        ],
+        "idle": [
+          "gpu"
+        ],
+        "write_json": [
+          "path",
+          "value"
+        ],
+        "distance": [
+          "q",
+          "g"
+        ],
+        "full_metrics": [
+          "distances",
+          "qids",
+          "gids",
+          "qexclude",
+          "gexclude",
+          "names",
+          "cameras",
+          "scenes",
+          "output"
+        ]
+      }
+    },
+    {
+      "name": "helper_happy_guard_upload_launch_sequence",
+      "status": "PASS",
+      "detail": "Full helper AST mock: one preflight, one module upload, one controller spawn/receipt; expected GPU2/3 schedule and new source manifest."
+    },
+    {
+      "name": "preflight_reject_live",
+      "status": "PASS",
+      "detail": "live rejected before source upload or launch."
+    },
+    {
+      "name": "preflight_reject_environment",
+      "status": "PASS",
+      "detail": "environment rejected before source upload or launch."
+    },
+    {
+      "name": "preflight_reject_output_exists",
+      "status": "PASS",
+      "detail": "output_exists rejected before source upload or launch."
+    },
+    {
+      "name": "preflight_reject_failed_exit",
+      "status": "PASS",
+      "detail": "failed_exit rejected before source upload or launch."
+    },
+    {
+      "name": "preflight_reject_unstarted_exists",
+      "status": "PASS",
+      "detail": "unstarted_exists rejected before source upload or launch."
+    },
+    {
+      "name": "preflight_reject_gpu2",
+      "status": "PASS",
+      "detail": "gpu2 rejected before source upload or launch."
+    },
+    {
+      "name": "preflight_reject_gpu3",
+      "status": "PASS",
+      "detail": "gpu3 rejected before source upload or launch."
+    },
+    {
+      "name": "all_original_source_mismatches_rejected",
+      "status": "PASS",
+      "detail": "All 15 old source entries independently corrupted: each rejected before upload."
+    },
+    {
+      "name": "all_24_input_size_and_hash_mismatches_rejected",
+      "status": "PASS",
+      "detail": "48 negative probes: every one of 24 input size/hash proofs rejects before upload."
+    },
+    {
+      "name": "two_reused_results_completion_guards",
+      "status": "PASS",
+      "detail": "10 reused-result negative probes blocked before upload; old schema accepted without new distance provenance field."
+    },
+    {
+      "name": "local_review_status_and_exact_hash_gates",
+      "status": "PASS",
+      "detail": "Status, blockers, helper digest and module digest gates independently reject before any remote call."
+    },
+    {
+      "name": "post_upload_new_source_and_input_guards",
+      "status": "PASS",
+      "detail": "New source and repeated input proofs both reject after upload, before output creation/Popen."
+    },
+    {
+      "name": "controller_four_jobs_smoke_full_wait_and_78_schema",
+      "status": "PASS",
+      "detail": "Four jobs/eight child stages: per-card smoke then full and exact next-job order; idle before every spawn; 52+26=78; output exclusively new root."
+    },
+    {
+      "name": "controller_failure_stops_own_slot_no_false_complete",
+      "status": "PASS",
+      "detail": {
+        "per_slot_fail_stop_cases": [
+          "gpu2/smoke",
+          "gpu2/full",
+          "gpu3/smoke",
+          "gpu3/full"
+        ],
+        "semantics": "No next stage/job in failed slot, failed exit retained, no COMPLETE aggregate. Existing ThreadPoolExecutor does not kill the other slot."
+      }
+    },
+    {
+      "name": "controller_result_schema_guards",
+      "status": "PASS",
+      "detail": "Eight invalid smoke/full schema probes stop before the next stage/job and never report overall COMPLETE."
+    },
+    {
+      "name": "actual_idle_240_second_wait_boundary",
+      "status": "PASS",
+      "detail": "Actual idle() AST with 500,700,499 MiB sleeps exactly 240 seconds twice then returns; sleeps are mocked."
+    },
+    {
+      "name": "generated_AST_compile_and_no_retry_or_extra_try",
+      "status": "PASS",
+      "detail": "Module, helper and four generated code strings compile with Python 3.10; no new try/except, retry loop or signal; new distance provenance schema present."
+    }
+  ],
+  "check_log": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_missing_distance_repair\\checks.jsonl",
+  "harness": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_missing_distance_repair\\review_delta_mock.py",
+  "evidence_files": [
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\axis_collaboration_v4_distance27_cpu_probe.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\axis_collaboration_v4_missing_development27_failure_snapshot.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\axis_collaboration_v4_missing_development27_launch.json"
+  ],
+  "execution": {
+    "stdlib_only": true,
+    "python": "3.10.19",
+    "real_ssh_calls": 0,
+    "gpu_forwards": 0,
+    "optimizer_updates": 0,
+    "real_signals": 0,
+    "package_installs": 0
+  },
+  "limitations": [
+    "Static and controlled mock review only; deployment must run actual recorded guards and smoke stages.",
+    "Same saved-feature CPU probe establishes distance/rank/AP differences, not the dispatch cause.",
+    "Failure stops its own GPU slot and blocks COMPLETE; ThreadPoolExecutor does not kill the other submitted slot."
+  ],
+  "observed_at": "2026-10-03T01:30:33.184242+00:00"
+}

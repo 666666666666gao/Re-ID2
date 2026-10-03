@@ -72,20 +72,20 @@ def main():
     exclusion = scenes if arguments.dataset == 'MSVR310' else cams
     measurements = {}
 
-    def measure(name, q, g, missing_query, missing_gallery):
-        metrics = full_metrics(distance(q, g), ids[query], ids, exclusion[query], exclusion,
+    def measure(name, distances, missing_query, missing_gallery):
+        metrics = full_metrics(distances, ids[query], ids, exclusion[query], exclusion,
                                names[query], cams[query], scenes[query], output / name)
         measurements[name] = {'missing_query': missing_query, 'missing_gallery': missing_gallery, 'metrics': metrics}
         print('DEVELOPMENT_MISSING_CONDITION', name, json.dumps({key: metrics[key] for key in METRICS}), flush=True)
 
-    measure('clean', clean[query], clean, [], [])
+    measure('clean', saved['distances'], [], [])
     assert all(abs(measurements['clean']['metrics'][key] - terminal['strict_reload'][key]) < 1e-8
                for key in ('mAP', 'Rank-1', 'Rank-5', 'Rank-10'))
     for code, missing in MISSING.items():
         feature, runtime = extract_missing(model, dev, cfg, arguments.seed, missing)
         assert feature.shape == clean.shape and torch.isfinite(feature).all()
-        measure('both_missing_' + code, feature[query], feature, list(missing), list(missing))
-        measure('query_missing_' + code, feature[query], clean, list(missing), [])
+        measure('both_missing_' + code, distance(feature[query], feature), list(missing), list(missing))
+        measure('query_missing_' + code, distance(feature[query], clean), list(missing), [])
         diagnostics[code] = runtime
     assert len(measurements) == 13
     assert versions == {name: value._version for name, value in model.state_dict().items()}
@@ -96,6 +96,7 @@ def main():
                'variant': arguments.variant, 'seed': arguments.seed, 'selected_epoch': terminal['best']['epoch'],
                'measurements': measurements, 'runtime': diagnostics, 'seconds': time.time() - started,
                'normal_feature_max_error': parity, 'optimizer_updates': 0,
+               'normal_distance_source': 'saved best_dev_arrays.npz/distances after exact clean feature parity; missing conditions use full_evaluation.distance',
                'state_tensor_versions_unchanged': True, 'original_mask_check': original_masks,
                'original_input_files': original_inputs, 'peak_memory_bytes': torch.cuda.max_memory_allocated(),
                'protocol': 'Fixed identity-heldout development queries and same development gallery. Six missing sets r/n/t/rn/rt/nt use normalized zero input tensors; both-missing uses identical masks on query/gallery, query-only uses clean gallery. Frozen dev-selected checkpoint, installed GT and original junk exclusion. No official test or optimizer updates.',

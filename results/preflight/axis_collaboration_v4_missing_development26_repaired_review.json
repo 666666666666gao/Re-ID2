@@ -1,0 +1,125 @@
+{
+  "status": "PASS",
+  "blockers": [],
+  "helper_sha256": "4ed2c5a03025c18b553ffa07167eed5ddb1a2eda19a4b691997b524f30e7c471",
+  "module_sha256": "9cbb3440b61ecf3bddfe88bf071328632c9ad3903b2d02aa0bf5a36d57cf8973",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer_model": "gpt-6-astra",
+  "reasoning_effort": "max",
+  "scope": "Only host/provider migration from repaired2027 helper to warm2026 helper. Prior80/51/25 checks and unchanged patched module not re-reviewed.",
+  "checks_count": 17,
+  "passed_checks": 17,
+  "checks": [
+    {
+      "name": "prior_review_and_pinned_unchanged_module",
+      "status": "PASS",
+      "detail": "Prior 25-check PASS binds unchanged helper/module; the other 14 source hashes remain exact. No previous suite or module review rerun."
+    },
+    {
+      "name": "actual_capacity_and_warm_provider_evidence",
+      "status": "PASS",
+      "detail": {
+        "inventory_at": "2026-10-03T09:38:59",
+        "selected_gpu_memory_MiB": [
+          15,
+          60
+        ],
+        "old27_resource_guard_failed_without_upload": true
+      }
+    },
+    {
+      "name": "physical_hosts_guard_upload_launch_order",
+      "status": "PASS",
+      "detail": "Actual helper AST: read-only 2027 reuse check -> 2026 guard -> one module upload -> one 2026 controller spawn with original warm interpreter/cwd."
+    },
+    {
+      "name": "native_absolute_paths_16_proofs_and_reused_host_isolation",
+      "status": "PASS",
+      "detail": "All 16 proofs read on physical host 2026 twice; baseline exit inside run; three axis exits outside. Reused 2027 results never enter 2026 input reads."
+    },
+    {
+      "name": "zero_weight_copy_and_narrow_write_scope",
+      "status": "PASS",
+      "detail": "Exactly one SCP of patched missing_development.py; zero checkpoint/feature/result copies; writes confined to that module and new 2026 output."
+    },
+    {
+      "name": "gpu0_resource_reject_zero_mutation",
+      "status": "PASS",
+      "detail": "2026 GPU0=500 MiB rejects before any upload, directory, receipt or Popen."
+    },
+    {
+      "name": "gpu1_resource_reject_zero_mutation",
+      "status": "PASS",
+      "detail": "2026 GPU1=500 MiB rejects before any upload, directory, receipt or Popen."
+    },
+    {
+      "name": "target_module_and_output_absence_guards",
+      "status": "PASS",
+      "detail": "Existing module or existing output on 2026 blocks all mutations (2 cases)."
+    },
+    {
+      "name": "four_native_COMPLETE50_exit0_guards",
+      "status": "PASS",
+      "detail": "12 migration-path terminal checks: each original run must be COMPLETE/50 epochs/exit0 at its native exit location."
+    },
+    {
+      "name": "all_16_migrated_input_proof_paths_reject_changes",
+      "status": "PASS",
+      "detail": "All 16 newly bound source-path size proofs individually reject before mutation."
+    },
+    {
+      "name": "old2027_reuse_guards_block_target_mutation",
+      "status": "PASS",
+      "detail": "Live old controller or invalid reused baseline on 2027 prevents reaching 2026; 2027 remains read-only."
+    },
+    {
+      "name": "target2026_original_source_guard",
+      "status": "PASS",
+      "detail": "Changed original source on target 2026 rejects before upload."
+    },
+    {
+      "name": "postupload_target_source_and_input_rechecks",
+      "status": "PASS",
+      "detail": "Post-upload module or native input drift blocks output/Popen at repeated 2026 proof gate (2 cases)."
+    },
+    {
+      "name": "dual_gpu_order_wait_and_cross_host_COMPLETE_schema",
+      "status": "PASS",
+      "detail": "GPU0 MSVR->RGB201 axis; GPU1 RGB100 demo->axis. All 8 stages idle->spawn->wait, smoke before full; COMPLETE binds 52 new + 26 reused on host2027."
+    },
+    {
+      "name": "dual_gpu_failure_stops_own_slot",
+      "status": "PASS",
+      "detail": "4 failures on migrated slots stop before next stage/job and never write aggregate COMPLETE; other submitted slot retains previous ThreadPoolExecutor semantics."
+    },
+    {
+      "name": "controller_only_provider_migration_AST_delta",
+      "status": "PASS",
+      "detail": "Generated old/new controller ASTs identical after normalizing only root, 3 provider CLI values, GPU indices and new reused_host field. All waits, result gates, and 2-worker execution inherited unchanged."
+    },
+    {
+      "name": "all_generated_python310_AST_compile_and_scope",
+      "status": "PASS",
+      "detail": "Helper plus all 5 generated scripts compile for Python3.10; no environment setup/install, signal, additional exception machinery, or unrelated source write."
+    }
+  ],
+  "trace_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_missing_warm26_migration",
+  "harness": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_missing_warm26_migration\\review_migration.py",
+  "execution": {
+    "stdlib_only": true,
+    "python": "3.10.19",
+    "real_ssh_calls": 0,
+    "real_gpu_calls": 0,
+    "real_signals": 0,
+    "package_installs": 0,
+    "project_source_edits": 0,
+    "human_doc_edits": 0
+  },
+  "limitations": [
+    "AST and in-memory controlled mocks only; actual deployment must pass live guards and all four smoke/full stages.",
+    "Old25 PASS remains same-family provisional; no new module metric or numerical parity acceptance inferred.",
+    "Failure stops its own GPU slot and blocks aggregate COMPLETE; the other submitted slot is not killed."
+  ],
+  "observed_at": "2026-10-03T01:54:00.186926+00:00"
+}
