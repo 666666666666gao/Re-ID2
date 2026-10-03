@@ -1,0 +1,573 @@
+{
+  "status": "PASS_STDLIB_SOURCE_AND_MOCK_CHECKS",
+  "neural_execution": false,
+  "ssh_calls": 0,
+  "gpu_queries": 0,
+  "package_installations": 0,
+  "checked_source_sha256": {
+    "routed_supervision_metric_axis.py": "ca58beb36b6290d669a186f184ddc21ddd5399eb470b050cefcac04c37211b00",
+    "run_routed_metric_experiment.py": "4bcf2ee0003df2717a324e3776e7821bdff8f41ad3f5ad60960b3597f9879873",
+    "verify_routed_metric_supervision.py": "4c54dbb8d5783b5c8b990c50f25a7224feacf668171fbf5e601af8488371c49a",
+    "launch_routed_metric_trial.py": "809d65693f83bb66828f436119abf9f09bb60a720b8f0caddfbd62666530c16a"
+  },
+  "helper_sha256": "8eedd5d4bd0097a18fd8a89ded509cba494c18681df449991bab5b622f24d3b7",
+  "checks": [
+    {
+      "name": "syntax",
+      "status": "PASS",
+      "evidence": "Four reviewed sources and deployment helper compile without importing them."
+    },
+    {
+      "name": "plan_binding",
+      "status": "PASS",
+      "evidence": {
+        "routed_supervision_metric_axis.py": "ca58beb36b6290d669a186f184ddc21ddd5399eb470b050cefcac04c37211b00",
+        "run_routed_metric_experiment.py": "4bcf2ee0003df2717a324e3776e7821bdff8f41ad3f5ad60960b3597f9879873",
+        "verify_routed_metric_supervision.py": "4c54dbb8d5783b5c8b990c50f25a7224feacf668171fbf5e601af8488371c49a",
+        "launch_routed_metric_trial.py": "809d65693f83bb66828f436119abf9f09bb60a720b8f0caddfbd62666530c16a"
+      }
+    },
+    {
+      "name": "baseline_source_binding",
+      "status": "PASS",
+      "evidence": {
+        "count": 37,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "trainer_write_json_exact",
+      "status": "PASS",
+      "evidence": "AST identical to MetricA."
+    },
+    {
+      "name": "trainer_configuration_exact",
+      "status": "PASS",
+      "evidence": "AST identical to MetricA."
+    },
+    {
+      "name": "trainer_evaluate_exact",
+      "status": "PASS",
+      "evidence": "AST identical to MetricA."
+    },
+    {
+      "name": "trainer_step_exact",
+      "status": "PASS",
+      "evidence": "AST identical to MetricA."
+    },
+    {
+      "name": "trainer_build_only_expected_changes",
+      "status": "PASS",
+      "evidence": "Only selected class/variant and method metadata change; optimizer, native AMP, smoke reload, 50-epoch loop and earliest dev selection retained."
+    },
+    {
+      "name": "trainer_main_only_expected_changes",
+      "status": "PASS",
+      "evidence": "Only selected class/variant and method metadata change; optimizer, native AMP, smoke reload, 50-epoch loop and earliest dev selection retained."
+    },
+    {
+      "name": "copied_forward_exact_except_new_auxiliary",
+      "status": "PASS",
+      "evidence": [
+        "with torch.autocast('cuda', enabled=False):\n    routed_f = F.normalize(self.frequency_projection(frequency.float()), dim=1)\n    routed_score = 32.0 * F.linear(routed_f, F.normalize(self.frequency_classifier.weight.float(), dim=1))",
+        "output.extend((routed_score, routed_f))"
+      ]
+    },
+    {
+      "name": "constructor_only_loss_weights",
+      "status": "PASS",
+      "evidence": "No modules, parameters, buffers or RNG draws added."
+    },
+    {
+      "name": "new_pair_graph",
+      "status": "PASS",
+      "evidence": "Differentiable FP32 path from actual conditioned/joint-routed frequency through existing PF; normalized shared classifier weights, scale32, no detach."
+    },
+    {
+      "name": "output_weight_alignment_False",
+      "status": "PASS",
+      "evidence": {
+        "pairs": [
+          "fused",
+          "base_moe",
+          "independent_M",
+          "independent_F",
+          "routed_PF",
+          "RGB",
+          "NI",
+          "TI"
+        ],
+        "weights": [
+          0.25,
+          1.0,
+          0.1,
+          0.05,
+          0.05,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "routed_pair_indices": [
+          8,
+          9
+        ]
+      }
+    },
+    {
+      "name": "output_weight_alignment_True",
+      "status": "PASS",
+      "evidence": {
+        "pairs": [
+          "fused",
+          "base_moe",
+          "independent_M",
+          "independent_F",
+          "routed_PF",
+          "original"
+        ],
+        "weights": [
+          0.25,
+          1.0,
+          0.1,
+          0.05,
+          0.05,
+          1.0
+        ],
+        "routed_pair_indices": [
+          8,
+          9
+        ]
+      }
+    },
+    {
+      "name": "launcher_success",
+      "status": "PASS",
+      "evidence": {
+        "spawns": [
+          "tensor",
+          "smoke",
+          "train"
+        ],
+        "wait_seconds": [],
+        "terminal_written": true,
+        "exception": null,
+        "exit_receipts_preserved": true
+      }
+    },
+    {
+      "name": "launcher_tensor_process_failure",
+      "status": "PASS",
+      "evidence": {
+        "spawns": [
+          "tensor"
+        ],
+        "wait_seconds": [],
+        "terminal_written": false,
+        "exception": "AssertionError: tensor",
+        "exit_receipts_preserved": true
+      }
+    },
+    {
+      "name": "launcher_tensor_bad_receipt",
+      "status": "PASS",
+      "evidence": {
+        "spawns": [
+          "tensor"
+        ],
+        "wait_seconds": [],
+        "terminal_written": false,
+        "exception": "AssertionError: ",
+        "exit_receipts_preserved": true
+      }
+    },
+    {
+      "name": "launcher_tensor_missing_receipt",
+      "status": "PASS",
+      "evidence": {
+        "spawns": [
+          "tensor"
+        ],
+        "wait_seconds": [],
+        "terminal_written": false,
+        "exception": "FileNotFoundError: /trial/preflight/tensor/result.json",
+        "exit_receipts_preserved": true
+      }
+    },
+    {
+      "name": "launcher_smoke_process_failure",
+      "status": "PASS",
+      "evidence": {
+        "spawns": [
+          "tensor",
+          "smoke"
+        ],
+        "wait_seconds": [],
+        "terminal_written": false,
+        "exception": "AssertionError: smoke",
+        "exit_receipts_preserved": true
+      }
+    },
+    {
+      "name": "launcher_smoke_bad_receipt",
+      "status": "PASS",
+      "evidence": {
+        "spawns": [
+          "tensor",
+          "smoke"
+        ],
+        "wait_seconds": [],
+        "terminal_written": false,
+        "exception": "AssertionError: ",
+        "exit_receipts_preserved": true
+      }
+    },
+    {
+      "name": "launcher_smoke_missing_receipt",
+      "status": "PASS",
+      "evidence": {
+        "spawns": [
+          "tensor",
+          "smoke"
+        ],
+        "wait_seconds": [],
+        "terminal_written": false,
+        "exception": "FileNotFoundError: /trial/preflight/smoke/smoke.json",
+        "exit_receipts_preserved": true
+      }
+    },
+    {
+      "name": "launcher_train_process_failure",
+      "status": "PASS",
+      "evidence": {
+        "spawns": [
+          "tensor",
+          "smoke",
+          "train"
+        ],
+        "wait_seconds": [],
+        "terminal_written": false,
+        "exception": "AssertionError: MSVR310_axis_metric_routed_fullref_s42",
+        "exit_receipts_preserved": true
+      }
+    },
+    {
+      "name": "launcher_train_bad_completion",
+      "status": "PASS",
+      "evidence": {
+        "spawns": [
+          "tensor",
+          "smoke",
+          "train"
+        ],
+        "wait_seconds": [],
+        "terminal_written": false,
+        "exception": "AssertionError: ",
+        "exit_receipts_preserved": true
+      }
+    },
+    {
+      "name": "launcher_train_wrong_budget",
+      "status": "PASS",
+      "evidence": {
+        "spawns": [
+          "tensor",
+          "smoke",
+          "train"
+        ],
+        "wait_seconds": [],
+        "terminal_written": false,
+        "exception": "AssertionError: ",
+        "exit_receipts_preserved": true
+      }
+    },
+    {
+      "name": "launcher_train_wrong_interface",
+      "status": "PASS",
+      "evidence": {
+        "spawns": [
+          "tensor",
+          "smoke",
+          "train"
+        ],
+        "wait_seconds": [],
+        "terminal_written": false,
+        "exception": "AssertionError: ",
+        "exit_receipts_preserved": true
+      }
+    },
+    {
+      "name": "launcher_busy_gpu_waits_then_success",
+      "status": "PASS",
+      "evidence": {
+        "spawns": [
+          "tensor",
+          "smoke",
+          "train"
+        ],
+        "wait_seconds": [
+          240
+        ],
+        "terminal_written": true,
+        "exception": null,
+        "exit_receipts_preserved": true
+      }
+    },
+    {
+      "name": "launcher_existing_output",
+      "status": "PASS",
+      "evidence": {
+        "spawns": [],
+        "wait_seconds": [],
+        "terminal_written": false,
+        "exception": "FileExistsError: /trial",
+        "exit_receipts_preserved": true
+      }
+    },
+    {
+      "name": "prior_axis_p0_utility_analysis",
+      "status": "PASS",
+      "evidence": "PASS_ACTUAL_FOUR_CASE_P0_EVIDENCE_AUDIT"
+    },
+    {
+      "name": "prior_axis_metric_msvr_development_analysis",
+      "status": "PASS",
+      "evidence": "PASS_EVIDENCE_AUDIT"
+    },
+    {
+      "name": "prior_axis_metric_msvr_frozen_analysis",
+      "status": "PASS",
+      "evidence": "PASS_ACTUAL_FROZEN_EVIDENCE_AUDIT"
+    },
+    {
+      "name": "helper_success",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 2,
+        "staged_files": 4,
+        "spawns": 1,
+        "launch_receipt_written": true,
+        "exception": null
+      }
+    },
+    {
+      "name": "helper_review_blocked",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 0,
+        "staged_files": 0,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_review_has_blocker",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 0,
+        "staged_files": 0,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_review_source_stale",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 0,
+        "staged_files": 0,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_helper_stale",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 0,
+        "staged_files": 0,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_local_baseline_stale",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 0,
+        "staged_files": 0,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_prior_p0_bad",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 0,
+        "staged_files": 0,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_prior_development_bad",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 0,
+        "staged_files": 0,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_prior_frozen_bad",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 0,
+        "staged_files": 0,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_remote_baseline_stale",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 1,
+        "staged_files": 0,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_remote_development_incomplete",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 1,
+        "staged_files": 0,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_remote_frozen_incomplete",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 1,
+        "staged_files": 0,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_remote_new_source_exists",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 1,
+        "staged_files": 0,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_remote_output_exists",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 1,
+        "staged_files": 0,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_initial_gpu_busy",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 1,
+        "staged_files": 0,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_initial_disk_at_floor",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 1,
+        "staged_files": 0,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_second_gpu_busy",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 2,
+        "staged_files": 4,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_second_disk_at_floor",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 2,
+        "staged_files": 4,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_staged_source_corrupt",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 2,
+        "staged_files": 4,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    },
+    {
+      "name": "helper_scp_failure",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 1,
+        "staged_files": 1,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "RuntimeError: mock scp failed"
+      }
+    },
+    {
+      "name": "helper_existing_remote_log",
+      "status": "PASS",
+      "evidence": {
+        "mock_remote_calls": 2,
+        "staged_files": 4,
+        "spawns": 0,
+        "launch_receipt_written": false,
+        "exception": "AssertionError: "
+      }
+    }
+  ]
+}

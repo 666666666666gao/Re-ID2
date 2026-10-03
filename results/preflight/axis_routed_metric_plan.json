@@ -1,0 +1,25 @@
+{
+  "status": "ACTUAL_TENSOR_AMP_GATES_STARTED_FRESH50_AFTER_PASS",
+  "baseline": "P1-A MetricA",
+  "single_factor": "Retrieval-path F auxiliary supervision at unchanged total F AUX budget .1; .05 original independent pre-projection F + .05 conditioned/joint-routed normalized PF, cosine scores using existing frequency classifier weights normalized and scale32",
+  "rationale": "P0 actual routed PF is much weaker than AUX on all3; P1-A metric interface retrained but full11 mAP -0.134921 vsbase with zeroRank1 rescues. Actual routed retrieval direction still lacks its own identity objective. Retain independent AUX because removing it disconnects existing frequency pool_score from differentiable losses.",
+  "parameters_added": 0,
+  "descriptor_dim": 5632,
+  "first_dataset": "MSVR310",
+  "budget_epochs": 50,
+  "engineering_updates": 3,
+  "official_test_uses": 0,
+  "logit_scale": 32,
+  "original_F_weight": 0.05,
+  "routed_F_weight": 0.05,
+  "unchanged": "All initial state tensors equal MetricA; metric interface/FFT/expert/route/gates/Maux/main and calibration losses/sampler/publicCLIP initialization/optimizer/AMP512/B64/seed42/50 earliestdevmAP/fullAdam checkpoints",
+  "limits": "This changes F auxiliary objective location and cosine score normalization, not the frequency transform or architecture. Same-budget ordinary controls must adopt the same training objective for strict mechanism claims. Gain objective, asymmetric availability training, contribution/control-head split and interfaceB remain separate.",
+  "source_sha256": {
+    "routed_supervision_metric_axis.py": "ca58beb36b6290d669a186f184ddc21ddd5399eb470b050cefcac04c37211b00",
+    "run_routed_metric_experiment.py": "4bcf2ee0003df2717a324e3776e7821bdff8f41ad3f5ad60960b3597f9879873",
+    "verify_routed_metric_supervision.py": "4c54dbb8d5783b5c8b990c50f25a7224feacf668171fbf5e601af8488371c49a",
+    "launch_routed_metric_trial.py": "809d65693f83bb66828f436119abf9f09bb60a720b8f0caddfbd62666530c16a"
+  },
+  "controller_pid": 3293229,
+  "started_at": "2026-10-03T15:10:40"
+}

@@ -1,0 +1,62 @@
+--- run_metric_mass_experiment.py
++++ run_routed_metric_experiment.py
+@@ -14,7 +14,7 @@
+ from residual_dual_axis import ResidualAugmentedDeMo
+ from axis_collaboration import AxisCollaborationDeMo
+ from scaled_axis_collaboration import ScaledAxisCollaborationDeMo, VARIANTS as SCALED_VARIANTS
+-from metric_mass_axis_collaboration import MetricMassAxisCollaborationDeMo
++from routed_supervision_metric_axis import RoutedSupervisionMetricDeMo
+ from experiment_data import split_records, make_loader, seed_all
+ from layers.make_loss import make_loss
+ from solver.make_optimizer import make_optimizer
+@@ -44,8 +44,8 @@
+ 
+ def build(args, cfg, classes, cameras):
+     seed_all(args.seed)
+-    assert args.variant == 'axis_metric_fullref'
+-    model = MetricMassAxisCollaborationDeMo(classes, cfg, cameras).float().cuda()
++    assert args.variant == 'axis_metric_routed_fullref'
++    model = RoutedSupervisionMetricDeMo(classes, cfg, cameras).float().cuda()
+     model.contribution_loss_weight = args.contribution_weight
+     return model
+ 
+@@ -101,7 +101,7 @@
+ def main():
+     parser = argparse.ArgumentParser()
+     parser.add_argument('--dataset', choices=['RGBNT201', 'RGBNT100', 'MSVR310'], required=True)
+-    parser.add_argument('--variant', choices=['axis_metric_fullref'], required=True)
++    parser.add_argument('--variant', choices=['axis_metric_routed_fullref'], required=True)
+     parser.add_argument('--data-root', required=True)
+     parser.add_argument('--pretrained', required=True)
+     parser.add_argument('--output', required=True)
+@@ -139,12 +139,13 @@
+         info['residual_direction_normalization'] = model.normalize_residual
+         info['residual_anchor'] = 'stopped per-relation original DeMo norms for M/I; stopped whole-base norm for F; unchanged learned scales and independent gates' if model.normalize_residual else 'original raw V3 projection amplitudes'
+         info['contribution_reference'] = 'stopped current-batch full11 gallery' if model.full_reference else 'stopped current-batch base00 gallery'
+-    info['method_revision'] = 'axis_collaboration_v7_metric_interface: V5 experts and losses; F metric-budget logit instead of weak amplitude tail'
++    info['method_revision'] = 'axis_collaboration_v8_routed_frequency_supervision: unchanged metric interface; split existing F AUX budget between independent evidence and actual routed PF direction'
+     info['relation_routing'] = 'unchanged V5 joint pi relation marginal times eligible relation count; independent a_S for M-only'
+     info['retrieval_interface'] = 'metric_weighted_frequency_block'
+     info['initial_frequency_metric_budget'] = .05
+     info['residual_anchor'] = 'Unchanged V5 M/I; F direction scaled by stopped identity-block norm times sqrt(w/(1-w)), w=sigmoid(existing F scalar)*original F gate'
+-    info['unchanged_V5_factors'] = 'backbone, FFT, experts, cross-condition round, router, auxiliary taps, gates, loss weights, contribution reference, optimizer, split, sampling, public CLIP and 50 epochs'
++    info['frequency_auxiliary_supervision'] = 'independent pre-projection F .05; actual conditioned/joint-routed normalized PF .05; existing frequency classifier reused with normalized weights and fixed cosine logit scale32'
++    info['unchanged_V7_factors'] = 'metric interface, parameters, FFT, experts, conditions, router, gates, M auxiliary, total F auxiliary budget .1, contribution weight .05/reference, optimizer, split, sampling, publicCLIP, seed42/B64/50epochs'
+     write_json(out / 'run.json', info)
+     if args.mode == 'prepare':
+         torch.save(model.state_dict(), out / 'initial.pth')
+
+--- inherited-forward
++++ routed-forward
+@@ -41,7 +41,11 @@
+     self.contribution_audit = {'target_requires_grad': target.requires_grad, 'reference': 'one stopped-gradient current-batch full11 gallery; same indices for all four states, no EMA', 'positive_indices': pos.tolist(), 'negative_indices': neg.tolist(), 'targets': target.tolist(), 'predictions': prediction.detach().float().tolist(), 'scores': {key: value.tolist() for key, value in scores.items()}, 'loss': float(contribution.detach()), 'closed_state_conditions': False, 'inference_counterfactuals': False}
+     standalone_m = self.modality_expert.pool(m0, eligible).mean(1)
+     standalone_f = self.frequency_expert.pool(f0, available, self.structured)
++    with torch.autocast('cuda', enabled=False):
++        routed_f = F.normalize(self.frequency_projection(frequency.float()), dim=1)
++        routed_score = 32.0 * F.linear(routed_f, F.normalize(self.frequency_classifier.weight.float(), dim=1))
+     output = [self.fused_classifier(self.fused_neck(fused)), fused, self.classifier_moe(self.bottleneck_moe(base_moe)), base_moe, self.modality_classifier(self.modality_neck(standalone_m)), standalone_m, self.frequency_classifier(self.frequency_neck(standalone_f)), standalone_f]
++    output.extend((routed_score, routed_f))
+     if self.direct:
+         output.extend((self.classifier(self.bottleneck(original)), original))
+     else:
