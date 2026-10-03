@@ -1,10 +1,10 @@
 {
   "status": "EXECUTION_RESUMED_UNMET",
-  "updated_at": "2026-10-04T00:58:17",
-  "execution_objective": "以完整DeMo为强基线，建立跨模态可用集合一致、能够产生实际检索增益的双轴互补Re-ID方法。先证明模态轴与频率轴分工及条件协作优于同增强、同有效参数、同输出维度的普通专家，并用逐查询干预与重训消融证明收益来源；再冻结统一方法，完成三个数据集、至少三个配对种子、独立身份确认划分、全部49种查询—图库模态组合及真实部署成本评测。保留三个数据集完整输入mAP和Rank-1均比同协议完整DeMo至少提高2个百分点的验收目标。",
+  "updated_at": "2026-10-04T01:03:18",
+  "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、独立身份确认、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
-  "scope": "Execution goal is refined here and in the single human handoff; the existing platform goal stays active and unfinished.",
+  "scope": "The refined execution objective is persisted here and in the single handoff. It remains unmet; the platform tool cannot edit the original objective or programmatically resume its last blocked status.",
   "acceptance": {
     "normal": "同一个统一方法，在RGBNT201、RGBNT100、MSVR310的完整输入mAP和Rank-1各超过同协议完整DeMo至少2个百分点；多种子和独立确认验证稳定性。",
     "missing": "完整覆盖49种查询—图库集合条件，预先登记来源不相交、重叠、仅查询缺失、双方缺失等关键组；报告全部正负结果，并与正确屏蔽/同增强/同容量普通专家比较。不得用单个均值或污染基线替代全面证据。",
@@ -22,13 +22,13 @@
     },
     {
       "id": "M1",
-      "status": "V3_ACTUAL_CUDA_SANITY_RUNNING_50_EPOCH_GATED",
+      "status": "V3_ALL70_AND10_SMOKES_PASS_TWO_FRESH50_RUNNING",
       "work": "在MSVR310固定fit/dev先做原平均、合法集合平均、共享查询公共出口的单因素重训；保留DeMo私有路径、FFT、专家、路由、损失和原缺失采样。",
       "evidence": "相同50轮、采样、有效参数预算和5632D；同步匹配普通频域与普通双专家，禁止闲置参数凑容量。检查公共块独立检索、全部49条件和四状态净收益。",
       "actual_evidence": "Frozen V12 outlet scale / projection utility:882 raw-GT cases and185220 query records audited; no training or pooling intervention.",
       "decision": "先判定公共出口是否保留判别信息及是否产生可用增量；若普通频域仍更好或11仍误伤，先定位投影/路由/控制，暂不扩展三数据集。",
       "implementation": "results/preflight/common_outlet_m1_plan.json",
-      "actual_preparation": "V2 actual CUDA tensor70/ten parameter entries passed; nine smokes passed three updates each. DeMo third attempt was a normal nativeAMP skip, so old perattempt assertion failed after two updates. Only smoke semantics repaired and source-reviewed; v3 controller and verifier actually live. No fresh50 or diskweights yet."
+      "actual_preparation": "V3 actual CUDA tensor70/all10 nativeAMPsmokes eachthreeactualupdates/strictreload PASS. DeMo requiredfour attempts withone skip; recorded rather than retried. First paired fresh50 jobs actually running on2026GPU2/3, five completedepochs each at sealedmilestone. Raw preflight source/launch/exit/log/result hashes archived."
     },
     {
       "id": "M2",
@@ -88,7 +88,7 @@
       ]
     }
   },
-  "revision": "20261004_M1_v3_smoke_actual_update_fix_running",
+  "revision": "20261004_M1_v3_all_sanity_pass_first_paired50_running",
   "primary_claims": [
     {
       "id": "C1",
