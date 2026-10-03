@@ -1,0 +1,269 @@
+{
+  "status": "PASS",
+  "blockers": [],
+  "reviewed_at": "2026-10-03T05:27:46.223092+00:00",
+  "checks_count": 21,
+  "checks": [
+    {
+      "check": "launcher_helper_observer_compile",
+      "status": "PASS",
+      "evidence": "Compilation only; no production module imported."
+    },
+    {
+      "check": "original_V5_18_sources_unchanged",
+      "status": "PASS",
+      "evidence": "Existing V5 launch receipt reused, including original model, runner, sampler, metrics and configuration."
+    },
+    {
+      "check": "plan_binds_only_new_launcher_and_single_scalar",
+      "status": "PASS",
+      "evidence": "One MSVR seed42 development trial; no new model, runner, target units or projected auxiliary taps."
+    },
+    {
+      "check": "original_scalar_assignment_and_fresh50_paths",
+      "status": "PASS",
+      "evidence": "Original CLI sets the existing scalar. Original builder, B64, 50 epochs and earliest-max dev-mAP selection remain bound by18-source equality."
+    },
+    {
+      "check": "native_smoke_full_optimizer_and_AMP_contract_preserved",
+      "status": "PASS",
+      "evidence": "Existing native smoke saves/reloads full model and optimizer and compares model outputs. Actual changed-scalar AMP remains pending."
+    },
+    {
+      "check": "controller_mock_smoke_then_fresh50_complete",
+      "status": "PASS",
+      "evidence": {
+        "events": [
+          "idle1",
+          "spawn_smoke",
+          "wait_smoke",
+          "idle1",
+          "spawn_train",
+          "wait_train"
+        ],
+        "commands_match_V5_except_scalar_mode_output": true,
+        "all_started_child_exits_saved": true,
+        "real_processes": 0
+      }
+    },
+    {
+      "check": "controller_mock_smoke_exit_failure_blocks50",
+      "status": "PASS",
+      "evidence": {
+        "events": [
+          "idle1",
+          "spawn_smoke",
+          "wait_smoke"
+        ],
+        "commands_match_V5_except_scalar_mode_output": true,
+        "all_started_child_exits_saved": true,
+        "real_processes": 0
+      }
+    },
+    {
+      "check": "controller_mock_smoke_wrong_scalar_blocks50",
+      "status": "PASS",
+      "evidence": {
+        "events": [
+          "idle1",
+          "spawn_smoke",
+          "wait_smoke"
+        ],
+        "commands_match_V5_except_scalar_mode_output": true,
+        "all_started_child_exits_saved": true,
+        "real_processes": 0
+      }
+    },
+    {
+      "check": "controller_mock_smoke_wrong_step_count_blocks50",
+      "status": "PASS",
+      "evidence": {
+        "events": [
+          "idle1",
+          "spawn_smoke",
+          "wait_smoke"
+        ],
+        "commands_match_V5_except_scalar_mode_output": true,
+        "all_started_child_exits_saved": true,
+        "real_processes": 0
+      }
+    },
+    {
+      "check": "controller_mock_smoke_bad_gradient_blocks50",
+      "status": "PASS",
+      "evidence": {
+        "events": [
+          "idle1",
+          "spawn_smoke",
+          "wait_smoke"
+        ],
+        "commands_match_V5_except_scalar_mode_output": true,
+        "all_started_child_exits_saved": true,
+        "real_processes": 0
+      }
+    },
+    {
+      "check": "controller_mock_smoke_reload_failure_blocks50",
+      "status": "PASS",
+      "evidence": {
+        "events": [
+          "idle1",
+          "spawn_smoke",
+          "wait_smoke"
+        ],
+        "commands_match_V5_except_scalar_mode_output": true,
+        "all_started_child_exits_saved": true,
+        "real_processes": 0
+      }
+    },
+    {
+      "check": "controller_mock_train_exit_failure_no_COMPLETE",
+      "status": "PASS",
+      "evidence": {
+        "events": [
+          "idle1",
+          "spawn_smoke",
+          "wait_smoke",
+          "idle1",
+          "spawn_train",
+          "wait_train"
+        ],
+        "commands_match_V5_except_scalar_mode_output": true,
+        "all_started_child_exits_saved": true,
+        "real_processes": 0
+      }
+    },
+    {
+      "check": "controller_mock_train49_no_COMPLETE",
+      "status": "PASS",
+      "evidence": {
+        "events": [
+          "idle1",
+          "spawn_smoke",
+          "wait_smoke",
+          "idle1",
+          "spawn_train",
+          "wait_train"
+        ],
+        "commands_match_V5_except_scalar_mode_output": true,
+        "all_started_child_exits_saved": true,
+        "real_processes": 0
+      }
+    },
+    {
+      "check": "helper_mock_success",
+      "status": "PASS",
+      "evidence": {
+        "uploads": [
+          "launch_mass_calibration_trial.py"
+        ],
+        "controller_starts": 1,
+        "original18_unchanged": true,
+        "real_remote_actions": 0
+      }
+    },
+    {
+      "check": "helper_mock_GPU1_busy_before_upload",
+      "status": "PASS",
+      "evidence": {
+        "uploads": [],
+        "controller_starts": 0,
+        "original18_unchanged": true,
+        "real_remote_actions": 0
+      }
+    },
+    {
+      "check": "helper_mock_GPU1_busy_before_start",
+      "status": "PASS",
+      "evidence": {
+        "uploads": [
+          "launch_mass_calibration_trial.py"
+        ],
+        "controller_starts": 0,
+        "original18_unchanged": true,
+        "real_remote_actions": 0
+      }
+    },
+    {
+      "check": "helper_mock_disk_at32e8_before_upload",
+      "status": "PASS",
+      "evidence": {
+        "uploads": [],
+        "controller_starts": 0,
+        "original18_unchanged": true,
+        "real_remote_actions": 0
+      }
+    },
+    {
+      "check": "helper_mock_disk_at32e8_before_start",
+      "status": "PASS",
+      "evidence": {
+        "uploads": [
+          "launch_mass_calibration_trial.py"
+        ],
+        "controller_starts": 0,
+        "original18_unchanged": true,
+        "real_remote_actions": 0
+      }
+    },
+    {
+      "check": "full_optimizer_disk_budget_grounded_in_measured_sizes",
+      "status": "PASS",
+      "evidence": {
+        "checkpoint_bytes": {
+          "smoke.pth": 1196948078,
+          "last.pth": 1196896718,
+          "best.pth": 399087701
+        },
+        "minimum_headroom_after_three_checkpoints": 407067503,
+        "note": "Live free space is rechecked by helper. No deletion or serialization change is introduced."
+      }
+    },
+    {
+      "check": "observer_two_rows_incremental_raw_before_failure",
+      "status": "PASS",
+      "evidence": "Exactly smoke and development rows; exited raw text and intake are stored once before failures are asserted. Checkpoint binaries are not collected."
+    },
+    {
+      "check": "observer_near_end_or240_poll_read_only",
+      "status": "PASS",
+      "evidence": "Polls at least240 seconds or approximately180 seconds before the current epoch-time estimate ends; reads existing controller with failure logs and no retry."
+    }
+  ],
+  "experiment_status": "SHELVED_USER_STEERING",
+  "deployment_status": "NOT_DEPLOYED",
+  "deployment_authorized_by_this_review": false,
+  "steering_note": "Parent reported user prioritizes P0 expert retrieval and shared-CLIP/projection gradients; scalar trial is archived and not being launched.",
+  "helper_path": "C:\\Users\\gb\\.codex_tmp\\demo_axis_v7_calibration26_deploy_20261003.py",
+  "helper_sha256": "cb7dc11f513e1cfdbab2bffae4c20579b631e831ff079165ceef1464d7f34b68",
+  "checked_source_sha256": {
+    "launch_mass_calibration_trial.py": "ff7dfd3d5a293cdc7c38f48ccf3341363f6729a1791d8f74541d5d08b992b40d"
+  },
+  "observer_path": "C:\\Users\\gb\\.codex_tmp\\demo_axis_v7_calibration26_observe_20261003.py",
+  "observer_sha256": "c15bd246b3f4a461821c3cbf110d8bfcea382b9f9492359edffe9be50b83afd5",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "requested_fork_turns": "none",
+  "serving_identity_verified": false,
+  "actual_serving_identity": null,
+  "route_note": "Parent-requested route only; continued same reviewer agent. Supplier execution identity is not inferred.",
+  "scope": "Single new launcher, original V5 CLI scalar .05 to1.0, native smoke-to-fresh50 sequencing, deploy/source/resource guards and observer. No old NN/core reruns.",
+  "runtime_validation": {
+    "status": "NOT_RUN_TRIAL_SHELVED",
+    "changed_scalar_AMP_run": false,
+    "fresh50_run": false,
+    "real_SSH_calls": 0,
+    "real_GPU_calls": 0,
+    "NN_model_imports": 0,
+    "real_optimizer_updates": 0
+  },
+  "limitations": [
+    "Static/stdlib checks do not establish changed-scalar AMP success or retrieval improvement.",
+    "The task/C ratio is one-batch diagnostic evidence;20x scalar change does not establish global gradient dominance.",
+    "Predictor-only gradient diagnostics do not establish shared-backbone gradient conflict.",
+    "Existing ordinary controls do not match the cw1 optimization protocol."
+  ],
+  "trace_directory": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_axis_v7_calibration"
+}

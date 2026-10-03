@@ -1,0 +1,28 @@
+{
+  "status": "SHELVED_USER_STEERING",
+  "observed_at": "2026-10-03T13:20:56",
+  "baseline": "V5 axis_mass_fullref",
+  "single_factor": "Existing scalar contribution_loss_weight .05 -> 1.0; no new model, head, parameters, runner, loss units or gradient paths",
+  "evidence": {
+    "V5": 12.899525381829966,
+    "V6": 11.147193273705073
+  },
+  "rationale": "20x calibration weight exceeds observed one-batch task/C gradient norm ratios12.90/11.15; inspect calibration and retrieval jointly, without assuming global dominance or improvement",
+  "unchanged": "Original V5 model/runner18 source SHA, original pre-projection auxiliary taps, sampler/lossweights/.05 residual etc, initialization seed42/publicCLIP/B64/50earliestmaxdevmAP, AMP512/full optimizer checkpoint serialization",
+  "first_dataset": "MSVR310",
+  "budget_epochs": 50,
+  "engineering_updates": 3,
+  "official_test_uses": 0,
+  "source_sha256": {
+    "launch_mass_calibration_trial.py": "ff7dfd3d5a293cdc7c38f48ccf3341363f6729a1791d8f74541d5d08b992b40d"
+  },
+  "sanity": "Original model/tensor contract already passed in same frozen18-source environment; revalidate changed loss scalar using native3AMP/all nonzero finite gradients/fullmodeloptimizer strictreload, then fresh50 from publicCLIP",
+  "frozen": "Original V5 evaluation leaves support this unchanged variant and read contribution_weight from saved arguments; singleMSVR fourstates/13missing after devbest, no test/reselection",
+  "limits": "Single-seed development scalar-loss experiment, not new structural contribution. Existing ordinary controls used .05 and are not matched-cw1 optimization controls; train matching controls if promising.",
+  "shelved_at": "2026-10-03T13:31:00",
+  "reason": "User prioritizes actual expert retrieval utility and shared CLIP/projection gradients, then a separately retrained frequency retrieval interface; scalar calibration microtuning is deferred.",
+  "deployment_count": 0,
+  "actual_amp_runs": 0,
+  "actual_training_epochs": 0,
+  "optimizer_updates": 0
+}

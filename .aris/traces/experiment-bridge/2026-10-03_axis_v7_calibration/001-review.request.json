@@ -1,0 +1,13 @@
+{
+  "call_number": 1,
+  "purpose": "V7 scalar-loss trial narrow code review",
+  "received_from": "/root",
+  "tool": "collaboration.followup_task",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "requested_fork_turns": "none",
+  "route_note": "Original route request; current review is a continuation of the same reviewer agent. Actual serving identity is not inferred.",
+  "latest_steering": "用户最新详细复核明确优先P0(专家真实检索能力+sharedCLIP/投影层分损失梯度)，P1频域检索接口/分开测量控制，反对继续相同设计微调。因此CW1尚未启动，现暂缓不部署，plan将改SHELVED_USER_STEERING。如必要mock已接近完成可保存原source绑定review作归档即可，注明当前已暂缓/实际AMP与50均未运行；不扩大检查、勿SSH/GPU/NN。我改用户方向先做P0，不把26-check预测器梯度诊断当共享主干冲突证据。",
+  "files_referenced": ["launch_mass_calibration_trial.py", "C:/Users/gb/.codex_tmp/demo_axis_v7_calibration26_deploy_20261003.py", "C:/Users/gb/.codex_tmp/demo_axis_v7_calibration26_observe_20261003.py", "results/preflight/axis_collaboration_v7_calibration_plan.json"],
+  "prompt": "真实双probe已COMPLETE/exits0/identicalimages0opt，ratio V5=12.899525、V6=11.147193，Git0d74ce6f/doc5SHA1773b9..。据此只做最小V7 scalar-loss trial：保留V5原18源码和original run_mass_experiment.py完全不改，唯一参数--contribution-weight .05→1.0（20倍）；先3步AMPsmoke/allgrad/strict完整modelopt，再从公共CLIPfresh50单MSVRseed42/B64。不沿用V6投影aux，无新model/head/params/target单位/路由改动。请按experiment-bridge CODE_REVIEW窄审新唯一源码launch_mass_calibration_trial.py、private C:/Users/gb/.codex_tmp/demo_axis_v7_calibration26_deploy_20261003.py、...demo_axis_v7_calibration26_observe_20261003.py，无SSH/GPU/NN。helper原18source前后SHA/GPU1<500/disk>3.2GB(实测full smoke1.197GB+last1.197GB+best399MB，26free12:45为9.142GB，0旧checkpoint删除)，SCP只有新launcher。全代码既有CLI原runner原模型。新plan results/preflight/axis_collaboration_v7_calibration_plan.json。检查新launcher argv恰为V5+cw1/output、smoke gates/fullarg1.0/exit记录/freshmode不使用smokecheckpoint、50gate、helper绑定/无旧源写、observer2rows一次intake+240或预计nearend轮询，不重做旧NN/core checks。输出results/preflight/axis_collaboration_v7_calibration_review.json PASS/blockers/helper_sha256/checked_source_sha256（只有launcher1源），trace .aris/traces/experiment-bridge/2026-10-03_axis_v7_calibration机器文件。代码/参数改动小，做必要范围检查即可，实际changed-scalar AMP仍须root验证。"
+}
