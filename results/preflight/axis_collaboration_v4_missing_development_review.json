@@ -1,0 +1,1664 @@
+{
+  "status": "PASS",
+  "verdict": "PASS_STATIC_AND_STDLIB_MOCK",
+  "reviewed_at": "2026-10-03T00:10:07.132415+00:00",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer": {
+    "role": "fresh delegated native Codex source reviewer",
+    "context": "Read directly from supplied files; no external model backend; no further delegation"
+  },
+  "blockers": [],
+  "required_fixes": [],
+  "module_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\missing_development.py",
+  "helper_path": "C:\\Users\\gb\\.codex_tmp\\demo_axis_v4_missing_dev26_deploy_20261003.py",
+  "module_sha256": "65f7eadb7fd0b05c939559626546dfe5f5686af6153958b98f10a5f552dbe91f",
+  "helper_sha256": "1b35f0ba2457d087a0a892d1a76c4d5c149d1bdca4677c44e366a9f4b95e92e6",
+  "scope": "New missing_development.py and the exact existing 2026 deployment helper, including generated guard/proof/controller/launch code. Existing functions were inspected and selectively executed with stdlib primitives. No source/human-document changes, SSH, GPU queries, installed packages, or neural execution.",
+  "reviewed_target": {
+    "host": "2026",
+    "source_hosts": [
+      "2025",
+      "2026"
+    ],
+    "workers": {
+      "2": [
+        "MSVR310_axis_scaled_fullref_s42",
+        "RGBNT201_axis_scaled_fullref_s42",
+        "RGBNT100_axis_scaled_fullref_s42"
+      ],
+      "3": [
+        "MSVR310_demo_s42",
+        "RGBNT201_demo_s42",
+        "RGBNT100_demo_s42"
+      ]
+    },
+    "gpu0_gpu1_recovery": "Independent and not invoked by this helper",
+    "host_migration": "Any later 2027 migration is outside this exact helper SHA and needs only its own changed host/path/synchronization review."
+  },
+  "actual_counts": {
+    "checks": 80,
+    "main_harness_checks": 77,
+    "supplement_checks": 3,
+    "generated_scripts": 14,
+    "generated_main_families": [
+      "guard",
+      "baseline_proof",
+      "axis_proof",
+      "controller",
+      "launch"
+    ],
+    "baseline_proof_instances": 3,
+    "axis_proof_instances": 3,
+    "generated_auxiliary_strings": {
+      "mkdir": 3,
+      "copy": 1,
+      "entry": 1
+    },
+    "models": 6,
+    "conditions_per_model": 13,
+    "conditions_in_positive_module_mocks": 78,
+    "positive_module_full_runs": 6,
+    "positive_module_smokes": 6,
+    "smoke_triplets": 64,
+    "masks_per_smoke": 6,
+    "input_proofs": 24,
+    "baseline_files_copied": 12,
+    "baseline_scp3_files_2025_to_2026": 8,
+    "baseline_local_copy_files_2026": 4,
+    "axis_files_reused_from_existing_frozen_cross26_input": 12,
+    "new_axis_file_copies": 0,
+    "source_uploads": 1,
+    "unchanged_existing_source_files": 14,
+    "actual_local_terminal_counts": {
+      "MSVR310_demo_s42": {
+        "gallery": 360,
+        "queries": 210
+      },
+      "MSVR310_axis_scaled_fullref_s42": {
+        "gallery": 360,
+        "queries": 210
+      },
+      "RGBNT201_demo_s42": {
+        "gallery": 825,
+        "queries": 825
+      },
+      "RGBNT201_axis_scaled_fullref_s42": {
+        "gallery": 825,
+        "queries": 825
+      },
+      "RGBNT100_demo_s42": {
+        "gallery": 3125,
+        "queries": 3125
+      },
+      "RGBNT100_axis_scaled_fullref_s42": {
+        "gallery": 3125,
+        "queries": 3125
+      }
+    },
+    "real_remote_neural_conditions": 0
+  },
+  "findings": [
+    {
+      "status": "PASS",
+      "area": "Development split and frozen checkpoint intake",
+      "source": "missing_development.py:27",
+      "detail": "COMPLETE with exactly50 epochs, the variant-appropriate exit0, and four original input-file proofs precede model build. Installed development query_indices, ids, cameras, scenes and names must all equal the saved arrays. split_records reads installed official-training directories, holds out fixed identities and preserves all dev records as gallery. No official_records or official-test selection is called. The six available local terminal/exit texts were read and are COMPLETE50/seed42 for the expected dataset/variant; MSVR retains360 gallery/210 queries, RGBNT201825/825 and RGBNT1003125/3125."
+    },
+    {
+      "status": "PASS",
+      "area": "FP32 strict reload, exact numerical clean parity and no update gates",
+      "source": "missing_development.py:46",
+      "detail": "Existing build seeds and returns float().cuda(); weights_only checkpoint load is strict, then all modules are checked eval. The reused extraction has torch.no_grad and no autocast. Clean features use the original64 inference batch layout and must have max absolute error exactly0 against frozen saved dev features. Four clean metrics must match strict_reload. Both smoke and full compare all state_dict tensor versions after their final extraction and before their successful terminal; full also rechecks original input sizes/SHA before COMPLETE. No optimizer, backward, step, train-mode or test-time update call exists in the new module. Injected late state mutation and changed original file prevented COMPLETE."
+    },
+    {
+      "status": "PASS",
+      "area": "Six normalized-zero masks and original DeMo semantics",
+      "source": "missing_evaluation.py:20",
+      "detail": "Actual mask_images was executed for all r/n/t/rn/rt/nt sets with primitive normalized arrays: only listed modality tensors become zeros_like. Actual verify_original_mask executed all six comparisons using the original DeMo forward mask AST with primitive arrays, returned12 forward calls, and restored miss_type=nothing; a sixth-mask mismatch failed. Real neural equality remains an execution gate, not a result of the primitive mock."
+    },
+    {
+      "status": "PASS",
+      "area": "Thirteen conditions, full gallery and GT metrics",
+      "source": "missing_development.py:75",
+      "detail": "Actual main control flow was exercised for all6 models and6 smokes with list-backed arrays and stub feature extraction. Every full mock generated exactly clean+6 both_missing+6 query_missing. Both_missing indexes queries from the same masked full dev feature set; query_missing uses that masked query subset with the clean full dev gallery. All GT/name arrays and lengths remained aligned. MSVR uses scenes for same-ID/same-scene junk; RGBNT uses cameras. Actual inherited full_metrics executed against an independent primitive rank-counting fixture and wrote six metrics, CMC, camera/scene/identity groups and per-query CSV, including invalid-query bookkeeping."
+    },
+    {
+      "status": "PASS",
+      "area": "Six independent proof bindings and exact allowed transport",
+      "source": "demo_axis_v4_missing_dev26_deploy_20261003.py:33",
+      "detail": "Executed the real helper outer AST with injected transports and all generated code. All3 baseline proofs and3 axis proofs bind their own dataset/run/host. Baseline MSVR310 andRGBNT201 read2025 dynamic_amp_comparison with inner exit0; RGBNT100 reads the same campaign on2026. Only best.pth,best_dev_arrays.npz,result.json,exit.json are copied for baselines:8scp -3 files and4same-host copyfile calls, all exact source/target. Axis runs directly reuse the already frozen2026 cross26_input with sibling exits, adding12 proofs and0new copies. All24 inputs are size/SHA checked before launch; originals remain unchanged. This is24verified inputs, not24new copies."
+    },
+    {
+      "status": "PASS",
+      "area": "Source preservation and launch gates",
+      "source": "demo_axis_v4_missing_dev26_deploy_20261003.py:20",
+      "detail": "All14 prior local deployed source SHAs match the previous launch receipt. The helper checks the same14 remote digests, requires both target GPUs below500MiB and exclusive new input/output roots, uploads only missing_development.py, then rechecks15 source entries and24 input proofs before one detached controller spawn. Actual generated-code mocks rejected GPU500/busy, old source drift, existing output and same-length checkpoint corruption for each of6models before any spawn."
+    },
+    {
+      "status": "PASS",
+      "area": "Worker dependency order and honest aggregate completion",
+      "source": "demo_axis_v4_missing_dev26_deploy_20261003.py:80",
+      "detail": "The actual controller ran with stdlib ThreadPoolExecutor and fake waited children. GPU2 receives axis andGPU3demo, each MSVR310→RGBNT201→RGBNT100. Each model must finish its64-triplet smoke exit0/PASS/zero-update/exact-parity before full. No retry loop exists. Smoke failure at each of the6positions prevented the full stage and every later job of that worker; full failure and malformed exit0 smoke outputs also blocked progress. The other worker may finish independently. A real threading.Event blocked the final child wait and proved aggregate COMPLETE was absent until release. After both workers return6runs only then are conditions78 and total COMPLETE written. Actual reused idle loop waited240seconds at2700 and500MiB and returned only at499MiB."
+    }
+  ],
+  "validation": {
+    "status": "PASS",
+    "process_exit_codes": [
+      0,
+      0
+    ],
+    "python_requested": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe",
+    "command_prefix": "uv run --offline --no-project --python <python_requested> python -X utf8",
+    "tool_chunks": [
+      "cc8d5e",
+      "f703f6"
+    ],
+    "trace_root": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_missing_development",
+    "artifacts": [
+      "review_harness.py",
+      "validation.json",
+      "review_supplement.py",
+      "supplement_validation.json",
+      "emit_review.py",
+      "review.json"
+    ],
+    "checks": [
+      {
+        "name": "all_14_existing_local_sources_equal_previous_launch_digests",
+        "status": "PASS",
+        "count": 14
+      },
+      {
+        "name": "six_real_local_terminal_texts_complete50_correct_dataset_variant_seed42_and_exit0",
+        "status": "PASS",
+        "counts": {
+          "MSVR310_demo_s42": {
+            "gallery": 360,
+            "queries": 210
+          },
+          "MSVR310_axis_scaled_fullref_s42": {
+            "gallery": 360,
+            "queries": 210
+          },
+          "RGBNT201_demo_s42": {
+            "gallery": 825,
+            "queries": 825
+          },
+          "RGBNT201_axis_scaled_fullref_s42": {
+            "gallery": 825,
+            "queries": 825
+          },
+          "RGBNT100_demo_s42": {
+            "gallery": 3125,
+            "queries": 3125
+          },
+          "RGBNT100_axis_scaled_fullref_s42": {
+            "gallery": 3125,
+            "queries": 3125
+          }
+        }
+      },
+      {
+        "name": "actual_outer_ast_and_generated_scripts_executed_with_injected_transports",
+        "status": "PASS",
+        "remote_script_instances": 12,
+        "baseline_proofs": 3,
+        "axis_proofs": 3,
+        "families": [
+          "guard",
+          "baseline_proof",
+          "axis_proof",
+          "controller",
+          "launch"
+        ],
+        "additional_strings": [
+          "mkdir(3)",
+          "same_host_copy(1)",
+          "entry"
+        ]
+      },
+      {
+        "name": "loop_bindings_24_inputs_and_12_actual_copies_exact",
+        "status": "PASS",
+        "proofs": 6,
+        "input_files": 24,
+        "scp3_files": 8,
+        "same_host_copies": 4,
+        "reused_axis_inputs": 12,
+        "uploaded_module_count": 1,
+        "original_source_inputs_unchanged": true
+      },
+      {
+        "name": "guard_gpu2_500_rejected",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "guard_gpu3_500_rejected",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "guard_gpu2_7000_rejected",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "guard_changed_old_source_rejected",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "guard_existing_output_rejected",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_MSVR310_demo_s42_status",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_MSVR310_demo_s42_epochs",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_MSVR310_demo_s42_exit1",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_RGBNT201_demo_s42_status",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_RGBNT201_demo_s42_epochs",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_RGBNT201_demo_s42_exit1",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_RGBNT100_demo_s42_status",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_RGBNT100_demo_s42_epochs",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_RGBNT100_demo_s42_exit1",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_MSVR310_axis_scaled_fullref_s42_status",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_MSVR310_axis_scaled_fullref_s42_epochs",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_MSVR310_axis_scaled_fullref_s42_exit1",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_RGBNT201_axis_scaled_fullref_s42_status",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_RGBNT201_axis_scaled_fullref_s42_epochs",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_RGBNT201_axis_scaled_fullref_s42_exit1",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_RGBNT100_axis_scaled_fullref_s42_status",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_RGBNT100_axis_scaled_fullref_s42_epochs",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "proof_RGBNT100_axis_scaled_fullref_s42_exit1",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "all_six_proof_strings_bind_their_own_model_and_host",
+        "status": "PASS",
+        "names": [
+          "MSVR310_demo_s42",
+          "RGBNT201_demo_s42",
+          "RGBNT100_demo_s42",
+          "MSVR310_axis_scaled_fullref_s42",
+          "RGBNT201_axis_scaled_fullref_s42",
+          "RGBNT100_axis_scaled_fullref_s42"
+        ]
+      },
+      {
+        "name": "launch_input_hash_change_MSVR310_demo_s42",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "launch_input_hash_change_RGBNT201_demo_s42",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "launch_input_hash_change_RGBNT100_demo_s42",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "launch_input_hash_change_MSVR310_axis_scaled_fullref_s42",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "launch_input_hash_change_RGBNT201_axis_scaled_fullref_s42",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "launch_input_hash_change_RGBNT100_axis_scaled_fullref_s42",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "launch_rechecks_all_six_models_before_any_spawn",
+        "status": "PASS"
+      },
+      {
+        "name": "controller_six_models_smoke_then_full_78_conditions",
+        "status": "PASS",
+        "starts": [
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            3,
+            "MSVR310_demo_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            3,
+            "MSVR310_demo_s42",
+            "full"
+          ],
+          [
+            "start",
+            3,
+            "RGBNT201_demo_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            3,
+            "RGBNT201_demo_s42",
+            "full"
+          ],
+          [
+            "start",
+            3,
+            "RGBNT100_demo_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            3,
+            "RGBNT100_demo_s42",
+            "full"
+          ]
+        ],
+        "aggregate_complete": true,
+        "waited": false
+      },
+      {
+        "name": "controller_smoke_failure_stops_worker_2_MSVR310",
+        "status": "PASS",
+        "starts": [
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "smoke"
+          ]
+        ],
+        "aggregate_complete": false,
+        "waited": false
+      },
+      {
+        "name": "controller_smoke_failure_stops_worker_2_RGBNT201",
+        "status": "PASS",
+        "starts": [
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "smoke"
+          ]
+        ],
+        "aggregate_complete": false,
+        "waited": false
+      },
+      {
+        "name": "controller_smoke_failure_stops_worker_2_RGBNT100",
+        "status": "PASS",
+        "starts": [
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "smoke"
+          ]
+        ],
+        "aggregate_complete": false,
+        "waited": false
+      },
+      {
+        "name": "controller_smoke_failure_stops_worker_3_MSVR310",
+        "status": "PASS",
+        "starts": [
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            3,
+            "MSVR310_demo_s42",
+            "smoke"
+          ]
+        ],
+        "aggregate_complete": false,
+        "waited": false
+      },
+      {
+        "name": "controller_smoke_failure_stops_worker_3_RGBNT201",
+        "status": "PASS",
+        "starts": [
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            3,
+            "MSVR310_demo_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            3,
+            "MSVR310_demo_s42",
+            "full"
+          ],
+          [
+            "start",
+            3,
+            "RGBNT201_demo_s42",
+            "smoke"
+          ]
+        ],
+        "aggregate_complete": false,
+        "waited": false
+      },
+      {
+        "name": "controller_smoke_failure_stops_worker_3_RGBNT100",
+        "status": "PASS",
+        "starts": [
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            3,
+            "MSVR310_demo_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            3,
+            "MSVR310_demo_s42",
+            "full"
+          ],
+          [
+            "start",
+            3,
+            "RGBNT201_demo_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            3,
+            "RGBNT201_demo_s42",
+            "full"
+          ],
+          [
+            "start",
+            3,
+            "RGBNT100_demo_s42",
+            "smoke"
+          ]
+        ],
+        "aggregate_complete": false,
+        "waited": false
+      },
+      {
+        "name": "controller_full_failure_stops_later_worker_models",
+        "status": "PASS",
+        "starts": [
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "full"
+          ]
+        ],
+        "aggregate_complete": false,
+        "waited": false
+      },
+      {
+        "name": "controller_exit0_invalid_smoke_status",
+        "status": "PASS",
+        "starts": [
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            3,
+            "MSVR310_demo_s42",
+            "smoke"
+          ]
+        ],
+        "aggregate_complete": false,
+        "waited": false
+      },
+      {
+        "name": "controller_exit0_invalid_smoke_optimizer_updates",
+        "status": "PASS",
+        "starts": [
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            3,
+            "MSVR310_demo_s42",
+            "smoke"
+          ]
+        ],
+        "aggregate_complete": false,
+        "waited": false
+      },
+      {
+        "name": "controller_exit0_invalid_smoke_normal_feature_max_error",
+        "status": "PASS",
+        "starts": [
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            3,
+            "MSVR310_demo_s42",
+            "smoke"
+          ]
+        ],
+        "aggregate_complete": false,
+        "waited": false
+      },
+      {
+        "name": "controller_incomplete_wait_never_writes_aggregate",
+        "status": "PASS",
+        "starts": [
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "MSVR310_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT201_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            2,
+            "RGBNT100_axis_scaled_fullref_s42",
+            "full"
+          ],
+          [
+            "start",
+            3,
+            "MSVR310_demo_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            3,
+            "MSVR310_demo_s42",
+            "full"
+          ],
+          [
+            "start",
+            3,
+            "RGBNT201_demo_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            3,
+            "RGBNT201_demo_s42",
+            "full"
+          ],
+          [
+            "start",
+            3,
+            "RGBNT100_demo_s42",
+            "smoke"
+          ],
+          [
+            "start",
+            3,
+            "RGBNT100_demo_s42",
+            "full"
+          ]
+        ],
+        "aggregate_complete": true,
+        "waited": true
+      },
+      {
+        "name": "module_full_MSVR310_demo",
+        "status": "PASS",
+        "fault": null,
+        "output_written": true,
+        "measurements": 13,
+        "extract_calls": 7,
+        "gallery": 360,
+        "queries": 210,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "original_mask_verification",
+          "extract_r",
+          "extract_n",
+          "extract_t",
+          "extract_rn",
+          "extract_rt",
+          "extract_nt"
+        ]
+      },
+      {
+        "name": "module_smoke64_MSVR310_demo",
+        "status": "PASS",
+        "fault": null,
+        "output_written": true,
+        "measurements": 0,
+        "extract_calls": 7,
+        "gallery": 360,
+        "queries": 210,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "original_mask_verification",
+          "extract_r",
+          "extract_n",
+          "extract_t",
+          "extract_rn",
+          "extract_rt",
+          "extract_nt"
+        ]
+      },
+      {
+        "name": "module_full_MSVR310_axis_scaled_fullref",
+        "status": "PASS",
+        "fault": null,
+        "output_written": true,
+        "measurements": 13,
+        "extract_calls": 7,
+        "gallery": 360,
+        "queries": 210,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "extract_r",
+          "extract_n",
+          "extract_t",
+          "extract_rn",
+          "extract_rt",
+          "extract_nt"
+        ]
+      },
+      {
+        "name": "module_smoke64_MSVR310_axis_scaled_fullref",
+        "status": "PASS",
+        "fault": null,
+        "output_written": true,
+        "measurements": 0,
+        "extract_calls": 7,
+        "gallery": 360,
+        "queries": 210,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "extract_r",
+          "extract_n",
+          "extract_t",
+          "extract_rn",
+          "extract_rt",
+          "extract_nt"
+        ]
+      },
+      {
+        "name": "module_full_RGBNT201_demo",
+        "status": "PASS",
+        "fault": null,
+        "output_written": true,
+        "measurements": 13,
+        "extract_calls": 7,
+        "gallery": 825,
+        "queries": 825,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "original_mask_verification",
+          "extract_r",
+          "extract_n",
+          "extract_t",
+          "extract_rn",
+          "extract_rt",
+          "extract_nt"
+        ]
+      },
+      {
+        "name": "module_smoke64_RGBNT201_demo",
+        "status": "PASS",
+        "fault": null,
+        "output_written": true,
+        "measurements": 0,
+        "extract_calls": 7,
+        "gallery": 825,
+        "queries": 825,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "original_mask_verification",
+          "extract_r",
+          "extract_n",
+          "extract_t",
+          "extract_rn",
+          "extract_rt",
+          "extract_nt"
+        ]
+      },
+      {
+        "name": "module_full_RGBNT201_axis_scaled_fullref",
+        "status": "PASS",
+        "fault": null,
+        "output_written": true,
+        "measurements": 13,
+        "extract_calls": 7,
+        "gallery": 825,
+        "queries": 825,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "extract_r",
+          "extract_n",
+          "extract_t",
+          "extract_rn",
+          "extract_rt",
+          "extract_nt"
+        ]
+      },
+      {
+        "name": "module_smoke64_RGBNT201_axis_scaled_fullref",
+        "status": "PASS",
+        "fault": null,
+        "output_written": true,
+        "measurements": 0,
+        "extract_calls": 7,
+        "gallery": 825,
+        "queries": 825,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "extract_r",
+          "extract_n",
+          "extract_t",
+          "extract_rn",
+          "extract_rt",
+          "extract_nt"
+        ]
+      },
+      {
+        "name": "module_full_RGBNT100_demo",
+        "status": "PASS",
+        "fault": null,
+        "output_written": true,
+        "measurements": 13,
+        "extract_calls": 7,
+        "gallery": 3125,
+        "queries": 3125,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "original_mask_verification",
+          "extract_r",
+          "extract_n",
+          "extract_t",
+          "extract_rn",
+          "extract_rt",
+          "extract_nt"
+        ]
+      },
+      {
+        "name": "module_smoke64_RGBNT100_demo",
+        "status": "PASS",
+        "fault": null,
+        "output_written": true,
+        "measurements": 0,
+        "extract_calls": 7,
+        "gallery": 3125,
+        "queries": 3125,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "original_mask_verification",
+          "extract_r",
+          "extract_n",
+          "extract_t",
+          "extract_rn",
+          "extract_rt",
+          "extract_nt"
+        ]
+      },
+      {
+        "name": "module_full_RGBNT100_axis_scaled_fullref",
+        "status": "PASS",
+        "fault": null,
+        "output_written": true,
+        "measurements": 13,
+        "extract_calls": 7,
+        "gallery": 3125,
+        "queries": 3125,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "extract_r",
+          "extract_n",
+          "extract_t",
+          "extract_rn",
+          "extract_rt",
+          "extract_nt"
+        ]
+      },
+      {
+        "name": "module_smoke64_RGBNT100_axis_scaled_fullref",
+        "status": "PASS",
+        "fault": null,
+        "output_written": true,
+        "measurements": 0,
+        "extract_calls": 7,
+        "gallery": 3125,
+        "queries": 3125,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "extract_r",
+          "extract_n",
+          "extract_t",
+          "extract_rn",
+          "extract_rt",
+          "extract_nt"
+        ]
+      },
+      {
+        "name": "module_reject_incomplete",
+        "status": "PASS",
+        "fault": "incomplete",
+        "output_written": false,
+        "measurements": 0,
+        "extract_calls": 0,
+        "gallery": 360,
+        "queries": 210,
+        "events": []
+      },
+      {
+        "name": "module_reject_epoch49",
+        "status": "PASS",
+        "fault": "epoch49",
+        "output_written": false,
+        "measurements": 0,
+        "extract_calls": 0,
+        "gallery": 360,
+        "queries": 210,
+        "events": []
+      },
+      {
+        "name": "module_reject_exit1",
+        "status": "PASS",
+        "fault": "exit1",
+        "output_written": false,
+        "measurements": 0,
+        "extract_calls": 0,
+        "gallery": 360,
+        "queries": 210,
+        "events": []
+      },
+      {
+        "name": "module_reject_saved_query_indices",
+        "status": "PASS",
+        "fault": "saved_query_indices",
+        "output_written": false,
+        "measurements": 0,
+        "extract_calls": 0,
+        "gallery": 360,
+        "queries": 210,
+        "events": [
+          "threads"
+        ]
+      },
+      {
+        "name": "module_reject_saved_ids",
+        "status": "PASS",
+        "fault": "saved_ids",
+        "output_written": false,
+        "measurements": 0,
+        "extract_calls": 0,
+        "gallery": 360,
+        "queries": 210,
+        "events": [
+          "threads"
+        ]
+      },
+      {
+        "name": "module_reject_saved_cameras",
+        "status": "PASS",
+        "fault": "saved_cameras",
+        "output_written": false,
+        "measurements": 0,
+        "extract_calls": 0,
+        "gallery": 360,
+        "queries": 210,
+        "events": [
+          "threads"
+        ]
+      },
+      {
+        "name": "module_reject_saved_scenes",
+        "status": "PASS",
+        "fault": "saved_scenes",
+        "output_written": false,
+        "measurements": 0,
+        "extract_calls": 0,
+        "gallery": 360,
+        "queries": 210,
+        "events": [
+          "threads"
+        ]
+      },
+      {
+        "name": "module_reject_saved_names",
+        "status": "PASS",
+        "fault": "saved_names",
+        "output_written": false,
+        "measurements": 0,
+        "extract_calls": 0,
+        "gallery": 360,
+        "queries": 210,
+        "events": [
+          "threads"
+        ]
+      },
+      {
+        "name": "module_reject_parity",
+        "status": "PASS",
+        "fault": "parity",
+        "output_written": false,
+        "measurements": 0,
+        "extract_calls": 1,
+        "gallery": 360,
+        "queries": 210,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean"
+        ]
+      },
+      {
+        "name": "module_reject_metric_parity",
+        "status": "PASS",
+        "fault": "metric_parity",
+        "output_written": false,
+        "measurements": 1,
+        "extract_calls": 1,
+        "gallery": 360,
+        "queries": 210,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "original_mask_verification"
+        ]
+      },
+      {
+        "name": "module_reject_nan_mask",
+        "status": "PASS",
+        "fault": "nan_mask",
+        "output_written": false,
+        "measurements": 7,
+        "extract_calls": 5,
+        "gallery": 360,
+        "queries": 210,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "original_mask_verification",
+          "extract_r",
+          "extract_n",
+          "extract_t",
+          "extract_rn"
+        ]
+      },
+      {
+        "name": "module_reject_state_mutation",
+        "status": "PASS",
+        "fault": "state_mutation",
+        "output_written": false,
+        "measurements": 13,
+        "extract_calls": 7,
+        "gallery": 360,
+        "queries": 210,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "original_mask_verification",
+          "extract_r",
+          "extract_n",
+          "extract_t",
+          "extract_rn",
+          "extract_rt",
+          "extract_nt"
+        ]
+      },
+      {
+        "name": "module_reject_input_mutation",
+        "status": "PASS",
+        "fault": "input_mutation",
+        "output_written": false,
+        "measurements": 13,
+        "extract_calls": 7,
+        "gallery": 360,
+        "queries": 210,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "original_mask_verification",
+          "extract_r",
+          "extract_n",
+          "extract_t",
+          "extract_rn",
+          "extract_rt",
+          "extract_nt"
+        ]
+      },
+      {
+        "name": "module_reject_original_mask",
+        "status": "PASS",
+        "fault": "original_mask",
+        "output_written": false,
+        "measurements": 0,
+        "extract_calls": 1,
+        "gallery": 360,
+        "queries": 210,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "original_mask_verification"
+        ]
+      },
+      {
+        "name": "module_smoke_reject_late_state_mutation",
+        "status": "PASS",
+        "fault": "state_mutation",
+        "output_written": false,
+        "measurements": 0,
+        "extract_calls": 7,
+        "gallery": 360,
+        "queries": 210,
+        "events": [
+          "threads",
+          "build",
+          "strict_load",
+          "eval",
+          "extract_clean",
+          "original_mask_verification",
+          "extract_r",
+          "extract_n",
+          "extract_t",
+          "extract_rn",
+          "extract_rt",
+          "extract_nt"
+        ]
+      },
+      {
+        "name": "actual_mask_images_all_six_sets_normalized_zero_and_unmasked_identity",
+        "status": "PASS"
+      },
+      {
+        "name": "actual_full_metrics_six_metrics_CMC_groups_and_perquery_csv_reference_fixture",
+        "status": "PASS",
+        "valid_queries": 2,
+        "invalid_queries": 1,
+        "gallery": 25
+      },
+      {
+        "name": "static_dev_only_no_training_calls_no_grad_extraction_FP32_build_and_strict_eval",
+        "status": "PASS"
+      },
+      {
+        "name": "actual_verify_original_mask_executes_six_comparisons_against_actual_DeMo_mask_branch",
+        "status": "PASS",
+        "comparisons": 6,
+        "forwards": 12,
+        "scope": "Primitive arrays, source mask branch only; not actual neural forward"
+      },
+      {
+        "name": "actual_original_mask_check_rejects_mismatch_on_sixth_mask",
+        "status": "PASS"
+      },
+      {
+        "name": "actual_idle_waits_at_500_and_above_returns_only_below500",
+        "status": "PASS",
+        "usage": [
+          2700,
+          500,
+          499
+        ],
+        "mock_sleep_seconds": [
+          240,
+          240
+        ]
+      }
+    ],
+    "generated_string_line_counts": [
+      {
+        "kind": "guard",
+        "lines": 10
+      },
+      {
+        "kind": "baseline_proof",
+        "lines": 7
+      },
+      {
+        "kind": "mkdir",
+        "lines": 1
+      },
+      {
+        "kind": "baseline_proof",
+        "lines": 7
+      },
+      {
+        "kind": "mkdir",
+        "lines": 1
+      },
+      {
+        "kind": "baseline_proof",
+        "lines": 7
+      },
+      {
+        "kind": "mkdir",
+        "lines": 1
+      },
+      {
+        "kind": "copy",
+        "lines": 5
+      },
+      {
+        "kind": "axis_proof",
+        "lines": 8
+      },
+      {
+        "kind": "axis_proof",
+        "lines": 8
+      },
+      {
+        "kind": "axis_proof",
+        "lines": 8
+      },
+      {
+        "kind": "launch",
+        "lines": 15
+      },
+      {
+        "kind": "controller",
+        "lines": 38
+      },
+      {
+        "kind": "entry",
+        "lines": 1
+      }
+    ]
+  },
+  "source_sha256": {
+    "missing_development.py": "65f7eadb7fd0b05c939559626546dfe5f5686af6153958b98f10a5f552dbe91f",
+    "missing_evaluation.py": "e04e16dbb4ec486f28065102b5d7301c68e7d1cef62cdd5fcfa99b3dac222089",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "scaled_axis_collaboration.py": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+    "diagnose_axis_collaboration.py": "60f3c6217cdebb347ab13501bb0013ca52925b139ba333cc2f2f6ec90c3e6729",
+    "launch_scaled_diagnostic.py": "ca865b0204806a0f391d18fe4d91710a90d006a981d1585958e473488c612a1b",
+    "launch_axis_scaled.py": "b0e069299966790340d9aaba55c1318ac18183a6def169d9cc5e9de655b58e9f",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "residual_dual_axis.py": "4a22801f014e971786402a477a33e7f86ecf608e786ab4c2f3c796abc033c91c",
+    "dual_axis.py": "0c6090fe5b8b15cc021bf1809860f0675187288dc2145d0129ce89a5eb78a330",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "modeling/make_model.py": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+    "splits.json": "66f6ee8f1c07f4fb97bf48ed8189b60859ab2f5f207ceea6b28a90c4ee1f9377",
+    "configs/MSVR310/DeMo.yml": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e"
+  },
+  "limitations": [
+    "Same-family independent fresh context, provisional source/control-flow acceptance only; not cross-family review.",
+    "No torch/numpy is installed or imported by these tests; no actual checkpoint deserialize, feature vector, CUDA calculation or neural equality was tested.",
+    "Helper terminal/exit fixtures use actual local result text, but weight/NPZ bytes are distinct representative mock content. Remote input bytes, installed GT, live resource state and real FP32 parity require the actual M0/full execution.",
+    "The clean parity implementation is exact numerical FP32 equality via max_abs_error==0, not a raw bytewise comparison. The original DeMo mask neural check uses torch.equal. No empirical neural equality is claimed by this review.",
+    "The helper emits only STARTED_SMOKE_AND_78_CONDITIONS_PENDING at launch; this review does not certify any real launch, smoke PASS or78-condition result. Mock PID777 printed by the harness is not a real process.",
+    "The reviewed helper targets2026. Parent-reported live resource failure and possible2027 migration do not alter this frozen-SHA source review; new target/path synchronization needs separate narrow review.",
+    "Single seed42 frozen missing-input diagnostic does not establish missing-input training, full official-train reproduction or multi-seed acceptance."
+  ],
+  "actual_reviewer_actions": {
+    "ssh": 0,
+    "scp": 0,
+    "gpu_queries": 0,
+    "remote_process_spawns": 0,
+    "optimizer_updates": 0,
+    "source_edits": 0,
+    "subagents": 0
+  },
+  "source_edits_by_reviewer": [],
+  "human_document_edits_by_reviewer": [],
+  "conclusion": "No concrete blockers found for the recorded module/helper SHA.80 targeted checks passed. Parent may use this provisional source review for the matching helper only, while collecting actual resource, provenance, strict neural smoke and full execution evidence separately."
+}

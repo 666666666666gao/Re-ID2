@@ -1,0 +1,32 @@
+{
+  "observed_at": "2026-10-03T00:43:47.514180+00:00",
+  "spec_sha256": "4993690212b8f331ceac59c1cf8fe15751a69be89ffdcb2c046cdb7989cae5a0",
+  "ledger_sha256": "6568a120d1a05c0ece7a02ffc251120464807ee6460789326e719fbb43605076",
+  "local_python": "3.13.12 (main, Feb  3 2026, 22:53:26) [MSC v.1944 64 bit (AMD64)]",
+  "local_python_executable": "C:\\Users\\gb\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\python.exe",
+  "invocation": {
+    "argv": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ClearAllForwardings=yes",
+      "-o",
+      "ConnectTimeout=15",
+      "2027",
+      "CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 /data/gb/Re-ID/conda-envs/tri_reid/bin/python -u -c 'import os,runpy,sys;os.chdir('\"'\"'/data/gb/Re-ID/DeMo-DualAxis'\"'\"');sys.path.insert(0,'\"'\"'/data/gb/Re-ID/DeMo-DualAxis'\"'\"');sys.argv=['\"'\"'verify_axis_scaled.py'\"'\"', '\"'\"'--dataset'\"'\"', '\"'\"'MSVR310'\"'\"', '\"'\"'--data-root'\"'\"', '\"'\"'/data/gb/Re-ID/dataset'\"'\"', '\"'\"'--pretrained'\"'\"', '\"'\"'/data/gb/Re-ID/pretrained/ViT-B-16.pt'\"'\"', '\"'\"'--output'\"'\"', '\"'\"'/data/gb/Re-ID/DeMo-DualAxis/runs/env27_doc_witness_msvr310'\"'\"'];runpy.run_path('\"'\"'/data/gb/Re-ID/DeMo-DualAxis/verify_axis_scaled.py'\"'\"',run_name=\"__main__\")'"
+    ],
+    "expected_stdout": "SCALED_AXIS_TENSOR_CONTRACT_PASS MSVR310",
+    "expected_artifact": "/data/gb/Re-ID/DeMo-DualAxis/runs/env27_doc_witness_msvr310/tensor_contract.json",
+    "expected_status": "PASS",
+    "optimizer_updates": 0,
+    "source_sha256": "cc0584bf2ba97f58cbb14c799f167b97524ee48d939cebb1752627e748ca3126",
+    "state": "FRESH_AGENT_EXECUTION_PENDING"
+  },
+  "document_argv_equals_ledger": true,
+  "document_section_sha256": "e514931de78c94274cf2b08bfed928e521c296250eb56715ff3490d5ea45eb45",
+  "document_section": "## 2027 环境迁移与可复现入口（2026-10-03）\n\n2025 原训练机发生 Xid79；2026 四卡由其他 Trifusion 任务占用，未抢占。新独立项目为 `/data/gb/Re-ID/DeMo-DualAxis`，环境为 `/data/gb/Re-ID/conda-envs/tri_reid`，数据为 `/data/gb/Re-ID/dataset`，公开 CLIP 为 `/data/gb/Re-ID/pretrained/ViT-B-16.pt`。Python 3.10.14、Torch 2.5.1+cu121 与源环境一致；三数据集固定划分和 seeded CUDA 8×8 运算已实际通过。环境尚待 fresh agent 按下列精确入口执行真实模型检查，不能提前记为 READY。\n\n规范内容哈希为 `4993690212b8f331ceac59c1cf8fe15751a69be89ffdcb2c046cdb7989cae5a0`，定义为解析 JSON 后按 sorted keys 和紧凑分隔符重新序列化的 SHA256，区别于漂亮排版 JSON 文件的字节 SHA。机器 ledger 位于 `.aris/compute/ssh2027.json`。ONE 交接文档保留全部人类说明，不额外创建环境 README。\n\n归档来自已运行实验的 2026 环境，使用独立临时工具打包，源环境安装包清单未改变。环境归档 3,397,458,926 bytes / SHA `d00624e7d0a617d3a3d129b6d6ed6698620235f033fe3413471593bdec2a12b5`；数据归档 2,149,711,741 bytes / SHA `b81fcfdc4b096d0390d47f8ceb61ecd859ff0dbc68a3f1c9df85f62a734e1596`。目标两归档核对后解压，CLIP 源/目标 SHA 一致。首次 tarfile data filter 因 compiler_compat/ld 链接报 LinkOutsideDestinationError，改按 conda-pack 官方 tar 解压；未改模型源码。首次导入后包清单断言把 setuptools/_vendor 的 12 项元数据计入；随后查明原 prefix/site-packages 的 93 项与源环境逐项一致，明确核对同一安装目录后通过。两个失败均保留实际证据，不能作为训练失败或模型指标。\n\n精确调用为 ledger 的 argv 数组，调用方直接使用 subprocess.Popen(argv)，不得重新拼接 shell 或擅改参数。远端 cwd、sys.path、四线程、GPU0 和数据/预训练路径均已包含；`runs` 父目录已预先创建，输出目录尚不存在。一次执行验证等参数、三种 5632D 描述子、原 DeMo 初始权重、四状态关闭机制、六种缺失模态和停止梯度的贡献目标；仅一次语义训练前向，optimizer_updates=0，不是效能实验。\n\n```json\n[\n  \"ssh\",\n  \"-o\",\n  \"BatchMode=yes\",\n  \"-o\",\n  \"ClearAllForwardings=yes\",\n  \"-o\",\n  \"ConnectTimeout=15\",\n  \"2027\",\n  \"CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 /data/gb/Re-ID/conda-envs/tri_reid/bin/python -u -c 'import os,runpy,sys;os.chdir('\\\"'\\\"'/data/gb/Re-ID/DeMo-DualAxis'\\\"'\\\"');sys.path.insert(0,'\\\"'\\\"'/data/gb/Re-ID/DeMo-DualAxis'\\\"'\\\"');sys.argv=['\\\"'\\\"'verify_axis_scaled.py'\\\"'\\\"', '\\\"'\\\"'--dataset'\\\"'\\\"', '\\\"'\\\"'MSVR310'\\\"'\\\"', '\\\"'\\\"'--data-root'\\\"'\\\"', '\\\"'\\\"'/data/gb/Re-ID/dataset'\\\"'\\\"', '\\\"'\\\"'--pretrained'\\\"'\\\"', '\\\"'\\\"'/data/gb/Re-ID/pretrained/ViT-B-16.pt'\\\"'\\\"', '\\\"'\\\"'--output'\\\"'\\\"', '\\\"'\\\"'/data/gb/Re-ID/DeMo-DualAxis/runs/env27_doc_witness_msvr310'\\\"'\\\"'];runpy.run_path('\\\"'\\\"'/data/gb/Re-ID/DeMo-DualAxis/verify_axis_scaled.py'\\\"'\\\"',run_name=\\\"__main__\\\")'\"\n]\n```\n\n预期 stdout 为 `SCALED_AXIS_TENSOR_CONTRACT_PASS MSVR310`，结果为 `/data/gb/Re-ID/DeMo-DualAxis/runs/env27_doc_witness_msvr310/tensor_contract.json` 的 status=PASS。独立 fresh 文档执行通过前，不产生恢复训练和缺失模态启动记录。迁移 helper 已通过 same-family/provisional 独立审查：恢复 36/36、缺失评测 51/51；先前完整恢复 117/117 和评测 80/80 仍保留。\n",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "local_evidence_setup_issue": "Initial trace.mkdir() raised FileNotFoundError for missing evidence parent directories before any SSH or documented invocation. Created only authorized local evidence directory hierarchy."
+}

@@ -1,0 +1,68 @@
+--- C:\Users\gb\.codex_tmp\demo_axis_v4_hardware_recovery26_20261003.py
++++ C:\Users\gb\.codex_tmp\demo_axis_v4_hardware_recovery27_20261003.py
+@@ -5,25 +5,23 @@
+ 
+ sys.path.insert(0, 'C:/Users/gb/projects/demo_dual_axis_20261002')
+ from collect_results import PROJECT, HOSTS, remote_python
++HOSTS['2027']=('/data/gb/Re-ID/DeMo-DualAxis','/data/gb/Re-ID/conda-envs/tri_reid/bin/python')
+ 
+ incident = json.loads((PROJECT/'results/preflight/axis_collaboration_v4_driver_evidence.json').read_text(encoding='utf-8'))
+ assert any('Xid' in line and '79,' in line and 'GPU has fallen off the bus' in line for line in incident['kernel']['selected_lines'])
+ prior = json.loads((PROJECT/'results/preflight/axis_collaboration_v4_extra_cross26_launch.json').read_text(encoding='utf-8'))
+-review_path = PROJECT/'results/preflight/axis_collaboration_v4_hardware_recovery_review.json'
++review_path = PROJECT/'results/preflight/axis_collaboration_v4_hardware_recovery27_review.json'
+ review = json.loads(review_path.read_text(encoding='utf-8'))
+ assert review['status']=='PASS' and not review['blockers']
+ assert review['helper_sha256']==hashlib.sha256(open(__file__,'rb').read()).hexdigest()
+-root, python = HOSTS['2026']
+-output = root+'/runs/axis_collaboration_v4_hardware_recovery26'
++root, python = HOSTS['2027']
++output = root+'/runs/axis_collaboration_v4_hardware_recovery27'
+ jobs = [('RGBNT100','frequency_scaled_fullref',0),('MSVR310','axis_raw_fullref',1)]
+ guard26 = f'''import hashlib,json,subprocess
+ from pathlib import Path
+ root=Path({root!r})
+-previous=Path({prior['output']!r})
+-terminal=json.loads((previous/'controller_result.json').read_text())
+-assert terminal['status']=='PASS' and terminal['optimizer_updates']==0
+-assert len(terminal['runs'])==2 and all(len(row['checks'])==2 and all(check['exit_code']==0 for check in row['checks']) for row in terminal['runs'])
+-assert not subprocess.run(['ps','-p',{str(prior['pid'])!r},'-o','pid='],capture_output=True,text=True).stdout.strip()
++doc=json.loads((root/'setup/env27_doc_validation.json').read_text())
++assert doc['status']=='PASS' and doc['spec_sha256']=='4993690212b8f331ceac59c1cf8fe15751a69be89ffdcb2c046cdb7989cae5a0'
+ assert all(hashlib.sha256((root/name).read_bytes()).hexdigest()==digest for name,digest in {prior['source_sha256']!r}.items())
+ assert not Path({output!r}).exists()
+ gpu=subprocess.check_output(['nvidia-smi','--query-gpu=index,memory.used','--format=csv,noheader,nounits'],text=True)
+@@ -31,7 +29,7 @@
+ assert all(used[gpu]<500 for _,_,gpu in {jobs!r})
+ print(json.dumps({{'source_sha256':{prior['source_sha256']!r},'gpu':gpu}}))
+ '''
+-availability=json.loads(remote_python('2026',guard26))
++availability=json.loads(remote_python('2027',guard26))
+ pause25 = f'''import hashlib,json,os,signal,subprocess
+ from pathlib import Path
+ root=Path({HOSTS['2025'][0]!r})
+@@ -67,7 +65,7 @@
+   idle(gpu)
+   stage='preflight' if mode=='smoke' else 'development'
+   campaign=root/stage
+-  command=[sys.executable,'-u','run_experiment.py','--dataset',dataset,'--variant',variant,'--seed','42','--mode',mode,'--contribution-weight','.05','--data-root','/data/gaob/Re-ID/dataset','--pretrained','/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt','--output',str(campaign/name)]
++  command=[sys.executable,'-u','run_experiment.py','--dataset',dataset,'--variant',variant,'--seed','42','--mode',mode,'--contribution-weight','.05','--data-root','/data/gb/Re-ID/dataset','--pretrained','/data/gb/Re-ID/pretrained/ViT-B-16.pt','--output',str(campaign/name)]
+   with (campaign/(name+'.log')).open('x') as log:
+    child=subprocess.Popen(command,env=dict(os.environ,CUDA_VISIBLE_DEVICES=str(gpu),OMP_NUM_THREADS='4',MKL_NUM_THREADS='4',OPENBLAS_NUM_THREADS='4'),stdout=log,stderr=subprocess.STDOUT)
+    write_json(campaign/(name+'_launch.json'),dict(pid=child.pid,gpu=gpu,started=time.time(),command=command,hardware_recovery_from='2025 NVIDIA Xid79',restart_from_public_CLIP=True))
+@@ -99,11 +97,11 @@
+ (output/'controller.py').write_text({controller_code!r})
+ with (output/'controller.log').open('x') as log:
+  child=subprocess.Popen([{python!r},'-u','-c',{entry!r}],cwd=root,start_new_session=True,stdout=log,stderr=subprocess.STDOUT,env=dict(os.environ,OMP_NUM_THREADS='4',MKL_NUM_THREADS='4',OPENBLAS_NUM_THREADS='4'))
+-print(json.dumps({{'pid':child.pid,'host':'2026','started':time.time(),'status':'HARDWARE_RECOVERY_STARTED_SMOKE_AND_50_EPOCH_RUNS_PENDING','jobs':{jobs!r},'output':str(output),'source_sha256':{prior['source_sha256']!r}}}))
++print(json.dumps({{'pid':child.pid,'host':'2027','started':time.time(),'status':'HARDWARE_RECOVERY_STARTED_SMOKE_AND_50_EPOCH_RUNS_PENDING','jobs':{jobs!r},'output':str(output),'source_sha256':{prior['source_sha256']!r}}}))
+ '''
+-launch=json.loads(remote_python('2026',launch_code))
+-launch.update(observed_at=datetime.now().isoformat(timespec='seconds'),original25_controller=paused,availability26=availability,incident_sha256=hashlib.sha256((PROJECT/'results/preflight/axis_collaboration_v4_driver_evidence.json').read_bytes()).hexdigest(),estimated_seconds={'RGBNT100':5400,'MSVR310':900},original_interrupted_steps_not_counted_as_new_updates=True)
+-receipt=PROJECT/'results/preflight/axis_collaboration_v4_hardware_recovery26_launch.json'
++launch=json.loads(remote_python('2027',launch_code))
++launch.update(observed_at=datetime.now().isoformat(timespec='seconds'),original25_controller=paused,availability27=availability,incident_sha256=hashlib.sha256((PROJECT/'results/preflight/axis_collaboration_v4_driver_evidence.json').read_bytes()).hexdigest(),estimated_seconds={'RGBNT100':5400,'MSVR310':900},original_interrupted_steps_not_counted_as_new_updates=True)
++receipt=PROJECT/'results/preflight/axis_collaboration_v4_hardware_recovery27_launch.json'
+ assert not receipt.exists()
+ receipt.write_bytes(json.dumps(launch,indent=2).encode('utf-8'))
+ print('V4_HARDWARE_RECOVERY_STARTED',json.dumps({key:launch[key] for key in ('pid','host','status','observed_at','jobs')}),flush=True)

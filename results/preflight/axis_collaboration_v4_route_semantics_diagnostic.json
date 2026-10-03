@@ -1,0 +1,40 @@
+{
+  "status": "SOURCE_AND_STDLIB_ALGEBRA_DIAGNOSTIC_NOT_NN_OR_EFFICACY",
+  "observed_at": "2026-10-03T09:04:56",
+  "source_sha256": {
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "scaled_axis_collaboration.py": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154"
+  },
+  "findings": [
+    {
+      "name": "relation preference cancels from modality conditional pooling",
+      "source": "axis_collaboration.py:ConditionalRouter.route",
+      "algebra": "pi(S,b)=exp(aS+cB+psiSB)/Z; pi(S,b)/sum_b pi(S,b)=exp(cB+psiSB)/sum_b exp(cB+psiSB)",
+      "observed": "aS changes frequency aggregation f but not pooled modality m when U/V/psi are held fixed",
+      "limits": "Source algebra only. Does not prove a cause of poor efficacy; shared features and frequency route remain jointly trained."
+    },
+    {
+      "name": "auxiliary identity taps precede retrieval projections",
+      "source": "axis_collaboration.py:AxisCollaborationDeMo.forward",
+      "observed": "Standalone m0/f0 pooled vectors feed auxiliary CE/Triplet; PM/PF projections feed fused descriptor. Stopped contribution targets do not directly train PM/PF.",
+      "limits": "Projection parameters still receive fused ReID gradients; no claim they are untrained."
+    }
+  ],
+  "test": {
+    "kind": "Fixed arbitrary scalar U/V/c/psi, change only aS; pure Python float64 algebra, no Torch or GPU",
+    "modality_output_max_change": 1.1102230246251565e-16,
+    "frequency_output_change": -0.0817208938392826,
+    "joint_route_max_change": 0.04461778260751484
+  },
+  "next_candidate": {
+    "status": "NOT_IMPLEMENTED_NOT_REVIEWED_NOT_LAUNCHED",
+    "single_variable": "Test relation-mass application after residual direction normalization, where it cannot be erased by PM LayerNorm or F.normalize.",
+    "controls": "Same trained architecture/capacity/dimension/public initialization/data/sampler/50 epochs. Compare mass applied versus current conditional-only pooling; keep auxiliary taps unchanged in this first comparison.",
+    "controlled_states": "When either expert is closed, its condition messages and joint interaction weights must also be absent; cannot reuse full-state joint mass for M-only/F-only states.",
+    "separate_candidate": "Project auxiliary identity taps into retrieval geometry in a later separate ablation, rather than changing two factors at once."
+  },
+  "gpu_forwards": 0,
+  "optimizer_updates": 0,
+  "current_v4_source_or_running_jobs_modified": false
+}

@@ -1,0 +1,155 @@
+{
+  "review_type": "tier3_agent_follows_doc",
+  "status": "PASS",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "max",
+    "fork_turns": "none",
+    "provenance": "Actual spawn parameters supplied by parent agent; child cannot independently inspect runtime."
+  },
+  "observed_at": "2026-10-03T01:00:38.978405+00:00",
+  "spec_sha256": "4993690212b8f331ceac59c1cf8fe15751a69be89ffdcb2c046cdb7989cae5a0",
+  "spec_sha256_scope": "Ledger and provided handoff agree; declarative spec was not supplied to this restricted reviewer and was not independently rehashed.",
+  "invocation": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ClearAllForwardings=yes",
+    "-o",
+    "ConnectTimeout=15",
+    "2027",
+    "CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 /data/gb/Re-ID/conda-envs/tri_reid/bin/python -u -c 'import os,runpy,sys;os.chdir('\"'\"'/data/gb/Re-ID/DeMo-DualAxis'\"'\"');sys.path.insert(0,'\"'\"'/data/gb/Re-ID/DeMo-DualAxis'\"'\"');sys.argv=['\"'\"'verify_axis_scaled.py'\"'\"', '\"'\"'--dataset'\"'\"', '\"'\"'MSVR310'\"'\"', '\"'\"'--data-root'\"'\"', '\"'\"'/data/gb/Re-ID/dataset'\"'\"', '\"'\"'--pretrained'\"'\"', '\"'\"'/data/gb/Re-ID/pretrained/ViT-B-16.pt'\"'\"', '\"'\"'--output'\"'\"', '\"'\"'/data/gb/Re-ID/DeMo-DualAxis/runs/env27_doc_witness_msvr310'\"'\"'];runpy.run_path('\"'\"'/data/gb/Re-ID/DeMo-DualAxis/verify_axis_scaled.py'\"'\"',run_name=\"__main__\")'"
+  ],
+  "execution_api": "subprocess.Popen(argv)",
+  "shell": false,
+  "invocation_count": 1,
+  "returncode": 0,
+  "started_at": "2026-10-03T00:44:28.806266+00:00",
+  "ended_at": "2026-10-03T00:44:50.175267+00:00",
+  "elapsed_seconds": 21.368992600007914,
+  "local_python": "3.13.12 (main, Feb  3 2026, 22:53:26) [MSC v.1944 64 bit (AMD64)]",
+  "local_python_executable": "C:\\Users\\gb\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\python.exe",
+  "stdout_witness": "SCALED_AXIS_TENSOR_CONTRACT_PASS MSVR310",
+  "stdout_witness_count": 1,
+  "optimizer_updates": 0,
+  "remote_tensor_contract_path": "/data/gb/Re-ID/DeMo-DualAxis/runs/env27_doc_witness_msvr310/tensor_contract.json",
+  "actual_tensor_contract": {
+    "status": "PASS",
+    "dataset": "MSVR310",
+    "variants": [
+      "axis_scaled_fullref",
+      "plain_scaled_fullref",
+      "frequency_scaled_fullref"
+    ],
+    "equal_parameters": [
+      {
+        "parameters": 99681414,
+        "trainable_parameters": 99669638
+      },
+      {
+        "parameters": 99681414,
+        "trainable_parameters": 99669638
+      },
+      {
+        "parameters": 99681414,
+        "trainable_parameters": 99669638
+      }
+    ],
+    "all_initial_state_tensors_equal": true,
+    "original_DeMo_initial_tensors_equal": true,
+    "descriptor_shapes": [
+      [
+        8,
+        5632
+      ],
+      [
+        8,
+        5632
+      ],
+      [
+        8,
+        5632
+      ]
+    ],
+    "base00_and_zero_scales_equal_original_DeMo": true,
+    "F_only_relative_norm_max_error": 1.1175870895385742e-08,
+    "missing": {
+      "r": {
+        "finite": true,
+        "invalid_relation_route_mass": 0.0
+      },
+      "n": {
+        "finite": true,
+        "invalid_relation_route_mass": 0.0
+      },
+      "t": {
+        "finite": true,
+        "invalid_relation_route_mass": 0.0
+      },
+      "rn": {
+        "finite": true,
+        "invalid_relation_route_mass": 0.0
+      },
+      "rt": {
+        "finite": true,
+        "invalid_relation_route_mass": 0.0
+      },
+      "nt": {
+        "finite": true,
+        "invalid_relation_route_mass": 0.0
+      }
+    },
+    "full_reference_target_CPU_max_error": 5.972697442180319e-08,
+    "target_requires_grad": false,
+    "full_reference_tail_mean_norm": 0.023949094116687775,
+    "target_mean": [
+      0.000118387455586344,
+      4.7599125537090003e-05,
+      2.283658250235021e-05
+    ],
+    "target_std": [
+      0.0003649340069387108,
+      0.00014616621774621308,
+      0.00013672737986780703
+    ],
+    "target_nonzero_count": 192,
+    "reference": "one stopped-gradient current-batch full11 gallery; same indices for all four states, no EMA",
+    "semantic_training_forward_batches": 1,
+    "optimizer_updates": 0,
+    "scope": "Initial actual8dev +64fit tensor checks; semantic fit forward updates training BN buffers, no optimizer; no efficacy or official test"
+  },
+  "tensor_contract_sha256": "97492172266630af0251946394f25ec294f8b7c26cfc871bb70510d77bb1c8cc",
+  "expected_source_sha256": "cc0584bf2ba97f58cbb14c799f167b97524ee48d939cebb1752627e748ca3126",
+  "actual_source_sha256": "cc0584bf2ba97f58cbb14c799f167b97524ee48d939cebb1752627e748ca3126",
+  "source_script_sha256_equals_ledger": true,
+  "checks": {
+    "document_argv_equals_ledger": true,
+    "executed_argv_equals_ledger": true,
+    "single_invocation": true,
+    "returncode_zero": true,
+    "stdout_witness_present": true,
+    "artifact_fetch_returncode_zero": true,
+    "artifact_bytes_preserved": true,
+    "tensor_status_pass": true,
+    "optimizer_updates_zero": true,
+    "source_hash_fetch_returncode_zero": true,
+    "source_script_sha256_equals_ledger": true,
+    "ledger_unchanged_during_review": true,
+    "handoff_contains_spec_sha256": true
+  },
+  "doc_and_reality_divergences": [],
+  "stderr_observation": "Three timm FutureWarning deprecation messages; no execution error. Full stderr preserved.",
+  "scope": "One authorized real-model tensor-contract invocation; one semantic training forward batch, zero optimizer updates. No efficacy experiment or additional GPU task.",
+  "local_evidence_setup_issue": "Initial trace.mkdir() raised FileNotFoundError for missing evidence parent directories before any SSH or documented invocation. Created only authorized local evidence directory hierarchy.",
+  "artifacts": {
+    "stdout": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\axis_collaboration_v4_env27_doc_stdout.log",
+    "stdout_sha256": "93dfa492383b7e0978d86293044f41e375133080137a0e9108011a522d3172ce",
+    "stderr": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\axis_collaboration_v4_env27_doc_stderr.log",
+    "stderr_sha256": "f7bf34e218b1069c472b17438b1f1c222f03013a74094a89bf68cab06e1e329a",
+    "tensor_contract": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\compute-env\\2026-10-03_ssh2027_doc\\tensor_contract.json",
+    "evidence_directory": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\compute-env\\2026-10-03_ssh2027_doc"
+  }
+}
