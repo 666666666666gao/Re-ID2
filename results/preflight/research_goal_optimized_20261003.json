@@ -1,6 +1,6 @@
 {
-  "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-03T23:36:01",
+  "status": "BLOCKED_UNMET_ADMIN_POWER_LIMIT_REQUIRED",
+  "updated_at": "2026-10-03T23:53:17",
   "execution_objective": "以完整DeMo为强基线，建立跨模态可用集合一致、能够产生实际检索增益的双轴互补Re-ID方法。先证明模态轴与频率轴分工及条件协作优于同增强、同有效参数、同输出维度的普通专家，并用逐查询干预与重训消融证明收益来源；再冻结统一方法，完成三个数据集、至少三个配对种子、独立身份确认划分、全部49种查询—图库模态组合及真实部署成本评测。保留三个数据集完整输入mAP和Rank-1均比同协议完整DeMo至少提高2个百分点的验收目标。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -83,9 +83,10 @@
       "resume_temperature_c": 70,
       "power_limit_before_launch_required": true,
       "hardware_limit_status": "NOT_APPLIED_PERMISSION_DENIED",
-      "temperature_monitor_status": "IMPLEMENTED_AND_SOURCE_REVIEWED_CPU_MOCKS_PASS_NOT_GPU_LOAD_VALIDATED",
+      "temperature_monitor_status": "CPU_REAL_LINUX_PROCESS_LIFECYCLE_PASS_NOT_GPU_LOAD_VALIDATED",
       "policy": "results/preflight/gpu_thermal_power_policy_20261003.json",
-      "power_limit_status": "NOT_APPLIED_PERMISSION_DENIED"
+      "power_limit_status": "NOT_APPLIED_PERMISSION_DENIED",
+      "real_Linux_CPU_checks": "results/preflight/common_outlet_linux_cpu_20261003/result.json"
     }
   },
   "revision": "20261003_execution_goal_v4_m1_prepared",
@@ -197,7 +198,7 @@
   ],
   "next_action": {
     "milestone": "M1",
-    "status": "PRIVILEGED_POWER_LIMIT_REQUIRED_BEFORE_CUDA_SANITY",
+    "status": "BLOCKED_ADMIN_POWER_LIMIT_REQUIRED",
     "action": "GPU2/3功率/温度启动条件通过后，先运行实际CUDA张量合同与全部10组三更新AMPsmoke屏障，再fresh50和49条件/四状态/独立GT复算。",
     "excluded_this_factor": [
       "新增频域关系损失",
@@ -206,5 +207,6 @@
       "三数据集直接扩展"
     ],
     "hardware_dependency": "管理员设置GPU2/3功率上限至250W并核验；温控代码已实现并通过源码/CPU验证，尚未做实际GPU负载验证。随后执行CUDA合同与全部smoke屏障。目标仍ACTIVE_UNMET。"
-  }
+  },
+  "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json"
 }

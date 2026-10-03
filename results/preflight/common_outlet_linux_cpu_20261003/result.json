@@ -1,0 +1,97 @@
+{
+  "status": "PASS_LINUX_CPU_PROCESS_LIFECYCLE",
+  "observed_at": "2026-10-03T15:44:13.740839+00:00",
+  "normal": {
+    "status": "PASS_REAL_LINUX_OWN_GROUP_PAUSE_RESUME",
+    "elapsed_seconds": 15.247515594004653,
+    "child_pid": 4056283,
+    "rows": 80,
+    "random_sequence_exact": true,
+    "progress_during_pause": 0,
+    "events": [
+      "pause_own_group",
+      "sample",
+      "resume_same_group"
+    ],
+    "phases": [
+      {
+        "phase": "before_pause",
+        "pid": 4056283,
+        "rows": 10
+      },
+      {
+        "phase": "paused_verified",
+        "pid": 4056283,
+        "rows": 10,
+        "state": "State:\tT (stopped)"
+      },
+      {
+        "phase": "paused_verified",
+        "pid": 4056283,
+        "rows": 10,
+        "state": "State:\tT (stopped)"
+      }
+    ],
+    "exit": {
+      "name": "normal",
+      "exit_code": 0,
+      "finished": 1791042248.2650192,
+      "gpu": 2,
+      "thermal_log": "normal_thermal.jsonl",
+      "forced_own_group_cleanup": false
+    }
+  },
+  "failures": [
+    {
+      "status": "PASS_REAL_LINUX_OWN_GROUP_FAILURE_REAP",
+      "case": "failure_running",
+      "pid": 4056912,
+      "exception_identity_preserved": true,
+      "exit": {
+        "name": "failure_running",
+        "exit_code": -9,
+        "finished": 1791042248.497406,
+        "gpu": 2,
+        "thermal_log": "failure_running_thermal.jsonl",
+        "forced_own_group_cleanup": true
+      }
+    },
+    {
+      "status": "PASS_REAL_LINUX_OWN_GROUP_FAILURE_REAP",
+      "case": "failure_paused",
+      "pid": 4056913,
+      "exception_identity_preserved": true,
+      "exit": {
+        "name": "failure_paused",
+        "exit_code": -9,
+        "finished": 1791042253.7338407,
+        "gpu": 2,
+        "thermal_log": "failure_paused_thermal.jsonl",
+        "forced_own_group_cleanup": true
+      }
+    }
+  ],
+  "source57_unchanged": true,
+  "actual_gpu_before": [
+    {
+      "gpu": 2,
+      "temperature_c": 45.0,
+      "power_draw_w": 30.88,
+      "power_limit_w": 350.0,
+      "memory_used_mib": 15.0,
+      "observed_at": 1791042232.9417622
+    },
+    {
+      "gpu": 3,
+      "temperature_c": 57.0,
+      "power_draw_w": 71.1,
+      "power_limit_w": 350.0,
+      "memory_used_mib": 155.0,
+      "observed_at": 1791042233.019122
+    }
+  ],
+  "neural_jobs": 0,
+  "CUDA_models": 0,
+  "physical_GPU_thermal_validation": "NOT_RUN",
+  "limitation": "Real Linux CPU Popen/process-group/signals and CPU loop state; all runtime temperature/power values in these tests were scripted, not a GPU load or optimizer-state validation."
+}
