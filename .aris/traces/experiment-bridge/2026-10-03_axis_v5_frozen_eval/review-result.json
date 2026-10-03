@@ -1,0 +1,426 @@
+{
+  "status": "PASS",
+  "blockers": [],
+  "non_blocking_findings": [],
+  "observed_at": "2026-10-03T11:12:53+08:00",
+  "helper_sha256": "a241ba6add2ee065c6e7fd501abc8127a6f504640038457c4096c8cead67bb6d",
+  "checked_source_sha256": {
+    "missing_mass_development.py": "8d125c311979b3f5ba674c5a16a43fec7812fccfb403ad3daad8e15a833b6f91",
+    "diagnose_mass_axis.py": "b8a940362a93cf6e4b920ec7af3b361859d1f942fe61811240a961b58ebc8266",
+    "launch_mass_frozen_evaluation.py": "6e4eebe0884c334552748edd9660d79cf270712ab61ac221483d324f18daf500"
+  },
+  "checks_count": 22,
+  "deterministic_groups": 16,
+  "source_review_groups": 6,
+  "mock_cases": 38,
+  "checks": [
+    {
+      "name": "syntax_and_existing18_source_preservation",
+      "status": "PASS",
+      "detail": "Three new leaves and private helper compile; all18 launch-bound existing sources remain byte-exact."
+    },
+    {
+      "name": "missing_leaf_exact_scoped_delta",
+      "status": "PASS",
+      "detail": "Exact text comparison confirms only V5 build/variant/exit and inapplicable DeMo-mask-check removal; repaired clean saved-distance logic retained."
+    },
+    {
+      "name": "four_state_leaf_exact_scoped_delta",
+      "status": "PASS",
+      "detail": "Exact comparison confirms V5 build/variant/exit plus state11 saved distances and explicit provenance; strict parity and1e-8 metric gates unchanged."
+    },
+    {
+      "name": "actual_V5_terminal_schema_and_paths",
+      "status": "PASS",
+      "detail": "Existing MSVR terminal contains required argument/build/epoch/best/strict_reload fields; adjacent exit and launch-derived run paths agree. No historical training replay/audit."
+    },
+    {
+      "name": "launcher_full_happy_path",
+      "status": "PASS",
+      "detail": "Actual launcher function: 3 datasets,12 child stages, each smoke before its full counterpart, GPU3 only, four-input proofs, totals39missing/12states.",
+      "cases": [
+        {
+          "case": "launcher_happy",
+          "child_count": 12,
+          "waits": [],
+          "rejected": false
+        }
+      ]
+    },
+    {
+      "name": "launcher_waits_for_existing_training",
+      "status": "PASS",
+      "detail": "Missing RGBNT201 exit produces one240second wait only after MSVR four stages; no training restart.",
+      "cases": [
+        {
+          "case": "launcher_wait",
+          "child_count": 12,
+          "waits": [
+            240
+          ],
+          "rejected": false
+        }
+      ]
+    },
+    {
+      "name": "launcher_terminal_dependency_rejections",
+      "status": "PASS",
+      "detail": "Nonzero exit/incomplete/49epochs/wrong variant/wrong dataset reject before any child.",
+      "cases": [
+        {
+          "case": "launcher_training_exit",
+          "child_count": 0,
+          "waits": [],
+          "rejected": true
+        },
+        {
+          "case": "launcher_terminal_status",
+          "child_count": 0,
+          "waits": [],
+          "rejected": true
+        },
+        {
+          "case": "launcher_epochs",
+          "child_count": 0,
+          "waits": [],
+          "rejected": true
+        },
+        {
+          "case": "launcher_variant",
+          "child_count": 0,
+          "waits": [],
+          "rejected": true
+        },
+        {
+          "case": "launcher_dataset",
+          "child_count": 0,
+          "waits": [],
+          "rejected": true
+        }
+      ]
+    },
+    {
+      "name": "launcher_child_failure_trace_and_no_retry",
+      "status": "PASS",
+      "detail": "Each stage nonzero exit preserves exclusive stdout/stderr log plus launch/exit JSON, then stops with no subsequent child.",
+      "cases": [
+        {
+          "case": "launcher_child_0",
+          "child_count": 1,
+          "waits": [],
+          "rejected": true
+        },
+        {
+          "case": "launcher_child_1",
+          "child_count": 2,
+          "waits": [],
+          "rejected": true
+        },
+        {
+          "case": "launcher_child_2",
+          "child_count": 3,
+          "waits": [],
+          "rejected": true
+        },
+        {
+          "case": "launcher_child_3",
+          "child_count": 4,
+          "waits": [],
+          "rejected": true
+        }
+      ]
+    },
+    {
+      "name": "launcher_result_semantic_gates",
+      "status": "PASS",
+      "detail": "Rejects reported update/version change/nonzero feature error/failed smoke/incomplete counts/recomputed normal distance before next stage.",
+      "cases": [
+        {
+          "case": "launcher_gate_updates",
+          "child_count": 1,
+          "waits": [],
+          "rejected": true
+        },
+        {
+          "case": "launcher_gate_versions",
+          "child_count": 1,
+          "waits": [],
+          "rejected": true
+        },
+        {
+          "case": "launcher_gate_parity",
+          "child_count": 1,
+          "waits": [],
+          "rejected": true
+        },
+        {
+          "case": "launcher_gate_smoke_status",
+          "child_count": 1,
+          "waits": [],
+          "rejected": true
+        },
+        {
+          "case": "launcher_gate_four_count",
+          "child_count": 2,
+          "waits": [],
+          "rejected": true
+        },
+        {
+          "case": "launcher_gate_distance_source",
+          "child_count": 2,
+          "waits": [],
+          "rejected": true
+        },
+        {
+          "case": "launcher_gate_missing_count",
+          "child_count": 4,
+          "waits": [],
+          "rejected": true
+        }
+      ]
+    },
+    {
+      "name": "launcher_four_frozen_input_proofs",
+      "status": "PASS",
+      "detail": "Mutation of each of four frozen files after a stage is detected; no next stage or completed controller claim.",
+      "cases": [
+        {
+          "case": "launcher_input_0",
+          "child_count": 1,
+          "waits": [],
+          "rejected": true
+        },
+        {
+          "case": "launcher_input_1",
+          "child_count": 1,
+          "waits": [],
+          "rejected": true
+        },
+        {
+          "case": "launcher_input_2",
+          "child_count": 1,
+          "waits": [],
+          "rejected": true
+        },
+        {
+          "case": "launcher_input_3",
+          "child_count": 1,
+          "waits": [],
+          "rejected": true
+        }
+      ]
+    },
+    {
+      "name": "helper_actual_embedded_guard_and_start",
+      "status": "PASS",
+      "detail": "Actual helper and both embedded Python scripts run only against fixture paths/mock subprocess: guard,3new uploads,source/input/resource recheck,exclusive log,one isolated-session controller.",
+      "cases": [
+        {
+          "case": "helper_happy",
+          "remote_mocks": 2,
+          "upload_mocks": 3,
+          "process_mocks": 1,
+          "rejected": false
+        }
+      ]
+    },
+    {
+      "name": "helper_local_review_and_source_gates",
+      "status": "PASS",
+      "detail": "Review status/blockers/helper SHA/exact3source map and old-source mismatch each prevent all remote calls.",
+      "cases": [
+        {
+          "case": "helper_review_status",
+          "remote_mocks": 0,
+          "upload_mocks": 0,
+          "process_mocks": 0,
+          "rejected": true
+        },
+        {
+          "case": "helper_review_blocker",
+          "remote_mocks": 0,
+          "upload_mocks": 0,
+          "process_mocks": 0,
+          "rejected": true
+        },
+        {
+          "case": "helper_review_helper_sha",
+          "remote_mocks": 0,
+          "upload_mocks": 0,
+          "process_mocks": 0,
+          "rejected": true
+        },
+        {
+          "case": "helper_review_source_sha",
+          "remote_mocks": 0,
+          "upload_mocks": 0,
+          "process_mocks": 0,
+          "rejected": true
+        },
+        {
+          "case": "helper_local_old_source",
+          "remote_mocks": 0,
+          "upload_mocks": 0,
+          "process_mocks": 0,
+          "rejected": true
+        }
+      ]
+    },
+    {
+      "name": "helper_readonly_guard_rejections",
+      "status": "PASS",
+      "detail": "Remote old-source/new-leaf/output/dependency/GPU guard rejects before uploads or process creation.",
+      "cases": [
+        {
+          "case": "helper_remote_old_source",
+          "remote_mocks": 1,
+          "upload_mocks": 0,
+          "process_mocks": 0,
+          "rejected": true
+        },
+        {
+          "case": "helper_new_exists",
+          "remote_mocks": 1,
+          "upload_mocks": 0,
+          "process_mocks": 0,
+          "rejected": true
+        },
+        {
+          "case": "helper_output_exists",
+          "remote_mocks": 1,
+          "upload_mocks": 0,
+          "process_mocks": 0,
+          "rejected": true
+        },
+        {
+          "case": "helper_terminal",
+          "remote_mocks": 1,
+          "upload_mocks": 0,
+          "process_mocks": 0,
+          "rejected": true
+        },
+        {
+          "case": "helper_training_exit",
+          "remote_mocks": 1,
+          "upload_mocks": 0,
+          "process_mocks": 0,
+          "rejected": true
+        },
+        {
+          "case": "helper_gpu_guard",
+          "remote_mocks": 1,
+          "upload_mocks": 0,
+          "process_mocks": 0,
+          "rejected": true
+        }
+      ]
+    },
+    {
+      "name": "helper_postupload_recheck_rejections",
+      "status": "PASS",
+      "detail": "Changed uploaded source/frozen input/new GPU occupancy/existing log prevents process creation after3uploads; no retries or overwrite.",
+      "cases": [
+        {
+          "case": "helper_upload_changed",
+          "remote_mocks": 2,
+          "upload_mocks": 3,
+          "process_mocks": 0,
+          "rejected": true
+        },
+        {
+          "case": "helper_input_changed",
+          "remote_mocks": 2,
+          "upload_mocks": 3,
+          "process_mocks": 0,
+          "rejected": true
+        },
+        {
+          "case": "helper_gpu_start",
+          "remote_mocks": 2,
+          "upload_mocks": 3,
+          "process_mocks": 0,
+          "rejected": true
+        },
+        {
+          "case": "helper_log_exists",
+          "remote_mocks": 2,
+          "upload_mocks": 3,
+          "process_mocks": 0,
+          "rejected": true
+        }
+      ]
+    },
+    {
+      "name": "existing_idle_GPU3_nonpreemption",
+      "status": "PASS",
+      "detail": "Actual reused idle function polls240seconds while memory>=500MiB, returns at153MiB; no signal, kill or other-GPU command."
+    },
+    {
+      "name": "final_source_bindings_unchanged",
+      "status": "PASS",
+      "detail": "All3 reviewed leaf hashes, private helper and preserved18 source hashes still match their starting bytes."
+    },
+    {
+      "name": "V5_build_hooks_shapes_and_independent_states",
+      "status": "PASS",
+      "mode": "source_review",
+      "detail": "run_mass_experiment.build returns the FP32 CUDA MassAxisCollaborationDeMo and accepts the actual terminal arguments. New extraction hooks see two M reads/two F reads and one normal calibrator call, then two independent calibrator calls. Inherited controlled_states uses independent m0/f0, zeros the disabled expert, and calls the overridden V5 fuse. State10 recomputes relation_score(modality) softmax mass without F conditions, full-state mass or joint psi; state01 has no M input. Full state11 is the original forward result. All four descriptors retain 5632 dimensions; route, gates, prediction and norm arrays keep per-record alignment. Hooks/methods are restored after extraction."
+    },
+    {
+      "name": "frozen_FP32_zero_updates_and_no_test_selection",
+      "status": "PASS",
+      "mode": "source_review",
+      "detail": "Both leaves load only the dev-selected best.pth with weights_only=True/strict=True, call model.eval and assert every module is in eval mode. Their extractors are under torch.no_grad; no optimizer construction/step, backward, model save, checkpoint search or official_records invocation is reachable. Registered tensor versions are compared before/after inference; launcher additionally checks all four frozen inputs after every smoke/full stage. Initial smoke uses exactly dev[:64], matching the inference loader batch size64. Full11/clean features require exact error0 before any saved distance reuse; strict existing metric tolerance remains1e-8."
+    },
+    {
+      "name": "installed_GT_queries_and_two_fixed_references",
+      "status": "PASS",
+      "mode": "source_review",
+      "detail": "split_records reads only installed training directories and fixed identity-disjoint development IDs. Both leaves compare saved query indices, IDs, camera, scene and names to installed ordered records before inference. RGBNT uses same-ID/same-camera junk exclusion; MSVR310 uses same-ID/same-scene. For each of base00 and full11 reference galleries, reference_contributions selects a GT-valid hardest positive and hardest different-ID negative once and shares their fixed reference direction across all four query states. The two galleries may select different pairs, explicitly recorded in separate CSV/NPZ fields. Predictions are diagnostics, never retrieval ground truth."
+    },
+    {
+      "name": "full_metric_and_output_schema",
+      "status": "PASS",
+      "mode": "source_review",
+      "detail": "The reused full_metrics receives query-by-gallery distances with the same ordered GT and outputs mAP, mINP, Rank-1/5/10/20, CMC1..50, per-query CSV and camera/scene/identity groups; it crosschecks the official-style stable-sort evaluate_reid implementation. The development split includes only queries with cross-camera/scene positives, so per-query harm/rescue rows stay valid and aligned. State11 uses saved distances after exact feature parity; states00/10/01 use original full_evaluation.distance. Reports/CSV/NPZ names match the launcher reads; two reference contribution tables and state arrays retain their own fixed indices."
+    },
+    {
+      "name": "six_masks_thirteen_conditions_and_baseline_reuse",
+      "status": "PASS",
+      "mode": "source_review",
+      "detail": "The copied repaired leaf imports the existing six normalized-zero input masks r/n/t/rn/rt/nt and METRICS. Smoke extracts clean plus all six masks, checks shape/finite values and state versions. Full evaluation emits clean plus six both-missing and six query-only conditions; query-only uses each masked query against the clean gallery, while both-missing uses the same mask on both. Clean reuses saved distances only after exact clean-feature parity and retains strict_reload agreement. The launcher schedules only axis_mass_fullref, so no historical DeMo baseline is rerun."
+    },
+    {
+      "name": "physical_paths_quoting_and_authorized_resource_scope",
+      "status": "PASS",
+      "mode": "source_review",
+      "detail": "collect_results.HOSTS2026 resolves /data/gaob/Re-ID/DeMo-DualAxis and the existing tri_reid/bin/python; the V5 launch receipt supplies the matching training root. Helper uses those paths, existing dataset/CLIP paths, and cwd=root so root imports and configs resolve. Its remote_python uses shlex.quote for the interpreter and Python code. Exactly three new leaves are uploaded after read-only guards; old sources are only checked. Controller child stages set CUDA_VISIBLE_DEVICES=3, use the existing idle(3) threshold and240second wait, and never kill or preempt other jobs. Existing exclusive output/log guards are retained without new fallback/retry machinery."
+    }
+  ],
+  "reviewer_agent": "/root/review_v5_frozen_eval",
+  "requested_reviewer_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "fork_turns": "none",
+  "provider_internal_identity_inferred": false,
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "scope": "Only three new V5 frozen-evaluation leaves and private2026 GPU3 deploy helper, with narrow existing API/schema/source-binding verification.",
+  "real_remote_calls": 0,
+  "real_process_spawns": 0,
+  "torch_imports": 0,
+  "gpu_forwards": 0,
+  "optimizer_updates": 0,
+  "source_or_handoff_modified": false,
+  "source_binding_rechecked_at_finalization": true,
+  "preserved_existing_source_count": 18,
+  "harness_attempts": 1,
+  "harness_failures_preserved": [],
+  "harness_status": "First stdlib AST/mock harness execution exited0. Initial bare python discovery failed with No pyvenv.cfg; the existing uv interpreter ran the harness without installation.",
+  "trace_path": ".aris/traces/experiment-bridge/2026-10-03_axis_v5_frozen_eval",
+  "limitations": [
+    "PASS covers reviewed source and mocked orchestration. No SSH, upload, actual subprocess child, Torch/model execution, dataset evaluation or GPU measurement was performed by this reviewer.",
+    "Mock file contents/results/GPU memory are fixtures for sequencing and failure gates, not actual frozen-feature/metric/accuracy/resource evidence. Runtime smoke and source/input/resource guards remain responsible for those checks.",
+    "The18 existing sources were hash-compared and only required APIs were inspected; this is not a new historical model/training/results review.",
+    "No deployment, checkpoint reselection, optimizer update, official-test use or baseline rerun was performed. Single-seed frozen interventions are diagnostics, not independently trained ablations or a final acceptance claim."
+  ]
+}
