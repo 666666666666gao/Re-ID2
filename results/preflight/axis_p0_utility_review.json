@@ -1,0 +1,85 @@
+{
+  "status": "PASS",
+  "blockers": [],
+  "non_blocking_findings": [],
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer": "/root/review_axis_p0_retrieval_utility",
+  "reviewer_model_family": "Codex/GPT-6",
+  "reviewer_model_id": "gpt-6-astra",
+  "reviewer_reasoning_effort": "max",
+  "reviewer_fork_turns": "none",
+  "reviewer_invocation_attribution": "Exact spawn parameters confirmed by /root; these are invocation metadata, not reviewer model self-identification.",
+  "review_date": "2026-10-03",
+  "scope": "Pre-deployment source review and stdlib-only launcher/control-path checks for the four seed42 P0 diagnostic cases. This is not a neural smoke result or evidence of retrieval utility.",
+  "checked_source_sha256": {
+    "probe_axis_retrieval_utility.py": "867799d3e43b0e5f60e9aba66dea09d7f49a41a2d06dccd592ed543e9af81ac7",
+    "probe_axis_task_gradients.py": "880009e32502975bd9d2cc27263740bc2fef228b0f7c2c13ce995219d1436c3a",
+    "launch_axis_utility_probes.py": "5c176c0772f6b8cdadb1ce7bfd0b0f943d657fff0618cc6d43939ef0ebfbac9e"
+  },
+  "helper_path": "C:/Users/gb/.codex_tmp/demo_axis_p0_utility26_deploy_20261003.py",
+  "helper_sha256": "9c4cd70fc5faf9f6a3cb6d9bdbeb9fbb03564e04c13f747bb42cddc5554de9a6",
+  "no_nn": true,
+  "no_ssh": true,
+  "no_gpu": true,
+  "no_package_install": true,
+  "source_changes_by_reviewer": false,
+  "checks": [
+    {
+      "topic": "Checkpoint and data selection",
+      "verdict": "PASS",
+      "evidence": "load_checkpoint requires COMPLETE, 50 epochs, exit_code 0 and seed42; strict best.pth load uses the matching V5/V6 builder. split_records reads installed official training records and identity-isolates development using splits.json. The query list admits only identities with a valid cross-camera or cross-scene positive. Saved query indices, IDs, cameras, scenes and image names must equal current installed development records. No official_records call is present in either probe."
+    },
+    {
+      "topic": "Actual routed descriptor capture and fusion reconstruction",
+      "verdict": "PASS",
+      "evidence": "Calibrator pre-hook captures the actual base; first projection hooks capture PM/PF/PI from the real full forward. Clean all-modality input is asserted, so all seven relations are eligible. M direction retains post-normalization joint route marginal times seven and base relation norms. F retains normalized PF times whole-base norm. PI and outer scales/gates are included in the exact fusion reconstruction assertion. This matches MassAxisCollaborationDeMo.fuse; normalization removes positive scalar gates/anchors only in the reported standalone descriptors."
+    },
+    {
+      "topic": "Independent auxiliary taps",
+      "verdict": "PASS",
+      "evidence": "The read wrappers preserve original outputs and capture m0/f0 before conditioned m1/f1. V5 AUX descriptors pool independent m0/f0 without projection. V6 applies normalized PM to independent pooled relation vectors then means relations, and normalized PF to independent frequency pooling, matching its training outputs."
+    },
+    {
+      "topic": "Frozen parity and immutable original inputs",
+      "verdict": "PASS",
+      "evidence": "Utility executes eval under no_grad, asserts exact zero max error to the saved normalized full11 features for first64 smoke or the full development set, and checks state tensor versions. Both probes verify unchanged byte count and SHA256 for best.pth, best_dev_arrays.npz, result.json and the original exit receipt. Neither constructs an optimizer, steps weights, or writes those original files."
+    },
+    {
+      "topic": "Retrieval metrics and difficult-query complementarity",
+      "verdict": "PASS",
+      "evidence": "full_metrics computes GT mAP, mINP, Rank1/5/10/20, CMC1..50, per-query CSV and camera/scene/identity groups. MSVR excludes same identity/scene and RGBNT excludes same identity/camera. Full11 uses its exact saved distances after feature parity and reproduces original best metrics. Complementarity counts base-wrong rescues, harms, AP improvement/worsening, M-only/F-only correctness and base-wrong M/F oracle union with explicit non-causal limitations."
+    },
+    {
+      "topic": "Task gradients",
+      "verdict": "PASS",
+      "evidence": "Three seeded fit batches use B64, original make_loss and original loss_weights. Base is base-MoE plus every original global head; fused, M AUX and F AUX are the other three weighted terms. They partition the original task loss while excluding contribution calibration. Native CUDA autocast and fixed loss scaling 512 are used; gradients are unscaled for norms/cosines on BACKBONE, PM and PF. autograd.grad leaves optimizer updates at zero. Unused parameters are explicitly listed and represented by mathematical zero only for vector comparison. Temporary train-mode state versions are reported and the process discards them."
+    },
+    {
+      "topic": "Deployment and failure gates",
+      "verdict": "PASS",
+      "evidence": "Private helper requires this PASS, no blockers and exact current three-file/helper hashes, verifies existing source constraints and complete original run receipts, checks idle GPUs0/1/3 and disk space, and uses fresh files/output/log. GPU2 is absent. Launcher uses the existing 240-second idle guard, schedules GPU0 V5 MSVR, GPU1 V5 RGBNT100 then V6 MSVR, and GPU3 V5 RGBNT201. Per-case smoke must succeed with the exact PASS status before full utility, and full utility must pass before gradients. Source-only mock confirmed both smoke child failure and incorrect smoke status prevent later stages. No retry or checkpoint mutation path was added."
+    }
+  ],
+  "validation": {
+    "status": "PASS_STDLIB_STATIC_AND_LAUNCHER_MOCK",
+    "trace": ".aris/traces/experiment-bridge/2026-10-03_axis_p0_utility/stdlib_checks.json",
+    "reproducer": ".aris/traces/experiment-bridge/2026-10-03_axis_p0_utility/reviewer_check.py",
+    "checked_original_source_receipt": "results/preflight/axis_collaboration_v6_projected_frozen_launch.json",
+    "all_original_receipt_hashes_match_local_sources": true,
+    "new_files_and_helper_ast_compile": true,
+    "embedded_remote_guard_and_start_compile": true,
+    "launcher_normal_sequence": "smoke -> utility -> gradients",
+    "launcher_smoke_nonzero_stops_case": true,
+    "launcher_smoke_wrong_status_stops_case": true,
+    "weighted_head_partition_for_direct_and_separate_globals": true,
+    "initial_interpreter_invocation": "python resolved to existing E:/Scripts/python.exe and failed before script execution: No pyvenv.cfg file (exit1).",
+    "successful_existing_interpreter": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe",
+    "interpreter_installation": "None; uv python find --offline located the already-installed interpreter."
+  },
+  "acceptance_limits": [
+    "No neural operation ran during review; actual CUDA allocation, native AMP finite gradients, exact saved-feature parity and exact fusion reconstruction remain deployment smoke/runtime gates.",
+    "Reported standalone dimensions differ and models are not retrained. Utility and oracle union do not establish realized fusion gains or a capacity-matched comparison.",
+    "Three local training batches measure current gradient directions and cannot establish sustained conflict or causality."
+  ]
+}

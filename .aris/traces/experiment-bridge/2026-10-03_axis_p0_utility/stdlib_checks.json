@@ -1,0 +1,70 @@
+{
+  "status": "PASS_STDLIB_STATIC_AND_LAUNCHER_MOCK",
+  "no_nn": true,
+  "no_ssh": true,
+  "no_gpu": true,
+  "no_package_install": true,
+  "original_bound_sources_match": true,
+  "parsed_new_files": [
+    "probe_axis_retrieval_utility.py",
+    "probe_axis_task_gradients.py",
+    "launch_axis_utility_probes.py"
+  ],
+  "helper_embedded_scripts_compile": [
+    "guard",
+    "start"
+  ],
+  "schedule": {
+    "0": [
+      [
+        "V5_MSVR310",
+        "\\v5\\MSVR310_axis_mass_fullref_s42"
+      ]
+    ],
+    "1": [
+      [
+        "V5_RGBNT100",
+        "\\v5\\RGBNT100_axis_mass_fullref_s42"
+      ],
+      [
+        "V6_MSVR310",
+        "/v6/MSVR310_axis_mass_projected_fullref_s42"
+      ]
+    ],
+    "3": [
+      [
+        "V5_RGBNT201",
+        "\\v5\\RGBNT201_axis_mass_fullref_s42"
+      ]
+    ]
+  },
+  "launcher_scenarios": {
+    "success": {
+      "rejected": false,
+      "stages": [
+        "smoke",
+        "utility",
+        "gradients"
+      ]
+    },
+    "smoke_exit_failure": {
+      "rejected": true,
+      "stages": [
+        "smoke"
+      ]
+    },
+    "smoke_status_failure": {
+      "rejected": true,
+      "stages": [
+        "smoke"
+      ]
+    }
+  },
+  "loss_partition_for_direct_and_separate_globals": true,
+  "checked_source_sha256": {
+    "probe_axis_retrieval_utility.py": "867799d3e43b0e5f60e9aba66dea09d7f49a41a2d06dccd592ed543e9af81ac7",
+    "probe_axis_task_gradients.py": "880009e32502975bd9d2cc27263740bc2fef228b0f7c2c13ce995219d1436c3a",
+    "launch_axis_utility_probes.py": "5c176c0772f6b8cdadb1ce7bfd0b0f943d657fff0618cc6d43939ef0ebfbac9e"
+  },
+  "helper_sha256": "9c4cd70fc5faf9f6a3cb6d9bdbeb9fbb03564e04c13f747bb42cddc5554de9a6"
+}
