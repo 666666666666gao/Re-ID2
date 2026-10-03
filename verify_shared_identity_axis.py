@@ -13,7 +13,7 @@ from run_shared_identity_experiment import PARTIAL_SETS, build
 from shared_identity_axis import KEYS, available_base_fusion, metric_descriptor, partial_gallery_triplet
 
 
-def main():
+def main(model_builder=build, common_increments=False):
     parser = argparse.ArgumentParser()
     parser.add_argument('--data-root', required=True)
     parser.add_argument('--pretrained', required=True)
@@ -31,7 +31,7 @@ def main():
     reference, common, sizes, records = None, None, {}, []
     for variant in ('axis_shared', 'frequency_shared', 'twins_shared', 'demo_shared'):
         args.variant = variant
-        model = build(args, cfg, classes, cameras)
+        model = model_builder(args, cfg, classes, cameras)
         state = model.state_dict()
         if reference is None:
             reference = {name: value.cpu().clone() for name, value in state.items()}
@@ -53,6 +53,8 @@ def main():
             valid = torch.tensor([all(index in retained for index in subset) for subset in RELATIONS], device='cuda')
             for name, feature in states.items():
                 assert feature.shape == (8, 5632) and torch.isfinite(feature).all()
+                if common_increments:
+                    assert torch.equal(feature[:, :5120], states['00'][:, :5120])
                 blocks = feature[:, :5120].reshape(8, 10, 512)
                 assert all(torch.count_nonzero(blocks[:, index]) == 0 for index in range(3) if index not in retained)
                 assert torch.count_nonzero(blocks[:, 3:][:, ~valid]) == 0
@@ -62,6 +64,17 @@ def main():
                             'shared_metric_mass': states['11'][:, 5120:].square().sum(1).tolist(),
                             'full_vs_base_feature_change': float((states['11'] - states['00']).abs().max())})
         assert versions == {name: value._version for name, value in model.state_dict().items()}
+        if common_increments and variant == 'frequency_shared':
+            legacy = build(args, cfg, classes, cameras)
+            legacy.eval()
+            for retained in (*PARTIAL_SETS, (0, 1, 2)):
+                partial = {key: value if index in retained else torch.zeros_like(value)
+                           for index, (key, value) in enumerate(images.items())}
+                with torch.no_grad():
+                    current = model(partial, cam_label=cam, view_label=scene, return_states=True)
+                    previous = legacy(partial, cam_label=cam, view_label=scene, return_states=True)
+                assert all(torch.equal(current[key], previous[key]) for key in current)
+            del legacy, current, previous
         # Existing DeMo expert BN must not ingest zeros for invalid relations.
         fusion = model.generalFusion
         invalid = [i for i, subset in enumerate(RELATIONS) if not all(m == 0 for m in subset)]
@@ -98,6 +111,8 @@ def main():
               'invalid_expert_BN_unchanged': True, 'partial_gallery_detached': True,
               'positive_self_excluded': True, 'ground_truth_positive_negative_indices_valid': True,
               'disjoint_source_common_similarity': common_similarity,
+              'common_increments_only': common_increments,
+              'ordinary_frequency_legacy_parity': common_increments,
               'optimizer_updates': 0, 'official_test_uses': 0}
     write_json(output / 'result.json', report)
     print('SHARED_IDENTITY_TENSOR_PASS', json.dumps(sizes), flush=True)

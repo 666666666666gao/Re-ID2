@@ -14,7 +14,7 @@ from missing_evaluation import MISSING, METRICS, extract_missing
 from run_experiment import configuration, write_json
 
 
-def main():
+def main(model_builder):
     parser = argparse.ArgumentParser()
     parser.add_argument('--run-dir', required=True)
     parser.add_argument('--output', required=True)
@@ -27,7 +27,6 @@ def main():
     assert terminal['status'] == 'COMPLETE' and terminal['epochs'] == 50
     arguments = argparse.Namespace(**terminal['arguments'])
     assert arguments.variant in ('axis_shared','frequency_shared','twins_shared','demo_shared')
-    from run_shared_identity_experiment import build
     exit_file = run.parent / (run.name + '_exit.json')
     assert json.loads(exit_file.read_text())['exit_code'] == 0
     original_inputs = {path.name: {'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'bytes': path.stat().st_size}
@@ -43,7 +42,7 @@ def main():
     assert np.array_equal(saved['cameras'], [row[2] for row in dev])
     assert np.array_equal(saved['scenes'], [row[3] for row in dev])
     assert np.array_equal(saved['names'], [Path(row[0] if isinstance(row[0], str) else row[0][0]).name for row in dev])
-    model = build(arguments, cfg, classes, cameras)
+    model = model_builder(arguments, cfg, classes, cameras)
     model.load_state_dict(torch.load(run / 'best.pth', map_location='cuda', weights_only=True), strict=True)
     model.eval()
     assert all(not module.training for module in model.modules())
@@ -111,4 +110,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    from run_shared_identity_experiment import build
+    main(build)

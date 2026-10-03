@@ -1,4 +1,4 @@
-"""Frozen V11: four controlled states and base-block utility over full availability49."""
+"""Frozen dev-best: four controlled states and base-block utility over full availability49."""
 import argparse
 import csv
 import hashlib
@@ -81,7 +81,7 @@ def contributions(qbank, gbank, query, ids, exclusion, predictions, output):
                 scope='query-state margins against frozen full11 gallery of this availability; empirical diagnostic, not causal/information-theoretic synergy')
 
 
-def main():
+def main(model_builder=build):
     parser = argparse.ArgumentParser()
     parser.add_argument('--run-dir', required=True)
     parser.add_argument('--previous-frozen', required=True)
@@ -110,7 +110,7 @@ def main():
     for key, values in (('ids', [r[1] for r in dev]), ('cameras', [r[2] for r in dev]), ('scenes', [r[3] for r in dev]),
                         ('names', [Path(r[0] if isinstance(r[0], str) else r[0][0]).name for r in dev])):
         assert np.array_equal(saved[key], values)
-    model = build(arguments, cfg, classes, cameras)
+    model = model_builder(arguments, cfg, classes, cameras)
     model.load_state_dict(torch.load(run / 'best.pth', map_location='cuda', weights_only=True), strict=True)
     model.eval()
     assert all(not module.training for module in model.modules())
@@ -171,7 +171,7 @@ def main():
                state_tensor_versions_unchanged=True, original_inputs=inputs, optimizer_updates=0, official_test_uses=0,
                residual_scale=None if arguments.variant == 'demo_shared' else model.residual_scale.detach().cpu().tolist(),
                seconds=time.time() - started, metric_count=49 * len(STATES), raw_distance_archive='raw_distances.npz',
-               protocol='same frozen V11 checkpoint; states close expert/conditional messages/psi together; all49 query/gallery retained sets; four-state retrieval closes experts on both sides; block-only cosine diagnostics are base00 private/shared, not deployment descriptors',
+               protocol='same frozen dev-selected checkpoint of the specified model; states close expert/conditional messages/psi together; all49 query/gallery retained sets; four-state retrieval closes experts on both sides; block-only cosine diagnostics are base00 private/shared, not deployment descriptors',
                limits='single-dataset seed42 frozen mechanism diagnostic; not retraining, new method, causal interaction or final all3 acceptance'))
 
 

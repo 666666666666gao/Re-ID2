@@ -81,7 +81,9 @@ def metrics_from_arrays(path, dataset, output):
                         arrays['names'][query], arrays['cameras'][query], arrays['scenes'][query], output)
 
 
-def main():
+def main(model_builder=build,
+         method_revision='shared_identity_v11: availability-aware original DeMo, shared raw-CLIP identity coordinates, full-view preservation and asymmetric partial-query/full-gallery training',
+         metric='5632D: sqrt(.75) normalized private5120 + sqrt(.25) normalized common512; F modifies nonzero common identity coordinates'):
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset', choices=['RGBNT201', 'RGBNT100', 'MSVR310'], required=True)
     parser.add_argument('--variant', choices=VARIANTS, required=True)
@@ -97,7 +99,7 @@ def main():
     out.mkdir(parents=True, exist_ok=False)
     cfg = configuration(args)
     fit, dev, queries, classes, cameras = split_records(args.data_root, args.dataset)
-    model = build(args, cfg, classes, cameras)
+    model = model_builder(args, cfg, classes, cameras)
     info = {'arguments': vars(args), 'config': cfg.dump(), 'classes': classes, 'camera_embeddings': cameras,
             'fit_records': len(fit), 'dev_records': len(dev), 'dev_queries': len(queries),
             'parameters': sum(p.numel() for p in model.parameters()),
@@ -108,8 +110,8 @@ def main():
             'checkpoint_rule': 'highest development mAP; ties keep earliest epoch; official test not used',
             'evaluation_scope': 'identity-heldout development; not full official-train paper reproduction',
             'amp_policy': 'native fp16 GradScaler512; two backwards, one optimizer update; skips counted',
-            'method_revision': 'shared_identity_v11: availability-aware original DeMo, shared raw-CLIP identity coordinates, full-view preservation and asymmetric partial-query/full-gallery training',
-            'metric': '5632D: sqrt(.75) normalized private5120 + sqrt(.25) normalized common512; F modifies nonzero common identity coordinates',
+            'method_revision': method_revision,
+            'metric': metric,
             'partial_training': 'one of six nonempty proper modality sets sampled uniformly per batch by independent seeded generator; same augmented images; full reference stopped; positives exclude self; GT IDs only',
             'partial_loss': {'label_smoothed_CE_weight': .25, 'cross_gallery_soft_triplet_weight': .5},
             'contribution_loss_weight': .05 if args.variant != 'demo_shared' else 0,
