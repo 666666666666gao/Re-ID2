@@ -1,0 +1,158 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "explicit_variant_builders",
+      "status": "PASS",
+      "evidence": [
+        [
+          "run_experiment",
+          [
+            "build"
+          ]
+        ],
+        [
+          "run_mass_experiment",
+          [
+            "build"
+          ]
+        ]
+      ]
+    },
+    {
+      "name": "complete50_and_exit0",
+      "status": "PASS",
+      "evidence": {
+        "27": "terminal['status'] == 'COMPLETE' and terminal['epochs'] == 50",
+        "29": "arguments.variant in ('demo', 'axis_mass_fullref')",
+        "35": "json.loads(exit_file.read_text())['exit_code'] == 0"
+      }
+    },
+    {
+      "name": "saved_query_indices_match",
+      "status": "PASS",
+      "evidence": [
+        "np.array_equal(saved['query_indices'], query)"
+      ]
+    },
+    {
+      "name": "saved_ids_match",
+      "status": "PASS",
+      "evidence": [
+        "np.array_equal(saved['ids'], [row[1] for row in dev])"
+      ]
+    },
+    {
+      "name": "saved_cameras_match",
+      "status": "PASS",
+      "evidence": [
+        "np.array_equal(saved['cameras'], [row[2] for row in dev])"
+      ]
+    },
+    {
+      "name": "saved_scenes_match",
+      "status": "PASS",
+      "evidence": [
+        "np.array_equal(saved['scenes'], [row[3] for row in dev])"
+      ]
+    },
+    {
+      "name": "saved_names_match",
+      "status": "PASS",
+      "evidence": [
+        "np.array_equal(saved['names'], [Path(row[0] if isinstance(row[0], str) else row[0][0]).name for row in dev])"
+      ]
+    },
+    {
+      "name": "parity_before_pair_or_smoke_masks",
+      "status": "PASS",
+      "evidence": "Exact parity assertion line59 precedes both smoke and full evaluation"
+    },
+    {
+      "name": "strict_checkpoint_load_and_eval",
+      "status": "PASS",
+      "evidence": [
+        "load_state_dict(strict=True) line50",
+        "model.eval line51",
+        "all modules not training line52"
+      ]
+    },
+    {
+      "name": "no_training_or_official_eval_calls",
+      "status": "PASS",
+      "evidence": "Main constructs no optimizer, makes no backward/train/official_records calls; extract_missing inherited @torch.no_grad"
+    },
+    {
+      "name": "frozen_checkpoint_no_missing_selection",
+      "status": "PASS",
+      "evidence": [
+        "Best checkpoint loaded before all conditions",
+        "No condition-based selection or weight write"
+      ]
+    },
+    {
+      "name": "metric_GT_contract",
+      "status": "PASS",
+      "evidence": "full_metrics(distances, ids[query], ids, exclusion[query], exclusion, names[query], cams[query], scenes[query], output / name)"
+    },
+    {
+      "name": "dataset_exclusion",
+      "status": "PASS",
+      "evidence": "MSVR same-ID/scene; RGBNT same-ID/camera; inherited stable argsort and no-valid-query handling"
+    },
+    {
+      "name": "state_and_files_end_check",
+      "status": "PASS",
+      "evidence": {
+        "101": "versions == {name: value._version for name, value in model.state_dict().items()}",
+        "67": "versions == {name: value._version for name, value in model.state_dict().items()}",
+        "104": "path.stat().st_size == proof['bytes'] and hashlib.sha256(path.read_bytes()).hexdigest() == proof['sha256']"
+      }
+    },
+    {
+      "name": "clean_metric_gate_matches_available_four",
+      "status": "PASS",
+      "evidence": "Terminal strict_reload contains these four; all six computed using full_metrics"
+    },
+    {
+      "name": "six_metrics_cmc50_groups_perquery",
+      "status": "PASS",
+      "evidence": [
+        "full_evaluation.py:20-65",
+        "utils/reid_evaluation.py:15 max_rank50",
+        "AP/INP and stable junk-filtered GT ranking are inherited"
+      ]
+    },
+    {
+      "name": "measure_function_unchanged_from_existing_mass",
+      "status": "PASS",
+      "evidence": "Exact AST equality"
+    },
+    {
+      "name": "disk_budget_excludes_new_weights",
+      "status": "PASS",
+      "evidence": {
+        "existing_text_file_projection": [
+          {
+            "dataset": "MSVR310",
+            "existing_13_condition_text_bytes": 713633,
+            "linear_49_over13_estimate_bytes": 2689847
+          },
+          {
+            "dataset": "RGBNT201",
+            "existing_13_condition_text_bytes": 1337085,
+            "linear_49_over13_estimate_bytes": 5039782
+          },
+          {
+            "dataset": "RGBNT100",
+            "existing_13_condition_text_bytes": 4181569,
+            "linear_49_over13_estimate_bytes": 15761299
+          }
+        ],
+        "three_dataset_linear_estimate_bytes": 23490928,
+        "helper_free_disk_gate_bytes": 1000000000,
+        "qualification": "Estimate from existing analogous text outputs, not a runtime measurement or exact output bound; new code persists no distances/features/weights"
+      }
+    }
+  ]
+}

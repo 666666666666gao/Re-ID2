@@ -1,0 +1,94 @@
+--- diagnose_metric_mass_axis.py
++++ diagnose_routed_metric_axis.py
+@@ -13,7 +13,7 @@
+ from dual_axis import RELATIONS
+ from experiment_data import make_loader, split_records
+ from full_evaluation import distance, full_metrics
+-from run_metric_mass_experiment import build, configuration, write_json
++from run_routed_metric_experiment import build, configuration, write_json
+ 
+ 
+ @torch.no_grad()
+@@ -86,7 +86,7 @@
+     terminal = json.loads((run / 'result.json').read_text())
+     assert terminal['status'] == 'COMPLETE' and terminal['epochs'] == 50
+     arguments = argparse.Namespace(**terminal['arguments'])
+-    assert arguments.variant == 'axis_metric_fullref'
++    assert arguments.variant == 'axis_metric_routed_fullref'
+     exit_file = run.parent / (run.name + '_exit.json')
+     assert json.loads(exit_file.read_text())['exit_code'] == 0
+     assert (args.data_root is None) == (args.pretrained is None), 'cross-host data and pretrained paths must be supplied together'
+--- missing_metric_mass_development.py
++++ missing_routed_metric_development.py
+@@ -11,7 +11,7 @@
+ from experiment_data import split_records
+ from full_evaluation import distance, full_metrics
+ from missing_evaluation import MISSING, METRICS, extract_missing
+-from run_metric_mass_experiment import build, configuration, write_json
++from run_routed_metric_experiment import build, configuration, write_json
+ 
+ 
+ def main():
+@@ -26,7 +26,7 @@
+     terminal = json.loads((run / 'result.json').read_text())
+     assert terminal['status'] == 'COMPLETE' and terminal['epochs'] == 50
+     arguments = argparse.Namespace(**terminal['arguments'])
+-    assert arguments.variant == 'axis_metric_fullref'
++    assert arguments.variant == 'axis_metric_routed_fullref'
+     exit_file = run.parent / (run.name + '_exit.json')
+     assert json.loads(exit_file.read_text())['exit_code'] == 0
+     original_inputs = {path.name: {'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'bytes': path.stat().st_size}
+--- launch_metric_mass_frozen_evaluation.py
++++ launch_routed_metric_frozen_evaluation.py
+@@ -1,4 +1,4 @@
+-"""Frozen P1 metric-interface MSVR checkpoint, four states and thirteen missing conditions."""
++"""Frozen V8 actual-routed supervision MSVR checkpoint, four states and thirteen missing conditions."""
+ import argparse
+ import hashlib
+ import json
+@@ -23,29 +23,29 @@
+     output.mkdir(exist_ok=False)
+     rows=[]
+     for dataset in ('MSVR310',):
+-        name=dataset+'_axis_metric_fullref_s42';run=training/name
++        name=dataset+'_axis_metric_routed_fullref_s42';run=training/name
+         exit_file=run.parent/(name+'_exit.json')
+         while not exit_file.exists():
+-            print('WAIT_METRIC_CLEAN50',name,flush=True)
++            print('WAIT_ROUTED_METRIC_CLEAN50',name,flush=True)
+             time.sleep(240)
+         assert json.loads(exit_file.read_text())['exit_code']==0,name
+         terminal=json.loads((run/'result.json').read_text())
+         assert terminal['status']=='COMPLETE' and terminal['epochs']==50
+-        assert terminal['arguments']['variant']=='axis_metric_fullref' and terminal['arguments']['dataset']==dataset
++        assert terminal['arguments']['variant']=='axis_metric_routed_fullref' and terminal['arguments']['dataset']==dataset
+         inputs=(run/'best.pth',run/'best_dev_arrays.npz',run/'result.json',exit_file)
+         proofs={str(path):dict(bytes=path.stat().st_size,sha256=hashlib.sha256(path.read_bytes()).hexdigest()) for path in inputs}
+         folder=output/name;folder.mkdir(exist_ok=False)
+         write_json(folder/'frozen_inputs.json',proofs)
+         stages=[]
+-        for script,kind in (('diagnose_metric_mass_axis.py','four_state'),('missing_metric_mass_development.py','missing')):
++        for script,kind in (('diagnose_routed_metric_axis.py','four_state'),('missing_routed_metric_development.py','missing')):
+             for smoke in (True,False):
+-                idle(3)
++                idle(1)
+                 stage=kind+('_smoke' if smoke else '_full')
+                 argv=[sys.executable,'-u',script,'--run-dir',str(run),'--output',str(folder/stage),'--data-root',args.data_root,'--pretrained',args.pretrained]
+                 if smoke:argv.append('--smoke')
+                 with (folder/(stage+'.log')).open('x') as log:
+-                    child=subprocess.Popen(argv,env=dict(os.environ,CUDA_VISIBLE_DEVICES='3',OMP_NUM_THREADS='4',MKL_NUM_THREADS='4',OPENBLAS_NUM_THREADS='4'),stdout=log,stderr=subprocess.STDOUT)
+-                    write_json(folder/(stage+'_launch.json'),dict(pid=child.pid,gpu=3,command=argv,started=time.time()))
++                    child=subprocess.Popen(argv,env=dict(os.environ,CUDA_VISIBLE_DEVICES='1',OMP_NUM_THREADS='4',MKL_NUM_THREADS='4',OPENBLAS_NUM_THREADS='4'),stdout=log,stderr=subprocess.STDOUT)
++                    write_json(folder/(stage+'_launch.json'),dict(pid=child.pid,gpu=1,command=argv,started=time.time()))
+                     code=child.wait()
+                 row=dict(stage=stage,exit_code=code,finished=time.time());write_json(folder/(stage+'_exit.json'),row)
+                 assert code==0,(name,stage)
+@@ -59,7 +59,7 @@
+                 for path in inputs:
+                     assert path.stat().st_size==proofs[str(path)]['bytes'] and hashlib.sha256(path.read_bytes()).hexdigest()==proofs[str(path)]['sha256']
+                 stages.append(row)
+-        record=dict(name=name,gpu=3,stages=stages,optimizer_updates=0,official_test_uses=0,normal_feature_max_error=0)
++        record=dict(name=name,gpu=1,stages=stages,optimizer_updates=0,official_test_uses=0,normal_feature_max_error=0)
+         write_json(folder/'controller_result.json',dict(status='PASS',**record));rows.append(record)
+     write_json(output/'controller_result.json',dict(status='COMPLETE',runs=rows,missing_conditions=13,four_state_conditions=4,optimizer_updates=0,official_test_uses=0,scope='Frozen seed42 identity-heldout development diagnostics; no trained ablation or final test claim'))
+ 

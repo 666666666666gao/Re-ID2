@@ -1,0 +1,106 @@
+{
+  "status": "PASS",
+  "blockers": [],
+  "non_blocking_issues": [],
+  "review_model": "gpt-6-astra",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "max",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer_task": "/root/review_anytoany49_frozen",
+  "reviewed_at": "2026-10-03T15:20:26+08:00",
+  "scope": "SOURCE_AND_STDLIB_AST_MOCK_ONLY",
+  "checked_source_sha256": {
+    "missing_anytoany_development.py": "f4eca39c3bf5d41148bfcd715e77fad19e29109c98bee1301b64ae2640677975",
+    "launch_anytoany_frozen.py": "dac49755976540ab24026c1de9d8755bab7baa399d714d0ed02fbecaf80be361"
+  },
+  "helper_path": "C:/Users/gb/.codex_tmp/demo_anytoany_deploy_20261003.py",
+  "helper_sha256": "072eb1a3be211601fce5be75906d60e219cdddcb6d45fdc6beadf2f08d891996",
+  "no_nn": true,
+  "torch_imported": false,
+  "nn_or_gpu_execution": false,
+  "actual_remote_calls": 0,
+  "installs": 0,
+  "implementation_edits": false,
+  "findings": [
+    {
+      "topic": "retained-set mapping and complete ordered Cartesian grid",
+      "result": "PASS",
+      "evidence": "Executed actual core AST: all 49 unique pairs, exactly six missing encodings plus one clean bank, 48 computed distances; preserved clean-distance object for q_RNT_g_RNT."
+    },
+    {
+      "topic": "independent descriptors and correct mask semantics",
+      "result": "PASS",
+      "evidence": "All banks encoded before pair loop; no gallery re-encoding or query-dependent adaptation. Inherited mask_images uses zeros_like only for missing normalized inputs; original modality order RGB/NI/TI retained."
+    },
+    {
+      "topic": "frozen model construction and scientific scope",
+      "result": "PASS",
+      "evidence": "Only explicit DeMo/run_experiment and V5/run_mass_experiment builders; configuration AST identical; strict best.pth restore, eval on all modules, inherited no_grad extraction, no training/optimizer/official-test call. Single seed42 diagnostic limits are explicit."
+    },
+    {
+      "topic": "GT, split and metric alignment",
+      "result": "PASS",
+      "evidence": "Saved query indices, IDs, cameras, scenes and names equal re-read development records. Original identity-heldout splits and same-ID/same-camera RGBNT or same-ID/same-scene MSVR filtering retained. Authoritative full_metrics yields six metrics, CMC50 and per-query/groups; measure AST unchanged from prior mass evaluator."
+    },
+    {
+      "topic": "parity and immutability gates",
+      "result": "PASS",
+      "evidence": "Clean feature parity must be exactly zero before smoke masks or full grid. Both stages require exit0/status, 0 optimizer updates and unchanged state versions; outer controller verifies four frozen file size/SHA proofs after smoke and full. Leaf full also rechecks input files. Clean four available strict_reload metrics checked."
+    },
+    {
+      "topic": "six known input run paths",
+      "result": "PASS",
+      "evidence": "All six local terminals seed42 COMPLETE50/exit0 with matched classes/cameras/fit/dev/query counts per dataset. DeMo result/exit bytes match prior 2027 mirror manifest; V5 result/exit match prior frozen_input proofs. Remote weights/data availability was not read in this review."
+    },
+    {
+      "topic": "launch and failure isolation",
+      "result": "PASS",
+      "evidence": "38 actual slot AST cases cover both variants and all three schedule paths; smoke/full and mutation/exit/status/parity/state/count gates. ThreadPool max_workers3 uses only GPU0/2/3; inherited idle mock requested 240s waits at memory>=500MiB."
+    },
+    {
+      "topic": "deployment and partial start",
+      "result": "PASS",
+      "evidence": "15 actual helper/generated-script AST cases pass with mocked in-memory files/subprocesses. Host26 precedes27; each receipt persists before advancing. Host27 failure preserves26 and helper rerun cannot restart26. Source/review bindings, mirror input proof, idle-card and disk guards reject the exercised defects."
+    },
+    {
+      "topic": "resources and preservation",
+      "result": "PASS",
+      "evidence": "GPU1 busy mock accepted without scheduling it; GPUs0/2/3 at500MiB rejected; free disk at1GB rejected. Two .py copies per host; no weights copied or deleted, no server2025 invocation. Existing analogous text artifacts project about23.49MB per three-dataset49 suite; this is a rough source-based estimate, not a runtime output bound."
+    }
+  ],
+  "verification": {
+    "controller_mock_cases": 38,
+    "deployment_mock_cases": 15,
+    "semantic_AST_checks": 18,
+    "known_local_run_cases": 6,
+    "cartesian_pairs_checked": 49,
+    "feature_banks": 7,
+    "actual_nn_forwards": 0,
+    "actual_GPU_checks": 0,
+    "actual_SSH_calls": 0
+  },
+  "trace_path": "C:/Users/gb/projects/demo_dual_axis_20261002/.aris/traces/experiment-bridge/2026-10-03_anytoany49",
+  "evidence_artifacts": [
+    "001-static-checks.json",
+    "002-mock-checks.json",
+    "002-mock-harness.json",
+    "003-deploy-mock-checks.json",
+    "003-deploy-mock-harness.json",
+    "004-semantic-checks.json"
+  ],
+  "limitations": [
+    "This PASS assesses source and synthetic control-flow behavior only; it does not certify any remote runtime or numerical output.",
+    "Live smoke must pass on each dataset/model before its full49 run; real clean feature parity, finite banks, input/source proofs and state preservation remain required.",
+    "Torch tensor operations, CUDA kernels, checkpoint tensor contents and actual ground-truth image records were not executed or inspected during this review.",
+    "Same-family fresh review is provisional; no official-test, missing-training, multi-seed or scientific acceptance claim is supported."
+  ],
+  "reviewer_execution_notes": [
+    {
+      "command": "PATH python -",
+      "exit_code": 1,
+      "error": "No pyvenv.cfg file",
+      "resolution": "Used already-installed C:/Users/gb/AppData/Roaming/uv/python/cpython-3.12.12-windows-x86_64-none/python.exe. No install or environment mutation."
+    }
+  ]
+}

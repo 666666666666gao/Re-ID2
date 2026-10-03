@@ -1,0 +1,57 @@
+{
+  "status": "ACTUAL_V5_ALL3_147_COMPLETE_AUDITED_DEMO27_NEW_IDLE_SCHEDULE_REVIEW_PENDING",
+  "scope": "Fixed seed42 dev-selected DeMo and V5 checkpoints, all three datasets, full query/gallery availability matrix",
+  "retained_sets": [
+    "R",
+    "N",
+    "T",
+    "RN",
+    "RT",
+    "NT",
+    "RNT"
+  ],
+  "pairs_per_dataset_model": 49,
+  "planned_metric_rows": 294,
+  "metrics": [
+    "mAP",
+    "mINP",
+    "Rank-1",
+    "Rank-5",
+    "Rank-10",
+    "Rank-20",
+    "CMC1..50",
+    "per-query",
+    "camera/scene/identity groups"
+  ],
+  "ground_truth": "Installed fixed identity-heldout development IDs/names/cameras/scenes/query order; original same-ID same-camera/scene junk exclusion",
+  "descriptor_protocol": "Encode seven banks independently once, use fixed per-sample descriptors for all pairwise scenarios; no query-dependent gallery encoding",
+  "normal_contract": "RNT/RNT uses saved dev-best distances only after clean features exactly equal saved features",
+  "missing_inputs": "Exactly zero normalized tensors for absent sensors",
+  "checkpoints": "No re-selection or adaptation based on missing-matrix results; original four input files hash preserved",
+  "hosts": {
+    "2026": {
+      "variant": "axis_mass_fullref",
+      "gpus": [
+        0,
+        2,
+        3
+      ]
+    },
+    "2027": {
+      "variant": "demo",
+      "gpus": [
+        0,
+        2,
+        3
+      ]
+    }
+  },
+  "optimizer_updates": 0,
+  "official_test_uses": 0,
+  "limits": "Frozen single-seed development robustness diagnostic, not missing-input retraining, new method success, official-test or multiseed evidence",
+  "integrity_audit": "Recompute all six metrics, CMC1..50 and group tables from per-query rows; pair DeMo/V5 identical GT; all prior13 metrics and queries must remain equal",
+  "completed_conditions": 147,
+  "actual26_controller_pid": 3301608,
+  "host27_changed_resource": "0/3 newly occupied by others; use1/2 under separately reviewed fixed schedule",
+  "pending_model": "DeMo all3 full49"
+}
