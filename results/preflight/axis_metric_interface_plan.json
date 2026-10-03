@@ -1,0 +1,27 @@
+{
+  "status": "ACTUAL_TENSOR_AND_AMP_GATES_STARTED_FRESH50_AFTER_PASS",
+  "baseline": "V5",
+  "single_factor": "F retrieval metric interface, existing residual_scale[1] reparameterized to logit(0.05), w=sigmoid(logit)*existing F gate; tail norm uses sqrt(w/(1-w))*stopped identity-block norm",
+  "evidence": "P0 routed F standalone mAP is lower than AUX on all3; routed F correctly identifies 7/24/26 base-wrong queries in MSVR/100/201 while actual full rescues0; sharedCLIP base/AUX cosines positive in12local batches. V6 PF fused/AUX cosines negative in3local batches.",
+  "initial_state_difference": "Only existing F scalar; parameter names/count/shapes and all other seeded initial tensors equal V5",
+  "unchanged": "V5 FFT/experts/conditions/route/auxiliary taps/gates/contribution coupling/lossweights/.05C, seed42/B64/publicCLIP/fixed split/sampling/nativeAMP512/50 earliest devmAP/fulloptimizer serialization",
+  "first_dataset": "MSVR310",
+  "budget_epochs": 50,
+  "engineering_updates": 3,
+  "official_test_uses": 0,
+  "required_gates": [
+    "Exact parameter/count/state delta contract",
+    "Exact original identity coordinates and actual metric-weight formula",
+    "3 actualAMP/all finite nonzero gradients/fullmodeloptimizer strict reload",
+    "Fresh50 independent of smoke checkpoint"
+  ],
+  "source_sha256": {
+    "metric_mass_axis_collaboration.py": "4e007fc276a9f979c6e3b5b5ad711d75f6a087c5fd719401da889ea1e76b9630",
+    "run_metric_mass_experiment.py": "2c35e06f5dd9d7ee8b6070248acd5e4bf09c8513d7eea47f34a9d4f77b904cb0",
+    "verify_metric_mass_interface.py": "e730b6a6c08ed86a655aa6fd0413d7e75f0b1f2edbb57db8514c95b04e222da6",
+    "launch_metric_mass_trial.py": "19cdffd9ccdebd8b559b03d1d31b9da296e88fa1d10b383edf96056d27adcca5"
+  },
+  "limits": "Single-factor retrained interface A; no gain objective, asymmetric missing training, separate control head or new experts added simultaneously. B relation residual interface remains separate future trial. Existing ordinary controls do not match the new interface and must be retrained if candidate promising.",
+  "started_at": "2026-10-03T14:07:19",
+  "controller_pid": 3255284
+}

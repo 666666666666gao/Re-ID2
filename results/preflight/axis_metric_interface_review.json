@@ -1,0 +1,129 @@
+{
+  "status": "PASS",
+  "blockers": [],
+  "non_blocking_issues": [],
+  "reviewed_at": "2026-10-03T14:06:46+08:00",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "max",
+  "model_attribution": "Native fresh reviewer identity confirmed by parent spawn instruction.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "scope": "P1-A single-factor frequency retrieval metric interface; source review and local standard-library checks only.",
+  "noNN": true,
+  "neural_execution": false,
+  "remote_execution": false,
+  "packages_installed": false,
+  "checked_source_sha256": {
+    "metric_mass_axis_collaboration.py": "4e007fc276a9f979c6e3b5b5ad711d75f6a087c5fd719401da889ea1e76b9630",
+    "run_metric_mass_experiment.py": "2c35e06f5dd9d7ee8b6070248acd5e4bf09c8513d7eea47f34a9d4f77b904cb0",
+    "verify_metric_mass_interface.py": "e730b6a6c08ed86a655aa6fd0413d7e75f0b1f2edbb57db8514c95b04e222da6",
+    "launch_metric_mass_trial.py": "19cdffd9ccdebd8b559b03d1d31b9da296e88fa1d10b383edf96056d27adcca5"
+  },
+  "helper_path": "C:\\Users\\gb\\.codex_tmp\\demo_axis_metric26_deploy_20261003.py",
+  "helper_sha256": "81346dbe3a9abcfb9e9dd87fca1de96bd0824d872c61148a5f6657161bb6cdfe",
+  "checks": [
+    {
+      "name": "Single-factor implementation",
+      "status": "PASS_SOURCE",
+      "evidence": "Subclass adds no parameter/module or forward override. It reuses only residual_scale[1] as logit(0.05); V5 M/I identity coordinates, seven relations, FFT, route, auxiliary taps, calibrator and contribution weights remain inherited."
+    },
+    {
+      "name": "Metric formula and gradients",
+      "status": "PASS_SOURCE_AND_STDLIB_MATH",
+      "evidence": "F tail uses normalized original PF direction times detached current identity norm times sqrt(w/(1-w)), with w=sigmoid(existing F scalar)*original gate. Identity has 5120 coordinates and F has 512. Gradients reach PF, F scalar and original F gate; identity norm is explicitly stopped. Forward metric identity is exact mathematically for nonzero blocks; no FP32 or tensor claim is made by the scalar check.",
+      "pairwise_formula": "sqrt((1-wq)*(1-wg))*dot(bhat_q,bhat_g) + sqrt(wq*wg)*dot(fhat_q,fhat_g)",
+      "fixed_lambda_claim": false,
+      "maximum_scalar_weight_error": 3.469446951953614e-18,
+      "maximum_scalar_pair_error": 2.7755575615628914e-17
+    },
+    {
+      "name": "Parameter and tensor contract gate",
+      "status": "PASS_SOURCE_RUNTIME_PENDING",
+      "evidence": "Both builders reseed before construction; verifier requires identical state keys and all tensors except residual_scale, exact unchanged M/I scalar entries, equal parameter count, 8x5632 descriptor, exact first 5120 coordinates, positive weights below 1, finite output and frequency normalized energy error below 1e-7."
+    },
+    {
+      "name": "Closed states and discarded V5 F tail",
+      "status": "PASS_SOURCE",
+      "evidence": "use_f=False immediately returns inherited V5 fuse. F-only receives independent f0 and its own gate, no joint condition/psi or saved full-state relation mass. Only full11 uses joint M/I route. The discarded old F tail is not used by identity slicing. PF is evaluated twice but contains only LayerNorm/Linear/GELU, so this has no stochastic or running-state side effect; no optimization refactor is requested."
+    },
+    {
+      "name": "Training, metric and initialization protocol",
+      "status": "PASS_EXACT_TEXT_COMPARISON",
+      "evidence": "configuration/evaluate/step/write_json and the entire smoke/train suffix from make_loss to EOF are text-identical to V5. Differences are import/model factory, unique axis_metric_fullref identifier and metadata. This preserves fixed identity-disjoint fit/dev, real labels and same-scene MSVR filtering, B64/seed42/public CLIP, native AMP512, optimizer, loss weights, 50 epochs, earliest development-mAP best selection, and full optimizer serialization."
+    },
+    {
+      "name": "Actual smoke and fresh training gate",
+      "status": "PASS_SOURCE_RUNTIME_PENDING",
+      "evidence": "Inherited smoke requires three successful AMP updates, finite nonzero gradients for every trainable parameter at the checked step, strict model load and optimizer load with exact repeated eval output. It writes SMOKE_PASS only afterward. A separate fresh process and separate output path starts train with no smoke checkpoint/resume input."
+    },
+    {
+      "name": "Launcher failure gates",
+      "status": "PASS_STDLIB_MOCK",
+      "cases": [
+        {
+          "case": "success",
+          "children": 3,
+          "blocked_as_expected": false,
+          "terminal_written": true
+        },
+        {
+          "case": "tensor_exit",
+          "children": 1,
+          "blocked_as_expected": true,
+          "terminal_written": false
+        },
+        {
+          "case": "tensor_status",
+          "children": 1,
+          "blocked_as_expected": true,
+          "terminal_written": false
+        },
+        {
+          "case": "smoke_exit",
+          "children": 2,
+          "blocked_as_expected": true,
+          "terminal_written": false
+        },
+        {
+          "case": "smoke_status",
+          "children": 2,
+          "blocked_as_expected": true,
+          "terminal_written": false
+        },
+        {
+          "case": "train_exit",
+          "children": 3,
+          "blocked_as_expected": true,
+          "terminal_written": false
+        },
+        {
+          "case": "train_status",
+          "children": 3,
+          "blocked_as_expected": true,
+          "terminal_written": false
+        },
+        {
+          "case": "train_epochs",
+          "children": 3,
+          "blocked_as_expected": true,
+          "terminal_written": false
+        }
+      ],
+      "evidence": "Mock executes AST-extracted actual main with in-memory result files. Tensor/smoke nonzero-exit and bad-status paths never enter later stages. Train nonzero-exit, bad status or 49 epochs cannot write COMPLETE. All launched stages are pinned to GPU1."
+    },
+    {
+      "name": "Deployment helper and resources",
+      "status": "PASS_SOURCE",
+      "evidence": "Helper requires this PASS with no blockers and exact existing source/helper identities, local P0 four-case audit PASS and remote P0 controller COMPLETE. It requires absent new source/output before first stage; only stages four new files. Source, GPU1 memory below 500 MiB and disk above 3.2 GB are rechecked before a single controller spawn. Existing execute waits 240s for its assigned GPU between stages. No task termination, weight deletion, old source modification, alternate host or package install is present. Embedded remote guard/start Python strings pass AST parsing; no SSH was executed."
+    }
+  ],
+  "runtime_acceptance": "Not yet established. PASS permits the reviewed gated tensor/AMP preflight; only actual passing outputs permit the fresh 50-epoch run. This review is not a model-quality, gradient-runtime, retrieval-improvement or full-training result.",
+  "trace_directory": ".aris/traces/experiment-bridge/2026-10-03_axis_metric_interface",
+  "trace_artifacts": [
+    "reproduce_stdlib_checks.py",
+    "stdlib_checks_actual_output.json",
+    "static_checks_actual_output.json"
+  ],
+  "implementation_source_modified": false,
+  "human_readable_markdown_created": false
+}
