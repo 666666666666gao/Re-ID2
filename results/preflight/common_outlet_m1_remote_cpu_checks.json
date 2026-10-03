@@ -1,0 +1,53 @@
+{
+  "status": "PASS_REMOTE_CPU_SOURCE_AND_THERMAL_MOCK_TESTS",
+  "python": "3.10.14 | packaged by conda-forge | (main, Mar 20 2024, 12:45:18) [GCC 12.3.0]",
+  "AST_files": [
+    "common_outlet_axis.py",
+    "run_common_outlet_experiment.py",
+    "missing_common_outlet_development.py",
+    "diagnose_common_outlet_states.py",
+    "gpu_thermal_execute.py",
+    "verify_common_outlet_axis.py",
+    "launch_common_outlet_trial.py",
+    "audit_common_outlet_states.py",
+    "test_gpu_thermal_execute.py"
+  ],
+  "thermal_tests": 6,
+  "stdout": "",
+  "stderr": "test_excess_power_pauses_only_our_group (test_gpu_thermal_execute.ThermalControlTests) ... ok\ntest_other_gpus_are_rejected (test_gpu_thermal_execute.ThermalControlTests) ... ok\ntest_sensor_failure_reaps_our_paused_group (test_gpu_thermal_execute.ThermalControlTests) ... ok\ntest_sensor_failure_reaps_our_running_group (test_gpu_thermal_execute.ThermalControlTests) ... ok\ntest_temperature_pause_and_resume_preserve_the_same_owned_group (test_gpu_thermal_execute.ThermalControlTests) ... ok\ntest_uncapped_gpu_refuses_before_starting_a_child (test_gpu_thermal_execute.ThermalControlTests) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.014s\n\nOK\n",
+  "gpus": [
+    {
+      "gpu": 2,
+      "temperature_c": 46.0,
+      "power_draw_w": 41.49,
+      "power_limit_w": 350.0,
+      "memory_used_mib": 15.0,
+      "observed_at": 1791041762.1932673
+    },
+    {
+      "gpu": 3,
+      "temperature_c": 59.0,
+      "power_draw_w": 48.65,
+      "power_limit_w": 350.0,
+      "memory_used_mib": 155.0,
+      "observed_at": 1791041762.2715056
+    }
+  ],
+  "launch_power_gate_probes": [
+    {
+      "gpu": 2,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"/data/gaob/Re-ID/DeMo-DualAxis/gpu_thermal_execute.py\", line 22, in check_limits\n    assert sample['power_limit_w'] <= 250, f'GPU{gpu} power cap is {sample[\"power_limit_w\"]}W; administrator must set <=250W before launch'\nAssertionError: GPU2 power cap is 350.0W; administrator must set <=250W before launch\n"
+    },
+    {
+      "gpu": 3,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"/data/gaob/Re-ID/DeMo-DualAxis/gpu_thermal_execute.py\", line 22, in check_limits\n    assert sample['power_limit_w'] <= 250, f'GPU{gpu} power cap is {sample[\"power_limit_w\"]}W; administrator must set <=250W before launch'\nAssertionError: GPU3 power cap is 350.0W; administrator must set <=250W before launch\n"
+    }
+  ],
+  "neural_jobs": 0,
+  "CUDA_model_verification": "NOT_RUN",
+  "limitation": "Telemetry query and mocked signal controls are not a real loaded GPU thermal validation."
+}

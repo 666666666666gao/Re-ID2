@@ -1,0 +1,321 @@
+{
+  "verdict": "PASS_SOURCE_REVIEW",
+  "summary": "The single blocking thermal-controller lifecycle defect B1 is resolved and its original running/paused timeout failures now pass focused CPU-mock rechecks. No remaining source blockers were found. M1 architecture, training, frozen evaluation and GT-path findings from the initial review remain applicable because the other seven new sources are unchanged. Source acceptance only: no neural/CUDA runtime validation or hardware-limit approval.",
+  "reviewed_at": "2026-10-03T23:25:49.047776+08:00",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "reviewer_context": "fresh native Codex subagent /root/review_common_outlet_m1_thermal; runtime model identity is not independently exposed in this reviewer context",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "scope": {
+    "plan": "results/preflight/common_outlet_m1_plan.json",
+    "local_checks": "results/preflight/common_outlet_m1_local_checks.json",
+    "new_sources_read": [
+      "common_outlet_axis.py",
+      "run_common_outlet_experiment.py",
+      "missing_common_outlet_development.py",
+      "diagnose_common_outlet_states.py",
+      "gpu_thermal_execute.py",
+      "verify_common_outlet_axis.py",
+      "launch_common_outlet_trial.py",
+      "audit_common_outlet_states.py",
+      "test_gpu_thermal_execute.py"
+    ],
+    "supporting_sources_read": [
+      "common_coordinate_axis.py",
+      "shared_identity_axis.py",
+      "axis_collaboration.py",
+      "scaled_axis_collaboration.py",
+      "residual_dual_axis.py",
+      "dual_axis.py",
+      "run_shared_identity_experiment.py",
+      "run_mass_experiment.py:configuration/evaluate",
+      "run_experiment.py:configuration",
+      "missing_shared_identity_development.py",
+      "diagnose_shared_identity_states.py",
+      "audit_shared_identity_states.py",
+      "experiment_data.py",
+      "full_evaluation.py:full_metrics/distance",
+      "missing_evaluation.py:extract_missing",
+      "data/datasets/msvr310.py",
+      "solver/make_optimizer.py",
+      "configs/MSVR310/DeMo.yml",
+      "launch_common_coordinate_trial.py",
+      "launch_shared_identity_states.py"
+    ],
+    "original48_match_existing_plan_digests": true,
+    "new9_match_existing_plan_digests": true,
+    "source_changes_made_by_reviewer": [],
+    "focused_recheck_sources": [
+      "gpu_thermal_execute.py",
+      "test_gpu_thermal_execute.py"
+    ],
+    "other7_new_sources_unchanged_since_initial_review": true
+  },
+  "blockers": [],
+  "nonblocking": [],
+  "correct_as_inspected": [
+    {
+      "topic": "Single M1 factor and active query",
+      "evidence": "CommonOutletAxis wraps the inherited common head with one trainable 512D query residual for every pooling; CommonOutletDeMo applies the same wrapper. Mean controls therefore use the query in their common descriptor rather than carrying idle parameter padding. Query construction uses a separate CPU Generator and adds no global sampling RNG draw. original_mean delegates fuse to the unchanged V12 class."
+    },
+    {
+      "topic": "Seven-relation arithmetic and masks",
+      "evidence": "eligible_mean averages the same projected, anchored, route-mass-weighted M/I rows over eligible relations. seed_query uses a single normalized query against actual routed M keys, with sqrt(512) scaling and invalid-relation masking, then aggregates those same M/I rows. It is not a 21-token PMA. Frequency keeps its existing independent increment. Nonempty retained sets imply eligible counts 1, 3 or 7, so the denominator is nonzero on the actual protocol."
+    },
+    {
+      "topic": "Private coordinates, metric mass and controlled states",
+      "evidence": "The new fuse preserves base[:, :5120] and changes only the common block before the inherited sqrt(.75)/sqrt(.25) normalization. Masks still come from valid source subsets. Controlled state10 uses independent m0 and its own relation scores; state01 uses independent f0. last_outlet_weights is diagnostic only and is not read as state input. No new state leakage was found."
+    },
+    {
+      "topic": "Training and RNG",
+      "evidence": "The wrapper reuses run_shared_identity_experiment, configuration, losses, full/partial update, sampler and scheduler. It persists args.pooling before run.json/result.json construction. Fifty epochs, B64, K4, seed42, native GradScaler512, earliest dev-mAP tie and fresh publicCLIP remain wired. The per-epoch and per-batch partial-set generator code is unchanged."
+    },
+    {
+      "topic": "Verifier and smoke barrier",
+      "evidence": "The verifier is wired for nine augmented initial state comparisons plus the DeMo shared-head comparison and all ten by seven availability checks. It includes private zero masks, common squared mass .25, seeded original_mean parity against CommonCoordinateAxis, isolated query RNG, and stopped gallery checks. All ten three-update native smokes check every trainable parameter for finite nonzero gradient and strict in-memory reload. Both smoke queues finish successfully before any train command is submitted. These checks have not run on a model during this review."
+    },
+    {
+      "topic": "Frozen evaluation and independent GT paths",
+      "evidence": "Both frozen wrappers reconstruct arguments including pooling and strict-load the specified best.pth. Each run has 49 frozen availability pairs and 294 six-state cases. Normal features and previous full11 metrics/per-query CSVs must match. The CPU wrapper points each explicitly named pooling/variant run to pooling/controlled_states/MSVR310_<variant>_s42/full. The inherited auditor reconstructs IDs/cameras/scenes from installed MSVR training filenames and fixed dev IDs, excludes same-ID/same-scene entries, lexicographically ranks stored FP32 distances, and recounts six metrics, CMC50, groups, per-query values and contribution arithmetic."
+    },
+    {
+      "topic": "Normal thermal path and resource scope",
+      "evidence": "The current normal path rejects 350W before Popen, rejects physical GPU0/1, sets CUDA_VISIBLE_DEVICES to the selected physical GPU2/3, creates a new process group, pauses at >=75C or power draw/limit >250W and resumes the same group only at <=70C and <=250W. Local monitoring sleeps 5 seconds; capacity waiting is 240 seconds. Existing four CPU mocks pass. This does not validate physical thermal response."
+    },
+    {
+      "topic": "B1 abnormal thermal-monitor unwind",
+      "evidence": "The revised finally owns cleanup immediately after successful Popen; running and paused timeout cases both terminate only the owned group, reap it and write a failure receipt before propagating the original exception. The separate mocked replays verified exact exception-object preservation and one wait per child."
+    }
+  ],
+  "tests_actually_run": {
+    "interpreter": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe",
+    "focused_cpu_thermal_unit_tests": {
+      "command": "<interpreter> -B test_gpu_thermal_execute.py -v",
+      "exit_code": 0,
+      "count": 6,
+      "status": "PASS",
+      "reported_duration_seconds": 0.046,
+      "names": [
+        "test_excess_power_pauses_only_our_group",
+        "test_other_gpus_are_rejected",
+        "test_sensor_failure_reaps_our_paused_group",
+        "test_sensor_failure_reaps_our_running_group",
+        "test_temperature_pause_and_resume_preserve_the_same_owned_group",
+        "test_uncapped_gpu_refuses_before_starting_a_child"
+      ]
+    },
+    "original_failure_case_replays": {
+      "status": "PASS_B1_RECHECK",
+      "harness": "In-memory stdlib mock replay against the final unmodified guard. Popen/getpgid/killpg/time.sleep/telemetry patched. Reused the original fake owned PGID4242 and initial cap250W/temp60C/draw200W/memory0MiB. TemporaryDirectory outputs only.",
+      "cases": [
+        {
+          "name": "timeout_while_running",
+          "paused_before_timeout": false,
+          "original_exception_object_preserved": true,
+          "signals": [
+            [
+              4242,
+              "SIGKILL(9)"
+            ]
+          ],
+          "wait_calls": 1,
+          "exit_receipt_exists": true,
+          "exit_code": -9,
+          "forced_own_group_cleanup": true,
+          "popen_calls": 1,
+          "status": "PASS"
+        },
+        {
+          "name": "timeout_after_temperature_pause",
+          "paused_before_timeout": true,
+          "original_exception_object_preserved": true,
+          "signals": [
+            [
+              4242,
+              "SIGSTOP(19)"
+            ],
+            [
+              4242,
+              "SIGKILL(9)"
+            ]
+          ],
+          "wait_calls": 1,
+          "exit_receipt_exists": true,
+          "exit_code": -9,
+          "forced_own_group_cleanup": true,
+          "popen_calls": 1,
+          "status": "PASS"
+        }
+      ],
+      "real_children_started": 0,
+      "gpu_queries": 0
+    },
+    "source_checks": {
+      "new9_AST_parse": "PASS",
+      "new9_updated_plan_digest_comparison": "PASS",
+      "old48_existing_plan_digest_comparison": "PASS",
+      "new_or_old_source_mismatches": [],
+      "changed_source_files_since_initial_review": [
+        "gpu_thermal_execute.py",
+        "test_gpu_thermal_execute.py"
+      ],
+      "other7_new_sources_unchanged": true,
+      "initial_review_preserved_byte_exact_before_final_update": true,
+      "status": "PASS"
+    }
+  },
+  "deployment_gates": [
+    {
+      "status": "BLOCKED_BY_EXISTING_HARDWARE_SETTING",
+      "evidence": "results/preflight/gpu_thermal_power_policy_20261003.json records both selected GPUs still capped at 350W at 2026-10-03T22:50:20, with direct and sudo-n administrative setting attempts rejected. This reviewer did not re-query the host.",
+      "requirement": "Do not launch a neural task until actual physical GPU2/3 power limits are observed <=250W. A source fix does not satisfy this hardware prerequisite."
+    },
+    {
+      "status": "NEURAL_CHECKS_NOT_RUN",
+      "requirement": "After source remediation/review and the hardware prerequisite, the actual tensor verifier and all ten smokes must pass before training. Expected parameter counts and source consistency are not model validation."
+    },
+    {
+      "status": "INDEPENDENT_CPU_AUDIT_PENDING",
+      "requirement": "After controller completion, run the existing audit_common_outlet_states.py with the campaign root, installed data root and fixed splits. The launcher does not invoke that separate CPU audit; its controller COMPLETE alone is not independent-GT acceptance."
+    }
+  ],
+  "limitations": [
+    "No SSH, deployment, administrator action, real nvidia-smi query, CUDA process, model import/construction/forward/backward or training was performed.",
+    "All thermal executions were CPU mocks. Real Linux signal delivery, actual power limiting, temperature overshoot/cooldown and uninterrupted optimizer/sampler state during suspension remain unverified.",
+    "No local Torch or NumPy is installed in the selected interpreter. No actual installed-dataset GT recount or checkpoint evaluation was performed.",
+    "Source inspection supports the formulas and dataflow but does not establish numerical CUDA parity, measured parameter counts, utility or completion of any of the ten experiments.",
+    "This fresh context is same-family review only and has provisional acceptance status; no cross-family independence is claimed."
+  ],
+  "review_round": 2,
+  "initial_review_evidence": {
+    "path": "results/preflight/common_outlet_m1_review_initial.json",
+    "verdict": "FAIL_SOURCE_REVIEW",
+    "reviewed_at": "2026-10-03T23:19:03.388121+08:00",
+    "byte_exact_archive_verified_before_final_update": true,
+    "blockers": [
+      {
+        "id": "B1",
+        "severity": "blocking",
+        "title": "Thermal-monitor failure abandons the owned child process group",
+        "locations": [
+          "gpu_thermal_execute.py:11",
+          "gpu_thermal_execute.py:36",
+          "gpu_thermal_execute.py:43",
+          "gpu_thermal_execute.py:49",
+          "gpu_thermal_execute.py:58"
+        ],
+        "finding": "Popen creates a separate session and the monitoring loop may SIGSTOP its process group. telemetry uses a real subprocess.check_output timeout of 15 seconds. There is no post-Popen try/finally cleanup. If telemetry raises, execute propagates the exception while the child remains alive; an already stopped child stays stopped indefinitely. No child.wait or failure exit receipt is reached. A running child instead continues without the thermal supervisor.",
+        "evidence": "Two deterministic mock reproductions executed against the current unmodified gpu_thermal_execute module, with fake owned PID/PGID 4242 and no real subprocess or GPU query. Details are retained in tests_actually_run.failure_reproduction.",
+        "minimal_fix": "Wrap the lifetime after successful Popen in a finally that, when the child is still alive, sends SIGKILL only to that newly created owned process group and reaps it with wait. SIGKILL also handles an already SIGSTOP-ed group without temporarily resuming unmonitored computation. Preserve an explicit failure receipt and propagate the original error. No retry, fallback, restart or peer-GPU action is needed.",
+        "required_recheck": "Re-run the existing four mocks and both timeout cases. The running and paused timeout cases must end with own-group cleanup and wait, retain the error, and leave no live child."
+      }
+    ],
+    "tests_actually_run": {
+      "interpreter": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe",
+      "existing_cpu_thermal_unit_tests": {
+        "command": "<interpreter> -B test_gpu_thermal_execute.py -v",
+        "exit_code": 0,
+        "count": 4,
+        "status": "PASS",
+        "names": [
+          "test_excess_power_pauses_only_our_group",
+          "test_other_gpus_are_rejected",
+          "test_temperature_pause_and_resume_preserve_the_same_owned_group",
+          "test_uncapped_gpu_refuses_before_starting_a_child"
+        ]
+      },
+      "failure_reproduction": {
+        "status": "REPRODUCED_MISSING_CLEANUP",
+        "harness": "In-memory stdlib unittest.mock test imported gpu_thermal_execute, patched Popen/getpgid/killpg/time.sleep and supplied telemetry samples followed by subprocess.TimeoutExpired(\"nvidia-smi\", 15). Output files were confined to TemporaryDirectory and removed on context exit.",
+        "fake_owned_pid_and_process_group": 4242,
+        "cases": [
+          {
+            "name": "timeout_while_running",
+            "telemetry_sequence": [
+              "initial cap250W/temp60C/draw200W/memory0MiB",
+              "TimeoutExpired(nvidia-smi,15)"
+            ],
+            "exception_propagated": "TimeoutExpired",
+            "killpg_calls": [],
+            "child_wait_called": false,
+            "child_terminate_called": false,
+            "child_kill_called": false,
+            "exit_receipt_exists": false,
+            "result": "Running child lifetime abandoned by execute; no cleanup call"
+          },
+          {
+            "name": "timeout_after_temperature_pause",
+            "telemetry_sequence": [
+              "initial cap250W/temp60C/draw200W/memory0MiB",
+              "cap250W/temp75C/draw200W/memory0MiB",
+              "TimeoutExpired(nvidia-smi,15)"
+            ],
+            "exception_propagated": "TimeoutExpired",
+            "killpg_calls": [
+              [
+                4242,
+                "SIGSTOP(19)"
+              ]
+            ],
+            "child_wait_called": false,
+            "child_terminate_called": false,
+            "child_kill_called": false,
+            "exit_receipt_exists": false,
+            "result": "Owned group is left paused with no recovery or termination call"
+          }
+        ],
+        "real_children_started": 0,
+        "gpu_queries": 0
+      },
+      "source_checks": {
+        "new9_AST_parse": "PASS",
+        "new9_existing_plan_digest_comparison": "PASS",
+        "old48_existing_plan_digest_comparison": "PASS",
+        "new_or_old_source_mismatches": [],
+        "numpy_available_in_local_interpreter": false,
+        "torch_available_in_local_interpreter": false
+      },
+      "stdlib_availability_enumeration": {
+        "eligible_counts_in_RELATIONS_order": [
+          1,
+          1,
+          1,
+          3,
+          3,
+          3,
+          7
+        ],
+        "total_pairs": 49,
+        "same_pairs": 7,
+        "source_disjoint_pairs": 12,
+        "overlap_mismatch_pairs": 30,
+        "both_partial_pairs": 36,
+        "partial_query_full_gallery_pairs": 6,
+        "status": "PASS"
+      },
+      "harness_preparation_failures": [
+        "Bare PATH python failed before testing with \"No pyvenv.cfg file\". Used the already installed uv-managed CPython; no environment or package was installed.",
+        "First in-memory source-check harness omitted encoding and hit Windows GBK UnicodeDecodeError reading the UTF-8 plan. Corrected the harness to read UTF-8 and reran successfully; no project source was changed."
+      ]
+    },
+    "initial_plan": "results/preflight/common_outlet_m1_plan_initial.json"
+  },
+  "resolved_blockers": [
+    {
+      "id": "B1",
+      "status": "RESOLVED",
+      "title": "Thermal-monitor failure abandons the owned child process group",
+      "locations": [
+        "gpu_thermal_execute.py:37",
+        "gpu_thermal_execute.py:59",
+        "gpu_thermal_execute.py:62",
+        "gpu_thermal_execute.py:63",
+        "gpu_thermal_execute.py:66"
+      ],
+      "resolution": "A finally now covers the successfully spawned child lifetime. If child.poll reports the child is still alive, cleanup sends SIGKILL only to child.pid as its owned process group; it then calls wait and writes exit_code and forced_own_group_cleanup. The pending sensor exception propagates after the finally. A normally exited child is reaped without a kill. No retry, fallback, restart or peer-GPU action was added.",
+      "validation": "All six updated CPU mocks pass. Both original failure scenarios were separately replayed with the same fake owned PGID4242; running timeout produced SIGKILL then wait, paused timeout produced SIGSTOP then SIGKILL then wait. Both wrote exit_code=-9 / forced_own_group_cleanup=true and preserved the exact original TimeoutExpired object. One Popen call per case, no real child or GPU query.",
+      "original_failure_evidence": "Retained verbatim under initial_review_evidence.tests_actually_run.failure_reproduction and in the byte-exact archived first review."
+    }
+  ]
+}

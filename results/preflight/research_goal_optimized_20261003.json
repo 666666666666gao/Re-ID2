@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-03T22:50:18",
+  "updated_at": "2026-10-03T23:36:01",
   "execution_objective": "以完整DeMo为强基线，建立跨模态可用集合一致、能够产生实际检索增益的双轴互补Re-ID方法。先证明模态轴与频率轴分工及条件协作优于同增强、同有效参数、同输出维度的普通专家，并用逐查询干预与重训消融证明收益来源；再冻结统一方法，完成三个数据集、至少三个配对种子、独立身份确认划分、全部49种查询—图库模态组合及真实部署成本评测。保留三个数据集完整输入mAP和Rank-1均比同协议完整DeMo至少提高2个百分点的验收目标。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -22,11 +22,13 @@
     },
     {
       "id": "M1",
-      "status": "MEASUREMENT_COMPLETE_POOLING_RETRAIN_PENDING",
+      "status": "POOLING_IMPLEMENTED_SOURCE_REVIEW_PASS_CUDA_SANITY_AND_50_EPOCH_PENDING",
       "work": "在MSVR310固定fit/dev先做原平均、合法集合平均、共享查询公共出口的单因素重训；保留DeMo私有路径、FFT、专家、路由、损失和原缺失采样。",
       "evidence": "相同50轮、采样、有效参数预算和5632D；同步匹配普通频域与普通双专家，禁止闲置参数凑容量。检查公共块独立检索、全部49条件和四状态净收益。",
       "actual_evidence": "Frozen V12 outlet scale / projection utility:882 raw-GT cases and185220 query records audited; no training or pooling intervention.",
-      "decision": "先判定公共出口是否保留判别信息及是否产生可用增量；若普通频域仍更好或11仍误伤，先定位投影/路由/控制，暂不扩展三数据集。"
+      "decision": "先判定公共出口是否保留判别信息及是否产生可用增量；若普通频域仍更好或11仍误伤，先定位投影/路由/控制，暂不扩展三数据集。",
+      "implementation": "results/preflight/common_outlet_m1_plan.json",
+      "actual_preparation": "Nine new files, old48sources unchanged; fresh source reviewPASS after own-group cleanup repair; local/remote sixCPUthermal mocks pass. NoCUDAmodelcheck or training."
     },
     {
       "id": "M2",
@@ -81,11 +83,12 @@
       "resume_temperature_c": 70,
       "power_limit_before_launch_required": true,
       "hardware_limit_status": "NOT_APPLIED_PERMISSION_DENIED",
-      "temperature_monitor_status": "REQUIRED_BEFORE_NEXT_TRAINING_NOT_IMPLEMENTED",
-      "policy": "results/preflight/gpu_thermal_power_policy_20261003.json"
+      "temperature_monitor_status": "IMPLEMENTED_AND_SOURCE_REVIEWED_CPU_MOCKS_PASS_NOT_GPU_LOAD_VALIDATED",
+      "policy": "results/preflight/gpu_thermal_power_policy_20261003.json",
+      "power_limit_status": "NOT_APPLIED_PERMISSION_DENIED"
     }
   },
-  "revision": "20261003_execution_goal_v3_thermal",
+  "revision": "20261003_execution_goal_v4_m1_prepared",
   "primary_claims": [
     {
       "id": "C1",
@@ -194,14 +197,14 @@
   ],
   "next_action": {
     "milestone": "M1",
-    "status": "PENDING_IMPLEMENTATION_AND_PRIVILEGED_POWER_LIMIT",
-    "action": "实现并审查公共出口三种汇聚方式的最小同预算对照，然后在2026 GPU2/3执行匹配fresh50。",
+    "status": "PRIVILEGED_POWER_LIMIT_REQUIRED_BEFORE_CUDA_SANITY",
+    "action": "GPU2/3功率/温度启动条件通过后，先运行实际CUDA张量合同与全部10组三更新AMPsmoke屏障，再fresh50和49条件/四状态/独立GT复算。",
     "excluded_this_factor": [
       "新增频域关系损失",
       "新增跨集合训练分布",
       "同时拆分贡献估计与控制",
       "三数据集直接扩展"
     ],
-    "hardware_dependency": "管理员设置GPU2/3功率上限至250W并核验；温度控制须加入下一控制器。目标不因此标记complete或blocked，仍可推进无GPU实现工作。"
+    "hardware_dependency": "管理员设置GPU2/3功率上限至250W并核验；温控代码已实现并通过源码/CPU验证，尚未做实际GPU负载验证。随后执行CUDA合同与全部smoke屏障。目标仍ACTIVE_UNMET。"
   }
 }
