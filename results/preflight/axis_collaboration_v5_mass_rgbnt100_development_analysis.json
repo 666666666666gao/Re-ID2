@@ -1,0 +1,98 @@
+{
+  "observed_at": "2026-10-03T11:50:36",
+  "scope": "Additional V5 post-normalization relation-mass seed42 public-CLIP fresh50-epoch development runs. Compare same-capacity V4 and independent DeMo using identical GT and sampler. Frozen raw evidence and paired GT query audit, no new GPU forward or optimizer update/test.",
+  "runs": {
+    "RGBNT100_axis_mass_fullref_s42": {
+      "dataset": "RGBNT100",
+      "variant": "axis_mass_fullref",
+      "best_epoch": 10,
+      "metrics": {
+        "mAP": 87.40450067975267,
+        "mINP": 66.08434418063683,
+        "Rank-1": 93.824,
+        "Rank-5": 94.848,
+        "Rank-10": 95.776,
+        "Rank-20": 96.832
+      },
+      "parameters": 98857094,
+      "trainable_parameters": 98845318,
+      "descriptor_dim": 5632,
+      "attempts": 4035,
+      "updates": 4035,
+      "amp_skips": 0,
+      "all50_epochs_finite_earliest_max_mAP_verified": true,
+      "six_metrics_per_query_recomputed": true,
+      "strict_reload_four_metrics_equal": true,
+      "sampling_epoch_step_names_equal_demo": true,
+      "capacity_and_dim_match_same_dataset_V4_axis": true,
+      "delta": {
+        "demo": {
+          "mAP": -1.249220965779287,
+          "mINP": -3.337974132454363,
+          "Rank-1": -1.9519999999999982,
+          "Rank-5": -1.7279999999999944,
+          "Rank-10": -1.5679999999999978,
+          "Rank-20": -1.9200000000000017
+        },
+        "V4_axis_scaled_fullref": {
+          "mAP": -1.9023380615680168,
+          "mINP": -2.9745542397027123,
+          "Rank-1": -3.584000000000003,
+          "Rank-5": -3.456000000000003,
+          "Rank-10": -2.656000000000006,
+          "Rank-20": -1.7600000000000051
+        }
+      },
+      "paired_queries": {
+        "demo": {
+          "paired_ground_truth_and_query_order_exact": true,
+          "valid_queries": 3125,
+          "rank1_harmed_count": 119,
+          "rank1_rescued_count": 58,
+          "rank1_harmed_fraction_of_all_queries": 0.03808,
+          "rank1_rescued_fraction_of_all_queries": 0.01856,
+          "rank1_harmed_fraction_of_reference_correct": 0.039759438690277316,
+          "rank1_rescued_fraction_of_reference_wrong": 0.4393939393939394,
+          "AP_improved_count": 1140,
+          "AP_worsened_count": 1475,
+          "AP_identical_count": 510,
+          "mAP_delta_recomputed_from_per_query_pp": -1.2492209657792843,
+          "Rank1_delta_recomputed_from_per_query_pp": -1.952,
+          "limit": "Paired separately trained dev checkpoints; these changes do not isolate expert-off effects inside the V4 model."
+        },
+        "V4_axis_scaled_fullref": {
+          "paired_ground_truth_and_query_order_exact": true,
+          "valid_queries": 3125,
+          "rank1_harmed_count": 137,
+          "rank1_rescued_count": 25,
+          "rank1_harmed_fraction_of_all_queries": 0.04384,
+          "rank1_rescued_fraction_of_all_queries": 0.008,
+          "rank1_harmed_fraction_of_reference_correct": 0.0450065703022339,
+          "rank1_rescued_fraction_of_reference_wrong": 0.30864197530864196,
+          "AP_improved_count": 1147,
+          "AP_worsened_count": 1517,
+          "AP_identical_count": 461,
+          "mAP_delta_recomputed_from_per_query_pp": -1.9023380615679972,
+          "Rank1_delta_recomputed_from_per_query_pp": -3.584,
+          "limit": "Paired separately trained dev checkpoints; these changes do not isolate expert-off effects inside the V4 model."
+        }
+      },
+      "mAP_Rank1_2pp_over_demo": false
+    }
+  },
+  "source_sha256": {
+    "results/axis_collaboration_v5_mass/development/RGBNT100_axis_mass_fullref_s42/result.json": "7c5e5847aabd71b7983bba801d132a70514bc42af9ef1dac2945688530d0981e",
+    "results/axis_collaboration_v5_mass/development/RGBNT100_axis_mass_fullref_s42_exit.json": "f5f8c6b68e2615a90283c5b8da5337090d660d4704dde56c40a7c2ec923c3c7f",
+    "results/axis_collaboration_v5_mass/development/RGBNT100_axis_mass_fullref_s42/epochs.csv": "e1bd00119826eced0ad30329341ed8e3f333bba52f89c9d3a0c9e2d83ab37acf",
+    "results/axis_collaboration_v5_mass/development/RGBNT100_axis_mass_fullref_s42/batch_orders.jsonl": "2cae6abcbc5ea14d70ffa7717aad8a4f7b91c3ca86c3c87f6ef4f3cb63c60b24",
+    "results/full_suite/RGBNT100_demo_s42/batch_orders.jsonl": "2cae6abcbc5ea14d70ffa7717aad8a4f7b91c3ca86c3c87f6ef4f3cb63c60b24",
+    "results/axis_collaboration_v5_mass/development/RGBNT100_axis_mass_fullref_s42/development_metrics/full_metrics.json": "e37f7cd02551926fa45a386c255be2b3fcda49180f9aa094d0b39adc02453533",
+    "results/axis_collaboration_v5_mass/development/RGBNT100_axis_mass_fullref_s42/development_metrics/full_metrics.csv": "3e65cad589e1b1a4c3f2476c84147107ca1280805f85ebd1a96f316c0f0db26c",
+    "results/full_suite/RGBNT100_demo_s42/full_evaluation/metrics.json": "c78103a310fa19e251fecb3e87bd20c44293d4fd009e120e127ae833f5810074",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/result.json": "4312965c781fa72b459e7380756a4f2212dadd9b06dc8db2e4a43f6266c804f9",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/development_metrics/full_metrics.json": "c34b1301486595abbf15febb8e29529d18c4f2544fdbea7bb39462f935426cc0",
+    "results/full_suite/RGBNT100_demo_s42/full_evaluation/dev_per_query.csv": "420f0a881173933d10be75a4bd120b83dd29bdacd26349b80068ed6b4390b039",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/development_metrics/full_metrics.csv": "e3cbf703e4c9989c32c75c537e303e034570c878840f6978c56a1d6aafb33477"
+  },
+  "status": "PASS_EVIDENCE_AUDIT"
+}
