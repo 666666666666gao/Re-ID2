@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-03T22:39:26",
+  "updated_at": "2026-10-03T22:50:18",
   "execution_objective": "以完整DeMo为强基线，建立跨模态可用集合一致、能够产生实际检索增益的双轴互补Re-ID方法。先证明模态轴与频率轴分工及条件协作优于同增强、同有效参数、同输出维度的普通专家，并用逐查询干预与重训消融证明收益来源；再冻结统一方法，完成三个数据集、至少三个配对种子、独立身份确认划分、全部49种查询—图库模态组合及真实部署成本评测。保留三个数据集完整输入mAP和Rank-1均比同协议完整DeMo至少提高2个百分点的验收目标。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -74,9 +74,18 @@
     "publication": "GitHub Re-ID2；只维护docs/实验交接.md，镜像Desktop/document及2025/26/27同名交接；五份字节一致。",
     "observation": "按测得时长估计里程碑，在结束前几分钟或180–300秒观察；默认240秒；观察超时不重启训练。",
     "evaluation_selection": "固定身份隔离fit/dev；正式测试和独立确认身份不用于训练或版本选择。开发mAP最大、最早并列最佳；不拼不同版本、不同条件或不同指标各自最优checkpoint。",
-    "unnecessary_work": "不强加完整DeMo再涨10点或每模块+2，不先更换FFT/主干/增加专家，不重复已完成测量或权重清理。"
+    "unnecessary_work": "不强加完整DeMo再涨10点或每模块+2，不先更换FFT/主干/增加专家，不重复已完成测量或权重清理。",
+    "hardware": {
+      "power_limit_w": 250,
+      "temperature_ceiling_c": 75,
+      "resume_temperature_c": 70,
+      "power_limit_before_launch_required": true,
+      "hardware_limit_status": "NOT_APPLIED_PERMISSION_DENIED",
+      "temperature_monitor_status": "REQUIRED_BEFORE_NEXT_TRAINING_NOT_IMPLEMENTED",
+      "policy": "results/preflight/gpu_thermal_power_policy_20261003.json"
+    }
   },
-  "revision": "20261003_execution_goal_v2",
+  "revision": "20261003_execution_goal_v3_thermal",
   "primary_claims": [
     {
       "id": "C1",
@@ -185,13 +194,14 @@
   ],
   "next_action": {
     "milestone": "M1",
-    "status": "NOT_IMPLEMENTED_NOT_LAUNCHED",
+    "status": "PENDING_IMPLEMENTATION_AND_PRIVILEGED_POWER_LIMIT",
     "action": "实现并审查公共出口三种汇聚方式的最小同预算对照，然后在2026 GPU2/3执行匹配fresh50。",
     "excluded_this_factor": [
       "新增频域关系损失",
       "新增跨集合训练分布",
       "同时拆分贡献估计与控制",
       "三数据集直接扩展"
-    ]
+    ],
+    "hardware_dependency": "管理员设置GPU2/3功率上限至250W并核验；温度控制须加入下一控制器。目标不因此标记complete或blocked，仍可推进无GPU实现工作。"
   }
 }

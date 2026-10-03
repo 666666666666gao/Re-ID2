@@ -1,0 +1,86 @@
+{
+  "updated_at": "2026-10-03T22:50:18",
+  "user_requirement": "2026 GPU2/3温度尽量不超过75℃，功率尽量不超过250W。",
+  "host": "2026",
+  "physical_gpus": [
+    2,
+    3
+  ],
+  "power_limit_w": 250,
+  "temperature_ceiling_c": 75,
+  "resume_temperature_c": 70,
+  "hardware_limits_applied": false,
+  "hardware_limit_status": "INSUFFICIENT_PERMISSIONS",
+  "actual_attempts": [
+    {
+      "command": [
+        "sudo",
+        "-n",
+        "nvidia-smi",
+        "-i",
+        "2,3",
+        "-pl",
+        "250"
+      ],
+      "exit_code": 1,
+      "stderr": "sudo: a password is required\n"
+    },
+    {
+      "command": [
+        "nvidia-smi",
+        "-i",
+        "2,3",
+        "-pl",
+        "250"
+      ],
+      "exit_code": 4,
+      "stdout": "Failed to set power management limit for GPU 00000000:86:00.0: Insufficient Permissions\nTerminating early due to previous errors.\n"
+    },
+    {
+      "command": [
+        "nvidia-smi",
+        "-i",
+        "2,3",
+        "-gtt",
+        "75"
+      ],
+      "exit_code": 4,
+      "stdout": "Unable to set requested Target Temperature for GPU 00000000:86:00.0: Insufficient Permissions\nTerminating early due to previous errors.\n"
+    }
+  ],
+  "post_attempt_observation": {
+    "observed_at": "2026-10-03T22:50:20",
+    "gpus": [
+      {
+        "index": "2",
+        "uuid": "GPU-442835f1-3e38-07d1-c823-57f7b12ad5bd",
+        "temperature_c": "44",
+        "power_draw_w": "30.18",
+        "power_limit_w": "350.00",
+        "power_min_w": "100.00",
+        "power_max_w": "350.00",
+        "utilization_pct": "0"
+      },
+      {
+        "index": "3",
+        "uuid": "GPU-a594c014-6f57-08e1-3b65-06e99b6e312a",
+        "temperature_c": "62",
+        "power_draw_w": "108.46",
+        "power_limit_w": "350.00",
+        "power_min_w": "100.00",
+        "power_max_w": "350.00",
+        "utilization_pct": "0"
+      }
+    ],
+    "compute_processes": ""
+  },
+  "new_neural_jobs": 0,
+  "launch_rule": "新训练必须先核验所选卡功率上限不高于250W；当前350W且设置被拒绝，暂不启动新的神经任务。",
+  "temperature_control_requirement": "后续控制器对自有任务本机采样温度；达到75℃暂停自有计算，冷却至70℃再继续同一进程；保留checkpoint、优化器与采样状态，不重训、不触碰他人任务。",
+  "temperature_monitor_implemented": false,
+  "polling_interpretation": "远端控制器的本机温度采样须比180–300秒状态观察更及时；长任务状态观察仍按里程碑/默认240秒，二者不是同一种轮询。",
+  "admin_commands": [
+    "sudo nvidia-smi -i 2,3 -pl 250",
+    "sudo nvidia-smi -i 2,3 -gtt 75"
+  ]
+}
