@@ -125,14 +125,13 @@ def main(model_builder=build,
     if args.mode == 'smoke':
         model.train()
         details = []
-        for index, (retained, batch) in enumerate(zip(PARTIAL_SETS, make_loader(fit, cfg, True, args.seed))):
-            detail = step(model, batch, optimizer, scaler, loss_fn, xent, retained)
+        for index, batch in enumerate(make_loader(fit, cfg, True, args.seed)):
+            detail = step(model, batch, optimizer, scaler, loss_fn, xent, PARTIAL_SETS[index])
+            assert detail['optimizer_updated'], 'smoke optimizer step skipped'
             details.append(detail)
-            print('SMOKE_ATTEMPT', index + 1, json.dumps(detail), flush=True)
-            if sum(int(row['optimizer_updated']) for row in details) == 3:
+            print('SMOKE_STEP', index + 1, json.dumps(detail), flush=True)
+            if len(details) == 3:
                 break
-        updates = sum(int(row['optimizer_updated']) for row in details)
-        assert updates == 3, 'smoke requires three actual optimizer updates'
         gradients = {name: bool(p.grad is not None and torch.isfinite(p.grad).all() and p.grad.abs().sum() > 0)
                      for name, p in model.named_parameters() if p.requires_grad}
         assert all(gradients.values()), [name for name, good in gradients.items() if not good]
@@ -148,8 +147,7 @@ def main(model_builder=build,
         with torch.no_grad():
             after = model(image, cam_label=cam.cuda(), view_label=scene.cuda())
         assert torch.equal(before, after)
-        write_json(out / 'smoke.json', {**info, 'status': 'SMOKE_PASS', 'steps': updates,
-                                      'attempts': len(details), 'amp_skipped_steps': len(details) - updates, 'details': details,
+        write_json(out / 'smoke.json', {**info, 'status': 'SMOKE_PASS', 'steps': 3, 'details': details,
                                       'gradients': gradients, 'strict_reload_equal': True,
                                       'peak_memory': torch.cuda.max_memory_allocated(), 'finished': time.time()})
         print('SMOKE_PASS', flush=True)

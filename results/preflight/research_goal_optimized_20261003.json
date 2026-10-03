@@ -1,6 +1,6 @@
 {
   "status": "EXECUTION_RESUMED_UNMET",
-  "updated_at": "2026-10-04T00:27:30",
+  "updated_at": "2026-10-04T00:58:17",
   "execution_objective": "以完整DeMo为强基线，建立跨模态可用集合一致、能够产生实际检索增益的双轴互补Re-ID方法。先证明模态轴与频率轴分工及条件协作优于同增强、同有效参数、同输出维度的普通专家，并用逐查询干预与重训消融证明收益来源；再冻结统一方法，完成三个数据集、至少三个配对种子、独立身份确认划分、全部49种查询—图库模态组合及真实部署成本评测。保留三个数据集完整输入mAP和Rank-1均比同协议完整DeMo至少提高2个百分点的验收目标。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -22,13 +22,13 @@
     },
     {
       "id": "M1",
-      "status": "V2_ACTUAL_CUDA_SANITY_RUNNING_50_EPOCH_GATED",
+      "status": "V3_ACTUAL_CUDA_SANITY_RUNNING_50_EPOCH_GATED",
       "work": "在MSVR310固定fit/dev先做原平均、合法集合平均、共享查询公共出口的单因素重训；保留DeMo私有路径、FFT、专家、路由、损失和原缺失采样。",
       "evidence": "相同50轮、采样、有效参数预算和5632D；同步匹配普通频域与普通双专家，禁止闲置参数凑容量。检查公共块独立检索、全部49条件和四状态净收益。",
       "actual_evidence": "Frozen V12 outlet scale / projection utility:882 raw-GT cases and185220 query records audited; no training or pooling intervention.",
       "decision": "先判定公共出口是否保留判别信息及是否产生可用增量；若普通频域仍更好或11仍误伤，先定位投影/路由/控制，暂不扩展三数据集。",
       "implementation": "results/preflight/common_outlet_m1_plan.json",
-      "actual_preparation": "User waived temperature/power; four CPU executor mocks and source reviewPASS. Actual first CUDA verifier failed expectedtensordtype mismatch before anysmoke/train; raw preserved, one-line dtype/device repair reviewed; newv2controller live. No50 result yet."
+      "actual_preparation": "V2 actual CUDA tensor70/ten parameter entries passed; nine smokes passed three updates each. DeMo third attempt was a normal nativeAMP skip, so old perattempt assertion failed after two updates. Only smoke semantics repaired and source-reviewed; v3 controller and verifier actually live. No fresh50 or diskweights yet."
     },
     {
       "id": "M2",
@@ -88,7 +88,7 @@
       ]
     }
   },
-  "revision": "20261004_user_waived_hardware_M1_v2_running",
+  "revision": "20261004_M1_v3_smoke_actual_update_fix_running",
   "primary_claims": [
     {
       "id": "C1",

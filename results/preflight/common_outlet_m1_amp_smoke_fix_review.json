@@ -1,0 +1,265 @@
+{
+  "verdict": "PASS_SOURCE_REVIEW",
+  "summary": "The smoke-only repair correctly requires three actual native-AMP optimizer updates within at most the existing six successive partial-set/batch attempts. It records skips, keeps the final gradient and strict reload gates, and leaves step(), native scale512 initialization and the fifty-epoch training tail unchanged. The v3 deployer restricts the one changed file to the old shared runner and uses a fresh output campaign. No source blockers found.",
+  "reviewed_at": "2026-10-04T00:54:15.441738+08:00",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "reviewer_context": "Focused rescue continuation of the originally fresh native Codex reviewer /root/review_common_outlet_m1_thermal; runtime model identity is not independently exposed in this context.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "checked_source_sha256": {
+    "common_outlet_axis.py": "b43002891b7a51c01573c3bcf1aaaa8811ae00824b08f1a9989427c8fa2e5436",
+    "run_common_outlet_experiment.py": "94ede0d2d329e63b403493c0fd62fb6471d8aae1e028ff1398795d3aca800cf4",
+    "missing_common_outlet_development.py": "fb055882dfe5d48ff51a396bf29c47a5d2b48292631d91d5dd5a93125b333f70",
+    "diagnose_common_outlet_states.py": "f28dea607bfcf35f72250c8fe642615cb9b03f156b1ad298bd793ddfcbf25900",
+    "gpu_thermal_execute.py": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+    "verify_common_outlet_axis.py": "2b3957bc6c2bac41299cfa985aa20cd000b17925278be78846987f8c7ea498c0",
+    "launch_common_outlet_trial.py": "6be4b58bb90a9af2d387bc9d735ba270291f56aaea37d3d721a745e3b7d9f529",
+    "audit_common_outlet_states.py": "47d071debbd345af180b612a0ef5e1a65dc54f90ee6a49374d78f6274863fee7",
+    "test_gpu_thermal_execute.py": "9bb827c7084b5f3b647da7dca18274265f01ed188f5e5252832ed9d25cd98a28"
+  },
+  "checked_previous_source_sha256": {
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "missing_evaluation.py": "e04e16dbb4ec486f28065102b5d7301c68e7d1cef62cdd5fcfa99b3dac222089",
+    "scaled_axis_collaboration.py": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "residual_dual_axis.py": "4a22801f014e971786402a477a33e7f86ecf608e786ab4c2f3c796abc033c91c",
+    "dual_axis.py": "0c6090fe5b8b15cc021bf1809860f0675187288dc2145d0129ce89a5eb78a330",
+    "modeling/make_model.py": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+    "splits.json": "66f6ee8f1c07f4fb97bf48ed8189b60859ab2f5f207ceea6b28a90c4ee1f9377",
+    "configs/MSVR310/DeMo.yml": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+    "configs/RGBNT201/DeMo.yml": "bfee0de623885a38cce974c1c5d74abf47c54e14852cc266b8f69c70a858c51d",
+    "configs/RGBNT100/DeMo.yml": "e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c",
+    "mass_axis_collaboration.py": "1312c8b993dcd16b1db1a8845a247afd4b1eff13255832644dd30e029e268f8d",
+    "run_mass_experiment.py": "ad3351c5ca83c21b57ce1454c0ad00673396ce5cbcfd0ccfaaa63f7eecb7e07b",
+    "missing_anytoany_development.py": "f4eca39c3bf5d41148bfcd715e77fad19e29109c98bee1301b64ae2640677975",
+    "launch_anytoany_frozen.py": "dac49755976540ab24026c1de9d8755bab7baa399d714d0ed02fbecaf80be361",
+    "modeling/moe/AttnMOE.py": "91d594c86ba44a5ce9eb843afaba898d5f8b0515b542b2754004c85ca272d3b6",
+    "modeling/meta_arch.py": "f9b93fba00f534debecebcd72f974320cd978e1619f1460674cbfc3afc961eec",
+    "launch_axis_scaled.py": "b0e069299966790340d9aaba55c1318ac18183a6def169d9cc5e9de655b58e9f",
+    "launch_runs.py": "8593a3a56f379605295e8d885e3fcfcdfece19b69209c2e9e05bf3ac5b75c101",
+    "availability_base_intervention.py": "5634f3af32f9349a7dcb6c595c6a46d0c1ba23debc686809642ef64ef3745f77",
+    "verify_availability_base_intervention.py": "8ff10998131fc98510bb7fdfb6a223ee165ceeb4527a39bd955eba56ef2aec53",
+    "missing_available_base_development.py": "173e21cb069e1807fcef1845c1d271e0ee6771037fc934e4a1e2d2bd23ca3c4b",
+    "launch_available_base_frozen.py": "11ac273607752925a84fa1a67ffbbe58c11943bd18057d08b3c038f09791a801",
+    "layers/softmax_loss.py": "d872eba630685044eda8e507f9e0f6f0e0a42af7e222ed4d8fd4c418d384c518",
+    "layers/make_loss.py": "232ef86081a76665225db4360ea67650230b1d5986818cabc23ce5db36340dec",
+    "layers/triplet_loss.py": "f502c44bec642bbf72ce6d0f58c9f9a0084beef9cbb451c2d2786bb13f94960a",
+    "solver/make_optimizer.py": "09e8e36c78c78cda75daad52bbc48f77f4dc33b96568a06bc1c193132ffbeafc",
+    "solver/scheduler_factory.py": "c5e20bdffec4b5360faa04f823639c8e5fd8672914813fb96148927c9ee19abc",
+    "shared_identity_axis.py": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+    "run_shared_identity_experiment.py": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+    "verify_shared_identity_axis.py": "658889348596bc13fdb4a3479c399e1f79001723e583585ade6c228a1e265516",
+    "missing_shared_identity_development.py": "c2c0a0908439cabc28b69ad0eb908db497c3a57746b15e8d645b328902769535",
+    "launch_shared_identity_trial.py": "cc01e9b8c4785c157f7c3efe5b186ccb06f1457ae0ca446a912b2e632b3ddf14",
+    "diagnose_shared_identity_states.py": "ed0d8d9fe840f247dcc657f52ed8f65d52f9c14d26bb5aaf2472b046746926b4",
+    "launch_shared_identity_states.py": "9d7c35ad9fb3695b354dc4b368d0de201ef3e99337183af15add29a04f29de61",
+    "common_coordinate_axis.py": "0a45146b7e645abc1e8b7d622c1556852855964ea29d7530b449e1c02c8deb5b",
+    "run_common_coordinate_experiment.py": "1633cd3ff82a83b8d5a9339726a46c1cdfeefdfcadaaf3c69b57531843f82f23",
+    "missing_common_coordinate_development.py": "25a91b0cc2dbd5524a231c95e265a816b9f98a9cc4c3e24f0382bb8d5e24fb6f",
+    "verify_common_coordinate_axis.py": "9f3e1676b0235168d0b3d2cda80047d81d849095c6cf9c468ba4394133919c11",
+    "diagnose_common_coordinate_states.py": "499a5627828d8695c6194ac468aaaf5cd48e407d2b4ab9794b1dea51074af5be",
+    "launch_common_coordinate_trial.py": "1dbcb156113ee2c1fc9049e466f0d24dd2d518fb4883b9c91c82f89fafb5d14c",
+    "audit_shared_identity_states.py": "e8cf168db43f36e36a40a66148f209a6b782775942ce7fcbdf9dce439d1fa8d0",
+    "diagnose_common_outlet_scale.py": "c99e82f6db42144ad4a33d264dcb42f18483ec544593f947f83dadca496baef8",
+    "launch_common_outlet_scale.py": "c0f38154ab62f5df14c498a755f5a5b808a51ad83c3131b84aa63e13cf8e6f30",
+    "audit_common_outlet_scale.py": "41a428d76e4b613aa69f2c06f3a07a6a09220e500bc4641d0c4cd6df3b5c7539"
+  },
+  "checked_deployer_sha256": "4ef2911e2dc6b45b05ed1b1d34dc41fb9dcca0f359180a4decf238bd99a50a69",
+  "blockers": [],
+  "nonblocking": [],
+  "scope": {
+    "changed_scientific_source_file": "run_shared_identity_experiment.py",
+    "change_scope": "Smoke branch only; existing step() and formal training tail unchanged.",
+    "other47_old_source_bytes_unchanged": true,
+    "all9_M1_source_bytes_unchanged": true,
+    "current48_source_map_verified": true,
+    "all48_unchanged_claim": false,
+    "before_plan": "results/preflight/common_outlet_m1_plan_before_amp_smoke_fix_20261004.json",
+    "original_runner": "results/preflight/common_outlet_m1_failed_amp_20261004/original_run_shared_identity_experiment.py",
+    "deployer": "C:/Users/gb/.codex_tmp/demo_common_outlet_m1_deploy_v3_20261004.py",
+    "campaign": "common_outlet_m1_trial_20261003_v3",
+    "reviewer_source_modifications": []
+  },
+  "actual_V2_evidence_read_and_recounted": {
+    "archive": "results/preflight/common_outlet_m1_failed_amp_20261004",
+    "primary_sources": [
+      "startup.log",
+      "preflight/tensor/result.json",
+      "preflight/original_mean_demo_shared.log",
+      "preflight/original_mean_demo_shared_exit.json",
+      "all nine preflight/*/smoke.json and associated exit receipts",
+      "intake.json"
+    ],
+    "tensor_status": "PASS_COMMON_OUTLET_TENSOR_CONTRACT",
+    "tensor_availability_checks": 70,
+    "tensor_parameter_count_entries": 10,
+    "augmented_parameter_counts": {
+      "parameters": 100263558,
+      "trainable_parameters": 100251270
+    },
+    "demo_parameter_counts": {
+      "parameters": 99397120,
+      "trainable_parameters": 99385856
+    },
+    "tensor_contract_flags_true": [
+      "augmented_initial_states_exact",
+      "shared_initial_state_exact",
+      "active_shared_query",
+      "seeded_readout_original_mean_parity",
+      "local_query_rng_unchanged",
+      "partial_gallery_detached"
+    ],
+    "passed_smokes": 9,
+    "all_nine_smokes_have_three_recorded_optimizer_updates": true,
+    "all_nine_smoke_gradient_flags_true": true,
+    "all_nine_strict_reload_equal": true,
+    "all_nine_exit_codes": 0,
+    "passed_smoke_updates": 27,
+    "demo_logged_updates": 2,
+    "total_logged_ephemeral_updates": 29,
+    "demo_error": "AssertionError: smoke optimizer step skipped",
+    "demo_exit_code": 1,
+    "demo_smoke_PASS_artifact_exists": false,
+    "full_train_runs_reported_by_intake": 0,
+    "new_disk_weights_reported_by_intake": 0,
+    "controller_terminal_reported_by_intake": true,
+    "evidence_attribution": "Recounted preserved outputs from the executor actual V2 attempt. This reviewer did not perform those model executions."
+  },
+  "repair_assessment": [
+    {
+      "topic": "Native AMP skip semantics",
+      "locations": [
+        "run_shared_identity_experiment.py:62",
+        "run_shared_identity_experiment.py:124",
+        "run_shared_identity_experiment.py:128"
+      ],
+      "finding": "The unchanged step uses native GradScaler.step/update and reports optimizer_updated from its scale transition. The old smoke rejected any skipped attempt even though the unchanged formal trainer records native skips. The repair accepts a skip as an attempt while still demanding three actual updates. GradScaler init_scale=512 and the step implementation are identical."
+    },
+    {
+      "topic": "Bounded successive batches; no retry",
+      "locations": [
+        "run_shared_identity_experiment.py:128",
+        "run_shared_identity_experiment.py:132",
+        "run_shared_identity_experiment.py:135"
+      ],
+      "finding": "zip(PARTIAL_SETS, existing loader) limits execution to six existing proper availability sets and advances to the next yielded batch on every attempt. There is no same-batch replay, manual scale adjustment, fallback or unbounded retry. The loop stops exactly at three true update flags and asserts three afterward; six attempts with fewer updates fail."
+    },
+    {
+      "topic": "Recorded attempts and retained quality gates",
+      "locations": [
+        "run_shared_identity_experiment.py:130",
+        "run_shared_identity_experiment.py:136",
+        "run_shared_identity_experiment.py:151"
+      ],
+      "finding": "Every attempted step is retained in details and logged before checking the update count. Successful smoke.json records steps=actual updates, attempts=len(details), and amp_skipped_steps=attempts-updates. Since success exits immediately after the third actual update, unchanged finite/nonzero trainable-gradient checks inspect that final successful backward. Strict in-memory reload equality remains required. The unchanged launcher accepts only SMOKE_PASS,steps3,strict_reload_equal before its all-ten-smokes barrier."
+    },
+    {
+      "topic": "Minimal scientific scope",
+      "finding": "Independent AST comparison against the archived original runner found only the smoke if-body different. Main initialization prefix, all other top-level/function ASTs and the formal training tail are equal. The training tail is also byte-exact. Original47 other files and all9 M1 files are byte-unchanged. The formal training schedule, optimizer, losses, sampling, model and evaluation definitions therefore remain unchanged."
+    }
+  ],
+  "deployer_review": {
+    "verdict": "PASS_SOURCE_REVIEW",
+    "status": "PREPARED_NOT_RUN_BY_REVIEWER",
+    "findings": [
+      "Compared directly to the reviewed v2 helper; changes are the new review/before-plan/v3 receipt filenames, the additional checked_previous_source_sha256 equality gate, and changed-file detection across the combined48+9 map with an allowlist containing only run_shared_identity_experiment.py.",
+      "Requires source review PASS/no blockers and exact current9 and48 reviewed maps. All57 local files must match the plan. Each2025/2026/2027 mirror must match the57 archived pre-fix sources before copying only the runner, then match all57 current sources. These are prepared gates, not remote checks executed by the reviewer.",
+      "Only2026 dispatches a neural controller, restricted by the unchanged schedule to physicalGPU2/3 and max2. The existing remote AST/4CPU-test/resource/data/CLIP/disk checks and exclusive output/log creation remain. Capacity waits stay240seconds; the user power/temperature waiver remains active.",
+      "The new common_outlet_m1_trial_20261003_v3 path and v3 receipt names preserve both prior failed attempts. One controller is dispatched, with no automatic retry. Its full tensor verifier and all10 fresh three-actual-update smokes must pass before any fifty-epoch training.",
+      "Existing own-process-group cleanup, process exit records and CONTROLLER_DISPATCHED_NEURAL_SANITY_NOT_YET_VERIFIED launch status are preserved. No data, weight, result or old-archive deletion is introduced."
+    ]
+  },
+  "tests_actually_run_by_reviewer": {
+    "interpreter": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe",
+    "raw_artifact_recount": "PASS: tensor70/parameter entries10;9 smoke records each3updates/all gradients/strict reload/exit0;DeMo2loggedupdates and expected failure.",
+    "source_AST_parse_count": 10,
+    "current57_source_digest_match": "PASS",
+    "original_runner_matches_archived_pre_fix_digest": "PASS",
+    "smoke_branch_only_AST_diff": "PASS",
+    "training_tail_AST_and_bytes_equal": "PASS",
+    "all_other_AST_equal": "PASS",
+    "other47_old_and_all9_M1_unchanged": "PASS",
+    "scientific_and_resource_plan_fields_unchanged": "PASS",
+    "v3_helper_only_expected_changes": "PASS",
+    "helper_and_two_generated_remote_snippets_AST": "PASS",
+    "generated_launch_receipt_newline_JSON_roundtrip": "PASS",
+    "source_control_flow_simulation": {
+      "status": "PASS",
+      "case_count": 6,
+      "cases": [
+        {
+          "name": "three_clean_updates",
+          "gate_passed": true,
+          "attempts": 3,
+          "simulated_actual_updates": 3,
+          "skips": 0
+        },
+        {
+          "name": "observed_demo_prefix_then_update",
+          "gate_passed": true,
+          "attempts": 4,
+          "simulated_actual_updates": 3,
+          "skips": 1
+        },
+        {
+          "name": "three_initial_skips_then_three_updates",
+          "gate_passed": true,
+          "attempts": 6,
+          "simulated_actual_updates": 3,
+          "skips": 3
+        },
+        {
+          "name": "two_updates_by_cap",
+          "gate_passed": false,
+          "attempts": 6,
+          "simulated_actual_updates": 2,
+          "skips": 4
+        },
+        {
+          "name": "six_skips",
+          "gate_passed": false,
+          "attempts": 6,
+          "simulated_actual_updates": 0,
+          "skips": 6
+        },
+        {
+          "name": "loader_ends_before_three_updates",
+          "gate_passed": false,
+          "attempts": 2,
+          "simulated_actual_updates": 2,
+          "skips": 0
+        }
+      ],
+      "all_cases_use_successive_unique_stub_batches": true,
+      "all_attempts_preserved_and_logged": true,
+      "max_attempts": 6,
+      "method": "Executed only the actual smoke loop/count/assert AST with standard-library step and loader stubs. No import or execution of the runner module, model, Torch or optimizer."
+    },
+    "Torch_imports": 0,
+    "SSH_calls": 0,
+    "GPU_queries": 0,
+    "neural_or_optimizer_executions": 0,
+    "unchanged_thermal_unit_tests_rerun": false
+  },
+  "historical_evidence_preserved": {
+    "all_prior_reviews_untouched": true,
+    "archived_before_plan_untouched": true,
+    "all_existing_failed_amp_archive_files_untouched": true,
+    "original_runner_archive_untouched": true
+  },
+  "required_next_runtime_evidence": [
+    "The v3 campaign must rerun and pass the full tensor contract and all10 smokes under the corrected smoke semantics before formal training.",
+    "No guarantee is made that native AMP recovers within six attempts; a case with fewer than three successful updates must fail and preserve its evidence.",
+    "Subsequent fifty-epoch,strict reload,frozen49,six-state294 and independent installed-GT audits remain required."
+  ],
+  "limitations": [
+    "No SSH,Torch import,model/optimizer execution,GPU query,administrator command or deployment was performed by this reviewer.",
+    "V2 model evidence was read from preserved artifacts; remote liveness and the observer exit were not independently re-observed.",
+    "The six CPU simulations validate the revised attempt-count control flow,not actual GradScaler dynamics or recovery on the DeMo model.",
+    "This is same-family/provisional source review;the corrected v3 runtime has not been accepted or reported complete."
+  ]
+}
