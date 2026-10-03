@@ -1,0 +1,12 @@
+{
+  "decorator": [
+    "torch.no_grad()"
+  ],
+  "single_reference": true,
+  "pos_count": 1,
+  "neg_count": 1,
+  "direction": true,
+  "iterator_string": false,
+  "parent_assignment": true,
+  "actual_function": "@torch.no_grad()\ndef full_reference_targets(states, labels):\n    reference = F.normalize(states['11'].float(), dim=1)\n    with torch.autocast('cuda', enabled=False):\n        similarity = reference @ reference.T\n    same = labels[:, None].eq(labels[None])\n    positive = same & ~torch.eye(len(labels), device=labels.device, dtype=torch.bool)\n    negative = ~same\n    assert positive.any(1).all() and negative.any(1).all()\n    pos = similarity.masked_fill(~positive, torch.inf).argmin(1)\n    neg = similarity.masked_fill(~negative, -torch.inf).argmax(1)\n    direction = reference[pos] - reference[neg]\n    scores = {key: (F.normalize(value.float(), dim=1) * direction).sum(1) for (key, value) in states.items()}\n    target = torch.stack((scores['11'] - scores['01'], scores['11'] - scores['10'], scores['11'] - scores['10'] - scores['01'] + scores['00']), 1)\n    return (target, pos, neg, scores)"
+}

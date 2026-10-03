@@ -1,0 +1,8 @@
+{
+  "issue": "Generated controller file-mode launch could not import project-root modules from its campaign subdirectory.",
+  "initial_status": "BLOCKED",
+  "evidence": "controller_import_reproduction.json: actual isolated stdlib fixture exit1/ModuleNotFoundError with project cwd.",
+  "fix": "The executor inserted sys.path.insert(0, root) before launch_axis_scaled and launch_runs imports in the generated controller.",
+  "verification": "controller_native_import_fix plus controller_import_fixed.json: explicit-path fixture exit0 and import ordering verified.",
+  "final_status": "RESOLVED"
+}

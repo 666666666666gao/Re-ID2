@@ -1,0 +1,52 @@
+[
+  {
+    "name": "initial_controls_and_uniform_V4_fuse",
+    "status": "PASS",
+    "mode": "source_review",
+    "source": [
+      "verify_axis_mass.py:21",
+      "verify_axis_mass.py:30",
+      "verify_axis_mass.py:41",
+      "verify_axis_mass.py:49",
+      "run_experiment.py:45"
+    ],
+    "detail": "The new model and each V4 control reset seed42 before identical registered-module initialization. Total/trainable counts and every initial state tensor are compared directly. The pre-hook captures the sole full-forward calibrator inputs (base Bx5632, M Bx7x512, F Bx512); all-eligible/gates-one fusion compares the V4 axis model with V5 uniform1/7 mass using torch.equal. This is a fuse-equivalence check, not a claim of full-forward equivalence."
+  },
+  {
+    "name": "fixed_evidence_aS_hook_and_actual_M_gradient",
+    "status": "PASS",
+    "mode": "source_review",
+    "source": [
+      "verify_axis_mass.py:54",
+      "verify_axis_mass.py:72",
+      "axis_collaboration.py:117",
+      "mass_axis_collaboration.py:13"
+    ],
+    "detail": "U Bx7x3x512 and V Bx3x3x512 remain fixed. relation_score receives U.mean(2), returns Bx7x1 and the forward hook adds1x7x1, modifying only a_S; c and psi read unchanged evidence. Hook removal precedes the new autograd graph. M conditional vectors should remain near-equal after relation-mass cancellation, while pi.sum(2) changes. Fixed outer gates[1,0,0] suppress F/I; the1536:5120 slice is exactly the seven M descriptor blocks. autograd.grad is outside no_grad and targets the actual trainable relation_score.weight through post-normalization M mass, with finite/nonzero validation; there is no calibrator-loss or F/I path in this scalar probe."
+  },
+  {
+    "name": "closed_evidence_independence_and_six_missing_masks",
+    "status": "PASS",
+    "mode": "source_review",
+    "source": [
+      "verify_axis_mass.py:78",
+      "verify_axis_mass.py:88",
+      "axis_collaboration.py:218",
+      "mass_axis_collaboration.py:21"
+    ],
+    "detail": "State10 recomputes the independent M pooled evidence and its own relation scores; state01 receives zero M and uses its independent F evidence. Changing only closed-branch evidence therefore must preserve outputs exactly; state00 equals base. All six single/double missing masks leave at least one sensor, build allowed Bx7 from RELATIONS, and boolean-index the Bx7x3 route correctly. Invalid mass must be exactly zero; multiplying pi marginal by eligible-count makes mean eligible weight one. No cached full-state route enters these closed states."
+  },
+  {
+    "name": "semantic_fit_forward_stopped_full11_zero_optimizer",
+    "status": "PASS",
+    "mode": "source_review",
+    "source": [
+      "verify_axis_mass.py:101",
+      "verify_axis_mass.py:107",
+      "scaled_axis_collaboration.py:18",
+      "scaled_axis_collaboration.py:42",
+      "experiment_data.py:83"
+    ],
+    "detail": "The final loader uses fixed fit identities, the preserved B64 identity sampler and seed42; it performs one training-mode autocast forward. The inherited full-reference constructor binds the no_grad target function whose reference is state11 and whose indices are shared across four states. The script checks finite contribution, detached target and at least one nonzero target component. It creates no optimizer and takes no step; the isolated semantic model can update BN running buffers. Formal smoke/train launch separate processes and construct fresh models from public CLIP, so those buffers are not reused."
+  }
+]

@@ -1,0 +1,71 @@
+{
+  "status": "PASS",
+  "corrected_check": {
+    "name": "full11_target_stopped_single_reference_and_shared_indices",
+    "passed": true,
+    "evidence": {
+      "source": "scaled_axis_collaboration.py:18",
+      "reason": "Entire target function is no_grad; one current-batch full11 hard-positive/negative selection and common direction are reused by the scores comprehension for all four states.",
+      "harness_correction": "Inspect the comprehension tuple AST instead of assuming ast.unparse omits parentheses. Python 3.10 emits for (key, value) in states.items().",
+      "preserved_first_failure": "001-deterministic-results.json and 001-harness.stdout.log",
+      "primary_diagnosis": "002-target-harness-diagnosis.json",
+      "source_changed": false,
+      "prior_suite_rerun": false
+    }
+  },
+  "additional_check": {
+    "name": "later_global_descriptor_normalization_does_not_generically_erase_mass",
+    "passed": true,
+    "evidence": {
+      "kind": "Independent stdlib vector algebra with fixed nonzero original prefix and fixed F path; not neural execution.",
+      "derivative": "For y=z/||z||, dy/da=(I-y*y^T)*(dz/da)/||z||.",
+      "results": [
+        {
+          "eligible_count": 1,
+          "normalized_descriptor_change": 0.0,
+          "normalized_descriptor_gradient_norm": 0.0,
+          "finite_difference_max_error": 0.0
+        },
+        {
+          "eligible_count": 1,
+          "normalized_descriptor_change": 0.0,
+          "normalized_descriptor_gradient_norm": 0.0,
+          "finite_difference_max_error": 0.0
+        },
+        {
+          "eligible_count": 3,
+          "normalized_descriptor_change": 0.025139266005417504,
+          "normalized_descriptor_gradient_norm": 0.04293609734697735,
+          "finite_difference_max_error": 3.326288463417759e-12
+        },
+        {
+          "eligible_count": 1,
+          "normalized_descriptor_change": 0.0,
+          "normalized_descriptor_gradient_norm": 0.0,
+          "finite_difference_max_error": 0.0
+        },
+        {
+          "eligible_count": 3,
+          "normalized_descriptor_change": 0.01154056752372618,
+          "normalized_descriptor_gradient_norm": 0.017208329924636948,
+          "finite_difference_max_error": 3.985938315520521e-12
+        },
+        {
+          "eligible_count": 3,
+          "normalized_descriptor_change": 0.01575592683408911,
+          "normalized_descriptor_gradient_norm": 0.02465443307608843,
+          "finite_difference_max_error": 7.857802949984283e-13
+        },
+        {
+          "eligible_count": 7,
+          "normalized_descriptor_change": 0.0116724391581012,
+          "normalized_descriptor_gradient_norm": 0.016524204910679782,
+          "finite_difference_max_error": 1.9335566134315307e-12
+        }
+      ],
+      "limit": "Shows a valid nonzero post-normalization derivative path, not that actual training gradients or efficacy are nonzero."
+    }
+  },
+  "prior_full_harness_not_rerun": true,
+  "original_failure_preserved": true
+}

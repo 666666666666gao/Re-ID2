@@ -1,0 +1,482 @@
+[
+  {
+    "name": "reviewed_new_sources_match_supplied_receipt",
+    "passed": true,
+    "evidence": {
+      "mass_axis_collaboration.py": "1312c8b993dcd16b1db1a8845a247afd4b1eff13255832644dd30e029e268f8d",
+      "run_mass_experiment.py": "ad3351c5ca83c21b57ce1454c0ad00673396ce5cbcfd0ccfaaa63f7eecb7e07b"
+    }
+  },
+  {
+    "name": "frozen_v4_and_active_missing_sources_unchanged",
+    "passed": true,
+    "evidence": {
+      "receipt": "results/preflight/axis_collaboration_v4_missing_development26_repaired_launch.json",
+      "original_frozen_sources": 14,
+      "existing_missing_module": 1,
+      "mismatches": []
+    }
+  },
+  {
+    "name": "new_and_direct_parent_source_syntax",
+    "passed": true,
+    "evidence": {
+      "ast_parsed": [
+        "mass_axis_collaboration.py",
+        "run_mass_experiment.py",
+        "axis_collaboration.py",
+        "scaled_axis_collaboration.py",
+        "run_experiment.py",
+        "dual_axis.py"
+      ],
+      "module_imports_executed": 0
+    }
+  },
+  {
+    "name": "same_constructor_capacity_state_and_rng_sequence",
+    "passed": true,
+    "evidence": {
+      "source": "mass_axis_collaboration.py:9",
+      "reason": "Exactly the V4 axis_scaled_fullref constructor; no added registered parameter, buffer, RNG operation or init assignment. Actual tensor equality remains the planned GPU gate."
+    }
+  },
+  {
+    "name": "forward_exact_ast_except_explicit_mass_and_reference_metadata",
+    "passed": true,
+    "evidence": {
+      "new_argument": "route.sum(2)",
+      "new_reference": "one stopped-gradient current-batch full11 gallery; same indices for all four states, no EMA",
+      "preserved": "backbone, availability masks, m0/f0, simultaneous conditions, m1/f1, routing, gates, detached diagnostics, controlled states, auxiliary CE/triplet taps, contribution loss, output ordering"
+    }
+  },
+  {
+    "name": "fuse_exact_v4_ast_except_post_normalization_m_i_mass",
+    "passed": true,
+    "evidence": {
+      "source": "mass_axis_collaboration.py:13",
+      "mass_applied_after_normalization_to": [
+        "M",
+        "I"
+      ],
+      "preserved": [
+        "detached per-relation anchors",
+        "F projection and amplitude",
+        "three learned scales",
+        "three independent gates",
+        "base prefix",
+        "descriptor concatenation"
+      ],
+      "inactive_branch_removed": "frequency_only is False for the fixed axis_scaled_fullref parent variant"
+    }
+  },
+  {
+    "name": "fixed_parent_variant_normalized_structured_fullref",
+    "passed": true,
+    "evidence": {
+      "variant": [
+        "axis_collaboration",
+        true,
+        true
+      ],
+      "descriptor": "Inherited 11*512 = 5632; no new head or descriptor slice."
+    }
+  },
+  {
+    "name": "runner_write_json_exact_ast",
+    "passed": true,
+    "evidence": {
+      "source": "run_mass_experiment.py:25",
+      "comparison": "run_experiment.py:24"
+    }
+  },
+  {
+    "name": "runner_configuration_exact_ast",
+    "passed": true,
+    "evidence": {
+      "source": "run_mass_experiment.py:32",
+      "comparison": "run_experiment.py:31"
+    }
+  },
+  {
+    "name": "runner_evaluate_exact_ast",
+    "passed": true,
+    "evidence": {
+      "source": "run_mass_experiment.py:54",
+      "comparison": "run_experiment.py:62"
+    }
+  },
+  {
+    "name": "runner_step_exact_ast",
+    "passed": true,
+    "evidence": {
+      "source": "run_mass_experiment.py:78",
+      "comparison": "run_experiment.py:86"
+    }
+  },
+  {
+    "name": "runner_main_entire_ast_same_after_declared_metadata_and_variant",
+    "passed": true,
+    "evidence": {
+      "preserved": [
+        "split and loader setup",
+        "seed42 default",
+        "B64/50 configuration",
+        "optimizer/scheduler/AMP",
+        "three-update smoke and strict reload",
+        "epoch1..50 training",
+        "per-epoch seed/augmentations/batch-order logging",
+        "earliest dev mAP checkpoint",
+        "final dev-only strict reload"
+      ],
+      "declared_metadata": [
+        "method_revision",
+        "relation_routing",
+        "unchanged_V4_factors"
+      ]
+    }
+  },
+  {
+    "name": "runner_build_same_seed_public_initialization_and_loss_weight",
+    "passed": true,
+    "evidence": "Seed reset immediately precedes the identical parent constructor; parent pretraining path and loss weights are unchanged. No checkpoint load or new runtime option is introduced."
+  },
+  {
+    "name": "no_additional_import_side_effect_or_parameter_allocation",
+    "passed": true,
+    "evidence": "The additional module contains only a docstring, imports of already loaded parents/torch, and the class declaration; no module-level random draw or model instantiation."
+  },
+  {
+    "name": "full11_target_stopped_single_reference_and_shared_indices",
+    "passed": false,
+    "evidence": {
+      "source": "scaled_axis_collaboration.py:18",
+      "reason": "Entire target function is no_grad; one current-batch full11 hard-positive/negative selection is reused for all four states. This path is inherited byte unchanged."
+    }
+  },
+  {
+    "name": "closed_state_call_wiring_has_no_opposite_evidence_or_full_route",
+    "passed": true,
+    "evidence": {
+      "source": "axis_collaboration.py:218",
+      "execution": "AST-extracted controlled_states only, with stdlib call spies; no router.conditions, router.route, psi, or neural forward exists on the stub.",
+      "unchanged_state10_when": "F evidence and full11 changed",
+      "unchanged_state01_when": "M evidence and full11 changed"
+    }
+  },
+  {
+    "name": "m_only_source_branch_recomputes_own_mass_all_seven_masks",
+    "passed": true,
+    "evidence": {
+      "source": "mass_axis_collaboration.py:28",
+      "results": [
+        {
+          "eligible_count": 1,
+          "ignored_full_mass": true,
+          "equals_independent_softmax": true
+        },
+        {
+          "eligible_count": 1,
+          "ignored_full_mass": true,
+          "equals_independent_softmax": true
+        },
+        {
+          "eligible_count": 3,
+          "ignored_full_mass": true,
+          "equals_independent_softmax": true
+        },
+        {
+          "eligible_count": 1,
+          "ignored_full_mass": true,
+          "equals_independent_softmax": true
+        },
+        {
+          "eligible_count": 3,
+          "ignored_full_mass": true,
+          "equals_independent_softmax": true
+        },
+        {
+          "eligible_count": 3,
+          "ignored_full_mass": true,
+          "equals_independent_softmax": true
+        },
+        {
+          "eligible_count": 7,
+          "ignored_full_mass": true,
+          "equals_independent_softmax": true
+        }
+      ],
+      "execution": "Only the exact mass-prefix AST executes on stdlib score/mask shims; all neural methods and torch execution are absent."
+    }
+  },
+  {
+    "name": "full_source_branch_uses_explicit_joint_mass",
+    "passed": true,
+    "evidence": "Full mass prefix executes with self lacking a router: it uses the supplied differentiable joint mass and does not recompute M-only logits."
+  },
+  {
+    "name": "normal_and_six_missing_masks_have_correct_mass_and_scale",
+    "passed": true,
+    "evidence": {
+      "algebra": "w_S = N_eligible * sum_b pi(S,b); mean eligible w=1; invalid rows=0; 0<=w<=N.",
+      "results": [
+        {
+          "available": [
+            false,
+            false,
+            true
+          ],
+          "eligible_count": 1,
+          "sum_mass": 1.0,
+          "mean_eligible_weight": 1.0,
+          "invalid_mass_max": 0.0,
+          "weight_min": 0.0,
+          "weight_max": 1.0
+        },
+        {
+          "available": [
+            false,
+            true,
+            false
+          ],
+          "eligible_count": 1,
+          "sum_mass": 1.0,
+          "mean_eligible_weight": 1.0,
+          "invalid_mass_max": 0.0,
+          "weight_min": 0.0,
+          "weight_max": 1.0
+        },
+        {
+          "available": [
+            false,
+            true,
+            true
+          ],
+          "eligible_count": 3,
+          "sum_mass": 1.0,
+          "mean_eligible_weight": 1.0,
+          "invalid_mass_max": 0.0,
+          "weight_min": 0.0,
+          "weight_max": 1.6224351967976915
+        },
+        {
+          "available": [
+            true,
+            false,
+            false
+          ],
+          "eligible_count": 1,
+          "sum_mass": 1.0,
+          "mean_eligible_weight": 1.0,
+          "invalid_mass_max": 0.0,
+          "weight_min": 0.0,
+          "weight_max": 1.0
+        },
+        {
+          "available": [
+            true,
+            false,
+            true
+          ],
+          "eligible_count": 3,
+          "sum_mass": 1.0,
+          "mean_eligible_weight": 1.0,
+          "invalid_mass_max": 0.0,
+          "weight_min": 0.0,
+          "weight_max": 1.484796145895672
+        },
+        {
+          "available": [
+            true,
+            true,
+            false
+          ],
+          "eligible_count": 3,
+          "sum_mass": 0.9999999999999999,
+          "mean_eligible_weight": 0.9999999999999997,
+          "invalid_mass_max": 0.0,
+          "weight_min": 0.0,
+          "weight_max": 1.4966647274153784
+        },
+        {
+          "available": [
+            true,
+            true,
+            true
+          ],
+          "eligible_count": 7,
+          "sum_mass": 1.0,
+          "mean_eligible_weight": 1.0,
+          "invalid_mass_max": 0,
+          "weight_min": 0.30685443636497234,
+          "weight_max": 2.223299244900305
+        }
+      ]
+    }
+  },
+  {
+    "name": "uniform_relation_mass_exactly_reduces_to_v4_algebra",
+    "passed": true,
+    "evidence": {
+      "rational_arithmetic_masks": 7,
+      "identity": "N * 3 * (1/(3*N)) = 1 for every eligible relation, zero otherwise.",
+      "limits": "Exact rational identity; no claim of bitwise Torch/AMP equivalence before actual M0."
+    }
+  },
+  {
+    "name": "old_conditional_pooling_cancels_relation_logits",
+    "passed": true,
+    "evidence": {
+      "maximum_float64_cancellation_error": 8.881784197001252e-16,
+      "scope": "Fixed arbitrary values and c/psi, only a_S changed; source diagnostic confirmation, not an efficacy attribution."
+    }
+  },
+  {
+    "name": "m_and_i_post_normalization_mass_has_a_s_derivative",
+    "passed": true,
+    "evidence": {
+      "derivative": "d(N*rho_S)/da_T = N*rho_S*(1[S=T]-rho_T), after direction normalization.",
+      "results": [
+        {
+          "eligible_count": 1,
+          "paths": {
+            "M": {
+              "change_norm": 0.0,
+              "gradient_norm": 0.0,
+              "finite_difference_max_error": 0.0
+            },
+            "I": {
+              "change_norm": 0.0,
+              "gradient_norm": 0.0,
+              "finite_difference_max_error": 0.0
+            }
+          }
+        },
+        {
+          "eligible_count": 1,
+          "paths": {
+            "M": {
+              "change_norm": 0.0,
+              "gradient_norm": 0.0,
+              "finite_difference_max_error": 0.0
+            },
+            "I": {
+              "change_norm": 0.0,
+              "gradient_norm": 0.0,
+              "finite_difference_max_error": 0.0
+            }
+          }
+        },
+        {
+          "eligible_count": 3,
+          "paths": {
+            "M": {
+              "change_norm": 0.03182668043680585,
+              "gradient_norm": 0.05441874993053609,
+              "finite_difference_max_error": 6.641215355429608e-13
+            },
+            "I": {
+              "change_norm": 0.015913340218402922,
+              "gradient_norm": 0.027209374965268044,
+              "finite_difference_max_error": 1.5638011718888123e-13
+            }
+          }
+        },
+        {
+          "eligible_count": 1,
+          "paths": {
+            "M": {
+              "change_norm": 0.0,
+              "gradient_norm": 0.0,
+              "finite_difference_max_error": 0.0
+            },
+            "I": {
+              "change_norm": 0.0,
+              "gradient_norm": 0.0,
+              "finite_difference_max_error": 0.0
+            }
+          }
+        },
+        {
+          "eligible_count": 3,
+          "paths": {
+            "M": {
+              "change_norm": 0.01584240853862121,
+              "gradient_norm": 0.023613369970359413,
+              "finite_difference_max_error": 6.52367049269742e-13
+            },
+            "I": {
+              "change_norm": 0.007921204269310601,
+              "gradient_norm": 0.011806684985179706,
+              "finite_difference_max_error": 3.480687960077944e-13
+            }
+          }
+        },
+        {
+          "eligible_count": 3,
+          "paths": {
+            "M": {
+              "change_norm": 0.020636426056223258,
+              "gradient_norm": 0.03226337889923269,
+              "finite_difference_max_error": 2.983273350576354e-13
+            },
+            "I": {
+              "change_norm": 0.010318213028111629,
+              "gradient_norm": 0.016131689449616345,
+              "finite_difference_max_error": 9.095415393067796e-14
+            }
+          }
+        },
+        {
+          "eligible_count": 7,
+          "paths": {
+            "M": {
+              "change_norm": 0.015917051697890747,
+              "gradient_norm": 0.022561555475126584,
+              "finite_difference_max_error": 1.993530340804739e-12
+            },
+            "I": {
+              "change_norm": 0.007958525848945373,
+              "gradient_norm": 0.01128077773756329,
+              "finite_difference_max_error": 1.0118407847703459e-12
+            }
+          }
+        }
+      ],
+      "single_relation_case": "Zero relation-selection derivative is expected when only one valid relation remains."
+    }
+  },
+  {
+    "name": "mass_not_detached_and_outer_gates_remain_independent",
+    "passed": true,
+    "evidence": {
+      "detached_in_fuse": [
+        "base[:, 3 * dim:10 * dim].reshape(batch, 7, dim).norm(dim=-1, keepdim=True)",
+        "base.norm(dim=1, keepdim=True)"
+      ],
+      "reason": "Only base norm anchors are stopped. Relation mass remains on the differentiable forward route. M/F/I gates use independent sigmoid coordinates, not an expert softmax; relation mass redistributes M/I internally."
+    }
+  },
+  {
+    "name": "initial_scale_bound_and_unchanged_frequency_path",
+    "passed": true,
+    "evidence": {
+      "relation_weight_bounds": {
+        "normal": [
+          0,
+          7
+        ],
+        "one_modality_missing": [
+          0,
+          3
+        ],
+        "two_modalities_missing": [
+          1,
+          1
+        ]
+      },
+      "initial_full_input_per_relation_bound_at_gates_half": "M+I norm <= (0.1+0.05)*0.5*7*anchor = 0.525*anchor.",
+      "initial_full_input_per_relation_bound_at_gate_at_most_one": "M+I norm <= 1.05*anchor.",
+      "qualification": "These use initial learned scale values, not a bound after unconstrained training. Uniform relation weights retain the V4 scale. No new numerical risk established by source evidence; actual AMP behavior is untested here."
+    }
+  }
+]

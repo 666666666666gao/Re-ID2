@@ -1,0 +1,70 @@
+{
+  "status": "SIX_REAL_PREFLIGHT_PASS_THREE_FRESH50_STARTED",
+  "observed_at": "2026-10-03T10:06:36",
+  "source_evidence": "results/preflight/axis_collaboration_v4_route_semantics_diagnostic.json",
+  "single_variable": "Post-normalization relation-mass weighting of all M-channel residual values (M and I), with eligible-count normalization keeping uniform weights equal to V4.",
+  "closed_states": "10 independent M pooled evidence -> independent a_S; 01 unchanged F-only; no reuse of joint full-state mass, conditions or psi when an expert is closed.",
+  "preserved": "All V4 registered parameters and initial state, 5632 dimensions, public CLIP, seed42/B64, fixed splits/augmentations/sampling/optimizer/loss weights/full11 detached reference, fresh50 and earliest best dev mAP.",
+  "comparisons": [
+    "paired same-budget V4 axis versus V5 axis (one variable)",
+    "existing same-parameter V4 plain twins and ordinary frequency",
+    "existing independent DeMo"
+  ],
+  "datasets": [
+    "MSVR310",
+    "RGBNT201",
+    "RGBNT100"
+  ],
+  "official_test_uses": 0,
+  "sanity": [
+    "source/stdlib fresh-agent review before GPU",
+    "actual initial states/counts equality versus V4 controls",
+    "uniform-route equivalence; changed a_S changes M residual after normalization",
+    "all six masks; closed-state no full-route dependence",
+    "one semantic64-fit forward/full11 stopped target",
+    "three fresh AMP update/strict reload per dataset before its fresh50 run"
+  ],
+  "frozen_v4_sources": {
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "scaled_axis_collaboration.py": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154"
+  },
+  "new_sources": {
+    "mass_axis_collaboration.py": "1312c8b993dcd16b1db1a8845a247afd4b1eff13255832644dd30e029e268f8d",
+    "run_mass_experiment.py": "ad3351c5ca83c21b57ce1454c0ad00673396ce5cbcfd0ccfaaa63f7eecb7e07b"
+  },
+  "limitations": "A source mechanism correction, not demonstrated retrieval improvement. No new loss/sweep/missing-training variable or prediction of meeting +2.",
+  "actual_started": "2026-10-03T10:30:12",
+  "actual_preflight_updates": 9,
+  "actual_checks": [
+    {
+      "dataset": "MSVR310",
+      "conditional_m_error": 4.76837158203125e-07,
+      "M_residual_change": 0.006658103317022324,
+      "aS_M_gradient_abs_sum": 23.536027908325195,
+      "smoke_updates": 3,
+      "all_gradients_nonzero_finite": true,
+      "strict_reload_equal": true
+    },
+    {
+      "dataset": "RGBNT201",
+      "conditional_m_error": 5.960464477539062e-07,
+      "M_residual_change": 0.004722105339169502,
+      "aS_M_gradient_abs_sum": 21.73080062866211,
+      "smoke_updates": 3,
+      "all_gradients_nonzero_finite": true,
+      "strict_reload_equal": true
+    },
+    {
+      "dataset": "RGBNT100",
+      "conditional_m_error": 6.258487701416016e-07,
+      "M_residual_change": 0.0061164963990449905,
+      "aS_M_gradient_abs_sum": 30.966957092285156,
+      "smoke_updates": 3,
+      "all_gradients_nonzero_finite": true,
+      "strict_reload_equal": true
+    }
+  ],
+  "host": "2026",
+  "controller_pid": 2954529
+}
