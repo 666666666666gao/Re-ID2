@@ -1,0 +1,1016 @@
+{
+  "pid": 3446554,
+  "live": false,
+  "stages": {
+    "frozen49/MSVR310_axis_shared_s42_exit.json": {
+      "name": "MSVR310_axis_shared_s42",
+      "exit_code": 0,
+      "finished": 1791025059.9760995
+    },
+    "frozen49/MSVR310_frequency_shared_s42_exit.json": {
+      "name": "MSVR310_frequency_shared_s42",
+      "exit_code": 0,
+      "finished": 1791025045.5015748
+    },
+    "frozen49/MSVR310_demo_shared_s42_exit.json": {
+      "name": "MSVR310_demo_shared_s42",
+      "exit_code": 0,
+      "finished": 1791024970.753617
+    },
+    "frozen49/MSVR310_twins_shared_s42_exit.json": {
+      "name": "MSVR310_twins_shared_s42",
+      "exit_code": 0,
+      "finished": 1791025100.5913577
+    },
+    "development/MSVR310_axis_shared_s42_exit.json": {
+      "name": "MSVR310_axis_shared_s42",
+      "exit_code": 0,
+      "finished": 1791025024.6164985
+    },
+    "development/MSVR310_frequency_shared_s42_exit.json": {
+      "name": "MSVR310_frequency_shared_s42",
+      "exit_code": 0,
+      "finished": 1791025010.231886
+    },
+    "development/MSVR310_demo_shared_s42_exit.json": {
+      "name": "MSVR310_demo_shared_s42",
+      "exit_code": 0,
+      "finished": 1791024936.4137757
+    },
+    "development/MSVR310_twins_shared_s42_exit.json": {
+      "name": "MSVR310_twins_shared_s42",
+      "exit_code": 0,
+      "finished": 1791025065.9763606
+    },
+    "preflight/axis_shared_exit.json": {
+      "name": "axis_shared",
+      "exit_code": 0,
+      "finished": 1791024217.8378994
+    },
+    "preflight/demo_shared_exit.json": {
+      "name": "demo_shared",
+      "exit_code": 0,
+      "finished": 1791024216.690859
+    },
+    "preflight/tensor_exit.json": {
+      "name": "tensor",
+      "exit_code": 0,
+      "finished": 1791024198.432586
+    },
+    "preflight/frequency_shared_exit.json": {
+      "name": "frequency_shared",
+      "exit_code": 0,
+      "finished": 1791024217.6073902
+    },
+    "preflight/twins_shared_exit.json": {
+      "name": "twins_shared",
+      "exit_code": 0,
+      "finished": 1791024217.1409192
+    },
+    "development/MSVR310_twins_shared_s42/status.json": {
+      "arguments": {
+        "dataset": "MSVR310",
+        "variant": "twins_shared",
+        "data_root": "/data/gaob/Re-ID/dataset",
+        "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+        "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/shared_identity_v11_trial_20261003/development/MSVR310_twins_shared_s42",
+        "seed": 42,
+        "mode": "train"
+      },
+      "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+      "classes": 103,
+      "camera_embeddings": 8,
+      "fit_records": 672,
+      "dev_records": 360,
+      "dev_queries": 210,
+      "parameters": 100263046,
+      "trainable_parameters": 100250758,
+      "descriptor_dim": 5632,
+      "torch": "2.5.1+cu121",
+      "gpu": "NVIDIA GeForce RTX 3090",
+      "started": 1791024226.1641023,
+      "loss_weights": [
+        1.0,
+        0.1,
+        0.1,
+        1.0,
+        0.25,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "pretraining": "public CLIP ViT-B/16; fresh ReID and shared heads; no previous research checkpoints",
+      "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+      "evaluation_scope": "identity-heldout development; not full official-train paper reproduction",
+      "amp_policy": "native fp16 GradScaler512; two backwards, one optimizer update; skips counted",
+      "method_revision": "shared_identity_v11: availability-aware original DeMo, shared raw-CLIP identity coordinates, full-view preservation and asymmetric partial-query/full-gallery training",
+      "metric": "5632D: sqrt(.75) normalized private5120 + sqrt(.25) normalized common512; F modifies nonzero common identity coordinates",
+      "partial_training": "one of six nonempty proper modality sets sampled uniformly per batch by independent seeded generator; same augmented images; full reference stopped; positives exclude self; GT IDs only",
+      "partial_loss": {
+        "label_smoothed_CE_weight": 0.25,
+        "cross_gallery_soft_triplet_weight": 0.5
+      },
+      "contribution_loss_weight": 0.05,
+      "retention": "only best.pth saved during training; smoke strict reload in memory; no last/initial/smoke weights",
+      "status": "COMPLETE",
+      "epochs": 50,
+      "steps": 453,
+      "best": {
+        "mAP": 46.23025305464108,
+        "Rank-1": 57.14285714285714,
+        "Rank-5": 70.0,
+        "Rank-10": 75.23809523809524,
+        "query_count": 210,
+        "gallery_count": 360,
+        "descriptor_dim": 5632,
+        "epoch": 32
+      },
+      "strict_reload": {
+        "mAP": 46.23025305464108,
+        "Rank-1": 57.14285714285714,
+        "Rank-5": 70.0,
+        "Rank-10": 75.23809523809524,
+        "query_count": 210,
+        "gallery_count": 360,
+        "descriptor_dim": 5632
+      },
+      "full_metrics": {
+        "mAP": 46.23025305464108,
+        "mINP": 33.72147024296272,
+        "Rank-1": 57.14285714285714,
+        "Rank-5": 70.0,
+        "Rank-10": 75.23809523809524,
+        "Rank-20": 79.04761904761905
+      },
+      "optimizer_steps": 453,
+      "amp_skipped_steps": 0,
+      "peak_memory": 13209314304,
+      "finished": 1791025064.7781975
+    },
+    "development/MSVR310_axis_shared_s42/status.json": {
+      "arguments": {
+        "dataset": "MSVR310",
+        "variant": "axis_shared",
+        "data_root": "/data/gaob/Re-ID/dataset",
+        "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+        "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/shared_identity_v11_trial_20261003/development/MSVR310_axis_shared_s42",
+        "seed": 42,
+        "mode": "train"
+      },
+      "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+      "classes": 103,
+      "camera_embeddings": 8,
+      "fit_records": 672,
+      "dev_records": 360,
+      "dev_queries": 210,
+      "parameters": 100263046,
+      "trainable_parameters": 100250758,
+      "descriptor_dim": 5632,
+      "torch": "2.5.1+cu121",
+      "gpu": "NVIDIA GeForce RTX 3090",
+      "started": 1791024226.503577,
+      "loss_weights": [
+        1.0,
+        0.1,
+        0.1,
+        1.0,
+        0.25,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "pretraining": "public CLIP ViT-B/16; fresh ReID and shared heads; no previous research checkpoints",
+      "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+      "evaluation_scope": "identity-heldout development; not full official-train paper reproduction",
+      "amp_policy": "native fp16 GradScaler512; two backwards, one optimizer update; skips counted",
+      "method_revision": "shared_identity_v11: availability-aware original DeMo, shared raw-CLIP identity coordinates, full-view preservation and asymmetric partial-query/full-gallery training",
+      "metric": "5632D: sqrt(.75) normalized private5120 + sqrt(.25) normalized common512; F modifies nonzero common identity coordinates",
+      "partial_training": "one of six nonempty proper modality sets sampled uniformly per batch by independent seeded generator; same augmented images; full reference stopped; positives exclude self; GT IDs only",
+      "partial_loss": {
+        "label_smoothed_CE_weight": 0.25,
+        "cross_gallery_soft_triplet_weight": 0.5
+      },
+      "contribution_loss_weight": 0.05,
+      "retention": "only best.pth saved during training; smoke strict reload in memory; no last/initial/smoke weights",
+      "status": "COMPLETE",
+      "epochs": 50,
+      "steps": 453,
+      "best": {
+        "mAP": 49.14268421647602,
+        "Rank-1": 63.33333333333333,
+        "Rank-5": 70.95238095238095,
+        "Rank-10": 77.14285714285715,
+        "query_count": 210,
+        "gallery_count": 360,
+        "descriptor_dim": 5632,
+        "epoch": 20
+      },
+      "strict_reload": {
+        "mAP": 49.14268421647602,
+        "Rank-1": 63.33333333333333,
+        "Rank-5": 70.95238095238095,
+        "Rank-10": 77.14285714285715,
+        "query_count": 210,
+        "gallery_count": 360,
+        "descriptor_dim": 5632
+      },
+      "full_metrics": {
+        "mAP": 49.14268421647602,
+        "mINP": 34.83000723953678,
+        "Rank-1": 63.33333333333333,
+        "Rank-5": 70.95238095238095,
+        "Rank-10": 77.14285714285715,
+        "Rank-20": 80.0
+      },
+      "optimizer_steps": 453,
+      "amp_skipped_steps": 0,
+      "peak_memory": 13032532480,
+      "finished": 1791025023.3845649
+    },
+    "development/MSVR310_demo_shared_s42/status.json": {
+      "arguments": {
+        "dataset": "MSVR310",
+        "variant": "demo_shared",
+        "data_root": "/data/gaob/Re-ID/dataset",
+        "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+        "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/shared_identity_v11_trial_20261003/development/MSVR310_demo_shared_s42",
+        "seed": 42,
+        "mode": "train"
+      },
+      "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+      "classes": 103,
+      "camera_embeddings": 8,
+      "fit_records": 672,
+      "dev_records": 360,
+      "dev_queries": 210,
+      "parameters": 99396608,
+      "trainable_parameters": 99385344,
+      "descriptor_dim": 5632,
+      "torch": "2.5.1+cu121",
+      "gpu": "NVIDIA GeForce RTX 3090",
+      "started": 1791024226.4619477,
+      "loss_weights": [
+        1.0,
+        1.0,
+        0.25,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "pretraining": "public CLIP ViT-B/16; fresh ReID and shared heads; no previous research checkpoints",
+      "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+      "evaluation_scope": "identity-heldout development; not full official-train paper reproduction",
+      "amp_policy": "native fp16 GradScaler512; two backwards, one optimizer update; skips counted",
+      "method_revision": "shared_identity_v11: availability-aware original DeMo, shared raw-CLIP identity coordinates, full-view preservation and asymmetric partial-query/full-gallery training",
+      "metric": "5632D: sqrt(.75) normalized private5120 + sqrt(.25) normalized common512; F modifies nonzero common identity coordinates",
+      "partial_training": "one of six nonempty proper modality sets sampled uniformly per batch by independent seeded generator; same augmented images; full reference stopped; positives exclude self; GT IDs only",
+      "partial_loss": {
+        "label_smoothed_CE_weight": 0.25,
+        "cross_gallery_soft_triplet_weight": 0.5
+      },
+      "contribution_loss_weight": 0,
+      "retention": "only best.pth saved during training; smoke strict reload in memory; no last/initial/smoke weights",
+      "status": "COMPLETE",
+      "epochs": 50,
+      "steps": 453,
+      "best": {
+        "mAP": 47.51282565827697,
+        "Rank-1": 55.23809523809524,
+        "Rank-5": 70.95238095238095,
+        "Rank-10": 77.14285714285715,
+        "query_count": 210,
+        "gallery_count": 360,
+        "descriptor_dim": 5632,
+        "epoch": 19
+      },
+      "strict_reload": {
+        "mAP": 47.51282565827697,
+        "Rank-1": 55.23809523809524,
+        "Rank-5": 70.95238095238095,
+        "Rank-10": 77.14285714285715,
+        "query_count": 210,
+        "gallery_count": 360,
+        "descriptor_dim": 5632
+      },
+      "full_metrics": {
+        "mAP": 47.51282565827697,
+        "mINP": 33.874207238074064,
+        "Rank-1": 55.23809523809524,
+        "Rank-5": 70.95238095238095,
+        "Rank-10": 77.14285714285715,
+        "Rank-20": 83.33333333333334
+      },
+      "optimizer_steps": 453,
+      "amp_skipped_steps": 0,
+      "peak_memory": 12205218304,
+      "finished": 1791024934.954018
+    },
+    "development/MSVR310_frequency_shared_s42/status.json": {
+      "arguments": {
+        "dataset": "MSVR310",
+        "variant": "frequency_shared",
+        "data_root": "/data/gaob/Re-ID/dataset",
+        "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+        "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/shared_identity_v11_trial_20261003/development/MSVR310_frequency_shared_s42",
+        "seed": 42,
+        "mode": "train"
+      },
+      "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+      "classes": 103,
+      "camera_embeddings": 8,
+      "fit_records": 672,
+      "dev_records": 360,
+      "dev_queries": 210,
+      "parameters": 100263046,
+      "trainable_parameters": 100250758,
+      "descriptor_dim": 5632,
+      "torch": "2.5.1+cu121",
+      "gpu": "NVIDIA GeForce RTX 3090",
+      "started": 1791024226.5116298,
+      "loss_weights": [
+        1.0,
+        0.1,
+        0.1,
+        1.0,
+        0.25,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "pretraining": "public CLIP ViT-B/16; fresh ReID and shared heads; no previous research checkpoints",
+      "checkpoint_rule": "highest development mAP; ties keep earliest epoch; official test not used",
+      "evaluation_scope": "identity-heldout development; not full official-train paper reproduction",
+      "amp_policy": "native fp16 GradScaler512; two backwards, one optimizer update; skips counted",
+      "method_revision": "shared_identity_v11: availability-aware original DeMo, shared raw-CLIP identity coordinates, full-view preservation and asymmetric partial-query/full-gallery training",
+      "metric": "5632D: sqrt(.75) normalized private5120 + sqrt(.25) normalized common512; F modifies nonzero common identity coordinates",
+      "partial_training": "one of six nonempty proper modality sets sampled uniformly per batch by independent seeded generator; same augmented images; full reference stopped; positives exclude self; GT IDs only",
+      "partial_loss": {
+        "label_smoothed_CE_weight": 0.25,
+        "cross_gallery_soft_triplet_weight": 0.5
+      },
+      "contribution_loss_weight": 0.05,
+      "retention": "only best.pth saved during training; smoke strict reload in memory; no last/initial/smoke weights",
+      "status": "COMPLETE",
+      "epochs": 50,
+      "steps": 453,
+      "best": {
+        "mAP": 48.697638515521405,
+        "Rank-1": 59.523809523809526,
+        "Rank-5": 71.42857142857143,
+        "Rank-10": 77.14285714285715,
+        "query_count": 210,
+        "gallery_count": 360,
+        "descriptor_dim": 5632,
+        "epoch": 31
+      },
+      "strict_reload": {
+        "mAP": 48.697638515521405,
+        "Rank-1": 59.523809523809526,
+        "Rank-5": 71.42857142857143,
+        "Rank-10": 77.14285714285715,
+        "query_count": 210,
+        "gallery_count": 360,
+        "descriptor_dim": 5632
+      },
+      "full_metrics": {
+        "mAP": 48.697638515521405,
+        "mINP": 35.16321241552324,
+        "Rank-1": 59.523809523809526,
+        "Rank-5": 71.42857142857143,
+        "Rank-10": 77.14285714285715,
+        "Rank-20": 79.04761904761905
+      },
+      "optimizer_steps": 453,
+      "amp_skipped_steps": 0,
+      "peak_memory": 13202668544,
+      "finished": 1791025008.2318282
+    },
+    "preflight/tensor/result.json": {
+      "status": "PASS_SHARED_IDENTITY_TENSOR_CONTRACT",
+      "parameter_counts": {
+        "axis_shared": {
+          "parameters": 100263046,
+          "trainable_parameters": 100250758
+        },
+        "frequency_shared": {
+          "parameters": 100263046,
+          "trainable_parameters": 100250758
+        },
+        "twins_shared": {
+          "parameters": 100263046,
+          "trainable_parameters": 100250758
+        },
+        "demo_shared": {
+          "parameters": 99396608,
+          "trainable_parameters": 99385344
+        }
+      },
+      "augmented_initial_states_exact": true,
+      "all_models_shared_initial_state_exact": true,
+      "availability_checks": [
+        {
+          "variant": "axis_shared",
+          "retained": "R",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.25,
+            0.2499999850988388,
+            0.25,
+            0.2499999850988388,
+            0.2499999701976776,
+            0.25,
+            0.2499999701976776
+          ],
+          "full_vs_base_feature_change": 0.0016967300325632095
+        },
+        {
+          "variant": "axis_shared",
+          "retained": "N",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.25,
+            0.2499999701976776,
+            0.25,
+            0.25,
+            0.2499999701976776,
+            0.25,
+            0.25
+          ],
+          "full_vs_base_feature_change": 0.001562744379043579
+        },
+        {
+          "variant": "axis_shared",
+          "retained": "T",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.2499999701976776,
+            0.2499999701976776,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "full_vs_base_feature_change": 0.0017106421291828156
+        },
+        {
+          "variant": "axis_shared",
+          "retained": "RN",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.2499999850988388,
+            0.2499999850988388,
+            0.2499999850988388,
+            0.2499999850988388,
+            0.2499999850988388,
+            0.2499999701976776,
+            0.25,
+            0.25
+          ],
+          "full_vs_base_feature_change": 0.0015993793494999409
+        },
+        {
+          "variant": "axis_shared",
+          "retained": "RT",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.25,
+            0.2499999850988388,
+            0.25,
+            0.2499999850988388,
+            0.25,
+            0.2499999850988388,
+            0.2499999850988388
+          ],
+          "full_vs_base_feature_change": 0.0015957523137331009
+        },
+        {
+          "variant": "axis_shared",
+          "retained": "NT",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.25,
+            0.2500000298023224,
+            0.25,
+            0.2500000298023224,
+            0.2500000298023224,
+            0.25,
+            0.2499999701976776
+          ],
+          "full_vs_base_feature_change": 0.0015801209956407547
+        },
+        {
+          "variant": "axis_shared",
+          "retained": "RNT",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.25,
+            0.24999995529651642,
+            0.2499999850988388,
+            0.2499999701976776,
+            0.2500000596046448,
+            0.25,
+            0.25
+          ],
+          "full_vs_base_feature_change": 0.001539282500743866
+        },
+        {
+          "variant": "frequency_shared",
+          "retained": "R",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.2499999701976776,
+            0.25,
+            0.25,
+            0.2499999850988388,
+            0.2499999850988388,
+            0.25,
+            0.2499999701976776,
+            0.2500000298023224
+          ],
+          "full_vs_base_feature_change": 0.0016558142378926277
+        },
+        {
+          "variant": "frequency_shared",
+          "retained": "N",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.2499999850988388,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.2500000298023224,
+            0.25
+          ],
+          "full_vs_base_feature_change": 0.001594647765159607
+        },
+        {
+          "variant": "frequency_shared",
+          "retained": "T",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.2499999850988388,
+            0.25,
+            0.25,
+            0.2499999701976776,
+            0.2500000298023224,
+            0.2499999701976776,
+            0.2499999850988388,
+            0.2499999850988388
+          ],
+          "full_vs_base_feature_change": 0.0016955193132162094
+        },
+        {
+          "variant": "frequency_shared",
+          "retained": "RN",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.25,
+            0.2499999701976776,
+            0.2499999850988388,
+            0.2500000298023224,
+            0.2500000298023224,
+            0.25,
+            0.25
+          ],
+          "full_vs_base_feature_change": 0.0016503841616213322
+        },
+        {
+          "variant": "frequency_shared",
+          "retained": "RT",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.25,
+            0.2499999850988388,
+            0.2499999850988388,
+            0.25,
+            0.25,
+            0.25,
+            0.2499999850988388
+          ],
+          "full_vs_base_feature_change": 0.0016125794500112534
+        },
+        {
+          "variant": "frequency_shared",
+          "retained": "NT",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.2500000596046448,
+            0.25,
+            0.25,
+            0.2499999850988388,
+            0.25,
+            0.2499999850988388,
+            0.25,
+            0.2500000298023224
+          ],
+          "full_vs_base_feature_change": 0.0015834793448448181
+        },
+        {
+          "variant": "frequency_shared",
+          "retained": "RNT",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.2500000298023224,
+            0.2500000298023224,
+            0.25,
+            0.2499999701976776,
+            0.2499999850988388,
+            0.25,
+            0.2499999850988388
+          ],
+          "full_vs_base_feature_change": 0.0015542209148406982
+        },
+        {
+          "variant": "twins_shared",
+          "retained": "R",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.2499999701976776,
+            0.25,
+            0.25,
+            0.25,
+            0.2499999701976776,
+            0.25,
+            0.2499999701976776,
+            0.25
+          ],
+          "full_vs_base_feature_change": 0.002048756927251816
+        },
+        {
+          "variant": "twins_shared",
+          "retained": "N",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.2499999850988388,
+            0.2499999701976776,
+            0.25,
+            0.2499999850988388,
+            0.2499999850988388,
+            0.2499999850988388,
+            0.2499999850988388,
+            0.25
+          ],
+          "full_vs_base_feature_change": 0.0020854640752077103
+        },
+        {
+          "variant": "twins_shared",
+          "retained": "T",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.2500000596046448,
+            0.25,
+            0.2500000298023224,
+            0.2499999850988388,
+            0.2499999701976776,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "full_vs_base_feature_change": 0.0017402935773134232
+        },
+        {
+          "variant": "twins_shared",
+          "retained": "RN",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.2500000298023224,
+            0.2500000298023224,
+            0.2499999701976776,
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "full_vs_base_feature_change": 0.002041410654783249
+        },
+        {
+          "variant": "twins_shared",
+          "retained": "RT",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.2499999701976776,
+            0.25,
+            0.2500000298023224,
+            0.25,
+            0.2499999701976776,
+            0.25,
+            0.25
+          ],
+          "full_vs_base_feature_change": 0.001895219087600708
+        },
+        {
+          "variant": "twins_shared",
+          "retained": "NT",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.2499999701976776,
+            0.2500000298023224,
+            0.25,
+            0.2499999850988388
+          ],
+          "full_vs_base_feature_change": 0.0019227825105190277
+        },
+        {
+          "variant": "twins_shared",
+          "retained": "RNT",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.2499999850988388,
+            0.2499999850988388,
+            0.2499999850988388,
+            0.25,
+            0.25,
+            0.2499999850988388,
+            0.25,
+            0.2499999850988388
+          ],
+          "full_vs_base_feature_change": 0.001979079097509384
+        },
+        {
+          "variant": "demo_shared",
+          "retained": "R",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.25,
+            0.2499999850988388,
+            0.2499999850988388,
+            0.2499999850988388,
+            0.2499999850988388,
+            0.2499999701976776,
+            0.25
+          ],
+          "full_vs_base_feature_change": 0.0
+        },
+        {
+          "variant": "demo_shared",
+          "retained": "N",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.25,
+            0.2499999701976776,
+            0.25,
+            0.2499999701976776,
+            0.25,
+            0.2499999701976776,
+            0.25
+          ],
+          "full_vs_base_feature_change": 0.0
+        },
+        {
+          "variant": "demo_shared",
+          "retained": "T",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.2500000298023224,
+            0.25,
+            0.25,
+            0.2499999701976776,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "full_vs_base_feature_change": 0.0
+        },
+        {
+          "variant": "demo_shared",
+          "retained": "RN",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.2499999850988388,
+            0.2499999701976776,
+            0.25,
+            0.25,
+            0.2499999701976776,
+            0.25,
+            0.25
+          ],
+          "full_vs_base_feature_change": 0.0
+        },
+        {
+          "variant": "demo_shared",
+          "retained": "RT",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.2499999701976776,
+            0.2499999850988388,
+            0.25,
+            0.25,
+            0.25,
+            0.2500000298023224,
+            0.25,
+            0.2499999701976776
+          ],
+          "full_vs_base_feature_change": 0.0
+        },
+        {
+          "variant": "demo_shared",
+          "retained": "NT",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.25,
+            0.2499999701976776,
+            0.2499999850988388,
+            0.25,
+            0.2500000298023224,
+            0.25,
+            0.2500000298023224
+          ],
+          "full_vs_base_feature_change": 0.0
+        },
+        {
+          "variant": "demo_shared",
+          "retained": "RNT",
+          "descriptor_dim": 5632,
+          "finite": true,
+          "invalid_private_coordinates_zero": true,
+          "shared_metric_mass": [
+            0.25,
+            0.2500000298023224,
+            0.2499999701976776,
+            0.2499999850988388,
+            0.2500000298023224,
+            0.2499999850988388,
+            0.25,
+            0.2499999850988388
+          ],
+          "full_vs_base_feature_change": 0.0
+        }
+      ],
+      "frozen_tensor_versions_unchanged": true,
+      "invalid_expert_BN_unchanged": true,
+      "partial_gallery_detached": true,
+      "positive_self_excluded": true,
+      "ground_truth_positive_negative_indices_valid": true,
+      "disjoint_source_common_similarity": 0.2499999850988388,
+      "optimizer_updates": 0,
+      "official_test_uses": 0
+    },
+    "preflight_result.json": {
+      "status": "PASS",
+      "tensor": {
+        "name": "tensor",
+        "exit_code": 0,
+        "finished": 1791024198.432586
+      },
+      "smokes": [
+        {
+          "name": "axis_shared",
+          "exit_code": 0,
+          "finished": 1791024217.8378994
+        },
+        {
+          "name": "frequency_shared",
+          "exit_code": 0,
+          "finished": 1791024217.6073902
+        },
+        {
+          "name": "twins_shared",
+          "exit_code": 0,
+          "finished": 1791024217.1409192
+        },
+        {
+          "name": "demo_shared",
+          "exit_code": 0,
+          "finished": 1791024216.690859
+        }
+      ]
+    },
+    "controller_result.json": {
+      "status": "COMPLETE",
+      "runs": [
+        {
+          "variant": "axis_shared",
+          "train": {
+            "name": "MSVR310_axis_shared_s42",
+            "exit_code": 0,
+            "finished": 1791025024.6164985
+          },
+          "frozen49": {
+            "name": "MSVR310_axis_shared_s42",
+            "exit_code": 0,
+            "finished": 1791025059.9760995
+          }
+        },
+        {
+          "variant": "frequency_shared",
+          "train": {
+            "name": "MSVR310_frequency_shared_s42",
+            "exit_code": 0,
+            "finished": 1791025010.231886
+          },
+          "frozen49": {
+            "name": "MSVR310_frequency_shared_s42",
+            "exit_code": 0,
+            "finished": 1791025045.5015748
+          }
+        },
+        {
+          "variant": "twins_shared",
+          "train": {
+            "name": "MSVR310_twins_shared_s42",
+            "exit_code": 0,
+            "finished": 1791025065.9763606
+          },
+          "frozen49": {
+            "name": "MSVR310_twins_shared_s42",
+            "exit_code": 0,
+            "finished": 1791025100.5913577
+          }
+        },
+        {
+          "variant": "demo_shared",
+          "train": {
+            "name": "MSVR310_demo_shared_s42",
+            "exit_code": 0,
+            "finished": 1791024936.4137757
+          },
+          "frozen49": {
+            "name": "MSVR310_demo_shared_s42",
+            "exit_code": 0,
+            "finished": 1791024970.753617
+          }
+        }
+      ]
+    }
+  },
+  "controller_tail": "/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/helpers.py:7: FutureWarning: Importing from timm.models.helpers is deprecated, please import via timm.models\n  warnings.warn(f\"Importing from {__name__} is deprecated, please import via timm.models\", FutureWarning)\n/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models\n  warnings.warn(f\"Importing from {__name__} is deprecated, please import via timm.models\", FutureWarning)\n/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers\n  warnings.warn(f\"Importing from {__name__} is deprecated, please import via timm.layers\", FutureWarning)\n",
+  "gpus": "0, 15, 0\n1, 15, 0\n2, 15, 0\n3, 155, 0\n",
+  "observed_at": "2026-10-03T18:58:59"
+}
