@@ -1,0 +1,13 @@
+--- sources_002_pending_gate/demo_available_base_deploy_20261003.py
++++ sources_003_final/demo_available_base_deploy_20261003.py
+@@ -24,6 +24,10 @@
+ from pathlib import Path
+ root=Path({previous['output']!r});stages=[]
+ for name in ('RGBNT201_axis_mass_fullref_s42','MSVR310_axis_mass_fullref_s42'):
++ for stage in ('smoke','full'):
++  exit_path=root/name/(stage+'_exit.json')
++  if exit_path.exists():
++   record=json.loads(exit_path.read_text());assert record['exit_code']==0,(name,stage,record)
+  path=root/name/'controller_result.json'
+  if path.exists():
+   assert json.loads(path.read_text())['status']=='PASS'

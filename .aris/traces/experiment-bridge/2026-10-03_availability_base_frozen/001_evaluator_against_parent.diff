@@ -1,0 +1,65 @@
+diff --git a/missing_anytoany_development.py b/missing_available_base_development.py
+index 9df2664..e8a14be 100644
+--- a/missing_anytoany_development.py
++++ b/missing_available_base_development.py
+@@ -1,4 +1,4 @@
+-"""Frozen development retrieval for all seven-by-seven availability pairs."""
++"""Frozen DeMo/V5 full49 with unavailable base sources/relations masked."""
+ import argparse
+ import hashlib
+ import json
+@@ -12,6 +12,8 @@ from experiment_data import split_records
+ from full_evaluation import distance, full_metrics
+ from missing_evaluation import MISSING, METRICS, extract_missing
+ from run_experiment import configuration, write_json
++from availability_base_intervention import install_available_base
++from verify_availability_base_intervention import verify_masked_base_fusion, verify_masked_descriptor
+ 
+ 
+ def main():
+@@ -50,6 +52,12 @@ def main():
+     model.load_state_dict(torch.load(run / 'best.pth', map_location='cuda', weights_only=True), strict=True)
+     model.eval()
+     assert all(not module.training for module in model.modules())
++    keys_before = tuple(model.state_dict())
++    parameter_ids = tuple(id(value) for value in model.parameters())
++    model = install_available_base(model)
++    assert tuple(model.state_dict()) == keys_before
++    assert tuple(id(value) for value in model.parameters()) == parameter_ids
++    tensor_contract = verify_masked_base_fusion(model.generalFusion) if args.smoke else None
+     versions = {name: value._version for name, value in model.state_dict().items()}
+     records = dev[:64] if args.smoke else dev
+     output.mkdir(exist_ok=False)
+@@ -63,10 +71,10 @@ def main():
+         for code, missing in MISSING.items():
+             feature, runtime = extract_missing(model, records, cfg, arguments.seed, missing)
+             assert feature.shape == clean.shape and torch.isfinite(feature).all()
+-            diagnostics[code] = runtime
++            diagnostics[code] = dict(runtime=runtime, descriptor_contract=verify_masked_descriptor(feature, missing))
+         assert versions == {name: value._version for name, value in model.state_dict().items()}
+         write_json(output / 'smoke.json', {'status': 'PASS', 'triplets': len(records),
+-                   'all_six_masks_finite': True, 'normal_feature_max_error': parity,
++                   'all_six_masks_finite': True, 'base_mask_tensor_contract': tensor_contract, 'parameter_objects_and_state_keys_unchanged': True, 'normal_feature_max_error': parity,
+                    'optimizer_updates': 0, 'original_mask_check': original_masks,
+                    'state_tensor_versions_unchanged': True, 'runtime': diagnostics})
+         return
+@@ -89,7 +97,7 @@ def main():
+         name=retained[present]
+         feature,runtime=extract_missing(model,dev,cfg,arguments.seed,missing)
+         assert feature.shape==clean.shape and torch.isfinite(feature).all()
+-        features[name]=feature;availability[name]=missing;diagnostics[name]=runtime
++        features[name]=feature;availability[name]=missing;diagnostics[name]=dict(runtime=runtime, descriptor_contract=verify_masked_descriptor(feature,missing))
+     assert set(features)=={'R','N','T','RN','RT','NT','RNT'}
+     for qset,qfeature in features.items():
+         for gset,gfeature in features.items():
+@@ -110,7 +118,9 @@ def main():
+                'state_tensor_versions_unchanged': True, 'original_mask_check': original_masks,
+                'original_input_files': original_inputs, 'peak_memory_bytes': torch.cuda.max_memory_allocated(),
+                'protocol': 'Fixed identity-heldout development queries and same gallery. All 49 query/gallery pairs of seven nonempty retained sets R,N,T,RN,RT,NT,RNT. Missing normalized inputs are exactly zero. Seven independently encoded descriptor banks reused without re-encoding for each pair. Frozen dev-best, installed GT and original junk exclusion. No official test or optimizer updates.',
+-               'limits': 'Single-seed frozen robustness diagnostic, not full official-train reproduction, independent training with missing inputs, or multi-seed acceptance.'})
++               'base_intervention': 'Mask post-PIFE unavailable global features and base HDM sources/relations; mask ATMoE logits before softmax and outputs after biased experts. Frozen full input dispatches original path exactly; no retraining, other expert/router changes, or added parameters.',
++               'parameter_objects_and_state_keys_unchanged': True,
++               'limits': 'Frozen source-masking intervention of existing seed42 checkpoints. No missing training, method accuracy acceptance, official-test or causal claim.'})
+ 
+ 
+ if __name__ == '__main__':

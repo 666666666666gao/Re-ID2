@@ -1,0 +1,37 @@
+--- sources_001/demo_available_base_deploy_20261003.py
++++ sources_003_final/demo_available_base_deploy_20261003.py
+@@ -3,6 +3,7 @@
+ import json
+ from pathlib import Path
+ import sys
++import time
+ sys.path.insert(0,'C:/Users/gb/projects/demo_dual_axis_20261002')
+ from collect_results import PROJECT,HOSTS,OPTIONS,command,remote_python
+ HOSTS['2027']=('/data/gb/Re-ID/DeMo-DualAxis','/data/gb/Re-ID/conda-envs/tri_reid/bin/python')
+@@ -17,6 +18,26 @@
+ assert review['checked_source_sha256']==new_sources
+ receipts=[]
+ for host in ('2026','2027'):
++    if host=='2027':
++        previous=receipts[0]
++        code=f'''import json
++from pathlib import Path
++root=Path({previous['output']!r});stages=[]
++for name in ('RGBNT201_axis_mass_fullref_s42','MSVR310_axis_mass_fullref_s42'):
++ for stage in ('smoke','full'):
++  exit_path=root/name/(stage+'_exit.json')
++  if exit_path.exists():
++   record=json.loads(exit_path.read_text());assert record['exit_code']==0,(name,stage,record)
++ path=root/name/'controller_result.json'
++ if path.exists():
++  assert json.loads(path.read_text())['status']=='PASS'
++  record=json.loads((root/name/'full_exit.json').read_text());assert record['exit_code']==0,(name,record)
++  stages.append(name)
++print(json.dumps(dict(released=len(stages)==2)))
++'''
++        while not json.loads(remote_python('2026',code))['released']:
++            print('WAIT_FOR_TWO_2026_FROZEN_JOBS_TO_RELEASE_GLOBAL4_BUDGET',flush=True)
++            time.sleep(240)
+     root,python=HOSTS[host]
+     parent=json.loads((PROJECT/('results/preflight/anytoany49_'+host+'_launch.json')).read_text())
+     sources=parent['source_sha256'].copy()

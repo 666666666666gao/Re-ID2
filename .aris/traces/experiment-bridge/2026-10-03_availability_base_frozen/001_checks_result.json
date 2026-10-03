@@ -1,0 +1,321 @@
+{
+  "status": "PASS",
+  "observed_at": "2026-10-03T09:40:33.762926+00:00",
+  "python": "C:\\Users\\gb\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\python.exe",
+  "python_version": "3.13.12 (main, Feb  3 2026, 22:53:26) [MSC v.1944 64 bit (AMD64)]",
+  "checks": [
+    {
+      "name": "syntax_and_raw_source_capture",
+      "status": "PASS",
+      "kind": "AST_OR_SOURCE_CHECK",
+      "evidence": {
+        "source_count": 28,
+        "sources": "sources_001",
+        "source_diff": "001_*.diff",
+        "no_source_module_import": true
+      }
+    },
+    {
+      "name": "parent_bound_sources_and_actual_direct_imports",
+      "status": "PASS",
+      "kind": "STDLIB_HASH_AND_AST_CHECK",
+      "evidence": [
+        {
+          "host": "2026",
+          "parent_source_count": 18,
+          "checked_total": 26,
+          "direct_local_imports": [
+            "availability_base_intervention.py",
+            "dual_axis.py",
+            "experiment_data.py",
+            "full_evaluation.py",
+            "launch_axis_scaled.py",
+            "missing_evaluation.py",
+            "run_experiment.py",
+            "run_mass_experiment.py",
+            "verify_availability_base_intervention.py"
+          ],
+          "parent_mismatches": [],
+          "parent_digest_overwrites": []
+        },
+        {
+          "host": "2027",
+          "parent_source_count": 16,
+          "checked_total": 24,
+          "direct_local_imports": [
+            "availability_base_intervention.py",
+            "dual_axis.py",
+            "experiment_data.py",
+            "full_evaluation.py",
+            "launch_axis_scaled.py",
+            "missing_evaluation.py",
+            "run_experiment.py",
+            "verify_availability_base_intervention.py"
+          ],
+          "parent_mismatches": [],
+          "parent_digest_overwrites": []
+        }
+      ]
+    },
+    {
+      "name": "six_jobs_and_samehost_RGBNT100_canonical_path",
+      "status": "PASS",
+      "kind": "AST_OR_SOURCE_CHECK",
+      "evidence": [
+        {
+          "host": "2026",
+          "gpu": 0,
+          "dataset": "RGBNT100",
+          "variant": "demo",
+          "run": "runs/dynamic_amp_comparison/RGBNT100_demo_s42"
+        },
+        {
+          "host": "2026",
+          "gpu": 1,
+          "dataset": "RGBNT100",
+          "variant": "axis_mass_fullref",
+          "run": "runs/axis_collaboration_v5_mass/development/RGBNT100_axis_mass_fullref_s42"
+        },
+        {
+          "host": "2026",
+          "gpu": 2,
+          "dataset": "RGBNT201",
+          "variant": "axis_mass_fullref",
+          "run": "runs/axis_collaboration_v5_mass/development/RGBNT201_axis_mass_fullref_s42"
+        },
+        {
+          "host": "2026",
+          "gpu": 3,
+          "dataset": "MSVR310",
+          "variant": "axis_mass_fullref",
+          "run": "runs/axis_collaboration_v5_mass/development/MSVR310_axis_mass_fullref_s42"
+        },
+        {
+          "host": "2027",
+          "gpu": 1,
+          "dataset": "RGBNT201",
+          "variant": "demo",
+          "run": "runs/axis_collaboration_v4_missing_development27_input/RGBNT201_demo_s42"
+        },
+        {
+          "host": "2027",
+          "gpu": 2,
+          "dataset": "MSVR310",
+          "variant": "demo",
+          "run": "runs/axis_collaboration_v4_missing_development27_input/MSVR310_demo_s42"
+        }
+      ]
+    },
+    {
+      "name": "relation_order_and_guard_operators_present",
+      "status": "PASS",
+      "kind": "AST_OR_SOURCE_CHECK",
+      "evidence": {
+        "relations": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            0,
+            1,
+            2
+          ]
+        ],
+        "scope": "Static source operators only; no numerical tensor execution"
+      }
+    },
+    {
+      "name": "new_files_no_training_checkpoint_write_or_test_calls",
+      "status": "PASS",
+      "kind": "AST_OR_SOURCE_CHECK",
+      "evidence": {
+        "forbidden_calls": [],
+        "qualification": "Existing imported run modules contain training definitions; only build/configuration/write_json are called."
+      }
+    },
+    {
+      "name": "controller_demo_success",
+      "status": "PASS",
+      "kind": "EXECUTED_STDLIB_MOCK",
+      "evidence": {
+        "actual_error": null,
+        "launches": [
+          "smoke",
+          "full"
+        ],
+        "trace": "controller_mocks_001\\demo_success"
+      }
+    },
+    {
+      "name": "controller_v5_success",
+      "status": "PASS",
+      "kind": "EXECUTED_STDLIB_MOCK",
+      "evidence": {
+        "actual_error": null,
+        "launches": [
+          "smoke",
+          "full"
+        ],
+        "trace": "controller_mocks_001\\v5_success"
+      }
+    },
+    {
+      "name": "controller_input_mismatch",
+      "status": "PASS",
+      "kind": "EXECUTED_STDLIB_MOCK",
+      "evidence": {
+        "actual_error": "AssertionError",
+        "launches": [],
+        "trace": "controller_mocks_001\\input_mismatch"
+      }
+    },
+    {
+      "name": "controller_smoke_exit",
+      "status": "PASS",
+      "kind": "EXECUTED_STDLIB_MOCK",
+      "evidence": {
+        "actual_error": "AssertionError",
+        "launches": [
+          "smoke"
+        ],
+        "trace": "controller_mocks_001\\smoke_exit"
+      }
+    },
+    {
+      "name": "controller_smoke_missing_result",
+      "status": "PASS",
+      "kind": "EXECUTED_STDLIB_MOCK",
+      "evidence": {
+        "actual_error": "FileNotFoundError",
+        "launches": [
+          "smoke"
+        ],
+        "trace": "controller_mocks_001\\smoke_missing_result"
+      }
+    },
+    {
+      "name": "controller_smoke_parity",
+      "status": "PASS",
+      "kind": "EXECUTED_STDLIB_MOCK",
+      "evidence": {
+        "actual_error": "AssertionError",
+        "launches": [
+          "smoke"
+        ],
+        "trace": "controller_mocks_001\\smoke_parity"
+      }
+    },
+    {
+      "name": "controller_smoke_tensor_contract",
+      "status": "PASS",
+      "kind": "EXECUTED_STDLIB_MOCK",
+      "evidence": {
+        "actual_error": "AssertionError",
+        "launches": [
+          "smoke"
+        ],
+        "trace": "controller_mocks_001\\smoke_tensor_contract"
+      }
+    },
+    {
+      "name": "controller_smoke_input_mutation",
+      "status": "PASS",
+      "kind": "EXECUTED_STDLIB_MOCK",
+      "evidence": {
+        "actual_error": "AssertionError",
+        "launches": [
+          "smoke"
+        ],
+        "trace": "controller_mocks_001\\smoke_input_mutation"
+      }
+    },
+    {
+      "name": "controller_full_exit",
+      "status": "PASS",
+      "kind": "EXECUTED_STDLIB_MOCK",
+      "evidence": {
+        "actual_error": "AssertionError",
+        "launches": [
+          "smoke",
+          "full"
+        ],
+        "trace": "controller_mocks_001\\full_exit"
+      }
+    },
+    {
+      "name": "controller_full_pair_count",
+      "status": "PASS",
+      "kind": "EXECUTED_STDLIB_MOCK",
+      "evidence": {
+        "actual_error": "AssertionError",
+        "launches": [
+          "smoke",
+          "full"
+        ],
+        "trace": "controller_mocks_001\\full_pair_count"
+      }
+    },
+    {
+      "name": "idle_waits_240_and_returns_only_below500",
+      "status": "PASS",
+      "kind": "EXECUTED_STDLIB_MOCK",
+      "evidence": {
+        "memory_sequence": [
+          500,
+          900,
+          499
+        ],
+        "observed_sleep_requests": [
+          240,
+          240
+        ],
+        "actual_sleep_seconds": 0
+      }
+    }
+  ],
+  "check_count": 16,
+  "neural_imports": [],
+  "runtime_tensor_execution": false,
+  "real_gpu_execution": false,
+  "ssh_or_network_calls": 0,
+  "real_experiment_child_processes": 0,
+  "real_read_only_git_processes": 7,
+  "imported_during_checks": [
+    "_bz2",
+    "_compression",
+    "_lzma",
+    "_tokenize",
+    "bz2",
+    "lzma",
+    "shutil",
+    "token",
+    "tokenize",
+    "zlib"
+  ],
+  "checked_source_sha256": {
+    "availability_base_intervention.py": "5634f3af32f9349a7dcb6c595c6a46d0c1ba23debc686809642ef64ef3745f77",
+    "verify_availability_base_intervention.py": "8ff10998131fc98510bb7fdfb6a223ee165ceeb4527a39bd955eba56ef2aec53",
+    "missing_available_base_development.py": "173e21cb069e1807fcef1845c1d271e0ee6771037fc934e4a1e2d2bd23ca3c4b",
+    "launch_available_base_frozen.py": "11ac273607752925a84fa1a67ffbbe58c11943bd18057d08b3c038f09791a801"
+  },
+  "helper_sha256": "9c86d6111afdd257b503f84def9cd407018216e1c9d4627766d9abbcfa772f99",
+  "plan_sha256": "842c36f4d791c085a1fda7c03e60cdd4b8d06ee26aa5bd9f1b385f82528d74de"
+}

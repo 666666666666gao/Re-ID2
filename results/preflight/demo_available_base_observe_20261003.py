@@ -1,0 +1,79 @@
+import base64
+from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime
+import hashlib
+import json
+import sys
+import time
+sys.path.insert(0,'C:/Users/gb/projects/demo_dual_axis_20261002')
+from collect_results import PROJECT,HOSTS,remote_python
+HOSTS['2027']=('/data/gb/Re-ID/DeMo-DualAxis','/data/gb/Re-ID/conda-envs/tri_reid/bin/python')
+def launched():
+    paths=[PROJECT/('results/preflight/availability_base_'+host+'_launch.json') for host in ('2026','2027')]
+    return [json.loads(path.read_text()) for path in paths if path.exists()]
+assert launched(), 'No actual launch receipt yet'
+
+def collect(launch):
+    target=PROJECT/('results/availability_base_frozen_'+launch['host']+'_20261003')
+    closed=[path.parent.relative_to(target).as_posix() for path in target.glob('*/*/intake.json')]
+    code=f'''import base64,hashlib,json,subprocess
+from pathlib import Path
+root=Path({launch['output']!r});project=root.parent.parent
+assert all(hashlib.sha256((project/name).read_bytes()).hexdigest()==sha for name,sha in {launch['source_sha256']!r}.items())
+record=dict(host={launch['host']!r},controller_live=bool(subprocess.run(['ps','-p',{str(launch['pid'])!r},'-o','pid='],capture_output=True,text=True).stdout.strip()),rows=[],files={{}})
+for job in {launch['jobs']!r}:
+ name=job['dataset']+'_'+job['variant']+'_s42';folder=root/name
+ for stage in ('smoke','full'):
+  row=dict(name=name,stage=stage)
+  for key,path in [('launch',folder/(stage+'_launch.json')),('exit',folder/(stage+'_exit.json')),('smoke',folder/stage/'smoke.json'),('result',folder/stage/'result.json')]:
+   if path.exists():row[key]=json.loads(path.read_text())
+  log=folder/(stage+'.log')
+  if log.exists():row['log_tail']=log.read_text()[-2400:]
+  record['rows'].append(row)
+  if 'exit' in row and name+'/'+stage not in {closed!r}:
+   paths=[path for path in (folder/stage).glob('*') if path.is_file() and path.suffix in ('.json','.csv','.log')]
+   paths.extend(folder/(stage+suffix) for suffix in ('.log','_launch.json','_exit.json'))
+   for path in paths:
+    if path.exists():
+     data=path.read_bytes();record['files'][path.relative_to(root).as_posix()]=dict(data=base64.b64encode(data).decode(),bytes=len(data),sha256=hashlib.sha256(data).hexdigest())
+ for key in ('controller_result.json','frozen_inputs.json'):
+  path=folder/key
+  if path.exists():record.setdefault('final_files',{{}})[name+'/'+key]=json.loads(path.read_text())
+if (root/'controller_result.json').exists():record['controller_result']=json.loads((root/'controller_result.json').read_text())
+record['controller_log_tail']=Path({launch['log']!r}).read_text()[-3000:]
+print(json.dumps(record))
+'''
+    record=json.loads(remote_python(launch['host'],code));record['observed_at']=datetime.now().isoformat(timespec='seconds')
+    files=record.pop('files')
+    for relative,proof in files.items():
+        data=base64.b64decode(proof['data']);assert len(data)==proof['bytes'] and hashlib.sha256(data).hexdigest()==proof['sha256']
+        path=target/relative;assert not path.exists(),relative
+        path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(data)
+    for row in record['rows']:
+        relative=row['name']+'/'+row['stage']
+        if 'exit' not in row or relative in closed:continue
+        exact=[relative+suffix for suffix in ('.log','_launch.json','_exit.json')]
+        manifest={name:{key:proof[key] for key in ('bytes','sha256')} for name,proof in files.items() if name.startswith(relative+'/') or name in exact}
+        path=target/relative/'intake.json';assert not path.exists()
+        path.parent.mkdir(parents=True,exist_ok=True)
+        path.write_bytes(json.dumps(dict(observed_at=record['observed_at'],files=manifest,exit_code=row['exit']['exit_code']),indent=2).encode())
+    for relative,value in record.pop('final_files',{}).items():
+        path=target/relative;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(json.dumps(value,indent=2).encode())
+    if 'controller_result' in record:
+        (target/'controller_result.json').write_bytes(json.dumps(record['controller_result'],indent=2).encode())
+    (PROJECT/('results/preflight/availability_base_'+launch['host']+'_latest_snapshot.json')).write_bytes(json.dumps(record,indent=2).encode())
+    failures=[row for row in record['rows'] if row.get('exit',{}).get('exit_code',0)!=0]
+    print('AVAILABILITY_BASE_OBSERVATION',json.dumps(dict(host=launch['host'],time=record['observed_at'],controller_live=record['controller_live'],failed=[row['name']+'/'+row['stage'] for row in failures],rows=[dict(name=row['name'],stage=row['stage'],exit=row.get('exit',{}).get('exit_code')) for row in record['rows']])),flush=True)
+    if failures:print('AVAILABILITY_BASE_PRIMARY_FAILURE',json.dumps({row['name']+'/'+row['stage']:row.get('log_tail','') for row in failures}),flush=True)
+    assert not failures
+    complete=record.get('controller_result',{}).get('status')=='COMPLETE'
+    assert record['controller_live'] or complete,record['controller_log_tail']
+    return complete
+
+with ThreadPoolExecutor(max_workers=2) as pool:
+    while True:
+        launches=launched()
+        done=list(pool.map(collect,launches))
+        if len(launches)==2 and all(done):break
+        time.sleep(240)
+print('AVAILABILITY_BASE_SIX_FROZEN_SMOKES_AND294_CONDITIONS_COLLECTED',flush=True)

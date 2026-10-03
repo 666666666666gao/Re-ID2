@@ -1,0 +1,58 @@
+{
+  "status": "PREPARED_SOURCE_REVIEW_REQUIRED_NO_NEURAL_RUN",
+  "observed_at": "2026-10-03T17:28:38",
+  "scientific_trigger": "V10 fresh50 worsened primary mAP and had0R1rescue; existing base accepts nonzero zero-image features while only added experts maskavailability. Isolate base pollution before asymmetric training.",
+  "change": "Frozen inference only: mask unavailable reduced global blocks, HDM inputs/invalid relations, ATMoE invalid logits before softmax and expert outputs. Full input dispatches unchanged original code. No parameter, checkpoint, frequency/router/auxiliary-training change.",
+  "jobs": [
+    {
+      "host": "2026",
+      "gpu": 0,
+      "dataset": "RGBNT100",
+      "variant": "demo",
+      "run": "runs/dynamic_amp_comparison/RGBNT100_demo_s42"
+    },
+    {
+      "host": "2026",
+      "gpu": 1,
+      "dataset": "RGBNT100",
+      "variant": "axis_mass_fullref",
+      "run": "runs/axis_collaboration_v5_mass/development/RGBNT100_axis_mass_fullref_s42"
+    },
+    {
+      "host": "2026",
+      "gpu": 2,
+      "dataset": "RGBNT201",
+      "variant": "axis_mass_fullref",
+      "run": "runs/axis_collaboration_v5_mass/development/RGBNT201_axis_mass_fullref_s42"
+    },
+    {
+      "host": "2026",
+      "gpu": 3,
+      "dataset": "MSVR310",
+      "variant": "axis_mass_fullref",
+      "run": "runs/axis_collaboration_v5_mass/development/MSVR310_axis_mass_fullref_s42"
+    },
+    {
+      "host": "2027",
+      "gpu": 1,
+      "dataset": "RGBNT201",
+      "variant": "demo",
+      "run": "runs/axis_collaboration_v4_missing_development27_input/RGBNT201_demo_s42"
+    },
+    {
+      "host": "2027",
+      "gpu": 2,
+      "dataset": "MSVR310",
+      "variant": "demo",
+      "run": "runs/axis_collaboration_v4_missing_development27_input/MSVR310_demo_s42"
+    }
+  ],
+  "stages": [
+    "tensor_contract_and64record_allmask_smoke",
+    "full49_independent_descriptor_banks"
+  ],
+  "acceptance": "All six metrics/CMC/per-query/groups for all49; clean parity exactly0, state/parameter objects unchanged, unavailable coordinates exact0, original inputs hashes unchanged. This is not the user final+2 acceptance or a trained ablation.",
+  "optimizer_updates": 0,
+  "official_test_uses": 0,
+  "next": "Use resulting evidence to implement asymmetric partial-query/full-gallery training with same augmentation DeMo and ordinary controls; preserve3dataset+2/+2 final gate."
+}

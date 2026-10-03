@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "C:\Users\gb\projects\demo_dual_axis_20261002\.aris\traces\experiment-bridge\2026-10-03_availability_base_frozen\001_source_checks.py", line 197, in controller_case
+    ns['main']()
+    ~~~~~~~~~~^^
+  File "C:\Users\gb\projects\demo_dual_axis_20261002\launch_available_base_frozen.py", line 66, in main
+    done=list(pool.map(worker,jobs))
+  File "C:\Users\gb\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\concurrent\futures\_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\gb\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\concurrent\futures\_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\gb\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\concurrent\futures\_base.py", line 456, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\gb\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\gb\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Users\gb\projects\demo_dual_axis_20261002\launch_available_base_frozen.py", line 57, in worker
+    if smoke:assert result['base_mask_tensor_contract']['status']=='PASS'
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
