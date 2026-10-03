@@ -1,0 +1,126 @@
+{
+  "status": "PASS",
+  "blockers": [],
+  "nonblocking": [],
+  "checked_source_sha256": {
+    "diagnose_common_outlet_scale.py": "c99e82f6db42144ad4a33d264dcb42f18483ec544593f947f83dadca496baef8",
+    "launch_common_outlet_scale.py": "c0f38154ab62f5df14c498a755f5a5b808a51ad83c3131b84aa63e13cf8e6f30",
+    "audit_common_outlet_scale.py": "41a428d76e4b613aa69f2c06f3a07a6a09220e500bc4641d0c4cd6df3b5c7539"
+  },
+  "plan_sha256": "dcdf57fbb70fd23231be60d3baf08ee8c4c471323941d81b8126fbea876806cc",
+  "helper_sha256": "2fc69aef49764acc997a55931e3ae58370782c9fcb0cf17b55d7466e569532ce",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "max",
+  "review_mode": "SOURCE_ONLY_WITH_STDLIB_AST_AND_MOCKS",
+  "reviewed_at_utc": "2026-10-03T13:34:54.962794+00:00",
+  "scope": {
+    "campaign": "/data/gaob/Re-ID/DeMo-DualAxis/runs/common_coordinate_v12_trial_20261003",
+    "variants": [
+      "axis_shared",
+      "frequency_shared",
+      "twins_shared"
+    ],
+    "fixed_dev_best_epochs": {
+      "axis_shared": 22,
+      "frequency_shared": 30,
+      "twins_shared": 19
+    },
+    "host": "2026",
+    "physical_gpus": [
+      2,
+      3
+    ],
+    "availability_sets": [
+      "RNT",
+      "R",
+      "N",
+      "T",
+      "RN",
+      "RT",
+      "NT"
+    ],
+    "stages": [
+      "deployed",
+      "base_common",
+      "M_pre",
+      "M_post",
+      "F_pre",
+      "F_post"
+    ],
+    "planned_cases": 882,
+    "prior_deployed_comparisons": 147,
+    "prohibited_execution_performed": false,
+    "source_edits": false,
+    "review_limits": "No Torch or numpy imported/executed; no model, SSH, GPU, training, deployment, or remote helper execution. Stdlib AST and mocked control functions only."
+  },
+  "checks": [
+    {
+      "name": "established_source_contract",
+      "status": "PASS",
+      "evidence": "All three plan.sources and all 45 plan.previous_sources match local bytes. All 44 listed Python sources parse. Parent V12 launch has matching campaign and preserved source contract."
+    },
+    {
+      "name": "fixed_checkpoint_and_data_scope",
+      "status": "PASS_SOURCE",
+      "evidence": "Strict best.pth load, MSVR310 and three augmented variants, fixed identity-heldout training-data dev records, no official_records call, inference under no_grad and eval, unchanged state tensor versions and protected input checks. Existing actual best epochs are 22/30/19."
+    },
+    {
+      "name": "production_fuse_reconstruction",
+      "status": "PASS_SOURCE",
+      "evidence": "Probe preserves production float32 casts, anchor norms, relation_mass*eligible_count, left-associated projection scaling, (dm+di).reshape(...).mean(1), df+mi then shared+(df+mi), and metric_descriptor. Returned deployment remains original bound fuse result; exact reconstruction assertion executes per batch."
+    },
+    {
+      "name": "projection_hooks_and_types",
+      "status": "PASS_SOURCE_AND_MOCK",
+      "evidence": "Forward path uses the three projections once in full eval. Closure default names M/F/I, detached outputs, and MethodType self binding passed standard-library mocks. No in-place mutation of source tensors or projection outputs."
+    },
+    {
+      "name": "availability_and_scale_measurement",
+      "status": "PASS_SOURCE",
+      "evidence": "Loader dictionary order RGB/NI/TI matches seven retained-index sets. Production eligible relations from RELATIONS give counts 1/3/7; masked input, modality rows and anchor zeros align. Scalars retain relation masses, anchors, counts, weighted-anchor mean7, M/F/I/MI/total increment-to-shared norms, M direction cancellation and common cosine change."
+    },
+    {
+      "name": "stage_associations",
+      "status": "PASS_SOURCE",
+      "evidence": "M_pre/M_post share the exact route mass, count, anchor, eligibility, per-relation normalization and mean over seven; only modality projection differs. F_pre is actual router.route frequency output, F_post its actual projection. Each stage is normalized for independent retrieval without changing production pooling."
+    },
+    {
+      "name": "all49_production_parity",
+      "status": "PASS_SOURCE_AND_PREDECESSOR_TEXT",
+      "evidence": "Seven banks cross all 49 query/gallery sets for six stages. Every deployed case requires exact previous six metrics and exact per-query CSV equality; normal full-bank features require exact saved feature parity, then reuse saved normal distances. All 147 actual predecessor CSVs have the expected schema and identical 210-query label/name/order associations; stdlib serialized six-metric recount differs by at most 1.4210854715202004e-14 pp."
+    },
+    {
+      "name": "independent_cpu_ground_truth_recount",
+      "status": "PASS_SOURCE",
+      "evidence": "CPU auditor imports numpy/stdlib and audit_shared_identity_states only, with no Torch import chain. Installed MSVR310 train filenames independently supply identity/camera/scene and query rows; all metadata must exactly equal raw archive metadata. Recount uses stable-equivalent lexicographic distance/gallery-row ordering, same-ID/same-scene junk exclusion, AP/INP/rank formulas, CMC1..50, group metrics and per-query values. Scale CSV row/name order and actual legal counts are checked."
+    },
+    {
+      "name": "smoke_barrier_and_failure_control",
+      "status": "PASS_STDLIB_MOCK",
+      "evidence": "Mocked launcher success demonstrated all three smoke completions before first full start, two physical GPU queues and same-card serialization. Injected smoke failure starts no full and writes no PASS/COMPLETE controller receipt. Injected axis full failure prevents the following twins full. No child retries in any scenario."
+    },
+    {
+      "name": "execute_resource_and_logging",
+      "status": "PASS_STDLIB_MOCK",
+      "evidence": "AST-extracted execute/idle with fake subprocess observed 900,500,0 MiB, two recorded 240-second waits and one spawn on CUDA_VISIBLE_DEVICES=2. Both exit0 and exit9 produce launch/exit receipts; nonzero exit raises and is not retried. Exclusive per-stage log creation is preserved."
+    },
+    {
+      "name": "remote_helpers",
+      "status": "PASS_SOURCE_AND_PAYLOAD_AST",
+      "evidence": "Deployer guard/start and observe/collect/cpu payloads all parse after actual f-string interpolation. Host is 2026, only selected GPUs2/3, predecessor COMPLETE/dead and capacity guards, source checks, exclusive launch/log paths and no retry loops. CPU payload hides CUDA, uses the reviewed standalone auditor, preserves log/exit on failure, and serializes its exit receipt without an invalid embedded newline. Collection uses tar data filter and verifies archived text against its inventory. Helpers were not executed."
+    }
+  ],
+  "supplemental_helpers_reviewed": [
+    "C:/Users/gb/.codex_tmp/demo_common_outlet_observe_20261003.py",
+    "C:/Users/gb/.codex_tmp/demo_common_outlet_collect_20261003.py",
+    "C:/Users/gb/.codex_tmp/demo_common_outlet_cpu_20261003.py"
+  ],
+  "trace_artifacts": [
+    ".aris/traces/experiment-bridge/2026-10-03_common_outlet_scale/review_checks.py",
+    ".aris/traces/experiment-bridge/2026-10-03_common_outlet_scale/review_checks.json",
+    ".aris/traces/experiment-bridge/2026-10-03_common_outlet_scale/prior_artifact_schema.json"
+  ],
+  "runtime_acceptance": "NOT_RUN. This review permits workflow progress to the actual all-three seven-bank first64 smoke barrier. It does not claim neural reconstruction, saved-feature parity, all147 deployment parity or the 882-case independent CPU audit has already passed."
+}
