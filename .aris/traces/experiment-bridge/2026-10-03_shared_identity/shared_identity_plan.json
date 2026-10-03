@@ -1,0 +1,68 @@
+{
+  "status": "PREPARED_SOURCE_REVIEW_REQUIRED_NO_NEURAL_RUN",
+  "created": "2026-10-03T18:23:31",
+  "objective": "Three datasets mAP and Rank-1 each at least +2pp versus same-protocol DeMo, missing-modality coverage; current wave is mechanism development, not completion.",
+  "evidence": [
+    "V10 normal MSVR310 mAP45.991582/R159.047619 below DeMo47.607792/59.047619; do not repeat max-four-state hinge recipe.",
+    "Frozen source masking: normal metrics unchanged exactly; V5 RGB100 R-query/full-gallery +30.737526mAP/+48.064R1, but some conditions regress.",
+    "12/49 source-disjoint DeMo availability pairs have disjoint surviving private coordinates; V5 shared F tail is not strictly orthogonal."
+  ],
+  "recipe": {
+    "shared_identity": "mean raw CLS512+pooled patch512 from only available modalities in shared CLIP space, shared LN1024/Linear1024x512/GELU/LN512 projection",
+    "private_base": "original complete DeMo when all modalities available; absent backbone/reductions skipped; illegal S subset A relations and gates zero; absent relation BN experts skipped during partial forward",
+    "metric": "5632D with separately normalized private5120 weight .75 and shared512 weight .25; frequency residual corrects nonzero shared coordinates; M/I correct legal private relation coordinates",
+    "training": "full supervised forward+backward then partial forward+backward, one optimizer step; same augmented images; six proper nonempty sets sampled uniformly per batch from independent seeded generator; same full batch detached gallery; GT positive excludes self, GT negative distinct IDs",
+    "loss": "all full-view original global/base losses retained; final fused ReID weight1; full M/F auxiliary .1 each; full shared ReID .25; partial label-smoothed CE .25 plus normalized cross-gallery soft triplet .5; existing contribution .05 for all augmented models; no V10 hinge",
+    "controls": "ordinary frequency and ordinary twins have exact same state keys, initial tensors, total/trainable parameters and5632D as dual axis; DeMo gets same shared interface, partial augmentation and losses except expert-specific terms",
+    "fixed_training": "MSVR310 fit/dev identity split, public CLIP, seed42, B64, AdamW existing cfg, native AMP512, fresh50, earliest dev-mAP tie wins; no official test"
+  },
+  "jobs": [
+    {
+      "dataset": "MSVR310",
+      "variant": "axis_shared",
+      "gpu": 0,
+      "host": "2026"
+    },
+    {
+      "dataset": "MSVR310",
+      "variant": "frequency_shared",
+      "gpu": 1,
+      "host": "2026"
+    },
+    {
+      "dataset": "MSVR310",
+      "variant": "twins_shared",
+      "gpu": 2,
+      "host": "2026"
+    },
+    {
+      "dataset": "MSVR310",
+      "variant": "demo_shared",
+      "gpu": 3,
+      "host": "2026"
+    }
+  ],
+  "gates": [
+    "fresh same-family Astra/max source-only review before deployment",
+    "actual CUDA contract: exact augmented initial states/params, all7 availability banks finite and invalid coordinates zero, shared .25 metric, invalid expert BN unchanged, stopped gallery and GT reference legality",
+    "all4 smoke3 real updates and finite nonzero gradients, strict in-memory checkpoint reload before any fresh50",
+    "four50 epoch real update/AMP skip logs, full six metrics and CMC1..50/perquery/subgroups; strict best reload; all4 frozen49 conditions using same GT and earliest dev-best"
+  ],
+  "acceptance": "Original baseline +2mAP/+2R1 across all3 and missing not yet established; ordinary frequency/twins matched comparison required; this single dataset/seed wave cannot establish final success.",
+  "global_max_parallel_runs": 4,
+  "poll_seconds": 240,
+  "hardware": {
+    "gpus": "0, 15, 0\n1, 15, 0\n2, 15, 0\n3, 155, 0\n",
+    "live_neural_commands": [],
+    "disk_free_bytes": 43324407808,
+    "observed_at": 1791023012.8685422
+  },
+  "retention": "Only best.pth per training run; no initial/last/smoke weights; raw logs and negative results retained; publicCLIP and earlier baseline/controls untouched.",
+  "sources": {
+    "shared_identity_axis.py": "507e9139b8766691b48081ea78ffd71addd0aea033c2b09c00de0030f34b26d9",
+    "run_shared_identity_experiment.py": "552266e90101a177cccbb6bfce7818af3be3dacc0e9eb8abc4e0a83d37ec80bd",
+    "verify_shared_identity_axis.py": "3f1145f3ef9069ed9471ec98d8f2ade24dbc2084bdf1c20fc6c17511692d8ee2",
+    "missing_shared_identity_development.py": "83342d0c1f15427a0b557854b9cd46aaf00af711dd9b71b5ab4d377cc8f67ae3",
+    "launch_shared_identity_trial.py": "cc01e9b8c4785c157f7c3efe5b186ccb06f1457ae0ca446a912b2e632b3ddf14"
+  }
+}
