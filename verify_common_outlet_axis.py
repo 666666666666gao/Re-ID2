@@ -70,7 +70,7 @@ def main():
                     coefficients = model.last_outlet_weights
                     assert coefficients.shape == (8, 7) and torch.count_nonzero(coefficients[:, ~eligible]) == 0
                     expected = len([i for i in eligible.tolist() if i]) / 7 if pooling == 'original_mean' else 1
-                    assert torch.allclose(coefficients.sum(1), torch.full((8,), expected, device='cuda'), atol=1e-6, rtol=0)
+                    assert torch.allclose(coefficients.sum(1), torch.full((8,), expected, dtype=coefficients.dtype, device=coefficients.device), atol=1e-6, rtol=0)
                 checks.append(dict(pooling=pooling, variant=variant, retained=''.join('RNT'[i] for i in retained),
                                    finite=True, invalid_coordinates_zero=True, unchanged_private=True))
             assert versions == {name: value._version for name, value in model.state_dict().items()}

@@ -1,0 +1,212 @@
+{
+  "verdict": "PASS_SOURCE_REVIEW",
+  "summary": "The user power/temperature waiver is implemented in the three reviewed sources. No source blockers found. Physical GPU2/3 scope, capacity waiting, owned-child cleanup and actual return-code recording remain intact. Scientific model, training, sanity barrier and evaluation flow are unchanged. This amendment supersedes the old hardware power/temperature launch gate only; it does not assert neural runtime acceptance.",
+  "reviewed_at": "2026-10-04T00:10:07.036359+08:00",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "reviewer_context": "Focused continuation of the originally fresh native Codex reviewer /root/review_common_outlet_m1_thermal; runtime model identity is not independently exposed in this context.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "user_override": {
+    "instruction": "不管功率和温度了",
+    "recorded_at": "2026-10-04T00:00:24",
+    "source": "Parent-provided explicit user instruction and current plan.user_override",
+    "effect": "No power/temperature launch gate, periodic thermal monitor, SIGSTOP/SIGCONT control or administrator prerequisite remains. The previous review hardware-setting blocker is historical and waived."
+  },
+  "scope": {
+    "sources_read": [
+      "gpu_thermal_execute.py",
+      "launch_common_outlet_trial.py",
+      "test_gpu_thermal_execute.py"
+    ],
+    "plan": "results/preflight/common_outlet_m1_plan.json",
+    "pre_waiver_plan": "results/preflight/common_outlet_m1_plan_before_power_waiver_20261003.json",
+    "provided_CPU_evidence": "results/preflight/common_outlet_m1_unrestricted_local_checks.json",
+    "source_files_changed_by_reviewer": [],
+    "prior_reviews_preserved": [
+      "results/preflight/common_outlet_m1_review_initial.json",
+      "results/preflight/common_outlet_m1_review.json"
+    ],
+    "old48_scientific_sources_unchanged": true,
+    "other6_M1_sources_unchanged": true,
+    "additional_deployer": "C:/Users/gb/.codex_tmp/demo_common_outlet_m1_deploy_unrestricted_20261004.py",
+    "deployer_support_source_read": "collect_results.py:PROJECT/HOSTS/OPTIONS/command/remote_python and guarded main entry"
+  },
+  "blockers": [],
+  "nonblocking": [
+    {
+      "id": "N1",
+      "kind": "planning_note_only",
+      "location": "results/preflight/common_outlet_m1_plan.json:cost_estimate.note",
+      "finding": "The unchanged cost-estimate note still describes future jobs at 250W, although the active resource requirements and code now remove that limit. It has no execution effect.",
+      "minimal_action": "Label the 250W estimate as historical or remove that now-obsolete future comparison when next updating the plan. No source change is needed."
+    }
+  ],
+  "source_findings": [
+    {
+      "topic": "Waiver fully applied",
+      "locations": [
+        "gpu_thermal_execute.py:9",
+        "gpu_thermal_execute.py:19",
+        "gpu_thermal_execute.py:39",
+        "launch_common_outlet_trial.py:102"
+      ],
+      "evidence": "telemetry queries only index,memory.used and returns only gpu,memory_used_mib,observed_at. check_limits delegates to that resource query. execute performs no periodic telemetry loop or thermal-log creation, contains no SIGSTOP/SIGCONT and waits for child completion. Launch, exit and top-level controller records explicitly say temperature_power_control=False. Current plan sets all thermal thresholds/sample intervals to null and power_before_launch_required=False."
+    },
+    {
+      "topic": "Selected GPUs and capacity ownership",
+      "locations": [
+        "gpu_thermal_execute.py:10",
+        "gpu_thermal_execute.py:25",
+        "gpu_thermal_execute.py:28",
+        "gpu_thermal_execute.py:30",
+        "launch_common_outlet_trial.py:11"
+      ],
+      "evidence": "telemetry accepts only physical GPU2 or GPU3 and checks returned index. execute waits while selected-card memory is >=500MiB, sleeping 240 seconds between resource queries, without preempting an existing task. CUDA_VISIBLE_DEVICES is the selected physical GPU; the schedule remains two serial queues on physical2/3."
+    },
+    {
+      "topic": "Popen completion and return-code semantics",
+      "locations": [
+        "gpu_thermal_execute.py:39",
+        "gpu_thermal_execute.py:41",
+        "gpu_thermal_execute.py:45",
+        "gpu_thermal_execute.py:49"
+      ],
+      "evidence": "Reading child.returncode after wait is correct: CPython wait delegates to _wait; the POSIX _wait sets returncode using the reaped exit status and returns that same cached attribute. poll also reaps/caches an already completed child. The controller records the actual code, then rejects a nonzero normal exit. Mock transitions from returncode=None to 0 and 7 verified both receipt values and rejection of 7. No live Linux process test was performed."
+    },
+    {
+      "topic": "Owned-child exception cleanup retained",
+      "locations": [
+        "gpu_thermal_execute.py:33",
+        "gpu_thermal_execute.py:35",
+        "gpu_thermal_execute.py:40"
+      ],
+      "evidence": "Popen creates a new session and the code checks child.pid equals its process-group ID. Exceptional unwind checks whether that child remains alive, sends SIGKILL only to its own group, waits for it, records the resulting returncode and forced cleanup flag, then propagates the original exception. The supplied wait-failure mock verifies one own-group kill, two wait calls including the interrupted first wait, exit_code=-9 and exact exception-object preservation."
+    },
+    {
+      "topic": "Scientific flow preserved",
+      "evidence": "All48 scientific files and the other6 M1 files match the already recorded plan digests. Replacing the single new temperature_power_control=False controller-metadata expression with the old metadata reproduces the pre-waiver launcher digest exactly. Therefore scheduling, ten-smoke barrier, training commands, strict reload checks, frozen49 cases and six-state294 cases are byte-unchanged in the launcher. Scientific protocol, pooling, schedule, sanity, evaluation and retention plan fields also equal their pre-waiver versions."
+    }
+  ],
+  "tests_actually_run": {
+    "interpreter": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe",
+    "unit_tests": {
+      "command": "<interpreter> -B test_gpu_thermal_execute.py -v",
+      "count": 4,
+      "exit_code": 0,
+      "status": "PASS",
+      "reported_seconds": 0.016,
+      "names": [
+        "test_busy_selected_gpu_waits_240_seconds_without_preemption",
+        "test_other_gpus_are_rejected",
+        "test_uncapped_hot_gpu_no_longer_blocks_or_pauses",
+        "test_wait_failure_reaps_only_our_running_group"
+      ]
+    },
+    "resource_query_fixture": {
+      "input": "3, 120",
+      "status": "PASS",
+      "observed_fields": [
+        "gpu",
+        "memory_used_mib",
+        "observed_at"
+      ],
+      "exact_query_verified": "--query-gpu=index,memory.used"
+    },
+    "returncode_transition_mocks": [
+      {
+        "child_returncode_after_wait": 0,
+        "recorded_exit_code": 0,
+        "assertion_raised": false,
+        "wait_calls": 1,
+        "killpg_calls": 0,
+        "status": "PASS"
+      },
+      {
+        "child_returncode_after_wait": 7,
+        "recorded_exit_code": 7,
+        "assertion_raised": true,
+        "wait_calls": 1,
+        "killpg_calls": 0,
+        "status": "PASS"
+      }
+    ],
+    "source_checks": {
+      "new9_AST_parse": "PASS",
+      "new9_current_plan_digest_match": "PASS",
+      "old48_plan_digest_match": "PASS",
+      "changed_sources_exactly": [
+        "gpu_thermal_execute.py",
+        "launch_common_outlet_trial.py",
+        "test_gpu_thermal_execute.py"
+      ],
+      "other6_unchanged": true,
+      "launcher_only_controller_metadata_changed": true,
+      "scientific_plan_fields_unchanged": true,
+      "mismatches": []
+    },
+    "CPython_POSIX_source_read": {
+      "path": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/Lib/subprocess.py",
+      "functions": [
+        "Popen.wait",
+        "POSIX Popen._wait",
+        "POSIX Popen._handle_exitstatus",
+        "POSIX Popen._internal_poll"
+      ],
+      "kind": "source inspection; not remote Linux execution"
+    },
+    "real_children_started": 0,
+    "GPU_queries": 0,
+    "neural_jobs": 0,
+    "deployer_preparation_checks": {
+      "helper_AST": "PASS",
+      "generated_remote_CPU_gate_AST": "PASS",
+      "generated_remote_launch_AST": "PASS",
+      "combined_source_count": 57,
+      "launch_JSON_receipt_suffix_codepoints": [
+        10
+      ],
+      "launch_JSON_receipt_serialization_roundtrip": "PASS",
+      "method": "Parsed the helper and evaluated only its two f-string expressions using known plan/path values. Parsed the resulting Python; checked the generated receipt newline and in-memory JSON roundtrip. The helper module and generated remote commands were not executed."
+    }
+  },
+  "remaining_scientific_validation": [
+    "Actual M1 CUDA tensor verifier and all ten native three-update smokes must pass before any fifty-epoch training.",
+    "Frozen strict reload, full49/six-state294 evaluation and independent installed-GT CPU audit remain required campaign evidence."
+  ],
+  "limitations": [
+    "No SSH, deployment, Torch import, model construction/forward/backward, CUDA query, GPU computation or administrator command was run.",
+    "The execution tests used CPU mocks and temporary local files; no real Linux session creation or signal delivery was exercised.",
+    "The POSIX behavior conclusion comes from local CPython source plus mock returncode transitions, not an inspection of the remote interpreter binary.",
+    "This amendment is a source review with same-family/provisional attribution, not model-runtime or experiment-result acceptance.",
+    "The deployer review checks prepared source and generated command syntax only. Remote source equality, free capacity/disk, data/pretrain availability and actual controller launch remain unobserved by this reviewer."
+  ],
+  "checked_source_sha256": {
+    "common_outlet_axis.py": "b43002891b7a51c01573c3bcf1aaaa8811ae00824b08f1a9989427c8fa2e5436",
+    "run_common_outlet_experiment.py": "94ede0d2d329e63b403493c0fd62fb6471d8aae1e028ff1398795d3aca800cf4",
+    "missing_common_outlet_development.py": "fb055882dfe5d48ff51a396bf29c47a5d2b48292631d91d5dd5a93125b333f70",
+    "diagnose_common_outlet_states.py": "f28dea607bfcf35f72250c8fe642615cb9b03f156b1ad298bd793ddfcbf25900",
+    "gpu_thermal_execute.py": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+    "verify_common_outlet_axis.py": "f6fb80d38a7f595038cbe7d399748119e9d5ed1c20ae55f0a851dd813e784f50",
+    "launch_common_outlet_trial.py": "6be4b58bb90a9af2d387bc9d735ba270291f56aaea37d3d721a745e3b7d9f529",
+    "audit_common_outlet_states.py": "47d071debbd345af180b612a0ef5e1a65dc54f90ee6a49374d78f6274863fee7",
+    "test_gpu_thermal_execute.py": "9bb827c7084b5f3b647da7dca18274265f01ed188f5e5252832ed9d25cd98a28"
+  },
+  "checked_deployer_sha256": "5be659cb2cec9fdda4ef20d8e3b11129611905af2294694ff99f98a085b12df5",
+  "deployer_review": {
+    "verdict": "PASS_SOURCE_REVIEW",
+    "status": "PREPARED_NOT_RUN",
+    "path": "C:/Users/gb/.codex_tmp/demo_common_outlet_m1_deploy_unrestricted_20261004.py",
+    "source_only_findings": [
+      "Requires the source review PASS with no blockers and all nine reviewed source hashes matching the current plan. Checks all57 local source bytes before any remote action.",
+      "Uses existing2025/2026 host roots and the explicit2027 mirror. On each of the three mirrors it checks all57 pre-waiver sources, copies exactly the three authorized changed files, then verifies all57 current sources. It does not dispatch models on2025 or2027.",
+      "The only launch target is2026. Its pre-dispatch command parses all9 new Python sources, runs the four CPU mocks, checks actual selected physicalGPU2/3 memory below500MiB, verifies existing data-root and CLIP paths, requires free disk above5,000,000,000 bytes and requires absent campaign output/log paths. These are code gates; none was executed by this reviewer.",
+      "Immediately before dispatch, the remote snippet rechecks all57 sources and absent output/log paths. Exclusive log creation precedes one Popen of the existing reviewed two-queue controller, with a new session and stdout/stderr redirected to that log.",
+      "The spawned controller retains its tensor verifier and all-ten-smokes barrier before any fifty-epoch training. Launch receipts explicitly label CONTROLLER_DISPATCHED_NEURAL_SANITY_NOT_YET_VERIFIED, retain selected_gpus=[2,3],max_parallel=2 and temperature_power_control=False, and preserve the planned campaign name even if the actual start date isOct4.",
+      "The helper adds no power/temperature/admin requirement, retries, fallback environment, GPU0/1 operation, weight deletion or new scientific behavior.",
+      "collect_results.remote_python constructs SSH execution with shlex.quote for the configured interpreter and code. command uses subprocess.run with check=True and a300-second timeout. Importing collect_results does not invoke its guarded main. All generated remote Python snippets inspected here parse successfully."
+    ],
+    "blockers": [],
+    "actual_deployment_or_neural_dispatch_performed_by_reviewer": false
+  }
+}

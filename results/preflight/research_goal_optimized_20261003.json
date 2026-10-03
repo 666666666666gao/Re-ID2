@@ -1,6 +1,6 @@
 {
-  "status": "BLOCKED_UNMET_ADMIN_POWER_LIMIT_REQUIRED",
-  "updated_at": "2026-10-03T23:53:17",
+  "status": "EXECUTION_RESUMED_UNMET",
+  "updated_at": "2026-10-04T00:27:30",
   "execution_objective": "以完整DeMo为强基线，建立跨模态可用集合一致、能够产生实际检索增益的双轴互补Re-ID方法。先证明模态轴与频率轴分工及条件协作优于同增强、同有效参数、同输出维度的普通专家，并用逐查询干预与重训消融证明收益来源；再冻结统一方法，完成三个数据集、至少三个配对种子、独立身份确认划分、全部49种查询—图库模态组合及真实部署成本评测。保留三个数据集完整输入mAP和Rank-1均比同协议完整DeMo至少提高2个百分点的验收目标。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -22,13 +22,13 @@
     },
     {
       "id": "M1",
-      "status": "POOLING_IMPLEMENTED_SOURCE_REVIEW_PASS_CUDA_SANITY_AND_50_EPOCH_PENDING",
+      "status": "V2_ACTUAL_CUDA_SANITY_RUNNING_50_EPOCH_GATED",
       "work": "在MSVR310固定fit/dev先做原平均、合法集合平均、共享查询公共出口的单因素重训；保留DeMo私有路径、FFT、专家、路由、损失和原缺失采样。",
       "evidence": "相同50轮、采样、有效参数预算和5632D；同步匹配普通频域与普通双专家，禁止闲置参数凑容量。检查公共块独立检索、全部49条件和四状态净收益。",
       "actual_evidence": "Frozen V12 outlet scale / projection utility:882 raw-GT cases and185220 query records audited; no training or pooling intervention.",
       "decision": "先判定公共出口是否保留判别信息及是否产生可用增量；若普通频域仍更好或11仍误伤，先定位投影/路由/控制，暂不扩展三数据集。",
       "implementation": "results/preflight/common_outlet_m1_plan.json",
-      "actual_preparation": "Nine new files, old48sources unchanged; fresh source reviewPASS after own-group cleanup repair; local/remote sixCPUthermal mocks pass. NoCUDAmodelcheck or training."
+      "actual_preparation": "User waived temperature/power; four CPU executor mocks and source reviewPASS. Actual first CUDA verifier failed expectedtensordtype mismatch before anysmoke/train; raw preserved, one-line dtype/device repair reviewed; newv2controller live. No50 result yet."
     },
     {
       "id": "M2",
@@ -78,18 +78,17 @@
     "evaluation_selection": "固定身份隔离fit/dev；正式测试和独立确认身份不用于训练或版本选择。开发mAP最大、最早并列最佳；不拼不同版本、不同条件或不同指标各自最优checkpoint。",
     "unnecessary_work": "不强加完整DeMo再涨10点或每模块+2，不先更换FFT/主干/增加专家，不重复已完成测量或权重清理。",
     "hardware": {
-      "power_limit_w": 250,
-      "temperature_ceiling_c": 75,
-      "resume_temperature_c": 70,
-      "power_limit_before_launch_required": true,
-      "hardware_limit_status": "NOT_APPLIED_PERMISSION_DENIED",
-      "temperature_monitor_status": "CPU_REAL_LINUX_PROCESS_LIFECYCLE_PASS_NOT_GPU_LOAD_VALIDATED",
-      "policy": "results/preflight/gpu_thermal_power_policy_20261003.json",
-      "power_limit_status": "NOT_APPLIED_PERMISSION_DENIED",
-      "real_Linux_CPU_checks": "results/preflight/common_outlet_linux_cpu_20261003/result.json"
+      "temperature_power_control": false,
+      "power_limit_before_launch_required": false,
+      "user_override": "不管功率和温度了",
+      "prior_hardware_policy": "HISTORICAL_SUPERSEDED_BY_USER",
+      "selected_physical_gpus": [
+        2,
+        3
+      ]
     }
   },
-  "revision": "20261003_execution_goal_v4_m1_prepared",
+  "revision": "20261004_user_waived_hardware_M1_v2_running",
   "primary_claims": [
     {
       "id": "C1",
@@ -198,15 +197,22 @@
   ],
   "next_action": {
     "milestone": "M1",
-    "status": "BLOCKED_ADMIN_POWER_LIMIT_REQUIRED",
-    "action": "GPU2/3功率/温度启动条件通过后，先运行实际CUDA张量合同与全部10组三更新AMPsmoke屏障，再fresh50和49条件/四状态/独立GT复算。",
+    "status": "ACTUAL_CUDA_AND_ALL10_SMOKE_BARRIER_RUNNING",
+    "action": "实际张量合同及全部10组三更新smoke通过后，同一控制器自动按GPU2/3串行队列运行10组fresh50、49条件/六状态及独立GT复算。",
     "excluded_this_factor": [
       "新增频域关系损失",
       "新增跨集合训练分布",
       "同时拆分贡献估计与控制",
       "三数据集直接扩展"
     ],
-    "hardware_dependency": "管理员设置GPU2/3功率上限至250W并核验；温控代码已实现并通过源码/CPU验证，尚未做实际GPU负载验证。随后执行CUDA合同与全部smoke屏障。目标仍ACTIVE_UNMET。"
+    "hardware_dependency": "用户已明确撤销，无管理员或功率/温度条件；保留GPU2/3、最多2项并行、空闲容量和来源一致性要求。"
   },
-  "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json"
+  "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
+  "user_resumption": {
+    "instruction": "不管功率和温度了",
+    "execution_authorized": true,
+    "prior_blocked_audit": "HISTORICAL_EXPIRED",
+    "platform_status_last_read": "blocked",
+    "platform_status_note": "Available update_goal supports only complete/blocked/paused and cannot programmatically resume; user removed the blocker, so authorized experiment execution continues. No falsecompletion or replacement goal."
+  }
 }

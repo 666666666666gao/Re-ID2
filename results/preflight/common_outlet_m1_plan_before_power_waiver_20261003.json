@@ -1,7 +1,7 @@
 {
-  "status": "SOURCE_REVIEW_PASS_V2_CONTROLLER_DISPATCHED_NEURAL_GATE_PENDING",
+  "status": "SOURCE_REVIEW_PASS_CUDA_SANITY_PENDING_POWER_LIMIT_UNMET",
   "created_at": "2026-10-03T23:10:45",
-  "campaign": "common_outlet_m1_trial_20261003_v2",
+  "campaign": "common_outlet_m1_trial_20261003",
   "objective": "Isolate seven-relation public readout pooling before identity-relation preservation or new cross-availability training.",
   "single_factor": "original_mean versus eligible_mean versus seed_query; all fresh controls share one active512D query residual in the common base head.",
   "architecture_scope": "Only the public outlet of seven already-routed modality relations and interaction increments changes. Frequency retains its existing common increment. This is not a full21token PMA method or completed semantic disentanglement.",
@@ -72,14 +72,13 @@
       2,
       3
     ],
-    "power_limit_w": null,
-    "temperature_ceiling_c": null,
-    "resume_temperature_c": null,
-    "power_before_launch_required": false,
-    "local_thermal_sample_seconds": null,
+    "power_limit_w": 250,
+    "temperature_ceiling_c": 75,
+    "resume_temperature_c": 70,
+    "power_before_launch_required": true,
+    "local_thermal_sample_seconds": 5,
     "remote_progress_poll_seconds": 240,
-    "hardware_limits_last_verified": "USER_REMOVED_REQUIREMENT",
-    "temperature_power_control": false
+    "hardware_limits_last_verified": "NOT_APPLIED_PERMISSION_DENIED"
   },
   "protocol": {
     "dataset": "MSVR310",
@@ -135,7 +134,7 @@
       805.7383282184601,
       789.7134966850281
     ],
-    "note": "Power/temperature restrictions waived by user; estimate actual runtime from the first completed fresh50 job."
+    "note": "Historical350W runs were11.1–13.4min each. Ten50epoch jobs at250W may take longer; first real timed job is required before reliable ETA. Evaluation/smokes are extra."
   },
   "criteria": "Compare matched ordinary frequency/twins, common-block retrieval and11minus00/harm/rescue before broad scaling; do not infer success from gradients or parameters. Keep all3normal+2 and fullmissing goal active.",
   "sources": {
@@ -143,11 +142,11 @@
     "run_common_outlet_experiment.py": "94ede0d2d329e63b403493c0fd62fb6471d8aae1e028ff1398795d3aca800cf4",
     "missing_common_outlet_development.py": "fb055882dfe5d48ff51a396bf29c47a5d2b48292631d91d5dd5a93125b333f70",
     "diagnose_common_outlet_states.py": "f28dea607bfcf35f72250c8fe642615cb9b03f156b1ad298bd793ddfcbf25900",
-    "gpu_thermal_execute.py": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
-    "verify_common_outlet_axis.py": "2b3957bc6c2bac41299cfa985aa20cd000b17925278be78846987f8c7ea498c0",
-    "launch_common_outlet_trial.py": "6be4b58bb90a9af2d387bc9d735ba270291f56aaea37d3d721a745e3b7d9f529",
+    "gpu_thermal_execute.py": "ca942e95e997ac84ee02bdb2aea74a8c4795dda0b33250d9f0fe4e17c6b91164",
+    "verify_common_outlet_axis.py": "f6fb80d38a7f595038cbe7d399748119e9d5ed1c20ae55f0a851dd813e784f50",
+    "launch_common_outlet_trial.py": "6a81979cf317c9140522423b08be162ed9e800d098990c8ed7624da4c63dadc6",
     "audit_common_outlet_states.py": "47d071debbd345af180b612a0ef5e1a65dc54f90ee6a49374d78f6274863fee7",
-    "test_gpu_thermal_execute.py": "9bb827c7084b5f3b647da7dca18274265f01ed188f5e5252832ed9d25cd98a28"
+    "test_gpu_thermal_execute.py": "5b0f05d506c0c21a871afe37cb02618508f880330071457ca373275e8192dca8"
   },
   "previous_sources": {
     "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
@@ -201,29 +200,16 @@
   },
   "review_independence": "same-family",
   "acceptance_status": "provisional",
-  "actual_neural_runs": 1,
+  "actual_neural_runs": 0,
   "review_fixes": [
     "B1: finally cleans only the newly created own process group with SIGKILL+wait when still live, retains exit receipt and propagates the original telemetry error. No retries/fallbacks.",
     "CPU regression tests include sensor timeout while running and while paused. Normal-completion mock polls now repeatedly return cached0 as real Popen does."
   ],
-  "source_review": "results/preflight/common_outlet_m1_tensor_dtype_fix_review.json",
+  "source_review": "results/preflight/common_outlet_m1_review.json",
   "deployed_source_copies": [
     "2025",
     "2026",
     "2027"
   ],
-  "remote_CPU_checks": "results/preflight/common_outlet_m1_remote_cpu_checks.json",
-  "user_override": {
-    "at": "2026-10-04T00:00:24",
-    "instruction": "不管功率和温度了",
-    "effect": "No power/temperature launch gate, periodic monitoring, SIGSTOP/SIGCONT or administrator dependency; GPU2/3/max2/capacity ownership restrictions remain."
-  },
-  "prior_failure": "results/preflight/common_outlet_m1_failed_tensor_20261004/intake.json",
-  "fix": "Only expected routing-coefficient tensor dtype/device now matches actual coefficients. Value/shape/atol1e-6/rtol0 unchanged; no model/train/loss change.",
-  "actual_neural_runs_scope": "One failed CUDA tensor verifier; no smoke or50epoch train, zerooptimizerupdates.",
-  "actual_cuda_verifier_attempts": 2,
-  "actual_smoke_runs": 0,
-  "actual_50_epoch_runs": 0,
-  "current_launch": "results/preflight/common_outlet_m1_v2_2026_launch.json",
-  "current_first_observation": "results/preflight/common_outlet_m1_v2_first_snapshot.json"
+  "remote_CPU_checks": "results/preflight/common_outlet_m1_remote_cpu_checks.json"
 }

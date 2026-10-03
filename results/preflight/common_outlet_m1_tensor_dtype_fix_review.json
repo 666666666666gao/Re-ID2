@@ -1,0 +1,129 @@
+{
+  "verdict": "PASS_SOURCE_REVIEW",
+  "summary": "The one-expression dtype/device repair directly addresses the recorded Float did not match Long failure without weakening the tensor assertion or changing scientific behavior. The prepared v2 deployer preserves the failed attempt, syncs only the repaired verifier and dispatches the unchanged sanity-first controller into a new campaign. No source blockers found. This is a focused rescue source review, not successful CUDA validation.",
+  "reviewed_at": "2026-10-04T00:23:03.952653+08:00",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "reviewer_context": "Focused rescue continuation of the originally fresh native Codex reviewer /root/review_common_outlet_m1_thermal. Runtime model identity is not independently exposed in this context.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "checked_source_sha256": {
+    "common_outlet_axis.py": "b43002891b7a51c01573c3bcf1aaaa8811ae00824b08f1a9989427c8fa2e5436",
+    "run_common_outlet_experiment.py": "94ede0d2d329e63b403493c0fd62fb6471d8aae1e028ff1398795d3aca800cf4",
+    "missing_common_outlet_development.py": "fb055882dfe5d48ff51a396bf29c47a5d2b48292631d91d5dd5a93125b333f70",
+    "diagnose_common_outlet_states.py": "f28dea607bfcf35f72250c8fe642615cb9b03f156b1ad298bd793ddfcbf25900",
+    "gpu_thermal_execute.py": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+    "verify_common_outlet_axis.py": "2b3957bc6c2bac41299cfa985aa20cd000b17925278be78846987f8c7ea498c0",
+    "launch_common_outlet_trial.py": "6be4b58bb90a9af2d387bc9d735ba270291f56aaea37d3d721a745e3b7d9f529",
+    "audit_common_outlet_states.py": "47d071debbd345af180b612a0ef5e1a65dc54f90ee6a49374d78f6274863fee7",
+    "test_gpu_thermal_execute.py": "9bb827c7084b5f3b647da7dca18274265f01ed188f5e5252832ed9d25cd98a28"
+  },
+  "checked_deployer_sha256": "d9b76a4f093c1af18719f0752ee048e5e17b5a1650b2fa4cebdf8cf37913fe5d",
+  "blockers": [],
+  "nonblocking": [],
+  "scope": {
+    "repaired_source": "verify_common_outlet_axis.py:73",
+    "deployer": "C:/Users/gb/.codex_tmp/demo_common_outlet_m1_deploy_v2_20261004.py",
+    "plan": "results/preflight/common_outlet_m1_plan.json",
+    "before_plan": "results/preflight/common_outlet_m1_plan_before_tensor_dtype_fix_20261004.json",
+    "reviewer_modified_sources": [],
+    "other8_M1_sources_unchanged": true,
+    "old48_scientific_sources_unchanged": true,
+    "new_campaign": "common_outlet_m1_trial_20261003_v2"
+  },
+  "actual_failure_evidence_read": {
+    "startup_log": "results/preflight/common_outlet_m1_failed_tensor_20261004/startup.log",
+    "tensor_log": "results/preflight/common_outlet_m1_failed_tensor_20261004/preflight/tensor.log",
+    "tensor_exit_receipt": "results/preflight/common_outlet_m1_failed_tensor_20261004/preflight/tensor_exit.json",
+    "intake": "results/preflight/common_outlet_m1_failed_tensor_20261004/intake.json",
+    "error": "RuntimeError: Float did not match Long",
+    "failing_expression": "torch.allclose(coefficients.sum(1), torch.full((8,), expected, device='cuda'), atol=1e-6, rtol=0)",
+    "tensor_exit_code": 1,
+    "selected_gpu": 2,
+    "forced_own_group_cleanup": false,
+    "controller_terminal_reported_in_intake": true,
+    "fresh50_runs_reported_in_intake": 0,
+    "optimizer_updates_reported_in_intake": 0,
+    "result_scope": "One actual failed CUDA tensor-verifier attempt. The previous tensor contract did not complete; no smoke, fifty-epoch training or optimizer-update acceptance follows from that attempt."
+  },
+  "repair_assessment": {
+    "cause": "For eligible_mean and seed_query, expected is the Python integer1. The recorded CPU reproducer confirms that torch.full without explicit dtype produced int64 while coefficients were float32, making allclose raise before it could compare values.",
+    "new_expression": "torch.full((8,), expected, dtype=coefficients.dtype, device=coefficients.device)",
+    "correctness": "The expected tensor now uses the same dtype/device as the actual coefficient tensor. coefficients.sum(1) retains its floating type. No alternate calculation or fallback is introduced.",
+    "unchanged": [
+      "expected scalar calculation",
+      "shape(8,)",
+      "coefficient summation",
+      "atol=1e-6",
+      "rtol=0",
+      "all other verifier assertions",
+      "model/training/loss/sampling/evaluation code"
+    ],
+    "exact_scope_proof": "Replacing exactly this expression in the current verifier with the logged old expression reconstructs the pre-fix source digest from the archived plan. All other eight M1 sources and all48 scientific sources match their current/pre-fix recorded digests.",
+    "provided_CPU_reproducer": {
+      "original_error": "Float did not match Long",
+      "coefficient_dtype": "torch.float32",
+      "original_expected_dtype": "torch.int64",
+      "fixed_expected_dtype": "torch.float32",
+      "same_tolerance": true,
+      "CUDA_initialized": false,
+      "PASS": true
+    },
+    "CPU_reproducer_attribution": "Executor-provided actual evidence read from intake; not rerun or produced by this reviewer.",
+    "repaired_CUDA_contract_status": "NOT_RUN_BY_REVIEWER_AND_NOT_YET_ESTABLISHED"
+  },
+  "deployer_review": {
+    "verdict": "PASS_SOURCE_REVIEW",
+    "status": "PREPARED_NOT_RUN_BY_REVIEWER",
+    "findings": [
+      "Compared directly with the previously reviewed unrestricted helper. The only helper-text changes are the new review/before-plan/receipt filenames and the changed-source allowlist restricted to verify_common_outlet_axis.py.",
+      "The plan changes the campaign to common_outlet_m1_trial_20261003_v2. Both remote preflight and dispatch require absent output/log paths, and dispatch exclusively creates the new log. The old failed campaign and preserved raw failure files are not overwritten or removed.",
+      "Before mirroring, the helper requires this source review PASS/no blockers and exact all9 checked source hashes, verifies all57 local files and permits only the verifier to differ from the pre-fix plan. Each2025/2026/2027 source mirror must match all57 pre-fix sources, receives only that verifier file, then must match all57 new sources.",
+      "Only2026 can receive a neural controller. Remote preflight parses9 sources, runs the existing4 CPU mocks, checks selected physicalGPU2/3 memory<500MiB, existing data/CLIP paths and disk>5,000,000,000 bytes. These are prepared code gates, not checks run by this reviewer.",
+      "One new-session Popen dispatches the unchanged reviewed two-queue controller. It must complete the full tensor verifier and all10 three-update smokes before any fifty-epoch job. Launch status remains CONTROLLER_DISPATCHED_NEURAL_SANITY_NOT_YET_VERIFIED.",
+      "User power/temperature waiver remains active. PhysicalGPU2/3/max2 scope,240-second capacity waits, own-group cleanup and no automatic retry/fallback remain unchanged. No neural dispatch to2025/2027 or GPU0/1 is introduced.",
+      "This new attempt is justified by the preserved authoritative process failure and corrected assertion; it is not a restart caused by an observation timeout. The intake records the original observer as naturally closed after its terminal observation."
+    ]
+  },
+  "tests_actually_run_by_reviewer": {
+    "kind": "Local Python standard-library source checks only",
+    "interpreter": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe",
+    "new9_AST_parse": "PASS",
+    "current57_source_digest_match": "PASS",
+    "one_expression_inverse_comparison_to_archived_verifier_digest": "PASS",
+    "changed_source_set": [
+      "verify_common_outlet_axis.py"
+    ],
+    "old48_unchanged": true,
+    "other8_M1_unchanged": true,
+    "scientific_and_resource_plan_fields_unchanged": "PASS",
+    "campaign_differs_from_failed_attempt": "PASS",
+    "v2_helper_exact_expected_text_changes": "PASS",
+    "helper_AST": "PASS",
+    "generated_remote_CPU_gate_AST": "PASS",
+    "generated_remote_launch_AST": "PASS",
+    "generated_launch_receipt_newline_and_in_memory_JSON_roundtrip": "PASS",
+    "Torch_imports": 0,
+    "SSH_calls": 0,
+    "actual_remote_commands": 0,
+    "GPU_queries": 0,
+    "model_or_neural_executions": 0,
+    "unchanged_CPU_execution_tests_rerun": false
+  },
+  "preserved_history": {
+    "previous_reviews_and_archived_before_plan_untouched": true,
+    "raw_first_failure_files_untouched": true,
+    "source_changes_made_by_reviewer": false
+  },
+  "required_next_runtime_evidence": [
+    "The repaired verifier must actually pass the entire70-availability tensor contract on the selected2026 GPU before proceeding.",
+    "All10 native three-update smokes, active-gradient checks and strict reload checks must pass before any fifty-epoch training.",
+    "The existing frozen49/six-state294 and installed-GT independent CPU audits remain campaign completion requirements."
+  ],
+  "limitations": [
+    "No SSH, Torch import, CPU Torch reproducer, model construction, CUDA forward/backward, administrator command or deployment was executed by this reviewer.",
+    "The recorded CPU reproducer and terminal-attempt status were read from supplied artifacts; this reviewer did not re-observe the remote host or its process table.",
+    "Source repair and generated-command syntax pass do not establish that the next CUDA verifier or training campaign will pass.",
+    "Same-family/provisional review only; no cross-family or model-runtime acceptance is claimed."
+  ]
+}

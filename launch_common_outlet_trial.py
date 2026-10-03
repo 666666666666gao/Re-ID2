@@ -99,7 +99,7 @@ def main():
         selected = [row for row in rows if row['pooling'] == pooling]
         save(output / pooling / 'controller_result.json', dict(status='COMPLETE', runs=selected))
         save(output / pooling / 'controlled_states/controller_result.json', dict(status='COMPLETE', runs=selected))
-    save(output / 'controller_result.json', dict(status='COMPLETE', runs=rows, power_limit_w=250, temperature_ceiling_c=75))
+    save(output / 'controller_result.json', dict(status='COMPLETE', runs=rows, temperature_power_control=False))
 
 
 if __name__ == '__main__':
