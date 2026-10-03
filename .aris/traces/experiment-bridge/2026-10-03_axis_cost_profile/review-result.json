@@ -1,0 +1,124 @@
+{
+  "status": "PASS",
+  "blockers": [],
+  "observed_at": "2026-10-03T10:56:05+08:00",
+  "helper_sha256": "758c760c662e4fc1667b85c0408e4d96c7fe34fd6e7c6a2b5f5c04f7cb591770",
+  "checked_source_sha256": {
+    "profile_reid_models.py": "48277ee647372932eafda72755f7412bcb979c4dae1f7727b399497d57124b41",
+    "mass_axis_collaboration.py": "1312c8b993dcd16b1db1a8845a247afd4b1eff13255832644dd30e029e268f8d"
+  },
+  "checks_count": 14,
+  "deterministic_groups": 9,
+  "source_review_groups": 5,
+  "reviewer": "gpt-6-astra",
+  "reasoning_effort": "max",
+  "fork_turns": "none",
+  "agent_id": "/root/review_axis_cost_profile",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "scope": "Narrow standalone inference-cost profiler and2027 GPU0 deployment helper; source/AST/stdlib mock only.",
+  "checks": [
+    {
+      "name": "frozen14_and_current_source_binding",
+      "status": "PASS",
+      "detail": "Existing launch receipt gives exactly14 preserved sources; current bytes match all14; helper uses the actual READY state field."
+    },
+    {
+      "name": "profile15_actual_AST_counts_units_limits",
+      "status": "PASS",
+      "detail": "15 distinct cases, one first8 dev batch each dataset,26 forwards/case (5+20+1),31 JSON writes, correct ms-to-throughput and FLOPs/8, all incompleteness/zero-update limits retained."
+    },
+    {
+      "name": "profile_peak_lifecycle_and_model_release",
+      "status": "PASS",
+      "detail": "Mock runtime enforces warmup5 before reset, peak reads after timed20 before profiler, no retained model before next constructor,15 empty-cache calls. CUDA events and synchronization are explicit per trial."
+    },
+    {
+      "name": "profile_state_version_guard",
+      "status": "PASS",
+      "detail": "A mutated registered tensor version after the26th forward is rejected before writing its condition."
+    },
+    {
+      "name": "deploy_happy_actual_AST",
+      "status": "PASS",
+      "detail": "Exact physical READY2027 interpreter/project/data paths; one read-only guard, two new file uploads,16-source recheck, output-parent creation and one new-session Python -c launch; GPU0 only."
+    },
+    {
+      "name": "local_review_and_READY_gates",
+      "status": "PASS",
+      "detail": "Status,blockers,helper/current-source binding and non-READY state each reject before any remote call."
+    },
+    {
+      "name": "guard_zero_remote_mutation",
+      "status": "PASS",
+      "detail": "Old-source mismatch,either preexisting new file,preexisting output,GPU0 memory500 each reject before uploads,remote writes or start."
+    },
+    {
+      "name": "postupload_source_and_GPU_recheck",
+      "status": "PASS",
+      "detail": "Mutated uploaded source and newly occupied GPU0 reject before output mkdir or process start; uploaded files are preserved without retries."
+    },
+    {
+      "name": "wrapper_log_exit_failure_no_retry",
+      "status": "PASS",
+      "detail": "Success and actual nonzero child exit each produce one exclusive log and exit JSON; failed child then raises, with one child invocation and no retry; correct cwd and GPU0-only environment."
+    },
+    {
+      "name": "actual_torch251_profiler_API",
+      "status": "PASS",
+      "mode": "source_review",
+      "detail": "The installed READY2027 ledger records torch2.5.1+cu121. Official v2.5.1 source defines FunctionEventAvg.self_device_time_total, count, key and flops; key_averages returns these aggregates. None-valued per-event FLOPs do not replace the aggregate initial zero. No compatibility fallback is needed.",
+      "sources": [
+        "https://raw.githubusercontent.com/pytorch/pytorch/v2.5.1/torch/autograd/profiler_util.py"
+      ]
+    },
+    {
+      "name": "profiler_coverage_and_observer_effect",
+      "status": "PASS",
+      "mode": "source_review",
+      "detail": "Official v2.5.1 profiler accepts CPU/CUDA activities, record_shapes and with_flops; documentation restricts FLOPs estimates to selected operations and warns of observer overhead. Source reads timing peaks before the separate profiler forward and exposes unreported operators, lower-bound naming and complete_model_FLOPs=false.",
+      "sources": [
+        "https://raw.githubusercontent.com/pytorch/pytorch/v2.5.1/torch/profiler/profiler.py"
+      ]
+    },
+    {
+      "name": "actual_dev_data_FP32_and_parameter_scope",
+      "status": "PASS",
+      "mode": "source_review",
+      "detail": "split_records reads installed training directories and fixed identity-disjoint development identities; make_loader(False) has deterministic eval transforms, no shuffle/drop_last, so dev[:8] yields8 real triplets. Existing source resizes to SIZE_TRAIN; all three current YAML files have matching SIZE_TRAIN/SIZE_TEST. All model constructors finish float().cuda(), eval applies to all submodules, and inference_mode encloses every measured forward. Counts are all registered and all requires_grad parameters, not a claim that every counted parameter runs at inference."
+    },
+    {
+      "name": "model_variants_and_zero_retrieval_selection",
+      "status": "PASS",
+      "mode": "source_review",
+      "detail": "The five requested variants are complete DeMo, V4 axis/plain/frequency fullref and V5 relation-mass. Four enhanced counts/dimensions are checked at runtime. Existing constructors and source receipts retain the previously reviewed model allocation; this review does not repeat that review. Only public CLIP plus fresh ReID heads is used. There is no optimizer, backward, checkpoint selection, retrieval evaluation or official test path."
+    },
+    {
+      "name": "physical_paths_and_import_resolution",
+      "status": "PASS",
+      "mode": "source_review",
+      "detail": "READY ledger target_prefix and documented project/data paths match /data/gb/Re-ID on2027. collect_results.remote_python reads the locally overridden HOSTS2027 interpreter. Wrapper uses Python -c with project cwd and child invokes profile_reid_models.py from that cwd, making project-root imports resolvable. No shell source/env install, old-file upload, signals, other-host calls or other-GPU allocation are introduced."
+    }
+  ],
+  "non_blocking_findings": [],
+  "source_or_handoff_modified": false,
+  "source_binding_rechecked_at_finalization": true,
+  "real_remote_calls": 0,
+  "real_process_spawns": 0,
+  "torch_imports": 0,
+  "gpu_forwards": 0,
+  "optimizer_updates": 0,
+  "harness_attempts": 1,
+  "harness_failures_preserved": [],
+  "harness_status": "First full narrow harness passed; no harness failure occurred or was removed.",
+  "trace_path": ".aris/traces/experiment-bridge/2026-10-03_axis_cost_profile",
+  "limitations": [
+    "PASS gates the reviewed source/deployment sequence. This reviewer did not execute actual Torch, CUDA, datasets, SSH, uploads, installs, signals or the15 cost conditions.",
+    "Mock timing, memory and parameters are fixtures validating sequencing and units; they are not measurements or evidence of actual throughput, peak memory, initialized tensor equality or GPU release.",
+    "Measured wall latency includes CUDA-event recording and synchronization/dispatch overhead. CUDA event samples measure their own event interval. Both exclude input decoding and host-to-device transfer.",
+    "Peak allocated/reserved values are process allocator bytes after warmup, including the model, held inputs/output and any allocator reservation. They are not total nvidia-smi device memory or activation-only bytes.",
+    "One fixed batch of8 and20 sequential trials cannot establish broad serving throughput or latency percentiles; shared-host load remains a disclosed limitation.",
+    "Profiler FLOPs are selected-operator estimates only. No full-model FLOPs, equal compute from equal parameters, trained retrieval score or speed superiority is established.",
+    "Current remote source/resources are intentionally left to the runtime guards; a past READY receipt does not prove current GPU availability."
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "observed_at": "2026-10-03T10:46:14",
+  "scope": "Additional V5 post-normalization relation-mass seed42 public-CLIP fresh50-epoch development runs. Compare same-capacity V4 and independent DeMo using identical GT and sampler. Frozen raw evidence and paired GT query audit, no new GPU forward or optimizer update/test.",
+  "runs": {
+    "MSVR310_axis_mass_fullref_s42": {
+      "dataset": "MSVR310",
+      "variant": "axis_mass_fullref",
+      "best_epoch": 44,
+      "metrics": {
+        "mAP": 48.00827999027874,
+        "mINP": 34.20338615064865,
+        "Rank-1": 59.04761904761905,
+        "Rank-5": 70.47619047619048,
+        "Rank-10": 75.71428571428571,
+        "Rank-20": 79.52380952380952
+      },
+      "parameters": 99681414,
+      "trainable_parameters": 99669638,
+      "descriptor_dim": 5632,
+      "attempts": 453,
+      "updates": 453,
+      "amp_skips": 0,
+      "all50_epochs_finite_earliest_max_mAP_verified": true,
+      "six_metrics_per_query_recomputed": true,
+      "strict_reload_four_metrics_equal": true,
+      "sampling_epoch_step_names_equal_demo": true,
+      "capacity_and_dim_match_same_dataset_V4_axis": true,
+      "delta": {
+        "demo": {
+          "mAP": 0.4004878863978476,
+          "mINP": 0.6816195788869521,
+          "Rank-1": 0.0,
+          "Rank-5": 1.4285714285714306,
+          "Rank-10": -0.9523809523809632,
+          "Rank-20": -0.4761904761904816
+        },
+        "V4_axis_scaled_fullref": {
+          "mAP": 2.124794838589793,
+          "mINP": 1.759004980228589,
+          "Rank-1": 0.952380952380949,
+          "Rank-5": 1.9047619047619122,
+          "Rank-10": 0.952380952380949,
+          "Rank-20": -1.4285714285714306
+        }
+      },
+      "paired_queries": {
+        "demo": {
+          "paired_ground_truth_and_query_order_exact": true,
+          "valid_queries": 210,
+          "rank1_harmed_count": 10,
+          "rank1_rescued_count": 10,
+          "rank1_harmed_fraction_of_all_queries": 0.047619047619047616,
+          "rank1_rescued_fraction_of_all_queries": 0.047619047619047616,
+          "rank1_harmed_fraction_of_reference_correct": 0.08064516129032258,
+          "rank1_rescued_fraction_of_reference_wrong": 0.11627906976744186,
+          "AP_improved_count": 95,
+          "AP_worsened_count": 101,
+          "AP_identical_count": 14,
+          "mAP_delta_recomputed_from_per_query_pp": 0.4004878863978501,
+          "Rank1_delta_recomputed_from_per_query_pp": 0.0,
+          "limit": "Paired separately trained dev checkpoints; these changes do not isolate expert-off effects inside the V4 model."
+        },
+        "V4_axis_scaled_fullref": {
+          "paired_ground_truth_and_query_order_exact": true,
+          "valid_queries": 210,
+          "rank1_harmed_count": 8,
+          "rank1_rescued_count": 10,
+          "rank1_harmed_fraction_of_all_queries": 0.0380952380952381,
+          "rank1_rescued_fraction_of_all_queries": 0.047619047619047616,
+          "rank1_harmed_fraction_of_reference_correct": 0.06557377049180328,
+          "rank1_rescued_fraction_of_reference_wrong": 0.11363636363636363,
+          "AP_improved_count": 132,
+          "AP_worsened_count": 62,
+          "AP_identical_count": 16,
+          "mAP_delta_recomputed_from_per_query_pp": 2.124794838589801,
+          "Rank1_delta_recomputed_from_per_query_pp": 0.9523809523809523,
+          "limit": "Paired separately trained dev checkpoints; these changes do not isolate expert-off effects inside the V4 model."
+        }
+      },
+      "mAP_Rank1_2pp_over_demo": false
+    }
+  },
+  "source_sha256": {
+    "results/axis_collaboration_v5_mass/development/MSVR310_axis_mass_fullref_s42/result.json": "ec550726d294285d4f1ed8b6191a9f302b6f19e774c9d3779dc06a64d1701987",
+    "results/axis_collaboration_v5_mass/development/MSVR310_axis_mass_fullref_s42_exit.json": "c8758c5ff89e53290d98a7561d3350e55a60ba62a5ed6a8b5f195e0045e7cffa",
+    "results/axis_collaboration_v5_mass/development/MSVR310_axis_mass_fullref_s42/epochs.csv": "088d76fc4c06f9083a8eb9783dce71709019c92bf73659393c5d79b237fb3c71",
+    "results/axis_collaboration_v5_mass/development/MSVR310_axis_mass_fullref_s42/batch_orders.jsonl": "ec453c2027d65b7ddfddcbf3aa2f0ee7ee9b01382230b006f99ec208ce188aca",
+    "results/full_suite/MSVR310_demo_s42/batch_orders.jsonl": "ec453c2027d65b7ddfddcbf3aa2f0ee7ee9b01382230b006f99ec208ce188aca",
+    "results/axis_collaboration_v5_mass/development/MSVR310_axis_mass_fullref_s42/development_metrics/full_metrics.json": "9694953b6899ed0bdf515de6c7975f3e787e418932c50f864be6bf089c612d38",
+    "results/axis_collaboration_v5_mass/development/MSVR310_axis_mass_fullref_s42/development_metrics/full_metrics.csv": "1dd1183cb3f64b91a948baeedb521a7eefc6d55debe9a4be0b8199e3e6736a55",
+    "results/full_suite/MSVR310_demo_s42/full_evaluation/metrics.json": "50751664e8b8a19ae627353ea830f148d072f04bb016e001f94ba996579774d1",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/result.json": "4797bb8917611c5e224a7e7bc9fea8d707e0538fea43cbadf6851e0a901f6cd9",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/development_metrics/full_metrics.json": "609f6735845a17a1d324bee634dd10319ffd62250498a43c118cf2c9a0ee3dba",
+    "results/full_suite/MSVR310_demo_s42/full_evaluation/dev_per_query.csv": "bc7d077d300f4d33b1827ad52c966b4ada044602773dbdf279ebbf9471e374da",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/development_metrics/full_metrics.csv": "2a11b1bb208cc55b30dbfb2a1a42e545c727e219e538d4a372615d7f0d4d7e2c"
+  },
+  "status": "PASS_EVIDENCE_AUDIT"
+}

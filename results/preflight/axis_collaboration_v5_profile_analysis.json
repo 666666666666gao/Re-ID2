@@ -1,0 +1,84 @@
+{
+  "status": "PASS_ACTUAL_ALL15_COST_EVIDENCE",
+  "observed_at": "2026-10-03T11:09:34",
+  "conditions": 15,
+  "optimizer_updates": 0,
+  "official_test_uses": 0,
+  "checked": "Raw file intake bytes, actual15case rows and operators, 20sample timing min/median/max, throughput units, GPU allocation/reservation, partialFLOPs sums, same8input names/shape, augmented sameparams/5632D, unchanged state versions",
+  "complete_model_FLOPs": false,
+  "hotspots": [
+    {
+      "dataset": "MSVR310",
+      "operator": "aten::addmm",
+      "count": 356,
+      "self_cpu_time_us": 7364.166999999831,
+      "self_device_time_us": 28766.34499999995,
+      "reported_flops": 540314831872
+    },
+    {
+      "dataset": "MSVR310",
+      "operator": "aten::_efficient_attention_forward",
+      "count": 83,
+      "self_cpu_time_us": 1140.5829999999457,
+      "self_device_time_us": 6794.120000000019,
+      "reported_flops": 0
+    },
+    {
+      "dataset": "MSVR310",
+      "operator": "aten::mul",
+      "count": 241,
+      "self_cpu_time_us": 2271.8410000000695,
+      "self_device_time_us": 3251.0229999999865,
+      "reported_flops": 231790125
+    },
+    {
+      "dataset": "RGBNT201",
+      "operator": "aten::addmm",
+      "count": 328,
+      "self_cpu_time_us": 6678.940999999844,
+      "self_device_time_us": 29636.576999999874,
+      "reported_flops": 540318501888
+    },
+    {
+      "dataset": "RGBNT201",
+      "operator": "aten::_efficient_attention_forward",
+      "count": 83,
+      "self_cpu_time_us": 972.1610000000132,
+      "self_device_time_us": 6912.976999999973,
+      "reported_flops": 0
+    },
+    {
+      "dataset": "RGBNT201",
+      "operator": "aten::mul",
+      "count": 181,
+      "self_cpu_time_us": 1728.3870000002091,
+      "self_device_time_us": 3176.692000000002,
+      "reported_flops": 231789901
+    },
+    {
+      "dataset": "RGBNT100",
+      "operator": "aten::addmm",
+      "count": 356,
+      "self_cpu_time_us": 7786.266000000089,
+      "self_device_time_us": 29398.976000000108,
+      "reported_flops": 540314831872
+    },
+    {
+      "dataset": "RGBNT100",
+      "operator": "aten::_efficient_attention_forward",
+      "count": 83,
+      "self_cpu_time_us": 1062.2329999999045,
+      "self_device_time_us": 6845.237000000003,
+      "reported_flops": 0
+    },
+    {
+      "dataset": "RGBNT100",
+      "operator": "aten::mul",
+      "count": 241,
+      "self_cpu_time_us": 2473.1460000001334,
+      "self_device_time_us": 3256.252999999984,
+      "reported_flops": 231790125
+    }
+  ],
+  "limits": "One RTX3090 GPU0 on shared host; publicCLIP/freshheads architecture costs; decode/H2D excluded; 20trials and one profile per case; reported FLOPs are only supported operators, not total model cost or equivalence"
+}
