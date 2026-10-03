@@ -1,0 +1,10 @@
+--- helper-before-binding-fix
++++ helper-after-binding-fix
+@@ -15,7 +15,6 @@
+ assert review['checked_source_sha256']==new_sources
+ launch=json.loads((PROJECT/'results/preflight/retrieval_utility_launch.json').read_text(encoding='utf-8'))
+ sources=launch['source_sha256'].copy()
+-sources['missing_evaluation.py']=hashlib.sha256((PROJECT/'missing_evaluation.py').read_bytes()).hexdigest()
+ assert all(hashlib.sha256((PROJECT/name).read_bytes()).hexdigest()==sha for name,sha in sources.items())
+ root,python=HOSTS['2026']
+ training=launch['output']+'/development'

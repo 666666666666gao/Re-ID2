@@ -1,0 +1,376 @@
+--- run_relation_frequency_experiment.py
++++ run_retrieval_utility_experiment.py
+@@ -14,7 +14,7 @@
+ from residual_dual_axis import ResidualAugmentedDeMo
+ from axis_collaboration import AxisCollaborationDeMo
+ from scaled_axis_collaboration import ScaledAxisCollaborationDeMo, VARIANTS as SCALED_VARIANTS
+-from relation_frequency_interface import RelationFrequencyInterfaceDeMo
++from retrieval_utility_axis import RetrievalUtilityDeMo
+ from experiment_data import split_records, make_loader, seed_all
+ from layers.make_loss import make_loss
+ from solver.make_optimizer import make_optimizer
+@@ -44,8 +44,8 @@
+ 
+ def build(args, cfg, classes, cameras):
+     seed_all(args.seed)
+-    assert args.variant == 'axis_relation_frequency_fullref'
+-    model = RelationFrequencyInterfaceDeMo(classes, cfg, cameras).float().cuda()
++    assert args.variant == 'axis_retrieval_utility_fullref'
++    model = RetrievalUtilityDeMo(classes, cfg, cameras).float().cuda()
+     model.contribution_loss_weight = args.contribution_weight
+     return model
+ 
+@@ -101,7 +101,7 @@
+ def main():
+     parser = argparse.ArgumentParser()
+     parser.add_argument('--dataset', choices=['RGBNT201', 'RGBNT100', 'MSVR310'], required=True)
+-    parser.add_argument('--variant', choices=['axis_relation_frequency_fullref'], required=True)
++    parser.add_argument('--variant', choices=['axis_retrieval_utility_fullref'], required=True)
+     parser.add_argument('--data-root', required=True)
+     parser.add_argument('--pretrained', required=True)
+     parser.add_argument('--output', required=True)
+@@ -145,6 +145,8 @@
+     info['initial_frequency_amplitude_scale'] = .05
+     info['residual_anchor'] = 'Unchanged V5 M/I; shared PF per source-specific relation, stopped original per-relation norms, F amplitude scale .05 times Fgate and legal relation weight; zero tail5632D'
+     info['unchanged_V5_factors'] = 'backbone, FFT, expert parameters, full cross-condition/router, auxiliary taps, gates, loss weights, contribution reference, optimizer, split, sampling, public CLIP and50; F interface uses perS pooling and independent F-only relation weights'
++    info['method_revision'] = 'P1 retrieval utility: unchanged source-specific interface B plus stopped-reference joint margin gain on its actual residual path'
++    info['retrieval_gain'] = dict(weight=model.gain_weight, margin=model.gain_margin, temperature=model.gain_temperature, reference='stopped base00 current training batch, same legal hard positive/negative for all states', target='stopped max of00/10/01 plus margin', gradient='direct base coordinate removed; expert/shared backbone input gradients remain')
+     write_json(out / 'run.json', info)
+     if args.mode == 'prepare':
+         torch.save(model.state_dict(), out / 'initial.pth')
+@@ -185,6 +187,7 @@
+                   'strict_reload_equal': True, 'peak_memory': torch.cuda.max_memory_allocated(), 'finished': time.time()}
+         if isinstance(model, AxisCollaborationDeMo):
+             result['contribution_sanity'] = model.contribution_audit
++            result['retrieval_gain_sanity'] = model.gain_audit
+         write_json(out / 'smoke.json', result)
+         print('SMOKE_PASS', flush=True)
+         return
+@@ -206,7 +209,7 @@
+                 loss, names, updated, scale = step(model, batch, optimizer, scaler, loss_fn)
+                 steps += 1; losses.append(loss)
+                 optimizer_steps += int(updated)
+-                orders.write(json.dumps({'epoch': epoch, 'step': steps, 'optimizer_updated': updated, 'amp_scale': scale, 'names': names}) + '\n')
++                orders.write(json.dumps({'epoch': epoch, 'step': steps, 'optimizer_updated': updated, 'amp_scale': scale, 'names': names, 'retrieval_gain': model.gain_audit}) + '\n')
+                 if not updated:
+                     print('AMP_SKIPPED', epoch, steps, 'scale', scale, flush=True)
+             metrics = evaluate(model, val_loader, queries, args.dataset)
+--- launch_relation_frequency_trial.py
++++ launch_retrieval_utility_trial.py
+@@ -16,17 +16,17 @@
+     args=parser.parse_args()
+     output=Path(args.output);output.mkdir(exist_ok=False)
+     preflight=output/'preflight';preflight.mkdir()
+-    argv=[sys.executable,'-u','verify_relation_frequency_interface.py','--data-root',args.data_root,'--pretrained',args.pretrained,
++    argv=[sys.executable,'-u','verify_retrieval_utility.py','--data-root',args.data_root,'--pretrained',args.pretrained,
+         '--output',str(preflight/'tensor')]
+     rows=[execute(argv,preflight,'tensor',1)]
+-    assert json.loads((preflight/'tensor/result.json').read_text())['status']=='PASS_RELATION_FREQUENCY_TENSOR_CONTRACT'
+-    common=[sys.executable,'-u','run_relation_frequency_experiment.py','--dataset','MSVR310','--variant','axis_relation_frequency_fullref',
++    assert json.loads((preflight/'tensor/result.json').read_text())['status']=='PASS_RETRIEVAL_UTILITY_CONTRACT'
++    common=[sys.executable,'-u','run_retrieval_utility_experiment.py','--dataset','MSVR310','--variant','axis_retrieval_utility_fullref',
+         '--seed','42','--contribution-weight','.05','--data-root',args.data_root,'--pretrained',args.pretrained]
+     rows.append(execute(common+['--mode','smoke','--output',str(preflight/'smoke')],preflight,'smoke',1))
+     assert json.loads((preflight/'smoke/smoke.json').read_text())['status']=='SMOKE_PASS'
+     write_json(output/'preflight_result.json',dict(status='PASS',checks=rows))
+     development=output/'development';development.mkdir()
+-    name='MSVR310_axis_relation_frequency_fullref_s42'
++    name='MSVR310_axis_retrieval_utility_fullref_s42'
+     rows.append(execute(common+['--mode','train','--output',str(development/name)],development,name,1))
+     result=json.loads((development/name/'result.json').read_text())
+     assert result['status']=='COMPLETE' and result['epochs']==50
+--- verify_relation_frequency_interface.py
++++ verify_retrieval_utility.py
+@@ -1,11 +1,13 @@
+-"""Actual per-source F injection and closed-state contract, without updates."""
++"""Check unchanged descriptors and genuine stopped-reference gain gradients."""
+ import argparse
+ from pathlib import Path
+ import torch
+ from torch.nn import functional as F
+-from experiment_data import make_loader,split_records
+-from run_mass_experiment import build as build_v5
+-from run_relation_frequency_experiment import build,configuration,write_json
++
++from experiment_data import make_loader, split_records
++from run_relation_frequency_experiment import build as build_b
++from run_retrieval_utility_experiment import build, configuration, write_json
++from retrieval_utility_axis import joint_retrieval_gain
+ 
+ 
+ def main():
+@@ -14,64 +16,64 @@
+     parser.add_argument('--pretrained',required=True)
+     parser.add_argument('--output',required=True)
+     args=parser.parse_args()
+-    args.dataset='MSVR310';args.variant='axis_relation_frequency_fullref';args.seed=42;args.contribution_weight=.05
++    args.dataset='MSVR310';args.variant='axis_retrieval_utility_fullref';args.seed=42;args.contribution_weight=.05
+     output=Path(args.output);output.mkdir(exist_ok=False)
+     torch.set_num_threads(4)
+     cfg=configuration(args)
+-    _,dev,_,classes,cameras=split_records(args.data_root,args.dataset)
+-    baseline=build_v5(argparse.Namespace(**{**vars(args),'variant':'axis_mass_fullref'}),cfg,classes,cameras)
++    fit,dev,_,classes,cameras=split_records(args.data_root,args.dataset)
++    baseline=build_b(argparse.Namespace(**{**vars(args),'variant':'axis_relation_frequency_fullref'}),cfg,classes,cameras)
+     model=build(args,cfg,classes,cameras)
+     old,new=baseline.state_dict(),model.state_dict()
+-    assert set(old)==set(new) and all(torch.equal(old[name],new[name]) for name in old)
++    assert set(old)==set(new) and all(torch.equal(old[key],new[key]) for key in old)
++    assert model.loss_weights==baseline.loss_weights
+     parameters=sum(p.numel() for p in model.parameters())
+-    assert parameters==sum(p.numel() for p in baseline.parameters()) and model.loss_weights==baseline.loss_weights
++    assert parameters==sum(p.numel() for p in baseline.parameters())
+     images,_,cam,scene,_=next(iter(make_loader(dev[:8],cfg,False,args.seed)))
+     images={key:value.cuda() for key,value in images.items()};cam,scene=cam.cuda(),scene.cuda()
+     baseline.eval();model.eval()
+-    versions={name:value._version for name,value in model.state_dict().items()}
+-    read_m,read_f=model.modality_expert.read,model.frequency_expert.read
+-    evidence_m,evidence_f=[],[]
+-    def capture_m(*arguments,**kwargs):
+-        value=read_m(*arguments,**kwargs);evidence_m.append(value);return value
+-    def capture_f(*arguments,**kwargs):
+-        value=read_f(*arguments,**kwargs);evidence_f.append(value);return value
+-    model.modality_expert.read=capture_m;model.frequency_expert.read=capture_f
+-    fuse=model.fuse;calls=[]
+-    def capture_fuse(*arguments,**kwargs):
+-        calls.append(arguments);return fuse(*arguments,**kwargs)
+-    model.fuse=capture_fuse
++    versions={key:value._version for key,value in model.state_dict().items()}
+     with torch.no_grad():
+         before=baseline(images,cam_label=cam,view_label=scene)
+         after=model(images,cam_label=cam,view_label=scene)
+-        base,modality,frequency,gates,use_m,use_f,eligible,mass,relation_frequency=calls[0]
+-        assert before.shape==after.shape==(8,5632) and after[:,-512:].eq(0).all()
+-        assert torch.equal(before[:,:1536],after[:,:1536])
+-        conditional=model.last_route/model.last_route.sum(2,keepdim=True)
+-        expected_relation=(model.router.by_relation(evidence_f[1])*conditional[...,None]).sum(2)
+-        assert torch.equal(expected_relation,relation_frequency)
+-        anchor=base[:,1536:5120].reshape(8,7,512).norm(dim=-1,keepdim=True)
+-        direction=F.normalize(model.frequency_projection(relation_frequency.float()),dim=-1)
+-        delta=model.residual_scale[1]*gates[:,1:2,None]*direction*anchor*(mass*7)[...,None]
+-        expected=torch.cat((before[:,:1536],before[:,1536:5120]+delta.flatten(1),torch.zeros_like(before[:,-512:])),1)
+-        assert torch.equal(expected,after) and torch.isfinite(after).all()
+-        available=torch.ones((8,3),device='cuda',dtype=torch.bool)
+-        m0,f0=evidence_m[0],evidence_f[0]
+-        states=model.controlled_states(base,m0,f0,eligible,available,after)
+-        changed_m=model.controlled_states(base,m0+999,f0,eligible,available,after)
+-        changed_f=model.controlled_states(base,m0,f0+999,eligible,available,after)
+-        assert torch.equal(states['01'],changed_m['01']) and torch.equal(states['10'],changed_f['10'])
+-        assert len(evidence_m)==len(evidence_f)==2
+-        m_only=baseline.fuse(base,model.modality_expert.pool(m0,eligible),torch.zeros_like(frequency),
+-            model.calibrator(base,model.modality_expert.pool(m0,eligible),torch.zeros_like(frequency))[1],True,False,eligible)
+-        assert torch.equal(states['10'],m_only)
+-    assert versions=={name:value._version for name,value in model.state_dict().items()}
+-    write_json(output/'result.json',dict(status='PASS_RELATION_FREQUENCY_TENSOR_CONTRACT',parameters=parameters,
+-        descriptor_dim=5632,initial_all_state_and_loss_weights_equal_V5=True,source_specific_band_pool_exact=True,
+-        original_global_coordinates_exact=True,frequency_identity_injection_exact=True,frequency_tail_exact_zero=True,
+-        state01_invariant_to_independent_M_evidence=True,state10_invariant_to_independent_F_evidence=True,
+-        controlled_states_no_additional_conditioned_expert_reads=True,state10_exact_original_V5=True,
+-        state_tensor_versions_unchanged=True,optimizer_updates=0,official_test_uses=0))
+-    print('RELATION_FREQUENCY_TENSOR_PASS',flush=True)
++    assert torch.equal(before,after) and after.shape==(8,5632) and after[:,-512:].eq(0).all()
++    assert versions=={key:value._version for key,value in model.state_dict().items()}
++    images,labels,cam,scene,_=next(iter(make_loader(fit,cfg,True,args.seed)))
++    images={key:value.cuda() for key,value in images.items()};labels,cam,scene=labels.cuda(),cam.cuda(),scene.cuda()
++    baseline.train();model.train()
++    cpu_rng=torch.get_rng_state();cuda_rng=torch.cuda.get_rng_state()
++    with torch.no_grad(),torch.autocast('cuda'):
++        old_output=baseline(images,label=labels,cam_label=cam,view_label=scene)
++    torch.set_rng_state(cpu_rng);torch.cuda.set_rng_state(cuda_rng)
++    with torch.no_grad(),torch.autocast('cuda'):
++        new_output=model(images,label=labels,cam_label=cam,view_label=scene)
++    assert len(old_output)==len(new_output) and all(torch.equal(a,b) for a,b in zip(old_output[:-1],new_output[:-1]))
++    assert torch.isclose(new_output[-1].float()-old_output[-1].float(),torch.tensor(model.gain_weight*model.gain_audit['loss'],device='cuda'),atol=1e-7,rtol=1e-5)
++    assert not hasattr(model,'_gain_states')
++    # Actual differentiable residual coordinates, with a separate base leaf.
++    base=torch.randn(8,32,device='cuda',requires_grad=True)
++    delta=(.001*torch.randn_like(base)).detach().requires_grad_()
++    labels=torch.arange(4,device='cuda').repeat_interleave(2)
++    states={'00':base,'10':base,'01':base,'11':base+delta}
++    loss,audit=joint_retrieval_gain(states,labels)
++    grad_base,grad_delta=torch.autograd.grad(loss,(base,delta))
++    assert torch.isfinite(loss) and loss>0
++    assert grad_base.eq(0).all() and torch.isfinite(grad_delta).all() and grad_delta.abs().sum()>0
++    with torch.no_grad():
++        reference=F.normalize(base,dim=1);similarity=reference@reference.T
++        same=labels[:,None].eq(labels[None]);positive=same & ~torch.eye(8,device='cuda',dtype=torch.bool)
++        pos=similarity.masked_fill(~positive,torch.inf).argmin(1)
++        neg=similarity.masked_fill(same,-torch.inf).argmax(1)
++        direction=reference[pos]-reference[neg]
++        r00=(reference*direction).sum(1);r11=(F.normalize(base+delta,dim=1)*direction).sum(1)
++        weights=(-r00/.1).sigmoid();expected=(weights*(r00+.02-r11).relu()).sum()/weights.sum()
++        assert torch.equal(loss.detach(),expected) and audit['positive_indices']==pos.tolist() and audit['negative_indices']==neg.tolist()
++    write_json(output/'result.json',dict(status='PASS_RETRIEVAL_UTILITY_CONTRACT',parameters=parameters,
++        descriptor_dim=5632,active_descriptor_dim=5120,initial_all_state_and_loss_weights_equal_B=True,
++        eval_descriptor_bitwise_equal_B=True,train_all_original_output_pairs_bitwise_equal_B=True,
++        only_new_scalar_gain_added=True,direct_base_gain_gradient_exact_zero=True,
++        actual_residual_gain_gradient_finite_nonzero=True,legal_fixed_reference_indices_exact=True,
++        no_retained_gain_graph=True,optimizer_updates=0,official_test_uses=0,gain_sanity=audit))
++    print('RETRIEVAL_UTILITY_TENSOR_PASS',flush=True)
+ 
+ 
+ if __name__=='__main__':main()
+--- relation_frequency_interface.py
++++ retrieval_utility_axis.py
+@@ -1,110 +1,58 @@
+-"""P1-B: source-specific F residuals in DeMo identity relation coordinates."""
++"""Train interface B's residuals to improve a fixed-reference retrieval margin."""
+ import torch
+ from torch.nn import functional as F
+-from dual_axis import RELATIONS
+-from mass_axis_collaboration import MassAxisCollaborationDeMo
++
++from relation_frequency_interface import RelationFrequencyInterfaceDeMo
+ 
+ 
+-class RelationFrequencyInterfaceDeMo(MassAxisCollaborationDeMo):
+-    def fuse(self,base,modality,frequency,gates,use_m,use_f,eligible,relation_mass=None,relation_frequency=None):
+-        original=super().fuse(base,modality,frequency,gates,use_m,use_f,eligible,relation_mass)
+-        if not use_f:return original
+-        assert relation_frequency is not None and relation_mass is not None
+-        with torch.autocast('cuda',enabled=False):
+-            batch,relations,dim=relation_frequency.shape
+-            anchor=base[:,3*dim:10*dim].float().reshape(batch,relations,dim).norm(dim=-1,keepdim=True).detach()
+-            direction=F.normalize(self.frequency_projection(relation_frequency.float()),dim=-1)
+-            weights=relation_mass.float()*eligible.sum(1,keepdim=True)
+-            residual=self.residual_scale[1]*gates.float()[:,1:2,None]*direction*anchor*weights[...,None]*eligible[...,None]
+-            identity=original[:,:10*dim].float()
+-            corrected=torch.cat((identity[:,:3*dim],identity[:,3*dim:]+residual.flatten(1)),1)
+-            return torch.cat((corrected,torch.zeros_like(base[:,-dim:])),1)
++def joint_retrieval_gain(states, labels, margin=.02, temperature=.1):
++    with torch.autocast('cuda', enabled=False):
++        base = states['00'].float()
++        reference = F.normalize(base.detach(), dim=1)
++        similarity = reference @ reference.T
++        same = labels[:, None].eq(labels[None])
++        positive = same & ~torch.eye(len(labels), device=labels.device, dtype=torch.bool)
++        negative = ~same
++        assert positive.any(1).all() and negative.any(1).all()
++        pos = similarity.masked_fill(~positive, torch.inf).argmin(1)
++        neg = similarity.masked_fill(~negative, -torch.inf).argmax(1)
++        direction = reference[pos] - reference[neg]
++        scores = {key: (F.normalize(states[key].detach().float(), dim=1) * direction).sum(1)
++                  for key in ('00', '10', '01')}
++        target = torch.stack(tuple(scores.values()), 1).max(1).values + margin
++        weights = (-scores['00'] / temperature).sigmoid()
++        # Identical forward value; remove the direct base-coordinate gradient.
++        # Expert paths may still update the shared backbone through their inputs.
++        query = states['11'].float() - (base - base.detach())
++        current = (F.normalize(query, dim=1) * direction).sum(1)
++        loss = (weights * (target - current).relu()).sum() / weights.sum()
++    audit = dict(loss=float(loss.detach()), margin=margin, temperature=temperature,
++                 weight_mean=float(weights.mean()), active_fraction=float((target > current).float().mean()),
++                 base_margin_mean=float(scores['00'].mean()), full_margin_mean=float(current.detach().mean()),
++                 stopped_target_mean=float(target.mean()), positive_indices=pos.tolist(), negative_indices=neg.tolist(),
++                 stopped_reference=True, stopped_targets=True, direct_base_gradient_removed=True,
++                 reference='One stopped current-training-batch base00 gallery and the same hardest legal positive/negative for all states')
++    return loss, audit
+ 
+-    def controlled_states(self,base,m0,f0,eligible,available,full):
+-        modality=self.modality_expert.pool(m0,eligible)
+-        frequency=self.frequency_expert.pool(f0,available,self.structured)
+-        _,gm=self.calibrator(base,modality,torch.zeros_like(frequency))
+-        _,gf=self.calibrator(base,torch.zeros_like(modality),frequency)
+-        # State01 sees only independent frequency evidence from each legal S.
+-        # It never reads M conditions, relation_score(M), full route, psi or I.
+-        v=self.router.by_relation(f0)
+-        with torch.autocast('cuda',enabled=False):
+-            v=v.float()
+-            band_weights=self.frequency_expert.pool_score(v).squeeze(-1).softmax(2)
+-            relation_frequency=(v*band_weights[...,None]).sum(2)
+-            logits=self.router.band_score(relation_frequency).squeeze(-1)
+-            relation_mass=logits.masked_fill(~eligible,-torch.inf).softmax(1)
+-        return {'00':base,
+-            '10':self.fuse(base,modality,torch.zeros_like(frequency),gm,True,False,eligible),
+-            '01':self.fuse(base,torch.zeros_like(modality),frequency,gf,False,True,eligible,relation_mass,relation_frequency),
+-            '11':full}
++
++class RetrievalUtilityDeMo(RelationFrequencyInterfaceDeMo):
++    gain_weight = .25
++    gain_margin = .02
++    gain_temperature = .1
++
++    def controlled_states(self, *args, **kwargs):
++        states = super().controlled_states(*args, **kwargs)
++        if self.training:
++            self._gain_states = states
++        return states
+ 
+     def forward(self, x, label=None, cam_label=None, view_label=None, return_pattern=3):
+-            keys = ('RGB', 'NI', 'TI')
+-            # The benchmark represents missing sensors by exactly zero normalized input.
+-            available = torch.stack([x[key].flatten(1).ne(0).any(1) for key in keys], 1)
+-            assert available.any(1).all(), 'benchmark conditions retain at least one modality'
+-            patches, globals_ = [], []
+-            for key, reduce in zip(keys, (self.rgb_reduce, self.nir_reduce, self.tir_reduce)):
+-                patch, global_ = self.BACKBONE(x[key], cam_label=cam_label, view_label=view_label)
+-                patches.append(patch)
+-                local = self.pool(patch.permute(0, 2, 1)).squeeze(-1)
+-                globals_.append(reduce(torch.cat((global_, local), -1)))
+-            original = torch.cat(globals_, -1)
+-            result = self.generalFusion(*patches, *globals_)
+-            base_moe = result[0] if self.training else result
+-            base = torch.cat((original, base_moe, torch.zeros_like(globals_[0])), -1)
+-            spatial = torch.stack(patches, 1)
+-            if self.structured or self.frequency_only:
+-                tokens = self.bands(spatial)
+-            else:
+-                tokens = spatial[:, :, None].expand(-1, -1, 3, -1, -1)
+-            if self.structured:
+-                eligible = torch.stack([available[:, subset].all(1) for subset in RELATIONS], 1)
+-            else:
+-                # Two ordinary experts read the full unfiltered modality/position set.
+-                # Their three streams and seven slots have no source/band restriction.
+-                eligible = torch.ones((len(available), 7), device=available.device, dtype=torch.bool)
+-            mvalues = self.modality_expert.prepare(tokens, available)
+-            fvalues = self.frequency_expert.prepare(tokens, available, self.structured)
+-            m0 = self.modality_expert.read(mvalues, eligible, self.structured)
+-            f0 = self.frequency_expert.read(fvalues, available, self.structured)
+-            # Simultaneous one-round update: only the independent evidence supplies
+-            # query conditions; each expert continues to read its own values.
+-            cm, cf = self.router.conditions(m0, f0)
+-            m1 = self.modality_expert.read(mvalues, eligible, self.structured, cm)
+-            f1 = self.frequency_expert.read(fvalues, available, self.structured, cf)
+-            modality, frequency, route = self.router.route(m1, f1, eligible, self.joint_interaction)
+-            prediction, gates = self.calibrator(base, modality, frequency)
+-            v = self.router.by_relation(f1)
+-            mass = route.sum(2, keepdim=True)
+-            conditional = route / torch.where(eligible[:, :, None], mass, torch.ones_like(mass))
+-            relation_frequency = (v * conditional[..., None]).sum(2)
+-            fused = self.fuse(base, modality, frequency, gates, True, True, eligible, route.sum(2), relation_frequency)
+-            self.last_route, self.last_gates = route.detach(), gates.detach()
+-            self.last_contribution_prediction = prediction.detach()
+-            if not self.training:
+-                return fused
+-            states = self.controlled_states(base, m0, f0, eligible, available, fused)
+-            target, pos, neg, scores = self.calibrator.targets(states, label)
+-            contribution = F.smooth_l1_loss(prediction.float(), target)
+-            self.contribution_audit = {'target_requires_grad': target.requires_grad,
+-                                       'reference': 'one stopped-gradient current-batch full11 gallery; same indices for all four states, no EMA',
+-                                       'positive_indices': pos.tolist(), 'negative_indices': neg.tolist(),
+-                                       'targets': target.tolist(), 'predictions': prediction.detach().float().tolist(),
+-                                       'scores': {key: value.tolist() for key, value in scores.items()},
+-                                       'loss': float(contribution.detach()), 'closed_state_conditions': False,
+-                                       'inference_counterfactuals': False}
+-            standalone_m = self.modality_expert.pool(m0, eligible).mean(1)
+-            standalone_f = self.frequency_expert.pool(f0, available, self.structured)
+-            output = [self.fused_classifier(self.fused_neck(fused)), fused,
+-                      self.classifier_moe(self.bottleneck_moe(base_moe)), base_moe,
+-                      self.modality_classifier(self.modality_neck(standalone_m)), standalone_m,
+-                      self.frequency_classifier(self.frequency_neck(standalone_f)), standalone_f]
+-            if self.direct:
+-                output.extend((self.classifier(self.bottleneck(original)), original))
+-            else:
+-                for feature, classifier, neck in zip(globals_, (self.classifier_r, self.classifier_n, self.classifier_t), (self.bottleneck_r, self.bottleneck_n, self.bottleneck_t)):
+-                    output.extend((classifier(neck(feature)), feature))
+-            output.append(self.contribution_loss_weight * contribution)
+-            return tuple(output)
++        output = super().forward(x, label=label, cam_label=cam_label, view_label=view_label,
++                                 return_pattern=return_pattern)
++        if not self.training:
++            return output
++        assert label is not None
++        states = self._gain_states
++        del self._gain_states
++        gain, self.gain_audit = joint_retrieval_gain(states, label, self.gain_margin, self.gain_temperature)
++        return (*output[:-1], output[-1] + self.gain_weight * gain)

@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "actual_grid_AST_seven_banks_49_pairs",
+      "status": "PASS",
+      "evidence": {
+        "clean_bank_already_extracted_before_fragment": 1,
+        "additional_extractions": 6,
+        "cartesian_pairs": 49,
+        "fresh_distance_calls": 48,
+        "saved_distance_pairs": [
+          "q_RNT_g_RNT"
+        ],
+        "query_sample_order": [
+          1,
+          5,
+          7
+        ],
+        "gallery_sample_order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "per_sample_descriptors_reused": true,
+        "numeric_feature_claim": false
+      }
+    },
+    {
+      "name": "actual_subclass_eval_control_flow_identity",
+      "status": "PASS",
+      "evidence": "Compiled only actual class AST with sentinel parent: eval returns the same parent output/state objects and cannot enter gain or save training state. No torch/numpy imports or arithmetic."
+    },
+    {
+      "name": "current_B_closed_state_dataflow",
+      "status": "PASS",
+      "evidence": "Actual B controlled_states AST executed symbolically: state10 uses only m0+zeroF and state01 only zeroM+f0; F relation weights depend only on f0/eligibility. Router conditions/route/joint APIs absent from mock, so such calls would fail. Source confirms interaction projection is inside use_m and use_f. No numeric claim."
+    },
+    {
+      "name": "generated_remote_python310_syntax",
+      "status": "PASS",
+      "evidence": "Both helper f-strings rendered from local metadata and parsed under Python3.10 grammar; neither snippet executed as a remote process."
+    }
+  ],
+  "no_neural_imports": true,
+  "actual_GPU_queries": 0,
+  "actual_SSH_calls": 0,
+  "actual_launches": 0
+}

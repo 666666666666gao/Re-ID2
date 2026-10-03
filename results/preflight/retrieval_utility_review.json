@@ -1,0 +1,419 @@
+{
+  "status": "PASS",
+  "blockers": [],
+  "non_blocking": [],
+  "created_at": "2026-10-03T16:34:59+08:00",
+  "skill": "experiment-bridge",
+  "phase": "2.5 CODE_REVIEW",
+  "reviewer": "/root/review_retrieval_utility_gain",
+  "reviewer_role": "fresh-secondary-reviewer",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "max",
+  "actual_spawn_confirmed_by_parent": true,
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "scope": "SOURCE_ONLY_AND_STDLIB_AST_MOCK",
+  "checked_source_sha256": {
+    "retrieval_utility_axis.py": "9fc02e7e45d0f7b7b60bb1f9c81947ae034af4f69faf2336a0e8d5a6fcc70e32",
+    "run_retrieval_utility_experiment.py": "90e5a4bf6c403dca8961bebb0f580efa28e759c8191157566e213728014f4025",
+    "verify_retrieval_utility.py": "b494d435b4e8ce2055d2617978a1b78489348b4c5c5c25fc2c44cdf0d1698389",
+    "launch_retrieval_utility_trial.py": "4eb303a8e87e2438ab90132bd7c512ea04ee323717022529398a03cab2e75019"
+  },
+  "helper_path": "C:/Users/gb/.codex_tmp/demo_retrieval_utility26_deploy_20261003.py",
+  "helper_sha256": "0cbee4d23808d14e8bead963f7ddf1f3aa9c276fd2e246ec69b4a229df4aaa2b",
+  "plan_path": "results/preflight/retrieval_utility_plan.json",
+  "parent_receipt": "results/preflight/relation_frequency_frozen_launch.json",
+  "parent_source_count": 51,
+  "deployed_source_count_after_copy": 55,
+  "checks": [
+    {
+      "name": "python310_parse_and_compile",
+      "status": "PASS",
+      "details": {
+        "python": "3.10.19 (main, Feb  3 2026, 22:48:33) [MSC v.1944 64 bit (AMD64)]",
+        "sources": [
+          "retrieval_utility_axis.py",
+          "run_retrieval_utility_experiment.py",
+          "verify_retrieval_utility.py",
+          "launch_retrieval_utility_trial.py"
+        ],
+        "helper": "C:\\Users\\gb\\.codex_tmp\\demo_retrieval_utility26_deploy_20261003.py"
+      }
+    },
+    {
+      "name": "actual_frozen_B_51_parents_match_and_complete",
+      "status": "PASS",
+      "details": {
+        "parent_count": 51,
+        "new_sources": 4
+      }
+    },
+    {
+      "name": "B_runner_training_AST_identical_except_declared_delta",
+      "status": "PASS",
+      "details": "Only selected model/variant, gain metadata and per-step gain audit differ; config, evaluation, AMP512, optimizer, sampling, 50 epochs, strict earliest dev-best/reload unchanged."
+    },
+    {
+      "name": "loss_and_no_new_parameters_static_contract",
+      "status": "PASS",
+      "details": "lambda .25, margin .02, temperature .1; fixed detached base00 normalized gallery; exclude self positives and same-label negatives; same selected indices and detached max00/10/01 target; full11 subtracts zero-valued direct-base path; unchanged B architecture."
+    },
+    {
+      "name": "real_CUDA_verifier_contains_required_assertions",
+      "status": "PASS",
+      "details": "Source inspected only: exact state/params/loss weights; eval and all original train output pairs; new scalar; RNG reset; differentiable separate base/residual leaf with exact-zero/finite-nonzero grads; independently recomputed fixed reference. No real CUDA witness in this review."
+    },
+    {
+      "name": "controller_fail_closed_and_exact_stage_order",
+      "status": "PASS",
+      "details": {
+        "success": {
+          "stages": [
+            "tensor",
+            "smoke",
+            "train"
+          ],
+          "exception": null
+        },
+        "tensor_exit": {
+          "stages": [
+            "tensor"
+          ],
+          "exception": "AssertionError"
+        },
+        "tensor_status": {
+          "stages": [
+            "tensor"
+          ],
+          "exception": "AssertionError"
+        },
+        "smoke_exit": {
+          "stages": [
+            "tensor",
+            "smoke"
+          ],
+          "exception": "AssertionError"
+        },
+        "smoke_status": {
+          "stages": [
+            "tensor",
+            "smoke"
+          ],
+          "exception": "AssertionError"
+        },
+        "train_epoch": {
+          "stages": [
+            "tensor",
+            "smoke",
+            "train"
+          ],
+          "exception": "AssertionError"
+        },
+        "existing_output": {
+          "stages": [],
+          "exception": "FileExistsError"
+        }
+      }
+    },
+    {
+      "name": "inherited_execute_gpu1_and_nonzero_exit_stop",
+      "status": "PASS",
+      "details": {
+        "0": {
+          "calls": [
+            {
+              "idle_gpu": 1
+            },
+            {
+              "argv": [
+                "mock_python",
+                "mock_stage"
+              ],
+              "cuda_visible_devices": "1"
+            }
+          ],
+          "exception": null
+        },
+        "1": {
+          "calls": [
+            {
+              "idle_gpu": 1
+            },
+            {
+              "argv": [
+                "mock_python",
+                "mock_stage"
+              ],
+              "cuda_visible_devices": "1"
+            }
+          ],
+          "exception": "AssertionError"
+        }
+      }
+    },
+    {
+      "name": "deployment_guard_and_start_fail_closed",
+      "status": "PASS",
+      "details": {
+        "success": {
+          "exception": null,
+          "copy_count": 4,
+          "spawn_count": 1,
+          "calls": [
+            {
+              "remote_program_mock": "guard"
+            },
+            {
+              "mock_gpu_query": 1
+            },
+            {
+              "copy_mock": "retrieval_utility_axis.py"
+            },
+            {
+              "copy_mock": "run_retrieval_utility_experiment.py"
+            },
+            {
+              "copy_mock": "verify_retrieval_utility.py"
+            },
+            {
+              "copy_mock": "launch_retrieval_utility_trial.py"
+            },
+            {
+              "remote_program_mock": "start"
+            },
+            {
+              "mock_gpu_query": 1
+            },
+            {
+              "exclusive_log": "/mock_remote/DeMo-DualAxis/runs/axis_collaboration_v10_retrieval_utility_trial.log"
+            },
+            {
+              "spawn_mock": [
+                "/mock_conda/python",
+                "-u",
+                "launch_retrieval_utility_trial.py",
+                "--data-root",
+                "/data/gaob/Re-ID/dataset",
+                "--pretrained",
+                "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+                "--output",
+                "/mock_remote/DeMo-DualAxis/runs/axis_collaboration_v10_retrieval_utility_trial"
+              ]
+            }
+          ]
+        },
+        "review_fail": {
+          "exception": "AssertionError",
+          "copy_count": 0,
+          "spawn_count": 0,
+          "calls": []
+        },
+        "local_hash_changed": {
+          "exception": "AssertionError",
+          "copy_count": 0,
+          "spawn_count": 0,
+          "calls": []
+        },
+        "parent_hash_changed": {
+          "exception": "AssertionError",
+          "copy_count": 0,
+          "spawn_count": 0,
+          "calls": [
+            {
+              "remote_program_mock": "guard"
+            }
+          ]
+        },
+        "parent_incomplete": {
+          "exception": "AssertionError",
+          "copy_count": 0,
+          "spawn_count": 0,
+          "calls": [
+            {
+              "remote_program_mock": "guard"
+            }
+          ]
+        },
+        "new_source_exists": {
+          "exception": "AssertionError",
+          "copy_count": 0,
+          "spawn_count": 0,
+          "calls": [
+            {
+              "remote_program_mock": "guard"
+            }
+          ]
+        },
+        "output_exists": {
+          "exception": "AssertionError",
+          "copy_count": 0,
+          "spawn_count": 0,
+          "calls": [
+            {
+              "remote_program_mock": "guard"
+            }
+          ]
+        },
+        "gpu_busy": {
+          "exception": "AssertionError",
+          "copy_count": 0,
+          "spawn_count": 0,
+          "calls": [
+            {
+              "remote_program_mock": "guard"
+            },
+            {
+              "mock_gpu_query": 1
+            }
+          ]
+        },
+        "disk_low": {
+          "exception": "AssertionError",
+          "copy_count": 0,
+          "spawn_count": 0,
+          "calls": [
+            {
+              "remote_program_mock": "guard"
+            },
+            {
+              "mock_gpu_query": 1
+            }
+          ]
+        },
+        "start_gpu_busy": {
+          "exception": "AssertionError",
+          "copy_count": 4,
+          "spawn_count": 0,
+          "calls": [
+            {
+              "remote_program_mock": "guard"
+            },
+            {
+              "mock_gpu_query": 1
+            },
+            {
+              "copy_mock": "retrieval_utility_axis.py"
+            },
+            {
+              "copy_mock": "run_retrieval_utility_experiment.py"
+            },
+            {
+              "copy_mock": "verify_retrieval_utility.py"
+            },
+            {
+              "copy_mock": "launch_retrieval_utility_trial.py"
+            },
+            {
+              "remote_program_mock": "start"
+            },
+            {
+              "mock_gpu_query": 1
+            }
+          ]
+        },
+        "start_disk_low": {
+          "exception": "AssertionError",
+          "copy_count": 4,
+          "spawn_count": 0,
+          "calls": [
+            {
+              "remote_program_mock": "guard"
+            },
+            {
+              "mock_gpu_query": 1
+            },
+            {
+              "copy_mock": "retrieval_utility_axis.py"
+            },
+            {
+              "copy_mock": "run_retrieval_utility_experiment.py"
+            },
+            {
+              "copy_mock": "verify_retrieval_utility.py"
+            },
+            {
+              "copy_mock": "launch_retrieval_utility_trial.py"
+            },
+            {
+              "remote_program_mock": "start"
+            },
+            {
+              "mock_gpu_query": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "review_bounds_and_source_unchanged_at_end",
+      "status": "PASS",
+      "details": "No torch/numpy imports, NN/CUDA execution, SSH/scp, GPU query, package installation, or implementation edits; all processes/queries above are mocked."
+    },
+    {
+      "name": "scientific_trigger_matches_actual_parent_audits",
+      "status": "PASS",
+      "details": {
+        "B_development_mAP": 47.47468569204681,
+        "B_development_Rank1": 59.523809523809526,
+        "B_minus_DeMo_mAP_pp": -0.13310641183407768,
+        "B_minus_DeMo_Rank1_pp": 0.4761904761904745,
+        "B_11_minus_00_mAP_pp": 0.35962776505013494,
+        "B_11_minus_00_Rank1_pp": 0.952380952380949,
+        "B_11_versus_00_Rank1_rescued": 2,
+        "B_11_versus_00_Rank1_harmed": 0,
+        "original_plus2_both_gate_passed": false
+      }
+    },
+    {
+      "name": "fixed_training_reference_and_data_split_semantics",
+      "status": "PASS",
+      "details": "Training legal pairs retain existing identity-PK semantics (same-label non-self positive, different-label negative); MSVR K=4/B64 supplies both. Only fit labels enter gain. Unchanged evaluation filters same-ID/same-scene on identity-heldout dev and selects earliest maximum dev mAP."
+    },
+    {
+      "name": "direct_base_gradient_algebra_static",
+      "status": "PASS",
+      "details": "query=full11-(base00-stop(base00)) retains forward values. In inherited B, base enters active coordinates additively; norm anchors and calibrator context are already detached. Thus direct base-coordinate derivative cancels. Expert inputs still connect to shared CLIP as planned. Gain reaches B residual projections/scales/router/gates; no claim that every shared-backbone gradient is zero."
+    },
+    {
+      "name": "torch251_api_source_compatibility",
+      "status": "PASS",
+      "details": "New operations use existing PyTorch Tensor/autograd/functional-normalize/autocast interfaces; no API newer than target Torch2.5.1 identified. Native GradScaler(cuda,init_scale=512) and loading code are AST-identical to frozen parent. Actual remote runtime not executed by reviewer."
+    }
+  ],
+  "execution_limits": {
+    "torch_imports": 0,
+    "numpy_imports": 0,
+    "neural_forwards": 0,
+    "optimizer_updates": 0,
+    "SSH_calls": 0,
+    "actual_GPU_process_queries": 0,
+    "package_installs": 0,
+    "implementation_edits_by_reviewer": 0,
+    "official_test_uses": 0
+  },
+  "required_runtime_gates": [
+    "Actual CUDA PASS_RETRIEVAL_UTILITY_CONTRACT, including real autograd and exact B parity assertions",
+    "Actual three native AMP optimizer updates and strict reload SMOKE_PASS",
+    "Only then a fresh public-CLIP MSVR310/seed42/B64/50 run in the new output directory"
+  ],
+  "limits": [
+    "PASS covers reviewed source/AST and standard-library mocks only; it is not a CUDA or efficacy result.",
+    "Actual tensor and AMP gates are pending. No new training metrics, four-state results or full49 results were inferred.",
+    "No official-test, multi-seed, independently retrained control, causal, information-theoretic, or all-three-dataset acceptance claim follows from this review."
+  ],
+  "trace_path": ".aris/traces/experiment-bridge/2026-10-03_retrieval_utility_gain",
+  "trace_artifacts": [
+    "001-request.json",
+    "001-response.json",
+    "001-meta.json",
+    "run.meta.json",
+    "001-stdout.log",
+    "001-stderr.log",
+    "001-source.diff",
+    "001-checks.json",
+    "001-review_harness.py",
+    "001-generated_remote_guard.py",
+    "001-generated_remote_start.py",
+    "reviewed_sources"
+  ]
+}
