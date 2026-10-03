@@ -1,0 +1,41 @@
+{
+  "call_number": 1,
+  "purpose": "frozen-evidence-integrity",
+  "timestamp": "2026-10-02T23:24:30.619693+00:00",
+  "agent_id": "/root/audit_v4_frozen_evaluation",
+  "agent_id_kind": "canonical task name; UUID unavailable",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "max",
+  "reviewer_family": "openai",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "duration_ms_since_first_trace_capture": 1402995,
+  "status": "ok",
+  "verdict": "WARN",
+  "audit_file": "results/preflight/axis_collaboration_v4_first5_integrity_audit.json",
+  "audit_sha256": "338d72a3866dd241cd30028e32550a680d451d3ceb1b591ff3daa1d38aeff7d5",
+  "execution_notes": [
+    {
+      "command": "PATH python -",
+      "exit_code": 1,
+      "output": "No pyvenv.cfg file",
+      "effect": "No audit Python code executed; direct existing uv-managed CPython used after uv python find."
+    },
+    {
+      "command": "Inline V1 label display",
+      "exit_code": 1,
+      "output": "KeyError: 'mAP_Rank1_2pp'",
+      "effect": "Exploratory display used the wrong key; corrected to the actual mAP_Rank1_at_least_2pp field. Final deterministic verifier passes."
+    },
+    {
+      "command": "verify_local_text.py initial",
+      "exit_code": 0,
+      "checks_PASS": 1191
+    },
+    {
+      "command": "verify_local_text.py after added input/cross-reference checks",
+      "exit_code": 0,
+      "checks_PASS": 1249
+    }
+  ]
+}

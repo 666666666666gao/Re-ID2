@@ -1,0 +1,1647 @@
+{
+  "audit_skill": "experiment-audit",
+  "verdict": "WARN",
+  "overall_verdict": "WARN",
+  "integrity_status": "warn",
+  "reason_code": "fixed_single_seed_development_scope_and_raw_binary_verification_not_repeated",
+  "summary": "本地文本证据与标准库数值复算通过；固定五项效果门槛未达成，完整范围不足。没有发现伪GT、自归一化检索分数或虚构结果，不能据此声称完整远端原始数组/GPU复验。",
+  "generated_at": "2026-10-02T23:24:30.619693+00:00",
+  "date": "2026-10-03",
+  "execution_started_at": "2026-10-02T23:01:07.624948+00:00",
+  "execution_timestamp_basis": "First saved input capture and actual finalization clock; native spawn dispatch timestamp was not exposed.",
+  "agent_id": "/root/audit_v4_frozen_evaluation",
+  "verdict_id": "/root/audit_v4_frozen_evaluation",
+  "agent_id_kind": "canonical task name; native UUID unavailable",
+  "executor_model": "GPT-6 Codex; specific parent model unavailable",
+  "executor_family": "openai",
+  "reviewer_model": "gpt-6-astra",
+  "reviewer_reasoning": "max",
+  "reviewer_reasoning_effort": "max",
+  "reviewer_family": "openai",
+  "reviewer_runtime_attribution": "Native spawn parameters confirmed by parent; fork_turns=none. No alternate reviewer or child agent.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "trace_path": ".aris/traces/experiment-audit/2026-10-03_run01",
+  "human_report_policy": "No EXPERIMENT_AUDIT.md or other handoff was created. Parent will merge a human summary into the sole docs/实验交接.md.",
+  "checks": {
+    "A": {
+      "status": "PASS",
+      "conclusion": "检索 GT 沿数据集文件名解析；未发现模型输出充当身份或相机/场景 GT。",
+      "details": [
+        "RGBNT201 从文件名取六位身份与相机，RGBNT100 用身份/camera 正则，MSVR310 从文件名取身份、camera 与 scene；source_records 排序后按固定 dev_ids 隔离，只有 fit 身份重编码。",
+        "14 张 CSV 的 14,145 行 query_index 均连续，姓名文件名解析的 identity/camera/scene 全部一致。V4 与独立 DeMo/V3 的配对 query、GT、有效标记、相关图库数及保留图库数完全一致。",
+        "5 份训练 batch_orders 覆盖各自全部声明 fit 文件名，身份数分别为 MSVR310 103、RGBNT201 141、RGBNT100 33，全部与各自 dev_ids 不相交。",
+        "RGBNT201/RGBNT100 排除 same-ID + same-camera；MSVR310 排除 same-ID + same-scene。MSVR310 的 360 个 dev triplet 中仅 210 个有跨场景正例并被选为 query；invalid_queries=0 不表示其余150个也做了 query。",
+        "历史 metric_computation 与四状态程序在模型创建/计算前核对完整安装数据的 query indices、ids、cameras、scenes、names 顺序；本次核验这些回执与调用源码及本地 CSV。"
+      ],
+      "evidence": [
+        {
+          "path": "data/datasets/RGBNT201.py",
+          "line": 79,
+          "reference": "data/datasets/RGBNT201.py:79",
+          "detail": "身份/相机文件名解析"
+        },
+        {
+          "path": "data/datasets/RGBNT100.py",
+          "line": 63,
+          "reference": "data/datasets/RGBNT100.py:63",
+          "detail": "正则解析官方目录记录"
+        },
+        {
+          "path": "data/datasets/msvr310.py",
+          "line": 81,
+          "reference": "data/datasets/msvr310.py:81",
+          "detail": "身份、camera、scene 解析"
+        },
+        {
+          "path": "experiment_data.py",
+          "line": 24,
+          "reference": "experiment_data.py:24",
+          "detail": "真实数据目录及稳定排序"
+        },
+        {
+          "path": "experiment_data.py",
+          "line": 33,
+          "reference": "experiment_data.py:33",
+          "detail": "身份隔离与可用query选择"
+        },
+        {
+          "path": "run_experiment.py",
+          "line": 65,
+          "reference": "run_experiment.py:65",
+          "detail": "loader GT 与 feature 同序积累"
+        },
+        {
+          "path": "C:/Users/gb/.codex_tmp/demo_axis_v4_complete_dev_metrics_20261003.py",
+          "line": 34,
+          "reference": "C:/Users/gb/.codex_tmp/demo_axis_v4_complete_dev_metrics_20261003.py:34",
+          "detail": "冻结数组对安装记录的五字段顺序核对"
+        },
+        {
+          "path": "diagnose_axis_collaboration.py",
+          "line": 103,
+          "reference": "diagnose_axis_collaboration.py:103",
+          "detail": "诊断前完整安装GT顺序断言"
+        },
+        {
+          "path": "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/development_metrics/metric_computation.json",
+          "line": 5,
+          "reference": "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/development_metrics/metric_computation.json:5",
+          "detail": "实际保存的安装GT顺序核对回执"
+        }
+      ],
+      "limitations": [
+        "未读取远端数据集图片或原始 NPY/NPZ 标签数组；真实安装数据顺序这一层是历史运行回执支持，而不是审查者重新访问数据集所得。",
+        "未在线复审数据集官方评测实现；本地是标准 same-ID/camera-or-scene 排除规则的自有 ReID 评测适配器。"
+      ],
+      "integrity_blockers": []
+    },
+    "B": {
+      "status": "PASS",
+      "conclusion": "未发现以预测自身 max/min/mean 为分母篡改检索指标。",
+      "details": [
+        "descriptor 的 L2 归一化与平方欧氏距离用于排序；AP、INP、CMC 的分母分别为真实相关数/排名或有效 query 数，再乘100表示百分点。",
+        "V4 的投影方向归一化和停止梯度的 base 范数只改变模型 descriptor 构造，不是对最终 mAP/Rank 分数的自归一化。",
+        "贡献校准的四状态 margin 来自归一化模型 descriptor；它是单独标注的模型派生诊断/训练目标，不是 ReID 性能 GT。",
+        "全部六指标与逐 query 汇总相符；高分 RGBNT100 也保留较低 mINP 和负差值，未见用自身最佳值缩放到100。"
+      ],
+      "evidence": [
+        {
+          "path": "run_experiment.py",
+          "line": 69,
+          "reference": "run_experiment.py:69",
+          "detail": "descriptor L2与距离"
+        },
+        {
+          "path": "full_evaluation.py",
+          "line": 22,
+          "reference": "full_evaluation.py:22",
+          "detail": "稳定排序和GT过滤"
+        },
+        {
+          "path": "full_evaluation.py",
+          "line": 33,
+          "reference": "full_evaluation.py:33",
+          "detail": "AP/INP定义"
+        },
+        {
+          "path": "full_evaluation.py",
+          "line": 43,
+          "reference": "full_evaluation.py:43",
+          "detail": "有效query均值×100"
+        },
+        {
+          "path": "utils/reid_evaluation.py",
+          "line": 33,
+          "reference": "utils/reid_evaluation.py:33",
+          "detail": "CMC/AP原始定义"
+        },
+        {
+          "path": "scaled_axis_collaboration.py",
+          "line": 48,
+          "reference": "scaled_axis_collaboration.py:48",
+          "detail": "模型内部残差方向与幅度"
+        },
+        {
+          "path": "scaled_axis_collaboration.py",
+          "line": 18,
+          "reference": "scaled_axis_collaboration.py:18",
+          "detail": "独立的四状态校准目标"
+        }
+      ],
+      "limitations": [
+        "未重新运行神经网络或从距离数组重建排序；结论针对已读评测链及可复算文本。"
+      ],
+      "integrity_blockers": []
+    },
+    "C": {
+      "status": "PASS",
+      "conclusion": "固定五项结果、对应调用/退出回执及已引用数字均有本地文件支持。",
+      "details": [
+        "初始128个要求输入全部存在；补入两份V3已列对照的4个JSON/CSV、冻结统计JSON/脚本、实际metric helper与采集调用链，最终137个输入全部冻结并保存SHA。",
+        "5项 result/status/run/best 一致，退出码均0，完整log的50个EPOCH行与epochs.csv逐字段一致，TRAIN_COMPLETE内容与result一致；81份归档文件的大小/SHA与intake逐一相同。",
+        "四份开发汇总内的六指标、六项差值、误伤/救回、AP提高/下降/相同及相应比例均由本次标准库重新计算并匹配。",
+        "CURRENT和最后V4首两项章节的表格按6位小数匹配；当时06:46:31观察确有3项训练结束而2项已六指标审计，06:58:35冻结快照则有固定5项完成。历史文档时间戳保留，不把动态快照当成全11项终态。",
+        "文档频域尾部0.024633/能量0.000609有新增读取的现存 frozen_stats JSON 支持；其权重SHA与诊断、数组SHA与metric_computation/跨机launch相同。该证据是冻结保存数组的历史CPU统计，不是expert-off结果。",
+        "旧54项诊断源码审查与25项部署审查均明确same-family/provisional和静态/CPU mock范围；本次没有将其当作新的GPU执行证明。"
+      ],
+      "evidence": [
+        {
+          "path": "results/preflight/axis_collaboration_v4_first5_development_analysis.json",
+          "line": 5,
+          "reference": "results/preflight/axis_collaboration_v4_first5_development_analysis.json:5",
+          "detail": "固定五项汇总"
+        },
+        {
+          "path": "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/result.json",
+          "line": 43,
+          "reference": "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/result.json:43",
+          "detail": "COMPLETE50、best22、严格重载"
+        },
+        {
+          "path": "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42/result.json",
+          "line": 43,
+          "reference": "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42/result.json:43",
+          "detail": "COMPLETE50、best32、严格重载"
+        },
+        {
+          "path": "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/controller_result.json",
+          "line": 2,
+          "reference": "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/controller_result.json:2",
+          "detail": "smoke/full均exit0"
+        },
+        {
+          "path": "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/intake.json",
+          "line": 40,
+          "reference": "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/intake.json:40",
+          "detail": "21个归档文件的SHA/bytes"
+        },
+        {
+          "path": "docs/实验交接.md",
+          "line": 10,
+          "reference": "docs/实验交接.md:10",
+          "detail": "首两项汇总表"
+        },
+        {
+          "path": "docs/实验交接.md",
+          "line": 775,
+          "reference": "docs/实验交接.md:775",
+          "detail": "四状态数值表"
+        },
+        {
+          "path": "results/preflight/axis_collaboration_v4_msvr_frozen_stats.json",
+          "line": 5,
+          "reference": "results/preflight/axis_collaboration_v4_msvr_frozen_stats.json:5",
+          "detail": "原权重和数组SHA"
+        },
+        {
+          "path": "results/preflight/axis_collaboration_v4_msvr_frozen_stats.json",
+          "line": 13,
+          "reference": "results/preflight/axis_collaboration_v4_msvr_frozen_stats.json:13",
+          "detail": "冻结tail norm/energy历史统计"
+        },
+        {
+          "path": "C:/Users/gb/.codex_tmp/demo_axis_v4_msvr_frozen_stats_20261003.py",
+          "line": 18,
+          "reference": "C:/Users/gb/.codex_tmp/demo_axis_v4_msvr_frozen_stats_20261003.py:18",
+          "detail": "CPU加载及tail统计真实源码"
+        }
+      ],
+      "limitations": [
+        "文档当前顶区仍是06:47历史快照；下一次发布需更新至明确的已审集合，不能把本审查外的新结束运行自动纳入。",
+        "原权重、原始数组、states.npz及remote/Desktop同步只核验本地保存的回执与哈希链；没有本次远端二进制重读或跨机同步实测。"
+      ],
+      "integrity_blockers": []
+    },
+    "D": {
+      "status": "PASS",
+      "conclusion": "full_metrics、mINP、CMC与Ranks有真实调用链和结果文件；可用文本的逐query复算通过。",
+      "details": [
+        "V4补充metrics helper在CUDA隐藏后调用full_evaluation.full_metrics，写出full_metrics JSON/CSV与metric_computation，再按SHA收集；这与full_evaluation.main的旧baseline官方test流程分开。",
+        "MSVR310四状态主程序对00/10/01/11逐个调用distance和full_metrics，并写状态CSV与完整metric报告；smoke/full命令、exit0、log和同SHA输出相互对应。",
+        "本次实际标准库复算14张表、14,145个query、595个camera/scene/identity分组。六指标最大误差1.4210854715202004e-14pp；50点CMC和逐query INP误差0；分组最大误差4.263256414560601e-14pp。",
+        "每条INP由 relevant_gallery/last_match 重算，Ranks与50点CMC由 first_match 重算；mAP由CSV所存AP均值重算。",
+        "两份贡献CSV共420条，按记录R00/R10/R01/R11的float32逐次差分复算三目标全部误差0；六组校准均值/标准差/MAE/RMSE/符号/协方差最大差4.412695053107596e-10。"
+      ],
+      "evidence": [
+        {
+          "path": "C:/Users/gb/.codex_tmp/demo_axis_v4_complete_dev_metrics_20261003.py",
+          "line": 29,
+          "reference": "C:/Users/gb/.codex_tmp/demo_axis_v4_complete_dev_metrics_20261003.py:29",
+          "detail": "导入实际full_metrics"
+        },
+        {
+          "path": "C:/Users/gb/.codex_tmp/demo_axis_v4_complete_dev_metrics_20261003.py",
+          "line": 44,
+          "reference": "C:/Users/gb/.codex_tmp/demo_axis_v4_complete_dev_metrics_20261003.py:44",
+          "detail": "CPU实际调用与原指标/重载断言"
+        },
+        {
+          "path": "full_evaluation.py",
+          "line": 20,
+          "reference": "full_evaluation.py:20",
+          "detail": "六指标及分组函数定义"
+        },
+        {
+          "path": "full_evaluation.py",
+          "line": 48,
+          "reference": "full_evaluation.py:48",
+          "detail": "evaluate_reid交叉核对与CMC输出"
+        },
+        {
+          "path": "diagnose_axis_collaboration.py",
+          "line": 140,
+          "reference": "diagnose_axis_collaboration.py:140",
+          "detail": "四状态实际metric调用"
+        },
+        {
+          "path": "diagnose_axis_collaboration.py",
+          "line": 146,
+          "reference": "diagnose_axis_collaboration.py:146",
+          "detail": "两个固定参考贡献调用"
+        },
+        {
+          "path": "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full.log",
+          "line": 14,
+          "reference": "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full.log:14",
+          "detail": "实际完成日志含四状态六指标"
+        },
+        {
+          "path": "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/state_11.csv",
+          "line": 2,
+          "reference": "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/state_11.csv:2",
+          "detail": "逐query原始文本"
+        },
+        {
+          "path": "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/full_reference_contributions.csv",
+          "line": 2,
+          "reference": "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/full_reference_contributions.csv:2",
+          "detail": "逐query四状态R及目标/预测"
+        }
+      ],
+      "limitations": [
+        "CSV未保存所有正例位置，因此不能仅凭first_match/last_match完整重建单query AP；本次不声称从原始距离矩阵独立重算AP。",
+        "未重新执行GPU、torch/numpy导入、严格加载权重、feature逐bit比较或hard-positive/negative搜索；这几项只能按已保存回执和源码判断。"
+      ],
+      "integrity_blockers": []
+    },
+    "E": {
+      "status": "WARN",
+      "conclusion": "证据支持固定五项单seed开发结果；用户效果目标未达成，完整对照与最终协议仍未覆盖。",
+      "details": [
+        "固定5项是MSVR310 axis、RGBNT201 axis/plain、RGBNT100 axis/plain，均seed42、50轮，总250 epoch/12723次batch尝试=12723次optimizer更新、AMP跳过0。best epoch依次37/42/48/22/32，全部是唯一最大dev mAP；源码严格>保证并列时保留最早。",
+        "5份(epoch,step,names)与同数据集DeMo完整逐项一致，每batch64；日志、逐batch和累计epoch计数互相吻合。RGBNT100 YAML原为30轮/128batch，但configuration明确覆写到50/64，实际run config与250轮CSV均相符。",
+        "RGBNT201 axis/plain总参数100355206、可训练100343430；RGBNT100二者98857094/98845318；MSVR310 axis99681414/99669638。5项都是5632维。保存的预检有11个3-step smoke、5515个可训练tensor梯度检查全true；这是历史运行记录，不是本审查重新计数模型权重或执行梯度。",
+        "三项axis对独立DeMo的mAP/Rank1差值依次为MSVR -1.724306952/-0.952380952pp、RGBNT201 +0.226174961/+2.060606061pp、RGBNT100 +0.653117096/+1.632pp。没有一个同时达到两项+2，三数据集整体目标为FAIL_EFFICACY，不是FAIL_INTEGRITY。",
+        "axis相对同参数plain：RGBNT201 mAP/Rank1 -1.072672947/-3.272727273pp；RGBNT100 +1.792459127/+0.48pp。不能据两个数据集一个seed宣称统一优于普通专家或稳定改善。",
+        "训练使用固定identity-heldout fit子集；不是完整官方train论文复现，也不是官方test最终结论。当前审查不涵盖其余6项完整对照、新版V4重复seed或缺失模态性能、训练独立routing消融。",
+        "V1的27个checkpoint/351条件/seed42,43,44仅核对既有汇总标签及1/13、0/13、0/13门槛标签，不重算旧351条件，不把它归属V4。",
+        "用户验收是三个数据集mAP和Rank-1各至少+2并覆盖缺失模态；完整六指标必须报告，不能把辅助all_six_2pp或every_dataset_and_condition标志自动改写为用户要求全部六指标/每一条件都+2。",
+        "可审成本是参数量、训练wall_seconds、训练peak_memory及MSVR诊断耗时。固定输入不包含完整V4 FLOPs/吞吐/推理延迟对照profile；文档“全部成本”应限定为实际已保存成本。"
+      ],
+      "evidence": [
+        {
+          "path": "run_experiment.py",
+          "line": 37,
+          "reference": "run_experiment.py:37",
+          "detail": "有效batch/epoch固定"
+        },
+        {
+          "path": "run_experiment.py",
+          "line": 200,
+          "reference": "run_experiment.py:200",
+          "detail": "实际50轮loop与同seed采样"
+        },
+        {
+          "path": "run_experiment.py",
+          "line": 220,
+          "reference": "run_experiment.py:220",
+          "detail": "最高dev mAP且并列保最早"
+        },
+        {
+          "path": "run_experiment.py",
+          "line": 228,
+          "reference": "run_experiment.py:228",
+          "detail": "strict=True重载和四指标相等断言"
+        },
+        {
+          "path": "run_experiment.py",
+          "line": 99,
+          "reference": "run_experiment.py:99",
+          "detail": "native GradScaler与更新/跳过计数"
+        },
+        {
+          "path": "configs/RGBNT100/DeMo.yml",
+          "line": 33,
+          "reference": "configs/RGBNT100/DeMo.yml:33",
+          "detail": "原YAML配置由runner覆写"
+        },
+        {
+          "path": "results/preflight/axis_collaboration_v4_first5_development_analysis.json",
+          "line": 368,
+          "reference": "results/preflight/axis_collaboration_v4_first5_development_analysis.json:368",
+          "detail": "三数据集axis真实门槛"
+        },
+        {
+          "path": "results/preflight/axis_collaboration_v4_first5_development_analysis.json",
+          "line": 403,
+          "reference": "results/preflight/axis_collaboration_v4_first5_development_analysis.json:403",
+          "detail": "同参数plain对照"
+        },
+        {
+          "path": "results/preflight/axis_collaboration_v4_first5_development_analysis.json",
+          "line": 430,
+          "reference": "results/preflight/axis_collaboration_v4_first5_development_analysis.json:430",
+          "detail": "单seed开发与缺失验证范围"
+        },
+        {
+          "path": "docs/实验交接.md",
+          "line": 17,
+          "reference": "docs/实验交接.md:17",
+          "detail": "V1与V4版本区分"
+        },
+        {
+          "path": "docs/实验交接.md",
+          "line": 771,
+          "reference": "docs/实验交接.md:771",
+          "detail": "现存成本描述须按具体字段解释"
+        }
+      ],
+      "limitations": [
+        "目前为开发阶段观察，不能支持稳定、完整官方train、完整新版缺失模态或全部V4对照结论。",
+        "开发集用于checkpoint选择与方法调试，不能作为完全未参与选择的最终泛化评测。",
+        "本审查不暂停或重启后台任务；06:58:35快照为读取时的历史状态，后来运行进度排除在固定范围外。"
+      ],
+      "integrity_blockers": []
+    },
+    "F": {
+      "status": "PASS",
+      "conclusion": "真实GT检索性能与模型派生贡献诊断已区分；没有可接受的因果/信息论/独立路由优越性结论。",
+      "details": [
+        "五项开发检索、三项独立DeMo开发对照、两项V3已引用对照和MSVR四状态检索分类为real_gt。",
+        "四状态margin贡献目标分类为synthetic_proxy（模型派生的经验margin，使用真实identity限制参考正负样本）；它不是伪造检索标签，也不是信息论协同量。",
+        "训练fullref表示停止梯度的当前batch full11 gallery，同身份非自身为正例，不排除同camera/scene；冻结诊断的完整dev reference分别使用00和11并加入相机/场景排除。这是不同目标分布，不能据诊断校准差直接断言训练损失实现错误。",
+        "00是同一jointly-trained checkpoint内部base路径加零尾部，不是独立DeMo；10/01用未交换条件的m0/f0，只开单专家，11保留条件消息、psi和交互投影。它们是冻结功能干预，不能替代重新训练消融，亦不能把bundled差异归因到某一个模块。",
+        "11相对00/10/01的mAP为-0.012381678/-0.082757610/-0.043033103pp，Rank1为0/0/+0.476190476pp。00->11有16 AP提高/50下降/144相同，Rank1误伤/救回0/0；实际改变排序不等于联合收益。",
+        "路由L1=0.014377150684595108表明joint分布与其边缘乘积有差异，本身不证明比独立routing训练更有效。plain_twins本身仍用同一joint router，因此不是independent-router ablation。",
+        "完整dev11参考的Pearson(M,F,I)=-0.106541974/+0.051685510/-0.104222243，符号一致率0.504761905/0.409523810/0.476190476；F预测100%为负而目标59.047619%为正。数值由本次CSV复算，解释上仅支持校准失配诊断。"
+      ],
+      "evidence": [
+        {
+          "path": "scaled_axis_collaboration.py",
+          "line": 18,
+          "reference": "scaled_axis_collaboration.py:18",
+          "detail": "训练current-batch full11派生目标"
+        },
+        {
+          "path": "axis_collaboration.py",
+          "line": 218,
+          "reference": "axis_collaboration.py:218",
+          "detail": "00/10/01/11定义"
+        },
+        {
+          "path": "axis_collaboration.py",
+          "line": 259,
+          "reference": "axis_collaboration.py:259",
+          "detail": "joint消息与路由真实组合"
+        },
+        {
+          "path": "diagnose_axis_collaboration.py",
+          "line": 63,
+          "reference": "diagnose_axis_collaboration.py:63",
+          "detail": "frozen dev参考及跨相机/场景正例"
+        },
+        {
+          "path": "diagnose_axis_collaboration.py",
+          "line": 195,
+          "reference": "diagnose_axis_collaboration.py:195",
+          "detail": "路由对自身边缘乘积L1"
+        },
+        {
+          "path": "diagnose_axis_collaboration.py",
+          "line": 208,
+          "reference": "diagnose_axis_collaboration.py:208",
+          "detail": "不同参考与非因果/非信息论边界"
+        },
+        {
+          "path": "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/diagnostic.json",
+          "line": 6,
+          "reference": "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/diagnostic.json:6",
+          "detail": "训练参考与frozen诊断参考分别记录"
+        },
+        {
+          "path": "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/diagnostic.json",
+          "line": 2550,
+          "reference": "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/diagnostic.json:2550",
+          "detail": "full11参考校准报告"
+        },
+        {
+          "path": "docs/实验交接.md",
+          "line": 782,
+          "reference": "docs/实验交接.md:782",
+          "detail": "同模型00与冻结干预边界"
+        },
+        {
+          "path": "docs/实验交接.md",
+          "line": 784,
+          "reference": "docs/实验交接.md:784",
+          "detail": "校准失配与解释边界"
+        }
+      ],
+      "limitations": [
+        "没有独立训练的无消息/无psi/独立routing对照，不能宣称联合路由已验证优于独立路由。",
+        "路由张量、gates及残差norm平均值只与保存报告对应，未从远端states.npz重新计算。"
+      ],
+      "integrity_blockers": []
+    }
+  },
+  "blocking_items": [],
+  "acceptance_goal": {
+    "user_requirement": "三个数据集的 mAP、Rank-1 均提升至少2点，并覆盖缺失模态；完整报告mAP/mINP/Rank-1/5/10/20和全部对照。",
+    "efficacy_status": "FAIL_FOR_THE_THREE_AUDITED_V4_AXIS_DEVELOPMENT_GATES",
+    "overall_user_goal": "NOT_ACHIEVED",
+    "must_not_infer": "Do not replace this with all six metrics +2 or every missing condition +2 solely because auxiliary strict flags exist.",
+    "remaining_scope": "Unaudited remaining V4 controls, V4 missing-modality efficacy, repeated seeds, full official-train/final-test protocol, independent-routing trained ablation, and full V4 cost profile."
+  },
+  "actual_actions": {
+    "standard_library_CPU_recomputation": true,
+    "experiment_module_imports": 0,
+    "torch_or_numpy_imports": 0,
+    "package_installs": 0,
+    "GPU_queries_or_forwards": 0,
+    "optimizer_updates": 0,
+    "SSH_or_SCP_calls": 0,
+    "remote_binary_reads": 0,
+    "experiment_source_edits": 0,
+    "training_or_monitor_restarts": 0,
+    "subagents_spawned": 0,
+    "GitHub_publications": 0,
+    "handoff_edits": 0
+  },
+  "deterministic_verification": {
+    "status": "PASS",
+    "checks": {
+      "PASS": 1249
+    },
+    "path": ".aris/traces/experiment-audit/2026-10-03_run01/deterministic_verification.json",
+    "program_path": ".aris/traces/experiment-audit/2026-10-03_run01/verify_local_text.py",
+    "program_sha256": "a27d72d955ffdb9c581f55d3e05f665040fadc2507dc9fd943a109940a48e50e",
+    "python": "C:\\Users\\gb\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\python.exe",
+    "python_version": "3.13.12 (main, Feb  3 2026, 22:53:26) [MSC v.1944 64 bit (AMD64)]",
+    "table_count": 14,
+    "query_rows": 14145,
+    "groups": 595,
+    "max_six_metric_abs_error_pp": 1.4210854715202004e-14,
+    "max_CMC_abs_error_pp": 0.0,
+    "max_group_abs_error_pp": 4.263256414560601e-14,
+    "max_per_query_INP_abs_error": 0.0,
+    "intake_hash_matches": 81
+  },
+  "completed_run_evidence": {
+    "MSVR310_axis_scaled_fullref_s42": {
+      "dataset": "MSVR310",
+      "epochs": 50,
+      "attempts": 453,
+      "updates": 453,
+      "AMP_skips": 0,
+      "best_epoch": 37,
+      "best_epoch_CSV_line": 38,
+      "max_mAP_tied_epochs": [
+        37
+      ],
+      "parameters": 99681414,
+      "trainable_parameters": 99669638,
+      "descriptor_dim": 5632,
+      "fit_records_declared": 672,
+      "distinct_sampled_filenames": 672,
+      "fit_identities": 103,
+      "dev_records": 360,
+      "dev_queries": 210,
+      "dev_identity_split_count": 52,
+      "batch_orders_rows": 453,
+      "wall_seconds": 701.1673159599304,
+      "training_peak_memory_bytes": 13023936000,
+      "delta_vs_demo": {
+        "mAP": -1.7243069521919452,
+        "mINP": -1.0773854013416369,
+        "Rank-1": -0.952380952380949,
+        "Rank-5": -0.4761904761904816,
+        "Rank-10": -1.9047619047619122,
+        "Rank-20": 0.952380952380949
+      },
+      "mAP_and_Rank1_both_ge_2pp": false
+    },
+    "RGBNT201_axis_scaled_fullref_s42": {
+      "dataset": "RGBNT201",
+      "epochs": 50,
+      "attempts": 2100,
+      "updates": 2100,
+      "AMP_skips": 0,
+      "best_epoch": 42,
+      "best_epoch_CSV_line": 43,
+      "max_mAP_tied_epochs": [
+        42
+      ],
+      "parameters": 100355206,
+      "trainable_parameters": 100343430,
+      "descriptor_dim": 5632,
+      "fit_records_declared": 3126,
+      "distinct_sampled_filenames": 3126,
+      "fit_identities": 141,
+      "dev_records": 825,
+      "dev_queries": 825,
+      "dev_identity_split_count": 30,
+      "batch_orders_rows": 2100,
+      "wall_seconds": 1714.4228448867798,
+      "training_peak_memory_bytes": 13034965504,
+      "delta_vs_demo": {
+        "mAP": 0.226174960999316,
+        "mINP": -0.2241896224458486,
+        "Rank-1": 2.0606060606060623,
+        "Rank-5": 1.4545454545454533,
+        "Rank-10": 1.9393939393939377,
+        "Rank-20": 3.393939393939391
+      },
+      "mAP_and_Rank1_both_ge_2pp": false
+    },
+    "RGBNT201_plain_scaled_fullref_s42": {
+      "dataset": "RGBNT201",
+      "epochs": 50,
+      "attempts": 2100,
+      "updates": 2100,
+      "AMP_skips": 0,
+      "best_epoch": 48,
+      "best_epoch_CSV_line": 49,
+      "max_mAP_tied_epochs": [
+        48
+      ],
+      "parameters": 100355206,
+      "trainable_parameters": 100343430,
+      "descriptor_dim": 5632,
+      "fit_records_declared": 3126,
+      "distinct_sampled_filenames": 3126,
+      "fit_identities": 141,
+      "dev_records": 825,
+      "dev_queries": 825,
+      "dev_identity_split_count": 30,
+      "batch_orders_rows": 2100,
+      "wall_seconds": 1642.0122253894806,
+      "training_peak_memory_bytes": 13198186496,
+      "delta_vs_demo": {
+        "mAP": 1.2988479075542472,
+        "mINP": -2.256612931002145,
+        "Rank-1": 5.333333333333329,
+        "Rank-5": 3.2727272727272805,
+        "Rank-10": 0.12121212121212466,
+        "Rank-20": 0.6060606060606091
+      },
+      "mAP_and_Rank1_both_ge_2pp": false
+    },
+    "RGBNT100_axis_scaled_fullref_s42": {
+      "dataset": "RGBNT100",
+      "epochs": 50,
+      "attempts": 4035,
+      "updates": 4035,
+      "AMP_skips": 0,
+      "best_epoch": 22,
+      "best_epoch_CSV_line": 23,
+      "max_mAP_tied_epochs": [
+        22
+      ],
+      "parameters": 98857094,
+      "trainable_parameters": 98845318,
+      "descriptor_dim": 5632,
+      "fit_records_declared": 5550,
+      "distinct_sampled_filenames": 5550,
+      "fit_identities": 33,
+      "dev_records": 3125,
+      "dev_queries": 3125,
+      "dev_identity_split_count": 17,
+      "batch_orders_rows": 4035,
+      "wall_seconds": 3817.9720723629,
+      "training_peak_memory_bytes": 13010333696,
+      "delta_vs_demo": {
+        "mAP": 0.6531170957887298,
+        "mINP": -0.36341989275165076,
+        "Rank-1": 1.632000000000005,
+        "Rank-5": 1.7280000000000086,
+        "Rank-10": 1.088000000000008,
+        "Rank-20": -0.1599999999999966
+      },
+      "mAP_and_Rank1_both_ge_2pp": false
+    },
+    "RGBNT100_plain_scaled_fullref_s42": {
+      "dataset": "RGBNT100",
+      "epochs": 50,
+      "attempts": 4035,
+      "updates": 4035,
+      "AMP_skips": 0,
+      "best_epoch": 32,
+      "best_epoch_CSV_line": 33,
+      "max_mAP_tied_epochs": [
+        32
+      ],
+      "parameters": 98857094,
+      "trainable_parameters": 98845318,
+      "descriptor_dim": 5632,
+      "fit_records_declared": 5550,
+      "distinct_sampled_filenames": 5550,
+      "fit_identities": 33,
+      "dev_records": 3125,
+      "dev_queries": 3125,
+      "dev_identity_split_count": 17,
+      "batch_orders_rows": 4035,
+      "wall_seconds": 3833.294876098633,
+      "training_peak_memory_bytes": 13197928448,
+      "delta_vs_demo": {
+        "mAP": -1.139342031299151,
+        "mINP": -6.327870028950429,
+        "Rank-1": 1.152000000000001,
+        "Rank-5": 1.3440000000000083,
+        "Rank-10": 1.1200000000000045,
+        "Rank-20": 0.416000000000011
+      },
+      "mAP_and_Rank1_both_ge_2pp": false
+    }
+  },
+  "metric_table_recomputations": {
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/development_metrics/full_metrics.csv": {
+      "dataset": "MSVR310",
+      "queries": 210,
+      "valid_queries": 210,
+      "distinct_query_identities": 20,
+      "metrics": {
+        "mAP": 45.883485151688944,
+        "mINP": 32.44438117042006,
+        "Rank-1": 58.0952380952381,
+        "Rank-5": 68.57142857142857,
+        "Rank-10": 74.76190476190476,
+        "Rank-20": 80.95238095238095
+      },
+      "max_metric_error": 0.0,
+      "max_cmc_error": 0.0,
+      "max_group_error": 1.4210854715202004e-14,
+      "max_per_query_INP_error": 0.0,
+      "groups": 55,
+      "CSV_data_lines": [
+        2,
+        211
+      ],
+      "AP_limit": "Aggregate AP mean independently recomputed; individual AP cannot be reconstructed from first/last rank alone."
+    },
+    "results/axis_collaboration_v4_development/RGBNT201_axis_scaled_fullref_s42/development_metrics/full_metrics.csv": {
+      "dataset": "RGBNT201",
+      "queries": 825,
+      "valid_queries": 825,
+      "distinct_query_identities": 30,
+      "metrics": {
+        "mAP": 64.67294057627781,
+        "mINP": 53.111820147964416,
+        "Rank-1": 65.57575757575758,
+        "Rank-5": 77.2121212121212,
+        "Rank-10": 84.96969696969697,
+        "Rank-20": 91.87878787878788
+      },
+      "max_metric_error": 0.0,
+      "max_cmc_error": 0.0,
+      "max_group_error": 2.842170943040401e-14,
+      "max_per_query_INP_error": 0.0,
+      "groups": 33,
+      "CSV_data_lines": [
+        2,
+        826
+      ],
+      "AP_limit": "Aggregate AP mean independently recomputed; individual AP cannot be reconstructed from first/last rank alone."
+    },
+    "results/axis_collaboration_v4_development/RGBNT201_plain_scaled_fullref_s42/development_metrics/full_metrics.csv": {
+      "dataset": "RGBNT201",
+      "queries": 825,
+      "valid_queries": 825,
+      "distinct_query_identities": 30,
+      "metrics": {
+        "mAP": 65.74561352283274,
+        "mINP": 51.07939683940812,
+        "Rank-1": 68.84848484848484,
+        "Rank-5": 79.03030303030303,
+        "Rank-10": 83.15151515151516,
+        "Rank-20": 89.0909090909091
+      },
+      "max_metric_error": 0.0,
+      "max_cmc_error": 0.0,
+      "max_group_error": 4.263256414560601e-14,
+      "max_per_query_INP_error": 0.0,
+      "groups": 33,
+      "CSV_data_lines": [
+        2,
+        826
+      ],
+      "AP_limit": "Aggregate AP mean independently recomputed; individual AP cannot be reconstructed from first/last rank alone."
+    },
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/development_metrics/full_metrics.csv": {
+      "dataset": "RGBNT100",
+      "queries": 3125,
+      "valid_queries": 3125,
+      "distinct_query_identities": 17,
+      "metrics": {
+        "mAP": 89.30683874132068,
+        "mINP": 69.05889842033955,
+        "Rank-1": 97.408,
+        "Rank-5": 98.304,
+        "Rank-10": 98.432,
+        "Rank-20": 98.592
+      },
+      "max_metric_error": 1.4210854715202004e-14,
+      "max_cmc_error": 0.0,
+      "max_group_error": 2.842170943040401e-14,
+      "max_per_query_INP_error": 0.0,
+      "groups": 26,
+      "CSV_data_lines": [
+        2,
+        3126
+      ],
+      "AP_limit": "Aggregate AP mean independently recomputed; individual AP cannot be reconstructed from first/last rank alone."
+    },
+    "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42/development_metrics/full_metrics.csv": {
+      "dataset": "RGBNT100",
+      "queries": 3125,
+      "valid_queries": 3125,
+      "distinct_query_identities": 17,
+      "metrics": {
+        "mAP": 87.51437961423281,
+        "mINP": 63.09444828414077,
+        "Rank-1": 96.928,
+        "Rank-5": 97.92,
+        "Rank-10": 98.464,
+        "Rank-20": 99.168
+      },
+      "max_metric_error": 0.0,
+      "max_cmc_error": 0.0,
+      "max_group_error": 1.4210854715202004e-14,
+      "max_per_query_INP_error": 0.0,
+      "groups": 26,
+      "CSV_data_lines": [
+        2,
+        3126
+      ],
+      "AP_limit": "Aggregate AP mean independently recomputed; individual AP cannot be reconstructed from first/last rank alone."
+    },
+    "results/full_suite/RGBNT201_demo_s42/full_evaluation/dev_per_query.csv": {
+      "dataset": "RGBNT201",
+      "queries": 825,
+      "valid_queries": 825,
+      "distinct_query_identities": 30,
+      "metrics": {
+        "mAP": 64.4467656152785,
+        "mINP": 53.336009770410264,
+        "Rank-1": 63.515151515151516,
+        "Rank-5": 75.75757575757575,
+        "Rank-10": 83.03030303030303,
+        "Rank-20": 88.48484848484848
+      },
+      "max_metric_error": 0.0,
+      "max_cmc_error": 0.0,
+      "max_group_error": 2.842170943040401e-14,
+      "max_per_query_INP_error": 0.0,
+      "groups": 33,
+      "CSV_data_lines": [
+        2,
+        826
+      ],
+      "AP_limit": "Aggregate AP mean independently recomputed; individual AP cannot be reconstructed from first/last rank alone."
+    },
+    "results/full_suite/RGBNT100_demo_s42/full_evaluation/dev_per_query.csv": {
+      "dataset": "RGBNT100",
+      "queries": 3125,
+      "valid_queries": 3125,
+      "distinct_query_identities": 17,
+      "metrics": {
+        "mAP": 88.65372164553196,
+        "mINP": 69.4223183130912,
+        "Rank-1": 95.776,
+        "Rank-5": 96.576,
+        "Rank-10": 97.344,
+        "Rank-20": 98.752
+      },
+      "max_metric_error": 0.0,
+      "max_cmc_error": 0.0,
+      "max_group_error": 2.842170943040401e-14,
+      "max_per_query_INP_error": 0.0,
+      "groups": 26,
+      "CSV_data_lines": [
+        2,
+        3126
+      ],
+      "AP_limit": "Aggregate AP mean independently recomputed; individual AP cannot be reconstructed from first/last rank alone."
+    },
+    "results/full_suite/MSVR310_demo_s42/full_evaluation/dev_per_query.csv": {
+      "dataset": "MSVR310",
+      "queries": 210,
+      "valid_queries": 210,
+      "distinct_query_identities": 20,
+      "metrics": {
+        "mAP": 47.60779210388089,
+        "mINP": 33.52176657176169,
+        "Rank-1": 59.04761904761905,
+        "Rank-5": 69.04761904761905,
+        "Rank-10": 76.66666666666667,
+        "Rank-20": 80.0
+      },
+      "max_metric_error": 7.105427357601002e-15,
+      "max_cmc_error": 0.0,
+      "max_group_error": 2.842170943040401e-14,
+      "max_per_query_INP_error": 0.0,
+      "groups": 55,
+      "CSV_data_lines": [
+        2,
+        211
+      ],
+      "AP_limit": "Aggregate AP mean independently recomputed; individual AP cannot be reconstructed from first/last rank alone."
+    },
+    "results/axis_collaboration_v3_development/RGBNT201_axis_collaboration_s42/development_metrics/full_metrics.csv": {
+      "dataset": "RGBNT201",
+      "queries": 825,
+      "valid_queries": 825,
+      "distinct_query_identities": 30,
+      "metrics": {
+        "mAP": 68.05460736810663,
+        "mINP": 55.35220832452566,
+        "Rank-1": 69.33333333333334,
+        "Rank-5": 80.96969696969697,
+        "Rank-10": 87.39393939393939,
+        "Rank-20": 92.0
+      },
+      "max_metric_error": 1.4210854715202004e-14,
+      "max_cmc_error": 0.0,
+      "max_group_error": 4.263256414560601e-14,
+      "max_per_query_INP_error": 0.0,
+      "groups": 33,
+      "CSV_data_lines": [
+        2,
+        826
+      ],
+      "AP_limit": "Aggregate AP mean independently recomputed; individual AP cannot be reconstructed from first/last rank alone."
+    },
+    "results/axis_collaboration_v3_development/MSVR310_axis_collaboration_s42/development_metrics/full_metrics.csv": {
+      "dataset": "MSVR310",
+      "queries": 210,
+      "valid_queries": 210,
+      "distinct_query_identities": 20,
+      "metrics": {
+        "mAP": 48.19915721583998,
+        "mINP": 33.74369545996975,
+        "Rank-1": 60.0,
+        "Rank-5": 71.9047619047619,
+        "Rank-10": 76.19047619047619,
+        "Rank-20": 80.95238095238095
+      },
+      "max_metric_error": 0.0,
+      "max_cmc_error": 0.0,
+      "max_group_error": 2.842170943040401e-14,
+      "max_per_query_INP_error": 0.0,
+      "groups": 55,
+      "CSV_data_lines": [
+        2,
+        211
+      ],
+      "AP_limit": "Aggregate AP mean independently recomputed; individual AP cannot be reconstructed from first/last rank alone."
+    },
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/state_00.csv": {
+      "dataset": "MSVR310",
+      "queries": 210,
+      "valid_queries": 210,
+      "distinct_query_identities": 20,
+      "metrics": {
+        "mAP": 45.89586682948299,
+        "mINP": 32.44085729750969,
+        "Rank-1": 58.0952380952381,
+        "Rank-5": 68.57142857142857,
+        "Rank-10": 74.76190476190476,
+        "Rank-20": 80.95238095238095
+      },
+      "max_metric_error": 0.0,
+      "max_cmc_error": 0.0,
+      "max_group_error": 1.4210854715202004e-14,
+      "max_per_query_INP_error": 0.0,
+      "groups": 55,
+      "CSV_data_lines": [
+        2,
+        211
+      ],
+      "AP_limit": "Aggregate AP mean independently recomputed; individual AP cannot be reconstructed from first/last rank alone."
+    },
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/state_10.csv": {
+      "dataset": "MSVR310",
+      "queries": 210,
+      "valid_queries": 210,
+      "distinct_query_identities": 20,
+      "metrics": {
+        "mAP": 45.96624276121885,
+        "mINP": 32.549852392095694,
+        "Rank-1": 58.0952380952381,
+        "Rank-5": 68.57142857142857,
+        "Rank-10": 74.28571428571429,
+        "Rank-20": 80.95238095238095
+      },
+      "max_metric_error": 7.105427357601002e-15,
+      "max_cmc_error": 0.0,
+      "max_group_error": 1.4210854715202004e-14,
+      "max_per_query_INP_error": 0.0,
+      "groups": 55,
+      "CSV_data_lines": [
+        2,
+        211
+      ],
+      "AP_limit": "Aggregate AP mean independently recomputed; individual AP cannot be reconstructed from first/last rank alone."
+    },
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/state_01.csv": {
+      "dataset": "MSVR310",
+      "queries": 210,
+      "valid_queries": 210,
+      "distinct_query_identities": 20,
+      "metrics": {
+        "mAP": 45.92651825438783,
+        "mINP": 32.444678795071525,
+        "Rank-1": 57.61904761904761,
+        "Rank-5": 68.57142857142857,
+        "Rank-10": 74.76190476190476,
+        "Rank-20": 80.95238095238095
+      },
+      "max_metric_error": 7.105427357601002e-15,
+      "max_cmc_error": 0.0,
+      "max_group_error": 1.4210854715202004e-14,
+      "max_per_query_INP_error": 0.0,
+      "groups": 55,
+      "CSV_data_lines": [
+        2,
+        211
+      ],
+      "AP_limit": "Aggregate AP mean independently recomputed; individual AP cannot be reconstructed from first/last rank alone."
+    },
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/state_11.csv": {
+      "dataset": "MSVR310",
+      "queries": 210,
+      "valid_queries": 210,
+      "distinct_query_identities": 20,
+      "metrics": {
+        "mAP": 45.883485151688944,
+        "mINP": 32.44438117042006,
+        "Rank-1": 58.0952380952381,
+        "Rank-5": 68.57142857142857,
+        "Rank-10": 74.76190476190476,
+        "Rank-20": 80.95238095238095
+      },
+      "max_metric_error": 0.0,
+      "max_cmc_error": 0.0,
+      "max_group_error": 1.4210854715202004e-14,
+      "max_per_query_INP_error": 0.0,
+      "groups": 55,
+      "CSV_data_lines": [
+        2,
+        211
+      ],
+      "AP_limit": "Aggregate AP mean independently recomputed; individual AP cannot be reconstructed from first/last rank alone."
+    }
+  },
+  "paired_query_recomputations": {
+    "MSVR310_axis_scaled_fullref_s42": {
+      "demo": {
+        "queries": 210,
+        "GT_and_order_equal": true,
+        "rank1_harmed_count": 10,
+        "rank1_rescued_count": 8,
+        "AP_improved_count": 70,
+        "AP_worsened_count": 124,
+        "AP_identical_count": 16,
+        "mAP_delta_pp": -1.7243069521919503,
+        "Rank1_delta_pp": -0.9523809523809524
+      },
+      "V3_axis": {
+        "queries": 210,
+        "GT_and_order_equal": true,
+        "rank1_harmed_count": 11,
+        "rank1_rescued_count": 7,
+        "AP_improved_count": 74,
+        "AP_worsened_count": 121,
+        "AP_identical_count": 15,
+        "mAP_delta_pp": -2.315672064151039,
+        "Rank1_delta_pp": -1.9047619047619049
+      }
+    },
+    "RGBNT201_axis_scaled_fullref_s42": {
+      "demo": {
+        "queries": 825,
+        "GT_and_order_equal": true,
+        "rank1_harmed_count": 66,
+        "rank1_rescued_count": 83,
+        "AP_improved_count": 340,
+        "AP_worsened_count": 341,
+        "AP_identical_count": 144,
+        "mAP_delta_pp": 0.22617496099932333,
+        "Rank1_delta_pp": 2.0606060606060606
+      },
+      "V3_axis": {
+        "queries": 825,
+        "GT_and_order_equal": true,
+        "rank1_harmed_count": 75,
+        "rank1_rescued_count": 44,
+        "AP_improved_count": 299,
+        "AP_worsened_count": 367,
+        "AP_identical_count": 159,
+        "mAP_delta_pp": -3.3816667918288275,
+        "Rank1_delta_pp": -3.7575757575757573
+      }
+    },
+    "RGBNT201_plain_scaled_fullref_s42": {
+      "demo": {
+        "queries": 825,
+        "GT_and_order_equal": true,
+        "rank1_harmed_count": 54,
+        "rank1_rescued_count": 98,
+        "AP_improved_count": 361,
+        "AP_worsened_count": 324,
+        "AP_identical_count": 140,
+        "mAP_delta_pp": 1.2988479075542714,
+        "Rank1_delta_pp": 5.333333333333334
+      },
+      "V4_axis_scaled_fullref": {
+        "queries": 825,
+        "GT_and_order_equal": true,
+        "rank1_harmed_count": 79,
+        "rank1_rescued_count": 106,
+        "AP_improved_count": 346,
+        "AP_worsened_count": 344,
+        "AP_identical_count": 135,
+        "mAP_delta_pp": 1.072672946554948,
+        "Rank1_delta_pp": 3.272727272727273
+      }
+    },
+    "RGBNT100_axis_scaled_fullref_s42": {
+      "demo": {
+        "queries": 3125,
+        "GT_and_order_equal": true,
+        "rank1_harmed_count": 37,
+        "rank1_rescued_count": 88,
+        "AP_improved_count": 1431,
+        "AP_worsened_count": 1187,
+        "AP_identical_count": 507,
+        "mAP_delta_pp": 0.6531170957887128,
+        "Rank1_delta_pp": 1.6320000000000001
+      }
+    },
+    "RGBNT100_plain_scaled_fullref_s42": {
+      "demo": {
+        "queries": 3125,
+        "GT_and_order_equal": true,
+        "rank1_harmed_count": 64,
+        "rank1_rescued_count": 100,
+        "AP_improved_count": 971,
+        "AP_worsened_count": 1599,
+        "AP_identical_count": 555,
+        "mAP_delta_pp": -1.1393420312991582,
+        "Rank1_delta_pp": 1.1520000000000001
+      },
+      "V4_axis_scaled_fullref": {
+        "queries": 3125,
+        "GT_and_order_equal": true,
+        "rank1_harmed_count": 77,
+        "rank1_rescued_count": 62,
+        "AP_improved_count": 957,
+        "AP_worsened_count": 1668,
+        "AP_identical_count": 500,
+        "mAP_delta_pp": -1.792459127087871,
+        "Rank1_delta_pp": -0.48
+      }
+    },
+    "00_to_11": {
+      "queries": 210,
+      "GT_and_order_equal": true,
+      "rank1_harmed_count": 0,
+      "rank1_rescued_count": 0,
+      "AP_improved_count": 16,
+      "AP_worsened_count": 50,
+      "AP_identical_count": 144,
+      "mAP_delta_pp": -0.01238167779404745,
+      "Rank1_delta_pp": 0.0
+    },
+    "10_to_11": {
+      "queries": 210,
+      "GT_and_order_equal": true,
+      "rank1_harmed_count": 0,
+      "rank1_rescued_count": 0,
+      "AP_improved_count": 37,
+      "AP_worsened_count": 45,
+      "AP_identical_count": 128,
+      "mAP_delta_pp": -0.08275760952990877,
+      "Rank1_delta_pp": 0.0
+    },
+    "01_to_11": {
+      "queries": 210,
+      "GT_and_order_equal": true,
+      "rank1_harmed_count": 0,
+      "rank1_rescued_count": 1,
+      "AP_improved_count": 40,
+      "AP_worsened_count": 62,
+      "AP_identical_count": 108,
+      "mAP_delta_pp": -0.04303310269888502,
+      "Rank1_delta_pp": 0.4761904761904762
+    }
+  },
+  "contribution_recomputations": {
+    "contributions.csv": {
+      "delta_M_given_F": {
+        "target_mean": -2.985372030664058e-05,
+        "target_std": 0.00028567758812034265,
+        "prediction_mean": 0.002133041760645851,
+        "prediction_std": 0.0013450821332386526,
+        "MAE": 0.0022222027535982697,
+        "RMSE": 0.0025682392438972517,
+        "positive_target_fraction": 0.43333333333333335,
+        "sign_agreement_fraction": 0.4523809523809524,
+        "prediction_target_covariance": -1.3439161428557814e-08,
+        "Pearson_correlation": -0.03497415223087928,
+        "MAE_over_target_std": 7.778708747226468,
+        "negative_prediction_fraction": 0.05714285714285714,
+        "max_summary_abs_error": 1.305813118225585e-10
+      },
+      "delta_F_given_M": {
+        "target_mean": 5.143438244149798e-05,
+        "target_std": 0.00034768807599119426,
+        "prediction_mean": -0.014641701454474102,
+        "prediction_std": 0.004819526558194951,
+        "MAE": 0.0146931358369156,
+        "RMSE": 0.015456247095544011,
+        "positive_target_fraction": 0.5190476190476191,
+        "sign_agreement_fraction": 0.48095238095238096,
+        "prediction_target_covariance": 1.7069484343687963e-07,
+        "Pearson_correlation": 0.1018652902636349,
+        "MAE_over_target_std": 42.25953333322747,
+        "negative_prediction_fraction": 1.0,
+        "max_summary_abs_error": 4.412695053107596e-10
+      },
+      "empirical_interaction": {
+        "target_mean": 2.1321121381507033e-05,
+        "target_std": 0.0003384033350552325,
+        "prediction_mean": 0.0006906267538267587,
+        "prediction_std": 0.0007904311798229743,
+        "MAE": 0.0008969416015870159,
+        "RMSE": 0.001106608053501157,
+        "positive_target_fraction": 0.49523809523809526,
+        "sign_agreement_fraction": 0.49047619047619045,
+        "prediction_target_covariance": -1.8656543618919126e-08,
+        "Pearson_correlation": -0.06974811741986056,
+        "MAE_over_target_std": 2.650510525969319,
+        "negative_prediction_fraction": 0.1761904761904762,
+        "max_summary_abs_error": 4.2589760928038456e-11
+      }
+    },
+    "full_reference_contributions.csv": {
+      "delta_M_given_F": {
+        "target_mean": -2.9346408943335216e-05,
+        "target_std": 0.0003141375286320078,
+        "prediction_mean": 0.002133041760645851,
+        "prediction_std": 0.0013450821332386526,
+        "MAE": 0.0022247783890980786,
+        "RMSE": 0.0025833868438530777,
+        "positive_target_fraction": 0.5142857142857142,
+        "sign_agreement_fraction": 0.5047619047619047,
+        "prediction_target_covariance": -4.501832848051161e-08,
+        "Pearson_correlation": -0.10654197397216507,
+        "MAE_over_target_std": 7.082179575253059,
+        "negative_prediction_fraction": 0.05714285714285714,
+        "max_summary_abs_error": 9.826007542346193e-11
+      },
+      "delta_F_given_M": {
+        "target_mean": 5.268766766502744e-05,
+        "target_std": 0.000348511254705,
+        "prediction_mean": -0.014641701454474102,
+        "prediction_std": 0.004819526558194951,
+        "MAE": 0.01469438912213913,
+        "RMSE": 0.015462882652424148,
+        "positive_target_fraction": 0.5904761904761905,
+        "sign_agreement_fraction": 0.4095238095238095,
+        "prediction_target_covariance": 8.68140450018416e-08,
+        "Pearson_correlation": 0.051685510088658904,
+        "MAE_over_target_std": 42.163313017185935,
+        "negative_prediction_fraction": 1.0,
+        "max_summary_abs_error": 2.2110779700212913e-10
+      },
+      "empirical_interaction": {
+        "target_mean": 2.3721040980446906e-05,
+        "target_std": 0.00034442788400667723,
+        "prediction_mean": 0.0006906267538267587,
+        "prediction_std": 0.0007904311798229743,
+        "MAE": 0.0009017527630064814,
+        "RMSE": 0.001115761415700271,
+        "positive_target_fraction": 0.5285714285714286,
+        "sign_agreement_fraction": 0.47619047619047616,
+        "prediction_target_covariance": -2.8374144810384548e-08,
+        "Pearson_correlation": -0.10422224261824965,
+        "MAE_over_target_std": 2.6181177682727905,
+        "negative_prediction_fraction": 0.1761904761904762,
+        "max_summary_abs_error": 6.765390851704023e-11
+      }
+    }
+  },
+  "dynamic_snapshot": {
+    "observed_at": "2026-10-03T06:58:35",
+    "read_at": "2026-10-02T23:01:07.796651+00:00",
+    "sha256": "02800a1de87184d6c1723ed44fc6499d3df9d5da196d001e284e71bb75f65f69",
+    "controller_live": true,
+    "planned": 11,
+    "completed": [
+      "MSVR310_axis_scaled_fullref_s42",
+      "RGBNT100_axis_scaled_fullref_s42",
+      "RGBNT100_plain_scaled_fullref_s42",
+      "RGBNT201_axis_scaled_fullref_s42",
+      "RGBNT201_plain_scaled_fullref_s42"
+    ],
+    "pending": [
+      {
+        "name": "RGBNT100_frequency_scaled_fullref_s42",
+        "status": {
+          "status": "RUNNING",
+          "epoch": 32,
+          "steps": 2581,
+          "latest": {
+            "epoch": 32,
+            "steps": 2581,
+            "optimizer_steps": 2581,
+            "amp_skipped_steps": 0,
+            "amp_scale": 1024.0,
+            "loss": 0.7559439949691296,
+            "seconds": 109.44276356697083,
+            "mAP": 87.62133128445025,
+            "Rank-1": 94.304,
+            "Rank-5": 95.19999999999999,
+            "Rank-10": 95.872
+          },
+          "best": {
+            "mAP": 88.69565737607624,
+            "Rank-1": 94.816,
+            "Rank-5": 95.872,
+            "Rank-10": 97.152,
+            "query_count": 3125,
+            "gallery_count": 3125,
+            "descriptor_dim": 5632,
+            "epoch": 7
+          }
+        }
+      },
+      {
+        "name": "MSVR310_axis_raw_fullref_s42"
+      },
+      {
+        "name": "MSVR310_frequency_scaled_fullref_s42",
+        "status": {
+          "status": "RUNNING",
+          "epoch": 36,
+          "steps": 327,
+          "latest": {
+            "epoch": 36,
+            "steps": 327,
+            "optimizer_steps": 327,
+            "amp_skipped_steps": 0,
+            "amp_scale": 512.0,
+            "loss": 2.0803603172302245,
+            "seconds": 11.02370572090149,
+            "mAP": 47.64732357757381,
+            "Rank-1": 59.523809523809526,
+            "Rank-5": 69.04761904761905,
+            "Rank-10": 76.19047619047619
+          },
+          "best": {
+            "mAP": 48.16419128720257,
+            "Rank-1": 59.523809523809526,
+            "Rank-5": 70.0,
+            "Rank-10": 76.19047619047619,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632,
+            "epoch": 29
+          }
+        }
+      },
+      {
+        "name": "MSVR310_plain_scaled_fullref_s42",
+        "status": {
+          "status": "RUNNING",
+          "epoch": 33,
+          "steps": 299,
+          "latest": {
+            "epoch": 33,
+            "steps": 299,
+            "optimizer_steps": 299,
+            "amp_skipped_steps": 0,
+            "amp_scale": 512.0,
+            "loss": 2.0777771870295205,
+            "seconds": 10.523244142532349,
+            "mAP": 48.13190566355014,
+            "Rank-1": 58.0952380952381,
+            "Rank-5": 72.85714285714285,
+            "Rank-10": 76.66666666666667
+          },
+          "best": {
+            "mAP": 48.94987290256551,
+            "Rank-1": 58.0952380952381,
+            "Rank-5": 72.38095238095238,
+            "Rank-10": 76.66666666666667,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632,
+            "epoch": 32
+          }
+        }
+      },
+      {
+        "name": "RGBNT201_frequency_scaled_fullref_s42",
+        "status": {
+          "status": "RUNNING",
+          "epoch": 26,
+          "steps": 1092,
+          "latest": {
+            "epoch": 26,
+            "steps": 1092,
+            "optimizer_steps": 1092,
+            "amp_skipped_steps": 0,
+            "amp_scale": 512.0,
+            "loss": 0.5869704612663814,
+            "seconds": 32.35422992706299,
+            "mAP": 58.584517146839175,
+            "Rank-1": 55.15151515151515,
+            "Rank-5": 72.24242424242424,
+            "Rank-10": 78.42424242424244
+          },
+          "best": {
+            "mAP": 59.35875932206891,
+            "Rank-1": 54.18181818181819,
+            "Rank-5": 70.54545454545455,
+            "Rank-10": 79.51515151515152,
+            "query_count": 825,
+            "gallery_count": 825,
+            "descriptor_dim": 5632,
+            "epoch": 25
+          }
+        }
+      },
+      {
+        "name": "MSVR310_axis_scaled_base_s42"
+      }
+    ],
+    "smokes": [
+      {
+        "name": "MSVR310_axis_scaled_fullref_smoke",
+        "steps": 3,
+        "gradient_tensors": 533,
+        "all_gradient_checks_true": true,
+        "strict_reload_equal": true
+      },
+      {
+        "name": "RGBNT100_frequency_scaled_fullref_smoke",
+        "steps": 3,
+        "gradient_tensors": 533,
+        "all_gradient_checks_true": true,
+        "strict_reload_equal": true
+      },
+      {
+        "name": "MSVR310_axis_raw_fullref_smoke",
+        "steps": 3,
+        "gradient_tensors": 533,
+        "all_gradient_checks_true": true,
+        "strict_reload_equal": true
+      },
+      {
+        "name": "RGBNT100_axis_scaled_fullref_smoke",
+        "steps": 3,
+        "gradient_tensors": 533,
+        "all_gradient_checks_true": true,
+        "strict_reload_equal": true
+      },
+      {
+        "name": "MSVR310_frequency_scaled_fullref_smoke",
+        "steps": 3,
+        "gradient_tensors": 533,
+        "all_gradient_checks_true": true,
+        "strict_reload_equal": true
+      },
+      {
+        "name": "RGBNT100_plain_scaled_fullref_smoke",
+        "steps": 3,
+        "gradient_tensors": 533,
+        "all_gradient_checks_true": true,
+        "strict_reload_equal": true
+      },
+      {
+        "name": "MSVR310_plain_scaled_fullref_smoke",
+        "steps": 3,
+        "gradient_tensors": 533,
+        "all_gradient_checks_true": true,
+        "strict_reload_equal": true
+      },
+      {
+        "name": "RGBNT201_axis_scaled_fullref_smoke",
+        "steps": 3,
+        "gradient_tensors": 417,
+        "all_gradient_checks_true": true,
+        "strict_reload_equal": true
+      },
+      {
+        "name": "RGBNT201_plain_scaled_fullref_smoke",
+        "steps": 3,
+        "gradient_tensors": 417,
+        "all_gradient_checks_true": true,
+        "strict_reload_equal": true
+      },
+      {
+        "name": "RGBNT201_frequency_scaled_fullref_smoke",
+        "steps": 3,
+        "gradient_tensors": 417,
+        "all_gradient_checks_true": true,
+        "strict_reload_equal": true
+      },
+      {
+        "name": "MSVR310_axis_scaled_base_smoke",
+        "steps": 3,
+        "gradient_tensors": 533,
+        "all_gradient_checks_true": true,
+        "strict_reload_equal": true
+      }
+    ],
+    "limit": "Frozen observation, not live or terminal campaign state."
+  },
+  "input_changes_after_frozen_capture": [
+    {
+      "path": "results/preflight/axis_collaboration_v4_latest_snapshot.json",
+      "audited_sha256": "02800a1de87184d6c1723ed44fc6499d3df9d5da196d001e284e71bb75f65f69",
+      "current_sha256": "4a793b534b6b79b6f85740d54f58e3cf00a7112182b36b8c88a736851a2662c0",
+      "observed_at": "2026-10-02T23:24:30.619693+00:00",
+      "treatment": "The frozen audit snapshot remains authoritative; no newer contents incorporated."
+    }
+  ],
+  "audited_input_hashes": {
+    "run_experiment.py": "sha256:6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "axis_collaboration.py": "sha256:9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "scaled_axis_collaboration.py": "sha256:0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+    "diagnose_axis_collaboration.py": "sha256:60f3c6217cdebb347ab13501bb0013ca52925b139ba333cc2f2f6ec90c3e6729",
+    "full_evaluation.py": "sha256:a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "utils/reid_evaluation.py": "sha256:96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+    "experiment_data.py": "sha256:70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "splits.json": "sha256:66f6ee8f1c07f4fb97bf48ed8189b60859ab2f5f207ceea6b28a90c4ee1f9377",
+    "configs/RGBNT201/DeMo.yml": "sha256:bfee0de623885a38cce974c1c5d74abf47c54e14852cc266b8f69c70a858c51d",
+    "configs/RGBNT100/DeMo.yml": "sha256:e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c",
+    "configs/MSVR310/DeMo.yml": "sha256:099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+    "data/datasets/RGBNT201.py": "sha256:1a3dda88f26efc2891322e2726c4f3591bfd0c040cdf5c717d0aabc55f349272",
+    "data/datasets/RGBNT100.py": "sha256:cef47b0a1dcc9bc434f6c3612e547db41fd8af2b1d7e953323ea80ffb6eb705f",
+    "data/datasets/msvr310.py": "sha256:72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/result.json": "sha256:4797bb8917611c5e224a7e7bc9fea8d707e0538fea43cbadf6851e0a901f6cd9",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/run.json": "sha256:5e0c870cfb238818d83ecc85264faa867e2b67e66d2101d58ac4407313b41855",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/status.json": "sha256:4797bb8917611c5e224a7e7bc9fea8d707e0538fea43cbadf6851e0a901f6cd9",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/best.json": "sha256:c7855eacf08784f9d6572b3d250250a340b965bcf64e6efd872859942ec8a0ef",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/epochs.csv": "sha256:3a9766e4b6c80d7f1cc5a41b7b093f471fc07af16bde7b7d5b646439549e135d",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/batch_orders.jsonl": "sha256:ec453c2027d65b7ddfddcbf3aa2f0ee7ee9b01382230b006f99ec208ce188aca",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/intake.json": "sha256:642feab9782b422a2a7a88a2dc1417562af8cfabdda000eadb17e409d822f21f",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/development_metrics/full_metrics.json": "sha256:609f6735845a17a1d324bee634dd10319ffd62250498a43c118cf2c9a0ee3dba",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/development_metrics/full_metrics.csv": "sha256:2a11b1bb208cc55b30dbfb2a1a42e545c727e219e538d4a372615d7f0d4d7e2c",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/development_metrics/metric_computation.json": "sha256:c9736c993e90618c296cba971a2b2c9185f4b6c0ec5b475cf092566b09c83f44",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42/development_metrics/intake.json": "sha256:4d1a715042e21a686f4a95903bdfe571f6175244daedb7f209fb74b3cacb3354",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42_exit.json": "sha256:218956f3fca1b01e392747d6890b93da3cbc2a9a0f2ba318568c3416817afe8b",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42_launch.json": "sha256:ecf20e33743db24d81cd02811295109feef1c9c014d90a845f55ea043faf9358",
+    "results/axis_collaboration_v4_development/MSVR310_axis_scaled_fullref_s42.log": "sha256:f66699a8039599767a9c4f98f6727802f3b6f53c695e9f8fd0ad45b2c71521e1",
+    "results/axis_collaboration_v4_development/RGBNT201_axis_scaled_fullref_s42/result.json": "sha256:780fdd728fc2a8a4c951b92afbb3fe6badf3bcff4730adf8ffdb2c130628328b",
+    "results/axis_collaboration_v4_development/RGBNT201_axis_scaled_fullref_s42/run.json": "sha256:de1a1ef02dad3bb09e3622b8b8a7db09f20f66cc204153f5d432ea706fc5581c",
+    "results/axis_collaboration_v4_development/RGBNT201_axis_scaled_fullref_s42/status.json": "sha256:780fdd728fc2a8a4c951b92afbb3fe6badf3bcff4730adf8ffdb2c130628328b",
+    "results/axis_collaboration_v4_development/RGBNT201_axis_scaled_fullref_s42/best.json": "sha256:e49c375a4b3e68ec86372c901fceed0c33a0e7333b764b240a8f08f0ca0e7751",
+    "results/axis_collaboration_v4_development/RGBNT201_axis_scaled_fullref_s42/epochs.csv": "sha256:3f51401ffb0770846d6184aa337fe21654d5d29910e359246088ff2a62c96e35",
+    "results/axis_collaboration_v4_development/RGBNT201_axis_scaled_fullref_s42/batch_orders.jsonl": "sha256:52f1778de32e47623b40becba5746509146288faa3b4e4bd96fad59f6a178fdb",
+    "results/axis_collaboration_v4_development/RGBNT201_axis_scaled_fullref_s42/intake.json": "sha256:21bfbcb169fd487908aee3087095527f45b75e840470f1ca9e3a0674c6880b5f",
+    "results/axis_collaboration_v4_development/RGBNT201_axis_scaled_fullref_s42/development_metrics/full_metrics.json": "sha256:be1cbf47286d757ba273a75303cd885c4f0689d3bb9c4d42b76769933e64ab6d",
+    "results/axis_collaboration_v4_development/RGBNT201_axis_scaled_fullref_s42/development_metrics/full_metrics.csv": "sha256:1e803ab896e0274c9380ec0d8b4be1974210f1b8d32ba9398f06c80a55efc673",
+    "results/axis_collaboration_v4_development/RGBNT201_axis_scaled_fullref_s42/development_metrics/metric_computation.json": "sha256:621dd8193c442a85c8c3ee7b78281f5158c47ee5876ece382c7b85350093fcde",
+    "results/axis_collaboration_v4_development/RGBNT201_axis_scaled_fullref_s42/development_metrics/intake.json": "sha256:0cd2c94acbd7c56db5e89f2ac54ed0c973b7341010c042ff85c78e250c25ea58",
+    "results/axis_collaboration_v4_development/RGBNT201_axis_scaled_fullref_s42_exit.json": "sha256:81c354a0490d3a94f6f21b7ed6650086e1ccc46c11c0e58ece567e19047ed798",
+    "results/axis_collaboration_v4_development/RGBNT201_axis_scaled_fullref_s42_launch.json": "sha256:50f9793b7b22729e0a038983f30c8723b552823ac0517c6e5c7dae0a59e1b209",
+    "results/axis_collaboration_v4_development/RGBNT201_axis_scaled_fullref_s42.log": "sha256:9ad4ffdd909fabcd7baee110b22fd5334e837d6e70178f4a243ddae2e71b7a6c",
+    "results/axis_collaboration_v4_development/RGBNT201_plain_scaled_fullref_s42/result.json": "sha256:388af85d28cb5b33929a9cd1a60d0c61267b97b597845fc9c69d26e47c904481",
+    "results/axis_collaboration_v4_development/RGBNT201_plain_scaled_fullref_s42/run.json": "sha256:292e84fc0fe0e9aae1749f5f46fc2d42a0535d859dc108a48217f1b75076e301",
+    "results/axis_collaboration_v4_development/RGBNT201_plain_scaled_fullref_s42/status.json": "sha256:388af85d28cb5b33929a9cd1a60d0c61267b97b597845fc9c69d26e47c904481",
+    "results/axis_collaboration_v4_development/RGBNT201_plain_scaled_fullref_s42/best.json": "sha256:24b1917778cb637734623c70b11f0c614888cac7f284e62fb789b48b7828f383",
+    "results/axis_collaboration_v4_development/RGBNT201_plain_scaled_fullref_s42/epochs.csv": "sha256:8d2162b0fed51c3c4b1b4cc7b4be4cbbf81304f19a346672268e2bc7a5bd677d",
+    "results/axis_collaboration_v4_development/RGBNT201_plain_scaled_fullref_s42/batch_orders.jsonl": "sha256:52f1778de32e47623b40becba5746509146288faa3b4e4bd96fad59f6a178fdb",
+    "results/axis_collaboration_v4_development/RGBNT201_plain_scaled_fullref_s42/intake.json": "sha256:ea33d8858ca6f639e34b03c3ff5bac9c4c3c16ad944cca52119423e54b10c7d4",
+    "results/axis_collaboration_v4_development/RGBNT201_plain_scaled_fullref_s42/development_metrics/full_metrics.json": "sha256:cae958bc8bcb9e01f86650ea65be1f280b9e48ebea49baeb350e2e6899ddd0b8",
+    "results/axis_collaboration_v4_development/RGBNT201_plain_scaled_fullref_s42/development_metrics/full_metrics.csv": "sha256:9e9c4abd8f1eddf28d74d111dc01eefef1c08470477d0b5660dde9aecd76729c",
+    "results/axis_collaboration_v4_development/RGBNT201_plain_scaled_fullref_s42/development_metrics/metric_computation.json": "sha256:c1b9f0a1ee3585a63b543ef4990fd9758c37c301b7f310bf6cfd35530563703a",
+    "results/axis_collaboration_v4_development/RGBNT201_plain_scaled_fullref_s42/development_metrics/intake.json": "sha256:52734e1adaa6efba2b49a0bd38cd73e1cbc13b34549d7acbc8f82b0962a038ad",
+    "results/axis_collaboration_v4_development/RGBNT201_plain_scaled_fullref_s42_exit.json": "sha256:a6fbd503dfadaa944be21ff23e0fd83fd2cd850da5d380339cdb2da488e510b2",
+    "results/axis_collaboration_v4_development/RGBNT201_plain_scaled_fullref_s42_launch.json": "sha256:10a9c4a2a3b5766df736dfe19b61852b08f6ec228af3b0df38beecb8fc14cfb1",
+    "results/axis_collaboration_v4_development/RGBNT201_plain_scaled_fullref_s42.log": "sha256:cec2cb19e85609e51e35c1a5ce2aba13985c02205c14abfa8d75032eae1962fb",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/result.json": "sha256:4312965c781fa72b459e7380756a4f2212dadd9b06dc8db2e4a43f6266c804f9",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/run.json": "sha256:3bd609d49119ae17240cc9ca6dadbaa8b381101c5a5cacaa7a9253a4e731e926",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/status.json": "sha256:4312965c781fa72b459e7380756a4f2212dadd9b06dc8db2e4a43f6266c804f9",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/best.json": "sha256:d195cbf026e95674f18a3da69e0e15386f3b63f341f65e932aa42ac17f39f33c",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/epochs.csv": "sha256:43bb33eaa0e46c3dc559f274308a8c35286f08087998d8478d578a3a3b8817fd",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/batch_orders.jsonl": "sha256:2cae6abcbc5ea14d70ffa7717aad8a4f7b91c3ca86c3c87f6ef4f3cb63c60b24",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/intake.json": "sha256:93cd3af4905863330c75532687e78eaaee2ceee435a1f2f602803aeab093dd99",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/development_metrics/full_metrics.json": "sha256:c34b1301486595abbf15febb8e29529d18c4f2544fdbea7bb39462f935426cc0",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/development_metrics/full_metrics.csv": "sha256:e3cbf703e4c9989c32c75c537e303e034570c878840f6978c56a1d6aafb33477",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/development_metrics/metric_computation.json": "sha256:a5cb52d595a24ff82c8c96e5f3bf76e8ac5ed092df90774288648edd68e85bae",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42/development_metrics/intake.json": "sha256:09d78a2bdefd2a177306304ee0bf3d81ae0d82945115e90413a612abdec9095c",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42_exit.json": "sha256:47305b131fc5707744d5b6ae2c51ea7c0454b8053267c688152b409d7d465a0c",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42_launch.json": "sha256:4e48e5f5425081521eb006ba07b46410b70c649d585f98d75756aeaab12c18f7",
+    "results/axis_collaboration_v4_development/RGBNT100_axis_scaled_fullref_s42.log": "sha256:201a771965f79676804db8f86718977acb636622ac6b9733974db3cde956e268",
+    "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42/result.json": "sha256:614c914fcbf66465d204fc5fbe806c29d30b89820d6bf035d8d5c63da82badfb",
+    "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42/run.json": "sha256:f17e700a7190c86adb6c4e2d197d1a0a53190a93d80def82d11253d94bf72c05",
+    "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42/status.json": "sha256:614c914fcbf66465d204fc5fbe806c29d30b89820d6bf035d8d5c63da82badfb",
+    "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42/best.json": "sha256:9dad0dbc6a8bc43e902811dd36303099a2115a1fa702abdc31a254bce7f0ee79",
+    "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42/epochs.csv": "sha256:e227e501cd999058e72197c43efe50a2090eb03c7c8c724c8592fc604497d468",
+    "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42/batch_orders.jsonl": "sha256:2cae6abcbc5ea14d70ffa7717aad8a4f7b91c3ca86c3c87f6ef4f3cb63c60b24",
+    "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42/intake.json": "sha256:3113a7ba77760761886c3cc04dfe1c49d37d944e1416fbf51abb44970240b8ae",
+    "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42/development_metrics/full_metrics.json": "sha256:9a1fcb02fdf4ded075611f615dad962c9c7254b82c5135d961a38b78e8afdcfa",
+    "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42/development_metrics/full_metrics.csv": "sha256:158c9a1241fdc13c8d1b24de3ad77207276ce3578e25c28d00df9cb032d063ce",
+    "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42/development_metrics/metric_computation.json": "sha256:fa416282b8c9efe6727b5673fefccb04ac9b67f3cda5505bd1d8d3c912a47adc",
+    "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42/development_metrics/intake.json": "sha256:951f643d7e29d25ffebea17acbb381089adde33e86f44e67da3ba61d24fadc42",
+    "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42_exit.json": "sha256:f44b4a88e49d621403128adcdbeb7cddd3bd777388cf360d1a538213c09803ae",
+    "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42_launch.json": "sha256:7129b94ff653515f2855f701767466992794aedd9d2a4d8f4f4582abb43ec911",
+    "results/axis_collaboration_v4_development/RGBNT100_plain_scaled_fullref_s42.log": "sha256:435f476ff27f199d978eb8f54862f35c73227d5c9e4dfab5c06984c859793e9a",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/controller.log": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/controller.py": "sha256:a71930633aeccebf8ce0a1310d63349c1411ef3b521812615b1a5d463061319f",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/controller_result.json": "sha256:0f567d79a5bfa45bc7be0655dce59a1ca0841815964466eaedbe480e3ddf8e9d",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/contributions.csv": "sha256:48930d50585b0d19378747cdf3e0167754e794e81dd0ee535c0254a63f32dd01",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/diagnostic.json": "sha256:b182dfa3a67c1d7f86916afe32e2ce384d34b88064a0cf7252bd37d1b4589e20",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/full_reference_contributions.csv": "sha256:94a87dfc65394250e51690f2b680be5a4460c79fcd92d90c6d4607420e1a4e5a",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/state_00.csv": "sha256:0de53178fe23eb12bd211f61a28883fc1a95a3ffc0ab651861d32c2283759a9c",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/state_00.json": "sha256:5fba4f90647492c1c852ca68a57b64a5254099d77e029657a5d82668b9dee806",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/state_01.csv": "sha256:e0b7eb2f5ddd252580a4b5bef7fcdd77929f8bd6465b644430f51d2999b7b27a",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/state_01.json": "sha256:76d7a6b26fff088d93df3053f4c9342102c62825acd63d4d31aa5b6e35b4bc96",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/state_10.csv": "sha256:1adff79a359ecbedfd3d411c8c6e9d0203db776398344eb495700d03bbf360b8",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/state_10.json": "sha256:96d67fa10b16d61f11f2b132594db7f179c91ae805ac0d5b6c20c3d7316b1545",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/state_11.csv": "sha256:2a11b1bb208cc55b30dbfb2a1a42e545c727e219e538d4a372615d7f0d4d7e2c",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full/state_11.json": "sha256:609f6735845a17a1d324bee634dd10319ffd62250498a43c118cf2c9a0ee3dba",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full.log": "sha256:036ac4d272b64c5688be58776635f87b3ac5f7404e6b828dfb8fc4bd2201f4e8",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full_exit.json": "sha256:6c2288140e6de6dc608a5ca417d550e274270032a976110740c4737b1ea46fa5",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/full_launch.json": "sha256:9edf431c34640da51b66795ca98a6b06ca75adb8be842c1dbba2033d571131a2",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/intake.json": "sha256:3228f62d08ba98b5068a21e98ebb21072856daad02e213a7ecbf3312aaeb4831",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/smoke/smoke.json": "sha256:d571f604933c007aa19939dc1ce74d5eb23c1b5ed75c63b96197c85e9a1d90dc",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/smoke.log": "sha256:e89d3b042c603a5bbd6c3da541302141d6a743d927fa799c21446d357a55f123",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/smoke_exit.json": "sha256:4f57955f294556d4031ee3dfc7ba7fea4ae9b322f59bb62dfce9d41862093dd9",
+    "results/axis_collaboration_v4_diagnostic/MSVR310_axis_scaled_fullref_s42_cross26/smoke_launch.json": "sha256:421bb508becd59b61decf3590f4058fbd279e6a1a10cabfc4b89e94f2b51f4a4",
+    "results/full_suite/RGBNT201_demo_s42/batch_orders.jsonl": "sha256:52f1778de32e47623b40becba5746509146288faa3b4e4bd96fad59f6a178fdb",
+    "results/full_suite/RGBNT201_demo_s42/full_evaluation/metrics.json": "sha256:06ca7620f1595717868955a0b324de073cc32e7cab69f48b1959d45baf278ed0",
+    "results/full_suite/RGBNT201_demo_s42/full_evaluation/dev_per_query.csv": "sha256:ba6f88b2d20542af7ac73a6e4bf9ee0af116b9559554de3c0bbe98466ca15673",
+    "results/full_suite/RGBNT100_demo_s42/batch_orders.jsonl": "sha256:2cae6abcbc5ea14d70ffa7717aad8a4f7b91c3ca86c3c87f6ef4f3cb63c60b24",
+    "results/full_suite/RGBNT100_demo_s42/full_evaluation/metrics.json": "sha256:c78103a310fa19e251fecb3e87bd20c44293d4fd009e120e127ae833f5810074",
+    "results/full_suite/RGBNT100_demo_s42/full_evaluation/dev_per_query.csv": "sha256:420f0a881173933d10be75a4bd120b83dd29bdacd26349b80068ed6b4390b039",
+    "results/full_suite/MSVR310_demo_s42/batch_orders.jsonl": "sha256:ec453c2027d65b7ddfddcbf3aa2f0ee7ee9b01382230b006f99ec208ce188aca",
+    "results/full_suite/MSVR310_demo_s42/full_evaluation/metrics.json": "sha256:50751664e8b8a19ae627353ea830f148d072f04bb016e001f94ba996579774d1",
+    "results/full_suite/MSVR310_demo_s42/full_evaluation/dev_per_query.csv": "sha256:bc7d077d300f4d33b1827ad52c966b4ada044602773dbdf279ebbf9471e374da",
+    "results/preflight/axis_collaboration_v4_first2_development_analysis.json": "sha256:004c4888593c7f0092264f2ea0d900da7339259107a098c3c18d641273471603",
+    "results/preflight/axis_collaboration_v4_first_plain_control_analysis.json": "sha256:2e92086a37e1056be1fe08a23c27195d54550e7cc98afa120d5e8f912fd1ff66",
+    "results/preflight/axis_collaboration_v4_rgbnt100_development_analysis.json": "sha256:3e11d4d5af8809be4c0bddafe78adf78fb335c1b9748934acc25af7693a52b98",
+    "results/preflight/axis_collaboration_v4_msvr_mechanism_analysis.json": "sha256:a33efd0cff4b3787a1bc395433000bec4af259f9105ee11856e31044aba413fa",
+    "results/preflight/axis_collaboration_v4_msvr_cross26_launch.json": "sha256:cec49640ae68a279f0d5c8ece1ed8090c58e842110fdff5e5981b011692ce922",
+    "results/preflight/axis_collaboration_v4_four_state_review.json": "sha256:0379165a42ea0bdb043d33507fa791d854828399b6bdae34078a2dfee62957b0",
+    "results/preflight/axis_collaboration_v4_cross26_deploy_review.json": "sha256:fe44646a3be57b07c95f1f8e4e5ba63884f0dd4915ee3c6ad673f3027ecdace0",
+    "results/preflight/axis_collaboration_v4_first2_publication_observation.json": "sha256:13bb8777d95fecad8c8875aba3ba909c6e387b5741657786bda4341cb3587967",
+    "results/preflight/axis_collaboration_v4_first2_handoff_sync.json": "sha256:0fff30384815fbb073eb0ea5110dfa65d854fbcdff4ab676b5b6871ec1c3633e",
+    "results/preflight/axis_collaboration_v4_latest_snapshot.json": "sha256:02800a1de87184d6c1723ed44fc6499d3df9d5da196d001e284e71bb75f65f69",
+    "results/preflight/axis_collaboration_v4_first5_development_analysis.json": "sha256:54f3d7c533e9a86ad80dd3bc9c87d7c1c4dd0e331de289cbf6fbda33d257677e",
+    "results/missing_modalities/verified_aggregate.json": "sha256:9a0c97f61dab079ac28fa8f901a85ecb248a71fb62ef702ae87c2a6082f2215c",
+    "docs/实验交接.md": "sha256:5839846c7729148d049f9431cd97807dab6c44f993af5f168bcd78ee51a01591",
+    "results/axis_collaboration_v3_development/MSVR310_axis_collaboration_s42/development_metrics/full_metrics.json": "sha256:a77c664b49ccf103537ec221076bd3c395e1de790ba465763b95b9e620df220a",
+    "results/axis_collaboration_v3_development/MSVR310_axis_collaboration_s42/development_metrics/full_metrics.csv": "sha256:642bde44477999218e3dd1ebc9167ea3e80763b7f21b5402aabc6929d4779bd5",
+    "results/axis_collaboration_v3_development/RGBNT201_axis_collaboration_s42/development_metrics/full_metrics.json": "sha256:fcef3aea5426c8573e359423a8b90e1da8bcf2c86cf4f73977ad2298b30ed3a1",
+    "results/axis_collaboration_v3_development/RGBNT201_axis_collaboration_s42/development_metrics/full_metrics.csv": "sha256:f7fff63c94f865d03a9f4bb3a612ca28d6fb4a5dadde726181d038ed0a30fb4a",
+    "results/preflight/axis_collaboration_v4_msvr_frozen_stats.json": "sha256:b062e673fbdad2ae192a643ed46146b4d8768279c3b674e3d95422b57167c56b",
+    "C:/Users/gb/.codex_tmp/demo_axis_v4_msvr_frozen_stats_20261003.py": "sha256:2608bf5c383b993da08ff41aa1baa4b72bf941414d3443084ae72fb2c4d22ae9",
+    "C:/Users/gb/.codex_tmp/demo_axis_v4_complete_dev_metrics_20261003.py": "sha256:bf4de3f41c7d527a25529df094f634cdc85be82bec90929b34252b6ee372b1d4",
+    "C:/Users/gb/.codex_tmp/demo_axis_v4_observe_20261003.py": "sha256:03dd863c4345fda297eb90e0a5b3f177197c329526dc5f6c0fba226ecd2ef44b",
+    "collect_results.py": "sha256:8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c"
+  },
+  "audited_input_manifest": ".aris/traces/experiment-audit/2026-10-03_run01/inputs.sha256.json",
+  "scope_limits": [
+    "Only fixed five V4 training outcomes and one completed MSVR diagnostic were audited; subsequent live completions are excluded.",
+    "Each scalar AP source rank list and original distance/feature/weight arrays were unavailable to this local text-only audit.",
+    "Source-reviewed historical remote execution receipts are not a fresh GPU run.",
+    "V1 351-condition raw evaluation was not recomputed.",
+    "Baseline official_test metrics are present in source JSON but were not independently re-evaluated or used for V4 model acceptance."
+  ]
+}

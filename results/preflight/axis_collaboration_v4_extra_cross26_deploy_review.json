@@ -1,0 +1,343 @@
+{
+  "status": "PASS",
+  "verdict": "PASS_STATIC_AND_CPU_MOCK",
+  "reviewed_at": "2026-10-02T23:05:53.792670+00:00",
+  "reviewer": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "max",
+    "context": "narrow delegated source review of only the new two-job orchestration helper"
+  },
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "scope": "Read-only review of demo_axis_v4_extra_cross26_deploy_20261003.py, five generated string families (proof instantiated separately for both jobs), and their new orchestration control flow. Existing model source and prior 54/25 reviews were retained; those suites were not rerun. No performance analysis.",
+  "helper_path": "C:/Users/gb/.codex_tmp/demo_axis_v4_extra_cross26_deploy_20261003.py",
+  "blockers": [],
+  "required_fixes": [],
+  "source_edits_by_reviewer": [],
+  "jobs": [
+    {
+      "run": "RGBNT201_axis_scaled_fullref_s42",
+      "gpu": 0
+    },
+    {
+      "run": "RGBNT100_axis_scaled_fullref_s42",
+      "gpu": 1
+    }
+  ],
+  "findings": [
+    {
+      "status": "PASS",
+      "area": "Current source boundary and predecessor guard",
+      "source": "../../.codex_tmp/demo_axis_v4_extra_cross26_deploy_20261003.py:9",
+      "detail": "The unchanged 54-check review must have status PASS, no blockers, and exact current SHA equality for all its listed local sources before external calls. The remote guard requires the previous MSVR controller's exact two-stage PASS/zero-update terminal, disappearance of its recorded PID, continuity of all 14 deployed source SHAs from its launch receipt, and absence of the new output root. Both new input subdirectories use exist_ok=False within the already existing handoff input parent. Incomplete predecessor, live PID, changed source and an existing second input directory were rejected by actual generated-code mocks."
+    },
+    {
+      "status": "PASS",
+      "area": "Task names and f-string/loop bindings",
+      "source": "../../.codex_tmp/demo_axis_v4_extra_cross26_deploy_20261003.py:31",
+      "detail": "Both actual proof_code expressions were generated with their own source run. The later controller and launch strings retain the complete jobs/proofs objects; the outer loop's final name/gpu cannot replace either job. The controller unpacks each job into its function-local name/gpu, and launch proof lookup uses separate run and filename variables. Executing the actual outer AST with stub transports matched every one of the eight intended scp -3 argument lists and both generated proof strings exactly."
+    },
+    {
+      "status": "PASS",
+      "area": "Four original inputs per completed run",
+      "source": "../../.codex_tmp/demo_axis_v4_extra_cross26_deploy_20261003.py:33",
+      "detail": "Each source result must be COMPLETE50 with axis_scaled_fullref and an outer exit0. best.pth, best_dev_arrays.npz, result.json and the outer exit are measured by size/SHA, then copied from 2025 into the corresponding exclusive new 2026 run directory or sibling exit path. The helper issues no source upload and no write to 2025. Proof mocks use real local terminal/exit text plus distinct representative checkpoint/NPZ bytes for each run; both positives, epoch49 and wrong-variant negatives passed, preserving result text bytes."
+    },
+    {
+      "status": "PASS",
+      "area": "Launch-time input and source checks",
+      "source": "../../.codex_tmp/demo_axis_v4_extra_cross26_deploy_20261003.py:78",
+      "detail": "Immediately before spawning, launch_code rechecks all 14 deployed source SHAs and the sizes and hashes of all eight copied input files. It creates a new exclusive output root, writes the exact generated controller, and requests one detached controller process with project cwd and the expected entry script. A changed source, wrong first-run file size or same-size wrong second-run bytes prevented any mock controller spawn."
+    },
+    {
+      "status": "PASS",
+      "area": "Two independent GPU workers with stage ordering",
+      "source": "../../.codex_tmp/demo_axis_v4_extra_cross26_deploy_20261003.py:47",
+      "detail": "ThreadPoolExecutor(max_workers=2) maps exactly the two fixed jobs once. Each worker has its own exclusive output subtree and calls the existing idle helper on its own GPU before each stage, using <500 MiB and 240-second waits. It directly invokes the reviewed diagnostic with the matching run path and both 2026 path overrides. A waited exit0 smoke is required before that same worker's full child. Actual stdlib-thread mocks exercised both successful workers and either smoke failing: the failed worker never launched full, the other could finish independently, and the overall controller wrote no PASS when a worker failed. There is no process retry loop."
+    },
+    {
+      "status": "PASS",
+      "area": "Receipt meaning and no whole11 launcher invocation",
+      "source": "../../.codex_tmp/demo_axis_v4_extra_cross26_deploy_20261003.py:92",
+      "detail": "The immediate launch record states FROZEN_CONTROLLER_STARTED_SMOKE_AND_FULL_PENDING and records the two jobs, input proofs, deployed source map, PID/host/time/output. It is not a smoke/full result. Per-stage and per-run receipts are written after waits, and aggregate PASS is written only after both worker results return. The helper directly calls diagnose_axis_collaboration.py for completed runs; it does not invoke the separate full-three-dataset launcher that requires all original11 training jobs."
+    }
+  ],
+  "preserved_artifacts": {
+    "results/preflight/axis_collaboration_v4_four_state_review.json": {
+      "sha256": "0379165a42ea0bdb043d33507fa791d854828399b6bdae34078a2dfee62957b0",
+      "byte_exact": true
+    },
+    "results/preflight/axis_collaboration_v4_msvr_cross26_launch.json": {
+      "sha256": "cec49640ae68a279f0d5c8ece1ed8090c58e842110fdff5e5981b011692ce922",
+      "byte_exact": true
+    },
+    "previous_54_and_25_suites": "Not rerun; prior review artifacts not edited"
+  },
+  "validation": {
+    "status": "PASS_STATIC_AND_CPU_MOCK",
+    "mock_check_count": 20,
+    "final_process_exit_code": 0,
+    "trace": [
+      {
+        "attempt": 1,
+        "tool_chunk_id": "dcf4d6",
+        "exit_code": 1,
+        "classification": "REVIEW_HARNESS_ERROR",
+        "error": "NameError: name 'controller_code' is not defined",
+        "cause": "The review harness initially evaluated dependent f-string expressions in a dictionary comprehension without placing prior assignments into its namespace. This was not execution of the helper and not a helper source defect.",
+        "resolution": "Evaluate generated assignments sequentially and retain each value in the evaluation namespace, matching the actual helper's ordering."
+      },
+      {
+        "attempt": 2,
+        "tool_chunk_id": "73bb0c",
+        "exit_code": 0,
+        "result": "All 20 new-helper checks passed"
+      }
+    ],
+    "python": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13.12-windows-x86_64-none/python.exe",
+    "method": "Inline stdlib AST harness; imports/transports/processes injected; generated code executed in isolated local mapped fixtures. The controller mock used the actual stdlib ThreadPoolExecutor with two workers.",
+    "generated_string_line_counts": {
+      "guard": 11,
+      "controller_code": 29,
+      "entry": 1,
+      "launch_code": 15,
+      "proof_RGBNT201_axis_scaled_fullref_s42": 8,
+      "proof_RGBNT100_axis_scaled_fullref_s42": 8
+    },
+    "checks": [
+      {
+        "name": "actual_outer_and_five_string_families_compile",
+        "status": "PASS",
+        "actual_string_count": 6
+      },
+      {
+        "name": "new_guard_pass",
+        "status": "PASS",
+        "caught": null
+      },
+      {
+        "name": "new_guard_old_incomplete",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "new_guard_pid_live",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "new_guard_source_changed",
+        "status": "PASS",
+        "caught": "AssertionError"
+      },
+      {
+        "name": "new_guard_second_input_exists",
+        "status": "PASS",
+        "caught": "FileExistsError"
+      },
+      {
+        "name": "new_proof_pass",
+        "run": "RGBNT201_axis_scaled_fullref_s42",
+        "status": "PASS",
+        "caught": null,
+        "result_bytes_unchanged": true
+      },
+      {
+        "name": "new_proof_epoch49",
+        "run": "RGBNT201_axis_scaled_fullref_s42",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "result_bytes_unchanged": true
+      },
+      {
+        "name": "new_proof_wrong_variant",
+        "run": "RGBNT201_axis_scaled_fullref_s42",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "result_bytes_unchanged": true
+      },
+      {
+        "name": "new_proof_pass",
+        "run": "RGBNT100_axis_scaled_fullref_s42",
+        "status": "PASS",
+        "caught": null,
+        "result_bytes_unchanged": true
+      },
+      {
+        "name": "new_proof_epoch49",
+        "run": "RGBNT100_axis_scaled_fullref_s42",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "result_bytes_unchanged": true
+      },
+      {
+        "name": "new_proof_wrong_variant",
+        "run": "RGBNT100_axis_scaled_fullref_s42",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "result_bytes_unchanged": true
+      },
+      {
+        "name": "new_launch_pass",
+        "status": "PASS",
+        "caught": null,
+        "mock_controller_spawns": 1
+      },
+      {
+        "name": "new_launch_source_changed",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_controller_spawns": 0
+      },
+      {
+        "name": "new_launch_first_size_wrong",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_controller_spawns": 0
+      },
+      {
+        "name": "new_launch_second_hash_wrong",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_controller_spawns": 0
+      },
+      {
+        "name": "new_two_worker_controller_pass",
+        "status": "PASS",
+        "caught": null,
+        "mock_gpu_stage_events": {
+          "0": [
+            "start_smoke",
+            "wait_smoke",
+            "start_full",
+            "wait_full"
+          ],
+          "1": [
+            "start_smoke",
+            "wait_smoke",
+            "start_full",
+            "wait_full"
+          ]
+        },
+        "mock_wait_seconds": {
+          "0": [
+            240,
+            240
+          ],
+          "1": [
+            240,
+            240
+          ]
+        }
+      },
+      {
+        "name": "new_two_worker_controller_first_smoke_fails",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_gpu_stage_events": {
+          "0": [
+            "start_smoke",
+            "wait_smoke"
+          ],
+          "1": [
+            "start_smoke",
+            "wait_smoke",
+            "start_full",
+            "wait_full"
+          ]
+        },
+        "mock_wait_seconds": {
+          "0": [
+            240
+          ],
+          "1": [
+            240,
+            240
+          ]
+        }
+      },
+      {
+        "name": "new_two_worker_controller_second_smoke_fails",
+        "status": "PASS",
+        "caught": "AssertionError",
+        "mock_gpu_stage_events": {
+          "0": [
+            "start_smoke",
+            "wait_smoke",
+            "start_full",
+            "wait_full"
+          ],
+          "1": [
+            "start_smoke",
+            "wait_smoke"
+          ]
+        },
+        "mock_wait_seconds": {
+          "0": [
+            240,
+            240
+          ],
+          "1": [
+            240
+          ]
+        }
+      },
+      {
+        "name": "actual_outer_two_job_name_and_transfer_binding",
+        "status": "PASS",
+        "mock_remote_host_order": [
+          "2026",
+          "2025",
+          "2025",
+          "2026"
+        ],
+        "mock_scp_count": 8,
+        "single_controller_launch": true
+      }
+    ],
+    "limits": "Only the new helper was exercised. No old54/25 checks rerun. No actual SSH/SCP/GPU/process launch; mapped local fixtures and injected transports/processes; actual local COMPLETE50 result/exit text plus representative weight/NPZ bytes. Two-worker controller used the real stdlib ThreadPoolExecutor with mock children."
+  },
+  "source_sha256": {
+    "../../.codex_tmp/demo_axis_v4_extra_cross26_deploy_20261003.py": "c4537ecc1c5e236489095deeb7b00b69557c80caa29ac5a7862e24de70f1d04f",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "scaled_axis_collaboration.py": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+    "diagnose_axis_collaboration.py": "60f3c6217cdebb347ab13501bb0013ca52925b139ba333cc2f2f6ec90c3e6729",
+    "launch_scaled_diagnostic.py": "ca865b0204806a0f391d18fe4d91710a90d006a981d1585958e473488c612a1b",
+    "launch_axis_scaled.py": "b0e069299966790340d9aaba55c1318ac18183a6def169d9cc5e9de655b58e9f",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "residual_dual_axis.py": "4a22801f014e971786402a477a33e7f86ecf608e786ab4c2f3c796abc033c91c",
+    "dual_axis.py": "0c6090fe5b8b15cc021bf1809860f0675187288dc2145d0129ce89a5eb78a330",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "modeling/make_model.py": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+    "splits.json": "66f6ee8f1c07f4fb97bf48ed8189b60859ab2f5f207ceea6b28a90c4ee1f9377",
+    "configs/MSVR310/DeMo.yml": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+    "collect_results.py": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+    "launch_runs.py": "8593a3a56f379605295e8d885e3fcfcdfece19b69209c2e9e05bf3ac5b75c101"
+  },
+  "source_scope_note": "Current 14 deployed source digests were compared with local files and the earlier reviewed source boundary, not re-audited as a new model implementation. Only the new helper's generated code/control flow was exercised.",
+  "non_blocking_notes": [
+    {
+      "status": "WARN",
+      "area": "Remote and neural results remain unverified in this review",
+      "detail": "No real SSH, SCP, live PID/resource query, checkpoint load, NumPy feature calculation or GPU child ran here. Actual predecessor/source/input checks, transfer success, launch receipt and each dataset's real smoke/full outputs remain execution evidence to collect."
+    },
+    {
+      "status": "WARN",
+      "area": "Per-job failure boundary",
+      "detail": "The two workers are intentionally independent: a smoke failure blocks that run's full stage and prevents aggregate PASS, while the other already scheduled worker can finish. This is the reviewed behavior."
+    }
+  ],
+  "actual_reviewer_actions": {
+    "ssh": 0,
+    "scp": 0,
+    "gpu_queries": 0,
+    "remote_spawns": 0,
+    "optimizer_updates": 0,
+    "model_source_edits": 0,
+    "helper_source_edits": 0,
+    "extra_agents": 0
+  },
+  "conclusion": "No concrete blockers found. The new two-job helper passes this narrow same-family provisional source/CPU-control-flow review at the recorded SHA. No real GPU diagnostic result is claimed."
+}
