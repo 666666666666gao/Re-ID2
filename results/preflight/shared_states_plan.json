@@ -1,0 +1,59 @@
+{
+  "status": "PREPARED_SOURCE_REVIEW_REQUIRED_NO_NEURAL_RUN",
+  "created": "2026-10-03T19:19:38",
+  "objective": "Diagnose actual M/F/collaboration retrieval utility after V11 failed full +2mAP and averaged worse than matched ordinary frequency; original all3+missing objective unchanged.",
+  "previous_goal_turn": "PROGRESS: implemented/reviewed/ran4fresh50+196availability conditions, actual1812updates0skip, published2a1276f; no ongoing NN.",
+  "runs": [
+    {
+      "dataset": "MSVR310",
+      "variant": "axis_shared",
+      "gpu": 0,
+      "seed": 42
+    },
+    {
+      "dataset": "MSVR310",
+      "variant": "frequency_shared",
+      "gpu": 1,
+      "seed": 42
+    },
+    {
+      "dataset": "MSVR310",
+      "variant": "twins_shared",
+      "gpu": 2,
+      "seed": 42
+    },
+    {
+      "dataset": "MSVR310",
+      "variant": "demo_shared",
+      "gpu": 3,
+      "seed": 42
+    }
+  ],
+  "frozen_inputs": "each original mAP-best checkpoint, its saved arrays/terminal/exit and prior full49 results protected unchanged; strict state loading; installed identity-heldout GT/order revalidated; no official test or optimizer",
+  "states": [
+    "00 base private+shared identity",
+    "10 independent M; no F conditional message or psi",
+    "01 independent F; no M conditional message or psi",
+    "11 full conditional collaboration",
+    "base_private:5120D base00 block only",
+    "base_shared:512D base00 common block only"
+  ],
+  "scope": "all four matched V11 models;7independently encoded availability banks reused for all49 query/gallery pairs;49*6*4=1176 complete six-metric cases, CMC50/groups/perquery; raw distances saved privately for independent CPU GT recount",
+  "metrics": "main four states use inherited squared Euclidean with normalized vectors; full11 RNT/RNT uses saved distance after exact feature parity; base-only blocks use2-2cosine to preserve exact disjoint-source zero-dot ties; auxiliary block scores are diagnostics, not final deployment results",
+  "controlled_retrieval": "switch each state on both query/gallery; conditional margin targets separately compare query states to the same full11 gallery and same GT positive/negative indices for that availability pair; empirical, not causal/information-theoretic interaction",
+  "gates": [
+    "freshAstra/max source-only review",
+    "per-job seven-bank first64 smoke finite/exact full11 feature parity/unchanged tensor versions/0updates before full",
+    "all49 full11 six metrics and full perquery table exactly reproduce previous V11 frozen results",
+    "strict original input files before/after and tensor versions unchanged",
+    "independent CPU recomputation from exact stored distances, labels, original junk exclusions"
+  ],
+  "global_max_parallel_runs": 4,
+  "poll_seconds": 240,
+  "retention": "no new weights; all four original best and raw negative results retained; no tuning/retraining in this diagnostic",
+  "sources": {
+    "diagnose_shared_identity_states.py": "9abbaca96cbea331f814255e1a64fec1c964d533da7cf3a8ed7a043825107f81",
+    "launch_shared_identity_states.py": "9d7c35ad9fb3695b354dc4b368d0de201ef3e99337183af15add29a04f29de61"
+  },
+  "helper_sha256": "e2d0ceb907613f87d2d00dbeb5efaabc141a0c0133661a6a5c5a4a4bfa721296"
+}

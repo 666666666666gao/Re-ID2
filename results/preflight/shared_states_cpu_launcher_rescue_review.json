@@ -1,0 +1,98 @@
+{
+  "status": "PASS_SOURCE_AST_STDLIB_RESCUE",
+  "can_run": true,
+  "reviewed_at": "2026-10-03T19:41:54+08:00",
+  "model": "gpt-6-astra",
+  "effort": "max",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "blockers": [],
+  "non_blocking": [],
+  "helper": "C:\\Users\\gb\\.codex_tmp\\demo_shared_states_cpu_20261003.py",
+  "helper_sha256": "4479c2693a3a18ff90edf5bd475dc5b631b73266694d39cf820dd17475cd5ef1",
+  "audit_source_sha256_unchanged": "e8cf168db43f36e36a40a66148f209a6b782775942ce7fcbdf9dce439d1fa8d0",
+  "change": "The only source change removes the unnecessary appended newline string from exit JSON serialization.",
+  "original_payload_parse_error_reproduced": {
+    "message": "unterminated string literal (detected at line 9)",
+    "line": 9,
+    "text": "exit_path.write_text(json.dumps(dict(exit_code=result.returncode,command=['/data/gaob/Re-ID/conda-envs/tri_reid/bin/python', '-u', 'audit_shared_identity_states.py', '--root', '/data/gaob/Re-ID/DeMo-DualAxis/runs/shared_identity_v11_frozen_states_20261003', '--data-root', '/data/gaob/Re-ID/dataset']))+'"
+  },
+  "fixed_guard_AST_valid": true,
+  "fixed_cpu_payload_AST_valid": true,
+  "fixed_source_diff": [
+    "--- preserved_initial_helper",
+    "+++ fixed_helper",
+    "@@ -34,7 +34,7 @@",
+    "  result=subprocess.run({argv!r},cwd={root!r},stdout=handle,stderr=subprocess.STDOUT,env=dict(os.environ,CUDA_VISIBLE_DEVICES='',OMP_NUM_THREADS='4',MKL_NUM_THREADS='4',OPENBLAS_NUM_THREADS='4'))",
+    " exit_path=Path({output!r})/'independent_cpu_audit_exit.json'",
+    " assert not exit_path.exists()",
+    "-exit_path.write_text(json.dumps(dict(exit_code=result.returncode,command={argv!r}))+'\\n')",
+    "+exit_path.write_text(json.dumps(dict(exit_code=result.returncode,command={argv!r})))",
+    " assert result.returncode==0,(result.returncode,'read preserved independent_cpu_audit.log')",
+    " report=json.loads((Path({output!r})/'independent_cpu_audit.json').read_text())",
+    " assert report['status']=='PASS' and report['cases']==1176"
+  ],
+  "mock_flow_checks": [
+    {
+      "mock_exit_code": 0,
+      "nonzero_stops_before_result_read": false,
+      "exit_receipt_preserved": true,
+      "events": [
+        [
+          "exclusive_log",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/shared_identity_v11_frozen_states_20261003/independent_cpu_audit.log"
+        ],
+        [
+          "subprocess_run_mock",
+          [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "audit_shared_identity_states.py",
+            "--root",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/shared_identity_v11_frozen_states_20261003",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset"
+          ]
+        ],
+        [
+          "write_exit",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/shared_identity_v11_frozen_states_20261003/independent_cpu_audit_exit.json"
+        ],
+        [
+          "read_text",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/shared_identity_v11_frozen_states_20261003/independent_cpu_audit.json"
+        ]
+      ]
+    },
+    {
+      "mock_exit_code": 2,
+      "nonzero_stops_before_result_read": true,
+      "exit_receipt_preserved": true,
+      "events": [
+        [
+          "exclusive_log",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/shared_identity_v11_frozen_states_20261003/independent_cpu_audit.log"
+        ],
+        [
+          "subprocess_run_mock",
+          [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "audit_shared_identity_states.py",
+            "--root",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/shared_identity_v11_frozen_states_20261003",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset"
+          ]
+        ],
+        [
+          "write_exit",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/shared_identity_v11_frozen_states_20261003/independent_cpu_audit_exit.json"
+        ]
+      ]
+    }
+  ],
+  "review_harness_note": "The first harness attempt used a whitespace-sensitive diff assertion with an extra space absent from the original source. It was corrected in this reviewer-only script; the original harness failure log is preserved. No implementation source changed.",
+  "scope": "Source/AST and mocked execution of the expanded remote payload only. No collect_results import, SSH, NumPy/Torch, audit process or model execution.",
+  "runtime_gate": "Running the corrected CPU-only launcher remains subject to its existing completed-controller and absent-audit/log guards. This review does not claim the CPU audit has passed."
+}

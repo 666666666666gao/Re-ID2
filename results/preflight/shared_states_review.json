@@ -1,0 +1,639 @@
+{
+  "status": "PASS",
+  "review_type": "SOURCE_ONLY_WITH_AST_AND_STDLIB_MOCKS",
+  "reviewed_at": "2026-10-03T19:32:39+08:00",
+  "model": "gpt-6-astra",
+  "effort": "max",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "scope": "Frozen V11 MSVR310 seed42 four existing mAP-best checkpoints; seven availability banks; 49 query/gallery pairs; six outputs and six retrieval metrics. No new method or training approval.",
+  "blockers": [],
+  "non_blocking": [
+    {
+      "id": "QUERY_INDEX_COORDINATES",
+      "severity": "interpretation_note",
+      "finding": "contributions.csv query_index is the original development/gallery row (query[index]); state_*.csv query_index is the ordinal within the 210-query table. raw_distances.npz query_indices provides the exact mapping. No incorrect join exists in the reviewed sources.",
+      "source": [
+        "diagnose_shared_identity_states.py:71",
+        "diagnose_shared_identity_states.py:72",
+        "diagnose_shared_identity_states.py:164",
+        "full_evaluation.py:29"
+      ],
+      "action": "Use query_indices when joining these tables during downstream analysis; no neural source change is required."
+    }
+  ],
+  "checked_source_sha256": {
+    "diagnose_shared_identity_states.py": "9abbaca96cbea331f814255e1a64fec1c964d533da7cf3a8ed7a043825107f81",
+    "launch_shared_identity_states.py": "9d7c35ad9fb3695b354dc4b368d0de201ef3e99337183af15add29a04f29de61"
+  },
+  "plan_sha256": "8f91cab24e5e68d84abbb011f1df6891e5577ffa799bb2987e6411275721dd29",
+  "helper_sha256": "e2d0ceb907613f87d2d00dbeb5efaabc141a0c0133661a6a5c5a4a4bfa721296",
+  "checks": [
+    {
+      "name": "existing_source_receipt_integrity",
+      "status": "PASS",
+      "evidence": {
+        "new_sources": {
+          "diagnose_shared_identity_states.py": "9abbaca96cbea331f814255e1a64fec1c964d533da7cf3a8ed7a043825107f81",
+          "launch_shared_identity_states.py": "9d7c35ad9fb3695b354dc4b368d0de201ef3e99337183af15add29a04f29de61"
+        },
+        "inherited_sources": 36,
+        "helper_sha256": "e2d0ceb907613f87d2d00dbeb5efaabc141a0c0133661a6a5c5a4a4bfa721296"
+      }
+    },
+    {
+      "name": "local_import_source_closure",
+      "status": "PASS",
+      "evidence": {
+        "parsed_local_modules": 82,
+        "paths": [
+          "axis_collaboration.py",
+          "collect_results.py",
+          "config/__init__.py",
+          "config/defaults.py",
+          "data/__init__.py",
+          "data/datasets/RGBNT100.py",
+          "data/datasets/RGBNT201.py",
+          "data/datasets/__init__.py",
+          "data/datasets/bases.py",
+          "data/datasets/dukemtmcreid.py",
+          "data/datasets/make_dataloader.py",
+          "data/datasets/market1501.py",
+          "data/datasets/msmt17.py",
+          "data/datasets/msvr310.py",
+          "data/datasets/sampler.py",
+          "data/datasets/sampler_ddp.py",
+          "diagnose_shared_identity_states.py",
+          "dual_axis.py",
+          "experiment_data.py",
+          "full_evaluation.py",
+          "launch_axis_scaled.py",
+          "launch_runs.py",
+          "launch_shared_identity_states.py",
+          "layers/__init__.py",
+          "layers/center_loss.py",
+          "layers/make_loss.py",
+          "layers/softmax_loss.py",
+          "layers/triplet_loss.py",
+          "mass_axis_collaboration.py",
+          "missing_evaluation.py",
+          "modeling/__init__.py",
+          "modeling/backbones/__init__.py",
+          "modeling/backbones/basic_cnn_params/__init__.py",
+          "modeling/backbones/basic_cnn_params/cal.py",
+          "modeling/backbones/basic_cnn_params/densenet.py",
+          "modeling/backbones/basic_cnn_params/flops.py",
+          "modeling/backbones/basic_cnn_params/hacnn.py",
+          "modeling/backbones/basic_cnn_params/inceptionresnetv2.py",
+          "modeling/backbones/basic_cnn_params/inceptionv4.py",
+          "modeling/backbones/basic_cnn_params/mlfn.py",
+          "modeling/backbones/basic_cnn_params/mobilenetv2.py",
+          "modeling/backbones/basic_cnn_params/mudeep.py",
+          "modeling/backbones/basic_cnn_params/nasnet.py",
+          "modeling/backbones/basic_cnn_params/osnet.py",
+          "modeling/backbones/basic_cnn_params/osnet_ain.py",
+          "modeling/backbones/basic_cnn_params/pcb.py",
+          "modeling/backbones/basic_cnn_params/resnet.py",
+          "modeling/backbones/basic_cnn_params/resnet_ibn_a.py",
+          "modeling/backbones/basic_cnn_params/resnet_ibn_b.py",
+          "modeling/backbones/basic_cnn_params/resnetmid.py",
+          "modeling/backbones/basic_cnn_params/senet.py",
+          "modeling/backbones/basic_cnn_params/shufflenet.py",
+          "modeling/backbones/basic_cnn_params/shufflenetv2.py",
+          "modeling/backbones/basic_cnn_params/squeezenet.py",
+          "modeling/backbones/basic_cnn_params/xception.py",
+          "modeling/backbones/t2t.py",
+          "modeling/backbones/token_performer.py",
+          "modeling/backbones/token_transformer.py",
+          "modeling/backbones/transformer_block.py",
+          "modeling/backbones/vit_pytorch.py",
+          "modeling/clip/LoRA.py",
+          "modeling/clip/__init__.py",
+          "modeling/clip/clip.py",
+          "modeling/clip/model.py",
+          "modeling/clip/simple_tokenizer.py",
+          "modeling/make_model.py",
+          "modeling/make_model_clipreid.py",
+          "modeling/meta_arch.py",
+          "modeling/moe/AttnMOE.py",
+          "modeling/moe/__init__.py",
+          "residual_dual_axis.py",
+          "run_experiment.py",
+          "run_mass_experiment.py",
+          "run_shared_identity_experiment.py",
+          "scaled_axis_collaboration.py",
+          "shared_identity_axis.py",
+          "solver/cosine_lr.py",
+          "solver/make_optimizer.py",
+          "solver/scheduler.py",
+          "solver/scheduler_factory.py",
+          "utils/iotools.py",
+          "utils/reid_evaluation.py"
+        ],
+        "module_imports_executed": 0
+      }
+    },
+    {
+      "name": "scope_and_availability",
+      "status": "PASS",
+      "evidence": {
+        "banks": 7,
+        "states": 6,
+        "pairs": 49,
+        "models": 4,
+        "six_metric_cases": 1176,
+        "disjoint_private_pairs": [
+          [
+            "R",
+            "N"
+          ],
+          [
+            "R",
+            "T"
+          ],
+          [
+            "R",
+            "NT"
+          ],
+          [
+            "N",
+            "R"
+          ],
+          [
+            "N",
+            "T"
+          ],
+          [
+            "N",
+            "RT"
+          ],
+          [
+            "T",
+            "R"
+          ],
+          [
+            "T",
+            "N"
+          ],
+          [
+            "T",
+            "RN"
+          ],
+          [
+            "RN",
+            "T"
+          ],
+          [
+            "RT",
+            "N"
+          ],
+          [
+            "NT",
+            "R"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "actual_previous_results_identity_and_tables",
+      "status": "PASS",
+      "evidence": [
+        {
+          "variant": "axis_shared",
+          "selected_epoch": 20,
+          "conditions": 49,
+          "queries": 210,
+          "gallery": 360
+        },
+        {
+          "variant": "frequency_shared",
+          "selected_epoch": 31,
+          "conditions": 49,
+          "queries": 210,
+          "gallery": 360
+        },
+        {
+          "variant": "twins_shared",
+          "selected_epoch": 32,
+          "conditions": 49,
+          "queries": 210,
+          "gallery": 360
+        },
+        {
+          "variant": "demo_shared",
+          "selected_epoch": 19,
+          "conditions": 49,
+          "queries": 210,
+          "gallery": 360
+        }
+      ]
+    },
+    {
+      "name": "controlled_state_ast_mock",
+      "status": "PASS",
+      "evidence": {
+        "states": {
+          "00": "metric(base)",
+          "10": [
+            true,
+            false
+          ],
+          "01": [
+            false,
+            true
+          ],
+          "11": "original_full11"
+        },
+        "events": [
+          [
+            "calibrator",
+            "base",
+            "pooled_M",
+            "zero(pooled_F)"
+          ],
+          [
+            "calibrator",
+            "base",
+            "zero(pooled_M)",
+            "pooled_F"
+          ],
+          [
+            "fuse",
+            "base",
+            "pooled_M",
+            "zero(pooled_F)",
+            [
+              "gate",
+              "pooled_M",
+              "zero(pooled_F)"
+            ],
+            true,
+            false,
+            "eligibility"
+          ],
+          [
+            "fuse",
+            "base",
+            "zero(pooled_M)",
+            "pooled_F",
+            [
+              "gate",
+              "zero(pooled_M)",
+              "pooled_F"
+            ],
+            false,
+            true,
+            "eligibility"
+          ]
+        ],
+        "conditional_and_psi_not_in_independent_states": true
+      }
+    },
+    {
+      "name": "calibration_target_and_csv_field_ast_mock",
+      "status": "PASS",
+      "evidence": {
+        "fields": [
+          "query_index",
+          "gallery_positive_index",
+          "gallery_negative_index",
+          "R00",
+          "R10",
+          "R01",
+          "R11",
+          "delta_M_given_F",
+          "delta_F_given_M",
+          "empirical_interaction"
+        ],
+        "target_rows": [
+          [
+            0.4,
+            0.6000000000000001,
+            0.30000000000000004
+          ],
+          [
+            0.6,
+            0.2,
+            0.10000000000000003
+          ]
+        ]
+      }
+    },
+    {
+      "name": "GT_and_fixed_reference_selection_source_plus_oracle",
+      "status": "PASS",
+      "evidence": {
+        "query_rows": [
+          0,
+          3
+        ],
+        "chosen_positive_negative_gallery_rows": [
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "same_scene_excluded": true,
+        "same_reference_for_four_states": true
+      }
+    },
+    {
+      "name": "launcher_sequence_and_smoke_failure_ast_mocks",
+      "status": "PASS",
+      "evidence": [
+        {
+          "case": "valid",
+          "calls": [
+            {
+              "stage": "smoke",
+              "gpu": 0,
+              "variant": "MSVR310_axis_shared_s42",
+              "argv": [
+                "/mock/python",
+                "-u",
+                "diagnose_shared_identity_states.py",
+                "--run-dir",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\campaign\\development\\MSVR310_axis_shared_s42",
+                "--previous-frozen",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\campaign\\frozen49\\MSVR310_axis_shared_s42",
+                "--data-root",
+                "/fixed/data",
+                "--pretrained",
+                "/fixed/clip.pt",
+                "--output",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\output\\MSVR310_axis_shared_s42\\smoke",
+                "--smoke"
+              ]
+            },
+            {
+              "stage": "full",
+              "gpu": 0,
+              "variant": "MSVR310_axis_shared_s42",
+              "argv": [
+                "/mock/python",
+                "-u",
+                "diagnose_shared_identity_states.py",
+                "--run-dir",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\campaign\\development\\MSVR310_axis_shared_s42",
+                "--previous-frozen",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\campaign\\frozen49\\MSVR310_axis_shared_s42",
+                "--data-root",
+                "/fixed/data",
+                "--pretrained",
+                "/fixed/clip.pt",
+                "--output",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\output\\MSVR310_axis_shared_s42\\full"
+              ]
+            },
+            {
+              "stage": "smoke",
+              "gpu": 1,
+              "variant": "MSVR310_frequency_shared_s42",
+              "argv": [
+                "/mock/python",
+                "-u",
+                "diagnose_shared_identity_states.py",
+                "--run-dir",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\campaign\\development\\MSVR310_frequency_shared_s42",
+                "--previous-frozen",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\campaign\\frozen49\\MSVR310_frequency_shared_s42",
+                "--data-root",
+                "/fixed/data",
+                "--pretrained",
+                "/fixed/clip.pt",
+                "--output",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\output\\MSVR310_frequency_shared_s42\\smoke",
+                "--smoke"
+              ]
+            },
+            {
+              "stage": "full",
+              "gpu": 1,
+              "variant": "MSVR310_frequency_shared_s42",
+              "argv": [
+                "/mock/python",
+                "-u",
+                "diagnose_shared_identity_states.py",
+                "--run-dir",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\campaign\\development\\MSVR310_frequency_shared_s42",
+                "--previous-frozen",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\campaign\\frozen49\\MSVR310_frequency_shared_s42",
+                "--data-root",
+                "/fixed/data",
+                "--pretrained",
+                "/fixed/clip.pt",
+                "--output",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\output\\MSVR310_frequency_shared_s42\\full"
+              ]
+            },
+            {
+              "stage": "smoke",
+              "gpu": 2,
+              "variant": "MSVR310_twins_shared_s42",
+              "argv": [
+                "/mock/python",
+                "-u",
+                "diagnose_shared_identity_states.py",
+                "--run-dir",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\campaign\\development\\MSVR310_twins_shared_s42",
+                "--previous-frozen",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\campaign\\frozen49\\MSVR310_twins_shared_s42",
+                "--data-root",
+                "/fixed/data",
+                "--pretrained",
+                "/fixed/clip.pt",
+                "--output",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\output\\MSVR310_twins_shared_s42\\smoke",
+                "--smoke"
+              ]
+            },
+            {
+              "stage": "full",
+              "gpu": 2,
+              "variant": "MSVR310_twins_shared_s42",
+              "argv": [
+                "/mock/python",
+                "-u",
+                "diagnose_shared_identity_states.py",
+                "--run-dir",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\campaign\\development\\MSVR310_twins_shared_s42",
+                "--previous-frozen",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\campaign\\frozen49\\MSVR310_twins_shared_s42",
+                "--data-root",
+                "/fixed/data",
+                "--pretrained",
+                "/fixed/clip.pt",
+                "--output",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\output\\MSVR310_twins_shared_s42\\full"
+              ]
+            },
+            {
+              "stage": "smoke",
+              "gpu": 3,
+              "variant": "MSVR310_demo_shared_s42",
+              "argv": [
+                "/mock/python",
+                "-u",
+                "diagnose_shared_identity_states.py",
+                "--run-dir",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\campaign\\development\\MSVR310_demo_shared_s42",
+                "--previous-frozen",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\campaign\\frozen49\\MSVR310_demo_shared_s42",
+                "--data-root",
+                "/fixed/data",
+                "--pretrained",
+                "/fixed/clip.pt",
+                "--output",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\output\\MSVR310_demo_shared_s42\\smoke",
+                "--smoke"
+              ]
+            },
+            {
+              "stage": "full",
+              "gpu": 3,
+              "variant": "MSVR310_demo_shared_s42",
+              "argv": [
+                "/mock/python",
+                "-u",
+                "diagnose_shared_identity_states.py",
+                "--run-dir",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\campaign\\development\\MSVR310_demo_shared_s42",
+                "--previous-frozen",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\campaign\\frozen49\\MSVR310_demo_shared_s42",
+                "--data-root",
+                "/fixed/data",
+                "--pretrained",
+                "/fixed/clip.pt",
+                "--output",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_valid\\output\\MSVR310_demo_shared_s42\\full"
+              ]
+            }
+          ]
+        },
+        {
+          "case": "failed_smoke",
+          "calls": [
+            {
+              "stage": "smoke",
+              "gpu": 0,
+              "variant": "MSVR310_axis_shared_s42",
+              "argv": [
+                "/mock/python",
+                "-u",
+                "diagnose_shared_identity_states.py",
+                "--run-dir",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_failed_smoke\\campaign\\development\\MSVR310_axis_shared_s42",
+                "--previous-frozen",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_failed_smoke\\campaign\\frozen49\\MSVR310_axis_shared_s42",
+                "--data-root",
+                "/fixed/data",
+                "--pretrained",
+                "/fixed/clip.pt",
+                "--output",
+                "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\mock_failed_smoke\\output\\MSVR310_axis_shared_s42\\smoke",
+                "--smoke"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "capacity_wait_ast_mock",
+      "status": "PASS",
+      "evidence": {
+        "memory_used_sequence_MiB": [
+          1000,
+          500,
+          499
+        ],
+        "wait_seconds": [
+          240,
+          240
+        ],
+        "starts_only_below_500MiB": true
+      }
+    },
+    {
+      "name": "execute_exit_and_device_ast_mocks",
+      "status": "PASS",
+      "evidence": {
+        "tested_exits": [
+          0,
+          1
+        ],
+        "failure_receipt_preserved": true,
+        "gpu_mask": "3",
+        "real_processes_started": 0
+      }
+    },
+    {
+      "name": "deployment_helper_remote_snippet_syntax_and_guards",
+      "status": "PASS",
+      "evidence": [
+        {
+          "snippet": "guard",
+          "AST_valid": true,
+          "executed": false
+        },
+        {
+          "snippet": "start",
+          "AST_valid": true,
+          "executed": false
+        }
+      ]
+    },
+    {
+      "name": "feature_extraction_and_dimensional_contract",
+      "status": "PASS_SOURCE_INSPECTION",
+      "evidence": "Triplets preserves RGB,NI,TI insertion order; absent normalized inputs are exactly zero. All four model states are 5632D; base00 splits at 5120 into 5120 private and 512 common coordinates. Seven independent banks normalize each output, first full11 calibrator hook capture supplies prediction_M/F/I, and demo_shared supplies no calibrator predictions. Hook call order is full then M-only then F-only."
+    },
+    {
+      "name": "four_state_retrieval_and_auxiliary_metric_contract",
+      "status": "PASS_SOURCE_INSPECTION",
+      "evidence": "Each retrieval condition selects the same state for query and gallery. Four principal states use inherited normalized squared Euclidean; RNT/RNT full11 uses saved distances only after exact normal feature parity. Auxiliary base00 blocks use 2-2cosine with stable sorting, preserving all 12 source-disjoint private zero-dot tie cases. Source supports signal-path interventions, not reduced computation or independently trained ablations."
+    },
+    {
+      "name": "all49_previous_full11_exact_gate",
+      "status": "PASS_SOURCE_INSPECTION",
+      "evidence": "For every one of 49 conditions, code requires exact equality for mAP,mINP,Rank1/5/10/20 and exact entire csv.DictReader row-list equality against the existing same-campaign, same-variant V11 result before writing COMPLETE."
+    },
+    {
+      "name": "ground_truth_and_calibration_scope",
+      "status": "PASS_SOURCE_INSPECTION",
+      "evidence": "Installed train records are sorted and split by the fixed identity-heldout IDs; saved query indices/IDs/cameras/scenes/names must match current installed records. MSVR same-ID/same-scene junk exclusion is passed to the inherited metric implementation. Conditional margins select hardest different-scene same-ID positive and hardest different-ID negative using full11, then use the same gallery vectors and indices for all four query states. Delta and empirical-interaction equations match full_reference_targets; comparison of predicted calibration to these development/availability-specific targets remains empirical."
+    },
+    {
+      "name": "frozen_inputs_and_zero_updates",
+      "status": "PASS_SOURCE_INSPECTION",
+      "evidence": "Strict best.pth loading, model.eval on every module, no_grad extraction, no optimizer call or weight save in the diagnostic. Checkpoint/arrays/training terminal/training exit/previous result sizes and existing SHA are recorded before extraction and verified after full execution; state_dict tensor versions are checked after extraction and before COMPLETE. Smoke uses first64 across all seven banks and returns before full metrics."
+    },
+    {
+      "name": "full_metrics_and_private_recount_inputs",
+      "status": "PASS_SOURCE_INSPECTION",
+      "evidence": "Inherited stable GT ranking computes six metrics, CMC1..50, camera/scene/identity groups and complete per-query tables, cross-checking mAP/CMC with evaluate_reid. Each run stores 294 exact raw distance matrices with query_indices/IDs/cameras/scenes/names in raw_distances.npz for a later independent CPU recount. This review does not execute or claim that recount."
+    },
+    {
+      "name": "only2026_four_gpu_deployment_and_no_preemption",
+      "status": "PASS_SOURCE_INSPECTION",
+      "evidence": "Helper addresses host2026 only and validates completed parent campaign, existing source receipts, absent new output/log, all four GPUs below500MiB, disk greater than5GB and no other processes using the same interpreter. It uploads only two reviewed new source files, verifies source hashes again, and starts one controller. Four fixed GPU slots each run smoke before full; existing execute checks capacity every240s, writes exclusive logs and preserves nonzero exit receipts. No preemption, retry or optimizer is introduced."
+    }
+  ],
+  "runtime_gates_pending": [
+    "Four real per-job first64 seven-bank smoke runs with exact full11 feature parity and unchanged tensor versions.",
+    "1176 real six-metric cases and all196 full11 condition outputs/per-query tables exactly reproducing V11.",
+    "Actual before/after protected-file and tensor-version evidence.",
+    "Independent CPU GT recount from stored exact distances."
+  ],
+  "neural_runtime_validation": "NOT_RUN_BY_REVIEWER",
+  "torch_numpy_or_neural_modules_imported": false,
+  "SSH_GPU_model_package_install_or_job_start_actions": false,
+  "implementation_changed_by_reviewer": false,
+  "trace_directory": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states",
+  "stdlib_mock_report": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-03_shared_states\\reviewer_stdlib_checks.json",
+  "runtime_claim_limit": "PASS is source review only. It does not establish neural execution success, usefulness, causal interaction, all-dataset or multi-seed acceptance."
+}

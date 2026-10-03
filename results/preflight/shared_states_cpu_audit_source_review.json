@@ -1,0 +1,25 @@
+{
+  "status": "PASS_SOURCE_ONLY",
+  "reviewed_at": "2026-10-03T19:34:41+08:00",
+  "model": "gpt-6-astra",
+  "effort": "max",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "source": "audit_shared_identity_states.py",
+  "source_sha256": "e8cf168db43f36e36a40a66148f209a6b782775942ce7fcbdf9dce439d1fa8d0",
+  "blockers": [],
+  "checks": [
+    "Independent installed MSVR filename parsing uses the same actual identity/camera/scene fields and fixed dev IDs, verifies both paired sensor files, and reconstructs GT and query indices before requiring raw metadata equality.",
+    "Independent np.lexsort(distance, original gallery index) order agrees with inherited stable distance sorting, then applies same-identity/same-scene exclusion. Six metrics, CMC1..50, all groups, every per-query field and query/gallery counts are reconstructed and compared.",
+    "Contribution query indices are explicitly interpreted as original dev/gallery rows, so the ordinal-versus-absolute convention noted in the NN review is handled correctly. Positive/negative indices are checked against installed GT.",
+    "Contribution delta/interaction equations use the correct R11,R10,R01,R00 signs. Target mean/std comparisons and harmonic/rescue/AP-change directions are consistent.",
+    "All 12 source-disjoint base-private conditions require raw cosine distance exactly 2. Full/private/shared state artifacts are all evaluated for every reported frozen condition.",
+    "Audit has no Torch/neural import, optimizer, job start, SSH, weight save or original-result mutation. It writes one exclusive independent_cpu_audit.json."
+  ],
+  "non_blocking": [
+    "Serialized contribution arithmetic is checked using Python float differences within 1e-7, and target mean/std use NumPy default float64 reconstruction within 1e-7. This is a tolerance-based consistency check, not bitwise float32 recomputation. No actual failing value is established in this source-only review.",
+    "The auditor validates contribution reference GT and stored-score arithmetic; it does not independently recompute margin dot products or hardest-reference selection from feature vectors, which are not stored in the raw distance archive. Its report should retain that bounded interpretation."
+  ],
+  "execution": "AST parse only; NumPy/Torch not imported, no audit or model execution, no SSH/GPU actions",
+  "original_NN_review": "results/preflight/shared_states_review.json remains unchanged"
+}
