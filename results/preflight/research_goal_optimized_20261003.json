@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-04T10:36:58",
+  "updated_at": "2026-10-04T11:00:04",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、独立身份确认、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -32,7 +32,7 @@
     },
     {
       "id": "M2",
-      "status": "PENDING",
+      "status": "M2_SOURCE_REVIEWED_ACTUAL_PREFLIGHT_RUNNING_NOT_YET_ACCEPTED",
       "work": "在M1结果明确后，单因素验证同可用来源的停止梯度频域身份关系保持，参照自身须先证明有稳定身份结构。",
       "evidence": "辅助→路由→投影→最终融合逐阶段逐查询AP、首位恢复及误伤；公共身份出口约束朝向。不能用关系距离损失单独证明坐标对齐。",
       "decision": "M2单因素：固定original_mean及原M1全部专家/路由/损失/缺失训练/5632D接口，以同可观测输入实际F_pre的停止梯度批内身份距离结构为参照，只新增实际PF出口关系保持训练；不增加专家、参数或描述子维度，不改门控、不换FFT、不增加跨集合覆盖。原M1双轴、普通频域和普通双专家无关系保持的已完成控制保留；对三种增强模型使用相同关系保持目标、公开CLIP/fresh50/seed42/B64和采样预算，先预检梯度/strict reload/零权重退化再训练。验证F_post身份邻域、真正11−00与误伤/救回；距离保持不能独自证明共同坐标朝向或贡献校准。若只修复独立F检索而未改善融合，后续再单因素检查身份方向/估计控制分离，不将M2自动视为成功。"
@@ -88,7 +88,7 @@
       ]
     }
   },
-  "revision": "20261004_M1_trained_outlet2352_CPU_PASS_next_single_factor",
+  "revision": "20261004_M2_frequency_relation_preflight_active",
   "primary_claims": [
     {
       "id": "C1",
@@ -191,6 +191,17 @@
       "decision": "results/trained_outlet_utility_20261004/next_decision.json",
       "optimizer_updates": 0,
       "new_weights": 0
+    },
+    "M2": {
+      "status": "DISPATCHED_PREFLIGHT",
+      "plan": "results/preflight/frequency_relation_m2_plan.json",
+      "controller_pid": 1519220,
+      "observed_at": "2026-10-04T10:58:46",
+      "tensor_contract_present": false,
+      "actual_smokes": 0,
+      "actual_training": {},
+      "planned_fresh50": 3,
+      "planned_CPU_cases": 2058
     }
   },
   "decision_rules": [
