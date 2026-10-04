@@ -1,0 +1,48 @@
+{
+  "status": "SOURCE_PREPARED_REVIEW_PENDING_NOT_DEPLOYED_NOT_LAUNCHED",
+  "source_sha256": {
+    "modality_outlet_alignment_axis.py": "b7a460dcac1ee9ffe6bd9e33d27570b1334c41747a0921c4923edc27988d45ba",
+    "run_full_official_modality_outlet_experiment.py": "2d5a71b31b88f319c45f064a646fddc0f947208a97e82e13ea0b1b86efad987d",
+    "evaluate_full_official_modality_outlet49.py": "fe029d358c321cde1f81b5357910cb2803a24bb8ecb4c28297d83b4d73ba80f8",
+    "diagnose_full_official_modality_outlet_states.py": "f942ad86ee16ace48e2cb9c616344e109d97b6100c950c1e8074a30230ed0034",
+    "verify_full_official_modality_outlet_axis.py": "1d66a1f323b7148b4c5d88a2dd087f901edebc625f7575ec8b2a0ad6fa6120ee",
+    "launch_full_official_modality_outlet_trial.py": "fcf78cb1a170295c3b2a8847c33793c60f839013cc2882a43891a407f7626922"
+  },
+  "basis": "Actual full official M3a/M3b axis readout1176 cases, results/full_official_control_readout_20261004/readout_analysis.json; PM post独立mAP下降及PM-public交叉检索弱，M2/M2b目前仅监督PF。",
+  "single_factor": "Add0.1 identity alignment on actual normalized PM×stopped_DeMo_anchor×relation_mass×eligible_count mean7 before gating, against stopped same-full-view public gallery of different observations; no new parameters. Keep all existing M3a mechanisms/losses and publicCLIP fresh heads.",
+  "dataset": "MSVR310",
+  "train_records": 1032,
+  "query_records": 591,
+  "gallery_records": 1055,
+  "training_heldout_identities": 0,
+  "seed": 42,
+  "epochs": 50,
+  "batch": 64,
+  "K": 4,
+  "gate_gradient_mode": "measurement_only",
+  "variants": [
+    "axis_shared",
+    "frequency_shared",
+    "twins_shared"
+  ],
+  "schedule": {
+    "2": [
+      "axis_shared"
+    ],
+    "3": [
+      "frequency_shared",
+      "twins_shared"
+    ]
+  },
+  "max_concurrent_neural_jobs": 2,
+  "temperature_power_control": false,
+  "real_preflight": "Each variant CUDA all7sets×FP32/AMP×4states exact versus parent, zero-weight full-training outputs equal, PM objective nonzero finite gradients/publicprojection+predictor no gradient, then3 real AMPupdates/alltrainablegradient/strictreloadinmemory; all3 pass before50.",
+  "selection": "Highest full official benchmark query/gallery mAP, earliesttie, samefixedbest forall49; benchmarkselectednotuntouchedfinaltest",
+  "validation": "Sixmetrics/CMC50/perquery/groups all49, installed-GT CPU49, all49×00/10/01/11+baseblocks CPU294/model,882statecases for3; sameidentityandsubsetsamplingexact withM3a parent andall3 controls.",
+  "compare": "Compare same-variant M4−M3a and M4axis vs M4ordinaryfreq/twins, originalDeMo/sameaugmentationDeMo. 11−00 netutility/harmrescue; no existing00cherrypick insteadoffairretrainedmodel.",
+  "success": "Keep unified3dataset/+2mAP/+2R1, missing/faircontrols/multiseed/inferenceutility goal; this single-seedMSVR diagnosticstage isnotfinalsuccess.",
+  "retention": "Onlybest.pth/run, officialfeaturearrays and necessaryreferenceweights; auditedrawdistances SHA/size archiveDthenremove servercopies. NewfullNN experiments mayrun duringreadoutrawtransfer; do not change existing sourceexecutables.",
+  "goal_complete": false,
+  "P": 16,
+  "sampler": "Native MSVR config:16 identities×4 instances=B64, unchanged from full-official M3a; K denotes instances per identity."
+}
