@@ -1,0 +1,202 @@
+{
+  "status": "PASS",
+  "blocking_findings": [],
+  "non_blocking_findings": [],
+  "reviewed_at": "2026-10-05T04:40:28+08:00",
+  "scope": "Fresh source-only execution review of the exact seven plan sources and deployer, plus the separately bound optional start publisher. No source acceptance is a claim of CUDA, optimizer, smoke, training or scientific success.",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "unattested",
+  "actual_reasoning_effort": "unattested",
+  "model_attribution_note": "Requested routing is recorded; the reviewer has no independent runtime attestation of the backend or effort.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "review_protocol": [
+    "C:/Users/gb/.agents/skills/experiment-bridge/SKILL.md",
+    "C:/Users/gb/.agents/skills/shared-references/local-codex-policy.md"
+  ],
+  "sources_sha256": {
+    "public_outlet_identity_training.py": "88d7dd8784bf763f81afbb09595a0ac1b1ffd69025be431ae1457faae09210f0",
+    "run_full_official_public_outlet_identity_experiment.py": "de07e3fcadfce6ea0aa4adc17531e84d364e4c0062d518c4dbd87e015e210a50",
+    "evaluate_full_official_public_outlet_identity49.py": "af5e50b930261c719d7c093cd4b1ba069db6799eefc61d5d9a2aa6e6ee8aa564",
+    "diagnose_full_official_public_outlet_identity_states.py": "8ed032d8c86eb72fdca6490db3ad6aaac99c78438dad6d5600cd81060bb39d6d",
+    "verify_full_official_public_outlet_identity.py": "c471247be15cb13b006b28313a73254aeee51528bf4ba951d0c55c9827044456",
+    "launch_full_official_public_outlet_identity_trial.py": "988e0f43f77742956782158078425a4a579deaf2b0c88e03d11aa43d7a99f3a1",
+    "results/preflight/full_official_public_outlet_identity_observer_20261005.py": "ed10ab23bf484e4c6e08a75c2fe2ee413bea46ebf0765d994e03bf019f043839"
+  },
+  "deployer_sha256": "57aef2ea41adeb04cab0495472918b3eca39b9018a77182ac7e39d9366b6be94",
+  "start_publisher_sha256": "1907eb70cc9965da808a6b84d90cc3b9a2197305d403febb739ca4f13652ac3a",
+  "training_review": "results/preflight/full_official_public_outlet_identity_training_review_20261005.json",
+  "checks": [
+    {
+      "check": "Original-parent numerical contract",
+      "result": "PASS_SOURCE_ONLY",
+      "references": [
+        "verify_full_official_public_outlet_identity.py:41",
+        "verify_full_official_public_outlet_identity.py:90",
+        "verify_full_official_public_outlet_identity.py:115",
+        "verify_full_official_availability_graph_v3.py:71"
+      ],
+      "detail": "Runs the original parent twice, then zero-weight delegation, each reset to identical initial state and RNG with a fresh Adam/GradScaler. Parent gradients keep rtol1e-5/atol1e-6; all original detail values, buffers and CPU/selected-CUDA RNG must match exactly. Each phase reconstructs its actual Adam update from its own measured moments using the unchanged M5v3 criterion. Cross-execution updated-parameter differences are reported diagnostically. Saved original-parent repetitions show a 2.1178275347e-6 state difference despite gradients passing the old tolerance and exact loss/details/BN/RNG, so this distinction has actual evidence."
+    },
+    {
+      "check": "Observed positive public-identity branch",
+      "result": "PASS_SOURCE_ONLY",
+      "references": [
+        "public_outlet_identity_training.py:24",
+        "public_outlet_identity_training.py:40",
+        "verify_full_official_public_outlet_identity.py:68",
+        "verify_full_official_public_outlet_identity.py:136"
+      ],
+      "detail": "Hooks capture the actual full/partial fused public512 slices, the same existing shared head and CE inputs/official-training labels. The contract checks .05 each CE, original full/partial loss values and mining indices, stopped gallery, scalar arithmetic, four CLIP calls and two public projections. It requires three shared-BN calls and +2 tracked batches while other buffers/RNG remain exact; shared projection/classifier gradients must be finite and nonzero. No M5 graph objective, extra trainable parameter or extra source draw is introduced."
+    },
+    {
+      "check": "Two-lane full-data preflight and training",
+      "result": "PASS_SOURCE_ONLY",
+      "references": [
+        "launch_full_official_public_outlet_identity_trial.py:10",
+        "launch_full_official_public_outlet_identity_trial.py:49",
+        "launch_full_official_public_outlet_identity_trial.py:75",
+        "run_full_official_experiment.py:99",
+        "run_full_official_experiment.py:138"
+      ],
+      "detail": "PhysicalGPU2 runs demo then axis; GPU3 runs frequency then twins, serialized within each lane and at most two NN children. The first executor fully joins all four contracts and all four true-three-update AMP/strict-reload smokes before any train call. Smoke counts/parameter counts match each original/M4 parent; enhanced variants match each other. Formal runs start fresh from public CLIP, seed42/B64/P16/K4, all1032/591/1055 and no artificial holdout, with 50 epochs and the unchanged benchmark-mAP best/earliest-tie rule."
+    },
+    {
+      "check": "Fixed-checkpoint GT evaluation and sampling accounting",
+      "result": "PASS_SOURCE_ONLY",
+      "references": [
+        "evaluate_full_official_public_outlet_identity49.py:6",
+        "diagnose_full_official_public_outlet_identity_states.py:6",
+        "audit_full_official49.py:83",
+        "audit_full_official_control_states.py:83",
+        "launch_full_official_public_outlet_identity_trial.py:94",
+        "launch_full_official_public_outlet_identity_trial.py:119"
+      ],
+      "detail": "Both wrappers only bind the new builder into existing evaluators. Four frozen49 evaluations use the selected best and installed-GT independent CPU recounts (196 cases); three enhanced models use all six states, heads, calibration and harm/rescue recounts (882 cases). Completion checks full record coverage and exact epoch/step/names/partial-set order against original shared/M4 parents and across all four new models. Training coverage reports seven public input availabilities; it makes no 49-pair graph-training coverage claim."
+    },
+    {
+      "check": "Deployer prerequisites and reviewed execution",
+      "result": "PASS_SOURCE_ONLY",
+      "references": [
+        "results/preflight/full_official_public_outlet_identity_deployer_20261005.py:25",
+        "results/preflight/full_official_public_outlet_identity_deployer_20261005.py:37",
+        "results/preflight/full_official_public_outlet_identity_deployer_20261005.py:64",
+        "gpu_thermal_execute.py:24"
+      ],
+      "detail": "Requires both source PASS records, all seven exact source bindings and its own reviewed hash, unchanged protected parent hashes locally/remotely, complete M4/baseline and complete M5 196/882 audits, closed M5 processes, unique output/receipt and more than4500MiB free. The resource gate uses only GPU2/3 memory below500MiB; no power/temperature controls. Upload bytes are rechecked before Popen and the real PID/process group/command are recorded. Launch is independent of raw-archive completion; its receipt explicitly leaves contract/smoke/fresh50 success pending."
+    },
+    {
+      "check": "Sole observer",
+      "result": "PASS_SOURCE_ONLY",
+      "references": [
+        "results/preflight/full_official_public_outlet_identity_observer_20261005.py:10",
+        "results/preflight/full_official_public_outlet_identity_observer_20261005.py:64"
+      ],
+      "detail": "Uses the existing launch PID/output, only reads remote phase artifacts/process states and polls at240seconds. It reports actual smoke updates/skips and completed training updates/skips. Terminal success requires196/882, parent-matched orders, all relevant GT audits, no active NN children and no failed child. It neither launches nor restarts training."
+    },
+    {
+      "check": "Optional start publication",
+      "result": "PASS_SOURCE_ONLY",
+      "references": [
+        "results/preflight/full_official_public_outlet_identity_start_publisher_20261005.py:21",
+        "results/preflight/full_official_public_outlet_identity_start_publisher_20261005.py:35",
+        "results/preflight/full_official_public_outlet_identity_start_publisher_20261005.py:59",
+        "results/preflight/full_official_public_outlet_identity_start_publisher_20261005.py:87"
+      ],
+      "detail": "Binds the seven sources and deployer, reads the real launch receipt and completed M5 publication, retains ACTIVE_UNMET and negative M5 results, and explicitly treats zero success counts as launch-time pending evidence. Updates the one handoff and byte-verifies project/Desktop/2026/2027;2025 remains IO-pending. The archive and Git pathspec enumerate only intended text/source artifacts; the staged index must initially be empty. Publication does not execute NN jobs. Its launch snapshot must not be treated as a later live-progress observation. Its self-hash is checked against this review and the exact overlap receipt is included in publication. The revised sentence distinguishes source preparation during04:26:59-04:35:36 from the later execution-source review and makes no during-transfer NN claim."
+    }
+  ],
+  "static_validation": {
+    "python_310_ast": "PASS: seven plan sources, deployer and optional start publisher; no application imports",
+    "embedded_scripts": "PASS: three deployer remote-code strings and observer remote-code string parsed without execution; remote receipt suffix validated as a newline and valid JSON",
+    "source_hashes_match_plan": true,
+    "protected_parent_hashes_match_plan": true,
+    "training_review_two_source_bindings_match": true,
+    "scientific_or_numerical_runtime_acceptance": false
+  },
+  "saved_M5_evidence": {
+    "source": "results/full_official_availability_graph_m5_20261005/analysis.json",
+    "status": "FOUR_FULL_OFFICIAL_GRAPH_RUNS196_FROZEN_AND882_STATE_CASES_ANALYZED",
+    "frozen_metric_cases": 196,
+    "enhanced_state_metric_cases": 882,
+    "axis_normal": {
+      "mAP": 47.9394026506869,
+      "mINP": 24.477367671372104,
+      "Rank-1": 65.98984771573603,
+      "Rank-5": 80.03384094754654,
+      "Rank-10": 84.77157360406092,
+      "Rank-20": 90.86294416243655
+    },
+    "frequency_normal": {
+      "mAP": 50.03440960724866,
+      "mINP": 26.21272498424468,
+      "Rank-1": 67.17428087986464,
+      "Rank-5": 82.91032148900169,
+      "Rank-10": 86.80203045685279,
+      "Rank-20": 91.37055837563452
+    },
+    "axis11_minus00_normal": {
+      "delta_pp": {
+        "mAP": -0.141167127383639,
+        "mINP": -0.016819876124291255,
+        "Rank-1": -0.3384094754653262,
+        "Rank-5": 0.0,
+        "Rank-10": -0.33840947546531197,
+        "Rank-20": 0.0
+      },
+      "Rank1_harm_queries": 3,
+      "Rank1_rescue_queries": 1,
+      "AP_improved_queries": 176,
+      "AP_worsened_queries": 298,
+      "AP_unchanged_queries": 117,
+      "both_metrics_plus2": false
+    },
+    "axis_vs_original_normal": {
+      "delta_pp": {
+        "mAP": 0.7747142034593253,
+        "mINP": 0.9744064369759258,
+        "Rank-1": 2.0304568527918647,
+        "Rank-5": -0.16920473773264177,
+        "Rank-10": 0.0,
+        "Rank-20": 1.015228426395936
+      },
+      "Rank1_harm_queries": 37,
+      "Rank1_rescue_queries": 49,
+      "AP_improved_queries": 306,
+      "AP_worsened_queries": 267,
+      "AP_unchanged_queries": 18,
+      "both_metrics_plus2": false
+    },
+    "goal_complete": false,
+    "interpretation": "Actual completed M5 remains negative for the required joint +2 target and axis inference utility. This motivates a hypothesis only; no M6 gain or causal explanation is established. Saved analysis was read, not independently rerun."
+  },
+  "pending_runtime_acceptance": [
+    "All four native parent/repeat/disabled/positive contracts,16 real updates total",
+    "All four true-three-update AMP smokes and strict reloads,12 real updates total, before any fresh50",
+    "Four completed fresh50 runs and196 frozen plus882 enhanced-state installed-GT cases",
+    "Actual signed fair comparisons and goal assessment"
+  ],
+  "execution_status": {
+    "ssh_or_deployer_executed": false,
+    "neural_modules_imported": false,
+    "new_neural_executions": 0,
+    "new_optimizer_updates": 0,
+    "new_smoke_updates": 0,
+    "new_fresh50_runs": 0,
+    "source_edits": false,
+    "git_actions": false,
+    "publication_executed": false
+  },
+  "goal_status": "ACTIVE_UNMET",
+  "goal_complete": false,
+  "optional_start_publisher_status": "PASS_SOURCE_ONLY",
+  "optional_start_publisher_reviewed_at": "2026-10-05T04:41:58+08:00",
+  "resolved_findings": [
+    {
+      "scope": "optional start publisher",
+      "finding": "The original archive-overlap sentence included completion of execution-source review inside an already-closed transfer interval.",
+      "resolution": "Corrected to actual source preparation overlapping the transfer and execution review completed subsequently. The evidence reports zero neural executions during transfer. This wording correction does not change the seven runtime sources or deployer."
+    }
+  ]
+}

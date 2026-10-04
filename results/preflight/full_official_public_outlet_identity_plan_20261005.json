@@ -1,0 +1,194 @@
+{
+  "status": "TRAINING_SOURCE_PASS_EXECUTION_GLUE_REVIEW_PENDING_NO_NEW_NN",
+  "prepared_at": "2026-10-05T04:16:35",
+  "evidence": [
+    "results/preflight/full_official_availability_graph_axis_frozen_readout_20261005.json",
+    "results/preflight/full_official_availability_graph_first_pair_frozen_utility_20261005.json",
+    "shared_identity_axis.py:93-106",
+    "shared_identity_axis.py:193-197"
+  ],
+  "actual_current_axis_normal": {
+    "mAP": 47.9394026506869,
+    "mINP": 24.477367671372104,
+    "Rank-1": 65.98984771573603,
+    "Rank-5": 80.03384094754654,
+    "Rank-10": 84.77157360406092,
+    "Rank-20": 90.86294416243655
+  },
+  "actual_vs_M5_ordinary_frequency": {
+    "mAP": -2.095006956561761,
+    "mINP": -1.7353573128725763,
+    "Rank-1": -1.184433164128606,
+    "Rank-5": -2.8764805414551518,
+    "Rank-10": -2.030456852791872,
+    "Rank-20": -0.507614213197968
+  },
+  "source_observation": "base_supervision directly classifies raw full-view shared512. Partial forward returns only fused5632 classifier/descriptor. Thus partial public512 has no direct supervision through the existing shared identity head, while the deployed metric assigns .75 to private and .25 to public. Current public graph teacher is stopped selected-source raw projection; complete graph axis already fails full-mAP+2 and falls behind ordinary frequency. These observations motivate, not prove, the new factor.",
+  "hypothesis": "Direct full/partial actual public-outlet identity supervision through one existing head can improve public comparability without relying on the current weak stopped subset reference; it may still fail and may improve ordinary controls equally.",
+  "baseline_parent": "Original full-official shared-identity DeMo and completed M4 expert parents, not M5 graph parents; M5 strongest ordinary result retained as additional reference.",
+  "single_added_factor": {
+    "total_weight": 0.1,
+    "full_weight": 0.05,
+    "partial_weight": 0.05,
+    "objective": "Existing label-smoothed identity CE on actual deployed fused descriptor[:,5120:5632] via existing shared_neck/shared_classifier",
+    "labels": "Official train identity labels only",
+    "extra_shared_BN_calls": 2,
+    "extra_backbone_calls": 0,
+    "extra_parameters": 0,
+    "inference_changes": 0
+  },
+  "preserved": [
+    "All original full and partial CE/triplet",
+    "M4 PM/F identity alignment and F relation objective",
+    "Measurement-only contribution gates",
+    "Backbone/FFT/dual-axis responsibilities/joint route/one conditioning",
+    "Full nativeB64/P16/K4/seed42/50 publicCLIP",
+    "Same original PK and uniform partial-set sampling",
+    "Same5632D .75private/.25public and original best-only rule"
+  ],
+  "datasets": [
+    "MSVR310"
+  ],
+  "prospective_models": [
+    "demo_shared",
+    "axis_shared",
+    "frequency_shared",
+    "twins_shared"
+  ],
+  "full_counts": {
+    "train": 1032,
+    "query": 591,
+    "gallery": 1055
+  },
+  "training_heldout_identities": 0,
+  "start_conditions": [
+    "Finish all four original graph runs and196+882 GT cases; inspect complete fair comparison and actual axis inference utility",
+    "Fresh source review of this new factor and actual execution glue",
+    "Actual disabled-parent old loss/gradient/RNG/buffer equivalence and own measured Adam updates; positive public-head input/label/original+extra objective/BN2calls/noextraCLIP proof",
+    "All four true3-update AMP/strictreload preflights before any fresh50",
+    "Only2026 GPU2/3,max2NN; overlap approved archive transfer with preparation/preflight/training when both resource and disk conditions hold"
+  ],
+  "complete_evaluation": "Each fixed50 selected best full49 installedGT independentCPU; enhanced3 sixstatesx49/head/calibration/actualharm-rescue; same ordinary comparisons. No artificial holdout and no untouched-test claim.",
+  "hardware": "Only2026 physicalGPU2/3; no power or temperature conditions",
+  "actual_new_NN": 0,
+  "actual_optimizer_updates": 0,
+  "actual_smoke_updates": 0,
+  "actual_fresh50_runs": 0,
+  "goal_complete": false,
+  "sources_sha256": {
+    "public_outlet_identity_training.py": "88d7dd8784bf763f81afbb09595a0ac1b1ffd69025be431ae1457faae09210f0",
+    "run_full_official_public_outlet_identity_experiment.py": "de07e3fcadfce6ea0aa4adc17531e84d364e4c0062d518c4dbd87e015e210a50",
+    "evaluate_full_official_public_outlet_identity49.py": "af5e50b930261c719d7c093cd4b1ba069db6799eefc61d5d9a2aa6e6ee8aa564",
+    "diagnose_full_official_public_outlet_identity_states.py": "8ed032d8c86eb72fdca6490db3ad6aaac99c78438dad6d5600cd81060bb39d6d",
+    "verify_full_official_public_outlet_identity.py": "c471247be15cb13b006b28313a73254aeee51528bf4ba951d0c55c9827044456",
+    "launch_full_official_public_outlet_identity_trial.py": "988e0f43f77742956782158078425a4a579deaf2b0c88e03d11aa43d7a99f3a1",
+    "results/preflight/full_official_public_outlet_identity_observer_20261005.py": "ed10ab23bf484e4c6e08a75c2fe2ee413bea46ebf0765d994e03bf019f043839"
+  },
+  "experimental_revision": "M6 prospective public-outlet ID CE, not the goal milestone M6 ablation. This is one addition relative to M4. It replaces the M5 graph experiment when compared across exploratory versions, so do not call M5-to-M6 a single-factor ablation.",
+  "training_source_review": "results/preflight/full_official_public_outlet_identity_training_review_20261005.json",
+  "protected_parent_sources_sha256": {
+    "independent_control_axis.py": "566a2fd6689ae72050a7587bc60b35a37687d53dea37d65ef12a249792a3f332",
+    "run_full_official_control_experiment.py": "cef53071ed0c572ae553feacccdf4a46840c7096b15804ef9ae3b2c8475bd98f",
+    "evaluate_full_official_control49.py": "cdeb3aabbbac8db0679174e851958437ef982a451de6a566dab0135e8f774a2b",
+    "verify_full_official_control_axis.py": "2cdd282ac59549910a2368c8f4cfc05a0552131ddbb0588bf72ab62138b3edff",
+    "launch_full_official_control_trial.py": "5218f63780248216e398e8e35c87547ab9e536cdf02e7f54e2e8a488e4326253",
+    "run_full_official_experiment.py": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
+    "evaluate_full_official49.py": "5db20659af12e248d91b22813517b1e72619483fa73ac06a60423e874a2c9d7b",
+    "audit_full_official49.py": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+    "diagnose_full_official_control_states.py": "42007521982055e5b4a0e468e5a9964aa09ac4abef1b6127e5a35abd3eb1bc88",
+    "audit_full_official_control_states.py": "3de0d88595a343679963867ac6f2ff22de728917d556b20e2c4e7eb657661d2c",
+    "measurement_gate_axis.py": "e7def67f8a7791d35e123b6bc81c6fcf1c9b6373913875983ecd1d4c0450ec8e",
+    "identity_alignment_axis.py": "a5e1882ee75f2e89f3977c423a05e6986d66ed182d74f09db2b464f5dc228dd7",
+    "frequency_relation_axis.py": "8247783d10c97b76fb4011ef1a05a2fd72b715f57b68f36d39b826f6c0d9f76e",
+    "common_outlet_axis.py": "b43002891b7a51c01573c3bcf1aaaa8811ae00824b08f1a9989427c8fa2e5436",
+    "shared_identity_axis.py": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+    "run_shared_identity_experiment.py": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "official_training_data.py": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "common_coordinate_axis.py": "0a45146b7e645abc1e8b7d622c1556852855964ea29d7530b449e1c02c8deb5b",
+    "scaled_axis_collaboration.py": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+    "gpu_thermal_execute.py": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+    "audit_shared_identity_states.py": "e8cf168db43f36e36a40a66148f209a6b782775942ce7fcbdf9dce439d1fa8d0",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "missing_evaluation.py": "e04e16dbb4ec486f28065102b5d7301c68e7d1cef62cdd5fcfa99b3dac222089",
+    "modality_outlet_alignment_axis.py": "b7a460dcac1ee9ffe6bd9e33d27570b1334c41747a0921c4923edc27988d45ba",
+    "run_full_official_modality_outlet_experiment.py": "2d5a71b31b88f319c45f064a646fddc0f947208a97e82e13ea0b1b86efad987d",
+    "evaluate_full_official_modality_outlet49.py": "fe029d358c321cde1f81b5357910cb2803a24bb8ecb4c28297d83b4d73ba80f8",
+    "diagnose_full_official_modality_outlet_states.py": "f942ad86ee16ace48e2cb9c616344e109d97b6100c950c1e8074a30230ed0034",
+    "verify_full_official_modality_outlet_axis.py": "1d66a1f323b7148b4c5d88a2dd087f901edebc625f7575ec8b2a0ad6fa6120ee",
+    "launch_full_official_modality_outlet_trial.py": "fcf78cb1a170295c3b2a8847c33793c60f839013cc2882a43891a407f7626922"
+  },
+  "decision": {
+    "analysis": "results/full_official_availability_graph_m5_20261005/analysis.json",
+    "status": "FOUR_FULL_OFFICIAL_GRAPH_RUNS196_FROZEN_AND882_STATE_CASES_ANALYZED",
+    "actual_all_four_full50": true,
+    "frozen_cases": 196,
+    "enhanced_state_cases": 882,
+    "axis_full_both_plus2": false,
+    "axis_inference_full11_minus00": {
+      "delta_pp": {
+        "mAP": -0.141167127383639,
+        "mINP": -0.016819876124291255,
+        "Rank-1": -0.3384094754653262,
+        "Rank-5": 0.0,
+        "Rank-10": -0.33840947546531197,
+        "Rank-20": 0.0
+      },
+      "Rank1_harm_queries": 3,
+      "Rank1_rescue_queries": 1,
+      "AP_improved_queries": 176,
+      "AP_worsened_queries": 298,
+      "AP_unchanged_queries": 117,
+      "both_metrics_plus2": false
+    },
+    "axis_inference_all49_equal_mean": {
+      "mAP": -0.09402851099520634,
+      "mINP": 0.017269127053648376,
+      "Rank-1": -0.3280500017265808,
+      "Rank-5": -0.21064263268759287,
+      "Rank-10": -0.10704789530025349,
+      "Rank-20": -0.3522221071169578
+    },
+    "axis_vs_M5_frequency": {
+      "delta_pp": {
+        "mAP": -2.0950069565617753,
+        "mINP": -1.7353573128725763,
+        "Rank-1": -1.184433164128606,
+        "Rank-5": -2.8764805414551518,
+        "Rank-10": -2.030456852791872,
+        "Rank-20": -0.507614213197968
+      },
+      "Rank1_harm_queries": 41,
+      "Rank1_rescue_queries": 34,
+      "AP_improved_queries": 269,
+      "AP_worsened_queries": 302,
+      "AP_unchanged_queries": 20,
+      "both_metrics_plus2": false
+    },
+    "do_not_expand_unchanged_M5_to_three_datasets": true,
+    "hypothesis_not_causal_fact": true
+  },
+  "execution": {
+    "schedule": {
+      "2": [
+        "demo_shared",
+        "axis_shared"
+      ],
+      "3": [
+        "frequency_shared",
+        "twins_shared"
+      ]
+    },
+    "all_four_contracts_and_smokes_before_any_fresh50": true,
+    "native_updates": 16,
+    "smoke_updates": 12,
+    "full50_runs": 4,
+    "frozen_metric_cases": 196,
+    "enhanced_state_cases": 882,
+    "sampling": "Original parent PK and uniform partial sets; no M5 graph pairing introduced",
+    "archive_completion_required_to_prepare_or_preflight": false,
+    "formal_space_gate_bytes": 4718592000
+  }
+}

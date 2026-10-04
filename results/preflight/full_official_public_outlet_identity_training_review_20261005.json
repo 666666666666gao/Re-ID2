@@ -1,0 +1,217 @@
+{
+  "status": "PASS",
+  "review_scope": "SOURCE_ONLY_EXPERIMENT_BRIDGE_CODE_REVIEW_OF_TWO_TRAINING_SOURCES",
+  "reviewed_at": "2026-10-04T20:24:14.691866+00:00",
+  "blocking_findings": [],
+  "non_blocking_findings": [],
+  "conclusion": "The two reviewed sources implement the planned extra direct public identity CE on the original M4/shared parents. No concrete source-level blocker found. This is not deployment, CUDA, optimizer, smoke, performance, or scientific-goal acceptance.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer_attribution": {
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "max",
+    "actual_model": "unattested",
+    "actual_reasoning_effort": "unattested",
+    "actual_backend": "unattested",
+    "context": "Fresh delegated Codex review reading local source and saved evidence; no cross-family acceptance claimed."
+  },
+  "skill": "C:/Users/gb/.agents/skills/experiment-bridge/SKILL.md",
+  "local_policy": "C:/Users/gb/.agents/skills/shared-references/local-codex-policy.md",
+  "plan": "results/preflight/full_official_public_outlet_identity_plan_20261005.json",
+  "sources_sha256": {
+    "public_outlet_identity_training.py": "88d7dd8784bf763f81afbb09595a0ac1b1ffd69025be431ae1457faae09210f0",
+    "run_full_official_public_outlet_identity_experiment.py": "de07e3fcadfce6ea0aa4adc17531e84d364e4c0062d518c4dbd87e015e210a50"
+  },
+  "source_findings": [
+    {
+      "check": "Actual deployed public outlet and common head",
+      "result": "PASS",
+      "references": [
+        "public_outlet_identity_training.py:31-33",
+        "public_outlet_identity_training.py:41-46",
+        "shared_identity_axis.py:20-25",
+        "shared_identity_axis.py:120-128",
+        "shared_identity_axis.py:177-211",
+        "common_coordinate_axis.py:10-34"
+      ],
+      "detail": "Both students are slices of the returned fused 5632-D retrieval descriptor, full output[1][:,5120:] and partial query[:,5120:], hence exactly coordinates 5120:5632 for these parents. They retain gradients and use the same existing shared_neck and shared_classifier. The expert parent puts M/F/I residual contributions into that public outlet before metric normalization. No raw-base or standalone-expert substitute is used."
+    },
+    {
+      "check": "Weights, labels, and original losses",
+      "result": "PASS",
+      "references": [
+        "public_outlet_identity_training.py:23-46",
+        "run_full_official_public_outlet_identity_experiment.py:14-21",
+        "run_full_official_experiment.py:94-104",
+        "layers/softmax_loss.py:16-34",
+        "official_training_data.py:20-32"
+      ],
+      "detail": "Builder fixes public_identity_weight=.1 on all four variants. Additional terms are .05 times full CE and .05 times partial CE, using the existing CrossEntropyLabelSmooth with epsilon .1 and current official training identity target. They do not receive the .25 original ID-loss coefficient again. Original weighted full CE/triplet pairs, final auxiliary scalar, .25 partial fused CE and .5 stopped-full-gallery triplet are retained. Training labels are relabeled only from the complete official training split; the existing evaluator does not call this training update or supply identity labels to the inference forward."
+    },
+    {
+      "check": "M4 parent semantics",
+      "result": "PASS",
+      "references": [
+        "run_full_official_public_outlet_identity_experiment.py:14-22",
+        "run_full_official_modality_outlet_experiment.py:7-17",
+        "run_full_official_control_experiment.py:10-16",
+        "modality_outlet_alignment_axis.py:22-70",
+        "identity_alignment_axis.py:35-71",
+        "frequency_relation_axis.py:27-62",
+        "measurement_gate_axis.py:12-26"
+      ],
+      "detail": "Expert variants use the unchanged M4 builder: original_mean pooling, measurement_only gates, relation_weight=.1, F alignment_weight=.1 at temperature .07, and PM alignment_weight=.1. Alignment names are assigned before the forward; existing full-view PM/F and relation losses remain in the returned odd auxiliary scalar and their audits are retained after the partial pass. Gate detach behavior is inherited. demo_shared uses the original full-official SharedIdentityDeMo builder. No M5 graph model, loss, teacher projection, reference cycle, or source sampler is imported into the reviewed update."
+    },
+    {
+      "check": "Disabled delegation",
+      "result": "PASS_SOURCE_ONLY",
+      "references": [
+        "public_outlet_identity_training.py:9-17"
+      ],
+      "detail": "After the variant assertion, zero weight immediately calls the original shared parent step for demo_shared or original M4 parent step for each expert variant, adds reporting fields, and returns. No new tensor transfer, alignment assignment, hook, forward, CE, RNG consumption, optimizer reset or BN call precedes the parent call. Numerical parent equivalence and native Adam updates remain unmeasured here."
+    },
+    {
+      "check": "Backward order and memory lifecycle",
+      "result": "PASS_SOURCE_ONLY",
+      "references": [
+        "public_outlet_identity_training.py:34-52",
+        "run_shared_identity_experiment.py:34-64"
+      ],
+      "detail": "The full original-plus-extra loss is backpropagated before partial backbone execution, without retain_graph. output and full_public are deleted; the full fused gallery is detached. Remaining scalar loss references do not request saved-tensor retention after backward. Partial original-plus-extra loss accumulates into the same optimizer gradients, followed by the original single unscale/step/update sequence. New code adds only two shared-head applications, with no extra backbone forward, model parameter, forward hook, teacher queue or feature bank. Actual B64 peak memory is pending native measurement."
+    },
+    {
+      "check": "Explicit BN state effect",
+      "result": "PASS_AS_PLANNED_WITH_NATIVE_PROOF_PENDING",
+      "references": [
+        "shared_identity_axis.py:28-38",
+        "shared_identity_axis.py:95-105",
+        "public_outlet_identity_training.py:31-32",
+        "public_outlet_identity_training.py:44",
+        "public_outlet_identity_training.py:65"
+      ],
+      "detail": "In a positive training step shared_neck is used three times in order: original raw full shared512, actual normalized full public512, actual normalized partial public512. This is two additional training BN calls for every variant and intentionally changes its running buffers. The report field discloses +2; it is a declaration, not a measured contract. Positive native validation must capture these three inputs and the +2 num_batches_tracked effect, allowing the intended extra running-stat updates. Existing eval returns the descriptor without this classification head."
+    },
+    {
+      "check": "Sampling, full-data regimen, and checkpoint semantics",
+      "result": "PASS_SOURCE_ONLY",
+      "references": [
+        "run_full_official_experiment.py:60-98",
+        "run_full_official_experiment.py:129-177",
+        "run_experiment.py:31-42",
+        "configs/MSVR310/DeMo.yml:21-36",
+        "experiment_data.py:88-93",
+        "data/datasets/sampler.py",
+        "official_training_data.py:20-32"
+      ],
+      "detail": "The unchanged official runner retains all official train/query/gallery records, no fit/dev holdout, seed42 default, 50 epochs, native MSVR B64/P16/K4, fresh public CLIP initialization path, Adam/fp16 GradScaler512, and one uniform draw among the original six proper partial sets per batch. The new step consumes no additional random draw. Maximum full benchmark mAP selects best.pth, with earliest ties and the benchmark-selection limitation disclosed. Four-way scheduling and full49/state diagnostic wiring are separate pending glue, not attested by these two files."
+    }
+  ],
+  "static_validation": {
+    "target_ast_parse": "PASS_BOTH_FILES_WITHOUT_IMPORT_OR_EXECUTION",
+    "review_source_hashes_match_plan": true,
+    "parent_ast_comparisons": "PASS: original full weighted aggregation, original odd auxiliary addition, original partial-loss expression, detached gallery assignment and partial source-mask assignment are AST-identical after local loss-variable renaming.",
+    "additional_ast_checks": "PASS: first zero-weight branch returns parent; exact public slice and shared-head expressions; .5*weight each; no new random call, retain_graph, parameter construction, hook or graph import.",
+    "neural_modules_imported": false,
+    "numeric_loss_gradient_or_optimizer_acceptance": false
+  },
+  "saved_evidence_review": {
+    "sources": [
+      "results/preflight/full_official_availability_graph_axis_frozen_readout_20261005.json",
+      "results/preflight/full_official_availability_graph_first_pair_frozen_utility_20261005.json"
+    ],
+    "M5_axis": {
+      "training_status": "COMPLETE",
+      "epochs": 50,
+      "optimizer_steps": 705,
+      "amp_skipped_steps": 0,
+      "full_metrics": {
+        "mAP": 47.9394026506869,
+        "mINP": 24.477367671372104,
+        "Rank-1": 65.98984771573603,
+        "Rank-5": 80.03384094754654,
+        "Rank-10": 84.77157360406092,
+        "Rank-20": 90.86294416243655
+      },
+      "frozen49_status": "PASS",
+      "frozen_cases": 49,
+      "normal_delta_vs_original_pp": {
+        "mAP": 0.7747142034593253,
+        "mINP": 0.9744064369759258,
+        "Rank-1": 2.0304568527918647,
+        "Rank-5": -0.16920473773264177,
+        "Rank-10": 0.0,
+        "Rank-20": 1.015228426395936
+      },
+      "normal_delta_vs_M5_frequency_pp": {
+        "mAP": -2.095006956561761,
+        "mINP": -1.7353573128725763,
+        "Rank-1": -1.184433164128606,
+        "Rank-5": -2.8764805414551518,
+        "Rank-10": -2.030456852791872,
+        "Rank-20": -0.507614213197968
+      },
+      "normal_both_plus2_vs_original": false,
+      "limits": "Full dual-axis49 scalar CPU-audited result with signed original/shared/ordinary-frequency/previous-axis comparisons, not final four-model analysis. Ordinary twins and actual candidate six-state inference utility remain pending.49 conditions repeat591 queries; no untouched-test, multiseed or three-dataset claim."
+    },
+    "M5_ordinary_frequency": {
+      "state_audit_status": "PASS_FULL_OFFICIAL_CONTROL_STATES_INSTALLED_GT",
+      "state_cases": 294,
+      "normal11_minus00": {
+        "delta_pp": {
+          "mAP": -0.046313023322220204,
+          "mINP": 0.061526460991785825,
+          "Rank-1": -0.507614213197968,
+          "Rank-5": -0.16920473773265599,
+          "Rank-10": -0.16920473773265599,
+          "Rank-20": 0.0
+        },
+        "Rank1_harm_queries": 4,
+        "Rank1_rescue_queries": 1,
+        "AP_improved_queries": 198,
+        "AP_worsened_queries": 261,
+        "AP_unchanged_queries": 132,
+        "queries": 591,
+        "both_metrics_plus2": false
+      },
+      "all49_equal_condition_mean11_minus00_pp": {
+        "mAP": -0.02498603596960374,
+        "mINP": 0.03981290305723724,
+        "Rank-1": -0.06215684243240421,
+        "Rank-5": -0.1312200006906321,
+        "Rank-10": -0.041437894954935287,
+        "Rank-20": -0.17956421147139104
+      },
+      "calibration_MAE_better_than_zero_conditions": [
+        0,
+        0,
+        0
+      ],
+      "limits": "This is the completed ordinary frequency control only, not the unfinished dual-axis candidate or final four-model comparison.00 is this trained model base; conditions repeat591 queries. Existing installed-GT state CPU audit read, no new inference or scoring."
+    },
+    "interpretation": "Actual M5 axis full mAP improvement is below +2 and it trails M5 ordinary frequency by 2.0950069566 mAP and 1.1844331641 Rank-1 points. The completed ordinary-frequency 11-minus-00 effect is negative in normal mAP/Rank-1. These saved results motivate testing a new objective; they predict no gain and establish no candidate inference utility. The cited evidence still leaves axis six-state utility and final twins/four-model closure pending."
+  },
+  "experimental_attribution": "One added direct public identity factor relative to M4 expert parents and original shared DeMo. M5 graph is absent, so M5-to-M6 comparison is an exploratory replacement and is not a single-factor ablation. Prospective M6 is not completion of the goal milestone named M6.",
+  "pending_before_launch": [
+    "Finish original four M5 graph runs and complete 196 frozen plus 882 enhanced-state GT cases; inspect the complete fair comparison and actual axis inference utility, as the plan requires.",
+    "Review the actual execution/deployment/evaluation glue separately; this receipt covers only the two named training sources.",
+    "Run actual native zero-weight parent loss/gradient/RNG/buffer equivalence and each measured Adam update; no numerical equivalence result is claimed here.",
+    "Run positive native proof of exact deployed full/partial head inputs, official train labels, original-plus-extra scalar arithmetic, gradient flow, intended additional two shared-BN calls, no extra CLIP calls and unchanged parameter set.",
+    "Complete all four real three-update AMP and strict-reload preflights before any fresh50; measure actual native memory and retain independent full49/state evaluation."
+  ],
+  "execution_status": {
+    "deployment_glue_review": "PENDING_OUTSIDE_SCOPE",
+    "native_disabled_contract": "PENDING_NOT_EXECUTED_BY_REVIEWER",
+    "native_positive_contract": "PENDING_NOT_EXECUTED_BY_REVIEWER",
+    "four_variant_smokes": "PENDING_NOT_EXECUTED_BY_REVIEWER",
+    "new_neural_execution": 0,
+    "new_optimizer_updates": 0,
+    "new_smoke_updates": 0,
+    "new_fresh50_runs": 0,
+    "ssh_or_deployer_execution": false,
+    "script_source_edits": false,
+    "git_edits_or_deletions": false
+  },
+  "hardware_scope": "Only server2026 physical GPU2/3, serialized per card, at most two NN jobs. No temperature or power conditions; imported check_limits only queries index and memory.used. No GPU or hardware command executed in this review.",
+  "goal_status": "ACTIVE_UNMET",
+  "goal_complete": false
+}
