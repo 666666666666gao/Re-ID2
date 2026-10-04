@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-04T18:46:04",
+  "updated_at": "2026-10-04T20:42:39",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -252,7 +252,7 @@
       "original_source_sha256": "b43002891b7a51c01573c3bcf1aaaa8811ae00824b08f1a9989427c8fa2e5436"
     },
     "full_official_protocol": {
-      "status": "FOUR_FULL_OFFICIAL_REFERENCES_AUDITED_BOTH_RGBNT100_RUNNING",
+      "status": "SIX_FULL_OFFICIAL_BASELINES_COMPLETE_ALL294_GT_CPU_AUDITS_PUBLISHED",
       "inventory": "results/preflight/full_official_inventory_20261004.json",
       "plan": "results/preflight/full_official_baseline_plan_20261004.json",
       "training_runs": 6,
@@ -263,16 +263,16 @@
       "real_smoke_optimizer_updates": 18,
       "actual_preflight": "results/preflight/full_official_baselines_actual_preflight_20261004.json",
       "observer_session": 95924,
-      "pending_full_training": 2,
-      "pending_all49": 2,
-      "pending_independent_GT_audits": 2,
+      "pending_full_training": 0,
+      "pending_all49": 0,
+      "pending_independent_GT_audits": 0,
       "observer_failure": "Old monitor counted DataLoader workers as NN; authoritative launch-PID observer replaces it, training never restarted",
       "observer_failure_evidence": "results/preflight/full_official_observer_failure_20261004.json",
       "observer_review": "results/preflight/full_official_primary_observer_v2_review_20261004.json",
       "observer_snapshot_atomic": false,
-      "completed_full_training": 4,
-      "completed_all49": 4,
-      "completed_independent_GT_audits": 4,
+      "completed_full_training": 6,
+      "completed_all49": 6,
+      "completed_independent_GT_audits": 6,
       "MSVR310_full_original_DeMo_plus2_thresholds": {
         "mAP": 49.164688447227576,
         "Rank-1": 65.95939086294416
@@ -283,7 +283,23 @@
         "Rank-1": 82.622009569378
       },
       "RGBNT201_original_record": "results/preflight/full_official_RGBNT201_original_complete_20261004.json",
-      "RGBNT201_pair": "results/full_official_RGBNT201_pair_20261004/summary.json"
+      "RGBNT201_pair": "results/full_official_RGBNT201_pair_20261004/summary.json",
+      "final_baseline_summary": "results/full_official_baselines_20261004/summary.json",
+      "final_paired_analysis": "results/full_official_baselines_20261004/baseline_pair_analysis.json",
+      "original_DeMo_plus2_thresholds": {
+        "MSVR310": {
+          "mAP": 49.164688447227576,
+          "Rank-1": 65.95939086294416
+        },
+        "RGBNT201": {
+          "mAP": 77.67457499232746,
+          "Rank-1": 82.622009569378
+        },
+        "RGBNT100": {
+          "mAP": 87.76856710316947,
+          "Rank-1": 98.61807580174927
+        }
+      }
     },
     "full_official_control_m3b": {
       "status": "SOURCE_REVIEW_PASS_NOT_DEPLOYED_NOT_LAUNCHED_CUDA_PENDING",
@@ -365,9 +381,9 @@
     }
   ],
   "next_action": {
-    "milestone": "FULL_OFFICIAL_BASELINE_RESET",
-    "status": "FOUR_FULL_OFFICIAL_REFERENCES_COMPLETE_TWO_RGBNT100_RUNNING",
-    "action": "先重跑三个数据集的完整DeMo与同公共接口/合法来源/缺失增强DeMo，各50轮与全49组合；之后所有普通专家/双轴候选统一改用完整数据协议。M3b旧子集方案不启动，原单因素方向保留但排在完整协议基线之后。",
+    "milestone": "FULL_OFFICIAL_M3B_REAL_PREFLIGHT",
+    "status": "BASELINES_COMPLETE_NEW_CUDA_CONTRACT_AND_SIX_SMOKES_PENDING",
+    "action": "使用已审查一次性部署器启动新完整MSVR310 M3a/M3b × 双轴/普通频域/普通双专家共6组对照。真实零控制等价/梯度隔离合同及全部6模型3次实际更新/严格内存重载先通过，再从公开CLIP训练50轮。固定best评测全49和294四状态/基础块诊断及GT CPU复算。未证明推理增益与公平胜出前，不扩展为统一三数据集方法。",
     "hardware_dependency": "Only2026GPU2/3,max2NN,no temperature/powerconditions"
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
