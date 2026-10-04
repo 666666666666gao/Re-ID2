@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-04T11:22:12",
+  "updated_at": "2026-10-04T11:42:38",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、独立身份确认、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -32,7 +32,7 @@
     },
     {
       "id": "M2",
-      "status": "REAL_CUDA_AND_THREE_SMOKES_PASS_FRESH50_AND_DIAGNOSTICS_ACTIVE",
+      "status": "COMPLETE_SINGLE_FACTOR_AUDITED_NOT_FINAL_CANDIDATE",
       "work": "在M1结果明确后，单因素验证同可用来源的停止梯度频域身份关系保持，参照自身须先证明有稳定身份结构。",
       "evidence": "辅助→路由→投影→最终融合逐阶段逐查询AP、首位恢复及误伤；公共身份出口约束朝向。不能用关系距离损失单独证明坐标对齐。",
       "decision": "M2单因素：固定original_mean及原M1全部专家/路由/损失/缺失训练/5632D接口，以同可观测输入实际F_pre的停止梯度批内身份距离结构为参照，只新增实际PF出口关系保持训练；不增加专家、参数或描述子维度，不改门控、不换FFT、不增加跨集合覆盖。原M1双轴、普通频域和普通双专家无关系保持的已完成控制保留；对三种增强模型使用相同关系保持目标、公开CLIP/fresh50/seed42/B64和采样预算，先预检梯度/strict reload/零权重退化再训练。验证F_post身份邻域、真正11−00与误伤/救回；距离保持不能独自证明共同坐标朝向或贡献校准。若只修复独立F检索而未改善融合，后续再单因素检查身份方向/估计控制分离，不将M2自动视为成功。"
@@ -88,7 +88,7 @@
       ]
     }
   },
-  "revision": "20261004_M2_actual_preflight_pass_training_and_utility_active",
+  "revision": "20261004_M2_full2058_CPU_PASS_decision_pending_next_single_factor",
   "primary_claims": [
     {
       "id": "C1",
@@ -193,61 +193,24 @@
       "new_weights": 0
     },
     "M2": {
-      "status": "REAL_PREFLIGHT_PASS_EXPERIMENT_ACTIVE",
-      "plan": "results/preflight/frequency_relation_m2_plan.json",
-      "accepted": "results/preflight/frequency_relation_m2_accepted_snapshot.json",
-      "controller_pid": 1519220,
-      "observed_at": "2026-10-04T11:18:49",
-      "actual_smokes": 3,
-      "actual_training": {
-        "MSVR310_twins_shared_s42": {
-          "status": "RUNNING",
-          "epoch": 4,
-          "steps": 37,
-          "best": {
-            "mAP": 36.52032279048344,
-            "Rank-1": 50.476190476190474,
-            "Rank-5": 64.76190476190476,
-            "Rank-10": 72.38095238095238,
-            "query_count": 210,
-            "gallery_count": 360,
-            "descriptor_dim": 5632,
-            "epoch": 4
-          }
-        },
-        "MSVR310_axis_shared_s42": {
-          "status": "COMPLETE",
-          "epoch": 50,
-          "steps": 453,
-          "best": {
-            "mAP": 48.88750952021254,
-            "Rank-1": 60.952380952380956,
-            "Rank-5": 73.33333333333333,
-            "Rank-10": 80.47619047619048,
-            "query_count": 210,
-            "gallery_count": 360,
-            "descriptor_dim": 5632,
-            "epoch": 9
-          }
-        },
-        "MSVR310_frequency_shared_s42": {
-          "status": "COMPLETE",
-          "epoch": 50,
-          "steps": 453,
-          "best": {
-            "mAP": 46.781438554969746,
-            "Rank-1": 59.04761904761905,
-            "Rank-5": 69.52380952380952,
-            "Rank-10": 74.28571428571429,
-            "query_count": 210,
-            "gallery_count": 360,
-            "descriptor_dim": 5632,
-            "epoch": 9
-          }
-        }
+      "status": "COMPLETE_INDEPENDENT_INSTALLED_GT_CPU_PASS",
+      "fresh50": 3,
+      "full_conditions": 147,
+      "controlled_states": 882,
+      "utility_stages": 1176,
+      "CPU_cases": 2058,
+      "condition_query_rows": 432180,
+      "analysis": "results/frequency_relation_m2_20261004/analysis.json",
+      "decision": "results/frequency_relation_m2_20261004/mechanism_decision.json",
+      "axis_normal_delta_original_demo_pp": {
+        "mAP": 1.2797174163316498,
+        "mINP": 0.4207511522078917,
+        "Rank-1": 1.904761904761905,
+        "Rank-5": 4.285714285714278,
+        "Rank-10": 3.80952380952381,
+        "Rank-20": 2.3809523809523796
       },
-      "planned_fresh50": 3,
-      "planned_CPU_cases": 2058
+      "axis_normal_both_plus2": false
     }
   },
   "decision_rules": [
@@ -273,16 +236,10 @@
     }
   ],
   "next_action": {
-    "milestone": "M2",
-    "status": "EXISTING_CONTROLLER_RUNNING_NO_DUPLICATE_LAUNCH",
-    "action": "完成当前三组fresh50、全部49条件/六状态/八阶段，并独立CPU核算2058组、432180条重复条件—查询记录；核对M1采样、真实更新及F投影前后判别力和11−00误伤/救回。根据终态证据选择下一单因素，未形成清晰候选前不扩展三数据集或多种子。",
-    "excluded_this_factor": [
-      "改变跨集合训练分布",
-      "拆分贡献估计与控制",
-      "改变FFT或专家容量",
-      "改动门控温度或放大残差"
-    ],
-    "hardware_dependency": "用户已取消温度和功率限制；仅2026物理GPU2/3，每卡最多一个NN任务，共最多两个。"
+    "milestone": "M2_or_M3_single_factor_after_audited_evidence",
+    "status": "ANALYZE_ACTUAL_OUTLET_AND_COOPERATION_BEFORE_NEXT_NN",
+    "action": "完整解释实际F_pre/PF、11−00及各缺失组结果；若只改善PF独立方向而协作仍无净收益，下一轮单独检查公共身份朝向或分离贡献估计与控制，保持跨集合采样不变；若F_pre也下降，不把关系loss下降认作保留了身份信息。未形成稳定公平优势前不扩展三数据集/多种子，不增加门控温度或盲目放大残差。",
+    "hardware_dependency": "Only 2026 physical GPU2/3, max two NN tasks; no temperature/power constraint."
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
   "user_resumption": {
