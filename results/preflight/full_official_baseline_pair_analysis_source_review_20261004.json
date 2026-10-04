@@ -1,0 +1,229 @@
+{
+  "status": "PASS",
+  "scope": "FRESH_SOURCE_REVIEW_AND_READ_ONLY_ACTUAL_TWO_PAIR_TEXT_ANALYSIS",
+  "reviewed_at": "2026-10-04T10:15:05.732038+00:00",
+  "reviewer_task": "/root/review_full_official_control_diagnostics",
+  "requested_reviewer_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "backend_attestation": "Requested model and effort recorded; actual backend identity is not independently attested.",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "sources_sha256": {
+    "analyze_full_official_baseline_pairs.py": "88c1ad3c99a4f2904fbefcc122b419d8e82046b137ac2145224ee9b646a0c4d6"
+  },
+  "reviewed_primary_artifacts": [
+    "results/full_official_MSVR310_first_pair_20261004/summary.json",
+    "results/full_official_RGBNT201_pair_20261004/summary.json",
+    "Each pair: both training result.json, official_split_manifest.json and batch_orders.jsonl; both frozen49 independent_cpu_audit.json and all49 original CSV files; training/frozen49/audit exit records"
+  ],
+  "checks": [
+    {
+      "name": "Pure standard library source and Python3.10 syntax",
+      "kind": "actual_AST_compile_and_source_review",
+      "status": "PASS",
+      "evidence": "Imports only argparse,csv,json,pathlib,statistics.fmean. Entire source parses/compiles with feature_version3.10; no Torch/NumPy, NN, subprocess, network or remote import."
+    },
+    {
+      "name": "Six-run terminal prerequisite before full-root analysis",
+      "kind": "actual_stdlib_controlled_prefix_checks",
+      "status": "PASS",
+      "evidence": "Only main prerequisite statements through line103 were executed in memory, not main. Five cases accepted COMPLETE+6+paired+absent report, and rejected RUNNING,5runs,unpaired,or existing JSON. No dataset analysis or writes occurred in these prefix checks."
+    },
+    {
+      "name": "Per-pair complete full-data inputs and paired sampling",
+      "kind": "actual_analyze_dataset_two_completed_pairs",
+      "status": "PASS",
+      "evidence": "Actual function checks both full50 results, correct dataset/variant, no heldout identities, exact1032/591/1055 or3951/836/836 counts, complete training coverage, all3 exit0 stages, CPU audit PASS49, matching best epoch and normal metrics; actual batch epoch/step/name sequences are equal within each pair."
+    },
+    {
+      "name": "All original query records and metadata",
+      "kind": "actual_original_CSV_and_manifest_verification",
+      "status": "PASS",
+      "evidence": "Analyzed196 model-condition cases from139846 CSV rows. Every query valid, ordinals complete, before/after GT metadata matching. Additional direct checks matched every query name/ID/camera/scene to official manifests; relevant and kept gallery counts matched manifest GT sameID/same-scene for MSVR and sameID/same-camera for RGB201."
+    },
+    {
+      "name": "All six metrics and condition deltas reproduce CPU audit",
+      "kind": "actual_stdlib_calculation",
+      "status": "PASS",
+      "evidence": "Independent fsum summaries used original AP/INP and explicit CSV Rank columns. Max sixmetric error to CPU audit2.1316282072803006e-14pp; max derived condition delta error2.842170943040401e-14pp, below source1e-8 tolerance."
+    },
+    {
+      "name": "Harm/rescue and AP changes",
+      "kind": "actual_two_pair_checks_and_source_review",
+      "status": "PASS",
+      "evidence": "For each of98 paired conditions, AP improved+worsened+unchanged equals query count;100*(rescue-harm)/query_count equals Rank1 delta. Harm is original first_match1 becoming non1; rescue is its converse. RGB201 normal109 harm/34 rescue/266 AP improved/370 worsened matches its primary summary."
+    },
+    {
+      "name": "All49 coverage and five predefined overlapping groups",
+      "kind": "actual_two_pair_checks",
+      "status": "PASS",
+      "evidence": "Both analyses contain exactly49 q/g combinations and only q_RNT_g_RNT marked normal. Group counts are7same availability,30overlap mismatch,12source disjoint,6partial query/full gallery,36both partial. RGB201 full49 deltas and all five group means match its existing primary summary."
+    },
+    {
+      "name": "Normal reference and original DeMo+2 thresholds",
+      "kind": "actual_two_pair_primary_comparison",
+      "status": "PASS",
+      "evidence": "Both normal deltas and absolute mAP/Rank1 thresholds agree with their primary summary and original full official DeMo CPU audit. No historical subset or augmented-reference threshold is used."
+    },
+    {
+      "name": "Double+2 counts do not imply all49 success",
+      "kind": "actual_two_pair_checks",
+      "status": "PASS",
+      "evidence": "MSVR34/49;RGB20133/49. Each condition flag is mAP delta>=2 AND Rank1 delta>=2; neither is49/49. Normal MSVR passes, normal RGB201 fails."
+    },
+    {
+      "name": "CSV writer fields8 onward",
+      "kind": "actual_source_writer_statements_in_memory",
+      "status": "PASS",
+      "evidence": "Executed only actual final CSV writer AST statements with two real analyzed reports and StringIO.98rows round-trip all six metric deltas and six remaining fields exactly; fields[8:] is Rank1_harm_queries,Rank1_rescue_queries,AP_improved_queries,AP_worsened_queries,AP_unchanged_queries,both_metrics_plus2."
+    },
+    {
+      "name": "CSV validity rejection",
+      "kind": "actual_stdlib_controlled_query_rows",
+      "status": "PASS",
+      "evidence": "Four in-memory CSV cases: valid accepted; False valid flag, incorrect query order, and missing row count rejected by actual query_rows function."
+    },
+    {
+      "name": "Output scope and interpretation",
+      "kind": "actual_AST_and_source_review",
+      "status": "PASS",
+      "evidence": "Only two main write sites: baseline_pair_analysis.json and baseline_pair_condition_deltas.csv. No mkdir or human handoff write. Full planned counters294 model cases/147 paired conditions/307916 repeated rows are arithmetically correct but not executed. limits explicitly labels shared-identity/availability/missing-augmentation baseline without new dual-axis experts; repeated queries and overlapping groups are not independent observations or official aggregate. goal_completeFalse."
+    },
+    {
+      "name": "Primary-artifact schema difference handled in review only",
+      "kind": "actual_primary_artifact_inspection",
+      "status": "PASS",
+      "evidence": "MSVR summary has normal delta and original DeMo+2 thresholds but no both_metrics_plus2_conditions or group_deltas. RGB201 has all49 deltas/groups/count. Review comparisons used those exact existing fields; the earlier auxiliary verification KeyError is not a source defect and no fallback or source change was added."
+    }
+  ],
+  "actual_dataset_results": {
+    "MSVR310": {
+      "status": "PASS",
+      "model_cases": 98,
+      "paired_conditions": 49,
+      "original_CSV_rows": 57918,
+      "paired_batches": 705,
+      "normal_delta_pp": {
+        "mAP": 2.2614059012516705,
+        "mINP": 1.4647519932465123,
+        "Rank-1": 5.076142131979687,
+        "Rank-5": 1.522842639593918,
+        "Rank-10": 1.5228426395939039,
+        "Rank-20": 1.015228426395936
+      },
+      "normal_query_change": {
+        "Rank1_harm_queries": 26,
+        "Rank1_rescue_queries": 56,
+        "AP_improved_queries": 335,
+        "AP_worsened_queries": 241,
+        "AP_unchanged_queries": 15
+      },
+      "both_metrics_plus2_conditions": 34,
+      "normal_both_metrics_plus2": true,
+      "group_counts": {
+        "same_availability": 7,
+        "overlap_mismatch": 30,
+        "source_disjoint": 12,
+        "partial_query_full_gallery": 6,
+        "both_partial": 36
+      },
+      "group_both_metrics_plus2_conditions": {
+        "same_availability": 1,
+        "overlap_mismatch": 21,
+        "source_disjoint": 12,
+        "partial_query_full_gallery": 5,
+        "both_partial": 25
+      },
+      "original_DeMo_plus2_thresholds": {
+        "mAP": 49.164688447227576,
+        "Rank-1": 65.95939086294416
+      },
+      "max_sixmetric_error_to_cpu_audit_pp": 1.4210854715202004e-14,
+      "max_condition_delta_error_to_cpu_audit_pp": 1.4210854715202004e-14
+    },
+    "RGBNT201": {
+      "status": "PASS",
+      "model_cases": 98,
+      "paired_conditions": 49,
+      "original_CSV_rows": 81928,
+      "paired_batches": 2647,
+      "normal_delta_pp": {
+        "mAP": -4.213861591631144,
+        "mINP": -0.32763085879692966,
+        "Rank-1": -8.971291866028707,
+        "Rank-5": -8.253588516746419,
+        "Rank-10": -7.057416267942571,
+        "Rank-20": -1.0765550239234472
+      },
+      "normal_query_change": {
+        "Rank1_harm_queries": 109,
+        "Rank1_rescue_queries": 34,
+        "AP_improved_queries": 266,
+        "AP_worsened_queries": 370,
+        "AP_unchanged_queries": 200
+      },
+      "both_metrics_plus2_conditions": 33,
+      "normal_both_metrics_plus2": false,
+      "group_counts": {
+        "same_availability": 7,
+        "overlap_mismatch": 30,
+        "source_disjoint": 12,
+        "partial_query_full_gallery": 6,
+        "both_partial": 36
+      },
+      "group_both_metrics_plus2_conditions": {
+        "same_availability": 2,
+        "overlap_mismatch": 19,
+        "source_disjoint": 12,
+        "partial_query_full_gallery": 3,
+        "both_partial": 28
+      },
+      "original_DeMo_plus2_thresholds": {
+        "mAP": 77.67457499232746,
+        "Rank-1": 82.622009569378
+      },
+      "max_sixmetric_error_to_cpu_audit_pp": 2.1316282072803006e-14,
+      "max_condition_delta_error_to_cpu_audit_pp": 2.842170943040401e-14
+    }
+  },
+  "actual_check_summary": {
+    "actual_completed_datasets": 2,
+    "actual_model_condition_cases": 196,
+    "actual_paired_conditions": 98,
+    "actual_original_csv_rows": 139846,
+    "main_prefix_mock_cases": 5,
+    "query_csv_mock_cases": 4,
+    "in_memory_writer_rows": 98,
+    "full_main_called": false,
+    "RGBNT100_analyzed": false
+  },
+  "execution_limits": {
+    "python": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe",
+    "python_version": "3.13.12",
+    "python_flags": [
+      "-X",
+      "utf8",
+      "-B",
+      "-S"
+    ],
+    "numpy_imported": false,
+    "torch_imported": false,
+    "NN": 0,
+    "nn_executions": 0,
+    "cuda_executions": 0,
+    "remote_connections": 0,
+    "training_or_deployment": 0,
+    "source_edits": 0,
+    "existing_pair_artifacts_written": 0,
+    "full_campaign_results_directory_created": false,
+    "generated_analysis_report_files": 0,
+    "only_new_reviewer_file": "results/preflight/full_official_baseline_pair_analysis_source_review_20261004.json"
+  },
+  "remaining_runtime_gates": [
+    "RGBNT100 was not analyzed; it remains outside this actual read-only check.",
+    "Do not call full main until the actual full six-run campaign is COMPLETE with paired sampling and every per-run completion/audit/exit/coverage condition satisfied.",
+    "This PASS covers a baseline reporting script and two completed text pairs; it does not establish any new M/F expert mechanism or the final three-dataset/multiseed method goal."
+  ]
+}
