@@ -1,0 +1,17 @@
+{
+  "verdict": "WARN_SOURCE_ONLY_NON_ATOMIC_OBSERVER",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "task": "/root/review_full_official_baselines",
+  "actual_backend_verified": false,
+  "observed_fix": "Canonical launch-PID observer resolves actual DataLoader overcount",
+  "remaining_finding": "Sequential scan can retain just-exited training PID and count successor evaluation PID; reproduced in reviewer AST interleaving, not observed in live run",
+  "reviewer_suggested_fix": "Second check of canonical exits and live PIDs before assertion",
+  "chosen_minimal_fix": "Remove unnecessary concurrency assertion from read-only non-atomic observer. Actual concurrency is enforced by exactly two serial physical-GPU workers in reviewed controller. No double scan, retries, fallback or NN change.",
+  "executed_checks": [
+    "Two mains plus8DataLoaderworkers",
+    "Settled smoke→train and train→frozen49",
+    "Idle and CPUaudit gaps"
+  ],
+  "neural_restarted": false
+}
