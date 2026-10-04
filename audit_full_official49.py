@@ -124,11 +124,12 @@ def main():
     normal = values['q_RNT_g_RNT']
     assert all(abs(normal[m] - trained['full_metrics'][m]) < 1e-8 for m in METRICS)
     result = dict(status='PASS', dataset=dataset, variant=arguments['variant'], cases=49,
+        model_arguments=arguments,
         perquery_count=49 * len(splits['query']), train_records=len(splits['train']), query_records=len(splits['query']),
         gallery_records=len(splits['gallery']), training_heldout_identities=0, training_coverage=trained['training_coverage'],
         selected_epoch=trained['best']['epoch'], max_sixmetric_error_pp=max(errors), conditions=values, normal=normal,
         equal_condition_mean={m: float(np.mean([v[m] for v in values.values()])) for m in METRICS},
-        limits='Equal-condition means are diagnostics, not an official aggregate. Benchmark checkpoint selection, one seed. Original demo missing-input protocol is reported separately from corrected-source shared demo.')
+        limits='Equal-condition means are diagnostics, not an official aggregate. Benchmark checkpoint selection, one seed. Saved model arguments identify architecture and gate mode; this CPU recount does not evaluate neural architecture or prove method gains.')
     (evaluation / 'independent_cpu_audit.json').write_text(json.dumps(result, indent=2) + '\n')
     print('FULL_OFFICIAL_ALL49_GT_CPU_PASS', dataset, arguments['variant'], flush=True)
 

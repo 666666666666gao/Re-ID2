@@ -1,0 +1,82 @@
+{
+  "status": "SOURCE_REVIEW_PASS_NOT_DEPLOYED_NOT_LAUNCHED_CUDA_PENDING",
+  "created_at": "2026-10-04T16:29:00",
+  "hypothesis": "Separate contribution measurement from a task-trained gate. At zero control output M3b must exactly preserve M3a; only the separate rank16 control head is added.",
+  "dataset": "MSVR310",
+  "full_official_counts": {
+    "train": 1032,
+    "query": 591,
+    "gallery": 1055,
+    "train_ids": 155
+  },
+  "training_heldout_identities": 0,
+  "modes": [
+    "measurement_only",
+    "independent_control"
+  ],
+  "variants": [
+    "axis_shared",
+    "frequency_shared",
+    "twins_shared"
+  ],
+  "fresh50_runs": 6,
+  "fixed": {
+    "seed": 42,
+    "batch": 64,
+    "instances_per_identity": 4,
+    "public_CLIP": true,
+    "AMP_initial_scale": 512,
+    "epochs": 50,
+    "pooling": "original_mean",
+    "relation_weight": 0.1,
+    "alignment_weight": 0.1,
+    "alignment_temperature": 0.07,
+    "contribution_weight": 0.05,
+    "partial_CE": 0.25,
+    "partial_triplet": 0.5,
+    "descriptor_dim": 5632
+  },
+  "changed": "Only M3b adds 27769 active parameters, equally to all three enhanced variants. Measurement predictor has contribution-regression gradients only; control head receives full/partial retrieval task gradients only. Both control inputs are stopped.",
+  "unchanged": "Fixed FFT/threebands, expert access, source masks, one conditional update, joint routing, common outlet, all losses and partial-query/full-gallery distribution. No historical research weight initialization; all six new full-official models fresh public CLIP.",
+  "preflight": [
+    "fresh same-family source review",
+    "all7 availability sets/all4 states exact at zero control",
+    "AMP full forward and loss exact at zero control",
+    "full and six partial task predictor gradients None",
+    "contribution/relation/alignment regression control gradients None",
+    "initial control output task gradients finite/nonzero; hidden gradients zero as required by zero output initialization",
+    "three actual optimizer updates each, every trainable parameter finite/nonzero by third update",
+    "strict reload in memory; no smoke binary weights",
+    "equal active parameters and5632D within each mode"
+  ],
+  "schedule": {
+    "2": "measurement_only:axis_shared,frequency_shared,twins_shared serial",
+    "3": "independent_control:axis_shared,frequency_shared,twins_shared serial"
+  },
+  "resource_policy": {
+    "host": "2026",
+    "physical_gpus": [
+      2,
+      3
+    ],
+    "max_concurrent_neural_jobs": 2,
+    "temperature_power_control": false
+  },
+  "launch_gate": "All six full official baselines COMPLETE50/full49/installed-GT CPU PASS, actual entire training coverage, exact paired sampling. Then contract and all six smokes before any new fresh50.",
+  "checkpoint_rule": "Highest full official query/gallery mAP among50, earliest ties, one fixed checkpoint for all six metrics/all49. Benchmark-selected, not untouched independent final test.",
+  "evaluation": "All591queries/1055gallery, all49 independently encoded availability pairs, complete sixmetrics/CMC1..50/perquery/group exports, independent installed filename GT CPU recount. Source disjoint12/overlap30/same7 and partial-query-full6 groups preregistered diagnostics.",
+  "decision": "Compare same-mode dual-axis against same-mode ordinary frequency and twins plus full protocol original and availability/missing-augmentation DeMo. M3b-minus-M3a isolates the control-head change. No final candidate solely from a peak normal metric; frozen mechanism harm/rescue and head contribution calibration required before expansion.",
+  "limits": "A full-data single-seed MSVR mechanism trial only. Must still establish one unified method on three datasets, at least3 pairedseeds and all missing groups. Old subset metrics are not new protocol baselines.",
+  "sources": {
+    "independent_control_axis.py": "566a2fd6689ae72050a7587bc60b35a37687d53dea37d65ef12a249792a3f332",
+    "run_full_official_control_experiment.py": "cef53071ed0c572ae553feacccdf4a46840c7096b15804ef9ae3b2c8475bd98f",
+    "evaluate_full_official_control49.py": "cdeb3aabbbac8db0679174e851958437ef982a451de6a566dab0135e8f774a2b",
+    "verify_full_official_control_axis.py": "2cdd282ac59549910a2368c8f4cfc05a0552131ddbb0588bf72ab62138b3edff",
+    "launch_full_official_control_trial.py": "a16416f5a3b86af0924b1a4a56fff5e6ca53dccdbd396b2bd839d0b17d50597f",
+    "run_full_official_experiment.py": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
+    "evaluate_full_official49.py": "5db20659af12e248d91b22813517b1e72619483fa73ac06a60423e874a2c9d7b",
+    "audit_full_official49.py": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56"
+  },
+  "reviewed_source_at": "2026-10-04T16:40:01",
+  "review_record": "results/preflight/full_official_control_m3b_source_review_20261004.json"
+}

@@ -57,10 +57,12 @@ def evaluate(model, records, cfg, args, output, arrays_path=None):
     return values, runtime
 
 
-def main():
+def main(builder=build, update=step, variants=VARIANTS,
+         method_revision='Full official original DeMo or matched shared-identity DeMo baseline',
+         partial_training=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset', choices=('MSVR310', 'RGBNT201', 'RGBNT100'), required=True)
-    parser.add_argument('--variant', choices=VARIANTS, required=True)
+    parser.add_argument('--variant', choices=variants, required=True)
     for key in ('data-root', 'pretrained', 'output'):
         parser.add_argument('--' + key, required=True)
     parser.add_argument('--seed', type=int, default=42)
@@ -73,7 +75,7 @@ def main():
     cfg = configuration(args)
     train, query, gallery, classes, cameras, manifest = full_records(args.data_root, args.dataset)
     write_json(out / 'official_split_manifest.json', manifest)
-    model = build(args, cfg, classes, cameras)
+    model = builder(args, cfg, classes, cameras)
     info = dict(arguments=vars(args), config=cfg.dump(), classes=classes, camera_embeddings=cameras,
         train_records=len(train), query_records=len(query), gallery_records=len(gallery),
         training_heldout_identities=0, parameters=sum(p.numel() for p in model.parameters()),
@@ -83,7 +85,9 @@ def main():
         checkpoint_rule='Maximum full official query/gallery mAP across 50 epochs; ties keep earliest epoch',
         evaluation_scope='Entire official training split and entire official query/gallery; no fit/dev holdout',
         selection_limitation='Official benchmark is used for checkpoint selection; this is not an untouched independent final test',
-        partial_training='None; original complete DeMo' if args.variant == 'demo' else 'Matched available-source DeMo; one uniformly sampled proper modality set per batch; stopped full-view gallery, same shared identity interface and original partial CE/triplet weights',
+        method_revision=method_revision,
+        partial_training=partial_training if partial_training is not None else (
+            'None; original complete DeMo' if args.variant == 'demo' else 'Matched available-source DeMo; one uniformly sampled proper modality set per batch; stopped full-view gallery, same shared identity interface and original partial CE/triplet weights'),
         amp_policy='Native fp16 GradScaler512; actual optimizer updates and skipped steps recorded',
         retention='Only best.pth; smoke strict reload in memory; no initial, last, or smoke weight files')
     write_json(out / 'run.json', info)
@@ -97,7 +101,7 @@ def main():
         model.train()
         details = []
         for i, batch in enumerate(make_loader(train, cfg, True, args.seed)):
-            details.append(step(model, batch, optimizer, scaler, loss_fn, xent, PARTIAL_SETS[i % 6], args.variant))
+            details.append(update(model, batch, optimizer, scaler, loss_fn, xent, PARTIAL_SETS[i % 6], args.variant))
             if sum(d['optimizer_updated'] for d in details) == 3:
                 break
         assert sum(d['optimizer_updated'] for d in details) == 3
@@ -140,7 +144,7 @@ def main():
             details, epoch_names = [], set()
             for batch in make_loader(train, cfg, True, args.seed + epoch):
                 retained = PARTIAL_SETS[int(torch.randint(6, (1,), generator=generator))]
-                detail = step(model, batch, optimizer, scaler, loss_fn, xent, retained, args.variant)
+                detail = update(model, batch, optimizer, scaler, loss_fn, xent, retained, args.variant)
                 details.append(detail)
                 steps += 1
                 updates += int(detail['optimizer_updated'])

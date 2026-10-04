@@ -1,0 +1,161 @@
+{
+  "status": "PASS",
+  "scope": "SOURCE_ONLY_CORRECTNESS_REVIEW",
+  "reviewed_at": "2026-10-04T08:37:45.884236+00:00",
+  "requested_reviewer_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "backend_attestation": "Requested model and effort recorded; actual backend identity is not independently attested by this review.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "base_git_head": "23077e1ac8e919b7016a38101841f5bd0db38216",
+  "plan": "results/preflight/full_official_control_m3b_plan_20261004.json",
+  "plan_sha256": "f9eef90455dfe15c2bc648af73bc946a084c3c2c4fdb815151d6c7c2f16cfed4",
+  "sources_sha256": {
+    "independent_control_axis.py": "566a2fd6689ae72050a7587bc60b35a37687d53dea37d65ef12a249792a3f332",
+    "run_full_official_control_experiment.py": "cef53071ed0c572ae553feacccdf4a46840c7096b15804ef9ae3b2c8475bd98f",
+    "evaluate_full_official_control49.py": "cdeb3aabbbac8db0679174e851958437ef982a451de6a566dab0135e8f774a2b",
+    "verify_full_official_control_axis.py": "2cdd282ac59549910a2368c8f4cfc05a0552131ddbb0588bf72ab62138b3edff",
+    "launch_full_official_control_trial.py": "a16416f5a3b86af0924b1a4a56fff5e6ca53dccdbd396b2bd839d0b17d50597f",
+    "run_full_official_experiment.py": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
+    "evaluate_full_official49.py": "5db20659af12e248d91b22813517b1e72619483fa73ac06a60423e874a2c9d7b",
+    "audit_full_official49.py": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56"
+  },
+  "parents_read": [
+    "measurement_gate_axis.py",
+    "identity_alignment_axis.py",
+    "frequency_relation_axis.py",
+    "common_outlet_axis.py",
+    "shared_identity_axis.py",
+    "run_shared_identity_experiment.py",
+    "axis_collaboration.py",
+    "common_coordinate_axis.py",
+    "scaled_axis_collaboration.py",
+    "official_training_data.py",
+    "experiment_data.py",
+    "run_experiment.py",
+    "gpu_thermal_execute.py",
+    "launch_full_official_baselines.py",
+    "layers/make_loss.py",
+    "solver/make_optimizer.py",
+    "configs/MSVR310/DeMo.yml"
+  ],
+  "blocking_findings": [],
+  "resolved_during_review": [
+    {
+      "finding": "Initial verifier compared all availability states only in FP32 and did not compare numerical full/partial AMP objectives with M3a.",
+      "resolution": "Verifier now compares all seven availability sets and all four states under FP32 and AMP; full AMP outputs/objective; all six partial AMP outputs, CE, triplet, objective, positive/negative indices.",
+      "location": "verify_full_official_control_axis.py:55-100"
+    },
+    {
+      "finding": "Inherited frozen-evaluation and CPU-audit provenance text referred specifically to baseline architectures and omitted saved gate mode.",
+      "resolution": "Both outputs now include full saved model_arguments and generic saved-protocol limitations. Only metadata changed against HEAD.",
+      "locations": [
+        "evaluate_full_official49.py:70-77",
+        "audit_full_official49.py:126-132"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "name": "Eight plan hashes and Python 3.10-compatible AST parse",
+      "kind": "stdlib_actual",
+      "status": "PASS"
+    },
+    {
+      "name": "Default baseline main computation matches Git HEAD after normalizing optional builder/update/variant injection and added metadata",
+      "kind": "AST_actual",
+      "status": "PASS"
+    },
+    {
+      "name": "Frozen evaluator and CPU audit computations match Git HEAD after normalizing added provenance metadata",
+      "kind": "AST_actual",
+      "status": "PASS"
+    },
+    {
+      "name": "CLI wrapper retains both gate modes, all three variants, fixed custom arguments and remaining training CLI arguments",
+      "kind": "stdlib_mock",
+      "status": "PASS"
+    },
+    {
+      "name": "Step wrapper passes exact batch names into alignment and preserves relation/alignment audits",
+      "kind": "stdlib_mock",
+      "status": "PASS"
+    },
+    {
+      "name": "Frozen wrapper installs explicit saved-mode M3a/M3b builder",
+      "kind": "stdlib_mock_and_source",
+      "status": "PASS"
+    },
+    {
+      "name": "Rank16 control head count equals 2*1539 + 1539*16 + 16 + 16*3 + 3 = 27769",
+      "kind": "stdlib_arithmetic_and_source",
+      "status": "PASS"
+    },
+    {
+      "name": "Predictor receives contribution regression only; control receives retrieval task only through stopped context and stopped prediction",
+      "kind": "source_graph_review_not_actual_autograd",
+      "status": "PASS"
+    },
+    {
+      "name": "Zero output init preserves M3a gate value; initial hidden gradients should be zero while output gradients are required nonzero",
+      "kind": "source_graph_review_not_actual_CUDA",
+      "status": "PASS"
+    },
+    {
+      "name": "Launcher complete flow: one contract, six smokes, six trains, six frozen evaluations, six audits",
+      "kind": "stdlib_in_memory_mock",
+      "status": "PASS",
+      "mock_child_calls": 25
+    },
+    {
+      "name": "Launcher rejects incomplete/unpaired/unvisited/bad-audit baseline prerequisites before first child",
+      "kind": "stdlib_in_memory_mock",
+      "status": "PASS",
+      "cases": 4
+    },
+    {
+      "name": "Launcher rejects failed contract before smokes and bad two-update/gradient/reload/equal-parameter smoke checks before training",
+      "kind": "stdlib_in_memory_mock",
+      "status": "PASS",
+      "cases": 5
+    },
+    {
+      "name": "Final exact epoch/step/name/partial-set order mismatch prevents controller COMPLETE",
+      "kind": "stdlib_in_memory_mock",
+      "status": "PASS",
+      "cases": 1
+    },
+    {
+      "name": "Only physical GPUs 2 and 3, one serial queue per card, no power/temperature conditions; all-six-smoke barrier precedes fresh50",
+      "kind": "source_and_mock",
+      "status": "PASS"
+    },
+    {
+      "name": "Full official data path, B64/K4/seed42, public-CLIP fresh builds, native AMP512, fifty epochs, earliest mAP tie, best-only reuse for all six metrics and all49",
+      "kind": "source_review",
+      "status": "PASS"
+    },
+    {
+      "name": "Third actual optimizer-update smoke checks every trainable tensor finite/nonzero and exact strict in-memory state reload",
+      "kind": "source_review_actual_CUDA_pending",
+      "status": "PASS"
+    }
+  ],
+  "execution_limits": {
+    "stdlib_interpreter": "3.12.12 (main, Feb  3 2026, 22:54:57) [MSC v.1944 64 bit (AMD64)]",
+    "torch_imported": false,
+    "remote_connections": false,
+    "package_installs": false,
+    "neural_or_CUDA_execution": false,
+    "training_launched": false,
+    "mock_files": "In-memory only; no source or experiment artifacts created by mocks.",
+    "review_file_is_only_reviewer_mutation": true
+  },
+  "launch_readiness": "NOT_ESTABLISHED_BY_SOURCE_REVIEW",
+  "remaining_required_runtime_evidence": [
+    "All six original full-official baseline runs must first complete fifty epochs, full49, installed-GT CPU audits, full training coverage and paired identity sampling.",
+    "After the baseline campaign completes, execute the revised actual CUDA zero-control/gradient contract on 2026 physical GPU2/3.",
+    "All six real three-update smokes must pass finite nonzero actual gradients, equal parameter counts within mode, and strict in-memory reload before any new fresh50.",
+    "Actual M3a/M3b full50/all49/CPU audit and paired batch/partial order evidence is still pending; no efficacy or scientific acceptance is implied."
+  ]
+}

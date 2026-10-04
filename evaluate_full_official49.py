@@ -68,12 +68,13 @@ def main():
     assert len(measurements) == 49
     assert versions == {n: v._version for n, v in model.state_dict().items()}
     write_json(out / 'result.json', dict(status='COMPLETE', dataset=arguments.dataset, variant=arguments.variant,
+        model_arguments=result['arguments'],
         seed=arguments.seed, selected_epoch=result['best']['epoch'], measurements=measurements, runtime=runtime,
         query_records=len(query), gallery_records=len(gallery), train_records=len(train),
         training_heldout_identities=0, optimizer_updates=0, normal_feature_max_error=0,
         state_tensor_versions_unchanged=True, original_mask=original_mask, seconds=time.time() - started,
         selection=result['checkpoint_rule'], protocol='All official queries and galleries, all 7x7 nonempty retained modality combinations; seven independent descriptor banks, frozen full-benchmark mAP-best, original GT junk exclusion',
-        limits='Official benchmark used for checkpoint selection; single seed; original demo zero-input protocol and availability-correct augmented demo reported separately'))
+        limits='Official benchmark used for checkpoint selection; single seed. Architecture, source handling and training revision are specified by the saved training record and model arguments; no training occurs in this frozen evaluation.'))
 
 
 if __name__ == '__main__':
