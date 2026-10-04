@@ -1,5 +1,12 @@
 # DeMo Dual-Axis experiment
 
+## Latest user override — 2026-10-04
+
+For all new experiments use the entire official training split and every official query/gallery record. Do not create or use an artificial fit/dev identity holdout. Historical subset experiments remain archived evidence. The full-data baseline stage follows the original highest benchmark mAP checkpoint principle, with earliest ties shared across models, and discloses benchmark-based selection. Missing evaluations use that fixed checkpoint, all 49 modality pairs, and original GT camera/scene exclusion. All neural jobs run only on 2026 physical GPU2/3, serialized per card, at most two concurrent. No temperature or power conditions. Rebuild complete DeMo and same-augmentation availability-correct DeMo references before advancing the pending M3b control-head experiment. Fresh source review and real preflight remain required.
+
+The older first-stage instructions below are historical where superseded by this user override.
+
+
 Keep changes minimal. Preserve original DeMo modules except the evidenced hardcoded pretrained path fix. Do not modify the sibling TriFusion project or its archived experiments.
 
 This is the new user-authorized first comparison: complete DeMo plus ordinary frequency versus dual-axis plus joint routing, with the same active parameters and descriptor dimension. One complete DeMo reference per dataset is included. Use existing pretrained CLIP, seed42, B64 and 50 epochs. No contribution loss, tuning sweep or official-test checkpoint selection in this first stage.

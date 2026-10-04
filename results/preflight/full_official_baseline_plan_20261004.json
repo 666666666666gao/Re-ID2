@@ -1,0 +1,62 @@
+{
+  "status": "SOURCE_READY_REVIEW_PENDING_NOT_LAUNCHED",
+  "user_override": "不要只留出一部分训练验证推理",
+  "updated_at": "2026-10-04T15:15:42",
+  "protocol": "All installed official training records, no identity holdout, all official query/gallery, original camera/scene junk exclusion",
+  "models": [
+    "demo",
+    "demo_shared"
+  ],
+  "datasets": [
+    "MSVR310",
+    "RGBNT201",
+    "RGBNT100"
+  ],
+  "runs": 6,
+  "source_files": [
+    "official_training_data.py",
+    "run_full_official_experiment.py",
+    "evaluate_full_official49.py",
+    "audit_full_official49.py",
+    "launch_full_official_baselines.py"
+  ],
+  "public_initialization": "CLIP ViT-B/16, fresh ReID heads",
+  "training": {
+    "epochs": 50,
+    "batch": 64,
+    "seed": 42,
+    "native_K": {
+      "MSVR310": 4,
+      "RGBNT201": 8,
+      "RGBNT100": 16
+    },
+    "AMP_initial_scale": 512
+  },
+  "selection": "Highest complete official query/gallery mAP, ties earliest; one best checkpoint for all six metrics and all49; benchmark-selected, not untouched test",
+  "missing": "All 49 pairs of seven nonempty retained sets, on every official query and gallery",
+  "comparisons": "Original full DeMo and same shared interface/availability correction/missing augmentation DeMo are separate baselines. Ordinary frequency/twins and unified dual-axis follow under this exact full data protocol; historical subset scores cannot count toward +2.",
+  "hardware": {
+    "host": "2026",
+    "physical_gpus": [
+      2,
+      3
+    ],
+    "max_NN": 2,
+    "temperature_power_control": false
+  },
+  "retention": "best.pth only per experiment, no smoke/last/initial binaries",
+  "audit": "Independent filenames parsed directly from installed official splits; CPU recount all six metrics, CMC1..50, per-query, groups, training record coverage; no model-prediction pseudo-GT",
+  "estimated_wall_hours": [
+    4,
+    6
+  ],
+  "pending_method": "M3b not implemented/launched. First rebuild full-protocol baseline references; no continuation of old subset M3b.",
+  "reporting": "Single consolidated handoff + JSON/CSV, GitHub text only",
+  "sampler_precheck": "results/preflight/full_official_PK_coverage_20261004.json",
+  "predicted_actual_batch_attempts": {
+    "MSVR310": 705,
+    "RGBNT201": 2647,
+    "RGBNT100": 6357
+  },
+  "predicted_training_record_coverage": "All official training records visited across50 under seeded native PK; actual names/updates must be checked independently."
+}

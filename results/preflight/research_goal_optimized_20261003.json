@@ -1,16 +1,16 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-04T15:00:50",
-  "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、独立身份确认、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。",
+  "updated_at": "2026-10-04T15:32:03",
+  "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、独立身份确认、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
   "scope": "Refined execution objective persists in this JSON and the single handoff. The platform original objective is unchanged and was actually observed ACTIVE on 2026-10-04; completion still requires all specified evidence.",
   "acceptance": {
-    "normal": "同一个统一方法，在RGBNT201、RGBNT100、MSVR310的完整输入mAP和Rank-1各超过同协议完整DeMo至少2个百分点；多种子和独立确认验证稳定性。",
+    "normal": "同一统一方法在三个完整官方训练/query/gallery协议下，mAP与Rank-1分别超过重跑的同协议完整DeMo至少2个百分点；历史fit/dev基线不得直接计算正式涨点；至少3配对种子。",
     "missing": "完整覆盖49种查询—图库集合条件，预先登记来源不相交、重叠、仅查询缺失、双方缺失等关键组；报告全部正负结果，并与正确屏蔽/同增强/同容量普通专家比较。不得用单个均值或污染基线替代全面证据。",
     "mechanism": "公平普通专家对照稳定胜出，实际协作在预定义关键组带来可重复净收益，模块必要性由重训消融与逐查询机制证据支撑。",
     "quantitative_interpretation": "保留原+2/+2内部验收；不额外要求每个模块都+2或在完整DeMo上再提高10点。49条件中的双+2达标数量持续报告，不能冒称全条件通过。",
-    "stability": "结构、超参与选择规则冻结后，至少3个配对种子及一个预先登记的独立身份确认划分；报告每种子原值、均值/标准差和按身份分组的配对置信区间，不只选最好种子。不得把49条件重复出现的查询当成独立样本扩充。",
+    "stability": "冻结结构、损失、超参和预先登记选点规则后做至少3配对种子；按身份统计置信区间。用户明确要求全训练，不再从官方训练身份另切fit/dev；官方benchmark参与checkpoint选择必须披露，不宣称独立未触碰测试。",
     "reporting": "全部条件报告mAP、mINP、Rank-1/5/10/20、CMC1..50、逐查询AP/INP/首末匹配、身份/相机/场景分组及误伤/恢复；同一实验所有指标固定使用同一开发mAP最佳checkpoint。"
   },
   "milestones": [
@@ -47,7 +47,7 @@
     {
       "id": "M4",
       "status": "GATED",
-      "work": "出现明确正向候选后冻结结构、超参和选择规则，至少3个配对种子，加一个预先登记的独立身份确认划分，再扩展统一方法到三个数据集。",
+      "work": "统一候选在全部官方训练/query/gallery下冻结配方做至少3配对种子；不再人工留出fit/dev身份。",
       "evidence": "按身份分组置信区间、配对变化、seed均值及标准差；49条件重复查询不算49倍独立样本。正式测试不用于版本选择。"
     },
     {
@@ -59,7 +59,7 @@
     {
       "id": "M6",
       "status": "GATED",
-      "work": "统一版本完成正式评测与真实成本测量并收尾。",
+      "work": "统一方法及完整DeMo/公平对照在三个完整官方训练和query/gallery下报告全部指标、49模态组合与真实成本。",
       "evidence": "三个数据集mAP/mINP/R1/5/10/20、CMC1..50、全部7×7模态组合、逐查询和身份/相机/场景分组、误伤/恢复；参数、有效参数、维度、真实延迟/吞吐/峰值显存及FLOPs覆盖说明。"
     }
   ],
@@ -70,12 +70,12 @@
       3
     ],
     "max_parallel_neural_jobs": 2,
-    "training": "公开预训练CLIP；开发比较每组fresh50、B64、数据集原K、同身份采样和同缺失集合序列；最早并列开发mAP最佳checkpoint。",
+    "training": "全部官方训练记录，零人工留出身份；公开CLIP/fresh50/B64/数据集原K/nativeAMP512；同协议基线、对照及统一方法。原PK采样保持，记录逐batch名称及累计实际样本覆盖。",
     "change_control": "每轮一个明确假设；源码审查与必要真实预检通过后才训练。不同时加入公共槽位、关系保持和跨集合目标；保留负结果，不原样扩展已失败配方。",
     "retention": "每实验只留固定最佳权重，保留必要基线/控制最佳及当前依赖；及时删除确认为无用的自产权重，保留文本结果和失败证据。",
     "publication": "GitHub Re-ID2；只维护docs/实验交接.md，镜像Desktop/document及2025/26/27同名交接；五份字节一致。",
     "observation": "按测得时长估计里程碑，在结束前几分钟或180–300秒观察；默认240秒；观察超时不重启训练。",
-    "evaluation_selection": "固定身份隔离fit/dev；正式测试和独立确认身份不用于训练或版本选择。开发mAP最大、最早并列最佳；不拼不同版本、不同条件或不同指标各自最优checkpoint。",
+    "evaluation_selection": "Highest complete official query/gallery mAP, ties earliest; one best checkpoint for all six metrics and all49; benchmark-selected, not untouched test",
     "unnecessary_work": "不强加完整DeMo再涨10点或每模块+2，不先更换FFT/主干/增加专家，不重复已完成测量或权重清理。",
     "hardware": {
       "temperature_power_control": false,
@@ -88,7 +88,7 @@
       ]
     }
   },
-  "revision": "20261004_M3a_three50_all3087_CPU_PASS_single_factor_decision",
+  "revision": "20261004_full_official_training_and_complete_query_gallery_user_override",
   "primary_claims": [
     {
       "id": "C1",
@@ -250,6 +250,22 @@
       "status": "EXISTING_GT_AND_SOURCE_SCOPE_RECHECK_NO_NEURAL_EXECUTION",
       "path": "results/preflight/m1_outlet_scope_recheck_20261004.json",
       "original_source_sha256": "b43002891b7a51c01573c3bcf1aaaa8811ae00824b08f1a9989427c8fa2e5436"
+    },
+    "full_official_protocol": {
+      "status": "SIX_REAL_PREFLIGHT_PASS_FULL50_RUNNING",
+      "inventory": "results/preflight/full_official_inventory_20261004.json",
+      "plan": "results/preflight/full_official_baseline_plan_20261004.json",
+      "training_runs": 0,
+      "artificial_holdout_identities": 0,
+      "controller_pid": 2173034,
+      "launch_evidence": "results/preflight/full_official_baselines_launch_20261004.json",
+      "real_smokes": 6,
+      "real_smoke_optimizer_updates": 18,
+      "actual_preflight": "results/preflight/full_official_baselines_actual_preflight_20261004.json",
+      "observer_session": 61934,
+      "pending_full_training": 6,
+      "pending_all49": 6,
+      "pending_independent_GT_audits": 6
     }
   },
   "decision_rules": [
@@ -275,9 +291,9 @@
     }
   ],
   "next_action": {
-    "milestone": "M3b_independent_control_head_single_factor",
-    "status": "NEXT_STEP_FROM_AUDITED_SINGLE_FACTOR_EVIDENCE",
-    "action": "继续MSVR310单因素M3b：在M3a原测量头和原贡献回归不变、预测停止梯度的前提下，增加独立小控制头，用相同停止梯度专家上下文和停止梯度测量值学习融合控制；候选为rank16、1539维输入、3个控制logit，sigmoid(20*prediction.detach()+control)，新控制出口零初始化，初始前向精确退化M3a。只新增27769个实际使用参数，三类增强模型等有效参数、5632D；不新增损失、视图、FFT、专家、联合路由或缺失覆盖，不修改原sigmoid20系数。真实预检必须证明旧state值/全7×4/AMP前向和损失值在零控制下精确一致，完整及六部分任务不更新测量头、原回归梯度仍非零、任务更新控制出口、回归不更新控制头；出口零初始化的首步隐藏梯度为零需如实记录，并由三次真实更新smoke确认所有控制参数实际得到梯度、strict reload通过。新控制参数改变state_dict及推理，不得复用旧无控制头推理builder；全部49、六状态、八阶段、交叉坐标都用新builder固定最佳重载，保留实际门控CSV，独立GT审计时精确核对相对M3a新增参数及相同采样，不改或伪造父参照。当前仅决定方向，源实现/审查/预检/训练尚未完成；若普通专家仍更好或11−00没有净收益，不扩展三数据集、多种子，更不宣称收益校准有效。",
+    "milestone": "FULL_OFFICIAL_BASELINE_RESET",
+    "status": "SIX_REAL_PREFLIGHT_PASS_FULL50_RUNNING",
+    "action": "先重跑三个数据集的完整DeMo与同公共接口/合法来源/缺失增强DeMo，各50轮与全49组合；之后所有普通专家/双轴候选统一改用完整数据协议。M3b旧子集方案不启动，原单因素方向保留但排在完整协议基线之后。",
     "hardware_dependency": "Only2026GPU2/3,max2NN,no temperature/powerconditions"
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
@@ -287,5 +303,11 @@
     "prior_blocked_audit": "HISTORICAL_EXPIRED",
     "platform_status_last_read": "active",
     "platform_status_note": "Platform goal actually read ACTIVE on 2026-10-04; user removed the historical hardware blocker. Original objective remains active and unmet."
+  },
+  "user_full_data_override": {
+    "received_at": "2026-10-04T15:15:42",
+    "text": "不要只留出一部分训练验证推理",
+    "historical_fit_dev_evidence": "Retained, distinct protocol, not official full-data acceptance",
+    "official_checkpoint_selection_disclosed": true
   }
 }

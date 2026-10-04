@@ -1,0 +1,35 @@
+{
+  "verdict": "PASS",
+  "blocking_issues": [],
+  "nonblocking_issues": [],
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_backend_verified": false,
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "task": "/root/review_full_official_baselines",
+  "reviewed_at": "2026-10-04T15:27:52",
+  "scope": "Fresh source review and stdlib-only AST checks; no NN, remote execution, deployment or mutation",
+  "findings": [
+    "All official train/query/gallery records, no artificial fit/dev, correct sorted labels/manifest order",
+    "Public CLIP/B64/seed42/K4-8-16/50scheduler/AMP512 preserved; exact paired batch names checked",
+    "No structurally unused trainable parameter in complete DeMo selected path; keep nonzero gradient gate",
+    "Earliest maximum benchmark mAP selects fixed checkpoint; all49 use unchanged, selection disclosed",
+    "Correct concatenated query/gallery feature partition and original junk exclusions",
+    "Independent filename GT, full labels/manifests/training coverage/six metrics/CMC1..50/CSV/groups audit",
+    "All six actual smokes precede train; one process per physicalGPU2/3, max2; best-only retention",
+    "Deployment PASS-gated, exclusive paths, one controller2026, exact single handoff sync"
+  ],
+  "executed_CPU_checks": [
+    "Five sources, deploy helper and embedded remote code AST parse",
+    "Actual launcher AST success, smoke failure with zero train, paired-order mismatch; concurrency max2, one perGPU",
+    "Selection AST: earliest tie accepted; later tie, missing epoch, mismatch rejected",
+    "Exact handoff replacement text exists once"
+  ],
+  "limits": [
+    "Real CUDA gradients and strictreload not yet verified",
+    "Full50 and all49 not yet run; sampler prediction not realized training",
+    "Same-family/provisional, actual backend cannot be independently attested",
+    "One seed and official benchmark-based checkpoint selection; historical fit/dev does not count toward full-data +2"
+  ]
+}
