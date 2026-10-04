@@ -1,0 +1,146 @@
+{
+  "status": "PASS",
+  "scope": "SOURCE_ONLY_DEPLOYER_EXTENSION",
+  "blocking_findings": [],
+  "reviewed_at": "2026-10-04T08:50:50.914008+00:00",
+  "deployer_file": "C:/Users/gb/.codex_tmp/demo_full_official_control_deploy_20261004.py",
+  "deployer_sha256": "b2e0308d6dba85e2c9488d24f6011b8924a63a5a07a9f51fcfc6578c370a6177",
+  "parents_sha256": {
+    "measurement_gate_axis.py": "e7def67f8a7791d35e123b6bc81c6fcf1c9b6373913875983ecd1d4c0450ec8e",
+    "identity_alignment_axis.py": "a5e1882ee75f2e89f3977c423a05e6986d66ed182d74f09db2b464f5dc228dd7",
+    "frequency_relation_axis.py": "8247783d10c97b76fb4011ef1a05a2fd72b715f57b68f36d39b826f6c0d9f76e",
+    "common_outlet_axis.py": "b43002891b7a51c01573c3bcf1aaaa8811ae00824b08f1a9989427c8fa2e5436",
+    "shared_identity_axis.py": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+    "run_shared_identity_experiment.py": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "official_training_data.py": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "common_coordinate_axis.py": "0a45146b7e645abc1e8b7d622c1556852855964ea29d7530b449e1c02c8deb5b",
+    "scaled_axis_collaboration.py": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+    "gpu_thermal_execute.py": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511"
+  },
+  "requested_reviewer_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "backend_attestation": "Requested model and effort recorded; actual backend identity is not independently attested.",
+  "git_head": "60bbfbcaf8d1a862e5c3e4577c1630d96116a76a",
+  "experiment_sources_sha256": {
+    "independent_control_axis.py": "566a2fd6689ae72050a7587bc60b35a37687d53dea37d65ef12a249792a3f332",
+    "run_full_official_control_experiment.py": "cef53071ed0c572ae553feacccdf4a46840c7096b15804ef9ae3b2c8475bd98f",
+    "evaluate_full_official_control49.py": "cdeb3aabbbac8db0679174e851958437ef982a451de6a566dab0135e8f774a2b",
+    "verify_full_official_control_axis.py": "2cdd282ac59549910a2368c8f4cfc05a0552131ddbb0588bf72ab62138b3edff",
+    "launch_full_official_control_trial.py": "a16416f5a3b86af0924b1a4a56fff5e6ca53dccdbd396b2bd839d0b17d50597f",
+    "run_full_official_experiment.py": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
+    "evaluate_full_official49.py": "5db20659af12e248d91b22813517b1e72619483fa73ac06a60423e874a2c9d7b",
+    "audit_full_official49.py": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56"
+  },
+  "remote_payload_sha256": {
+    "precheck": "5f29c87c3a61cc06e384bd4713efb742afe1d459b29070847c1badbc7eaafa7b",
+    "launch_code": "5cd6b394814f334dfc3ff749d0539b64f5a21cd74f76bf4c83f77b49ed843cab"
+  },
+  "reviewed_controller": "launch_full_official_control_trial.py",
+  "prior_source_review": "results/preflight/full_official_control_m3b_source_review_20261004.json",
+  "resolved_findings": [
+    {
+      "original_deployer_sha256": "0ee33765165110b6d62f8a371708cfde1e536080d9a3b8062789140f2d667217",
+      "location": "demo_full_official_control_deploy_20261004.py:65 (original)",
+      "finding": "The outer f-string interpreted the receipt newline escape, emitting an unterminated single-quoted string in launch_code. Actual emitted-payload AST parse failed at remote payload line 10.",
+      "resolution": "Author escaped the inner newline; both emitted payloads now parse and the actual remote_python shlex quoting round-trips exact payload bytes."
+    },
+    {
+      "finding": "The deployer initially computed 13 parent hashes at deployment but did not bind them to a reviewed digest. Current parent files were unchanged; no actual stale parent was observed.",
+      "resolution": "Author added one equality assertion comparing all 13 computed parent hashes to this receipt before any SCP. The real assertion accepts exact digests and rejects a changed parent digest."
+    }
+  ],
+  "checks": [
+    {
+      "name": "Final deployer and emitted prerequisite/launch payloads parse with Python 3.10 grammar",
+      "kind": "stdlib_actual_AST",
+      "status": "PASS"
+    },
+    {
+      "name": "Remote command shlex quote/split preserves exact interpreter and both complete payloads",
+      "kind": "stdlib_actual_string_check",
+      "status": "PASS"
+    },
+    {
+      "name": "Eight experiment source hashes match plan and previous PASS review; 13 parents exactly match current Git HEAD",
+      "kind": "actual_local_hash_read",
+      "status": "PASS"
+    },
+    {
+      "name": "Parent review binding occurs before SCP and rejects a changed parent digest",
+      "kind": "AST_order_and_stdlib_assertion_mock",
+      "status": "PASS"
+    },
+    {
+      "name": "Complete deploy flow copies 21 sources plus 3 review/plan records, verifies all21 remote hashes, creates one controller and persistent receipt, then writes/copies pending-preflight proof",
+      "kind": "stdlib_in_memory_mock",
+      "status": "PASS",
+      "copy_calls": 25,
+      "mock_children": 1
+    },
+    {
+      "name": "Reject incomplete/count/unpaired/49epoch/heldout/unvisited/bad-audit/wrong-case-count/nonzero-exit baselines before first SCP",
+      "kind": "stdlib_in_memory_mock",
+      "status": "PASS",
+      "cases": 9
+    },
+    {
+      "name": "Reject existing remote output or remote launch receipt before SCP, and existing log before Popen",
+      "kind": "stdlib_in_memory_mock",
+      "status": "PASS",
+      "cases": 3
+    },
+    {
+      "name": "Existing local proof, wrong deployer-review SHA, or unreviewed source bytes prevent first remote action",
+      "kind": "stdlib_in_memory_mock",
+      "status": "PASS",
+      "cases": 3
+    },
+    {
+      "name": "Remote source hash mismatch prevents controller launch",
+      "kind": "stdlib_in_memory_mock",
+      "status": "PASS"
+    },
+    {
+      "name": "Observation timeout after mocked launch creates no retry or second child; rerun refuses persistent receipt. Even with receipt absent, exclusive controller log refuses second Popen",
+      "kind": "stdlib_in_memory_mock",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "name": "Successful repeat refuses local proof before any new remote action",
+      "kind": "stdlib_in_memory_mock",
+      "status": "PASS"
+    },
+    {
+      "name": "Only host2026 is used; reviewed controller retains physicalGPU2/3 serial queues, max2, contract and all6-smoke barrier before50; no temperature/power setting or restart path",
+      "kind": "source_review",
+      "status": "PASS"
+    }
+  ],
+  "mock_summary": {
+    "full_program_and_remote_payload_scenarios": 19,
+    "parent_pin_additional_scenarios": 2,
+    "remote_network_calls": 0,
+    "real_child_processes_launched": 0,
+    "real_files_written_by_mocks": 0
+  },
+  "execution_limits": {
+    "torch_imported": false,
+    "remote_connections": false,
+    "installs": false,
+    "NN_or_CUDA_execution": false,
+    "deployer_executed_against_real_environment": false,
+    "real_training_launched": false,
+    "review_receipt_is_only_reviewer_mutation_in_this_extension": true
+  },
+  "remaining_runtime_gates": [
+    "Actual six full-official baseline completion, all294 installed-GT cases, all-record training coverage and exit0 must satisfy remote prerequisite before deployment.",
+    "Actual CUDA zero-control/gradient contract and all six real three-update smokes remain pending and must pass before any new50.",
+    "This source PASS does not claim server state, CUDA acceptance, full50 results, or scientific efficacy."
+  ]
+}
