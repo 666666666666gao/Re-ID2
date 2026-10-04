@@ -1,0 +1,837 @@
+{
+  "status": "PASS",
+  "review_kind": "Fresh secondary source/schema review of completed-six-model text publisher and verified local raw-distance archive; explicitly mocked rejection tests only",
+  "reviewed_at_utc": "2026-10-04T14:23:39.424796+00:00",
+  "applied_skill": "C:/Users/gb/.codex/skills/experiment-bridge/SKILL.md, Phase 2.5",
+  "routing_policy": "C:/Users/gb/.codex/skills/shared-references/local-codex-policy.md",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_backend_identity": "unverified; backend attestation unavailable",
+  "actual_backend_effort": "unverified; backend attestation unavailable",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "publisher_path": "C:/Users/gb/.codex_tmp/demo_full_official_control_complete_publish_20261004.py",
+  "publisher_sha256": "0df46bd1a216052c81d4cc6cf247efe85300008873710774920719ad77e63d2b",
+  "initial_reviewed_publisher_sha256": "90ad3d7019adb4766e4e2ac29797d5bb4ab1c7cc1254142ada4d1e65cbf4e2ff",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "resolved_findings": [
+    {
+      "id": "R1",
+      "line": 94,
+      "classification": "BLOCKING_REPORT_ACCURACY",
+      "finding": "The original text asserted that correlation coefficients had been archived, but the current calibration producer/auditor and actual two-axis receipts expose target_mean, target_std, MAE and zero_prediction_MAE only.",
+      "resolution": "Executor removed the unsupported correlation claim. No new statistic or neural execution was added.",
+      "verified": true
+    },
+    {
+      "id": "R2",
+      "line": 97,
+      "classification": "BLOCKING_REPORT_ACCURACY",
+      "finding": "The original text located complete source code in the results directory. The reviewed intake copies json/csv/jsonl/log files and adds only intake_entrypoint.py; complete source remains at the project root.",
+      "resolution": "Executor changed the text to locate complete source at the project root and numerical results/evidence in the result directory.",
+      "verified": true
+    },
+    {
+      "id": "R3",
+      "line": 94,
+      "classification": "COST_WORDING",
+      "finding": "The measured extraction timer covers decoding and DataLoader first batch, not model loading or a full process/CUDA cold start.",
+      "resolution": "Executor replaced the cold-start phrase with DataLoader first batch.",
+      "verified": true
+    },
+    {
+      "id": "R4",
+      "classification": "BLOCKING_REMOTE_HASH_MANIFEST",
+      "finding": "The retention extension added archive receipt, archive entrypoint and this review to the publication payload/expected hashes, while the remote fixed extra list initially omitted all three; actual == expected would fail after transfer.",
+      "resolution": "Executor added those three named paths to the fixed remote extra list. Static inspection verifies that both sides now contain exactly the same six non-trial paths.",
+      "verified": true
+    },
+    {
+      "id": "R5",
+      "classification": "PREPARATION_DEPENDENCY",
+      "finding": "The publisher's newly named archive entrypoint did not initially exist at its project preflight path.",
+      "resolution": "Executor copied the archive source to that exact path; reviewer verified identical bytes and SHA256 55d8ca26fac261947fcf344271f511000b0ffe4f9ce81f6a7cdb52d4785d887e.",
+      "verified": true
+    }
+  ],
+  "revision_validation": {
+    "initial_text_revision": {
+      "publisher_sha256": "a40d5d744f4ea8cbe64b4a416ba59bd67aa4e40e91582d3a67c9231008325032",
+      "changed_lines": [
+        94,
+        97
+      ],
+      "changes": "Unsupported correlation claim removed; code location and extraction cost wording corrected."
+    },
+    "final_retention_revision": {
+      "publisher_sha256": "0df46bd1a216052c81d4cc6cf247efe85300008873710774920719ad77e63d2b",
+      "archive_sha256": "55d8ca26fac261947fcf344271f511000b0ffe4f9ce81f6a7cdb52d4785d887e",
+      "changes": "Added completed588-distance retention receipt gate, accurate local-copy/server-removal text, archive receipt/source/review publication and matching fixed remote hash paths."
+    },
+    "final_sources_sha256_match_executor_messages": true,
+    "archive_entrypoint_same_bytes": true,
+    "previously_tested_assertion_nodes_preserved": 17,
+    "additional_retention_assertion_nodes": 3,
+    "final_sources_compiled_without_actual_execution": true
+  },
+  "conclusion": "No remaining concrete publisher or archive source/schema/scope/transport defect was found after the minimal corrections. PASS is source acceptance only: real six-model completion, intake, 1764-case analysis, local SHA-verified archival and publication remain unexecuted by this reviewer.",
+  "tested_scope": {
+    "pipeline_gate": "Publisher requires the reviewed analyzer and intake COMPLETE statuses, exact six mode/variant keys, 1764 metric cases, 1042524 repeated-condition query rows, 173754 contribution rows, zero heldout identities, exact 1032/591/1055 splits, matched sampling, six complete state keys, 49 conditions per model, 11 comparisons and 539 CSV rows. The byte-unchanged reviewed intake/analyzer enforce complete50 training, actual model arguments, five successful phase exits, all installed-GT audit counts, sampling identity and capacity equivalence before producing those statuses. The final publisher additionally requires the ALL588 local-verified/server-cleared archive status, exactly588 distance files, six completed runs and removed-byte equality.",
+    "modes": [
+      "measurement_only",
+      "independent_control"
+    ],
+    "variants": [
+      "axis_shared",
+      "frequency_shared",
+      "twins_shared"
+    ],
+    "states": [
+      "00",
+      "10",
+      "01",
+      "11",
+      "base_private",
+      "base_shared"
+    ],
+    "metrics": [
+      "mAP",
+      "mINP",
+      "Rank-1",
+      "Rank-5",
+      "Rank-10",
+      "Rank-20"
+    ],
+    "threshold_reference": "Full official MSVR310 original complete DeMo normal metrics plus exactly 2 percentage points; not augmented DeMo or a historical subset.",
+    "original_DeMo_plus2_thresholds": {
+      "mAP": 49.164688447227576,
+      "Rank-1": 65.95939086294418
+    },
+    "reporting": "Six normal metrics, all six diagnostic state metrics, 11 fair model comparisons, query harm/rescue and AP changes, all49 means, 7/30/12/6/36 availability groups, audited head/calibration fields, actual update/AMP skip counts, total/trainable parameters, extraction time, frozen-availability runtimes in analysis and peak training allocated memory are retained. Full per-query/CMC/group/curve records remain in the text intake; the handoff explicitly points to those detailed files.",
+    "inference_interpretation": "No benefit or final superiority is hardcoded. All signed deltas are rendered from the report. 11-vs00 is identified as inference closure in the same trained model, not retraining; contribution margins are empirical rather than causal/information-theoretic. Single MSVR310 seed42, official benchmark checkpoint selection, repeated queries and overlapping groups are disclosed.",
+    "goal": "Existing actual goal status is ACTIVE_UNMET and is preserved. Both report/receipt must have goal_complete exactly false; proof also records false. Unified three-dataset double+2, multi-seed, fair ordinary-control and positive collaboration evidence remain outstanding.",
+    "text_and_git_scope": "Trial files retain the text-only suffix allowlist. The final payload adds only three named preflight text artifacts (distance archive receipt, archive source entrypoint, this review) alongside the existing goal, analyzer, handoff and proof. Raw distance/head binaries are copied outside the project on D:, not added to Git. Read-only final git index inspection was empty.",
+    "transport": "Final remote hashes enumerate the fixed trial prefix plus six explicitly named extra files. The expected and actual fixed-path sets were checked equal. Hash code is695 characters and the constructed Windows ssh command is912 characters. Git pathspec uses true NUL bytes and --pathspec-from-file/--pathspec-file-nul. Actual transfer, hash comparison and push were not executed."
+  },
+  "actual_evidence_read": {
+    "first_axis_pair": "Authentic partial receipt only: measurement_only and independent_control axis runs each have 50 epochs, 705 effective updates, zero AMP skips, five zero phase exits, 294 audited states, 173754 repeated query rows and 28959 calibration rows. It was not treated as all-six completion.",
+    "real_preflight": "Authentic saved CUDA-contract and six three-update smoke receipt: six smoke PASS results, strict reloads, 18 real smoke updates; three variants match parameters within each mode, descriptor5632, M3b adds27769 parameters. Reviewer did not rerun CUDA or smokes.",
+    "no_inference_benefit_invented": "Actual axis normal11-minus00 mAP deltas are -0.06889904509208122 and -0.3284962039916479; Rank1 deltas are 0 and -1.015228426395943. The publisher's signed formatting preserves such negative evidence.",
+    "previous_intake_analyzer_review": "Existing PASS record and current analyzer/intake hashes match the previously reviewed sources; no duplicate full all-six intake or analysis was attempted."
+  },
+  "mocked_rejection_checks": {
+    "status": "PASS_EXPLICIT_IN_MEMORY_REJECTION_TESTS_ONLY",
+    "total_cases": 67,
+    "prior_publisher_cases": {
+      "status": "PASS_EXPLICIT_IN_MEMORY_REJECTION_TESTS_ONLY",
+      "tested_ast_lines": [
+        15,
+        41
+      ],
+      "count": 32,
+      "cases": [
+        {
+          "case": "analysis_missing",
+          "rejected": true,
+          "error": "FileNotFoundError",
+          "publisher_line": 16,
+          "note": "FileNotFoundError originates in the in-memory path stub; the publisher call site is line 16."
+        },
+        {
+          "case": "authentic_two_axis_partial_receipt_is_not_six_model_analysis",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 18
+        },
+        {
+          "case": "report_status_in_progress",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 18
+        },
+        {
+          "case": "receipt_status_in_progress",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 19
+        },
+        {
+          "case": "report_metric_cases_short",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 20
+        },
+        {
+          "case": "receipt_metric_cases_short",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 20
+        },
+        {
+          "case": "report_repeated_condition_query_rows_short",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 21
+        },
+        {
+          "case": "receipt_repeated_condition_query_rows_short",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 21
+        },
+        {
+          "case": "report_contribution_rows_short",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 22
+        },
+        {
+          "case": "receipt_contribution_rows_short",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 22
+        },
+        {
+          "case": "heldout_identities",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 23
+        },
+        {
+          "case": "unpaired_sampling",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 23
+        },
+        {
+          "case": "wrong_official_query_count",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 24
+        },
+        {
+          "case": "report_goal_complete_true",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 25
+        },
+        {
+          "case": "receipt_goal_complete_true",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 25
+        },
+        {
+          "case": "fifth_model_only",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 26
+        },
+        {
+          "case": "six_models_wrong_mode",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 26
+        },
+        {
+          "case": "six_models_wrong_variant",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 26
+        },
+        {
+          "case": "ten_comparisons",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 27
+        },
+        {
+          "case": "48_comparison_conditions",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 27
+        },
+        {
+          "case": "comparison_csv_538_rows",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 29
+        },
+        {
+          "case": "comparison_csv_540_rows",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 29
+        },
+        {
+          "case": "original_demo_threshold_changed",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 31
+        },
+        {
+          "case": "augmented_demo_substituted_for_original_threshold",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 31
+        },
+        {
+          "case": "last_model_unvisited_training_record",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 33
+        },
+        {
+          "case": "last_model_missing_base_shared_state",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 34
+        },
+        {
+          "case": "last_model_48_conditions",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 34
+        },
+        {
+          "case": "publication_proof_exists",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 38
+        },
+        {
+          "case": "archive_exists",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 38
+        },
+        {
+          "case": "npz_binary_in_trial_root",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 40
+        },
+        {
+          "case": "pth_weight_in_trial_root",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 40
+        },
+        {
+          "case": "unrelated_file_already_staged",
+          "rejected": true,
+          "error": "AssertionError",
+          "publisher_line": 41
+        }
+      ],
+      "label": "All full-six success-shaped inputs were skeletal in-memory MOCKS solely to reach rejection gates. No future model result or performance was produced.",
+      "actual_publisher_execution": 0,
+      "neural_execution": 0,
+      "SSH": 0,
+      "git_mutations": 0,
+      "actual_files_written": 0,
+      "actual_collection": 0,
+      "actual_all_six_analysis": 0,
+      "tested_publisher_sha256": "90ad3d7019adb4766e4e2ac29797d5bb4ab1c7cc1254142ada4d1e65cbf4e2ff",
+      "final_revision_note": "These32 checks exercised the original AST prefix. Static AST comparison confirms all17 tested assertions remain unchanged in the final publisher; the three newly inserted retention assertions are tested separately below."
+    },
+    "added_archive_and_publisher_cases": {
+      "status": "PASS_EXPLICIT_IN_MEMORY_ARCHIVE_REJECTION_TESTS_ONLY",
+      "count": 35,
+      "cases": [
+        {
+          "case": "publisher_archive_receipt_missing",
+          "rejected": true,
+          "error": "FileNotFoundError",
+          "source_line": 19,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "publisher_archive_in_progress",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 20,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "publisher_archive_587_files",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 21,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "publisher_archive_only_five_runs",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 21,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "publisher_archive_removed_byte_mismatch",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 22,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "archive_analysis_missing",
+          "rejected": true,
+          "error": "FileNotFoundError",
+          "source_line": 13,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "archive_analysis_in_progress",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 14,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "archive_analysis_1763_cases",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 15,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "archive_destination_exists",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 19,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "archive_proof_exists",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 19,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_controller_running",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 6,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_five_runs",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 6,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_unpaired",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 6,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_states_not_audited",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 7,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_1763_cases",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 7,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_last_frozen_failed",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 14,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_last_frozen48",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 14,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_last_states_failed",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 15,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_last_states293",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 15,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_different_conditions",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 16,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_missing_frozen_file",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 20,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_missing_raw_file",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 20,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_last_training_exit1",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 18,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_last_frozen49_exit1",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 18,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_last_audit_exit1",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 18,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_last_diagnosis_exit1",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 18,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_manifest_last_diagnosis_audit_exit1",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 18,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_delete_hash_changed",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 7,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_delete_missing_file",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 7,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_delete_unexpected_distance_file",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 7,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_delete_resolved_path_outside_run",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 8,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "remote_delete_audit_failed",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 9,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "local_verification_hash_mismatch",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 66,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "local_verification_missing_file",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 66,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        },
+        {
+          "case": "local_verification_unexpected_distance",
+          "rejected": true,
+          "error": "AssertionError",
+          "source_line": 66,
+          "mock_unlink_calls": 0,
+          "mock_remote_calls": 0
+        }
+      ],
+      "remote_payload_line_numbers_are_payload_relative": true,
+      "model_results_created": 0,
+      "actual_publisher_execution": 0,
+      "actual_archive_execution": 0,
+      "actual_file_copies": 0,
+      "actual_file_deletions": 0,
+      "actual_SSH": 0,
+      "neural_execution": 0,
+      "statement": "All paths, bytes, hash metadata, subprocess calls and unlink methods used by these rejection tests were in-memory mocks. No actual source main, remote code, archive, NN or filesystem mutation ran."
+    },
+    "final_publisher_sha256": "0df46bd1a216052c81d4cc6cf247efe85300008873710774920719ad77e63d2b",
+    "archive_sha256": "55d8ca26fac261947fcf344271f511000b0ffe4f9ce81f6a7cdb52d4785d887e",
+    "actual_copies": 0,
+    "actual_deletions": 0,
+    "actual_SSH": 0,
+    "neural_execution": 0
+  },
+  "static_checks": {
+    "final_publisher_compiled": true,
+    "embedded_remote_snippets_compiled_only": "Publisher tar/hash expressions and archive manifest/delete source were inspected/compiled; archive rejection payloads used mocked paths and bytes only.",
+    "pathspec_separators_are_NUL_bytes": true,
+    "literal_backslash_n_in_newline_constants": 0,
+    "markdown_table_header_and_separator_columns": [
+      {
+        "source_line": 75,
+        "columns": 6,
+        "text": "| 比较（after−before） | ΔmAP | ΔR1 | normal误伤/救回 | 全49平均ΔmAP/ΔR1 | 双+2条件数 |",
+        "source_line_at_initial_review": 75
+      },
+      {
+        "source_line": 75,
+        "columns": 6,
+        "text": "|---|---:|---:|---:|---:|---:|",
+        "source_line_at_initial_review": 75
+      },
+      {
+        "source_line": 79,
+        "columns": 8,
+        "text": "| 模型 | 状态 | mAP | mINP | R1 | R5 | R10 | R20 |",
+        "source_line_at_initial_review": 79
+      },
+      {
+        "source_line": 79,
+        "columns": 8,
+        "text": "|---|---|---:|---:|---:|---:|---:|---:|",
+        "source_line_at_initial_review": 79
+      },
+      {
+        "source_line": 83,
+        "columns": 5,
+        "text": "| 模型 | normal11−00 ΔmAP/ΔR1 | normal误伤/救回 | AP改善/下降/不变 | all49平均11−00 ΔmAP/ΔR1 |",
+        "source_line_at_initial_review": 83
+      },
+      {
+        "source_line": 83,
+        "columns": 5,
+        "text": "|---|---:|---:|---:|---:|",
+        "source_line_at_initial_review": 83
+      },
+      {
+        "source_line": 90,
+        "columns": 6,
+        "text": "| 模型 | MAE(M/F/I) | 零预测MAE(M/F/I) | MAE优于零预测的条件数(M/F/I) | 参数/可训练 | 真实更新/AMP跳过 |",
+        "source_line_at_initial_review": 90
+      },
+      {
+        "source_line": 90,
+        "columns": 6,
+        "text": "|---|---|---|---|---:|---:|",
+        "source_line_at_initial_review": 90
+      },
+      {
+        "source_line": 94,
+        "columns": 3,
+        "text": "| 模型 | 端到端完整提取秒 | 训练峰值显存字节 |",
+        "source_line_at_initial_review": 94
+      },
+      {
+        "source_line": 94,
+        "columns": 3,
+        "text": "|---|---:|---:|",
+        "source_line_at_initial_review": 94
+      },
+      {
+        "source_line": 62,
+        "columns": 8,
+        "text": "| 模型 | best epoch | mAP | mINP | R1 | R5 | R10 | R20 |",
+        "source_line_at_initial_review": 62
+      },
+      {
+        "source_line": 62,
+        "columns": 8,
+        "text": "|---|---:|---:|---:|---:|---:|---:|---:|",
+        "source_line_at_initial_review": 62
+      }
+    ],
+    "existing_single_handoff_marker_count": 1,
+    "new_heading_absent_before_actual_publication": true,
+    "schema_field_accesses_match_reviewed_producer_and_saved_actual_receipts": true,
+    "full_handoff_render_execution": 0,
+    "git_index_observed_empty": true,
+    "final_archive_compiled": true,
+    "prior_gate_assertions_preserved": 17,
+    "fixed_extra_paths_match": true,
+    "fixed_extra_paths": [
+      "results/preflight/research_goal_optimized_20261003.json",
+      "analyze_full_official_control_trial.py",
+      "docs/实验交接.md",
+      "results/preflight/full_official_control_distances_local_archive_20261004.json",
+      "results/preflight/full_official_control_distances_archive_entrypoint_20261004.py",
+      "results/preflight/full_official_control_complete_publisher_source_review_20261004.json"
+    ],
+    "publisher_remote_hash_code_characters": 695,
+    "publisher_remote_hash_windows_command_characters": 912,
+    "archive_entrypoint_same_bytes": true
+  },
+  "reviewed_sources_sha256": {
+    "analyze_full_official_control_trial.py": "a894a0d333daaf71f7ee515e1f0112a11f4eb0233d36ebc7790404ffa3ac6ac9",
+    "results/preflight/full_official_control_m3b_intake_prepared_20261004.py": "2be7e82bf017ba6e5c14f147b710b49025b35776ea4df7df4eeeea0185cdd158",
+    "results/preflight/full_official_control_m3b_intake_analysis_source_review_20261004.json": "cae79396a86dd6d4939f4920a6aa4123b7c4e83608def0465139ee028281fe1a",
+    "results/preflight/full_official_control_first_axis_pair_20261004.json": "e7f461d4879ee9e82e0650c0a17c72f1e0416c5a11f54b8e161637d9bf84166e",
+    "results/preflight/full_official_control_m3b_actual_preflight_20261004.json": "291e35ffd6b208a705d188046afc0bb0ce822cd63e4821fabeeaeea7926afcee",
+    "results/full_official_baselines_20261004/summary.json": "bc64f097886d8e726c1997ac9c4b46e857de967fa15e9a19fa3a8cdbf3e3c8db",
+    "diagnose_full_official_control_states.py": "42007521982055e5b4a0e468e5a9964aa09ac4abef1b6127e5a35abd3eb1bc88",
+    "audit_full_official_control_states.py": "3de0d88595a343679963867ac6f2ff22de728917d556b20e2c4e7eb657661d2c",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "run_full_official_experiment.py": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
+    "collect_results.py": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+    "launch_full_official_control_trial.py": "5218f63780248216e398e8e35c87547ab9e536cdf02e7f54e2e8a488e4326253",
+    "analyze_full_official_baseline_pairs.py": "88c1ad3c99a4f2904fbefcc122b419d8e82046b137ac2145224ee9b646a0c4d6",
+    "results/preflight/full_official_control_distances_archive_entrypoint_20261004.py": "55d8ca26fac261947fcf344271f511000b0ffe4f9ce81f6a7cdb52d4785d887e"
+  },
+  "final_local_preparation_state": {
+    "future_trial_root_absent": true,
+    "distance_archive_receipt_absent": true,
+    "actual_distance_archive_root_absent": true,
+    "publication_proof_absent": true
+  },
+  "limits": [
+    "Actual complete six-model local result directory, distance archive receipt and new local distance archive root were absent at final review. No actual all-six success path, intake, analysis, archive, cleanup or publication was run.",
+    "All67 rejection cases are explicitly mocked.32 exercise the original publisher assertions, which remain unchanged in final source;35 additional cases exercise the new retention and archive gates. No mock model results or raw-distance files were written.",
+    "Saved actual two-axis/preflight receipts and source inspection do not independently rerun CUDA, installed-GT raw-distance arithmetic, final four ordinary controls or the future all-six result analysis.",
+    "Archive deletion review uses in-memory mocked paths/bytes/unlink/subprocess operations only. Real local hash verification, remote revalidation, transfers and deletions still must succeed when the authorized executor runs the prepared archive.",
+    "Final publication depends on the actual all-six intake/analyzer and completed local archive receipt. This review itself performs no new training, cleanup, controller/observer change or publication."
+  ],
+  "neural_execution": 0,
+  "execution_counts": {
+    "neural_execution": 0,
+    "SSH": 0,
+    "actual_publisher": 0,
+    "actual_collector": 0,
+    "actual_all_six_analysis": 0,
+    "git_mutations": 0,
+    "cleanup": 0,
+    "source_edits_by_reviewer": 0,
+    "result_directory_creation": 0,
+    "review_json_files_written": 1,
+    "actual_archive": 0,
+    "actual_file_copies": 0,
+    "actual_file_deletions": 0,
+    "distinct_review_json_paths_written": 1,
+    "review_json_updates": 1
+  },
+  "goal_complete": false,
+  "full_six_result_acceptance": false,
+  "previous_reviewed_publisher_sha256": "a40d5d744f4ea8cbe64b4a416ba59bd67aa4e40e91582d3a67c9231008325032",
+  "archive_source_path": "C:/Users/gb/.codex_tmp/demo_full_official_control_distances_archive_20261004.py",
+  "archive_sha256": "55d8ca26fac261947fcf344271f511000b0ffe4f9ce81f6a7cdb52d4785d887e",
+  "archive_entrypoint_path": "results/preflight/full_official_control_distances_archive_entrypoint_20261004.py",
+  "archive_entrypoint_sha256": "55d8ca26fac261947fcf344271f511000b0ffe4f9ce81f6a7cdb52d4785d887e",
+  "archive_review": {
+    "status": "PASS_SOURCE_AND_MOCK_REJECTIONS_ONLY",
+    "reused_pattern": "C:/Users/gb/.codex_tmp/demo_full_official_distances_to_local_20261004.py",
+    "preconditions": "Requires actual six-model analyzed status and1764 cases, absent destination/proof, remote COMPLETE six-run controller with paired sampling/all frozen-state audits, per-run49/294 CPU PASS conditions and all five phase exit codes0.",
+    "expected_files": "Per model49 frozen49/q_*_g_*.npz plus49 diagnosis/q_*_g_*/raw.npz. Six models yield588 distance files:294 frozen files and294 files containing six-state distances and raw contribution quantities.",
+    "copy_then_delete_order": "For each model, both scp operations must succeed; local98-file relative-path/size/SHA256 mapping must exactly match the pre-copy remote manifest before any remote delete call. Remote delete payload recalculates the98-file mapping, requires equality, checks every resolved file lies inside that model's frozen49 or diagnosis folder and requires the installed-GT state audit PASS before unlinking.",
+    "deletion_scope": "Only the two explicit distance glob results are unlinked. Training directories, best.pth, best_official_arrays.npz, JSON/CSV/logs, source, audits and42 head arrays are outside the deletion selection. No recursive removal is used.",
+    "extra_local_copy": "scp-r also copies diagnosis text and42 head arrays, but those are not counted as the588 verified distance files; their remote originals are retained. Final wording does not claim a separate per-head SHA verification.",
+    "receipt": "Completed status is written only after six successful per-run copies/rechecks/removals and removed bytes equal the initial distance total. Final publisher requires this status and includes the receipt in both mirror and Git text payloads.",
+    "audit_after_cleanup": "Published text states that fresh CPU raw-distance audits require restoring the archived distances first; saved PASS receipts are not a claim that the audits were rerun after deletion.",
+    "local_destination": "D:/Program Files/UserCache/gb/ReID2-experiment-artifacts/full_official_control_m3b_20261004/raw_distances",
+    "windows_delete_command_check": {
+      "scope": "Source-generated per-run98-entry manifests with actual mode/variant/condition path spellings,64-character mock SHA strings and8-digit mock byte counts; not actual remote file metadata.",
+      "max_command_characters": 23455,
+      "windows_limit_compared": 32767,
+      "by_run": [
+        {
+          "name": "MSVR310_measurement_only_axis_shared_s42",
+          "characters": 22663
+        },
+        {
+          "name": "MSVR310_measurement_only_frequency_shared_s42",
+          "characters": 23158
+        },
+        {
+          "name": "MSVR310_measurement_only_twins_shared_s42",
+          "characters": 22762
+        },
+        {
+          "name": "MSVR310_independent_control_axis_shared_s42",
+          "characters": 22960
+        },
+        {
+          "name": "MSVR310_independent_control_frequency_shared_s42",
+          "characters": 23455
+        },
+        {
+          "name": "MSVR310_independent_control_twins_shared_s42",
+          "characters": 23059
+        }
+      ]
+    }
+  }
+}
