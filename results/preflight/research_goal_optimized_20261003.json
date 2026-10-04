@@ -1,10 +1,10 @@
 {
-  "status": "EXECUTION_RESUMED_UNMET",
-  "updated_at": "2026-10-04T02:24:40",
+  "status": "ACTIVE_UNMET",
+  "updated_at": "2026-10-04T10:23:03",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、独立身份确认、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
-  "scope": "The refined execution objective is persisted here and in the single handoff. It remains unmet; the platform tool cannot edit the original objective or programmatically resume its last blocked status.",
+  "scope": "Refined execution objective persists in this JSON and the single handoff. The platform original objective is unchanged and was actually observed ACTIVE on 2026-10-04; completion still requires all specified evidence.",
   "acceptance": {
     "normal": "同一个统一方法，在RGBNT201、RGBNT100、MSVR310的完整输入mAP和Rank-1各超过同协议完整DeMo至少2个百分点；多种子和独立确认验证稳定性。",
     "missing": "完整覆盖49种查询—图库集合条件，预先登记来源不相交、重叠、仅查询缺失、双方缺失等关键组；报告全部正负结果，并与正确屏蔽/同增强/同容量普通专家比较。不得用单个均值或污染基线替代全面证据。",
@@ -26,7 +26,7 @@
       "work": "在MSVR310固定fit/dev先做原平均、合法集合平均、共享查询公共出口的单因素重训；保留DeMo私有路径、FFT、专家、路由、损失和原缺失采样。",
       "evidence": "相同50轮、采样、有效参数预算和5632D；同步匹配普通频域与普通双专家，禁止闲置参数凑容量。检查公共块独立检索、全部49条件和四状态净收益。",
       "actual_evidence": "Frozen V12 outlet scale / projection utility:882 raw-GT cases and185220 query records audited; no training or pooling intervention.",
-      "decision": "先判定公共出口是否保留判别信息及是否产生可用增量；若普通频域仍更好或11仍误伤，先定位投影/路由/控制，暂不扩展三数据集。",
+      "decision": "All three trained outlets have negligible complete-input11minus00 and inconsistent fair-control benefits. Frozen actual auxiliary/routed/projected identity utility across all49 is now required before selecting an M2 relation-preservation target.",
       "implementation": "results/preflight/common_outlet_m1_plan.json",
       "actual_preparation": "Ten fresh50,490 complete49conditions,2940sixstates and full independent installed-GT CPU audit actuallycomplete. No final candidate/multiseed/three-dataset claim."
     },
@@ -88,7 +88,7 @@
       ]
     }
   },
-  "revision": "20261004_M1_v3_all_sanity_pass_first_paired50_running",
+  "revision": "20261004_M1_allten_complete_frozen_outlet_utility_active",
   "primary_claims": [
     {
       "id": "C1",
@@ -171,6 +171,27 @@
       "axis_normal_F_post_minus_pre_mAP_pp": -9.990572245383653,
       "interpretation": "实际路由证据经投影后独立检索变弱；门控随可用性明显变化。不能据此单独认定mean7、容量不足或严格信息损失是原因。",
       "analysis": "results/preflight/common_outlet_scale_analysis.json"
+    },
+    "M1_trained": {
+      "status": "COMPLETE_NEGATIVE_FOR_UNIFIED_SUPERIORITY",
+      "fresh50_runs": 10,
+      "full_model_conditions": 490,
+      "controlled_state_conditions": 2940,
+      "installed_GT_CPU_rows": 617400,
+      "analysis": "results/common_outlet_m1_v3_complete/analysis.json",
+      "published_commit": "8a9f478415ac817d97a954923952e4bda0e07853"
+    },
+    "trained_outlet_utility": {
+      "status": "DISPATCHED_SIX_SMOKES_NOT_ALL_ACCEPTED",
+      "plan": "results/preflight/trained_outlet_utility_plan.json",
+      "controller_pid": 1403791,
+      "observed_at": "2026-10-04T10:22:49",
+      "actual_smokes": 0,
+      "actual_full": 0,
+      "planned_cases": 2352,
+      "planned_query_rows": 493920,
+      "optimizer_updates": 0,
+      "new_weights": 0
     }
   },
   "decision_rules": [
