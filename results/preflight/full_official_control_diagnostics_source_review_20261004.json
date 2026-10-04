@@ -1,0 +1,191 @@
+{
+  "status": "PASS",
+  "scope": "FRESH_SOURCE_REVIEW_FULL_OFFICIAL_CONTROL_DIAGNOSTICS",
+  "reviewed_at": "2026-10-04T09:56:47.045625+00:00",
+  "reviewer_task": "/root/review_full_official_control_diagnostics",
+  "requested_reviewer_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "backend_attestation": "Requested model and effort recorded; actual backend identity is not independently attested.",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "sources_sha256": {
+    "diagnose_full_official_control_states.py": "42007521982055e5b4a0e468e5a9964aa09ac4abef1b6127e5a35abd3eb1bc88",
+    "audit_full_official_control_states.py": "3de0d88595a343679963867ac6f2ff22de728917d556b20e2c4e7eb657661d2c",
+    "launch_full_official_control_trial.py": "5218f63780248216e398e8e35c87547ab9e536cdf02e7f54e2e8a488e4326253"
+  },
+  "reviewed_references_sha256": {
+    "independent_control_axis.py": "566a2fd6689ae72050a7587bc60b35a37687d53dea37d65ef12a249792a3f332",
+    "measurement_gate_axis.py": "e7def67f8a7791d35e123b6bc81c6fcf1c9b6373913875983ecd1d4c0450ec8e",
+    "identity_alignment_axis.py": "a5e1882ee75f2e89f3977c423a05e6986d66ed182d74f09db2b464f5dc228dd7",
+    "frequency_relation_axis.py": "8247783d10c97b76fb4011ef1a05a2fd72b715f57b68f36d39b826f6c0d9f76e",
+    "common_outlet_axis.py": "b43002891b7a51c01573c3bcf1aaaa8811ae00824b08f1a9989427c8fa2e5436",
+    "common_coordinate_axis.py": "0a45146b7e645abc1e8b7d622c1556852855964ea29d7530b449e1c02c8deb5b",
+    "shared_identity_axis.py": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "missing_evaluation.py": "e04e16dbb4ec486f28065102b5d7301c68e7d1cef62cdd5fcfa99b3dac222089",
+    "audit_full_official49.py": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+    "audit_shared_identity_states.py": "e8cf168db43f36e36a40a66148f209a6b782775942ce7fcbdf9dce439d1fa8d0",
+    "gpu_thermal_execute.py": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+    "official_training_data.py": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+    "evaluate_full_official49.py": "5db20659af12e248d91b22813517b1e72619483fa73ac06a60423e874a2c9d7b",
+    "evaluate_full_official_control49.py": "cdeb3aabbbac8db0679174e851958437ef982a451de6a566dab0135e8f774a2b",
+    "run_full_official_experiment.py": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
+    "run_full_official_control_experiment.py": "cef53071ed0c572ae553feacccdf4a46840c7096b15804ef9ae3b2c8475bd98f",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "data/datasets/msvr310.py": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2"
+  },
+  "contract": {
+    "dataset": "MSVR310",
+    "train_records": 1032,
+    "train_identities": 155,
+    "query_records": 591,
+    "gallery_records": 1055,
+    "epochs": 50,
+    "training_heldout_identities": 0,
+    "initialization": "Public CLIP ViT-B/16; fresh identity/control heads",
+    "modes": [
+      "measurement_only",
+      "independent_control"
+    ],
+    "variants": [
+      "axis_shared",
+      "frequency_shared",
+      "twins_shared"
+    ],
+    "descriptor_dim": 5632,
+    "parameter_equality": "Compared across the three variants within each gate mode by the existing six-smoke barrier",
+    "cases_per_model": 294,
+    "models": 6,
+    "planned_cases_total": 1764
+  },
+  "checks": [
+    {
+      "name": "All 25 reviewed Python sources parse and compile without imports",
+      "kind": "actual_stdlib_AST_compile",
+      "status": "PASS",
+      "evidence": "Three scoped sources and 22 directly read references; no module import, bytecode cache or NN invocation."
+    },
+    {
+      "name": "Complete official splits and same saved best checkpoint",
+      "kind": "source_review",
+      "status": "PASS",
+      "evidence": "diagnose:98-117 uses full_records, exact official manifest/metadata, strict best.pth load and evaluation mode; official_training_data:20-32 labels every source identity with no fit/dev split. Loader uses all q+g records, batch64, shuffleFalse, drop_lastFalse. Existing generic train runs50 and earliest maximum official benchmark mAP selection."
+    },
+    {
+      "name": "Full11 prediction and control hook order",
+      "kind": "source_review",
+      "status": "PASS",
+      "evidence": "shared_identity_axis:177-198 calls calibrator for full11 before controlled_states. controlled_states:168-175 calls it next for10 and01. IndependentControlCalibrator:24-26 emits child control before the corresponding parent hook. diagnose:30-48 checks3 results and captures index0 for predictions/gates/control in both modes."
+    },
+    {
+      "name": "Correct expert closures on both query and gallery",
+      "kind": "source_review",
+      "status": "PASS",
+      "evidence": "controlled_states builds10/01 from independent m0/f0 reads, zeroes the closed expert input, and passes use_m/use_f flags. CommonCoordinateAxis:17-31 excludes the closed projection and interaction unless both experts are enabled. Conditional router messages are used only for full11; full forward work cannot enter the independent state values. diagnose:149 uses each state on both q andg."
+    },
+    {
+      "name": "Normalization and distance parity with prior full49",
+      "kind": "source_review",
+      "status": "PASS",
+      "evidence": "Generic train/eval and diagnosis use identical query+gallery ordering and FP32 F.normalize(...,dim1). Full11 uses full_evaluation.distance, exact stored best normal feature equality, exact all49 prior distance equality, six metrics and prior CSV equality. Base private/shared slices are separately normalized cosine diagnostics."
+    },
+    {
+      "name": "No frozen NN update or extra checkpoint write",
+      "kind": "actual_AST_and_source_review",
+      "status": "PASS",
+      "evidence": "One strict model.load_state_dict, torch.no_grad extraction, model.eval, state tensor version equality and unchanged existing protected files; no optimizer step, backward, model.train or torch.save in the diagnostic."
+    },
+    {
+      "name": "Contribution calibration references and prediction binding",
+      "kind": "source_review",
+      "status": "PASS",
+      "evidence": "Fixed gallery full11 per availability; positive is sameID/different scene for MSVR and negative is differentID. Minimum positive similarity and maximum negative similarity supply the same direction to all four query states. Three delta formulas match exported raw scores. New auditor:34 requires raw predictions equal the corresponding query slice of verified head NPZ; CSV values and summary arithmetic are independently checked."
+    },
+    {
+      "name": "Head formula and all record metadata audit",
+      "kind": "source_review",
+      "status": "PASS",
+      "evidence": "All7 head files cover query+gallery; native filename GT metadata equality, shape/finite checks, measurement-only zero control, sigmoid(20*prediction+control) reconstruction and exact serialized CSV values are checked. Numerical threshold execution remains a real-runtime gate."
+    },
+    {
+      "name": "Independent native GT recount for all294 retrieval cases",
+      "kind": "source_review",
+      "status": "PASS",
+      "evidence": "New auditor calls installed_rows on train/query/gallery; native MSVR identity/camera/scene filename parsing matches original parser independently. recount uses lexicographic stable tie order and sameID/same-scene exclusion; verify checks all six metrics, CMC1..50, per-query CSV and camera/scene/identity groups. All49 condition sets match prior results; normal11 six metrics match best train result."
+    },
+    {
+      "name": "Auditor dependency closure contains no Torch",
+      "kind": "actual_stdlib_AST_import_graph",
+      "status": "PASS",
+      "evidence": "Local closure is audit_full_official_control_states.py -> audit_full_official49.py and audit_shared_identity_states.py; external imports are argparse,csv,json,numpy,pathlib,re. Imported legacy installed_gt is not invoked; the new main uses native full official installed_rows."
+    },
+    {
+      "name": "Successful controller stage order and resource serialization",
+      "kind": "actual_stdlib_controlled_mock",
+      "status": "PASS",
+      "evidence": "Executed actual launcher main with in-memory Path/stub execute and real stdlib ThreadPoolExecutor:37 virtual child calls; contract then all6 smokes; each of6 runs train->frozen49->CPU49->diagnosis->CPU294. Two concurrent calls maximum, one per GPU2/3. Final counters1764/1042524/173754 and diagnosis receipts were verified."
+    },
+    {
+      "name": "Controller rejects incomplete or failed prerequisite/diagnostic stages",
+      "kind": "actual_stdlib_controlled_mock",
+      "status": "PASS",
+      "evidence": "Six negative cases reject incomplete baseline, failed prior CPU49 audit, diagnosis execute failure, diagnosis-audit execute failure, wrong diagnosis status, or wrong diagnosis cases. No COMPLETE controller and no next variant/completed receipt for the failed lane. Incomplete baseline makes0 stub execute calls."
+    }
+  ],
+  "mock_summary": {
+    "scenarios": 7,
+    "success_stub_execute_calls": 37,
+    "success_peak_concurrent_calls": 2,
+    "success_peak_per_gpu": {
+      "2": 1,
+      "3": 1
+    },
+    "negative_cases": [
+      "baseline_incomplete",
+      "prior_cpu_audit_fails",
+      "diagnosis_execution_fails",
+      "diagnosis_audit_execution_fails",
+      "diagnosis_status_fails",
+      "diagnosis_count_fails"
+    ],
+    "negative_stub_execute_counts": [
+      0,
+      25,
+      26,
+      27,
+      27,
+      27
+    ],
+    "mock_files_written_to_disk": 0
+  },
+  "execution_limits": {
+    "python": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe",
+    "python_version": "3.13.12",
+    "python_flags": [
+      "-X",
+      "utf8",
+      "-B",
+      "-S"
+    ],
+    "numpy_available_without_site": false,
+    "torch_available_without_site": false,
+    "torch_imported": false,
+    "nn_executions": 0,
+    "cuda_executions": 0,
+    "remote_connections": 0,
+    "training_or_deployment": 0,
+    "source_edits": 0
+  },
+  "remaining_runtime_gates": [
+    "This source PASS is not a numerical CPU/NN/CUDA acceptance result. Actual NumPy/Torch diagnostics and audits were not executed in this review.",
+    "Live baseline campaign must complete all6 full50 and294 GT cases before any shared executable deployment; no active pipeline was touched.",
+    "Actual zero-control/gradient contract and all6 real three-update smokes must pass before any new50 training. Each completed model must then satisfy exact frozen full11 parity and all294 CPU audit checks.",
+    "Installed full-split counts, actual trained parameter counts, floating-point sigmoid tolerance, NN feature equivalence and measured results are runtime facts, not established by controlled mocks."
+  ],
+  "interpretation": "No concrete current defect found in the scoped new diagnostics/auditor/controller change. Calibration and repeated-condition retrieval are frozen empirical diagnostics; raw neural distances/scores are inputs to CPU audit, not independently regenerated neural outputs. No causal/information-theoretic or final multiseed/three-dataset efficacy claim."
+}

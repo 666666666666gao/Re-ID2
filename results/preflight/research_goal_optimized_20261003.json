@@ -1,7 +1,7 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-04T16:59:21",
-  "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、独立身份确认、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
+  "updated_at": "2026-10-04T18:01:42",
+  "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
   "scope": "Refined execution objective persists in this JSON and the single handoff. The platform original objective is unchanged and was actually observed ACTIVE on 2026-10-04; completion still requires all specified evidence.",
@@ -11,7 +11,7 @@
     "mechanism": "公平普通专家对照稳定胜出，实际协作在预定义关键组带来可重复净收益，模块必要性由重训消融与逐查询机制证据支撑。",
     "quantitative_interpretation": "保留原+2/+2内部验收；不额外要求每个模块都+2或在完整DeMo上再提高10点。49条件中的双+2达标数量持续报告，不能冒称全条件通过。",
     "stability": "冻结结构、损失、超参和预先登记选点规则后做至少3配对种子；按身份统计置信区间。用户明确要求全训练，不再从官方训练身份另切fit/dev；官方benchmark参与checkpoint选择必须披露，不宣称独立未触碰测试。",
-    "reporting": "全部条件报告mAP、mINP、Rank-1/5/10/20、CMC1..50、逐查询AP/INP/首末匹配、身份/相机/场景分组及误伤/恢复；同一实验所有指标固定使用同一开发mAP最佳checkpoint。"
+    "reporting": "全部条件报告mAP、mINP、Rank-1/5/10/20、CMC1..50、逐查询AP/INP/首末匹配、身份/相机/场景分组及误伤/恢复；同一实验所有指标固定使用同一完整官方query/gallery mAP最佳checkpoint。"
   },
   "milestones": [
     {
@@ -39,16 +39,16 @@
     },
     {
       "id": "M3",
-      "status": "FULL_OFFICIAL_M3B_SOURCE_REVIEWED_REAL_PREFLIGHT_AND_BASELINES_GATED",
+      "status": "FULL_OFFICIAL_CONTROL_AND_DIAGNOSTICS_SOURCE_REVIEWED_REAL_PREFLIGHT_AND_BASELINES_GATED",
       "work": "依据M2b实测收益估计失配，先单因素验证融合门控检索梯度与贡献回归的隔离；相同/重叠/不相交集合配对覆盖仍是后续独立因素，不同时加入。所有公平对照保持相同可用性处理和训练/计算预算。",
-      "evidence": "公共身份可比较性及联合路由优于独立路由的重训证据；贡献估计与门控控制分开验证，并比较固定门控/普通注意力。目标只用fit训练身份。",
-      "decision": "M3a只detach门控，不新建控制头，不改原M2b损失/采样/预算。真实CUDA契约和三次真实更新smokes通过，原控制器运行中。完整校准、真实PF救回、11−00及同轮普通专家和增强DeMo比较完成前，不宣布效益、不进入大规模扩展。"
+      "evidence": "公共身份可比较性及联合路由优于独立路由的重训证据；贡献估计与门控控制分开验证，并比较固定门控/普通注意力。目标只用完整官方训练身份。",
+      "decision": "在全部6组全量基线终态后，对同协议M3a/M3b × 双轴/普通频域/普通双专家共6组从公开CLIP重训50轮。先验证零控制输出时全可用集合四状态等价、测量/控制梯度隔离及全部6组3次真实更新。每模型固定mAP-best后全49组合及00/10/01/11、公共/私有块诊断与GT CPU复算；真实推理净收益和公平对照稳定胜出后才扩展。"
     },
     {
       "id": "M4",
       "status": "GATED",
       "work": "统一候选在全部官方训练/query/gallery下冻结配方做至少3配对种子；不再人工留出fit/dev身份。",
-      "evidence": "按身份分组置信区间、配对变化、seed均值及标准差；49条件重复查询不算49倍独立样本。正式测试不用于版本选择。"
+      "evidence": "按完整官方评测身份进行分组核查、均值/标准差和配对查询变化；49条件中的重复查询不是49倍独立样本。官方benchmark参与checkpoint选择须明确披露；不再切人工fit/dev确认集。"
     },
     {
       "id": "M5",
@@ -73,7 +73,7 @@
     "training": "全部官方训练记录，零人工留出身份；公开CLIP/fresh50/B64/数据集原K/nativeAMP512；同协议基线、对照及统一方法。原PK采样保持，记录逐batch名称及累计实际样本覆盖。",
     "change_control": "每轮一个明确假设；源码审查与必要真实预检通过后才训练。不同时加入公共槽位、关系保持和跨集合目标；保留负结果，不原样扩展已失败配方。",
     "retention": "每实验只留固定最佳权重，保留必要基线/控制最佳及当前依赖；及时删除确认为无用的自产权重，保留文本结果和失败证据。",
-    "publication": "GitHub Re-ID2；只维护docs/实验交接.md，镜像Desktop/document及2025/26/27同名交接；五份字节一致。",
+    "publication": "GitHub Re-ID2；只维护docs/实验交接.md，Desktop/document及活动服务器项目逐字节一致。2025当前实际I/O故障，镜像待恢复；project/Desktop/2026/2027核对。待运行候选源码先放remote pending目录，全部6基线结束前不覆盖正在使用的执行源码。",
     "observation": "按测得时长估计里程碑，在结束前几分钟或180–300秒观察；默认240秒；观察超时不重启训练。",
     "evaluation_selection": "Highest complete official query/gallery mAP, ties earliest; one best checkpoint for all six metrics and all49; benchmark-selected, not untouched test",
     "unnecessary_work": "不强加完整DeMo再涨10点或每模块+2，不先更换FFT/主干/增加专家，不重复已完成测量或权重清理。",
@@ -294,15 +294,32 @@
       "plan": "results/preflight/full_official_control_m3b_plan_20261004.json",
       "review": "results/preflight/full_official_control_m3b_source_review_20261004.json",
       "deployment_gate": "All six full official baseline runs and all294 GT CPU cases must complete before contract, six actual smokes and any new fresh50",
-      "deployer_review": "results/preflight/full_official_control_m3b_deployer_review_20261004.json",
+      "deployer_review": "results/preflight/full_official_control_m3b_diagnostics_deployer_review_20261004.json",
       "deployer_status": "SOURCE_REVIEW_PASS_NOT_EXECUTED",
-      "source_parents_bound": 13
+      "source_parents_bound": 16,
+      "diagnostic_states": [
+        "00",
+        "10",
+        "01",
+        "11",
+        "base_private",
+        "base_shared"
+      ],
+      "planned_diagnostic_cases": 1764,
+      "actual_diagnostic_cases": 0,
+      "diagnostics_review": "results/preflight/full_official_control_diagnostics_source_review_20261004.json"
+    },
+    "owned_weight_retention": {
+      "receipt": "results/preflight/full_official_obsolete_weight_retirement_20261004.json",
+      "retired_files": 4,
+      "retired_bytes": 1643123034,
+      "protected": "Active official best weights, completed canonical historical controls, all metrics/logs"
     }
   },
   "decision_rules": [
     {
       "finding": "完整输入与预定义缺失关键组均胜过公平普通专家，11相对00产生净收益。",
-      "next": "冻结结构、超参及选择规则，进入配对多种子和独立身份确认；确认后扩展三个数据集。"
+      "next": "冻结结构、超参及选择规则，进入配对多种子和完整官方评测身份分组核查；确认后扩展三个数据集。"
     },
     {
       "finding": "完整输入改善，但缺失关键组仍退步。",
@@ -323,7 +340,7 @@
   ],
   "next_action": {
     "milestone": "FULL_OFFICIAL_BASELINE_RESET",
-    "status": "SIX_REAL_PREFLIGHT_PASS_FULL50_RUNNING",
+    "status": "FOUR_FULL_OFFICIAL_REFERENCES_COMPLETE_TWO_RGBNT100_RUNNING",
     "action": "先重跑三个数据集的完整DeMo与同公共接口/合法来源/缺失增强DeMo，各50轮与全49组合；之后所有普通专家/双轴候选统一改用完整数据协议。M3b旧子集方案不启动，原单因素方向保留但排在完整协议基线之后。",
     "hardware_dependency": "Only2026GPU2/3,max2NN,no temperature/powerconditions"
   },

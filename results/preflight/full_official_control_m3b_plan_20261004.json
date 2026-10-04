@@ -72,11 +72,38 @@
     "run_full_official_control_experiment.py": "cef53071ed0c572ae553feacccdf4a46840c7096b15804ef9ae3b2c8475bd98f",
     "evaluate_full_official_control49.py": "cdeb3aabbbac8db0679174e851958437ef982a451de6a566dab0135e8f774a2b",
     "verify_full_official_control_axis.py": "2cdd282ac59549910a2368c8f4cfc05a0552131ddbb0588bf72ab62138b3edff",
-    "launch_full_official_control_trial.py": "a16416f5a3b86af0924b1a4a56fff5e6ca53dccdbd396b2bd839d0b17d50597f",
+    "launch_full_official_control_trial.py": "5218f63780248216e398e8e35c87547ab9e536cdf02e7f54e2e8a488e4326253",
     "run_full_official_experiment.py": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
     "evaluate_full_official49.py": "5db20659af12e248d91b22813517b1e72619483fa73ac06a60423e874a2c9d7b",
-    "audit_full_official49.py": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56"
+    "audit_full_official49.py": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+    "diagnose_full_official_control_states.py": "42007521982055e5b4a0e468e5a9964aa09ac4abef1b6127e5a35abd3eb1bc88",
+    "audit_full_official_control_states.py": "3de0d88595a343679963867ac6f2ff22de728917d556b20e2c4e7eb657661d2c"
   },
   "reviewed_source_at": "2026-10-04T16:40:01",
-  "review_record": "results/preflight/full_official_control_m3b_source_review_20261004.json"
+  "review_record": "results/preflight/full_official_control_m3b_source_review_20261004.json",
+  "diagnostics": {
+    "states": [
+      "00",
+      "10",
+      "01",
+      "11",
+      "base_private",
+      "base_shared"
+    ],
+    "conditions_per_model": 49,
+    "metric_cases_per_model": 294,
+    "total_cases": 1764,
+    "repeated_query_rows": 1042524,
+    "contribution_reference": "Query-only four-state margins against identical full11 gallery and fixed GT-valid positive/negative. Empirical diagnostic, not causal or information theory.",
+    "four_state_retrieval": "Same corresponding state on query and gallery. Closed expert disables conditional message and interaction.",
+    "head_audit": "Actual seven-bank heads: predictions/control_logits/gates, GT metadata and sigmoid; contribution prediction exactly bound to same query bank head.",
+    "all49_full11_parity": "Exact prior full49 raw distances, sixmetrics andperquery; normal features exact selected50 checkpoint.",
+    "cpu_audit": "Native installed filename GT, independentranking all294, CMC1..50,perquery/groups, harm/rescue, calibration arithmetic/legalreferences andzero-predictor comparison.",
+    "schedule": "Each model train50→frozen49→CPU49→NNdiagnosis294→CPUdiagnosis294; serialperGPU, max2NN.",
+    "no_new_training": true,
+    "diagnostics_actual_runs": 0
+  },
+  "diagnostic_review_record": "results/preflight/full_official_control_diagnostics_source_review_20261004.json",
+  "diagnostic_deployer_review_record": "results/preflight/full_official_control_m3b_diagnostics_deployer_review_20261004.json",
+  "diagnostics_reviewed_at": "2026-10-04T18:01:42"
 }

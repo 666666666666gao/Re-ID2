@@ -33,7 +33,7 @@ def main():
         assert audit['status'] == 'PASS' and audit['cases'] == 49
     root = Path(args.output)
     root.mkdir(exist_ok=False)
-    for phase in ('contract', 'preflight', 'training', 'frozen49', 'audit'):
+    for phase in ('contract', 'preflight', 'training', 'frozen49', 'audit', 'diagnosis', 'diagnosis_audit'):
         (root / phase).mkdir()
     contract = execute([sys.executable, '-u', 'verify_full_official_control_axis.py',
         '--data-root', args.data_root, '--pretrained', args.pretrained, '--output', str(root / 'contract' / 'gradient')],
@@ -87,8 +87,17 @@ def main():
                 '--run-dir', str(run), '--evaluation', str(frozen)], root / 'audit', run_name, gpu)
             audit = json.loads((frozen / 'independent_cpu_audit.json').read_text())
             assert audit['status'] == 'PASS' and audit['cases'] == 49 and audit['training_coverage']['unvisited'] == []
+            diagnosis = root / 'diagnosis' / run_name
+            diagnosed = execute([sys.executable, '-u', 'diagnose_full_official_control_states.py',
+                '--run-dir', str(run), '--previous-frozen', str(frozen), '--output', str(diagnosis)],
+                root / 'diagnosis', run_name, gpu)
+            diagnosis_audited = execute([sys.executable, '-u', 'audit_full_official_control_states.py',
+                '--run-dir', str(run), '--previous-frozen', str(frozen), '--diagnosis', str(diagnosis)],
+                root / 'diagnosis_audit', run_name, gpu)
+            states = json.loads((diagnosis / 'independent_cpu_audit.json').read_text())
+            assert states['status'] == 'PASS_FULL_OFFICIAL_CONTROL_STATES_INSTALLED_GT' and states['cases'] == 294
             rows.append(dict(dataset='MSVR310', mode=mode, variant=variant, gpu=gpu,
-                train=trained, evaluation=evaluated, audit=audited))
+                train=trained, evaluation=evaluated, audit=audited, diagnosis=diagnosed, diagnosis_audit=diagnosis_audited))
             save(root / ('gpu_' + str(gpu) + '_completed.json'), dict(status='IN_PROGRESS', runs=rows))
         return rows
 
@@ -103,6 +112,8 @@ def main():
                 paired.append([(r['epoch'], r['step'], r['names'], r['partial_set']) for r in map(json.loads, handle)])
     assert all(order == paired[0] for order in paired[1:])
     save(root / 'controller_result.json', dict(status='COMPLETE', runs=rows, training_heldout_identities=0,
+        frozen_state_metric_cases=1764, frozen_state_repeated_query_rows=1764 * 591,
+        contribution_rows=6 * 49 * 591, all_frozen_state_cpu_audits_passed=True,
         paired_identity_and_partial_sampling_exact=True, temperature_power_control=False,
         limits='Single-seed full-data MSVR mechanism trial only; not a final three-dataset or multiseed method.'))
 

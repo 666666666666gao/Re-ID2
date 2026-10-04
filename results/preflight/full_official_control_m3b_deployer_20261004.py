@@ -16,13 +16,17 @@ proof = pf / 'full_official_control_m3b_launch_20261004.json'
 assert not proof.exists()
 plan_file = pf / 'full_official_control_m3b_plan_20261004.json'
 review_file = pf / 'full_official_control_m3b_source_review_20261004.json'
+diagnostics_review_file = pf / 'full_official_control_diagnostics_source_review_20261004.json'
 plan = json.loads(plan_file.read_text(encoding='utf-8'))
 review = json.loads(review_file.read_text(encoding='utf-8'))
+diagnostics_review = json.loads(diagnostics_review_file.read_text(encoding='utf-8'))
 assert plan['status'] == 'SOURCE_REVIEW_PASS_NOT_DEPLOYED_NOT_LAUNCHED_CUDA_PENDING'
 assert review['status'] == 'PASS' and not review['blocking_findings']
-assert plan['sources'] == review['sources_sha256']
+assert diagnostics_review['status'] == 'PASS' and not diagnostics_review['blocking_findings']
+assert plan['sources'] == (review['sources_sha256'] | diagnostics_review['sources_sha256'])
 assert all(hashlib.sha256((PROJECT / file).read_bytes()).hexdigest() == sha for file, sha in plan['sources'].items())
-deploy_review = json.loads((pf / 'full_official_control_m3b_deployer_review_20261004.json').read_text(encoding='utf-8'))
+deploy_review_file = pf / 'full_official_control_m3b_diagnostics_deployer_review_20261004.json'
+deploy_review = json.loads(deploy_review_file.read_text(encoding='utf-8'))
 assert deploy_review['status'] == 'PASS' and deploy_review['deployer_sha256'] == hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
 precheck = f'''import json
 from pathlib import Path
@@ -42,13 +46,14 @@ prerequisite = json.loads(remote_python('2026', precheck))
 parents = ('measurement_gate_axis.py', 'identity_alignment_axis.py', 'frequency_relation_axis.py',
     'common_outlet_axis.py', 'shared_identity_axis.py', 'run_shared_identity_experiment.py',
     'axis_collaboration.py', 'official_training_data.py', 'experiment_data.py', 'run_experiment.py',
-    'common_coordinate_axis.py', 'scaled_axis_collaboration.py', 'gpu_thermal_execute.py')
+    'common_coordinate_axis.py', 'scaled_axis_collaboration.py', 'gpu_thermal_execute.py',
+    'audit_shared_identity_states.py', 'full_evaluation.py', 'missing_evaluation.py')
 source_files = [*plan['sources'], *parents]
 source_hashes = {file: hashlib.sha256((PROJECT / file).read_bytes()).hexdigest() for file in source_files}
 assert {file: source_hashes[file] for file in parents} == deploy_review['parents_sha256']
 for file in source_hashes:
     command(['scp', *OPTIONS, str(PROJECT / file), '2026:' + root + '/' + file])
-for file in (plan_file, review_file, pf / 'full_official_control_m3b_deployer_review_20261004.json'):
+for file in (plan_file, review_file, diagnostics_review_file, deploy_review_file):
     command(['scp', *OPTIONS, str(file), '2026:' + root + '/results/preflight/' + file.name])
 verified = json.loads(remote_python('2026', 'import hashlib,json;from pathlib import Path;root=Path(' + repr(root) + ');files=' + repr(list(source_hashes)) + ';print(json.dumps({f:hashlib.sha256((root/f).read_bytes()).hexdigest() for f in files}))'))
 assert verified == source_hashes
