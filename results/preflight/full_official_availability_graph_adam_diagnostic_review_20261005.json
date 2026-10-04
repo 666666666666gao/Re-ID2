@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "review_date": "2026-10-05",
+  "reviewer": "Native Codex reviewer /root/review_graph_amp_rescue",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "max",
+  "actual_model": "unverified",
+  "actual_effort": "unverified",
+  "actual_backend": "unattested",
+  "scope": "Source-only review of the one-shot frequency_shared Adam diagnostic and its single-job deployer after reading the real clean preflight failure. PASS allows only this bounded diagnostic, not another campaign, altered acceptance gate, active graph correctness claim or fresh50.",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "source_sha256": "e04c35c29d0298124e85a54dbddb26571b9dc7930fd14b163ed8eee93d99d297",
+  "deployer_sha256": "254c0fb1137fab18e81e9939656e4d8b5f161358dac77ce031355e74be7647a1",
+  "source": "diagnose_graph_disabled_adam.py",
+  "deployer": "results/preflight/full_official_availability_graph_adam_diagnostic_deployer_20261005.py",
+  "primary_failure": "results/preflight/full_official_availability_graph_clean_preflight_failure_20261005.json",
+  "primary_failure_sha256": "a72c1cddb160e2e5dbcceb3e4e732c2b9bbd0625fdfe4f025575c1b6469bb504",
+  "judgment": "results/preflight/full_official_availability_graph_rescue3_judgment_20261005.json",
+  "checks": [
+    {
+      "check": "Four bounded native parent diagnostic updates",
+      "status": "PASS_SOURCE",
+      "evidence": "The source fixes frequency_shared/MSVR310/seed42, verifies official1032/591/1055 counts, takes the same real native64 batch and restores the initial state before three direct M4 parent updates and one actual disabled delegation. Each phase creates the original optimizer and GradScaler512, seeds1234 and requires one actual update, four backbone calls and two shared-projection calls. It never calls the active .1 branch or full-training runner."
+    },
+    {
+      "check": "Targeted gradient, parameter and Adam measurements",
+      "status": "PASS_SOURCE",
+      "evidence": "The named parameter object is selected directly from model.named_parameters and its actual optimizer group is located by object identity. The diagnostic asserts ordinary Adam, one-parameter group, non-AMSGrad/non-maximizing configuration and step1. It records the known element's initial/final parameter, unscaled gradient, actual group fields and both actual moments. The update reconstruction includes actual betas, learning rate and epsilon."
+    },
+    {
+      "check": "Original checks retained and evidence written before numerical assertions",
+      "status": "PASS_SOURCE",
+      "evidence": "The revised source writes the current scalar/group/moment row to progress.json before the first reconstruction assertion and before all following gradient/detail/RNG/BN comparisons. Subsequent complete rows add whole-state/gradient maximum errors and culprit deltas. Original gradient and reconstruction tolerances remain rtol1e-5/atol1e-6; exact details, RNG and BN statistics remain required. Cross-run updated parameter differences are measured, not falsely declared equal."
+    },
+    {
+      "check": "No training-method changes",
+      "status": "PASS_LOCAL_READ_ONLY",
+      "evidence": "Current availability_graph_training.py, v2 verifier and solver/make_optimizer.py still match the hashes of the actual failed clean attempt. The new diagnostic adds no model parameters, backbone structure, loss term, optimizer scaling, saved benchmark weights or inference path."
+    },
+    {
+      "check": "One diagnostic launch after prior jobs terminate",
+      "status": "PASS_SOURCE",
+      "evidence": "The deployer reads the actual clean launch receipt and requires its controller and every recorded contract/preflight child to be terminal, with no training launch receipts. It requires a new diagnostic output directory and no local launch proof, checks GPU3 memory<500MiB and copies only the reviewed diagnostic source. It verifies the remote source hash before starting exactly one process with CUDA_VISIBLE_DEVICES=3 and a distinct output/run directory. It changes no parent source or existing result and performs no power/temperature query/control."
+    },
+    {
+      "check": "Local syntax and embedded remote programs",
+      "status": "PASS_LOCAL_STDLIB_ONLY",
+      "evidence": "The diagnostic and deployer parse with Python3.10 grammar using local Python3.13 ast.parse. Both embedded remote Python programs parse after local string rendering. No SSH, CUDA, model execution or diagnostic launch was performed by this reviewer."
+    }
+  ],
+  "interpretation_limits": [
+    "Actual diagnostic results are still pending. This source PASS does not prove the old failure was a false gate or establish Adam amplification as its cause.",
+    "After the job, analyze measured raw gradient plus coupled weight decay jointly with the moments and final parameter. Reconstructing from moments alone is not sufficient causal evidence.",
+    "The historical source reviews and failed real preflights remain intact. Any future verifier acceptance change requires the measured evidence and explicit scope described in the rescue3 judgment."
+  ]
+}

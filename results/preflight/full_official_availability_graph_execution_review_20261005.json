@@ -1,0 +1,140 @@
+{
+  "status": "PASS",
+  "reviewed_at_utc": "2026-10-04T17:53:48.815Z",
+  "review_scope": "Corrected CUDA parent-step verifier, four-model controller, frozen49/state wrappers, private deployer and sole observer; exact current plan and unchanged two training additions included for provenance. Source/CPU/memory-only review, no execution on compute.",
+  "skill": "C:/Users/gb/.codex/skills/experiment-bridge/SKILL.md Phase2.5 CODE_REVIEW",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "max",
+  "actual_model": "unverified",
+  "actual_effort": "unverified",
+  "actual_backend": "unattested",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "attribution": "Continuation of the fresh delegated source reviewer; backend not independently attested. No cross-family acceptance or actual CUDA PASS claimed.",
+  "plan": "results/preflight/full_official_availability_graph_plan_20261005.json",
+  "sources_sha256": {
+    "availability_graph_training.py": "f185f6904ad7098d3321c1a4596bd861774077e2e19ec3e183a4a18d5076bc01",
+    "run_full_official_availability_graph_experiment.py": "cf24e2d6d3182665c9aee847afb7536c4cf2fa8346eded857e4f3f9b6b763842",
+    "verify_full_official_availability_graph.py": "d7a70769237f7a611006f43a56593f1760f7a276de882c85c5cb9065f8b730b2",
+    "evaluate_full_official_availability_graph49.py": "f50210e2c321c12cd4326edd8d72ee487dce2197309255fb85beb053aca14544",
+    "diagnose_full_official_availability_graph_states.py": "8e202a6751b310dca3a09fe1abb976655be1c03e16e5af3d270cbbc25d1351d2",
+    "launch_full_official_availability_graph_trial.py": "542fb0732009acafea78d40ffe3ace63636b7ba7ba376bc8273dc06e1b56fdd1"
+  },
+  "deployer_sha256": "3a09f8401ae7578281f0e28dac62be4ad9a04a8061f37bdb1e5b6e4c6bd18173",
+  "observer_sha256": "9238c9c181902718024caa83039d9beca4561aa48a6c9ca169b41535990c1833",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "resolved_findings": [
+    {
+      "id": "BOOL_STATE_ERROR_SUMMARY",
+      "severity": "BLOCKING_BEFORE_FIX",
+      "location": "verify_full_official_availability_graph.py:83",
+      "evidence": "All enhanced models inherit torch.bool bands.masks (dual_axis.py:18-19, axis_collaboration.py:174). Original diagnostic subtraction over every state tensor raised the reproduced RuntimeError even after assert_close passed.",
+      "original_source_sha256": "0cb4523d7b95a7e04daab186eeb7e50f561f60253ac0c4d8ebe978bfeb75d239",
+      "resolution": "Parent changed only the maximum floating-state-error generator to filter is_floating_point(). Every tensor still receives assert_close, and BN num_batches_tracked still receives exact equality.",
+      "validation": "Actual corrected comparison block executes successfully with float weights, bool bands.masks and integer BN counters. Changed Boolean, BN, gradient, RNG and old-detail fixtures each correctly reject. No source edit was made by this reviewer.",
+      "status": "RESOLVED"
+    }
+  ],
+  "checks": [
+    {
+      "check": "Plan/current provenance and actual predecessor",
+      "status": "PASS",
+      "evidence": "All six runtime hashes equal plan.source_sha256; both training files retain their original reviewed hashes. All32 protected parent sources match. Saved M4 controller and analysis are COMPLETE/THREE_FULL_OFFICIAL_M4_RUNS_AND882_STATE_CASES_ANALYZED. The saved signed analysis fails the both-metrics+2 condition; this is a negative predecessor decision, not new efficacy."
+    },
+    {
+      "check": "Real AMP comparison contract",
+      "status": "PASS_SOURCE_AND_CPU_COMPARISON_FIXTURES",
+      "evidence": "One model is initialized by the unchanged parent builder; initial state is cloned before the native64 training batch. Parent and zero-weight graph paths use the same batch and reset state, fresh Adam/scaler512 and seed1234. Each must perform one actual AMP optimizer update and four backbone calls for R partial. All model-state tensors and all present gradients are compared at rtol1e-5/atol1e-6, BN counters/RNG/old details exactly. B=N verifies source-disjoint R->N, stopped reference and valid distinct-observation positives. Corrected floating-only error reporting is safe for existing bool masks. Real execution remains pending."
+    },
+    {
+      "check": "Global preflight barrier and matched counts",
+      "status": "PASS_SOURCE_AND_MEMORY_FIXTURES",
+      "evidence": "Both two-worker preflight futures complete before the training executor exists. All4 real contracts and four fresh smoke processes must pass; each smoke requires3 effective updates, all trainable gradients finite/nonzero and exact reload through the unchanged runner. Graph weight/stopping/zero-extra-backbone fields and same-variant parent counts are checked. Enhanced variants have identical counts. Expected totals12 smoke updates and8 contract updates are emitted only after those checks."
+    },
+    {
+      "check": "Two serial GPU lanes",
+      "status": "PASS_SOURCE",
+      "evidence": "GPU2 runs demo_shared then axis_shared; GPU3 runs frequency_shared then twins_shared. Each worker uses the existing blocking execute helper serially; max2 workers, physical GPU2/3 restriction, busy-memory wait240s, no temperature or power rule. There is no alternate fallback or new hardware-control path."
+    },
+    {
+      "check": "Full-data evaluation wiring",
+      "status": "PASS_SOURCE_AND_WRAPPER_MEMORY_CHECKS",
+      "evidence": "Frozen wrapper replaces evaluate_full_official49.build with the graph builder before main; state wrapper replaces diagnose_full_official_control_states.build. Those actual module globals were verified with memory callables. The inherited builder supports saved graph arguments and strict reload. Four variants get49 frozen conditions each (196); only three enhanced variants get six-state49 diagnostics each (882). DeMo is never required to expose a calibrator."
+    },
+    {
+      "check": "Installed GT and fixed-checkpoint contracts",
+      "status": "PASS_SOURCE",
+      "evidence": "Inherited full official train/query/gallery are1032/591/1055 with no heldout training IDs; training asserts all1032 records visited. Frozen evaluator strictly reloads selected best, checks manifest/arguments/normal features and49 independent query/gallery availability pairs. CPU audits recount installed filename GT with original scene exclusion, preserve benchmark best/earliest ties and check saved per-query/group/CMC output. Enhanced six-state audit additionally verifies all294 metrics, full11 equality and contribution-reference/head identities. Final controller COMPLETE needs all196+882 cases."
+    },
+    {
+      "check": "Actual future batch coverage and parent pairing",
+      "status": "PASS_SOURCE_AND_SAVED_PARENT_DATA",
+      "evidence": "Controller reads actual new batch_orders, requires each epoch/step/name/A tuple exactly equal to the same-variant parent, and requires all four orders equal. Every row must have graph_step=index, B=seven-cycle[index%7], queries=[RNT,A], stopped reference/no extra pass and legal positives. All49 A/B counts must be positive. Existing four parent histories actually match across705 batches/705 updates/0 skips; this fixture evidence is not actual new training coverage.",
+      "expected_parameter_counts": {
+        "demo_shared": {
+          "parameters": 99982336,
+          "trainable_parameters": 99971072
+        },
+        "enhanced": {
+          "parameters": 100902534,
+          "trainable_parameters": 100890246
+        },
+        "descriptor_dim": 5632
+      }
+    },
+    {
+      "check": "Deployer review/source/ownership gate",
+      "status": "PASS_SOURCE_AND_GENERATED_REMOTE_CODE_MEMORY_FIXTURES",
+      "evidence": "Before transport it requires both PASS reviews, exact six current source hashes and its own reviewed hash, unchanged32 parent hashes and the actual completed negative M4 analysis. Remote precheck requires completed M4 and full baseline controllers, no existing new output/launch receipt, exact protected parents, disk>4500MiB and selected GPU2/3 memory<500MiB. It copies only six new runtime files plus three review/plan JSONs, verifies deployed bytes, launches one new-session controller with explicit argv/cwd/DEVNULL and records zero achieved contracts/smokes/fresh50 at launch. No parent source or weight is copied or removed."
+    },
+    {
+      "check": "Single observer lifecycle",
+      "status": "PASS_SOURCE_AND_GENERATED_READ_ONLY_CODE_MEMORY_FIXTURES",
+      "evidence": "Observer reads one saved controller PID/output; refuses existing destination/terminal and performs a240-second read-only polling lane. It excludes zombie and CPU-audit processes from active-neural reporting, reports failures, and does not launch jobs. Terminal success requires196 frozen/882 enhanced states, complete audits, paired orders, preflight PASS, no active neural children/failures; shared-DeMo has no state/calibrator requirement. Running->complete, dead controller, failed child and duplicate-observer fixtures have expected outcomes."
+    }
+  ],
+  "executed_verification": {
+    "status": "PASS",
+    "interpreter": "E:/anaconda/python.exe -X utf8 -B -S",
+    "torch": "1.13.1+cpu",
+    "command": "C:/Users/gb/.codex_tmp/review_availability_graph_execution_cpu_20261005.py",
+    "receipt": "C:/Users/gb/.codex_tmp/review_availability_graph_execution_cpu_20261005.json",
+    "exit_code": 0,
+    "syntax_sources": 8,
+    "protected_parent_hashes_exact": 32,
+    "corrected_contract_comparison_cases": 6,
+    "launcher_memory_cases": 11,
+    "wrapper_cases": 2,
+    "observer_memory_cases": 4,
+    "deployer_memory_cases": 5,
+    "fixture_limits": "Actual source blocks run against memory files/transports/processes and synthetic CPU tensors. The controller fixture uses real saved parent order data, but generated trial results, transports and Popen calls are mocks. No real neural/model/optimizer/CUDA/SSH/SCP/deployment operation occurred. A mock print-signature harness error was corrected and the final harness exited0; that error was not in production source."
+  },
+  "actual_NN": 0,
+  "actual_model_constructions": 0,
+  "actual_optimizer_updates": 0,
+  "actual_CUDA_operations": 0,
+  "actual_SSH_calls": 0,
+  "actual_SCP_calls": 0,
+  "actual_deployments": 0,
+  "actual_new_weights": 0,
+  "actual_dataset_image_reads": 0,
+  "actual_controller_launches": 0,
+  "actual_observer_launches": 0,
+  "source_changes_by_reviewer": 0,
+  "actual_CUDA_contracts_passed": 0,
+  "actual_new_smoke_updates": 0,
+  "actual_new_fresh50_runs": 0,
+  "source_gate_passed": true,
+  "required_runtime_gates": [
+    "Reviewed deployer must actually satisfy source/resource/prior-completion gates before starting its controller.",
+    "All four real AMP parent-step comparisons plus12 actual smoke optimizer updates, finite nonzero gradients and reload checks must PASS before any fresh50.",
+    "Actual four fresh50, installed-GT196 frozen and882 state cases and actual49-pair training coverage must complete before result claims."
+  ],
+  "reporting_limits": [
+    "This source PASS permits the reviewed preflight chain; it is not an actual CUDA/preflight/training/result PASS.",
+    "Official benchmark-based checkpoint selection and single-seed MSVR310 scope remain disclosed.",
+    "No gain, useful inference mechanism or completion of the all-three-dataset +2 mAP/+2 Rank1/fair-control/missing-modality goal is claimed."
+  ],
+  "goal_complete": false
+}

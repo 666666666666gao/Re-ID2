@@ -1,0 +1,116 @@
+{
+  "status": "PASS",
+  "review_date": "2026-10-05",
+  "reviewer": "Native Codex reviewer /root/review_graph_amp_rescue",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "max",
+  "actual_model": "unverified",
+  "actual_effort": "unverified",
+  "actual_backend": "unattested",
+  "scope": "Source-only execution review of v3, its controller, validated plan, deployer and observer, informed by the completed actual native Adam diagnostic. This PASS binds the sources below and permits the reviewed real preflight sequence. It does not claim the v3 CUDA contracts, smoke updates, fresh50 runs or benchmark results have passed.",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "plan": "results/preflight/full_official_availability_graph_validated_plan_20261005.json",
+  "plan_sha256": "a8589ec01ebce84c3ca541292538dee54b399c4da7e0a0c8176497806003f22e",
+  "sources_sha256": {
+    "availability_graph_training.py": "e46ebbe383d561ca9ce473e1f295e1457b7463c7bdcedcbf07dc4e596169f268",
+    "run_full_official_availability_graph_experiment.py": "cf24e2d6d3182665c9aee847afb7536c4cf2fa8346eded857e4f3f9b6b763842",
+    "evaluate_full_official_availability_graph49.py": "f50210e2c321c12cd4326edd8d72ee487dce2197309255fb85beb053aca14544",
+    "diagnose_full_official_availability_graph_states.py": "8e202a6751b310dca3a09fe1abb976655be1c03e16e5af3d270cbbc25d1351d2",
+    "launch_full_official_availability_graph_trial.py": "6e59f108624ca280d1f39405ca32c155012030e574b4a4e068c928ed4f9acd07",
+    "verify_full_official_availability_graph_v3.py": "d7bedc9ecea00b54ae1454b9b07bd3c3f68de9d88f06a108f6a7c32927bc157d"
+  },
+  "deployer_sha256": "a68e3ed83d32bb7c971392cd5aac640cb068bb2dc76e121b82babd7aeb07c717",
+  "observer_sha256": "394eecca6114b82e88854b9d22c7e48699696ef761238e8772a64df5df512f3d",
+  "deployer": "results/preflight/full_official_availability_graph_validated_deployer_20261005.py",
+  "observer": "results/preflight/full_official_availability_graph_validated_observer_20261005.py",
+  "primary_actual_evidence": {
+    "path": "results/preflight/full_official_availability_graph_adam_diagnostic_intake_20261005.json",
+    "sha256": "24dbf9fc2583713f74598ceb4f6ba46026b8125b8ad76bc360e2f1342e0bd3df",
+    "status": "FOUR_ACTUAL_ADAM_DIAGNOSTIC_UPDATES_COMPLETE",
+    "diagnostic_pid": 3729178,
+    "diagnostic_alive_at_collection": false,
+    "collected_at": "2026-10-05T02:55:21.985607",
+    "actual_scope": "Three direct original frequency_shared parent updates followed by one disabled delegation, same initial state, native64 batch, seed and original Adam/AMP configuration.",
+    "culprit": "router.to_modality_query.1.weight[50,121]",
+    "parent3_minus_parent1_absolute_parameter_difference": 2.117827534675598e-6,
+    "parent3_minus_parent1_absolute_unscaled_gradient_difference": 1.4870238373987377e-10,
+    "parent3_and_disabled_culprit_parameter_gradient_and_moments_identical": true,
+    "all_repeated_phase_gradients_original_tolerance_pass": true,
+    "all_repeated_phase_RNG_BN_and_original_details_exact": true,
+    "theta0": -0.025194521993398666,
+    "group": {"lr": 0.00035, "weight_decay": 0.0001, "eps": 1e-8, "betas": [0.9, 0.999]},
+    "parent1_raw_gradient": 2.525201580283465e-6,
+    "parent3_raw_gradient": 2.525052877899725e-6,
+    "parent1_raw_gradient_plus_weight_decay_theta_double": 5.749380943598286e-9,
+    "parent3_raw_gradient_plus_weight_decay_theta_double": 5.600678559858412e-9,
+    "parent1_effective_gradient_from_actual_first_moment": 5.74944480913331e-9,
+    "parent3_effective_gradient_from_actual_first_moment": 5.600742092326529e-9,
+    "raw_decay_relation_vs_moment_maximum_residual": 6.386553502398676e-14,
+    "parent1_own_moment_update_reconstruction_error": 6.193121362962906e-11,
+    "parent3_own_moment_update_reconstruction_error": 4.827546730423737e-10,
+    "predicted_parameter_difference_from_actual_moments": 2.118248358135011e-6,
+    "predicted_vs_measured_parameter_difference_residual": 4.208234594127447e-10,
+    "interpretation": "The unchanged direct parent itself reproduces the old failing updated-parameter gate before disabled graph delegation. Raw gradient plus coupled weight decay nearly cancel, leaving an effective gradient below Adam epsilon. The measured moments and group reconstruct the actual parameter delta with the listed residual; raw-gradient-plus-decay values agree with moment-derived values to ordinary FP32 arithmetic precision. This supports Adam sensitivity as the amplification mechanism at this element. It does not identify the upstream source or CUDA kernel responsible for the tiny raw-gradient variation."
+  },
+  "numerical_contract_decision": {
+    "decision": "ACCEPT_EXPLICIT_EVIDENCE_BASED_GATE_REVISION",
+    "old_cross_execution_updated_parameter_allclose": "Demonstrably fails for repeated execution of the original parent itself at the unchanged rtol1e-5/atol1e-6. Retain differences as diagnostic data; do not claim this old gate passed.",
+    "replacement": "Require original loss/detail and all-gradient equivalence, exact CPU/CUDA RNG and buffers, and reconstruct every actual optimized parameter from its own first-step Adam moments and actual group fields under the original rtol1e-5/atol1e-6. Independently retain the positive graph contract.",
+    "tolerance_relaxed": false,
+    "training_or_optimizer_math_changed": false,
+    "field_names": ["parent_step_loss_gradient_equivalence", "optimizer_update_consistency"],
+    "specific_kernel_cause": "unidentified"
+  },
+  "checks": [
+    {
+      "check": "Exact source binding and unchanged training",
+      "status": "PASS_LOCAL_SOURCE",
+      "evidence": "All six runtime hashes equal plan.source_sha256; all 32 protected parent hashes match. availability_graph_training.py, builder, evaluation and diagnosis sources are unchanged from the reviewed clean attempt. solver/make_optimizer.py remains ordinary configured Adam with one trainable parameter per group, SHA256 09e8e36c78c78cda75daad52bbc48f77f4dc33b96568a06bc1c193132ffbeafc. V3 adds no model, loss, optimizer or inference change."
+    },
+    {
+      "check": "V3 numerical criterion implements the measured decision",
+      "status": "PASS_SOURCE",
+      "evidence": "V3 restores the same initial state before parent, parent_repeat, disabled and positive phases, retaining native batch, seed, original optimizer and GradScaler512. Every phase requires a real optimizer update. It checks actual Adam/non-AMSGrad/non-maximizing groups and step1, reconstructs each updated parameter with its own group learning rate, betas, epsilon and moments, and checks grad-none parameters unchanged. Original gradient rtol1e-5/atol1e-6, exact detail fields and RNG remain. All non-parameter buffers are now required exact. Cross-execution state and gradient maxima and largest named errors are retained in progress and final results; updated-parameter equality is explicitly diagnostic only."
+    },
+    {
+      "check": "Positive graph branch remains independent",
+      "status": "PASS_SOURCE",
+      "evidence": "The v2 positive-branch checks are retained unchanged: real weight.1 R-to-N, four observed backbone calls, three projection calls, exact full raw mean, N-only teacher and partial R inputs, no-grad teacher, distinct positive observations, unchanged original mining/names/partial losses, .05 full plus .05 partial graph arithmetic, exact RNG/BN, finite gradients, nonzero shared projection gradients and unchanged state keys. Disabled delegation is explicitly not claimed to validate this branch."
+    },
+    {
+      "check": "All real preflights precede fresh50",
+      "status": "PASS_SOURCE",
+      "evidence": "The controller calls v3 and requires both renamed gates. All four variants must complete four contract updates plus three .1 smoke updates each, strict reload, full official counts, zero heldout and matching parent sizes. Both serial GPU lanes finish the shared barrier before any fresh50 job starts. This is 16 contract and 12 smoke optimizer updates; none are claimed completed by this review. Subsequent paired-order, coverage, frozen49 and enhanced-state CPU audits remain unchanged."
+    },
+    {
+      "check": "New execution namespace and failed-job guard",
+      "status": "PASS_SOURCE",
+      "evidence": "The deployer requires the actual failed clean controller and each recorded contract/preflight child terminal, zero clean training receipts, the completed one-shot diagnostic terminal and its completion result, completed M4/baselines, exact protected parent hashes, physical GPU2/3 memory below500MiB and free disk above4500MiB. It requires new m5_validated output and launch paths, validates this exact review/source/deployer binding, copies the six reviewed sources and diagnostic evidence, verifies transferred source hashes and starts the reviewed controller. No parent or failed result is overwritten."
+    },
+    {
+      "check": "Observer scope and local static checks",
+      "status": "PASS_LOCAL_SOURCE",
+      "evidence": "The read-only observer uses new validated-only launch, JSONL and terminal paths, sleeps240 seconds, reports actual failures and active children, and requires all completion audits before terminal success. Six runtime sources, deployer and observer parse under Python3.10 grammar; two deployer remote snippets and one observer snippet also parse. Reviewer execution was limited to local stdlib syntax, hashes and diagnostic arithmetic. No SSH, CUDA, model import, training or deployment was performed by this reviewer."
+    }
+  ],
+  "history_preserved": {
+    "first_failure_sha256": "b25a4bb57eefade3704fb38c4de9dd341cb3595843f489a98bbc691fe191d009",
+    "rescue_failure_sha256": "e1582926935f526ec5f0595e0e39c506f11cab7c32dc543b4ac74e0791263825",
+    "clean_failure_sha256": "a72c1cddb160e2e5dbcceb3e4e732c2b9bbd0625fdfe4f025575c1b6469bb504",
+    "note": "Earlier failure artifacts, archived failed sources, v2 verifier and source-only reviews remain historical evidence. Inherited plural sources_sha256 in the plan is initial preparation metadata; singular source_sha256 is the authoritative six-source execution binding copied into this review. Earlier source PASS records never claimed the failed actual CUDA gates passed."
+  },
+  "required_real_validation": [
+    "The reviewed deployment guard must succeed on the actual server before launch.",
+    "All four v3 contracts must pass original loss/gradient/RNG/buffer checks, own Adam update consistency and independent positive graph checks.",
+    "All four three-update .1 smoke runs and strict reload/count checks must pass before fresh50 is allowed.",
+    "Any new failure must remain primary evidence and be diagnosed; this review authorizes no unchanged retry or arbitrary tolerance increase."
+  ],
+  "actual_v3_contracts_claimed_passed": 0,
+  "actual_validated_smoke_updates_claimed": 0,
+  "actual_validated_fresh50_runs_claimed": 0,
+  "benchmark_performance_claim": false,
+  "goal_complete": false
+}

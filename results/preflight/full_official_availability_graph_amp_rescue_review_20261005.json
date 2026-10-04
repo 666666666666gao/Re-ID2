@@ -1,0 +1,102 @@
+{
+  "status": "MINIMAL_ZERO_WEIGHT_PATCH_RECOMMENDED_REAL_CUDA_VALIDATION_REQUIRED",
+  "review_date": "2026-10-05",
+  "reviewer": "Fresh native Codex reviewer /root/review_graph_amp_rescue",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "model_attribution": {
+    "installed_routing_policy_model": "gpt-6-astra",
+    "installed_routing_policy_reasoning_effort": "max",
+    "actual_backend_model_attestation": "unavailable; the reviewer context does not provide a runtime model attestation"
+  },
+  "scope": "Read the original failure artifact first, then inspect the graph step, verifier, builder, launcher and real shared/M4 parent paths. Static rescue diagnosis only. No SSH, GPU access, real model execution or training by this reviewer. Only this review record was written.",
+  "primary_failure": {
+    "path": "results/preflight/full_official_availability_graph_first_preflight_failure_20261005.json",
+    "variant": "frequency_shared",
+    "stage": "state_dict comparison after one real parent AMP optimizer step and one real graph-weight-zero AMP optimizer step",
+    "traceback_location": "verify_full_official_availability_graph.py:70",
+    "tensor_name": "not recorded by the failed assertion",
+    "mismatched_elements": 1,
+    "tensor_elements": 32768,
+    "index": [50, 121],
+    "greatest_absolute_difference": 0.000002117827534675598,
+    "greatest_relative_difference": 0.00008363490633200854,
+    "existing_tolerance": {"atol": 0.000001, "rtol": 0.00001},
+    "other_observed_evidence": [
+      "demo_shared and axis_shared real parent-versus-graph-zero contract commands exited 0 with PASS markers.",
+      "demo_shared nonzero-weight smoke exited 0; the supplied axis_shared smoke log is incomplete.",
+      "The frequency_shared failure occurs before gradient, final RNG, parent-detail and graph-audit comparisons. Those frequency checks cannot be claimed as passed.",
+      "The launcher waits for all four variant contract/smoke results before entering fresh50 training. The supplied failure artifact contains no fresh50 start evidence."
+    ]
+  },
+  "concrete_findings": [
+    {
+      "id": "ZERO_WEIGHT_BACKWARD_STRUCTURE",
+      "severity": "blocking until real validation",
+      "locations": ["availability_graph_training.py:42", "availability_graph_training.py:55"],
+      "finding": "Both new graph objectives are attached to the full and partial backward roots even when graph_weight is zero. The shared parent at run_shared_identity_experiment.py:43-60 has no corresponding branches. M4 delegates its optimizer step to that shared parent and adds model-internal expert losses through the unchanged output tuple.",
+      "evidence_scope": "The structural difference is established from source and the zero-weight equivalence failure is established from the real log. The log does not establish that changed gradient accumulation order caused the difference.",
+      "recommendation": "Keep selected-source reference extraction, both graph-loss computations and their audit fields. Add each graph term to its backward loss only when model.graph_weight > 0. Do not change original loss weights, autocast, GradScaler, optimizer order or tolerance."
+    },
+    {
+      "id": "FAILED_COMPARISON_NOT_LOCALIZED",
+      "severity": "required diagnostic",
+      "locations": ["verify_full_official_availability_graph.py:68-84"],
+      "finding": "The assertion omits the state key and exits before recording maximum state/gradient errors. A single parent execution also gives no parent-versus-parent repeatability evidence.",
+      "recommendation": "In the focused real diagnostic, record comparison category, tensor name, shape, maximum absolute/relative error, mismatch count and existing-tolerance result before asserting. Include repeated parent runs from the same initial state and batch, then repeated graph-zero runs after the minimal patch. Preserve all existing gates."
+    }
+  ],
+  "proposed_minimal_source_change": {
+    "file": "availability_graph_training.py",
+    "full_loss": [
+      "full_graph, full_detail = identity_alignment_loss(output[1][:, 5120:], reference, target, names, model.graph_temperature)",
+      "if model.graph_weight > 0:",
+      "    full_loss = full_loss + .5 * model.graph_weight * full_graph"
+    ],
+    "partial_loss": [
+      "partial_graph, partial_detail = identity_alignment_loss(query[:, 5120:], reference, target, names, model.graph_temperature)",
+      "partial_loss = .25 * partial_ce + .5 * cross_triplet",
+      "if model.graph_weight > 0:",
+      "    partial_loss = partial_loss + .5 * model.graph_weight * partial_graph"
+    ],
+    "reason_this_is_in_scope": "Zero graph weight is an existing exercised contract setting, not a hypothetical edge case. At zero, this removes new backward branches. At the authorized weight .1, the arithmetic remains .05 full graph plus .05 partial graph, with the same expression order and temperature .07.",
+    "source_constraints_confirmed": [
+      "The reference reuses detached full-view backbone features and the selected cyclic R/N/T/RN/RT/NT/RNT set; it adds no backbone invocation.",
+      "The existing shared projection is LayerNorm/Linear/GELU/LayerNorm, optionally wrapped by the M4 SharedReadout query addition; no BatchNorm or Dropout is added by this extra reference projection.",
+      "The proposed condition does not change trainable parameters, the stopped reference, distinct-observation identity positives, original partial sampling or graph audit fields.",
+      "The original two backwards, one optimizer update and GradScaler initial scale 512 remain intact."
+    ]
+  },
+  "required_real_validation": {
+    "reviewer_executed": false,
+    "diagnostic_first_target": "frequency_shared on the already authorized physical GPU3, serialized with its lane",
+    "diagnostic_protocol": [
+      "Use the exact same real augmented native64 batch, initial state_dict including BN buffers, parent model configuration and seed_all(1234) for every execution. Recreate the optimizer and native CUDA GradScaler(512) before each step; restore initial state before every parent or graph-zero step.",
+      "Run two parent one-step executions and one patched graph-zero one-step execution. Compare parent repeat and parent-versus-graph-zero using the unchanged rtol=1e-5 and atol=1e-6. Reset graph_step=1 for the graph-zero run so the reference is N and the partial query is R. The follow-up execution review accepts this minimal three-phase protocol; graph repetition is only needed if a subsequent result remains ambiguous.",
+      "Record tensor names and errors for state and gradient comparisons, actual optimizer updates, backbone counts, BN counters, selected CPU/CUDA RNG states and existing parent detail/audit equality. Do not hide skipped AMP updates or stop evidence collection at an unnamed state assertion.",
+      "If repeated parents violate the same tolerance, retain that result as evidence of parent numerical variability; it does not authorize relaxing the contract or declaring graph equivalence. If parents repeat within tolerance but graph-zero fails, the graph path still needs diagnosis. If all pass, report that the patched zero-weight contract passed, without claiming that the original failure's numerical cause was proved.",
+      "After the focused diagnosis passes, satisfy the contract and .1-weight three-update real smoke gates for all four variants before any fresh50 training. Keep complete official counts 1032/591/1055, native64, fresh CLIP, 50 epochs, no identity holdout, existing exact RNG/BN/detail checks and all-variant barrier."
+    ],
+    "acceptance_limit": "This source review recommends a repair candidate. It is not a real CUDA PASS and does not release fresh50 training. The original failure artifact must remain preserved.",
+    "followup_execution_review": "results/preflight/full_official_availability_graph_rescue_execution_review_20261005.json"
+  },
+  "reviewed_file_sha256": {
+    "results/preflight/full_official_availability_graph_first_preflight_failure_20261005.json": "b25a4bb57eefade3704fb38c4de9dd341cb3595843f489a98bbc691fe191d009",
+    "availability_graph_training.py": "f185f6904ad7098d3321c1a4596bd861774077e2e19ec3e183a4a18d5076bc01",
+    "verify_full_official_availability_graph.py": "d7a70769237f7a611006f43a56593f1760f7a276de882c85c5cb9065f8b730b2",
+    "run_full_official_availability_graph_experiment.py": "cf24e2d6d3182665c9aee847afb7536c4cf2fa8346eded857e4f3f9b6b763842",
+    "launch_full_official_availability_graph_trial.py": "542fb0732009acafea78d40ffe3ace63636b7ba7ba376bc8273dc06e1b56fdd1",
+    "run_shared_identity_experiment.py": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+    "run_full_official_modality_outlet_experiment.py": "2d5a71b31b88f319c45f064a646fddc0f947208a97e82e13ea0b1b86efad987d",
+    "run_full_official_control_experiment.py": "cef53071ed0c572ae553feacccdf4a46840c7096b15804ef9ae3b2c8475bd98f",
+    "modality_outlet_alignment_axis.py": "b7a460dcac1ee9ffe6bd9e33d27570b1334c41747a0921c4923edc27988d45ba",
+    "identity_alignment_axis.py": "a5e1882ee75f2e89f3977c423a05e6986d66ed182d74f09db2b464f5dc228dd7",
+    "shared_identity_axis.py": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+    "frequency_relation_axis.py": "8247783d10c97b76fb4011ef1a05a2fd72b715f57b68f36d39b826f6c0d9f76e",
+    "measurement_gate_axis.py": "e7def67f8a7791d35e123b6bc81c6fcf1c9b6373913875983ecd1d4c0450ec8e",
+    "common_outlet_axis.py": "b43002891b7a51c01573c3bcf1aaaa8811ae00824b08f1a9989427c8fa2e5436",
+    "solver/make_optimizer.py": "09e8e36c78c78cda75daad52bbc48f77f4dc33b96568a06bc1c193132ffbeafc",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "layers/make_loss.py": "232ef86081a76665225db4360ea67650230b1d5986818cabc23ce5db36340dec"
+  }
+}

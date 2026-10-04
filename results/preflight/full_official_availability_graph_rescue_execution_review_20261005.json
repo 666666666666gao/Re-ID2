@@ -1,0 +1,92 @@
+{
+  "status": "PASS",
+  "review_date": "2026-10-05",
+  "review_scope": "Fresh rescue source review after reading the actual first failed AMP contract. Reviewed the six runtime files, rescue plan, deployer and observer, plus relevant shared/M4 dependencies. PASS means the revised source and controlled execution path are acceptable for the required real preflight; it is not a CUDA, training or benchmark PASS.",
+  "reviewer": "Fresh native Codex reviewer /root/review_graph_amp_rescue",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "max",
+  "actual_model": "unverified",
+  "actual_effort": "unverified",
+  "actual_backend": "unattested",
+  "attribution": "The requested model and effort follow the installed Codex routing policy. The reviewer context has no independent runtime model attestation. No cross-family acceptance is claimed.",
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    {
+      "location": "results/preflight/full_official_availability_graph_rescue_plan_20261005.json:sources_sha256",
+      "finding": "The plan retains a plural sources_sha256 field with the two original preparation hashes, alongside singular source_sha256 containing the six current runtime hashes. The deployer correctly uses singular source_sha256, so this does not block execution.",
+      "suggestion": "Label the old two-file field as historical preparation metadata if the plan is edited, to avoid confusing it with the current six-file execution set."
+    }
+  ],
+  "sources_sha256": {
+    "availability_graph_training.py": "2ae48c2662ec429d5bbd10866faa9d3a3cd6ee9de11036b604a51d8422fa8b77",
+    "run_full_official_availability_graph_experiment.py": "cf24e2d6d3182665c9aee847afb7536c4cf2fa8346eded857e4f3f9b6b763842",
+    "verify_full_official_availability_graph.py": "896fe9f55622453a5e792a707fc952339d507e188630f400f0b8b473df48fdbf",
+    "evaluate_full_official_availability_graph49.py": "f50210e2c321c12cd4326edd8d72ee487dce2197309255fb85beb053aca14544",
+    "diagnose_full_official_availability_graph_states.py": "8e202a6751b310dca3a09fe1abb976655be1c03e16e5af3d270cbbc25d1351d2",
+    "launch_full_official_availability_graph_trial.py": "059b8d755eff72320c482d5f31d054e9ddbc5edbb394b2febe33d1ba4ae5569d"
+  },
+  "deployer_sha256": "cbab78308395309f6a9b9b931c22b215c5cac2e0941bab63bb74461b8e994c67",
+  "observer_sha256": "4aa46ae9f86dc3f7853dac67e01baa18b3695e08dd18cdac75a025ac2cd3361a",
+  "failure_and_repair": {
+    "original_failure": "results/preflight/full_official_availability_graph_first_preflight_failure_20261005.json",
+    "initial_rescue_review": "results/preflight/full_official_availability_graph_amp_rescue_review_20261005.json",
+    "preserved_first_sources": "results/preflight/full_official_availability_graph_failed_first_sources_20261005.json",
+    "observed_failure": "frequency_shared state comparison failed at 1/32768 elements, maximum absolute error 2.117827534675598e-6 and relative error 8.363490633200854e-5. Original rtol1e-5/atol1e-6 are retained.",
+    "root_cause_status": "Unproven. Zero-weight extra backward branches are an established structural difference, but the original log alone cannot distinguish their numerical effect from parent repeatability.",
+    "minimal_patch": "Graph targets, losses and audit fields are still computed. Only attachment of the full and partial graph terms is conditioned on model.graph_weight > 0. The .1 path preserves the same .05 full and .05 partial expressions and arithmetic order. Original full losses, M4 objectives, .25 partial CE, .5 partial triplet, native AMP and optimizer ordering remain unchanged.",
+    "accepted_diagnostic_protocol": "parent, parent_repeat, graph-zero on one identical real native64 batch. Each later phase restores the initial state_dict including BN buffers and creates a fresh optimizer/GradScaler512; each phase seeds1234. The extra parent repetition is sufficient for the current minimal diagnosis. Additional graph repetitions are not required absent a new ambiguous failure."
+  },
+  "checks": [
+    {
+      "check": "Current source identity and minimal diff",
+      "status": "PASS_LOCAL_READ_ONLY",
+      "evidence": "All six runtime SHA256 values equal rescue plan.source_sha256; all32 protected parent hashes match locally. Direct comparison with archived failed source texts shows only conditional graph-term attachment, parent repeat/named comparisons/reporting, and contract update count8->12 in the three changed runtime files."
+    },
+    {
+      "check": "Original numerical and audit gates preserved",
+      "status": "PASS_SOURCE",
+      "evidence": "Both parent_repeat and graph-zero compare state/gradient key sets and tensors at unchanged tolerance, exact BN counters, exact CPU/selected CUDA RNG and parent detail fields. Graph-zero additionally checks R query/N reference, stopped reference, distinct positives, valid anchors and zero additional backbone passes. Each phase requires an actual optimizer update and four actual backbone calls. Assertion messages now identify phase, state/gradient and tensor name."
+    },
+    {
+      "check": "All four preflights precede any fresh50",
+      "status": "PASS_SOURCE",
+      "evidence": "The first two-lane executor completes every contract and .1 three-update smoke before reaching the separate training executor. Each contract contains3 asserted optimizer updates; four contracts total12, with12 further smoke updates. A failing parent repeat or graph contract prevents that lane and the all-variant barrier from completing."
+    },
+    {
+      "check": "Preserved failed attempt and isolated recovery namespace",
+      "status": "PASS_SOURCE",
+      "evidence": "The deployer requires the failed original controller and its recorded contract/preflight children to be terminal, and confirms no original training launch receipts. It requires the new m5_rescue1 output/receipt to be absent. It copies only the reviewed six graph runtime files and review/plan records after local and remote protected-parent checks. The first failed output directory and logs are not overwritten."
+    },
+    {
+      "check": "Authorized hardware and prerequisites",
+      "status": "PASS_SOURCE",
+      "evidence": "Only server2026 is contacted. Physical GPU2 runs demo_shared then axis_shared; GPU3 runs frequency_shared then twins_shared. Two serial lanes allow at most two concurrent neural jobs. Prerequisites check completed M4/882 GT cases, completed baselines, exact paired sampling, >4500MiB free storage and selected-GPU memory availability. Existing gpu_thermal_execute performs no temperature or power query/control."
+    },
+    {
+      "check": "Observer follows the new existing controller",
+      "status": "PASS_SOURCE",
+      "evidence": "The observer reads the rescue launch receipt and uses distinct rescue observation/terminal filenames. It polls every240 seconds, performs read-only remote observations, records nonzero child exits and stops on controller/failure evidence. Completion requires196 frozen cases,882 enhanced state cases, paired sampling, all variant frozen CPU audits and all enhanced state CPU audits. It starts no neural jobs and changes no remote source."
+    },
+    {
+      "check": "Syntax and embedded remote commands",
+      "status": "PASS_LOCAL_STDLIB_ONLY",
+      "evidence": "The six runtime files plus deployer and observer parse with Python3.10 syntax rules using local Python3.13 ast.parse(feature_version=(3,10)). All three interpolated remote Python programs also parse after local string rendering. No program import, SSH, CUDA, real model or training execution occurred."
+    },
+    {
+      "check": "Requested experiment scope retained",
+      "status": "PASS_SOURCE",
+      "evidence": "Builders keep graph weight.1/temperature.07, cyclic seven-source stopped cached-raw references, no added parameters or backbone passes, all four fair variants, native64, and full official1032/591/1055 with no training identity holdout. Frozen49 and enhanced six-state wrappers reuse the unchanged official evaluator/diagnostic paths."
+    }
+  ],
+  "real_execution_status": {
+    "reviewer_ran_ssh": false,
+    "reviewer_ran_cuda_or_models": false,
+    "reviewer_started_training": false,
+    "revised_real_contracts_passed": "not yet observed by this reviewer",
+    "revised_nonzero_smokes_passed": "not yet observed by this reviewer",
+    "fresh50_release": "Only the runtime all-four-contract/all-four-smoke barrier may release training after actual passes.",
+    "on_failure": "Preserve the named failure and use the parent_repeat versus graph phase to localize it. Do not widen tolerances, alter parent AMP scaling or replay unchanged code as a rescue."
+  }
+}

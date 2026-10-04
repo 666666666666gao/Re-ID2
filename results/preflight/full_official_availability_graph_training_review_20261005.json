@@ -1,0 +1,209 @@
+{
+  "status": "PASS",
+  "reviewed_at": "2026-10-05T01:32:43+08:00",
+  "review_scope": "Two prepared-only availability-graph training files and preparation JSON, checked against the actual unchanged full-official M4/shared-DeMo dependency interfaces. Source inspection, local Python AST, synthetic CPU tensor function checks, and saved official manifests/parent batch histories only.",
+  "skill": "C:/Users/gb/.codex/skills/experiment-bridge/SKILL.md Phase 2.5 CODE_REVIEW",
+  "policy": "C:/Users/gb/.codex/skills/shared-references/local-codex-policy.md",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "max",
+  "actual_model": "unverified",
+  "actual_effort": "unverified",
+  "actual_backend": "unattested",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "attribution": "Fresh delegated reviewer read the exact files. Requested model/effort are workflow attribution, not independent backend attestation. No cross-family acceptance is claimed.",
+  "sources_sha256": {
+    "availability_graph_training.py": "f185f6904ad7098d3321c1a4596bd861774077e2e19ec3e183a4a18d5076bc01",
+    "run_full_official_availability_graph_experiment.py": "cf24e2d6d3182665c9aee847afb7536c4cf2fa8346eded857e4f3f9b6b763842"
+  },
+  "preparation": "results/preflight/full_official_availability_graph_preparation_20261005.json",
+  "blocking_issues": [],
+  "nonblocking_issues": [],
+  "source_fixes_requested": [],
+  "checks": [
+    {
+      "check": "Exact prepared sources and parent interfaces",
+      "status": "PASS",
+      "evidence": "Both source hashes equal the preparation record. Seventeen new/dependency files parse under local Python3.7. Thirteen relevant parent file hashes equal the existing M4 review record; no parent source was changed by this review.",
+      "references": [
+        "availability_graph_training.py:11",
+        "run_full_official_availability_graph_experiment.py:14",
+        "results/preflight/full_official_modality_outlet_source_review_20261005.json"
+      ]
+    },
+    {
+      "check": "Single additional objective uses the actual public identity output",
+      "status": "PASS_SOURCE_AND_CPU_TOY",
+      "evidence": "Full student is output[1][:,5120:] and partial student is query[:,5120:]. The inherited M4 path places routed PM, PF and interaction increments in those public512 coordinates through CommonOutletAxis original_mean -> CommonCoordinateAxis.fuse. Shared-DeMo uses its corresponding actual public512. identity_alignment_loss re-normalizes the metric slice, so the existing sqrt(.25) metric amplitude does not unintentionally scale this loss. Both losses use temperature .07 and exactly .5*.1=.05 weight. Toy execution verifies full original auxiliary loss plus .05 full graph and .25 CE/.5 triplet plus .05 partial graph.",
+      "references": [
+        "availability_graph_training.py:40",
+        "availability_graph_training.py:53",
+        "common_coordinate_axis.py:34",
+        "common_outlet_axis.py:55",
+        "shared_identity_axis.py:120",
+        "shared_identity_axis.py:190"
+      ]
+    },
+    {
+      "check": "Reference contains only selected real B sources and is stopped",
+      "status": "PASS_SOURCE_AND_28_CPU_TOY_CASES",
+      "evidence": "The BACKBONE hook sees RGB, NI, TI in the existing encode_available order. It caches only detached CLS plus mean detached patch tokens, matching the original raw representation before each modality reduction. Exactly three full-view calls are asserted. Selected raw vectors are averaged and passed through the existing shared_projection inside no_grad, then detached again. The reference is shared by both graph terms. All 7 reference sets for all 4 variants passed exact selected-raw-mean and stopped-reference checks using parameter-free callable tensor stand-ins.",
+      "references": [
+        "availability_graph_training.py:21",
+        "availability_graph_training.py:30",
+        "shared_identity_axis.py:70",
+        "modeling/meta_arch.py:90"
+      ]
+    },
+    {
+      "check": "Hook return and backbone/activation lifetime",
+      "status": "PASS_SOURCE_AND_CPU_TOY",
+      "evidence": "capture has no return value, so it does not replace the backbone output. Its handle is removed immediately after the full model forward, before partial forward. Full loss is backpropagated without retain_graph before deleting output/raw_sources and starting partial forward; reference/gallery are detached. Toy traces verify full forward -> full backward -> partial forward -> partial backward, hook removal, exactly 3 captured full calls, and exactly 3+|A| total calls. The new code does not add a backbone pass. Real peak-memory behavior was not measured.",
+      "references": [
+        "availability_graph_training.py:21",
+        "availability_graph_training.py:26",
+        "availability_graph_training.py:45",
+        "availability_graph_training.py:50",
+        "run_shared_identity_experiment.py:48"
+      ]
+    },
+    {
+      "check": "No added RNG draw or BatchNorm update from target construction",
+      "status": "PASS_SOURCE_AND_CPU_TOY_RNG",
+      "evidence": "B selection is modulo arithmetic on graph_step. The existing shared projection is LayerNorm/Linear/GELU/LayerNorm; augmented M4 also has the existing SharedReadout query addition. Those target operations contain no BatchNorm, dropout or random draw. The target never calls shared_neck/classifier or model.forward. Four zero-weight callable tensor fixtures with an explicit stochastic backbone stand-in produce exactly the parent CPU RNG state. Actual CUDA RNG/BN state equivalence remains required.",
+      "references": [
+        "availability_graph_training.py:18",
+        "availability_graph_training.py:31",
+        "shared_identity_axis.py:28",
+        "common_outlet_axis.py:18"
+      ]
+    },
+    {
+      "check": "Original objectives, routing and inference preserved",
+      "status": "PASS_SOURCE_AND_CPU_TOY",
+      "evidence": "The augmented builder is the existing M4 builder, preserving measurement_only gates, original_mean pooling, .1 relation, .1 PF alignment, .1 PM alignment, and .07 alignment temperature. The full pair losses and final auxiliary scalar are accumulated exactly as before; original .25 partial CE and .5 stopped-full-gallery triplet remain. Shared-DeMo uses its existing full-official shared builder. No new nn.Module or Parameter is declared, no state-dictionary entry is added, and no inference method is replaced. The M4 predictor gates remain detached. This is the same new training objective across DeMo and the matched axis/frequency/twins controls.",
+      "references": [
+        "run_full_official_availability_graph_experiment.py:14",
+        "run_full_official_modality_outlet_experiment.py:14",
+        "modality_outlet_alignment_axis.py:50",
+        "measurement_gate_axis.py:18",
+        "availability_graph_training.py:34",
+        "availability_graph_training.py:55"
+      ]
+    },
+    {
+      "check": "Positive observations and negatives use training GT",
+      "status": "PASS_SOURCE_CPU_MATH_AND_SAVED_DATA",
+      "evidence": "The existing identity_alignment_loss requires same GT identity and unequal observation names for positives, removes same-observation entries from the denominator, and excludes anchors with no distinct-observation positive. Other identities supply negatives. A synthetic duplicate-only identity example matches a manual objective within1e-6, excludes the two invalid anchors, yields finite nonzero student gradients, and no reference gradient. Real saved three M3a histories each contain705 B64/P16/K4 batches, all1032 training records, minimum52 valid distinct-observation anchors and minimum130 positive pairs per batch. No image or new model was read.",
+      "references": [
+        "identity_alignment_axis.py:12",
+        "official_training_data.py:18",
+        "experiment_data.py:85",
+        "data/datasets/sampler.py:15",
+        "results/full_official_control_m3b_20261004/training"
+      ]
+    },
+    {
+      "check": "All seven B sets, original A sampling, and counters",
+      "status": "PASS_SOURCE_BUILDER_TOY_AND_SAVED_DATA",
+      "evidence": "REFERENCE_SETS is the original six proper PARTIAL_SETS followed by RNT. The full official driver still samples A uniformly from the six sets using its independent seeded generator. graph_step is set to0 in every fresh builder, including smoke, logs the current zero-based attempt, and increments once after each attempted step. A mock AMP skip is counted as optimizer_updated=false while the B cycle advances by attempt, matching the stated step-based cycle. Four mocked builders verify graph .1/.07/cycle arguments and all inherited M4 arguments. Projecting B onto the three identical saved parent A/name sequences covers all49 A/B pairs, minimum9 and maximum101 batches; actual new-run coverage has not occurred.",
+      "references": [
+        "availability_graph_training.py:8",
+        "availability_graph_training.py:18",
+        "availability_graph_training.py:68",
+        "availability_graph_training.py:82",
+        "run_full_official_availability_graph_experiment.py:20",
+        "run_full_official_experiment.py:144"
+      ]
+    },
+    {
+      "check": "Existing metadata and effective AMP update policy",
+      "status": "PASS_SOURCE_AND_CPU_TOY",
+      "evidence": "All original shared/M4 detail keys are retained. reference_requires_grad still describes the stopped full fused gallery; graph_reference_requires_grad is separate. Full-step M4 relation/alignment/modality audits remain available after partial forward because the inherited partial path does not recompute them. In each zero-weight toy variant all old detail values and leaf gradients equal the actual parent step body. The GradScaler order remains two backwards, one unscale, one step, one update, and the same scale comparison for optimizer_updated. The unchanged real driver requires3 effective smoke updates, all trainable gradients finite/nonzero, and exact strict in-memory reload.",
+      "references": [
+        "availability_graph_training.py:58",
+        "availability_graph_training.py:62",
+        "availability_graph_training.py:78",
+        "run_full_official_control_experiment.py:12",
+        "run_full_official_modality_outlet_experiment.py:7",
+        "run_full_official_experiment.py:98"
+      ]
+    },
+    {
+      "check": "Official training and evaluation separation",
+      "status": "PASS_SOURCE_AND_SAVED_MANIFESTS",
+      "evidence": "The entrypoint reuses full_official main, which trains only full_records.train and uses query/gallery for evaluation. Saved manifests confirm1032 train/591 query/1055 gallery and disjoint train/evaluation GT identities with no artificial holdout. The new step receives no query/gallery loader or heldout metadata. Fifty-epoch highest official-query/gallery mAP checkpoint selection with earliest ties remains inherited and explicitly disclosed; benchmark-based selection is not an untouched-test protocol.",
+      "references": [
+        "run_full_official_experiment.py:75",
+        "run_full_official_experiment.py:145",
+        "run_full_official_experiment.py:160",
+        "official_training_data.py:18"
+      ]
+    },
+    {
+      "check": "Preparation premise and scope do not claim efficacy",
+      "status": "PASS_SAVED_EVIDENCE_AND_SOURCE",
+      "evidence": "The existing first-pair receipt reports q_R_g_T axis mAP7.604445524616847/Rank1 7.952622673434856 and frequency mAP8.179627452155026/Rank1 9.137055837563452. This is observed weakness of the prior candidates; it does not establish that the new objective helps or identify a causal explanation. The preparation correctly records actual_new_NN=0, actual_updates=0 and goal_complete=false. This reviewer made no live M4-status observation; the final three-control diagnostic decision remains a separate prerequisite.",
+      "references": [
+        "results/preflight/full_official_modality_outlet_first_pair_diagnostics_20261005.json",
+        "results/preflight/full_official_availability_graph_preparation_20261005.json"
+      ]
+    }
+  ],
+  "executed_verification": {
+    "python": "3.7.6",
+    "torch": "1.13.1+cpu",
+    "command": "E:/anaconda/python.exe -X utf8 -B -S C:/Users/gb/.codex_tmp/review_availability_graph_training_cpu_20261005.py",
+    "CPU_check_exit_code": 0,
+    "parsed_python_files": 17,
+    "unchanged_parent_hashes_against_prior_review": 13,
+    "identity_loss_manual_check": true,
+    "zero_weight_parent_toy_variants": 4,
+    "selected_reference_toy_cases": 28,
+    "builder_initialization_toy_cases": 4,
+    "mock_AMP_skip_counter_check": true,
+    "full_and_partial_graph_weight_math": true,
+    "saved_parent_histories": 3,
+    "saved_parent_batches_each": 705,
+    "saved_parent_unique_training_records_each": 1032,
+    "saved_parent_min_valid_distinct_observation_anchors": 52,
+    "saved_parent_min_positive_pairs": 130,
+    "projected_pair_coverage": 49,
+    "projected_pair_min_batches": 9,
+    "projected_pair_max_batches": 101,
+    "saved_parent_three_normalized_orders_exact": true,
+    "private_verification_receipt": "C:/Users/gb/.codex_tmp/review_availability_graph_training_cpu_20261005.json",
+    "fixture_limits": "Actual source function bodies executed with synthetic CPU tensors, memory-only model/backbone/scaler/optimizer callables, intercepted .cuda/autocast, and no optimizer tensor updates. No nn.Module/CLIP was constructed. These are toy checks, not actual neural training, server PyTorch, CUDA, BN or AMP equivalence."
+  },
+  "actual_new_NN": 0,
+  "actual_model_constructions": 0,
+  "actual_optimizer_updates": 0,
+  "actual_new_weights": 0,
+  "actual_checkpoint_loads": 0,
+  "actual_dataset_image_reads": 0,
+  "actual_CUDA_operations": 0,
+  "CUDA_initialized": false,
+  "actual_SSH_calls": 0,
+  "actual_SCP_calls": 0,
+  "actual_deployments": 0,
+  "actual_experiment_subprocess_launches": 0,
+  "actual_deletions": 0,
+  "actual_Git_writes": 0,
+  "source_changes_by_reviewer": 0,
+  "actual_new_model_smokes_completed": 0,
+  "actual_new_model_fresh50_runs": 0,
+  "launch_gate_satisfied": false,
+  "required_before_launch": [
+    "Finish and inspect the existing M4 third control, all three saved-GT CPU882 state cases and fair final comparisons before deciding on this hypothesis; this review made no live-status claim.",
+    "Real server/CUDA zero-weight equivalence to the corresponding parent AMP optimizer step, including original losses, gradients, actual updated state, existing BN buffers and RNG; selected-source stopping, no hidden parameter/inference change, hook lifetime and backbone-call count.",
+    "For every model, a real numerical CUDA contract and at least3 actual GradScaler optimizer updates with finite nonzero required gradients and exact strict reload, using a fresh builder with graph_step0; toy results do not meet this gate.",
+    "Review the actual prospective launch/deployment/evaluation wiring before execution. This review covers only the two supplied prepared source files and their existing parent interfaces.",
+    "Actual new batch orders must demonstrate all49 query/reference availability pairs and preserve matched PK/A sequences; saved-parent projected coverage is not actual new coverage."
+  ],
+  "result_requirements": [
+    "Frozen selected-checkpoint full49 metrics against installed dataset GT with original camera/scene exclusion; augmented controls retain six-state49/contribution GT audits.",
+    "Retain fair DeMo, ordinary-frequency/twins and prior references and report signed comparisons; the user's goal still covers all three datasets, missing modalities, fair controls, inference utility and at least+2 mAP/+2 Rank1.",
+    "No efficacy, inference utility, causal explanation, unified three-dataset success or completed user goal is established by this prepared source PASS."
+  ],
+  "goal_complete": false
+}

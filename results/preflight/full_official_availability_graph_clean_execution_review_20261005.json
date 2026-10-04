@@ -1,0 +1,96 @@
+{
+  "status": "PASS",
+  "review_date": "2026-10-05",
+  "review_scope": "Source review of the clean disabled/positive contract, six runtime files, clean plan, deployer and observer, following direct inspection of both real failed AMP contracts. PASS permits the staged real preflight; it is not a real CUDA, smoke, training or benchmark PASS.",
+  "reviewer": "Native Codex reviewer /root/review_graph_amp_rescue",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "max",
+  "actual_model": "unverified",
+  "actual_effort": "unverified",
+  "actual_backend": "unattested",
+  "attribution": "Requested model/effort follow the installed Codex policy. The reviewer has no independent runtime model attestation; no cross-family acceptance is claimed.",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "sources_sha256": {
+    "availability_graph_training.py": "e46ebbe383d561ca9ce473e1f295e1457b7463c7bdcedcbf07dc4e596169f268",
+    "run_full_official_availability_graph_experiment.py": "cf24e2d6d3182665c9aee847afb7536c4cf2fa8346eded857e4f3f9b6b763842",
+    "verify_full_official_availability_graph_v2.py": "fe2868905006203b754a931cdad0f469fc4ec7be19097306c97be83eab714668",
+    "evaluate_full_official_availability_graph49.py": "f50210e2c321c12cd4326edd8d72ee487dce2197309255fb85beb053aca14544",
+    "diagnose_full_official_availability_graph_states.py": "8e202a6751b310dca3a09fe1abb976655be1c03e16e5af3d270cbbc25d1351d2",
+    "launch_full_official_availability_graph_trial.py": "24a60a2e965741fab43a607886123485685001a9539bbc0d14324d14d5055bc8"
+  },
+  "deployer_sha256": "44df3ccbd6c56d9af1565c1cfae7f11d3e5c05a656d38a8df8eb4f97565eb665",
+  "observer_sha256": "56c152edcd8ee5d56bb4b04ad9fb8d0dbb3b89216c3684bde8f3da3c06c746bf",
+  "reviewed_plan": "results/preflight/full_official_availability_graph_clean_plan_20261005.json",
+  "historical_evidence": {
+    "first_failure": "results/preflight/full_official_availability_graph_first_preflight_failure_20261005.json",
+    "second_failure": "results/preflight/full_official_availability_graph_rescue_preflight_failure_20261005.json",
+    "second_stage_judgment": "results/preflight/full_official_availability_graph_rescue2_judgment_20261005.json",
+    "failed_second_sources": "results/preflight/full_official_availability_graph_failed_rescue_sources_20261005.json",
+    "preservation_check": "Archived training source text hashes exactly to2ae48c2662ec429d5bbd10866faa9d3a3cd6ee9de11036b604a51d8422fa8b77 and archived v1 verifier text exactly to896fe9f55622453a5e792a707fc952339d507e188630f400f0b8b473df48fdbf. Both are the inspected failed rescue1 sources. Earlier reviews remain source-only verdicts with their original limits.",
+    "plan_history": "The inherited plural sources_sha256 field records the original two-file preparation. Current execution correctly binds the separate singular source_sha256 six-file set, reproduced in this review's sources_sha256.",
+    "root_cause_limit": "The repeated historical router.to_modality_query.1.weight[50,121] discrepancy remains unexplained. Disabled-mode delegation must not be described as proving the old mismatch was harmless, nondeterministic or caused by Adam/AMP."
+  },
+  "checks": [
+    {
+      "check": "Current runtime sources and protected parents",
+      "status": "PASS_LOCAL_READ_ONLY",
+      "evidence": "All six current runtime hashes equal clean plan.source_sha256. All32 protected parent source hashes match locally. No parent training/model code was changed."
+    },
+    {
+      "check": "Minimal zero-weight implementation and unchanged positive path",
+      "status": "PASS_SOURCE_AND_ARCHIVED_DIFF",
+      "evidence": "The only training-source changes against the failed rescue1 snapshot are imports of the existing parent steps and an entry branch for graph_weight==0. That branch calls the genuine shared step for demo_shared or M4 step otherwise before graph-only hooks, references or losses. After the parent update it adds honest graph_disabled/weight/step metadata and advances the Python counter. It fabricates no graph-loss or reference audits. The .1 path below it is unchanged."
+    },
+    {
+      "check": "Independent disabled-mode and positive-mode contracts",
+      "status": "PASS_SOURCE",
+      "evidence": "The new v2 verifier resets the same initial state_dict and graph counter before each parent, parent_repeat, disabled and positive phase. Each uses the same real native64 batch, seed1234, a fresh optimizer and GradScaler512. Disabled results compare states/gradients at original rtol1e-5/atol1e-6 and all original detail fields; the output explicitly says delegation does not validate the positive branch. Positive .1 executes separately with R query and N reference."
+    },
+    {
+      "check": "Actual positive reference-source observations",
+      "status": "PASS_SOURCE",
+      "evidence": "External BACKBONE and shared_projection forward hooks have no return value and therefore do not replace model outputs. They capture detached raw CLS/pooled patch values and projection inputs for inspection. The positive phase requires4 backbone outputs and3 projection calls: full raw-source mean, N-only teacher input, then partial R input. The captured teacher projection output must have requires_grad=False. These checks inspect the active .1 execution rather than infer it from disabled delegation."
+    },
+    {
+      "check": "Positive objective, stopping, sampling and model integrity",
+      "status": "PASS_SOURCE",
+      "evidence": "Positive checks require a real optimizer update, finite positive raw graph losses, prescribed RNT/R queries and N reference, stopped reference and valid distinct-observation identity positives. They check original full loss plus .05 full graph, unchanged partial CE/triplet and sample/mining detail, and the complete .25CE/.5triplet/.05partial-graph scalar arithmetic. All phases compare CPU/selected CUDA RNG exactly; positive BN running statistics and counters compare exactly to the parent. Positive state keys are unchanged and gradients are finite with a nonzero shared_projection gradient. The subsequent required smoke checks all trainable gradients and strict reload."
+    },
+    {
+      "check": "Evidence retained before disabled numerical assertions",
+      "status": "PASS_SOURCE",
+      "evidence": "For parent_repeat and disabled comparisons, named largest state/gradient absolute errors and current detail are written to comparison_progress.json before elementwise state/gradient assertions. Assertions retain phase and tensor names. The original numerical tolerances are unchanged."
+    },
+    {
+      "check": "All-variant barrier and actual update totals",
+      "status": "PASS_SOURCE",
+      "evidence": "Controller argv calls verify_full_official_availability_graph_v2.py, then the unchanged positive .1 three-update smoke for each variant. All four contracts and smokes complete before the separate training executor is reached. Four asserted contract updates per variant justify16 total contract updates; three asserted smoke updates per variant justify12 smoke updates. Runtime training uses fresh CLIP/native64/full official1032/591/1055/no identity holdout and50 epochs."
+    },
+    {
+      "check": "Isolated clean deployment with failed jobs closed first",
+      "status": "PASS_SOURCE",
+      "evidence": "The deployer targets the distinct m5_clean campaign and clean receipts. Before replacing only the six reviewed graph runtime files, it checks the failed rescue1 controller and every recorded contract/preflight child are terminal and no training launch exists there. It verifies completed M4/882 CPU cases, completed baselines, protected parent hashes, selected GPU memory availability and >4500MiB free storage. The old failures and v1 verifier are preserved."
+    },
+    {
+      "check": "Authorized execution and observation",
+      "status": "PASS_SOURCE",
+      "evidence": "Server2026 physicalGPU2 runs demo then axis; GPU3 runs frequency then twins, serialized within each lane with at most two neural jobs. The observer reads the clean launch receipt, writes distinct clean observation/terminal files, polls every240 seconds and checks the196 frozen/882 enhanced-state audited completion requirements. No temperature or power query/control is added."
+    },
+    {
+      "check": "Local syntax including rendered remote programs",
+      "status": "PASS_LOCAL_STDLIB_ONLY",
+      "evidence": "All six runtime files plus clean deployer and observer parse under Python3.10 grammar using local Python3.13 ast.parse(feature_version=(3,10)). All three embedded remote Python programs parse after local string rendering. No remote code, model import, CUDA or neural computation was executed by the reviewer."
+    }
+  ],
+  "real_gates_pending": {
+    "clean_contracts_passed": "Not yet observed",
+    "clean_smokes_passed": "Not yet observed",
+    "fresh50_started_by_reviewer": false,
+    "ssh_or_cuda_executed_by_reviewer": false,
+    "required_next_evidence": "Actual passes for all four new disabled/positive contracts and all four .1-weight smokes. In particular, exact positive BN statistics, exact captured source inputs, scalar loss preservation and RNG checks must be decided by real CUDA execution, not this static review.",
+    "on_failure": "Preserve the new failure and comparison_progress.json. Read the actual failed condition before further work; do not reinterpret this source PASS as a runtime PASS, relax tolerances or rerun unchanged code as a rescue."
+  }
+}

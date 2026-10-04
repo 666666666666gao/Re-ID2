@@ -1,0 +1,63 @@
+{
+  "status": "TARGETED_PARENT_ADAM_DIAGNOSTIC_REQUIRED_BEFORE_ACCEPTANCE_GATE_CHANGE",
+  "review_date": "2026-10-05",
+  "reviewer": "Native Codex reviewer /root/review_graph_amp_rescue",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "actual_backend": "unattested",
+  "scope": "Primary-artifact and source judgment only. No SSH, CUDA, real model or training execution by the reviewer. The current training implementation should remain unchanged while the exact parent optimizer behavior is measured.",
+  "primary_artifact": {
+    "path": "results/preflight/full_official_availability_graph_clean_preflight_failure_20261005.json",
+    "sha256": "a72c1cddb160e2e5dbcceb3e4e732c2b9bbd0625fdfe4f025575c1b6469bb504",
+    "collected_at": "2026-10-05T02:42:16.581407",
+    "actual_fresh50_runs": 0,
+    "failed_phase": "frequency_shared disabled state comparison",
+    "tensor": "router.to_modality_query.1.weight",
+    "index": [50, 121],
+    "state_absolute_error": 0.000002117827534675598,
+    "state_relative_error": 0.00008364190580323339,
+    "mismatched_elements": "1/32768",
+    "disabled_all_gradient_max_error": 0.0000000009313225746154785,
+    "disabled_router_weight_gradient_tensor_max_error": 0.0000000002000888343900442,
+    "parent_repeat_state_max_error": 0.000000001862645149230957,
+    "parent_repeat_gradient_max_error": 0.0000000023283064365386963,
+    "correction_to_task_summary": "The frequency parent_repeat state maximum is1.862645149230957e-9. The3.725290298461914e-9 value belongs to the axis_shared contract.",
+    "other_results": "The artifact contains PASS results for complete demo_shared and axis_shared disabled/positive contracts. It contains the completed demo_shared three-update smoke. Axis smoke completion is not established by this snapshot."
+  },
+  "judgment": [
+    "The disabled branch invokes the identical existing M4 parent step before any new graph hook, projection or loss. The repeated historical state discrepancy therefore cannot be used as evidence that the active graph objective or new backward branches caused this occurrence.",
+    "Parent repeats now have directly measured nonzero floating-point gradient differences. The disabled run's maximum gradient difference is below the original atol1e-6, while one post-Adam parameter exceeds the state tolerance. These are different numerical requirements; close gradients do not imply equally close Adam-updated parameters near an epsilon-sensitive effective gradient.",
+    "This makes an overly sensitive post-Adam comparison a concrete hypothesis, not yet a proven explanation. The current artifact lacks the failing element's own gradient, initial parameter, actual epsilon and optimizer moments. The router tensor's maximum gradient error need not occur at index(50,121).",
+    "Frequency disabled gradient/detail/RNG/BN assertions occur after the failed state assertion, so their formal PASS cannot be inferred from the traceback. The recorded gradient maximum is evidence of small differences, not a substitute for the remaining checks.",
+    "Do not make another training-path patch or loosen state tolerances on this evidence. Perform the single bounded diagnostic below before deciding whether the acceptance contract should change."
+  ],
+  "optimizer_basis": {
+    "installed_torch_from_actual_smoke": "2.5.1+cu121",
+    "actual_configuration": {"optimizer": "Adam", "base_lr": 0.00035, "weight_decay": 0.0001},
+    "primary_implementation_reference": "https://github.com/pytorch/pytorch/blob/v2.5.1/torch/optim/adam.py",
+    "verified_implementation_facts": "PyTorch2.5.1 Adam defaults to epsilon1e-8 and betas(.9,.999); ordinary Adam adds coupled weight decay to the gradient before updating moments. The actual diagnostic must read its own parameter group rather than assume these defaults.",
+    "derived_first_step_relation": "For step1 with zero initial moments and ordinary non-maximizing/non-AMSGrad Adam, h=g+weight_decay*theta0 and theta1=theta0-lr*h/(abs(h)+eps), ignoring floating-point rounding. The local sensitivity is lr*eps/(abs(h)+eps)^2, bounded by lr/eps.",
+    "conditional_scale_check": "With lr.00035 and eps1e-8 the upper sensitivity bound is35000. A2.0008883439e-10 gradient perturbation can therefore permit a change up to about7.0031092e-6 near h=0, which includes the observed2.1178275e-6 scale. This is only a feasibility calculation using a tensor maximum, not a fit to the missing culprit measurements. Coupled weight-decay cancellation matters even when raw g itself is not near zero."
+  },
+  "minimal_actual_diagnostic": {
+    "source": "diagnose_graph_disabled_adam.py",
+    "source_sha256": "e04c35c29d0298124e85a54dbddb26571b9dc7930fd14b163ed8eee93d99d297",
+    "execution_scope": "One frequency_shared job on authorized physicalGPU3 after the clean controller and every recorded preflight child are terminal. Three direct parent steps and one disabled delegation, all from the same initial model state/native64 augmented batch/seed1234 with fresh original optimizer and native GradScaler512. No whole-campaign retry, positive graph claim, benchmark evaluation or new saved weights.",
+    "measurements": "At the known element record theta0, theta1, unscaled gradient, actual lr/weight_decay/epsilon/betas, step1 and exp_avg/exp_avg_sq. Record all-gradient and state maximum differences, original detail equality, exact RNG and exact BN statistics. Preserve measurements in progress.json before reconstruction or cross-run assertions.",
+    "independent_checks": "Keep the original gradient rtol1e-5/atol1e-6 and exact detail/RNG/BN checks. Reconstruct each observed optimizer update from its own measured moments under the original numerical tolerance. Record cross-run parameter differences without using them to abort this explicitly diagnostic job.",
+    "required_interpretation": "After execution, jointly compare g+weight_decay*theta0, exp_avg/(1-beta1), exp_avg_sq/(1-beta2), observed update and reconstructed update for the culprit. Check reconstruction residuals are small relative to the observed inter-run difference. Moment-based reconstruction by itself is not proof that the measured gradient perturbation caused the difference.",
+    "what_parent3_resolves": "A third direct parent call tests whether call order/repeated native execution can produce the same effect without entering the disabled wrapper. If it does not, the measured optimizer relations can still localize the update sensitivity, but must not prove an unobserved cause of the upstream gradient variation."
+  },
+  "conditional_minimal_verifier_revision_after_evidence": [
+    "Only if the measured optimizer/gradient relation explains the parameter discrepancy, keep cross-run post-Adam state errors as reported diagnostics rather than a sole method-equivalence rejection.",
+    "Retain original loss/detail/sampling, all-gradient comparisons at their existing tolerance, exact RNG and BN/buffer checks, model keys/counts, actual optimizer updates, native AMP and strict reload.",
+    "Validate each step's optimizer update against its own measured gradient/moments and actual group settings; do not compare it to an update generated from a slightly different gradient. Keep this limited to the actual first-step Adam configuration, without a generic numerical framework or fallback.",
+    "Keep the separate actual positive.1 R-to-N reference/loss/stopping/backbone/RNG/BN contract and all-four-model smoke barrier before fresh50.",
+    "Describe the resulting claim as forward/gradient equivalence plus optimizer update integrity. Do not leave an unqualified post-update parameter-equivalence claim true when its recorded comparison fails. Preserve all earlier failure artifacts and source snapshots."
+  ],
+  "current_training_source_sha256": {
+    "availability_graph_training.py": "e46ebbe383d561ca9ce473e1f295e1457b7463c7bdcedcbf07dc4e596169f268",
+    "verify_full_official_availability_graph_v2.py": "fe2868905006203b754a931cdad0f469fc4ec7be19097306c97be83eab714668",
+    "solver/make_optimizer.py": "09e8e36c78c78cda75daad52bbc48f77f4dc33b96568a06bc1c193132ffbeafc"
+  }
+}

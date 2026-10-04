@@ -1,0 +1,74 @@
+{
+  "status": "CLEAN_DISABLED_AND_POSITIVE_CONTRACT_REIMPLEMENTATION_RECOMMENDED",
+  "review_date": "2026-10-05",
+  "reviewer": "Native Codex reviewer /root/review_graph_amp_rescue, second-stage follow-up",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "max",
+  "actual_backend": "unattested",
+  "scope": "Read the second primary failure before inspecting source. Static diagnosis and a minimal reimplementation plan only; no SSH, CUDA, model execution or training by this reviewer. This is not an implementation PASS or a real preflight PASS.",
+  "primary_evidence": {
+    "path": "results/preflight/full_official_availability_graph_rescue_preflight_failure_20261005.json",
+    "sha256": "e1582926935f526ec5f0595e0e39c506f11cab7c32dc543b4ac74e0791263825",
+    "failed_variant": "frequency_shared",
+    "failed_phase": "graph",
+    "failed_tensor": "router.to_modality_query.1.weight",
+    "failed_index": [50, 121],
+    "mismatched_elements": 1,
+    "tensor_elements": 32768,
+    "maximum_absolute_difference": 0.000002117827534675598,
+    "maximum_relative_difference": 0.00008363490633200854,
+    "unchanged_tolerance": {"rtol": 0.00001, "atol": 0.000001},
+    "parent_repeat": "The failure is reached in the graph phase after all parent_repeat assertions passed. Its exact frequency error magnitudes were not saved before the later failure.",
+    "other_observed_results": "demo_shared and axis_shared have zero recorded state/gradient error for both parent_repeat and graph-zero, exact RNG/BN/details, and three actual .1-weight smoke updates with zero AMP skips each.",
+    "fresh50": "No completed all-four preflight barrier. Parent task reports terminal controller/observer and no active neural jobs or fresh50 starts; no fresh remote inspection was performed by this reviewer."
+  },
+  "revised_diagnosis": [
+    "Removing the two zero-weight objective attachments was insufficient: the same element and numerical difference remain. Do not reuse the original backward-branch-order hypothesis as an established explanation.",
+    "The successful parent_repeat rejects using demonstrated parent repeat variability as justification for this failure. It does not prove CUDA is globally deterministic; the precise cause remains unmeasured.",
+    "The named router query projection already runs under autocast(enabled=False) in axis_collaboration.py:109. Its input depends on AMP expert computations, but attributing this directly to FP16 execution of the named linear layer would be incorrect.",
+    "The zero-weight implementation still runs the new backbone hook, selected-source projection and two unused graph losses. Their allocations, retained autograd objects and extra execution distinguish it from the parent. The current artifact does not identify which operation first changes a forward value, gradient or optimizer update.",
+    "SharedReadout.forward only applies the existing projection and adds its query parameter. Its underlying projection has LayerNorm/Linear/GELU/LayerNorm, not BatchNorm or Dropout. A hidden BN update or additional RNG consumption from that reference head is not supported by source.",
+    "The failure precedes saved graph gradient/loss comparisons. Near-zero effective gradient plus Adam amplification is plausible, especially for this small conditioning projection, but cannot be claimed without the named gradient, initial parameter, weight decay, epsilon and update evidence."
+  ],
+  "recommended_minimal_training_change": {
+    "file": "availability_graph_training.py",
+    "change": "At function entry after the variant assertion, if graph_weight == 0, immediately return the existing shared_step for demo_shared or the existing m4_step for an enhanced variant. Perform this before graph-only hooks, feature caches, reference projection, losses, metadata mutation or graph-step increment. Keep the authorized .1 path mathematically and operationally unchanged.",
+    "why_in_scope": "Zero weight is an existing exercised disabling mode with two real failed contracts. Eliminating all work for a disabled factor is an explicit mode implementation, not an exception fallback or a speculative compatibility path.",
+    "result_schema": "The disabled branch returns the genuine parent detail. It must not fabricate selected-reference, graph-loss, stopped-reference or graph-audit fields for computations it did not execute.",
+    "limits": "This establishes parent delegation when the factor is disabled. It does not explain the historical failure and does not independently prove numerical preservation of the .1 graph implementation. Keep both old failures as evidence of the rejected zero-weight implementation."
+  },
+  "recommended_clean_verifier": {
+    "approach": "Reimplement the failed verifier clearly from the plan rather than continue patching its overloaded zero-weight test. Separate disabled-mode parent equivalence from positive graph semantics and actual update integrity.",
+    "disabled_mode": [
+      "Use the original real native64 batch, initial state including BN buffers, seed1234, fresh optimizer and native GradScaler512. Existing parent, parent_repeat and disabled-wrapper phases may be retained.",
+      "Keep all current state and gradient comparisons at rtol1e-5/atol1e-6, exact BN counts, CPU/selected CUDA RNG, parent detail and actual update/backbone-count checks.",
+      "Describe the result as disabled-mode parent delegation/equivalence. Do not claim selected-B, stopping or graph positive-observation validation from this branch."
+    ],
+    "positive_mode": [
+      "Restore the same initial state and run one actual .1-weight graph update with graph_step=1 and retained=(0,), so the partial query is R and the selected reference is N. This is an additional direct graph contract, separate from the disabled comparison and existing three-update smoke.",
+      "Require the actual update, finite losses, reference N/query R, valid distinct-observation positives and a stopped reference for both full and partial graph objectives. Count actual backbone calls; this case must use four.",
+      "Compare RNG consumption and BN update counts with the parent using existing exact checks. Do not compare .1 parameter states or gradients to the parent because the new objective intentionally changes them.",
+      "Retain the full/partial graph raw losses and original full, partial CE and triplet terms in the result. Use these to audit the prescribed .05 full/.05 partial addition. No new architecture, weights, AMP scaling or training objective is authorized.",
+      "Keep the existing .1-weight three-real-update smoke, all-gradient and strict-reload checks for every variant. All four disabled/positive contracts and all four smokes must complete before fresh50. Update actual contract update totals to reflect the chosen explicit phases."
+    ],
+    "failure_observability": "Compute and save comparison summaries before the first assertion: phase, original loss/detail values, RNG/BN checks, state/gradient tensor names, mismatch counts and maximum errors. Also save the exact parent/current/initial parameter and unscaled gradient values at router.to_modality_query.1.weight[50,121], plus its Adam parameter-group settings, if the comparison differs. This is targeted at the twice-observed failure and needs no retry wrapper or extra exception handling.",
+    "what_real_validation_resolves": "A pass establishes correct disabled delegation and actual positive graph semantics/update integrity under the specified gates. A disabled failure with parent_repeat passing requires investigation of reset/dispatch/instrumentation. A positive gate failure isolates the active factor. Neither outcome retroactively proves the numerical cause of the historical unused-computation mismatch."
+  },
+  "causal_diagnostic_if_needed": {
+    "required_for_claiming_old_root_cause": true,
+    "required_to_implement_clean_disabled_mode": false,
+    "scope": "If a causal explanation of the old zero-mode mismatch is needed, run a separate explicitly diagnostic comparison of the preserved old path with forward/loss/named-gradient/Adam measurements, not an unchanged retry intended to pass. Tiny state error alone is insufficient to label the effect harmless AMP noise or Adam amplification."
+  },
+  "preservation_and_execution": [
+    "Preserve both original failure JSONs, their source snapshots and the previous source-only PASS reviews with their original stated scope.",
+    "Save the currently failed rescue1 source snapshot before implementing the clean verifier or zero-mode change.",
+    "Review the final changed runtime files and execution schema before deployment; use a distinct rescue namespace and preserve the all-variant barrier.",
+    "Confirm the old controller and its children are terminal before replacing only the reviewed graph files. Keep protected parents, physical GPU2/3, at most two neural jobs, and 240-second observation cadence."
+  ],
+  "reviewed_failed_sources_sha256": {
+    "availability_graph_training.py": "2ae48c2662ec429d5bbd10866faa9d3a3cd6ee9de11036b604a51d8422fa8b77",
+    "verify_full_official_availability_graph.py": "896fe9f55622453a5e792a707fc952339d507e188630f400f0b8b473df48fdbf"
+  }
+}
