@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "review_date": "2026-10-05",
+  "reviewer": "Native Codex reviewer /root/review_graph_amp_rescue",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "max",
+  "actual_model": "unverified",
+  "actual_effort": "unverified",
+  "actual_backend": "unattested",
+  "scope": "Source-only review of the future completed-run text collector against the current graph controller, actual parent result schemas and unchanged GT audit producers. The collector was not imported or executed; no SSH, CUDA, new model execution or result collection was performed by this reviewer.",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "source": "results/preflight/full_official_availability_graph_intake_20261005.py",
+  "source_sha256": "30c1d9c34c5a6e819306c1cba99d5b032e37286839447256893ce2a67e308e10",
+  "schema_source_sha256": {
+    "launch_full_official_availability_graph_trial.py": "6e59f108624ca280d1f39405ca32c155012030e574b4a4e068c928ed4f9acd07",
+    "audit_full_official49.py": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+    "audit_full_official_control_states.py": "3de0d88595a343679963867ac6f2ff22de728917d556b20e2c4e7eb657661d2c",
+    "run_full_official_experiment.py": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
+    "gpu_thermal_execute.py": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+    "collect_results.py": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c"
+  },
+  "checks": [
+    {
+      "check": "Current execution source and complete-run barrier",
+      "status": "PASS_SOURCE",
+      "evidence": "Source is taken from the actual validated launch receipt, which names runs/full_official_availability_graph_m5_validated_20261005. Before packing, the collector requires controller COMPLETE, exactly the four distinct expected variants, paired sampling, zero heldout, zero added parameters, the complete preflight with16 contract and12 smoke updates, 196 frozen cases and882 enhanced state cases. It cannot produce the completed intake receipt while the controller result is absent or incomplete."
+    },
+    {
+      "check": "Full training and source-availability coverage",
+      "status": "PASS_SOURCE",
+      "evidence": "Each run requires COMPLETE/50 epochs, graph weight.1 and temperature.07, official train1032/query591/gallery1055 counts and training coverage eligible1032/visited1032/unvisited empty. Each variant requires49 positive graph-pair counts. The reviewed controller constructs the exact7x7 key set and independently checks every pair has been visited before writing COMPLETE. The builder adds graph arguments before the training result captures vars(args), so the required argument fields are present in the actual producer schema."
+    },
+    {
+      "check": "GT audit schemas and phase exits",
+      "status": "PASS_SOURCE_AND_PARENT_ARTIFACT_SCHEMA",
+      "evidence": "Every model requires frozen audit PASS/49 cases/28959 per-query rows. Enhanced variants additionally require PASS_FULL_OFFICIAL_CONTROL_STATES_INSTALLED_GT/294 cases/173754 repeated-condition query rows/28959 calibration rows; DeMo has no enhanced diagnosis/calibrator branch. All required contract, preflight, training, frozen49 and audit exit receipts must be zero, plus diagnosis and diagnosis_audit for the three enhanced variants. Keys and values match the unchanged audit producers and actual completed M4-axis and DeMo baseline JSONs. The audit producers recount saved distances against installed filename-derived GT and check manifests, per-query CSVs, metric aggregates and reference legality."
+    },
+    {
+      "check": "Text-only collection and preservation",
+      "status": "PASS_SOURCE",
+      "evidence": "The remote archive file list is restricted to .json/.csv/.jsonl/.log under this one campaign. Neural weights and NPZ raw arrays do not enter it. The collector creates new remote/local archives and a new destination, copies the compressed text archive, checks its byte count, extracts with tarfile data filtering and records a local SHA256 plus the exact intake source. It contains no training, inference, weight deletion, raw-distance deletion or analysis execution. The receipt correctly leaves actual_analysis_executed and goal_complete false and states the one-seed benchmark-selection limitation and retained weights/distances."
+    },
+    {
+      "check": "Arithmetic and local syntax",
+      "status": "PASS_LOCAL_STDLIB_ONLY",
+      "evidence": "Collector and embedded remote program parse with Python3.10 grammar using stdlib AST only. Counts independently checked:49*591=28959,294*591=173754,882*591=521262 and3*49*591=86877 contribution rows. No collector execution or broad synthetic fixtures were used."
+    }
+  ],
+  "actual_parent_schema_evidence": [
+    "results/full_official_modality_outlet_m4_20261005/frozen49/MSVR310_measurement_only_axis_shared_s42/independent_cpu_audit.json",
+    "results/full_official_modality_outlet_m4_20261005/diagnosis/MSVR310_measurement_only_axis_shared_s42/independent_cpu_audit.json",
+    "results/full_official_baselines_20261004/frozen49/MSVR310_demo_shared_s42/independent_cpu_audit.json"
+  ],
+  "actual_status_at_review": {
+    "source": "results/preflight/full_official_availability_graph_validated_primary_observer_20261005.jsonl",
+    "snapshot_time": "2026-10-05T03:05:53",
+    "controller_complete": false,
+    "preflight_pass": false,
+    "demo_and_frequency_contract_and_smoke_pass": true,
+    "axis_and_twins_contracts_active": true,
+    "reported_failures": [],
+    "local_intake_destination_exists": false,
+    "local_intake_archive_exists": false,
+    "note": "This is the inspected historical snapshot, not a claim about later live execution. Expected final M5 completion results do not yet exist locally and were not fabricated or substituted with parent results."
+  },
+  "execution_condition": "Use this exact source only after the actual validated campaign completes. Its own real completion, GT audit and zero-exit guards must pass before packing. This source PASS does not assert any pending training, evaluation, collection or analysis has completed.",
+  "collector_executed_by_reviewer": false,
+  "source_or_training_method_edited_by_reviewer": false,
+  "fictitious_completion_results_created": false,
+  "goal_complete": false
+}
