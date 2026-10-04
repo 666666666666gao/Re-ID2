@@ -1,0 +1,71 @@
+{
+  "status": "SOURCE_PREPARED_NOT_DEPLOYED",
+  "prepared_at": "2026-10-04T22:53:14",
+  "reason": "Actual six-model full-official analysis shows both axis variants below same-augmentation DeMo and same-mode plain twins; normal11-00 mAP is negative in all6 models; calibration beats zero MAE in0/49 for each of M/F/I in every model. Diagnose the actual routed and projected identity evidence before selecting another training change.",
+  "authoritative_analysis": "results/full_official_control_m3b_20261004/analysis.json",
+  "dataset": "MSVR310",
+  "seed": 42,
+  "train_records": 1032,
+  "query_records": 591,
+  "gallery_records": 1055,
+  "training_heldout_identities": 0,
+  "runs": [
+    {
+      "mode": "measurement_only",
+      "variant": "axis_shared",
+      "gpu": 2,
+      "run_dir": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_control_m3b_20261004/training/MSVR310_measurement_only_axis_shared_s42",
+      "previous_frozen": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_control_m3b_20261004/frozen49/MSVR310_measurement_only_axis_shared_s42"
+    },
+    {
+      "mode": "independent_control",
+      "variant": "axis_shared",
+      "gpu": 3,
+      "run_dir": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_control_m3b_20261004/training/MSVR310_independent_control_axis_shared_s42",
+      "previous_frozen": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_control_m3b_20261004/frozen49/MSVR310_independent_control_axis_shared_s42"
+    }
+  ],
+  "source_files_sha256": {
+    "diagnose_full_official_control_readout.py": "cd4d755947c8a5c3a56a9dcf89c20e3fb981306377aca6964c247cc2a9890f0c",
+    "audit_full_official_control_readout.py": "f63a79f0fca10c83aa156f16a239be178f733a7b8f8def74e1f31ebcbf920170",
+    "diagnose_trained_outlet_utility.py": "26fc6c2320b7739109cc5f91c5241ed3ac36ff4ae9d718fd09ebd49b31d4fecb",
+    "diagnose_common_outlet_scale.py": "c99e82f6db42144ad4a33d264dcb42f18483ec544593f947f83dadca496baef8",
+    "launch_full_official_control_readout.py": "6a27def0079a92dc24960ffe0da213682cbcdcb9dc8fe7f953c926bbd8d21265"
+  },
+  "stages": [
+    "deployed",
+    "base_common",
+    "M_pre",
+    "M_post",
+    "F_pre",
+    "F_post",
+    "M_aux",
+    "F_aux"
+  ],
+  "availability_sets": 7,
+  "modality_pairs": 49,
+  "metric_cases_per_model": 588,
+  "metric_cases_total": 1176,
+  "repeated_query_rows_total": 695016,
+  "metrics": [
+    "mAP",
+    "mINP",
+    "Rank-1",
+    "Rank-5",
+    "Rank-10",
+    "Rank-20"
+  ],
+  "preflight": "Fresh source review and real CUDA smoke64 official query records across all7 availabilities, exact unchanged fuse reconstruction and normal saved feature parity. Smoke is not performance evidence.",
+  "full_evaluation": "Every official query and gallery record; exact deployed metrics and per-query CSV parity across all49 compared with existing frozen full result; stage features and FP32 distances only; independent CPU installed-GT recount with original same-ID/same-scene exclusion, six metrics/CMC50/perquery/groups. Four directed projected M/F versus public-coordinate readouts use the same official references andGT, fixed512D coordinates; no fitting, rotation, matching correction or changed deployment.",
+  "mutations": "No optimizer updates, new weights, backbone/model/loss changes or threshold tuning. Only observational probe methods and forward hooks, reusing the existing trained outlet probe. Weights, original saved arrays and prior text are protected.",
+  "resource_schedule": "2026 physical GPU2/3 only, serial smoke then full frozen diagnostic then CPU audit per card, maximum2 NN. No temperature or power conditions. Existing raw-distance archive native23843 remains the sole archive. Launch after more than3500MiB space is freed for the approximately2.94GB uncompressed raw-distance upper bound; do not reread server distances being archived, only preserved best arrays and text.",
+  "reporting": "One existing handoff only. Plain stage descriptors512D versus deployed5632D explicitly disclosed. Repeated conditions are not independent. No causal or information-destruction claims. Preserve positive/negative results; verified new raw distances locally archive before remote cleanup.",
+  "actual_NN": 0,
+  "goal_complete": false,
+  "directed_public_coordinate_readouts": [
+    "F_post_to_common",
+    "common_to_F_post",
+    "M_post_to_common",
+    "common_to_M_post"
+  ]
+}

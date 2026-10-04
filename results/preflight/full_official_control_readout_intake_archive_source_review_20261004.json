@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-04T15:47:38.319Z",
+  "reviewer_agent": "/root/review_readout_intake_archive",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_backend_attestation": "unavailable",
+  "actual_model": null,
+  "actual_reasoning_effort": null,
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "status": "PASS_SOURCE_INTAKE_ARCHIVE_ANALYZER",
+  "verdicts": {
+    "intake": "PASS",
+    "archive": "PASS",
+    "analyzer": "PASS"
+  },
+  "blocking_issues": [],
+  "nonblocking_issues": [],
+  "scope": {
+    "reviewed_source_files": [
+      "results/preflight/full_official_control_readout_intake_20261004.py",
+      "results/preflight/full_official_control_readout_distances_archive_20261004.py",
+      "analyze_full_official_control_readout.py"
+    ],
+    "read_context_files": [
+      "diagnose_full_official_control_readout.py",
+      "audit_full_official_control_readout.py",
+      "launch_full_official_control_readout.py",
+      "collect_results.py",
+      "results/preflight/full_official_control_readout_primary_observer_terminal_20261004.json",
+      "results/preflight/full_official_control_readout_launch_20261004.json",
+      "analyze_full_official_control_trial.py",
+      "analyze_full_official_baseline_pairs.py"
+    ],
+    "full_official_counts": {
+      "models": 2,
+      "conditions_per_model": 49,
+      "readouts_per_condition": 12,
+      "metric_cases": 1176,
+      "repeated_condition_query_rows": 695016,
+      "raw_npz_files": 98
+    },
+    "review_method": "Direct source review; Python 3.10 AST; exact generated remote payload execution inside virtual filesystem mocks. No real SSH, SCP, removal, neural execution, training or deployment. Companion analyzer was run on actual collected text with both output writes captured in memory; four evidence mutations were rejected.",
+    "actual_metrics_recomputed": 1176,
+    "actual_raw_npz_arrays_recounted": 0,
+    "actual_metric_recompute_basis": "Per-query exported CSV values; this is not a new installed-GT raw-distance recount.",
+    "actual_readout_csv_files_checked": 1176,
+    "actual_previous_deployed_csv_files_checked": 98
+  },
+  "source_sha256": {
+    "results/preflight/full_official_control_readout_intake_20261004.py": "b023f64bf90268dcfe0719dbca1b6782d11ada092cd046d87e326e5d173f7516",
+    "results/preflight/full_official_control_readout_distances_archive_20261004.py": "067c64db8e034ae08fb48b15e856b858446a38a22a81948b7c853b66758545b4",
+    "diagnose_full_official_control_readout.py": "cd4d755947c8a5c3a56a9dcf89c20e3fb981306377aca6964c247cc2a9890f0c",
+    "audit_full_official_control_readout.py": "f63a79f0fca10c83aa156f16a239be178f733a7b8f8def74e1f31ebcbf920170",
+    "launch_full_official_control_readout.py": "6a27def0079a92dc24960ffe0da213682cbcdcb9dc8fe7f953c926bbd8d21265",
+    "collect_results.py": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+    "results/preflight/full_official_control_readout_primary_observer_terminal_20261004.json": "356cd79f9a27c59f3073c6f1a276a9d77a0bb5ba859c0c107d604d353ebdc95c",
+    "results/preflight/full_official_control_readout_launch_20261004.json": "d99e957edcd12c9aab0409221b3f398e2b37c00b57e2de5386b8b42cb9e3b07d",
+    "analyze_full_official_control_readout.py": "3de0d1d3df60e764e12d3cf85ab19e7af09173137eab7d5a7127b93c83331369",
+    "analyze_full_official_control_trial.py": "a894a0d333daaf71f7ee515e1f0112a11f4eb0233d36ebc7790404ffa3ac6ac9",
+    "analyze_full_official_baseline_pairs.py": "88c1ad3c99a4f2904fbefcc122b419d8e82046b137ac2145224ee9b646a0c4d6"
+  },
+  "evidence": {
+    "observer_terminal": "controller_complete=true; metric_cases=1176; both modes report 588 cases,49 raw files,CPU pass; no active neural processes or failures.",
+    "launch_source_matches": {
+      "diagnose_full_official_control_readout.py": true,
+      "audit_full_official_control_readout.py": true,
+      "launch_full_official_control_readout.py": true
+    },
+    "intake": "Local unique destination/archive and terminal gates precede one remote text tar creation and one SCP. Remote gate checks both 588-case installed-GT audits and zero exits. Only .json/.csv/.jsonl/.log enter archive.",
+    "archive": "Initial manifest requires49 raw.npz per mode matching audited condition keys. Each mode is copied, local relative-path/size/SHA256 dictionary must exactly match remote manifest, then the remote payload rechecks raw sizes/SHA and original inputs before unlinking only49 matching raw.npz.",
+    "copy_scope_note": "Archive SCP recursively copies each frozen mode directory, including its text alongside raw files; deletion scope remains only audited raw.npz. This preserves source best weights, official feature arrays, source, texts and audit receipts.",
+    "scope_limits": "Completed NN and installed-GT audit status comes from supplied observer/launch evidence and producer schema. The reviewer did not independently regenerate neural outputs or recount actual raw matrices.",
+    "analyzer": "Actual1176 CSVs (591 queries each) reproduced all six metrics and matched both reported values and saved CPU-audit values. All98 deployed CSVs exactly matched prior exports. Main produced784 delta rows in memory with six metric deltas and all five query-change columns exact; five overlapping group counts7/30/12/6/36 passed.",
+    "analyzer_scope_limits": "Read-only actual text validation, not neural regeneration or a fresh raw-distance audit. Output correctly labels benchmark-selected single-seed MSVR stage diagnostics, 512D versus5632D and overlapping/repeated591-query conditions.",
+    "actual_text_samples": {
+      "measurement_only": {
+        "selected_epoch": 32,
+        "max_cpu_sixmetric_error_pp": 0,
+        "M_projection_normal": {
+          "mAP": -10.009171478152442,
+          "mINP": -7.384711722389266,
+          "Rank-1": -10.829103214890019,
+          "Rank-5": -7.275803722504222,
+          "Rank-10": -5.2453468697123355,
+          "Rank-20": -5.076142131979694
+        },
+        "F_projection_normal": {
+          "mAP": -3.4776571500832745,
+          "mINP": -1.6795742903473947,
+          "Rank-1": -6.768189509306254,
+          "Rank-5": -4.39932318104907,
+          "Rank-10": -1.692047377326574,
+          "Rank-20": -0.5076142131979822
+        },
+        "M_public_directed_normal": {
+          "M_post_to_common": 8.466797704322587,
+          "common_to_M_post": 9.491231029070086
+        },
+        "F_public_directed_normal": {
+          "F_post_to_common": 32.5825047034796,
+          "common_to_F_post": 34.87963620235299
+        }
+      },
+      "independent_control": {
+        "selected_epoch": 27,
+        "max_cpu_sixmetric_error_pp": 0,
+        "M_projection_normal": {
+          "mAP": -11.302018283738903,
+          "mINP": -6.760366725684868,
+          "Rank-1": -11.336717428087987,
+          "Rank-5": -10.321489001692044,
+          "Rank-10": -9.475465313028764,
+          "Rank-20": -8.967851099830796
+        },
+        "F_projection_normal": {
+          "mAP": -1.898631215712932,
+          "mINP": -1.5929963951997088,
+          "Rank-1": -3.891708967851102,
+          "Rank-5": -2.030456852791886,
+          "Rank-10": -1.0152284263959501,
+          "Rank-20": -1.3536379018612479
+        },
+        "M_public_directed_normal": {
+          "M_post_to_common": 6.071164088292893,
+          "common_to_M_post": 6.765117735587603
+        },
+        "F_public_directed_normal": {
+          "F_post_to_common": 33.1886545694473,
+          "common_to_F_post": 35.06359122400431
+        }
+      }
+    }
+  },
+  "validation": {
+    "mock_case_count": 14,
+    "cases": [
+      {
+        "case": "intake:success",
+        "status": "PASS",
+        "mock_remote_calls": 1,
+        "mock_copy_calls": 1,
+        "virtual_raw_deletions": 0
+      },
+      {
+        "case": "intake:terminal_not_complete",
+        "status": "PASS",
+        "mock_remote_calls": 0,
+        "mock_copy_calls": 0,
+        "virtual_raw_deletions": 0
+      },
+      {
+        "case": "intake:failed_exit",
+        "status": "PASS",
+        "mock_remote_calls": 1,
+        "mock_copy_calls": 0,
+        "virtual_raw_deletions": 0
+      },
+      {
+        "case": "intake:failed_audit",
+        "status": "PASS",
+        "mock_remote_calls": 1,
+        "mock_copy_calls": 0,
+        "virtual_raw_deletions": 0
+      },
+      {
+        "case": "intake:short_text_copy",
+        "status": "PASS",
+        "mock_remote_calls": 1,
+        "mock_copy_calls": 1,
+        "virtual_raw_deletions": 0
+      },
+      {
+        "case": "intake:existing_destination",
+        "status": "PASS",
+        "mock_remote_calls": 0,
+        "mock_copy_calls": 0,
+        "virtual_raw_deletions": 0
+      },
+      {
+        "case": "archive:success",
+        "status": "PASS",
+        "mock_remote_calls": 3,
+        "mock_copy_calls": 2,
+        "virtual_raw_deletions": 98
+      },
+      {
+        "case": "archive:local_raw_changed",
+        "status": "PASS",
+        "mock_remote_calls": 1,
+        "mock_copy_calls": 1,
+        "virtual_raw_deletions": 0
+      },
+      {
+        "case": "archive:remote_raw_changed",
+        "status": "PASS",
+        "mock_remote_calls": 2,
+        "mock_copy_calls": 1,
+        "virtual_raw_deletions": 0
+      },
+      {
+        "case": "archive:protected_changed",
+        "status": "PASS",
+        "mock_remote_calls": 2,
+        "mock_copy_calls": 1,
+        "virtual_raw_deletions": 0
+      },
+      {
+        "case": "archive:failed_exit",
+        "status": "PASS",
+        "mock_remote_calls": 1,
+        "mock_copy_calls": 0,
+        "virtual_raw_deletions": 0
+      },
+      {
+        "case": "archive:failed_audit",
+        "status": "PASS",
+        "mock_remote_calls": 1,
+        "mock_copy_calls": 0,
+        "virtual_raw_deletions": 0
+      },
+      {
+        "case": "archive:second_copy_failed",
+        "status": "PASS",
+        "mock_remote_calls": 2,
+        "mock_copy_calls": 2,
+        "virtual_raw_deletions": 49
+      },
+      {
+        "case": "archive:existing_archive",
+        "status": "PASS",
+        "mock_remote_calls": 0,
+        "mock_copy_calls": 0,
+        "virtual_raw_deletions": 0
+      }
+    ],
+    "actual_ssh": 0,
+    "actual_scp": 0,
+    "actual_delete": 0,
+    "actual_nn": 0,
+    "reviewed_source_edits": 0,
+    "harness_note": "Two initial test-harness errors (mock os lacking path; helper parameter colliding with os.name) were corrected in-memory; reviewed source remained unchanged. Final14 cases passed.",
+    "analyzer_checks": [
+      {
+        "case": "actual_collected_1176_cases_and_784_csv_rows_readonly",
+        "status": "PASS",
+        "readout_csv_count": 1176,
+        "prior_deployed_csv_count": 98,
+        "rows_per_csv": 591,
+        "output_writes_captured_in_memory": 2
+      },
+      {
+        "case": "selected_epoch_mismatch",
+        "status": "PASS_REJECTED"
+      },
+      {
+        "case": "cpu_metric_mismatch",
+        "status": "PASS_REJECTED"
+      },
+      {
+        "case": "gt_row_mismatch",
+        "status": "PASS_REJECTED"
+      },
+      {
+        "case": "deployed_prior_perquery_mismatch",
+        "status": "PASS_REJECTED"
+      }
+    ],
+    "analyzer_check_count": 5,
+    "actual_analysis_file_writes": 0,
+    "total_executed_check_cases": 19
+  }
+}

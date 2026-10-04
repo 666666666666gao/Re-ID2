@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-04T23:27:14",
+  "updated_at": "2026-10-05T00:17:31",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -391,7 +391,7 @@
       }
     },
     "full_official_control_readout": {
-      "status": "BOTH_REAL_CUDA_SMOKES_AND_ALL1176_FROZEN_GT_CASES_PASS_TEXT_INTAKE_PENDING",
+      "status": "BOTH_FROZEN_FULL_OFFICIAL_READOUTS_AND1176_CASES_ANALYZED_PUBLISHED",
       "plan": "results/preflight/full_official_control_readout_plan_20261004.json",
       "source_review": "results/preflight/full_official_control_readout_source_review_20261004.json",
       "launch": "results/preflight/full_official_control_readout_launch_20261004.json",
@@ -409,7 +409,28 @@
       "all_cpu_audits_passed": true,
       "controller_exited": true,
       "active_neural_processes": 0,
-      "terminal": "results/preflight/full_official_control_readout_primary_observer_terminal_20261004.json"
+      "terminal": "results/preflight/full_official_control_readout_primary_observer_terminal_20261004.json",
+      "actual_text_intake": true,
+      "text_files": 2392,
+      "actual_analysis": true,
+      "distance_archive": {
+        "status": "ALL98_READOUT_DISTANCE_FILES_LOCAL_SHA256_VERIFIED_SERVER_COPIES_CLEARED",
+        "files": 98,
+        "bytes": 2542101865,
+        "local_root": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\full_official_control_readout_20261004\\raw_distances",
+        "evidence": "results/preflight/full_official_control_readout_distances_local_archive_20261004.json"
+      },
+      "analysis": "results/full_official_control_readout_20261004/readout_analysis.json",
+      "all49_stage_delta_csv": "results/full_official_control_readout_20261004/readout_condition_deltas.csv",
+      "actual_metric_cases": 1176,
+      "training_updates": 0
+    },
+    "full_official_modality_outlet_m4": {
+      "status": "SIX_SOURCE_AND_PLAN_PREPARED_REVIEW_PENDING_NOT_DEPLOYED",
+      "plan": "results/preflight/full_official_modality_outlet_plan_20261005.json",
+      "actual_fresh50_runs": 0,
+      "actual_smoke_updates": 0,
+      "new_model_parameters": 0
     }
   },
   "decision_rules": [
@@ -435,9 +456,9 @@
     }
   ],
   "next_action": {
-    "milestone": "FULL_OFFICIAL_M3B_RESULT_DECISION",
-    "status": "ALL_FAIR_CONTROLS_AND_FROZEN_UTILITY_RESULTS_AVAILABLE",
-    "action": "依据本次全6组完整/缺失/四状态/收益校准/真实成本结果决定下一单因素改进，保留全部负结果；未验证同一方法三数据集双+2、多种子、公平普通专家和推理协作净收益前，目标保持ACTIVE/UNMET。继续将核查完成的自产原始距离保存本地并校验后清理服务器副本。",
+    "milestone": "FULL_OFFICIAL_ROUTED_M_OUTLET_SUPERVISION_TRIAL",
+    "status": "SOURCE_PREPARED_FRESH_REVIEW_PENDING",
+    "action": "按最新用户要求，在98份原始距离本地归档传输期间并行准备和启动下一轮实验。M4只给实际路由PM聚合出口增加0.1公共身份监督；三个专家版本同监督同预算、B64/P16/K4、全量MSVR官方训练/query/gallery、50轮。源码审查后先真实CUDA合同及9次真实AMP更新，通过才启动3组fresh50；保持2026 GPU2/3每卡串行最多2个NN，传输无需占用GPU，旧共享源码和固定参照不变。结果尚未产生，目标仍ACTIVE/UNMET。",
     "hardware_dependency": "Only2026GPU2/3,max2NN,no temperature/powerconditions"
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
@@ -453,5 +474,6 @@
     "text": "不要只留出一部分训练验证推理",
     "historical_fit_dev_evidence": "Retained, distinct protocol, not official full-data acceptance",
     "official_checkpoint_selection_disclosed": true
-  }
+  },
+  "archive_overlap_policy": "用户2026-10-05明确要求：在本地距离归档传输期间也准备和开始实验；不等待传输结束才推进独立的源码审查、CUDA预检或训练，仍遵守已授权GPU2/3与最多2NN。"
 }

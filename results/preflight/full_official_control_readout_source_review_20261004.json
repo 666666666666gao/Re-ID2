@@ -1,0 +1,396 @@
+{
+  "status": "PASS",
+  "review_scope": "Fresh source correctness review after the evidenced modality-index repair; final eight feature stages plus four directed public-coordinate readouts, CPU auditor, launcher and deployer.",
+  "reviewed_at_utc": "2026-10-04 15:12:48 UTC",
+  "skill": "C:/Users/gb/.codex/skills/experiment-bridge/SKILL.md Phase 2.5 CODE_REVIEW=true",
+  "policy": "C:/Users/gb/.codex/skills/shared-references/local-codex-policy.md",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "max",
+  "actual_model": "unverified",
+  "actual_effort": "unverified",
+  "actual_backend": "unverified",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "attribution": "Fresh reviewer context read source artifacts directly. Requested model/effort are task attribution, not independent proof of the serving backend or sampling effort. No cross-family acceptance is claimed.",
+  "plan": "results/preflight/full_official_control_readout_plan_20261004.json",
+  "sources_sha256": {
+    "diagnose_full_official_control_readout.py": "cd4d755947c8a5c3a56a9dcf89c20e3fb981306377aca6964c247cc2a9890f0c",
+    "audit_full_official_control_readout.py": "f63a79f0fca10c83aa156f16a239be178f733a7b8f8def74e1f31ebcbf920170",
+    "diagnose_trained_outlet_utility.py": "26fc6c2320b7739109cc5f91c5241ed3ac36ff4ae9d718fd09ebd49b31d4fecb",
+    "diagnose_common_outlet_scale.py": "c99e82f6db42144ad4a33d264dcb42f18483ec544593f947f83dadca496baef8",
+    "launch_full_official_control_readout.py": "6a27def0079a92dc24960ffe0da213682cbcdcb9dc8fe7f953c926bbd8d21265"
+  },
+  "deployer_file": "results/preflight/full_official_control_readout_deployer_20261004.py",
+  "deployer_sha256": "170b88cdc1e8a5708c4c9db88aa71c54ddd4f9525524e70efea343b68f44f683",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "resolved_findings": [
+    {
+      "id": "R1",
+      "original_severity": "BLOCKING",
+      "file": "diagnose_full_official_control_readout.py",
+      "original_source_sha256": "c806676cb57680beb307f09e7ef503a4a8dc2f053b478279a07c737fbf3d554b",
+      "original_line": 57,
+      "problem": "evaluate_full_official49.SETS contains missing modality names, but integer index not in missing retained (0,1,2) for every availability. Smoke normal-feature parity would not detect this; the first missing-condition parity would fail against the saved full-official results.",
+      "concrete_evidence": "The original expression reproduced identical (0,1,2) for all seven sets. Existing q_RNT_g_R mAP is 39.39447081739943 versus normal 47.82302291212298 for measurement_only, and 39.48232363586713 versus normal 47.71460680404778 for independent_control.",
+      "minimal_fix": "retained = tuple(index for index, key in enumerate(('RGB', 'NI', 'TI')) if key not in missing)",
+      "resolution": "Parent applied the one-line mapping correction. The final source AST evaluates to all seven intended nonempty retained index sets.",
+      "final_line": 62,
+      "status": "FIXED_AND_REVIEWED"
+    }
+  ],
+  "source_checks": [
+    {
+      "check": "Frozen official records and selected checkpoints",
+      "status": "PASS",
+      "evidence": "Producer lines 35-54 require completed 50-epoch training, zero training holdout, successful exit, exact old/trained arguments and best epoch, the entire official manifest, 1032/591/1055 records, and strict loading of each run's best.pth through independent_control_axis.build.",
+      "saved_contracts": [
+        {
+          "mode": "measurement_only",
+          "selected_epoch": 32,
+          "record_counts": [
+            1032,
+            591,
+            1055
+          ],
+          "existing_csv_count": 49,
+          "normal_mAP": 47.82302291212298,
+          "first_missing_mAP": 39.39447081739943,
+          "previous_cpu_audit_status": "PASS"
+        },
+        {
+          "mode": "independent_control",
+          "selected_epoch": 27,
+          "record_counts": [
+            1032,
+            591,
+            1055
+          ],
+          "existing_csv_count": 49,
+          "normal_mAP": 47.71460680404778,
+          "first_missing_mAP": 39.48232363586713,
+          "previous_cpu_audit_status": "PASS"
+        }
+      ],
+      "limits": "Existing JSON/CSV contracts were read locally. Dataset images and best weights were not loaded by this review."
+    },
+    {
+      "check": "Probe compatibility with current model inheritance",
+      "status": "PASS",
+      "evidence": "IndependentControlAxis -> MeasurementGateAxis -> IdentityAlignmentAxis -> FrequencyRelationAxis -> CommonOutletAxis(original_mean) -> CommonCoordinateAxis. The M2/M2b loss hooks are training-only. Normal eval returns after one full fuse; each expert has one unconditional and one conditional read. Auxiliary captures use the existing unconditional pools and projection hooks observe M/F/I once.",
+      "source_references": [
+        "shared_identity_axis.py:177",
+        "identity_alignment_axis.py:45",
+        "frequency_relation_axis.py:35",
+        "common_outlet_axis.py:55",
+        "common_coordinate_axis.py:10",
+        "diagnose_trained_outlet_utility.py:21"
+      ]
+    },
+    {
+      "check": "Exact original fuse association",
+      "status": "PASS_SOURCE_AND_SYNTHETIC_CPU",
+      "evidence": "The probe preserves projected row weighting, residual scaling and gate association, computes (dm + di).mean(1), then df + mi, then shared + (df + mi), then the same metric_descriptor. torch.equal is asserted for every real forward. Fourteen CPU tensor fixtures across both inheritance chains and all seven availabilities satisfied the actual probe assertion.",
+      "limits": "The fixtures used parameter-free projection/expert stand-ins and the actual inherited fuse/probe method bodies. They were not real model, checkpoint, or CUDA validation."
+    },
+    {
+      "check": "Legacy module global scope",
+      "status": "PASS",
+      "evidence": "diagnose_trained_outlet_utility patches framework.STAGES to eight, so framework.extract returns all eight banks. The new main uses full_records and independent_control_axis.build, and imports write_json directly from run_experiment. It never calls framework.main, split_records, build_trained, or the legacy write_result that needs METADATA['pooling']. No corresponding runtime KeyError path remains.",
+      "source_references": [
+        "diagnose_full_official_control_readout.py:12",
+        "diagnose_full_official_control_readout.py:18",
+        "diagnose_trained_outlet_utility.py:117",
+        "diagnose_trained_outlet_utility.py:127",
+        "diagnose_common_outlet_scale.py:91"
+      ]
+    },
+    {
+      "check": "Availability, normalization and directed readout mapping",
+      "status": "PASS",
+      "retained_mapping": {
+        "RNT": [
+          0,
+          1,
+          2
+        ],
+        "R": [
+          0
+        ],
+        "N": [
+          1
+        ],
+        "T": [
+          2
+        ],
+        "RN": [
+          0,
+          1
+        ],
+        "RT": [
+          0,
+          2
+        ],
+        "NT": [
+          1,
+          2
+        ]
+      },
+      "readouts": {
+        "deployed": [
+          "deployed",
+          "deployed"
+        ],
+        "base_common": [
+          "base_common",
+          "base_common"
+        ],
+        "M_pre": [
+          "M_pre",
+          "M_pre"
+        ],
+        "M_post": [
+          "M_post",
+          "M_post"
+        ],
+        "F_pre": [
+          "F_pre",
+          "F_pre"
+        ],
+        "F_post": [
+          "F_post",
+          "F_post"
+        ],
+        "M_aux": [
+          "M_aux",
+          "M_aux"
+        ],
+        "F_aux": [
+          "F_aux",
+          "F_aux"
+        ],
+        "F_post_to_common": [
+          "F_post",
+          "base_common"
+        ],
+        "common_to_F_post": [
+          "base_common",
+          "F_post"
+        ],
+        "M_post_to_common": [
+          "M_post",
+          "base_common"
+        ],
+        "common_to_M_post": [
+          "base_common",
+          "M_post"
+        ]
+      },
+      "evidence": "Each bank is computed from query + gallery with only intended retained modalities. framework.extract converts each stage to FP32 and applies F.normalize(dim=1) before CPU storage; full_evaluation.distance computes squared Euclidean distances on those normalized inputs. Cross readouts use query [0:591] from their named query stage and gallery [591:] from their named gallery stage. All four cross readouts pair 512D features; deployed is only paired with deployed at 5632D.",
+      "source_references": [
+        "diagnose_full_official_control_readout.py:21",
+        "diagnose_full_official_control_readout.py:61",
+        "diagnose_full_official_control_readout.py:94",
+        "diagnose_common_outlet_scale.py:95",
+        "full_evaluation.py:106"
+      ]
+    },
+    {
+      "check": "Coverage, parity and archived raw-file independence",
+      "status": "PASS",
+      "evidence": "Full path evaluates all 49 modality pairs and 12 readouts: 588 cases / 347508 repeated query rows per model, 1176 / 695016 total. RNT deployed features are required to exactly equal preserved best_official_arrays. Every deployed six-metric result and complete parsed per-query CSV must exactly match the prior 49 results. Prior reads are preserved best.pth/best_official_arrays.npz and JSON/CSV; no archived or deleted prior per-condition NPZ is read. New raw NPZ files belong exclusively to the new diagnosis.",
+      "source_references": [
+        "diagnose_full_official_control_readout.py:46",
+        "diagnose_full_official_control_readout.py:71",
+        "diagnose_full_official_control_readout.py:88",
+        "audit_full_official_control_readout.py:25"
+      ]
+    },
+    {
+      "check": "Independent installed-GT CPU recount",
+      "status": "PASS_SOURCE_AND_SYNTHETIC_CPU",
+      "evidence": "Auditor reconstructs sorted train/query/gallery filename GT, compares it with the saved full manifest and every raw metadata array, and checks exact expected readout mapping and 49 conditions. recount uses identity AND scene exclusion, stable gallery-index tie breaking via lexsort, AP from all positive ranks and INP = positive count / last positive rank. verify checks six percentage metrics, CMC1-50, every CSV field and camera/scene/identity group summaries. Prior deployed metrics are checked within 1e-8 percentage points.",
+      "synthetic_fixture": {
+        "queries": 4,
+        "gallery": 64,
+        "distance_ties": true,
+        "same_ID_same_scene_excluded": true,
+        "same_ID_same_camera_other_scene_retained": true,
+        "sixmetric_max_error_pp": 0,
+        "CMC50_and_groups_and_CSV_verified": true,
+        "wrong_CMC_rejected": true
+      },
+      "source_references": [
+        "audit_full_official_control_readout.py:29",
+        "audit_full_official_control_readout.py:44",
+        "audit_full_official49.py:13",
+        "audit_full_official49.py:37",
+        "audit_full_official49.py:55"
+      ],
+      "limits": "The CPU auditor verifies stored distances against installed GT; it does not independently regenerate neural features."
+    },
+    {
+      "check": "Launcher order and resource scope",
+      "status": "PASS_SOURCE_AND_MEMORY_SIMULATION",
+      "evidence": "Physical GPU2 is measurement_only and GPU3 independent_control. Two-worker smoke phase must entirely return PASS before the separate two-worker full phase starts. Each card executes frozen extraction/evaluation before its CPU audit. Both real smoke payloads must cover 64 query records, seven availability sets, eight stages, exact normal features/fuse, and zero optimizer updates/weights. Full completion requires both 588-case CPU audits. Reused executor restricts GPUs to 2/3 and has no temperature/power gate.",
+      "disk_minimum_free_MiB": 3500,
+      "uncompressed_distance_bytes": 2932967520,
+      "simulations": [
+        {
+          "case": "success",
+          "events": [
+            [
+              "smoke",
+              "measurement_only"
+            ],
+            [
+              "smoke",
+              "independent_control"
+            ],
+            [
+              "frozen",
+              "measurement_only"
+            ],
+            [
+              "audit",
+              "measurement_only"
+            ],
+            [
+              "frozen",
+              "independent_control"
+            ],
+            [
+              "audit",
+              "independent_control"
+            ]
+          ],
+          "expected_outcome_verified": true
+        },
+        {
+          "case": "smoke_failure_blocks_full",
+          "events": [
+            [
+              "smoke",
+              "measurement_only"
+            ],
+            [
+              "smoke",
+              "independent_control"
+            ]
+          ],
+          "expected_outcome_verified": true
+        },
+        {
+          "case": "frozen_failure_blocks_that_audit_and_completion",
+          "events": [
+            [
+              "smoke",
+              "measurement_only"
+            ],
+            [
+              "smoke",
+              "independent_control"
+            ],
+            [
+              "frozen",
+              "measurement_only"
+            ],
+            [
+              "frozen",
+              "independent_control"
+            ],
+            [
+              "audit",
+              "independent_control"
+            ]
+          ],
+          "expected_outcome_verified": true
+        },
+        {
+          "case": "insufficient_space_blocks_launch",
+          "events": [],
+          "expected_outcome_verified": true
+        }
+      ],
+      "source_references": [
+        "launch_full_official_control_readout.py:12",
+        "launch_full_official_control_readout.py:26",
+        "launch_full_official_control_readout.py:44",
+        "launch_full_official_control_readout.py:59",
+        "gpu_thermal_execute.py:19"
+      ]
+    },
+    {
+      "check": "Deployer paths, source closure and single launch",
+      "status": "PASS_SOURCE_AND_MEMORY_SIMULATION",
+      "evidence": "Before any copy or launch, deployer requires this PASS review, exact five source digests, its own reviewed digest, the unchanged 26-file previous M3b source closure, remote original six-run COMPLETE/1764-audit prerequisite, absent new output/receipt, and >3500MiB. It copies only the three new sources, two unchanged probe helpers, plan and review; checks remote source digests; then launches one frozen-readout controller from the existing project root with an exclusive log and receipt. collect_results.command uses argv lists and remote_python applies shlex.quote to the Python executable and code. No weights, dataset images, optimizer command, deletion or Git mutation is present.",
+      "simulation": {
+        "prior_source_closure_local_files_checked": 26,
+        "scp_calls_mocked": 8,
+        "remote_snippets_compiled_only": 3,
+        "launch_command_expected": true,
+        "proof_preflight_false": true
+      },
+      "source_references": [
+        "results/preflight/full_official_control_readout_deployer_20261004.py:16",
+        "results/preflight/full_official_control_readout_deployer_20261004.py:27",
+        "results/preflight/full_official_control_readout_deployer_20261004.py:37",
+        "results/preflight/full_official_control_readout_deployer_20261004.py:44",
+        "collect_results.py:23"
+      ],
+      "limits": "SCP and remote_python were replaced by in-memory recording stubs. The three generated remote Python snippets were compiled only; none was sent or executed remotely."
+    }
+  ],
+  "executed_verification": {
+    "dependency_python_syntax_files": 18,
+    "final_five_sources_and_deployer_syntax": true,
+    "local_previous_source_closure_files_checked": 26,
+    "source_plan_hashes_rechecked_at_write": true,
+    "synthetic_probe_cases": 14,
+    "synthetic_probe_scope": "Actual inherited fuse and attach_probe function bodies with synthetic CPU tensors and parameter-free stand-ins; no learned module/backbone/model construction.",
+    "synthetic_metric_fixture": {
+      "queries": 4,
+      "gallery": 64,
+      "distance_ties": true,
+      "same_ID_same_scene_excluded": true,
+      "same_ID_same_camera_other_scene_retained": true,
+      "sixmetric_max_error_pp": 0,
+      "CMC50_and_groups_and_CSV_verified": true,
+      "wrong_CMC_rejected": true
+    },
+    "launcher_memory_simulation_cases": 4,
+    "torch_cpu_version": "2.14.0+cpu",
+    "numpy_version": "2.5.2",
+    "cuda_initialized": false
+  },
+  "actual_NN": 0,
+  "actual_optimizer_updates": 0,
+  "actual_new_weights": 0,
+  "actual_checkpoint_loads": 0,
+  "actual_SSH_calls": 0,
+  "actual_deployments": 0,
+  "actual_model_or_deployment_subprocess_launches": 0,
+  "actual_existing_analysis_reruns": 0,
+  "actual_deletions": 0,
+  "actual_Git_writes": 0,
+  "source_changes_by_reviewer": 0,
+  "actual_CUDA_preflight_completed": false,
+  "actual_full_diagnostic_completed": false,
+  "actual_new_installed_GT_audit_completed": false,
+  "required_next_runtime_checks": [
+    "Both real CUDA smoke64 runs across all seven availabilities must PASS.",
+    "Both full official frozen diagnostics must complete their feature, all49 deployed metric/CSV parity and unchanged-state assertions.",
+    "Both real installed-GT CPU audits must PASS all 588 readouts each."
+  ],
+  "reporting_limits": [
+    "This PASS is a provisional same-family source review; it is not a completed real CUDA preflight or new experiment result.",
+    "Eight extracted feature stages comprise seven 512D representations and one deployed 5632D descriptor. Four additional readouts compare projected M/F to base_common in each direction without fitting or coordinate rotation.",
+    "Independent-stage and cross-coordinate retrieval provide empirical utility/compatibility evidence only. They do not establish information loss, semantic disentanglement or causality.",
+    "MSVR310 seed42 and benchmark-selected best checkpoints are explicit limitations. Repeated modality conditions are not independent queries.",
+    "The broader three-dataset mAP/Rank-1 +2 goal remains unmet; this source review makes no gain claim."
+  ],
+  "goal_complete": false,
+  "artifacts_written": [
+    "results/preflight/full_official_control_readout_source_review_20261004.json"
+  ]
+}
