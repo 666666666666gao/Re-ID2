@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-04T20:42:39",
+  "updated_at": "2026-10-04T21:45:25",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -86,7 +86,8 @@
         2,
         3
       ]
-    }
+    },
+    "raw_distance_retention": "原始距离文件保存在本地D盘账户目录，全部GT/逐query核查完成并逐文件SHA256核对后清理服务器副本；保留固定best权重、必要参照、完整CSV/JSON/logs。"
   },
   "revision": "20261004_full_official_training_and_complete_query_gallery_user_override",
   "primary_claims": [
@@ -302,16 +303,16 @@
       }
     },
     "full_official_control_m3b": {
-      "status": "SOURCE_REVIEW_PASS_NOT_DEPLOYED_NOT_LAUNCHED_CUDA_PENDING",
+      "status": "REAL_CUDA_AND_SIX_SMOKES_PASS_TWO_AXIS50_AUDITED_FOUR_CONTROLS_PENDING",
       "planned_fresh50_runs": 6,
-      "actual_fresh50_runs": 0,
-      "actual_CUDA_contract": false,
-      "actual_smokes": 0,
+      "actual_fresh50_runs": 4,
+      "actual_CUDA_contract": true,
+      "actual_smokes": 6,
       "plan": "results/preflight/full_official_control_m3b_plan_20261004.json",
       "review": "results/preflight/full_official_control_m3b_source_review_20261004.json",
       "deployment_gate": "All six full official baseline runs and all294 GT CPU cases must complete before contract, six actual smokes and any new fresh50",
       "deployer_review": "results/preflight/full_official_control_m3b_diagnostics_deployer_review_20261004.json",
-      "deployer_status": "SOURCE_REVIEW_PASS_NOT_EXECUTED",
+      "deployer_status": "EXECUTED_ONCE_CONTROLLER_LIVE",
       "source_parents_bound": 16,
       "diagnostic_states": [
         "00",
@@ -322,7 +323,7 @@
         "base_shared"
       ],
       "planned_diagnostic_cases": 1764,
-      "actual_diagnostic_cases": 0,
+      "actual_diagnostic_cases": 588,
       "diagnostics_review": "results/preflight/full_official_control_diagnostics_source_review_20261004.json",
       "reporting_preparation": {
         "status": "SOURCE_REVIEW_PASS_TEXT_INTAKE_AND_ALL1764_ANALYSIS_NOT_EXECUTED",
@@ -334,7 +335,16 @@
         "cases_required": 1764,
         "repeated_query_rows_required": 1042524,
         "limits": "Actual all49 baseline query arithmetic only; future trial whole-pipeline analysis pending."
-      }
+      },
+      "completed_fresh50_runs": 2,
+      "actual_smoke_optimizer_updates": 18,
+      "actual_preflight": "results/preflight/full_official_control_m3b_actual_preflight_20261004.json",
+      "launch_evidence": "results/preflight/full_official_control_m3b_launch_20261004.json",
+      "controller_pid": 2958092,
+      "first_axis_pair": "results/preflight/full_official_control_first_axis_pair_20261004.json",
+      "ordinary_controls_complete": false,
+      "observer_session": 93879,
+      "last_observation": "2026-10-04T21:43:36"
     },
     "owned_weight_retention": {
       "receipt": "results/preflight/full_official_obsolete_weight_retirement_20261004.json",
@@ -343,19 +353,31 @@
       "protected": "Active official best weights, completed canonical historical controls, all metrics/logs"
     },
     "full_official_baseline_pair_analysis": {
-      "status": "TWO_ALREADY_COMPLETE_OFFICIAL_BASELINE_PAIRS_ALL196_GT_AUDITED_CASES_REANALYZED",
-      "model_metric_cases": 196,
-      "paired_conditions": 98,
+      "status": "THREE_COMPLETE_OFFICIAL_BASELINE_PAIRS_ALL294_CASES_ANALYZED",
+      "model_metric_cases": 294,
+      "paired_conditions": 147,
       "completed_datasets": [
         "MSVR310",
-        "RGBNT201"
+        "RGBNT201",
+        "RGBNT100"
       ],
-      "excluded_running_dataset": "RGBNT100",
-      "evidence": "results/preflight/full_official_baseline_pair_analysis_first_two_20261004.json",
+      "excluded_running_dataset": null,
+      "evidence": "results/full_official_baselines_20261004/baseline_pair_analysis.json",
       "source_review": "results/preflight/full_official_baseline_pair_analysis_source_review_20261004.json",
       "full_baseline_publisher_review": "results/preflight/full_official_baselines_complete_publisher_source_review_20261004.json",
-      "full_baseline_publisher_executed": false,
+      "full_baseline_publisher_executed": true,
       "no_dual_axis_experts": true
+    },
+    "raw_distance_local_archive": {
+      "status": "ALL294_DISTANCE_FILES_LOCAL_SHA256_VERIFIED_SERVER_COPIES_CLEARED",
+      "local_root": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\full_official_baselines_20261004\\raw_distances",
+      "files": 294,
+      "bytes": 5261235099,
+      "receipt": "results/preflight/full_official_baseline_distances_local_archive_20261004.json",
+      "redundant_2027_backup_retired": {
+        "removed_duplicate_files": 49,
+        "removed_duplicate_bytes": 2397647358
+      }
     }
   },
   "decision_rules": [
@@ -381,9 +403,9 @@
     }
   ],
   "next_action": {
-    "milestone": "FULL_OFFICIAL_M3B_REAL_PREFLIGHT",
-    "status": "BASELINES_COMPLETE_NEW_CUDA_CONTRACT_AND_SIX_SMOKES_PENDING",
-    "action": "使用已审查一次性部署器启动新完整MSVR310 M3a/M3b × 双轴/普通频域/普通双专家共6组对照。真实零控制等价/梯度隔离合同及全部6模型3次实际更新/严格内存重载先通过，再从公开CLIP训练50轮。固定best评测全49和294四状态/基础块诊断及GT CPU复算。未证明推理增益与公平胜出前，不扩展为统一三数据集方法。",
+    "milestone": "FULL_OFFICIAL_M3B_MATCHED_ORDINARY_CONTROLS",
+    "status": "TWO_AXIS50_AND588_GT_CASES_COMPLETE_FOUR_ORDINARY50_DIAGNOSTICS_PENDING",
+    "action": "继续同一完整MSVR310六组控制器及240秒权威PID观测，完成四组普通专家的50轮、全49及各294状态GT核查。六组全部完成后只执行一次已审查文本intake及全1764条件分析，再决定下一单因素改进。首两组11相对自身00仍有负作用，不宣布控制分离成功，不原样扩展为三数据集最终方法。",
     "hardware_dependency": "Only2026GPU2/3,max2NN,no temperature/powerconditions"
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
