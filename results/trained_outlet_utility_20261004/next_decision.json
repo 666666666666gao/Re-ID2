@@ -1,0 +1,14 @@
+{
+  "status": "FROZEN_DIAGNOSTIC_INTERPRETATION_NOT_TRAINING_RESULT",
+  "findings": [
+    "观察一：三个双轴版本完整输入F_aux约39.53–40.47 mAP，实际F_pre约38.58–39.39；PF后的F_post仅26.40–31.99，分别比对应F_pre下降9.760963/12.775647/7.407435点mAP。普通频域三个对照也下降8.155713/11.183730/8.164240点。全部49条件平均PF变化六组均负，为−3.254022至−6.261842点mAP。投影出口的经验身份邻域保留，是可检验的共同问题，并非双轴专属缺陷。",
+    "观察二：原始平均双轴的F_pre→F_post完整输入首位误伤27、救回8，AP改善56、下降153；三双轴的PF后均低于各自实际PF前。辅助→路由变化相对较小，但混合了条件、路由与汇聚，不能把这一对比解释成严格路由因果效应。下一训练参照优先取相同输入的实际已路由F_pre停止梯度，而不是强迫缺失输入模仿完整来源或把有用但不同路径的辅助表征直接当唯一真值。",
+    "观察三：完整输入三个双轴的F门控平均仅0.024664/0.058947/0.038882，F增量相对公共基础范数平均为0.002284/0.004929/0.003283；仅RGB时门控约0.9976/0.9980/0.9969，F相对增量约0.09238/0.08345/0.08418。新增方向的身份质量与有条件使用方式均需检验；不能仅放大权重，既有冻结尾部放大负结果仍有效。该轮不同时修正门控，避免无法归因。",
+    "限制：这只是固定MSVR310 fit/dev、seed42的冻结诊断，完整阶段表在同一个开发选择的best上计算，不是新训练收益、严格信息论损失、多种子稳定性或三数据集达标。对不同维度阶段不拼接最佳指标；所有正负逐条件、六指标与误伤/救回完整保留。"
+  ],
+  "next_step": "M2单因素：固定original_mean及原M1全部专家/路由/损失/缺失训练/5632D接口，以同可观测输入实际F_pre的停止梯度批内身份距离结构为参照，只新增实际PF出口关系保持训练；不增加专家、参数或描述子维度，不改门控、不换FFT、不增加跨集合覆盖。原M1双轴、普通频域和普通双专家无关系保持的已完成控制保留；对三种增强模型使用相同关系保持目标、公开CLIP/fresh50/seed42/B64和采样预算，先预检梯度/strict reload/零权重退化再训练。验证F_post身份邻域、真正11−00与误伤/救回；距离保持不能独自证明共同坐标朝向或贡献校准。若只修复独立F检索而未改善融合，后续再单因素检查身份方向/估计控制分离，不将M2自动视为成功。",
+  "teacher": "Same actual availability and routed frequency evidence F_pre, stopped gradient; no complete-source teacher for a missing sample.",
+  "unchanged_factors": ["backbone", "FFT", "expert_access", "joint_router", "contribution_head", "gates", "partial_query_full_gallery_training", "pooling_original_mean", "parameters", "5632D"],
+  "training_started": false,
+  "goal_complete": false
+}
