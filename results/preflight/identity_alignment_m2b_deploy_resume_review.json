@@ -1,0 +1,138 @@
+{
+  "verdict": "PASS_SOURCE_REVIEW",
+  "at_utc": "2026-10-04 04:50:17 UTC",
+  "campaign": "identity_alignment_m2b_20261004",
+  "blockers": [],
+  "non_blockers": [],
+  "checked_resume_sha256": "3df7cca34641b6fe7517a2ed5a56ce93408b388035da145b3e4be7d0e1f876c7",
+  "checked_source_sha256": {
+    "identity_alignment_axis.py": "a5e1882ee75f2e89f3977c423a05e6986d66ed182d74f09db2b464f5dc228dd7",
+    "run_identity_alignment_experiment.py": "888d99e1b801d709c91bac455c628fcd970a2f1d66cdc0cac520af930a209cee",
+    "verify_identity_alignment_axis.py": "318aa698f107dc0b47401fbfedbcec11cec86d6d0a9994456216a29a369ede29",
+    "launch_identity_alignment_trial.py": "062445bdd4e4f5ff32ed5e983bc710cf37a22a9be8952151955eb25651877c02",
+    "diagnose_identity_alignment_utility.py": "3aba5807817fa1125a6942fe34521d67abf533f12fa7a13720fa8af75a960968",
+    "diagnose_identity_alignment_coordinates.py": "68c1c667ac7e8cdcd7b7829808dca986c66e111073046ce0f6032a9465ee36e2",
+    "audit_identity_alignment_trial.py": "0b92179d73111b50ef81bce8b80bcf8eba35592909d79cf0d14931cd52a529e3"
+  },
+  "checked_original_deployer_sha256": "2781903a5d0576ca40a3e0de3eca7842f9c33e5e73ae93ac2c192ed09bbaa7ec",
+  "checked_plan_sha256": "20897e7db91994717189e5bea1d0194b03cce584bb4254fee5a32c4b2144947c",
+  "checked_original_review_sha256": "3357caf6d17ad340a447c807a42621de170bfd316279b54a77cd154a0b2fe71b",
+  "checked_failure_proof_sha256": "afaed287bac89148be3fb608092addffeadf1c70e31a2113f8cbc3279d0aa92c",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "model_requested": "gpt-6-astra",
+  "reasoning_effort_requested": "max",
+  "reviewer_context": "Fresh delegated Codex rescue/second-opinion context; direct artifact reads and local dependency-free checks.",
+  "served_backend_independently_proven": false,
+  "model_attribution": "The installed experiment-bridge Codex policy requests gpt-6-astra/max. This is requested-routing attribution only; no served-backend identifier is independently verified and no cross-family acceptance is claimed.",
+  "review_scope": "Only the actual failed pre-neural deploy boundary and the private resume script. Prior scientific/source review is preserved; all 7 new and 69 preceding source identities were rechecked locally. No implementation or deployment script was edited.",
+  "safe_to_resume_current_cpu_gate_and_one_launch": true,
+  "resume_boundary": "Safe to resume the current failed remote CPU gate and then dispatch the unchanged reviewed launcher once, only if the resume script's live source, selected-memory, audited-input, installed-path, disk and absent-output/log guards pass. Do not repeat the original deployer or source copies. This is a specific continuation of the evidenced pre-launch failure, not a general retry authorization.",
+  "checks": [
+    {
+      "id": "primary_failure_and_exact_boundary",
+      "status": "PASS_ARTIFACT_AND_LOCAL_IDENTITY",
+      "evidence": "The preserved failure JSON records remote cwd /home/gaob, returncode 1 and ModuleNotFoundError for gpu_thermal_execute, after 76 sources plus plan/review were copied and checked on 2025/2026/2027. It records absent campaign output, root log and launch receipt and no neural launch. Its failed deployer digest matches the unchanged original file and original source review. Local remote-CPU and launch receipts are also absent. No fresh remote observation was performed by this reviewer."
+    },
+    {
+      "id": "root_cause_and_minimal_import_fix",
+      "status": "PASS_LOCAL_EXECUTED",
+      "evidence": "collect_results.remote_python invokes the environment Python with -c and does not change cwd. The original CPU payload only binds r and therefore cannot resolve the project module from /home/gaob. The resumed payload adds sys and inserts str(r) at sys.path[0] before the project import. Removing exactly those two additions yields an AST identical to the original CPU payload. No fallback, try/except, compatibility layer or generalized import mechanism was added."
+    },
+    {
+      "id": "isolated_original_failure_and_fixed_import",
+      "status": "PASS_LOCAL_EXECUTED",
+      "evidence": "The actual extracted CPU prefixes, with only the root value bound to the local project, were run in CPython 3.12.6 using -I -B from the unrelated private temporary directory. The original prefix reproduced ModuleNotFoundError. The resumed prefix imported gpu_thermal_execute from the exact project file and found callable telemetry. Execution stopped before calling telemetry; Torch and NumPy were not imported. No network, GPU query or neural work ran."
+    },
+    {
+      "id": "source_identity_and_syntax",
+      "status": "PASS_LOCAL_EXECUTED",
+      "evidence": "All 7 new and 69 prior file hashes equal the plan. The original review's source maps equal the plan. All 72 Python source files, both private deployers and all four extracted old/new CPU/launch payloads compile locally and parse with Python 3.10 syntax. The original deployer, plan, review and failure evidence are unchanged."
+    },
+    {
+      "id": "resume_without_recopy",
+      "status": "PASS_SOURCE",
+      "evidence": "The resume requires the original PASS and exact original deployer/source identities, then this rescue PASS and exact resume/source identities. It checks all existing 76 source hashes on each configured mirror and performs no scp or command call. It does not repeat any original deployment copy stage or modify completed experiments."
+    },
+    {
+      "id": "existing_runtime_guards_preserved",
+      "status": "PASS_SOURCE_PENDING_REMOTE_EXECUTION",
+      "evidence": "After source verification, the CPU gate still parses the seven new sources, queries memory only on physical GPU2/3 and requires each below 500 MiB, validates COMPLETE input controllers and exact PASS audits with 2058/1029 cases, requires three retained M2 weights, installed data/pretrained paths, over 2 GB free disk, and absent campaign output/log. These guards are identical to the original payload after the import fix and have not been accepted through a mock or local result."
+    },
+    {
+      "id": "single_unchanged_dispatch",
+      "status": "PASS_SOURCE_AND_EXTRACTED_PAYLOAD_COMPARISON",
+      "evidence": "The extracted launch payload is byte-identical to the original reviewed payload, with exactly one subprocess.Popen. It rechecks all 76 source hashes and output/log absence and exclusively opens the root log before dispatch. Its exact argv invokes launch_identity_alignment_trial.py through the existing 2026 environment, cwd is the project root, and existing thread variables are unchanged. 2025/2027 receive source verification only; no GPU0/1 task or hardware-setting command was introduced."
+    },
+    {
+      "id": "unchanged_CUDA_and_training_barrier",
+      "status": "PASS_SOURCE_PENDING_ACTUAL_CUDA",
+      "evidence": "The unchanged launcher first executes the CUDA tensor contract and requires its PASS, then collects all three real smoke results before creating fresh50 training work. Each smoke must report three real updates and strict reload equality. GPU2 serially runs axis/twins and GPU3 frequency, with maximum two active calls. This source check is not an actual CUDA, smoke, memory-use, training or scientific-result PASS."
+    },
+    {
+      "id": "scope_preservation",
+      "status": "PASS_LOCAL_AND_SOURCE",
+      "evidence": "No training source, configuration, conda environment, hardware policy, pretrained file, dataset, checkpoint, original failure proof or original review was changed. No remote command, hardware query, deployment, neural execution or optimizer step was executed. The requested rescue review JSON is the only project artifact created by this review."
+    }
+  ],
+  "executed_local_checks": {
+    "status": "PASS_LOCAL_RESCUE_CHECKS",
+    "interpreter": "3.12.6 (tags/v3.12.6:a4a2d2b, Sep  6 2024, 20:11:23) [MSC v.1940 64 bit (AMD64)]",
+    "source_count": 76,
+    "new_source_count": 7,
+    "previous_source_count": 69,
+    "python_sources_compiled": 72,
+    "deployers_compiled": 2,
+    "remote_payloads_compiled": 4,
+    "python310_syntax": true,
+    "checked_resume_sha256": "3df7cca34641b6fe7517a2ed5a56ce93408b388035da145b3e4be7d0e1f876c7",
+    "checked_original_deployer_sha256": "2781903a5d0576ca40a3e0de3eca7842f9c33e5e73ae93ac2c192ed09bbaa7ec",
+    "plan_sha256": "20897e7db91994717189e5bea1d0194b03cce584bb4254fee5a32c4b2144947c",
+    "original_review_sha256": "3357caf6d17ad340a447c807a42621de170bfd316279b54a77cd154a0b2fe71b",
+    "failure_proof_sha256": "afaed287bac89148be3fb608092addffeadf1c70e31a2113f8cbc3279d0aa92c",
+    "cpu_payload_only_changes": [
+      "add sys to stdlib imports",
+      "sys.path.insert(0,str(r)) before project import"
+    ],
+    "launch_payload_byte_identical": true,
+    "original_import_reproduction": {
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 6, in <module>\nModuleNotFoundError: No module named 'gpu_thermal_execute'\n"
+    },
+    "fixed_import_probe": {
+      "status": "PASS_EXACT_MODULE_IMPORTED_NO_TELEMETRY_CALL",
+      "module": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\gpu_thermal_execute.py",
+      "torch_imported": false,
+      "numpy_imported": false
+    },
+    "local_receipts_absent": {
+      "identity_alignment_m2b_remote_cpu_checks.json": true,
+      "identity_alignment_m2b_2026_launch.json": true
+    },
+    "launch_call_sites": 1,
+    "no_scp_or_command_calls": true,
+    "no_added_try_except": true,
+    "training_sources_changed": 0,
+    "remote_calls": 0,
+    "neural_executions": 0,
+    "telemetry_calls": 0,
+    "hardware_setting_changes": 0
+  },
+  "actual_CUDA_pending": true,
+  "runtime_acceptance": {
+    "remote_CPU_gate": "NOT_EXECUTED_BY_REVIEWER",
+    "neural_dispatch": "NOT_EXECUTED_BY_REVIEWER",
+    "CUDA_tensor_contract": "PENDING_ACTUAL_EXECUTION",
+    "three_real_update_smokes": "ALL_THREE_PENDING_ACTUAL_EXECUTION",
+    "fresh50": "MUST_WAIT_FOR_ACTUAL_CONTRACT_AND_ALL_THREE_SMOKES",
+    "campaign_evaluation_and_independent_3087_case_audit": "PENDING_ACTUAL_RESULTS"
+  },
+  "implementation_edits": 0,
+  "remote_calls": 0,
+  "telemetry_calls": 0,
+  "neural_executions": 0,
+  "optimizer_updates": 0,
+  "hardware_setting_changes": 0,
+  "new_human_markdown_documents": 0,
+  "goal_complete": false
+}

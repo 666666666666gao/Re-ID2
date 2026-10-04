@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-04T12:19:43",
+  "updated_at": "2026-10-04T12:56:07",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、独立身份确认、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -88,7 +88,7 @@
       ]
     }
   },
-  "revision": "20261004_cross_coordinate_1029_CPU_PASS_single_factor_decision",
+  "revision": "20261004_M2b_actual_alignment_contract_and_three_smokes_pass_fresh50_active",
   "primary_claims": [
     {
       "id": "C1",
@@ -225,6 +225,50 @@
       "analysis": "results/cross_identity_coordinates_20261004/analysis.json",
       "decision": "results/cross_identity_coordinates_20261004/mechanism_decision.json",
       "finding": "双轴正常common自检索49.268410mAP/61.904762R1，PF自检索32.687296/41.428571，PF→common仅19.142618/10.000000，common→PF仅15.832914/12.857143。两个交叉方向在40/49与44/49条件的mAP低于公共同坐标，在36/49与47/49低于PF同坐标。普通频域和普通双专家也存在该经验兼容差，不能当作双轴特有创新证据或严格归因。差异并非所有条件同向：来源不相交组PF→common的平均mAP15.951544略高于PF自检索15.445800，但R1仍较低；必须保留完整条件矩阵。结合M2正常11−00近零，下一轮有理由单独验证实际PF与公共身份坐标的身份匹配监督。"
+    },
+    "M2b": {
+      "status": "ACTUAL_CONTRACT_THREE_REAL_UPDATE_SMOKES_PASS_FRESH50_ACTIVE",
+      "controller_pid": 1804357,
+      "observed_at": "2026-10-04T12:55:01",
+      "actual_smokes": 3,
+      "actual_smoke_updates": 9,
+      "training": {
+        "MSVR310_axis_shared_s42": {
+          "status": "RUNNING",
+          "epoch": 8,
+          "steps": 73,
+          "best": {
+            "mAP": 44.18684271671165,
+            "Rank-1": 54.761904761904766,
+            "Rank-5": 68.57142857142857,
+            "Rank-10": 74.76190476190476,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632,
+            "epoch": 8
+          }
+        },
+        "MSVR310_frequency_shared_s42": {
+          "status": "RUNNING",
+          "epoch": 8,
+          "steps": 73,
+          "best": {
+            "mAP": 45.95720917729915,
+            "Rank-1": 58.0952380952381,
+            "Rank-5": 70.95238095238095,
+            "Rank-10": 77.61904761904762,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632,
+            "epoch": 8
+          }
+        }
+      },
+      "plan": "results/preflight/identity_alignment_m2b_plan.json",
+      "planned_fresh50": 3,
+      "planned_CPU_cases": 3087,
+      "planned_repeated_condition_query_rows": 648270,
+      "official_test_uses": 0
     }
   },
   "decision_rules": [
@@ -251,9 +295,9 @@
   ],
   "next_action": {
     "milestone": "M2b_actual_PF_public_identity_alignment_single_factor",
-    "status": "SINGLE_FACTOR_DEFINED_REQUIRES_SOURCE_REVIEW_AND_REAL_PREFLIGHT_BEFORE_TRAINING",
-    "action": "M2b单因素：以已完成M2为父配方，保留原0.1关系保持及FFT/路由/门控/原完整与部分训练/5632D/参数/选择规则，只新增实际路由后PF查询对停止梯度公共身份图库的跨样本身份对比目标。采用同一full-view fit训练batch、按训练身份构造非自身正例/负例，排除自身，不逐样本复制公共特征；源码与真实预检须确认合法正例及观测采样。固定新增权重0.1、温度0.07，不用dev/test构造训练参照，不调门控幅值或增加缺失组合覆盖。三种增强模型axis/frequency/twins同目标同公开CLIP/fresh50/B64/seed42/K4；与原M2无此目标的三best配对比较。先审核并检验零权重精确退化、停止梯度方向、实际PF梯度、参数/维度/采样同预算、strict reload和AMP真实更新，再考虑50轮。终态检查全部49六指标/六状态、跨坐标兼容与PF独立判别力、11−00/AP误伤救回。只有改善兼容且带来可重复净融合收益并胜公平对照才进入候选；不能把对比loss下降或交叉检索涨点独自当成协作成功。",
-    "hardware_dependency": "Only2026 physicalGPU2/3,max2 NN,no temperature/power conditions."
+    "status": "EXISTING_REVIEWED_CONTROLLER_RUNNING_NO_RESTART",
+    "action": "完成原M2单因素身份匹配监督的三fresh50、全49/六状态/八阶段/七坐标对，独立3087组核算后判断兼容与真正融合收益。保留原跨集合采样/门控/关系损失；不将新loss下降或cross涨点当作达标。",
+    "hardware_dependency": "Only2026GPU2/3,max2NN,no temperature/powerconditions"
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
   "user_resumption": {
