@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-05T04:42:27",
+  "updated_at": "2026-10-05T04:59:27",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -508,7 +508,7 @@
       }
     },
     "full_official_public_outlet_identity_m6": {
-      "status": "PUBLIC_IDENTITY_CONTROLLER_LAUNCHED_NATIVE_CONTRACTS_AND_TWELVE_SMOKE_UPDATES_PENDING",
+      "status": "FOUR_NATIVE_CONTRACTS_AND_ALL_SMOKES_PASSED_TWO_FRESH50_RUNNING",
       "plan": "results/preflight/full_official_public_outlet_identity_plan_20261005.json",
       "controller_pid": 4026779,
       "controller_output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_public_outlet_identity_m6_20261005",
@@ -516,8 +516,93 @@
       "source_review_status": "PASS_SOURCE_ONLY",
       "actual_fresh50_runs": 0,
       "completed_fresh50_runs": 0,
-      "caveat": "Launch receipt proves controller start only; native contracts, smoke success and training results require separate real evidence.",
-      "single_factor_parent": "M4 expert parents and original shared-identity DeMo; M5-to-M6 is an exploratory replacement, not a single-factor ablation."
+      "caveat": "The saved sole-observer snapshot proves two started fresh50 runs; no final metric or candidate superiority is inferred.",
+      "single_factor_parent": "M4 expert parents and original shared-identity DeMo; M5-to-M6 is an exploratory replacement, not a single-factor ablation.",
+      "actual_contract_optimizer_updates": 16,
+      "actual_smoke_optimizer_updates": 12,
+      "actual_smoke_amp_skips": 1,
+      "actual_fresh50_runs_started": 2,
+      "actual_completed_fresh50": 0,
+      "preflight_evidence": "results/preflight/full_official_public_outlet_identity_actual_preflight_20261005.json",
+      "training_started_snapshot": {
+        "controller_pid": 4026779,
+        "controller_alive": true,
+        "controller_complete": false,
+        "runs": [
+          {
+            "variant": "demo_shared",
+            "gpu": 2,
+            "contract_pass": true,
+            "smoke_pass": true,
+            "training_epoch": 13,
+            "training_complete": false,
+            "frozen_complete": false,
+            "frozen_cpu_pass": false,
+            "state_cpu_pass": false,
+            "smoke_updates": 3,
+            "smoke_amp_skips": 0
+          },
+          {
+            "variant": "axis_shared",
+            "gpu": 2,
+            "contract_pass": true,
+            "smoke_pass": true,
+            "training_epoch": 0,
+            "training_complete": false,
+            "frozen_complete": false,
+            "frozen_cpu_pass": false,
+            "state_cpu_pass": false,
+            "smoke_updates": 3,
+            "smoke_amp_skips": 0
+          },
+          {
+            "variant": "frequency_shared",
+            "gpu": 3,
+            "contract_pass": true,
+            "smoke_pass": true,
+            "training_epoch": 11,
+            "training_complete": false,
+            "frozen_complete": false,
+            "frozen_cpu_pass": false,
+            "state_cpu_pass": false,
+            "smoke_updates": 3,
+            "smoke_amp_skips": 1
+          },
+          {
+            "variant": "twins_shared",
+            "gpu": 3,
+            "contract_pass": true,
+            "smoke_pass": true,
+            "training_epoch": 0,
+            "training_complete": false,
+            "frozen_complete": false,
+            "frozen_cpu_pass": false,
+            "state_cpu_pass": false,
+            "smoke_updates": 3,
+            "smoke_amp_skips": 0
+          }
+        ],
+        "active_neural_processes": [
+          {
+            "pid": 4033054,
+            "gpu": 2,
+            "phase": "training",
+            "variant": "demo_shared"
+          },
+          {
+            "pid": 4033055,
+            "gpu": 3,
+            "phase": "training",
+            "variant": "frequency_shared"
+          }
+        ],
+        "failures": [],
+        "preflight_pass": true,
+        "snapshot_atomic": false,
+        "temperature_power_control": false,
+        "local_observed_at": "2026-10-05T04:50:01"
+      },
+      "closeout_sources": "Prepared and reviewed only; collect/analyze/archive after all actual196+882 terminal cases."
     }
   },
   "decision_rules": [
@@ -544,8 +629,8 @@
   ],
   "next_action": {
     "milestone": "FULL_OFFICIAL_PUBLIC_OUTLET_IDENTITY_M6",
-    "status": "NATIVE_CONTRACTS_AND_FOUR_TRUE_THREE_UPDATE_SMOKES_REQUIRED_BEFORE_FRESH50",
-    "action": "Observe the single existing controller at240-second milestones. Read real native update/head/BN/RNG evidence before any fresh50, then collect full49 and enhanced six-state GT audits and all signed fair comparisons.",
+    "status": "MONITOR_EXISTING_TWO_LANE_FULL50_AND_COMPLETE_FROZEN49_STATES",
+    "action": "Continue the same sole240-second observer and original controller. At the actual four-run196/882 terminal, collect text, analyze all six signed metrics against original/M4/current ordinary/strongM5frequency references, then archive343 distances locally by size/SHA before clearing matching server copies.",
     "hardware_dependency": "Only2026 physicalGPU2/3,max2NN,no power or temperature conditions",
     "transport_policy": "Prepare, review, preflight and train eligible independent experiments while archival transfer runs; delete only local size/SHA-verified raw copies."
   },
