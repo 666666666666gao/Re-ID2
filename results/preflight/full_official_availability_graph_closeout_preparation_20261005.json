@@ -1,0 +1,108 @@
+{
+  "status": "FOUR_CLOSEOUT_SOURCES_REVIEWED_PREPARED_NOT_EXECUTED",
+  "prepared_at": "2026-10-05T03:41:26",
+  "source_sha256": {
+    "results/preflight/full_official_availability_graph_intake_20261005.py": "30c1d9c34c5a6e819306c1cba99d5b032e37286839447256893ce2a67e308e10",
+    "analyze_full_official_availability_graph_trial.py": "d82120c70133c06ccf503aadeb3f7c012bf9efa2eb01dc5dffadb0bae48b391a",
+    "results/preflight/full_official_availability_graph_distances_archive_20261005.py": "1f5176456e3ff819a1b507a0cdb6a6e31735227886daec4c1ff84d39502a32af",
+    "results/preflight/full_official_availability_graph_complete_publisher_20261005.py": "36789537824be64218d926f166cc21c06fe18e6e7eaa97ceeafc0cdd79e942a8"
+  },
+  "reviews": [
+    "results/preflight/full_official_availability_graph_intake_review_20261005.json",
+    "results/preflight/full_official_availability_graph_analysis_review_20261005.json",
+    "results/preflight/full_official_availability_graph_distance_archive_review_20261005.json",
+    "results/preflight/full_official_availability_graph_complete_publisher_review_20261005.json"
+  ],
+  "actual_last_observation": {
+    "controller_pid": 3763285,
+    "controller_alive": true,
+    "controller_complete": false,
+    "runs": [
+      {
+        "variant": "demo_shared",
+        "gpu": 2,
+        "contract_pass": true,
+        "smoke_pass": true,
+        "training_epoch": 50,
+        "training_complete": true,
+        "frozen_complete": true,
+        "frozen_cpu_pass": true,
+        "state_cpu_pass": false,
+        "smoke_updates": 3,
+        "smoke_amp_skips": 0,
+        "optimizer_updates": 705,
+        "amp_skips": 0
+      },
+      {
+        "variant": "axis_shared",
+        "gpu": 2,
+        "contract_pass": true,
+        "smoke_pass": true,
+        "training_epoch": 5,
+        "training_complete": false,
+        "frozen_complete": false,
+        "frozen_cpu_pass": false,
+        "state_cpu_pass": false,
+        "smoke_updates": 3,
+        "smoke_amp_skips": 0
+      },
+      {
+        "variant": "frequency_shared",
+        "gpu": 3,
+        "contract_pass": true,
+        "smoke_pass": true,
+        "training_epoch": 50,
+        "training_complete": true,
+        "frozen_complete": true,
+        "frozen_cpu_pass": true,
+        "state_cpu_pass": false,
+        "smoke_updates": 3,
+        "smoke_amp_skips": 0,
+        "optimizer_updates": 705,
+        "amp_skips": 0
+      },
+      {
+        "variant": "twins_shared",
+        "gpu": 3,
+        "contract_pass": true,
+        "smoke_pass": true,
+        "training_epoch": 0,
+        "training_complete": false,
+        "frozen_complete": false,
+        "frozen_cpu_pass": false,
+        "state_cpu_pass": false,
+        "smoke_updates": 3,
+        "smoke_amp_skips": 0
+      }
+    ],
+    "active_neural_processes": [
+      {
+        "pid": 3865059,
+        "gpu": 2,
+        "phase": "training",
+        "variant": "axis_shared"
+      },
+      {
+        "pid": 3875440,
+        "gpu": 3,
+        "phase": "diagnosis",
+        "variant": "frequency_shared"
+      }
+    ],
+    "failures": [],
+    "preflight_pass": true,
+    "snapshot_atomic": false,
+    "temperature_power_control": false,
+    "local_observed_at": "2026-10-05T03:37:59"
+  },
+  "planned_frozen_cases": 196,
+  "planned_enhanced_state_cases": 882,
+  "planned_raw_distance_files": 343,
+  "actual_text_intake": false,
+  "actual_analysis": false,
+  "actual_local_archive": false,
+  "actual_complete_publication": false,
+  "goal_complete": false,
+  "transport_policy": "Prepare, preflight and launch eligible independent experiments while raw archival transfers; retain max2NN only2026GPU2/3; never clear raw before local size/SHA verification.",
+  "limits": "Source-only acceptance is provisional, same family/backend unattested; it is not actual experiment completion or method success."
+}
