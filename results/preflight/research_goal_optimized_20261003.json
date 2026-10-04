@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-04T13:41:47",
+  "updated_at": "2026-10-04T14:10:05",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、独立身份确认、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -88,7 +88,7 @@
       ]
     }
   },
-  "revision": "20261004_M2b_three50_all3087_CPU_PASS_single_factor_decision",
+  "revision": "20261004_M3a_actual_gradient_contract_three_smokes_pass_fresh50_active",
   "primary_claims": [
     {
       "id": "C1",
@@ -235,6 +235,51 @@
       "decision": "results/identity_alignment_m2b_20261004/mechanism_decision.json",
       "finding": "M2b完成三组fresh50、453实更新/零AMP跳步，3087组/648270重复条件—查询安装GT独立核算PASS。双轴正常六指标为47.630672/32.836992/59.523810/72.380952/77.142857/81.428571；相对原DeMo正常mAP/R1仅+0.022880/+0.476190，未通过+2/+2。全49双轴相对同增强DeMo−4.288197/−6.375121、普通频域−5.021974/−6.715258、普通双专家−5.903164/−7.346939，三组公平对照各0/49双+2；相对原M2双轴全49−1.396147/−2.536443。PF与公共坐标兼容确有改善：正常PF→公共+11.853785mAP，公共→PF+16.960317；PF自身正常+0.796769，但全49自身−0.227203mAP/−1.078717R1，不能只报告正常对齐。正常11−00为+0.059703mAP/+0.476190R1、误伤0/救回1，PF独立可救回的11个基础错误联合兑现0个；全49联合误伤78/救回112，PF潜在救回767出现次中兑现57次。00正常相对M2已下降约1.316mAP，训练期基础变化与推理增量须区分。收益估计正常M/F/I的MAE约0.045684/0.024102/0.030008，目标std约0.001585/0.000904/0.001593；源码仍让同一预测同时接受任务梯度并控制门控。这些是下一单因素的依据，不证明门控耦合是全部性能下降的因果原因。",
       "official_test_uses": 0
+    },
+    "M3a": {
+      "status": "ACTUAL_GRADIENT_CONTRACT_THREE_REAL_UPDATE_SMOKES_PASS_FRESH50_ACTIVE",
+      "controller_pid": 1977717,
+      "observed_at": "2026-10-04T14:09:43",
+      "actual_smokes": 3,
+      "actual_smoke_updates": 9,
+      "training": {
+        "MSVR310_axis_shared_s42": {
+          "status": "RUNNING",
+          "epoch": 10,
+          "steps": 91,
+          "best": {
+            "mAP": 46.15022458061146,
+            "Rank-1": 61.42857142857143,
+            "Rank-5": 70.95238095238095,
+            "Rank-10": 75.23809523809524,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632,
+            "epoch": 9
+          }
+        },
+        "MSVR310_frequency_shared_s42": {
+          "status": "RUNNING",
+          "epoch": 11,
+          "steps": 100,
+          "best": {
+            "mAP": 45.85617078468696,
+            "Rank-1": 59.04761904761905,
+            "Rank-5": 72.38095238095238,
+            "Rank-10": 78.0952380952381,
+            "query_count": 210,
+            "gallery_count": 360,
+            "descriptor_dim": 5632,
+            "epoch": 11
+          }
+        }
+      },
+      "plan": "results/preflight/measurement_gate_m3a_plan.json",
+      "planned_fresh50": 3,
+      "planned_CPU_cases": 3087,
+      "planned_repeated_condition_query_rows": 648270,
+      "official_test_uses": 0,
+      "partial_contribution_regression_targets_present": false
     }
   },
   "decision_rules": [
@@ -261,8 +306,8 @@
   ],
   "next_action": {
     "milestone": "M3a_measurement_only_gate_gradient_single_factor",
-    "status": "NEXT_STEP_FROM_AUDITED_SINGLE_FACTOR_EVIDENCE",
-    "action": "先在MSVR310验证M3a收益估计梯度隔离：保持M2b全部关系0.1、身份对齐0.1/tau0.07、专家/FFT/联合路由、采样与缺失覆盖、残差幅值学习、损失权重、初始化、参数和5632D不变，仅将传入融合的gates停止梯度；prediction仍以原贡献目标监督。不增加头或参数，不把这一诊断称为已实现独立控制头。验证初始state_dict和全部前向值与M2b精确相同，而完整/部分检索任务对predictor的梯度均关闭、贡献回归梯度真实非零。三个增强模型同改、预检及三smoke全通过后才三fresh50，固定最佳权重全49/六状态/八阶段/跨坐标与独立GT核算，再联合检查估计误差、PF判别、实际11−00、逐查询救回/误伤、普通专家及同增强DeMo。部分视图当前没有贡献回归目标的限制保留并明确报告；不同时添加跨集合覆盖、EMA库或新控制头。M2b不扩展三数据集或多种子；新因素是否能改善基础泛化和真正协作由实测决定，不承诺涨点。",
+    "status": "EXISTING_REVIEWED_CONTROLLER_RUNNING_NO_RESTART",
+    "action": "完成当前三组fresh50、完整49条件、六状态、八阶段、七种交叉坐标检索及独立GT审计。只切断融合门控的检索反向梯度，收益估计器继续接受原贡献回归；不新增控制头、损失或缺失配对。与原M2b、同轮普通专家和同增强DeMo完整比较，依据真实推理收益决定下一步。",
     "hardware_dependency": "Only2026GPU2/3,max2NN,no temperature/powerconditions"
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
