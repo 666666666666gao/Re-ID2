@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-05T00:24:33",
+  "updated_at": "2026-10-05T01:38:24",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -426,9 +426,9 @@
       "training_updates": 0
     },
     "full_official_modality_outlet_m4": {
-      "status": "M4_CONTROLLER_LAUNCHED_WITH_ACTUAL_OBSERVED_STARTUP",
+      "status": "THREE_FULL_OFFICIAL_M4_RUNS_AND882_STATE_CASES_ANALYZED_PUBLISHED",
       "plan": "results/preflight/full_official_modality_outlet_plan_20261005.json",
-      "actual_fresh50_runs": 2,
+      "actual_fresh50_runs": 3,
       "actual_smoke_updates": 9,
       "new_model_parameters": 0,
       "controller_pid": 3345716,
@@ -436,8 +436,22 @@
       "launch": "results/preflight/full_official_modality_outlet_launch_20261005.json",
       "actual_contracts_passed": 3,
       "preflight_pass": true,
-      "completed_fresh50_runs": 0,
-      "planned_fresh50_runs": 3
+      "completed_fresh50_runs": 3,
+      "planned_fresh50_runs": 3,
+      "actual_state_metric_cases": 882,
+      "repeated_condition_query_rows": 521262,
+      "contribution_rows": 86877,
+      "actual_text_intake": true,
+      "actual_analysis": true,
+      "analysis": "results/full_official_modality_outlet_m4_20261005/analysis.json",
+      "signed_condition_deltas": "results/full_official_modality_outlet_m4_20261005/comparison_condition_deltas.csv",
+      "distance_archive": {
+        "status": "ALL294_M4_DISTANCE_FILES_LOCAL_SHA256_VERIFIED_SERVER_COPIES_CLEARED",
+        "files": 294,
+        "bytes": 2434750270,
+        "local_root": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\full_official_modality_outlet_m4_20261005\\raw_distances",
+        "evidence": "results/preflight/full_official_modality_outlet_distances_local_archive_20261005.json"
+      }
     }
   },
   "decision_rules": [
@@ -463,9 +477,9 @@
     }
   ],
   "next_action": {
-    "milestone": "FULL_OFFICIAL_M4_THREE_MATCHED_TRIALS",
-    "status": "MONITOR_ONE_EXISTING_CONTROLLER_AND_COLLECT_COMPLETE_TRIAL_RESULTS",
-    "action": "继续唯一240秒观察器监控既有M4控制器，不重复启动。三个版本合同与9次AMP真实更新全部通过后自动进入fresh50；每模型mAP-best严格重载后全49及GT CPU49、6状态全49及GT CPU294，完整六指标/逐query/误伤救回/校准/成本终态再分析。全部正式数据，无人工留出；原始距离逐份本地SHA/大小验证后清理。与同variant M3a及M4同参数普通专家公平比较，机制净收益成立前不扩展为最终三数据集方法。Goal ACTIVE/UNMET。",
+    "milestone": "FULL_OFFICIAL_M4_RESULT_DECISION",
+    "status": "DECIDE_NEXT_SINGLE_FACTOR_FROM_COMPLETE_FAIR_AND_FROZEN_DIAGNOSTICS",
+    "action": "根据本轮完整六指标、49条件、同variant M3a/同参数普通专家和推理关闭诊断决定下一单因素；机制未成立前不盲目扩展三数据集。后续传输期间也并行准备/预检/训练。Goal ACTIVE/UNMET。",
     "hardware_dependency": "Only2026GPU2/3,max2NN,no temperature/powerconditions"
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
