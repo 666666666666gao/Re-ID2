@@ -1,0 +1,166 @@
+{
+  "status": "PASS_FULL_OFFICIAL_PUBLIC_IDENTITY_PARENT_AMP_STEP",
+  "variant": "demo_shared",
+  "parent_optimizer_updates": 2,
+  "disabled_delegation_optimizer_updates": 1,
+  "positive_public_identity_optimizer_updates": 1,
+  "parent_step_loss_gradient_equivalence": true,
+  "optimizer_update_consistency": true,
+  "own_adam_update_checks": [
+    {
+      "phase": "parent",
+      "actual_optimizer_updates": 1,
+      "checked_parameter_tensors": 448,
+      "maximum_own_adam_reconstruction_error": 2.3162800744103151e-07
+    },
+    {
+      "phase": "parent_repeat",
+      "actual_optimizer_updates": 1,
+      "checked_parameter_tensors": 448,
+      "maximum_own_adam_reconstruction_error": 2.3162800744103151e-07
+    },
+    {
+      "phase": "disabled",
+      "actual_optimizer_updates": 1,
+      "checked_parameter_tensors": 448,
+      "maximum_own_adam_reconstruction_error": 2.3162800744103151e-07
+    },
+    {
+      "phase": "positive",
+      "actual_optimizer_updates": 1,
+      "checked_parameter_tensors": 448,
+      "maximum_own_adam_reconstruction_error": 2.3162807316623457e-07
+    }
+  ],
+  "comparison_tolerance": {
+    "rtol": 1e-05,
+    "atol": 1e-06
+  },
+  "repeatability_and_disabled_comparisons": [
+    {
+      "phase": "parent_repeat",
+      "maximum_state_absolute_error": 0.0,
+      "maximum_gradient_absolute_error": 0.0,
+      "largest_state_errors": [
+        [
+          0.0,
+          "tir_reduce.1.weight"
+        ],
+        [
+          0.0,
+          "tir_reduce.1.bias"
+        ],
+        [
+          0.0,
+          "tir_reduce.0.weight"
+        ],
+        [
+          0.0,
+          "tir_reduce.0.bias"
+        ],
+        [
+          0.0,
+          "shared_projection.3.weight"
+        ]
+      ],
+      "largest_gradient_errors": [
+        [
+          0.0,
+          "tir_reduce.1.weight"
+        ],
+        [
+          0.0,
+          "tir_reduce.1.bias"
+        ],
+        [
+          0.0,
+          "tir_reduce.0.weight"
+        ],
+        [
+          0.0,
+          "tir_reduce.0.bias"
+        ],
+        [
+          0.0,
+          "shared_projection.3.weight"
+        ]
+      ]
+    },
+    {
+      "phase": "disabled",
+      "maximum_state_absolute_error": 0.0,
+      "maximum_gradient_absolute_error": 0.0,
+      "largest_state_errors": [
+        [
+          0.0,
+          "tir_reduce.1.weight"
+        ],
+        [
+          0.0,
+          "tir_reduce.1.bias"
+        ],
+        [
+          0.0,
+          "tir_reduce.0.weight"
+        ],
+        [
+          0.0,
+          "tir_reduce.0.bias"
+        ],
+        [
+          0.0,
+          "shared_projection.3.weight"
+        ]
+      ],
+      "largest_gradient_errors": [
+        [
+          0.0,
+          "tir_reduce.1.weight"
+        ],
+        [
+          0.0,
+          "tir_reduce.1.bias"
+        ],
+        [
+          0.0,
+          "tir_reduce.0.weight"
+        ],
+        [
+          0.0,
+          "tir_reduce.0.bias"
+        ],
+        [
+          0.0,
+          "shared_projection.3.weight"
+        ]
+      ]
+    }
+  ],
+  "cross_execution_updated_parameter_equality": "Diagnostic only; retain the M5v3 own-Adam criterion backed by three original-parent repeated updates.",
+  "criterion_evidence": "results/preflight/full_official_availability_graph_adam_diagnostic_intake_20261005.json",
+  "positive_public_identity_branch": {
+    "actual_optimizer_updates": 1,
+    "actual_public_outlet_inputs_exact": true,
+    "classifier_inputs_and_official_training_labels_exact": true,
+    "existing_head_calls": 3,
+    "intended_extra_shared_BN_updates": 2,
+    "other_buffers_exact": true,
+    "original_full_and_partial_losses_retained": true,
+    "scalar_objective_arithmetic_verified": true,
+    "backbone_calls": 4,
+    "projection_calls": 2,
+    "added_backbone_calls": 0,
+    "RNG_exact": true,
+    "public_full_ce": 5.04207706451416,
+    "public_partial_ce": 5.043084144592285
+  },
+  "parent_buffers_exact": true,
+  "positive_other_buffers_exact": true,
+  "CPU_and_selected_CUDA_RNG_exact": true,
+  "parent_detail_fields_exact": true,
+  "added_parameters": 0,
+  "training_heldout_identities": 0,
+  "descriptor_dim": 5632,
+  "new_weights": 0,
+  "scope": "Four actual native64 optimizer updates; no benchmark performance measured."
+}

@@ -1,0 +1,60 @@
+{
+  "status": "FAIL",
+  "blocking_findings": [
+    {
+      "id": "M6_CURRENT_GOAL_STALE_FIELDS",
+      "priority": "P2",
+      "file": "results/preflight/full_official_public_outlet_identity_complete_publisher_20261005.py",
+      "line": 51,
+      "title": "Update all current M6 progress fields before publishing",
+      "finding": "The update sets completed_fresh50_runs=4 and a published terminal status, but the existing M6 current_evidence object retains actual_fresh50_runs=0, actual_completed_fresh50=0, actual_fresh50_runs_started=2, a caveat saying no final metric is inferred, and closeout_sources saying collect/analyze/archive are prepared only. These fields are present in the actual goal input, so the resulting current goal would contradict its four completed runs and executed closeout.",
+      "evidence": "results/preflight/research_goal_optimized_20261003.json current_evidence.full_official_public_outlet_identity_m6; the saved controller_result is COMPLETE and all four saved training results are COMPLETE with epochs=50.",
+      "requested_fix": "Update the existing current counters and caveat/closeout_sources to the actual terminal evidence. Preserve training_started_snapshot as the explicitly timestamped historical launch snapshot and preserve the real frequency smoke AMP skip."
+    }
+  ],
+  "nonblocking_findings": [],
+  "reviewed_at": "2026-10-05T08:10:50+08:00",
+  "review_type": "Fresh source-only experiment-bridge Phase 2.5 CODE_REVIEW with read-only saved local evidence verification",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "unattested; native Codex backend identity is not exposed to the reviewer",
+  "actual_reasoning_effort": "unattested",
+  "actual_backend_attestation": "unattested",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "scientific_goal_acceptance": false,
+  "sources_sha256": {
+    "results/preflight/full_official_public_outlet_identity_complete_publisher_20261005.py": "e0cff9089264ad70d8ccd3adb583fd2054097b5bc98cc6a5df0399aa29195969"
+  },
+  "scope": {
+    "source_files_reviewed": 1,
+    "source_edits": 0,
+    "SSH_calls": 0,
+    "neural_execution": 0,
+    "optimizer_updates": 0,
+    "Git_commands": 0,
+    "copies": 0,
+    "deletions": 0,
+    "entrypoints_executed_by_reviewer": [],
+    "write_scope": "This review JSON only"
+  },
+  "checks": {
+    "syntax": "Publisher Python AST parsed; publisher and imported operational entrypoints were not executed.",
+    "method_reporting": "Correctly describes added 0.1 actual public-block CE using the existing shared head, 0.05 full plus 0.05 partial, two intentional additional shared-BN calls, unchanged raw public identity supervision, zero added parameters/backbone forward, and matched sampling. M4/original shared DeMo are the one-factor parents; M5 replacement is explicitly exploratory rather than a single-factor ablation.",
+    "actual_terminal_evidence": "Four saved training results independently have COMPLETE, 50 epochs, 705 optimizer updates, 0 formal AMP skips, full 1032/591/1055 records and 0 heldout identities. All four frozen audits are PASS; saved controller confirms all 196 frozen and 882 state GT cases passed.",
+    "smoke_preservation": "Existing handoff explicitly retains frequency_shared 3 smoke updates, 4 attempts and 1 AMP skip. Publisher inserts a new terminal section without removing that record and preserves actual_smoke_amp_skips=1 in the current goal. Formal training zero skips are separately reported.",
+    "signed_comparisons": "All 441 unique CSV comparison-condition rows match all six JSON deltas exactly, including harm/rescue and AP-change counts. Each of nine comparisons has 49 conditions. Recomputed after-minus-before maximum error is 2.842170943040401e-14 percentage points; equal-condition mean maximum error is 1.7763568394002505e-15.",
+    "negative_findings": "Hardcoded M6 axis normal metrics, deltas versus original DeMo/current twins/strong M5 frequency, 11-minus00 effects, 3 harms/0 rescues, AP 220/270/101 counts, all49 effect means, and zero favorable calibration-MAE conditions agree with the actual analysis. Scientific goal remains ACTIVE_UNMET, false, with benchmark selection, single seed/dataset and dependent-query limitations disclosed.",
+    "archive_gate": "Before any goal/document mutation the publisher requires the final ALL343_PUBLIC_IDENTITY_DISTANCE_FILES_LOCAL_SHA256_VERIFIED_SERVER_COPIES_CLEARED status, 343 files, four completed runs and removed bytes equal total bytes. At the saved archive observation used in this review the archive remains IN_PROGRESS; this is an existing correctly enforced invocation prerequisite, not an additional source defect.",
+    "review_bindings": "Both PASS review files are read before mutation and every existing sources_sha256 entry is checked against current bytes. All five bindings in the preparation review currently match. This record binds only the publisher path/current SHA.",
+    "handoff_and_git_scope": "Source writes one project handoff and the configured Desktop copy, verifies identical document bytes locally and SHA for the full text set on 2026/2027, records 2025_IO pending, and stages only the explicit result subtree/extras/document/proof paths after requiring an empty index. Unrelated dirty V6 snapshot is outside those paths.",
+    "full_rgbnt100_storage": "Observed official counts 8675/1715/8575 and 49 shared-baseline packed bytes 2426652515 agree with saved result/archive evidence. FP32 matrix size 58824500 and seven matrices times49 total 20176803500 are exact. Approximate packed size 17290985522.08142 comes from the saved real MSVR axis raw RNT-to-RNT archive element-count scaling and is explicitly approximate. Free space is explicitly historical; new streaming remains unimplemented and current MSVR protocol unchanged.",
+    "goal_update": "FAIL: the M6 key exists and ACTIVE_UNMET is preserved, but current counters/caveat/closeout_sources remain stale as detailed in the blocking finding."
+  },
+  "limitations": [
+    "This verdict reviews source/reporting correctness only. A future PASS would not assert scientific goal achievement, completed publication, or completed raw-distance archival.",
+    "Only existing saved local text evidence was inspected; no neural inference, installed-GT/raw-distance recomputation, remote query, publication, copy/deletion or Git action was performed.",
+    "Final 343-file archival proof must reach the publisher-required completed status before invocation.",
+    "Fresh context is same-family and provisional; actual model/backend and effort are unattested."
+  ]
+}

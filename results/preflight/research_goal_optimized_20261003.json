@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-05T04:59:27",
+  "updated_at": "2026-10-05T08:17:25",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -508,21 +508,21 @@
       }
     },
     "full_official_public_outlet_identity_m6": {
-      "status": "FOUR_NATIVE_CONTRACTS_AND_ALL_SMOKES_PASSED_TWO_FRESH50_RUNNING",
+      "status": "FOUR_FULL_OFFICIAL_PUBLIC_IDENTITY_RUNS196_FROZEN882_STATE_CASES_ANALYZED_PUBLISHED",
       "plan": "results/preflight/full_official_public_outlet_identity_plan_20261005.json",
       "controller_pid": 4026779,
       "controller_output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_public_outlet_identity_m6_20261005",
       "launch_evidence": "results/preflight/full_official_public_outlet_identity_launch_20261005.json",
       "source_review_status": "PASS_SOURCE_ONLY",
-      "actual_fresh50_runs": 0,
-      "completed_fresh50_runs": 0,
-      "caveat": "The saved sole-observer snapshot proves two started fresh50 runs; no final metric or candidate superiority is inferred.",
+      "actual_fresh50_runs": 4,
+      "completed_fresh50_runs": 4,
+      "caveat": "Four full50 runs and all196+882 installed-GT cases completed. M6 remains a negative method candidate; no three-dataset or multi-seed success.",
       "single_factor_parent": "M4 expert parents and original shared-identity DeMo; M5-to-M6 is an exploratory replacement, not a single-factor ablation.",
       "actual_contract_optimizer_updates": 16,
       "actual_smoke_optimizer_updates": 12,
       "actual_smoke_amp_skips": 1,
-      "actual_fresh50_runs_started": 2,
-      "actual_completed_fresh50": 0,
+      "actual_fresh50_runs_started": 4,
+      "actual_completed_fresh50": 4,
       "preflight_evidence": "results/preflight/full_official_public_outlet_identity_actual_preflight_20261005.json",
       "training_started_snapshot": {
         "controller_pid": 4026779,
@@ -602,7 +602,149 @@
         "temperature_power_control": false,
         "local_observed_at": "2026-10-05T04:50:01"
       },
-      "closeout_sources": "Prepared and reviewed only; collect/analyze/archive after all actual196+882 terminal cases."
+      "closeout_sources": "Intake, complete analysis and343 local raw archive executed; final publication follows their actual terminal evidence.",
+      "actual_final_frozen_cases": 196,
+      "actual_final_enhanced_state_cases": 882,
+      "actual_text_intake": true,
+      "actual_analysis": true,
+      "analysis": "results/full_official_public_outlet_identity_m6_20261005/analysis.json",
+      "terminal_observer": {
+        "controller_pid": 4026779,
+        "controller_alive": false,
+        "controller_complete": true,
+        "runs": [
+          {
+            "variant": "demo_shared",
+            "gpu": 2,
+            "contract_pass": true,
+            "smoke_pass": true,
+            "training_epoch": 50,
+            "training_complete": true,
+            "frozen_complete": true,
+            "frozen_cpu_pass": true,
+            "state_cpu_pass": false,
+            "smoke_updates": 3,
+            "smoke_amp_skips": 0,
+            "optimizer_updates": 705,
+            "amp_skips": 0
+          },
+          {
+            "variant": "axis_shared",
+            "gpu": 2,
+            "contract_pass": true,
+            "smoke_pass": true,
+            "training_epoch": 50,
+            "training_complete": true,
+            "frozen_complete": true,
+            "frozen_cpu_pass": true,
+            "state_cpu_pass": true,
+            "smoke_updates": 3,
+            "smoke_amp_skips": 0,
+            "optimizer_updates": 705,
+            "amp_skips": 0,
+            "state_metric_cases": 294
+          },
+          {
+            "variant": "frequency_shared",
+            "gpu": 3,
+            "contract_pass": true,
+            "smoke_pass": true,
+            "training_epoch": 50,
+            "training_complete": true,
+            "frozen_complete": true,
+            "frozen_cpu_pass": true,
+            "state_cpu_pass": true,
+            "smoke_updates": 3,
+            "smoke_amp_skips": 1,
+            "optimizer_updates": 705,
+            "amp_skips": 0,
+            "state_metric_cases": 294
+          },
+          {
+            "variant": "twins_shared",
+            "gpu": 3,
+            "contract_pass": true,
+            "smoke_pass": true,
+            "training_epoch": 50,
+            "training_complete": true,
+            "frozen_complete": true,
+            "frozen_cpu_pass": true,
+            "state_cpu_pass": true,
+            "smoke_updates": 3,
+            "smoke_amp_skips": 0,
+            "optimizer_updates": 705,
+            "amp_skips": 0,
+            "state_metric_cases": 294
+          }
+        ],
+        "active_neural_processes": [],
+        "failures": [],
+        "preflight_pass": true,
+        "frozen_metric_cases": 196,
+        "state_metric_cases": 882,
+        "paired_identity_and_partial_sampling_exact": true,
+        "actual_public_input_coverage": {
+          "demo_shared": {
+            "R": 116,
+            "N": 124,
+            "T": 125,
+            "RN": 119,
+            "RT": 113,
+            "NT": 108,
+            "RNT": 705
+          },
+          "axis_shared": {
+            "R": 116,
+            "N": 124,
+            "T": 125,
+            "RN": 119,
+            "RT": 113,
+            "NT": 108,
+            "RNT": 705
+          },
+          "frequency_shared": {
+            "R": 116,
+            "N": 124,
+            "T": 125,
+            "RN": 119,
+            "RT": 113,
+            "NT": 108,
+            "RNT": 705
+          },
+          "twins_shared": {
+            "R": 116,
+            "N": 124,
+            "T": 125,
+            "RN": 119,
+            "RT": 113,
+            "NT": 108,
+            "RNT": 705
+          }
+        },
+        "snapshot_atomic": false,
+        "temperature_power_control": false,
+        "local_observed_at": "2026-10-05T05:54:15"
+      },
+      "signed_condition_deltas": "results/full_official_public_outlet_identity_m6_20261005/comparison_condition_deltas.csv",
+      "distance_archive": {
+        "status": "ALL343_PUBLIC_IDENTITY_DISTANCE_FILES_LOCAL_SHA256_VERIFIED_SERVER_COPIES_CLEARED",
+        "files": 343,
+        "bytes": 2535673267,
+        "local_root": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\full_official_public_outlet_identity_m6_20261005\\raw_distances",
+        "evidence": "results/preflight/full_official_public_outlet_identity_distances_local_archive_20261005.json"
+      }
+    },
+    "full_official_rgbnt100_storage": {
+      "status": "OBSERVED_FULL_RGBNT100_STORAGE_CONSTRAINT_PROSPECTIVE_STREAMING_REQUIRED",
+      "evidence": "results/preflight/full_official_rgbnt100_storage_plan_20261005.json",
+      "official_counts": {
+        "train": 8675,
+        "query": 1715,
+        "gallery": 8575
+      },
+      "actual_frozen49_bytes": 2426652515,
+      "streaming_code_implemented": false,
+      "current_trial_changes": 0
     }
   },
   "decision_rules": [
@@ -628,11 +770,11 @@
     }
   ],
   "next_action": {
-    "milestone": "FULL_OFFICIAL_PUBLIC_OUTLET_IDENTITY_M6",
-    "status": "MONITOR_EXISTING_TWO_LANE_FULL50_AND_COMPLETE_FROZEN49_STATES",
-    "action": "Continue the same sole240-second observer and original controller. At the actual four-run196/882 terminal, collect text, analyze all six signed metrics against original/M4/current ordinary/strongM5frequency references, then archive343 distances locally by size/SHA before clearing matching server copies.",
-    "hardware_dependency": "Only2026 physicalGPU2/3,max2NN,no power or temperature conditions",
-    "transport_policy": "Prepare, review, preflight and train eligible independent experiments while archival transfer runs; delete only local size/SHA-verified raw copies."
+    "milestone": "FULL_OFFICIAL_PUBLIC_IDENTITY_RESULT_DECISION",
+    "status": "DECIDE_FROM_COMPLETE_FAIR_COMPARISONS_AND_FROZEN_EXPERT_UTILITY",
+    "action": "依据完整输入/49缺失/公平普通对照/强M5普通频域及11−00误伤救回决定下一步；无效损失不原样扩展。优先准备大数据集逐条件审计归档，保持全部官方记录与49条件；候选须先有真实公平优势再进入三个数据集与多种子。原+2验收目标不变。",
+    "hardware_dependency": "Only2026GPU2/3,max2NN,no temperature/powerconditions",
+    "transport_policy": "归档传输与独立准备/预检/训练并行；仅删除已本地大小/SHA验证的距离副本。"
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
   "user_resumption": {
