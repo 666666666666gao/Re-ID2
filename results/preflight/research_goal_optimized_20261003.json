@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-05T11:04:14",
+  "updated_at": "2026-10-05T11:24:21",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -773,7 +773,7 @@
       "caveat": "Prepared hypothesis only; two-stage budget and continued-DeMo/unfrozen-axis controls required. No new method success or accepted launch implied."
     },
     "full_official_frozen_identity_anchor_m7": {
-      "status": "FOUR_FULL50_ALL49_RUNS_CLOSED_FINAL_ADAPTIVE_AXIS_TRAINING",
+      "status": "ALL_FIVE50_AND245_FROZEN_AUDITS_COMPLETE_FINAL294_STATE_ARCHIVE_PENDING",
       "plan": "results/preflight/full_official_frozen_identity_anchor_plan_20261005.json",
       "runtime_plan": "results/preflight/full_official_frozen_anchor_runtime_plan_20261005.json",
       "training_review": "results/preflight/full_official_frozen_identity_anchor_training_review_20261005.json",
@@ -781,8 +781,8 @@
       "actual_contract_updates": 5,
       "actual_smoke_updates": 15,
       "actual_full50_started": 5,
-      "actual_full50_completed": 4,
-      "actual_frozen_cases": 196,
+      "actual_full50_completed": 5,
+      "actual_frozen_cases": 245,
       "actual_state_cases": 882,
       "actual_neural_stream_gate": true,
       "caveat": "Three fixed00 paths equal anchor across all49 CSV rows. Actual expert gains tiny, not unique axis superiority. Final adaptive control and global5 closeout still pending; single-seed MSVR cannot meet unified3dataset goal.",
@@ -2934,16 +2934,7 @@
       "actual_analysis": false,
       "current_snapshot": "results/preflight/full_official_frozen_anchor_primary_observer_latest_20261005.json",
       "first_pair_closeout": "results/preflight/full_official_frozen_anchor_first_pair_closed_20261005.json",
-      "running": [
-        {
-          "name": "MSVR310_anchor_axis_shared_adaptive_s42",
-          "gpu": 2,
-          "epoch": 5,
-          "optimizer_steps": 71,
-          "amp_skipped_steps": 0,
-          "pid": 658373
-        }
-      ],
+      "running": [],
       "completed_normal_metrics": [
         {
           "name": "MSVR310_anchor_demo_shared_adaptive_s42",
@@ -3040,10 +3031,35 @@
           "query_records": 591,
           "gallery_records": 1055,
           "training_heldout_identities": 0
+        },
+        {
+          "name": "MSVR310_anchor_axis_shared_adaptive_s42",
+          "variant": "axis_shared",
+          "freeze": 0,
+          "gpu": 2,
+          "selected_epoch": 22,
+          "full_metrics": {
+            "mAP": 49.27388275507951,
+            "mINP": 25.344273713420616,
+            "Rank-1": 65.14382402707277,
+            "Rank-5": 81.89509306260575,
+            "Rank-10": 85.44839255499154,
+            "Rank-20": 91.20135363790186
+          },
+          "optimizer_steps": 705,
+          "amp_skipped_steps": 0,
+          "frozen_conditions": 49,
+          "state_cases_pending": 294,
+          "train_records": 1032,
+          "query_records": 591,
+          "gallery_records": 1055,
+          "training_heldout_identities": 0
         }
       ],
-      "observed_at": "2026-10-05T10:54:20",
-      "fixed_three_utility": "results/preflight/full_official_frozen_anchor_fixed_three_utility_20261005.json"
+      "observed_at": "2026-10-05T11:24:21",
+      "fixed_three_utility": "results/preflight/full_official_frozen_anchor_fixed_three_utility_20261005.json",
+      "all_training_complete": "results/preflight/full_official_frozen_anchor_all_training_complete_20261005.json",
+      "pending_inference": "Final adaptive49/294 streamedstates and localarchive/global5 bridge closure; original training not restarted."
     },
     "full_official_neural_condition_archive_equivalence": {
       "status": "PASS_FULL49_NEURAL_STREAM_EQUALS_COMPLETED_M6_GT_AUDIT",
@@ -3072,17 +3088,25 @@
       "interpretation": "Shared identity anchor is stronger than original DeMo on MSVR310 but lower on RGBNT201 and RGBNT100. Its quality must not be assumed universal; unchanged three-dataset expansion remains conditional on actual candidate utility and original DeMo/fair ordinary controls."
     },
     "full_official_frozen_public_identity_m8": {
-      "status": "SOURCE_PASS_INDEPENDENT_GPU3_NATIVE_PREFLIGHT_READY_NOT_EXECUTED",
+      "status": "ACTUAL_NATIVE3_SMOKE9_PASS_FORMAL3RUN_SOURCE_PASS_NOT_STARTED",
       "plan": "results/preflight/full_official_frozen_public_identity_m8_preparation_20261005.json",
       "reviews": [
         "results/preflight/full_official_frozen_public_identity_m8_training_review_20261005.json",
         "results/preflight/full_official_frozen_public_identity_m8_preflight_execution_review_20261005.json"
       ],
-      "actual_native_updates": 0,
-      "actual_smoke_updates": 0,
+      "actual_native_updates": 3,
+      "actual_smoke_updates": 9,
       "actual_full50_started": 0,
       "factor": "Existing M6 deployed-public CE weight0.1 with M7 identityencoder frozen;2 extra mutable BN/head calls,no extra params/backbone. Earlier M6 co-training was negative.",
-      "full50_decision": "After complete M7 comparison and passing actual3native+9smoke gates; separate formal3run queue/archive not yet implemented."
+      "full50_decision": "After complete M7 comparison and passing actual3native+9smoke gates; separate formal3run queue/archive not yet implemented.",
+      "amp_skipped_steps": 0,
+      "new_weights": 0,
+      "actual_preflight": "results/preflight/full_official_frozen_public_identity_m8_actual_preflight_20261005.json",
+      "native_session": 56557,
+      "controller_pid": 704480,
+      "formal_queue_implemented": true,
+      "formal_queue_review_pending": false,
+      "formal_review": "results/preflight/full_official_frozen_public_identity_m8_full_execution_review_20261005.json"
     }
   },
   "decision_rules": [
@@ -3109,8 +3133,8 @@
   ],
   "next_action": {
     "milestone": "COMPLETE_M7_GLOBAL5_CLOSEOUT_AND_INDEPENDENT_M8_GPU3_NATIVE_GATE",
-    "status": "M7_FINAL_GPU2_RUNNING_M8_PREFLIGHT_SOURCE_REVIEW_PASS_GPU3_RELEASED",
-    "action": "在原M7继续训练/归档期间用已释放GPU3执行三组真实原生更新和三更新smoke；不等无关传输、不修改原控制器。M7全部245冻结/1176状态和归档关闭后执行已复核全量采集/分析，再决定新固定公共CE三组50轮试验。完整三数据集各+2及公平缺失、真实协作、多种子目标仍ACTIVE_UNMET。",
+    "status": "M7_FINAL_MISSING_ARCHIVE_PENDING_M8_ALL_SOURCE_AND_NATIVE_GATES_PASS",
+    "action": "原M7全部50轮和245冻结GT审计已完成，最后294状态及归档继续；传输期间已完成M8真实3+9更新预检和三组50轮调度复核。原全5流式回执关闭后立刻运行已复核全量采集/分析，依据真实公平优势和11−00判断窄因素M8是否启动，不重复训练、不改原运行源码。三数据集各+2/公平缺失/真实协作/多种子目标保持ACTIVE_UNMET。",
     "hardware_dependency": "Only2026GPU2/3,max2NN,serial/card,no temperature/powerconditions"
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",

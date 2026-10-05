@@ -1,0 +1,177 @@
+{
+  "status": "PASS",
+  "review_type": "SOURCE_ONLY",
+  "reviewed_at": "2026-10-05T11:21:43+08:00",
+  "reviewer": "/root/review_frozen_public_identity_m8_full_execution",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_backend": "UNATTESTED",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "summary": "No blocking or non-blocking correctness defect found in the five reviewed M8 execution sources and their reviewed reuse paths. Source PASS permits the existing gated workflow to continue; it does not assert M7 global completion, a scientific decision to train M8, or actual M8 formal execution.",
+  "blocking_findings": [],
+  "non_blocking_findings": [],
+  "sources_sha256": {
+    "run_full_official_frozen_public_identity_experiment.py": "a28511746236d11ed9608a6f3ac20be6337d95df13db7549d35a1e0e4cea37ef",
+    "verify_full_official_frozen_public_identity.py": "dfa8376d23d4898f71b05d59b0d6d6f64cf8f45acd1e51f77ae3808ddd392193",
+    "launch_full_official_frozen_public_identity_trial.py": "14cebca04fc1d3205630a3fd9fa36d65453b33a6f49251ae280d0aeaa6b35901",
+    "results/preflight/full_official_frozen_public_identity_stream_bridge_20261005.py": "422e56cf296003c19ff5bbdf7387b148105c9b0bddb43a8de9ad72239b23394c",
+    "results/preflight/full_official_frozen_public_identity_train_launch_20261005.py": "9d59e43aac06369f60200f9bd33a95e9f9e80f902541ea2094a5d6b2185bcc71"
+  },
+  "directly_reused_sources_sha256": {
+    "launch_full_official_frozen_anchor_trial.py": "88b1b7388903431ac813e318b77f041e80db9afb1ccc2ee1492920e5c08fb228",
+    "launch_frozen_public_identity_preflight.py": "1619cfcc082fbe5759fb51744cc084ea3f34b9e53692c7a41f26dd4de473d731",
+    "gpu_thermal_execute.py": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+    "frozen_identity_anchor_axis.py": "37fc8426306477732f2601f70072572ad568b01d2a298d865293c84ca227deae",
+    "run_full_official_frozen_anchor_experiment.py": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+    "public_outlet_identity_training.py": "88d7dd8784bf763f81afbb09595a0ac1b1ffd69025be431ae1457faae09210f0",
+    "evaluate_full_official_frozen_anchor49.py": "ca8a13aa68eff8722ae02fbe4624fb6f46872f551f6292aa734da1cd99cae3c4",
+    "diagnose_full_official_frozen_anchor_stream.py": "69a45634a5d66c8ccf9faa0a3c813d9724ecd6c9aed579fa6eee02f6ce9ffa0e",
+    "audit_full_official49.py": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+    "evaluate_full_official49.py": "5db20659af12e248d91b22813517b1e72619483fa73ac06a60423e874a2c9d7b",
+    "diagnose_full_official_streaming_states.py": "f7d0d67ff961090cb728481a27a33a9b3dc10fd1501c47e4968c5cb965544374"
+  },
+  "checks": [
+    {
+      "id": "method_and_frozen_anchor",
+      "status": "PASS",
+      "evidence": [
+        "run_full_official_frozen_public_identity_experiment.py:11",
+        "public_outlet_identity_training.py:9",
+        "frozen_identity_anchor_axis.py:15",
+        "run_full_official_frozen_anchor_experiment.py:154"
+      ],
+      "result": "M8 reuses the same M7 anchor builder, restricts all three variants to freeze=1, and adds existing M6 public CE weight0.1 as0.05 full+0.05 partial on descriptor5120:5632. Existing shared_neck/shared_classifier receive two extra mutable calls. There are no new parameters/backbone passes; original full objectives,0.25 partial CE,0.5 stopped-gallery triplet and six frozen encoder modules are retained. Frozen weights/buffers/modes are checked during training and after best reload."
+    },
+    {
+      "id": "existing_actual_native_evidence",
+      "status": "PASS",
+      "evidence": [
+        "results/preflight/full_official_frozen_public_identity_m8_actual_preflight_20261005.json",
+        "launch_frozen_public_identity_preflight.py:49",
+        "verify_full_official_frozen_anchor.py"
+      ],
+      "result": "Read-only validation of the collected primary contract/smoke/exit records passed for all3 variants: native1+smoke3 updates each,0AMP skips,105 finite nonzero gradient names equal,100902534 total/2675846 trainable parameters,5632D,B64/P16/K4,1032/591/1055 records,0holdout, initial7-set equality, unchanged encoder, strict reload, own Adam replay max error0. Every saved CE detail has positive full/partial terms,weight0.1,no extra parameters/backbone passes and2 extra neck calls. All6 saved child exits are0 onGPU3. These are earlier actual records, not reviewer-run neural checks."
+    },
+    {
+      "id": "formal_launch_prerequisites",
+      "status": "PASS",
+      "evidence": [
+        "results/preflight/full_official_frozen_public_identity_train_launch_20261005.py:22",
+        "launch_full_official_frozen_public_identity_trial.py:24",
+        "analyze_full_official_frozen_anchor_trial.py:120"
+      ],
+      "result": "Launcher first requires source-review PASS with exact five-source equality, actual M8 native3/smoke9/0skip evidence, completed M7 local analysis status emitted by the existing analyzer, and the parent-authored PROCEED decision with goal_complete=false. Remote checks require M7 COMPLETE5/245frozen/1176states, passed audits and paired sampling, same anchor, exact actual preflight_result and cleared M7 raw banks. Controller independently checks M7/preflight completion and binds data/pretrained/anchor/M7 arguments to the actual preflight launch. No formal launch was executed for this review."
+    },
+    {
+      "id": "training_budget_and_sampling",
+      "status": "PASS",
+      "evidence": [
+        "launch_full_official_frozen_public_identity_trial.py:60",
+        "run_full_official_frozen_anchor_experiment.py:139",
+        "run_experiment.py:31",
+        "configs/MSVR310/DeMo.yml:23",
+        "experiment_data.py:88",
+        "data/datasets/sampler.py",
+        "official_training_data.py:20"
+      ],
+      "result": "Actual training command uses the full official MSVR split,seed42,freeze1 and same anchor; inherited config supplies50 additional epochs,B64,K4,new Adam/scheduler and AMP512. Epoch seeds and a dedicated partial-set generator match M7, with unchanged PK sampler and all six proper subsets. Controller requires705 attempts=705trueupdates,0skips,all1032 train records visited and1032/591/1055 counts. It compares every(epoch,step,names,partial_set) row against the corresponding completed M7 run and across all3 M8 variants before declaring COMPLETE."
+    },
+    {
+      "id": "gpu_schedule_and_parent_isolation",
+      "status": "PASS",
+      "evidence": [
+        "launch_full_official_frozen_public_identity_trial.py:16",
+        "launch_full_official_frozen_public_identity_trial.py:72",
+        "launch_full_official_frozen_public_identity_trial.py:92",
+        "gpu_thermal_execute.py:9",
+        "results/preflight/full_official_frozen_public_identity_train_launch_20261005.py:60"
+      ],
+      "result": "Only2026 physicalGPU2(axis) andGPU3(frequency then twins), one sequential worker per card and max2 workers. Each child finishes before its lane proceeds; the shared lock serializes archive-sensitive evaluation/diagnosis/ACK phases. Resource queries request index and memory only, with no power/temperature controls. Only3 M8 root-level source files are deployed; M7 controller, receiver and all reused scientific sources are unchanged."
+    },
+    {
+      "id": "checkpoint_and_inference_builder",
+      "status": "PASS",
+      "evidence": [
+        "run_full_official_frozen_anchor_experiment.py:166",
+        "evaluate_full_official_frozen_anchor49.py:2",
+        "evaluate_full_official49.py:30",
+        "diagnose_full_official_frozen_anchor_stream.py:2",
+        "diagnose_full_official_streaming_states.py:51",
+        "shared_identity_axis.py:192"
+      ],
+      "result": "Training keeps maximum full-official mAP with earliest ties and reloads that best strictly. Both inference wrappers rebuild the unchanged anchored model, then strictly load the new M8 best.pth and use eval mode. public_identity_weight is a training callback attribute, not a forward/state-dict dependency; the inherited inference builder therefore needs no M8-specific publicCE attribute. Full normal features/distances must exactly match saved best_official_arrays, and all49 state11 outputs must match the frozen49 matrices, metrics and per-query records."
+    },
+    {
+      "id": "full_gt_evaluation",
+      "status": "PASS",
+      "evidence": [
+        "evaluate_full_official49.py:46",
+        "audit_full_official49.py:13",
+        "audit_full_official49.py:37",
+        "diagnose_full_official_streaming_states.py:94",
+        "audit_full_official_condition.py:13",
+        "audit_full_official_condition.py:29"
+      ],
+      "result": "Seven full query/gallery feature banks produce all49 conditions. The six states00/10/01/11/base_private/base_shared yield294 cases per model. Independent CPU audits enumerate installed official filenames/labels, verify manifests and all record counts, recount all six metrics and per-query/group records, and retain same-ID/same-scene exclusion for MSVR (same-ID/same-camera for RGBNT). Evaluation compares retrieval with installed GT, never another model prediction as GT."
+    },
+    {
+      "id": "three_run_stream_protocol_and_eof",
+      "status": "PASS",
+      "evidence": [
+        "results/preflight/full_official_frozen_public_identity_stream_bridge_20261005.py:14",
+        "launch_full_official_frozen_anchor_trial.py:34",
+        "launch_full_official_frozen_anchor_trial.py:81",
+        "launch_full_official_frozen_public_identity_trial.py:89"
+      ],
+      "result": "The new receiver handles RAW_READY/CLEARED,FROZEN_READY/CLEARED,RUN_COMPLETE and one CONTROLLER_COMPLETE for3runs/147frozen/882states. ACK payloads including job and condition match unchanged producer expectations and use real newline characters. EOF requires remote exit0, completion event,147 unique raw receipts exactly equal cleared keys,3 completed/frozen/cleared jobs and49 raw receipts per completed job. This avoids the old receiver5run/196raw constants without changing that live receiver."
+    },
+    {
+      "id": "archive_order_and_namespace",
+      "status": "PASS",
+      "evidence": [
+        "diagnose_full_official_streaming_states.py:118",
+        "results/preflight/full_official_anchor_stream_bridge_20261005.py:19",
+        "launch_full_official_frozen_anchor_trial.py:81",
+        "results/preflight/full_official_frozen_public_identity_train_launch_20261005.py:72"
+      ],
+      "result": "Every6-state raw is audited before RAW_READY; reused copy_verified confines its relative path to the declared root and verifies local size/SHA before ACK. Producers recheck size/SHA and own bounded path before unlink. Frozen49 are retained through all full11 equality comparisons and then copied/ACKed/rechecked/unlinked. M8 has distinct remote run and local D-drive archive roots and distinct receipt, with exclusive creation. The reviewed workflow contains no Git publication of raw distances, images or weight binaries."
+    },
+    {
+      "id": "source_receipt_and_syntax",
+      "status": "PASS",
+      "evidence": [
+        "results/preflight/full_official_frozen_public_identity_train_launch_20261005.py:23",
+        "results/preflight/full_official_frozen_public_identity_train_launch_20261005.py:41"
+      ],
+      "result": "All5 target hashes and all11 formal directly reused source hashes match the preparation plan at final review write. All16 files parse locally. Both rendered remote Python snippets at launcher lines42 and63 parse (18 and7 lines), without executing remote code. Review fields status,blocking_findings,sources_sha256,directly_reused_sources_sha256 match the launcher consumption schema; remote parents are verified before deployment and3 M8 remote sources are rechecked/AST-parsed after copy."
+    }
+  ],
+  "local_checks": {
+    "execution": "stdlib-only source/JSON inspection and AST parsing; no experiment-module imports",
+    "python": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe -X utf8 -B -S",
+    "target_and_formal_parent_ast_files": 16,
+    "nested_remote_snippets_ast_parsed": 2,
+    "existing_primary_native_smoke_variants_checked": 3,
+    "source_sha256_rechecked_before_report": true,
+    "mock_stream_execution": false,
+    "runtime_tensor_or_installed_gt_reexecution": false
+  },
+  "scope_limits": [
+    "Fresh source-only correctness review in an independent context, same model family and provisional acceptance. Requested Astra/max; actual backend/model/effort are not attested.",
+    "No SSH, GPU query, deployment, neural execution, experiment import, training, inference, archival copy, deletion or publication was performed by the reviewer. Only this report is written.",
+    "No new formal50 result or training decision is asserted. M7 global completion and analysis remain prerequisites to be produced and checked by the existing launch gates; parent must author the substantive M8 decision from completed M7 comparison.",
+    "Existing native3/smoke9 records support the prior preflight only. This review does not claim formal705-update numerical behavior, future49/294 audits or archive runtime success.",
+    "The common anchor was benchmark-selected after50 epochs and each M8 arm plans50 additional epochs with a new optimizer. Single-seed MSVR evidence and benchmark checkpoint selection do not establish unified3dataset superiority or an untouched final test."
+  ],
+  "actual_deployment": false,
+  "actual_deployed": 0,
+  "actual_neural_execution": 0,
+  "actual_gpu_queries": 0,
+  "actual_ssh_calls": 0,
+  "actual_formal_training_started": 0,
+  "implementation_modified": false,
+  "goal_complete": false
+}
