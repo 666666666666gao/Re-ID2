@@ -1,0 +1,305 @@
+{
+  "status": "FAIL",
+  "review_type": "SOURCE_ONLY",
+  "reviewed_at": "2026-10-05T12:47:30.0851594+08:00",
+  "reviewer": "/root/review_rgbnt201_original_anchor_r201a",
+  "requested_backend": "Codex",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_backend": "UNATTESTED",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "summary": "Two deterministic preflight blockers were found in the original seven-source revision: the anchor builder compares already-CUDA CLIP tensors with CPU checkpoint tensors, and the native verifier requires P16/K4 although the unchanged RGBNT201 configuration and original baseline use P8/K8. No additional concrete training, evaluation, archive or M8 lane-scheduling defect was found in the reviewed reachable paths. This revision must not pass the deployment gate.",
+  "blocking_findings": [
+    {
+      "id": "R201A-B01",
+      "severity": "BLOCKING",
+      "path": "original_identity_anchor.py",
+      "line": 71,
+      "title": "Anchor equality assertion compares CUDA backbone state with CPU checkpoint tensors",
+      "evidence": [
+        "original_identity_anchor.py:51 constructs OriginalAnchoredDeMo before reading the checkpoint; shared_identity_axis.py:110 calls DeMo.__init__, which constructs build_transformer at modeling/make_model.py:20.",
+        "modeling/meta_arch.py:70 explicitly calls clip_model.to(\"cuda\") during construction, and line71 retains clip_model.visual as BACKBONE.base. Thus the constructed model already contains CUDA backbone tensors before original_identity_anchor.py:81.",
+        "original_identity_anchor.py:64 loads every saved tensor with map_location='cpu'. load_state_dict at line70 copies values into the existing model tensors; line71 then passes a CUDA BACKBONE.base tensor and a CPU saved tensor directly to torch.equal.",
+        "The archived original RGBNT201 result records torch 2.5.1+cu121. Official PyTorch v2.5.1 cuda_equal checks identical devices and raises when they differ."
+      ],
+      "impact": "The first build in the native verifier raises during checkpoint equality checking, before any native update or smoke. The same builder is also used by both training controls and their full49 evaluator.",
+      "minimal_correction": "Compare model.state_dict()[key].detach().cpu() with the CPU saved value, matching the same-device comparison already used by assert_anchor_unchanged at original_identity_anchor.py:42. Do not modify the existing M8 parent modules.",
+      "authoritative_reference": {
+        "title": "PyTorch v2.5.1 CUDA equal implementation",
+        "url": "https://github.com/pytorch/pytorch/blob/v2.5.1/aten/src/ATen/native/cuda/Equal.cpp#L19",
+        "raw_source": "https://raw.githubusercontent.com/pytorch/pytorch/v2.5.1/aten/src/ATen/native/cuda/Equal.cpp",
+        "reviewed_lines": "18-19 (zero-based web rendering), device equality TORCH_CHECK"
+      },
+      "verification": "Static call-path and official dependency-source inspection only; no CUDA or neural code was executed."
+    },
+    {
+      "id": "R201A-B02",
+      "severity": "BLOCKING",
+      "path": "verify_rgbnt201_original_anchor.py",
+      "line": 86,
+      "end_line": 87,
+      "title": "Native batch gate hardcodes MSVR-style P16/K4 instead of RGBNT201 P8/K8",
+      "evidence": [
+        "configs/RGBNT201/DeMo.yml sets DATALOADER.NUM_INSTANCE to 8.",
+        "run_experiment.py:31-40 loads that dataset configuration and fixes B64 but does not override NUM_INSTANCE.",
+        "experiment_data.py:90 passes cfg.DATALOADER.NUM_INSTANCE directly to RandomIdentitySampler. data/datasets/sampler.py:22 therefore selects 64/8=8 identities, and lines47-60 append eight samples per selected identity.",
+        "verify_rgbnt201_original_anchor.py:86 instead requires 16 unique identities and line87 requires four occurrences per identity.",
+        "The archived full-official RGBNT201 original result also records NUM_INSTANCE: 8. Its first saved batch contains 64 names, eight identities and eight names per identity."
+      ],
+      "impact": "After correcting R201A-B01, the verifier still fails at the first native batch before step(...) is called. Native2/smoke6 cannot complete, so formal training remains gated.",
+      "minimal_correction": "Keep the actual RGBNT201 B64/P8/K8 sampler unchanged and correct the verifier assertions to eight identities and eight instances per identity. The expected 2647 successful updates belongs to this preserved native configuration.",
+      "verification": "Source inspection plus read-only inspection of the completed original baseline's saved configuration and first batch-order record; no new batch loader or optimizer was run."
+    }
+  ],
+  "non_blocking_findings": [],
+  "sources_sha256": {
+    "original_identity_anchor.py": "e61911b3050164f03239adf8c29ba509bd1913fa66b87fd273ab83b8f6d4d9c0",
+    "run_rgbnt201_original_anchor.py": "00393f0a90f1f015aed8522a4815476cc6247730b3bcbec4abc83f9c913e15b5",
+    "verify_rgbnt201_original_anchor.py": "aedcd0f44d9b1fb280a68cac81c2eeeb280a5d9bc174057aa6ce425a04808ff7",
+    "evaluate_rgbnt201_original_anchor49.py": "15ed4f803145b2a4c9d1a2e23c6f491fc45302c2f008822701cd843160f3ca32",
+    "launch_rgbnt201_original_anchor.py": "18d9ac18694778fc24efbdf7aa768603d0479e8aa48d362130a14df000a8e275",
+    "results/preflight/rgbnt201_original_anchor_stream_20261005.py": "fbac797bf30e9f954146f84900d9251411f385a495df95680d20a73706e9c81a",
+    "results/preflight/rgbnt201_original_anchor_deploy_20261005.py": "c801c8369092d519799cf3f472591b6986272cb76533c0502f4915164cd6fb52"
+  },
+  "directly_reused_sources_sha256": {
+    "run_full_official_frozen_anchor_experiment.py": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+    "shared_identity_axis.py": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+    "run_shared_identity_experiment.py": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+    "gpu_thermal_execute.py": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+    "launch_full_official_frozen_anchor_trial.py": "88b1b7388903431ac813e318b77f041e80db9afb1ccc2ee1492920e5c08fb228",
+    "evaluate_full_official49.py": "5db20659af12e248d91b22813517b1e72619483fa73ac06a60423e874a2c9d7b",
+    "audit_full_official49.py": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+    "official_training_data.py": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "solver/make_optimizer.py": "09e8e36c78c78cda75daad52bbc48f77f4dc33b96568a06bc1c193132ffbeafc",
+    "solver/scheduler_factory.py": "c5e20bdffec4b5360faa04f823639c8e5fd8672914813fb96148927c9ee19abc",
+    "results/preflight/full_official_anchor_stream_bridge_20261005.py": "53fd78e3b4ebbd79b6d0a60059e9c297f727ac8a42931b6a5b103e44d7d88d8e",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "modeling/make_model.py": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+    "modeling/meta_arch.py": "f9b93fba00f534debecebcd72f974320cd978e1619f1460674cbfc3afc961eec",
+    "modeling/moe/AttnMOE.py": "91d594c86ba44a5ce9eb843afaba898d5f8b0515b542b2754004c85ca272d3b6",
+    "configs/RGBNT201/DeMo.yml": "bfee0de623885a38cce974c1c5d74abf47c54e14852cc266b8f69c70a858c51d",
+    "data/datasets/sampler.py": "579b45b767960b7ca8a373808d890493e6ac8d152c0fe13dbe0f4dc02ed9f068",
+    "data/datasets/RGBNT201.py": "1a3dda88f26efc2891322e2726c4f3591bfd0c040cdf5c717d0aabc55f349272",
+    "missing_evaluation.py": "e04e16dbb4ec486f28065102b5d7301c68e7d1cef62cdd5fcfa99b3dac222089",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+    "collect_results.py": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+    "layers/make_loss.py": "232ef86081a76665225db4360ea67650230b1d5986818cabc23ce5db36340dec",
+    "audit_shared_identity_states.py": "e8cf168db43f36e36a40a66148f209a6b782775942ce7fcbdf9dce439d1fa8d0",
+    "modeling/make_model_clipreid.py": "eda949ce202c8adf9fc9c0d4763bccbbdaec7140ebced7d9b7f0b6eebd8dc846",
+    "dual_axis.py": "0c6090fe5b8b15cc021bf1809860f0675187288dc2145d0129ce89a5eb78a330",
+    "solver/cosine_lr.py": "d3db6e30c1666c5af71200086f33c644d476310b6c5dc7ed98097cc989bdad4d"
+  },
+  "supporting_sources_sha256": {
+    "launch_full_official_frozen_public_identity_trial.py": "14cebca04fc1d3205630a3fd9fa36d65453b33a6f49251ae280d0aeaa6b35901",
+    "frozen_identity_anchor_axis.py": "37fc8426306477732f2601f70072572ad568b01d2a298d865293c84ca227deae",
+    "diagnose_full_official_frozen_anchor_stream.py": "69a45634a5d66c8ccf9faa0a3c813d9724ecd6c9aed579fa6eee02f6ce9ffa0e",
+    "diagnose_full_official_streaming_states.py": "f7d0d67ff961090cb728481a27a33a9b3dc10fd1501c47e4968c5cb965544374"
+  },
+  "primary_evidence_sha256": {
+    "results/preflight/rgbnt201_priority_plan_20261005.json": "02a358e4ac82c9709333757e79ef4c840a6a7bd2dd0ea8510416adbd14ec6bdf",
+    "results/preflight/rgbnt201_original_anchor_M8_boundary_20261005.json": "7188fe84a852c24a9ad88c7367487cbbe75f6d922fea10cb38069aaefdf26da9",
+    "results/full_official_baselines_20261004/training/RGBNT201_demo_s42/result.json": "9e35222359690e691a5c6bb1c135449bde503fe3ac3e92fbf4172e92e133b035",
+    "results/full_official_baselines_20261004/training/RGBNT201_demo_s42_exit.json": "641b47809fc6d7d8b7f1cf8498747c02f12828d9964cc29127df4747046620cd",
+    "results/full_official_baselines_20261004/training/RGBNT201_demo_s42/batch_orders.jsonl": "0f7242664ba687049e4a953214a50b38ca57e0de2916c262c14deb5c47be4f8d",
+    "results/full_official_baselines_20261004/training/RGBNT201_demo_shared_s42/result.json": "e733b29144162f8a4407129d874da9c1eaf7ce57e7e8447823949eb872495e58",
+    "results/rgbnt201_baseline_blocks_p0_20261005/result.json": "ae6769f3025fce77e65984983ef1c6c378b032d0ed53ecd48acf80fbdd58543d"
+  },
+  "reviewed_reuse_scope": {
+    "run_full_official_frozen_anchor_experiment": "Full main path, smoke/50-epoch loop, callback resolution, best selection, checkpoint reload, evaluation and saved metadata.",
+    "shared_identity_axis": "SharedIdentityDeMo, shared initialization, private/common metric, available-source encoding/fusion, base supervision and partial-gallery triplet. Expert subclass sections are outside the selected demo_shared execution path.",
+    "run_shared_identity_experiment": "PARTIAL_SETS and step; its historical holdout main is not called.",
+    "launch_full_official_frozen_anchor_trial": "archive_frozen, emit, save, STREAM_PREFIX import and old stream_diagnosis completion semantics.",
+    "full_evaluation": "official_records, full_metrics, extract and distance; historical holdout main is not called.",
+    "experiment_data": "seed_all, source_records, Triplets and make_loader; split_records is not called.",
+    "missing_evaluation": "mask_images, extract_missing and original-mask distinction.",
+    "audit_shared_identity_states": "METRICS and summarize only; its historical holdout audit is not called.",
+    "collect_results": "PROJECT, OPTIONS, command and remote_python only; historical collectors and publishers are not called.",
+    "modeling_make_model_clipreid": "load_clip_to_cpu source and return path.",
+    "dual_axis": "RELATIONS ordering used by availability fusion.",
+    "solver_cosine_lr": "Constructor, warmup and epoch learning-rate calculation.",
+    "supporting_M8_sources": "Actual M8 schedule and final diagnosis exit/result producer, plus old builder for comparison. These sources were not edited or executed."
+  },
+  "checks": [
+    {
+      "id": "original_baseline_lineage_and_same_initial_tensors",
+      "status": "FAIL_SOURCE",
+      "evidence": [
+        "original_identity_anchor.py:46-85",
+        "verify_rgbnt201_original_anchor.py:35-55"
+      ],
+      "result": "The declared lineage, manifest/class/camera checks, saved-state key/shape/dtype checks and seeded new shared/fused modules match the plan. The real pair would compare every initial state tensor and the original raw 5120D private coordinates on eight queries. Actual construction is blocked by R201A-B01; no parity success is asserted."
+    },
+    {
+      "id": "single_freezing_factor",
+      "status": "PASS_SOURCE",
+      "evidence": [
+        "original_identity_anchor.py:14-43",
+        "shared_identity_axis.py:20-25",
+        "shared_identity_axis.py:108-128",
+        "modeling/make_model.py:103-179"
+      ],
+      "result": "Only BACKBONE, rgb_reduce, nir_reduce, tir_reduce and generalFusion are frozen and kept recursively in eval mode in the fixed control. The newly initialized shared_projection and shared/fused heads remain trainable, as do original classification heads. State comparison covers frozen weights and buffers. Both controls retain the same .75/.25 metric and existing full/partial objectives; this is an original-anchor outlet control, not a new-expert comparison."
+    },
+    {
+      "id": "native_and_smoke_gates",
+      "status": "FAIL_SOURCE",
+      "evidence": [
+        "verify_rgbnt201_original_anchor.py:68-129",
+        "run_full_official_frozen_anchor_experiment.py:98-129",
+        "launch_rgbnt201_original_anchor.py:50-82"
+      ],
+      "result": "The code intends one real Adam update per control, replay from cloned optimizer parameters/groups, finite nonzero gradients for every active parameter, fixed all-seven private-state equality after update, in-memory strict reload and zero AMP skips; then three real smoke updates per control with no saved weight files. R201A-B01 and R201A-B02 prevent reaching those successful gates."
+    },
+    {
+      "id": "full_training_budget_and_sampling",
+      "status": "PASS_SOURCE",
+      "evidence": [
+        "run_full_official_frozen_anchor_experiment.py:74-97",
+        "run_full_official_frozen_anchor_experiment.py:139-181",
+        "run_shared_identity_experiment.py:22-73",
+        "launch_rgbnt201_original_anchor.py:99-105",
+        "launch_rgbnt201_original_anchor.py:122-130"
+      ],
+      "result": "Both arms use all official3951 train/836 query/836 gallery records without an artificial holdout, seed42/B64 and the existing RGBNT201 P8/K8 sampler. Each receives a new Adam, scheduler and GradScaler512 for additional50 epochs after the same original50 anchor. The launcher requires 2647 successful updates, zero skips, full training-record coverage and exactly matching ordered identity batches/partial sets. These are runtime requirements, not completed evidence."
+    },
+    {
+      "id": "checkpoint_and_full49_gt",
+      "status": "PASS_SOURCE",
+      "evidence": [
+        "run_full_official_frozen_anchor_experiment.py:158-176",
+        "evaluate_rgbnt201_original_anchor49.py:6-8",
+        "evaluate_full_official49.py:27-77",
+        "audit_full_official49.py:13-132",
+        "full_evaluation.py:20-65",
+        "utils/reid_evaluation.py:8-56"
+      ],
+      "result": "Highest complete official benchmark mAP selects one best with earliest ties; selection is disclosed. The evaluator uses the new builder, strictly reloads that best, forms seven whole-split descriptor banks and evaluates all49 pairs. Full-input bank/distance equality is checked against saved best arrays. The CPU audit independently enumerates installed GT filenames, applies same-ID/same-camera exclusion, verifies all six metrics, CMC1..50, all836 query rows and camera/scene/identity groups, and checks the selected epoch against all50 recorded epochs. Two arms give98 cases; no per-condition checkpoint selection occurs."
+    },
+    {
+      "id": "M8_final_neural_lane_boundaries",
+      "status": "PASS_SOURCE",
+      "evidence": [
+        "launch_rgbnt201_original_anchor.py:19-30",
+        "launch_rgbnt201_original_anchor.py:53-55",
+        "launch_rgbnt201_original_anchor.py:95-120",
+        "launch_full_official_frozen_public_identity_trial.py:16",
+        "launch_full_official_frozen_public_identity_trial.py:72-90",
+        "launch_full_official_frozen_anchor_trial.py:68-78",
+        "gpu_thermal_execute.py:9-49"
+      ],
+      "result": "Preflight waits on old M8axis diagnosis exit0 on GPU2. Formal fixed/adaptive arms independently wait on the last M8axis/GPU2 and M8twins/GPU3 diagnosis exit0, absent child PID and COMPLETE result. M8's actual source has no later neural phase on either lane. This blocks GPU3 while twins diagnosis remains alive even when its memory temporarily drops; remaining unrelated archives are not a global barrier. Only GPU2/3 memory availability is queried; no temperature/power controls are used. Waits are240 seconds."
+    },
+    {
+      "id": "immutable_parent_processes_and_metadata",
+      "status": "PASS_SOURCE",
+      "evidence": [
+        "run_rgbnt201_original_anchor.py:25-36",
+        "results/preflight/rgbnt201_original_anchor_deploy_20261005.py:54-62"
+      ],
+      "result": "The wrapper replaces the reused loop's frozen-state check and pretraining JSON metadata only inside its own process. Deployment copies only the five new runtime sources. Existing M8 sources, model processes and stream receiver are not changed."
+    },
+    {
+      "id": "raw98_retention_and_ownership",
+      "status": "PASS_SOURCE",
+      "evidence": [
+        "launch_rgbnt201_original_anchor.py:106-117",
+        "results/preflight/rgbnt201_original_anchor_stream_20261005.py:14-53",
+        "launch_full_official_frozen_anchor_trial.py:81-94",
+        "results/preflight/full_official_anchor_stream_bridge_20261005.py:19-27"
+      ],
+      "result": "Each completed49 evaluation is CPU-audited before archive. The controller serializes only its own frozen-bank acknowledgements. The new receiver copies each owned path under its own run root, rejects an existing destination and verifies local bytes/SHA before acknowledging. The remote side rechecks each size/SHA before unlinking those49 files. Completion requires both runs and98 archived files; best weights and the old M8 receiver remain separate."
+    },
+    {
+      "id": "deployment_gate",
+      "status": "PASS_SOURCE_GATE_WITH_CURRENT_REVISION_BLOCKED",
+      "evidence": [
+        "results/preflight/rgbnt201_original_anchor_deploy_20261005.py:28-62",
+        "launch_rgbnt201_original_anchor.py:84-90"
+      ],
+      "result": "Deployment requires review.status PASS, no blocking findings and exact equality with the seven plan-source hashes. Parent bytes are checked remotely and the five new runtime files are rechecked after copying. Formal mode also requires actual native2/smoke6 exit0 evidence. This FAIL artifact intentionally prevents deployment of the reviewed revision."
+    }
+  ],
+  "archived_observations": {
+    "original_RGBNT201": {
+      "source": "results/full_official_baselines_20261004/training/RGBNT201_demo_s42/result.json",
+      "status": "COMPLETE",
+      "epochs": 50,
+      "selected_epoch": 28,
+      "optimizer_steps": 2647,
+      "amp_skipped_steps": 0,
+      "full_split_counts": {
+        "train": 3951,
+        "query": 836,
+        "gallery": 836
+      },
+      "classes": 171,
+      "camera_embeddings": 4,
+      "torch": "2.5.1+cu121",
+      "native_sampler": {
+        "batch": 64,
+        "identities_per_batch": 8,
+        "instances_per_identity": 8
+      },
+      "mAP": 75.67457499232746,
+      "Rank1": 80.622009569378,
+      "parent_exit_code": 0
+    },
+    "CPU_block_diagnosis": {
+      "source": "results/rgbnt201_baseline_blocks_p0_20261005/result.json",
+      "original": {
+        "mAP": 75.67457499232746,
+        "Rank1": 80.622009569378
+      },
+      "shared_private": {
+        "mAP": 73.63261004355425,
+        "Rank1": 73.92344497607655
+      },
+      "shared_public": {
+        "mAP": 56.7334219170707,
+        "Rank1": 57.17703349282297
+      },
+      "shared_fused": {
+        "mAP": 71.46071340069632,
+        "Rank1": 71.65071770334929
+      },
+      "scope": "Read existing four836-query score artifacts only; no new diagnosis was executed."
+    },
+    "M8": {
+      "source": "results/preflight/rgbnt201_original_anchor_M8_boundary_20261005.json",
+      "observed_at": "2026-10-05T12:42:03",
+      "axis_diagnosis": {
+        "pid": 906264,
+        "alive": false,
+        "exit_code": 0
+      },
+      "twins_diagnosis": {
+        "pid": 958098,
+        "alive": true
+      },
+      "controller_complete": false,
+      "scope": "Existing local read-only snapshot, not a fresh remote observation. The runtime lane gate must still evaluate the actual exit/result files."
+    }
+  },
+  "local_checks": {
+    "seven_target_sources_read_directly": true,
+    "all_seven_hashes_equal_plan": true,
+    "directly_reused_paths_reviewed": 28,
+    "source_execution": false,
+    "ast_parse": "NOT_PERFORMED",
+    "imported_project_modules": false,
+    "neural_inference_or_training": false,
+    "deployment": false,
+    "remote_job_queries": false,
+    "source_edits": false,
+    "written_artifacts": [
+      "results/preflight/rgbnt201_original_anchor_source_review_20261005.json"
+    ],
+    "actions": "Read source, compute SHA256, inspect existing local JSON/batch-order evidence, and read the official PyTorch2.5.1 device-check implementation. No additional human document or source file was written."
+  },
+  "acceptance_limit": "SOURCE_ONLY FAIL applies to exactly the seven recorded original hashes. Correct both evidenced defects, update the plan hashes and perform a fresh review before deployment. Any later SOURCE_ONLY PASS would not establish actual native/smoke execution, full50/full49 completion, final metric improvements, novelty, unique dual-axis gains or three-dataset scientific success."
+}

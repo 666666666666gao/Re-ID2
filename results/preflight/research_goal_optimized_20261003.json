@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-05T12:27:43",
+  "updated_at": "2026-10-05T13:59:38",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -3261,6 +3261,43 @@
       },
       "scope": "Four fixed descriptors, entire official normal query/gallery and installed same-ID/same-camera exclusion. Existing full49 results remain separate; no new missing feature banks or weight tuning.",
       "limits": "Single-seed benchmark-selected baselines. Private/public block ablation diagnoses the selected shared checkpoint, not retraining, causal attribution, or a new best method. No new weights or raw distance files."
+    },
+    "RGBNT201_R201A_preparation": {
+      "status": "R201A_NATIVE_FAILURE_PRIMARY_GRADIENT_DIAGNOSTIC_REVIEW_PENDING_NO_FULL50",
+      "plan": "results/preflight/rgbnt201_priority_plan_20261005.json",
+      "previous_goal_turn": "PROGRESS: actual full201 CPU four-block diagnosis changed next factor; priority/code/result publication c8b0d94b completed",
+      "current_sources": 7,
+      "actual_native_updates": 0,
+      "actual_smoke_updates": 0,
+      "new_full50_started": 0,
+      "M8_boundary": "results/preflight/rgbnt201_original_anchor_M8_boundary_20261005.json",
+      "P": 8,
+      "K": 8,
+      "initial_source_review": "FAIL_before_deployment",
+      "source_fail_archive": "results/preflight/rgbnt201_original_anchor_initial_fail_review_20261005.json",
+      "fixes": [
+        "ConstructorCUDA versus checkpointCPU equality moved toCPU",
+        "Preserve RGBNT201 P8/K8 instead of MSVR P16/K4"
+      ],
+      "native_session": 45924,
+      "source_review": "Corrected sourcePASS; no actual native/smoke result yet; new50notstarted",
+      "native_session45924_exit": 1,
+      "completed_native_contracts": 0,
+      "new_weight_files": 0,
+      "native_failure": "results/preflight/rgbnt201_original_anchor_initial_native_failure_20261005.json",
+      "evidence_limit": "Trace implies two step calls executed updates but no completed native proof; all7 private/fixed/reload checks passed for fixedcontrol before adaptive predicate failed. Do not claim nativePASS."
+    },
+    "M8_actual_terminal": {
+      "observed_at": "2026-10-05T12:55:26",
+      "actual_terminal": {
+        "status": "COMPLETE",
+        "frozen_metric_cases": 147,
+        "enhanced_state_metric_cases": 882,
+        "all_frozen_and_state_cpu_audits_passed": true,
+        "paired_identity_and_partial_sampling_exact": true,
+        "M7_corresponding_sampling_exact": true,
+        "all147_enhanced_raw_and147_frozen_raw_local_verified": true
+      }
     }
   },
   "decision_rules": [
@@ -3287,8 +3324,8 @@
   ],
   "next_action": {
     "milestone": "RGBNT201_STRONG_REFERENCE_DIAGNOSIS_AND_SINGLE_FACTOR_IMPROVEMENT",
-    "status": "RGBNT201_PRIMARY_CPU_DIAGNOSIS_COMPLETE_NEXT_SINGLE_FACTOR_NOT_STARTED",
-    "action": "First prepare a matched original-DeMo-initialized RGBNT201 comparison: the existing shared outlet with original identity encoder frozen versus allowed to update, identical new heads/seed/full50/new optimizer/augmentation/checkpoint rule. This isolates reference drift before stacking new expert mechanisms. It is a staged training diagnosis, not a novel dual-axis method or a total50-budget comparison to the completed baseline. Fresh source review and real native preflight required before launching; no new RGBNT201 full50 source/queue is running yet. Introduce axis/frequency/twins only after the protected outlet proves useful relative to the original reference; ordinary controls remain mandatory for any method claim.",
+    "status": "RGBNT201_PAIRED_FULL50_RUNNING_GPU2AND3_NATIVE17655",
+    "action": "Actual FP32fusion preflight29163 exit0/native2+smoke6/zeroAMP/strictreload/private parity/fixed7states passed. Formal paired RGBNT20150 now actually running26GPU2fixed andGPU3adaptive; native17655/controller1119221/children1119633and1119634 preserved. Initial actual epochs4/2, zero skips. Whole3951train/836Q836G/0holdout; original DeMo E28 plus additional50,newAdam, shared0.75/0.25 outlet; all49/audits/rawlocal sizeSHA-before-clear/onlybest follow after each50. All3datasets+2/faircontrol/actual dualexpert utility remains unmet.",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
@@ -3300,7 +3337,7 @@
       "first_lane": "GPU2 after its existing M8 NN phases actually close exit0 and native checks pass; unrelated transfers and GPU3 M8 queue are not a global barrier",
       "temperature_power_control": false
     },
-    "existing_M8_closeout": "Native52604/controller811717 unchanged; two completed50 trainings; frozen49/state audit and third scheduled control remain to close."
+    "existing_M8_closeout": "ACTUAL_COMPLETE_NATIVE52604_EXIT0_THREE50_147FROZEN882STATES_LOCAL_RAW_VERIFIED"
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
   "user_resumption": {

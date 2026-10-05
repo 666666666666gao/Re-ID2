@@ -1,0 +1,196 @@
+{
+  "status": "SOURCE_REVIEW_PASS",
+  "review_type": "SOURCE_ONLY",
+  "reviewed_at": "2026-10-05T13:44:20.677731+08:00",
+  "reviewer": "/root/review_rgbnt201_fusion_precision_probe",
+  "requested_backend": "Codex",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "requested_fork_turns": "none",
+  "actual_backend": "UNATTESTED",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "summary": "Fresh source review found no concrete blocking defect in this bounded two-condition gradient diagnostic. The manual full and RGB-only partial loss/backward matches the demo_shared path of run_shared_identity_experiment.step before its unscale/optimizer actions. Both conditions reuse one warm model and one augmented B64/P8/K8 batch, reload its complete registered initial state and reset seed42. Only the process-local available_base_fusion binding is changed; no optimizer, weight save, evaluation, training acceptance waiver or formal training launch is implemented. This review did not execute the diagnostic.",
+  "blocking_findings": [],
+  "non_blocking_findings": [],
+  "sources_sha256": {
+    "diagnose_rgbnt201_fusion_precision.py": "615897fbb656496389f0cb429c948ba0c02ad166e1faa783883141017e306206"
+  },
+  "directly_reused_sources_sha256": {
+    "original_identity_anchor.py": "73f667ac8fc1920b61f28f19ff6f058fe000f2d7065827c8a6c1fa20f2785be9",
+    "shared_identity_axis.py": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+    "run_shared_identity_experiment.py": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "official_training_data.py": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "layers/make_loss.py": "232ef86081a76665225db4360ea67650230b1d5986818cabc23ce5db36340dec",
+    "layers/softmax_loss.py": "d872eba630685044eda8e507f9e0f6f0e0a42af7e222ed4d8fd4c418d384c518",
+    "layers/triplet_loss.py": "f502c44bec642bbf72ce6d0f58c9f9a0084beef9cbb451c2d2786bb13f94960a",
+    "configs/RGBNT201/DeMo.yml": "bfee0de623885a38cce974c1c5d74abf47c54e14852cc266b8f69c70a858c51d",
+    "config/defaults.py": "41d6e21de28ffca68104954c52dcba3d0f3c16249980c70107d6c72e1117c6ba",
+    "data/datasets/sampler.py": "579b45b767960b7ca8a373808d890493e6ac8d152c0fe13dbe0f4dc02ed9f068",
+    "data/datasets/RGBNT201.py": "1a3dda88f26efc2891322e2726c4f3591bfd0c040cdf5c717d0aabc55f349272",
+    "data/datasets/make_dataloader.py": "2061c8131ab76771fdbf53b36faf3e3b6cf6493002c7fa84304ff589d63dd3d8",
+    "modeling/make_model.py": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+    "modeling/meta_arch.py": "f9b93fba00f534debecebcd72f974320cd978e1619f1460674cbfc3afc961eec",
+    "modeling/moe/AttnMOE.py": "91d594c86ba44a5ce9eb843afaba898d5f8b0515b542b2754004c85ca272d3b6",
+    "gpu_thermal_execute.py": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511"
+  },
+  "supporting_evidence_sha256": {
+    "verify_rgbnt201_original_anchor.py": "4294916bcd508257c8d7deb6d1df9aca4b01589f62b394eca3ce143a6c1df7c7",
+    "run_rgbnt201_original_anchor.py": "00393f0a90f1f015aed8522a4815476cc6247730b3bcbec4abc83f9c913e15b5",
+    "results/preflight/rgbnt201_original_anchor_deploy_20261005.py": "cc8feec5943a5afc8f45aea43d65378a672d62ea1fa47dce60bef5e53b9ec5ec",
+    "results/preflight/rgbnt201_priority_plan_20261005.json": "781d82de849af0ec71471c26ccbc44912a803f4cec355713da3cd9c3fbfdcccd",
+    "results/preflight/rgbnt201_original_anchor_actual_gradient_failure_20261005.json": "7b59b9af1f1b1852acfa01d4e514d04266d0945c3c9f29f11de291a7624f4f7d",
+    "results/full_official_baselines_20261004/training/RGBNT201_demo_s42/result.json": "9e35222359690e691a5c6bb1c135449bde503fe3ac3e92fbf4172e92e133b035",
+    "results/full_official_baselines_20261004/training/RGBNT201_demo_s42_exit.json": "641b47809fc6d7d8b7f1cf8498747c02f12828d9964cc29127df4747046620cd"
+  },
+  "reviewed_checks": [
+    {
+      "check": "actual_training_loss_identity",
+      "result": "PASS_SOURCE",
+      "evidence": [
+        "run_rgbnt201_original_anchor.py:19 delegates to run_shared_identity_experiment.step; shared_identity_axis.py supplies the model and partial_gallery_triplet, not the step itself.",
+        "SharedIdentityDeMo with RGBNT201 DIRECT=1 returns four score/feature pairs and loss_weights [1, 1, 0.25, 1]: fused, MoE, common shared head, and concatenated original globals.",
+        "diagnose_rgbnt201_fusion_precision.py:66-74 reproduces the weighted full loss and detached output[1] reference used by run_shared_identity_experiment.py:40-52. The demo_shared model returns no odd trailing contribution loss.",
+        "The reused make_loss uses RGBNT201 ID_LOSS_WEIGHT=0.25, TRIPLET_LOSS_WEIGHT=1, label smoothing on and the configured soft triplet.",
+        "Probe lines75-82 retain RGB and zero NI/TI, reproducing retained=(0,) in the native verifier. They reuse the same label-smoothed CE and partial_gallery_triplet with weights 0.25 and 0.5.",
+        "partial_gallery_triplet detaches the full reference, excludes each query itself from positives, uses GT labels and retains the existing positive/negative mining and FP32 distance computation."
+      ]
+    },
+    {
+      "check": "same_warm_state_batch_and_seed",
+      "result": "PASS_SOURCE",
+      "evidence": [
+        "original_identity_anchor.build loads original RGBNT201 demo best.pth and checks the completed50 result, native exit, 2647 optimizer steps, zero skipped steps, no heldout identities, classes/cameras and official manifest.",
+        "The archived original result independently records selected epoch28, 171 training identities, four camera embeddings, and completed50.",
+        "Probe lines43-49 create one adaptive model, clone state_dict tensors to CPU, and load one augmented batch once. Both conditions reuse these exact tensors.",
+        "Probe lines62-65 strictly reload parameters and registered buffers, select train mode, clear gradients and reset all existing Python/NumPy/Torch/CUDA seed sources to42 before each full forward.",
+        "configuration plus RGBNT201 YAML sets B64/K8; the unchanged RandomIdentitySampler constructs eight groups of eight identities/instances. The probe asserts B64 and eight unique identities.",
+        "full_records uses all3951 official training records and all836 query/836 gallery metadata with zero artificial holdout. Only a single training batch undergoes neural computation in this diagnostic."
+      ]
+    },
+    {
+      "check": "precision_intervention_scope",
+      "result": "PASS_SOURCE",
+      "evidence": [
+        "Probe lines52-61 capture the actual shared module function then bind either that original or an autocast-disabled wrapper calling the same function with FP32 patch/global inputs.",
+        "SharedIdentityDeMo.forward reaches encode_available, whose module-global available_base_fusion lookup observes this binding for both full and partial calls.",
+        "No parameter dtype or requires_grad flag is changed by the wrapper. Input float casts preserve autograd connectivity. build returns FP32 parameters, so the disabled region supports FP32 fusion operations.",
+        "CLIP, reductions, shared projection, heads and losses retain their original outer autocast contexts and existing explicit FP32 subregions. The fusion result can propagate normal dtype promotion; this is a local precision intervention, not a claim that every downstream operation is FP16.",
+        "The original function binding is restored on normal completion. Only this isolated process is affected; runtime source files are not edited."
+      ]
+    },
+    {
+      "check": "gradient_measurement_and_parameter_immutability",
+      "result": "PASS_SOURCE",
+      "evidence": [
+        "Both backward calls multiply loss by exactly512, matching the fixed initial GradScaler512 pre-unscale gradient calculation in the failed native attempt. No optimizer is created or called.",
+        "gradient_state enumerates every requires_grad named parameter, distinguishes None, nonfinite and finite-zero gradients, records parameter/gradient dtype and all nonzero counts.",
+        "Stored gradient tensors are still scaled512. max_abs is divided by512 in the report; finite/nonzero counts are observations on the scaled tensors. This is not an executed GradScaler.unscale_/step or a replacement native acceptance check.",
+        "Probe lines84-86 compare every named parameter with its saved initial CPU tensor after each condition. BN buffers are expected to change within a train-mode condition and are restored before the next condition.",
+        "No torch.save, optimizer update or checkpoint overwrite occurs. Each condition has its own JSON and the terminal result has diagnostic COMPLETE status, not a native/smoke PASS."
+      ]
+    },
+    {
+      "check": "memory_and_outputs",
+      "result": "PASS_SOURCE_ONLY_RUNTIME_UNMEASURED",
+      "evidence": [
+        "Only one live model and a CPU state snapshot are held; no Adam states, second model, replay model or saved weight binary is created.",
+        "The full backward runs before the RGB partial forward and output is deleted, preserving the existing B64 activation-release design. Per-condition graph values are deleted before the next iteration; retained measurements are plain scalar dictionaries.",
+        "FP32 fusion uses more temporary memory than AMP fusion; source review does not establish its actual peak or completion. Native execution remains required to observe this.",
+        "The fresh output directory uses exist_ok=False, preserving earlier failure outputs. Per-condition reports persist independently, and result.json is written only after both conditions finish.",
+        "The terminal limits explicitly deny completed50/all49, validation score, method-gain and acceptance-gate claims and acknowledge stochastic kernels can differ across dtypes."
+      ]
+    },
+    {
+      "check": "hardware_scope_and_corrected_command",
+      "result": "PASS_SOURCE_WITH_CORRECTED_PROPOSED_ARGV",
+      "evidence": [
+        "The supplied initial command omitted training/ in the anchor path. Existing rgbnt201_original_anchor_deploy_20261005.py ANCHOR and archived baseline layout establish the corrected path below; the probe itself accepts and uses --anchor-run-dir correctly.",
+        "original_identity_anchor.build checks CUDA_VISIBLE_DEVICES through the existing GPU2/3 memory-only check. The proposed bounded execution uses gpu_thermal_execute.execute(..., gpu=2), which exports physical2 as visible CUDA and records launch/exit.",
+        "gpu_thermal_execute retains 240-second memory-availability waits and contains no temperature/power queries or conditions. This review did not invoke it or independently query remote hardware."
+      ]
+    }
+  ],
+  "corrected_proposed_execution": {
+    "server": "2026",
+    "cwd": "/data/gaob/Re-ID/DeMo-DualAxis",
+    "executor": "gpu_thermal_execute.execute",
+    "physical_gpu": 2,
+    "argv": [
+      "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+      "-u",
+      "diagnose_rgbnt201_fusion_precision.py",
+      "--data-root",
+      "/data/gaob/Re-ID/dataset",
+      "--pretrained",
+      "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+      "--anchor-run-dir",
+      "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT201_demo_s42",
+      "--output",
+      "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt201_original_anchor_fusion_precision_probe_20261005/probe"
+    ],
+    "executed_by_reviewer": false
+  },
+  "preserved_prior_failure": {
+    "native_exit_code": 1,
+    "fixed_trainable_parameters": 14,
+    "fixed_failed_names": [],
+    "adaptive_trainable_parameters": 332,
+    "adaptive_missing_or_nonfinite_gradients": 0,
+    "adaptive_finite_zero_names": [
+      "generalFusion.r_token",
+      "generalFusion.n_token",
+      "generalFusion.t_token",
+      "generalFusion.rn_token",
+      "generalFusion.rt_token",
+      "generalFusion.rnt_token"
+    ],
+    "nt_token_nonzero_count": 464,
+    "acceptance_gate": "Unchanged: every active parameter must have a finite nonzero native gradient; the prior adaptive failure is not waived.",
+    "formal50_or_smoke_started_by_review": false
+  },
+  "validation": {
+    "new_source_ast_parse": "PASS",
+    "all_parsed_python_sources": [
+      "diagnose_rgbnt201_fusion_precision.py",
+      "original_identity_anchor.py",
+      "shared_identity_axis.py",
+      "run_shared_identity_experiment.py",
+      "run_experiment.py",
+      "experiment_data.py",
+      "official_training_data.py",
+      "full_evaluation.py",
+      "layers/make_loss.py",
+      "layers/softmax_loss.py",
+      "layers/triplet_loss.py",
+      "config/defaults.py",
+      "data/datasets/sampler.py",
+      "data/datasets/RGBNT201.py",
+      "data/datasets/make_dataloader.py",
+      "modeling/make_model.py",
+      "modeling/meta_arch.py",
+      "modeling/moe/AttnMOE.py",
+      "gpu_thermal_execute.py",
+      "verify_rgbnt201_original_anchor.py",
+      "run_rgbnt201_original_anchor.py",
+      "results/preflight/rgbnt201_original_anchor_deploy_20261005.py"
+    ],
+    "review_execution": "Read-only source/artifact inspection plus stdlib AST, JSON and SHA256 operations; only this review JSON was written.",
+    "local_parser": "Existing uv-managed CPython3.12 executable; bare python alias was unusable (No pyvenv.cfg file) before any script execution. No environment installation or repair.",
+    "new_nn_calls": 0,
+    "ssh_calls": 0,
+    "optimizer_updates": 0,
+    "new_weight_files": 0,
+    "runtime_source_edits": 0
+  },
+  "interpretation_limits": [
+    "SOURCE_REVIEW_PASS authorizes no claim of runtime completion, corrected native preflight, successful optimization, formal50 or all49 results.",
+    "A difference on one warm-start training batch supports a precision-sensitivity diagnosis only. Attention/dropout kernels and their random-number consumption may differ despite equal seeds; the comparison cannot by itself prove a unique underflow mechanism or scientific improvement.",
+    "Any prospective training precision change still needs its own source review and the unchanged actual native/smoke gates before formal training."
+  ]
+}

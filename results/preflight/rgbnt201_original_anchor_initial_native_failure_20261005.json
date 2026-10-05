@@ -1,0 +1,58 @@
+{
+  "launch": {
+    "pid": 1000893,
+    "started": 1791176436.7742145,
+    "arguments": {
+      "data_root": "/data/gaob/Re-ID/dataset",
+      "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+      "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt201_original_anchor_preflight_20261005",
+      "anchor_run_dir": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT201_demo_s42",
+      "m8_root": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_frozen_public_identity_m8_20261005",
+      "mode": "preflight",
+      "preflight_root": null
+    },
+    "gpus": [
+      2,
+      3
+    ],
+    "temperature_power_control": false,
+    "original_M8_unchanged": true
+  },
+  "native_launch": {
+    "pid": 1001054,
+    "process_group": 1001054,
+    "gpu": 2,
+    "started": 1791176436.9780445,
+    "command": [
+      "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+      "-u",
+      "verify_rgbnt201_original_anchor.py",
+      "--data-root",
+      "/data/gaob/Re-ID/dataset",
+      "--pretrained",
+      "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+      "--anchor-run-dir",
+      "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT201_demo_s42",
+      "--output",
+      "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt201_original_anchor_preflight_20261005/contract/paired"
+    ],
+    "initial_resources": {
+      "gpu": 2,
+      "memory_used_mib": 18.0,
+      "observed_at": 1791176436.9761846
+    },
+    "temperature_power_control": false
+  },
+  "native_exit": {
+    "name": "paired",
+    "exit_code": 1,
+    "finished": 1791176466.4234202,
+    "gpu": 2,
+    "temperature_power_control": false,
+    "forced_own_group_cleanup": false
+  },
+  "log": "/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/helpers.py:7: FutureWarning: Importing from timm.models.helpers is deprecated, please import via timm.models\n  warnings.warn(f\"Importing from {__name__} is deprecated, please import via timm.models\", FutureWarning)\n/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models\n  warnings.warn(f\"Importing from {__name__} is deprecated, please import via timm.models\", FutureWarning)\n/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers\n  warnings.warn(f\"Importing from {__name__} is deprecated, please import via timm.layers\", FutureWarning)\nusing Transformer_type: ViT-B-16 as a backbone\nResized position embedding: %s to %s torch.Size([197, 768]) torch.Size([129, 768])\nPosition embedding resize to height:16 width: 8\nSuccessfully load ckpt!\n<All keys matched successfully>\nLoading pretrained model from CLIP\ncamera number is : 4\nusing Transformer_type: ViT-B-16 as a backbone\nResized position embedding: %s to %s torch.Size([197, 768]) torch.Size([129, 768])\nPosition embedding resize to height:16 width: 8\nSuccessfully load ckpt!\n<All keys matched successfully>\nLoading pretrained model from CLIP\ncamera number is : 4\nusing Transformer_type: ViT-B-16 as a backbone\nResized position embedding: %s to %s torch.Size([197, 768]) torch.Size([129, 768])\nPosition embedding resize to height:16 width: 8\nSuccessfully load ckpt!\n<All keys matched successfully>\nLoading pretrained model from CLIP\ncamera number is : 4\n===========Building DeMo===========\nusing soft triplet loss for training\nlabel smooth on, numclasses: 171\nusing soft triplet loss for training\nlabel smooth on, numclasses: 171\nTraceback (most recent call last):\n  File \"/data/gaob/Re-ID/DeMo-DualAxis/verify_rgbnt201_original_anchor.py\", line 135, in <module>\n    main()\n  File \"/data/gaob/Re-ID/DeMo-DualAxis/verify_rgbnt201_original_anchor.py\", line 94, in main\n    assert active[name], name\nAssertionError: generalFusion.r_token\n",
+  "weights": [],
+  "observed_at": "2026-10-05T13:04:10",
+  "native_session": 45924
+}
