@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "review_date": "2026-10-05",
+  "reviewer": "Native Codex reviewer /root/review_official_condition_audit",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "max",
+  "actual_model": "unattested",
+  "actual_backend": "unattested",
+  "actual_effort": "unattested",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "scope": "Fresh experiment-bridge Phase 2.5 source review of audit_full_official_condition.py against audit_full_official_control_states.py and audit_full_official49.py, including their reused metric/calibration helpers and the actual saved M6 reference text schemas. PASS accepts this source only.",
+  "sources_sha256": {
+    "audit_full_official_condition.py": "94ba9a65b399776fadbb7588a0c6bd70c04e569fa0f568729533bfc8ca751121"
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "checks": [
+    {
+      "check": "Complete official installed context and fixed checkpoint",
+      "status": "PASS_SOURCE",
+      "evidence": "Lines 13-26 require COMPLETE, 50 epochs and zero training-heldout identities; regenerate train/query/gallery rows through the existing installed_rows helper; match all three complete manifests and training-result counts; and require disjoint train/test identities. Lines 65-69 require complete diagnosis/frozen results, the saved all49 audit PASS, identical model arguments, and the same trained best epoch. This checks the already selected checkpoint; it does not perform a new checkpoint selection."
+    },
+    {
+      "check": "Original-GT six-state metric recount",
+      "status": "PASS_SOURCE",
+      "evidence": "Lines 31-39 match every raw query/gallery name, identity, camera and scene to installed rows, then reuse the original recount and verify for all six STATES. Recount keeps the MSVR310 same-identity/same-scene exclusion and the RGBNT same-identity/same-camera exclusion; verify checks six metrics, CMC1-50, groups and every query CSV row. No model output is substituted for GT."
+    },
+    {
+      "check": "Frozen full11 and original saved audit equivalence",
+      "status": "PASS_SOURCE",
+      "evidence": "Lines 40-47 require exact full11 distance-array equality, six-metric equality to the prior frozen result, and equal prior/full11 CSV text. Lines 48-50 preserve the original three signed changes and calibration result shape. Lines 71 and 75 require exact reconstructed head-summary and complete selected-condition dictionary equality to the original saved all49 audit. The selected condition uses the same query-availability prediction index as the original loop."
+    },
+    {
+      "check": "Calibration and head checks are retained",
+      "status": "PASS_SOURCE",
+      "evidence": "The existing verify_heads checks all seven availability exports, installed row metadata, shapes, finite values, measurement-only zero controls, sigmoid gates and CSV values. The unchanged verify_calibration checks legal installed-GT positive/negative references, the selected query predictions, four-score target arithmetic, means/std/MAE and contribution CSV values. These remain frozen empirical diagnostics; the source does not train or feed test GT into a model."
+    },
+    {
+      "check": "CPU-only and bounded acceptance scope",
+      "status": "PASS_SOURCE",
+      "evidence": "The imported module chain uses NumPy and the standard library, with guarded CLI entrypoints and no neural execution. The CLI refuses an existing output and writes only the explicit proof path. Its status, cases=6 and limits restrict acceptance to this condition's CPU equivalence; no future streaming scheduler or neural-inference validation is claimed."
+    },
+    {
+      "check": "Actual reference text schema compatibility",
+      "status": "PASS_READ_ONLY_TEXT_CHECK",
+      "evidence": "Read the actual M6 MSVR310_public_identity_axis_shared_s42 training, diagnosis, frozen49 and saved-audit JSONs. The model arguments and selected epoch32 agree; train/query/gallery counts are1032/591/1055 with matching manifest counts. Diagnosis, frozen49 and saved audit contain the same49 conditions, each diagnosis/audit condition has all six expected states, and all49 saved state_11 CSV texts exactly match their prior frozen CSV texts. No raw NPZ or installed dataset was loaded by this reviewer."
+    }
+  ],
+  "reference_root": "results/full_official_public_outlet_identity_m6_20261005",
+  "reference_model": "MSVR310_public_identity_axis_shared_s42",
+  "execution": {
+    "audited_cli_or_helpers_executed": false,
+    "raw_npz_recount_executed": false,
+    "installed_dataset_read": false,
+    "ssh_executed": false,
+    "neural_execution": false,
+    "git_executed": false,
+    "copy_or_delete_executed": false,
+    "source_edited": false,
+    "synthetic_completion_fixture_used": false,
+    "optional_ast_check": "Not executed: the local Python launcher returned 'No pyvenv.cfg file' before the read-only check body ran. Source review and actual text checks used file reads and PowerShell; no AST or runtime PASS is claimed."
+  },
+  "remaining_numerical_gate": "After this source PASS, execute the exact reviewed CLI on the installed-GT server using one actual restored archived condition, its frozen NPZ/CSV, the seven actual head exports and the existing all49 audit. Require all assertions and terminal exit0 before accepting numerical equivalence. That execution and its archive/restore operations were not performed by this reviewer.",
+  "source_only_acceptance": true,
+  "numerical_gate_acceptance": false,
+  "future_all49_streaming_acceptance": false,
+  "scientific_goal_acceptance": false
+}

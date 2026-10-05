@@ -1,0 +1,97 @@
+{
+  "status": "EVIDENCE_GROUNDED_ANCHOR_PROTECTION_NEXT_FACTOR_PREPARATION_ONLY",
+  "prepared_at": "2026-10-05T08:26:10",
+  "evidence": "results/full_official_public_outlet_identity_m6_20261005/analysis.json",
+  "observed_shared_DeMo_publicCE_delta": {
+    "mAP": -2.718131223683251,
+    "mINP": -2.339593708190659,
+    "Rank-1": -5.583756345177662,
+    "Rank-5": 0.8460236886632799,
+    "Rank-10": 0.33840947546531197,
+    "Rank-20": 0.507614213197968
+  },
+  "observed_axis_parent_delta": {
+    "mAP": -0.6825464410177062,
+    "mINP": 0.35018620947314716,
+    "Rank-1": -0.8460236886632799,
+    "Rank-5": 0.0,
+    "Rank-10": -0.507614213197968,
+    "Rank-20": -0.8460236886632799
+  },
+  "observed_axis11_minus00": {
+    "delta_pp": {
+      "mAP": -0.23697527125287365,
+      "mINP": 0.07071571685544598,
+      "Rank-1": -0.5076142131979822,
+      "Rank-5": 0.33840947546531197,
+      "Rank-10": -0.16920473773265599,
+      "Rank-20": -0.16920473773265599
+    },
+    "Rank1_harm_queries": 3,
+    "Rank1_rescue_queries": 0,
+    "AP_improved_queries": 220,
+    "AP_worsened_queries": 270,
+    "AP_unchanged_queries": 101,
+    "both_metrics_plus2": false
+  },
+  "original_shared_anchor": {
+    "selected_epoch": 37,
+    "normal": {
+      "mAP": 49.42609434847925,
+      "mINP": 24.967713227642683,
+      "Rank-1": 69.03553299492386,
+      "Rank-5": 81.7258883248731,
+      "Rank-10": 86.29441624365482,
+      "Rank-20": 90.86294416243655
+    }
+  },
+  "hypothesis": "A fixed pretrained identity encoder may prevent auxiliary/expert training from changing the reference space; train new evidence to complement a stable anchor rather than simultaneously moving it. This is unproven and does not by itself fix routing/projection harm.",
+  "source_identified_identity_modules": [
+    "BACKBONE",
+    "rgb_reduce",
+    "nir_reduce",
+    "tir_reduce",
+    "generalFusion",
+    "shared_projection"
+  ],
+  "proposed_controls": [
+    "Same shared-DeMo anchor continued50 with original training",
+    "Same anchor ordinary frequency with fixed identity encoder",
+    "Same anchor ordinary twins with fixed identity encoder",
+    "Same anchor dual axes with fixed identity encoder",
+    "Same anchor dual axes with trainable identity encoder"
+  ],
+  "proposed_training": {
+    "dataset": "MSVR310",
+    "official_counts": {
+      "train": 1032,
+      "query": 591,
+      "gallery": 1055
+    },
+    "artificial_holdout": 0,
+    "second_stage_epochs": 50,
+    "seed": 42,
+    "batch": 64,
+    "P": 16,
+    "K": 4,
+    "encoder_anchor": "Existing complete official shared-DeMo50 best, selected E37; not a fresh CLIP-only experiment",
+    "extra_losses": 0
+  },
+  "prelaunch_requirements": [
+    "Review an exact experiment plan and sources before native execution.",
+    "Require exact state/shape/class-label mapping from the same full-data anchor.",
+    "Strict reload and all7 controlled00 outputs must equal the fixed identity anchor for identical inputs.",
+    "Frozen retrieval modules must remain eval and weights/buffers unchanged through real native updates; active parameters/gradients matched across three experts.",
+    "An unfrozen-axis continuation separates freezing from warm start; continued DeMo is required to exclude extra epochs.",
+    "All5 fixed-best49 banks (245 cases), four enhanced6x49 banks (1176 states), installedGT audit, complete six metrics and true11-minus00/harm-rescue remain required."
+  ],
+  "fairness": "Common anchor was already trained50; stage2 adds50. Report both stages/cost and compare against continued DeMo and same-warmstart ordinary controls. Do not call this one-factor versus freshCLIP M4/M5/M6, or silently treat100 total as50.",
+  "success_rule": "Preserve original three-dataset +2mAP/+2Rank1 and missing-modality requirements; a candidate must also beat the strong anchor/continued DeMo and same-capacity ordinary experts with positive frozen11-minus00 before expansion.",
+  "scientific_limits": "Negative M6 alone does not prove gradient conflict, causality, or that freezing will help. Earlier mean/seed-query, metric scaling, RKD alignment, calibration/control splitting and cross-set objectives already tried; not offered as untried fixes.",
+  "hardware": "Only2026 physical GPU2/3,max2NN,serialized/card,no temperature/powerlimit",
+  "validation_storage": "One frozen49 bank remains remote through its enhanced audit so full11 matrix equality is retained; stream/audit/localarchive each enhanced raw condition before the next. Archive-sensitive phases serialized. Future NN integration not implemented.",
+  "actual_new_training": 0,
+  "actual_new_optimizer_updates": 0,
+  "actual_new_method_code": false,
+  "goal_complete": false
+}
