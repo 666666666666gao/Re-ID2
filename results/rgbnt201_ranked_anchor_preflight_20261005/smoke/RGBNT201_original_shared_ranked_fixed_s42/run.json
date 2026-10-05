@@ -1,0 +1,75 @@
+{
+  "arguments": {
+    "dataset": "RGBNT201",
+    "variant": "demo_shared",
+    "data_root": "/data/gaob/Re-ID/dataset",
+    "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+    "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt201_ranked_anchor_preflight_20261005/smoke/RGBNT201_original_shared_ranked_fixed_s42",
+    "anchor_run_dir": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT201_demo_s42",
+    "freeze_identity_encoder": 1,
+    "seed": 42,
+    "mode": "smoke"
+  },
+  "config": "DATALOADER:\n  NUM_INSTANCE: 8\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT201\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 256\n  - 128\n  SIZE_TRAIN:\n  - 256\n  - 128\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 1\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 4\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+  "classes": 171,
+  "camera_embeddings": 4,
+  "train_records": 3951,
+  "query_records": 836,
+  "gallery_records": 836,
+  "training_heldout_identities": 0,
+  "parameters": 100388864,
+  "trainable_parameters": 2465280,
+  "descriptor_dim": 5632,
+  "started": 1791186278.5318582,
+  "torch": "2.5.1+cu121",
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "pretraining": "Full-official original RGBNT201 DeMo50 selected best; new shared/fused heads; additional50 with new Adam/scheduler/AMP512",
+  "anchor": {
+    "run_dir": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT201_demo_s42",
+    "selected_epoch": 28,
+    "anchor_training_epochs": 50,
+    "anchor_model": "demo",
+    "initialized_state_tensors": 417,
+    "new_modules": [
+      "shared_projection",
+      "shared_neck",
+      "shared_classifier",
+      "fused_neck",
+      "fused_classifier"
+    ],
+    "freeze_identity_encoder": true,
+    "identity_modules": [
+      "BACKBONE",
+      "rgb_reduce",
+      "nir_reduce",
+      "tir_reduce",
+      "generalFusion"
+    ],
+    "shared_projection_frozen": false,
+    "selected_anchor_full_metrics": {
+      "mAP": 75.67457499232746,
+      "mINP": 62.57709224977215,
+      "Rank-1": 80.622009569378,
+      "Rank-5": 89.23444976076556,
+      "Rank-10": 93.77990430622009,
+      "Rank-20": 94.97607655502392
+    },
+    "fusion_precision": "FP32 base fusion in both controls; backbone/reducers/heads retain existing AMP; actual same-batch precision probe restored all six warm HDM query gradients",
+    "optimizer_schedule": "Original DeMo50 selected best plus additional50/new Adam/scheduler/AMP512; no optimizer resume",
+    "limits": "Only original private encoder is fixed in the protected control. Newly initialized shared/fused heads remain trainable; the .75/.25 fused descriptor is not claimed equal to the original 5120D descriptor."
+  },
+  "checkpoint_rule": "Maximum full official query/gallery mAP across 50 epochs; ties keep earliest epoch",
+  "evaluation_scope": "Entire official training split and entire official query/gallery; no fit/dev holdout",
+  "selection_limitation": "Official benchmark is used for checkpoint selection; this is not an untouched independent final test",
+  "method_revision": "R201B changes only the objective relative to the completed R201A fixed control: GT-aware smooth AP on the actual normalized 5632D full and partial descriptors, temperature .05 and weight1 each. Original DeMo50 selectedE28 plus additional50/new Adam. Original identity encoder fixed in eval mode; same FP32 base fusion, shared outlet, .75/.25 metric, full ReID and partial CE/triplet, sampling and BN calls. Same-ID/same-camera junk excluded; queries without a legal cross-camera positive skip only the ranking term and are counted. Not a new expert or dual-axis novelty claim. Entire official3951/836/836; benchmark-selected highest mAP/earliest ties; fixed best for all49.",
+  "partial_training": "Matched available-source DeMo; one uniformly sampled proper modality set per batch; stopped full-view gallery, same shared identity interface and original partial CE/triplet weights",
+  "amp_policy": "Native fp16 GradScaler512; actual optimizer updates and skipped steps recorded",
+  "retention": "Only best.pth; smoke strict reload in memory; no initial, last, or smoke weight files",
+  "ranking_objective": {
+    "temperature": 0.05,
+    "weight": 1.0,
+    "descriptor": "Actual normalized full/partial fused5632D; stopped full gallery for partial",
+    "junk": "same identity and same camera",
+    "positive": "same identity and different camera"
+  }
+}

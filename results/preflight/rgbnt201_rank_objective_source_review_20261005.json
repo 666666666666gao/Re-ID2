@@ -1,0 +1,121 @@
+{
+  "review_date": "2026-10-05",
+  "status": "PASS",
+  "verdict": "PASS",
+  "review_type": "SOURCE_ONLY",
+  "reviewer": "/root/review_rgbnt201_rank_objective",
+  "review_scope": "Only rgbnt201_ranked_outlet.py and the R201B section of the priority plan; relevant existing parents inspected to establish descriptor, loss, sampler and update semantics. No builder or launcher is implemented or approved by this review.",
+  "summary": "No blocking source defect was found in the declared smooth-AP objective factor. The code applies the intended label/camera-aware approximation to the actual fused full-view and partial-view descriptors, preserves the original losses and two-backward/one-update sequence, and introduces no model parameters or additional neural forwards. This is permission to continue preparation and actual preflight, not a real-math, native-update, smoke, formal50 or scientific-success result.",
+  "blocking_findings": [],
+  "non_blocking_findings": [],
+  "requested_backend": "Codex",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_backend": "UNATTESTED",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer_context": "Fresh delegated reviewer read the supplied local sources directly. Workflow routing requests do not attest the actual served backend, model or effort.",
+  "sources_sha256": {
+    "rgbnt201_ranked_outlet.py": "827cf687a3aebbaad69b263432cb07136bfb3d8e1feef9473b759e58c49bf688"
+  },
+  "directly_reused_sources_sha256": {
+    "run_shared_identity_experiment.py": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+    "shared_identity_axis.py": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+    "original_identity_anchor.py": "847b6adf93eb44ff119585e5548e1ef52115bcd59d8e87cdb4735b541d390bcb",
+    "run_rgbnt201_original_anchor.py": "12bbe91090dba3e1d7b4e2ec7ca0c21be377894a088b7376588ab042d61b473a",
+    "run_full_official_frozen_anchor_experiment.py": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "official_training_data.py": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+    "data/datasets/sampler.py": "579b45b767960b7ca8a373808d890493e6ac8d152c0fe13dbe0f4dc02ed9f068",
+    "configs/RGBNT201/DeMo.yml": "bfee0de623885a38cce974c1c5d74abf47c54e14852cc266b8f69c70a858c51d",
+    "layers/make_loss.py": "232ef86081a76665225db4360ea67650230b1d5986818cabc23ce5db36340dec",
+    "solver/make_optimizer.py": "09e8e36c78c78cda75daad52bbc48f77f4dc33b96568a06bc1c193132ffbeafc",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427"
+  },
+  "plan_reviewed": {
+    "path": "results/preflight/rgbnt201_priority_plan_20261005.json",
+    "section": "R201B",
+    "sha256_at_review": "36e2a2e086cda75be9d6002bda582ecae6330ee437118423af2f121788dce107",
+    "section_status_at_review": "RANK_OBJECTIVE_SOURCE_REVIEW_PENDING_NO_NN_OR_FORMAL50",
+    "source_hash_matches_plan": true,
+    "scope_boundary": "The plan's historical top-level/R201A running-status fields are outside this narrow R201B review and do not establish current runtime state. The task supplied R201A completion and block-readout facts; this review did not recollect or recompute them."
+  },
+  "mathematical_objective": {
+    "similarity": "s[i,j] = dot(query[i], gallery[j]) in FP32 on the already weighted/normalized fused descriptor",
+    "junk": "J[i,k] = (label[i] == label[k]) AND (camera[i] == camera[k])",
+    "positive": "P[i,k] = (label[i] == label[k]) AND NOT J[i,k]",
+    "ahead": "A[i,j,k] = sigmoid((s[i,k] - s[i,j]) / 0.05) for k != j, and 0 for k == j",
+    "rank": "R[i,j] = 1 + sum_k A[i,j,k] * (NOT J[i,k])",
+    "positive_rank": "Rpos[i,j] = 1 + sum_k A[i,j,k] * P[i,k]",
+    "query_ap": "For queries with at least one legal positive: AP[i] = sum_j P[i,j] * Rpos[i,j] / R[i,j] / sum_j P[i,j]",
+    "loss": "1 - mean(AP[i]) over eligible queries; graph-connected zero if there are no eligible queries",
+    "interpretation": "This is the explicitly defined smooth approximation in this source. Exact official Smooth-AP implementation reproduction and a novel-loss claim are not established or claimed by this review."
+  },
+  "checks": [
+    {
+      "requirement": "Correct sign, candidate axis, rank numerator and denominator",
+      "status": "PASS_SOURCE",
+      "evidence": "similarity[:, None, :] - similarity[:, :, None] gives s[i,k]-s[i,j]. A more similar competitor k contributes more to the rank of candidate j. The eye mask excludes candidate self k=j, and the final reduction is over k. Both ranks add candidate j once; numerator competitors are legal positives and denominator competitors are all non-junk candidates. The final mean is restricted to legal positive j and eligible i."
+    },
+    {
+      "requirement": "RGBNT201 GT masks and no grouped-label assumption",
+      "status": "PASS_SOURCE",
+      "evidence": "The code excludes all same-ID/same-camera candidates, including the same record, and retains different-ID negatives even when their cameras match. Legal positives require the same ID and a different camera. Masks use pairwise equality of the provided labels/cameras, without reshaping into P/K groups or assuming contiguous identity blocks. This agrees with full_evaluation.full_metrics junk semantics."
+    },
+    {
+      "requirement": "Permutation semantics",
+      "status": "PASS_SOURCE",
+      "evidence": "For the documented same-records-in-both-views interface, a common permutation of query, gallery, labels and cameras permutes both similarity axes and every mask together; candidate self, per-query positive counts and averaged loss are unchanged algebraically. Independent query/gallery ordering with only one shared metadata vector is outside this function's documented interface. Actual tensor permutation probes remain unrun."
+    },
+    {
+      "requirement": "Identity-only PK sampler and ineligible-query handling",
+      "status": "PASS_SOURCE",
+      "evidence": "RandomIdentitySampler groups only by pid and never enforces camera diversity; RGBNT201 config is B64/K8/P8. positive.any(1) selects queries with at least one legal cross-camera positive. A wholly ineligible batch returns similarity.sum()*0 with eligible count 0; otherwise no empty positive count enters the AP denominator. step returns full and partial eligible counts in its detail dictionary. The existing runner can persist these through its full-detail batch_orders.jsonl writes; the future R201B integration must retain that path."
+    },
+    {
+      "requirement": "Rank the deployed fused 5632-dimensional descriptor",
+      "status": "PASS_SOURCE",
+      "evidence": "SharedIdentityDeMo.forward constructs fused=metric_descriptor(base), places fused at output[1] in both full and partial training, and returns fused for evaluation. metric_descriptor concatenates sqrt(.75)*normalized private5120 and sqrt(.25)*normalized public512. OriginalAnchoredDeMo inherits this forward. R201B passes output[1] directly to both full-rank arguments, and uses the partial forward's query against the detached full descriptor. No block weight or descriptor dimension changes."
+    },
+    {
+      "requirement": "Preserve old four-head/full and partial losses",
+      "status": "PASS_SOURCE",
+      "evidence": "RGBNT201 DIRECT=1 gives four score/feature pairs and loss_weights=[1,1,.25,1] for fused, MoE, shared and direct-private heads. R201B retains the same weighted loss_fn call for every pair, then adds rank_weight 1 to the full loss. Partial loss retains .25 label-smoothed CE and .5 existing partial_gallery_triplet, then adds rank_weight 1. The new assertion deliberately targets the even-length demo_shared output; it does not silently drop an expert contribution term."
+    },
+    {
+      "requirement": "Gradient graph and update sequence",
+      "status": "PASS_SOURCE",
+      "evidence": "Full smooth_ap uses output[1] as query and gallery without detach, so both similarity arguments retain their existing differentiable paths. FP32 casts preserve autograd. Only the existing partial-gallery boundary uses detach, exactly as the old step; partial rank gradients reach the partial query. Full loss backward precedes partial forward/backward, followed by one unscale, one scaler.step and one scaler.update. zero_grad and optimizer-updated bookkeeping match the parent. The external scaler's AMP512 initialization is supplied by the existing official runner, not constructed by this module."
+    },
+    {
+      "requirement": "No additional parameters, neural forwards, BN calls or encoder-state changes",
+      "status": "PASS_SOURCE",
+      "evidence": "The new module contains only constants and the smooth_ap/step functions. smooth_ap performs tensor arithmetic and metadata masking, with no module creation or model invocation. step retains exactly one full and one partial model call, and never changes model modes, requires_grad flags, parameters, buffers, optimizers, sampler or random state. The fixed original encoder policy and existing FP32 base fusion are supplied unchanged by original_identity_anchor; the new full-rank path adds no detach to them. Runtime parameter/BN/anchor equality is still a preflight gate."
+    },
+    {
+      "requirement": "Training-only labels and honest integration scope",
+      "status": "PASS_SOURCE",
+      "evidence": "New losses consume target and cam from the supplied training batch only. No query/gallery benchmark labels, files or evaluation functions are accessed by the new module. R201B states entire official train, the same original E28 fixed encoder/interface and the same additional50/new-optimizer budget. No entry point currently wires the module to that full-data builder/runner, so these future-run settings are not claimed to be executed or enforced by the standalone step itself."
+    }
+  ],
+  "required_next_gates": [
+    "Actual CPU math probes: well-separated correct ordering has AP near 1; one positive after one legal negative has AP near .5; same-ID/same-camera junk contributes neither a rank competitor nor a positive; joint permutation invariance; all-ineligible count 0 and finite zero rank term.",
+    "Actual autograd checks: finite rank loss and appropriate full-query/full-gallery gradients, partial-query gradients with stopped full gallery, and unchanged frozen private tensors/buffers/modes.",
+    "Implement and review the minimal fixed-E28 R201B builder/runner/launcher integration, preserving official3951/836/836, B64/P8/K8, sampler/partial-set sequence, four old heads, metric blocks, model parameters and existing AMP512/new-Adam/additional50 policy.",
+    "Actual new-loss native updates and independent Adam replay, then smoke with successful optimizer updates, active finite gradients, unchanged intended BN call counts/private anchor, eligible-query logging and strict reload, before formal50."
+  ],
+  "review_actions": {
+    "source_inspection": "PERFORMED",
+    "sha256_read": "PERFORMED",
+    "ast_parse": "NOT_RUN: the local python command failed interpreter startup with 'No pyvenv.cfg file' before parsing; no source was imported or executed and no environment repair was attempted",
+    "cpu_math_probes": "NOT_RUN",
+    "gradient_checks_or_optimizer_replay": "NOT_RUN",
+    "model_build_or_neural_calls": "NONE",
+    "remote_or_ssh_actions": "NONE",
+    "source_or_plan_edits": "NONE",
+    "only_written_artifact": "results/preflight/rgbnt201_rank_objective_source_review_20261005.json"
+  },
+  "acceptance_limit": "SOURCE_ONLY PASS, same-family provisional and actual backend UNATTESTED. No numerical execution, native training, formal50 completion, metric improvement, dual-axis mechanism gain or +2 acceptance is attested."
+}

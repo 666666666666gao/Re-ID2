@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-05T13:59:38",
+  "updated_at": "2026-10-05T15:49:35",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -3298,6 +3298,55 @@
         "M7_corresponding_sampling_exact": true,
         "all147_enhanced_raw_and147_frozen_raw_local_verified": true
       }
+    },
+    "RGBNT201_R201A": {
+      "status": "COMPLETE_RGBNT201_R201A_TWO50_FULL98_AUDITED_NEGATIVE",
+      "completed_additional50": 2,
+      "actual_optimizer_updates": 5294,
+      "amp_skipped_steps": 0,
+      "full_frozen_conditions": 98,
+      "installed_GT_CPU_audits": "PASS_BOTH49",
+      "normal": {
+        "fixed": {
+          "mAP": 73.8544217506381,
+          "mINP": 61.94793400011994,
+          "Rank-1": 77.15311004784688,
+          "Rank-5": 84.44976076555024,
+          "Rank-10": 91.14832535885168,
+          "Rank-20": 93.6602870813397
+        },
+        "adaptive": {
+          "mAP": 69.60747501694881,
+          "mINP": 56.66818020182991,
+          "Rank-1": 72.1291866028708,
+          "Rank-5": 83.49282296650718,
+          "Rank-10": 88.39712918660287,
+          "Rank-20": 91.6267942583732
+        }
+      },
+      "selected_epochs": {
+        "fixed": 1,
+        "adaptive": 7
+      },
+      "actual_CPU_selected_block_readouts": 2,
+      "conclusion": "Frozenprivate exactoriginalall836; sharedfusionstillharmful. Updatingprivatealsoharms. Neither fusedcontrol passesoriginalnormal baseline or+2; availabilitygroup gainsnotdualaxisnovelty.",
+      "normal_raw_archived_local_verified": 2,
+      "frozen_raw_archived_local_verified": 98,
+      "analysis": "results/rgbnt201_original_anchor_r201a_20261005/analysis.json",
+      "all_six_metrics98": "results/rgbnt201_original_anchor_r201a_20261005/metrics49_all.csv"
+    },
+    "RGBNT201_R201B": {
+      "status": "FULL50_RUNNING_NOT_TERMINAL",
+      "actual_native_updates": 2,
+      "actual_smoke_updates": 3,
+      "actual_full50_started": 1,
+      "actual_full50_completed": 0,
+      "formal_native_session": 88725,
+      "gpu": 2,
+      "first_training_boundary_observation_at": "2026-10-05T16:11:06+08:00",
+      "preflight_amp_skips": 0,
+      "source_review": "SOURCE_ONLY_PASS_SAME_FAMILY_PROVISIONAL",
+      "factor": "GT-aware smoothAP on real deployed full/partial descriptor; same frozen original DeMoE28 and allothertraining/interface/sampling."
     }
   },
   "decision_rules": [
@@ -3324,8 +3373,8 @@
   ],
   "next_action": {
     "milestone": "RGBNT201_STRONG_REFERENCE_DIAGNOSIS_AND_SINGLE_FACTOR_IMPROVEMENT",
-    "status": "RGBNT201_PAIRED_FULL50_RUNNING_GPU2AND3_NATIVE17655",
-    "action": "Actual FP32fusion preflight29163 exit0/native2+smoke6/zeroAMP/strictreload/private parity/fixed7states passed. Formal paired RGBNT20150 now actually running26GPU2fixed andGPU3adaptive; native17655/controller1119221/children1119633and1119634 preserved. Initial actual epochs4/2, zero skips. Whole3951train/836Q836G/0holdout; original DeMo E28 plus additional50,newAdam, shared0.75/0.25 outlet; all49/audits/rawlocal sizeSHA-before-clear/onlybest follow after each50. All3datasets+2/faircontrol/actual dualexpert utility remains unmet.",
+    "status": "R201A_TWO50_FULL98_NEGATIVE_R201B_NATIVE_PASS_FULL50_RUNNING_GPU2",
+    "action": "Prioritize RGBNT201. R201A2x50/all98negative, fixedprivate exactoriginal; publicfusionharms. R201B sixsource/32parents sourcePASS, CPUmathPASS, native71851exit0: native2 realAdam/replay/fixed7/strictreload andsmoke3/0AMP/0weights. Now oneprotected R201B ranking-only full50 actuallyrunning26GPU2 native88725; sameinit/network/metric/sampling. Entire3951/836/836/zeroholdout, bestbenchmark selectedthen49GTaudits/rawarchive-before-clear. Firsttrainingboundaryobserve 2026-10-05T16:11:06+08:00 fromold1568.75s ETA; thereafter240s. No rankingterminal/success claim; all3+2/fairordinaryexpert/actualcollaboration/multiseed remainsunmet.",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [

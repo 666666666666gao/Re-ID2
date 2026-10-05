@@ -1,0 +1,98 @@
+{
+  "review_date": "2026-10-05",
+  "status": "PASS",
+  "verdict": "PASS",
+  "review_scope": "SOURCE_ONLY: new CPU selected-block diagnostic and R201A.selected_block_readout plan",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "requested_backend": "Codex",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "max",
+  "actual_backend": "UNATTESTED",
+  "actual_model": "UNATTESTED",
+  "actual_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer_context": "Fresh delegated reviewer read the supplied local source and relevant producer/scorer artifacts directly. Requested routing does not attest the actual backend, model or effort.",
+  "sources_sha256": {
+    "diagnose_rgbnt201_original_anchor_blocks.py": "abd7b90bce0433d6b3680086bf6ea4a42c67ac6069a1f5a6c500dba865c9f778"
+  },
+  "directly_reused_sources_sha256": {
+    "diagnose_rgbnt201_baseline_blocks.py": "545551ea240e4fec18a1c9ce668afad3b7abd4bd6823dcfbed5f23012469cc15",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "official_training_data.py": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "shared_identity_axis.py": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+    "original_identity_anchor.py": "847b6adf93eb44ff119585e5548e1ef52115bcd59d8e87cdb4735b541d390bcb",
+    "run_rgbnt201_original_anchor.py": "12bbe91090dba3e1d7b4e2ec7ca0c21be377894a088b7376588ab042d61b473a",
+    "run_full_official_frozen_anchor_experiment.py": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "data/datasets/RGBNT201.py": "1a3dda88f26efc2891322e2726c4f3591bfd0c040cdf5c717d0aabc55f349272",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2"
+  },
+  "plan_reviewed": {
+    "path": "results/preflight/rgbnt201_priority_plan_20261005.json",
+    "section": "R201A.selected_block_readout",
+    "sha256_at_review": "1e5e46a476f1dbeca134c7415e609d4a577affe545a0e9923f7d63f3a005d8ff",
+    "selected_block_status_at_review": "SOURCE_REVIEW_PENDING_NOT_EXECUTED"
+  },
+  "checks": [
+    {
+      "requirement": "One completed R201A control against its original reference",
+      "status": "PASS_SOURCE",
+      "evidence": "Both inputs must be COMPLETE, full50, seed42, zero holdout, 2647 successful optimizer steps, zero AMP skips and parent exit_code 0. Original/control variants and 5120/5632 dimensions are checked. No running checkpoint is accepted."
+    },
+    {
+      "requirement": "Anchor provenance matches the actual producer schema",
+      "status": "PASS_SOURCE",
+      "evidence": "original_identity_anchor.build writes anchor_record with run_dir, anchor_model='demo', selected_epoch, selected_anchor_full_metrics and freeze_identity_encoder. The reused runner copies anchor_record into result.json under anchor, preserves best and full_metrics, and saves selected arrays after strict reload. The diagnostic verifies reference path, original model, selected epoch and complete six-metric anchor dictionary. The archived original reference is selected E28 after full50."
+    },
+    {
+      "requirement": "All official records, installed GT and legitimate junk exclusion",
+      "status": "PASS_SOURCE",
+      "evidence": "full_records supplies the entire 3951 train / 836 query / 836 gallery split, and asserts raw training identities are disjoint from test identities through official_records. The diagnostic verifies the complete manifest and every query/gallery metadata array against installed records, then checks metadata agreement between runs. full_metrics excludes only gallery records with the same identity AND camera as the query; identities supply evaluation GT only."
+    },
+    {
+      "requirement": "Correct fixed descriptors and six-metric parity",
+      "status": "PASS_SOURCE",
+      "evidence": "Original and fused vectors are used unchanged. The first 5120 and last 512 control coordinates are the actual private/public metric_descriptor blocks and are independently L2-normalized before block scoring. The same CPU distance function and four Torch threads are used. Original/fused distances must equal saved matrices elementwise; all six best metrics must agree within 1e-8. Actual parity remains an execution gate."
+    },
+    {
+      "requirement": "CMC50, every query, groups and signed comparisons",
+      "status": "PASS_SOURCE",
+      "evidence": "full_metrics writes all query rows, valid-query status, mAP/mINP/Rank1/5/10/20, CMC1..50 and camera/scene/identity groups. Comparison rows are aligned by name, identity and validity across all 836 queries. Deltas are left minus right; Rank1 harm/rescue and AP worsening/improvement use that same direction and common valid queries."
+    },
+    {
+      "requirement": "Coordinate error is descriptive, not an exact frozen-weight assertion",
+      "status": "PASS_SOURCE",
+      "evidence": "The maximum coordinate differences compare strip-and-renormalized private vectors with original vectors. They are reported without an equality/drift assertion. Output explicitly includes floating-point rounding and attributes frozen-weight protection to the separate native/training checks."
+    },
+    {
+      "requirement": "CPU-only normal readout with bounded artifacts",
+      "status": "PASS_SOURCE",
+      "evidence": "The reachable path enumerates metadata, loads saved arrays/JSON, makes CPU tensors and scores four descriptors. It never builds or loads a model, calls extract/training, creates checkpoints or writes raw-distance arrays. It creates one new output directory and four CSV/JSON pairs plus result.json. Existing all49 evaluations remain separate; there is no metric sweep."
+    },
+    {
+      "requirement": "Scientific interpretation and compute disclosure",
+      "status": "PASS_SOURCE",
+      "evidence": "The plan and output disclose original50 plus additional50, one seed and benchmark checkpoint selection. The four readouts are selected-descriptor counterfactuals, without retraining, causal-proof or unique dual-axis gain claims."
+    }
+  ],
+  "existing_evidence_read_only": [
+    "results/preflight/rgbnt201_baseline_blocks_source_review_20261005.json",
+    "results/preflight/rgbnt201_baseline_blocks_actual_20261005.json",
+    "results/full_official_baselines_20261004/training/RGBNT201_demo_s42/result.json"
+  ],
+  "review_actions": {
+    "source_inspection": "PERFORMED",
+    "source_sha256_read": "PERFORMED",
+    "new_diagnostic_execution": "NOT_RUN",
+    "ast_parse": "NOT_RUN",
+    "remote_actions": "NONE",
+    "neural_inference_or_training": "NONE",
+    "source_edits": "NONE",
+    "only_written_artifact": "results/preflight/rgbnt201_r201a_block_readout_source_review_20261005.json"
+  },
+  "execution_boundary": "Use CUDA_VISIBLE_DEVICES='' and the existing conda Python after the selected control has completed50 and exit0. Fixed and adaptive controls can be read separately without waiting for unrelated transfers. Do not query, restart or change native17655, fixed GPU2 PID1119633 or adaptive GPU3 PID1119634 on the basis of this review. Installed-array checks and actual numerical outputs are not attested here.",
+  "acceptance_limit": "No concrete source defect was found in this narrow diagnostic. SOURCE_ONLY PASS is provisional same-family review, not actual execution, training completion, scientific success or a recomputed all49 audit."
+}
