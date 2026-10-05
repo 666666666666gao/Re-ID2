@@ -1,0 +1,203 @@
+{
+  "status": "PASS",
+  "review_scope": "SOURCE_ONLY_EXPERIMENT_BRIDGE_PHASE_2_5_CODE_REVIEW_OF_THREE_M7_TRAINING_AND_NATIVE_VERIFIER_SOURCES",
+  "reviewed_at": "2026-10-05 00:52:31 UTC",
+  "blocking_findings": [],
+  "non_blocking_findings": [],
+  "conclusion": "The three sources implement the planned common-anchor continuation and frozen/adaptive M4 controls without a concrete source-level blocker. The runner retains the original official sampling, schedule, losses, metric computation and checkpoint rule. PASS applies to source review only; no native execution, optimizer, smoke, full50, all49 or scientific success is attested.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer_attribution": {
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "max",
+    "actual_model": "unattested",
+    "actual_reasoning_effort": "unattested",
+    "actual_backend": "unattested",
+    "context": "Fresh delegated Codex review of supplied local source and saved text evidence. Requested model/effort are not asserted as runtime-attested values. No cross-family acceptance."
+  },
+  "skill": "C:/Users/gb/.codex/skills/experiment-bridge/SKILL.md",
+  "local_policy": "C:/Users/gb/.codex/skills/shared-references/local-codex-policy.md",
+  "plan": "results/preflight/full_official_frozen_identity_anchor_plan_20261005.json",
+  "sources_sha256": {
+    "frozen_identity_anchor_axis.py": "37fc8426306477732f2601f70072572ad568b01d2a298d865293c84ca227deae",
+    "run_full_official_frozen_anchor_experiment.py": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+    "verify_full_official_frozen_anchor.py": "10ee13e7992b5672896723548d02969382a5acda9ee4d2bb09fec380aac2c94c"
+  },
+  "source_findings": [
+    {
+      "check": "Common anchor and five intended controls",
+      "result": "PASS_SOURCE_ONLY",
+      "references": [
+        "frozen_identity_anchor_axis.py:46-96",
+        "run_full_official_frozen_anchor_experiment.py:57-97",
+        "results/preflight/full_official_frozen_identity_anchor_plan_20261005.json:37-89"
+      ],
+      "detail": "demo_shared requires freeze=0 and uses original SharedIdentityDeMo. The three expert variants use AnchoredAxis over the original M4 parent, with freeze=1 for the fixed encoder controls and freeze=0 for the adaptive axis. All load the supplied shared-DeMo best checkpoint before training. The builder checks completed50, no heldout identities, variant/dataset/seed, descriptor dimension, classes/camera count, and exact original official manifest including identity relabeling. The five-way choice of the same anchor directory remains an execution-glue obligation."
+    },
+    {
+      "check": "Explicit initialization mapping and exact base coordinate semantics",
+      "result": "PASS_SOURCE_ONLY_NATIVE_EQUALITY_PENDING",
+      "references": [
+        "frozen_identity_anchor_axis.py:69-92",
+        "common_outlet_axis.py:18-28",
+        "shared_identity_axis.py:28-38",
+        "shared_identity_axis.py:70-92",
+        "shared_identity_axis.py:120-128",
+        "shared_identity_axis.py:168-175",
+        "verify_full_official_frozen_anchor.py:38-53"
+      ],
+      "detail": "Base shared_projection has exactly the six parameter keys of LayerNorm1024, Linear1024-to-512 and LayerNorm512. The expert SharedReadout stores the same projection under .projection and adds a 512-vector query. Mapping only that prefix, requiring injectivity/key presence/shape/dtype, loading every anchor tensor into the current complete state and explicitly zeroing the expert query preserves the intended base coordinate function. All original classification heads and buffers are loaded as well; new expert tensors retain their common seeded initialization. This is the deliberate initialization for the observed wrapper difference, not a generic compatibility fallback. The native verifier strictly reloads a separate SharedIdentityDeMo reference and requires torch.equal for all seven initial controlled00 outputs. Both parent model types support return_states."
+    },
+    {
+      "check": "Frozen encoder weights, buffers and train/eval modes",
+      "result": "PASS_SOURCE_ONLY_NATIVE_IMMUTABILITY_PENDING",
+      "references": [
+        "frozen_identity_anchor_axis.py:15-43",
+        "frozen_identity_anchor_axis.py:82-96",
+        "shared_identity_axis.py:41-67",
+        "shared_identity_axis.py:95-105",
+        "verify_full_official_frozen_anchor.py:55-67",
+        "verify_full_official_frozen_anchor.py:102-115"
+      ],
+      "detail": "Only BACKBONE, rgb_reduce, nir_reduce, tir_reduce, generalFusion and shared_projection receive requires_grad_(False). AnchoredAxis.train first performs the normal recursive mode change, then recursively restores these six modules to eval, preventing their BN buffer drift. Full-availability fusion respects the module's own training flag when unpacking its result; partial fusion uses its child expert and gate modules, which are also eval. Original outside-encoder bottlenecks/classifiers and shared/fused heads stay trainable subject to their original fixed BN biases. Encoder snapshots include all state_dict weights and buffers and are compared by exact torch.equal after real updates and strict reload. The verifier also compares train-surroundings encoding to eval controlled00 for all seven sets."
+    },
+    {
+      "check": "Original M4 and shared-DeMo training objectives",
+      "result": "PASS_SOURCE_ONLY",
+      "references": [
+        "run_full_official_frozen_anchor_experiment.py:31-36",
+        "run_full_official_modality_outlet_experiment.py:7-17",
+        "run_full_official_control_experiment.py:10-16",
+        "run_shared_identity_experiment.py:34-73",
+        "measurement_gate_axis.py:12-26",
+        "frequency_relation_axis.py:27-62",
+        "identity_alignment_axis.py:35-71",
+        "modality_outlet_alignment_axis.py:22-57"
+      ],
+      "detail": "Continued DeMo delegates directly to the original shared step. Expert updates delegate directly through the original M4/control/shared chain, including alignment names set before forward, unchanged .1 F relation, .1 F identity alignment, .1 PM outlet alignment and .07 temperature, original contribution regression with detached measurement-only gates, and original full weighted CE/triplet pairs. Both retain one full pass then one original proper-subset pass, a detached full-view gallery and .25 partial CE plus .5 cross triplet, accumulated into one optimizer step. No M5 graph or M6 public-CE update is called and no new loss is introduced. Freezing removes encoder gradients by design without freezing the original training classifier heads."
+    },
+    {
+      "check": "Matched frozen expert capacity and input frames",
+      "result": "PASS_SOURCE_ONLY_NATIVE_CROSS_CONTROL_CHECK_PENDING",
+      "references": [
+        "axis_collaboration.py:166-196",
+        "shared_identity_axis.py:131-139",
+        "frozen_identity_anchor_axis.py:49-60",
+        "experiment_data.py:88-93",
+        "data/datasets/sampler.py:38-64"
+      ],
+      "detail": "All three ordinary-frequency/twins/dual-axis variants instantiate the same expert, router, projection and head tensor shapes, differing through the pre-existing control booleans. The same six encoder modules are frozen and the new query is zero/frozen in all three. Seeded model construction, full/partial frame count, loader generator and original P16/K4 sampler remain common. Exact measured active parameter totals and all-active-gradient membership still must be compared across their native receipts; source structure is not a numeric capacity receipt."
+    },
+    {
+      "check": "Runner clone and two-stage fairness",
+      "result": "PASS_SOURCE_ONLY",
+      "references": [
+        "run_full_official_frozen_anchor_experiment.py:57-97",
+        "run_full_official_frozen_anchor_experiment.py:130-180",
+        "run_full_official_experiment.py:129-175",
+        "run_experiment.py:31-41",
+        "solver/scheduler_factory.py:7-32",
+        "solver/make_optimizer.py:4-40"
+      ],
+      "detail": "The evaluator is AST-identical to the original. The complete epoch loop is AST-identical after removing only the newly added frozen-encoder assertion. The textual runner diff otherwise consists of anchor build/step imports, anchor/freeze CLI, method and initialization metadata, fixed 5632 dimension, and freeze checks in smoke/end reload. Epoch seed resets, dedicated proper-subset RNG, loader, scheduler.step(epoch), new Adam, fp16 GradScaler512, batch order recording, update/skip counters, all official records and best/reload behavior are unchanged. Metadata discloses an already-completed50 anchor run selected at E37, followed by additional50 with new optimizer/scheduler rather than resuming epoch50 optimizer state. These are two-stage controls, not a one-factor comparison with fresh-CLIP M4/M5/M6."
+    },
+    {
+      "check": "Native verifier one-update contract and replay",
+      "result": "PASS_SOURCE_ONLY_NOT_EXECUTED",
+      "references": [
+        "verify_full_official_frozen_anchor.py:68-126",
+        "solver/make_optimizer.py:4-40",
+        "run_shared_identity_experiment.py:38-64"
+      ],
+      "detail": "The verifier clones every optimizer parameter and complete parameter-group options before the native update, requires the optimizer to be Adam, checks the real loader batch is B64 with exactly16 identities and4 instances each, and calls the same stage2 step. It rejects AMP skips and a gradient-carrying gallery, requires finite nonzero gradients for every active optimizer parameter, assigns their unscaled gradients to its independent pre-update clones and performs one Adam replay. Every updated parameter must match that replay at rtol1e-6/atol1e-7. Frozen state equality is checked after the update and after strict in-memory reload, with exact inference equality. No current static call-path blocker was found. Native arithmetic, memory and equality are not accepted without its actual result."
+    },
+    {
+      "check": "Separate three-update smoke",
+      "result": "PASS_SOURCE_ONLY_NOT_EXECUTED",
+      "references": [
+        "run_full_official_frozen_anchor_experiment.py:98-129"
+      ],
+      "detail": "Smoke uses the actual training loader and original update, stops only after three optimizer updates, records attempts and AMP skips, checks every active gradient, checks frozen tensors after each attempted update and requires exact strict-reload inference equality. This is separate from the one-update verifier; it creates no smoke checkpoint on disk. A smoke receipt does not establish50 epochs,705 paired orders or final evaluation."
+    },
+    {
+      "check": "Official data, GT exclusion and checkpoint rule",
+      "result": "PASS_SOURCE_ONLY",
+      "references": [
+        "official_training_data.py:20-32",
+        "full_evaluation.py:20-79",
+        "run_full_official_frozen_anchor_experiment.py:39-54",
+        "run_full_official_frozen_anchor_experiment.py:158-178"
+      ],
+      "detail": "The loader relabels only the complete official training identities and checks their disjointness from official query/gallery identities. Evaluation uses real dataset identity labels and same-ID/same-scene exclusion for MSVR310; the RGBNT path retains same-ID/same-camera exclusion. Six metrics use the unchanged official full evaluator. Strictly greater full benchmark mAP selects the best checkpoint, retaining earliest ties and explicitly disclosing benchmark selection. The source does not claim an untouched test."
+    }
+  ],
+  "static_validation": {
+    "python": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe -X utf8 -B -S",
+    "target_ast_parse": "PASS_ALL_THREE_WITHOUT_PROJECT_IMPORT_OR_EXECUTION",
+    "review_source_hashes_match_plan": true,
+    "evaluate_function_ast_identical_to_original": true,
+    "epoch_loop_ast_identical_after_removing_only_frozen_assert": true,
+    "negative_evidence_fields_and_anchor_metrics_match_saved_analysis": true,
+    "neural_modules_imported": false,
+    "numeric_loss_gradient_optimizer_or_memory_acceptance": false
+  },
+  "saved_evidence_review": {
+    "analysis": "results/full_official_public_outlet_identity_m6_20261005/analysis.json",
+    "original_anchor": "results/full_official_baselines_20261004/training/MSVR310_demo_shared_s42/result.json",
+    "full_split_counts": {
+      "train": 1032,
+      "query": 591,
+      "gallery": 1055
+    },
+    "original_anchor_status": "COMPLETE",
+    "original_anchor_selected_epoch": 37,
+    "original_anchor_epochs": 50,
+    "original_anchor_optimizer_steps": 705,
+    "original_anchor_amp_skipped_steps": 0,
+    "original_anchor_all1032_visited": true,
+    "original_anchor_full_metrics": {
+      "mAP": 49.42609434847925,
+      "mINP": 24.967713227642683,
+      "Rank-1": 69.03553299492386,
+      "Rank-5": 81.7258883248731,
+      "Rank-10": 86.29441624365482,
+      "Rank-20": 90.86294416243655
+    },
+    "M6_shared_DeMo_delta_mAP": -2.718131223683251,
+    "M6_shared_DeMo_delta_Rank1": -5.583756345177662,
+    "M6_axis_minus_M4_axis_delta_mAP": -0.6825464410177062,
+    "M6_axis_minus_M4_axis_delta_Rank1": -0.8460236886632799,
+    "M6_axis_11_minus_00_mAP": -0.23697527125287365,
+    "M6_axis_11_minus_00_Rank1": -0.5076142131979822,
+    "M6_axis_11_minus_00_Rank1_harm_queries": 3,
+    "M6_axis_11_minus_00_Rank1_rescue_queries": 0,
+    "interpretation": "The negative M6 numbers and E37 anchor metadata agree with the exact plan. They motivate testing anchor protection; they do not prove gradient conflict, freezing benefit or positive inference utility. No checkpoint binary was loaded by this reviewer."
+  },
+  "pending_gates": [
+    "Review the execution/deployment and final evaluation integration separately before use; these three sources do not schedule or validate the entire five-control suite.",
+    "For exactly demo_shared/freeze0, frequency_shared/freeze1, twins_shared/freeze1, axis_shared/freeze1 and axis_shared/freeze0, fix the same original shared-DeMo anchor directory and execute the reviewed native verifier. Require all seven initial00 comparisons, B64/P16/K4, one actual Adam update, own replay, all-active gradients, strict reload and exact frozen state where applicable.",
+    "Compare the measured active parameter totals and active-gradient names of the three frozen expert controls, then complete a separate real three-update smoke for each of the five controls before its full stage2 run.",
+    "Complete the additional50 runs and verify the actual705 updates, AMP counters, all1032 train coverage, identical identity orders and proper-subset orders across the five controls using the saved receipts. Source equality alone is not actual run evidence.",
+    "At each independently selected fixed best checkpoint complete all5x49=245 frozen evaluations and4x6x49=1176 enhanced states, installed-GT CPU audits, all six metrics and signed11-minus00/harm-rescue comparisons. Retain the frozen49 bank through its enhanced matrix-equality audit as the plan specifies.",
+    "Disclose both training stages and compare against the E37 strong anchor, continued DeMo and the same-warmstart ordinary experts. Require positive frozen11-minus00 and preserve the original three-dataset plus2mAP/plus2Rank1 and missing-modality scientific goal."
+  ],
+  "execution_status": {
+    "deployment_or_evaluation_glue_review": "PENDING_OUTSIDE_THIS_REVIEW",
+    "native_contracts": "PENDING_NOT_EXECUTED_BY_REVIEWER",
+    "smokes": "PENDING_NOT_EXECUTED_BY_REVIEWER",
+    "additional50_runs": "PENDING_NOT_EXECUTED_BY_REVIEWER",
+    "final_all49_and_state_audits": "PENDING_NOT_EXECUTED_BY_REVIEWER",
+    "new_neural_execution": 0,
+    "new_optimizer_updates": 0,
+    "new_smoke_updates": 0,
+    "ssh_execution": false,
+    "git_execution": false,
+    "source_edits": false,
+    "copied_files": false,
+    "only_written_artifact": "results/preflight/full_official_frozen_identity_anchor_training_review_20261005.json"
+  },
+  "hardware_scope": "Only server2026 physical GPU2/3, serialized per card, at most two NN jobs. Existing check_limits checks index and memory only; no temperature/power requirement. No GPU/hardware query was executed by this reviewer.",
+  "scientific_goal_acceptance": false,
+  "goal_complete": false,
+  "goal_status": "ACTIVE_UNMET"
+}

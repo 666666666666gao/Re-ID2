@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-05T08:29:09",
+  "updated_at": "2026-10-05T09:10:15",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -743,8 +743,9 @@
         "gallery": 8575
       },
       "actual_frozen49_bytes": 2426652515,
-      "streaming_code_implemented": false,
-      "current_trial_changes": 0
+      "streaming_code_implemented": true,
+      "current_trial_changes": 0,
+      "neural_numeric_validation": false
     },
     "full_official_condition_cpu_equivalence": {
       "status": "ALL49_FULL_OFFICIAL_CONDITION_CPU_AUDITS_EXACT_WITH_BOUNDED_RAW_REPLAY",
@@ -768,6 +769,25 @@
       "actual_new_training": 0,
       "actual_new_method_code": false,
       "caveat": "Prepared hypothesis only; two-stage budget and continued-DeMo/unfrozen-axis controls required. No new method success or accepted launch implied."
+    },
+    "full_official_frozen_identity_anchor_m7": {
+      "status": "TRAINING_AND_EXECUTION_SOURCE_REVIEWS_PASS_DEPLOYED_PREFLIGHT_STARTED",
+      "plan": "results/preflight/full_official_frozen_identity_anchor_plan_20261005.json",
+      "runtime_plan": "results/preflight/full_official_frozen_anchor_runtime_plan_20261005.json",
+      "training_review": "results/preflight/full_official_frozen_identity_anchor_training_review_20261005.json",
+      "code_implemented": true,
+      "actual_contract_updates": null,
+      "actual_smoke_updates": null,
+      "actual_full50_started": 0,
+      "actual_full50_completed": 0,
+      "actual_frozen_cases": 0,
+      "actual_state_cases": 0,
+      "actual_neural_stream_gate": false,
+      "caveat": "Same common strong anchor50-bestE37 plus additional50/newAdam. Five controls,245frozen/1176states planned only; sourcePASS is provisional, no NN or scientific success.",
+      "execution_review": "results/preflight/full_official_frozen_anchor_execution_review_20261005.json",
+      "deployment": "results/preflight/full_official_frozen_anchor_deployment_20261005.json",
+      "native_preflight_session": 1728,
+      "actual_preflight_started": true
     }
   },
   "decision_rules": [
@@ -794,8 +814,8 @@
   ],
   "next_action": {
     "milestone": "REVIEW_ANCHOR_PROTECTION_FACTOR_AND_INTEGRATE_FULL_NEURAL_STORAGE_SCHEDULE",
-    "status": "M6_NEGATIVE_FULLY_PUBLISHED_CPU_ALL49_EQUIVALENCE_PASSED_NEXT_METHOD_NOT_IMPLEMENTED",
-    "action": "实现并审查固定身份参照的受控候选：同一全数据shared-DeMo50锚点，同初始化普通专家、双轴与继续训练DeMo/未冻结双轴对照；额外50轮与完整成本单独披露。真实预检通过才启动。接入逐条件诊断归档，保持全官方记录及49条件；仅明确公平优势和正11−00后扩展三数据集及种子。原+2目标保持。",
+    "status": "M7_NATIVE_FIVE_CONTROL_PREFLIGHT_RUNNING_FULL50_NOT_STARTED",
+    "action": "完成八项运行/推理归档源码复核；五组真实更新和各三更新smoke、既有M6全49神经stream等价门禁通过后，才启动同锚点额外50轮。归档期间准备/训练独立工作，保持全官方记录、完整49与公平对照。原+2目标不变。",
     "hardware_dependency": "Only2026GPU2/3,max2NN,serial/card,no temperature/powerconditions"
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
