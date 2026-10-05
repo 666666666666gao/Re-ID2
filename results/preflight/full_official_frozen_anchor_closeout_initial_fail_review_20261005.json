@@ -1,0 +1,83 @@
+{
+  "status": "FAIL",
+  "reviewed_at": "2026-10-05T09:25:42+08:00",
+  "review_kind": "Fresh source-only experiment-bridge closeout review; no new M7 intake or analysis execution",
+  "sources_sha256": {
+    "analyze_full_official_frozen_anchor_trial.py": "d1031031c9448b71ecc2ceb03118f0b4e27dd011420369bfb478e8bb0e6711d3",
+    "results/preflight/full_official_frozen_anchor_intake_20261005.py": "9995d30fd90890afd16cc0e1ed025bc67d7935a89ba480085581d43030a453aa"
+  },
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": null,
+  "actual_reasoning_effort": null,
+  "actual_model_attestation": "UNATTESTED: requested routing is recorded; the reviewer cannot independently attest the serving model or reasoning backend.",
+  "blocking_findings": [
+    {
+      "id": "B1",
+      "file": "analyze_full_official_frozen_anchor_trial.py",
+      "line": 120,
+      "title": "Selected-checkpoint extraction is reported as first-stage pretraining cost",
+      "finding": "anchor_pretraining_cost.runtime copies anchor['runtime']. This object measures the selected checkpoint's final query/gallery extraction, not the completed 50-epoch anchor training. The required two-stage cost report therefore omits first-stage training wall time while presenting extraction runtime under pretraining cost.",
+      "evidence": {
+        "anchor_result": "results/full_official_baselines_20261004/training/MSVR310_demo_shared_s42/result.json",
+        "anchor_selected_epoch": 37,
+        "anchor_completed_epochs": 50,
+        "runtime_end_to_end_seconds": 16.141275644302368,
+        "runtime_triplets": 1646,
+        "training_launch": "results/full_official_baselines_20261004/training/MSVR310_demo_shared_s42_launch.json",
+        "training_exit": "results/full_official_baselines_20261004/training/MSVR310_demo_shared_s42_exit.json",
+        "training_launch_started": 1791098933.5330312,
+        "training_exit_finished": 1791100523.2008,
+        "training_launch_to_exit_seconds": 1589.6677687168121,
+        "runtime_producer": "full_evaluation.py:93 records extract() end_to_end_seconds; run_full_official_experiment.py stores the final selected-checkpoint evaluate() runtime.",
+        "plan_requirement": "results/preflight/full_official_frozen_identity_anchor_plan_20261005.json fairness requires reporting both stages/cost."
+      },
+      "minimal_fix": "Rename the extraction object explicitly, for example selected_checkpoint_extraction_runtime, and add the anchor first-stage training process wall seconds from its existing launch/exit receipts. Preserve the completed50/selectedE37 and additional50/new-optimizer disclosures. No training or inference replay is needed."
+    }
+  ],
+  "nonblocking_findings": [],
+  "checked_correct": [
+    "Exactly the two preparation-bound sources match their SHA256 values and parse as Python. Both embedded remote Python payloads were AST-parsed without execution.",
+    "Intake gates on the train-mode stream completion receipt with196 enhanced raw acknowledgements and5 frozen banks, then the controller COMPLETE/5runs/245frozen/1176state fields. These names and values match the existing controller and stream bridge producers.",
+    "Collection selects JSON/JSONL/CSV/log files plus heads_*.npz. The four enhanced producers each write7 head NPZ files, giving28; checkpoint, data-image, ordinary feature NPZ and raw-distance NPZ files are excluded by the allowlist.",
+    "The source checks local tar size/SHA, exact member names, regular bounded members and every extracted member size/SHA before writing the receipt and invoking the bounded remote text_intake.tar.gz unlink. No model/data file is deleted by this intake.",
+    "Five analyzed names match the controller schedule: continued shared-DeMo, fixed axis/frequency/twins and adaptive axis. Completion,50 additional epochs, full1032/591/1055 coverage, no heldout identities,5632D, fixed capacity equality, native optimizer counters and anchor-matched batch/partial orders are checked.",
+    "The analyzer reuses load_bank/query_rows/summarize/compare/comparison_groups. It retains8 signed comparisons x49 conditions, all6 metrics and harm/rescue, including original DeMo, the strong shared anchor, continued DeMo, fixed ordinary controls and adaptive axis.",
+    "All4 enhanced models require294 installed-GT state cases each. The analyzer reconstructs6 state CSVs per condition, checks11 against the frozen bank, reconstructs11-minus00/10/01, retains calibration/head summaries and explicitly compares the original anchor to trained00.",
+    "Benchmark checkpoint selection,50+50 staging,new optimizer,single seed,dependent descriptive49-condition means and goal_complete=false are disclosed. No metric-superiority claim is made."
+  ],
+  "local_read_only_validation": {
+    "new_sources_ast_passed": 2,
+    "embedded_remote_payloads_ast_passed": 2,
+    "existing_baseline_banks_checked": 2,
+    "existing_baseline_condition_cases_checked": 98,
+    "existing_baseline_query_rows_checked": 57918,
+    "existing_baseline_group_counts": {
+      "same_availability": 7,
+      "overlap_mismatch": 30,
+      "source_disjoint": 12,
+      "partial_query_full_gallery": 6,
+      "both_partial": 36
+    },
+    "existing_M6_axis_conditions_checked": 49,
+    "existing_M6_axis_six_state_cases_checked": 294,
+    "existing_M6_axis_query_rows_checked": 173754,
+    "existing_M6_axis_head_CSV_files_checked": 7,
+    "existing_M6_axis_head_CSV_rows_checked": 11522,
+    "existing_head_NPZ_available_in_project": false,
+    "head_NPZ_scope": "Source schema inspected; existing local M6 intake contains head CSV/audit summaries only. Future28 M7 head NPZ transfers are not attested.",
+    "source_edits": 0,
+    "ssh_calls": 0,
+    "git_operations": 0,
+    "new_neural_execution": 0
+  },
+  "actual_intake": false,
+  "actual_analysis": false,
+  "actual_M7_full50_completion_attested": false,
+  "actual_M7_collection_or_analysis_attested": false,
+  "actual_new_neural_execution": 0,
+  "goal_complete": false,
+  "limits": "Source review and read-only checks of completed baseline/M6 fixtures only. No new M7 trial/controller/stream completion, actual intake, analysis execution, raw-distance recount or scientific success is claimed. Correct B1 and re-review the changed source binding before closeout execution."
+}
