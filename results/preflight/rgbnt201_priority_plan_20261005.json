@@ -1,6 +1,6 @@
 {
-  "status": "COMPLETE_TWO50_FULL98_AUDITED_AND_BLOCK_READOUT_NEGATIVE",
-  "updated_at": "2026-10-05T15:13:55",
+  "status": "R201A_TWO50_FULL98_AND_R201B_ONE50_FULL49_COMPLETE_NORMAL_NEGATIVE",
+  "updated_at": "2026-10-05T16:37:34",
   "user_instruction": "先主要看RGBNT201数据集，优先提升这个数据集的指标",
   "priority_dataset": "RGBNT201",
   "other_datasets": "Confirm the selected fixed method later on RGBNT100 and MSVR310; original three-dataset acceptance is unchanged",
@@ -1194,7 +1194,7 @@
   },
   "M8_terminal_readout": "results/preflight/full_official_frozen_public_identity_m8_condition_readout_20261005.json",
   "R201B": {
-    "status": "ACTUAL_NATIVE2_SMOKE3_PASS_FULL50_STARTED_GPU2_NATIVE88725",
+    "status": "ACTUAL_FULL50_FULL49_GT_AUDIT_CPU_BLOCKS_LOCAL_RAW_ARCHIVE_COMPLETE_NEGATIVE",
     "source": "rgbnt201_ranked_outlet.py",
     "sha256": "827cf687a3aebbaad69b263432cb07136bfb3d8e1feef9473b759e58c49bf688",
     "factor": "Add GT-aware smooth AP to actual full/partial deployed5632D descriptor, keeping existing four ReID heads/full loss and .25partialCE/.5crossTriplet unchanged. No new parameters, gate, FFT, extra BN call or sampler change. Same frozen original E28 identity encoder, same public interface and same additional50 budget.",
@@ -1212,15 +1212,77 @@
       "results/preflight/rgbnt201_ranked_anchor_stream_20261005.py": "41693832aada678ee59209a5ca4aeb45f1ee8676fee43d3ac85db8572f89edfc",
       "results/preflight/rgbnt201_ranked_anchor_deploy_20261005.py": "c16f60d393457b490c9bc49fd49dc1fa34bba74c6556e1c8bbfae0bc19a752c5"
     },
-    "native_session": 88725,
+    "native_session": null,
     "actual_full50_started": 1,
     "source_review": "results/preflight/rgbnt201_ranked_anchor_source_review_20261005.json",
     "actual_native_updates": 2,
     "actual_smoke_updates": 3,
     "amp_skipped_preflight": 0,
-    "actual_full50_completed": 0,
+    "actual_full50_completed": 1,
     "first_training_boundary_observation_at": "2026-10-05T16:11:06+08:00",
     "actual_preflight": "results/preflight/rgbnt201_ranked_anchor_actual_preflight_20261005.json",
-    "training_start": "results/preflight/rgbnt201_ranked_anchor_training_start_20261005.json"
+    "training_start": "results/preflight/rgbnt201_ranked_anchor_training_start_20261005.json",
+    "last_native88725_exit_code": 0,
+    "successful_optimizer_updates": 2647,
+    "formal_amp_skips": 0,
+    "complete_frozen_conditions": 49,
+    "selected_epoch": 1,
+    "full_metrics": {
+      "mAP": 73.70794213173309,
+      "mINP": 61.831264188522475,
+      "Rank-1": 76.91387559808612,
+      "Rank-5": 84.56937799043062,
+      "Rank-10": 90.66985645933015,
+      "Rank-20": 93.77990430622009
+    },
+    "relative_normal": {
+      "original_DeMo": {
+        "delta_pp": {
+          "mAP": -1.9666328605943733,
+          "mINP": -0.745828061249675,
+          "Rank-1": -3.708133971291872,
+          "Rank-5": -4.665071770334933,
+          "Rank-10": -3.110047846889941,
+          "Rank-20": -1.1961722488038333
+        },
+        "Rank1_harm_queries": 39,
+        "Rank1_rescue_queries": 8,
+        "AP_improved_queries": 209,
+        "AP_worsened_queries": 361
+      },
+      "R201A_fixed": {
+        "delta_pp": {
+          "mAP": -0.14647961890500483,
+          "mINP": -0.11666981159746825,
+          "Rank-1": -0.23923444976075814,
+          "Rank-5": 0.11961722488038617,
+          "Rank-10": -0.4784688995215305,
+          "Rank-20": 0.11961722488038617
+        },
+        "Rank1_harm_queries": 3,
+        "Rank1_rescue_queries": 1,
+        "AP_improved_queries": 200,
+        "AP_worsened_queries": 267
+      }
+    },
+    "normal_both_plus2": false,
+    "ranking_coverage": {
+      "batches": 2647,
+      "full_valid_queries": 57456,
+      "partial_valid_queries": 57456,
+      "full_zero_positive_batches": 85,
+      "partial_zero_positive_batches": 85
+    },
+    "analysis": "results/rgbnt201_ranked_anchor_r201b_20261005/analysis.json",
+    "raw_archive": "results/preflight/rgbnt201_r201b_normal_array_archive_20261005.json"
+  },
+  "next_direction": {
+    "status": "DATA_GROUNDED_INTERFACE_PLAN_NOT_IMPLEMENTED_OR_TRAINED",
+    "primary_dataset": "RGBNT201",
+    "strong_anchor": "Original complete DeMoE28 private identity",
+    "decision": "Do not expand R201B ranking alone or forced25percent public fusion. Preserve originalidentity; establish matched ordinaryfrequency/dualaxis prototype and actual projection utility, then bounded internal evidence bypass/relationship-coordinate correction based on201 evidence.",
+    "requirements": "Sameinit/sampling/additional50/effectiveparams/dim, source review+realnative/smoke before formal50, all49GT+rawlocalverify, no addedloss stack or claim fromgenericmissinghandling.",
+    "actual_new_candidate_native_updates": 0,
+    "actual_new_candidate_full50": 0
   }
 }

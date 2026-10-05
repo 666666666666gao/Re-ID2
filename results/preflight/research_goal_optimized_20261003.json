@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-05T15:49:35",
+  "updated_at": "2026-10-05T16:37:34",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -3336,17 +3336,68 @@
       "all_six_metrics98": "results/rgbnt201_original_anchor_r201a_20261005/metrics49_all.csv"
     },
     "RGBNT201_R201B": {
-      "status": "FULL50_RUNNING_NOT_TERMINAL",
+      "status": "ACTUAL_FULL50_FULL49_GT_AUDIT_CPU_BLOCKS_LOCAL_RAW_ARCHIVE_COMPLETE_NEGATIVE",
       "actual_native_updates": 2,
       "actual_smoke_updates": 3,
       "actual_full50_started": 1,
-      "actual_full50_completed": 0,
-      "formal_native_session": 88725,
-      "gpu": 2,
-      "first_training_boundary_observation_at": "2026-10-05T16:11:06+08:00",
-      "preflight_amp_skips": 0,
-      "source_review": "SOURCE_ONLY_PASS_SAME_FAMILY_PROVISIONAL",
-      "factor": "GT-aware smoothAP on real deployed full/partial descriptor; same frozen original DeMoE28 and allothertraining/interface/sampling."
+      "actual_full50_completed": 1,
+      "actual_optimizer_updates": 2647,
+      "amp_skipped_steps": 0,
+      "full_conditions49": 49,
+      "independent_installed_GT_CPU": "PASS49",
+      "actual_selected_CPU_block_readout": 1,
+      "normal": {
+        "mAP": 73.70794213173309,
+        "mINP": 61.831264188522475,
+        "Rank-1": 76.91387559808612,
+        "Rank-5": 84.56937799043062,
+        "Rank-10": 90.66985645933015,
+        "Rank-20": 93.77990430622009
+      },
+      "normal_both_plus2": false,
+      "relative_normal": {
+        "original_DeMo": {
+          "delta_pp": {
+            "mAP": -1.9666328605943733,
+            "mINP": -0.745828061249675,
+            "Rank-1": -3.708133971291872,
+            "Rank-5": -4.665071770334933,
+            "Rank-10": -3.110047846889941,
+            "Rank-20": -1.1961722488038333
+          },
+          "Rank1_harm_queries": 39,
+          "Rank1_rescue_queries": 8,
+          "AP_improved_queries": 209,
+          "AP_worsened_queries": 361
+        },
+        "R201A_fixed": {
+          "delta_pp": {
+            "mAP": -0.14647961890500483,
+            "mINP": -0.11666981159746825,
+            "Rank-1": -0.23923444976075814,
+            "Rank-5": 0.11961722488038617,
+            "Rank-10": -0.4784688995215305,
+            "Rank-20": 0.11961722488038617
+          },
+          "Rank1_harm_queries": 3,
+          "Rank1_rescue_queries": 1,
+          "AP_improved_queries": 200,
+          "AP_worsened_queries": 267
+        }
+      },
+      "all49_minus_R201A": {
+        "mAP": 0.05479479426453082,
+        "mINP": 0.01100402170255066,
+        "Rank-1": 0.07567620349575321,
+        "Rank-5": -0.053705692803440286,
+        "Rank-10": -0.07567620349574611,
+        "Rank-20": -0.046382189239324134
+      },
+      "private_query_AP_INP_Rank1_exact_original": true,
+      "normal_raw_local_verified": 1,
+      "frozen_raw_local_verified": 49,
+      "analysis": "results/rgbnt201_ranked_anchor_r201b_20261005/analysis.json",
+      "limitation": "Single objective shared-interface factor, seed42/staged50+50/officialbenchmarkselect; notdual-axis gain orfinal3dataset success."
     }
   },
   "decision_rules": [
@@ -3373,8 +3424,8 @@
   ],
   "next_action": {
     "milestone": "RGBNT201_STRONG_REFERENCE_DIAGNOSIS_AND_SINGLE_FACTOR_IMPROVEMENT",
-    "status": "R201A_TWO50_FULL98_NEGATIVE_R201B_NATIVE_PASS_FULL50_RUNNING_GPU2",
-    "action": "Prioritize RGBNT201. R201A2x50/all98negative, fixedprivate exactoriginal; publicfusionharms. R201B sixsource/32parents sourcePASS, CPUmathPASS, native71851exit0: native2 realAdam/replay/fixed7/strictreload andsmoke3/0AMP/0weights. Now oneprotected R201B ranking-only full50 actuallyrunning26GPU2 native88725; sameinit/network/metric/sampling. Entire3951/836/836/zeroholdout, bestbenchmark selectedthen49GTaudits/rawarchive-before-clear. Firsttrainingboundaryobserve 2026-10-05T16:11:06+08:00 fromold1568.75s ETA; thereafter240s. No rankingterminal/success claim; all3+2/fairordinaryexpert/actualcollaboration/multiseed remainsunmet.",
+    "status": "R201B_FULL50_FULL49_COMPLETE_NEGATIVE_NEXT_RGBNT201_EXPERT_RETRIEVAL_INTERFACE",
+    "action": "Do not expand R201B ranking alone or forced25percent public fusion. Preserve originalidentity; establish matched ordinaryfrequency/dualaxis prototype and actual projection utility, then bounded internal evidence bypass/relationship-coordinate correction based on201 evidence. Entire3951/836/836/0holdout, all3dataset+2/fairordinaryexpert/actualcollaboration/multiseedgoal unchanged. No next candidate alreadyrunning or successclaim.",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
