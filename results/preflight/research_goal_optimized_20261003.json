@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-05T09:34:27",
+  "updated_at": "2026-10-05T10:16:29",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -773,19 +773,19 @@
       "caveat": "Prepared hypothesis only; two-stage budget and continued-DeMo/unfrozen-axis controls required. No new method success or accepted launch implied."
     },
     "full_official_frozen_identity_anchor_m7": {
-      "status": "FIVE_NATIVE_GATES_AND_ALL49_NEURAL_STREAM_PASS_TWO_ADDITIONAL50_RUNNING_THREE_QUEUED",
+      "status": "TWO_FULL50_ALL49_RUNS_CLOSED_NEXT_TWO_TRAINING",
       "plan": "results/preflight/full_official_frozen_identity_anchor_plan_20261005.json",
       "runtime_plan": "results/preflight/full_official_frozen_anchor_runtime_plan_20261005.json",
       "training_review": "results/preflight/full_official_frozen_identity_anchor_training_review_20261005.json",
       "code_implemented": true,
       "actual_contract_updates": 5,
       "actual_smoke_updates": 15,
-      "actual_full50_started": 2,
-      "actual_full50_completed": 0,
-      "actual_frozen_cases": 0,
-      "actual_state_cases": 0,
+      "actual_full50_started": 4,
+      "actual_full50_completed": 2,
+      "actual_frozen_cases": 98,
+      "actual_state_cases": 294,
       "actual_neural_stream_gate": true,
-      "caveat": "All5 native contracts and15smokeupdates/0skips;complete MSVR49/294NNstream exactoldGTaudit, notRGBNT100NNvalidation. Only2additional50started,3queued,0completed. Benchmark checkpoint/two-stage cost disclosed; no latest science superiority.",
+      "caveat": "MSVR310 single seed only; dual-axis candidates not complete; partial cohort utility comparison not interpreted as method superiority.",
       "execution_review": "results/preflight/full_official_frozen_anchor_execution_review_20261005.json",
       "deployment": "results/preflight/full_official_frozen_anchor_deployment_20261005.json",
       "native_preflight_session": 1728,
@@ -795,7 +795,7 @@
       "native_neural_stream_gate_session": 24068,
       "last_observed_neural_stream_conditions": 49,
       "actual_preflight_complete": true,
-      "queued_full50": 3,
+      "queued_full50": 1,
       "neural_stream_gate": "results/preflight/full_official_neural_stream_gate_20261005.json",
       "gate_handoff": "results/preflight/full_official_frozen_anchor_gate_handoff_20261005.json",
       "native_training_session": 42510,
@@ -2931,7 +2931,79 @@
       "closeout_preparation": "results/preflight/full_official_frozen_anchor_closeout_preparation_20261005.json",
       "closeout_source_review": "results/preflight/full_official_frozen_anchor_closeout_review_20261005.json",
       "actual_intake": false,
-      "actual_analysis": false
+      "actual_analysis": false,
+      "current_snapshot": "results/preflight/full_official_frozen_anchor_primary_observer_latest_20261005.json",
+      "first_pair_closeout": "results/preflight/full_official_frozen_anchor_first_pair_closed_20261005.json",
+      "running": [
+        {
+          "name": "MSVR310_anchor_axis_shared_fixed_s42",
+          "gpu": 2,
+          "epoch": 17,
+          "optimizer_steps": 239,
+          "amp_skipped_steps": 0,
+          "loss": 2.859323109899248,
+          "pid": 551700
+        },
+        {
+          "name": "MSVR310_anchor_twins_shared_fixed_s42",
+          "gpu": 3,
+          "epoch": 25,
+          "optimizer_steps": 352,
+          "amp_skipped_steps": 0,
+          "loss": 2.7666896411350796,
+          "pid": 542686
+        }
+      ],
+      "completed_normal_metrics": [
+        {
+          "name": "MSVR310_anchor_demo_shared_adaptive_s42",
+          "variant": "demo_shared",
+          "freeze": 0,
+          "gpu": 2,
+          "selected_epoch": 22,
+          "full_metrics": {
+            "mAP": 48.83930763272587,
+            "mINP": 25.14279975669905,
+            "Rank-1": 65.48223350253807,
+            "Rank-5": 82.23350253807106,
+            "Rank-10": 86.46362098138748,
+            "Rank-20": 90.86294416243655
+          },
+          "optimizer_steps": 705,
+          "amp_skipped_steps": 0,
+          "frozen_conditions": 49,
+          "state_cases": 0,
+          "local_frozen_size_sha_verified": 49,
+          "train_records": 1032,
+          "query_records": 591,
+          "gallery_records": 1055,
+          "training_heldout_identities": 0
+        },
+        {
+          "name": "MSVR310_anchor_frequency_shared_fixed_s42",
+          "variant": "frequency_shared",
+          "freeze": 1,
+          "gpu": 3,
+          "selected_epoch": 3,
+          "full_metrics": {
+            "mAP": 49.484478076005836,
+            "mINP": 25.016775556668236,
+            "Rank-1": 69.03553299492386,
+            "Rank-5": 81.89509306260575,
+            "Rank-10": 86.29441624365482,
+            "Rank-20": 90.69373942470389
+          },
+          "optimizer_steps": 705,
+          "amp_skipped_steps": 0,
+          "frozen_conditions": 49,
+          "state_cases": 294,
+          "local_frozen_size_sha_verified": 49,
+          "train_records": 1032,
+          "query_records": 591,
+          "gallery_records": 1055,
+          "training_heldout_identities": 0
+        }
+      ]
     },
     "full_official_neural_condition_archive_equivalence": {
       "status": "PASS_FULL49_NEURAL_STREAM_EQUALS_COMPLETED_M6_GT_AUDIT",
@@ -2952,6 +3024,12 @@
       "new_local_npz_files": 49,
       "new_local_npz_bytes": 707480271,
       "local_root": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\full_official_neural_stream_equivalence_20261005"
+    },
+    "full_official_shared_anchor_scope": {
+      "evidence": "results/preflight/full_official_shared_anchor_cross_dataset_scope_20261005.json",
+      "status": "EXISTING_FULL_OFFICIAL_BASELINES_SCOPE_CHECK_NO_NEW_NEURAL_EXECUTION",
+      "new_optimizer_updates": 0,
+      "interpretation": "Shared identity anchor is stronger than original DeMo on MSVR310 but lower on RGBNT201 and RGBNT100. Its quality must not be assumed universal; unchanged three-dataset expansion remains conditional on actual candidate utility and original DeMo/fair ordinary controls."
     }
   },
   "decision_rules": [
@@ -2978,8 +3056,8 @@
   ],
   "next_action": {
     "milestone": "COMPLETE_COMMON_ANCHOR_FIVE_CONTROL_STAGE2_AND_ALL49_UTILITY_VALIDATION",
-    "status": "M7_TWO_ADDITIONAL50_RUNNING_THREE_QUEUED_ALL_NATIVE_AND_NEURAL_STORAGE_GATES_PASSED",
-    "action": "继续监测2026GPU2/3两卡串行五对照，按预定全官方50轮和固定best完成245冻结/1176状态；逐条件GT后本地校验归档/清理，另一卡可训练。完整比较锚点、继续训练DeMo、普通专家、冻结/不冻结双轴及11−00，完成审查过的采集/分析后决定是否扩展。原三数据集各+2/缺失/多种子目标不变。",
+    "status": "M7_TWO_CLOSED_TWO_RUNNING_ONE_QUEUED_TRANSFER_AND_PREPARATION_OVERLAP",
+    "action": "完成现有两组及其全部49条件推理/逐条件归档，再按原队列执行不冻结双轴；传输期间继续独立准备和检查。等待五组完整采集/分析后比较原DeMo、同锚点、继续训练DeMo、普通专家及真实11−00。共享锚点在201/100低于原DeMo，不能只依据MSVR提升直接统一扩展。原三数据集各+2及缺失公平性目标保持不变。",
     "hardware_dependency": "Only2026GPU2/3,max2NN,serial/card,no temperature/powerconditions"
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
@@ -2996,5 +3074,5 @@
     "historical_fit_dev_evidence": "Retained, distinct protocol, not official full-data acceptance",
     "official_checkpoint_selection_disclosed": true
   },
-  "archive_overlap_policy": "用户2026-10-05明确要求：在本地距离归档传输期间也准备和开始实验；不等待传输结束才推进独立的源码审查、CUDA预检或训练，仍遵守已授权GPU2/3与最多2NN。"
+  "archive_overlap_policy": "用户明确要求：本地距离文件传输期间同时准备并推进独立实验；GPU空闲且实际门禁通过就启动，不把传输完成作为无关实验的前置条件。现有队列维持2026物理GPU2/3、每卡串行、最多2NN；不重复启动或修改运行中的控制器。raw仍须本地大小/SHA核验后再清理远端。"
 }
