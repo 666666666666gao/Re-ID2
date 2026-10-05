@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-05T19:21:30",
+  "updated_at": "2026-10-05T20:27:24",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -3452,7 +3452,65 @@
         "axis_best_mAP": 78.54104141517529,
         "cause": "UNDETERMINED; finite training and0AMP skips do not prove stable retrieval utility"
       },
-      "goal_complete": false
+      "goal_complete": false,
+      "narrow_completed50": 2,
+      "actual_closed_state_cases": 392,
+      "narrow_normal_axis": {
+        "mAP": 78.54104141517529,
+        "mINP": 64.50057817583463,
+        "Rank-1": 84.0909090909091,
+        "Rank-5": 91.74641148325358,
+        "Rank-10": 94.377990430622,
+        "Rank-20": 97.60765550239235
+      },
+      "normal_rank1_rescue": 52,
+      "normal_rank1_harm": 23,
+      "missing_all49_mean_delta_mAP": -0.226579163324828,
+      "missing_deferred_by_latest_user": true
+    },
+    "three_dataset_normal_first": {
+      "status": "NORMAL_FIRST_NATIVE12_PASS_MSVR_TWO_LIVE_RGBNT100_QUEUED",
+      "updated_at": "2026-10-05T20:27:24",
+      "user_order": "Three datasets complete modalities first; missing afterwards; all3/missing goal unchanged",
+      "common_method": "R201C narrow original5120 relation coordinates; exact same losses/augmentation/gates, no per-dataset method",
+      "originals": "Each corresponding original DeMo full-official50/seed42 best; additional50/freshAdam",
+      "gpus": [
+        2,
+        3
+      ],
+      "power_temperature_control": false,
+      "root": "runs/identity_coordinate_full_normal_three_20261005",
+      "receiver": 71594,
+      "controller_pid": 1997315,
+      "source_review": "Fresh SOURCE_ONLY PASS, same-family/provisional/actual modelUNATTESTED",
+      "native_actual_updates": 12,
+      "native_controls": 4,
+      "native_gradient_scope": "Each control checked after its third update; no per-param audit of firsttwo",
+      "formal_new_models": 4,
+      "formal_planned_epochs": 200,
+      "formal_planned_updates": 14124,
+      "formal_completed_models": 0,
+      "initial_formal_epochs": {
+        "MSVR310_identity_axis_shared_narrow_s42": 7,
+        "MSVR310_identity_frequency_shared_narrow_s42": 7
+      },
+      "existing_RGBNT201_narrow_completed50": 2,
+      "existing_RGBNT201_closed_state_cases": 392,
+      "original_missing_parent": 1808059,
+      "original_missing_receiver": 17662,
+      "original_missing_parent_state": "Tsl",
+      "old_bypass_training": {
+        "RGBNT201_identity_axis_shared_bypass_s42": "COMPLETE",
+        "RGBNT201_identity_frequency_shared_bypass_s42": "COMPLETE"
+      },
+      "neural_sources_of_old_queue_changed": 0,
+      "resume": "New controller SIGCONT old parent only after4 newnormal50/GT/normalraw archives complete",
+      "observer_target": "2026-10-05T20:33:00+08:00",
+      "observer": 79030,
+      "observer_interval_afterward_if_needed_seconds": 240,
+      "all3_goal_complete": false,
+      "missing_goal_complete": false,
+      "limits": "Benchmark-selected/one seed/two-stage budget. RGBNT201 known12 disjoint-source cases unsolved; missing stage deferred, not dropped."
     }
   },
   "decision_rules": [
@@ -3479,8 +3537,8 @@
   ],
   "next_action": {
     "milestone": "RGBNT201_STRONG_REFERENCE_DIAGNOSIS_AND_SINGLE_FACTOR_IMPROVEMENT",
-    "status": "MONITOR_ORIGINAL_R201C_CONTROLLER_AT_ESTIMATED_MILESTONE",
-    "action": "Original17662 continues full50/best strict reload/all49/all4states/GT audits. Observed axisbestE11 already exceeds original+2/+2 but latestE43 collapsed, so no stable/final claim. Next single estimate19:29; only after4-model terminal archive receipt run reviewed CPU closeout. RGBNT201 first; all3/missing/multiseed scope unchanged;12disjoint cases structurally unsolved.",
+    "status": "THREE_NORMAL_DATASETS_BEFORE_NEW_MISSING_EVALUATION",
+    "action": "Continue sole71594 on26 physical2/3, two MSVR310 then two RGBNT100 narrow controls. Native12 actuallypassed; complete full50/installedGT/selectedraw localarchive before resuming same oldparent1808059/receiver17662. Original201bypass NN finished50; only sequencing parent STOP, no source mutation/restart. Observe20:33 from actual24.8-25.2sec/epoch, then estimateRGBNT100 timing; no earlyloop. All3 both+2/missing/fairtwins/multiseed/fullscope remain unmet.",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
