@@ -1,0 +1,391 @@
+{
+  "status": "SOURCE_DESIGN_FINDINGS_ONLY_NOT_CODE_ACCEPTANCE",
+  "reviewed_at": "2026-10-05T16:59:37+08:00",
+  "reviewer": "/root/review_rgbnt201_r201b_ranked_launch",
+  "context_reused_from_initial_fresh_source_review": true,
+  "initial_source_review": "results/preflight/rgbnt201_ranked_anchor_source_review_20261005.json",
+  "review_context": "Follow-up by the same reviewer in the existing source-review context. This is not a new cold/fresh audit.",
+  "requested_backend": "Codex",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_backend": "UNATTESTED",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "unavailable_separate_audit": "The additional fresh R201A semantic audit was reported unavailable after a thread-limit spawn failure. This follow-up does not replace that audit or convert it into a completed independent audit.",
+  "summary": "R201B executed the reviewed rank objective and remained worse on normal retrieval than original DeMo and R201A FIXED. The selected private-only block preserves original normal metrics; the shared public block is the observed harmful normal-fusion component. R201B has no frequency expert, so it supplies no RGBNT201 PM/PF bottleneck evidence. The smallest next step is an RGBNT201 native interface diagnostic comparing P(x) against x+P(x) on identical original-E28-frozen expert states and actual routed evidence, equally in ordinary-frequency and dual-axis variants. Keep this one interface factor separate from relation-conditioned F pooling, private-coordinate injection and removal of the fixed public25 metric. No current builder already implements the whole requested combination.",
+  "actual_artifacts_read": [
+    "results/rgbnt201_ranked_anchor_r201b_20261005/analysis.json",
+    "results/rgbnt201_ranked_anchor_r201b_20261005/metrics49_three_models.csv",
+    "results/rgbnt201_ranked_anchor_r201b_20261005/per_query49_paired_deltas.csv",
+    "results/rgbnt201_ranked_anchor_r201b_20261005/controller_result.json",
+    "results/rgbnt201_ranked_anchor_r201b_20261005/training/RGBNT201_original_shared_ranked_fixed_s42/result.json",
+    "results/preflight/rgbnt201_ranked_anchor_actual_preflight_20261005.json",
+    "results/preflight/rgbnt201_r201b_block_session_20261005.json",
+    "results/rgbnt201_r201b_blocks_20261005/fixed/result.json",
+    "results/rgbnt201_r201b_blocks_20261005/fixed/original_DeMo.json",
+    "results/rgbnt201_r201b_blocks_20261005/fixed/control_private_only.json",
+    "results/rgbnt201_r201b_blocks_20261005/fixed/control_public_only.json",
+    "results/rgbnt201_r201b_blocks_20261005/fixed/control_fused.json",
+    "results/rgbnt201_r201b_blocks_20261005/cpu_launch.json",
+    "results/rgbnt201_r201b_blocks_20261005/cpu_exit.json"
+  ],
+  "actual_code_evidence_connection": {
+    "six_current_R201B_sources_equal_initial_review": true,
+    "actual_preflight_source_map_equal_initial_review": true,
+    "native_receipt_status": "PASS_RGBNT201_RANKED_ANCHOR_TWO_NATIVE_UPDATES",
+    "native_updates": 2,
+    "native_active_gradients_all_true_both_controls": true,
+    "native_own_Adam_replay_max_error_both_controls": 0.0,
+    "native_fixed_private_all7_unchanged": true,
+    "native_rank_losses_fixed": {
+      "full": 0.07505780458450317,
+      "partial": 0.4253045916557312,
+      "eligible_full": 24,
+      "eligible_partial": 24
+    },
+    "fixed_smoke_updates": 3,
+    "smoke_skips": 0,
+    "strict_reload_equal": true,
+    "controller_status": "COMPLETE",
+    "controller_frozen_cases": 49,
+    "controller_train_eval_audit_exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "controller_reports_all49_raw_local_verified": true,
+    "additional_updates": 2647,
+    "amp_skips": 0,
+    "rank_coverage": {
+      "batches": 2647,
+      "full_valid_queries": 57456,
+      "partial_valid_queries": 57456,
+      "full_zero_positive_batches": 85,
+      "partial_zero_positive_batches": 85
+    },
+    "csv_rows": {
+      "metrics49_three_models": 147,
+      "per_query49_paired_deltas": 81928
+    },
+    "scope": "Read existing local primary/analysis receipts and reduced the normal paired CSV rows. No new server audit, archive verification, model execution or general scientific acceptance was performed."
+  },
+  "evidence_findings": [
+    {
+      "finding": "Ranking was exercised and did not repair normal retrieval at this tested setting.",
+      "evidence": {
+        "R201B_selected_epoch": 1,
+        "R201B_normal": {
+          "mAP": 73.70794213173309,
+          "mINP": 61.831264188522475,
+          "Rank-1": 76.91387559808612,
+          "Rank-5": 84.56937799043062,
+          "Rank-10": 90.66985645933015,
+          "Rank-20": 93.77990430622009
+        },
+        "normal_relative_to_original": {
+          "delta_pp": {
+            "mAP": -1.9666328605943733,
+            "mINP": -0.745828061249675,
+            "Rank-1": -3.708133971291872,
+            "Rank-5": -4.665071770334933,
+            "Rank-10": -3.110047846889941,
+            "Rank-20": -1.1961722488038333
+          },
+          "Rank1_harm_queries": 39,
+          "Rank1_rescue_queries": 8,
+          "AP_improved_queries": 209,
+          "AP_worsened_queries": 361
+        },
+        "normal_relative_to_R201A_fixed": {
+          "delta_pp": {
+            "mAP": -0.14647961890500483,
+            "mINP": -0.11666981159746825,
+            "Rank-1": -0.23923444976075814,
+            "Rank-5": 0.11961722488038617,
+            "Rank-10": -0.4784688995215305,
+            "Rank-20": 0.11961722488038617
+          },
+          "Rank1_harm_queries": 3,
+          "Rank1_rescue_queries": 1,
+          "AP_improved_queries": 200,
+          "AP_worsened_queries": 267
+        },
+        "all49_mean_mAP_delta_B_minus_A": 0.05479479426453082,
+        "all49_mean_Rank1_delta_B_minus_A": 0.07567620349575321
+      },
+      "interpretation": "The positive native rank losses, eligible-query records and 2647 successful updates connect the negative result to the intended implementation. It is one seed and one temperature/weight choice, not proof that every ranking objective must fail. No further loss stack or sampler change is justified by this review."
+    },
+    {
+      "finding": "Protected private identity survives; fixed public25 fusion causes the observed selected normal readout to be worse.",
+      "evidence": {
+        "blocks_mAP_Rank1": {
+          "original_DeMo": {
+            "mAP": 75.67457499232746,
+            "Rank-1": 80.622009569378
+          },
+          "control_fused": {
+            "mAP": 73.70794213173309,
+            "Rank-1": 76.91387559808612
+          },
+          "control_private_only": {
+            "mAP": 75.67457499232746,
+            "Rank-1": 80.622009569378
+          },
+          "control_public_only": {
+            "mAP": 60.24490291701701,
+            "Rank-1": 63.63636363636363
+          }
+        },
+        "private_only_minus_original": {
+          "delta_pp": {
+            "mAP": 0.0,
+            "mINP": 0.0,
+            "Rank-1": 0.0,
+            "Rank-5": 0.0,
+            "Rank-10": 0.0,
+            "Rank-20": 0.0
+          },
+          "Rank1_harm_queries": 0,
+          "Rank1_rescue_queries": 0,
+          "AP_improved_queries": 0,
+          "AP_worsened_queries": 0,
+          "valid_queries": 836
+        },
+        "private_feature_max_abs_error": {
+          "query": 5.21540641784668e-08,
+          "gallery": 5.21540641784668e-08
+        }
+      },
+      "interpretation": "Private-only equals the original six metrics and per-query AP/Rank1 outcomes; strip-and-renormalize coordinates differ by about 5.2e-8. This is a selected-checkpoint block readout, not retraining-based causal proof. The 512D public branch is initialize_shared applied to mean available CLS/local features, not PF or an FFT branch."
+    },
+    {
+      "finding": "Missing-view improvements over original DeMo cannot be assigned solely to public identity learning.",
+      "code_paths": [
+        "modeling/make_model.py:138-178",
+        "shared_identity_axis.py:41-92",
+        "missing_evaluation.py:20-33"
+      ],
+      "evidence": "Original DeMo forwards zeroed missing images through the backbone/reducers/fusion. R201A/B encode_available skips absent backbones, explicitly zeros their features, masks ineligible HDM relations and skips absent relation BN experts. R201A/B also have the public block and partial training.",
+      "interpretation": "The normal block readout does not isolate these changes for all49. Both A/B use the same path, so B-versus-A remains the objective comparison. Neither all49 equal-condition means nor the 49 reused query sets are independent replications."
+    },
+    {
+      "finding": "An RGBNT201-specific PM/PF diagnosis is still missing.",
+      "code_paths": [
+        "run_rgbnt201_ranked_anchor.py:3-6",
+        "original_identity_anchor.py:28-62",
+        "shared_identity_axis.py:108-128",
+        "axis_collaboration.py:179-185"
+      ],
+      "evidence": "The completed model is OriginalAnchoredDeMo/SharedIdentityDeMo. Its forward has neither modality_expert, frequency_expert, router, PM nor PF. Historical MSVR310 interface/projection results and the existing relation_frequency_interface implementation are useful code context only.",
+      "interpretation": "Do not relabel the shared-public degradation as a frequency-expert bottleneck or claim that an MSVR projection mechanism is already demonstrated on RGBNT201."
+    }
+  ],
+  "real_tensor_layouts": [
+    {
+      "tensor": "RGBNT201 CLIP spatial input",
+      "shape": "B x 3 modalities x 128 spatial patches x 512 channels; 16x8 grid from 256x128 images and patch16",
+      "code_paths": [
+        "configs/RGBNT201/DeMo.yml:2-16",
+        "modeling/make_model.py:16-20",
+        "modeling/meta_arch.py:91-103"
+      ]
+    },
+    {
+      "tensor": "Existing SpatialBands output",
+      "shape": "B x 3 source groups x 3 bands x 128 patches x 512",
+      "code_paths": [
+        "dual_axis.py:8-29"
+      ],
+      "note": "Keep the existing FFT/masks unchanged."
+    },
+    {
+      "tensor": "Original private descriptor",
+      "shape": "B x 5120 = globals(R,N,T) 3x512 followed by 7 relation slots x512",
+      "code_paths": [
+        "shared_identity_axis.py:75-90",
+        "modeling/moe/AttnMOE.py:104-117",
+        "modeling/moe/AttnMOE.py:180-191"
+      ],
+      "relation_order": [
+        "R",
+        "N",
+        "T",
+        "RN",
+        "RT",
+        "NT",
+        "RNT"
+      ]
+    },
+    {
+      "tensor": "Existing public descriptor",
+      "shape": "mean of available raw [CLS512, pooled spatial512] -> shared_projection 1024->512; appended at coordinates5120:5632",
+      "code_paths": [
+        "shared_identity_axis.py:28-38",
+        "shared_identity_axis.py:75-90"
+      ],
+      "note": "This public projection is distinct from expert PM/PF."
+    },
+    {
+      "tensor": "M independent/conditioned evidence m0/m1",
+      "shape": "B x 7 relations x 3 bands x 512; upstream attention rank64",
+      "code_paths": [
+        "axis_collaboration.py:11-46",
+        "shared_identity_axis.py:181-187"
+      ]
+    },
+    {
+      "tensor": "F independent/conditioned evidence f0/f1",
+      "shape": "B x 3 groups x 3 bands x 512; upstream attention rank64",
+      "code_paths": [
+        "axis_collaboration.py:49-90",
+        "shared_identity_axis.py:181-187"
+      ],
+      "note": "Groups have physical-source provenance in structured mode. Ordinary-frequency prepare merges all available source/position values; its group slots must not be described as source-isolated evidence."
+    },
+    {
+      "tensor": "Router relation frequency V",
+      "shape": "B x 7 relations x 3 bands x 512, by averaging f1 source groups in each RELATIONS subset",
+      "code_paths": [
+        "axis_collaboration.py:102-130"
+      ]
+    },
+    {
+      "tensor": "Router outputs",
+      "shape": "M: Bx7x512; F: Bx512; pi: Bx7x3",
+      "code_paths": [
+        "axis_collaboration.py:117-130"
+      ],
+      "note": "The returned global F has already summed away relation and band axes. Relation-specific F cannot be recovered by reshaping/repeating this Bx512 tensor."
+    },
+    {
+      "tensor": "PM and PF outlet projections",
+      "shape": "LayerNorm512 -> Linear512x64 -> GELU -> Linear64x512, shared across leading dimensions",
+      "code_paths": [
+        "axis_collaboration.py:179-184",
+        "shared_identity_axis.py:155-158"
+      ],
+      "note": "PM input is Bx7x512, current PF input Bx512. Their equal input/output widths permit x+P(x) without parameters. PI is1024->64->512 and is outside this bypass factor."
+    }
+  ],
+  "entry_point_findings": [
+    {
+      "path": "original_identity_anchor.py:15-95",
+      "finding": "This is the correct existing original-E28 loading/freezing contract: five original identity modules, exact state copy, frozen weights/buffers/eval modes and current FP32 base fusion.",
+      "limit": "build explicitly permits only demo_shared and asserts that added state prefixes equal the five existing shared/fused modules. It cannot construct an expert model merely by changing --variant or NEW_MODULES metadata."
+    },
+    {
+      "path": "frozen_identity_anchor_axis.py:15-16,46-96",
+      "finding": "The existing expert anchor builder expects a completed demo_shared5632 anchor, maps shared_projection keys into SharedReadout, zeros the extra query and instantiates ModalityOutletAlignmentAxis.",
+      "limit": "It would select the wrong anchor lineage for original demo5120 E28, freeze a sixth module shared_projection and import M4 relation/alignment losses. It is not a direct RGBNT201 original-anchor solution."
+    },
+    {
+      "path": "run_full_official_frozen_anchor_experiment.py:31-36,57-59,75-105,139-180",
+      "finding": "The full-official loop can be reused through explicit builder/update/variants and an original-five-module assert_anchor_unchanged binding, preserving full data, sampling, seed, fresh Adam, best selection and frozen checks.",
+      "limit": "Its default expert update goes through run_full_official_modality_outlet_experiment.step into control_step and expects relation_audit/alignment_audit/modality_alignment_audit. A plain SharedIdentityAxis adaptation must pass an explicit adapter to run_shared_identity_experiment.step. Otherwise it inherits the M4 stack or raises missing-attribute errors."
+    },
+    {
+      "path": "verify_rgbnt201_original_anchor.py:42-65,113-130",
+      "finding": "The current native gate establishes full-RNT private parity with original DeMo, plus invariance of the availability-aware private descriptor across seven sets before/after a real update.",
+      "limit": "It does not compare every missing descriptor with original DeMo.forward. All7 preservation must mean exact equality to the frozen E28 availability-aware reference under the same encoder path, unless the original zero-input path is separately and explicitly chosen."
+    },
+    {
+      "path": "relation_frequency_interface.py:8-40,42-109 and verify_relation_frequency_interface.py",
+      "finding": "Existing code already shows per-relation F pooling, shared PF use, identity-slot injection, a zero tail and an independent F-only state.",
+      "limit": "It inherits the older MassAxis chain, uses the original all-modal backbone forward on missing inputs, lacks the R201A original-freeze contract/partial interface, and its supplied verifier is MSVR310 split_records-based. Reuse the tensor formula after review, not this launcher/verifier as a drop-in full-official RGBNT201 experiment."
+    }
+  ],
+  "smallest_next_factor": {
+    "name": "RGBNT201 native comparison of narrow PM/PF against an internal evidence bypass",
+    "stage": "Diagnostic/native feasibility first; no full50 experiment is accepted by this finding.",
+    "only_factor_in_the_diagnostic": "At the actual routed outlet tensors, compare PM(m) and PF(f) with m+PM(m) and f+PF(f), before the same existing normalization, relation weights, scales, gates and final metric. Do not simultaneously change FFT, source routing, auxiliary tap, loss weights, public25 geometry, availability handling or sampler.",
+    "minimal_source_integration": "A small separate original-E28-anchored SharedIdentityAxis adaptation using the five-module freeze/eval and checkpoint-copy logic of original_identity_anchor, with an explicit shared_step adapter to the existing full-official frozen loop. Keep completed R201A/B sources immutable. This adaptation does not exist yet and is not code-approved here.",
+    "matched_expert_controls": [
+      "frequency_shared ordinary-frequency control",
+      "axis_shared dual-axis control"
+    ],
+    "control_matching": "The two variants already instantiate the same expert/router/calibrator/PM/PF/PI parameters. Reset seed42 and use identical source state tensors and batches for each P-only versus bypass comparison. Use the same outlet rule, frozen original weights, descriptor dimensions and all optimizer settings in both variants. Verify active gradients as well as stored parameter counts; do not claim that an unused/padded branch is active matching capacity.",
+    "smallest_actual_diagnostic": [
+      "Use full official TRAIN inventory and the native seed42 B64/P8/K8 batch; keep GT positives and junk checks on TRAIN identities/cameras. Do not create a fit/dev holdout.",
+      "Before updates, capture actual m0/f0, conditioned m1/f1, routed PM/PF input, projection output and deployed full/partial descriptors. Compare the same routed tensor x with P(x) and x+P(x), not an auxiliary unconditioned expert vector with a routed vector.",
+      "Measure normalized neighborhood/GT rank changes and cosine/norm changes before and after the outlet, plus the actual fused descriptor effect. Evaluate full and partial query against their matching full-view galleries. These are readout diagnostics, not new training losses.",
+      "Record all seven availability-aware E28 private references once and require exact private state/mode/buffer and descriptor invariance after the proposed actual update. Check full-RNT against original DeMo separately; report missing-path semantics explicitly.",
+      "After the new diagnostic/update code receives its own code review, run real updates, per-parameter finite/nonzero gradients, independent Adam replay and strict reload for the compared conditions, then required smoke before any formal50."
+    ],
+    "interpretation_limit": "A fresh expert has random new weights. Its first-batch retrieval score is an initialization diagnostic and cannot establish useful learned expertise or a dataset-wide bottleneck. Bypass preserves a direct computational path for x, not necessarily original-identity coordinates, rank order or semantic content after normalization. It also does not remove the upstream rank64 attention bottlenecks.",
+    "known_remaining_problem": "Keeping the existing public25 metric during this narrow diagnostic deliberately leaves the already observed normal-fusion problem visible. A successful bypass diagnostic does not, by itself, repair that metric or justify claiming the original normal descriptor is preserved in the full11 state."
+  },
+  "smallest_relation_coordinate_candidate_after_that_diagnostic": {
+    "not_the_same_first_factor": true,
+    "candidate": "Retain the immutable original private reference b=[g_R,g_N,g_T,r_R,...,r_RNT] and add learned corrections to its existing seven relation slots. Rank the corrected identity descriptor rather than reserving a mandatory 25 percent metric share for a newly learned public block.",
+    "minimal_tensor_formula": [
+      "V[S,b] = mean of conditioned F evidence f1 over source groups in relation S; shape Bx7x3x512.",
+      "rho[S] = sum_b pi[S,b], and F[S] = sum_b (pi[S,b]/rho[S])*V[S,b] for eligible relations, using the existing eligibility treatment.",
+      "Apply the SAME PF module independently to each F[S]; retain either the chosen P-only interface or the chosen x+P interface consistently, without introducing new projectors.",
+      "Scale normalized F[S] direction by the stopped norm of original relation slot r[S], existing alpha_F/gate_F and existing relation mass rho[S]*eligible_count; mask ineligible relations.",
+      "Add the resulting delta_F[S] to the corresponding original relation slot, alongside the existing M/I corrections if retained by the predeclared control. Keep the original base tensor untouched and available as state00.",
+      "For this identity-only retrieval candidate prefer a natural5120 descriptor in both ordinary-frequency and dual-axis controls; corresponding fused-head/result/evaluator dimension contracts must be explicitly adapted. Do not imply this is dimension-matched to completed R201A/B5632 or hide a zero tail as active capacity."
+    ],
+    "closed_states": "State01 must use independent f0, its own F-only relation/band weights and its own F-only gate; it must not read conditioned f1, full pi, M evidence, psi or I. State10 likewise uses independent m0. relation_frequency_interface.py:23-40 contains the relevant prior formula, but it needs RGBNT201/native validation under the chosen anchor and full/partial interface.",
+    "ordinary_frequency_fairness": "Give the ordinary-frequency control the same relation-coordinate outlet, scales, heads, dimension and number of active trainable tensors. Preserve its intended unstructured access to all available frequency values; do not describe its merged group slots as physical-source-specific. Do not keep ordinary frequency confined to the old public tail while allowing only dual-axis to modify identity slots.",
+    "coupled_changes_that_must_be_disclosed": [
+      "Relation-specific F pooling must replace the current global Bx512 F collapse; this is required by per-relation injection and cannot be implemented by reshaping the collapsed tensor.",
+      "Moving F from the public tail into existing identity slots changes the retrieval geometry. Removing mandatory public25 normalization changes state00 relative to the old fused5632 interface.",
+      "A natural5120 output changes the fused neck/classifier and hardcoded descriptor-size metadata in the reused5632 runner/evaluator/native checks. These are real current contracts, not speculative compatibility concerns.",
+      "Original E28 has no shared/expert/router/calibrator/fused-head state. These tensors require declared matched initialization; transplanting R201A/B shared heads or MSVR expert heads would change the factor and lineage.",
+      "Starting any expert model from E28 is a new common expert baseline relative to R201B. Comparisons among equally initialized paired controls can isolate the outlet choice; R201B versus a combined new expert/metric/outlet model cannot be called a pure bypass or pure frequency factor."
+    ],
+    "scope": "Concrete source-based design direction only. It is a separate outlet experiment after the first diagnostic, not an accepted implementation or automatic authorization to combine several factors in one claimed ablation."
+  },
+  "blocking_design_issues_before_formal_R201C": [
+    {
+      "issue": "No current entry point satisfies original E28 protection plus the expert pair.",
+      "evidence": "original_identity_anchor.build only constructs demo_shared and rejects expert-added keys; frozen_identity_anchor_axis.build requires a demo_shared5632 anchor and M4 losses.",
+      "smallest_resolution": "Implement and review a small experiment-specific original-E28 expert adapter, retaining the original five-module state/eval contract and passing the plain shared_step adapter explicitly."
+    },
+    {
+      "issue": "Protection and initialization must be named precisely.",
+      "evidence": "Current residual scales are [.1,.05,.05], projection final weights use std.001, and outputs are normalized before anchor scaling. Small final-layer weight magnitude does not imply a vanishing residual. P-only and x+P have identical parameters but different initial outputs.",
+      "smallest_resolution": "Require exact frozen base00, not initial full11 equality. Retain matched existing nonzero initialization for the narrow diagnostic and report the initial descriptor perturbation. Setting outer scales or final layers to zero to force full11 equality changes initialization and can zero task gradients to earlier expert/router/projection tensors, conflicting with current all-active-gradient gates; do not silently do that or waive the gate."
+    },
+    {
+      "issue": "The learned expert basis is not proven to be the original identity basis.",
+      "evidence": "PM/PF inputs are learned512D expert outputs with their own rank64 attention/output maps; equal width alone does not establish coordinate alignment. R201A/B never trained or measured these expert tensors.",
+      "smallest_resolution": "Perform the actual RGBNT201 routed-input/projection/deployed-output diagnostic. Treat an identity bypass as a hypothesis about preserving supplied evidence, not as a guaranteed identity-coordinate correction or a transferred MSVR conclusion."
+    },
+    {
+      "issue": "Combining bypass, relation-specific F, new metric mass and new anchor initialization would prevent a single-factor conclusion.",
+      "evidence": "These modify distinct current code paths and descriptors; old SharedIdentityAxis also gives ordinary-frequency and dual-axis different private/public outlet behavior.",
+      "smallest_resolution": "Run the bounded PM/PF diagnostic first. If proceeding to a relation-coordinate metric, declare the common repaired interface for both expert controls, then isolate one subsequent outlet choice in matched controls. Do not use old R201B or old ordinary-frequency results as a same-interface ablation."
+    }
+  ],
+  "no_new_loss_or_search_recommendation": {
+    "ranking_stack": "Do not append R201B smooth-AP to an inherited M4/M6/M8 alignment/public-CE stack in this interface diagnostic.",
+    "unchanged": [
+      "existing FFT",
+      "number of experts",
+      "routing mechanism",
+      "PK sampler",
+      "seed42",
+      "entire3951 training and836 query/gallery",
+      "physical2026 GPU2/3 only",
+      "no power/temperature controls"
+    ],
+    "new_controls": "Use identical predeclared existing base-expert full/partial losses across the new matched expert controls. The introduction of expert auxiliary heads versus R201B is common setup, not evidence for the bypass factor."
+  },
+  "actions_this_followup": {
+    "local_source_and_artifact_reads": true,
+    "stdlib_JSON_CSV_arithmetic": true,
+    "project_imports_or_source_execution": false,
+    "NN_calls": 0,
+    "SSH_calls": 0,
+    "launches": 0,
+    "server_audits": 0,
+    "source_edits": false,
+    "deletions": false,
+    "root_document_or_publication_edits": false,
+    "only_written_artifact": "results/preflight/rgbnt201_r201c_interface_source_findings_20261005.json"
+  },
+  "acceptance_limit": "SOURCE_DESIGN_FINDINGS_ONLY_NOT_CODE_ACCEPTANCE. Same reviewer context, same-family provisional, actual backend/model/effort UNATTESTED. No new code has been implemented or accepted. Any new implementation still needs its independent code check and actual RGBNT201 native/gradient/Adam-replay/strict-reload/smoke gates before full50; completed R201B evidence does not discharge those gates or the unavailable extra fresh semantic audit."
+}
