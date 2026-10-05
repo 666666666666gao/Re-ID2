@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-05T11:51:00",
+  "updated_at": "2026-10-05T12:27:43",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -3134,6 +3134,133 @@
           "amp_skipped_steps": 0
         }
       ]
+    },
+    "RGBNT201_primary_cpu_diagnosis": {
+      "status": "ACTUAL_CPU_RGBNT201_FOUR_OUTLETS_COMPLETE_EXIT0_ALL9_TEXT_FILES_VERIFIED",
+      "observed_at": "2026-10-05T12:27:43",
+      "native_session": 19615,
+      "exit_code": 0,
+      "source_review": "results/preflight/rgbnt201_baseline_blocks_source_review_20261005.json",
+      "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt201_baseline_blocks_p0_20261005",
+      "local": "results\\rgbnt201_baseline_blocks_p0_20261005",
+      "files_sha256": {
+        "shared_fused.json": "4f35c74b2dc7523dd4dc81d78e1230bd36ea9768494428c2cfe71d3d73f22595",
+        "shared_private_only.json": "0a1c8d1afe176871d345f3ce4fcd13a419ffc0ae6b7a2cf809164f28ad481c06",
+        "shared_fused.csv": "c8c8196ac9a677b2058748b47ab64068628b47a9db7cb6683e4099af7fde13e4",
+        "original_DeMo.json": "5e4bccd57d92e1e1a01e0773a383399410c8588c1f6e8d333a7283af2ee643f1",
+        "shared_public_only.csv": "3f5be5b37aa1c35e750271de9150560397047dae26c09ad4eacd66c93096f706",
+        "shared_public_only.json": "8277e83094da06b7f0cfdcaa30bbb3441cf91ea1a776d63fe045d43a28914495",
+        "result.json": "ae6769f3025fce77e65984983ef1c6c378b032d0ed53ecd48acf80fbdd58543d",
+        "original_DeMo.csv": "e80a8eda0a4ec504772211dd8d992d0a8ad76b873f3efe190e32b2692a86665d",
+        "shared_private_only.csv": "266d2c5879c9617b6b8d11aa1f3e43044518125e0266f83494a0af88c431cb68"
+      },
+      "full_split_counts": {
+        "train": 3951,
+        "query": 836,
+        "gallery": 836
+      },
+      "neural_inference_calls": 0,
+      "optimizer_updates": 0,
+      "raw_distance_files": 0,
+      "new_weight_files": 0,
+      "normal_metrics": {
+        "original_DeMo": {
+          "mAP": 75.67457499232746,
+          "mINP": 62.57709224977215,
+          "Rank-1": 80.622009569378,
+          "Rank-5": 89.23444976076556,
+          "Rank-10": 93.77990430622009,
+          "Rank-20": 94.97607655502392
+        },
+        "shared_fused": {
+          "mAP": 71.46071340069632,
+          "mINP": 62.24946139097525,
+          "Rank-1": 71.65071770334929,
+          "Rank-5": 80.98086124401914,
+          "Rank-10": 86.72248803827752,
+          "Rank-20": 93.89952153110048
+        },
+        "shared_private_only": {
+          "mAP": 73.63261004355425,
+          "mINP": 63.14392992187814,
+          "Rank-1": 73.92344497607655,
+          "Rank-5": 82.77511961722487,
+          "Rank-10": 88.1578947368421,
+          "Rank-20": 93.77990430622009
+        },
+        "shared_public_only": {
+          "mAP": 56.7334219170707,
+          "mINP": 45.76986312607294,
+          "Rank-1": 57.17703349282297,
+          "Rank-5": 69.85645933014354,
+          "Rank-10": 75.95693779904306,
+          "Rank-20": 84.92822966507177
+        }
+      },
+      "comparisons": {
+        "shared_fused_minus_original_DeMo": {
+          "delta_pp": {
+            "mAP": -4.213861591631144,
+            "mINP": -0.32763085879690124,
+            "Rank-1": -8.971291866028707,
+            "Rank-5": -8.253588516746419,
+            "Rank-10": -7.057416267942571,
+            "Rank-20": -1.0765550239234472
+          },
+          "Rank1_harm_queries": 109,
+          "Rank1_rescue_queries": 34,
+          "AP_improved_queries": 266,
+          "AP_worsened_queries": 370,
+          "valid_queries": 836
+        },
+        "shared_private_only_minus_original_DeMo": {
+          "delta_pp": {
+            "mAP": -2.041964948773213,
+            "mINP": 0.56683767210599,
+            "Rank-1": -6.698564593301441,
+            "Rank-5": -6.459330143540683,
+            "Rank-10": -5.622009569377994,
+            "Rank-20": -1.1961722488038333
+          },
+          "Rank1_harm_queries": 102,
+          "Rank1_rescue_queries": 46,
+          "AP_improved_queries": 283,
+          "AP_worsened_queries": 358,
+          "valid_queries": 836
+        },
+        "shared_public_only_minus_original_DeMo": {
+          "delta_pp": {
+            "mAP": -18.941153075256764,
+            "mINP": -16.80722912369921,
+            "Rank-1": -23.444976076555022,
+            "Rank-5": -19.37799043062202,
+            "Rank-10": -17.82296650717703,
+            "Rank-20": -10.047846889952154
+          },
+          "Rank1_harm_queries": 220,
+          "Rank1_rescue_queries": 24,
+          "AP_improved_queries": 153,
+          "AP_worsened_queries": 581,
+          "valid_queries": 836
+        },
+        "shared_fused_minus_shared_private_only": {
+          "delta_pp": {
+            "mAP": -2.1718966428579307,
+            "mINP": -0.8944685309028912,
+            "Rank-1": -2.2727272727272663,
+            "Rank-5": -1.7942583732057358,
+            "Rank-10": -1.4354066985645773,
+            "Rank-20": 0.11961722488038617
+          },
+          "Rank1_harm_queries": 35,
+          "Rank1_rescue_queries": 16,
+          "AP_improved_queries": 253,
+          "AP_worsened_queries": 336,
+          "valid_queries": 836
+        }
+      },
+      "scope": "Four fixed descriptors, entire official normal query/gallery and installed same-ID/same-camera exclusion. Existing full49 results remain separate; no new missing feature banks or weight tuning.",
+      "limits": "Single-seed benchmark-selected baselines. Private/public block ablation diagnoses the selected shared checkpoint, not retraining, causal attribution, or a new best method. No new weights or raw distance files."
     }
   },
   "decision_rules": [
@@ -3159,10 +3286,21 @@
     }
   ],
   "next_action": {
-    "milestone": "COMPLETE_M8_FIXED_ACTUAL_PUBLIC_CE_THREE_CONTROL50_AND_ALL49_UTILITY",
-    "status": "TWO_M8_FULL50_ACTIVE_ONE_QUEUED_ONLY2026GPU2_3",
-    "action": "保持原M8 controller811717/native52604：GPU2双轴、GPU3普通频域→普通双专家；三项各50轮/705真实更新，完整1032/591/1055/0人工留出，固定best后147冻结/882六状态GT核查，逐份raw本地大小SHA确认后清理远端。传输期间继续独立准备和诊断，不重复启动或改运行源码。对照各自M7父版本、同容量普通专家、原DeMo及身份参照，验证真实正11−00和有符号缺失分组。原三数据集各+2/公平缺失/协作/多种子目标不变。",
-    "hardware_dependency": "Only2026GPU2/3,max2NN,serial/card,no temperature/powerconditions"
+    "milestone": "RGBNT201_STRONG_REFERENCE_DIAGNOSIS_AND_SINGLE_FACTOR_IMPROVEMENT",
+    "status": "RGBNT201_PRIMARY_CPU_DIAGNOSIS_COMPLETE_NEXT_SINGLE_FACTOR_NOT_STARTED",
+    "action": "First prepare a matched original-DeMo-initialized RGBNT201 comparison: the existing shared outlet with original identity encoder frozen versus allowed to update, identical new heads/seed/full50/new optimizer/augmentation/checkpoint rule. This isolates reference drift before stacking new expert mechanisms. It is a staged training diagnosis, not a novel dual-axis method or a total50-budget comparison to the completed baseline. Fresh source review and real native preflight required before launching; no new RGBNT201 full50 source/queue is running yet. Introduce axis/frequency/twins only after the protected outlet proves useful relative to the original reference; ordinary controls remain mandatory for any method claim.",
+    "hardware_dependency": {
+      "host": "2026",
+      "physical_gpus": [
+        2,
+        3
+      ],
+      "max_parallel_neural_jobs": 2,
+      "serial_per_card": true,
+      "first_lane": "GPU2 after its existing M8 NN phases actually close exit0 and native checks pass; unrelated transfers and GPU3 M8 queue are not a global barrier",
+      "temperature_power_control": false
+    },
+    "existing_M8_closeout": "Native52604/controller811717 unchanged; two completed50 trainings; frozen49/state audit and third scheduled control remain to close."
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
   "user_resumption": {
@@ -3178,5 +3316,28 @@
     "historical_fit_dev_evidence": "Retained, distinct protocol, not official full-data acceptance",
     "official_checkpoint_selection_disclosed": true
   },
-  "archive_overlap_policy": "用户明确要求：本地距离文件传输期间同时准备并推进独立实验；GPU空闲且实际门禁通过就启动，不把传输完成作为无关实验的前置条件。现有队列维持2026物理GPU2/3、每卡串行、最多2NN；不重复启动或修改运行中的控制器。raw仍须本地大小/SHA核验后再清理远端。"
+  "archive_overlap_policy": "用户明确要求：本地距离文件传输期间同时准备并推进独立实验；GPU空闲且实际门禁通过就启动，不把传输完成作为无关实验的前置条件。现有队列维持2026物理GPU2/3、每卡串行、最多2NN；不重复启动或修改运行中的控制器。raw仍须本地大小/SHA核验后再清理远端。",
+  "dataset_priority": {
+    "updated_at": "2026-10-05T12:19:58",
+    "user_instruction": "先主要看RGBNT201数据集，优先提升这个数据集的指标",
+    "primary": "RGBNT201",
+    "secondary": [
+      "RGBNT100",
+      "MSVR310"
+    ],
+    "acceptance_changed": false,
+    "strong_original_baseline": {
+      "mAP": 75.67457499232746,
+      "mINP": 62.57709224977215,
+      "Rank-1": 80.622009569378,
+      "Rank-5": 89.23444976076556,
+      "Rank-10": 93.77990430622009,
+      "Rank-20": 94.97607655502392
+    },
+    "normal_targets": {
+      "mAP": 77.67457499232746,
+      "Rank-1": 82.622009569378
+    },
+    "plan": "results/preflight/rgbnt201_priority_plan_20261005.json"
+  }
 }

@@ -1,0 +1,129 @@
+{
+  "review_date": "2026-10-05",
+  "review_scope": "SOURCE_ONLY",
+  "verdict": "PASS",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "requested_backend": "Codex",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "max",
+  "actual_backend": "UNATTESTED",
+  "actual_model": "UNATTESTED",
+  "actual_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer_context": "Fresh delegated source reviewer; source artifacts read directly. Requested routing is not treated as actual backend/model/effort attestation.",
+  "source": {
+    "path": "diagnose_rgbnt201_baseline_blocks.py",
+    "sha256": "545551ea240e4fec18a1c9ce668afad3b7abd4bd6823dcfbed5f23012469cc15",
+    "reviewed_lines": "1-99"
+  },
+  "direct_dependencies": [
+    {
+      "path": "full_evaluation.py",
+      "sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+      "reviewed_functions": ["full_metrics", "distance", "official_records", "extract"]
+    },
+    {
+      "path": "official_training_data.py",
+      "sha256": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+      "reviewed_functions": ["full_records", "metadata", "name"]
+    },
+    {
+      "path": "run_experiment.py",
+      "sha256": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+      "reviewed_functions": ["write_json"],
+      "additional_scope": "Imports and guarded entrypoint inspected. Model construction and training functions are not called by the diagnostic."
+    }
+  ],
+  "supporting_sources": [
+    {
+      "path": "run_full_official_experiment.py",
+      "sha256": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
+      "reviewed_scope": "Baseline builder, feature/NPZ producer, four CPU threads, 50-epoch selection and terminal result creation."
+    },
+    {
+      "path": "shared_identity_axis.py",
+      "sha256": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+      "reviewed_scope": "COMMON_WEIGHT, metric_descriptor, encode_available, SharedIdentityDeMo output layout."
+    },
+    {
+      "path": "run_shared_identity_experiment.py",
+      "sha256": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+      "reviewed_scope": "Builder mapping demo_shared to SharedIdentityDeMo."
+    },
+    {
+      "path": "experiment_data.py",
+      "sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+      "reviewed_scope": "source_records and distinction from unused split_records/holdout path."
+    },
+    {
+      "path": "data/datasets/RGBNT201.py",
+      "sha256": "1a3dda88f26efc2891322e2726c4f3591bfd0c040cdf5c717d0aabc55f349272",
+      "reviewed_scope": "Official train_171/test paths and identity/camera parsing."
+    },
+    {
+      "path": "utils/reid_evaluation.py",
+      "sha256": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+      "reviewed_scope": "evaluate_reid: stable ranking, same-ID/same-camera exclusion, AP and CMC through rank 50."
+    }
+  ],
+  "checks": [
+    {
+      "requirement": "Use only the two completed full-official RGBNT201 seed42 baselines",
+      "status": "PASS_SOURCE",
+      "evidence": "Diagnostic lines 27-45 require COMPLETE, 50 epochs, correct dataset/variant, seed42, zero heldout identities, 2647 optimizer steps, zero AMP skips, descriptor dimensions 5120/5632 and parent exit_code 0. They load only the selected best_official_arrays.npz and verify installed 3951/836/836 records, manifest and all query/gallery metadata."
+    },
+    {
+      "requirement": "Reproduce saved original and shared-fused distances and six metrics",
+      "status": "PASS_SOURCE",
+      "evidence": "Lines 58-69 preserve full saved descriptors, reuse the producer's CPU distance function with four threads, require exact saved distance equality and require all six metrics to match recorded best within 1e-8. The producer saves CPU descriptors after full-vector normalization."
+    },
+    {
+      "requirement": "Evaluate private5120 and public512 individually with L2 normalization",
+      "status": "PASS_SOURCE",
+      "evidence": "SharedIdentityDeMo returns metric_descriptor(base), whose first 5120 and last 512 coordinates are the respective normalized private/public blocks weighted by sqrt(0.75) and sqrt(0.25). Diagnostic lines 52-60 select those exact blocks and normalize each row before distance computation."
+    },
+    {
+      "requirement": "Full official same-ID/same-camera GT, six metrics, CMC50, every query and groups",
+      "status": "PASS_SOURCE",
+      "evidence": "Lines 65-67 use verified query/gallery IDs and cameras as the exclusion labels. full_metrics excludes only matching ID and camera, computes AP/INP and Rank1/5/10/20, cross-checks evaluate_reid, emits CMC1..50 and camera/scene/identity groups, and writes every query including invalid-query indicators."
+    },
+    {
+      "requirement": "Signed comparisons and harm/rescue",
+      "status": "PASS_SOURCE",
+      "evidence": "Lines 74-86 align 836 rows by name, identity and validity; delta_pp is left minus right, harm counts left Rank1 below right and rescue counts above. AP improved/worsened counts use the same signed direction and common valid-query set."
+    },
+    {
+      "requirement": "CPU-only normal-input diagnostic, no training, NN inference, new raw distances/checkpoints or tuning sweep",
+      "status": "PASS_SOURCE",
+      "evidence": "The reachable diagnostic path constructs CPU tensors from saved NumPy arrays and calls only metadata enumeration, normalization, distance/scoring and JSON/CSV I/O. It does not construct/load a model, invoke extract/build/training, save NPZ/weights, or launch/change jobs. Output explicitly keeps existing full49 results separate and describes selected-checkpoint block ablation without causal or new-method claims."
+    }
+  ],
+  "archived_inputs_read_only": {
+    "root": "results/full_official_baselines_20261004/training",
+    "files": [
+      "RGBNT201_demo_s42/result.json",
+      "RGBNT201_demo_s42_exit.json",
+      "RGBNT201_demo_shared_s42/result.json",
+      "RGBNT201_demo_shared_s42_exit.json"
+    ],
+    "observed": {
+      "demo": {"selected_epoch": 28, "descriptor_dim": 5120, "epochs": 50, "optimizer_steps": 2647, "amp_skipped_steps": 0, "training_visited": 3951, "training_unvisited": 0, "exit_code": 0},
+      "demo_shared": {"selected_epoch": 8, "descriptor_dim": 5632, "epochs": 50, "optimizer_steps": 2647, "amp_skipped_steps": 0, "training_visited": 3951, "training_unvisited": 0, "exit_code": 0}
+    },
+    "qualification": "Existing archived JSON evidence only; no new training, NPZ parity execution or scientific result was produced by this review."
+  },
+  "review_actions": {
+    "source_inspection": "PERFORMED",
+    "source_sha256_read": "PERFORMED",
+    "ast_parse": "NOT_PERFORMED: optional local python -B invocation failed to start with 'No pyvenv.cfg file'; no source execution occurred",
+    "diagnostic_execution": "NOT_RUN",
+    "remote_actions": "NONE",
+    "training_or_inference": "NONE",
+    "source_edits": "NONE",
+    "only_written_artifact": "results/preflight/rgbnt201_baseline_blocks_source_review_20261005.json"
+  },
+  "execution_boundary": "Intended CPU execution uses CUDA_VISIBLE_DEVICES empty. That launch environment, installed-dataset/NPZ checks, exact distance parity and resulting block metrics require actual execution and are not attested by this source review. Existing M8 GPU2/3 jobs were not queried or changed.",
+  "acceptance_limit": "SOURCE_ONLY PASS means no concrete source logic defect was found within the supplied plan. It is not actual execution, an installed-data audit, scientific success, or a newly recomputed 49-condition evaluation."
+}
