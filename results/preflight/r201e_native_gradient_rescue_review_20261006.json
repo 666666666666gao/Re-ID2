@@ -1,0 +1,203 @@
+{
+  "status": "PASS",
+  "review_scope": "SOURCE_ONLY_ZERO_UPDATE_PROBE_AND_RESCUE_DIAGNOSIS",
+  "reviewed_at": "2026-10-06T09:27:41.496705+08:00",
+  "workflow": "experiment-bridge RESCUE_ON_FAILURE second opinion after actual R201E native failure",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_backend": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "attestation_note": "Requested routing is not proof of actual backend/model/effort. This reviewer has no runtime attestation.",
+  "summary": "The current one-forward, zero-optimizer probe is source-correct for comparing AP feature derivatives under the two autocast contexts on the same ordinary-control first batch and loss graph. No source blocker to that bounded probe was found. Original native failure remains unresolved; this PASS is not a repaired-native, formal-training or retrieval-effectiveness PASS. The five original R201E sources remain byte-identical to the initial reviewed failure version.",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "probe_source_sha256": "d0ad08950589f3e0c40682f358deaab99684e6fab092132a6e2765ecf4b8906a",
+  "probe_source_status": "PASS",
+  "actual_failure_evidence": {
+    "original_session": 71177,
+    "receiver_exit_code": 1,
+    "native_exit_codes": {
+      "frequency_shared": 1,
+      "axis_shared": 1
+    },
+    "innermost_failure": "run_r201e_list_objective.py:47: assert torch.isfinite(gradient).all() and gradient.abs().sum() > 0",
+    "primary_logs": [
+      {
+        "path": "results/r201e_list_objective_native_failed_20261006/native/RGBNT201_r201e_frequency_shared_s42_smoke.log",
+        "sha256": "eb84c6c06964880a1a08b71ebdc7ad3e7d98c7741d09d5bb71f4ce88ef2e4a8e",
+        "innermost_failure_lines": "27-29"
+      },
+      {
+        "path": "results/r201e_list_objective_native_failed_20261006/native/RGBNT201_r201e_axis_shared_s42_smoke.log",
+        "sha256": "eb84c6c06964880a1a08b71ebdc7ad3e7d98c7741d09d5bb71f4ce88ef2e4a8e",
+        "innermost_failure_lines": "27-29"
+      }
+    ],
+    "cpu_fixture": "Existing cpu_fixture.json records PASS_CPU_LIST_VALUE_GRADIENT_AND_PERMUTATION; value_error=0, gradient_error=1.862645149230957e-09, permutation_error=0, gradient_l1=0.9272656440734863. Not rerun by this reviewer.",
+    "process_absence": "Existing r201e_list_objective_failed_native_actual_20261006.json records no ps rows for controller3632081 and native3632457/3632458. Reviewer performed no live process check.",
+    "formal_training_started": false,
+    "weights_recorded": [],
+    "completed_native_optimizer_updates": null,
+    "native_update_count_status": "UNKNOWN: no completed smoke details were written; lack of details does not establish zero prior updates.",
+    "failure_batch_index": null,
+    "batch_index_limit": "run_full_official_frozen_anchor_experiment.py:99-127 stores details in memory and writes them only after success. The traceback does not identify which smoke iteration failed. A first-batch probe must not be called a proven replay of the failing batch before it reproduces the failure.",
+    "runtime_torch_from_run_json": "2.5.1+cu121"
+  },
+  "diagnosis": {
+    "established_from_source": [
+      "run_shared_identity_experiment.py:39-47 invokes the R201E loss closure inside torch.autocast(cuda). smooth_ap disables autocast and casts to float for its entire forward at list_retrieval_objective.py:14-30. Returning to run_r201e_list_objective.py:46 restores the outer enabled context for this unscaled autograd.grad diagnostic.",
+      "The actual full-loss scaled backward is outside that context at run_shared_identity_experiment.py:48-50; the partial backward and single optimizer step remain at lines54-64. The diagnostic therefore uses a different autocast context from the eventual training backward. This difference is real; it is not evidence that a particular backward kernel actually underflowed.",
+      "The differentiated feature is the first returned fused descriptor at rgbnt201_identity_outlet.py:89,106. Its fuse computes in disabled autocast, converts operands to float and returns F.normalize(private) at lines31-53. Thus the current feature and the SmoothAP forward are FP32 by source. An enabled surrounding context alone does not establish that the returned gradient, or every backward operation, was FP16.",
+      "The SmoothAP graph remains connected through normalization, cosine products, score differences, sigmoid and ratios. The existing CPU check exercises one random value/gradient case and separated/tied loss values; it does not establish a nonzero derivative on the real pretrained native batch.",
+      "Only the primary full-view metric term changes relative to R201C narrow/unit; .25 CE, AP coefficient1, temperature.01, auxiliary losses, partial losses, targets, routes, frozen anchor and model/budget remain unchanged in the five verified sources."
+    ],
+    "source_supported_hypotheses_not_runtime_findings": [
+      "The diagnostic autocast context can be tested as a precision confound. FP32 forward computation does not justify assuming that running autograd.grad under enabled autocast is equivalent to the real outside-autocast backward. Whether this produces underflow or another numerical change in this environment is UNKNOWN until the paired probe is run.",
+      "A small-temperature ranking objective on this actual feature geometry can have a numerically zero or very small derivative. The existing fixture reports perfect_loss=0 for separated features, but the failed native logs report neither AP loss nor margins nor any gradient statistics. Actual saturation, cancellation, nonfinite values, and their relative contribution remain UNKNOWN."
+    ],
+    "not_established": [
+      "Whether the failed assertion was caused by a nonfinite element or finite all-zero gradient.",
+      "Whether autocast caused the failure, whether FP32 rescues it, or whether the AP objective is numerically saturated on the failing batch.",
+      "Whether the first ordinary-control batch is the failing batch; whether the axis-control diagnosis is identical.",
+      "Whether any native optimizer update completed before the assertion; formal training did not start according to the preserved intake.",
+      "Any retrieval gain, global absence of useful learning signal, stability, all-active parameter gradient success or mathematical zero-gradient claim."
+    ]
+  },
+  "probe_source_checks": [
+    {
+      "check": "same_model_data_initialization_and_first_smoke_batch",
+      "result": "PASS_SOURCE_NOT_EXECUTED",
+      "evidence": [
+        "probe_list_gradient_precision.py:20-29 selects RGBNT201/frequency_shared/seed42/frozen encoder/smoke, calls the same configuration, full_records and R201E build, then seed_all(42), model.train(), and the same make_loader(...,True,42). These last two operations now match native runner lines99-102.",
+        "configuration at run_experiment.py:31-40 preserves the RGBNT201 config, B64 and four workers; official_training_data.py:20-32 uses the whole official training split. coordinate build at identity_coordinate_three_dataset.py:19-48 loads the same original selected anchor and constructs the same fresh heads, strict state, and train mode.",
+        "experiment_data.py:88-93 uses the unchanged P8K8 sampler and explicit generator seed42; data/datasets/sampler.py:38-64 supplies the identity batches. Re-seeding after model construction matches the native sampling and worker-augmentation setup. The optimizer/loss construction omitted by the probe happens before that reseed in native and performs no optimizer step.",
+        "Native failing-batch identity is absent from the old logs. This establishes intended first-batch equivalence by source, not observed tensor equality with an archived failed forward."
+      ]
+    },
+    {
+      "check": "same_graph_context_comparison",
+      "result": "PASS_SOURCE_NOT_EXECUTED",
+      "evidence": [
+        "probe_list_gradient_precision.py:33-39 executes one model full-view forward and one smooth_ap call. It requests both derivatives of the same scalar loss with respect to the same output[1] tensor, uses retain_graph=True, and changes only the autocast context between requests. No detach/recreated leaf/recomputed forward changes the tested graph.",
+        "The disabled context does not rerun the backbone in FP32. It compares backward contexts on the existing mixed-precision model forward followed by the FP32 AP computation. This is exactly the relevant diagnostic distinction.",
+        "No optimizer is constructed or stepped; there is no model checkpoint write, parameter-gradient accumulation via backward, partial forward, training loop or native/formal acceptance claim. The train-mode forward can update in-memory BatchNorm buffers; those are not persisted."
+      ]
+    },
+    {
+      "check": "statistics_and_interpretation",
+      "result": "PASS_SOURCE_NOT_EXECUTED",
+      "evidence": [
+        "probe_list_gradient_precision.py:47-56 records finite/l1/maximum/dtype/nonzero for both gradients, maximum difference, primary AP loss, actual unit-descriptor feature_dtype, identity counts, all per-query positive counts, names, and min/mean/max margins.",
+        "Lines40-46 recompute normalized FP32 cosine scores for reporting only. Positives include same-ID other samples and exclude the diagonal; negatives exclude the same identity. The margin is min positive similarity minus max negative similarity per query. It is a separation diagnostic, not proof of sigmoid saturation.",
+        "A loss rounded to zero is not itself proof of zero derivative. If both recorded derivatives are zero, the probe establishes numerical zero at this feature in the deployed FP32 implementation, not an identically zero mathematical objective. If both are nonzero, the first-batch assertion failure was not reproduced."
+      ]
+    }
+  ],
+  "runtime_result_interpretation": [
+    {
+      "observation": "AMP gradient fails finite/nonzero, disabled-context FP32 gradient is finite and nonzero on the same loss graph",
+      "conclusion": "The surrounding diagnostic context changes the result and explains this reproduced assertion failure for this sample. Report measured values; do not automatically label a nonfinite case as underflow.",
+      "minimal_followup": "Change only the smoke diagnostic autograd.grad call to execute inside with torch.autocast(cuda, enabled=False); retain the finite/nonzero assertion and the original loss graph. Then perform fresh source review and the required real native sanity for both controls before any formal run."
+    },
+    {
+      "observation": "Both gradients are finite and all zero",
+      "conclusion": "Disabling autocast does not restore the current FP32 AP feature derivative. Saturation/cancellation/feature geometry remain possible; the mathematical cause is not uniquely established by margins alone.",
+      "minimal_followup": "Keep native acceptance failed. Preserve the numbers and investigate the actual numerical objective on this evidence; do not relax the gate, add a fallback, change temperature or substitute another objective to manufacture acceptance."
+    },
+    {
+      "observation": "Both gradients are finite and nonzero",
+      "conclusion": "The first ordinary-control batch did not reproduce the old assertion failure. A small numerical difference alone does not establish the original failure cause.",
+      "minimal_followup": "Do not claim root-cause resolution or resume unchanged formal training from this result; identify the original failing smoke iteration with bounded diagnostic evidence if further work is needed."
+    },
+    {
+      "observation": "Disabled-context gradient is nonfinite",
+      "conclusion": "The failure is not cured by the diagnostic context change; actual loss/feature/gradient values are needed to localize the numerical defect.",
+      "minimal_followup": "Keep the sanity barrier failed and use the saved statistics. No speculative compatibility layer, try/except, loss replacement or temperature sweep is justified."
+    }
+  ],
+  "probe_execution_scope": {
+    "approved_by_source_review": "One ordinary-control full-view B64 first-batch forward; two feature-gradient calculations; zero optimizer updates.",
+    "required_invocation_environment": "Use the same remote tri_reid environment, data, pretrained and selected anchor paths from the preserved native launch record, with CUDA_VISIBLE_DEVICES=2 set by the caller. The probe itself does not select a physical GPU.",
+    "formal_training_authorized_by_this_PASS": false,
+    "both_native_three_update_gate_still_required": true,
+    "source_acceptance_not_runtime_result": true
+  },
+  "existing_source_verification": {
+    "new_source_count": 5,
+    "new_sources": [
+      {
+        "path": "list_retrieval_objective.py",
+        "actual_sha256": "1bed66d6359c820eb714a176dae8e3c920b456e24004a8cd03948673d7f12610",
+        "plan_sha256": "1bed66d6359c820eb714a176dae8e3c920b456e24004a8cd03948673d7f12610",
+        "first_review_sha256": "1bed66d6359c820eb714a176dae8e3c920b456e24004a8cd03948673d7f12610",
+        "matches_plan_and_first_review": true
+      },
+      {
+        "path": "run_r201e_list_objective.py",
+        "actual_sha256": "4b1b4dd3171e42a036975b91ec8d1f6ce21c2a68fdfbba22c43eae2490709dbb",
+        "plan_sha256": "4b1b4dd3171e42a036975b91ec8d1f6ce21c2a68fdfbba22c43eae2490709dbb",
+        "first_review_sha256": "4b1b4dd3171e42a036975b91ec8d1f6ce21c2a68fdfbba22c43eae2490709dbb",
+        "matches_plan_and_first_review": true
+      },
+      {
+        "path": "check_list_retrieval_objective.py",
+        "actual_sha256": "e9a06dfd715dd57022b67c4652c7e7adce1511c2b4407ea72a77be99cbb3cc1e",
+        "plan_sha256": "e9a06dfd715dd57022b67c4652c7e7adce1511c2b4407ea72a77be99cbb3cc1e",
+        "first_review_sha256": "e9a06dfd715dd57022b67c4652c7e7adce1511c2b4407ea72a77be99cbb3cc1e",
+        "matches_plan_and_first_review": true
+      },
+      {
+        "path": "launch_r201e_list_objective.py",
+        "actual_sha256": "57b1cf775b69e260b8b1ed5d54002afd83b47847a3e9af6052d7b851c2bb38c0",
+        "plan_sha256": "57b1cf775b69e260b8b1ed5d54002afd83b47847a3e9af6052d7b851c2bb38c0",
+        "first_review_sha256": "57b1cf775b69e260b8b1ed5d54002afd83b47847a3e9af6052d7b851c2bb38c0",
+        "matches_plan_and_first_review": true
+      },
+      {
+        "path": "results/preflight/r201e_list_objective_deploy_20261006.py",
+        "actual_sha256": "a9bddbfababdc169707bf875e042ab156128ac7b7907d58eb85a9fd8028dcd58",
+        "plan_sha256": "a9bddbfababdc169707bf875e042ab156128ac7b7907d58eb85a9fd8028dcd58",
+        "first_review_sha256": "a9bddbfababdc169707bf875e042ab156128ac7b7907d58eb85a9fd8028dcd58",
+        "matches_plan_and_first_review": true
+      }
+    ],
+    "reused_source_count": 49,
+    "reused_vs_plan_hash_mismatches": [],
+    "ast_files_checked": [
+      "probe_list_gradient_precision.py",
+      "list_retrieval_objective.py",
+      "run_r201e_list_objective.py",
+      "check_list_retrieval_objective.py",
+      "launch_r201e_list_objective.py",
+      "results/preflight/r201e_list_objective_deploy_20261006.py"
+    ],
+    "ast_result": "PASS",
+    "first_review_path": "results/preflight/r201e_list_objective_source_review_20261006.json",
+    "first_review_preserved_sha256": "dcccd8fc609e28d6194c31a7f1479f64580bed53e3c9507c606ce646f885472f",
+    "old_source_PASS_and_failed_logs_modified": false
+  },
+  "primary_external_reference": {
+    "title": "PyTorch v2.5.1 autocast source documentation",
+    "url": "https://raw.githubusercontent.com/pytorch/pytorch/v2.5.1/torch/amp/autocast_mode.py",
+    "support": "Its autocast class documentation recommends limiting autocast to forward/loss and placing backward after leaving the context. This supports aligning the diagnostic with the real backward context; it does not prove an underflow in these native runs.",
+    "scope": "Read-only public documentation; runtime torch version2.5.1+cu121 is recorded in the native run.json. No external model was invoked."
+  },
+  "actions_this_review": {
+    "local_source_and_existing_text_reads": true,
+    "stdlib_AST_and_existing_hash_checks": true,
+    "project_modules_imported": false,
+    "NN_calls": 0,
+    "SSH_calls": 0,
+    "probe_runs": 0,
+    "fixture_runs": 0,
+    "training_runs": 0,
+    "installs": 0,
+    "source_edits_by_reviewer": false,
+    "personal_MEMORY_read": false,
+    "deletions": false,
+    "only_written_artifact": "results/preflight/r201e_native_gradient_rescue_review_20261006.json"
+  }
+}
