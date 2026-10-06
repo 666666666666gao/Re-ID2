@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-07T07:30:12",
+  "updated_at": "2026-10-07T07:55:33",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -11938,6 +11938,50 @@
         "partial_loss_effective_zero": true,
         "normal_full50_complete": false
       }
+    },
+    "I_closed_N3_and_missing49_figures": {
+      "status": "ACTUAL_RENDERED_SELF_CHECK_AND_FRESH_REVIEW_PASS",
+      "figures": 2,
+      "epoch_rows": 300,
+      "plotted_values": 1194,
+      "expert_seeds": [
+        42,
+        43,
+        44
+      ],
+      "replication": "Fixed teacher42, notwholepipeline",
+      "critical_overlap_case": {
+        "dataset": "RGBNT100",
+        "condition": "q_T_g_RT",
+        "improved": "I_axis_shared_s42/11",
+        "reference": "I_axis_shared_s42/00",
+        "mAP": "-1.8079579001917097",
+        "mINP": "0.38270462870136157",
+        "Rank-1": "-8.5131195335277",
+        "Rank-5": "-9.50437317784256",
+        "Rank-10": "-9.504373177842552",
+        "Rank-20": "-7.521865889212833",
+        "rescued": "48",
+        "harmed": "194",
+        "AP_improved": "582",
+        "AP_worsened": "1110",
+        "both_plus2": "False"
+      },
+      "source_fact": {
+        "path": "rgbnt201_identity_outlet.py",
+        "sha256": "ee03a16de0e7f4beb28f4a78a4ab8c16e8f19014bfa4164482d59714e52de784",
+        "lines": [
+          49,
+          50
+        ],
+        "behavior": "PI reads all pooled modality relations and pooled frequency then repeats same projected interaction into all eligible relation slots. PM/PF remain per-relation; a T slot PI can depend on other available-source evidence. This describes tensor access, not measured causal contamination."
+      },
+      "source_hypothesis": "An availability change may alter a global PI message inserted into overlapping private identity coordinates; test before claiming cause.",
+      "not_causal_proof": true,
+      "new_neural_calls": 0,
+      "new_optimizer_updates": 0,
+      "proof": "results/r201i_N3_missing49_figures_20261007/rendered_self_check.json",
+      "review": "results/preflight/r201i_N3_missing49_figures_review_20261007.json"
     }
   },
   "decision_rules": [
@@ -11977,7 +12021,8 @@
       "first_lane": "Previous F/state/mature NN consumers are closed; next reviewed launch must verify actual GPU2/3 availability and keep at most two NN, serial per card.",
       "temperature_power_control": false
     },
-    "existing_M8_closeout": "ACTUAL_COMPLETE_NATIVE52604_EXIT0_THREE50_147FROZEN882STATES_LOCAL_RAW_VERIFIED"
+    "existing_M8_closeout": "ACTUAL_COMPLETE_NATIVE52604_EXIT0_THREE50_147FROZEN882STATES_LOCAL_RAW_VERIFIED",
+    "pending_missing_diagnostic": "Finish current original J three-normal queue first. I RGB100 T→RT11−00 genuine overlapping harm:−1.807958MAP/−8.513120R1,48rescues194harms. PI currently pools globals then broadcasts to legal slots; relation-specific PI is only a future single-factor hypothesis, notimplemented/run and notrootcause. Preserve full scope; do not disable proper-input experts or substitute base00 to redefine success."
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
   "user_resumption": {

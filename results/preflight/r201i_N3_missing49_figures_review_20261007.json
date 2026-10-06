@@ -1,0 +1,258 @@
+{
+  "status": "PASS",
+  "reviewed_at": "2026-10-07T07:54:40+08:00",
+  "scope": "Fresh paper-figure Step 7 review of two CLOSED-data figures and captions: statistical and visual reporting, not final venue-size acceptance or overall method acceptance.",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model_backend": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "blocking_findings": [],
+  "findings": [
+    {
+      "severity": "INFO",
+      "figure": "expert_seed_curves",
+      "finding": "All 300 observed epochs and all 900 plotted mAP/Rank-1/objective values equal the cited training CSV. All six selected epochs are earliest mAP maxima and agree with per_seed_six.csv; the same selected epoch is used for all plotted rows. Epoch50 markers retain final outcomes, including axis seed44 mAP decline of 3.226685970826324 percentage points from E30 to E50."
+    },
+    {
+      "severity": "INFO",
+      "figure": "expert_seed_curves",
+      "finding": "The caption correctly states three paired expert seeds conditional on one frozen DeMo42 teacher, the two matched additional-50-epoch arms, benchmark checkpoint selection, and the teacher reference unequal total training budget. The dotted reference matches the best E28 checkpoint from the completed 50-epoch teacher run. It does not claim three independent whole pipelines or untouched-test performance."
+    },
+    {
+      "severity": "INFO",
+      "figure": "fixed_best_missing49",
+      "finding": "All 294 signed percentage-point values equal I_axis_shared_s42/11 minus its own /00 in six_metrics.csv, with 49 cells per dataset and metric. All 294 rendered SVG cell labels match the expected one-decimal rounding. Separate symmetric mAP and Rank-1 scales are each shared across datasets. All 12 source-disjoint cells per panel are hatched; T-to-RT is correctly unhatched."
+    },
+    {
+      "severity": "INFO",
+      "figure": "fixed_best_missing49",
+      "finding": "The caption limits interpretation to one fixed normal-selected checkpoint per dataset, correlated repeated-query diagnostics, and nearconstant private distances in disjoint-source cells. Negative results remain visible; no independent-replicate, pooled-mAP, cross-source identity, or general success claim is made."
+    },
+    {
+      "severity": "INFO",
+      "figure": "both",
+      "finding": "Both final PNGs were opened and visually inspected. No clipped labels, clipped colorbar text, legend/data obstruction, or incorrect panel labels were found. Line style plus color distinguishes the curve arms; signed heatmap numbers preserve interpretation without relying on color. The earlier heatmap colorbar clipping is absent in the reviewed final PNG."
+    },
+    {
+      "severity": "INFO",
+      "figure": "supporting critical_missing_case.json",
+      "finding": "The RGBNT100 T-to-RT comparison exactly matches comparisons.csv: -1.8079579001917097 mAP and -8.5131195335277 Rank-1 percentage points, 48 rescued and 194 harmed. TIR overlaps, so this is not one of the 12 disjoint-source tie cases. rgbnt201_identity_outlet.py lines49-51 implement a pooled interaction broadcast into eligible slots; the artifact correctly treats the proposed explanation as an untested causal hypothesis."
+    }
+  ],
+  "data_checks": {
+    "curve_rows": 300,
+    "curve_numeric_values_checked": 900,
+    "missing_delta_values_checked": 294,
+    "missing_max_absolute_error": 0.0,
+    "rendered_heatmap_annotations_checked": 294,
+    "source_manifest_hashes_checked": 6,
+    "source_manifest_hashes_match": true,
+    "final_render_hashes_checked": 6,
+    "final_render_hashes_match": true,
+    "selected_epochs_and_same_checkpoint_metrics_match": true,
+    "paired_epoch_budget_optimizer_steps_and_record_coverage_match": true,
+    "selected_runs": [
+      {
+        "seed": 42,
+        "model": "frequency_shared",
+        "selected_epoch": 31,
+        "selected_mAP": 76.06171640319826,
+        "selected_Rank1": 80.622009569378,
+        "epoch50_mAP": 75.61099538050891,
+        "epoch50_Rank1": 80.02392344497608
+      },
+      {
+        "seed": 42,
+        "model": "axis_shared",
+        "selected_epoch": 30,
+        "selected_mAP": 79.58100610693934,
+        "selected_Rank1": 84.56937799043062,
+        "epoch50_mAP": 79.12605381865167,
+        "epoch50_Rank1": 85.04784688995215
+      },
+      {
+        "seed": 43,
+        "model": "frequency_shared",
+        "selected_epoch": 18,
+        "selected_mAP": 75.98621821811545,
+        "selected_Rank1": 80.622009569378,
+        "epoch50_mAP": 75.07347971090742,
+        "epoch50_Rank1": 79.54545454545455
+      },
+      {
+        "seed": 43,
+        "model": "axis_shared",
+        "selected_epoch": 31,
+        "selected_mAP": 77.8862027117653,
+        "selected_Rank1": 83.49282296650718,
+        "epoch50_mAP": 77.11094641890315,
+        "epoch50_Rank1": 82.53588516746412
+      },
+      {
+        "seed": 44,
+        "model": "frequency_shared",
+        "selected_epoch": 6,
+        "selected_mAP": 75.71560121522725,
+        "selected_Rank1": 80.50239234449761,
+        "epoch50_mAP": 74.83194135246133,
+        "epoch50_Rank1": 79.66507177033493
+      },
+      {
+        "seed": 44,
+        "model": "axis_shared",
+        "selected_epoch": 30,
+        "selected_mAP": 77.60385502273725,
+        "selected_Rank1": 81.9377990430622,
+        "epoch50_mAP": 74.37716905191093,
+        "epoch50_Rank1": 80.622009569378
+      }
+    ],
+    "symmetric_color_limits": {
+      "mAP": 3.906431114611877,
+      "Rank-1": 8.5131195335277
+    },
+    "critical_overlapping_case": {
+      "dataset": "RGBNT100",
+      "condition": "q_T_g_RT",
+      "improved": "I_axis_shared_s42/11",
+      "reference": "I_axis_shared_s42/00",
+      "mAP": "-1.8079579001917097",
+      "mINP": "0.38270462870136157",
+      "Rank-1": "-8.5131195335277",
+      "Rank-5": "-9.50437317784256",
+      "Rank-10": "-9.504373177842552",
+      "Rank-20": "-7.521865889212833",
+      "rescued": "48",
+      "harmed": "194",
+      "AP_improved": "582",
+      "AP_worsened": "1110",
+      "both_plus2": "False"
+    }
+  },
+  "render_review": {
+    "actual_pngs_viewed": [
+      "expert_seed_curves.png",
+      "fixed_best_missing49.png"
+    ],
+    "png_dimensions": {
+      "expert_seed_curves": [
+        1480,
+        1360
+      ],
+      "fixed_best_missing49": [
+        1520,
+        1180
+      ]
+    },
+    "final_visible_clipping": false,
+    "legend_obscures_data": false,
+    "vector_export_check": "PDF/SVG exports contain vector plot paths and text; heatmap colorbar gradients are two narrow raster images. The cells and labels are not a screenshot.",
+    "final_venue_size_acceptance": "NOT_ASSESSED; venue and final placement are outside this closed-data review scope."
+  },
+  "limitations": [
+    "This PASS concerns the reviewed figure package and its stated comparisons, not evidence of a universal benefit or achievement of the project performance goal.",
+    "Independent context, same model family; actual backend and effort cannot be independently attested."
+  ],
+  "actual_file_sha256": {
+    "results/r201i_N3_missing49_figures_20261007/expert_seed_curves.png": {
+      "bytes": 197400,
+      "sha256": "097f2d39108c15e61e2095a10eca826119998f0b140d75d28acc1d2ff4e67dd4"
+    },
+    "results/r201i_N3_missing49_figures_20261007/expert_seed_curves.pdf": {
+      "bytes": 26220,
+      "sha256": "ad27010934562ffbd32c8c899386d5bf55eb990a5c777434972fd7942152840c"
+    },
+    "results/r201i_N3_missing49_figures_20261007/expert_seed_curves.svg": {
+      "bytes": 68617,
+      "sha256": "f7812eb93960c22419b6a08379099cc13627aa6a6d032348cb1cccc09b0eb22e"
+    },
+    "results/r201i_N3_missing49_figures_20261007/fixed_best_missing49.png": {
+      "bytes": 310672,
+      "sha256": "6268575f85d4a0ff95cc6cd03e420178c41ce294e30eedfcec759ae940db0a65"
+    },
+    "results/r201i_N3_missing49_figures_20261007/fixed_best_missing49.pdf": {
+      "bytes": 31793,
+      "sha256": "be81e45035116adab6758a506309310154ae9f44d91e34121c02c8c93ff6ff17"
+    },
+    "results/r201i_N3_missing49_figures_20261007/fixed_best_missing49.svg": {
+      "bytes": 175158,
+      "sha256": "91a5241e70a8a67c02c34c228bfda54969ef21d5aa835d21782f313b2abfec39"
+    },
+    "results/r201i_N3_missing49_figures_20261007/inputs.json": {
+      "bytes": 60639,
+      "sha256": "c7ce20d4f6aaf965cd6cd5337f653acbd0337976f4f107f5254f94d6afe213e9"
+    },
+    "results/r201i_N3_missing49_figures_20261007/captions.json": {
+      "bytes": 1433,
+      "sha256": "6c1797ba6748e9ad3baab0ba7e539e4b6531416a2ec6ee138aaf8b3e6109288f"
+    },
+    "results/r201i_N3_missing49_figures_20261007/gen_expert_seed_curves.py": {
+      "bytes": 2162,
+      "sha256": "74f3d42b64167b9545798031e91a8ea77a8926d3ac617c8132f2c9741163f4a2"
+    },
+    "results/r201i_N3_missing49_figures_20261007/gen_fixed_best_missing49.py": {
+      "bytes": 2010,
+      "sha256": "8fb4ac506b43d5e07fea0c5d6660c9fbe7810e10daf08dac7e63b59a2c18a738"
+    },
+    "results/r201i_N3_missing49_figures_20261007/plot_style.py": {
+      "bytes": 693,
+      "sha256": "6012abf9c7abb401f60474b89b535711787d2d6c544344ae01296f658680df60"
+    },
+    "results/r201i_N3_missing49_figures_20261007/render_actual.json": {
+      "bytes": 2229,
+      "sha256": "cd6736848261a1a3671f128e48fd452e4e69911018a1da2811e676a19298ebfe"
+    },
+    "results/r201i_N3_missing49_figures_20261007/rendered_self_check.json": {
+      "bytes": 882,
+      "sha256": "06e547052700926ff952358e55b86b31af7af5c5e042a3a37123abc4c31ebbae"
+    },
+    "results/r201i_N3_missing49_figures_20261007/critical_missing_case.json": {
+      "bytes": 1879,
+      "sha256": "16720d90bb158ea8651011320f069b2051027c544f762c5e52a34d47d2e43a07"
+    },
+    "results/r201i_expert_seeds_20261006/normal_seed_analysis/training_curves.csv": {
+      "bytes": 58127,
+      "sha256": "d75815c2033d458ebf42f09c4424e09d2c280f5c4d139eb1efedacd04757ce3c"
+    },
+    "results/r201i_expert_seeds_20261006/normal_seed_analysis/per_seed_six.csv": {
+      "bytes": 834,
+      "sha256": "5e0feef4667ac67d9327f72f7df8e5da3113fb20441a3226aa8654cd769c79ee"
+    },
+    "results/r201i_expert_seeds_20261006/normal_seed_analysis/result.json": {
+      "bytes": 16758,
+      "sha256": "7778f323b7e7e6707ddf1f0333f30caa071a534cfe1839c1ea3ea10f22e329b7"
+    },
+    "results/r201i_missing49_20261007/missing_analysis/six_metrics.csv": {
+      "bytes": 378077,
+      "sha256": "576d2f4ef916cd049ebc52b3bf86e3e2cad93a0bb9e632ee70bc64fa46f28f99"
+    },
+    "results/r201i_missing49_20261007/missing_analysis/result.json": {
+      "bytes": 1735,
+      "sha256": "3ceb08ade79f1339e2c81a570f2149a948a0e7ec88f5df078ecbc81a75a2782a"
+    },
+    "results/full_official_baselines_20261004/training/RGBNT201_demo_s42/result.json": {
+      "bytes": 24833,
+      "sha256": "9e35222359690e691a5c6bb1c135449bde503fe3ac3e92fbf4172e92e133b035"
+    },
+    "results/r201i_missing49_20261007/missing_analysis/comparisons.csv": {
+      "bytes": 319440,
+      "sha256": "5a27269ace45de0c2bb7ccf22b3ceb0f5eacf376ff95f80f00419e7adc44c774"
+    },
+    "rgbnt201_identity_outlet.py": {
+      "bytes": 10205,
+      "sha256": "ee03a16de0e7f4beb28f4a78a4ab8c16e8f19014bfa4164482d59714e52de784"
+    }
+  },
+  "activity": {
+    "new_neural_calls": 0,
+    "new_optimizer_updates": 0,
+    "gpu_queries": 0,
+    "running_J_inspected": false,
+    "source_edits": 0,
+    "cleanup_actions": 0,
+    "deploy_actions": 0,
+    "git_operations": 0
+  }
+}
