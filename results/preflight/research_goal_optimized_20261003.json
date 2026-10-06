@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-06T12:37:13",
+  "updated_at": "2026-10-06T12:43:29",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -3902,7 +3902,7 @@
       "unique_raw_and_references_retained": true
     },
     "R201G_other_two_normal": {
-      "status": "SOURCE_PASS_NOT_EXECUTED",
+      "status": "ACTUAL_MSVR_NATIVE6_PASS_TWO_NORMAL50_LIVE_RGB100_NOT_STARTED",
       "models": 4,
       "expected_native_updates": 12,
       "expected_formal_updates": 14124,
@@ -3912,7 +3912,34 @@
         "RGBNT100"
       ],
       "same_G_recipe": true,
-      "review": "results/preflight/r201g_other_two_normal_source_review_20261006.json"
+      "review": "results/preflight/r201g_other_two_normal_source_review_20261006.json",
+      "original_primary_session": 28890,
+      "original_observer_session": 32692,
+      "original_observer_pid": 24816,
+      "observed_at": "2026-10-06T12:41:31",
+      "active_dataset": "MSVR310",
+      "controller_pid": 4131945,
+      "NN_pids": [
+        4133198,
+        4133199
+      ],
+      "actual_epochs_each": [
+        5,
+        5
+      ],
+      "actual_updates_each": [
+        71,
+        71
+      ],
+      "amp_skipped_each": [
+        0,
+        0
+      ],
+      "MSVR_native_updates": 6,
+      "other_formal_completed": 0,
+      "RGBNT100_status": "NOT_STARTED",
+      "next_original_observer_eta": "2026-10-06T12:49:01",
+      "full_goal_achieved": false
     }
   },
   "decision_rules": [
@@ -3939,8 +3966,8 @@
   ],
   "next_action": {
     "milestone": "PREPARE_NORMAL_INPUT_CANDIDATE_FROM_CLOSED_CONTROL_EVIDENCE",
-    "status": "START_REVIEWED_UNCHANGED_G_OTHER_TWO_NORMAL",
-    "action": "Actual accepted201 closure/CPU/fourstates confirmed. Start one unchanged G sequential receiver forMSVR310 thenRGBNT100 native2x3/full2x50/installedGT/perfileDsizeSHAACK. Verify all3same-method normal with prepared15model15710pairCPU; thenfixedbest49, fairretraining and pairedseeds. No newloss/architecture/tuning or phasepeak success claim.",
+    "status": "WAIT_ORIGINAL_MSVR_THEN_RGB100_NORMAL_RECEIVER",
+    "action": "Keep only original28890 receiver and32692 timedobserver(local24816). NextactualE20 observation12:49:01. Complete MSVRtwo50/GT/raw then samecontrollerautomatically launchesRGB100native2x3/two50. No earlyextraSSH/GPU query, no restart orNNsourcechange. Closed4othernormal then preparedterminalintake and15model/15710pairthree-normalCPU; fixedbestmissing49/pairedseeds/fairutility stillrequired.",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
