@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-06T13:24:21",
+  "updated_at": "2026-10-06T13:38:55",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -3981,6 +3981,24 @@
       "joint_harms_single_correct": 12,
       "empirical_AP_interaction_pp": 2.7173803052885668,
       "bootstrap_scope": "Selected seed42 query identities only; not training seeds/causal/psi proof"
+    },
+    "R201G_closed_training_dose": {
+      "status": "ACTUAL_G_TWO_CLOSED_DATASETS_FULL50_OBJECTIVE_VERSUS_NORMAL_RETRIEVAL_CPU_READOUT",
+      "analysis": "results/preflight/r201g_closed_two_dataset_training_dose_20261006.json",
+      "epoch_rows": 200,
+      "actual_batch_rows": 6704,
+      "new_neural_calls": 0,
+      "interpretation": "Normal retrieval decreases substantially after axis best while full training loss decreases; zero partialloss did not remove late collapse. No new causal/gradient/radial/subspace proof."
+    },
+    "R201G_201_missing_prepared": {
+      "status": "FRESH_SOURCE_REVIEW_PASS_NOT_EXECUTED_WAIT_ALL_THREE_NORMAL",
+      "plan": "results/preflight/r201g_201_missing49_stream_plan_20261006.json",
+      "review": "results/preflight/r201g_201_missing49_stream_source_review_20261006.json",
+      "native_conditions": 2,
+      "full_conditions": 98,
+      "full_state_cases": 392,
+      "actual_nn_calls": 0,
+      "scope": "Prioritize selectedG201 two controls after all3normal; not replace remaining fullgoal three-dataset missing/fairretrain/seeds."
     }
   },
   "decision_rules": [
@@ -4008,7 +4026,7 @@
   "next_action": {
     "milestone": "PREPARE_NORMAL_INPUT_CANDIDATE_FROM_CLOSED_CONTROL_EVIDENCE",
     "status": "WAIT_ORIGINAL_RGB100_NORMAL_ENDPOINT",
-    "action": "Keep sole28890 receiver and32692 observer; original next estimatedE20 14:10:18, no earlyremote/GPU checks/restart/NNsourcechange. After actualRGB100 EXIT0/GT/raw4, run reviewed per-dataset RGB100 intake ONCE then unchanged three-normal analyzer. G201 positive, MSVR fails+2 so no all3 superiority. Complete RGB100 before missing scheduling or new factor.",
+    "action": "Original28890/32692 unchanged, next estimatedE20 14:10:18. After actualRGB100 EXIT0/GT/raw4, run reviewed datasetRGB100 intake once then unchanged15-model3normal analyzer. Only AFTER all3normal report, execute reviewed G201missing native once, require actual8GT+all7small PASS, then full49 once/392GT/98raw. Keep D unique evidence and best, no earlyremote checks or NNsourcechanges/restarts. G MSVR fails+2 so goal remains unmet; positive201 robustness will guide next controlled intervention.",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
