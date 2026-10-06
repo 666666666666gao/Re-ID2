@@ -1,0 +1,621 @@
+{
+  "status": "PASS",
+  "scope": "Four actually rendered figures of sealed, completed RGBNT201 and MSVR310 normal-input seed42 runs only; numerical/visual report acceptance, not final venue submission acceptance.",
+  "requested_reviewer": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "max"
+  },
+  "actual_reviewer": {
+    "backend": "UNATTESTED",
+    "model": "UNATTESTED",
+    "reasoning_effort": "UNATTESTED",
+    "attestation_basis": "No independently supplied backend/model/effort attestation is available to this reviewer."
+  },
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "blocking_findings": [],
+  "findings": [
+    {
+      "id": "F01",
+      "status": "PASS",
+      "topic": "Closed data and same-checkpoint six metrics",
+      "evidence": "Eight expert runs each have exactly epochs 1..50, COMPLETE status, zero AMP skips and full recorded training coverage. All 400 unique G/I CSV rows match original epochs.csv and inputs.json. All six selected metrics match the same earliest normal-mAP maximum, result.best, full_metrics and strict_reload. All selected maxima here are unique; the implemented first-maximum rule preserves earliest ties.",
+      "selected_epochs": {
+        "RGBNT201": {
+          "original_DeMo": 28,
+          "G_frequency_shared": 28,
+          "I_frequency_shared": 31,
+          "G_axis_shared": 7,
+          "I_axis_shared": 30
+        },
+        "MSVR310": {
+          "original_DeMo": 32,
+          "G_frequency_shared": 15,
+          "I_frequency_shared": 15,
+          "G_axis_shared": 4,
+          "I_axis_shared": 5
+        }
+      }
+    },
+    {
+      "id": "F02",
+      "status": "PASS",
+      "topic": "Exact source and artifact identity",
+      "evidence": "All 22 source hashes match actual local files, including the two directly referenced completed primary training_curves.csv files. All 12 rendered size/SHA records and all eight renderer input records match. TeX captions exactly match captions.json. Explicit UTF-8 decoding found valid punctuation and no replacement characters."
+    },
+    {
+      "id": "F03",
+      "status": "PASS",
+      "topic": "Ordinary controls and budgets",
+      "evidence": "Within each dataset, the four G/I axis/ordinary runs match recorded configuration, 50 expert epochs, optimizer steps, coverage, descriptor width and parameter counts. Each uses the same recorded frozen original DeMo42 selected anchor after its 50-epoch run; the expert stage adds 50 epochs. RGBNT201 has 2647 expert optimizer updates per run, MSVR310 705. Captions and cost CSV distinguish original DeMo50 from teacher50+expert50. This verifies recorded protocol, not upstream training implementation."
+    },
+    {
+      "id": "F04",
+      "status": "PASS",
+      "topic": "Replication and exclusions",
+      "evidence": "Only RGBNT201/MSVR310 occur in plot inputs; expert seed42 and anchor seed42 are fixed. Captions identify N=1 paired expert seed, benchmark checkpoint selection and absence of RGBNT100/additional-seed/missing results. No whole-pipeline replication, stable three-dataset +2 success or causal conclusion is claimed."
+    },
+    {
+      "id": "F05",
+      "status": "PASS",
+      "topic": "Routes and L1 semantics",
+      "evidence": "All eight source route tables are finite nonnegative 7x3 arrays summing to one within 4.71e-8. Four plotted axis tables, eight route CSV rows, column sums, gates and entropy match source records. Denominators are actual query+gallery occurrences: RGBNT201 836+836=1672; MSVR310 591+1055=1646. Captions distinguish occurrences from independent seeds and avoid inferring band necessity or retrieval utility.",
+      "L1_definition": "The retained runtime mean_joint_minus_marginal_product_L1 is reported as mean_s sum_(r,b) |p_s(r,b)-p_s(r)p_s(b)|, the mean per routed sample. The preparer copies the recorded aggregate and does not compute L1 from mean_route.",
+      "concrete_L1_check": "I axis RGBNT201: recorded per-sample mean 0.0025358465500175953 versus L1 of mean table 0.0014844925560242375. I axis MSVR310: 0.06490559130907059 versus 0.05293150166772312. The report does not substitute the latter statistic.",
+      "scope_limit": "Individual per-sample route tensors and upstream reduction implementation are outside this review scope; no new per-sample reconstruction is claimed."
+    },
+    {
+      "id": "F06",
+      "status": "PASS",
+      "topic": "Objective curves",
+      "evidence": "All 200 I primary rows match the two sealed training_curves.csv files. Their six metrics and aggregate loss match original epoch rows, and batch counts sum to 2647 per RGBNT201 run / 705 per MSVR310 run. Effective partial loss is zero; hinge losses are finite and positive; mean violations stay within [0,64]. Captions state that aggregate G/I losses have different primary terms and are not directly equivalent objective values, and do not infer gradient norms, a unique collapse cause or multi-seed stability."
+    },
+    {
+      "id": "F07",
+      "status": "PASS",
+      "topic": "Claims match results",
+      "evidence": "Complete late trajectories are retained, including RGBNT201 G-axis and MSVR310 late deterioration. I axis selected checkpoint versus original: RGBNT201 +3.90643111461188 mAP / +3.94736842105262 Rank-1; MSVR310 only +0.055919393630084 mAP / 0 Rank-1. Captions make no stable +2, three-dataset success or causal mechanism claim."
+    },
+    {
+      "id": "F08",
+      "status": "PASS",
+      "topic": "Recorded costs and measurement limits",
+      "evidence": "All ten cost rows match result parameters, trainable parameters, descriptor width, selected epoch, runtime, occurrence rate and allocator peak converted to MiB. data_reduction.json states that extraction includes decode/first batch, shared-server timing is not isolated performance and allocator peak covers training/evaluation/reload rather than isolated inference or full FLOPs. No hardware-efficiency conclusion is present in the figures."
+    },
+    {
+      "id": "F09",
+      "status": "PASS",
+      "topic": "Actual visuals and vectors",
+      "evidence": "All four full-resolution local PNGs were emitted and visually inspected by this reviewer. At supplied report size, labels and annotations are readable, legends sit outside data and no clipping/occlusion or in-figure titles were found. Shared heatmap range 0..40% covers all cells. SVG verification checked 64 paths / 3200 points, 48 actual marker centers, 12 original reference lines and 84 heatmap labels. All four PDFs contain one page, embedded TrueType fonts and decompressible Flate streams. PDF structural checks and file identity were performed; no additional PDF rasterization was performed."
+    },
+    {
+      "id": "F10",
+      "status": "PASS",
+      "topic": "Renderer failure history",
+      "evidence": "render_actual.json plus twelve matching retained files support completed CPU rendering. temporary_cleanup_actual.json retains original_renderer_exit_code=1, failure after all outputs were received/verified and the remaining imported-module __pycache__ cause. Later bounded cleanup is recorded ACTUAL_CPU_FIGURE_TEMP_CLEANUP_CONTINUATION_COMPLETE. The original renderer is not relabeled full exit0 success. No remote cleanup or verification was performed by this reviewer."
+    }
+  ],
+  "nonblocking_limits": [
+    {
+      "id": "L01",
+      "status": "WARN",
+      "detail": "The six-panel figures are 11.5 x 7 inches with 9-point ticks/legend and 10-point labels. They pass current full-width report viewing. Final venue typography/layout are not claimed and remain outside acceptance; inspect actual-size compiled paper before submission."
+    },
+    {
+      "id": "L02",
+      "status": "WARN",
+      "detail": "Fresh same-family subagent review. Requested gpt-6-astra/max recorded; actual backend/model/effort UNATTESTED. Acceptance provisional, not independent cross-family certification."
+    }
+  ],
+  "recommended_action": "Accept current sealed figures for full reporting with their captions and documented limits. No blocking change required in reviewed scope. Preserve original renderer exit1 and check final-size typography when preparing a venue layout.",
+  "numeric_audit": {
+    "comparison_checks": 8480,
+    "failures": [],
+    "expert_epoch_rows": 400,
+    "source_epoch_rows_including_original": 500,
+    "primary_rows": 200,
+    "primary_to_original_epoch_scalar_comparisons": 1400,
+    "selected_marker_values": 48,
+    "route_rows": 8,
+    "cost_rows": 10,
+    "runs": [
+      {
+        "dataset": "RGBNT201",
+        "model": "original_DeMo",
+        "selected_epoch": 28,
+        "mAP_best_tie_epochs": [
+          28
+        ],
+        "selected_six": {
+          "mAP": 75.67457499232746,
+          "mINP": 62.57709224977215,
+          "Rank-1": 80.622009569378,
+          "Rank-5": 89.23444976076556,
+          "Rank-10": 93.77990430622009,
+          "Rank-20": 94.97607655502392
+        },
+        "steps": 2647,
+        "seed": 42,
+        "train_coverage": 3951,
+        "query": 836,
+        "gallery": 836,
+        "config_sha256": "349f175043bbb6ccad39afe4efd177b42d01c57496d4cbabf27a0636bfbb17b4"
+      },
+      {
+        "dataset": "RGBNT201",
+        "model": "G_frequency_shared",
+        "selected_epoch": 28,
+        "mAP_best_tie_epochs": [
+          28
+        ],
+        "selected_six": {
+          "mAP": 76.71329100509308,
+          "mINP": 63.952152322361755,
+          "Rank-1": 82.29665071770334,
+          "Rank-5": 91.50717703349282,
+          "Rank-10": 93.77990430622009,
+          "Rank-20": 95.45454545454545
+        },
+        "steps": 2647,
+        "seed": 42,
+        "train_coverage": 3951,
+        "query": 836,
+        "gallery": 836,
+        "config_sha256": "349f175043bbb6ccad39afe4efd177b42d01c57496d4cbabf27a0636bfbb17b4",
+        "L1_of_mean_table": 2.869359804966165e-08,
+        "reported_mean_of_per_sample_L1": 6.56085248351701e-08,
+        "route_sum": 0.9999999720603228
+      },
+      {
+        "dataset": "RGBNT201",
+        "model": "I_frequency_shared",
+        "selected_epoch": 31,
+        "mAP_best_tie_epochs": [
+          31
+        ],
+        "selected_six": {
+          "mAP": 76.06171640319826,
+          "mINP": 63.00747975252744,
+          "Rank-1": 80.622009569378,
+          "Rank-5": 89.71291866028707,
+          "Rank-10": 93.77990430622009,
+          "Rank-20": 95.45454545454545
+        },
+        "steps": 2647,
+        "seed": 42,
+        "train_coverage": 3951,
+        "query": 836,
+        "gallery": 836,
+        "config_sha256": "349f175043bbb6ccad39afe4efd177b42d01c57496d4cbabf27a0636bfbb17b4",
+        "L1_of_mean_table": 4.7079950814613025e-08,
+        "reported_mean_of_per_sample_L1": 6.482105163740925e-08,
+        "route_sum": 0.99999995296821
+      },
+      {
+        "dataset": "RGBNT201",
+        "model": "G_axis_shared",
+        "selected_epoch": 7,
+        "mAP_best_tie_epochs": [
+          7
+        ],
+        "selected_six": {
+          "mAP": 78.97918040649468,
+          "mINP": 65.31062083278603,
+          "Rank-1": 84.44976076555024,
+          "Rank-5": 91.98564593301435,
+          "Rank-10": 94.377990430622,
+          "Rank-20": 96.29186602870813
+        },
+        "steps": 2647,
+        "seed": 42,
+        "train_coverage": 3951,
+        "query": 836,
+        "gallery": 836,
+        "config_sha256": "349f175043bbb6ccad39afe4efd177b42d01c57496d4cbabf27a0636bfbb17b4",
+        "L1_of_mean_table": 0.0019080244481858356,
+        "reported_mean_of_per_sample_L1": 0.0027485587634146214,
+        "route_sum": 1.0000000261934474
+      },
+      {
+        "dataset": "RGBNT201",
+        "model": "I_axis_shared",
+        "selected_epoch": 30,
+        "mAP_best_tie_epochs": [
+          30
+        ],
+        "selected_six": {
+          "mAP": 79.58100610693934,
+          "mINP": 66.09674018873324,
+          "Rank-1": 84.56937799043062,
+          "Rank-5": 92.34449760765551,
+          "Rank-10": 94.25837320574163,
+          "Rank-20": 95.93301435406698
+        },
+        "steps": 2647,
+        "seed": 42,
+        "train_coverage": 3951,
+        "query": 836,
+        "gallery": 836,
+        "config_sha256": "349f175043bbb6ccad39afe4efd177b42d01c57496d4cbabf27a0636bfbb17b4",
+        "L1_of_mean_table": 0.0014844925560242375,
+        "reported_mean_of_per_sample_L1": 0.0025358465500175953,
+        "route_sum": 1.0000000334403012
+      },
+      {
+        "dataset": "MSVR310",
+        "model": "original_DeMo",
+        "selected_epoch": 32,
+        "mAP_best_tie_epochs": [
+          32
+        ],
+        "selected_six": {
+          "mAP": 47.164688447227576,
+          "mINP": 23.502961234396178,
+          "Rank-1": 63.95939086294417,
+          "Rank-5": 80.20304568527918,
+          "Rank-10": 84.77157360406092,
+          "Rank-20": 89.84771573604061
+        },
+        "steps": 705,
+        "seed": 42,
+        "train_coverage": 1032,
+        "query": 591,
+        "gallery": 1055,
+        "config_sha256": "5dd782d26636d9c74c0cbd09f1b68d2a68daf505b204b184e47649d723b4898a"
+      },
+      {
+        "dataset": "MSVR310",
+        "model": "G_frequency_shared",
+        "selected_epoch": 15,
+        "mAP_best_tie_epochs": [
+          15
+        ],
+        "selected_six": {
+          "mAP": 47.24680863675226,
+          "mINP": 23.663143516382217,
+          "Rank-1": 63.62098138747885,
+          "Rank-5": 80.8798646362098,
+          "Rank-10": 84.60236886632826,
+          "Rank-20": 89.84771573604061
+        },
+        "steps": 705,
+        "seed": 42,
+        "train_coverage": 1032,
+        "query": 591,
+        "gallery": 1055,
+        "config_sha256": "5dd782d26636d9c74c0cbd09f1b68d2a68daf505b204b184e47649d723b4898a",
+        "L1_of_mean_table": 4.256468711713764e-06,
+        "reported_mean_of_per_sample_L1": 7.482386536139529e-06,
+        "route_sum": 0.9999999534338713
+      },
+      {
+        "dataset": "MSVR310",
+        "model": "I_frequency_shared",
+        "selected_epoch": 15,
+        "mAP_best_tie_epochs": [
+          15
+        ],
+        "selected_six": {
+          "mAP": 47.237814977555246,
+          "mINP": 23.62984991278797,
+          "Rank-1": 63.7901861252115,
+          "Rank-5": 80.71065989847716,
+          "Rank-10": 84.77157360406092,
+          "Rank-20": 89.84771573604061
+        },
+        "steps": 705,
+        "seed": 42,
+        "train_coverage": 1032,
+        "query": 591,
+        "gallery": 1055,
+        "config_sha256": "5dd782d26636d9c74c0cbd09f1b68d2a68daf505b204b184e47649d723b4898a",
+        "L1_of_mean_table": 4.6270660159497545e-06,
+        "reported_mean_of_per_sample_L1": 7.414012543449644e-06,
+        "route_sum": 1.0000000013969839
+      },
+      {
+        "dataset": "MSVR310",
+        "model": "G_axis_shared",
+        "selected_epoch": 4,
+        "mAP_best_tie_epochs": [
+          4
+        ],
+        "selected_six": {
+          "mAP": 47.21107132502441,
+          "mINP": 23.551308518735574,
+          "Rank-1": 63.7901861252115,
+          "Rank-5": 80.20304568527918,
+          "Rank-10": 84.77157360406092,
+          "Rank-20": 90.01692047377327
+        },
+        "steps": 705,
+        "seed": 42,
+        "train_coverage": 1032,
+        "query": 591,
+        "gallery": 1055,
+        "config_sha256": "5dd782d26636d9c74c0cbd09f1b68d2a68daf505b204b184e47649d723b4898a",
+        "L1_of_mean_table": 0.02424271812195432,
+        "reported_mean_of_per_sample_L1": 0.03646940365433693,
+        "route_sum": 0.9999999981373549
+      },
+      {
+        "dataset": "MSVR310",
+        "model": "I_axis_shared",
+        "selected_epoch": 5,
+        "mAP_best_tie_epochs": [
+          5
+        ],
+        "selected_six": {
+          "mAP": 47.22060784085766,
+          "mINP": 23.555108520124353,
+          "Rank-1": 63.95939086294417,
+          "Rank-5": 80.03384094754654,
+          "Rank-10": 84.77157360406092,
+          "Rank-20": 90.01692047377327
+        },
+        "steps": 705,
+        "seed": 42,
+        "train_coverage": 1032,
+        "query": 591,
+        "gallery": 1055,
+        "config_sha256": "5dd782d26636d9c74c0cbd09f1b68d2a68daf505b204b184e47649d723b4898a",
+        "L1_of_mean_table": 0.05293150166772312,
+        "reported_mean_of_per_sample_L1": 0.06490559130907059,
+        "route_sum": 0.9999999962747097
+      }
+    ]
+  },
+  "vector_audit": {
+    "failures": [],
+    "SVG_curve_paths_audited": 64,
+    "SVG_curve_points_audited": 3200,
+    "SVG_marker_centers_audited": 48,
+    "SVG_original_reference_lines_audited": 12,
+    "SVG_heatmap_cell_values_audited": 84,
+    "pdfs": [
+      {
+        "name": "completed_normal_objectives.pdf",
+        "decompressed_flate_streams": 4,
+        "page_objects": 1,
+        "embedded_true_type": true
+      },
+      {
+        "name": "MSVR310_normal_six_curves.pdf",
+        "decompressed_flate_streams": 4,
+        "page_objects": 1,
+        "embedded_true_type": true
+      },
+      {
+        "name": "RGBNT201_normal_six_curves.pdf",
+        "decompressed_flate_streams": 4,
+        "page_objects": 1,
+        "embedded_true_type": true
+      },
+      {
+        "name": "selected_axis_route_means.pdf",
+        "decompressed_flate_streams": 9,
+        "page_objects": 1,
+        "embedded_true_type": true
+      }
+    ],
+    "latex_captions_exact_match": true
+  },
+  "review_activity": {
+    "local_read_only_source_review": true,
+    "local_review_json_only_write": true,
+    "new_neural_calls": 0,
+    "new_optimizer_updates": 0,
+    "new_SSH_calls": 0,
+    "remote_reads": 0,
+    "training": 0,
+    "spawned_subagents": 0,
+    "existing_figures_or_sources_modified": false
+  },
+  "reviewed_at": "2026-10-07T01:20:41+08:00",
+  "audited_artifact_hashes": {
+    "results/full_official_baselines_20261004/training/MSVR310_demo_s42/epochs.csv": {
+      "bytes": 8895,
+      "sha256": "7181c4d0ea6e0a720bc3cf54c95bba64c0a4100c6e67173cce9561c45dd91ff9"
+    },
+    "results/full_official_baselines_20261004/training/MSVR310_demo_s42/result.json": {
+      "bytes": 55490,
+      "sha256": "3968c2aa9a0fd0a0cd6cdb6ef761670d9471c29e7c2a93ef60238023cd092f3c"
+    },
+    "results/full_official_baselines_20261004/training/RGBNT201_demo_s42/epochs.csv": {
+      "bytes": 8977,
+      "sha256": "ea5a386428e72012cfe25d4add5751a4c9f1dd080ded603e5440750d1c80e102"
+    },
+    "results/full_official_baselines_20261004/training/RGBNT201_demo_s42/result.json": {
+      "bytes": 24833,
+      "sha256": "9e35222359690e691a5c6bb1c135449bde503fe3ac3e92fbf4172e92e133b035"
+    },
+    "results/preflight/prepare_r201i_completed_normal_figures_20261007.py": {
+      "bytes": 6819,
+      "sha256": "90a889f55db82adc5ea4d444d6b6f0d000d24f8848531315353c7b90761e7ab9"
+    },
+    "results/r201g_normal_priority_20261006/training/RGBNT201_r201g_axis_shared_s42/epochs.csv": {
+      "bytes": 8971,
+      "sha256": "861b69ca84af613a388ba91888e5d254370232e4e418499ba0f7857233bb2271"
+    },
+    "results/r201g_normal_priority_20261006/training/RGBNT201_r201g_axis_shared_s42/result.json": {
+      "bytes": 28573,
+      "sha256": "833206d3a13a59b4cf42a816f2648b4683f2104c51b4be6ebeb96bc54ad46e95"
+    },
+    "results/r201g_normal_priority_20261006/training/RGBNT201_r201g_frequency_shared_s42/epochs.csv": {
+      "bytes": 8942,
+      "sha256": "5746ae12773fbeea9d310496729e7c58730699dca8e3015314fe0bfeabfa7ff3"
+    },
+    "results/r201g_normal_priority_20261006/training/RGBNT201_r201g_frequency_shared_s42/result.json": {
+      "bytes": 28692,
+      "sha256": "fc46976b0a8148ee71b1b845ebc38181df2e3cdda9959497f9b0eeb53b32f2ea"
+    },
+    "results/r201g_other_two_normal_20261006/MSVR310/training/MSVR310_r201g_axis_shared_s42/epochs.csv": {
+      "bytes": 8876,
+      "sha256": "70d0bf1d5bc220e47b7c5d7109baf0692059d0b69e0ba09f5825324104cdf48f"
+    },
+    "results/r201g_other_two_normal_20261006/MSVR310/training/MSVR310_r201g_axis_shared_s42/result.json": {
+      "bytes": 59366,
+      "sha256": "31b922d9e46182cb9f4299703d90af10289b4e62916003f567016cdd754a3b3c"
+    },
+    "results/r201g_other_two_normal_20261006/MSVR310/training/MSVR310_r201g_frequency_shared_s42/epochs.csv": {
+      "bytes": 8847,
+      "sha256": "ca615fb0a73e24edd932a04ba84f3bc72e2cd23b2fd1345e20ce800501f1d62a"
+    },
+    "results/r201g_other_two_normal_20261006/MSVR310/training/MSVR310_r201g_frequency_shared_s42/result.json": {
+      "bytes": 59368,
+      "sha256": "db5a78a91cb0b7fb9d49ed261e44eb04be0f9f7d1aaba7d8f9a8a54e0ceb6654"
+    },
+    "results/r201i_completed_normal_figures_20261007/captions.json": {
+      "bytes": 2237,
+      "sha256": "7ac580b997e554010e7255abbeb275281772be1b86103bb5366e7981256ad1f1"
+    },
+    "results/r201i_completed_normal_figures_20261007/closed_400_epoch_curves.csv": {
+      "bytes": 62172,
+      "sha256": "c2f1c5c67e76aedb935e5b5affb869c292a6b3f3fee59c2d2ecdc6d7f04d9f65"
+    },
+    "results/r201i_completed_normal_figures_20261007/completed_normal_objectives.pdf": {
+      "bytes": 22389,
+      "sha256": "2482f3988fca817e822c07e0d4ec6ce938b73bb06004f422a6a72e88649b6153"
+    },
+    "results/r201i_completed_normal_figures_20261007/completed_normal_objectives.png": {
+      "bytes": 290155,
+      "sha256": "44fddfd1930c24ca9344d9fe85322ab400ed63ad7753635410da680da61f80e8"
+    },
+    "results/r201i_completed_normal_figures_20261007/completed_normal_objectives.svg": {
+      "bytes": 66702,
+      "sha256": "4fb583033d22b4aebd1e88150514c1153b1c0aeaf62c4ea80181b5bddcaf5641"
+    },
+    "results/r201i_completed_normal_figures_20261007/data_reduction.json": {
+      "bytes": 4772,
+      "sha256": "1cf36e2cfb23d51d91f42a30659971ae5b4ad3efd0d6810948471770ddfc9f55"
+    },
+    "results/r201i_completed_normal_figures_20261007/gen_completed_objectives.py": {
+      "bytes": 67,
+      "sha256": "81f212431d8a7671893c07d3b881ffaba1610f93240ae97180d0605b3b3d183f"
+    },
+    "results/r201i_completed_normal_figures_20261007/gen_msvr310_normal.py": {
+      "bytes": 68,
+      "sha256": "551d32df5e150a35758ab43d48009071b1d3db5870d9055ca9b1067007e9e926"
+    },
+    "results/r201i_completed_normal_figures_20261007/gen_rgbnt201_normal.py": {
+      "bytes": 69,
+      "sha256": "d0a97d963cc23fcf3e9870789806780b716a4c64b65b5829fc23fef63e5ac3f0"
+    },
+    "results/r201i_completed_normal_figures_20261007/gen_selected_route_means.py": {
+      "bytes": 59,
+      "sha256": "b9cd92df73be75f7ad639f9ae3e9ca0f89c657964a12ea85962164af40aff5b7"
+    },
+    "results/r201i_completed_normal_figures_20261007/inputs.json": {
+      "bytes": 210443,
+      "sha256": "3e55f45f8b076bdd5f307b3b49364a5ab2e48ec5e9f53dae448b6022dc7bd2ac"
+    },
+    "results/r201i_completed_normal_figures_20261007/latex_includes.tex": {
+      "bytes": 2614,
+      "sha256": "d6e3b5f77eff56a31aece9e4a6380144deec358041026e9140535c77d5baca97"
+    },
+    "results/r201i_completed_normal_figures_20261007/MSVR310_normal_six_curves.pdf": {
+      "bytes": 26534,
+      "sha256": "dae23bd6d15344d03f0547e2992d43b9726edbb05696d7a2cb45be40178ef8b7"
+    },
+    "results/r201i_completed_normal_figures_20261007/MSVR310_normal_six_curves.png": {
+      "bytes": 271735,
+      "sha256": "8d89de51271dc4773f406259332156e19e37267940991683f198875c17aa5db3"
+    },
+    "results/r201i_completed_normal_figures_20261007/MSVR310_normal_six_curves.svg": {
+      "bytes": 88768,
+      "sha256": "37179756fde6748d0d1f1896a9b01f289d2fbda4527b3ee1e03259964a529b79"
+    },
+    "results/r201i_completed_normal_figures_20261007/plot_completed_normal_common.py": {
+      "bytes": 4642,
+      "sha256": "f83a31cacd76ec5f79501ba6029bae300387ada25dbacf3b2f3b84e1f5506290"
+    },
+    "results/r201i_completed_normal_figures_20261007/recorded_costs.csv": {
+      "bytes": 1329,
+      "sha256": "a06ccc84b5f039a6d74e8ecf12afcf0623ddf2ec9647541c7977737724732fe6"
+    },
+    "results/r201i_completed_normal_figures_20261007/render_actual.json": {
+      "bytes": 3369,
+      "sha256": "af8bbd58ef4d5af7c23eead0482d7136751dcdda1fd3e7a3aca79df5d26b2ee1"
+    },
+    "results/r201i_completed_normal_figures_20261007/rendered_self_check.json": {
+      "bytes": 1081,
+      "sha256": "e492f8dcc18f6a4b5746994e8de9860699e231d832e1510c635cbaec3d88a510"
+    },
+    "results/r201i_completed_normal_figures_20261007/RGBNT201_normal_six_curves.pdf": {
+      "bytes": 27655,
+      "sha256": "d577ac40a9e0ec91ea1dcd0060fe54dbfe570e470beb5ef69f97ac768fdb2887"
+    },
+    "results/r201i_completed_normal_figures_20261007/RGBNT201_normal_six_curves.png": {
+      "bytes": 244533,
+      "sha256": "2dfc8fdf654aef6933d6e95ab88862f43d33a61e243b6c146d97eac7276060c5"
+    },
+    "results/r201i_completed_normal_figures_20261007/RGBNT201_normal_six_curves.svg": {
+      "bytes": 89249,
+      "sha256": "56b58b53bef071bc5d1b5268e5edb5442b59afb10f0592954507483b88dee558"
+    },
+    "results/r201i_completed_normal_figures_20261007/selected_and_final_six.csv": {
+      "bytes": 3207,
+      "sha256": "11f2944f60b9934422f99c7cbbaad3fda4395b441a264866c1fc731f9bd28c13"
+    },
+    "results/r201i_completed_normal_figures_20261007/selected_axis_route_means.pdf": {
+      "bytes": 21555,
+      "sha256": "196a67df6d930b2fedde1cc278a946b305209834f8c9732ef97c319efd64190c"
+    },
+    "results/r201i_completed_normal_figures_20261007/selected_axis_route_means.png": {
+      "bytes": 130340,
+      "sha256": "ebeeb0e1c9f18a5a015c4f99fb089529e24b8314163728c7956ada4bf64d94b7"
+    },
+    "results/r201i_completed_normal_figures_20261007/selected_axis_route_means.svg": {
+      "bytes": 50329,
+      "sha256": "0c7c501c45c3d696e2fb7f290b4b6cedf5505b86c679b578dde75e1881de3ec9"
+    },
+    "results/r201i_completed_normal_figures_20261007/selected_route_readout.csv": {
+      "bytes": 1972,
+      "sha256": "89418655b0f88deb3a3733e10bc992c0000e1fc0c5db2210faf8445c5f841b15"
+    },
+    "results/r201i_completed_normal_figures_20261007/temporary_cleanup_actual.json": {
+      "bytes": 3590,
+      "sha256": "60196a460591dc3a367b3706b98100eb814cdeeb48e04e3ba8488e103f2ea416"
+    },
+    "results/r201i_primary_margin_20261006/MSVR310/normal_analysis/training_curves.csv": {
+      "bytes": 29659,
+      "sha256": "d702b1afdbfc735c3230293ba4b555e1e8d18701bfadefcbc21d3cd3e79cefbe"
+    },
+    "results/r201i_primary_margin_20261006/MSVR310/training/MSVR310_r201i_axis_shared_s42/epochs.csv": {
+      "bytes": 8876,
+      "sha256": "dda6d78a8167c5d409d12185259716fd7c530a1365c46e5cc9ac983265b57a0e"
+    },
+    "results/r201i_primary_margin_20261006/MSVR310/training/MSVR310_r201i_axis_shared_s42/result.json": {
+      "bytes": 59403,
+      "sha256": "3db76422c92635766ce5299fda5f7d318f9deec6cc7549ef13ce8b85407a4684"
+    },
+    "results/r201i_primary_margin_20261006/MSVR310/training/MSVR310_r201i_frequency_shared_s42/epochs.csv": {
+      "bytes": 8872,
+      "sha256": "c36bec6ec97f753eabb150d877aa2e5c49b9cfa9ecf45f1691d9048dc50f622a"
+    },
+    "results/r201i_primary_margin_20261006/MSVR310/training/MSVR310_r201i_frequency_shared_s42/result.json": {
+      "bytes": 59272,
+      "sha256": "ccee3fe593ec46d3209954b5baf0d510c2857595aa8dfdbf68b6f16375356ced"
+    },
+    "results/r201i_primary_margin_20261006/RGBNT201/normal_analysis/training_curves.csv": {
+      "bytes": 29799,
+      "sha256": "48c3144850c2db3a66e79998085fcf58ef312f5b0df24632164059f56887b7b6"
+    },
+    "results/r201i_primary_margin_20261006/RGBNT201/training/RGBNT201_r201i_axis_shared_s42/epochs.csv": {
+      "bytes": 8934,
+      "sha256": "b1e143a27ea80eba8b1b04f66551e09ec02871f1540260fb880e6df9943fd5c4"
+    },
+    "results/r201i_primary_margin_20261006/RGBNT201/training/RGBNT201_r201i_axis_shared_s42/result.json": {
+      "bytes": 28584,
+      "sha256": "9ebed6479980502197690ff16238cbdcaed47f581ae9c761be420652679488eb"
+    },
+    "results/r201i_primary_margin_20261006/RGBNT201/training/RGBNT201_r201i_frequency_shared_s42/epochs.csv": {
+      "bytes": 8954,
+      "sha256": "56a2f326eacacd05c78682e2a5352d5d62682e3ebf6fe0a1333566170c8d9e12"
+    },
+    "results/r201i_primary_margin_20261006/RGBNT201/training/RGBNT201_r201i_frequency_shared_s42/result.json": {
+      "bytes": 28640,
+      "sha256": "5a9fe43ce2f51e696e5c72afb45d4aefd539c56ba8913634dd323590fa0a7f3a"
+    }
+  }
+}

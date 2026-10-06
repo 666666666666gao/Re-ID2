@@ -1,0 +1,23 @@
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.95\textwidth]{RGBNT201_normal_six_curves.pdf}
+\caption{RGBNT201 complete official normal-input trajectories. G and I are paired expert-stage seed42 runs on the same frozen DeMo42 identity anchor, 50 additional epochs after original50. G uses primary soft Triplet; I uses hinge margin0.3, with auxiliaries unchanged. All four markers use that run’s normal mAP-best earliest-tie epoch for every metric, not each metric’s maximum. The horizontal reference is original DeMo50’s selected checkpoint (different total budget). N=1 paired expert seed; official benchmark participates in selection. No RGBNT100, additional seeds or missing results are included.}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.95\textwidth]{MSVR310_normal_six_curves.pdf}
+\caption{MSVR310 complete official normal-input trajectories under the same protocol, colors, budget distinction and mAP-based markers as RGBNT201. N=1 paired expert seed on DeMo42. Small best-score differences and later trajectories do not establish stable +2 improvement or whole-pipeline repeatability.}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.95\textwidth]{completed_normal_objectives.pdf}
+\caption{Complete50 expert-stage epochs for RGBNT201 (top) and MSVR310 (bottom). Left: recorded aggregate G/I training loss; middle/right: I primary hinge loss and mean active margin violations among64 anchors per training batch, for dual axis and ordinary control. Aggregate losses have different primary terms and are not directly equivalent objective values. These scalar curves do not measure gradient norms, identify a unique collapse cause or establish multi-seed stability. Full official training, teacher42 fixed, expert seed42 only.}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.95\textwidth]{selected_axis_route_means.pdf}
+\caption{Full-normal selected-checkpoint mean 7-relation × 3-spatial-frequency routing probabilities: RGBNT201 top, MSVR310 bottom; G left, I right. Shared color range0–40 percent; cell values are percentages. Means cover all actual query+gallery routed occurrences (1672 and1646 respectively), not independent training repeats. Selected epochs follow normal mAP, not route entropy. Cross-band and conditional updates precede routing, so low routed band allocation does not prove middle/high inputs unused. Per-sample joint-minus-marginal L1, reported separately in the source CSV, is not the L1 of this average table, mutual information, or retrieval utility.}
+\end{figure*}
