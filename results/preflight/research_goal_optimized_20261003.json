@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-07T02:57:23",
+  "updated_at": "2026-10-07T03:15:29",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -11158,10 +11158,17 @@
       "new_native_updates": 0,
       "seed42_reused": true,
       "limits": "Conditional expert-stage repeats; benchmark-selected Best-of3 separate from mean/sampleSD. Not whole-pipeline repeatability or complete49.",
-      "expert_seed_running": 43,
-      "actual_native_updates_closed": 6,
+      "expert_seed_running": 44,
+      "actual_native_updates_closed": 12,
       "source_review": "results/preflight/r201i_expert_seeds_prelaunch_recovery_source_review_20261007.json",
-      "original_prelaunch_failure_preserved": true
+      "original_prelaunch_failure_preserved": true,
+      "closed_extra_seeds": [
+        43
+      ],
+      "closed_extra_epochs": 100,
+      "closed_extra_updates": 5292,
+      "seed43_normal_cpu": "results/r201i_s43_completed_normal_progress_20261007/result.json",
+      "three_seed_statistics_complete": false
     },
     "R201I_fixed_best_complete_missing_queued": {
       "status": "ACTUAL_SOURCE_REVIEW_PASS_SINGLE_LOCAL_MISSING_QUEUE_WAITING_NORMAL_SEEDS",
@@ -11347,8 +11354,8 @@
   ],
   "next_action": {
     "milestone": "PREPARE_NORMAL_INPUT_CANDIDATE_FROM_CLOSED_CONTROL_EVIDENCE",
-    "status": "ORIGINAL_I_THREE_NORMAL_COMPLETE_SEED43_NATIVE_PASS_FORMAL_RUNNING",
-    "action": "三集I42完整normal已完成300模型轮/19418updates/native18及GT/raw/CPU；201通过+2/+2，100与MSVR未通过。原seed receiver13056在真实3.5GB门失败并退出，保留失败；清4个同fit/dev协议被保留V12主指标支配且full49闭合旧M1权重后，fresh审查恢复原post-intake AST，43native6已过/正式50运行，然后44配对native/50和三seed统计；missing原21496继续等实际完成后做六I42+normal Best-of3补充全部49四状态。不重新训练/收取已完成I42，不调低空间门，不改NN源或选点，不将3seed条件实验说成3次整套pipeline。",
+    "status": "EXPERT43_FULL50_GT_RAW_COMPLETE_EXPERT44_NATIVE6_PASS_FORMAL_RUNNING",
+    "action": "I42三集六normal完整300模型轮/19418updates已闭合；43两臂50/5292updates、native6、fullGT/raw/CPU已闭合，44native6通过后两臂50运行。等原47076完成44及三seed统计，保留全seed六指标/配对/sampleSD/Bestof3区别；然后原21496固定normal权重运行三集49四状态和normal Bestof3补充。仅2026物理2/3最多2NN，不重复原NN/收取，不宣称2seed为N3或整套pipeline，goal仍三集各mAP/R1+2和缺失完整公平验证。",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
