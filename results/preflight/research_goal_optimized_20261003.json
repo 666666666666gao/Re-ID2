@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-06T23:20:25",
+  "updated_at": "2026-10-06T23:39:55",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -10686,7 +10686,7 @@
       "historical_receipts_kept": true
     },
     "R201I_primary_margin_prepared": {
-      "status": "ACTUAL_RGBNT201_TWO_FULL50_GT_AND_CPU_COMPLETE_OTHER_DATASETS_ORIGINAL_RECEIVER_CONTINUES",
+      "status": "ACTUAL_TWO_I_NORMAL_DATASETS_GT_CPU_COMPLETE_RGBNT100_ORIGINAL_RUNNING_GOAL_UNMET",
       "datasets": [
         "RGBNT201",
         "MSVR310",
@@ -10709,14 +10709,14 @@
       "source_review": "results/preflight/r201i_primary_margin_source_review_20261006.json",
       "primary_margin": 0.3,
       "actual_native_updates": 18,
-      "actual_formal_epochs": 100,
+      "actual_formal_epochs": 200,
       "executed": true,
-      "actual_formal_updates_observed": 5294,
+      "actual_formal_updates_observed": 6704,
       "initial_proof": "results/preflight/r201i_primary_margin_initial_actual_20261006.json",
       "original_primary_session": 27774,
       "original_receiver_pid": 21900,
       "passive_timer_pid": 20940,
-      "latest_observed_at": "2026-10-06T23:11:44",
+      "latest_observed_at": "2026-10-06T23:22:08",
       "latest_epochs": {
         "RGBNT201_r201i_frequency_shared_s42": 21,
         "RGBNT201_r201i_axis_shared_s42": 20
@@ -10743,10 +10743,11 @@
       },
       "all_eligible201_training_records_visited": true,
       "AMP_skipped_updates": 0,
-      "closed_formal_epochs": 100,
-      "closed_formal_updates": 5294,
+      "closed_formal_epochs": 200,
+      "closed_formal_updates": 6704,
       "completed_normal_datasets": [
-        "RGBNT201"
+        "RGBNT201",
+        "MSVR310"
       ],
       "all_three_normal_complete": false,
       "RGBNT201_six_metrics": [
@@ -10912,6 +10913,210 @@
         "Rank-5": 91.98564593301435,
         "Rank-10": 94.49760765550239,
         "Rank-20": 96.5311004784689
+      },
+      "MSVR310_six_metrics": [
+        {
+          "dataset": "MSVR310",
+          "model": "original_DeMo",
+          "selected_epoch": "32",
+          "mAP": "47.164688447227576",
+          "mINP": "23.502961234396178",
+          "Rank-1": "63.95939086294417",
+          "Rank-5": "80.20304568527918",
+          "Rank-10": "84.77157360406092",
+          "Rank-20": "89.84771573604061"
+        },
+        {
+          "dataset": "MSVR310",
+          "model": "G_frequency_shared",
+          "selected_epoch": "15",
+          "mAP": "47.24680863675226",
+          "mINP": "23.663143516382217",
+          "Rank-1": "63.62098138747885",
+          "Rank-5": "80.8798646362098",
+          "Rank-10": "84.60236886632826",
+          "Rank-20": "89.84771573604061"
+        },
+        {
+          "dataset": "MSVR310",
+          "model": "I_frequency_shared",
+          "selected_epoch": "15",
+          "mAP": "47.237814977555246",
+          "mINP": "23.62984991278797",
+          "Rank-1": "63.7901861252115",
+          "Rank-5": "80.71065989847716",
+          "Rank-10": "84.77157360406092",
+          "Rank-20": "89.84771573604061"
+        },
+        {
+          "dataset": "MSVR310",
+          "model": "G_axis_shared",
+          "selected_epoch": "4",
+          "mAP": "47.21107132502441",
+          "mINP": "23.551308518735574",
+          "Rank-1": "63.7901861252115",
+          "Rank-5": "80.20304568527918",
+          "Rank-10": "84.77157360406092",
+          "Rank-20": "90.01692047377327"
+        },
+        {
+          "dataset": "MSVR310",
+          "model": "I_axis_shared",
+          "selected_epoch": "5",
+          "mAP": "47.22060784085766",
+          "mINP": "23.555108520124353",
+          "Rank-1": "63.95939086294417",
+          "Rank-5": "80.03384094754654",
+          "Rank-10": "84.77157360406092",
+          "Rank-20": "90.01692047377327"
+        }
+      ],
+      "MSVR310_comparisons": [
+        {
+          "dataset": "MSVR310",
+          "improved": "I_axis_shared",
+          "reference": "original_DeMo",
+          "mAP": 0.05591939363008436,
+          "mINP": 0.05214728572817506,
+          "Rank-1": 0.0,
+          "Rank-5": -0.16920473773264177,
+          "Rank-10": 0.0,
+          "Rank-20": 0.16920473773265599,
+          "both_plus2": false,
+          "rank1_rescued": 1,
+          "rank1_harmed": 1,
+          "AP_improved": 273,
+          "AP_worsened": 207
+        },
+        {
+          "dataset": "MSVR310",
+          "improved": "I_frequency_shared",
+          "reference": "original_DeMo",
+          "mAP": 0.07312653032767003,
+          "mINP": 0.12688867839179352,
+          "Rank-1": -0.1692047377326702,
+          "Rank-5": 0.5076142131979822,
+          "Rank-10": 0.0,
+          "Rank-20": 0.0,
+          "both_plus2": false,
+          "rank1_rescued": 3,
+          "rank1_harmed": 4,
+          "AP_improved": 285,
+          "AP_worsened": 234
+        },
+        {
+          "dataset": "MSVR310",
+          "improved": "I_axis_shared",
+          "reference": "I_frequency_shared",
+          "mAP": -0.017207136697585668,
+          "mINP": -0.07474139266361846,
+          "Rank-1": 0.1692047377326702,
+          "Rank-5": -0.6768189509306239,
+          "Rank-10": 0.0,
+          "Rank-20": 0.16920473773265599,
+          "both_plus2": false,
+          "rank1_rescued": 3,
+          "rank1_harmed": 2,
+          "AP_improved": 253,
+          "AP_worsened": 267
+        },
+        {
+          "dataset": "MSVR310",
+          "improved": "I_axis_shared",
+          "reference": "G_axis_shared",
+          "mAP": 0.009536515833246995,
+          "mINP": 0.0038000013887788953,
+          "Rank-1": 0.1692047377326702,
+          "Rank-5": -0.16920473773264177,
+          "Rank-10": 0.0,
+          "Rank-20": 0.0,
+          "both_plus2": false,
+          "rank1_rescued": 1,
+          "rank1_harmed": 0,
+          "AP_improved": 228,
+          "AP_worsened": 219
+        },
+        {
+          "dataset": "MSVR310",
+          "improved": "I_frequency_shared",
+          "reference": "G_frequency_shared",
+          "mAP": -0.008993659197017223,
+          "mINP": -0.03329360359424527,
+          "Rank-1": 0.16920473773264888,
+          "Rank-5": -0.16920473773264177,
+          "Rank-10": 0.16920473773265599,
+          "Rank-20": 0.0,
+          "both_plus2": false,
+          "rank1_rescued": 1,
+          "rank1_harmed": 0,
+          "AP_improved": 206,
+          "AP_worsened": 248
+        },
+        {
+          "dataset": "MSVR310",
+          "improved": "I_axis_shared",
+          "reference": "G_frequency_shared",
+          "mAP": -0.02620079589460289,
+          "mINP": -0.10803499625786372,
+          "Rank-1": 0.3384094754653191,
+          "Rank-5": -0.8460236886632657,
+          "Rank-10": 0.16920473773265599,
+          "Rank-20": 0.16920473773265599,
+          "both_plus2": false,
+          "rank1_rescued": 3,
+          "rank1_harmed": 1,
+          "AP_improved": 244,
+          "AP_worsened": 266
+        }
+      ],
+      "MSVR310_original_both_plus2": false,
+      "MSVR310_primary_activity": {
+        "I_axis_shared": [
+          {
+            "epoch": 1.0,
+            "primary_triplet_loss": 0.04829662226672683,
+            "primary_margin_violations": 38.857142857142854,
+            "primary_positive_distance_mean": 0.40214734205177854,
+            "primary_negative_distance_mean": 0.6767919787338802
+          },
+          {
+            "epoch": 20.0,
+            "primary_triplet_loss": 0.016271819294031178,
+            "primary_margin_violations": 21.928571428571427,
+            "primary_positive_distance_mean": 0.3876010754278728,
+            "primary_negative_distance_mean": 0.7230682671070099
+          },
+          {
+            "epoch": 50.0,
+            "primary_triplet_loss": 0.02249134667882962,
+            "primary_margin_violations": 20.357142857142858,
+            "primary_positive_distance_mean": 0.4147975295782089,
+            "primary_negative_distance_mean": 0.7608259533132825
+          }
+        ],
+        "I_frequency_shared": [
+          {
+            "epoch": 1.0,
+            "primary_triplet_loss": 0.04828476905822754,
+            "primary_margin_violations": 38.92857142857143,
+            "primary_positive_distance_mean": 0.4021473824977875,
+            "primary_negative_distance_mean": 0.6767871763025012
+          },
+          {
+            "epoch": 20.0,
+            "primary_triplet_loss": 0.022311694787016938,
+            "primary_margin_violations": 29.642857142857142,
+            "primary_positive_distance_mean": 0.384066213454519,
+            "primary_negative_distance_mean": 0.693321168422699
+          },
+          {
+            "epoch": 50.0,
+            "primary_triplet_loss": 0.03775685253952231,
+            "primary_margin_violations": 31.642857142857142,
+            "primary_positive_distance_mean": 0.4067064566271646,
+            "primary_negative_distance_mean": 0.7041370698383876
+          }
+        ]
       }
     },
     "H_weaker_weight_retirement": {
@@ -10922,20 +11127,21 @@
       "proof": "results/preflight/r201h_closed_weaker_weights_retirement_actual_20261006.json"
     },
     "R201I_normal_CPU_prepared": {
-      "status": "ACTUAL_RGBNT201_TEXT_AND_CPU_COMPLETE_OTHER_TWO_PENDING",
+      "status": "ACTUAL_TWO_DATASET_TEXT_AND_CPU_COMPLETE_RGBNT100_PENDING",
       "new_sources": 2,
       "reused_sources": 67,
       "source_review": "results/preflight/r201i_normal_cpu_closeout_source_review_20261006.json",
-      "actual_intakes": 1,
-      "actual_CPU_reductions": 1,
+      "actual_intakes": 2,
+      "actual_CPU_reductions": 2,
       "executed": true,
       "per_dataset_models": 5,
       "per_dataset_comparisons": 6,
       "per_dataset_curve_rows": 100,
       "completed_datasets": [
-        "RGBNT201"
+        "RGBNT201",
+        "MSVR310"
       ],
-      "paired_query_rows": 5016
+      "paired_query_rows": 8562
     }
   },
   "decision_rules": [
@@ -10963,7 +11169,7 @@
   "next_action": {
     "milestone": "PREPARE_NORMAL_INPUT_CANDIDATE_FROM_CLOSED_CONTROL_EVIDENCE",
     "status": "R201I_THREE_NORMAL_ORIGINAL_RECEIVER_LIVE_ESTIMATED_MILESTONES",
-    "action": "201同协议完整50/GT/CSV六指标与100轮curve已闭合，both+2且胜同I频域；不代表三集/缺失/多seed完成。继续原27774/local21900与唯一timer20940，逐集MSVR/RGB100结束后一次收取并分析；三个正常之后固定best全部49，公平对照与>=3seeds等完整目标保留，不拼旧版本、不动active NNsource。",
+    "action": "201已完整+2/+2，MSVR50/GT/CPU已完整且仅+0.055919/0，无统一三集达标；MSVR primary hinge并未整体关闭，E50均值0.022491/违反20.357个64-anchor。保持原27774/local21900与timer20940完成RGBNT100，不改active source、不降低目标；关闭后收CPU，再固定全部normal best完整49，以真实推理贡献、源可用性和公平对照决定下一单因素。",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
