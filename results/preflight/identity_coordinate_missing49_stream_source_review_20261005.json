@@ -1,26 +1,127 @@
 {
   "status": "PASS",
-  "review_scope": "SOURCE_ONLY",
-  "reviewed_at": "2026-10-05T22:14:17+08:00",
-  "reviewer": "/root/review_identity_missing49_stream",
+  "reviewed_at": "2026-10-05T23:57:05+08:00",
+  "reviewer": "/root/review_old_archive_keepalive",
   "requested_backend": "Codex native fresh collaboration reviewer",
   "requested_model": "gpt-6-astra",
   "requested_reasoning_effort": "max",
   "actual_backend": "UNATTESTED",
   "actual_model": "UNATTESTED",
   "actual_reasoning_effort": "UNATTESTED",
-  "attribution_basis": "Requested routing does not independently attest the executing backend/model/effort; no independent attestation was available in this review.",
-  "review_context": "Fresh delegated source review; supplied plan plus direct reads of exact new sources, canonical dependencies and existing local primary JSON/CSV.",
+  "attribution_basis": "The experiment-bridge installed policy requests Astra/max. Requested routing and task labels do not independently attest the actual serving backend/model/effort.",
+  "review_context": "Fresh delegated SOURCE_ONLY review using direct local source, preserved prior receipt, and actual saved primary-artifact reads. No project module or production entrypoint was executed.",
   "review_independence": "same-family",
   "acceptance_status": "provisional",
-  "summary": "PASS after a minimal launcher stdout-lock correction. The three new sources preserve the fixed-best R201C narrow four-state evaluator, full official data and installed-GT metric auditing, and bounded raw archive acknowledgement. This is not deployment or native/full execution acceptance.",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "review_scope": "SOURCE_ONLY_THREE_STREAM_SOURCES_WITH_SINGLE_POPEN_SSH_KEEPALIVE_CHANGE_AND_ACTUAL_RECOVERED_PREREQUISITE_SCHEMA",
+  "summary": "PASS. The evaluator and launcher exactly match the preserved prior PASS; the deployer changes only its long-lived SSH Popen argv to ServerAliveInterval30 and ServerAliveCountMax3. Direct source review and actual saved prerequisite schema checks preserve fixed-best all-official inference, zero updates, native-before-full, bounded archive acknowledgement and the corrected stdout lock. No native/full execution is claimed.",
   "sources_sha256": {
     "evaluate_identity_coordinate_missing49_stream.py": "ff49b55f61d7483a110d3e51a5b0f0af9045af60d0910ebeb8f4e64c59afa770",
     "launch_identity_coordinate_missing49_stream.py": "a58ca0eb870883ed7d168383ea08ae189432311cb3573b06293aa60ba214a761",
-    "results/preflight/identity_coordinate_missing49_stream_deploy_20261005.py": "1428540a7aa594dbbd2f44a193aadecc47eeacebc1d9821a9efc705630254cba"
+    "results/preflight/identity_coordinate_missing49_stream_deploy_20261005.py": "c41d14e736e8936ada83bc2beb63dbb6d25ad948a0435cf3f098ccc27c48052c"
   },
-  "blocking_findings": [],
-  "nonblocking_findings": [],
+  "prior_review": {
+    "path": "results/preflight/identity_coordinate_missing49_stream_source_review_before_keepalive_20261005.json",
+    "sha256": "cc411624b2928d3b1143142555d86fa20836384dfbce4f4644514f3a287244d0",
+    "status": "PASS",
+    "preserved_bytes": true,
+    "prior_deployer_sha256": "1428540a7aa594dbbd2f44a193aadecc47eeacebc1d9821a9efc705630254cba",
+    "scope_note": "Historical prior checks remain in the preserved record; this updated receipt reports only checks actually performed in this review."
+  },
+  "transport_change": {
+    "file": "results/preflight/identity_coordinate_missing49_stream_deploy_20261005.py",
+    "changed_call": "The single subprocess.Popen SSH connection that runs launch_identity_coordinate_missing49_stream.py",
+    "added_argv": [
+      "-o",
+      "ServerAliveInterval=30",
+      "-o",
+      "ServerAliveCountMax=3"
+    ],
+    "exact_change_verified": "git HEAD deployer bytes equal the prior reviewed SHA. Applying only the shown Popen argv replacement to those bytes exactly equals current source.",
+    "actual_data_facts": {
+      "original_old_receiver": 17662,
+      "original_old_exit_code": 1,
+      "actual_stderr": "client_loop: send disconnect: Connection reset",
+      "old_effective_ServerAliveInterval": 0,
+      "old_effective_ServerAliveCountMax": 3,
+      "old_controller_absent": true,
+      "old_all12_child_exits0": true,
+      "old_completed_GT_cases": 784,
+      "prior_normal_receiver": 71594,
+      "prior_normal_exit_code": 1,
+      "normal_archive_only_recovery_canonical_complete": true
+    },
+    "unchanged": "Global collect_results.OPTIONS, old50 sources, evaluator, launcher, archive ACK format, consumer gates and restoration/cleanup logic.",
+    "limit": "The real connection-reset evidence supports this bounded keepalive change. The exact underlying failure cause remains unproven; SOURCE_ONLY review does not demonstrate transport reliability or guarantee that keepalive prevents every reset."
+  },
+  "checks": [
+    {
+      "check": "fixed_best_full_official_and_zero_updates",
+      "result": "PASS_SOURCE",
+      "evidence": [
+        "The exact unchanged evaluator uses installed_context/full_records, exact official manifest and metadata, COMPLETE50/full training coverage/zero AMP, normal GT auditPASS and individual train exit0. It strictly loads each selected best.pth through the unchanged narrow5120 builder; missing conditions do not select a checkpoint.",
+        "The original00/M-only10/F-only01/full11 paths are reused. Extraction is eval/no_grad, with finite normalized5120D banks and unchanged anchor/tensor-version/input-byte checks. No optimizer or checkpoint save is present.",
+        "RNT11 full query/gallery features and distances must exactly match restored selected arrays, and all six normal metrics must equal the saved training result."
+      ]
+    },
+    {
+      "check": "installed_GT_and_native_first",
+      "result": "PASS_SOURCE_NOT_EXECUTED",
+      "evidence": [
+        "Native requires each of four controls to pass all seven8-record/four-state shape and norm checks, then full official normal matrices for all four states:16 GT cases and4 raw archives.",
+        "Full requires matching reviewed native local sources/exit0/raw4 and the remote native PASS4/GT16/all7/local-archive record. It then covers four controls x49 pairs x4 states=784 GT cases and196 raw archives.",
+        "Directly read canonical recount/verify/full_metrics: installed filename labels, same-ID/same-scene MSVR or same-ID/same-camera RGBNT exclusions, stable gallery-index ties, six metrics,CMC50,every CSV field and group summaries. Targets remain dataset GT."
+      ]
+    },
+    {
+      "check": "stdout_lock_archive_ACK_and_bounded_lifecycle",
+      "result": "PASS_SOURCE_AND_AST",
+      "evidence": [
+        "All three lane stdout print sites at lines56,81,91 are inside the same exchange lock. RAW_READY, exact stdin ACK validation and forwarding to its child remain serialized; controller completion prints after both futures finish.",
+        "Each worker retains at most one raw file and unlinks it only after its exact local-copy acknowledgement and repeated remote size/SHA. The Windows receiver uses copy_verified and requires every unique ready event to have one cleared event, full counts, controller completion and SSH exit0 before its receipt.",
+        "Two serialized lanes remain on physicalGPU2/3 with240-second memory-availability waits and no temperature/power condition. CPU banks are built before releasing the model; no new training work is introduced."
+      ]
+    },
+    {
+      "check": "actual_recovered_prerequisites_and_restore_schema",
+      "result": "PASS_SOURCE_AND_ACTUAL_NORMAL_RECEIPT;_OLD_RESCUE_STILL_PENDING",
+      "evidence": [
+        "The actual normal canonical receipt and archive-rescue receipt are identical and record the required COMPLETE_THREE_NORMAL_DATASETS_AND_FOUR_NEW50_GT_AND_LOCAL_RAW,exit0,4 archives,14124 historical updates. They explicitly retain original71594 exit1 and the recovery actor.",
+        "The actual collected normal controller has COMPLETE,new_models4,normal_datasets_completed3,normal_archives_local_verified4,paired_sampling_exact. All four saved archive paths remain under the dedicated D root with actual sizes matching records. These are accepted by the unchanged normal checks; recovery provenance does not bypass a gate.",
+        "The old canonical terminal receipt remains absent. The separately reviewed archive-only rescue supplies every old status/controller field consumed by this deployer and launcher, but native remains gated until that rescue actually completes.",
+        "Native restores only the four exact selected arrays to best_official_arrays_restore_missing49.npz and checks remote size/SHA. Full retains and uses these inputs, then removes only these four exact restored copies after complete196 archive/clear pairs. Original local arrays and best weights remain retained."
+      ]
+    }
+  ],
+  "actual_local_checks": {
+    "source_AST_and_compile": "PASS for all three current sources; no project imports or entrypoints.",
+    "prior_byte_comparison": {
+      "evaluator_unchanged": true,
+      "launcher_unchanged": true,
+      "deployer_exactly_keepalive_replacement": true
+    },
+    "original_old_runtime_current_local_hashes": {
+      "entries": 43,
+      "mismatches": []
+    },
+    "normal_runtime_current_local_hashes": {
+      "entries": 50,
+      "mismatches": []
+    },
+    "stdout_lock_AST": {
+      "all_lane_prints_locked": true,
+      "lines": [
+        56,
+        81,
+        91
+      ]
+    },
+    "normal_recovered_receipt_and_controller_gates": "PASS by actual saved JSON and local path/size reads; no restoration, raw-payload rehash or remote call.",
+    "old_canonical_receipt_present": false,
+    "new_native_actual_receipt_present": false,
+    "new_full_actual_receipt_present": false
+  },
   "resolved_findings": [
     {
       "id": "R1",
@@ -32,163 +133,32 @@
       "verification_scope": "Static source and AST; no synthetic receipt, production entrypoint, network transport or native execution."
     }
   ],
-  "checks": [
-    {
-      "check": "two_real_terminal_prerequisites_before_deployment",
-      "result": "PASS_SOURCE; actual terminal receipts currently absent",
-      "evidence": [
-        "The Windows deployer reads the original rgbnt201_identity_outlet50_actual_session receipt and the four-new-normal actual_session receipt before its first SSH/scp/Popen. Exact producer status strings and exit_code0 match the unchanged original receivers; normal archives4 and successful updates14124 are required.",
-        "Remote precheck and launcher independently require the corresponding normal and old controller_result COMPLETE records. Launcher verifies new_models4,normal_datasets_completed3,normal_archives_local_verified4,paired_sampling_exact and original models4,closed_state_cases784,all_raw_local_verified.",
-        "Local observation during review found neither prerequisite terminal receipt, nor a new missing native receipt. No receipt/root was fabricated and no gate was executed or bypassed.",
-        "The new deployment copies only the two new runtime source files after the terminal prerequisites. It does not rewrite the current normal or old queue sources, resume a parent, restart a receiver or run RGBNT201 narrow again."
-      ]
-    },
-    {
-      "check": "native_barrier_then_full_four_controls",
-      "result": "PASS_SOURCE_NOT_EXECUTED",
-      "evidence": [
-        "Native runs each of the four MSVR310/RGBNT100 x frequency/axis controls. Each calls extract_bank on eight real records for all seven nonempty modality sets and checks exactly four finite 8x5120 normalized states with norm error below1e-5.",
-        "Native also extracts the entire normal official query plus gallery for all four states, audits their four complete GT distance matrices and transfers one raw NPZ per control. Native completion therefore requires four NPZ and16 complete normal GT state cases, beyond the small-batch shape checks.",
-        "Full mode requires the actual native Windows receipt with exit0,raw4 and the same reviewed sources, and the remote native controller PASS with controls4,GT16,all7 checks and local archive acknowledgement.",
-        "Full iterates all7x7 sets for each of four controls:196 raw NPZ and784 GT state cases. The source creates fresh native/full output directories and never converts an incomplete result into success."
-      ]
-    },
-    {
-      "check": "unchanged_fixed_best_model_and_fourstate_branch_closure",
-      "result": "PASS_SOURCE",
-      "evidence": [
-        "The evaluator reuses identity_coordinate_three_dataset.build, which creates the unchanged IdentityCoordinateAxis with bypass=False, matching dataset/variant/seed42, the original corresponding50-epoch anchor, fixed identity encoder and original5120D narrow outlet. It strictly loads each selected normal best.pth.",
-        "Reused controlled_states defines00 as the original private base,10 as the M-only branch from m0 and its independent gate,01 as the F-only branch from f0 with independent relation evidence and gate, and11 as the full fused branch. The new evaluator does not change or reconstruct these branches.",
-        "No optimizer is constructed or stepped in the new evaluator and no torch.save/new checkpoint exists. torch.no_grad wraps extraction; model.eval, unchanged frozen-anchor checks, state tensor-version equality and protected input byte hashes bracket evaluation.",
-        "RNT11 query/gallery normalized arrays and CPU distance must be exactly equal to the restored originally selected normal arrays; final six normal metrics must equal the trained selected result. Missing cases cannot select another checkpoint."
-      ]
-    },
-    {
-      "check": "full_splits_shapes_order_masks_and_GT_metrics",
-      "result": "PASS_SOURCE_AND_EXISTING_LOCAL_TEXT",
-      "evidence": [
-        "installed_context independently parses installed train/query/gallery filenames and requires COMPLETE50,no heldout identities,exact manifests/counts and train/test identity separation. The evaluator also requires the preceding normal GT audit PASS and full recorded training coverage.",
-        "full_records uses complete official query/gallery lists. Query plus gallery extraction, batch64/eval loader, seed and normalization match the original training evaluator; per-state banks split at len(query), with exact totalx5120 shape.",
-        "The canonical SETS contains RNT,R,N,T,RN,RT,NT; mask_images zeroes the designated normalized modality tensors. All49 query/gallery set pairs occur once;12 pairs have disjoint source sets.",
-        "full_metrics uses same-ID/same-scene exclusion for MSVR310 and same-ID/same-camera for RGBNT100. Every saved raw state is independently reranked by canonical recount using installed GT and stable gallery-index ties.",
-        "canonical verify checks mAP,mINP,R1,R5,R10,R20,all50 CMC entries,query/gallery/valid counts,every per-query CSV field and all camera/scene/identity group summaries. It is applied to four states before RAW_READY for every condition.",
-        "Actual local text checks reparsed all names in the two original manifests, checked both new native manifests per dataset equal the originals and independently reduced591+1715 original-baseline CSV rows including149 groups and CMC50; these checks do not stand in for a new installed-GT runtime audit."
-      ]
-    },
-    {
-      "check": "selected_array_restore_and_retention",
-      "result": "PASS_SOURCE_NOT_EXECUTED",
-      "evidence": [
-        "The deployer reads each actual original normal archive path from the normal terminal receipt, verifies that it is under the dedicated D account archive, and verifies its recorded size/SHA before restoring.",
-        "Restoration uses the dedicated best_official_arrays_restore_missing49.npz name and checks remote bytes/SHA. It does not recreate or overwrite the cleared producer best_official_arrays.npz name.",
-        "The restored input is retained between native and full. After full SSH exit0,controller completion,196 unique archived/cleared records, the only restored-copy cleanup checks the exact four recorded names, normal-root containment and bytes/SHA before unlink. Original local selected arrays and all best weights remain retained."
-      ]
-    },
-    {
-      "check": "one_raw_per_worker_CPU_bank_lifecycle",
-      "result": "PASS_SOURCE_NOT_EXECUTED",
-      "evidence": [
-        "Full extraction builds all seven sets of four CPU feature banks first, preserving each fixed query/gallery reference. It checks weights/versions, copies residual scales to CPU, deletes model and empties the CUDA cache before any per-condition CPU metric/archive loop.",
-        "The source reports actual cuda_allocated_bytes after deletion; it does not assert or claim an unmeasured zero. No further model/NN forward occurs during distance generation, metric audit or transfer.",
-        "Each worker creates one condition raw.npz, asserts exactly one matching own raw file, waits for its exact archive ACK, rechecks bytes/SHA, removes only that raw file and verifies none remain before proceeding.",
-        "Two lanes can therefore have at most two live remote raw NPZ overall, one per worker. Per-condition metadata and metric summaries remain, but49 raw matrices are not accumulated on remote storage.",
-        "Actual dimensional arithmetic: one RGBNT100 condition has235298000 uncompressed matrix bytes across four float32 states;49 such conditions would11529602000 bytes per control. Compression and final D capacity are not established by this arithmetic."
-      ]
-    },
-    {
-      "check": "parallel_stdout_stdin_archive_order",
-      "result": "PASS_SOURCE_AFTER_R1_FIX",
-      "evidence": [
-        "The two lanes serialize RAW_READY emission, exactly one stdin readline, matching job/condition/file ACK verification and forwarding to that same child within exchange. The job field is removed only after the controller match, preserving the worker ACK schema.",
-        "Every lane stdout print now shares exchange. RAW_CLEARED and wait notices cannot interleave a JSON frame or consume another lane ACK. Main controller completion occurs after both lane futures complete.",
-        "On Windows copy_verified enforces a path relative to the dedicated remote root, a new local destination, successful scp, byte count and SHA. Only after it returns does the receiver write the ARCHIVED ACK.",
-        "Workers recheck and unlink their own exact raw file only after the verified ACK. Remote and local sets separately require ready/cleared uniqueness and matching counts, and successful child/controller exit precedes terminal receipts."
-      ]
-    },
-    {
-      "check": "physical_GPU_lanes_and_process_cleanup",
-      "result": "PASS_SOURCE",
-      "evidence": [
-        "LANES binds frequency to physicalGPU2 and axis to physicalGPU3 on host2026. Two ThreadPoolExecutor workers each run MSVR310 then RGBNT100 serially and await their child exit before starting the next control; at most two NN children can run.",
-        "The reused check_limits queries only GPU index and memory.used, waits240 seconds when occupied and does not query, set or gate temperature or power. Its older filename does not imply thermal control.",
-        "Each evaluator child uses start_new_session=True and verifies its process-group ID equals child.pid. The existing finally pattern kills only that own child process group when still alive, awaits it and records the true exit code. No unrelated PID, old controller or global process kill is used."
-      ]
-    },
-    {
-      "check": "scientific_claim_limits",
-      "result": "PASS_SOURCE",
-      "evidence": [
-        "The unchanged original50-plus-additional50,benchmark-selected best and single seed remain explicit. Native/source acceptance does not guarantee+2 improvement, multiseed acceptance, causality, calibrated contribution or information-theoretic synergy.",
-        "Disjoint-source cases explicitly report their distance range/deviation from2 and cross_source_identity_comparison_not_established. All12 are still evaluated and are not described as solved by rounding/ties.",
-        "Repeated query rows across conditions are explicitly not independent samples. Existing RGBNT201 narrow results are reused as prior completed evidence; this new four-control evaluator covers only the remaining two datasets."
-      ]
-    }
+  "directly_read_dependencies": [
+    "collect_results.py",
+    "results/preflight/full_official_anchor_stream_bridge_20261005.py",
+    "identity_coordinate_three_dataset.py",
+    "audit_full_official_condition.py",
+    "audit_full_official49.py",
+    "full_evaluation.py",
+    "official_training_data.py",
+    "rgbnt201_identity_outlet.py",
+    "missing_evaluation.py",
+    "gpu_thermal_execute.py",
+    "results/preflight/identity_coordinate_three_normal_actual_session_20261005.json",
+    "results/preflight/identity_coordinate_three_normal_archive_rescue_actual_20261005.json",
+    "results/identity_coordinate_three_normal_completed_20261005/controller_result.json",
+    "results/preflight/rgbnt201_r201c_original_missing_session_failure_20261005.json",
+    "results/preflight/rgbnt201_r201c_old_missing_controller_absence_actual_20261005.json",
+    "results/preflight/identity_coordinate_missing_old_queue_resumed_actual_20261005.json",
+    "results/preflight/rgbnt201_r201c_archive_rescue_20261005.py"
   ],
-  "actual_local_checks": {
-    "new_sources_AST_current_and_Python39": 3,
-    "prior_review_runtime_source_hashes_unchanged": 50,
-    "existing_receiver_launcher_and_helper_AST_checks": 8,
-    "new_module_imports": 0,
-    "lane_stdout_prints_under_exchange": [
-      56,
-      81,
-      91
-    ],
-    "sets": 7,
-    "full_conditions_per_control": 49,
-    "disjoint_conditions_per_control": 12,
-    "native_expected_NPZ": 4,
-    "native_expected_GT_state_cases": 16,
-    "full_expected_NPZ": 196,
-    "full_expected_GT_state_cases": 784,
-    "existing_original_baseline_CSV": [
-      {
-        "dataset": "MSVR310",
-        "train_query_gallery": [
-          1032,
-          591,
-          1055
-        ],
-        "query_rows": 591,
-        "groups_checked": 90,
-        "max_sixmetric_error_pp": 1.4210854715202004e-14,
-        "CMC50_checked": true,
-        "native_pair_saved_manifests_equal_original": true
-      },
-      {
-        "dataset": "RGBNT100",
-        "train_query_gallery": [
-          8675,
-          1715,
-          8575
-        ],
-        "query_rows": 1715,
-        "groups_checked": 59,
-        "max_sixmetric_error_pp": 1.4210854715202004e-14,
-        "CMC50_checked": true,
-        "native_pair_saved_manifests_equal_original": true
-      }
-    ],
-    "scope": "Standard-library AST/hash/JSON/CSV calculations only. Existing saved manifest names were reparsed; no installed remote filenames or raw-distance matrix was newly read/reranked."
-  },
-  "runtime_state_at_review": {
-    "source": "Parent task context and existing local immutable text, not a fresh runtime observation",
-    "latest_supplied_actual_training_observation": "2026-10-05T20:52:47+08:00",
-    "normal_receiver": 71594,
-    "old_receiver": 17662,
-    "sole_scheduled_observer": 78060,
-    "sole_observer_first_target": "2026-10-05T22:55:00+08:00",
-    "original_terminal_receipt_locally_present": false,
-    "normal_terminal_receipt_locally_present": false,
-    "new_native_terminal_receipt_locally_present": false,
-    "deployment_permitted_by_current_gate_state": false
-  },
   "acceptance_limits": [
-    "SOURCE_ONLY PASS is conditional acceptance of these exact three file bytes, not a claim that native/full evaluation, archive transfer or terminal prerequisites completed.",
-    "Actual native acceptance must still run all four controls, each seven eight-record finite/unit state checks and all four full-normal GT matrices; actual full acceptance then requires784 state cases and196 verified local raw archives.",
-    "The original two terminal receipts are absent, so the reviewed deployer cannot run now. Existing queues, sole observer timing and own stopped/resume lifecycle remain unchanged.",
-    "No cross-family or independently attested backend/model/effort acceptance is claimed.",
-    "Local storage evidence reports D free17630429184 bytes and normal RGBNT100 compression about0.850-0.851; these are existing measurements, not a bound for new all49 four-state compressed artifacts. This review does not certify eventual disk capacity."
+    "SOURCE_ONLY PASS does not mean deployment or new native/full inference has run. Both new actual execution receipts are absent; no such receipt or output root was created.",
+    "The actual three-normal recovery is already complete and preserves original71594 failure. The old17662 archive rescue and its real canonical receipt are still prerequisite work at this review.",
+    "Native must still pass16 full normal GT cases plus the all7 checks; full must then pass784 GT cases and196 actual local raw archives. Existing normal or old784 evidence cannot substitute for these new stages.",
+    "Keepalive is a source change for the observed transport failure; its operational effect and the original exact cause remain unproven.",
+    "Benchmark selection, one seed, original50 plus additional50 and12 unsolved disjoint-source conditions remain disclosed. No+2, calibrated/causal synergy, multiseed or full-goal acceptance is implied.",
+    "No cross-family or independently attested actual backend/model/effort acceptance is claimed."
   ],
   "actions_this_review": {
     "SSH_or_remote_calls": 0,
@@ -202,6 +172,6 @@
     "source_edits_by_reviewer": 0,
     "documents_or_other_worktree_edits": 0,
     "report_written": "results/preflight/identity_coordinate_missing49_stream_source_review_20261005.json",
-    "note": "Default bare python resolved to a broken local environment; it performed no review work. Successful local checks used the existing uv-managed Python, with no package install/download requested."
+    "sibling_review_receipt_written": "results/preflight/rgbnt201_r201c_archive_rescue_source_review_20261005.json"
   }
 }

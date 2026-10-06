@@ -83,7 +83,8 @@ print('REVIEWED_NEW_EVALUATION_SOURCES_AND_SELECTED_RESTORES_EXACT')'''
     print(command(['ssh', *OPTIONS, '2026', shlex.quote(PYTHON) + ' -'], input=code), end='')
     argv = [PYTHON, '-u', 'launch_identity_coordinate_missing49_stream.py', '--normal-root', NORMAL,
         '--old-root', OLD, '--output', ROOT, '--mode', args.mode]
-    process = subprocess.Popen(['ssh', *OPTIONS, '2026', 'cd ' + shlex.quote(REMOTE) + ' && ' + shlex.join(argv)],
+    process = subprocess.Popen(['ssh', *OPTIONS, '-o', 'ServerAliveInterval=30', '-o', 'ServerAliveCountMax=3',
+        '2026', 'cd ' + shlex.quote(REMOTE) + ' && ' + shlex.join(argv)],
         stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True, encoding='utf-8')
     raw, cleared, complete = {}, set(), False
     for line in process.stdout:
