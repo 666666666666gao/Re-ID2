@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-06T15:37:53",
+  "updated_at": "2026-10-06T16:02:22",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -4160,6 +4160,95 @@
       "expected_pairs": 14,
       "expected_query_pairs": 11704,
       "plan": "results/preflight/r201h_protocol_list_cpu_closeout_plan_20261006.json"
+    },
+    "G_three_normal_and_201_missing_actual_closed": {
+      "queue": {
+        "status": "ACTUAL_G_THREE_NORMAL_THEN_FIXED201_ALL49_CPU_QUEUE_COMPLETE",
+        "finished_at": "2026-10-06T16:01:51",
+        "exit_code": 0,
+        "completed_stages": [
+          [
+            "results/preflight/r201g_dataset_normal_complete_intake_20261006.py",
+            "--dataset",
+            "RGBNT100"
+          ],
+          [
+            "analyze_r201g_dataset_normal.py",
+            "--dataset",
+            "RGBNT100"
+          ],
+          [
+            "analyze_r201g_three_normal.py"
+          ],
+          [
+            "results/preflight/r201g_201_missing49_stream_deploy_20261006.py",
+            "--mode",
+            "native"
+          ],
+          [
+            "results/preflight/r201g_201_missing49_stream_intake_20261006.py",
+            "--mode",
+            "native"
+          ],
+          [
+            "results/preflight/r201g_201_missing49_stream_deploy_20261006.py",
+            "--mode",
+            "full"
+          ],
+          [
+            "results/preflight/r201g_201_missing49_stream_intake_20261006.py",
+            "--mode",
+            "full"
+          ]
+        ],
+        "normal_datasets": 3,
+        "normal_models": 15,
+        "new_G201_missing_GT_cases": 392,
+        "new_G201_missing_raw_local": 98,
+        "G201_metric_rows": 833,
+        "G201_paired_query_rows": 122892,
+        "new_optimizer_updates": 0,
+        "limits": "Protocol closeout only; no +2/three missing datasets/multiseed/fair-ablation/H success claim. Any child failure stops this queue; original processes are never restarted."
+      },
+      "normal_result": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201g_other_two_normal_20261006\\three_dataset_normal_analysis\\result.json",
+      "missing_result": {
+        "status": "ACTUAL_G201_FIXED_NORMAL_BEST_ALL49_FOURSTATE_CPU_READOUT",
+        "completed_at": "2026-10-06T16:01:51",
+        "dataset": "RGBNT201",
+        "model_state_metric_rows": 833,
+        "comparisons": 637,
+        "checked_condition_query_rows": 696388,
+        "paired_query_rows": 122892,
+        "unique_query_records": 836,
+        "seed": 42,
+        "all_six_CMC50_identity_camera_scene_verified": true,
+        "new_neural_calls": 0,
+        "new_optimizer_updates": 0,
+        "limits": "G201 only, fixed normal mAP-best/earliesttie, benchmark-selected seed42. Original50 versus G/unit original50+additional50; normal and unit experts use matched sampling/params/5120D. Baseline missing processing differs from correctly masked00, so baseline missing gains are not unique dual-axis evidence. Equal-condition group means are not official pooled mAP; repeated condition-query rows not independent samples. Disjoint private coordinates may yield near-constant distances and do not establish meaningful cross-source identification. Current ordinary control is mixed-source expert, not literal single-frequency branch. Not allthree missing success, calibrated contribution, psi ablation, pairedseeds or finalgoal."
+      },
+      "all_three_normal_plus2": false
+    },
+    "local_D_user_space_actual": {
+      "status": "ACTUAL_OWN_D_USER_SPACE_CHECK",
+      "checked_at": "2026-10-06T15:59:36.3396078+08:00",
+      "own_root": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts",
+      "D_free_bytes": 25236463616,
+      "E_free_bytes": 21621784576,
+      "own_file_count": 2589,
+      "own_bytes": 25251393746,
+      "temporary_transfer_files": [],
+      "current_G201_full49_raw_files_seen": 86,
+      "expected_G201_full49_raw_files": 98,
+      "largest_completed_raw_bytes": 9733233,
+      "remaining_bytes_at_observed_max": 116798796,
+      "estimate_is_not_future_file_size_guarantee": true,
+      "new_files_deleted": 0,
+      "new_bytes_released": 0,
+      "prior_verified_relocation_receipts": [
+        "results/preflight/own_D_closed_missing_to_E_actual_20261006.json",
+        "results/preflight/own_D_closed_control_to_E_actual_20261006.json"
+      ],
+      "retention": "Current receiver and unique raw distances remain on D. Historical closed distances remain on E at documented exact locations. Size/SHA and actual free space are checked for each incoming raw file. No unrelated directory or active checkpoint was changed."
     }
   },
   "decision_rules": [
