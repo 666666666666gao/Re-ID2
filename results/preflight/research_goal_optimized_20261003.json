@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-07T01:36:31",
+  "updated_at": "2026-10-07T02:23:50",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -11127,26 +11127,27 @@
       "proof": "results/preflight/r201h_closed_weaker_weights_retirement_actual_20261006.json"
     },
     "R201I_normal_CPU_prepared": {
-      "status": "ACTUAL_TWO_DATASET_TEXT_AND_CPU_COMPLETE_RGBNT100_PENDING",
+      "status": "ACTUAL_ALL_THREE_DATASET_TEXT_AND_CPU_COMPLETE",
       "new_sources": 2,
       "reused_sources": 67,
       "source_review": "results/preflight/r201i_normal_cpu_closeout_source_review_20261006.json",
-      "actual_intakes": 2,
-      "actual_CPU_reductions": 2,
+      "actual_intakes": 3,
+      "actual_CPU_reductions": 3,
       "executed": true,
       "per_dataset_models": 5,
       "per_dataset_comparisons": 6,
       "per_dataset_curve_rows": 100,
       "completed_datasets": [
         "RGBNT201",
-        "MSVR310"
+        "MSVR310",
+        "RGBNT100"
       ],
-      "paired_query_rows": 8562
+      "paired_query_rows": 18852
     },
     "R201I_expert_seed_confirmation": {
-      "status": "ACTUAL_SOURCE_REVIEW_PASS_SINGLE_LOCAL_QUEUE_WAITING_ORIGINAL_RGBNT100",
+      "status": "ACTUAL_EXTRA_SEED_NATIVE6_PASS_FORMAL_RUNNING",
       "plan": "results/preflight/r201i_expert_seeds_plan_20261006.json",
-      "queue_pid": 13056,
+      "queue_pid": 47076,
       "seeds": [
         42,
         43,
@@ -11156,7 +11157,11 @@
       "new_formal_updates": 0,
       "new_native_updates": 0,
       "seed42_reused": true,
-      "limits": "Conditional expert-stage repeats; benchmark-selected Best-of3 separate from mean/sampleSD. Not whole-pipeline repeatability or complete49."
+      "limits": "Conditional expert-stage repeats; benchmark-selected Best-of3 separate from mean/sampleSD. Not whole-pipeline repeatability or complete49.",
+      "expert_seed_running": 43,
+      "actual_native_updates_closed": 6,
+      "source_review": "results/preflight/r201i_expert_seeds_prelaunch_recovery_source_review_20261007.json",
+      "original_prelaunch_failure_preserved": true
     },
     "R201I_fixed_best_complete_missing_queued": {
       "status": "ACTUAL_SOURCE_REVIEW_PASS_SINGLE_LOCAL_MISSING_QUEUE_WAITING_NORMAL_SEEDS",
@@ -11234,6 +11239,76 @@
         }
       },
       "limits": "Selected checkpoint only; observed rescue/harm cohorts not a trained gate, no late50 features, no threshold selected on benchmark, no multi-seed/missing/other-dataset inference. Smaller correction is not automatically better."
+    },
+    "R201I_three_full_normal_terminal": {
+      "status": "ACTUAL_I_THREE_NORMAL_DATASETS_SIX_FULL50_GT_RAW_COMPLETE",
+      "model_epochs": 300,
+      "formal_updates": 19418,
+      "native_updates": 18,
+      "all_three_normal_CPU": true,
+      "all_six_best_GT_raw": true,
+      "normal_deltas": [
+        {
+          "dataset": "RGBNT201",
+          "improved": "I_axis_shared",
+          "reference": "original_DeMo",
+          "mAP": 3.906431114611877,
+          "mINP": 3.5196479389610857,
+          "Rank-1": 3.94736842105263,
+          "Rank-5": 3.1100478468899553,
+          "Rank-10": 0.4784688995215447,
+          "Rank-20": 0.956937799043061,
+          "both_plus2": true,
+          "rank1_rescued": 46,
+          "rank1_harmed": 13,
+          "AP_improved": 404,
+          "AP_worsened": 158
+        },
+        {
+          "dataset": "MSVR310",
+          "improved": "I_axis_shared",
+          "reference": "original_DeMo",
+          "mAP": 0.05591939363008436,
+          "mINP": 0.05214728572817506,
+          "Rank-1": 0.0,
+          "Rank-5": -0.16920473773264177,
+          "Rank-10": 0.0,
+          "Rank-20": 0.16920473773265599,
+          "both_plus2": false,
+          "rank1_rescued": 1,
+          "rank1_harmed": 1,
+          "AP_improved": 273,
+          "AP_worsened": 207
+        },
+        {
+          "dataset": "RGBNT100",
+          "improved": "I_axis_shared",
+          "reference": "original_DeMo",
+          "mAP": 0.28592536068094887,
+          "mINP": 0.21812551551862924,
+          "Rank-1": 0.0,
+          "Rank-5": 0.116618075801739,
+          "Rank-10": 0.0583090379008695,
+          "Rank-20": 0.05830903790088371,
+          "both_plus2": false,
+          "rank1_rescued": 6,
+          "rank1_harmed": 6,
+          "AP_improved": 802,
+          "AP_worsened": 602
+        }
+      ],
+      "only_RGBNT201_both_plus2": true,
+      "missing_inference_complete": false,
+      "source": "results/preflight/r201i_primary_margin_actual_session_20261006.json"
+    },
+    "closed_legacy_M1_weight_capacity_retirement": {
+      "status": "ACTUAL_FOUR_CLOSED_DOMINATED_LEGACY_M1_WEIGHTS_RETIRED_SEED_CAPACITY_RESTORED",
+      "files_removed": 4,
+      "bytes_removed": 1605696336,
+      "remote_free_after": 4022886400,
+      "same_fit_dev_GT_verified": true,
+      "original_full_anchors_G_I_and_RAW_retained": true,
+      "proof": "results/preflight/closed_legacy_M1_weight_capacity_retirement_actual_20261007.json"
     }
   },
   "decision_rules": [
@@ -11260,8 +11335,8 @@
   ],
   "next_action": {
     "milestone": "PREPARE_NORMAL_INPUT_CANDIDATE_FROM_CLOSED_CONTROL_EVIDENCE",
-    "status": "R201I_THREE_NORMAL_ORIGINAL_RECEIVER_LIVE_ESTIMATED_MILESTONES",
-    "action": "原I100当前两臂E21/0AMPskip，原21900/20940按预计01:47节点继续；seed队列13056独占后续100CPU→43配对→44配对。新missing队列21496待实际三集normal和三expertseed CPU完成后，固定I42六权重及normal预选201 Best-of3补充，native后完整7×7/四状态/安装GT/本地raw与CPU；不选缺失峰值，不改live NN源，不降低三集+2/+2。随后根据真实seed/完整缺失正负证据决定下一单因素，数学上无重叠的private坐标限制仍必须实质解决。",
+    "status": "ORIGINAL_I_THREE_NORMAL_COMPLETE_SEED43_NATIVE_PASS_FORMAL_RUNNING",
+    "action": "三集I42完整normal已完成300模型轮/19418updates/native18及GT/raw/CPU；201通过+2/+2，100与MSVR未通过。原seed receiver13056在真实3.5GB门失败并退出，保留失败；清4个同fit/dev协议被保留V12主指标支配且full49闭合旧M1权重后，fresh审查恢复原post-intake AST，43native6已过/正式50运行，然后44配对native/50和三seed统计；missing原21496继续等实际完成后做六I42+normal Best-of3补充全部49四状态。不重新训练/收取已完成I42，不调低空间门，不改NN源或选点，不将3seed条件实验说成3次整套pipeline。",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
