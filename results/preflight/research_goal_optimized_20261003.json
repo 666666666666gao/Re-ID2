@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-06T14:11:14",
+  "updated_at": "2026-10-06T14:19:31",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -88,7 +88,7 @@
       ]
     },
     "raw_distance_retention": "原始距离文件保存在本地D盘账户目录，全部GT/逐query核查完成并逐文件SHA256核对后清理服务器副本；保留固定best权重、必要参照、完整CSV/JSON/logs。 用户2026-10-06明确授权删除无用本地D传输；逐字节相同的重复指标/预检raw已退休并保留替代路径记录，有用正式raw/最佳权重/必要参照保留。",
-    "local_D_space": "Actual 2026-10-06T13:20:09 19602567168 bytes free; no new confirmed useless or temporary files. Unique raw/best retained; E196 cold originals have migration receipt. Original receiver checks measured size before transfer."
+    "local_D_space": "Original observer actual 2026-10-06T14:10:22 D free 19125297152 bytes; each receiver checks actual file size versus available space, retains unique raw/best and clears remote only after size/SHA ACK. No broad D deletion or duplicate old49 transfer."
   },
   "revision": "20261004_full_official_training_and_complete_query_gallery_user_override",
   "primary_claims": [
@@ -3902,7 +3902,7 @@
       "unique_raw_and_references_retained": true
     },
     "R201G_other_two_normal": {
-      "status": "ACTUAL_MSVR_TWO_NORMAL50_GT_RAW_CPU_CLOSED_RGB100_E3_LIVE",
+      "status": "ACTUAL_MSVR_CLOSED_RGB100_E20_E21_LIVE_LATE_AXIS_DECLINE",
       "models": 4,
       "expected_native_updates": 12,
       "expected_formal_updates": 14124,
@@ -3916,7 +3916,7 @@
       "original_primary_session": 28890,
       "original_observer_session": 32692,
       "original_observer_pid": 24816,
-      "observed_at": "2026-10-06T13:14:32",
+      "observed_at": "2026-10-06T14:10:22",
       "active_dataset": "RGBNT100",
       "controller_pid": 21189,
       "NN_pids": [
@@ -3924,12 +3924,12 @@
         23350
       ],
       "actual_epochs_each": [
-        3,
-        3
+        20,
+        21
       ],
       "actual_updates_each": [
-        382,
-        382
+        2544,
+        2672
       ],
       "amp_skipped_each": [
         0,
@@ -3938,7 +3938,7 @@
       "MSVR_native_updates": 6,
       "other_formal_completed": 2,
       "RGBNT100_status": "LIVE_NOT_COMPLETE",
-      "next_original_observer_eta": "2026-10-06T14:10:18",
+      "next_original_observer_eta": "2026-10-06T15:38:30",
       "full_goal_achieved": false,
       "RGBNT100_native_updates": 6,
       "MSVR_normal_analysis": "results/r201g_other_two_normal_20261006/MSVR310/normal_analysis/result.json",
@@ -3971,7 +3971,63 @@
         "rank1_harmed": 2
       },
       "source_review": "results/preflight/r201g_dataset_normal_intake_source_review_20261006.json",
-      "old_whole_root_intake": "SUPERSEDED_NEVER_EXECUTED_DO_NOT_RUN"
+      "old_whole_root_intake": "SUPERSEDED_NEVER_EXECUTED_DO_NOT_RUN",
+      "current_best": [
+        {
+          "epoch": 3,
+          "mAP": 85.80205536940795,
+          "mINP": 61.93404520257507,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.37609329446065,
+          "Rank-20": 97.72594752186589
+        },
+        {
+          "epoch": 3,
+          "mAP": 86.24522770966956,
+          "mINP": 62.75945975981184,
+          "Rank-1": 96.50145772594753,
+          "Rank-5": 97.25947521865889,
+          "Rank-10": 97.667638483965,
+          "Rank-20": 97.95918367346938
+        }
+      ],
+      "current_latest": [
+        {
+          "epoch": 20,
+          "steps": 2544,
+          "optimizer_steps": 2544,
+          "amp_skipped_steps": 0,
+          "amp_scale": 1024.0,
+          "loss": 1.4569148576165747,
+          "epoch_unique_train_records": 8128,
+          "cumulative_unique_train_records": 8675,
+          "seconds": 181.82389974594116,
+          "mAP": 81.27367922040958,
+          "mINP": 55.25657854830614,
+          "Rank-1": 94.98542274052478,
+          "Rank-5": 96.15160349854227,
+          "Rank-10": 96.61807580174927,
+          "Rank-20": 97.14285714285714
+        },
+        {
+          "epoch": 21,
+          "steps": 2672,
+          "optimizer_steps": 2672,
+          "amp_skipped_steps": 0,
+          "amp_scale": 1024.0,
+          "loss": 1.37885332852602,
+          "epoch_unique_train_records": 8192,
+          "cumulative_unique_train_records": 8675,
+          "seconds": 188.53286743164062,
+          "mAP": 54.987278360188995,
+          "mINP": 20.5912553174601,
+          "Rank-1": 82.21574344023324,
+          "Rank-5": 84.13994169096209,
+          "Rank-10": 85.01457725947522,
+          "Rank-20": 86.41399416909621
+        }
+      ]
     },
     "R201G_query_utility": {
       "analysis": "results/r201g_normal_states_20261006/joint_query_utility_analysis/result.json",
@@ -4069,8 +4125,8 @@
   ],
   "next_action": {
     "milestone": "PREPARE_NORMAL_INPUT_CANDIDATE_FROM_CLOSED_CONTROL_EVIDENCE",
-    "status": "WAIT_ORIGINAL_RGB100_NORMAL_ENDPOINT",
-    "action": "Keep original28890/32692, original next estimated14:10:18. After RGB100 EXIT0/raw4/14124, reviewed per-dataset RGB100 intake once then15-model3normal CPU. Only after all3normal, reviewed G201missing native once; actual8GT/all7small PASS thenfull49 once/392GT/98raw. Reviewed new native/full CPUintake after each actualclosure; full17-state833metrics/637comparisons/122892pairs. Do not conflate source/old441checks with newmissing. Allgoal+2/fairretrain/seeds/all3missing remains unmet. Subsequent intervention may inspect legitimate training references but cannot delete singlecamera identities or assume zero-weight partialrefs caused failure.",
+    "status": "WAIT_ORIGINAL_RGB100_NORMAL_CLOSEOUT_ESTIMATED1538",
+    "action": "Keep only original28890 receiver and32692/24816 observer. Actual14:10:22 RGB100 freq20/2544 andaxis21/2672,0AMP/all8675; severeaxislate decline/currentbest3not+2. Next original15:38:30 then240ifneeded, no earlyremote/GPUquery/restart/activeNNsourcechange. Complete each50/6357/GT/raw then per-datasetRGB100 intake and15-model3normal report. Only thereafter reviewedG201native actual8GT/all7small, full49/392GT/98raw and reviewed17state833metric637comparison122892pair CPU. Goalall3+2/fairretrain/seeds/fullmissing remains unmet.",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
