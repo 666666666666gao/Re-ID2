@@ -1,0 +1,140 @@
+{
+  "status": "PASS",
+  "review_date": "2026-10-06",
+  "review_type": "FRESH_SOURCE_REVIEW_ONLY",
+  "requested_backend": "Codex native agent",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_backend": "UNATTESTED",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "attribution_note": "Requested model and effort are recorded separately from actual execution, which is not attested by a backend/model/effort receipt available to this reviewer.",
+  "plan": "results/preflight/r201g_closed_selected_tensor_plan_20261006.json",
+  "sources_sha256": {
+    "results/preflight/r201g_closed_selected_tensor_readout_20261006.py": "76b35d55f7b0b0393948f8d5a136a3cdba0fc85bf2da3d6f75bf6b9dd6e7af31"
+  },
+  "directly_reused_sources_sha256": {
+    "collect_results.py": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "rgbnt201_identity_outlet.py": "ee03a16de0e7f4beb28f4a78a4ab8c16e8f19014bfa4164482d59714e52de784",
+    "identity_coordinate_three_dataset.py": "de4128c5c5993e0766ba74a700870b13478af44d28440312287b0fe2e32bb415",
+    "run_r201g_normal_priority.py": "1ad85d62a1e5ecd12d52b069c58fdaba436ae7ef3ba27e61f3763191b4c6779e"
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "suggested_patches": [],
+  "checks": [
+    {
+      "id": "exact_plan_sources",
+      "status": "PASS",
+      "evidence": "Read the new script and all five directly reused sources. The exact one-entry sources_sha256 and five-entry directly_reused_sources_sha256 maps equal the plan, and all six current source byte hashes match. No source changes were made."
+    },
+    {
+      "id": "local_gate_before_ssh",
+      "status": "PASS",
+      "evidence": "Lines 15-24 require absent actual proof, PASS review with no blocking findings, matching reviewed hashes, closed RGBNT201 status with exit_code 0, 5294 successful updates and two archives, and closed MSVR310 status with 1410 successful updates and two archives. These precede the only SSH invocation at line 67. The imported collect_results module has no import-time SSH or other action. Current local receipts satisfy the closure checks; the actual proof was absent during review."
+    },
+    {
+      "id": "four_closed_selected_paths_only",
+      "status": "PASS",
+      "evidence": "The embedded loop explicitly enumerates only RGBNT201/r201g_normal_priority_20261006 and MSVR310/r201g_other_two_normal_20261006/MSVR310, each with frequency_shared and axis_shared. Each run must have COMPLETE, epochs 50, optimizer_steps 2647 or 705, zero AMP skips, PASS normal_cpu_audit, NORMAL_LOCAL_SIZE_SHA_VERIFIED_REMOTE_CLEARED acknowledgement, and best.pth as its only .pth file before weight bytes are read. No RGBNT100 checkpoint path is visited."
+    },
+    {
+      "id": "cpu_read_only_execution_scope",
+      "status": "PASS",
+      "evidence": "The remote command hides CUDA before Python starts and bounds OMP/MKL/Torch CPU threads to four. Embedded code reads state tensors using torch.load on in-memory bytes with map_location='cpu' and weights_only=True. It imports no project model module, constructs no neural model, calls no forward/backward/optimizer, writes no remote file, and makes no GPU, temperature or power query. The only intended new file is the local actual readout after successful command completion."
+    },
+    {
+      "id": "state_keys_inheritance_and_initial_scales",
+      "status": "PASS",
+      "evidence": "AxisCollaborationDeMo defines residual_scale with three constructor values [0.1, 0.05, 0.05] and both PM/PF Sequential output layers at index 3 as Linear(64, dim). Reviewed inheritance reaches these layers through SharedIdentityAxis, CommonCoordinateAxis, OriginalProjectionProbe and IdentityCoordinateAxis without renaming them; the G builder passes bypass=False. Identity-coordinate code uses 512-dimensional relation slots. The readout checks residual_scale shape [3], .3.weight shape [512,64], .3.bias shape [512], and finite values. Initial values are explicitly separate from learned selected-checkpoint values, with M/F/I order established by fuse."
+    },
+    {
+      "id": "matrix_rank_definitions",
+      "status": "PASS",
+      "evidence": "PM/PF weight and bias are converted to float64 before computation. Numerical rank is torch.linalg.matrix_rank(W); entropy effective rank is exp(-sum(p*log(p))) with p equal to singular values divided by their sum, excluding zero terms. The affine linear-layer image b+col(W) has dimension rank(W), bounded by 64; the linear span including bias is rank([W,b]), bounded by 65. The output labels these as selected output-weight properties rather than observed feature ranks. This does not assert all hidden inputs or directions occur in sampled features."
+    },
+    {
+      "id": "closed_checkpoint_unchanged",
+      "status": "PASS",
+      "evidence": "Each selected best.pth is read into bytes and hashed before weights_only loading; its on-disk bytes are hashed again after tensor computations, with exact equality required before appending the row. Computations use converted tensor copies, and no save or checkpoint mutation is present. Existing before/after SHA verification is sufficient for this closed selected-weight readout; no additional hash framework is proposed."
+    },
+    {
+      "id": "selected_epoch_metric_binding",
+      "status": "PASS",
+      "evidence": "Each row takes selected_epoch from its own result.best.epoch and selected_metrics from its own result.full_metrics. The existing training runner saves best.pth only on strict normal-mAP improvement, reloads it after epoch 50, verifies reloaded metrics against best, and writes full_metrics from that reload. Local text copies confirm epochs 28/7 for RGBNT201 frequency/axis and 15/4 for MSVR310 frequency/axis; all six metrics equal best, strict_reload and normal_cpu_audit.six_metrics, and audit.selected_epoch agrees. All four exit records are 0 and full-training coverage audits pass."
+    },
+    {
+      "id": "bounded_interpretation",
+      "status": "PASS",
+      "evidence": "The code describes four selected normal-mAP-best tensor states. It explicitly excludes late-E50 state, observed/effective feature rank, sample residual magnitude, radial/tangent decomposition, calibrated contribution, causal late-collapse explanation and wider/bypass-is-better conclusions. Constructor scale values are not represented as measured learned-stage states. Prior R201C internal bypass testing is acknowledged, with no proposal that it is untried."
+    },
+    {
+      "id": "stdlib_ast_and_compile",
+      "status": "PASS",
+      "evidence": "Parsed and compiled the new script AST and the literal embedded remote-code AST without executing either. Used only C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe -X utf8 -B -S, invoked with login:false. No target module import, Torch import, neural execution, package installation or bytecode write occurred."
+    }
+  ],
+  "local_text_evidence": [
+    {
+      "dataset": "RGBNT201",
+      "variant": "frequency_shared",
+      "epochs": 50,
+      "optimizer_steps": 2647,
+      "amp_skipped_steps": 0,
+      "selected_epoch": 28,
+      "mAP": 76.71329100509308,
+      "Rank-1": 82.29665071770334,
+      "exit_code": 0
+    },
+    {
+      "dataset": "RGBNT201",
+      "variant": "axis_shared",
+      "epochs": 50,
+      "optimizer_steps": 2647,
+      "amp_skipped_steps": 0,
+      "selected_epoch": 7,
+      "mAP": 78.97918040649468,
+      "Rank-1": 84.44976076555024,
+      "exit_code": 0
+    },
+    {
+      "dataset": "MSVR310",
+      "variant": "frequency_shared",
+      "epochs": 50,
+      "optimizer_steps": 705,
+      "amp_skipped_steps": 0,
+      "selected_epoch": 15,
+      "mAP": 47.24680863675226,
+      "Rank-1": 63.62098138747885,
+      "exit_code": 0
+    },
+    {
+      "dataset": "MSVR310",
+      "variant": "axis_shared",
+      "epochs": 50,
+      "optimizer_steps": 705,
+      "amp_skipped_steps": 0,
+      "selected_epoch": 4,
+      "mAP": 47.21107132502441,
+      "Rank-1": 63.7901861252115,
+      "exit_code": 0
+    }
+  ],
+  "review_execution": {
+    "ssh_calls": 0,
+    "weight_or_array_binary_reads": 0,
+    "torch_imports": 0,
+    "new_neural_models": 0,
+    "new_neural_calls": 0,
+    "new_optimizer_updates": 0,
+    "source_changes": 0,
+    "documentation_changes": 0,
+    "git_actions": 0,
+    "private_memory_reads": 0,
+    "only_file_written": "results/preflight/r201g_closed_selected_tensor_source_review_20261006.json"
+  },
+  "limits": "This PASS permits the scoped CPU tensor readout source to proceed to actual execution. It is a same-family provisional source review, not an actual remote execution receipt, a new raw-array audit, a weight-shape observation, or proof of any learned scale/rank value. Runtime must still satisfy all script assertions before producing the actual readout."
+}
