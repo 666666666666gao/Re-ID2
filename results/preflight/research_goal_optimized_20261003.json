@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-06T23:39:55",
+  "updated_at": "2026-10-06T23:57:41",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -11142,6 +11142,21 @@
         "MSVR310"
       ],
       "paired_query_rows": 8562
+    },
+    "R201I_expert_seed_confirmation": {
+      "status": "ACTUAL_SOURCE_REVIEW_PASS_SINGLE_LOCAL_QUEUE_WAITING_ORIGINAL_RGBNT100",
+      "plan": "results/preflight/r201i_expert_seeds_plan_20261006.json",
+      "queue_pid": 13056,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "anchor_seed": 42,
+      "new_formal_updates": 0,
+      "new_native_updates": 0,
+      "seed42_reused": true,
+      "limits": "Conditional expert-stage repeats; benchmark-selected Best-of3 separate from mean/sampleSD. Not whole-pipeline repeatability or complete49."
     }
   },
   "decision_rules": [
@@ -11169,7 +11184,7 @@
   "next_action": {
     "milestone": "PREPARE_NORMAL_INPUT_CANDIDATE_FROM_CLOSED_CONTROL_EVIDENCE",
     "status": "R201I_THREE_NORMAL_ORIGINAL_RECEIVER_LIVE_ESTIMATED_MILESTONES",
-    "action": "201已完整+2/+2，MSVR50/GT/CPU已完整且仅+0.055919/0，无统一三集达标；MSVR primary hinge并未整体关闭，E50均值0.022491/违反20.357个64-anchor。保持原27774/local21900与timer20940完成RGBNT100，不改active source、不降低目标；关闭后收CPU，再固定全部normal best完整49，以真实推理贡献、源可用性和公平对照决定下一单因素。",
+    "action": "保持原I RGBNT100两臂full50/GT/raw完成；新单一seed队列先一次收取100终态CPU，然后2026 GPU2/3顺序运行RGBNT201 seed43/44配对native3及full50。复用I42，固定DeMo42 teacher；三seed逐值、mean/sampleSD、paired deltas和单列Best-of3。之后仍须fixed normal best完整49、公平重训结构对照及真实成本；不改active source、不降低三集+2/+2目标。",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
