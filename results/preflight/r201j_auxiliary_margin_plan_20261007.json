@@ -1,0 +1,101 @@
+{
+  "status": "ACTUAL_201_NATIVE6_PASS_FORMAL50_STARTED_OTHER_NORMAL_PENDING",
+  "created_at": "2026-10-07T07:16:15",
+  "problem": "I44 late normal mAP regression; I42 vehicle gains weak. Auxiliary M/F raw512 still soft Triplet while final unit5120 is hinge; role not experimentally isolated.",
+  "claim": "Test whether changing ONLY the M/F auxiliary metric to existing margin0.3 hinge preserves useful inference corrections and improves best/last behavior. No novelty or root-cause assertion.",
+  "anti_claim": "Both ordinary and axis must use same target/loss/sample/budget. If both change equally this is a training factor, not dual-axis uniqueness.",
+  "relative_to": "Completed I42, not G; do not change primary unit5120 hinge0.3, branch weights, CE, contribution, partial-zero forwards/BN, base/common supervision, features, architecture, frozen original DeMo42, optimizer or sampler.",
+  "changed_calls": {
+    "call2": "Independent standalone M raw512 auxiliary only",
+    "call3": "Independent standalone F raw512 auxiliary only"
+  },
+  "unchanged_calls": "first fused remains I hinge; >=4 base/common original make_loss stays soft",
+  "training": {
+    "datasets": [
+      "RGBNT201",
+      "MSVR310",
+      "RGBNT100"
+    ],
+    "controls": [
+      "frequency_shared",
+      "axis_shared"
+    ],
+    "seed": 42,
+    "epochs": 50,
+    "batch": 64,
+    "anchor_seed": 42,
+    "anchor_epochs": 50,
+    "full_official_training": true,
+    "train_identity_holdout": 0,
+    "normal_selection": "highest full benchmark mAP; earliest ties; all6 same epoch",
+    "benchmark_selection_disclosed": true
+  },
+  "hardware": {
+    "host": "2026",
+    "physical_gpus": [
+      2,
+      3
+    ],
+    "max_parallel_nn": 2,
+    "serial_per_card": true,
+    "power_temperature_control": false
+  },
+  "run_order": [
+    "Fresh source review",
+    "2 arms native3 real updates each, definition/grad/frozen/sampling/strict-reload checks",
+    "RGBNT201 two full50 + installed GT/CPU + raw local ACK",
+    "MSVR310 then RGBNT100 same paired full50, normal first",
+    "CPU fair I/J original comparison with best/last/all curves; only after all normal consider fixed-best49"
+  ],
+  "metrics": [
+    "mAP",
+    "mINP",
+    "Rank-1",
+    "Rank-5",
+    "Rank-10",
+    "Rank-20",
+    "best-minus-last",
+    "per-query rescue/harm",
+    "actual_updates/AMP",
+    "walltime/peak_memory"
+  ],
+  "success": "201 retains real positive utility and paired advantage; vehicle normal improves, final gap reduces; global +2/fair49 goal stays unchanged. New seed42 alone not stability proof.",
+  "failure": "If no better retrieval or late stability, reject auxiliary-margin explanation and retain complete negative; no rescue by lucky seed/mixed metrics.",
+  "native_gate": "No formal before actual two-arm6 update PASS, unchanged anchor, full unit primary, M/F same raw features/shapes, hinge clamp equality and finite feature gradients, original remaining loss calls and paired order.",
+  "estimate": {
+    "observed_I_epoch_stage_seconds": [
+      {
+        "dataset": "RGBNT201",
+        "pair_epoch_seconds": [
+          2324.0120134353638,
+          2362.9524853229523
+        ],
+        "estimated_stage_wall_minutes": 39.38254142204921
+      },
+      {
+        "dataset": "MSVR310",
+        "pair_epoch_seconds": [
+          1281.044516801834,
+          1270.9757044315338
+        ],
+        "estimated_stage_wall_minutes": 21.350741946697234
+      },
+      {
+        "dataset": "RGBNT100",
+        "pair_epoch_seconds": [
+          9402.456776618958,
+          8951.427289247513
+        ],
+        "estimated_stage_wall_minutes": 156.70761294364928
+      }
+    ],
+    "neural_hours": 7.109130218293932,
+    "wall_hours": 3.6240149385399287,
+    "extra_native_GT_archive": "add several minutes per stage; figures are estimates not execution",
+    "observe": "native actual first; at near each expected stage end; 180-300s when long-stage monitoring"
+  },
+  "retention": "Only per-trial best.pth. Normal raw archived local exactsizeSHA then removed server. Original anchors and I42 best preserved; nonselected N3 expert43/44 closed normal weights may be retired only after actual bestof3/GT/raw/dependency audit; all scores/raw retained and loss of NN replay disclosed.",
+  "goal": "ACTIVE_UNMET",
+  "handoff": "Only docs/实验交接.md, no extra human handoff documents",
+  "observed_at": "2026-10-07T07:30:12"
+}
