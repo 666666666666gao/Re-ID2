@@ -1,0 +1,91 @@
+{
+  "status": "ACTUAL_OFFICIAL_TRAIN_METADATA_AND_CLOSED_G_PARTIAL_REFERENCE_SELECTOR_CPU_AUDIT",
+  "completed_at": "2026-10-06T13:57:55",
+  "full_training_pools": {
+    "RGBNT201": {
+      "training_records": 3951,
+      "training_identities": 171,
+      "benchmark_junk_selector": "camera",
+      "identities_with_cross_selector_positive": 51,
+      "identities_without_cross_selector_positive": 120,
+      "training_records_without_cross_selector_positive": 2555
+    },
+    "RGBNT100": {
+      "training_records": 8675,
+      "training_identities": 50,
+      "benchmark_junk_selector": "camera",
+      "identities_with_cross_selector_positive": 50,
+      "identities_without_cross_selector_positive": 0,
+      "training_records_without_cross_selector_positive": 0
+    },
+    "MSVR310": {
+      "training_records": 1032,
+      "training_identities": 155,
+      "benchmark_junk_selector": "scene",
+      "identities_with_cross_selector_positive": 60,
+      "identities_without_cross_selector_positive": 95,
+      "training_records_without_cross_selector_positive": 432
+    }
+  },
+  "recorded_partial_mining": [
+    {
+      "dataset": "RGBNT201",
+      "variant": "axis_shared",
+      "benchmark_junk_selector": "camera",
+      "queries": 169408,
+      "selected_positive_same_selector": 130379,
+      "selected_positive_same_filename": 0,
+      "queries_without_batch_cross_selector_positive": 111952,
+      "same_label_positive_candidates": 1185856,
+      "cross_selector_positive_candidates": 198672,
+      "batches": 2647,
+      "selected_same_selector_fraction": 0.7696153664525879,
+      "batches_without_any_cross_selector_positive": 85
+    },
+    {
+      "dataset": "RGBNT201",
+      "variant": "frequency_shared",
+      "benchmark_junk_selector": "camera",
+      "queries": 169408,
+      "selected_positive_same_selector": 127623,
+      "selected_positive_same_filename": 0,
+      "queries_without_batch_cross_selector_positive": 111952,
+      "same_label_positive_candidates": 1185856,
+      "cross_selector_positive_candidates": 198672,
+      "batches": 2647,
+      "selected_same_selector_fraction": 0.7533469493766528,
+      "batches_without_any_cross_selector_positive": 85
+    },
+    {
+      "dataset": "MSVR310",
+      "variant": "axis_shared",
+      "benchmark_junk_selector": "scene",
+      "queries": 45120,
+      "selected_positive_same_selector": 27880,
+      "selected_positive_same_filename": 1883,
+      "queries_without_batch_cross_selector_positive": 23364,
+      "same_label_positive_candidates": 135360,
+      "cross_selector_positive_candidates": 46692,
+      "batches": 705,
+      "selected_same_selector_fraction": 0.6179078014184397,
+      "batches_without_any_cross_selector_positive": 0
+    },
+    {
+      "dataset": "MSVR310",
+      "variant": "frequency_shared",
+      "benchmark_junk_selector": "scene",
+      "queries": 45120,
+      "selected_positive_same_selector": 27640,
+      "selected_positive_same_filename": 1640,
+      "queries_without_batch_cross_selector_positive": 23364,
+      "same_label_positive_candidates": 135360,
+      "cross_selector_positive_candidates": 46692,
+      "batches": 705,
+      "selected_same_selector_fraction": 0.6125886524822695,
+      "batches_without_any_cross_selector_positive": 0
+    }
+  ],
+  "new_neural_calls": 0,
+  "new_optimizer_updates": 0,
+  "limits": "Training identities only, installed source manifest metadata; never dev/test target training. Audit uses already logged partial-gallery positive/negative indices, not unlogged full Triplet or ContributionCalibrator selections. Partial objective is zero in G, so its selected references have no optimizer effect. Same-camera (201/100) or same-scene(MSVR) positives are benchmark junk but label-only training losses deliberately permit them; this is an objective/protocol distinction, not a demonstrated code defect or causal explanation. Whole training pool may support cross-selector positives even when current PK batch does not. No new camera-aware AP experiment has executed."
+}

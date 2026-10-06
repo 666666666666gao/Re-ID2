@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-06T13:38:55",
+  "updated_at": "2026-10-06T14:11:14",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -3999,6 +3999,50 @@
       "full_state_cases": 392,
       "actual_nn_calls": 0,
       "scope": "Prioritize selectedG201 two controls after all3normal; not replace remaining fullgoal three-dataset missing/fairretrain/seeds."
+    },
+    "R201G_201_missing_CPU_prepared": {
+      "status": "FRESH_CPU_SOURCE_REVIEW_PASS_OLD441_SCHEMA_ACTUAL_NEW_G_NOT_EXECUTED",
+      "plan": "results/preflight/r201g_201_missing49_cpu_closeout_plan_20261006.json",
+      "review": "results/preflight/r201g_201_missing49_cpu_closeout_source_review_20261006.json",
+      "old_retained_actual_cases": 441,
+      "old_retained_repeated_query_rows": 368676,
+      "new_G_missing_cases": 0,
+      "planned_model_state_metric_rows": 833,
+      "planned_comparisons": 637,
+      "planned_primary_paired_query_rows": 122892
+    },
+    "training_reference_selector_audit": {
+      "analysis": "results/preflight/r201g_train_reference_GT_selector_audit_20261006.json",
+      "status": "ACTUAL_OFFICIAL_TRAIN_METADATA_AND_CLOSED_G_PARTIAL_REFERENCE_SELECTOR_CPU_AUDIT",
+      "training_pools": {
+        "RGBNT201": {
+          "training_records": 3951,
+          "training_identities": 171,
+          "benchmark_junk_selector": "camera",
+          "identities_with_cross_selector_positive": 51,
+          "identities_without_cross_selector_positive": 120,
+          "training_records_without_cross_selector_positive": 2555
+        },
+        "RGBNT100": {
+          "training_records": 8675,
+          "training_identities": 50,
+          "benchmark_junk_selector": "camera",
+          "identities_with_cross_selector_positive": 50,
+          "identities_without_cross_selector_positive": 0,
+          "training_records_without_cross_selector_positive": 0
+        },
+        "MSVR310": {
+          "training_records": 1032,
+          "training_identities": 155,
+          "benchmark_junk_selector": "scene",
+          "identities_with_cross_selector_positive": 60,
+          "identities_without_cross_selector_positive": 95,
+          "training_records_without_cross_selector_positive": 432
+        }
+      },
+      "closed_G_logged_batches": 6704,
+      "R201G_201_batches_without_any_cross_camera_positive": 85,
+      "limits": "Recorded zero-weight partial targets only, not currentoptimization cause/fullTriplet/calibrator indices. Label-only versus officialjunk rules differ; no newGT-aware AP executed and no training records removed."
     }
   },
   "decision_rules": [
@@ -4026,7 +4070,7 @@
   "next_action": {
     "milestone": "PREPARE_NORMAL_INPUT_CANDIDATE_FROM_CLOSED_CONTROL_EVIDENCE",
     "status": "WAIT_ORIGINAL_RGB100_NORMAL_ENDPOINT",
-    "action": "Original28890/32692 unchanged, next estimatedE20 14:10:18. After actualRGB100 EXIT0/GT/raw4, run reviewed datasetRGB100 intake once then unchanged15-model3normal analyzer. Only AFTER all3normal report, execute reviewed G201missing native once, require actual8GT+all7small PASS, then full49 once/392GT/98raw. Keep D unique evidence and best, no earlyremote checks or NNsourcechanges/restarts. G MSVR fails+2 so goal remains unmet; positive201 robustness will guide next controlled intervention.",
+    "action": "Keep original28890/32692, original next estimated14:10:18. After RGB100 EXIT0/raw4/14124, reviewed per-dataset RGB100 intake once then15-model3normal CPU. Only after all3normal, reviewed G201missing native once; actual8GT/all7small PASS thenfull49 once/392GT/98raw. Reviewed new native/full CPUintake after each actualclosure; full17-state833metrics/637comparisons/122892pairs. Do not conflate source/old441checks with newmissing. Allgoal+2/fairretrain/seeds/all3missing remains unmet. Subsequent intervention may inspect legitimate training references but cannot delete singlecamera identities or assume zero-weight partialrefs caused failure.",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
