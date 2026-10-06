@@ -1,0 +1,366 @@
+{
+  "status": "ACTUAL_G_DATASET_TWO_FULL50_NORMAL_CPU_READOUT",
+  "completed_at": "2026-10-06T13:24:13",
+  "dataset": "MSVR310",
+  "model_results": 5,
+  "comparisons": [
+    {
+      "dataset": "MSVR310",
+      "improved": "normal_axis_shared",
+      "reference": "original_DeMo",
+      "mAP": 0.04638287779683736,
+      "mINP": 0.04834728433939617,
+      "Rank-1": -0.1692047377326702,
+      "Rank-5": 0.0,
+      "Rank-10": 0.0,
+      "Rank-20": 0.16920473773265599,
+      "both_plus2": false,
+      "rank1_rescued": 0,
+      "rank1_harmed": 1
+    },
+    {
+      "dataset": "MSVR310",
+      "improved": "normal_frequency_shared",
+      "reference": "original_DeMo",
+      "mAP": 0.08212018952468725,
+      "mINP": 0.1601822819860388,
+      "Rank-1": -0.3384094754653191,
+      "Rank-5": 0.6768189509306239,
+      "Rank-10": -0.16920473773265599,
+      "Rank-20": 0.0,
+      "both_plus2": false,
+      "rank1_rescued": 2,
+      "rank1_harmed": 4
+    },
+    {
+      "dataset": "MSVR310",
+      "improved": "normal_axis_shared",
+      "reference": "normal_frequency_shared",
+      "mAP": -0.035737311727849885,
+      "mINP": -0.11183499764664262,
+      "Rank-1": 0.16920473773264888,
+      "Rank-5": -0.6768189509306239,
+      "Rank-10": 0.16920473773265599,
+      "Rank-20": 0.16920473773265599,
+      "both_plus2": false,
+      "rank1_rescued": 3,
+      "rank1_harmed": 2
+    },
+    {
+      "dataset": "MSVR310",
+      "improved": "normal_axis_shared",
+      "reference": "unit_axis_shared",
+      "mAP": 0.0056487806662772755,
+      "mINP": -0.1751690354335409,
+      "Rank-1": 0.0,
+      "Rank-5": 0.507614213197968,
+      "Rank-10": 0.33840947546531197,
+      "Rank-20": 0.0,
+      "both_plus2": false,
+      "rank1_rescued": 1,
+      "rank1_harmed": 1
+    },
+    {
+      "dataset": "MSVR310",
+      "improved": "normal_frequency_shared",
+      "reference": "unit_frequency_shared",
+      "mAP": 0.022840270678699426,
+      "mINP": 0.15218511708551574,
+      "Rank-1": -0.3384094754653191,
+      "Rank-5": 0.5076142131979537,
+      "Rank-10": -0.16920473773265599,
+      "Rank-20": -0.16920473773265599,
+      "both_plus2": false,
+      "rank1_rescued": 1,
+      "rank1_harmed": 3
+    }
+  ],
+  "paired_query_rows": 2955,
+  "training": {
+    "original_DeMo": {
+      "selected_epoch": 32,
+      "parameters": 98489856,
+      "trainable_parameters": 98484736,
+      "descriptor_dim": 5120,
+      "budget_epochs": 50,
+      "final_epoch": {
+        "mAP": 45.8097959324754,
+        "mINP": 22.52311847403095,
+        "Rank-1": 62.77495769881557,
+        "Rank-5": 79.35702199661591,
+        "Rank-10": 83.41793570219966,
+        "Rank-20": 88.83248730964468
+      },
+      "runtime": {
+        "end_to_end_seconds": 17.001151084899902,
+        "triplets": 1646,
+        "includes_decode_and_first_batch": true
+      },
+      "peak_memory": 12187581952
+    },
+    "unit_frequency_shared": {
+      "selected_epoch": 5,
+      "parameters": 100821638,
+      "trainable_parameters": 3123846,
+      "descriptor_dim": 5120,
+      "budget_epochs": 100,
+      "final_epoch": {
+        "mAP": 47.129936188093794,
+        "mINP": 23.507658021014134,
+        "Rank-1": 63.7901861252115,
+        "Rank-5": 80.03384094754654,
+        "Rank-10": 84.77157360406092,
+        "Rank-20": 89.84771573604061
+      },
+      "runtime": {
+        "end_to_end_seconds": 14.947400331497192,
+        "triplets": 1646,
+        "includes_decode_and_first_batch": true,
+        "mean_route": [
+          [
+            0.11203375458717346,
+            0.01673365943133831,
+            0.014087866991758347
+          ],
+          [
+            0.11203859746456146,
+            0.01673712022602558,
+            0.014088437892496586
+          ],
+          [
+            0.11204372346401215,
+            0.016737613826990128,
+            0.014089128002524376
+          ],
+          [
+            0.11204510182142258,
+            0.016735950484871864,
+            0.014088335447013378
+          ],
+          [
+            0.11203901469707489,
+            0.016734909266233444,
+            0.014087896794080734
+          ],
+          [
+            0.11202342808246613,
+            0.016732631251215935,
+            0.014085262082517147
+          ],
+          [
+            0.11201981455087662,
+            0.01673216000199318,
+            0.014085604809224606
+          ]
+        ],
+        "mean_outer_gates": [
+          0.866036593914032,
+          0.8285180330276489,
+          0.8310848474502563
+        ],
+        "mean_route_entropy": 2.613797664642334,
+        "mean_joint_minus_marginal_product_L1": 2.9953296689200215e-05
+      },
+      "peak_memory": 1668362240
+    },
+    "normal_frequency_shared": {
+      "selected_epoch": 15,
+      "parameters": 100821638,
+      "trainable_parameters": 3123846,
+      "descriptor_dim": 5120,
+      "budget_epochs": 100,
+      "final_epoch": {
+        "mAP": 46.61511435395067,
+        "mINP": 23.442050097359378,
+        "Rank-1": 62.43654822335025,
+        "Rank-5": 80.8798646362098,
+        "Rank-10": 84.0947546531303,
+        "Rank-20": 89.84771573604061
+      },
+      "runtime": {
+        "end_to_end_seconds": 18.288084983825684,
+        "triplets": 1646,
+        "includes_decode_and_first_batch": true,
+        "mean_route": [
+          [
+            0.12736527621746063,
+            0.007944341748952866,
+            0.007548484951257706
+          ],
+          [
+            0.12736012041568756,
+            0.007944701239466667,
+            0.007548415567725897
+          ],
+          [
+            0.12736816704273224,
+            0.007944334298372269,
+            0.00754849798977375
+          ],
+          [
+            0.1273616999387741,
+            0.007944492623209953,
+            0.007548484019935131
+          ],
+          [
+            0.12736767530441284,
+            0.007944377139210701,
+            0.00754849798977375
+          ],
+          [
+            0.1273626685142517,
+            0.007944369688630104,
+            0.007548339199274778
+          ],
+          [
+            0.12736406922340393,
+            0.007944437675178051,
+            0.007548502646386623
+          ]
+        ],
+        "mean_outer_gates": [
+          0.9639676213264465,
+          0.9475300908088684,
+          0.9498260021209717
+        ],
+        "mean_route_entropy": 2.3583123683929443,
+        "mean_joint_minus_marginal_product_L1": 7.482386536139529e-06
+      },
+      "peak_memory": 1668362240
+    },
+    "unit_axis_shared": {
+      "selected_epoch": 6,
+      "parameters": 100821638,
+      "trainable_parameters": 3123846,
+      "descriptor_dim": 5120,
+      "budget_epochs": 100,
+      "final_epoch": {
+        "mAP": 42.520428418880776,
+        "mINP": 20.204848299802126,
+        "Rank-1": 58.544839255499156,
+        "Rank-5": 77.32656514382403,
+        "Rank-10": 83.24873096446701,
+        "Rank-20": 87.81725888324873
+      },
+      "runtime": {
+        "end_to_end_seconds": 14.558873891830444,
+        "triplets": 1646,
+        "includes_decode_and_first_batch": true,
+        "mean_route": [
+          [
+            0.26717838644981384,
+            0.003738358383998275,
+            0.0032107580918818712
+          ],
+          [
+            0.1324024200439453,
+            0.003335516666993499,
+            0.002940935082733631
+          ],
+          [
+            0.06842486560344696,
+            0.0026170224882662296,
+            0.002336377976462245
+          ],
+          [
+            0.16443371772766113,
+            0.003427079413086176,
+            0.0030312011949718
+          ],
+          [
+            0.12184453755617142,
+            0.002945063402876258,
+            0.002647773828357458
+          ],
+          [
+            0.08776114881038666,
+            0.0027940773870795965,
+            0.0025408901274204254
+          ],
+          [
+            0.11667988449335098,
+            0.002998304320499301,
+            0.0027116884011775255
+          ]
+        ],
+        "mean_outer_gates": [
+          0.9390034675598145,
+          0.9190099239349365,
+          0.9144653677940369
+        ],
+        "mean_route_entropy": 1.964269995689392,
+        "mean_joint_minus_marginal_product_L1": 0.018851839005947113
+      },
+      "peak_memory": 1445382144
+    },
+    "normal_axis_shared": {
+      "selected_epoch": 4,
+      "parameters": 100821638,
+      "trainable_parameters": 3123846,
+      "descriptor_dim": 5120,
+      "budget_epochs": 100,
+      "final_epoch": {
+        "mAP": 39.75130944711508,
+        "mINP": 18.081208991105623,
+        "Rank-1": 56.852791878172596,
+        "Rank-5": 74.45008460236888,
+        "Rank-10": 81.89509306260575,
+        "Rank-20": 87.47884940778341
+      },
+      "runtime": {
+        "end_to_end_seconds": 16.298564910888672,
+        "triplets": 1646,
+        "includes_decode_and_first_batch": true,
+        "mean_route": [
+          [
+            0.11700261384248734,
+            0.028407976031303406,
+            0.02242276258766651
+          ],
+          [
+            0.09851650148630142,
+            0.02634732984006405,
+            0.021258288994431496
+          ],
+          [
+            0.07504214346408844,
+            0.02275882661342621,
+            0.019367462024092674
+          ],
+          [
+            0.10713571310043335,
+            0.027077794075012207,
+            0.021734625101089478
+          ],
+          [
+            0.09495456516742706,
+            0.025008758530020714,
+            0.020681219175457954
+          ],
+          [
+            0.08595667034387589,
+            0.024107718840241432,
+            0.020149286836385727
+          ],
+          [
+            0.09599172323942184,
+            0.02526392973959446,
+            0.020814089104533195
+          ]
+        ],
+        "mean_outer_gates": [
+          0.9836933016777039,
+          0.9723549485206604,
+          0.974388599395752
+        ],
+        "mean_route_entropy": 2.7867271900177,
+        "mean_joint_minus_marginal_product_L1": 0.03646940365433693
+      },
+      "peak_memory": 1445382144
+    }
+  },
+  "official_GT_six_CMC50_perquery_groups": true,
+  "new_neural_calls": 0,
+  "new_optimizer_updates": 0,
+  "limits": "One dataset/seed42, officialbenchmark mAP-best/earliesttie. Original50 versus original50+new50, matched normal and unit expert budgets/params/dims/sampling. Not all3, missing49, multiseed or retraining ablations. NormalmAP-best may trade off Rank1. Historical frequency_shared is mixed-source ordinary-expert control."
+}
