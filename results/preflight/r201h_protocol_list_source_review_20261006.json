@@ -1,10 +1,11 @@
 {
   "status": "PASS",
-  "reviewed_at": "2026-10-06T14:48:34+08:00",
-  "review_scope": "Fresh static SOURCE correctness review of the three planned H sources and necessary reused implementation. No loss harness, neural model, remote command or GPU operation was executed.",
+  "reviewed_at": "2026-10-06T16:21:31+08:00",
+  "review_scope": "Fresh experiment-bridge Phase2.5 SOURCE_ONLY review of H objective,runner and math harness and declared reused source closure for the smoke-only FP32 autograd diagnostic change.",
+  "summary": "No remaining blocking source defect. The only runner change is the smoke diagnostic autocast context; actual H native repair remains unexecuted and formal updates remain0.",
   "sources_sha256": {
     "protocol_list_objective.py": "5bfb50d39b8219a8ad9232721f3558ba2250478645a177223f410ca7979cd2ac",
-    "run_r201h_protocol_list.py": "d3bc5b5aafceed2b340e579e2c2e287e46ceb47b824e68d4384fa4236201cd6e",
+    "run_r201h_protocol_list.py": "ff4d08eda462ff3ea3554f3cfa0d864bc9c883ed751f15f765ef66bc00b823d4",
     "results/preflight/r201h_protocol_list_math_preflight_20261006.py": "535a21ea443e9729235680c9138b908c2614187b699fe6e73edec3b26aab4c22"
   },
   "directly_reused_sources_sha256": {
@@ -64,85 +65,63 @@
     "results/preflight/r201g_normal_priority_complete_intake_20261006.py": "a1ca62bc2fc64f2d3e832c1b0a38d984e206300c2e63b7e13618792c7d5cb680",
     "analyze_r201g_normal_priority.py": "b72bf19b8aade0c320f84ed0bca7ae763e60241a57a5db4edf8155efccfe6970",
     "list_retrieval_objective.py": "1bed66d6359c820eb714a176dae8e3c920b456e24004a8cd03948673d7f12610",
-    "collect_results.py": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c"
+    "collect_results.py": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+    "results/preflight/full_official_anchor_stream_bridge_20261005.py": "53fd78e3b4ebbd79b6d0a60059e9c297f727ac8a42931b6a5b103e44d7d88d8e"
   },
   "blocking_findings": [],
-  "nonblocking_findings": [],
+  "nonblocking_findings": [
+    {
+      "id": "runtime_repair_unverified",
+      "severity": "RUNTIME_PREREQUISITE",
+      "finding": "The preserved first native attempt failed before any optimizer update. FP32 diagnostic repair is source-correct but not yet tested in H; this remains a mandatory native gate before full training, not a source blocker.",
+      "required_action": "Root must preserve the failed attempt and satisfy the existing fresh-root gate, then obtain actual corrected four-native3 and terminal EXIT0 acceptance before any full50."
+    }
+  ],
   "checks": [
     {
-      "id": "plan_hashes",
-      "status": "PASS",
-      "evidence": "Independently computed SHA256 for all 3 new sources and all 57 directly_reused_sources_sha256 entries; all 60 digests equal the exact plan maps."
-    },
-    {
-      "id": "python_syntax",
-      "status": "PASS",
-      "evidence": "Parsed all 57 Python files in the two maps with stdlib ast.parse. Also reconstructed only the constant/repr substitutions in the CPU harness code f-string and parsed the emitted 48-line Python program. No reviewed source was imported or executed."
-    },
-    {
-      "id": "label_only_equivalence",
+      "id": "exact_smoke_only_AST_change",
       "status": "PASS_STATIC",
-      "evidence": "protocol_list_objective.py:12-30 uses the same non-diagonal eligibility, sigmoid(score[i,j]-score[i,k])/.01 direction, self-candidate exclusion, positive and total soft ranks, and AP averaging as list_retrieval_objective.py. On the actual P8K8 label-only fixture all rows have seven positives: clamp_min(1) leaves denominators unchanged and ap[valid] selects every row in the same order. smooth_ap uses the same FP32 normalization and Gram matrix. Numerical value/feature-gradient equivalence is covered by the unexecuted CPU harness."
+      "evidence": "Compared directly with the immutable failed runner. Removing exactly the one newly added with torch.autocast('cuda',enabled=False) around the existing gradient=torch.autograd.grad(ap_loss,feature,retain_graph=True)[0] makes the complete runner AST identical. The wrapper is inside model.normal_priority_smoke, which G build sets only for args.mode==smoke. No source other than this runner changed among the declared closure."
     },
     {
-      "id": "camera_positive_and_competitor_masks",
+      "id": "unchanged_training_and_no_weakened_checks",
       "status": "PASS_STATIC",
-      "evidence": "protocol_list_objective.py:12-29 excludes same-ID/same-camera entries from eligible, intersects that mask with same-ID positives, and applies eligible to every competing gallery j in both ranks. Query self is excluded by the same camera/identity rule; k==j is additionally removed from competitors. Other-ID same-camera entries remain negatives. The sign ranks higher similarities above a positive. Junk entries appear neither as positive candidates nor competitors, so their score-entry gradients are zero."
+      "evidence": "The finite gradient assertion and valid-query strict positive L1 assertion remain. Zero-valid queries still require exactly zero AP loss and zero diagnostic gradient. g.step still computes its forwards/full loss in CUDA autocast, performs the original GradScaler full backward outside that context, retains partial forwards/BN/mining and zero-weight second backward, then unscale/step/update. autograd.grad retains the graph and does not replace the actual training backward. No fallback, retry, new exception handling, threshold relaxation or alternate objective was added."
     },
     {
-      "id": "invalid_query_and_gallery_roles",
-      "status": "PASS_STATIC",
-      "evidence": "protocol_list_objective.py:14,29-30 averages only query rows with an eligible positive. Eligibility is constructed per query and no global row/column or feature filtering occurs. An invalid query observation remains an eligible negative gallery candidate for valid queries of another identity. Its own score row has zero AP gradient; its feature can still receive gallery-role gradient, as intended."
+      "id": "first_native_failure_and_relevant_prior_E_evidence",
+      "status": "PASS_OBSERVED_LOCAL",
+      "evidence": "Read the preserved H label-axis and label-frequency logs/exit receipts: both exit1 at the unchanged nonzero diagnostic assertion before the first optimizer update. All 11 collected failure files match the recorded sizes/SHA256. Existing E third-step smoke records have AMP diagnostic L1=0 versus FP32 L1=6.422073965950403e-6 (axis) and 5.708250682801008e-6 (frequency). E/F source already disables autocast around that diagnostic. This supports a candidate diagnostic repair, not proof of the H cause, H runtime success or retrieval-metric failure causes."
     },
     {
-      "id": "evidenced_entirely_invalid_batch",
+      "id": "reviewed_plans_and_declared_source_closure",
       "status": "PASS_STATIC",
-      "evidence": "protocol_list_objective.py:19-22 returns scores.sum()*0 when the entire batch has no valid AP queries. The result remains connected to the FP32 normalized feature graph and has zero AP gradient. The denominator clamp prevents division by zero for invalid rows in mixed batches. These two operations address the supplied actual 85/2647 wholly invalid RGBNT201 batches rather than a hypothetical fallback."
+      "evidence": "Re-read all three updated plans and every declared source byte immediately before writing. Their existing dictionary conventions and source sets are retained; the previously omitted directly imported copy_verified helper is now included. All declared hashes match current files. Only the H runner hash differs from the immutable prior closures; no source patch was needed for copy_verified. The local review gates evaluate the entire sources_sha256|directly_reused_sources_sha256 union before their work, and existing remote gates still check their non-results subset."
     },
     {
-      "id": "all64_classification_and_auxiliaries",
-      "status": "PASS_STATIC",
-      "evidence": "run_r201h_protocol_list.py:40-64 preserves the full 64-observation batch and changes only the first full-output loss to .25*xent(score,target)+AP. SharedIdentityAxis.loss_weights[0] is 1; all later pairs delegate unchanged to loss_fn, and g.step still includes output[-1] contribution loss. The configured label smoothing and .25 CE match the original make_loss path. Camera-invalid AP rows are not removed from any classification, auxiliary, contribution or sampler input."
+      "id": "prior_review_snapshots_are_historical",
+      "status": "PASS_OBSERVED_LOCAL",
+      "evidence": "All 11 original failed-run source/plan/review snapshot files were read and previously compared byte-for-byte to their Git HEAD versions. The three original SOURCE PASS receipts are immutable prior-review snapshots of the old runner, not current approval or runtime acceptance. This review only replaces the three live receipts. Failed artifacts and snapshots remain unchanged."
     },
     {
-      "id": "unchanged_G_partial_compute_and_BN",
+      "id": "unchanged_protocol_AP_algebra_and_valid_query_mean",
       "status": "PASS_STATIC",
-      "evidence": "The H update directly calls run_r201g_normal_priority.step. That source retains the full forward/backward, detached full gallery, same partial image masking, partial forward, CE and cross-gallery mining, 0*partial_CE+0*cross_triplet, second backward and one scaler/optimizer update. The smoke-only fused BN counter remains asserted equal to two. No H change bypasses partial computation or modifies G source."
+      "evidence": "protocol_list_objective.py still normalizes the 5120D feature in FP32, computes cosine scores, and fixes temperature .01. Label policy excludes only self; camera policy excludes same-ID/same-camera entries, including self, from positives and competitors. Each positive candidate excludes itself from rank competitors; the loss averages only queries with at least one eligible positive. Invalid queries remain in full CE/auxiliary/contribution and may remain galleries for other queries. The evidenced all-invalid batch returns graph-connected scores.sum()*0 and the denominator clamp is unchanged."
     },
     {
-      "id": "actual_5120_descriptor_and_frozen_identity",
+      "id": "loss_harness_source_and_prior_actual_math_scope",
       "status": "PASS_STATIC",
-      "evidence": "H build delegates to G build and identity_coordinate_three_dataset.build, which constructs the unchanged IdentityCoordinateAxis, requires seed42/freeze_identity_encoder=1 and loads the completed original DeMo anchor. OriginalProjectionProbe freezes/evals the identity modules and the inherited runner invokes assert_anchor_unchanged. IdentityCoordinateAxis.fuse returns the normalized original 5120-coordinate descriptor; its first training feature and inference return are the same fused descriptor, and full_evaluation.extract applies the same FP32 normalization. The AP feature shape assertion is (64,5120). Fresh expert/head initialization, newly created Adam and the additional50 schedule are inherited unchanged."
+      "evidence": "Read the CPU-only math harness source: it checks label value/feature-gradient agreement with the existing AP implementation, camera loss against an independent scalar reference, zero gradients on junk scores, permutation, mixed valid/invalid rows and graph-connected zero when all queries are invalid. The existing CPU math proof is historical, and this unchanged algebra harness was not executed or repeated by this reviewer. Synthetic algebra is not native model/AMP/Adam acceptance."
     },
     {
-      "id": "FP32_loss_and_gradient_path",
+      "id": "method_weights_model_data_and_sampling_unchanged",
       "status": "PASS_STATIC",
-      "evidence": "protocol_list_objective.py:33-36 disables autocast for the actual feature device and casts features to float before normalization, matmul, sigmoid and ranking reductions. No detach occurs on this primary path. IdentityCoordinateAxis.fuse already produces FP32 features. Only the separate existing G partial gallery is detached."
+      "evidence": "H still replaces only the first full-view retrieval loss with .25 fused CE plus AP coefficient1; other model outputs use the inherited loss function. All expert/head parameters, the frozen official DeMo anchor, original50+freshAdam additional50 schedule, seed42, P8K8/B64, 5120D unit descriptor, contribution/auxiliary objectives and zero partial weights are unchanged. Source trace uses full_records rather than historical split_records: all official training observations and query/gallery lists remain, with no fit/dev holdout or test identities in training."
     },
     {
-      "id": "smoke_flag_and_native_checks",
+      "id": "benchmark_selection_and_GT_unchanged",
       "status": "PASS_STATIC",
-      "evidence": "G build sets normal_priority_smoke from args.mode. H queries AP feature gradients only under this flag, retains the graph for the actual full backward, asserts finite gradients and nonzero L1 for valid AP queries, and requires exact zero loss/gradient for an entirely invalid batch. Existing BN2, unit-norm, frozen-anchor, three-real-update, all-trainable-gradient and strict-reload smoke checks remain inherited. These checks have not been run for H."
-    },
-    {
-      "id": "official_data_and_control_scope",
-      "status": "PASS_STATIC",
-      "evidence": "The inherited runner obtains full_records, whose training relabeling preserves every official source record and original training camera metadata; Triplets passes that camera to the H loss. No split_records/fit-dev branch is used by the H runner. B64, K8, seed42 and .25 CE/1 metric follow the fixed configuration. Hlabel and Hcamera share this runner/model and differ only in the reference mask; no evaluation camera rule or descriptor is changed."
-    },
-    {
-      "id": "CPU_harness_review_gate_and_isolation",
-      "status": "PASS_STATIC",
-      "evidence": "The harness checks PASS/no blockers and the exact review maps before its only SSH command. The emitted program imports torch plus stdlib and compiles only the two loss-helper strings; it imports no neural model/training module, constructs no optimizer and performs only synthetic CPU tensor/autograd algebra. CUDA_VISIBLE_DEVICES is empty in the command and asserted inside the program. collect_results import has only stdlib imports/constants/definitions; its collector/main is not called. Review performed only AST inspection, not the SSH command."
-    },
-    {
-      "id": "CPU_harness_check_coverage",
-      "status": "PASS_STATIC",
-      "evidence": "The unexecuted harness compares old/new label loss and feature gradients; compares camera loss with an independent scalar ranking calculation; checks finite/nonzero overall and exact zero junk-score gradients; checks joint query/gallery permutation; checks mixed valid/invalid query rows; and checks graph-connected zero loss/gradient for the actual-required no-positive batch. Its output explicitly limits acceptance to synthetic CPU algebra."
-    },
-    {
-      "id": "candidate_claims_and_neural_boundary",
-      "status": "PASS_STATIC",
-      "evidence": "The plan and H revision call this a known AP/protocol-mask candidate, disclose benchmark-best checkpoint selection and make no gain, novelty or failure-cause claim. They correctly reject prior E/F AP with nonzero partial weights as a matched Hlabel control and do not treat zero-weight G partial mining as an optimization cause. Only the loss helper, runner and CPU harness are new; no H neural controller/deployer is present. The plan reserves future native smoke/training until unchanged G100full/all3normal and fixed G201 missing49 plus CPU diagnostics close."
+      "evidence": "The inherited full runner evaluates every official query/gallery record after each of50 epochs, saves only when normal mAP strictly improves and therefore keeps the earliest tie, then strict-reloads that best checkpoint. RGBNT201 evaluation removes same-ID/same-camera gallery junk and is audited against installed filename/identity/camera/scene GT. This is disclosed benchmark-selected evaluation; the fix adds no new benchmark rule, metric column selection, parameters, weights or data. Known protocol AP is not claimed novel or guaranteed to improve retrieval."
     }
   ],
   "reviewer_provenance": {
@@ -151,10 +130,27 @@
     "actual_model": "UNATTESTED",
     "actual_backend": "UNATTESTED",
     "actual_effort": "UNATTESTED",
-    "attestation_note": "Requested routing is not evidence of the actual served model, backend or reasoning effort. No independent runtime attestation was available to this reviewer."
+    "attestation_note": "Requested routing is not evidence of the actual served model, backend or reasoning effort. No independent runtime attestation was available.",
+    "reviewer_task": "/root/review_r201h_native_fp32_diagnostic",
+    "context": "Fresh delegated source review under experiment-bridge Phase2.5 and local-codex-policy.md; no personal MEMORY.md read."
   },
   "review_independence": "same-family",
   "acceptance_status": "provisional",
+  "runtime_gate_state": {
+    "status": "FIRST_NATIVE_ATTEMPT_EXIT1_CORRECTED_NATIVE_NOT_RUN_FULL_GATE_UNMET",
+    "original_native_session": 23859,
+    "first_native_exit_code": 1,
+    "failed_label_controls": 2,
+    "first_attempt_successful_optimizer_updates": 0,
+    "formal_updates": 0,
+    "actual_H_normal_models": 0,
+    "corrected_native_repair_executed": false,
+    "H_native_actual_success_receipt_present": false,
+    "H_full_actual_success_receipt_present": false,
+    "H_completed_local_target_present": false,
+    "remote_failed_root_preservation_or_move": "NOT_INSPECTED_BY_THIS_REVIEWER",
+    "required_before_full": "Actual corrected four native3,12 successful updates,total zero AMP skips,strict reload/equal sampling/all gradients plus original deployer terminal exit0 receipt; source PASS is insufficient."
+  },
   "execution": {
     "local_python": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe",
     "python_flags": [
@@ -164,22 +160,85 @@
       "-S"
     ],
     "shell_login": false,
-    "actual_CPU_math_checks": 0,
-    "new_neural_models": 0,
+    "source_files_SHA256_verified": 61,
+    "union_source_files_SHA256_verified": 66,
+    "union_python_sources_AST_parsed": 63,
+    "source_hash_mismatches": 0,
+    "sole_diagnostic_AST_wrapper_removed_for_comparison": 1,
+    "runner_AST_otherwise_identical_to_failed_snapshot": true,
+    "failed_artifact_files_size_SHA256_verified": 11,
+    "original_snapshot_files_equal_Git_HEAD": 11,
+    "reviewed_project_module_imports": 0,
+    "test_suites_executed": 0,
+    "CPU_analyzer_runs": 0,
+    "existing_CPU_analysis_repeats": 0,
+    "new_actual_CPU_math_checks": 0,
     "new_neural_calls": 0,
     "new_optimizer_updates": 0,
     "ssh_calls": 0,
     "GPU_queries": 0,
-    "reviewed_project_module_imports": 0,
+    "observer_calls": 0,
     "existing_sources_modified": 0,
-    "existing_G100_training_touched": false
+    "plans_modified": 0,
+    "docs_modified": 0,
+    "personal_MEMORY_md_reads": 0,
+    "git_mutations": 0,
+    "read_only_git_operations": [
+      "status",
+      "diff",
+      "show"
+    ],
+    "review_receipts_written": 3,
+    "output_written": "results/preflight/r201h_protocol_list_source_review_20261006.json"
   },
   "limits": [
-    "PASS is static source acceptance for the exact hashes only. It is not an executed algebra/gradient, AMP, Adam, model, descriptor-reload or retrieval-performance result.",
-    "Actual 120/171 single-camera identities and 85/2647 wholly no-cross-camera-positive batches are supplied task/plan evidence, not newly recomputed by this source-only review.",
-    "No H neural launch is accepted by this review. The current G100 original training must remain untouched; its full/all-three normal closure and fixed G201 missing49 plus CPU diagnostics remain prerequisites before any future H neural phase.",
-    "The candidate does not establish a +2 gain, late stability, new novelty or resolution of the 12 disjoint private-coordinate retrieval cases. Matched ordinary controls and later full-three-dataset/paired-seed/49-condition evidence remain necessary if it becomes useful.",
-    "Same-family review with actual reviewer routing UNATTESTED remains provisional."
+    "SOURCE_ONLY static change-impact review of the exact declared local source closure; no project module, model, loss harness, test suite, SSH command or experiment was executed.",
+    "The actual H first native attempt23859 EXIT1 is preserved. The corrected H diagnostic has not run and its numerical repair is unproven; this PASS is not H native, formal, GT-result or retrieval-metric acceptance.",
+    "Requested gpt-6-astra/max routing has no independent runtime attestation. Actual model/backend/effort remain UNATTESTED; review independence is same-family and acceptance provisional.",
+    "All prior review/plan files under failure/source_snapshot are historical snapshots of the failed attempt. Current plan hashes are review-time snapshots, not a claim that the old SOURCE PASS survived a source change.",
+    "No source method/data/weights/parameters/sampling/temperature/benchmark-selection change beyond the smoke-only diagnostic context is approved here. Existing actual CPU algebra is not native AMP/Adam or metric evidence."
   ],
-  "next_step": "Root may run only the already prepared review-gated CPU math harness after this source PASS; record actual outcomes separately. Future H neural work remains deferred by the plan."
+  "next_step": "Retain this fresh SOURCE PASS only for the current hashes. Root may continue the planned diagnostic-only recovery after preserving the failed attempt; corrected actual native12 EXIT0 remains required before full50, and actual full4/10588/200/raw4 closure remains required before once-only CPU intake.",
+  "review_kind": "SOURCE_ONLY",
+  "reviewed_plan_sha256": {
+    "results/preflight/r201h_protocol_list_plan_20261006.json": "b2033d59b0305c1e790b94a32b36687bb84b0c83140ca5100df222375fb061ac",
+    "results/preflight/r201h_protocol_list_launch_plan_20261006.json": "13f88d1b9e0873646ac44088923596e557435d873125ac1b3cd87b4a85efd701",
+    "results/preflight/r201h_protocol_list_cpu_closeout_plan_20261006.json": "a30bcf80a547ecdc2bd05d76f2af569f234aedf0466b13baa3f4159494bf00d7"
+  },
+  "prior_review_snapshot": {
+    "path": "results/r201h_protocol_list_native_failure_20261006/source_snapshot/results/preflight/r201h_protocol_list_source_review_20261006.json",
+    "sha256": "c26293149b4c127f286783e3d3ea11fb5e6e8d6b8b6a4e7f9d7d4549790011ce",
+    "interpretation": "Immutable historical prior SOURCE review of the failed runner; not current approval or runtime PASS."
+  },
+  "prior_source_snapshots_sha256": {
+    "results/r201h_protocol_list_native_failure_20261006/source_snapshot/launch_r201h_protocol_list.py": "2ba6db65e749ab5094248682c7c208641a15224cdd846a13883945559fdd9209",
+    "results/r201h_protocol_list_native_failure_20261006/source_snapshot/protocol_list_objective.py": "5bfb50d39b8219a8ad9232721f3558ba2250478645a177223f410ca7979cd2ac",
+    "results/r201h_protocol_list_native_failure_20261006/source_snapshot/run_r201h_protocol_list.py": "d3bc5b5aafceed2b340e579e2c2e287e46ceb47b824e68d4384fa4236201cd6e",
+    "results/r201h_protocol_list_native_failure_20261006/source_snapshot/results/preflight/r201h_protocol_list_complete_intake_20261006.py": "cc7f114beb8e805a97bb1f5f5142be51cddab4677476302d1e5ecf0462306802",
+    "results/r201h_protocol_list_native_failure_20261006/source_snapshot/results/preflight/r201h_protocol_list_cpu_closeout_plan_20261006.json": "7e4a33078c5cc7138c3aa53628ea9325939a91e96024d553fe14e8aba3c03a71",
+    "results/r201h_protocol_list_native_failure_20261006/source_snapshot/results/preflight/r201h_protocol_list_cpu_closeout_source_review_20261006.json": "1778627c7d2482d03e53928ce3957d5a8d7f86eb1fb91ddec45dd891f65919e6",
+    "results/r201h_protocol_list_native_failure_20261006/source_snapshot/results/preflight/r201h_protocol_list_deploy_20261006.py": "ee739732b818deee9f9ef7551d2604714c1c3959f4e3432348261759227f7ccb",
+    "results/r201h_protocol_list_native_failure_20261006/source_snapshot/results/preflight/r201h_protocol_list_launch_plan_20261006.json": "648c3de8546482ca7f34024c9e3f23f3197c6d462eff19ef104f13a57d704c5e",
+    "results/r201h_protocol_list_native_failure_20261006/source_snapshot/results/preflight/r201h_protocol_list_launch_source_review_20261006.json": "7211ce2a277e7d89f0530aefc2dd5e578a7dca2d25ae5d319403220da2fd2d90",
+    "results/r201h_protocol_list_native_failure_20261006/source_snapshot/results/preflight/r201h_protocol_list_plan_20261006.json": "5d525375d4622bcbebbd78bd47d8612fa4aaae9d2f5e04d77e0ae9bb77bbba7e",
+    "results/r201h_protocol_list_native_failure_20261006/source_snapshot/results/preflight/r201h_protocol_list_source_review_20261006.json": "c26293149b4c127f286783e3d3ea11fb5e6e8d6b8b6a4e7f9d7d4549790011ce"
+  },
+  "failure_evidence": {
+    "path": "results/preflight/r201h_native_failure_intake_actual_20261006.json",
+    "sha256": "157c493e4cab48f859925a3dd782a0fab2e121086d2195e7c96b88be823f8ad2",
+    "status": "ACTUAL_H_NATIVE_FIRST_ATTEMPT_EXIT1_TEXT_PRESERVED",
+    "scope": "Observed local preserved actual failure artifacts only; no current remote process query."
+  },
+  "resolved_receipt_findings": [
+    {
+      "id": "copy_verified_missing_from_existing_declared_closure",
+      "resolution": "Read the unchanged helper and added its existing SHA to all three plan/review reused dictionaries; no experiment source modification.",
+      "source": "results/preflight/full_official_anchor_stream_bridge_20261005.py",
+      "sha256": "53fd78e3b4ebbd79b6d0a60059e9c297f727ac8a42931b6a5b103e44d7d88d8e"
+    },
+    {
+      "id": "stale_plan_prelaunch_labels",
+      "resolution": "Root changed the live plans to first-native-failed/fresh-source-pending and distinguishes formal not started from the actual failed native attempt. Re-read exact updated plan hashes immediately before writing."
+    }
+  ]
 }

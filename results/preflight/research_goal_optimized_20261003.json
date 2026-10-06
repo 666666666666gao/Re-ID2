@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-06T16:02:22",
+  "updated_at": "2026-10-06T16:22:23",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -4249,6 +4249,29 @@
         "results/preflight/own_D_closed_control_to_E_actual_20261006.json"
       ],
       "retention": "Current receiver and unique raw distances remain on D. Historical closed distances remain on E at documented exact locations. Size/SHA and actual free space are checked for each incoming raw file. No unrelated directory or active checkpoint was changed."
+    },
+    "H_native_first_failure_and_smoke_diagnostic_source_fix": {
+      "original_session": 23859,
+      "original_exit_code": 1,
+      "original_updates": 0,
+      "formal_updates": 0,
+      "preserved": {
+        "retained_root": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201h_protocol_list_20261006_native_first_failed",
+        "files": 11,
+        "original_failed_root_preserved": true,
+        "new_formal_updates": 0,
+        "new_neural_calls": 0,
+        "new_optimizer_updates": 0,
+        "weights_deleted": 0,
+        "status": "ACTUAL_H_FIRST_NATIVE_EXIT1_ROOT_PRESERVED_FOR_REVIEWED_RETRY",
+        "verified_at": "2026-10-06T16:22:22",
+        "original_native_session": 23859,
+        "original_exit_code": 1,
+        "original_root": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201h_protocol_list_20261006",
+        "original_runner_sha256": "d3bc5b5aafceed2b340e579e2c2e287e46ceb47b824e68d4384fa4236201cd6e"
+      },
+      "source_change": "Only smoke autograd diagnostic CUDA autocast explicitly disabled, matching E/F; training unchanged.",
+      "corrected_native_executed": false
     }
   },
   "decision_rules": [

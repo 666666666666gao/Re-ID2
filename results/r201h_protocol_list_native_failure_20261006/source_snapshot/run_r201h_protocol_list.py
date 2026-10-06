@@ -50,9 +50,7 @@ def main():
             ap_loss,info=smooth_ap(feature,target,target_cam,reference)
             metric.update(info,full_AP_loss=float(ap_loss.detach()),primary_full_metric='protocol_smooth_AP_unit5120',metric_coefficient=1.)
             if model.normal_priority_smoke:
-                # The caller is in AMP; mirror the existing E/F FP32 diagnostic.
-                with torch.autocast('cuda',enabled=False):
-                    gradient=torch.autograd.grad(ap_loss,feature,retain_graph=True)[0]
+                gradient=torch.autograd.grad(ap_loss,feature,retain_graph=True)[0]
                 assert torch.isfinite(gradient).all()
                 if info['valid_AP_queries']:
                     assert gradient.abs().sum()>0
