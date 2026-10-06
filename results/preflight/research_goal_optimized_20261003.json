@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-06T21:59:41",
+  "updated_at": "2026-10-06T22:15:12",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -10686,7 +10686,7 @@
       "historical_receipts_kept": true
     },
     "R201I_primary_margin_prepared": {
-      "status": "FRESH_SOURCE_ONLY_PASS_TRUE_NATIVE_AND_FORMAL_NOT_EXECUTED",
+      "status": "ACTUAL_RGBNT201_NATIVE6_PASS_AND_PAIR_FORMAL_LIVE_OTHER_TWO_NOT_STARTED",
       "datasets": [
         "RGBNT201",
         "MSVR310",
@@ -10708,9 +10708,21 @@
       },
       "source_review": "results/preflight/r201i_primary_margin_source_review_20261006.json",
       "primary_margin": 0.3,
-      "actual_native_updates": 0,
-      "actual_formal_epochs": 0,
-      "executed": false
+      "actual_native_updates": 6,
+      "actual_formal_epochs": 8,
+      "executed": true,
+      "actual_formal_updates_observed": 422,
+      "initial_proof": "results/preflight/r201i_primary_margin_initial_actual_20261006.json",
+      "original_primary_session": 27774,
+      "original_receiver_pid": 21900,
+      "passive_timer_pid": 20940
+    },
+    "H_weaker_weight_retirement": {
+      "files_removed": 4,
+      "bytes_removed": 1620968356,
+      "H_saved_arrays_retained": 4,
+      "G_original_anchors_retained": true,
+      "proof": "results/preflight/r201h_closed_weaker_weights_retirement_actual_20261006.json"
     }
   },
   "decision_rules": [
@@ -10737,8 +10749,8 @@
   ],
   "next_action": {
     "milestone": "PREPARE_NORMAL_INPUT_CANDIDATE_FROM_CLOSED_CONTROL_EVIDENCE",
-    "status": "R201I_FRESH_SOURCE_PASS_THREE_NORMAL_NATIVE_THEN_FULL50_NEXT",
-    "action": "先以同G原始参照、真实各集采样和预算，在2026 GPU2/3串行启动I（只改full-unit primary margin.3）；每集native6后paired50，三个正常全部闭合再决定fixed best缺失49。D/E实测和归档路径映射已记录。",
+    "status": "R201I_THREE_NORMAL_ORIGINAL_RECEIVER_LIVE_ESTIMATED_MILESTONES",
+    "action": "只监控原27774/local21900和唯一passive20940，优先201。201 paired50/GT/raw关闭后原controller串行MSVR和100；三个正常完整关闭后收metadata并CPU分析，再决定fixed best全49。native6和E4不是50轮完成；不重启旧receiver或增加第三NN。传输前核对D/E容量，源保持冻结。",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
