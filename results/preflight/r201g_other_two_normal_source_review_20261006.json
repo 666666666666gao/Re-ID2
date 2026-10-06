@@ -1,0 +1,274 @@
+{
+  "status": "PASS",
+  "review_type": "SOURCE_ONLY",
+  "reviewed_at": "2026-10-06T12:27:58+08:00",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "max",
+  "actual_runtime": "UNATTESTED",
+  "actual_backend": "UNATTESTED",
+  "actual_model": "UNATTESTED",
+  "actual_effort": "UNATTESTED",
+  "attribution_note": "A fresh native Codex collaboration reviewer read the actual local sources. Exact runtime model/backend/effort was not independently attested; requested settings are not presented as verified runtime identity.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "blocking_findings": [],
+  "non_blocking_findings": [
+    {
+      "id": "DOC-1",
+      "severity": "LOW",
+      "path": "run_r201g_normal_priority.py",
+      "line": 13,
+      "finding": "The inherited REVISION text says P8K8 for every dataset, but configuration preserves the dataset NUM_INSTANCE: MSVR310 K4 and RGBNT100 K16. With the enforced B64 these are P16K4 and P4K16. RGBNT201 remains P8K8.",
+      "evidence": [
+        "run_experiment.py:33-39 sets B64 and 50 epochs but does not override NUM_INSTANCE.",
+        "configs/MSVR310/DeMo.yml:23 has NUM_INSTANCE=4.",
+        "configs/RGBNT100/DeMo.yml:23 has NUM_INSTANCE=16.",
+        "Existing complete original and old-unit receipts match 705 MSVR310 and 6357 RGBNT100 updates per model."
+      ],
+      "impact": "Descriptive metadata is overgeneralized; the unchanged per-dataset implementation and matched sampling are correct for the plan.",
+      "suggested_action": "Disclose the effective sampler composition in the single handoff or result explanation. Do not alter the frozen reused NN source or sampler merely to make this inherited string true."
+    }
+  ],
+  "resolved_before_final_review": [
+    {
+      "path": "results/preflight/r201g_other_two_normal_deploy_20261006.py",
+      "line": 36,
+      "issue": "The first version requested states[exit_code], but the real normal-state receipt has no exit_code field.",
+      "resolution": "The executor changed only the new gate to exact status, state_cases==8, and optimizer_updates==checkpoint_writes==0. The reviewed current source matches the actual producer; that producer asserts process.wait()==0 before writing the receipt.",
+      "producer_evidence": [
+        "results/preflight/r201g_normal_states_deploy_20261006.py:89",
+        "results/preflight/r201g_normal_states_deploy_20261006.py:118-122"
+      ]
+    }
+  ],
+  "plan_path": "results/preflight/r201g_other_two_normal_plan_20261006.json",
+  "plan_sha256_at_review": "a75b8752486b8d06f0e37b1383862a155697860b0eaa9e71f25b559ac9288201",
+  "sources_sha256": {
+    "results/preflight/r201g_other_two_normal_deploy_20261006.py": "96085eb825655df311728196c4dbf75e7998bae6dd80bf4a68abfe06704c8bec"
+  },
+  "directly_reused_sources_sha256": {
+    "run_r201g_normal_priority.py": "1ad85d62a1e5ecd12d52b069c58fdaba436ae7ef3ba27e61f3763191b4c6779e",
+    "launch_r201g_normal_priority.py": "ef9d9bd8bcfba8c2bcee6a5c52588514d4f71fbe9f48bb75770b6ef55ead0dd1",
+    "results/preflight/r201g_normal_priority_deploy_20261006.py": "d8207423829667c8733b4c851039c4b5a96a955d3bfd98ce89b48a5d7d855a94",
+    "identity_coordinate_three_dataset.py": "de4128c5c5993e0766ba74a700870b13478af44d28440312287b0fe2e32bb415",
+    "run_identity_coordinate_three_dataset.py": "dd9b117b3dc7bd733c5d87546ef7e2cfcfcd3d1972df6241f661629313f579b2",
+    "audit_full_official_normal.py": "ee26b0a29bea046db70d4072f88160b3d2ce726451accbd6b90dd44b0a1ee742",
+    "launch_identity_coordinate_three_normal.py": "05a4c531862215f932be1fe4a20b75c2f691c9a8acac28de1baf75b3d908ac98",
+    "rgbnt201_projection_probe.py": "d6f6e0bddef26f5578818810b1c57415789f4e2e7b88dda8f6af1548eacaf583",
+    "original_identity_anchor.py": "847b6adf93eb44ff119585e5548e1ef52115bcd59d8e87cdb4735b541d390bcb",
+    "common_coordinate_axis.py": "0a45146b7e645abc1e8b7d622c1556852855964ea29d7530b449e1c02c8deb5b",
+    "shared_identity_axis.py": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "dual_axis.py": "0c6090fe5b8b15cc021bf1809860f0675187288dc2145d0129ce89a5eb78a330",
+    "scaled_axis_collaboration.py": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+    "run_full_official_frozen_anchor_experiment.py": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+    "run_shared_identity_experiment.py": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+    "diagnose_rgbnt201_projection_probe.py": "37ae7b432d2c73f097407d969944f74443ddbf915f0ec74389366de1144228cb",
+    "evaluate_full_official49.py": "5db20659af12e248d91b22813517b1e72619483fa73ac06a60423e874a2c9d7b",
+    "official_training_data.py": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "missing_evaluation.py": "e04e16dbb4ec486f28065102b5d7301c68e7d1cef62cdd5fcfa99b3dac222089",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "solver/make_optimizer.py": "09e8e36c78c78cda75daad52bbc48f77f4dc33b96568a06bc1c193132ffbeafc",
+    "solver/scheduler_factory.py": "c5e20bdffec4b5360faa04f823639c8e5fd8672914813fb96148927c9ee19abc",
+    "modeling/make_model.py": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+    "modeling/meta_arch.py": "f9b93fba00f534debecebcd72f974320cd978e1619f1460674cbfc3afc961eec",
+    "modeling/moe/AttnMOE.py": "91d594c86ba44a5ce9eb843afaba898d5f8b0515b542b2754004c85ca272d3b6",
+    "layers/make_loss.py": "232ef86081a76665225db4360ea67650230b1d5986818cabc23ce5db36340dec",
+    "layers/softmax_loss.py": "d872eba630685044eda8e507f9e0f6f0e0a42af7e222ed4d8fd4c418d384c518",
+    "data/datasets/sampler.py": "579b45b767960b7ca8a373808d890493e6ac8d152c0fe13dbe0f4dc02ed9f068",
+    "data/datasets/RGBNT201.py": "1a3dda88f26efc2891322e2726c4f3591bfd0c040cdf5c717d0aabc55f349272",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+    "gpu_thermal_execute.py": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+    "configs/RGBNT201/DeMo.yml": "bfee0de623885a38cce974c1c5d74abf47c54e14852cc266b8f69c70a858c51d",
+    "rgbnt201_identity_outlet.py": "ee03a16de0e7f4beb28f4a78a4ab8c16e8f19014bfa4164482d59714e52de784",
+    "run_rgbnt201_identity_outlet.py": "803e46e0670c323134d5c2b9f101e34d7ea464d9de37137afa44f21949bfc034",
+    "evaluate_rgbnt201_identity_outlet49.py": "a2f2a8ead42f4bdd67dcdfdbc22e2b0ec7a3f8fd27f70c232595779a6bcb367c",
+    "verify_rgbnt201_identity_outlet.py": "951784df8a02f543c3df9647ec92c1ba95e0c42af18405ff6440b75dbf857359",
+    "launch_rgbnt201_identity_outlet_native.py": "5b5c8c494f40d5e6c3d6af6744b344139a21a3bd245d1c2c4a3bfb4c17209f19",
+    "launch_full_official_frozen_anchor_trial.py": "88b1b7388903431ac813e318b77f041e80db9afb1ccc2ee1492920e5c08fb228",
+    "diagnose_full_official_streaming_states.py": "f7d0d67ff961090cb728481a27a33a9b3dc10fd1501c47e4968c5cb965544374",
+    "audit_full_official49.py": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+    "audit_shared_identity_states.py": "e8cf168db43f36e36a40a66148f209a6b782775942ce7fcbdf9dce439d1fa8d0",
+    "evaluate_rgbnt201_identity_states49.py": "085702c72189999d65375c497c4c635f5eb1c5c920139756c31e56f5ef87cc0e",
+    "audit_rgbnt201_identity_states49.py": "ead3b2e7d83f0de85ee6c4ecd667931938bb8ba2df07887825af88101e8de512",
+    "launch_rgbnt201_identity_outlet50.py": "51cf22e7dbde9041e59048565b0fd550d06cd7e80b0f0b7accd949e110e32709",
+    "configs/MSVR310/DeMo.yml": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+    "configs/RGBNT100/DeMo.yml": "e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c",
+    "data/datasets/RGBNT100.py": "cef47b0a1dcc9bc434f6c3612e547db41fd8af2b1d7e953323ea80ffb6eb705f",
+    "data/datasets/msvr310.py": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+    "config/defaults.py": "41d6e21de28ffca68104954c52dcba3d0f3c16249980c70107d6c72e1117c6ba",
+    "results/preflight/r201g_normal_priority_complete_intake_20261006.py": "a1ca62bc2fc64f2d3e832c1b0a38d984e206300c2e63b7e13618792c7d5cb680",
+    "analyze_r201g_normal_priority.py": "b72bf19b8aade0c320f84ed0bca7ae763e60241a57a5db4edf8155efccfe6970"
+  },
+  "prepared_followup_sources_sha256": {
+    "results/preflight/r201g_other_two_normal_complete_intake_20261006.py": "2945fd7758090670f50645e40acde1aa8221ac6149a29fe282e5c7bdc0d9c50d",
+    "analyze_r201g_three_normal.py": "40dc49277a4248e14e904021d8456d1f41e4080c43bb423542950daab413229d"
+  },
+  "source_binding": {
+    "status": "PASS",
+    "deployment_source_entries": 1,
+    "directly_reused_entries": 54,
+    "prepared_followup_entries": 2,
+    "all_bound_local_entries": 57,
+    "local_hash_mismatches": [],
+    "remote_check_reviewed_not_executed": "The deployment verifies non-results source paths from the merged deployment/reused maps on host2026 before launch; this covers the existing generic runner, launcher, dataset configs/parsers and bound GT/model dependencies. Local-only deployment files are checked locally.",
+    "prepared_followup_scope": "The two newly prepared followups are separately bound here and in the plan. They are deliberately excluded from deployment/reused remote checks because they are not part of the unchanged remote NN recipe."
+  },
+  "deterministic_checks": {
+    "interpreter": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe -X utf8 -B -S",
+    "execution_mode": "PowerShell login:false; standard-library source parsing and read-only JSON/schema inspection only",
+    "python_ast_and_compile": "PASS",
+    "compiled_bound_python_files": 54,
+    "rendered_remote_LF_compile": {
+      "deployment_check": "PASS",
+      "prepared_intake_inventory_check": "PASS"
+    },
+    "local_torch_imports": 0,
+    "local_numpy_imports": 0,
+    "application_entrypoints_executed": 0
+  },
+  "verified_points": [
+    {
+      "area": "Conditional RGBNT201 acceptance gates",
+      "status": "PASS",
+      "evidence": [
+        "results/preflight/r201g_other_two_normal_deploy_20261006.py:28-40",
+        "analyze_r201g_normal_priority.py:70-102",
+        "analyze_r201g_normal_states.py:19-87"
+      ],
+      "details": "The script consumes actual full50/5294/2-archive closure, exact completed CPU analysis, axis-versus-original both_plus2, positive mAP and Rank-1 versus the paired frequency control, completed selected four-state proof and positive axis11-versus-own00 mAP/Rank-1. The named comparisons and status values match their real writers. State analysis requires both selected11/raw and original00/raw parity records and validates aligned per-query GT metadata; no phase-peak or training status substitutes for acceptance."
+    },
+    {
+      "area": "Original consumers and duplicate prevention",
+      "status": "PASS",
+      "evidence": [
+        "results/preflight/r201g_other_two_normal_deploy_20261006.py:26-27",
+        "results/preflight/r201g_other_two_normal_deploy_20261006.py:46-63",
+        "launch_r201g_normal_states.py:27-41",
+        "launch_r201g_normal_priority.py:31-35"
+      ],
+      "details": "Hardcoded G parent3986116 and training3988001/3988002 match the existing original91249 startup record. State controller/NN PIDs are read from the actual state launch files at the paths produced by execute. Remote ps must return1 for every listed PID before launch; live, stopped or zombie PIDs therefore do not count as absent. Existing output/receipt/archive destinations are rejected and the remote launch root is created with exist_ok=False. No replacement observer, training replay, or prior publisher/cleanup is invoked."
+    },
+    {
+      "area": "Sequential datasets and GPU scope",
+      "status": "PASS",
+      "evidence": [
+        "results/preflight/r201g_other_two_normal_deploy_20261006.py:20",
+        "results/preflight/r201g_other_two_normal_deploy_20261006.py:65-124",
+        "launch_r201g_normal_priority.py:15",
+        "launch_r201g_normal_priority.py:55-63",
+        "launch_r201g_normal_priority.py:76-107",
+        "gpu_thermal_execute.py:24-49"
+      ],
+      "details": "Insertion order is MSVR310 then RGBNT100. The first SSH receiver must reach native, controller-complete, two local ACKs/two clear events and wait()==0 before the next dataset begins. The reused controller runs only frequency on physicalGPU2 and axis on physicalGPU3 with two NN workers; native and formal phases are separate. No four-model parallel launch or power/temperature query/control is introduced."
+    },
+    {
+      "area": "Mandatory genuine native gate",
+      "status": "PASS",
+      "evidence": [
+        "launch_r201g_normal_priority.py:42-63",
+        "run_full_official_frozen_anchor_experiment.py:98-129",
+        "run_r201g_normal_priority.py:40-85"
+      ],
+      "details": "Each dataset runs three real optimizer updates for each model before its formal pair. It rejects AMP skips, unequal strict reload, wrong 8x5120 descriptor, inactive/nonfinite third-step gradients, mismatched capacity or sampled names/partial sets, nonzero effective partial losses, and changed partial forward/BN behavior. Native weights are only serialized in memory and the full stage builds fresh from the original dataset anchor."
+    },
+    {
+      "area": "Same generic method and original per-dataset initialization",
+      "status": "PASS",
+      "evidence": [
+        "identity_coordinate_three_dataset.py:15-49",
+        "rgbnt201_projection_probe.py:28-43",
+        "original_identity_anchor.py:44-52",
+        "run_r201g_normal_priority.py:22-94",
+        "run_experiment.py:31-41"
+      ],
+      "details": "The invoked builder supports all three datasets and uses the corresponding complete original DeMo50 seed42 best checkpoint, full split manifest, classes/camera counts and terminal exit. Identity modules stay frozen/eval and their tensors are checked unchanged. Fresh optimizer/scheduler, B64, unit5120, full CE/Triplet, auxiliary heads and contribution loss remain. Only partial CE and cross-gallery Triplet weights are zero; partial images, forwards, BN, hard mining and the second backward remain. No new architecture, loss, source mutation, tuning or seed is introduced."
+    },
+    {
+      "area": "Full official data and actual GT",
+      "status": "PASS",
+      "evidence": [
+        "official_training_data.py:20-32",
+        "full_evaluation.py:68-79",
+        "run_full_official_frozen_anchor_experiment.py:40-54",
+        "run_full_official_frozen_anchor_experiment.py:139-181",
+        "audit_full_official_normal.py:17-56",
+        "audit_full_official49.py:13-80"
+      ],
+      "details": "Training uses the full official training split, and extraction uses every official query/gallery record. The selected checkpoint is the first maximum normal mAP epoch among50 and is reloaded/re-evaluated. Installed-filename GT audits verify metadata, complete training coverage, six metrics, CMC1-50, query CSVs and identity/camera/scene groups. Exclusion is same identity/same scene for MSVR310 and same identity/same camera for RGBNT100/RGBNT201, not another model prediction."
+    },
+    {
+      "area": "Per-file archive and retention",
+      "status": "PASS",
+      "evidence": [
+        "results/preflight/r201g_other_two_normal_deploy_20261006.py:45",
+        "results/preflight/r201g_other_two_normal_deploy_20261006.py:52",
+        "results/preflight/r201g_other_two_normal_deploy_20261006.py:94-111",
+        "results/preflight/full_official_anchor_stream_bridge_20261005.py:19-27",
+        "launch_r201g_normal_priority.py:65-74"
+      ],
+      "details": "D-drive admission is measured, and free space is checked against each announced actual file size before copying. The destination is dataset-specific under the new owned D root. copy_verified requires a fresh destination and matching size/SHA before ACK. Only then does the remote controller recheck containment/size/SHA and unlink the exact raw array. Archives are serialized through one worker; selected best weights, GT text and other datasets remain. One earliest-tie best.pth per formal model is retained; there is no binary Git publication or broad deletion."
+    },
+    {
+      "area": "Counts and existing schema compatibility",
+      "status": "PASS",
+      "evidence": [
+        "results/preflight/r201g_other_two_normal_deploy_20261006.py:20",
+        "results/full_official_baselines_20261004/training/MSVR310_demo_s42/result.json",
+        "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/result.json",
+        "results/identity_coordinate_three_normal_completed_20261005/normal_analysis/result.json"
+      ],
+      "details": "Read existing original and all six old-unit result schemas. MSVR310 is1032/591/1055 with705 updates/model; RGBNT100 is8675/1715/8575 with6357 updates/model. Two models each yields14124 formal updates and200 additional epochs; four native3 models yield12 native updates. Existing old-unit paths and all complete/coverage/descriptor fields used by the new analyzer exist and match."
+    },
+    {
+      "area": "Prepared text intake",
+      "status": "PASS",
+      "evidence": [
+        "results/preflight/r201g_other_two_normal_complete_intake_20261006.py:22-79"
+      ],
+      "details": "The future collector requires the exact new four-run terminal receipt,14124/200/native12 and four archives. It rechecks each dataset controller, full50/expected updates/zero AMP/full coverage, installed-GT acceptance, exactly best.pth retained and remote raw absence. Only text extensions are packaged; package/member size/SHA validation precedes exact temporary-package removal. It does not start NN, rerun evaluation, transfer arrays/weights or overwrite an existing intake tree."
+    },
+    {
+      "area": "Prepared unified three-dataset CPU report",
+      "status": "PASS",
+      "evidence": [
+        "analyze_r201g_three_normal.py:15-99",
+        "analyze_identity_coordinate_three_normal.py:9-42"
+      ],
+      "details": "Requires actual completed intake and the prior G201/old-unit completed reports. It compares original, old-unit frequency/axis and G frequency/axis in each dataset:15 models,15 comparisons,15710 paired query rows,300 G epoch rows and19418 G stage formal updates. It checks complete coverage, one selected epoch/all six metrics, CMC/groups, aligned query GT records, equal control parameter counts, exact matched epoch/name/partial-set batch orders and effective zero G partial losses. It records original50 versus total100 expert budgets and leaves missing/multiseed success false. The output directory is new-only; no future result is manufactured by this review."
+    }
+  ],
+  "runtime_gate_status": {
+    "status": "NOT_EVALUATED_BY_SOURCE_REVIEW",
+    "actual_entry_artifact_exists_at_review": {
+      "results/preflight/r201g_normal_priority_actual_session_20261006.json": false,
+      "results/r201g_normal_priority_20261006/normal_analysis/result.json": false,
+      "results/preflight/r201g_normal_states_actual_20261006.json": false,
+      "results/r201g_normal_states_20261006/normal_state_analysis/result.json": false
+    },
+    "last_local_runtime_record_inspected": "results/preflight/r201g_normal_priority_timed_latest_20261006.json",
+    "last_local_runtime_record_time": "2026-10-06T12:05:34",
+    "last_local_runtime_record_observation": "Original G controller and both NN processes were recorded RUNNING at epoch21; controller_result was null. This stored record is not a fresh remote liveness observation.",
+    "meaning_of_PASS": "Only the reviewed source logic and prepared followups pass. Actual G201 closure, CPU improvement/own00 gates, original PID absences, remote source equality/storage and each new native gate remain prerequisites and were not claimed complete here."
+  },
+  "read_only_schema_and_helper_sources": [
+    "results/preflight/r201g_normal_states_deploy_20261006.py",
+    "analyze_r201g_normal_states.py",
+    "launch_r201g_normal_states.py",
+    "analyze_identity_coordinate_three_normal.py",
+    "results/preflight/full_official_anchor_stream_bridge_20261005.py",
+    "collect_results.py"
+  ],
+  "execution_accounting": {
+    "ssh_or_remote_commands": 0,
+    "new_neural_calls": 0,
+    "new_optimizer_updates": 0,
+    "publisher_or_launcher_entrypoints": 0,
+    "cleanup_entrypoints": 0,
+    "implementation_edits": 0,
+    "review_json_writes": 1
+  },
+  "preserved_goal": "One unified method on all3 full official normal datasets with both mAP and Rank-1 each at least+2, followed by the still-required fair utility, paired seeds and all49 missing evaluations. This four-model normal extension does not itself close that goal."
+}

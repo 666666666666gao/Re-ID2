@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-06T12:18:07",
+  "updated_at": "2026-10-06T12:37:13",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -3821,9 +3821,9 @@
       "limits": "Selected E42 and F4; fixed scaled derivatives, not formal Adam replay or causal whole-run temperature conclusion."
     },
     "R201G_normal_priority": {
-      "status": "ACTUAL_TWO_NORMAL50_LIVE_E21_FIRST20_OBJECTIVE_VERIFIED",
+      "status": "ACTUAL_201_TWO_FULL50_GT_RAW_AND_NORMAL_FOURSTATE_CLOSED",
       "formal_models": 2,
-      "formal_completed_models": 0,
+      "formal_completed_models": 2,
       "native_updates": 6,
       "controller_pid": 3986116,
       "nn_pids": [
@@ -3833,14 +3833,14 @@
       "primary_session": 91249,
       "observed_at": "2026-10-06T12:05:34",
       "actual_epochs_each": [
-        21,
-        21
+        50,
+        50
       ],
       "factor": "Only original unit-Triplet partial CE.25/cross-triplet.5 weights ->0; forward/BN/mining/two backwards retained",
       "full_goal_achieved": false,
       "actual_updates_each": [
-        1110,
-        1110
+        2647,
+        2647
       ],
       "amp_skipped_each": [
         0,
@@ -3851,7 +3851,46 @@
         3951
       ],
       "first20_actual_cpu_result": "results/r201g_training_dose_first20_20261006/result.json",
-      "next_original_observer_eta": "2026-10-06T12:26:00"
+      "next_original_observer_eta": "2026-10-06T12:26:00",
+      "successful_updates": 5294,
+      "raw_normal_archives": 2,
+      "raw_fourstate_archives": 2,
+      "normal_best_comparison_original": {
+        "improved": "normal_axis_shared",
+        "reference": "original_DeMo",
+        "mAP": 3.304605414167213,
+        "mINP": 2.7335285830138787,
+        "Rank-1": 3.827751196172244,
+        "Rank-5": 2.7511961722487968,
+        "Rank-10": 0.5980861244019167,
+        "Rank-20": 1.3157894736842053,
+        "both_plus2": true,
+        "rank1_rescued": 43,
+        "rank1_harmed": 11,
+        "AP_improved": 396,
+        "AP_worsened": 167
+      },
+      "normal_best_comparison_fair": {
+        "improved": "normal_axis_shared",
+        "reference": "normal_frequency_shared",
+        "mAP": 2.2658894014015942,
+        "mINP": 1.3584685104242737,
+        "Rank-1": 2.1531100478468943,
+        "Rank-5": 0.4784688995215305,
+        "Rank-10": 0.5980861244019167,
+        "Rank-20": 0.8373205741626748,
+        "both_plus2": true,
+        "rank1_rescued": 40,
+        "rank1_harmed": 22,
+        "AP_improved": 370,
+        "AP_worsened": 222
+      },
+      "normal_fourstate_cases": 8,
+      "normal_state_pair_rows": 5852,
+      "postepoch_collapse_retained": true,
+      "formal_other_two_completed": 0,
+      "missing_complete": false,
+      "multiseed_complete": false
     },
     "local_D_latest_scoped_audit": {
       "observed_at": "2026-10-06T12:16:49",
@@ -3861,6 +3900,19 @@
       "new_deleted_files": 0,
       "new_freed_file_bytes": 0,
       "unique_raw_and_references_retained": true
+    },
+    "R201G_other_two_normal": {
+      "status": "SOURCE_PASS_NOT_EXECUTED",
+      "models": 4,
+      "expected_native_updates": 12,
+      "expected_formal_updates": 14124,
+      "expected_additional_epochs": 200,
+      "order": [
+        "MSVR310",
+        "RGBNT100"
+      ],
+      "same_G_recipe": true,
+      "review": "results/preflight/r201g_other_two_normal_source_review_20261006.json"
     }
   },
   "decision_rules": [
@@ -3887,8 +3939,8 @@
   ],
   "next_action": {
     "milestone": "PREPARE_NORMAL_INPUT_CANDIDATE_FROM_CLOSED_CONTROL_EVIDENCE",
-    "status": "ORIGINAL_R201G_WAITING_ESTIMATED_TERMINAL",
-    "action": "Only original91249 receiver and17738 passive observer at12:26:00. Complete2full50/GT/rawACK then prepared intake/11modelCPU, reviewed normal4states, and all6/harm-rescue. No restart or extra observer. Useful unified candidate other2official normal first, thenfixedbest49/pairedseeds; originalacceptance unchanged.",
+    "status": "START_REVIEWED_UNCHANGED_G_OTHER_TWO_NORMAL",
+    "action": "Actual accepted201 closure/CPU/fourstates confirmed. Start one unchanged G sequential receiver forMSVR310 thenRGBNT100 native2x3/full2x50/installedGT/perfileDsizeSHAACK. Verify all3same-method normal with prepared15model15710pairCPU; thenfixedbest49, fairretraining and pairedseeds. No newloss/architecture/tuning or phasepeak success claim.",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
