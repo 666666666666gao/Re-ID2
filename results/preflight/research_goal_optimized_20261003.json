@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-07T01:21:19",
+  "updated_at": "2026-10-07T01:36:31",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -11205,6 +11205,35 @@
       "MSVR310_axis_I_low_percent": 79.96388077735901,
       "interpretation": "Actual selected 7x3 probability means only. Cross-band/conditional updates precede routing; middle/high inputs not proven unused. Larger nonfactorization on MSVR does not establish retrieval value. Psi necessity requires retrained ablation.",
       "source": "results/r201i_completed_normal_figures_20261007/selected_route_readout.csv"
+    },
+    "R201I_selected_identity_shift": {
+      "status": "ACTUAL_SELECTED_I201_COMPLETE_FEATURE_IDENTITY_SHIFT_CPU",
+      "result": "results/r201i_selected_identity_shift_20261007/result.json",
+      "samples": 3344,
+      "expert_seed": 42,
+      "anchor_seed": 42,
+      "new_neural_calls": 0,
+      "new_optimizer_updates": 0,
+      "axis_mean_query_epsilon": 0.18572590409583897,
+      "I_axis_mean_query_angle": 10.665982094947488,
+      "G_axis_mean_query_angle": 10.62271758390556,
+      "I_ordinary_mean_query_angle": 6.98627228508712,
+      "G_ordinary_mean_query_angle": 14.065766950412373,
+      "query_gallery_metadata_byte_equal": {
+        "I_frequency_shared": {
+          "names": true,
+          "ids": true,
+          "cameras": true,
+          "scenes": true
+        },
+        "I_axis_shared": {
+          "names": true,
+          "ids": true,
+          "cameras": true,
+          "scenes": true
+        }
+      },
+      "limits": "Selected checkpoint only; observed rescue/harm cohorts not a trained gate, no late50 features, no threshold selected on benchmark, no multi-seed/missing/other-dataset inference. Smaller correction is not automatically better."
     }
   },
   "decision_rules": [
