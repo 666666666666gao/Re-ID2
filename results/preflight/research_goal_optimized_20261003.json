@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-07T11:14:29",
+  "updated_at": "2026-10-07T11:40:15",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -13824,6 +13824,60 @@
       "all3_both_plus2": false,
       "missing_evaluated": false,
       "goal": "ACTIVE_UNMET"
+    },
+    "R201K_native6_and_formal_actual": {
+      "status": "ACTUAL_K_FIRST_DATASET_NATIVE6_PASS_BOTH_NORMAL50_FORMAL_RUNNING",
+      "recorded_at": "2026-10-07T11:40:15",
+      "original_J_closed": true,
+      "driver_pid": 46392,
+      "native": {
+        "status": "ACTUAL_TWO_K_NATIVE3_RELATION_LOCAL_PI_PASS_FORMAL_NEXT",
+        "observed_at": "2026-10-07T11:34:17",
+        "dataset": "RGBNT201",
+        "remote_root": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201k_relation_local_pi_20261007/RGBNT201",
+        "actual_native_updates": 6,
+        "primary_margin": 0.3,
+        "auxiliary_soft_unchanged": true,
+        "PI_outlet": "shared_relation_local",
+        "PI_native_input_isolation": true,
+        "controlled10_01_same_input_parent_equal": true,
+        "partial_loss_effective_zero": true,
+        "normal_full50_complete": false
+      },
+      "formal_observation": {
+        "status": "ACTUAL_K_RGBNT201_BOTH_FORMAL_TRAINS_HAVE_COMPLETED_EPOCHS",
+        "observed_at": "2026-10-07T11:37:34",
+        "models": [
+          {
+            "variant": "frequency_shared",
+            "completed_epoch_rows": 3,
+            "last_completed_epoch": 3,
+            "full50_result_exists": false
+          },
+          {
+            "variant": "axis_shared",
+            "completed_epoch_rows": 3,
+            "last_completed_epoch": 3,
+            "full50_result_exists": false
+          }
+        ]
+      },
+      "schedule": {
+        "status": "ACTUAL_K_NATIVE_PASS_FORMAL_RUNNING_NEAR_END_FIRST_LOOK_SCHEDULED",
+        "recorded_at": "2026-10-07T11:37:32",
+        "driver_pid": 46392,
+        "native_observed": "2026-10-07T11:34:17",
+        "measured_previous_J_RGBNT201_slowest_epoch_seconds": 2374.0696647167206,
+        "planned_first_look": "2026-10-07T12:08:51",
+        "limits": "Timing is an estimate from unchanged dataset/sampling and prior J; K PI seven-row computation may alter timing. No intermediate metric selection, no new NN observer/queue, no power-temperature query.",
+        "native_local_wait_session_id": 2014
+      },
+      "completed_K_full50_models": 0,
+      "completed_K_missing_conditions": 0,
+      "older_V11_archived_bytes": 1602182434,
+      "unique_weights_lost": 0,
+      "goal": "ACTIVE_UNMET",
+      "limits": "Six actual native Adam updates and recorded epoch3 each; later progress not inferred. Source and native PASS do not prove retrieval gain, whole50, all3+2, missing, stable3 independent pipelines, causal/retrained ablation or real cost."
     }
   },
   "decision_rules": [
@@ -13850,8 +13904,8 @@
   ],
   "next_action": {
     "milestone": "PREPARE_NORMAL_INPUT_CANDIDATE_FROM_CLOSED_CONTROL_EVIDENCE",
-    "status": "J_ALL_THREE_NORMAL_FULL50_GT_RAW_CPU_CLOSED_K_PREPARED_RUNTIME_GATES_PENDING",
-    "action": "J original31604 completed all six full50 and automatic GT/raw/CPU; do not replay J. Next K relation-local PI only after actual storage>4.5GB/protected9anchor hashes/GPU2-3 availability and reviewed native3 per arm; finish all K normal3 first then reviewed K fixed-best full49. Existing I N3 and full49 preserved; all3+2/fair/missing/stability/retrained ablations/realcost remains unmet.",
+    "status": "K_NATIVE6_PASS_RGBNT201_FORMAL_RUNNING_ORIGINAL_RECEIVER46392",
+    "action": "Original K receiver46392 owns sequence RGBNT201->MSVR310->RGBNT100, physicalGPU2frequency/3axis,max2NN. Native3 realAdam/strictreload/PI relation-isolation/controlled10-01 equality passed both first arms, and each formal has3completedepochs last11:37:34 observation. Resume same localwait2014 until firstlook12:08:51 or actualreceiverterminal; do not duplicate NN/observer/intake or poll remote early. All K normal3+GT/rawSHA/CPU must finish before sixfixedbest42 typed K full49; whole all3+2/fair/missing/stability/cost acceptance remains unmet.",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
@@ -13865,7 +13919,7 @@
     },
     "existing_M8_closeout": "ACTUAL_COMPLETE_NATIVE52604_EXIT0_THREE50_147FROZEN882STATES_LOCAL_RAW_VERIFIED",
     "pending_missing_diagnostic": "Completed I RGBNT100 T->RT11-00 true overlap harms remain; global PI broadcast is an observed access fact, not proved cause. K relation-local shared PI is source PASS, unchanged I losses, no K NN/results yet. Missing K full49 requires K all3 normal closure first. No model/epoch/seed reselect for missing.",
-    "current_rule": "J original31604 completed all six full50 and automatic GT/raw/CPU; do not replay J. Next K relation-local PI only after actual storage>4.5GB/protected9anchor hashes/GPU2-3 availability and reviewed native3 per arm; finish all K normal3 first then reviewed K fixed-best full49. Existing I N3 and full49 preserved; all3+2/fair/missing/stability/retrained ablations/realcost remains unmet."
+    "current_rule": "Original K receiver46392 owns sequence RGBNT201->MSVR310->RGBNT100, physicalGPU2frequency/3axis,max2NN. Native3 realAdam/strictreload/PI relation-isolation/controlled10-01 equality passed both first arms, and each formal has3completedepochs last11:37:34 observation. Resume same localwait2014 until firstlook12:08:51 or actualreceiverterminal; do not duplicate NN/observer/intake or poll remote early. All K normal3+GT/rawSHA/CPU must finish before sixfixedbest42 typed K full49; whole all3+2/fair/missing/stability/cost acceptance remains unmet."
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
   "user_resumption": {

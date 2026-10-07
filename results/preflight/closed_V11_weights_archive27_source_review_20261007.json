@@ -1,0 +1,170 @@
+{
+  "status": "PASS",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "source_sha256": "28665a99aaa9a96c91310518b6d7c6b49ef933dddde9306f259b7a56961f239b",
+  "reviewed_at": "2026-10-07T11:16:46+08:00",
+  "review": {
+    "phase": "experiment-bridge Phase 2.5 SOURCE review",
+    "reviewer": "/root/review_closed_v11_weight_archive27",
+    "fresh_context": true,
+    "review_independence": "same-family",
+    "acceptance_status": "provisional",
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "max",
+    "actual_backend": "UNATTESTED",
+    "actual_reasoning_effort": "UNATTESTED",
+    "attribution_limit": "Requested routing is not attestation of the actual serving backend or reasoning effort."
+  },
+  "scope": "Storage prerequisite for the already-reviewed K experiment: archive four completed unused historical V11 MSVR310 development weights to server27, then retire only their server26 copies. This is not a new scientific architecture review.",
+  "source_files_examined": [
+    "C:/Users/gb/projects/demo_dual_axis_20261002/results/preflight/closed_V11_weights_archive27_20261007.py"
+  ],
+  "dependencies_examined": [
+    {
+      "path": "C:/Users/gb/projects/demo_dual_axis_20261002/collect_results.py",
+      "scope": "OPTIONS, command(), imports/module-level initialization, and __main__ guard; read and parsed, not imported or executed. command() uses subprocess.run(check=True, capture_output=True, text=True, encoding=utf-8, timeout=300)."
+    },
+    {
+      "path": "C:/Users/gb/projects/demo_dual_axis_20261002/results/preflight/r201j_nonselected_N3_weights_retired_actual_20261007.json",
+      "scope": "Existing protected_anchors_and_I42_best mapping: exactly three original DeMo teachers and six I42 best weights; all nine keys are disjoint from NAMES."
+    }
+  ],
+  "instructions_examined": [
+    "C:/Users/gb/AGENTS.md",
+    "C:/Users/gb/projects/demo_dual_axis_20261002/AGENTS.md",
+    "C:/Users/gb/.codex/skills/experiment-bridge/SKILL.md",
+    "C:/Users/gb/.codex/skills/shared-references/local-codex-policy.md"
+  ],
+  "outer_python": {
+    "ast": "PASS",
+    "compile": "PASS",
+    "checker_python": "3.13.12",
+    "execution": "NOT_EXECUTED",
+    "imports": "All required outer imports are present; collect_results main is guarded and its import does not launch collection."
+  },
+  "expanded_templates": {
+    "count": 4,
+    "ast_passed": 4,
+    "compile_passed": 4,
+    "method": "Read ast.JoinedStr constants and expand only named substitution values without importing or executing the reviewed source. Actual literal roots, four exact paths and protected mapping were used. Remote-produced records used shape-faithful synthetic bytes=1, sha256=64 zeros and result_sha256=64 ones; total=4. These are syntax/serialization fixtures, not runtime weight evidence.",
+    "templates": [
+      {
+        "outer_line": 35,
+        "expanded_lines": 14,
+        "role": "server26 read-only completion, protected-SHA, historical-prefix process exclusion, exact-path inventory and free space",
+        "imports": [
+          "hashlib",
+          "json",
+          "shutil",
+          "pathlib.Path"
+        ],
+        "ast": "PASS",
+        "compile": "PASS"
+      },
+      {
+        "outer_line": 51,
+        "expanded_lines": 6,
+        "role": "server27 new archive root, destination scope, space budget and four exact parent directories",
+        "imports": [
+          "json",
+          "shutil",
+          "pathlib.Path"
+        ],
+        "ast": "PASS",
+        "compile": "PASS"
+      },
+      {
+        "outer_line": 60,
+        "expanded_lines": 6,
+        "role": "server27 all four size/SHA checks, archive manifest and all-four acknowledgment",
+        "imports": [
+          "hashlib",
+          "json",
+          "pathlib.Path"
+        ],
+        "ast": "PASS",
+        "compile": "PASS"
+      },
+      {
+        "outer_line": 67,
+        "expanded_lines": 12,
+        "role": "server26 protected-SHA recheck, all four source and result checks, four exact unlinks, absence and final protected-SHA checks",
+        "imports": [
+          "hashlib",
+          "json",
+          "shutil",
+          "pathlib.Path"
+        ],
+        "ast": "PASS",
+        "compile": "PASS"
+      }
+    ],
+    "manifest_serialization": "PASS: the expanded write_text expression appends a real newline, and the resulting representative JSON parses successfully."
+  },
+  "checks": [
+    {
+      "name": "Exact mutation scope",
+      "result": "PASS",
+      "evidence": "NAMES is four fixed best.pth paths under the historical V11 development prefix. Both source checks resolve inside that prefix. The only deletion call is unlink() over those four records; no glob, recursive deletion, other-project path or NN operation is present. Destination is the new server27 project archives/closed_V11_weights_20261007 root."
+    },
+    {
+      "name": "Archive before retirement",
+      "result": "PASS",
+      "evidence": "Each SCP must return successfully. Server27 then verifies every one of four sizes and SHA values and writes the manifest before returning ALL_FOUR_V11_WEIGHTS_SIZE_SHA_ACK. The caller checks that status before issuing the server26 retirement script."
+    },
+    {
+      "name": "Truthful failure flow",
+      "result": "PASS",
+      "evidence": "Subprocess failures/timeouts, JSON errors and assertions propagate. All four source size/SHA and result.json SHA checks finish before the unlink loop. No success proof is written until the final remote command succeeds. A failure during the unlink loop can leave a partial retirement, but all four archived copies already passed verification and the code does not claim a completed operation; no automatic replay or fallback is present."
+    },
+    {
+      "name": "Protected dependencies",
+      "result": "PASS",
+      "evidence": "The actual dependency mapping contains the expected 3 original teachers plus 6 I42 best weights. It is disjoint from NAMES and is checked before copying, immediately before retirement and after retirement. Existing J/G/I metrics, raw data and best weights are outside all mutation paths."
+    },
+    {
+      "name": "Windows OpenSSH argument form",
+      "result": "PASS",
+      "evidence": "Read-only executable metadata resolves scp to C:/WINDOWS/System32/OpenSSH/scp.exe, OpenSSH_9.5p2 for Windows (file 9.5.6.2). The argument vector uses supported -3, then -o BatchMode=yes, -o ClearAllForwardings=yes, -o ConnectTimeout=15, followed by two host:absolute-path operands. No shell is used for local subprocess argument parsing; the remote interpreter pathname is shlex-quoted and receives code on stdin. No SSH/SCP command was executed.",
+      "reference": "https://man.openbsd.org/scp"
+    },
+    {
+      "name": "Completion and known consumers",
+      "result": "PASS",
+      "evidence": "The source requires COMPLETE and 50 epochs for each old result, excludes command lines containing the historical V11 prefix, and rechecks result bytes before unlink. Known inactivity and independence from current consumers are supplied task context, not newly collected runtime evidence."
+    },
+    {
+      "name": "Current experiment isolation",
+      "result": "PASS",
+      "evidence": "No training, evaluation, optimizer, GPU, power/temperature query, current J progress query, receiver manipulation, or K gate modification is present. The /proc inspection serves only the historical V11-prefix exclusion. The existing J100 receiver and its weights are outside mutation scope."
+    }
+  ],
+  "exact_source_paths": [
+    "runs/shared_identity_v11_trial_20261003/development/MSVR310_twins_shared_s42/best.pth",
+    "runs/shared_identity_v11_trial_20261003/development/MSVR310_axis_shared_s42/best.pth",
+    "runs/shared_identity_v11_trial_20261003/development/MSVR310_demo_shared_s42/best.pth",
+    "runs/shared_identity_v11_trial_20261003/development/MSVR310_frequency_shared_s42/best.pth"
+  ],
+  "protected_count": 9,
+  "runtime": {
+    "reviewed_source_imports": 0,
+    "reviewed_source_executions": 0,
+    "embedded_script_executions": 0,
+    "ssh_calls": 0,
+    "scp_calls": 0,
+    "archive_operations": 0,
+    "delete_operations": 0,
+    "new_neural_calls": 0,
+    "new_optimizer_updates": 0,
+    "early_nn_queries": 0
+  },
+  "limits": [
+    "SOURCE PASS only; this review did not attest remote file presence, current remote free space, actual transfer completion, archive retention, or actual deletion.",
+    "The supplied server26 free-space observation of 4.115 GB remains below the unchanged 4.5 GB K gate; this report does not claim that gate has passed.",
+    "All four remote size/SHA confirmations and the post-retirement receipt remain runtime obligations of the reviewed source. Existing storage and task assumptions were not replaced with speculative defenses."
+  ],
+  "files_written": [
+    "C:/Users/gb/projects/demo_dual_axis_20261002/results/preflight/closed_V11_weights_archive27_source_review_20261007.json"
+  ]
+}
