@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-07T19:52:56",
+  "updated_at": "2026-10-07T21:32:31",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -39106,6 +39106,881 @@
       "new_neural_calls": 0,
       "new_optimizer_updates": 0,
       "limits": "Interim only two completed expert seeds, fixed DeMo42 teacher; not completed N5, full-pipeline repeats, best-of5 deployment selection or final variance. All curves and negative metrics preserved, maximum normal benchmark mAP earliest epoch tie selected; benchmark participates in selection. No additional missing NN for seed43, no measured seed43 00/10/01 state inference; inherited freeze invariants do not substitute for final winner verification. Existing K42 all3/all49 results unchanged; no whole-goal completion."
+    },
+    "K_five_fixed_teacher_expert_seeds_normal_terminal": {
+      "status": "ACTUAL_K_RGBNT201_FIVE_EXPERT_SEEDS_NORMAL_CPU_COMPLETE",
+      "completed_at": "2026-10-07T21:21:45",
+      "seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "fixed_anchor_seed": 42,
+      "new_models": 8,
+      "new_epochs": 400,
+      "seed42_reused": true,
+      "training": {
+        "frequency_shared_s42": {
+          "steps": 2647,
+          "parameters": 101236358,
+          "trainable_parameters": 3312262,
+          "runtime": {
+            "end_to_end_seconds": 16.838676929473877,
+            "triplets": 1672,
+            "includes_decode_and_first_batch": true,
+            "mean_route": [
+              [
+                0.1274019032716751,
+                0.007811762858182192,
+                0.007643478456884623
+              ],
+              [
+                0.1274019032716751,
+                0.007811762858182192,
+                0.007643478456884623
+              ],
+              [
+                0.1274019032716751,
+                0.007811762858182192,
+                0.007643478456884623
+              ],
+              [
+                0.1274019032716751,
+                0.007811762858182192,
+                0.007643478456884623
+              ],
+              [
+                0.1274019032716751,
+                0.007811762858182192,
+                0.007643478456884623
+              ],
+              [
+                0.1274019032716751,
+                0.007811762858182192,
+                0.007643478456884623
+              ],
+              [
+                0.1274019032716751,
+                0.007811762858182192,
+                0.007643478456884623
+              ]
+            ],
+            "mean_outer_gates": [
+              0.9570652842521667,
+              0.9325545430183411,
+              0.9477015137672424
+            ],
+            "mean_route_entropy": 2.3542423248291016,
+            "mean_joint_minus_marginal_product_L1": 6.687503173452569e-08
+          },
+          "peak_memory": 1682746368,
+          "final_epoch": {
+            "mAP": 75.6067484209868,
+            "mINP": 62.58771588321359,
+            "Rank-1": 80.02392344497608,
+            "Rank-5": 88.27751196172248,
+            "Rank-10": 93.54066985645933,
+            "Rank-20": 95.45454545454545
+          }
+        },
+        "axis_shared_s42": {
+          "steps": 2647,
+          "parameters": 101236358,
+          "trainable_parameters": 3312262,
+          "runtime": {
+            "end_to_end_seconds": 15.236634731292725,
+            "triplets": 1672,
+            "includes_decode_and_first_batch": true,
+            "mean_route": [
+              [
+                0.2721220552921295,
+                0.00018188981630373746,
+                0.00018238916527479887
+              ],
+              [
+                0.2020149528980255,
+                0.00015705004625488073,
+                0.00015800468099769205
+              ],
+              [
+                0.1159488707780838,
+                0.0001577879738761112,
+                0.00012991625408176333
+              ],
+              [
+                0.11081930994987488,
+                0.00013944823876954615,
+                0.00014652112440671772
+              ],
+              [
+                0.10601846128702164,
+                0.00012990609684493393,
+                0.00012794947542715818
+              ],
+              [
+                0.10994705557823181,
+                0.00012116705329390243,
+                0.00011954169895034283
+              ],
+              [
+                0.0811389610171318,
+                0.00011752605496440083,
+                0.00012120609608246014
+              ]
+            ],
+            "mean_outer_gates": [
+              0.8971437811851501,
+              0.8687458038330078,
+              0.8810364007949829
+            ],
+            "mean_route_entropy": 1.4161896705627441,
+            "mean_joint_minus_marginal_product_L1": 0.002883884124457836
+          },
+          "peak_memory": 1456275456,
+          "final_epoch": {
+            "mAP": 78.91088100078521,
+            "mINP": 64.73580254237604,
+            "Rank-1": 84.21052631578947,
+            "Rank-5": 92.46411483253588,
+            "Rank-10": 94.377990430622,
+            "Rank-20": 96.65071770334929
+          }
+        },
+        "frequency_shared_s43": {
+          "steps": 2646,
+          "parameters": 101236358,
+          "trainable_parameters": 3312262,
+          "runtime": {
+            "end_to_end_seconds": 13.74223804473877,
+            "triplets": 1672,
+            "includes_decode_and_first_batch": true,
+            "mean_route": [
+              [
+                0.12325159460306168,
+                0.009851318784058094,
+                0.009754175320267677
+              ],
+              [
+                0.12325187027454376,
+                0.009851318784058094,
+                0.009754175320267677
+              ],
+              [
+                0.12325148284435272,
+                0.009851318784058094,
+                0.009754174388945103
+              ],
+              [
+                0.12325173616409302,
+                0.009851319715380669,
+                0.009754175320267677
+              ],
+              [
+                0.1232515424489975,
+                0.009851318784058094,
+                0.009754175320267677
+              ],
+              [
+                0.12325168401002884,
+                0.009851318784058094,
+                0.009754174388945103
+              ],
+              [
+                0.12325165420770645,
+                0.009851318784058094,
+                0.009754174388945103
+              ]
+            ],
+            "mean_outer_gates": [
+              0.9233994483947754,
+              0.892098605632782,
+              0.9093358516693115
+            ],
+            "mean_route_entropy": 2.437370538711548,
+            "mean_joint_minus_marginal_product_L1": 2.29794380857129e-07
+          },
+          "peak_memory": 1682746368,
+          "final_epoch": {
+            "mAP": 75.08447660251151,
+            "mINP": 61.725941055045894,
+            "Rank-1": 79.54545454545455,
+            "Rank-5": 89.11483253588517,
+            "Rank-10": 93.0622009569378,
+            "Rank-20": 94.73684210526315
+          }
+        },
+        "axis_shared_s43": {
+          "steps": 2646,
+          "parameters": 101236358,
+          "trainable_parameters": 3312262,
+          "runtime": {
+            "end_to_end_seconds": 14.526915073394775,
+            "triplets": 1672,
+            "includes_decode_and_first_batch": true,
+            "mean_route": [
+              [
+                0.22398990392684937,
+                0.0003110828693024814,
+                0.00027157654403708875
+              ],
+              [
+                0.07364548742771149,
+                5.4837360949022695e-05,
+                4.725964390672743e-05
+              ],
+              [
+                0.13937567174434662,
+                5.064391370979138e-05,
+                4.132360118092038e-05
+              ],
+              [
+                0.060091689229011536,
+                0.00011141248978674412,
+                9.912352834362537e-05
+              ],
+              [
+                0.26719313859939575,
+                0.00012066106864949688,
+                0.00010734743409557268
+              ],
+              [
+                0.11489004641771317,
+                4.039334453409538e-05,
+                3.7975743907736614e-05
+              ],
+              [
+                0.1193767860531807,
+                7.444629591191188e-05,
+                6.922162720002234e-05
+              ]
+            ],
+            "mean_outer_gates": [
+              0.8964231014251709,
+              0.8573797941207886,
+              0.8670815825462341
+            ],
+            "mean_route_entropy": 1.4854166507720947,
+            "mean_joint_minus_marginal_product_L1": 0.002121588448062539
+          },
+          "peak_memory": 1456275456,
+          "final_epoch": {
+            "mAP": 77.20345088183248,
+            "mINP": 63.610778738792106,
+            "Rank-1": 81.57894736842105,
+            "Rank-5": 91.26794258373205,
+            "Rank-10": 93.42105263157895,
+            "Rank-20": 95.57416267942584
+          }
+        },
+        "frequency_shared_s44": {
+          "steps": 2646,
+          "parameters": 101236358,
+          "trainable_parameters": 3312262,
+          "runtime": {
+            "end_to_end_seconds": 13.822641611099243,
+            "triplets": 1672,
+            "includes_decode_and_first_batch": true,
+            "mean_route": [
+              [
+                0.13060803711414337,
+                0.006270626559853554,
+                0.005970850586891174
+              ],
+              [
+                0.13062556087970734,
+                0.006270429119467735,
+                0.005970705300569534
+              ],
+              [
+                0.13061553239822388,
+                0.006270619109272957,
+                0.005970716942101717
+              ],
+              [
+                0.1306074559688568,
+                0.006270228419452906,
+                0.005970597732812166
+              ],
+              [
+                0.1306137889623642,
+                0.0062707108445465565,
+                0.005970865488052368
+              ],
+              [
+                0.13062183558940887,
+                0.00627044728025794,
+                0.0059705437161028385
+              ],
+              [
+                0.13061951100826263,
+                0.006270384881645441,
+                0.005970571655780077
+              ]
+            ],
+            "mean_outer_gates": [
+              0.8318789005279541,
+              0.7652804255485535,
+              0.7537870407104492
+            ],
+            "mean_route_entropy": 2.291705369949341,
+            "mean_joint_minus_marginal_product_L1": 1.2970754141861107e-05
+          },
+          "peak_memory": 1682746368,
+          "final_epoch": {
+            "mAP": 74.85060686585949,
+            "mINP": 61.619505381285954,
+            "Rank-1": 79.66507177033493,
+            "Rank-5": 88.63636363636364,
+            "Rank-10": 93.42105263157895,
+            "Rank-20": 95.09569377990431
+          }
+        },
+        "axis_shared_s44": {
+          "steps": 2646,
+          "parameters": 101236358,
+          "trainable_parameters": 3312262,
+          "runtime": {
+            "end_to_end_seconds": 13.581340789794922,
+            "triplets": 1672,
+            "includes_decode_and_first_batch": true,
+            "mean_route": [
+              [
+                0.2339344620704651,
+                0.001491546630859375,
+                0.0009631117573007941
+              ],
+              [
+                0.2478238344192505,
+                0.0005995019455440342,
+                0.0003950342070311308
+              ],
+              [
+                0.18486163020133972,
+                0.0009258354548364878,
+                0.0007054823799990118
+              ],
+              [
+                0.08808999508619308,
+                0.0007382070762105286,
+                0.0004937234334647655
+              ],
+              [
+                0.07321561872959137,
+                0.0008780535426922143,
+                0.0006411915528587997
+              ],
+              [
+                0.11196627467870712,
+                0.0005943587748333812,
+                0.00043681476381607354
+              ],
+              [
+                0.050136808305978775,
+                0.0006439907592721283,
+                0.0004645126173272729
+              ]
+            ],
+            "mean_outer_gates": [
+              0.910619854927063,
+              0.8781567215919495,
+              0.8993219137191772
+            ],
+            "mean_route_entropy": 1.2541230916976929,
+            "mean_joint_minus_marginal_product_L1": 0.013559088110923767
+          },
+          "peak_memory": 1456275456,
+          "final_epoch": {
+            "mAP": 77.33744788261893,
+            "mINP": 61.42622496783046,
+            "Rank-1": 83.25358851674642,
+            "Rank-5": 91.26794258373205,
+            "Rank-10": 93.6602870813397,
+            "Rank-20": 95.93301435406698
+          }
+        },
+        "frequency_shared_s45": {
+          "steps": 2646,
+          "parameters": 101236358,
+          "trainable_parameters": 3312262,
+          "runtime": {
+            "end_to_end_seconds": 14.62055516242981,
+            "triplets": 1672,
+            "includes_decode_and_first_batch": true,
+            "mean_route": [
+              [
+                0.13105003535747528,
+                0.006066908594220877,
+                0.005740187596529722
+              ],
+              [
+                0.13105003535747528,
+                0.006066908128559589,
+                0.005740187596529722
+              ],
+              [
+                0.13105003535747528,
+                0.006066908594220877,
+                0.005740187596529722
+              ],
+              [
+                0.13105003535747528,
+                0.006066908594220877,
+                0.005740187596529722
+              ],
+              [
+                0.13105003535747528,
+                0.006066908128559589,
+                0.005740187596529722
+              ],
+              [
+                0.13105003535747528,
+                0.006066908594220877,
+                0.005740187596529722
+              ],
+              [
+                0.13105003535747528,
+                0.006066908128559589,
+                0.005740187596529722
+              ]
+            ],
+            "mean_outer_gates": [
+              0.946950376033783,
+              0.9325178265571594,
+              0.9452102780342102
+            ],
+            "mean_route_entropy": 2.282426595687866,
+            "mean_joint_minus_marginal_product_L1": 6.84146144180886e-08
+          },
+          "peak_memory": 1682746368,
+          "final_epoch": {
+            "mAP": 76.12051518341656,
+            "mINP": 62.719657284814744,
+            "Rank-1": 80.98086124401914,
+            "Rank-5": 89.5933014354067,
+            "Rank-10": 93.89952153110048,
+            "Rank-20": 94.97607655502392
+          }
+        },
+        "axis_shared_s45": {
+          "steps": 2646,
+          "parameters": 101236358,
+          "trainable_parameters": 3312262,
+          "runtime": {
+            "end_to_end_seconds": 13.866716384887695,
+            "triplets": 1672,
+            "includes_decode_and_first_batch": true,
+            "mean_route": [
+              [
+                0.1435108780860901,
+                0.0005915571236982942,
+                0.0005105518503114581
+              ],
+              [
+                0.15952397882938385,
+                6.37563643977046e-05,
+                6.631898577325046e-05
+              ],
+              [
+                0.21295729279518127,
+                0.00011474967323010787,
+                0.0001444688969058916
+              ],
+              [
+                0.05284830927848816,
+                0.00013619122910313308,
+                0.00013448751997202635
+              ],
+              [
+                0.16571849584579468,
+                0.0001913573214551434,
+                0.00021716090850532055
+              ],
+              [
+                0.18686819076538086,
+                6.265144475037232e-05,
+                7.667746103834361e-05
+              ],
+              [
+                0.07604809105396271,
+                0.00010058713087346405,
+                0.00011421745148254558
+              ]
+            ],
+            "mean_outer_gates": [
+              0.9070085883140564,
+              0.8897860050201416,
+              0.8872143030166626
+            ],
+            "mean_route_entropy": 1.266644835472107,
+            "mean_joint_minus_marginal_product_L1": 0.00497917365282774
+          },
+          "peak_memory": 1453832192,
+          "final_epoch": {
+            "mAP": 76.37792327776015,
+            "mINP": 61.7027078686565,
+            "Rank-1": 81.81818181818183,
+            "Rank-5": 89.83253588516746,
+            "Rank-10": 93.30143540669856,
+            "Rank-20": 94.97607655502392
+          }
+        },
+        "frequency_shared_s46": {
+          "steps": 2647,
+          "parameters": 101236358,
+          "trainable_parameters": 3312262,
+          "runtime": {
+            "end_to_end_seconds": 14.258900165557861,
+            "triplets": 1672,
+            "includes_decode_and_first_batch": true,
+            "mean_route": [
+              [
+                0.11374407261610031,
+                0.013625327497720718,
+                0.015457618050277233
+              ],
+              [
+                0.11378084868192673,
+                0.0136275514960289,
+                0.015457370318472385
+              ],
+              [
+                0.11378475278615952,
+                0.013626452535390854,
+                0.0154575789347291
+              ],
+              [
+                0.11378266662359238,
+                0.01362795103341341,
+                0.015458679758012295
+              ],
+              [
+                0.11376940459012985,
+                0.013627574779093266,
+                0.015458651818335056
+              ],
+              [
+                0.11376971006393433,
+                0.013625756837427616,
+                0.015455980785191059
+              ],
+              [
+                0.1137765571475029,
+                0.013627693057060242,
+                0.015457798726856709
+              ]
+            ],
+            "mean_outer_gates": [
+              0.966845691204071,
+              0.9480939507484436,
+              0.9512755274772644
+            ],
+            "mean_route_entropy": 2.589843273162842,
+            "mean_joint_minus_marginal_product_L1": 4.533664105110802e-05
+          },
+          "peak_memory": 1682746368,
+          "final_epoch": {
+            "mAP": 75.19563333328321,
+            "mINP": 62.37025210918944,
+            "Rank-1": 79.54545454545455,
+            "Rank-5": 88.27751196172248,
+            "Rank-10": 93.0622009569378,
+            "Rank-20": 95.33492822966507
+          }
+        },
+        "axis_shared_s46": {
+          "steps": 2647,
+          "parameters": 101236358,
+          "trainable_parameters": 3312262,
+          "runtime": {
+            "end_to_end_seconds": 14.438953638076782,
+            "triplets": 1672,
+            "includes_decode_and_first_batch": true,
+            "mean_route": [
+              [
+                0.16482339799404144,
+                0.00029813640867359936,
+                0.0002858193765860051
+              ],
+              [
+                0.07357320189476013,
+                6.553850107593462e-05,
+                6.509046215796843e-05
+              ],
+              [
+                0.21773263812065125,
+                0.00018268362327944487,
+                0.0001729886862449348
+              ],
+              [
+                0.04875018075108528,
+                0.00013481135829351842,
+                0.00013280803977977484
+              ],
+              [
+                0.21320198476314545,
+                0.00023628967755939811,
+                0.00022676415392197669
+              ],
+              [
+                0.16495028138160706,
+                9.599709301255643e-05,
+                9.715223859529942e-05
+              ],
+              [
+                0.11469429731369019,
+                0.0001406609226251021,
+                0.0001392897975165397
+              ]
+            ],
+            "mean_outer_gates": [
+              0.8977395296096802,
+              0.871981143951416,
+              0.8731653094291687
+            ],
+            "mean_route_entropy": 1.4571504592895508,
+            "mean_joint_minus_marginal_product_L1": 0.003318377071991563
+          },
+          "peak_memory": 1453832192,
+          "final_epoch": {
+            "mAP": 74.08093948339783,
+            "mINP": 60.61624133501643,
+            "Rank-1": 80.14354066985646,
+            "Rank-5": 88.1578947368421,
+            "Rank-10": 91.86602870813397,
+            "Rank-20": 94.85645933014354
+          }
+        }
+      },
+      "summary": [
+        {
+          "kind": "value",
+          "model_or_reference": "frequency_shared",
+          "N": 5,
+          "mean_mAP": 75.95729427914391,
+          "sample_sd_mAP": 0.27593024265152316,
+          "mean_mINP": 62.83756066387255,
+          "sample_sd_mINP": 0.21663010203059313,
+          "mean_Rank-1": 80.64593301435407,
+          "sample_sd_Rank-1": 0.3912781634879504,
+          "mean_Rank-5": 89.66507177033493,
+          "sample_sd_Rank-5": 0.3647835091382029,
+          "mean_Rank-10": 93.6602870813397,
+          "sample_sd_Rank-10": 0.08458215085963225,
+          "mean_Rank-20": 95.11961722488039,
+          "sample_sd_Rank-20": 0.23008832609654709
+        },
+        {
+          "kind": "value",
+          "model_or_reference": "axis_shared",
+          "N": 5,
+          "mean_mAP": 78.16279470277755,
+          "sample_sd_mAP": 0.9142726651902081,
+          "mean_mINP": 64.39825324123109,
+          "sample_sd_mINP": 1.0372293370082635,
+          "mean_Rank-1": 83.80382775119617,
+          "sample_sd_Rank-1": 0.9250054990038882,
+          "mean_Rank-5": 91.29186602870813,
+          "sample_sd_Rank-5": 0.9621568206789601,
+          "mean_Rank-10": 93.82775119617224,
+          "sample_sd_Rank-10": 0.5046656246346678,
+          "mean_Rank-20": 95.50239234449761,
+          "sample_sd_Rank-20": 0.4362340317897268
+        },
+        {
+          "kind": "paired_axis_delta",
+          "model_or_reference": "frequency_shared",
+          "N": 5,
+          "mean_mAP": 2.2055004236336346,
+          "sample_sd_mAP": 0.9485977625717998,
+          "mean_mINP": 1.5606925773585332,
+          "sample_sd_mINP": 0.9958695741215107,
+          "mean_Rank-1": 3.157894736842104,
+          "sample_sd_Rank-1": 1.203922262209206,
+          "mean_Rank-5": 1.626794258373201,
+          "sample_sd_Rank-5": 1.212803048386279,
+          "mean_Rank-10": 0.16746411483254064,
+          "sample_sd_Rank-10": 0.5254995846050011,
+          "mean_Rank-20": 0.3827751196172272,
+          "sample_sd_Rank-20": 0.5944867770234072
+        },
+        {
+          "kind": "paired_axis_delta",
+          "model_or_reference": "original_DeMo42",
+          "N": 5,
+          "mean_mAP": 2.488219710450076,
+          "sample_sd_mAP": 0.9142726651902081,
+          "mean_mINP": 1.821160991458933,
+          "sample_sd_mINP": 1.0372293370082635,
+          "mean_Rank-1": 3.1818181818181785,
+          "sample_sd_Rank-1": 0.9250054990038882,
+          "mean_Rank-5": 2.057416267942574,
+          "sample_sd_Rank-5": 0.9621568206789601,
+          "mean_Rank-10": 0.047846889952157315,
+          "sample_sd_Rank-10": 0.5046656246346678,
+          "mean_Rank-20": 0.526315789473685,
+          "sample_sd_Rank-20": 0.4362340317897268
+        }
+      ],
+      "best_of_five": [
+        {
+          "seed": 45,
+          "model": "frequency_shared",
+          "selected_epoch": 33,
+          "mAP": 76.36388985639657,
+          "mINP": 63.09823822442048,
+          "Rank-1": 81.3397129186603,
+          "Rank-5": 90.19138755980862,
+          "Rank-10": 93.77990430622009,
+          "Rank-20": 95.21531100478468
+        },
+        {
+          "seed": 42,
+          "model": "axis_shared",
+          "selected_epoch": 30,
+          "mAP": 79.6643146931862,
+          "mINP": 66.16064487219106,
+          "Rank-1": 85.16746411483254,
+          "Rank-5": 92.22488038277513,
+          "Rank-10": 94.377990430622,
+          "Rank-20": 95.33492822966507
+        }
+      ],
+      "paired_deltas": [
+        {
+          "seed": 42,
+          "reference": "frequency_shared",
+          "mAP": 3.6123012371752736,
+          "mINP": 3.1455448565408517,
+          "Rank-1": 4.665071770334933,
+          "Rank-5": 2.3923444976076667,
+          "Rank-10": 0.7177033492823028,
+          "Rank-20": -0.11961722488038617,
+          "rank1_rescued": 43,
+          "rank1_harmed": 4,
+          "both_plus2": true
+        },
+        {
+          "seed": 42,
+          "reference": "original_DeMo42",
+          "mAP": 3.9897397008587347,
+          "mINP": 3.5835526224189067,
+          "Rank-1": 4.545454545454547,
+          "Rank-5": 2.990430622009569,
+          "Rank-10": 0.5980861244019167,
+          "Rank-20": 0.3588516746411443,
+          "rank1_rescued": 43,
+          "rank1_harmed": 5,
+          "both_plus2": true
+        },
+        {
+          "seed": 43,
+          "reference": "frequency_shared",
+          "mAP": 1.9828642156062415,
+          "mINP": 1.5927240563951983,
+          "Rank-1": 3.4688995215310996,
+          "Rank-5": 2.15311004784688,
+          "Rank-10": 0.3588516746411585,
+          "Rank-20": 0.3588516746411443,
+          "rank1_rescued": 36,
+          "rank1_harmed": 7,
+          "both_plus2": false
+        },
+        {
+          "seed": 43,
+          "reference": "original_DeMo42",
+          "mAP": 2.2736992294852882,
+          "mINP": 1.8258349826791402,
+          "Rank-1": 3.3492822966507134,
+          "Rank-5": 2.5119617224880244,
+          "Rank-10": 0.23923444976077235,
+          "Rank-20": 0.4784688995215305,
+          "rank1_rescued": 35,
+          "rank1_harmed": 7,
+          "both_plus2": true
+        },
+        {
+          "seed": 44,
+          "reference": "frequency_shared",
+          "mAP": 2.5879006855650317,
+          "mINP": 1.5019366165360637,
+          "Rank-1": 2.631578947368425,
+          "Rank-5": 2.3923444976076382,
+          "Rank-10": 0.4784688995215447,
+          "Rank-20": 0.7177033492823028,
+          "rank1_rescued": 32,
+          "rank1_harmed": 10,
+          "both_plus2": true
+        },
+        {
+          "seed": 44,
+          "reference": "original_DeMo42",
+          "mAP": 2.6306141968818935,
+          "mINP": 1.5176673870786601,
+          "Rank-1": 2.5119617224880386,
+          "Rank-5": 2.3923444976076382,
+          "Rank-10": 0.3588516746411585,
+          "Rank-20": 0.5980861244019167,
+          "rank1_rescued": 31,
+          "rank1_harmed": 10,
+          "both_plus2": true
+        },
+        {
+          "seed": 45,
+          "reference": "frequency_shared",
+          "mAP": 1.1080502415374553,
+          "mINP": 0.4374567065858912,
+          "Rank-1": 1.4354066985645773,
+          "Rank-5": -0.4784688995215447,
+          "Rank-10": -0.5980861244019167,
+          "Rank-20": -0.23923444976075814,
+          "rank1_rescued": 27,
+          "rank1_harmed": 15,
+          "both_plus2": false
+        },
+        {
+          "seed": 45,
+          "reference": "original_DeMo42",
+          "mAP": 1.7973651056065592,
+          "mINP": 0.9586026812342183,
+          "Rank-1": 2.15311004784688,
+          "Rank-5": 0.4784688995215163,
+          "Rank-10": -0.5980861244019167,
+          "Rank-20": 0.0,
+          "rank1_rescued": 31,
+          "rank1_harmed": 13,
+          "both_plus2": false
+        },
+        {
+          "seed": 46,
+          "reference": "frequency_shared",
+          "mAP": 1.73638573828417,
+          "mINP": 1.1258006507346607,
+          "Rank-1": 3.5885167464114858,
+          "Rank-5": 1.6746411483253638,
+          "Rank-10": -0.11961722488038617,
+          "Rank-20": 1.1961722488038333,
+          "rank1_rescued": 38,
+          "rank1_harmed": 8,
+          "both_plus2": false
+        },
+        {
+          "seed": 46,
+          "reference": "original_DeMo42",
+          "mAP": 1.7496803194179051,
+          "mINP": 1.2201472838837404,
+          "Rank-1": 3.3492822966507134,
+          "Rank-5": 1.913875598086122,
+          "Rank-10": -0.3588516746411443,
+          "Rank-20": 1.1961722488038333,
+          "rank1_rescued": 36,
+          "rank1_harmed": 8,
+          "both_plus2": false
+        }
+      ],
+      "new_neural_calls": 0,
+      "limits": "Conditional on one fixed original DeMo42 anchor; whole-pipeline repeatability untested. Official benchmark selects epochs and Best-of5, not untouched validation. Best-of5 and mean are distinct. No missing49/causal attribution/three-dataset success inferred."
     }
   },
   "decision_rules": [
@@ -39132,8 +40007,8 @@
   ],
   "next_action": {
     "milestone": "PREPARE_NORMAL_INPUT_CANDIDATE_FROM_CLOSED_CONTROL_EVIDENCE",
-    "status": "K43_FULL50_GT_RAW_TEXT_CPU_CLOSED_K44_NATIVE6_FORMAL_ORIGINAL_QUEUE_RUNNING",
-    "action": "Continue same original21123/PID40844, seed44native6 actually accepted, 43full50pair100epochs5292closed; 42reuse/43done only2of5. Only passive67703 until19:56:17 orownerexit; expected20:01:17 by43actual2438sec. No earlyremoteNN/GPU/source/loss changes, no rerun. Complete44-46 originalsameN, finalCPUall5/meanSD/paired plus separateBest5 andselectedwinnerfixedmissing verification. All3+2/fair/missing/stability/ablation/cost objective remains ACTIVE_UNMET.",
+    "status": "K_EXPERT_N5_NORMAL_COMPLETE_BEST45_ORDINARY_FIXED_MISSING49_PENDING",
+    "action": "Original21123/PID40844 N5 actualexit0;8new50/400epochs/21170formal/native24, all GT/rawACK/text/automaticCPU complete. AxisBest5 remainsK42/E30 with existing full49 exactsamewinner; ordinaryBest5 changedto45/E33, requires new declared one-control49/196 fixedweight validation. No complete-goal inference:100/MVR normal+2 andmissingnetutility stillfail. Prepare/review/native/complete only45 full49, reuse42accepted49, then weakest-data controlledtarget guidedbyK100inactivehinge/fullsampling evidence. Do not rerun N5 or appendseeds, report meanSD/allnegatives/Best5 separately, no wholepipelineN5claim.",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
@@ -39147,7 +40022,7 @@
     },
     "existing_M8_closeout": "ACTUAL_COMPLETE_NATIVE52604_EXIT0_THREE50_147FROZEN882STATES_LOCAL_RAW_VERIFIED",
     "pending_missing_diagnostic": "K49closed:201 meanpositive,100/MSVRmeannegative;12disjoint privatecoordsconstant/ties not identitymechanism. Next selectedN5winner fixedweightmissing verification only afterallnormal-seed comparison; no source/loss change during currentqueue.",
-    "current_rule": "Continue same original21123/PID40844, seed44native6 actually accepted, 43full50pair100epochs5292closed; 42reuse/43done only2of5. Only passive67703 until19:56:17 orownerexit; expected20:01:17 by43actual2438sec. No earlyremoteNN/GPU/source/loss changes, no rerun. Complete44-46 originalsameN, finalCPUall5/meanSD/paired plus separateBest5 andselectedwinnerfixedmissing verification. All3+2/fair/missing/stability/ablation/cost objective remains ACTIVE_UNMET.",
+    "current_rule": "Original21123/PID40844 N5 actualexit0;8new50/400epochs/21170formal/native24, all GT/rawACK/text/automaticCPU complete. AxisBest5 remainsK42/E30 with existing full49 exactsamewinner; ordinaryBest5 changedto45/E33, requires new declared one-control49/196 fixedweight validation. No complete-goal inference:100/MVR normal+2 andmissingnetutility stillfail. Prepare/review/native/complete only45 full49, reuse42accepted49, then weakest-data controlledtarget guidedbyK100inactivehinge/fullsampling evidence. Do not rerun N5 or appendseeds, report meanSD/allnegatives/Best5 separately, no wholepipelineN5claim.",
     "after_N5_diagnostic_option": "Only after fixed N5 queue/comparison: consider preregistered sameB64 P4K16 vsP8K8 paired controls. Both negative identity candidate count and positive sample count change; no global train coverage omission observed. Keep all3+2/missing/fair/stability objective, no live source change or new sampler job."
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
