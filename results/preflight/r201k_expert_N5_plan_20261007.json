@@ -1,0 +1,62 @@
+{
+  "status": "PREDECLARED_RGBNT201_MATCHED_K_EXPERT_N5_PLAN_NOT_NEW_TRAINING",
+  "created_at": "2026-10-07T15:31:51",
+  "dataset": "RGBNT201",
+  "method": "Exact completed K relation-local PI and unchanged I unit5120 hinge.3 primary / original soft auxiliaries; no new factor",
+  "expert_seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "anchor_seed": 42,
+  "anchor_budget_epochs": 50,
+  "new_stage_epochs_per_control": 50,
+  "controls": [
+    "frequency_shared",
+    "axis_shared"
+  ],
+  "existing_seed42_normal_actual": "results/preflight/r201k_relation_local_pi_actual_session_20261007.json",
+  "existing_seed42_normal_actual_sha256": "b017bef308a2ba4edd6d4f32e980fd44b59d505fc28c75d257b19e5fba0d69bb",
+  "reuse_seed42_without_retraining": true,
+  "new_training_jobs": 8,
+  "new_formal_epochs": 400,
+  "expected_new_formal_updates": 21176,
+  "expected_new_native_updates": 24,
+  "new_training_jobs_launched": 0,
+  "sources_read_before_implementation_sha256": {
+    "relation_local_identity_outlet.py": "c22d550b2618ec64d38c425c360c130e3286eb4cd28ef028dcef660cad9fd307",
+    "run_r201k_relation_local_pi.py": "0c3fa388227070ef8818fda2c84a1deb8e2f04070b6870d4ec1b116f647d8b8f",
+    "identity_coordinate_expert_seeds.py": "6ef35ab6d1d56e187a78441786e4d0f702de9f5832bbb69ea3f71ae1e856ea7b",
+    "run_r201i_expert_seeds.py": "c3fc90184eeb03eacd1fe00295d00fbeb5fd0d79f621d30beb0c682448ce755b",
+    "launch_r201i_expert_seeds.py": "44a2a76ab03b65b1a9a44996224716375cc2c26a1678dea55bd2abc48824c69b"
+  },
+  "gate": "First finish the current fixed K42 all3 missing49/GT/raw-ACK/automaticCPU receiver. Then implement only support for expert seed43..46 on the unchanged teacher42 K graph, fresh-source review PASS and paired native3 before full50. No overlap with current K49 GPU lanes.",
+  "hardware": {
+    "server": "2026",
+    "ordinary_physical_GPU": 2,
+    "axis_physical_GPU": 3,
+    "maximum_NN": 2,
+    "temperature_power_control": false,
+    "server27": "CPU/archive/mirror only"
+  },
+  "protocol": {
+    "full_official_train_query_gallery": true,
+    "artificial_holdout": false,
+    "train_batch_size": 64,
+    "instances_per_identity": 8,
+    "selection": "Maximum normal benchmark mAP; earliest epoch for ties. Within each variant Best-of5 chosen by mAP, earliest declared seed for exact tie; all six metrics from same checkpoint.",
+    "missing_selection": "Never choose a different seed/epoch per missing condition. K42 missing49 remains the already fixed selection; any later normal-selected deployment winner requires separately declared fixed-weight verification.",
+    "test_usage_disclosure": "Official benchmark participates in epoch and deployment seed selection; not an untouched independent test."
+  },
+  "reporting": [
+    "Every declared seed result including negative/failed runs, seed status and seed-specific selected epoch",
+    "Same seeds/N for ordinary and dual-axis, same parameter/output/training budget and paired batch orders per seed",
+    "Mean and sample standard deviation, paired per-seed and mean differences; separate Best-of5 table",
+    "Normal six metrics, CMC50 and per-query/identity-camera-scene summaries, selected and epoch50, full training/loss/mining curves",
+    "Explicit fixed teacher42 conditional expert-stage repetition, not five end-to-end pipelines or original-DeMo seed repeats"
+  ],
+  "retention": "Keep each run only its normal mAP-best checkpoint during evaluation. Do not delete the active K42/teacher or any weight still needed for announced inference. After comparison and confirmed consumers, retain selected best deployment per control; record all nonwinner metrics/source/config before targeted archive or removal.",
+  "limits": "Source implementation/review/native/new training not yet executed. N5 is fixed before seeing the four new seed outcomes; no growing the search until a lucky result appears. Does not replace three-dataset +2, fair expert/missing net utility, retrained ablations, actual costs or whole-pipeline paired-seed requirement."
+}
