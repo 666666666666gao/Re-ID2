@@ -1,0 +1,1127 @@
+{
+  "status": "PASS",
+  "review_scope": "SOURCE_ONLY",
+  "reviewed_at": "2026-10-07T09:23:19+08:00",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_backend": "unattested",
+  "actual_model": "unattested",
+  "actual_reasoning_effort": "unattested",
+  "runtime_model_evidence": "No serving-backend or effort attestation was provided. Requested routing is recorded separately and is not proof of the actual backend.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer": "/root/review_r201k_relation_local_pi",
+  "fresh_agent_context": true,
+  "summary": "No blocking source defect found in the three new normal-stage files. K reuses completed I initialization, training/loss/data/protocol and changes only the existing shared PI projection input from a global broadcast to seven relation-local contexts. Source PASS is not native/runtime/deployment/performance acceptance. Future deployment/receiver, K-bound full49 and paired-seed evidence remain separate requirements.",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "source_checks": [
+    {
+      "id": "C1",
+      "status": "PASS",
+      "topic": "Only relation-local PI changes the formal forward",
+      "evidence": [
+        "relation_local_identity_outlet.py:8-33,52-54",
+        "rgbnt201_identity_outlet.py:29-53,76-89",
+        "axis_collaboration.py:102-130,179-184"
+      ],
+      "conclusion": "The subclass defines only fuse and no constructor, modules or parameters. It replaces the single PI([mean_S M_S,global_F]) vector broadcast with PI([M_S,relation_frequency_S]) of shape Bx7x1024 -> Bx7x512 using the inherited LayerNorm1024/Linear1024->64/GELU/Linear64->512 tensors and per-last-dimension normalization. relation_frequency_S is the existing by_relation(f1) conditional-band pool. AST subtrees for relation-mass fallback, M and F branches, anchor, weights, private concatenation and final normalization are identical to the parent. The intended seven-row computation changes cost even though parameters and descriptor dimensions do not change."
+    },
+    {
+      "id": "C2",
+      "status": "PASS",
+      "topic": "Factory alias and initialization remain process-local and identical to I",
+      "evidence": [
+        "run_r201k_relation_local_pi.py:23-30",
+        "run_r201i_primary_margin.py:21-25",
+        "run_r201g_normal_priority.py:5,22-27",
+        "identity_coordinate_three_dataset.py:15-49",
+        "rgbnt201_projection_probe.py:28-43",
+        "rgbnt201_identity_outlet.py:18-27",
+        "launch_r201k_relation_local_pi.py:37-40",
+        "gpu_thermal_execute.py:30-33"
+      ],
+      "conclusion": "g.coordinate_build is the imported function whose globals resolve coordinate.IdentityCoordinateAxis at call time, so assigning that module name before parent.build selects the subclass. It does not rewrite any file or mutate another process. Existing parent constructor order/seeds and frozen original DeMo50 s42 loading are retained; extra audit dictionaries/method text do not add tensor state. Formal native and full50 use separate subprocesses and rebuild fresh experts, heads, Adam and scaler rather than continuing smoke weights or I trained expert weights."
+    },
+    {
+      "id": "C3",
+      "status": "PASS",
+      "topic": "M-only/F-only/00 parity uses current identical tensors and weights",
+      "evidence": [
+        "relation_local_identity_outlet.py:11-12,17-29,55-60",
+        "rgbnt201_identity_outlet.py:55-70",
+        "axis_collaboration.py:98-100,179-184"
+      ],
+      "conclusion": "The M/F formulas are unchanged and their native probes explicitly call IdentityCoordinateAxis.fuse on the exact same original call arguments and module tensors under no_grad, then require torch.equal on the final output. The inherited 00 definition is unchanged. These are within-current-K-call code/parity statements; trained K10/K01 are not asserted numerically equal to trained I10/I01."
+    },
+    {
+      "id": "C4",
+      "status": "PASS",
+      "topic": "Native PI isolation has the stated narrow measurement scope and no BN/RNG/gradient mutation",
+      "evidence": [
+        "relation_local_identity_outlet.py:13-14,30-51",
+        "axis_collaboration.py:179-184",
+        "run_r201k_relation_local_pi.py:33-44",
+        "rgbnt201_identity_outlet.py:89-106"
+      ],
+      "conclusion": "For each S the probe perturbs every other PI input slot with a deterministic linspace pattern, reuses the same projection, and asserts zero max error for the retained normalized512 PI_S output. It occurs after per-slot512 normalization and before residual/gate/anchor/global5120 normalization. Probes run under no_grad on detached clones, using only LayerNorm/Linear/GELU and deterministic arange/linspace; no BN/dropout, RNG draw, train/eval toggle, optimizer call, backward, in-place edit of original tensors or parameter gradients is added. The real PI graph remains attached for the original loss. The audit dictionary is cleared before every native step and assertions execute on both full and partial calls; the persisted shape/error row is the last PI call of that step, while M/F parity flags arise from the current full call. Formal train mode disables these probes. None of these assertions was executed in this review."
+    },
+    {
+      "id": "C5",
+      "status": "PASS",
+      "topic": "Global coupling and masking are correctly retained",
+      "evidence": [
+        "relation_local_identity_outlet.py:16-21,25-33,52-54",
+        "rgbnt201_identity_outlet.py:80-88",
+        "axis_collaboration.py:106-143",
+        "shared_identity_axis.py:70-92"
+      ],
+      "conclusion": "Only direct PI projection access is isolated. Conditional expert messages, globally determined band/relation route, calibrator gates, anchor scaling and final5120 normalization remain coupled. Eligibility and relation masses mask the final residual exactly as before. The formal fuse explicitly casts its tensors to FP32 inside disabled CUDA autocast, including relation_frequency, so the inherited AMP experts and FP32 outlet precision boundary are retained. No claim of end-to-end sensor independence, semantic disentanglement or retrieval improvement is supported by the local perturbation check."
+    },
+    {
+      "id": "C6",
+      "status": "PASS",
+      "topic": "I loss, partial0 forwards, BN2 and optimizer path are unchanged",
+      "evidence": [
+        "run_r201k_relation_local_pi.py:33-45",
+        "run_r201i_primary_margin.py:28-60",
+        "run_r201g_normal_priority.py:40-86",
+        "shared_identity_axis.py:139,215-231",
+        "scaled_axis_collaboration.py:17-32",
+        "layers/make_loss.py:13-55",
+        "layers/triplet_loss.py:107-135"
+      ],
+      "conclusion": "K delegates the entire training step to I. The first full-unit5120 term remains 0.25 label-smoothed CE plus the existing margin0.3 batch-hard hinge with outer coefficient1. All later configured auxiliary soft Triplet/CE terms, loss weights and contribution target definition remain inherited. The actual contribution target values may change because 11 changes; its formula/reference/mining remain unchanged. G still performs the same partial image mask, partial forward/BN, measured partial CE and gallery triplet at zero effective weights, and a second backward. BN2 and native hinge/feature-gradient checks are retained."
+    },
+    {
+      "id": "C7",
+      "status": "PASS",
+      "topic": "Full official data, sampler, budget, seed and paired controls",
+      "evidence": [
+        "official_training_data.py:20-32",
+        "experiment_data.py:17-21,48-93",
+        "run_experiment.py:31-41",
+        "configs/RGBNT201/DeMo.yml:21-35",
+        "configs/MSVR310/DeMo.yml:21-36",
+        "configs/RGBNT100/DeMo.yml:21-36",
+        "run_full_official_frozen_anchor_experiment.py:75-97,139-157",
+        "launch_r201k_relation_local_pi.py:15,37-40,66-67,106-110"
+      ],
+      "conclusion": "B64, 50 additional epochs, seed42 and original frozen teacher42 are retained. Dataset K values are 8/4/16 for RGBNT201/MSVR310/RGBNT100, hence P8/P16/P4. Both arms share the same inherited initialization/capacity, full official records, crop/flip/erasing, sampler and partial sets. Native and final formal name/partial-set sequences are compared within K. Historical I-versus-K parameter and order comparison remains a later CPU readout requirement, not a launcher assertion currently executed."
+    },
+    {
+      "id": "C8",
+      "status": "PASS",
+      "topic": "Native3 gate precedes paired full50 in each dataset controller",
+      "evidence": [
+        "launch_r201k_relation_local_pi.py:42-71,84-104",
+        "run_full_official_frozen_anchor_experiment.py:98-129",
+        "original_identity_anchor.py:44-52"
+      ],
+      "conclusion": "The inherited smoke loop counts real GradScaler updates; the new launcher requires exactly three attempts and three successful updates, no AMP skips, all trainable parameter gradients finite/nonzero after the third step, unchanged frozen identity state, exact in-memory strict reload and 8x5120 descriptor. It additionally requires BN2, I hinge checks, both M/F equality flags and seven zero outside-slot errors in every current step. Both native arms must pass before either full50 train arm starts. This is source coverage, not an actual native PASS."
+    },
+    {
+      "id": "C9",
+      "status": "PASS",
+      "topic": "Normal benchmark selection and installed-GT six-metric audit",
+      "evidence": [
+        "run_full_official_frozen_anchor_experiment.py:39-54,139-180",
+        "full_evaluation.py:20-65",
+        "audit_full_official_normal.py:17-56",
+        "audit_full_official49.py:13-80",
+        "launch_r201k_relation_local_pi.py:88-98"
+      ],
+      "conclusion": "Every epoch evaluates full official query/gallery, selects strict greater mAP so earliest ties remain, and reloads the fixed selected checkpoint for all six metrics. Full training coverage, zero heldout identities, successful update accounting, installed-filename identity/camera/scene labels, appropriate RGBNT same-camera or MSVR same-scene exclusion, CMC1..50, every exported AP/INP/first-last match and group metrics are independently recounted. Evaluation uses installed ground truth, not model predictions as labels. The benchmark selection limitation remains disclosed."
+    },
+    {
+      "id": "C10",
+      "status": "PASS",
+      "topic": "Normal RAW acknowledgement and card serialization protocol",
+      "evidence": [
+        "launch_r201k_relation_local_pi.py:15,63-65,73-104,110-116",
+        "gpu_thermal_execute.py:9-49"
+      ],
+      "conclusion": "The two neural lanes use physical GPU2/3, with at most two workers within one controller and native joined before training. The archive executor has one worker, serializing stdin handshakes. Each normal RAW advertises size/SHA, waits for an exact name/file NORMAL_ARCHIVED acknowledgement, verifies the unchanged remote size/SHA and path containment, and only then removes that one remote file. Controller completion waits for both archive futures and paired final orders. Temperature/power are neither queried nor gated. The local receiver that must actually copy and verify bytes before ACK is not present among these three new files; its future implementation is a separate pre-deployment requirement."
+    },
+    {
+      "id": "C11",
+      "status": "PASS",
+      "topic": "Source locks are current and match the completed I reviewed source set",
+      "evidence": [
+        "results/preflight/r201k_relation_local_pi_plan_20261007.json",
+        "results/preflight/r201k_relation_local_pi_review_request_20261007.json",
+        "results/preflight/r201i_primary_margin_source_review_20261006.json"
+      ],
+      "conclusion": "All three new and61 declared parent file SHA values match both the plan and request. All61 parents also match the completed I source review manifest: I runner plus its60 reused files. All61 Python files parse with installed CPython3.13 using AST only. The six completed I result JSON bytes and plan fields for best epoch, parameters, descriptor dimension and full six metrics also match. A local hash/AST pass does not attest remote deployment bytes, importability or target runtime behavior."
+    }
+  ],
+  "followup_execution_and_science_requirements": [
+    {
+      "id": "D1",
+      "classification": "PRE_DEPLOYMENT_REQUIREMENT_NOT_SOURCE_DEFECT",
+      "status": "PENDING",
+      "evidence": [
+        "launch_r201k_relation_local_pi.py:25-40,73-81,112-115",
+        "results/preflight/r201k_relation_local_pi_plan_20261007.json:run_order,deployment_constraints,current_neural_context"
+      ],
+      "required": "Before any K launch, concretize/review the K-specific serial three-dataset deployer and local RAW receiver/closed-text intake. It must consume real J all3 normal/GT/raw/CPU completion, verify original protected anchors and actual remote/local capacity, check reviewed local/remote sources, only ACK after size/SHA-verified local copy, consume exact pair totals5294/1410/12714 and terminal exit0, and run the I/K/original paired CPU comparison. The current launcher only handles one dataset and supplies the remote half of the ACK protocol. Old G deployers are examples and are not K launch/receivers.",
+      "scope": "No deployment was attempted or authorized by this source-only review. Source correctness PASS does not satisfy these execution prerequisites."
+    },
+    {
+      "id": "D2",
+      "classification": "MISSING_STAGE_IMPLEMENTATION_REQUIREMENT_NOT_CURRENT_NORMAL_SOURCE_DEFECT",
+      "status": "PENDING",
+      "evidence": [
+        "evaluate_identity_coordinate_missing49_stream.py:19,69-70,92-94",
+        "launch_r201k_relation_local_pi.py:114",
+        "results/preflight/r201k_relation_local_pi_plan_20261007.json:run_order"
+      ],
+      "required": "After all three normal datasets close, implement/review an explicit K builder binding for fixed-normal-best full49. The old missing49 executable imports the original global-PI coordinate builder; same state keys/shapes allow strict K checkpoint load without identifying the wrong forward. Its normal-feature parity assertion is useful but does not replace choosing the K architecture. Preserve all7 availability/native checks, all49/four states, all six metrics/CMC50/per-query/groups/rescue-harm and RAW acknowledgements. Do not reselect missing-specific checkpoints.",
+      "scope": "The current new launcher does not invoke missing49. This is a mandatory later-stage dependency, not a defect in the reviewed normal source."
+    },
+    {
+      "id": "D3",
+      "classification": "SCIENTIFIC_ACCEPTANCE_REQUIREMENT",
+      "status": "PENDING",
+      "evidence": [
+        "identity_coordinate_three_dataset.py:17,25",
+        "launch_r201k_relation_local_pi.py:39,115",
+        "results/preflight/r201k_relation_local_pi_plan_20261007.json:acceptance,remaining_limits"
+      ],
+      "required": "The current code deliberately implements seed42 only. At least three paired seeds, independently paired baseline/teacher/student full-pipeline evidence, fair ordinary-expert controls, all3 mAP and Rank1 gains of at least2 points and the required full49 positive/negative/group evidence remain unfulfilled. Fixed-teacher expert repeats alone do not establish full-pipeline seed stability. Retain best/last curves and negative results; do not combine metrics across checkpoints or versions."
+    },
+    {
+      "id": "D4",
+      "classification": "NATIVE_AND_COST_VALIDATION_REQUIREMENT",
+      "status": "NOT_EXECUTED",
+      "required": "Run the reviewed real native gate only after D1 prerequisites and current J schedule permit it; no source result proves zero skips, exact numeric parity/isolation, finite gradients, reload correctness, memory or throughput on the target. Full training disables native probes, but PI now processes seven rows; report actual matched latency/memory/throughput and original50+extra50 budget rather than inferring equal cost from equal parameters."
+    }
+  ],
+  "sources_sha256": {
+    "relation_local_identity_outlet.py": "c22d550b2618ec64d38c425c360c130e3286eb4cd28ef028dcef660cad9fd307",
+    "run_r201k_relation_local_pi.py": "0c3fa388227070ef8818fda2c84a1deb8e2f04070b6870d4ec1b116f647d8b8f",
+    "launch_r201k_relation_local_pi.py": "4fe735369966bcb5cd84050b8a7a3def7a1787c1749ade693ddefe0e380d9f0c"
+  },
+  "directly_reused_sources_sha256": {
+    "results/preflight/r201g_other_two_normal_deploy_20261006.py": "96085eb825655df311728196c4dbf75e7998bae6dd80bf4a68abfe06704c8bec",
+    "run_r201g_normal_priority.py": "1ad85d62a1e5ecd12d52b069c58fdaba436ae7ef3ba27e61f3763191b4c6779e",
+    "launch_r201g_normal_priority.py": "ef9d9bd8bcfba8c2bcee6a5c52588514d4f71fbe9f48bb75770b6ef55ead0dd1",
+    "results/preflight/r201g_normal_priority_deploy_20261006.py": "d8207423829667c8733b4c851039c4b5a96a955d3bfd98ce89b48a5d7d855a94",
+    "identity_coordinate_three_dataset.py": "de4128c5c5993e0766ba74a700870b13478af44d28440312287b0fe2e32bb415",
+    "run_identity_coordinate_three_dataset.py": "dd9b117b3dc7bd733c5d87546ef7e2cfcfcd3d1972df6241f661629313f579b2",
+    "audit_full_official_normal.py": "ee26b0a29bea046db70d4072f88160b3d2ce726451accbd6b90dd44b0a1ee742",
+    "launch_identity_coordinate_three_normal.py": "05a4c531862215f932be1fe4a20b75c2f691c9a8acac28de1baf75b3d908ac98",
+    "rgbnt201_projection_probe.py": "d6f6e0bddef26f5578818810b1c57415789f4e2e7b88dda8f6af1548eacaf583",
+    "original_identity_anchor.py": "847b6adf93eb44ff119585e5548e1ef52115bcd59d8e87cdb4735b541d390bcb",
+    "common_coordinate_axis.py": "0a45146b7e645abc1e8b7d622c1556852855964ea29d7530b449e1c02c8deb5b",
+    "shared_identity_axis.py": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "dual_axis.py": "0c6090fe5b8b15cc021bf1809860f0675187288dc2145d0129ce89a5eb78a330",
+    "scaled_axis_collaboration.py": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+    "run_full_official_frozen_anchor_experiment.py": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+    "run_shared_identity_experiment.py": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+    "diagnose_rgbnt201_projection_probe.py": "37ae7b432d2c73f097407d969944f74443ddbf915f0ec74389366de1144228cb",
+    "evaluate_full_official49.py": "5db20659af12e248d91b22813517b1e72619483fa73ac06a60423e874a2c9d7b",
+    "official_training_data.py": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "missing_evaluation.py": "e04e16dbb4ec486f28065102b5d7301c68e7d1cef62cdd5fcfa99b3dac222089",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "solver/make_optimizer.py": "09e8e36c78c78cda75daad52bbc48f77f4dc33b96568a06bc1c193132ffbeafc",
+    "solver/scheduler_factory.py": "c5e20bdffec4b5360faa04f823639c8e5fd8672914813fb96148927c9ee19abc",
+    "modeling/make_model.py": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+    "modeling/meta_arch.py": "f9b93fba00f534debecebcd72f974320cd978e1619f1460674cbfc3afc961eec",
+    "modeling/moe/AttnMOE.py": "91d594c86ba44a5ce9eb843afaba898d5f8b0515b542b2754004c85ca272d3b6",
+    "layers/make_loss.py": "232ef86081a76665225db4360ea67650230b1d5986818cabc23ce5db36340dec",
+    "layers/softmax_loss.py": "d872eba630685044eda8e507f9e0f6f0e0a42af7e222ed4d8fd4c418d384c518",
+    "data/datasets/sampler.py": "579b45b767960b7ca8a373808d890493e6ac8d152c0fe13dbe0f4dc02ed9f068",
+    "data/datasets/RGBNT201.py": "1a3dda88f26efc2891322e2726c4f3591bfd0c040cdf5c717d0aabc55f349272",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+    "gpu_thermal_execute.py": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+    "configs/RGBNT201/DeMo.yml": "bfee0de623885a38cce974c1c5d74abf47c54e14852cc266b8f69c70a858c51d",
+    "rgbnt201_identity_outlet.py": "ee03a16de0e7f4beb28f4a78a4ab8c16e8f19014bfa4164482d59714e52de784",
+    "run_rgbnt201_identity_outlet.py": "803e46e0670c323134d5c2b9f101e34d7ea464d9de37137afa44f21949bfc034",
+    "evaluate_rgbnt201_identity_outlet49.py": "a2f2a8ead42f4bdd67dcdfdbc22e2b0ec7a3f8fd27f70c232595779a6bcb367c",
+    "verify_rgbnt201_identity_outlet.py": "951784df8a02f543c3df9647ec92c1ba95e0c42af18405ff6440b75dbf857359",
+    "launch_rgbnt201_identity_outlet_native.py": "5b5c8c494f40d5e6c3d6af6744b344139a21a3bd245d1c2c4a3bfb4c17209f19",
+    "launch_full_official_frozen_anchor_trial.py": "88b1b7388903431ac813e318b77f041e80db9afb1ccc2ee1492920e5c08fb228",
+    "diagnose_full_official_streaming_states.py": "f7d0d67ff961090cb728481a27a33a9b3dc10fd1501c47e4968c5cb965544374",
+    "audit_full_official49.py": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+    "audit_shared_identity_states.py": "e8cf168db43f36e36a40a66148f209a6b782775942ce7fcbdf9dce439d1fa8d0",
+    "evaluate_rgbnt201_identity_states49.py": "085702c72189999d65375c497c4c635f5eb1c5c920139756c31e56f5ef87cc0e",
+    "audit_rgbnt201_identity_states49.py": "ead3b2e7d83f0de85ee6c4ecd667931938bb8ba2df07887825af88101e8de512",
+    "launch_rgbnt201_identity_outlet50.py": "51cf22e7dbde9041e59048565b0fd550d06cd7e80b0f0b7accd949e110e32709",
+    "configs/MSVR310/DeMo.yml": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+    "configs/RGBNT100/DeMo.yml": "e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c",
+    "data/datasets/RGBNT100.py": "cef47b0a1dcc9bc434f6c3612e547db41fd8af2b1d7e953323ea80ffb6eb705f",
+    "data/datasets/msvr310.py": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+    "config/defaults.py": "41d6e21de28ffca68104954c52dcba3d0f3c16249980c70107d6c72e1117c6ba",
+    "results/preflight/r201g_normal_priority_complete_intake_20261006.py": "a1ca62bc2fc64f2d3e832c1b0a38d984e206300c2e63b7e13618792c7d5cb680",
+    "analyze_r201g_normal_priority.py": "b72bf19b8aade0c320f84ed0bca7ae763e60241a57a5db4edf8155efccfe6970",
+    "evaluate_identity_coordinate_missing49_stream.py": "ff49b55f61d7483a110d3e51a5b0f0af9045af60d0910ebeb8f4e64c59afa770",
+    "audit_full_official_condition.py": "94ba9a65b399776fadbb7588a0c6bd70c04e569fa0f568729533bfc8ca751121",
+    "results/preflight/full_official_anchor_stream_bridge_20261005.py": "53fd78e3b4ebbd79b6d0a60059e9c297f727ac8a42931b6a5b103e44d7d88d8e",
+    "collect_results.py": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+    "layers/triplet_loss.py": "f502c44bec642bbf72ce6d0f58c9f9a0084beef9cbb451c2d2786bb13f94960a",
+    "run_r201i_primary_margin.py": "954c0af47e36a5c221d443e8d9b6965d749e169dd858b19fb64d78609116869c"
+  },
+  "declared_parent_dependency_manifest_sha256": {
+    "results/preflight/r201g_other_two_normal_deploy_20261006.py": "96085eb825655df311728196c4dbf75e7998bae6dd80bf4a68abfe06704c8bec",
+    "run_r201g_normal_priority.py": "1ad85d62a1e5ecd12d52b069c58fdaba436ae7ef3ba27e61f3763191b4c6779e",
+    "launch_r201g_normal_priority.py": "ef9d9bd8bcfba8c2bcee6a5c52588514d4f71fbe9f48bb75770b6ef55ead0dd1",
+    "results/preflight/r201g_normal_priority_deploy_20261006.py": "d8207423829667c8733b4c851039c4b5a96a955d3bfd98ce89b48a5d7d855a94",
+    "identity_coordinate_three_dataset.py": "de4128c5c5993e0766ba74a700870b13478af44d28440312287b0fe2e32bb415",
+    "run_identity_coordinate_three_dataset.py": "dd9b117b3dc7bd733c5d87546ef7e2cfcfcd3d1972df6241f661629313f579b2",
+    "audit_full_official_normal.py": "ee26b0a29bea046db70d4072f88160b3d2ce726451accbd6b90dd44b0a1ee742",
+    "launch_identity_coordinate_three_normal.py": "05a4c531862215f932be1fe4a20b75c2f691c9a8acac28de1baf75b3d908ac98",
+    "rgbnt201_projection_probe.py": "d6f6e0bddef26f5578818810b1c57415789f4e2e7b88dda8f6af1548eacaf583",
+    "original_identity_anchor.py": "847b6adf93eb44ff119585e5548e1ef52115bcd59d8e87cdb4735b541d390bcb",
+    "common_coordinate_axis.py": "0a45146b7e645abc1e8b7d622c1556852855964ea29d7530b449e1c02c8deb5b",
+    "shared_identity_axis.py": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "dual_axis.py": "0c6090fe5b8b15cc021bf1809860f0675187288dc2145d0129ce89a5eb78a330",
+    "scaled_axis_collaboration.py": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+    "run_full_official_frozen_anchor_experiment.py": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+    "run_shared_identity_experiment.py": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+    "diagnose_rgbnt201_projection_probe.py": "37ae7b432d2c73f097407d969944f74443ddbf915f0ec74389366de1144228cb",
+    "evaluate_full_official49.py": "5db20659af12e248d91b22813517b1e72619483fa73ac06a60423e874a2c9d7b",
+    "official_training_data.py": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "missing_evaluation.py": "e04e16dbb4ec486f28065102b5d7301c68e7d1cef62cdd5fcfa99b3dac222089",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "solver/make_optimizer.py": "09e8e36c78c78cda75daad52bbc48f77f4dc33b96568a06bc1c193132ffbeafc",
+    "solver/scheduler_factory.py": "c5e20bdffec4b5360faa04f823639c8e5fd8672914813fb96148927c9ee19abc",
+    "modeling/make_model.py": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+    "modeling/meta_arch.py": "f9b93fba00f534debecebcd72f974320cd978e1619f1460674cbfc3afc961eec",
+    "modeling/moe/AttnMOE.py": "91d594c86ba44a5ce9eb843afaba898d5f8b0515b542b2754004c85ca272d3b6",
+    "layers/make_loss.py": "232ef86081a76665225db4360ea67650230b1d5986818cabc23ce5db36340dec",
+    "layers/softmax_loss.py": "d872eba630685044eda8e507f9e0f6f0e0a42af7e222ed4d8fd4c418d384c518",
+    "data/datasets/sampler.py": "579b45b767960b7ca8a373808d890493e6ac8d152c0fe13dbe0f4dc02ed9f068",
+    "data/datasets/RGBNT201.py": "1a3dda88f26efc2891322e2726c4f3591bfd0c040cdf5c717d0aabc55f349272",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+    "gpu_thermal_execute.py": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+    "configs/RGBNT201/DeMo.yml": "bfee0de623885a38cce974c1c5d74abf47c54e14852cc266b8f69c70a858c51d",
+    "rgbnt201_identity_outlet.py": "ee03a16de0e7f4beb28f4a78a4ab8c16e8f19014bfa4164482d59714e52de784",
+    "run_rgbnt201_identity_outlet.py": "803e46e0670c323134d5c2b9f101e34d7ea464d9de37137afa44f21949bfc034",
+    "evaluate_rgbnt201_identity_outlet49.py": "a2f2a8ead42f4bdd67dcdfdbc22e2b0ec7a3f8fd27f70c232595779a6bcb367c",
+    "verify_rgbnt201_identity_outlet.py": "951784df8a02f543c3df9647ec92c1ba95e0c42af18405ff6440b75dbf857359",
+    "launch_rgbnt201_identity_outlet_native.py": "5b5c8c494f40d5e6c3d6af6744b344139a21a3bd245d1c2c4a3bfb4c17209f19",
+    "launch_full_official_frozen_anchor_trial.py": "88b1b7388903431ac813e318b77f041e80db9afb1ccc2ee1492920e5c08fb228",
+    "diagnose_full_official_streaming_states.py": "f7d0d67ff961090cb728481a27a33a9b3dc10fd1501c47e4968c5cb965544374",
+    "audit_full_official49.py": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+    "audit_shared_identity_states.py": "e8cf168db43f36e36a40a66148f209a6b782775942ce7fcbdf9dce439d1fa8d0",
+    "evaluate_rgbnt201_identity_states49.py": "085702c72189999d65375c497c4c635f5eb1c5c920139756c31e56f5ef87cc0e",
+    "audit_rgbnt201_identity_states49.py": "ead3b2e7d83f0de85ee6c4ecd667931938bb8ba2df07887825af88101e8de512",
+    "launch_rgbnt201_identity_outlet50.py": "51cf22e7dbde9041e59048565b0fd550d06cd7e80b0f0b7accd949e110e32709",
+    "configs/MSVR310/DeMo.yml": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+    "configs/RGBNT100/DeMo.yml": "e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c",
+    "data/datasets/RGBNT100.py": "cef47b0a1dcc9bc434f6c3612e547db41fd8af2b1d7e953323ea80ffb6eb705f",
+    "data/datasets/msvr310.py": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+    "config/defaults.py": "41d6e21de28ffca68104954c52dcba3d0f3c16249980c70107d6c72e1117c6ba",
+    "results/preflight/r201g_normal_priority_complete_intake_20261006.py": "a1ca62bc2fc64f2d3e832c1b0a38d984e206300c2e63b7e13618792c7d5cb680",
+    "analyze_r201g_normal_priority.py": "b72bf19b8aade0c320f84ed0bca7ae763e60241a57a5db4edf8155efccfe6970",
+    "evaluate_identity_coordinate_missing49_stream.py": "ff49b55f61d7483a110d3e51a5b0f0af9045af60d0910ebeb8f4e64c59afa770",
+    "audit_full_official_condition.py": "94ba9a65b399776fadbb7588a0c6bd70c04e569fa0f568729533bfc8ca751121",
+    "results/preflight/full_official_anchor_stream_bridge_20261005.py": "53fd78e3b4ebbd79b6d0a60059e9c297f727ac8a42931b6a5b103e44d7d88d8e",
+    "collect_results.py": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+    "layers/triplet_loss.py": "f502c44bec642bbf72ce6d0f58c9f9a0084beef9cbb451c2d2786bb13f94960a",
+    "run_r201i_primary_margin.py": "954c0af47e36a5c221d443e8d9b6965d749e169dd858b19fb64d78609116869c"
+  },
+  "plan": "results/preflight/r201k_relation_local_pi_plan_20261007.json",
+  "plan_sha256": "bec8cedb659f3125cfe03fb9957056e6e549e0f1afe9b23c48915dc52834f399",
+  "review_request": "results/preflight/r201k_relation_local_pi_review_request_20261007.json",
+  "review_request_sha256": "16c4f94aab50744619bd881333881192630d8654fc13e49c90241d08b80f1a28",
+  "source_integrity": {
+    "new_sources": 3,
+    "declared_parent_sources": 61,
+    "all64_current_SHA_match": true,
+    "plan_request_SHA_match": true,
+    "parent61_match_completed_I_review_manifest": true,
+    "parent_I_review_path": "results/preflight/r201i_primary_margin_source_review_20261006.json",
+    "parent_I_review_sha256": "b4f971fd79c94002b85927f0d75e4fe2dc81b4543db09342793ac15958b48104",
+    "historical_review_use": "Consulted after direct source inspection only for source-lock/provenance cross-check, not as a substitute for this review.",
+    "all_reused_source_bytes_unchanged": true
+  },
+  "reviewed_files": [
+    {
+      "path": "relation_local_identity_outlet.py",
+      "sha256": "c22d550b2618ec64d38c425c360c130e3286eb4cd28ef028dcef660cad9fd307",
+      "expected_sha256": "c22d550b2618ec64d38c425c360c130e3286eb4cd28ef028dcef660cad9fd307",
+      "sha_match": true,
+      "scope": "new",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "run_r201k_relation_local_pi.py",
+      "sha256": "0c3fa388227070ef8818fda2c84a1deb8e2f04070b6870d4ec1b116f647d8b8f",
+      "expected_sha256": "0c3fa388227070ef8818fda2c84a1deb8e2f04070b6870d4ec1b116f647d8b8f",
+      "sha_match": true,
+      "scope": "new",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "launch_r201k_relation_local_pi.py",
+      "sha256": "4fe735369966bcb5cd84050b8a7a3def7a1787c1749ade693ddefe0e380d9f0c",
+      "expected_sha256": "4fe735369966bcb5cd84050b8a7a3def7a1787c1749ade693ddefe0e380d9f0c",
+      "sha_match": true,
+      "scope": "new",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "results/preflight/r201g_other_two_normal_deploy_20261006.py",
+      "sha256": "96085eb825655df311728196c4dbf75e7998bae6dd80bf4a68abfe06704c8bec",
+      "expected_sha256": "96085eb825655df311728196c4dbf75e7998bae6dd80bf4a68abfe06704c8bec",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "targeted_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "run_r201g_normal_priority.py",
+      "sha256": "1ad85d62a1e5ecd12d52b069c58fdaba436ae7ef3ba27e61f3763191b4c6779e",
+      "expected_sha256": "1ad85d62a1e5ecd12d52b069c58fdaba436ae7ef3ba27e61f3763191b4c6779e",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "launch_r201g_normal_priority.py",
+      "sha256": "ef9d9bd8bcfba8c2bcee6a5c52588514d4f71fbe9f48bb75770b6ef55ead0dd1",
+      "expected_sha256": "ef9d9bd8bcfba8c2bcee6a5c52588514d4f71fbe9f48bb75770b6ef55ead0dd1",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "results/preflight/r201g_normal_priority_deploy_20261006.py",
+      "sha256": "d8207423829667c8733b4c851039c4b5a96a955d3bfd98ce89b48a5d7d855a94",
+      "expected_sha256": "d8207423829667c8733b4c851039c4b5a96a955d3bfd98ce89b48a5d7d855a94",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "targeted_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "identity_coordinate_three_dataset.py",
+      "sha256": "de4128c5c5993e0766ba74a700870b13478af44d28440312287b0fe2e32bb415",
+      "expected_sha256": "de4128c5c5993e0766ba74a700870b13478af44d28440312287b0fe2e32bb415",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "run_identity_coordinate_three_dataset.py",
+      "sha256": "dd9b117b3dc7bd733c5d87546ef7e2cfcfcd3d1972df6241f661629313f579b2",
+      "expected_sha256": "dd9b117b3dc7bd733c5d87546ef7e2cfcfcd3d1972df6241f661629313f579b2",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "audit_full_official_normal.py",
+      "sha256": "ee26b0a29bea046db70d4072f88160b3d2ce726451accbd6b90dd44b0a1ee742",
+      "expected_sha256": "ee26b0a29bea046db70d4072f88160b3d2ce726451accbd6b90dd44b0a1ee742",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "launch_identity_coordinate_three_normal.py",
+      "sha256": "05a4c531862215f932be1fe4a20b75c2f691c9a8acac28de1baf75b3d908ac98",
+      "expected_sha256": "05a4c531862215f932be1fe4a20b75c2f691c9a8acac28de1baf75b3d908ac98",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "rgbnt201_projection_probe.py",
+      "sha256": "d6f6e0bddef26f5578818810b1c57415789f4e2e7b88dda8f6af1548eacaf583",
+      "expected_sha256": "d6f6e0bddef26f5578818810b1c57415789f4e2e7b88dda8f6af1548eacaf583",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "original_identity_anchor.py",
+      "sha256": "847b6adf93eb44ff119585e5548e1ef52115bcd59d8e87cdb4735b541d390bcb",
+      "expected_sha256": "847b6adf93eb44ff119585e5548e1ef52115bcd59d8e87cdb4735b541d390bcb",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "common_coordinate_axis.py",
+      "sha256": "0a45146b7e645abc1e8b7d622c1556852855964ea29d7530b449e1c02c8deb5b",
+      "expected_sha256": "0a45146b7e645abc1e8b7d622c1556852855964ea29d7530b449e1c02c8deb5b",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "shared_identity_axis.py",
+      "sha256": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+      "expected_sha256": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "axis_collaboration.py",
+      "sha256": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+      "expected_sha256": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "dual_axis.py",
+      "sha256": "0c6090fe5b8b15cc021bf1809860f0675187288dc2145d0129ce89a5eb78a330",
+      "expected_sha256": "0c6090fe5b8b15cc021bf1809860f0675187288dc2145d0129ce89a5eb78a330",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "targeted_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "scaled_axis_collaboration.py",
+      "sha256": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+      "expected_sha256": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "run_full_official_frozen_anchor_experiment.py",
+      "sha256": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+      "expected_sha256": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "run_shared_identity_experiment.py",
+      "sha256": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+      "expected_sha256": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "targeted_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "diagnose_rgbnt201_projection_probe.py",
+      "sha256": "37ae7b432d2c73f097407d969944f74443ddbf915f0ec74389366de1144228cb",
+      "expected_sha256": "37ae7b432d2c73f097407d969944f74443ddbf915f0ec74389366de1144228cb",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "evaluate_full_official49.py",
+      "sha256": "5db20659af12e248d91b22813517b1e72619483fa73ac06a60423e874a2c9d7b",
+      "expected_sha256": "5db20659af12e248d91b22813517b1e72619483fa73ac06a60423e874a2c9d7b",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "official_training_data.py",
+      "sha256": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+      "expected_sha256": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "experiment_data.py",
+      "sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+      "expected_sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "full_evaluation.py",
+      "sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+      "expected_sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "missing_evaluation.py",
+      "sha256": "e04e16dbb4ec486f28065102b5d7301c68e7d1cef62cdd5fcfa99b3dac222089",
+      "expected_sha256": "e04e16dbb4ec486f28065102b5d7301c68e7d1cef62cdd5fcfa99b3dac222089",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "run_experiment.py",
+      "sha256": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+      "expected_sha256": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "targeted_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "solver/make_optimizer.py",
+      "sha256": "09e8e36c78c78cda75daad52bbc48f77f4dc33b96568a06bc1c193132ffbeafc",
+      "expected_sha256": "09e8e36c78c78cda75daad52bbc48f77f4dc33b96568a06bc1c193132ffbeafc",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "solver/scheduler_factory.py",
+      "sha256": "c5e20bdffec4b5360faa04f823639c8e5fd8672914813fb96148927c9ee19abc",
+      "expected_sha256": "c5e20bdffec4b5360faa04f823639c8e5fd8672914813fb96148927c9ee19abc",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "modeling/make_model.py",
+      "sha256": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+      "expected_sha256": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "modeling/meta_arch.py",
+      "sha256": "f9b93fba00f534debecebcd72f974320cd978e1619f1460674cbfc3afc961eec",
+      "expected_sha256": "f9b93fba00f534debecebcd72f974320cd978e1619f1460674cbfc3afc961eec",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "modeling/moe/AttnMOE.py",
+      "sha256": "91d594c86ba44a5ce9eb843afaba898d5f8b0515b542b2754004c85ca272d3b6",
+      "expected_sha256": "91d594c86ba44a5ce9eb843afaba898d5f8b0515b542b2754004c85ca272d3b6",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "layers/make_loss.py",
+      "sha256": "232ef86081a76665225db4360ea67650230b1d5986818cabc23ce5db36340dec",
+      "expected_sha256": "232ef86081a76665225db4360ea67650230b1d5986818cabc23ce5db36340dec",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "layers/softmax_loss.py",
+      "sha256": "d872eba630685044eda8e507f9e0f6f0e0a42af7e222ed4d8fd4c418d384c518",
+      "expected_sha256": "d872eba630685044eda8e507f9e0f6f0e0a42af7e222ed4d8fd4c418d384c518",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "data/datasets/sampler.py",
+      "sha256": "579b45b767960b7ca8a373808d890493e6ac8d152c0fe13dbe0f4dc02ed9f068",
+      "expected_sha256": "579b45b767960b7ca8a373808d890493e6ac8d152c0fe13dbe0f4dc02ed9f068",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "data/datasets/RGBNT201.py",
+      "sha256": "1a3dda88f26efc2891322e2726c4f3591bfd0c040cdf5c717d0aabc55f349272",
+      "expected_sha256": "1a3dda88f26efc2891322e2726c4f3591bfd0c040cdf5c717d0aabc55f349272",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "utils/reid_evaluation.py",
+      "sha256": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+      "expected_sha256": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "gpu_thermal_execute.py",
+      "sha256": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+      "expected_sha256": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "configs/RGBNT201/DeMo.yml",
+      "sha256": "bfee0de623885a38cce974c1c5d74abf47c54e14852cc266b8f69c70a858c51d",
+      "expected_sha256": "bfee0de623885a38cce974c1c5d74abf47c54e14852cc266b8f69c70a858c51d",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "not_applicable"
+    },
+    {
+      "path": "rgbnt201_identity_outlet.py",
+      "sha256": "ee03a16de0e7f4beb28f4a78a4ab8c16e8f19014bfa4164482d59714e52de784",
+      "expected_sha256": "ee03a16de0e7f4beb28f4a78a4ab8c16e8f19014bfa4164482d59714e52de784",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "run_rgbnt201_identity_outlet.py",
+      "sha256": "803e46e0670c323134d5c2b9f101e34d7ea464d9de37137afa44f21949bfc034",
+      "expected_sha256": "803e46e0670c323134d5c2b9f101e34d7ea464d9de37137afa44f21949bfc034",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "evaluate_rgbnt201_identity_outlet49.py",
+      "sha256": "a2f2a8ead42f4bdd67dcdfdbc22e2b0ec7a3f8fd27f70c232595779a6bcb367c",
+      "expected_sha256": "a2f2a8ead42f4bdd67dcdfdbc22e2b0ec7a3f8fd27f70c232595779a6bcb367c",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "verify_rgbnt201_identity_outlet.py",
+      "sha256": "951784df8a02f543c3df9647ec92c1ba95e0c42af18405ff6440b75dbf857359",
+      "expected_sha256": "951784df8a02f543c3df9647ec92c1ba95e0c42af18405ff6440b75dbf857359",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "launch_rgbnt201_identity_outlet_native.py",
+      "sha256": "5b5c8c494f40d5e6c3d6af6744b344139a21a3bd245d1c2c4a3bfb4c17209f19",
+      "expected_sha256": "5b5c8c494f40d5e6c3d6af6744b344139a21a3bd245d1c2c4a3bfb4c17209f19",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "launch_full_official_frozen_anchor_trial.py",
+      "sha256": "88b1b7388903431ac813e318b77f041e80db9afb1ccc2ee1492920e5c08fb228",
+      "expected_sha256": "88b1b7388903431ac813e318b77f041e80db9afb1ccc2ee1492920e5c08fb228",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "targeted_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "diagnose_full_official_streaming_states.py",
+      "sha256": "f7d0d67ff961090cb728481a27a33a9b3dc10fd1501c47e4968c5cb965544374",
+      "expected_sha256": "f7d0d67ff961090cb728481a27a33a9b3dc10fd1501c47e4968c5cb965544374",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "audit_full_official49.py",
+      "sha256": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+      "expected_sha256": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "audit_shared_identity_states.py",
+      "sha256": "e8cf168db43f36e36a40a66148f209a6b782775942ce7fcbdf9dce439d1fa8d0",
+      "expected_sha256": "e8cf168db43f36e36a40a66148f209a6b782775942ce7fcbdf9dce439d1fa8d0",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "targeted_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "evaluate_rgbnt201_identity_states49.py",
+      "sha256": "085702c72189999d65375c497c4c635f5eb1c5c920139756c31e56f5ef87cc0e",
+      "expected_sha256": "085702c72189999d65375c497c4c635f5eb1c5c920139756c31e56f5ef87cc0e",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "audit_rgbnt201_identity_states49.py",
+      "sha256": "ead3b2e7d83f0de85ee6c4ecd667931938bb8ba2df07887825af88101e8de512",
+      "expected_sha256": "ead3b2e7d83f0de85ee6c4ecd667931938bb8ba2df07887825af88101e8de512",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "launch_rgbnt201_identity_outlet50.py",
+      "sha256": "51cf22e7dbde9041e59048565b0fd550d06cd7e80b0f0b7accd949e110e32709",
+      "expected_sha256": "51cf22e7dbde9041e59048565b0fd550d06cd7e80b0f0b7accd949e110e32709",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "configs/MSVR310/DeMo.yml",
+      "sha256": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+      "expected_sha256": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "not_applicable"
+    },
+    {
+      "path": "configs/RGBNT100/DeMo.yml",
+      "sha256": "e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c",
+      "expected_sha256": "e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "not_applicable"
+    },
+    {
+      "path": "data/datasets/RGBNT100.py",
+      "sha256": "cef47b0a1dcc9bc434f6c3612e547db41fd8af2b1d7e953323ea80ffb6eb705f",
+      "expected_sha256": "cef47b0a1dcc9bc434f6c3612e547db41fd8af2b1d7e953323ea80ffb6eb705f",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "data/datasets/msvr310.py",
+      "sha256": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+      "expected_sha256": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "config/defaults.py",
+      "sha256": "41d6e21de28ffca68104954c52dcba3d0f3c16249980c70107d6c72e1117c6ba",
+      "expected_sha256": "41d6e21de28ffca68104954c52dcba3d0f3c16249980c70107d6c72e1117c6ba",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "targeted_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "results/preflight/r201g_normal_priority_complete_intake_20261006.py",
+      "sha256": "a1ca62bc2fc64f2d3e832c1b0a38d984e206300c2e63b7e13618792c7d5cb680",
+      "expected_sha256": "a1ca62bc2fc64f2d3e832c1b0a38d984e206300c2e63b7e13618792c7d5cb680",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "targeted_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "analyze_r201g_normal_priority.py",
+      "sha256": "b72bf19b8aade0c320f84ed0bca7ae763e60241a57a5db4edf8155efccfe6970",
+      "expected_sha256": "b72bf19b8aade0c320f84ed0bca7ae763e60241a57a5db4edf8155efccfe6970",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "targeted_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "evaluate_identity_coordinate_missing49_stream.py",
+      "sha256": "ff49b55f61d7483a110d3e51a5b0f0af9045af60d0910ebeb8f4e64c59afa770",
+      "expected_sha256": "ff49b55f61d7483a110d3e51a5b0f0af9045af60d0910ebeb8f4e64c59afa770",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "audit_full_official_condition.py",
+      "sha256": "94ba9a65b399776fadbb7588a0c6bd70c04e569fa0f568729533bfc8ca751121",
+      "expected_sha256": "94ba9a65b399776fadbb7588a0c6bd70c04e569fa0f568729533bfc8ca751121",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "results/preflight/full_official_anchor_stream_bridge_20261005.py",
+      "sha256": "53fd78e3b4ebbd79b6d0a60059e9c297f727ac8a42931b6a5b103e44d7d88d8e",
+      "expected_sha256": "53fd78e3b4ebbd79b6d0a60059e9c297f727ac8a42931b6a5b103e44d7d88d8e",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "targeted_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "collect_results.py",
+      "sha256": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+      "expected_sha256": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "SHA_and_AST_only",
+      "AST": "PASS"
+    },
+    {
+      "path": "layers/triplet_loss.py",
+      "sha256": "f502c44bec642bbf72ce6d0f58c9f9a0084beef9cbb451c2d2786bb13f94960a",
+      "expected_sha256": "f502c44bec642bbf72ce6d0f58c9f9a0084beef9cbb451c2d2786bb13f94960a",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    },
+    {
+      "path": "run_r201i_primary_margin.py",
+      "sha256": "954c0af47e36a5c221d443e8d9b6965d749e169dd858b19fb64d78609116869c",
+      "expected_sha256": "954c0af47e36a5c221d443e8d9b6965d749e169dd858b19fb64d78609116869c",
+      "sha_match": true,
+      "scope": "declared_parent",
+      "reading": "full_content",
+      "AST": "PASS"
+    }
+  ],
+  "read_coverage": {
+    "full_content_files": [
+      "relation_local_identity_outlet.py",
+      "run_r201k_relation_local_pi.py",
+      "launch_r201k_relation_local_pi.py",
+      "rgbnt201_identity_outlet.py",
+      "identity_coordinate_three_dataset.py",
+      "run_r201i_primary_margin.py",
+      "run_r201g_normal_priority.py",
+      "run_full_official_frozen_anchor_experiment.py",
+      "axis_collaboration.py",
+      "audit_full_official_normal.py",
+      "rgbnt201_projection_probe.py",
+      "original_identity_anchor.py",
+      "shared_identity_axis.py",
+      "gpu_thermal_execute.py",
+      "common_coordinate_axis.py",
+      "scaled_axis_collaboration.py",
+      "full_evaluation.py",
+      "official_training_data.py",
+      "experiment_data.py",
+      "layers/make_loss.py",
+      "layers/triplet_loss.py",
+      "solver/make_optimizer.py",
+      "solver/scheduler_factory.py",
+      "configs/RGBNT201/DeMo.yml",
+      "configs/MSVR310/DeMo.yml",
+      "configs/RGBNT100/DeMo.yml",
+      "audit_full_official49.py",
+      "data/datasets/sampler.py",
+      "evaluate_identity_coordinate_missing49_stream.py"
+    ],
+    "targeted_content_files": {
+      "run_experiment.py": "configuration and shared writer; lines 24-41; imported evaluation/build context only",
+      "launch_full_official_frozen_anchor_trial.py": "save helper and launcher context; lines 1-156 and 196-215",
+      "audit_shared_identity_states.py": "summarize/changes; lines 53-63",
+      "results/preflight/r201g_normal_priority_deploy_20261006.py": "existing source and RAW transfer/ACK pattern; lines 24-110",
+      "results/preflight/full_official_anchor_stream_bridge_20261005.py": "copy_verified; lines 19-27",
+      "analyze_r201g_normal_priority.py": "targeted searches for historical paired orders/parameters and six-metric/group/rescue-harm reduction",
+      "results/preflight/r201g_other_two_normal_deploy_20261006.py": "targeted searches for serial dataset/source/ACK gates",
+      "results/preflight/r201g_normal_priority_complete_intake_20261006.py": "targeted searches for closed-source/text intake and digest verification",
+      "run_shared_identity_experiment.py": "PARTIAL_SETS; line 22",
+      "dual_axis.py": "RELATIONS; line 8",
+      "config/defaults.py": "NO_MARGIN and MARGIN defaults; lines 111 and 141"
+    },
+    "note": "All64 manifest files were read as bytes for SHA; all61 Python files were parsed. Full substantive reading is only claimed for the listed full_content files, including every new file and all seven requested parent sources."
+  },
+  "syntax_checks": {
+    "status": "PASS",
+    "python_files_AST_parsed": 61,
+    "new_python_files_AST_parsed": 3,
+    "parser": "installed uv-managed CPython3.13",
+    "project_module_imports": false,
+    "model_execution": false,
+    "target_environment_importability_proven": false,
+    "unchanged_fuse_AST_subtrees": [
+      "relation_mass is None",
+      "use_m",
+      "use_f",
+      "anchor",
+      "weights",
+      "private",
+      "final normalization"
+    ],
+    "new_class_only_overrides_fuse": true
+  },
+  "parent_I_closed_evidence": [
+    {
+      "dataset": "RGBNT201",
+      "variant": "frequency_shared",
+      "path": "results/r201i_primary_margin_20261006/RGBNT201/training/RGBNT201_r201i_frequency_shared_s42/result.json",
+      "sha256": "5a9fe43ce2f51e696e5c72afb45d4aefd539c56ba8913634dd323590fa0a7f3a",
+      "manifest_match": true,
+      "closed_epochs": 50,
+      "selected_epoch": 31,
+      "parameters": 101236358,
+      "trainable_parameters": 3312262,
+      "descriptor_dim": 5120
+    },
+    {
+      "dataset": "RGBNT201",
+      "variant": "axis_shared",
+      "path": "results/r201i_primary_margin_20261006/RGBNT201/training/RGBNT201_r201i_axis_shared_s42/result.json",
+      "sha256": "9ebed6479980502197690ff16238cbdcaed47f581ae9c761be420652679488eb",
+      "manifest_match": true,
+      "closed_epochs": 50,
+      "selected_epoch": 30,
+      "parameters": 101236358,
+      "trainable_parameters": 3312262,
+      "descriptor_dim": 5120
+    },
+    {
+      "dataset": "MSVR310",
+      "variant": "frequency_shared",
+      "path": "results/r201i_primary_margin_20261006/MSVR310/training/MSVR310_r201i_frequency_shared_s42/result.json",
+      "sha256": "ccee3fe593ec46d3209954b5baf0d510c2857595aa8dfdbf68b6f16375356ced",
+      "manifest_match": true,
+      "closed_epochs": 50,
+      "selected_epoch": 15,
+      "parameters": 100821638,
+      "trainable_parameters": 3123846,
+      "descriptor_dim": 5120
+    },
+    {
+      "dataset": "MSVR310",
+      "variant": "axis_shared",
+      "path": "results/r201i_primary_margin_20261006/MSVR310/training/MSVR310_r201i_axis_shared_s42/result.json",
+      "sha256": "3db76422c92635766ce5299fda5f7d318f9deec6cc7549ef13ce8b85407a4684",
+      "manifest_match": true,
+      "closed_epochs": 50,
+      "selected_epoch": 5,
+      "parameters": 100821638,
+      "trainable_parameters": 3123846,
+      "descriptor_dim": 5120
+    },
+    {
+      "dataset": "RGBNT100",
+      "variant": "frequency_shared",
+      "path": "results/r201i_primary_margin_20261006/RGBNT100/training/RGBNT100_r201i_frequency_shared_s42/result.json",
+      "sha256": "000b571b628c8e0ecd946c11db3178fb8646db88cb314a0d529bc6627b6a652d",
+      "manifest_match": true,
+      "closed_epochs": 50,
+      "selected_epoch": 7,
+      "parameters": 99585158,
+      "trainable_parameters": 1887366,
+      "descriptor_dim": 5120
+    },
+    {
+      "dataset": "RGBNT100",
+      "variant": "axis_shared",
+      "path": "results/r201i_primary_margin_20261006/RGBNT100/training/RGBNT100_r201i_axis_shared_s42/result.json",
+      "sha256": "86bf0ee13fa9404a43131bf5b0979ad24a7abd270ea06469ad5ca3aaa191f313",
+      "manifest_match": true,
+      "closed_epochs": 50,
+      "selected_epoch": 16,
+      "parameters": 99585158,
+      "trainable_parameters": 1887366,
+      "descriptor_dim": 5120
+    }
+  ],
+  "expected_execution": {
+    "dataset_order": [
+      "RGBNT201",
+      "MSVR310",
+      "RGBNT100"
+    ],
+    "native_updates_per_arm": 3,
+    "native_updates_total": 18,
+    "formal_updates_per_pair": {
+      "RGBNT201": 5294,
+      "MSVR310": 1410,
+      "RGBNT100": 12714
+    },
+    "formal_updates_total": 19418,
+    "additional_epochs_total": 300,
+    "teachers": "Per-dataset original DeMo50 seed42 fixed",
+    "expert_seed": 42,
+    "batch": 64,
+    "descriptor_dim": 5120,
+    "physical_gpus": [
+      2,
+      3
+    ],
+    "host": "2026",
+    "maximum_NN": 2
+  },
+  "current_context_as_supplied": {
+    "original_J_receiver_pid": 31604,
+    "original_readonly33400": "INTENTIONALLY_RETIRED_DO_NOT_RESTART",
+    "sole_local_wait_session": 44730,
+    "next_remote_look": "2026-10-07T11:04:34+08:00",
+    "current_processes_independently_polled_by_reviewer": false,
+    "extra_observers_started": 0
+  },
+  "runtime_validation": {
+    "status": "NOT_EXECUTED",
+    "actual_K_native_updates": 0,
+    "actual_K_formal_epochs": 0,
+    "actual_K_formal_updates": 0,
+    "actual_K_GPU_jobs_launched": 0,
+    "actual_K_model_forwards": 0,
+    "runtime_PASS_asserted": false,
+    "native_PASS_asserted": false,
+    "accuracy_PASS_asserted": false,
+    "causal_or_plus2_success_asserted": false,
+    "source_gate": "PASS for the reviewed local normal-stage implementation only; D1 pre-deployment dependencies, actual native gates and later scientific acceptance remain pending."
+  },
+  "operations": {
+    "SSH_calls": 0,
+    "GPU_queries": 0,
+    "training_runs": 0,
+    "model_forwards": 0,
+    "optimizer_updates": 0,
+    "project_module_imports": 0,
+    "source_edits_by_reviewer": 0,
+    "existing_file_edits": 0,
+    "new_observers": 0,
+    "weight_or_raw_deletions": 0,
+    "git_mutations": 0,
+    "only_written_files": [
+      "results/preflight/r201k_relation_local_pi_source_review_20261007.json"
+    ]
+  }
+}

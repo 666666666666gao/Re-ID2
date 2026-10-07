@@ -1,0 +1,443 @@
+{
+  "status": "PREPARED_AST_PASS_REVIEW_PENDING_NOT_DEPLOYED",
+  "created_at": "2026-10-07T09:14:39",
+  "parent": "Completed I seed42, globally broadcast PI; not J loss or a mixture of versions",
+  "objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
+  "acceptance": {
+    "normal": "同一统一方法在三个完整官方训练/query/gallery协议下，mAP与Rank-1分别超过重跑的同协议完整DeMo至少2个百分点；历史fit/dev基线不得直接计算正式涨点；至少3配对种子。",
+    "missing": "完整覆盖49种查询—图库集合条件，预先登记来源不相交、重叠、仅查询缺失、双方缺失等关键组；报告全部正负结果，并与正确屏蔽/同增强/同容量普通专家比较。不得用单个均值或污染基线替代全面证据。",
+    "mechanism": "公平普通专家对照稳定胜出，实际协作在预定义关键组带来可重复净收益，模块必要性由重训消融与逐查询机制证据支撑。",
+    "quantitative_interpretation": "保留原+2/+2内部验收；不额外要求每个模块都+2或在完整DeMo上再提高10点。49条件中的双+2达标数量持续报告，不能冒称全条件通过。",
+    "stability": "冻结结构、损失、超参和预先登记选点规则后做至少3配对种子；按身份统计置信区间。用户明确要求全训练，不再从官方训练身份另切fit/dev；官方benchmark参与checkpoint选择必须披露，不宣称独立未触碰测试。",
+    "reporting": "全部条件报告mAP、mINP、Rank-1/5/10/20、CMC1..50、逐查询AP/INP/首末匹配、身份/相机/场景分组及误伤/恢复；同一实验所有指标固定使用同一完整官方query/gallery mAP最佳checkpoint。"
+  },
+  "problem_anchor": "I has real full RGBNT201 synergy but vehicle normal increments near zero and harmful overlapping-source missing retrieval, e.g. RGBNT100 TIR query to RGB+TIR gallery. Global PI access is confirmed source behavior, not an established cause.",
+  "primary_claims": [
+    {
+      "id": "C1",
+      "status": "HYPOTHESIS_NOT_RESULT",
+      "claim": "Using the matched M_S/F_S evidence for each relation PI can yield useful retrieval correction beyond a global PI broadcast under matched params/5120/budget.",
+      "minimum_evidence": "All3 full-official normal six metrics and fair ordinary expert controls; final all3 mAP/R1+2 and >=3 paired seeds remain required, not inferred from a source/native pass."
+    },
+    {
+      "id": "C2",
+      "status": "HYPOTHESIS_NOT_RESULT",
+      "claim": "Relation-local direct PI access may reduce overlapping-availability harmful fusion.",
+      "minimum_evidence": "Fixed normal-best full49 states, all six metrics/CMC50/groups/paired AP-INP/rescue-harm, especially q_T_g_RT; no end-to-end source-independence or disjoint-source compatibility claim."
+    }
+  ],
+  "anti_claims": [
+    "No new expert/parameter/descriptor dimension or modified loss/teacher/augmentation/sampler/selection can explain the change.",
+    "Native input isolation is not a retrieval gain, semantic disentanglement, causal proof or a calibrated contribution predictor.",
+    "Do not hide negative seeds, late regression or adverse missing groups; do not mix checkpoints/versions."
+  ],
+  "sole_changed_factor": {
+    "old": "Norm512(PI([mean_S M_S, global_F])) -> identical vector broadcast to every eligible S",
+    "new": "Norm512(PI([M_S, F_S])) -> one vector per S with the SAME 1024->64->512 parameter tensors",
+    "source_of_F_S": "Existing router.by_relation(f1) pools modalities in S, then existing joint-route conditional-band pooling.",
+    "still_globally_coupled": [
+      "cross conditions",
+      "contribution/gates",
+      "joint route",
+      "final global5120 normalization"
+    ]
+  },
+  "unchanged": [
+    "I primary final-unit5120 hinge .3; all auxiliary M/F/base/common soft Triplet, CE, weights and contribution targets",
+    "Partial objectives0 with same partial images/forwards/BN2/mining/two backwards",
+    "Frozen original DeMo50 seed42 per dataset, new expert/head/Adam50, same RNG initialization and B64/P-K",
+    "FFT bands, M/F experts and messages, psi/route, PM/PF, gamma/gates, anchors/weights/eligibility",
+    "00 definition and 10/01 formulas given the SAME current tensors and weights; trained K single-state scores need not equal trained I scores"
+  ],
+  "native_required": {
+    "real_Adam_updates_per_arm": 3,
+    "arms": 2,
+    "all_datasets_native_updates": 18,
+    "amp_skipped_steps": 0,
+    "strict_reload_equal": true,
+    "third_update_all_trainable_nonzero": true,
+    "frozen_identity_equal": true,
+    "paired_sampler_equal": true,
+    "descriptor_shape": [
+      8,
+      5120
+    ],
+    "native_training_PI_shapes": [
+      [
+        64,
+        7,
+        1024
+      ],
+      [
+        64,
+        7,
+        512
+      ]
+    ],
+    "pi_outside_slot_invariance": "Perturb other PI context rows; each retained normalized PI_S vector must stay exactly equal BEFORE final global5120 normalization. No RNG or BN in this probe.",
+    "state10_01_parity": "Compare new and original fuse on same current call inputs/weights, no-grad original projection has no BN/dropout.",
+    "primary_hinge_definition_gradient": "Reuse actual I primary checks; aux remains original soft.",
+    "native_only_probes": true
+  },
+  "run_order": [
+    "Wait for original J all3 normal/GT/raw/CPU terminal, without relaunching it",
+    "Fresh Astra/max source review PASS, then actual capacity/protected-anchor checks and reviewed deployment",
+    "RGBNT201 paired native6 -> two full50 -> installed GT/local raw SHA ACK/CPU",
+    "MSVR310 paired native6 -> two full50 -> installed GT/local raw SHA ACK/CPU",
+    "RGBNT100 paired native6 -> two full50 -> installed GT/local raw SHA ACK/CPU",
+    "After all3 normal, fixed best full49 with K builder; >=3 paired seed/full-pipeline confirmation and necessary retrained ablations if mechanism merits continuation"
+  ],
+  "normal_runs": [
+    {
+      "dataset": "RGBNT201",
+      "train": 3951,
+      "query": 836,
+      "gallery": 836,
+      "updates_each": 2647,
+      "K": 8,
+      "batch": 64,
+      "seed": 42,
+      "teacher_seed": 42,
+      "variants": [
+        "frequency_shared",
+        "axis_shared"
+      ],
+      "extra_epochs_each": 50,
+      "teacher_epochs": 50
+    },
+    {
+      "dataset": "MSVR310",
+      "train": 1032,
+      "query": 591,
+      "gallery": 1055,
+      "updates_each": 705,
+      "K": 4,
+      "batch": 64,
+      "seed": 42,
+      "teacher_seed": 42,
+      "variants": [
+        "frequency_shared",
+        "axis_shared"
+      ],
+      "extra_epochs_each": 50,
+      "teacher_epochs": 50
+    },
+    {
+      "dataset": "RGBNT100",
+      "train": 8675,
+      "query": 1715,
+      "gallery": 8575,
+      "updates_each": 6357,
+      "K": 16,
+      "batch": 64,
+      "seed": 42,
+      "teacher_seed": 42,
+      "variants": [
+        "frequency_shared",
+        "axis_shared"
+      ],
+      "extra_epochs_each": 50,
+      "teacher_epochs": 50
+    }
+  ],
+  "comparison": "Original DeMo50, I ordinary/global, I dual/global, K ordinary/local, K dual/local; old normal and K partial sets/orders must match exactly. I/K budgets100; original50 not equal total budget.",
+  "metrics": [
+    "mAP",
+    "mINP",
+    "Rank-1",
+    "Rank-5",
+    "Rank-10",
+    "Rank-20",
+    "CMC1..50",
+    "per-query AP/INP/first-last positive",
+    "identity-camera-scene",
+    "rescue/harm",
+    "best and E50/full curves",
+    "params/effective trainable/descriptor dimensions/real latency-memory-throughput when verified"
+  ],
+  "selection": "Normal full official query/gallery mAP maximum, earliest tie; use same fixed checkpoint for every metric and later49; disclose benchmark epoch/seed selection.",
+  "baseline_families": [
+    "complete original DeMo",
+    "same-capacity mixed-source ordinary experts (historical frequency_shared name)",
+    "structured dual-axis experts"
+  ],
+  "decision_rules": {
+    "native_failure": "Stop before formal and inspect actual failure; fresh rescue review as applicable, do not relax zero-skip/reload/GT/data gates.",
+    "normal_failure": "Retain all3 normal negatives/best-last; no +2/novelty/robustness claim; use evidence to revise next factor.",
+    "main_success": "Only actual uniform all3 plus2 mAP/R1, fair ordinary control/stability/mechanism/missing and reporting requirements can complete goal."
+  },
+  "full49_groups": [
+    {
+      "id": "normal",
+      "definition": "A=B=RNT",
+      "conditions": 1
+    },
+    {
+      "id": "same_availability",
+      "definition": "A=B",
+      "conditions": 7
+    },
+    {
+      "id": "overlap_mismatch",
+      "definition": "A!=B且A∩B非空",
+      "conditions": 30
+    },
+    {
+      "id": "source_disjoint",
+      "definition": "A∩B为空",
+      "conditions": 12
+    },
+    {
+      "id": "partial_query_full_gallery",
+      "definition": "A!=RNT且B=RNT",
+      "conditions": 6
+    },
+    {
+      "id": "both_partial",
+      "definition": "A!=RNT且B!=RNT",
+      "conditions": 36
+    }
+  ],
+  "critical_missing_case": {
+    "status": "CLOSED_I_CRITICAL_OVERLAPPING_MISSING_CASE_AND_SOURCE_FACT",
+    "observed_at": "2026-10-07T07:50:47",
+    "condition": {
+      "dataset": "RGBNT100",
+      "condition": "q_T_g_RT",
+      "improved": "I_axis_shared_s42/11",
+      "reference": "I_axis_shared_s42/00",
+      "mAP": "-1.8079579001917097",
+      "mINP": "0.38270462870136157",
+      "Rank-1": "-8.5131195335277",
+      "Rank-5": "-9.50437317784256",
+      "Rank-10": "-9.504373177842552",
+      "Rank-20": "-7.521865889212833",
+      "rescued": "48",
+      "harmed": "194",
+      "AP_improved": "582",
+      "AP_worsened": "1110",
+      "both_plus2": "False"
+    },
+    "installed_query_count": 1715,
+    "source_overlap": "TIR present on both sides; not one of12 disjoint tie cells",
+    "source_fact": {
+      "path": "rgbnt201_identity_outlet.py",
+      "sha256": "ee03a16de0e7f4beb28f4a78a4ab8c16e8f19014bfa4164482d59714e52de784",
+      "lines": [
+        49,
+        50
+      ],
+      "behavior": "PI reads all pooled modality relations and pooled frequency then repeats same projected interaction into all eligible relation slots. PM/PF remain per-relation; a T slot PI can depend on other available-source evidence. This describes tensor access, not measured causal contamination."
+    },
+    "hypothesis": "An availability change may alter a global PI message inserted into overlapping private identity coordinates; test before claiming cause.",
+    "next_decision": "Finish existing J normal201/MSVR/100 first, keep source frozen. If considering a PI repair later, isolate global broadcast versus relation-specific PI using same tensors/parameter budget and matched ordinary control; fresh plan/source review/native/full50 required. Do not disable missing experts or count baseline00 fallback as goal achievement; no implementation/NN for this hypothesis now.",
+    "new_neural_calls": 0,
+    "new_optimizer_updates": 0
+  },
+  "critical_case_source_sha256": "16720d90bb158ea8651011320f069b2051027c544f762c5e52a34d47d2e43a07",
+  "parent_actual": {
+    "RGBNT201": {
+      "frequency_shared": {
+        "selected_epoch": 31,
+        "six_metrics": {
+          "mAP": 76.06171640319826,
+          "mINP": 63.00747975252744,
+          "Rank-1": 80.622009569378,
+          "Rank-5": 89.71291866028707,
+          "Rank-10": 93.77990430622009,
+          "Rank-20": 95.45454545454545
+        },
+        "parameters": 101236358,
+        "trainable_parameters": 3312262,
+        "descriptor_dim": 5120,
+        "source_file": "results/r201i_primary_margin_20261006/RGBNT201/training/RGBNT201_r201i_frequency_shared_s42/result.json",
+        "source_sha256": "5a9fe43ce2f51e696e5c72afb45d4aefd539c56ba8913634dd323590fa0a7f3a"
+      },
+      "axis_shared": {
+        "selected_epoch": 30,
+        "six_metrics": {
+          "mAP": 79.58100610693934,
+          "mINP": 66.09674018873324,
+          "Rank-1": 84.56937799043062,
+          "Rank-5": 92.34449760765551,
+          "Rank-10": 94.25837320574163,
+          "Rank-20": 95.93301435406698
+        },
+        "parameters": 101236358,
+        "trainable_parameters": 3312262,
+        "descriptor_dim": 5120,
+        "source_file": "results/r201i_primary_margin_20261006/RGBNT201/training/RGBNT201_r201i_axis_shared_s42/result.json",
+        "source_sha256": "9ebed6479980502197690ff16238cbdcaed47f581ae9c761be420652679488eb"
+      }
+    },
+    "MSVR310": {
+      "frequency_shared": {
+        "selected_epoch": 15,
+        "six_metrics": {
+          "mAP": 47.237814977555246,
+          "mINP": 23.62984991278797,
+          "Rank-1": 63.7901861252115,
+          "Rank-5": 80.71065989847716,
+          "Rank-10": 84.77157360406092,
+          "Rank-20": 89.84771573604061
+        },
+        "parameters": 100821638,
+        "trainable_parameters": 3123846,
+        "descriptor_dim": 5120,
+        "source_file": "results/r201i_primary_margin_20261006/MSVR310/training/MSVR310_r201i_frequency_shared_s42/result.json",
+        "source_sha256": "ccee3fe593ec46d3209954b5baf0d510c2857595aa8dfdbf68b6f16375356ced"
+      },
+      "axis_shared": {
+        "selected_epoch": 5,
+        "six_metrics": {
+          "mAP": 47.22060784085766,
+          "mINP": 23.555108520124353,
+          "Rank-1": 63.95939086294417,
+          "Rank-5": 80.03384094754654,
+          "Rank-10": 84.77157360406092,
+          "Rank-20": 90.01692047377327
+        },
+        "parameters": 100821638,
+        "trainable_parameters": 3123846,
+        "descriptor_dim": 5120,
+        "source_file": "results/r201i_primary_margin_20261006/MSVR310/training/MSVR310_r201i_axis_shared_s42/result.json",
+        "source_sha256": "3db76422c92635766ce5299fda5f7d318f9deec6cc7549ef13ce8b85407a4684"
+      }
+    },
+    "RGBNT100": {
+      "frequency_shared": {
+        "selected_epoch": 7,
+        "six_metrics": {
+          "mAP": 85.78359603127801,
+          "mINP": 61.854369433644585,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.31778425655978,
+          "Rank-20": 97.72594752186589
+        },
+        "parameters": 99585158,
+        "trainable_parameters": 1887366,
+        "descriptor_dim": 5120,
+        "source_file": "results/r201i_primary_margin_20261006/RGBNT100/training/RGBNT100_r201i_frequency_shared_s42/result.json",
+        "source_sha256": "000b571b628c8e0ecd946c11db3178fb8646db88cb314a0d529bc6627b6a652d"
+      },
+      "axis_shared": {
+        "selected_epoch": 16,
+        "six_metrics": {
+          "mAP": 86.05449246385042,
+          "mINP": 62.06403379907489,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.14285714285714,
+          "Rank-10": 97.43440233236151,
+          "Rank-20": 97.78425655976677
+        },
+        "parameters": 99585158,
+        "trainable_parameters": 1887366,
+        "descriptor_dim": 5120,
+        "source_file": "results/r201i_primary_margin_20261006/RGBNT100/training/RGBNT100_r201i_axis_shared_s42/result.json",
+        "source_sha256": "86bf0ee13fa9404a43131bf5b0979ad24a7abd270ea06469ad5ca3aaa191f313"
+      }
+    }
+  },
+  "deployment_constraints": {
+    "host": "2026",
+    "physical_gpus": [
+      2,
+      3
+    ],
+    "max_NN": 2,
+    "temperature_power_queries_or_limits": false,
+    "estimated_two_gpu_normal_wall_hours": 3.62,
+    "estimated_GPU_hours_upper": 7.25,
+    "estimate_excludes_native_GT_IO": true,
+    "check_capacity_before_deploy": true,
+    "only_verified_own_unused_weights_retirement": true,
+    "all_unique_current_raw_retained": true,
+    "original_anchor_Ibest_protected": true,
+    "local_raw_size_SHA_ACK_before_remote_clear": true
+  },
+  "remaining_limits": [
+    "Private5120 support still disjoint for twelve source-disjoint combinations: no new common coordinate or matching protocol; tie changes are not identity retrieval.",
+    "This source currently seed42 only. Conditional fixed-teacher expert repeats alone do not establish full-pipeline robustness; independently paired baseline/teacher/student seed implementation and runs remain needed.",
+    "Frozen input-isolation probes verify direct PI access only, not downstream semantic independence or accuracy."
+  ],
+  "current_neural_context": {
+    "original_J_receiver_pid": 31604,
+    "original_J100_pending": true,
+    "original_readonly33400_intentionally_retired": true,
+    "local_wait_session": 44730,
+    "first_remote_look": "2026-10-07T11:04:34",
+    "K_native_updates": 0,
+    "K_formal_epochs": 0,
+    "K_GPU_jobs_launched": 0
+  },
+  "sources_sha256": {
+    "relation_local_identity_outlet.py": "c22d550b2618ec64d38c425c360c130e3286eb4cd28ef028dcef660cad9fd307",
+    "run_r201k_relation_local_pi.py": "0c3fa388227070ef8818fda2c84a1deb8e2f04070b6870d4ec1b116f647d8b8f",
+    "launch_r201k_relation_local_pi.py": "4fe735369966bcb5cd84050b8a7a3def7a1787c1749ade693ddefe0e380d9f0c"
+  },
+  "declared_parent_dependency_manifest_sha256": {
+    "results/preflight/r201g_other_two_normal_deploy_20261006.py": "96085eb825655df311728196c4dbf75e7998bae6dd80bf4a68abfe06704c8bec",
+    "run_r201g_normal_priority.py": "1ad85d62a1e5ecd12d52b069c58fdaba436ae7ef3ba27e61f3763191b4c6779e",
+    "launch_r201g_normal_priority.py": "ef9d9bd8bcfba8c2bcee6a5c52588514d4f71fbe9f48bb75770b6ef55ead0dd1",
+    "results/preflight/r201g_normal_priority_deploy_20261006.py": "d8207423829667c8733b4c851039c4b5a96a955d3bfd98ce89b48a5d7d855a94",
+    "identity_coordinate_three_dataset.py": "de4128c5c5993e0766ba74a700870b13478af44d28440312287b0fe2e32bb415",
+    "run_identity_coordinate_three_dataset.py": "dd9b117b3dc7bd733c5d87546ef7e2cfcfcd3d1972df6241f661629313f579b2",
+    "audit_full_official_normal.py": "ee26b0a29bea046db70d4072f88160b3d2ce726451accbd6b90dd44b0a1ee742",
+    "launch_identity_coordinate_three_normal.py": "05a4c531862215f932be1fe4a20b75c2f691c9a8acac28de1baf75b3d908ac98",
+    "rgbnt201_projection_probe.py": "d6f6e0bddef26f5578818810b1c57415789f4e2e7b88dda8f6af1548eacaf583",
+    "original_identity_anchor.py": "847b6adf93eb44ff119585e5548e1ef52115bcd59d8e87cdb4735b541d390bcb",
+    "common_coordinate_axis.py": "0a45146b7e645abc1e8b7d622c1556852855964ea29d7530b449e1c02c8deb5b",
+    "shared_identity_axis.py": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "dual_axis.py": "0c6090fe5b8b15cc021bf1809860f0675187288dc2145d0129ce89a5eb78a330",
+    "scaled_axis_collaboration.py": "0db085f891653cdca1b821a04e4bd019ff644edf42a481be57bd818abafb3f30",
+    "run_full_official_frozen_anchor_experiment.py": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+    "run_shared_identity_experiment.py": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+    "diagnose_rgbnt201_projection_probe.py": "37ae7b432d2c73f097407d969944f74443ddbf915f0ec74389366de1144228cb",
+    "evaluate_full_official49.py": "5db20659af12e248d91b22813517b1e72619483fa73ac06a60423e874a2c9d7b",
+    "official_training_data.py": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "missing_evaluation.py": "e04e16dbb4ec486f28065102b5d7301c68e7d1cef62cdd5fcfa99b3dac222089",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "solver/make_optimizer.py": "09e8e36c78c78cda75daad52bbc48f77f4dc33b96568a06bc1c193132ffbeafc",
+    "solver/scheduler_factory.py": "c5e20bdffec4b5360faa04f823639c8e5fd8672914813fb96148927c9ee19abc",
+    "modeling/make_model.py": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+    "modeling/meta_arch.py": "f9b93fba00f534debecebcd72f974320cd978e1619f1460674cbfc3afc961eec",
+    "modeling/moe/AttnMOE.py": "91d594c86ba44a5ce9eb843afaba898d5f8b0515b542b2754004c85ca272d3b6",
+    "layers/make_loss.py": "232ef86081a76665225db4360ea67650230b1d5986818cabc23ce5db36340dec",
+    "layers/softmax_loss.py": "d872eba630685044eda8e507f9e0f6f0e0a42af7e222ed4d8fd4c418d384c518",
+    "data/datasets/sampler.py": "579b45b767960b7ca8a373808d890493e6ac8d152c0fe13dbe0f4dc02ed9f068",
+    "data/datasets/RGBNT201.py": "1a3dda88f26efc2891322e2726c4f3591bfd0c040cdf5c717d0aabc55f349272",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+    "gpu_thermal_execute.py": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+    "configs/RGBNT201/DeMo.yml": "bfee0de623885a38cce974c1c5d74abf47c54e14852cc266b8f69c70a858c51d",
+    "rgbnt201_identity_outlet.py": "ee03a16de0e7f4beb28f4a78a4ab8c16e8f19014bfa4164482d59714e52de784",
+    "run_rgbnt201_identity_outlet.py": "803e46e0670c323134d5c2b9f101e34d7ea464d9de37137afa44f21949bfc034",
+    "evaluate_rgbnt201_identity_outlet49.py": "a2f2a8ead42f4bdd67dcdfdbc22e2b0ec7a3f8fd27f70c232595779a6bcb367c",
+    "verify_rgbnt201_identity_outlet.py": "951784df8a02f543c3df9647ec92c1ba95e0c42af18405ff6440b75dbf857359",
+    "launch_rgbnt201_identity_outlet_native.py": "5b5c8c494f40d5e6c3d6af6744b344139a21a3bd245d1c2c4a3bfb4c17209f19",
+    "launch_full_official_frozen_anchor_trial.py": "88b1b7388903431ac813e318b77f041e80db9afb1ccc2ee1492920e5c08fb228",
+    "diagnose_full_official_streaming_states.py": "f7d0d67ff961090cb728481a27a33a9b3dc10fd1501c47e4968c5cb965544374",
+    "audit_full_official49.py": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+    "audit_shared_identity_states.py": "e8cf168db43f36e36a40a66148f209a6b782775942ce7fcbdf9dce439d1fa8d0",
+    "evaluate_rgbnt201_identity_states49.py": "085702c72189999d65375c497c4c635f5eb1c5c920139756c31e56f5ef87cc0e",
+    "audit_rgbnt201_identity_states49.py": "ead3b2e7d83f0de85ee6c4ecd667931938bb8ba2df07887825af88101e8de512",
+    "launch_rgbnt201_identity_outlet50.py": "51cf22e7dbde9041e59048565b0fd550d06cd7e80b0f0b7accd949e110e32709",
+    "configs/MSVR310/DeMo.yml": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+    "configs/RGBNT100/DeMo.yml": "e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c",
+    "data/datasets/RGBNT100.py": "cef47b0a1dcc9bc434f6c3612e547db41fd8af2b1d7e953323ea80ffb6eb705f",
+    "data/datasets/msvr310.py": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+    "config/defaults.py": "41d6e21de28ffca68104954c52dcba3d0f3c16249980c70107d6c72e1117c6ba",
+    "results/preflight/r201g_normal_priority_complete_intake_20261006.py": "a1ca62bc2fc64f2d3e832c1b0a38d984e206300c2e63b7e13618792c7d5cb680",
+    "analyze_r201g_normal_priority.py": "b72bf19b8aade0c320f84ed0bca7ae763e60241a57a5db4edf8155efccfe6970",
+    "evaluate_identity_coordinate_missing49_stream.py": "ff49b55f61d7483a110d3e51a5b0f0af9045af60d0910ebeb8f4e64c59afa770",
+    "audit_full_official_condition.py": "94ba9a65b399776fadbb7588a0c6bd70c04e569fa0f568729533bfc8ca751121",
+    "results/preflight/full_official_anchor_stream_bridge_20261005.py": "53fd78e3b4ebbd79b6d0a60059e9c297f727ac8a42931b6a5b103e44d7d88d8e",
+    "collect_results.py": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+    "layers/triplet_loss.py": "f502c44bec642bbf72ce6d0f58c9f9a0084beef9cbb451c2d2786bb13f94960a",
+    "run_r201i_primary_margin.py": "954c0af47e36a5c221d443e8d9b6965d749e169dd858b19fb64d78609116869c"
+  },
+  "output_policy": "One human handoff docs/实验交接.md mirrored Desktop/26/27; machine plan/review artifacts here replace additional human planning documents."
+}
