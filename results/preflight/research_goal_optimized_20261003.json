@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-07T08:34:47",
+  "updated_at": "2026-10-07T08:42:06",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -12400,6 +12400,24 @@
       "formal_three_datasets_complete": false,
       "missing_evaluated": false,
       "goal": "ACTIVE_UNMET"
+    },
+    "R201J_RGBNT100_near_end_watch": {
+      "status": "ACTUAL_RGBNT100_NEAR_END_SCHEDULE_AND_LOCAL_RECEIVER_WAIT_STARTED",
+      "started": "2026-10-07T08:39:30",
+      "original_driver_pid": 31604,
+      "original_driver_start": "2026-10-07T07:27:00",
+      "retired_readonly_observer_pid": 33400,
+      "retired_observer_start": "2026-10-07T07:33:24",
+      "observer_intentionally_retired": true,
+      "reason": "User requested estimated near-end observations rather than unnecessary repeated queries in a long phase",
+      "native_RGBNT100_started": "2026-10-07T08:32:52",
+      "native_updates_total": 18,
+      "measured_previous_RGBNT100_ordinary50_seconds": 9402.456776618958,
+      "planned_first_look": "2026-10-07T11:04:34",
+      "training_restarted": false,
+      "new_neural_calls": 0,
+      "new_optimizer_updates": 0,
+      "native_local_wait_session_id": 44730
     }
   },
   "decision_rules": [
@@ -12426,7 +12444,7 @@
   ],
   "next_action": {
     "milestone": "PREPARE_NORMAL_INPUT_CANDIDATE_FROM_CLOSED_CONTROL_EVIDENCE",
-    "status": "J_201_AND_MSVR_FULL50_GT_RAW_CPU_COMPLETE_CONTINUE_RGBNT100",
+    "status": "J_TWO_NORMAL_DATASETS_CLOSED_RGBNT100_RUNNING_WAIT_NEAR_END",
     "action": "原31604继续J三集正常对照：201约40min、MSVR约21min、100约157min，每对Native3真实更新后正式50/安装GT/本地raw ACK/CPU读出，完成全部正常再考虑固定best49。仅2026物理2/3最多2NN，不重复训练/observer。I三seed与完整49已完成但goal仍未达；J只有native，不作成绩或稳定性主张。",
     "hardware_dependency": {
       "host": "2026",
@@ -12441,7 +12459,7 @@
     },
     "existing_M8_closeout": "ACTUAL_COMPLETE_NATIVE52604_EXIT0_THREE50_147FROZEN882STATES_LOCAL_RAW_VERIFIED",
     "pending_missing_diagnostic": "Finish current original J three-normal queue first. I RGB100 T→RT11−00 genuine overlapping harm:−1.807958MAP/−8.513120R1,48rescues194harms. PI currently pools globals then broadcasts to legal slots; relation-specific PI is only a future single-factor hypothesis, notimplemented/run and notrootcause. Preserve full scope; do not disable proper-input experts or substitute base00 to redefine success.",
-    "current_rule": "Continue the existing receiver31604 and observer33400. Complete RGBNT100 normal/GT/local SHA ACK/CPU before full missing49. Preserve I three-seed best42 and all negative results; no source edits or duplicate training."
+    "current_rule": "Original NN receiver31604 continues unchanged. Own readonly observer33400 was intentionally retired to honor near-end timing. Resume SAME local OS receiver wait44730 in180-300second chunks; first look11:04:34 or actual receiver exit, then inspect original receipts/terminal. No duplicate training/observer/intake. Complete RGBNT100 normal/GT/raw/CPU before missing49; uniform all3+2 objective stays active."
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
   "user_resumption": {
