@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-08T00:36:46",
+  "updated_at": "2026-10-08T01:25:14",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -41383,6 +41383,555 @@
       "new_neural_calls": 0,
       "new_optimizer_updates": 0,
       "limits": "One weak dataset/seed42; L only NUM_INSTANCE8 versus K per-dataset4/16, both positive multiplicity and negative identity pool and updates differ. All50 epochs, fullofficial/benchmark-selected earliestmAP/same6/all49later. Frozen same originalDeMo42 teacher, architecture/loss/params/5120 unchanged; ordinary/axis L matched actualupdate/order budget. Original50 versus two-stage100 disclosed, historical frequency name is mixed-source ordinary. CPU checks actual GT audits; no guaranteed +2/causality/novelty/all3/missing/wholepipeline repeats."
+    },
+    "L_closed_training_primary_and_view_diagnostics": {
+      "primary": {
+        "status": "ACTUAL_CLOSED_MSVR_K_L_PRIMARY_ACTIVITY_CPU_READOUT",
+        "recorded_at": "2026-10-08T00:48:56",
+        "dataset": "MSVR310",
+        "expert_seed": 42,
+        "formal_models": 4,
+        "total_actual_batch_rows": 3410,
+        "windows": [
+          {
+            "model": "K_frequency_shared",
+            "NUM_INSTANCE": 4,
+            "window": "all",
+            "first_epoch": 1,
+            "last_epoch": 50,
+            "batches": 705,
+            "primary_loss_zero_batches": 0,
+            "primary_loss_zero_fraction": 0.0,
+            "primary_loss_mean": 0.03565844021116694,
+            "primary_violation_mean": 33.695035460992905,
+            "total_loss_mean": 2.0061919624923816,
+            "epoch_last_mAP": 46.77587819218972,
+            "epoch_last_Rank1": 63.28257191201354
+          },
+          {
+            "model": "K_frequency_shared",
+            "NUM_INSTANCE": 4,
+            "window": "first5",
+            "first_epoch": 1,
+            "last_epoch": 5,
+            "batches": 71,
+            "primary_loss_zero_batches": 0,
+            "primary_loss_zero_fraction": 0.0,
+            "primary_loss_mean": 0.04778154071053149,
+            "primary_violation_mean": 38.816901408450704,
+            "total_loss_mean": 3.1625714234902826,
+            "epoch_last_mAP": 47.21613500814075,
+            "epoch_last_Rank1": 63.95939086294417
+          },
+          {
+            "model": "K_frequency_shared",
+            "NUM_INSTANCE": 4,
+            "window": "last10",
+            "first_epoch": 41,
+            "last_epoch": 50,
+            "batches": 141,
+            "primary_loss_zero_batches": 0,
+            "primary_loss_zero_fraction": 0.0,
+            "primary_loss_mean": 0.04072313651389687,
+            "primary_violation_mean": 33.98581560283688,
+            "total_loss_mean": 1.9429245908209618,
+            "epoch_last_mAP": 46.77587819218972,
+            "epoch_last_Rank1": 63.28257191201354
+          },
+          {
+            "model": "K_axis_shared",
+            "NUM_INSTANCE": 4,
+            "window": "all",
+            "first_epoch": 1,
+            "last_epoch": 50,
+            "batches": 705,
+            "primary_loss_zero_batches": 0,
+            "primary_loss_zero_fraction": 0.0,
+            "primary_loss_mean": 0.028465587966778175,
+            "primary_violation_mean": 27.00851063829787,
+            "total_loss_mean": 2.0020641840941518,
+            "epoch_last_mAP": 43.198921153051494,
+            "epoch_last_Rank1": 60.06768189509306
+          },
+          {
+            "model": "K_axis_shared",
+            "NUM_INSTANCE": 4,
+            "window": "first5",
+            "first_epoch": 1,
+            "last_epoch": 5,
+            "batches": 71,
+            "primary_loss_zero_batches": 0,
+            "primary_loss_zero_fraction": 0.0,
+            "primary_loss_mean": 0.047698680062214255,
+            "primary_violation_mean": 38.74647887323944,
+            "total_loss_mean": 3.1636751033890413,
+            "epoch_last_mAP": 47.216806399191995,
+            "epoch_last_Rank1": 63.95939086294417
+          },
+          {
+            "model": "K_axis_shared",
+            "NUM_INSTANCE": 4,
+            "window": "last10",
+            "first_epoch": 41,
+            "last_epoch": 50,
+            "batches": 141,
+            "primary_loss_zero_batches": 0,
+            "primary_loss_zero_fraction": 0.0,
+            "primary_loss_mean": 0.0268211475778239,
+            "primary_violation_mean": 22.71631205673759,
+            "total_loss_mean": 1.9318543900834753,
+            "epoch_last_mAP": 43.198921153051494,
+            "epoch_last_Rank1": 60.06768189509306
+          },
+          {
+            "model": "L_frequency_shared",
+            "NUM_INSTANCE": 8,
+            "window": "all",
+            "first_epoch": 1,
+            "last_epoch": 50,
+            "batches": 1000,
+            "primary_loss_zero_batches": 2,
+            "primary_loss_zero_fraction": 0.002,
+            "primary_loss_mean": 0.03956778818415478,
+            "primary_violation_mean": 31.505,
+            "total_loss_mean": 2.2066031678915023,
+            "epoch_last_mAP": 46.03910130390301,
+            "epoch_last_Rank1": 62.43654822335025
+          },
+          {
+            "model": "L_frequency_shared",
+            "NUM_INSTANCE": 8,
+            "window": "first5",
+            "first_epoch": 1,
+            "last_epoch": 5,
+            "batches": 100,
+            "primary_loss_zero_batches": 0,
+            "primary_loss_zero_fraction": 0.0,
+            "primary_loss_mean": 0.05288425503764302,
+            "primary_violation_mean": 36.97,
+            "total_loss_mean": 3.48227322101593,
+            "epoch_last_mAP": 47.18936585622068,
+            "epoch_last_Rank1": 63.7901861252115
+          },
+          {
+            "model": "L_frequency_shared",
+            "NUM_INSTANCE": 8,
+            "window": "last10",
+            "first_epoch": 41,
+            "last_epoch": 50,
+            "batches": 200,
+            "primary_loss_zero_batches": 0,
+            "primary_loss_zero_fraction": 0.0,
+            "primary_loss_mean": 0.033416570557747036,
+            "primary_violation_mean": 28.725,
+            "total_loss_mean": 1.9543008399009705,
+            "epoch_last_mAP": 46.03910130390301,
+            "epoch_last_Rank1": 62.43654822335025
+          },
+          {
+            "model": "L_axis_shared",
+            "NUM_INSTANCE": 8,
+            "window": "all",
+            "first_epoch": 1,
+            "last_epoch": 50,
+            "batches": 1000,
+            "primary_loss_zero_batches": 6,
+            "primary_loss_zero_fraction": 0.006,
+            "primary_loss_mean": 0.03422132075298578,
+            "primary_violation_mean": 26.473,
+            "total_loss_mean": 2.2051143032312392,
+            "epoch_last_mAP": 41.53049835963826,
+            "epoch_last_Rank1": 58.206429780033844
+          },
+          {
+            "model": "L_axis_shared",
+            "NUM_INSTANCE": 8,
+            "window": "first5",
+            "first_epoch": 1,
+            "last_epoch": 5,
+            "batches": 100,
+            "primary_loss_zero_batches": 0,
+            "primary_loss_zero_fraction": 0.0,
+            "primary_loss_mean": 0.052796214623376726,
+            "primary_violation_mean": 36.84,
+            "total_loss_mean": 3.4820034861564637,
+            "epoch_last_mAP": 47.19038368515725,
+            "epoch_last_Rank1": 63.95939086294417
+          },
+          {
+            "model": "L_axis_shared",
+            "NUM_INSTANCE": 8,
+            "window": "last10",
+            "first_epoch": 41,
+            "last_epoch": 50,
+            "batches": 200,
+            "primary_loss_zero_batches": 3,
+            "primary_loss_zero_fraction": 0.015,
+            "primary_loss_mean": 0.024505350938998163,
+            "primary_violation_mean": 20.065,
+            "total_loss_mean": 1.949819049835205,
+            "epoch_last_mAP": 41.53049835963826,
+            "epoch_last_Rank1": 58.206429780033844
+          }
+        ],
+        "sources": {
+          "results/r201k_relation_local_pi_20261007/MSVR310/training/MSVR310_r201k_frequency_shared_s42/batch_orders.jsonl": {
+            "bytes": 2039084,
+            "sha256": "b189acd7f52dcdc46d045c080ebada857734453041866afeb1238a5932934dba"
+          },
+          "results/r201k_relation_local_pi_20261007/MSVR310/training/MSVR310_r201k_frequency_shared_s42/epochs.csv": {
+            "bytes": 8855,
+            "sha256": "40dd38f06c70cb1a356bd217cb8eae4e9bb365d445e0d4b769c7e2e2fa5ed845"
+          },
+          "results/r201k_relation_local_pi_20261007/MSVR310/training/MSVR310_r201k_frequency_shared_s42/result.json": {
+            "bytes": 59539,
+            "sha256": "816efdaff4b71a4551bf4696ba087cc01e79b81b46ef84f5efbdd8320d2b3575"
+          },
+          "results/r201k_relation_local_pi_20261007/MSVR310/training/MSVR310_r201k_axis_shared_s42/batch_orders.jsonl": {
+            "bytes": 2039151,
+            "sha256": "49964c32a1ecfb86eb33a79bcab9176a166a1aa74d3070f7eb6d2b95d2fd8205"
+          },
+          "results/r201k_relation_local_pi_20261007/MSVR310/training/MSVR310_r201k_axis_shared_s42/epochs.csv": {
+            "bytes": 8892,
+            "sha256": "74f3ddc1688a3ea026ab4ff789f852a54be8480364d84e06bd789b81201ccb7d"
+          },
+          "results/r201k_relation_local_pi_20261007/MSVR310/training/MSVR310_r201k_axis_shared_s42/result.json": {
+            "bytes": 59680,
+            "sha256": "6ecb5162422f01eee61fc0c797934cd153bad747a03fd413a19f330b425d1f33"
+          },
+          "results/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_frequency_shared_s42/batch_orders.jsonl": {
+            "bytes": 2965365,
+            "sha256": "92f298b65c1900a2de00f452da2d4ec7345a589c208bcf42ed9697cacdb9cae7"
+          },
+          "results/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_frequency_shared_s42/epochs.csv": {
+            "bytes": 8881,
+            "sha256": "557c0684050ef768e6323252ac7752b0e55629d2bae2993fe62df8fcd4099f83"
+          },
+          "results/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_frequency_shared_s42/result.json": {
+            "bytes": 61253,
+            "sha256": "7770c580033fdc2f39be9a9c904ab56850d557eb479de6ea292642349dce3087"
+          },
+          "results/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_axis_shared_s42/batch_orders.jsonl": {
+            "bytes": 2965301,
+            "sha256": "882c31c36dc26793ba290ce404e90313cd1962e672ae4a0319cf8cf881785afe"
+          },
+          "results/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_axis_shared_s42/epochs.csv": {
+            "bytes": 8886,
+            "sha256": "e46fda48a2138ee0888f2769c834b40f7447c22ba9204613ce9d42f380068767"
+          },
+          "results/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_axis_shared_s42/result.json": {
+            "bytes": 61229,
+            "sha256": "9f67a997160ebddebca6da4d69bc860dfc2b67c4fbf349f4fbedb7baa1c4090a"
+          }
+        },
+        "new_neural_calls": 0,
+        "new_optimizer_updates": 0,
+        "goal": "ACTIVE_UNMET",
+        "limits": "Only already closed official-data K/L batch telemetry; no SSH, GPU, new model forward or parameters. K P16K4 versus L P8K8 changes positive multiplicity, negative identity pool and 705/1000 updates per arm; paired ordinary/axis within family match, K/L orders and budgets differ. Active primary loss does not prove helpful gradients or causal diagnosis; these windows are repeated training batches, not independent test samples. Negative all-six/selected/final-epoch evidence remains in official normal analysis; no benchmark-based new choice or missing inference."
+      },
+      "view": {
+        "status": "ACTUAL_CLOSED_TRAINING_GT_VIEW_AND_SAMPLING_COVERAGE_CPU_READOUT",
+        "recorded_at": "2026-10-08T01:15:29",
+        "formal_closed_models": 4,
+        "total_actual_batch_rows": 10709,
+        "readouts": [
+          {
+            "family": "K",
+            "dataset": "RGBNT201",
+            "model": "axis_shared_s42",
+            "GT_view_field": "camera",
+            "train_records": 3951,
+            "train_identities": 171,
+            "views_per_identity_histogram": {
+              "1": 120,
+              "2": 51
+            },
+            "global_cross_view_eligible_records": 1396,
+            "global_cross_view_eligible_record_fraction": 0.3533282713237155,
+            "windows": [
+              {
+                "window": "all",
+                "first_epoch": 1,
+                "last_epoch": 50,
+                "batches": 2647,
+                "anchors": 169408,
+                "identity_positive_pairs": 1185856,
+                "same_record_pairs": 0,
+                "cross_view_pairs": 198672,
+                "distinct_record_anchors": 169408,
+                "cross_view_anchors": 57456,
+                "duplicate_record_positions": 0,
+                "cross_view_anchor_fraction": 0.3391575368341519,
+                "distinct_record_anchor_fraction": 1.0,
+                "cross_view_positive_pair_fraction": 0.16753467537373845,
+                "same_record_positive_pair_fraction": 0.0
+              },
+              {
+                "window": "last10",
+                "first_epoch": 41,
+                "last_epoch": 50,
+                "batches": 530,
+                "anchors": 33920,
+                "identity_positive_pairs": 237440,
+                "same_record_pairs": 0,
+                "cross_view_pairs": 39632,
+                "distinct_record_anchors": 33920,
+                "cross_view_anchors": 11504,
+                "duplicate_record_positions": 0,
+                "cross_view_anchor_fraction": 0.3391509433962264,
+                "distinct_record_anchor_fraction": 1.0,
+                "cross_view_positive_pair_fraction": 0.16691374663072775,
+                "same_record_positive_pair_fraction": 0.0
+              }
+            ]
+          },
+          {
+            "family": "K",
+            "dataset": "RGBNT100",
+            "model": "axis_shared_s42",
+            "GT_view_field": "camera",
+            "train_records": 8675,
+            "train_identities": 50,
+            "views_per_identity_histogram": {
+              "3": 2,
+              "4": 3,
+              "5": 4,
+              "6": 5,
+              "7": 9,
+              "8": 27
+            },
+            "global_cross_view_eligible_records": 8675,
+            "global_cross_view_eligible_record_fraction": 1.0,
+            "windows": [
+              {
+                "window": "all",
+                "first_epoch": 1,
+                "last_epoch": 50,
+                "batches": 6357,
+                "anchors": 406848,
+                "identity_positive_pairs": 6102720,
+                "same_record_pairs": 0,
+                "cross_view_pairs": 5257008,
+                "distinct_record_anchors": 406848,
+                "cross_view_anchors": 406848,
+                "duplicate_record_positions": 0,
+                "cross_view_anchor_fraction": 1.0,
+                "distinct_record_anchor_fraction": 1.0,
+                "cross_view_positive_pair_fraction": 0.8614204813591316,
+                "same_record_positive_pair_fraction": 0.0
+              },
+              {
+                "window": "last10",
+                "first_epoch": 41,
+                "last_epoch": 50,
+                "batches": 1270,
+                "anchors": 81280,
+                "identity_positive_pairs": 1219200,
+                "same_record_pairs": 0,
+                "cross_view_pairs": 1050212,
+                "distinct_record_anchors": 81280,
+                "cross_view_anchors": 81280,
+                "duplicate_record_positions": 0,
+                "cross_view_anchor_fraction": 1.0,
+                "distinct_record_anchor_fraction": 1.0,
+                "cross_view_positive_pair_fraction": 0.8613943569553806,
+                "same_record_positive_pair_fraction": 0.0
+              }
+            ]
+          },
+          {
+            "family": "K",
+            "dataset": "MSVR310",
+            "model": "axis_shared_s42",
+            "GT_view_field": "scene",
+            "train_records": 1032,
+            "train_identities": 155,
+            "views_per_identity_histogram": {
+              "1": 95,
+              "2": 30,
+              "3": 14,
+              "4": 5,
+              "5": 7,
+              "6": 4
+            },
+            "global_cross_view_eligible_records": 600,
+            "global_cross_view_eligible_record_fraction": 0.5813953488372093,
+            "windows": [
+              {
+                "window": "all",
+                "first_epoch": 1,
+                "last_epoch": 50,
+                "batches": 705,
+                "anchors": 45120,
+                "identity_positive_pairs": 135360,
+                "same_record_pairs": 11510,
+                "cross_view_pairs": 46692,
+                "distinct_record_anchors": 44360,
+                "cross_view_anchors": 21756,
+                "duplicate_record_positions": 4293,
+                "cross_view_anchor_fraction": 0.4821808510638298,
+                "distinct_record_anchor_fraction": 0.9831560283687943,
+                "cross_view_positive_pair_fraction": 0.3449468085106383,
+                "same_record_positive_pair_fraction": 0.08503250591016548
+              },
+              {
+                "window": "last10",
+                "first_epoch": 41,
+                "last_epoch": 50,
+                "batches": 141,
+                "anchors": 9024,
+                "identity_positive_pairs": 27072,
+                "same_record_pairs": 2286,
+                "cross_view_pairs": 9274,
+                "distinct_record_anchors": 8884,
+                "cross_view_anchors": 4324,
+                "duplicate_record_positions": 854,
+                "cross_view_anchor_fraction": 0.4791666666666667,
+                "distinct_record_anchor_fraction": 0.9844858156028369,
+                "cross_view_positive_pair_fraction": 0.3425679669030733,
+                "same_record_positive_pair_fraction": 0.08444148936170212
+              }
+            ]
+          },
+          {
+            "family": "L",
+            "dataset": "MSVR310",
+            "model": "axis_shared_s42",
+            "GT_view_field": "scene",
+            "train_records": 1032,
+            "train_identities": 155,
+            "views_per_identity_histogram": {
+              "1": 95,
+              "2": 30,
+              "3": 14,
+              "4": 5,
+              "5": 7,
+              "6": 4
+            },
+            "global_cross_view_eligible_records": 600,
+            "global_cross_view_eligible_record_fraction": 0.5813953488372093,
+            "windows": [
+              {
+                "window": "all",
+                "first_epoch": 1,
+                "last_epoch": 50,
+                "batches": 1000,
+                "anchors": 64000,
+                "identity_positive_pairs": 448000,
+                "same_record_pairs": 80814,
+                "cross_view_pairs": 119084,
+                "distinct_record_anchors": 63936,
+                "cross_view_anchors": 26664,
+                "duplicate_record_positions": 22022,
+                "cross_view_anchor_fraction": 0.416625,
+                "distinct_record_anchor_fraction": 0.999,
+                "cross_view_positive_pair_fraction": 0.2658125,
+                "same_record_positive_pair_fraction": 0.18038839285714287
+              },
+              {
+                "window": "last10",
+                "first_epoch": 41,
+                "last_epoch": 50,
+                "batches": 200,
+                "anchors": 12800,
+                "identity_positive_pairs": 89600,
+                "same_record_pairs": 16044,
+                "cross_view_pairs": 24002,
+                "distinct_record_anchors": 12792,
+                "cross_view_anchors": 5368,
+                "duplicate_record_positions": 4364,
+                "cross_view_anchor_fraction": 0.419375,
+                "distinct_record_anchor_fraction": 0.999375,
+                "cross_view_positive_pair_fraction": 0.2678794642857143,
+                "same_record_positive_pair_fraction": 0.1790625
+              }
+            ]
+          }
+        ],
+        "sources": {
+          "results/r201k_relation_local_pi_20261007/RGBNT201/training/RGBNT201_r201k_axis_shared_s42/official_split_manifest.json": {
+            "bytes": 625841,
+            "sha256": "211cb146c0a5c1e013aa2d9cbd2b833b9f8c71338a5ab973bb0055313abfaeb8"
+          },
+          "results/r201k_relation_local_pi_20261007/RGBNT201/training/RGBNT201_r201k_axis_shared_s42/result.json": {
+            "bytes": 28824,
+            "sha256": "10c3a92c35fea8c8d2165a1d1744c6181b8247241b9628ed9486a2581aa31911"
+          },
+          "results/r201k_relation_local_pi_20261007/RGBNT201/training/RGBNT201_r201k_axis_shared_s42/batch_orders.jsonl": {
+            "bytes": 7655501,
+            "sha256": "2e7a4a9647fb70f8dce8307841478ca754fa491b93c994eff3d726daecee8bbe"
+          },
+          "results/r201k_relation_local_pi_20261007/RGBNT100/training/RGBNT100_r201k_axis_shared_s42/official_split_manifest.json": {
+            "bytes": 2068069,
+            "sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203"
+          },
+          "results/r201k_relation_local_pi_20261007/RGBNT100/training/RGBNT100_r201k_axis_shared_s42/result.json": {
+            "bytes": 41934,
+            "sha256": "120a76f8ab781f069dc6c20075ddab1e5d4e90234413403e2d6a8ff90e05ba12"
+          },
+          "results/r201k_relation_local_pi_20261007/RGBNT100/training/RGBNT100_r201k_axis_shared_s42/batch_orders.jsonl": {
+            "bytes": 17483341,
+            "sha256": "6e80c1391f5bbdca55b32e65a13726927142a3b4956302427882e856da5491f8"
+          },
+          "results/r201k_relation_local_pi_20261007/MSVR310/training/MSVR310_r201k_axis_shared_s42/official_split_manifest.json": {
+            "bytes": 297339,
+            "sha256": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2"
+          },
+          "results/r201k_relation_local_pi_20261007/MSVR310/training/MSVR310_r201k_axis_shared_s42/result.json": {
+            "bytes": 59680,
+            "sha256": "6ecb5162422f01eee61fc0c797934cd153bad747a03fd413a19f330b425d1f33"
+          },
+          "results/r201k_relation_local_pi_20261007/MSVR310/training/MSVR310_r201k_axis_shared_s42/batch_orders.jsonl": {
+            "bytes": 2039151,
+            "sha256": "49964c32a1ecfb86eb33a79bcab9176a166a1aa74d3070f7eb6d2b95d2fd8205"
+          },
+          "results/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_axis_shared_s42/official_split_manifest.json": {
+            "bytes": 297339,
+            "sha256": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2"
+          },
+          "results/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_axis_shared_s42/result.json": {
+            "bytes": 61229,
+            "sha256": "9f67a997160ebddebca6da4d69bc860dfc2b67c4fbf349f4fbedb7baa1c4090a"
+          },
+          "results/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_axis_shared_s42/batch_orders.jsonl": {
+            "bytes": 2965301,
+            "sha256": "882c31c36dc26793ba290ce404e90313cd1962e672ae4a0319cf8cf881785afe"
+          }
+        },
+        "new_neural_calls": 0,
+        "new_optimizer_updates": 0,
+        "remote_queries": 0,
+        "goal": "ACTIVE_UNMET",
+        "limits": "Closed local official TRAIN manifests and actual50epoch PK batch names only. Cross-view uses original RGBNT camera/MSVR scene metadata; measures potential distinct-record/cross-view positive availability, not which hard positive the current identity-only loss selects. No embeddings, gradients, causal effect or future L100 result inferred. K/L sampler changes positive multiplicity, negative identity pool and update budget; no query/gallery identities used for training, no heldout, NN, parameter or benchmark selection changes. Ordinary/axis paired orders were audited elsewhere; this readout uses their closed axis lane only."
+      },
+      "capacity": {
+        "status": "ACTUAL_LOCAL_CAPACITY_MEASURED_AGAINST_EMPIRICAL_K_FUTURE_L_ESTIMATE",
+        "measured_at": "2026-10-08T00:56:42.0699734+08:00",
+        "capacity": [
+          {
+            "variant": "frequency_shared",
+            "drive": "D",
+            "free_bytes": 74402979840,
+            "empirical_K_full_bytes": 7734984427,
+            "empirical_K_native_bytes": 208842683,
+            "required_with_2GiB_reserve": 10091310758,
+            "estimate_fits": true
+          },
+          {
+            "variant": "axis_shared",
+            "drive": "E",
+            "free_bytes": 182733475840,
+            "empirical_K_full_bytes": 7733737888,
+            "empirical_K_native_bytes": 208761942,
+            "required_with_2GiB_reserve": 10089983478,
+            "estimate_fits": true
+          }
+        ],
+        "new_neural_calls": 0,
+        "new_optimizer_updates": 0,
+        "limits": "Local disk read only; estimate uses closed historical K archives, not future L actual byte counts. Reviewed deployer must recheck before launch and every actual archive. No files deleted, no remote progress query, no early missing launch."
+      },
+      "limits": "Metadata/loss activity is not gradient usefulness or causal proof; currentRGB100 same original owner running, no current epoch inferred."
     }
   },
   "decision_rules": [
@@ -41419,7 +41968,7 @@
       ],
       "max_parallel_neural_jobs": 2,
       "serial_per_card": true,
-      "first_lane": "OriginalL RGB100 physical2ordinary/3axis full50 running, MSVR closed; exact same receiver72693/5824, solepassive94345 near02:33:17 or ownerexit. No new source/loss/temperature/power.",
+      "first_lane": "OriginalRGB100 normal queue Python5824 continues; old94345 tool/monitor unavailable, same localowner max300s wait only02:33:17.113620+08 orownerexit. No NNrestart, source/loss/power/temperature changes. Complete normal15126/native12/200/GT/raw/text/CPU then reviewed full49.",
       "temperature_power_control": false
     },
     "existing_M8_closeout": "ACTUAL_COMPLETE_NATIVE52604_EXIT0_THREE50_147FROZEN882STATES_LOCAL_RAW_VERIFIED",
