@@ -1,0 +1,62 @@
+{
+  "arguments": {
+    "dataset": "RGBNT201",
+    "variant": "frequency_shared",
+    "data_root": "/data/gaob/Re-ID/dataset",
+    "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+    "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201k_expert_N5_20261007/s43/training/RGBNT201_r201k_frequency_shared_s43",
+    "anchor_run_dir": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT201_demo_s42",
+    "freeze_identity_encoder": 1,
+    "seed": 43,
+    "mode": "train"
+  },
+  "config": "DATALOADER:\n  NUM_INSTANCE: 8\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT201\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 256\n  - 128\n  SIZE_TRAIN:\n  - 256\n  - 128\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 1\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 4\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 43\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+  "classes": 171,
+  "camera_embeddings": 4,
+  "train_records": 3951,
+  "query_records": 836,
+  "gallery_records": 836,
+  "training_heldout_identities": 0,
+  "parameters": 101236358,
+  "trainable_parameters": 3312262,
+  "descriptor_dim": 5120,
+  "started": 1791369637.5084417,
+  "torch": "2.5.1+cu121",
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "pretraining": "Full-official original RGBNT201 DeMo50 bestE28 plus additional50/new Adam; original identity encoder fixed",
+  "anchor": {
+    "original_run": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT201_demo_s42",
+    "original_best_epoch": 28,
+    "anchor_training_epochs": 50,
+    "new_stage_epochs": 50,
+    "anchor_seed": 42,
+    "expert_seed": 43,
+    "identity_modules": [
+      "BACKBONE",
+      "rgb_reduce",
+      "nir_reduce",
+      "tir_reduce",
+      "generalFusion"
+    ],
+    "descriptor_dim": 5120,
+    "bypass": false,
+    "selected_anchor_full_metrics": {
+      "mAP": 75.67457499232746,
+      "mINP": 62.57709224977215,
+      "Rank-1": 80.622009569378,
+      "Rank-5": 89.23444976076556,
+      "Rank-10": 93.77990430622009,
+      "Rank-20": 94.97607655502392
+    },
+    "method": "R201K single PI-outlet factor relative to completed I. Same existing 1024->64->512 projection tensors now process concat(M_S,F_S) at each of seven relations, normalized per512; replace mean(M_S)+globalF and one broadcast vector. No new parameters/experts or output coordinates. Existing conditions, joint route, PM/PF, gates, anchors, final5120 norm and controlled00/10/01 unchanged as code. I primary unit5120 hinge.3, M/F/base/common auxiliary soft and CE/weights, partial0 forward/BN2/mining/two backwards, frozen original DeMo42, fresh heads/Adam, B64/K8-4-16/additional50 and data sampling unchanged. Full official train/query/gallery, normal mAP-best earliest tie, benchmark selected; three normal datasets before missing49. Direct PI input isolation does not imply strict end-to-end source independence: conditions/gates/global normalization still couple sources. Benefit/cause/novelty and all3+2 remain unproven until actual fair training/GT/missing/seeds. RGBNT201 conditional expert-stage N5: predeclared seeds42/43/44/45/46, fixed original DeMo42 teacher, existing K42 pair reused without retraining. Each additional seed has ordinary and axis, unchanged B64/P8K8/additional50, same-checkpoint normal mAP-best earliest tie/six metrics. Report every seed, mean/sampleSD/paired delta and separate Best-of5; benchmark-selected, not five end-to-end pipelines. No graph/loss/route/parameter/dimension factor.",
+    "optimizer_schedule": "Original50/seed42 plus additional50/freshAdam/expert-seed43",
+    "limits": "Fixed DeMo42 conditional expert repeat, not an end-to-end pipeline seed. Common context remains auxiliary; task gate is not claimed calibrated. Twelve disjoint-source private-coordinate comparisons remain unestablished."
+  },
+  "checkpoint_rule": "Maximum full official query/gallery mAP across 50 epochs; ties keep earliest epoch",
+  "evaluation_scope": "Entire official training split and entire official query/gallery; no fit/dev holdout",
+  "selection_limitation": "Official benchmark is used for checkpoint selection; this is not an untouched independent final test",
+  "method_revision": "R201K single PI-outlet factor relative to completed I. Same existing 1024->64->512 projection tensors now process concat(M_S,F_S) at each of seven relations, normalized per512; replace mean(M_S)+globalF and one broadcast vector. No new parameters/experts or output coordinates. Existing conditions, joint route, PM/PF, gates, anchors, final5120 norm and controlled00/10/01 unchanged as code. I primary unit5120 hinge.3, M/F/base/common auxiliary soft and CE/weights, partial0 forward/BN2/mining/two backwards, frozen original DeMo42, fresh heads/Adam, B64/K8-4-16/additional50 and data sampling unchanged. Full official train/query/gallery, normal mAP-best earliest tie, benchmark selected; three normal datasets before missing49. Direct PI input isolation does not imply strict end-to-end source independence: conditions/gates/global normalization still couple sources. Benefit/cause/novelty and all3+2 remain unproven until actual fair training/GT/missing/seeds. RGBNT201 conditional expert-stage N5: predeclared seeds42/43/44/45/46, fixed original DeMo42 teacher, existing K42 pair reused without retraining. Each additional seed has ordinary and axis, unchanged B64/P8K8/additional50, same-checkpoint normal mAP-best earliest tie/six metrics. Report every seed, mean/sampleSD/paired delta and separate Best-of5; benchmark-selected, not five end-to-end pipelines. No graph/loss/route/parameter/dimension factor.",
+  "partial_training": "Unchanged K/I: zero partial objectives, same partial forwards/BN2/mining/two backward calls.",
+  "amp_policy": "Native fp16 GradScaler512; actual optimizer updates and skipped steps recorded",
+  "retention": "Only best.pth; smoke strict reload in memory; no initial, last, or smoke weight files"
+}
