@@ -1,6 +1,6 @@
 {
   "status": "ACTIVE_UNMET",
-  "updated_at": "2026-10-07T12:24:37",
+  "updated_at": "2026-10-07T13:15:07",
   "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
   "platform_objective_edit_supported": false,
@@ -14363,6 +14363,548 @@
       "K_missing_evaluated": false,
       "goal": "ACTIVE_UNMET",
       "limits": "One dataset/seed42, normal benchmark mAP-best earliest tie; original50 versus I/K original50+additional50. K versus same-variant I changes only the existing shared PI input from global broadcast to relation-local M_S/F_S; primary hinge.3 and all auxiliary soft losses remain identical, and K axis/frequency has matched budget/params/dims/sampling. Historical frequency is mixed-source ordinary-expert control, not literal DeMo plus plain-frequency branch. No all3/missing49/multiseed/retrained-psi or causal claim. CPU exports check earlier installed-GT audits, not a new NN/GT inference."
+    },
+    "R201K_MSVR_normal_closed": {
+      "status": "ACTUAL_K_MSVR_TWO_FULL50_GT_RAW_CPU_COMPLETE_CONTINUE100",
+      "recorded_at": "2026-10-07T13:15:07",
+      "finished": "2026-10-07T12:42:23",
+      "actual_stage_epochs": 100,
+      "actual_stage_updates": 1410,
+      "actual_closed_K_epochs": 200,
+      "actual_closed_K_updates": 6704,
+      "actual_K_native_updates": 18,
+      "selected": [
+        {
+          "dataset": "MSVR310",
+          "model": "original_DeMo",
+          "selected_epoch": "32",
+          "mAP": "47.164688447227576",
+          "mINP": "23.502961234396178",
+          "Rank-1": "63.95939086294417",
+          "Rank-5": "80.20304568527918",
+          "Rank-10": "84.77157360406092",
+          "Rank-20": "89.84771573604061"
+        },
+        {
+          "dataset": "MSVR310",
+          "model": "I_frequency_shared",
+          "selected_epoch": "15",
+          "mAP": "47.237814977555246",
+          "mINP": "23.62984991278797",
+          "Rank-1": "63.7901861252115",
+          "Rank-5": "80.71065989847716",
+          "Rank-10": "84.77157360406092",
+          "Rank-20": "89.84771573604061"
+        },
+        {
+          "dataset": "MSVR310",
+          "model": "K_frequency_shared",
+          "selected_epoch": "28",
+          "mAP": "47.23920571396494",
+          "mINP": "23.872352648429185",
+          "Rank-1": "63.45177664974619",
+          "Rank-5": "81.21827411167513",
+          "Rank-10": "84.77157360406092",
+          "Rank-20": "90.01692047377327"
+        },
+        {
+          "dataset": "MSVR310",
+          "model": "I_axis_shared",
+          "selected_epoch": "5",
+          "mAP": "47.22060784085766",
+          "mINP": "23.555108520124353",
+          "Rank-1": "63.95939086294417",
+          "Rank-5": "80.03384094754654",
+          "Rank-10": "84.77157360406092",
+          "Rank-20": "90.01692047377327"
+        },
+        {
+          "dataset": "MSVR310",
+          "model": "K_axis_shared",
+          "selected_epoch": "5",
+          "mAP": "47.216806399191995",
+          "mINP": "23.546340397808233",
+          "Rank-1": "63.95939086294417",
+          "Rank-5": "79.86463620981388",
+          "Rank-10": "84.77157360406092",
+          "Rank-20": "90.01692047377327"
+        }
+      ],
+      "comparisons": [
+        {
+          "dataset": "MSVR310",
+          "improved": "K_axis_shared",
+          "reference": "original_DeMo",
+          "mAP": 0.05211795196441926,
+          "mINP": 0.04337916341205528,
+          "Rank-1": 0.0,
+          "Rank-5": -0.33840947546529776,
+          "Rank-10": 0.0,
+          "Rank-20": 0.16920473773265599,
+          "both_plus2": false,
+          "rank1_rescued": 1,
+          "rank1_harmed": 1,
+          "AP_improved": 266,
+          "AP_worsened": 211
+        },
+        {
+          "dataset": "MSVR310",
+          "improved": "K_frequency_shared",
+          "reference": "original_DeMo",
+          "mAP": 0.07451726673736658,
+          "mINP": 0.36939141403300724,
+          "Rank-1": -0.5076142131979751,
+          "Rank-5": 1.0152284263959501,
+          "Rank-10": 0.0,
+          "Rank-20": 0.16920473773265599,
+          "both_plus2": false,
+          "rank1_rescued": 3,
+          "rank1_harmed": 6,
+          "AP_improved": 276,
+          "AP_worsened": 268
+        },
+        {
+          "dataset": "MSVR310",
+          "improved": "K_axis_shared",
+          "reference": "K_frequency_shared",
+          "mAP": -0.02239931477294732,
+          "mINP": -0.32601225062095196,
+          "Rank-1": 0.5076142131979751,
+          "Rank-5": -1.3536379018612479,
+          "Rank-10": 0.0,
+          "Rank-20": 0.0,
+          "both_plus2": false,
+          "rank1_rescued": 6,
+          "rank1_harmed": 3,
+          "AP_improved": 266,
+          "AP_worsened": 278
+        },
+        {
+          "dataset": "MSVR310",
+          "improved": "K_axis_shared",
+          "reference": "I_axis_shared",
+          "mAP": -0.003801441665665095,
+          "mINP": -0.008768122316119786,
+          "Rank-1": 0.0,
+          "Rank-5": -0.16920473773265599,
+          "Rank-10": 0.0,
+          "Rank-20": 0.0,
+          "both_plus2": false,
+          "rank1_rescued": 0,
+          "rank1_harmed": 0,
+          "AP_improved": 131,
+          "AP_worsened": 157
+        },
+        {
+          "dataset": "MSVR310",
+          "improved": "K_frequency_shared",
+          "reference": "I_frequency_shared",
+          "mAP": 0.001390736409696558,
+          "mINP": 0.24250273564121372,
+          "Rank-1": -0.33840947546530487,
+          "Rank-5": 0.507614213197968,
+          "Rank-10": 0.0,
+          "Rank-20": 0.16920473773265599,
+          "both_plus2": false,
+          "rank1_rescued": 2,
+          "rank1_harmed": 4,
+          "AP_improved": 273,
+          "AP_worsened": 256
+        },
+        {
+          "dataset": "MSVR310",
+          "improved": "K_axis_shared",
+          "reference": "I_frequency_shared",
+          "mAP": -0.021008578363250763,
+          "mINP": -0.08350951497973824,
+          "Rank-1": 0.1692047377326702,
+          "Rank-5": -0.8460236886632799,
+          "Rank-10": 0.0,
+          "Rank-20": 0.16920473773265599,
+          "both_plus2": false,
+          "rank1_rescued": 3,
+          "rank1_harmed": 2,
+          "AP_improved": 252,
+          "AP_worsened": 268
+        }
+      ],
+      "training": {
+        "original_DeMo": {
+          "selected_epoch": 32,
+          "parameters": 98489856,
+          "trainable_parameters": 98484736,
+          "descriptor_dim": 5120,
+          "budget_epochs": 50,
+          "final_epoch": {
+            "mAP": 45.8097959324754,
+            "mINP": 22.52311847403095,
+            "Rank-1": 62.77495769881557,
+            "Rank-5": 79.35702199661591,
+            "Rank-10": 83.41793570219966,
+            "Rank-20": 88.83248730964468
+          },
+          "runtime": {
+            "end_to_end_seconds": 17.001151084899902,
+            "triplets": 1646,
+            "includes_decode_and_first_batch": true
+          },
+          "peak_memory": 12187581952
+        },
+        "I_frequency_shared": {
+          "selected_epoch": 15,
+          "parameters": 100821638,
+          "trainable_parameters": 3123846,
+          "descriptor_dim": 5120,
+          "budget_epochs": 100,
+          "final_epoch": {
+            "mAP": 46.77162013058159,
+            "mINP": 23.55076025106336,
+            "Rank-1": 63.113367174280874,
+            "Rank-5": 81.04906937394247,
+            "Rank-10": 84.26395939086294,
+            "Rank-20": 89.67851099830794
+          },
+          "runtime": {
+            "end_to_end_seconds": 15.16858196258545,
+            "triplets": 1646,
+            "includes_decode_and_first_batch": true,
+            "mean_route": [
+              [
+                0.1313973218202591,
+                0.005938255228102207,
+                0.005519880913197994
+              ],
+              [
+                0.13139300048351288,
+                0.005938637536019087,
+                0.005519873928278685
+              ],
+              [
+                0.13140496611595154,
+                0.005938216112554073,
+                0.005519881844520569
+              ],
+              [
+                0.1313953548669815,
+                0.005938472226262093,
+                0.005519947037100792
+              ],
+              [
+                0.131404846906662,
+                0.005938389338552952,
+                0.005519987549632788
+              ],
+              [
+                0.1313960701227188,
+                0.005938321817666292,
+                0.005519798956811428
+              ],
+              [
+                0.13140028715133667,
+                0.005938479211181402,
+                0.005520012229681015
+              ]
+            ],
+            "mean_outer_gates": [
+              0.9728397130966187,
+              0.9593076705932617,
+              0.9595137238502502
+            ],
+            "mean_route_entropy": 2.275418519973755,
+            "mean_joint_minus_marginal_product_L1": 7.414012543449644e-06
+          },
+          "peak_memory": 1668362240
+        },
+        "K_frequency_shared": {
+          "selected_epoch": 28,
+          "parameters": 100821638,
+          "trainable_parameters": 3123846,
+          "descriptor_dim": 5120,
+          "budget_epochs": 100,
+          "final_epoch": {
+            "mAP": 46.77587819218972,
+            "mINP": 23.540393717287465,
+            "Rank-1": 63.28257191201354,
+            "Rank-5": 81.04906937394247,
+            "Rank-10": 84.4331641285956,
+            "Rank-20": 89.5093062605753
+          },
+          "runtime": {
+            "end_to_end_seconds": 17.726269721984863,
+            "triplets": 1646,
+            "includes_decode_and_first_batch": true,
+            "mean_route": [
+              [
+                0.12520180642604828,
+                0.00896481517702341,
+                0.008689907379448414
+              ],
+              [
+                0.12520025670528412,
+                0.008964857086539268,
+                0.00868995487689972
+              ],
+              [
+                0.12520529329776764,
+                0.00896487943828106,
+                0.00869004800915718
+              ],
+              [
+                0.12520067393779755,
+                0.008964795619249344,
+                0.008689926005899906
+              ],
+              [
+                0.12520389258861542,
+                0.0089648999273777,
+                0.00869002379477024
+              ],
+              [
+                0.12520156800746918,
+                0.008964778855443,
+                0.008689923211932182
+              ],
+              [
+                0.12520276010036469,
+                0.008964910171926022,
+                0.008690052665770054
+              ]
+            ],
+            "mean_outer_gates": [
+              0.9696326851844788,
+              0.958157479763031,
+              0.9619925022125244
+            ],
+            "mean_route_entropy": 2.3991281986236572,
+            "mean_joint_minus_marginal_product_L1": 3.0000323931744788e-06
+          },
+          "peak_memory": 1673807872
+        },
+        "I_axis_shared": {
+          "selected_epoch": 5,
+          "parameters": 100821638,
+          "trainable_parameters": 3123846,
+          "descriptor_dim": 5120,
+          "budget_epochs": 100,
+          "final_epoch": {
+            "mAP": 43.26085222293916,
+            "mINP": 20.039688842734826,
+            "Rank-1": 59.89847715736041,
+            "Rank-5": 77.49576988155668,
+            "Rank-10": 83.07952622673434,
+            "Rank-20": 88.49407783417935
+          },
+          "runtime": {
+            "end_to_end_seconds": 15.095733404159546,
+            "triplets": 1646,
+            "includes_decode_and_first_batch": true,
+            "mean_route": [
+              [
+                0.18594962358474731,
+                0.01752849854528904,
+                0.015667518600821495
+              ],
+              [
+                0.10957159101963043,
+                0.015178713947534561,
+                0.013813864439725876
+              ],
+              [
+                0.07110045105218887,
+                0.012844957411289215,
+                0.012380106374621391
+              ],
+              [
+                0.13454148173332214,
+                0.01599964313209057,
+                0.014559503644704819
+              ],
+              [
+                0.11085493862628937,
+                0.014473098330199718,
+                0.013625089079141617
+              ],
+              [
+                0.0823841467499733,
+                0.013466119766235352,
+                0.012782549485564232
+              ],
+              [
+                0.10523657500743866,
+                0.014474974013864994,
+                0.013566551730036736
+              ]
+            ],
+            "mean_outer_gates": [
+              0.908444881439209,
+              0.8859958052635193,
+              0.8610795140266418
+            ],
+            "mean_route_entropy": 2.4992833137512207,
+            "mean_joint_minus_marginal_product_L1": 0.06490559130907059
+          },
+          "peak_memory": 1445382144
+        },
+        "K_axis_shared": {
+          "selected_epoch": 5,
+          "parameters": 100821638,
+          "trainable_parameters": 3123846,
+          "descriptor_dim": 5120,
+          "budget_epochs": 100,
+          "final_epoch": {
+            "mAP": 43.198921153051494,
+            "mINP": 20.008745875958574,
+            "Rank-1": 60.06768189509306,
+            "Rank-5": 77.49576988155668,
+            "Rank-10": 82.74111675126903,
+            "Rank-20": 88.66328257191202
+          },
+          "runtime": {
+            "end_to_end_seconds": 15.712317705154419,
+            "triplets": 1646,
+            "includes_decode_and_first_batch": true,
+            "mean_route": [
+              [
+                0.1823984831571579,
+                0.01812925562262535,
+                0.015996981412172318
+              ],
+              [
+                0.1081896722316742,
+                0.015497717075049877,
+                0.013942467048764229
+              ],
+              [
+                0.07324966788291931,
+                0.013002585619688034,
+                0.01240210235118866
+              ],
+              [
+                0.13291989266872406,
+                0.016442371532320976,
+                0.014777949079871178
+              ],
+              [
+                0.11127622425556183,
+                0.01480527687817812,
+                0.0137719064950943
+              ],
+              [
+                0.0829726979136467,
+                0.01368760410696268,
+                0.012849133461713791
+              ],
+              [
+                0.10518524050712585,
+                0.014797993935644627,
+                0.01370477769523859
+              ]
+            ],
+            "mean_outer_gates": [
+              0.9045926332473755,
+              0.8824114799499512,
+              0.8747106194496155
+            ],
+            "mean_route_entropy": 2.512756824493408,
+            "mean_joint_minus_marginal_product_L1": 0.06195861101150513
+          },
+          "peak_memory": 1448861696
+        }
+      },
+      "model_results": 5,
+      "paired_query_rows": 3546,
+      "curve_rows": 100,
+      "RGBNT100_native": {
+        "status": "ACTUAL_TWO_K_NATIVE3_RELATION_LOCAL_PI_PASS_FORMAL_NEXT",
+        "observed_at": "2026-10-07T12:43:03",
+        "dataset": "RGBNT100",
+        "remote_root": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201k_relation_local_pi_20261007/RGBNT100",
+        "actual_native_updates": 6,
+        "primary_margin": 0.3,
+        "auxiliary_soft_unchanged": true,
+        "PI_outlet": "shared_relation_local",
+        "PI_native_input_isolation": true,
+        "controlled10_01_same_input_parent_equal": true,
+        "partial_loss_effective_zero": true,
+        "normal_full50_complete": false
+      },
+      "RGBNT100_schedule": {
+        "status": "ACTUAL_K_201_MSVR_TWO_NORMAL_PAIRS_CLOSED_RGBNT100_NATIVE6_LONG_STAGE_WAIT_SCHEDULED",
+        "recorded_at": "2026-10-07T13:05:32",
+        "driver_pid": 46392,
+        "native_observed": "2026-10-07T12:43:03",
+        "completed_K_formal_epochs": 200,
+        "completed_K_formal_updates": 6704,
+        "actual_K_native_updates": 18,
+        "measured_K_to_I_train_time_ratios": {
+          "frequency_shared": 1.0826853806065941,
+          "axis_shared": 1.0130388052761798
+        },
+        "estimated_100_train_seconds": {
+          "frequency_shared": 10179.902493830747,
+          "axis_shared": 9068.143206615894
+        },
+        "planned_first_look": "2026-10-07T15:27:42",
+        "limits": "Estimate from same-arm measured completed K201/MSVR versus I and original I100 times. Runtime includes train/eval/IO, not isolated module cost. Firstlook5minbeforeestimatedend; no early NN/temperature/power query or repeated observer.",
+        "native_local_wait_session_id": 5796
+      },
+      "V12_unused_archive": {
+        "status": "ACTUAL_FOUR_UNUSED_CLOSED_V12_WEIGHTS_ARCHIVED27_AND_SERVER26_COPIES_RETIRED",
+        "verified_at": "2026-10-07T13:03:14",
+        "records": [
+          {
+            "path": "runs/common_coordinate_v12_trial_20261003/development/MSVR310_twins_shared_s42/best.pth",
+            "bytes": 401421657,
+            "sha256": "49f4e4020091b6e038d8f8e3d529eca7ee3f4dab0064c1964d3a24a5a715f7b5",
+            "result_sha256": "7485a2a4ac797d4d1cd2fbfa6cca9c9b023aeee21014b0993a1969cbcae44247"
+          },
+          {
+            "path": "runs/common_coordinate_v12_trial_20261003/development/MSVR310_axis_shared_s42/best.pth",
+            "bytes": 401421657,
+            "sha256": "40985657381647fa7429c005e2a1f7684469b1d9032d516e8d97a39bc6baaae0",
+            "result_sha256": "2ee3d12823c78b2508cd6a9e5be40c7e49ff5a5c30bb2551be5f6851bc8413d4"
+          },
+          {
+            "path": "runs/common_coordinate_v12_trial_20261003/development/MSVR310_demo_shared_s42/best.pth",
+            "bytes": 397917463,
+            "sha256": "a04f79c5a5efbb56ffcf61fef2bdd193b89a40a74f249965251d2b3f8b4c37e6",
+            "result_sha256": "06461008c5a28a151c76f111cc528922ddf331237926c0216cdb4fc11fa2b145"
+          },
+          {
+            "path": "runs/common_coordinate_v12_trial_20261003/development/MSVR310_frequency_shared_s42/best.pth",
+            "bytes": 401421657,
+            "sha256": "42e8291f4afe6bee03547bdb4479e8e3f7081d796034a64037cd0153c36c5928",
+            "result_sha256": "7f0e00fd667565eafd162109254a5462810240109f14be101ad3450d2dd8e04e"
+          }
+        ],
+        "bytes": 1602182434,
+        "archive_root": "/data/gb/Re-ID/DeMo-DualAxis/archives/closed_V12_weights_20261007",
+        "archive_ack": {
+          "status": "ALL_FOUR_V12_WEIGHTS_SIZE_SHA_ACK",
+          "manifest_sha256": "273610cc5059484c1238e6c785995891da9a73f273610279c04fdc6f261a84ce"
+        },
+        "before_free": 2280828928,
+        "after_free": 3872403456,
+        "protected_anchors_and_I42_best": {
+          "runs/full_official_baselines_20261004/training/RGBNT201_demo_s42/best.pth": "a2239edaa14cf80f0e31e2284be7d4a4e547aa7fc31c355ea5504fefba5f5808",
+          "runs/full_official_baselines_20261004/training/RGBNT100_demo_s42/best.pth": "95852451d64cdb6741060fac82919e2ecfde9c5fa913c2e9a9ec384c3b046b2a",
+          "runs/full_official_baselines_20261004/training/MSVR310_demo_s42/best.pth": "fb1409ab5e958f70fae0fdf991a95c7dc59e3cefbaa31ba63630578c39e48572",
+          "runs/r201i_primary_margin_20261006/RGBNT201/training/RGBNT201_r201i_frequency_shared_s42/best.pth": "120e3284b8ae8516044d8549af3c071eb90b9649bc3716567c5d8b9620838223",
+          "runs/r201i_primary_margin_20261006/RGBNT201/training/RGBNT201_r201i_axis_shared_s42/best.pth": "de07a859a05de924031dfb92b80b7fff58132d6f0f776e07815357f3b334347f",
+          "runs/r201i_primary_margin_20261006/MSVR310/training/MSVR310_r201i_frequency_shared_s42/best.pth": "32d2c852063300312540ac4bde156bdc7c2eb42584727734a671b3d66cb2bd50",
+          "runs/r201i_primary_margin_20261006/MSVR310/training/MSVR310_r201i_axis_shared_s42/best.pth": "6a548d98f03000d0ab9944e5f2a14346eba0ddd78e3db4daa5fae8f6062e457e",
+          "runs/r201i_primary_margin_20261006/RGBNT100/training/RGBNT100_r201i_axis_shared_s42/best.pth": "d619d9e751e1c71e309269f6e0ef2eb0ae7948b796e91524237c8bbc5a3bde90",
+          "runs/r201i_primary_margin_20261006/RGBNT100/training/RGBNT100_r201i_frequency_shared_s42/best.pth": "4c36529a8af46305dc87e4f28d3212112e1d84bd9176fe6cbef08e040531c256"
+        },
+        "new_neural_calls": 0,
+        "new_optimizer_updates": 0,
+        "unique_weights_lost": 0,
+        "limits": "Four completed historical fit/dev V12 weights only; old source paths require explicit archive27 restore for neural replay. No current I/J/original/G weights, metrics, raw or other projects modified."
+      },
+      "K_all3_normal_complete": false,
+      "K_missing_evaluated": false,
+      "goal": "ACTIVE_UNMET",
+      "limits": "One dataset/seed42, normal benchmark mAP-best earliest tie; original50 versus I/K original50+additional50. K versus same-variant I changes only the existing shared PI input from global broadcast to relation-local M_S/F_S; primary hinge.3 and all auxiliary soft losses remain identical, and K axis/frequency has matched budget/params/dims/sampling. Historical frequency is mixed-source ordinary-expert control, not literal DeMo plus plain-frequency branch. No all3/missing49/multiseed/retrained-psi or causal claim. CPU exports check earlier installed-GT audits, not a new NN/GT inference."
     }
   },
   "decision_rules": [
@@ -14389,8 +14931,8 @@
   ],
   "next_action": {
     "milestone": "PREPARE_NORMAL_INPUT_CANDIDATE_FROM_CLOSED_CONTROL_EVIDENCE",
-    "status": "K201_NORMAL_FULL50_GT_RAW_CPU_CLOSED_MSVR_NATIVE6_PASSED",
-    "action": "Original K receiver46392 completed first201 twofull50/5294updates/native6/GT/raw/automaticCPU. MSVR native6 passed12:18:06; sameoriginalqueue continuesMSVR then100. Resume SAME native76945 until12:34:27 oractualreceiverterminal, noearlyremoteprogress ornewobserver/NN/intake. Completed previous waits2014/40094/96959 mustnotreplay. All3normal+GT/raw/CPU beforefixed6besttyped294conditions1176states. Normal201double+2 verified but parentI gain small, lowerR5/R20 andworseE50 retained; all3+2/fair/missing/stability/retrainedablations/cost stillunmet.",
+    "status": "K201_AND_MSVR_FULL50_GT_RAW_CPU_CLOSED_RGBNT100_NATIVE18_LONG_WAIT",
+    "action": "Original K receiver46392 completed201+MSVR fourfull50/200epochs6704updates/GT/raw/automaticCPU; MSVR notdouble+2, latefailurespreserved. 100native6 passed12:43:03(total18); longestformalstagecontinues2/3,max2NN. Resume SAME localwait5796 until15:27:42 oractualreceiverterminal, no earlyremoteprogress/newobserver/NN/sourcechange. Prior2014/40094/96959/76945/11525waits terminalmustnotreuse. All3normalGT/raw/CPU beforefixedsixbest42 typed49. ActualfourclosedV12weights archive27sizeSHAACKbeforeexact26source-retirement, currentteachers/I/J/K/G/raw/metrics untouched. Fullgoalall3+2/fair/missing/stability/retrainedablation/realcost ACTIVE_UNMET.",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
@@ -14403,8 +14945,8 @@
       "temperature_power_control": false
     },
     "existing_M8_closeout": "ACTUAL_COMPLETE_NATIVE52604_EXIT0_THREE50_147FROZEN882STATES_LOCAL_RAW_VERIFIED",
-    "pending_missing_diagnostic": "K201fullnormalclosed, remainingMSVR/100pending; relation-localPI SOURCE/native passed but missingT->RT andall49 effects unknown. Fixednormal best six controls/seed42, no missingcheckpointreselect. I49trueoverlap harms and12private source-disjointnearconstant2 retained; no causalfixclaim.",
-    "current_rule": "Original K receiver46392 completed first201 twofull50/5294updates/native6/GT/raw/automaticCPU. MSVR native6 passed12:18:06; sameoriginalqueue continuesMSVR then100. Resume SAME native76945 until12:34:27 oractualreceiverterminal, noearlyremoteprogress ornewobserver/NN/intake. Completed previous waits2014/40094/96959 mustnotreplay. All3normal+GT/raw/CPU beforefixed6besttyped294conditions1176states. Normal201double+2 verified but parentI gain small, lowerR5/R20 andworseE50 retained; all3+2/fair/missing/stability/retrainedablations/cost stillunmet."
+    "pending_missing_diagnostic": "K201normalpositive, MSVRnormalFAIL, 100ongoing. RelationlocalPI smallnormalgain doesnotproveT->RTmissingfix; frozenfixedsixbest42K49 plannedonlyafterall3normalstrictclosure. Preserve I49 trueoverlap harms/disjointprivateconstant2/allnegative andallconditionalI42/43/44 seeds; Kmissing0.",
+    "current_rule": "Original K receiver46392 completed201+MSVR fourfull50/200epochs6704updates/GT/raw/automaticCPU; MSVR notdouble+2, latefailurespreserved. 100native6 passed12:43:03(total18); longestformalstagecontinues2/3,max2NN. Resume SAME localwait5796 until15:27:42 oractualreceiverterminal, no earlyremoteprogress/newobserver/NN/sourcechange. Prior2014/40094/96959/76945/11525waits terminalmustnotreuse. All3normalGT/raw/CPU beforefixedsixbest42 typed49. ActualfourclosedV12weights archive27sizeSHAACKbeforeexact26source-retirement, currentteachers/I/J/K/G/raw/metrics untouched. Fullgoalall3+2/fair/missing/stability/retrainedablation/realcost ACTIVE_UNMET."
   },
   "blocked_audit": "results/preflight/common_outlet_power_blocked_audit_20261003.json",
   "user_resumption": {
