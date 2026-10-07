@@ -1,0 +1,2852 @@
+{
+  "status": "RESULT_TO_CLAIM_REVIEW_COMPLETE",
+  "claim_supported": "no",
+  "component_support": "partial",
+  "main_intended_claim_supported": false,
+  "goal_status": "ACTIVE_UNMET",
+  "goal_scope_preserved": true,
+  "intended_claim": "The same unified full-official method exceeds complete original DeMo by at least 2 percentage points in both mAP and Rank-1 on RGBNT201, RGBNT100 and MSVR310, fairly beats ordinary experts, and demonstrates stable conditional dual-axis retrieval utility with complete missing-modality evaluation and positive net benefits in the predefined key groups.",
+  "verdict_reason": "Execution and the current full49 reporting are complete. The full scientific claim is not met by these results: only RGBNT201 passes the normal +2/+2 gate, while RGBNT100 and MSVR310 have negative all49 mean 11-minus-00 utility. RGBNT201 supplies useful positive component evidence, including five expert-seed normal results conditional on the same DeMo42 anchor, but does not establish the required three-dataset performance, complete-pipeline stability, or uniformly positive key-group cooperation.",
+  "confidence": "high",
+  "confidence_scope": {
+    "current_full_claim_not_supported": "high",
+    "RGBNT201_conditional_normal_benefit": "high",
+    "causal_explanation_or_next_intervention_success": "low",
+    "priority_of_one_final_margin_control_over_an_arbitrary_cap": "medium"
+  },
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer_attribution": {
+    "role": "Fresh-context secondary Codex result-to-claim reviewer",
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "max",
+    "actual_model_backend": "UNATTESTED",
+    "actual_reasoning_effort": "UNATTESTED",
+    "cross_family_acceptance": false,
+    "scope": "Read local source artifacts and performed bounded stdlib arithmetic checks; no SSH, model forward, optimizer, installation, cleanup, publication, or source modification. The sole written artifact is this review JSON."
+  },
+  "acceptance_interpretation": {
+    "source": "results/preflight/research_goal_optimized_20261003.json#acceptance",
+    "normal": "Retain the same-method, all-three-dataset mAP and Rank-1 +2 pp target and the final frozen-recipe paired-seed requirement.",
+    "missing": "Require complete 49-condition coverage, predefined key groups, all positive and negative results, and fair correctly masked ordinary controls. This is not a newly invented requirement that every one of the 49 conditions individually exceeds DeMo by +2/+2.",
+    "double_plus2_condition_counts": "Continue reporting these counts descriptively, without turning them into either all-condition acceptance or a replacement for the key-group and ordinary-control evidence.",
+    "selection": "Highest normal official benchmark mAP, earliest exact ties, with the same selected checkpoint for all six metrics and all49 conditions. This is benchmark-selected evidence, not an untouched independent test.",
+    "sampling_unit": "Condition means are equal-condition diagnostics. Rescue/harm totals and condition-query rows repeat the same queries; the combined dataset total has 3142 unique queries, not millions of independent observations.",
+    "performance_vs_execution": "A successful receiver exit and complete GT/RAW/CPU collection establish execution completion, not performance acceptance."
+  },
+  "claims": [
+    {
+      "id": "normal_all_three_plus2",
+      "claim_supported": "no",
+      "claim": "One unified L/P8K8 method passes normal mAP and Rank-1 +2 pp on all three official datasets.",
+      "judgment": "RGBNT201 passes at +3.9897397009 mAP and +4.5454545455 Rank-1; RGBNT100 has only +0.1659886007 and 0; MSVR310 has only +0.0291571008 and 0. Exactly one of three datasets passes. The unchanged K201 P8K8 pair is valid reused evidence for L, not another trained replication.",
+      "sources": [
+        "normal_and_missing_six_metrics",
+        "uniform_L_source",
+        "normal_and_missing_scope",
+        "goal_acceptance"
+      ]
+    },
+    {
+      "id": "RGBNT201_frozen_joint_utility",
+      "claim_supported": "yes",
+      "claim": "For the selected K42/L-equivalent RGBNT201 checkpoint, joint inference produces measurable normal retrieval improvements over its own base and either controlled single-axis state.",
+      "judgment": "11-minus-00 is +3.989740/+4.545455 pp in mAP/Rank-1, with 43 first-rank rescues and 5 harms. 11-minus-10 is +3.473546/+4.066986, and 11-minus-01 is +3.869687/+4.306220. This is a conditional frozen-state result. Switching states also changes messages, routing/gates and interaction paths, and each state uses its own gallery descriptors; it does not isolate the necessity of psi, PI or one learned branch.",
+      "sources": [
+        "normal_and_missing_six_metrics",
+        "condition_comparisons",
+        "identity_outlet_source",
+        "relation_local_source"
+      ]
+    },
+    {
+      "id": "fair_ordinary_advantage_all_three",
+      "claim_supported": "no",
+      "claim": "The dual-axis method consistently beats the matched ordinary experts across the three datasets and missing key groups.",
+      "judgment": "Normal RGBNT201 exceeds its paired ordinary control by +3.612301/+4.665072, but Rank-20 is lower by 0.119617 pp. RGBNT100 has +0.159538 mAP and zero Rank-1 gain. MSVR310 has -0.00002545 mAP and +0.169205 Rank-1, a mixed result. Full49 against ordinary is +0.367892/+0.292940 for RGBNT201, -0.014087/+0.009520 for RGBNT100, and -0.072969/-0.258987 for MSVR310. The current frequency_shared control is a mixed-source ordinary expert control, not a literal single frequency branch or the full set of final-recipe ordinary-twins ablations.",
+      "sources": [
+        "normal_and_missing_six_metrics",
+        "availability_group_deltas",
+        "identity_outlet_source",
+        "method_history"
+      ]
+    },
+    {
+      "id": "full49_execution_reporting",
+      "claim_supported": "yes",
+      "claim": "Current L-equivalent fixed-normal-best evaluation covers all49 conditions, four states, all three datasets, and retains negative evidence.",
+      "judgment": "The completed scope reports four new L controls with 196 conditions plus the exact two K201 controls with 98 reused conditions, for 294 control-condition cases and 1176 state cases. Native 4/16 is separate. The combined tables contain 2107 six-metric rows and 1519 comparisons. This conclusion is about the completed evidence collection; independent integrity findings are attached separately and do not certify the performance claim.",
+      "sources": [
+        "missing_execution_terminal",
+        "normal_and_missing_scope",
+        "normal_and_missing_six_metrics",
+        "condition_comparisons"
+      ]
+    },
+    {
+      "id": "stable_positive_missing_key_group_utility",
+      "claim_supported": "no",
+      "claim": "Opening the dual-axis experts has stable positive net retrieval benefits in the predefined missing groups.",
+      "judgment": "All49 11-minus-00 mAP/Rank-1 is +0.503897/+0.673762 on RGBNT201, but -0.064812/-0.080919 on RGBNT100 and -0.063766/-0.193377 on MSVR310. RGBNT100 overlap-mismatch and both-partial groups are negative on both core metrics. MSVR310 overlap-mismatch, partial-query/full-gallery and both-partial are negative on both core metrics. RGBNT201 source-disjoint Rank-1 is negative versus both 00 and ordinary, and both-partial Rank-1 is negative versus ordinary. Large original-DeMo improvements under partial-query/full-gallery do not isolate expert cooperation when 00 or the ordinary control already provides those gains. The broad key-group claim is contradicted, even though all49 reporting itself is complete.",
+      "sources": [
+        "availability_group_deltas",
+        "condition_comparisons",
+        "disjoint_geometry"
+      ]
+    },
+    {
+      "id": "N5_conditional_expert_seed_normal_advantage",
+      "claim_supported": "yes",
+      "claim": "Across five RGBNT201 expert seeds on the fixed DeMo42 anchor, selected normal dual-axis models have a positive paired average advantage.",
+      "judgment": "Axis mean mAP/Rank-1 is 78.162795/83.803828 with sample SD 0.914273/0.925005. Paired ordinary improvements average +2.205500/+3.157895 with sample SD 0.948598/1.203922. All five pairs have positive mAP and Rank-1 differences, but only 2/5 pass +2/+2 versus ordinary and 3/5 versus the fixed original DeMo42. Seed43 ordinary-relative mAP +1.982864 must not be rounded into a pass. Seed45/46 original-relative mAP falls below +2. This is a mean-and-paired result, not a claim that every seed passes.",
+      "sources": [
+        "N5_result",
+        "N5_per_seed",
+        "N5_paired_deltas"
+      ]
+    },
+    {
+      "id": "whole_pipeline_and_three_dataset_stability",
+      "claim_supported": "no",
+      "claim": "Five independent whole pipelines establish stable three-dataset normal and missing performance.",
+      "judgment": "N5 changes expert initialization/sampling with one fixed original DeMo42 teacher; it is not five independently retrained teachers or complete pipelines. L's other two datasets have one learner seed each. Normal Best-of-5 axis seed42 and ordinary seed45 are distinct from matched-seed mean statistics. Best-of-5 missing evaluation is already complete for those two fixed winners, but it does not supply five-seed missing replication. Late degradation remains: L axis E50 is 84.514538/96.093294 on RGBNT100 and 41.530498/58.206430 on MSVR310; N5 axis seed46 E50 also falls below its fixed anchor on mAP.",
+      "sources": [
+        "N5_result",
+        "N5_per_seed",
+        "best5_missing_scope",
+        "best5_missing_groups",
+        "RGBNT100_L_axis_epochs",
+        "MSVR_L_axis_epochs"
+      ]
+    },
+    {
+      "id": "causal_mechanism_and_source_comparability",
+      "claim_supported": "no",
+      "claim": "The evidence proves conditional psi/PI necessity, calibrated contribution estimates, or end-to-end source isolation and meaningful cross-source matching.",
+      "judgment": "Relation-local PI directly reads [M_S,F_S] rather than broadcasting one global PI vector, but conditions, gates, route weights and final normalization still couple sources. Four-state utility and direct-input locality do not establish necessity or calibration. For every current dataset, all12 source-disjoint private-distance conditions remain within 4.76837158203125e-7 of distance 2 across the four states. Report their measured rankings, but do not interpret floating-point/tie-dependent differences as demonstrated cross-source identity retrieval. A margin change or magnitude cap cannot by itself create common support between disjoint private coordinate blocks.",
+      "sources": [
+        "relation_local_source",
+        "identity_outlet_source",
+        "disjoint_geometry",
+        "method_history"
+      ]
+    }
+  ],
+  "what_results_support": [
+    "Complete current normal and full49 evaluation with a transparent fixed-checkpoint rule and retained failures.",
+    "A useful RGBNT201 normal candidate with positive frozen joint-state utility and positive expert-seed paired average improvements conditional on one fixed anchor.",
+    "A modest positive RGBNT201 all49 11-minus-00 mean, with important key-group and higher-rank negatives explicitly retained.",
+    "Within each K/L family, the ordinary and dual-axis arms form a matched new-stage budget and data-order comparison; exact K201 reuse avoids inventing an extra L run.",
+    "A narrow, measurable training-signal rationale for testing one final-only margin 0.6 control, without evidence that it will solve the retrieval goal."
+  ],
+  "what_results_dont_support": [
+    "All-three-dataset normal +2/+2 acceptance, or changing the goal to single-dataset success.",
+    "Stable positive missing cooperation across the key groups, or replacing fair 11-minus-00/ordinary contrasts with the larger original-DeMo missing differences.",
+    "Universal improvement across all six metrics, all seeds, every epoch, or every missing condition.",
+    "Five independent full pipelines, an independent untouched test, or inferential sample sizes obtained by counting repeated condition-query rows as independent.",
+    "Equal total training budgets versus original DeMo: original50 is compared with a frozen original50 anchor plus an additional50 expert stage; only the new-stage ordinary/axis budgets are matched.",
+    "Hinge inactivity as a universal cause, harmful auxiliary losses as an established cause, or either margin0.6 or a final correction cap as a validated fix.",
+    "Direct PI input locality as end-to-end isolation, or four-state superiority as retrained psi/PI necessity or contribution calibration.",
+    "An accepted canonical evidence precheck: evidence_check.py is unresolved."
+  ],
+  "missing_evidence": [
+    {
+      "gap": "Performance, not execution",
+      "needed": "One frozen unified recipe that meets the original normal +2/+2 targets on all3 and produces repeatable benefits versus fair ordinary controls and own00 in the predefined missing key groups. Repeating the completed L49 collection unchanged would not fill this gap."
+    },
+    {
+      "gap": "Stability and uncertainty",
+      "needed": "At least three paired final-recipe seeds on all3 after freezing the scientific choice, with the anchor/pipeline randomness explicitly distinguished from expert-only repeats, identity-cluster uncertainty, and complete missing-group positive and negative outcomes. Existing RGBNT201 N5 and fixed-Best5 missing outputs remain valid but narrower evidence."
+    },
+    {
+      "gap": "Mechanism specificity",
+      "needed": "Matched final-recipe retraining controls for independent versus joint routing, single versus dual experts and the claimed interaction components, plus per-query/identity behavior. Do not substitute frozen state switches, source reachability, loss activity or gradient existence for this evidence."
+    },
+    {
+      "gap": "Comparable source geometry",
+      "needed": "Evidence that source-disjoint descriptors support meaningful identity comparison rather than near-constant private distances, while preserving the entire49 report and the prior common-outlet/identity-alignment negative history."
+    },
+    {
+      "gap": "Final-recipe cost",
+      "needed": "Measured training and inference cost for the final common recipe and its matched controls, including descriptor/active-parameter counts, comparable timing, memory and clearly scoped FLOPs. Collection wall time, unequal total-stage budgets and historical model timings are not interchangeable with that evidence."
+    },
+    {
+      "gap": "Diagnostic basis for the next control",
+      "needed": "For a margin control, verify per-anchor gap/active fractions and actual final-metric gradients on prespecified official-training batches, then observe complete training and retrieval. For a correction bound, measure the actual aggregate correction after all routes/gates/eligibility and before final normalization; current I201 selected-feature geometry does not measure L late-epoch drift or select a justified universal cap."
+    }
+  ],
+  "suggested_claim_revision": {
+    "reporting_only": "Report complete L-equivalent full49 evaluation and the positive RGBNT201 conditional normal result, alongside the two weak datasets, key-group harms and expert-only seed limits.",
+    "goal_revision": "None. Keep the intended all3 +2/+2, fair-control, full49, mechanism, stability and cost objective ACTIVE_UNMET."
+  },
+  "next_scientific_choice": {
+    "preferred_training_factor": "One prespecified final-primary hinge margin 0.3 to 0.6 control, paired ordinary and dual-axis, after a bounded real preflight.",
+    "alternative": "A bound on the FINAL aggregated correction is worth a separate diagnostic and potentially a later single-factor training control; do not combine it with the margin change.",
+    "reason_for_priority": "The directly recorded RGBNT100 zero-hinge batches and logged batch-mean distance gaps provide a concrete signal-availability test for margin0.6. That value is not proven optimal or sufficient. By contrast, no current L train/late-state aggregate geometry identifies a useful cap, and the actual I201 selected rescue/harm amplitudes overlap. Thus an arbitrary cap has weaker immediate evidential grounding than one explicit margin control.",
+    "source_intervention_boundary": "run_r201i_primary_margin.py intercepts only the first loss call on the final unit5120 descriptor and hardcodes TripletLoss(margin=.3), gap=.3 and matching telemetry. The proposed isolated control changes only that final-primary margin and its truthful telemetry. Keep fused CE .25, auxiliary soft objectives, partial0 forward/BN2/mining/two backwards, K relation-local PI, L P8K8, Adam schedule, teachers, weights, output dimension and checkpoint selection unchanged. Changing MODEL.NO_MARGIN globally or the auxiliary margin would test a different factor.",
+    "why_not_a_universal_cause": "LMSVR has 197/200 active last10 batches at margin0.3 while retrieval deteriorates. Raising margin would increase a signal that is already present there; it cannot validate the hypothesis that inactivity caused all failures. Nonzero total loss also does not locate harmful auxiliary gradients.",
+    "final_aggregate_bound_definition": "If pursued separately, define R after summing the M/F/I corrections and multiplying relation mass, eligible-count scaling and eligibility, immediately before adding it to the frozen base and normalizing. Constrain the norm of this complete R relative to the same base, with one fixed training-grounded rule applied to both arms. Per-branch normalized directions, small individual gates, or bounds before the route weighting do not by themselves bound the deployed aggregate correction. Do not choose the cap from rescued/harmed benchmark cohorts or disable all missing experts to manufacture safety.",
+    "cap_evidence_limit": "The measured I201 selected dual-axis mean relative raw correction is 0.190777, close to G201's 0.191529 despite different trajectories. I201 rescue/harm mean final shifts are 0.197073/0.199475. This argues against a claimed universal amplitude threshold; it does not prove a training-time aggregate bound can never help. Current L late-feature growth is unmeasured, not an established cause.",
+    "launch_status": "Neither margin0.6 nor a final aggregate-bound experiment was launched by this review."
+  },
+  "next_experiments_needed": [
+    {
+      "rank": 1,
+      "type": "bounded_diagnostic_preflight",
+      "action": "On a fixed small set of official-training batches, compare the final unit5120 primary hinge at margins0.3 and0.6 on the same features. Record per-anchor positive/negative gaps, active fractions, final-feature and representative parameter gradient magnitudes, and finite native updates for both matched arms. Preserve all official training identities and do not introduce an artificial fit/dev split.",
+      "purpose": "Verify that the proposed isolated factor changes the intended optimization path. The new batch-mean lower-bound calculation already supports a test; a gradient/preflight pass is not a retrieval result.",
+      "not_yet_done": true,
+      "sources": [
+        "RGBNT100_primary_diagnostic",
+        "MSVR_primary_diagnostic",
+        "primary_margin_source",
+        "triplet_source"
+      ]
+    },
+    {
+      "rank": 2,
+      "type": "single_factor_full_training_control",
+      "action": "Run one prespecified final-only margin0.6 paired control against the existing L margin0.3 recipe with unchanged full official data, matched ordinary/axis order and updates, same teachers and full50 schedule. Respect RGBNT201 priority, then complete all3 normal evaluations before fixed-normal-best all49 evaluation. Because the objective changes, RGBNT201 margin0.6 must be trained; the exact K201 reuse valid for L does not extend to this new factor.",
+      "decision_evidence": "Report all six selected and final metrics, all curves, fair ordinary contrasts, own00/10/01/11 utility and every key-group negative. More active hinge, lower training loss or a higher isolated best score cannot close the goal. Do not initiate a margin sweep or select different margins per dataset from benchmark outcomes.",
+      "not_yet_done": true,
+      "sources": [
+        "uniform_L_source",
+        "primary_margin_source",
+        "goal_acceptance"
+      ]
+    },
+    {
+      "rank": 3,
+      "type": "separate_geometry_diagnostic_then_conditional_control",
+      "action": "Measure the final weighted aggregate correction on prespecified training batches and prospectively through the next complete run. If those observations motivate a finite correction budget, compare one fixed aggregate-bound rule with an otherwise identical unbounded recipe using matched arms and fresh full training; do not simultaneously alter the margin, router, auxiliary weights or sampling.",
+      "decision_evidence": "Test whether the bound improves both ordinary-relative and own00 retrieval utility, including negative missing groups, while retaining RGBNT201's useful joint gain. Do not rerun old G/H or I201 selected geometry unchanged and do not infer late growth from those early selected banks.",
+      "not_yet_done": true,
+      "sources": [
+        "relation_local_source",
+        "identity_outlet_source",
+        "I201_selected_geometry",
+        "availability_group_deltas"
+      ]
+    },
+    {
+      "rank": 4,
+      "type": "missing_utility_and_mechanism_controls",
+      "action": "Use the completed full49 and four-state negatives to select the next distinct source-comparability or cooperation hypothesis if the objective control fails. Preserve source-disjoint geometry as a structural limitation and inspect actual overlap/both-partial harms. Any proposed training change must differ meaningfully from the already completed pooling, identity-coordinate, partial-loss, auxiliary-margin and relation-PI experiments. Once a candidate shows useful fair key-group gains, perform the claimed component's matched retraining ablation.",
+      "decision_evidence": "A new common-coordinate claim requires real retrieval evidence beyond approximately constant disjoint distances; a psi/PI claim requires isolated retraining beyond direct-input locality or four-state gains.",
+      "sources": [
+        "method_history",
+        "goal_acceptance",
+        "disjoint_geometry",
+        "availability_group_deltas"
+      ]
+    },
+    {
+      "rank": 5,
+      "type": "frozen_candidate_acceptance",
+      "action": "Freeze one successful recipe and its selection rule, then obtain the required paired repeats on all3, identity-group uncertainty, complete49/group/negative reporting, and matched final-recipe cost evidence. Preserve N5 expert-only and Best-of-5 as separate statistics; do not spend acceptance runs on unchanged L solely to relabel its present failures.",
+      "sources": [
+        "goal_acceptance",
+        "N5_result",
+        "best5_missing_scope"
+      ]
+    }
+  ],
+  "already_tried_directions_not_to_repeat_unchanged": [
+    {
+      "direction": "G zeroed partial-view CE/cross-gallery loss gradients",
+      "observed": "RGBNT201 normal improved, but late degradation and negative missing utility remained. The partial forward, BN updates, mining and two backwards were retained; removal of all partial computation was not tested.",
+      "source": "docs/实验交接.md:1482"
+    },
+    {
+      "direction": "E/F Smooth-AP and increased .01-to-.05 smoothing scale; H label versus camera-aware AP references",
+      "observed": "Increasing loss activity did not produce the required retrieval gain; H's camera-reference correction did not reach +2/+2. Do not repeat the same AP scale grid or claim that more nonzero loss implies better retrieval.",
+      "source": "docs/实验交接.md:1180; docs/实验交接.md:1551"
+    },
+    {
+      "direction": "I changed only final-primary soft Triplet to hinge0.3",
+      "observed": "Useful RGBNT201 normal improvement and better trajectory than G, but weak RGBNT100/MSVR and conditional-seed failures persist. A0.6 control is a new fixed margin value, not proof that I solved stability.",
+      "source": "run_r201i_primary_margin.py; docs/实验交接.md:697"
+    },
+    {
+      "direction": "J changed independent M/F auxiliary soft metrics to hinge0.3",
+      "observed": "Small/mixed selected changes, no all3 +2/+2 and no repair of MSVR late degradation. Do not repeat J unchanged or treat it as a test of the final-primary margin0.6.",
+      "source": "docs/实验交接.md:531"
+    },
+    {
+      "direction": "K replaced global broadcast PI with a shared per-relation PI",
+      "observed": "RGBNT201 benefit is retained, but three-dataset and key-group success remain absent. Direct PI locality is implemented already and is not an untried repair or established causal explanation.",
+      "source": "run_r201k_relation_local_pi.py; relation_local_identity_outlet.py; docs/实验交接.md:592"
+    },
+    {
+      "direction": "L unified NUM_INSTANCE8 at B64",
+      "observed": "K201 is exactly reused; new100/MSVR full50 and all49 are complete. The sampler change does not solve either weak dataset. It changes both positive multiplicity and negative-identity pool, with updates705-to1000 and6357-to6563, so oldK-versusL is not an equal-update isolated positive-coverage test.",
+      "source": "run_r201l_uniform_k8.py; results/preflight/r201l_uniform_K8_plan_20261007.json"
+    },
+    {
+      "direction": "G/H and I201 selected-feature radial/shift diagnostics",
+      "observed": "Corrections are already predominantly tangential and I201 rescue/harm amplitudes overlap. Removing radial components or choosing a benchmark-derived universal cap is not supported as the next repair. No actual FINAL aggregate-bound training has yet been shown.",
+      "source": "results/r201i_selected_identity_shift_20261007/result.json; docs/实验交接.md:1206"
+    }
+  ],
+  "sources": {
+    "goal_acceptance": "results/preflight/research_goal_optimized_20261003.json",
+    "review_request": "results/preflight/r201l_full49_result_to_claim_request_20261008.json",
+    "canonical_precheck": "results/preflight/r201l_full49_claim_evidence_precheck_20261008.json",
+    "method_history": "docs/实验交接.md",
+    "normal_and_missing_six_metrics": "results/r201l_missing49_20261007/missing_analysis/six_metrics.csv",
+    "availability_group_deltas": "results/r201l_missing49_20261007/missing_analysis/availability_group_deltas.csv",
+    "condition_comparisons": "results/r201l_missing49_20261007/missing_analysis/comparisons.csv",
+    "disjoint_geometry": "results/r201l_missing49_20261007/missing_analysis/disjoint_distance_geometry.csv",
+    "normal_and_missing_scope": "results/r201l_missing49_20261007/missing_analysis/result.json",
+    "missing_execution_terminal": "results/preflight/r201l_missing49_complete_20261008_actual.json",
+    "N5_result": "results/r201k_expert_N5_20261007/normal_seed_analysis/result.json",
+    "N5_per_seed": "results/r201k_expert_N5_20261007/normal_seed_analysis/per_seed_six.csv",
+    "N5_paired_deltas": "results/r201k_expert_N5_20261007/normal_seed_analysis/paired_deltas.csv",
+    "best5_missing_scope": "results/r201k_best5_ordinary_missing49_20261007/missing_best5_analysis/result.json",
+    "best5_missing_groups": "results/r201k_best5_ordinary_missing49_20261007/missing_best5_analysis/availability_group_deltas.csv",
+    "RGBNT100_primary_diagnostic": "results/preflight/r201l_RGBNT100_closed_primary_activity_actual_20261008.json",
+    "MSVR_primary_diagnostic": "results/preflight/r201l_MSVR_closed_primary_activity_actual_20261008.json",
+    "RGBNT100_K_axis_batches": "results/r201k_relation_local_pi_20261007/RGBNT100/training/RGBNT100_r201k_axis_shared_s42/batch_orders.jsonl",
+    "RGBNT100_L_axis_batches": "results/r201l_uniform_k8_20261007/RGBNT100/training/RGBNT100_r201l_axis_shared_s42/batch_orders.jsonl",
+    "MSVR_L_axis_batches": "results/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_axis_shared_s42/batch_orders.jsonl",
+    "RGBNT100_L_axis_epochs": "results/r201l_uniform_k8_20261007/RGBNT100/training/RGBNT100_r201l_axis_shared_s42/epochs.csv",
+    "MSVR_L_axis_epochs": "results/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_axis_shared_s42/epochs.csv",
+    "uniform_L_source": "run_r201l_uniform_k8.py",
+    "K_source": "run_r201k_relation_local_pi.py",
+    "primary_margin_source": "run_r201i_primary_margin.py",
+    "relation_local_source": "relation_local_identity_outlet.py",
+    "identity_outlet_source": "rgbnt201_identity_outlet.py",
+    "triplet_source": "layers/triplet_loss.py",
+    "G_loss_source": "run_r201g_normal_priority.py",
+    "I201_selected_geometry": "results/r201i_selected_identity_shift_20261007/result.json",
+    "integrity_audit": "results/preflight/r201l_full49_integrity_audit_20261008.json",
+    "RGBNT100_normal_administrative_recovery": "results/preflight/r201l_RGBNT100_closed_archive_recovery_actual_20261008.json"
+  },
+  "reviewed_at": "2026-10-08T06:04:11.001394+08:00",
+  "integrity_status": "warn",
+  "audit_pending": false,
+  "integrity_audit": {
+    "path": "results/preflight/r201l_full49_integrity_audit_20261008.json",
+    "actual_saved_verdict": "WARN",
+    "actual_saved_integrity_status": "WARN",
+    "core_result_integrity": "PASS",
+    "summary": "No blocking integrity defect found in the actual current L normal/full49 and exact reused K201 evidence. Real dataset GT, raw metric computation, active entrypoints, complete declared scope and preserved exit provenance are consistent. Scope, budget, selection, near-tie geometry and unmet-goal limitations prevent full scientific acceptance.",
+    "blocking_findings_count": 0,
+    "nonblocking_findings_count": 5,
+    "nonblocking_findings": [
+      {
+        "id": "L-INTEGRITY-W01",
+        "severity": "WARN",
+        "blocking": false,
+        "kind": "selection_and_stability_limit",
+        "already_disclosed": true,
+        "finding": "CurrentL is benchmark-selected seed42 on a fixed teacher42; exact K201 reuse does not add an independent learner or full-pipeline replicate.",
+        "evidence": [
+          "results/r201l_missing49_20261007/jobs.json:100",
+          "results/r201l_missing49_20261007/missing_analysis/result.json:19",
+          "results/preflight/research_goal_optimized_20261003.json:13"
+        ]
+      },
+      {
+        "id": "L-INTEGRITY-W02",
+        "severity": "WARN",
+        "blocking": false,
+        "kind": "comparison_budget_limit",
+        "already_disclosed": true,
+        "finding": "OriginalDeMo50 and teacher50+expert50 are unequal total budgets; L-vs-oldK sampler composition and update counts differ. PairedL ordinary/axis remains matched.",
+        "evidence": [
+          "run_r201l_uniform_k8.py:9",
+          "identity_coordinate_three_dataset.py:39",
+          "analyze_r201l_dataset_normal.py:76"
+        ]
+      },
+      {
+        "id": "L-INTEGRITY-W03",
+        "severity": "WARN",
+        "blocking": false,
+        "kind": "geometry_and_mechanism_limit",
+        "already_disclosed": true,
+        "finding": "The12 disjoint-source conditions have distances2 +/-4.76837158203125e-7; their rankings cannot establish cross-source identity. Repeated-query aggregates and frozen state differences are not independent samples or causal/retrained mechanism proof.",
+        "evidence": [
+          "evaluate_identity_coordinate_missing49_stream.py:131",
+          "results/r201l_missing49_20261007/missing_analysis/result.json:19"
+        ]
+      },
+      {
+        "id": "L-INTEGRITY-W04",
+        "severity": "WARN",
+        "blocking": false,
+        "kind": "unmet_scientific_acceptance",
+        "already_disclosed": true,
+        "finding": "Normal allthree +2/+2 remains1/3; paired ordinary full49 double+2 counts are2/49 RGB201,0/49 RGB100,0/49 MSVR. A completed run is not scientific acceptance.",
+        "evidence": [
+          "results/r201k_relation_local_pi_20261007/RGBNT201/normal_analysis/comparisons.csv:2",
+          "results/r201l_uniform_k8_20261007/RGBNT100/normal_analysis/comparisons.csv:2",
+          "results/r201l_uniform_k8_20261007/MSVR310/normal_analysis/comparisons.csv:2",
+          "results/r201l_missing49_20261007/missing_analysis/availability_group_deltas.csv:30",
+          "results/r201l_missing49_20261007/missing_analysis/availability_group_deltas.csv:93",
+          "results/r201l_missing49_20261007/missing_analysis/availability_group_deltas.csv:170"
+        ]
+      },
+      {
+        "id": "L-INTEGRITY-W05",
+        "severity": "WARN",
+        "blocking": false,
+        "kind": "administrative_handoff_lag",
+        "already_disclosed": false,
+        "finding": "At the exact hashed reviewed snapshot the single handoff still leads with03:39 running/ETA text, while the actual05:37 closed evidence exists. This is a dated-status lag, not a metric mismatch.",
+        "action": "Update the current section of the existing single handoff before next publication; preserve original normal-controller unknown exit and keep goal ACTIVE_UNMET.",
+        "evidence": [
+          "docs/实验交接.md:1",
+          "docs/实验交接.md:15",
+          "results/preflight/r201l_missing49_complete_20261008_actual.json:2"
+        ]
+      }
+    ],
+    "limitations": [
+      "This is a fresh direct-artifact same-family semantic audit with provisional acceptance. Requested model/effort are not runtime-attested.",
+      "No SSH, remote installed-data reinspection, weight strict-load, neural forward, optimizer, training, completed-pipeline execution, cleanup, publishing or source edit was performed.",
+      "Prior full installed-GT runtime audits are evidenced by their actual text and current call chain. Local independent work revalidated filename manifests, CSV metrics/metadata and sampled RAW rankings; it did not rerun every raw-distance ranking or prove remote image contents afresh.",
+      "All294 retained RAW sizes were checked, but only12 targeted RAW SHA/ranking samples were reread; existing per-file archive receipts anchor the remainder. No multiGB weights were blindly hashed.",
+      "Prior source-review PASS statuses are not treated as present scientific success. Current source hashes and actual results were read independently.",
+      "OldK100/MSVR values used as current reducer comparators were checked against their result JSONs; this audit does not recertify every historical training pipeline.",
+      "Current handoff lag is recorded at its captured SHA. A later parent update can resolve that administrative note without changing audited model/results."
+    ],
+    "source_correction_required": false,
+    "review_independence": "same-family",
+    "acceptance_status": "provisional",
+    "claim_judgment_effect": "WARN does not invalidate the measured negative result; confidence in rejection of the broad performance claim remains high. It does not upgrade semantic acceptance. The audit statement about all49 threshold generalization is not adopted as a new every-condition +2 requirement. The dated handoff lag is for the parent to update in the existing single handoff."
+  },
+  "evidence_precheck": {
+    "path": "results/preflight/r201l_full49_claim_evidence_precheck_20261008.json",
+    "actual_status": "CANONICAL_EVIDENCE_CHECK_UNRESOLVED_SEMANTIC_REVIEW_WILL_RUN",
+    "canonical_helper_resolved": false,
+    "canonical_accepted_precheck": false,
+    "semantic_review_performed_despite_unresolved_helper": true,
+    "local_arithmetic_is_not_canonical_acceptance": true
+  },
+  "direct_table_checks": {
+    "six_metric_rows": 2107,
+    "comparison_rows": 1519,
+    "six_metric_delta_checks": 9114,
+    "maximum_delta_error_pp": 0.0,
+    "group_rows": 217,
+    "group_metric_mean_checks": 1302,
+    "maximum_group_mean_error_pp": 3.552713678800501e-15,
+    "group_counts_rescue_harm_double_plus2_match": true,
+    "scope": "Local stdlib arithmetic on cited existing tables, not a rerun of model inference or every raw GT ranking and not canonical evidence_check.py."
+  },
+  "normal_evidence": [
+    {
+      "dataset": "RGBNT201",
+      "condition": "q_RNT_g_RNT",
+      "models_all_six_percent": {
+        "original_DeMo": {
+          "mAP": 75.67457499232746,
+          "mINP": 62.57709224977215,
+          "Rank-1": 80.622009569378,
+          "Rank-5": 89.23444976076556,
+          "Rank-10": 93.77990430622009,
+          "Rank-20": 94.97607655502392
+        },
+        "K_frequency_shared_s42/11": {
+          "mAP": 76.05201345601093,
+          "mINP": 63.015100015650205,
+          "Rank-1": 80.50239234449761,
+          "Rank-5": 89.83253588516746,
+          "Rank-10": 93.6602870813397,
+          "Rank-20": 95.45454545454545
+        },
+        "K_axis_shared_s42/00": {
+          "mAP": 75.67457499232746,
+          "mINP": 62.57709224977215,
+          "Rank-1": 80.622009569378,
+          "Rank-5": 89.23444976076556,
+          "Rank-10": 93.77990430622009,
+          "Rank-20": 94.97607655502392
+        },
+        "K_axis_shared_s42/10": {
+          "mAP": 76.19076861710796,
+          "mINP": 63.129844598651985,
+          "Rank-1": 81.10047846889952,
+          "Rank-5": 89.83253588516746,
+          "Rank-10": 93.89952153110048,
+          "Rank-20": 95.09569377990431
+        },
+        "K_axis_shared_s42/01": {
+          "mAP": 75.79462796176833,
+          "mINP": 62.72629212389775,
+          "Rank-1": 80.86124401913875,
+          "Rank-5": 89.47368421052632,
+          "Rank-10": 93.6602870813397,
+          "Rank-20": 94.97607655502392
+        },
+        "K_axis_shared_s42/11": {
+          "mAP": 79.6643146931862,
+          "mINP": 66.16064487219106,
+          "Rank-1": 85.16746411483254,
+          "Rank-5": 92.22488038277513,
+          "Rank-10": 94.377990430622,
+          "Rank-20": 95.33492822966507
+        }
+      },
+      "joint_comparisons": [
+        {
+          "reference": "original_DeMo",
+          "delta_pp": {
+            "mAP": 3.9897397008587347,
+            "mINP": 3.5835526224189067,
+            "Rank-1": 4.545454545454547,
+            "Rank-5": 2.990430622009569,
+            "Rank-10": 0.5980861244019167,
+            "Rank-20": 0.3588516746411443
+          },
+          "rescued": 43,
+          "harmed": 5,
+          "both_plus2": true
+        },
+        {
+          "reference": "K_axis_shared_s42/00",
+          "delta_pp": {
+            "mAP": 3.9897397008587347,
+            "mINP": 3.5835526224189067,
+            "Rank-1": 4.545454545454547,
+            "Rank-5": 2.990430622009569,
+            "Rank-10": 0.5980861244019167,
+            "Rank-20": 0.3588516746411443
+          },
+          "rescued": 43,
+          "harmed": 5,
+          "both_plus2": true
+        },
+        {
+          "reference": "K_axis_shared_s42/10",
+          "delta_pp": {
+            "mAP": 3.473546076078236,
+            "mINP": 3.0308002735390716,
+            "Rank-1": 4.066985645933016,
+            "Rank-5": 2.3923444976076667,
+            "Rank-10": 0.4784688995215305,
+            "Rank-20": 0.23923444976075814
+          },
+          "rescued": 39,
+          "harmed": 5,
+          "both_plus2": true
+        },
+        {
+          "reference": "K_axis_shared_s42/01",
+          "delta_pp": {
+            "mAP": 3.869686731417872,
+            "mINP": 3.434352748293307,
+            "Rank-1": 4.306220095693789,
+            "Rank-5": 2.751196172248811,
+            "Rank-10": 0.7177033492823028,
+            "Rank-20": 0.3588516746411443
+          },
+          "rescued": 42,
+          "harmed": 6,
+          "both_plus2": true
+        },
+        {
+          "reference": "K_frequency_shared_s42/11",
+          "delta_pp": {
+            "mAP": 3.6123012371752736,
+            "mINP": 3.1455448565408517,
+            "Rank-1": 4.665071770334933,
+            "Rank-5": 2.3923444976076667,
+            "Rank-10": 0.7177033492823028,
+            "Rank-20": -0.11961722488038617
+          },
+          "rescued": 43,
+          "harmed": 4,
+          "both_plus2": true
+        }
+      ],
+      "descriptive_metric_interaction_11_minus10_minus01_plus00_pp": {
+        "mAP": 3.353493106637373,
+        "mINP": 2.881600399413472,
+        "Rank-1": 3.827751196172258,
+        "Rank-5": 2.1531100478469085,
+        "Rank-10": 0.5980861244019167,
+        "Rank-20": 0.23923444976075814
+      },
+      "interaction_limit": "Nonlinear descriptive retrieval contrast with state-specific gallery descriptors; not a causal interaction estimator or retrained module-necessity proof.",
+      "primary_all49_coverage_per_model": {
+        "original_DeMo": 49,
+        "K_frequency_shared_s42/11": 49,
+        "K_axis_shared_s42/00": 49,
+        "K_axis_shared_s42/10": 49,
+        "K_axis_shared_s42/01": 49,
+        "K_axis_shared_s42/11": 49
+      }
+    },
+    {
+      "dataset": "RGBNT100",
+      "condition": "q_RNT_g_RNT",
+      "models_all_six_percent": {
+        "original_DeMo": {
+          "mAP": 85.76856710316947,
+          "mINP": 61.84590828355626,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.37609329446065,
+          "Rank-20": 97.72594752186589
+        },
+        "L_frequency_shared_s42/11": {
+          "mAP": 85.77501804716096,
+          "mINP": 61.87199510726682,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.37609329446065,
+          "Rank-20": 97.72594752186589
+        },
+        "L_axis_shared_s42/00": {
+          "mAP": 85.76855925352847,
+          "mINP": 61.84591629610866,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.37609329446065,
+          "Rank-20": 97.72594752186589
+        },
+        "L_axis_shared_s42/10": {
+          "mAP": 85.79305968625252,
+          "mINP": 61.86220542198782,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.43440233236151,
+          "Rank-20": 97.72594752186589
+        },
+        "L_axis_shared_s42/01": {
+          "mAP": 85.77062473097705,
+          "mINP": 61.84693174204335,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.43440233236151,
+          "Rank-20": 97.72594752186589
+        },
+        "L_axis_shared_s42/11": {
+          "mAP": 85.9345557038676,
+          "mINP": 62.00639040536132,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.08454810495627,
+          "Rank-10": 97.49271137026238,
+          "Rank-20": 97.90087463556851
+        }
+      },
+      "joint_comparisons": [
+        {
+          "reference": "original_DeMo",
+          "delta_pp": {
+            "mAP": 0.16598860069812815,
+            "mINP": 0.16048212180506027,
+            "Rank-1": 0.0,
+            "Rank-5": 0.0583090379008695,
+            "Rank-10": 0.116618075801739,
+            "Rank-20": 0.1749271137026227
+          },
+          "rescued": 3,
+          "harmed": 3,
+          "both_plus2": false
+        },
+        {
+          "reference": "L_axis_shared_s42/00",
+          "delta_pp": {
+            "mAP": 0.16599645033913646,
+            "mINP": 0.16047410925266092,
+            "Rank-1": 0.0,
+            "Rank-5": 0.0583090379008695,
+            "Rank-10": 0.116618075801739,
+            "Rank-20": 0.1749271137026227
+          },
+          "rescued": 3,
+          "harmed": 3,
+          "both_plus2": false
+        },
+        {
+          "reference": "L_axis_shared_s42/10",
+          "delta_pp": {
+            "mAP": 0.1414960176150828,
+            "mINP": 0.14418498337350627,
+            "Rank-1": 0.0,
+            "Rank-5": 0.0583090379008695,
+            "Rank-10": 0.0583090379008695,
+            "Rank-20": 0.1749271137026227
+          },
+          "rescued": 3,
+          "harmed": 3,
+          "both_plus2": false
+        },
+        {
+          "reference": "L_axis_shared_s42/01",
+          "delta_pp": {
+            "mAP": 0.16393097289055447,
+            "mINP": 0.1594586633179702,
+            "Rank-1": 0.0,
+            "Rank-5": 0.0583090379008695,
+            "Rank-10": 0.0583090379008695,
+            "Rank-20": 0.1749271137026227
+          },
+          "rescued": 3,
+          "harmed": 3,
+          "both_plus2": false
+        },
+        {
+          "reference": "L_frequency_shared_s42/11",
+          "delta_pp": {
+            "mAP": 0.15953765670664666,
+            "mINP": 0.13439529809450335,
+            "Rank-1": 0.0,
+            "Rank-5": 0.0583090379008695,
+            "Rank-10": 0.116618075801739,
+            "Rank-20": 0.1749271137026227
+          },
+          "rescued": 3,
+          "harmed": 3,
+          "both_plus2": false
+        }
+      ],
+      "descriptive_metric_interaction_11_minus10_minus01_plus00_pp": {
+        "mAP": 0.1394305401665008,
+        "mINP": 0.14316953743881555,
+        "Rank-1": 0.0,
+        "Rank-5": 0.0583090379008695,
+        "Rank-10": 0.0,
+        "Rank-20": 0.1749271137026227
+      },
+      "interaction_limit": "Nonlinear descriptive retrieval contrast with state-specific gallery descriptors; not a causal interaction estimator or retrained module-necessity proof.",
+      "primary_all49_coverage_per_model": {
+        "original_DeMo": 49,
+        "L_frequency_shared_s42/11": 49,
+        "L_axis_shared_s42/00": 49,
+        "L_axis_shared_s42/10": 49,
+        "L_axis_shared_s42/01": 49,
+        "L_axis_shared_s42/11": 49
+      }
+    },
+    {
+      "dataset": "MSVR310",
+      "condition": "q_RNT_g_RNT",
+      "models_all_six_percent": {
+        "original_DeMo": {
+          "mAP": 47.164688447227576,
+          "mINP": 23.502961234396178,
+          "Rank-1": 63.95939086294417,
+          "Rank-5": 80.20304568527918,
+          "Rank-10": 84.77157360406092,
+          "Rank-20": 89.84771573604061
+        },
+        "L_frequency_shared_s42/11": {
+          "mAP": 47.193870993733,
+          "mINP": 23.539294662785384,
+          "Rank-1": 63.7901861252115,
+          "Rank-5": 80.37225042301185,
+          "Rank-10": 84.77157360406092,
+          "Rank-20": 89.84771573604061
+        },
+        "L_axis_shared_s42/00": {
+          "mAP": 47.16468933937531,
+          "mINP": 23.502975508759793,
+          "Rank-1": 63.95939086294417,
+          "Rank-5": 80.20304568527918,
+          "Rank-10": 84.77157360406092,
+          "Rank-20": 89.84771573604061
+        },
+        "L_axis_shared_s42/10": {
+          "mAP": 47.18578876549262,
+          "mINP": 23.51627695281378,
+          "Rank-1": 63.95939086294417,
+          "Rank-5": 80.20304568527918,
+          "Rank-10": 84.77157360406092,
+          "Rank-20": 89.84771573604061
+        },
+        "L_axis_shared_s42/01": {
+          "mAP": 47.1498228013745,
+          "mINP": 23.4663006027529,
+          "Rank-1": 63.95939086294417,
+          "Rank-5": 80.03384094754654,
+          "Rank-10": 84.77157360406092,
+          "Rank-20": 89.84771573604061
+        },
+        "L_axis_shared_s42/11": {
+          "mAP": 47.19384554798738,
+          "mINP": 23.52161936532509,
+          "Rank-1": 63.95939086294417,
+          "Rank-5": 80.20304568527918,
+          "Rank-10": 84.77157360406092,
+          "Rank-20": 90.01692047377327
+        }
+      },
+      "joint_comparisons": [
+        {
+          "reference": "original_DeMo",
+          "delta_pp": {
+            "mAP": 0.02915710075980371,
+            "mINP": 0.018658130928912442,
+            "Rank-1": 0.0,
+            "Rank-5": 0.0,
+            "Rank-10": 0.0,
+            "Rank-20": 0.16920473773265599
+          },
+          "rescued": 0,
+          "harmed": 0,
+          "both_plus2": false
+        },
+        {
+          "reference": "L_axis_shared_s42/00",
+          "delta_pp": {
+            "mAP": 0.02915620861207202,
+            "mINP": 0.018643856565297767,
+            "Rank-1": 0.0,
+            "Rank-5": 0.0,
+            "Rank-10": 0.0,
+            "Rank-20": 0.16920473773265599
+          },
+          "rescued": 0,
+          "harmed": 0,
+          "both_plus2": false
+        },
+        {
+          "reference": "L_axis_shared_s42/10",
+          "delta_pp": {
+            "mAP": 0.00805678249476216,
+            "mINP": 0.005342412511311068,
+            "Rank-1": 0.0,
+            "Rank-5": 0.0,
+            "Rank-10": 0.0,
+            "Rank-20": 0.16920473773265599
+          },
+          "rescued": 0,
+          "harmed": 0,
+          "both_plus2": false
+        },
+        {
+          "reference": "L_axis_shared_s42/01",
+          "delta_pp": {
+            "mAP": 0.04402274661288175,
+            "mINP": 0.055318762572191815,
+            "Rank-1": 0.0,
+            "Rank-5": 0.16920473773264177,
+            "Rank-10": 0.0,
+            "Rank-20": 0.16920473773265599
+          },
+          "rescued": 0,
+          "harmed": 0,
+          "both_plus2": false
+        },
+        {
+          "reference": "L_frequency_shared_s42/11",
+          "delta_pp": {
+            "mAP": -2.5445745620800153e-05,
+            "mINP": -0.017675297460293393,
+            "Rank-1": 0.1692047377326702,
+            "Rank-5": -0.1692047377326702,
+            "Rank-10": 0.0,
+            "Rank-20": 0.16920473773265599
+          },
+          "rescued": 1,
+          "harmed": 0,
+          "both_plus2": false
+        }
+      ],
+      "descriptive_metric_interaction_11_minus10_minus01_plus00_pp": {
+        "mAP": 0.022923320495571886,
+        "mINP": 0.042017318518205116,
+        "Rank-1": 0.0,
+        "Rank-5": 0.16920473773264177,
+        "Rank-10": 0.0,
+        "Rank-20": 0.16920473773265599
+      },
+      "interaction_limit": "Nonlinear descriptive retrieval contrast with state-specific gallery descriptors; not a causal interaction estimator or retrained module-necessity proof.",
+      "primary_all49_coverage_per_model": {
+        "original_DeMo": 49,
+        "L_frequency_shared_s42/11": 49,
+        "L_axis_shared_s42/00": 49,
+        "L_axis_shared_s42/10": 49,
+        "L_axis_shared_s42/01": 49,
+        "L_axis_shared_s42/11": 49
+      }
+    }
+  ],
+  "missing_evidence_tables": [
+    {
+      "dataset": "RGBNT201",
+      "improved": "K_axis_shared_s42/11",
+      "reference": "original_DeMo",
+      "negative_condition_counts": {
+        "mAP": 21,
+        "mINP": 22,
+        "Rank-1": 19,
+        "Rank-5": 18,
+        "Rank-10": 16,
+        "Rank-20": 14
+      },
+      "both_plus2_conditions": 13,
+      "groups": [
+        {
+          "group": "all49",
+          "conditions": 49,
+          "delta_pp": {
+            "mAP": 0.5840783376220628,
+            "mINP": 0.43782138554594646,
+            "Rank-1": 0.5175275851967576,
+            "Rank-5": 1.157113563128601,
+            "Rank-10": 2.194609901376819,
+            "Rank-20": 4.001074113856069
+          },
+          "rescued": 2857,
+          "harmed": 2645,
+          "net_rescues": 212,
+          "both_plus2_conditions": 13
+        },
+        {
+          "group": "same_availability",
+          "conditions": 7,
+          "delta_pp": {
+            "mAP": 1.5656648511555749,
+            "mINP": 1.614332602931085,
+            "Rank-1": 1.8967874231032147,
+            "Rank-5": 0.6151742993848259,
+            "Rank-10": -0.0854408749145575,
+            "Rank-20": -0.2392344497607622
+          },
+          "rescued": 324,
+          "harmed": 213,
+          "net_rescues": 111,
+          "both_plus2_conditions": 3
+        },
+        {
+          "group": "overlap_mismatch",
+          "conditions": 30,
+          "delta_pp": {
+            "mAP": 0.5694879428403693,
+            "mINP": 0.4597288205424274,
+            "Rank-1": 0.34688995215310864,
+            "Rank-5": 1.2519936204146735,
+            "Rank-10": 1.9577352472089322,
+            "Rank-20": 2.818979266347687
+          },
+          "rescued": 2291,
+          "harmed": 2204,
+          "net_rescues": 87,
+          "both_plus2_conditions": 10
+        },
+        {
+          "group": "source_disjoint",
+          "conditions": 12,
+          "delta_pp": {
+            "mAP": 0.04796219168174809,
+            "mINP": -0.30324541208658673,
+            "Rank-1": 0.13955342902711323,
+            "Rank-5": 1.236044657097289,
+            "Rank-10": 4.11682615629984,
+            "Rank-20": 9.429824561403509
+          },
+          "rescued": 242,
+          "harmed": 228,
+          "net_rescues": 14,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "partial_query_full_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": 3.986945479009313,
+            "mINP": 3.3498820288709683,
+            "Rank-1": 3.728070175438596,
+            "Rank-5": 5.283094098883573,
+            "Rank-10": 6.200159489633175,
+            "Rank-20": 6.917862838915468
+          },
+          "rescued": 603,
+          "harmed": 416,
+          "net_rescues": 187,
+          "both_plus2_conditions": 3
+        },
+        {
+          "group": "full_query_partial_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": -2.8248879686042536,
+            "mINP": -2.258601327448806,
+            "Rank-1": -3.7480063795853304,
+            "Rank-5": -2.6714513556618797,
+            "Rank-10": -1.913875598086128,
+            "Rank-20": -1.8939393939393934
+          },
+          "rescued": 279,
+          "harmed": 467,
+          "net_rescues": -188,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "both_partial",
+          "conditions": 36,
+          "delta_pp": {
+            "mAP": 0.49049316056088865,
+            "mINP": 0.3145003072444304,
+            "Rank-1": 0.5814726209463051,
+            "Rank-5": 1.0566188197767146,
+            "Rank-10": 2.2561137692716655,
+            "Rank-20": 4.5986177565124935
+          },
+          "rescued": 1932,
+          "harmed": 1757,
+          "net_rescues": 175,
+          "both_plus2_conditions": 9
+        }
+      ],
+      "most_negative_mAP_condition": {
+        "condition": "q_RNT_g_T",
+        "delta_pp": {
+          "mAP": -8.1247383338292,
+          "mINP": -7.544530613439065,
+          "Rank-1": -9.808612440191393,
+          "Rank-5": -5.143540669856456,
+          "Rank-10": -0.956937799043061,
+          "Rank-20": -0.7177033492823028
+        },
+        "rescued": 50,
+        "harmed": 132
+      }
+    },
+    {
+      "dataset": "RGBNT201",
+      "improved": "K_axis_shared_s42/11",
+      "reference": "K_axis_shared_s42/00",
+      "negative_condition_counts": {
+        "mAP": 14,
+        "mINP": 13,
+        "Rank-1": 16,
+        "Rank-5": 20,
+        "Rank-10": 17,
+        "Rank-20": 27
+      },
+      "both_plus2_conditions": 2,
+      "groups": [
+        {
+          "group": "all49",
+          "conditions": 49,
+          "delta_pp": {
+            "mAP": 0.5038969745597521,
+            "mINP": 0.6166230697588547,
+            "Rank-1": 0.6737623278976667,
+            "Rank-5": 0.23923444976076524,
+            "Rank-10": 0.1733229176838208,
+            "Rank-20": -0.5907626208378088
+          },
+          "rescued": 1484,
+          "harmed": 1208,
+          "net_rescues": 276,
+          "both_plus2_conditions": 2
+        },
+        {
+          "group": "same_availability",
+          "conditions": 7,
+          "delta_pp": {
+            "mAP": 0.8538112989820544,
+            "mINP": 1.0732541601697005,
+            "Rank-1": 0.8885850991114168,
+            "Rank-5": 0.56390977443609,
+            "Rank-10": 0.35885167464114737,
+            "Rank-20": -0.017088174982913325
+          },
+          "rescued": 176,
+          "harmed": 124,
+          "net_rescues": 52,
+          "both_plus2_conditions": 1
+        },
+        {
+          "group": "overlap_mismatch",
+          "conditions": 30,
+          "delta_pp": {
+            "mAP": 0.5489838782689488,
+            "mINP": 0.7430304728270998,
+            "Rank-1": 0.9529505582137164,
+            "Rank-5": 0.39872408293460876,
+            "Rank-10": 0.32296650717703534,
+            "Rank-20": -0.5342902711323761
+          },
+          "rescued": 1154,
+          "harmed": 915,
+          "net_rescues": 239,
+          "both_plus2_conditions": 1
+        },
+        {
+          "group": "source_disjoint",
+          "conditions": 12,
+          "delta_pp": {
+            "mAP": 0.18706302604041783,
+            "mINP": 0.0342364260152486,
+            "Rank-1": -0.14952153110047847,
+            "Rank-5": -0.34888357256778285,
+            "Rank-10": -0.3090111642743227,
+            "Rank-20": -1.0665869218500796
+          },
+          "rescued": 154,
+          "harmed": 169,
+          "net_rescues": -15,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "partial_query_full_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": 0.720363044443704,
+            "mINP": 1.2288496297704758,
+            "Rank-1": 0.7974481658692186,
+            "Rank-5": -0.31897926634768875,
+            "Rank-10": -0.5781499202551821,
+            "Rank-20": -0.47846889952153165
+          },
+          "rescued": 285,
+          "harmed": 245,
+          "net_rescues": 40,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "full_query_partial_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": 0.8989239980430094,
+            "mINP": 0.8076331658737335,
+            "Rank-1": 1.475279106858055,
+            "Rank-5": 1.0566188197767137,
+            "Rank-10": 1.2958532695374825,
+            "Rank-20": 1.1562998405103653
+          },
+          "rescued": 187,
+          "harmed": 113,
+          "net_rescues": 74,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "both_partial",
+          "conditions": 36,
+          "delta_pp": {
+            "mAP": 0.30515249437913455,
+            "mINP": 0.4003355839416589,
+            "Rank-1": 0.4120148856990966,
+            "Rank-5": 0.11961722488038275,
+            "Rank-10": 0.09968102073365277,
+            "Rank-20": -0.927033492822966
+          },
+          "rescued": 969,
+          "harmed": 845,
+          "net_rescues": 124,
+          "both_plus2_conditions": 1
+        }
+      ],
+      "most_negative_mAP_condition": {
+        "condition": "q_R_g_RT",
+        "delta_pp": {
+          "mAP": -2.214026866925753,
+          "mINP": -0.46779519132967096,
+          "Rank-1": -2.8708133971291865,
+          "Rank-5": -2.5119617224880386,
+          "Rank-10": -2.153110047846887,
+          "Rank-20": 1.79425837320575
+        },
+        "rescued": 40,
+        "harmed": 64
+      }
+    },
+    {
+      "dataset": "RGBNT201",
+      "improved": "K_axis_shared_s42/11",
+      "reference": "K_frequency_shared_s42/11",
+      "negative_condition_counts": {
+        "mAP": 14,
+        "mINP": 14,
+        "Rank-1": 24,
+        "Rank-5": 22,
+        "Rank-10": 21,
+        "Rank-20": 29
+      },
+      "both_plus2_conditions": 2,
+      "groups": [
+        {
+          "group": "all49",
+          "conditions": 49,
+          "delta_pp": {
+            "mAP": 0.3678917182264914,
+            "mINP": 0.5526871845439654,
+            "Rank-1": 0.2929401425642028,
+            "Rank-5": 0.08299970705985782,
+            "Rank-10": 0.0903232106239638,
+            "Rank-20": -0.7201445171369985
+          },
+          "rescued": 1527,
+          "harmed": 1407,
+          "net_rescues": 120,
+          "both_plus2_conditions": 2
+        },
+        {
+          "group": "same_availability",
+          "conditions": 7,
+          "delta_pp": {
+            "mAP": 0.8833852675185752,
+            "mINP": 0.939885872035222,
+            "Rank-1": 0.9056732740943276,
+            "Rank-5": 0.7689678742310347,
+            "Rank-10": 0.11961722488038617,
+            "Rank-20": 0.2392344497607622
+          },
+          "rescued": 206,
+          "harmed": 153,
+          "net_rescues": 53,
+          "both_plus2_conditions": 1
+        },
+        {
+          "group": "overlap_mismatch",
+          "conditions": 30,
+          "delta_pp": {
+            "mAP": 0.370062583551287,
+            "mINP": 0.6198646150204626,
+            "Rank-1": 0.4944178628389154,
+            "Rank-5": -0.019936204146730554,
+            "Rank-10": 0.12360446570973024,
+            "Rank-20": -0.6220095693779899
+          },
+          "rescued": 1193,
+          "harmed": 1069,
+          "net_rescues": 124,
+          "both_plus2_conditions": 1
+        },
+        {
+          "group": "source_disjoint",
+          "conditions": 12,
+          "delta_pp": {
+            "mAP": 0.06175998449412038,
+            "mINP": 0.15887770731615605,
+            "Rank-1": -0.5681818181818182,
+            "Rank-5": -0.05980861244019109,
+            "Rank-10": -0.009968102073365367,
+            "Rank-20": -1.5251196172248804
+          },
+          "rescued": 128,
+          "harmed": 185,
+          "net_rescues": -57,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "partial_query_full_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": 0.09649737506686822,
+            "mINP": 0.7473244291590472,
+            "Rank-1": 0.35885167464114787,
+            "Rank-5": -0.8771929824561427,
+            "Rank-10": -1.4154704944178604,
+            "Rank-20": -1.435406698564594
+          },
+          "rescued": 268,
+          "harmed": 250,
+          "net_rescues": 18,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "full_query_partial_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": 1.166227704462803,
+            "mINP": 1.0780839782143614,
+            "Rank-1": 1.6347687400318982,
+            "Rank-5": 0.7177033492823005,
+            "Rank-10": 1.4952153110047857,
+            "Rank-20": 1.1164274322169045
+          },
+          "rescued": 221,
+          "harmed": 139,
+          "net_rescues": 82,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "both_partial",
+          "conditions": 36,
+          "delta_pp": {
+            "mAP": 0.18994562440957719,
+            "mINP": 0.36065768727425007,
+            "Rank-1": -0.0631313131313131,
+            "Rank-5": 0.07309941520467834,
+            "Rank-10": 0.0897129186602881,
+            "Rank-20": -0.9237107921318446
+          },
+          "rescued": 995,
+          "harmed": 1014,
+          "net_rescues": -19,
+          "both_plus2_conditions": 1
+        }
+      ],
+      "most_negative_mAP_condition": {
+        "condition": "q_R_g_RT",
+        "delta_pp": {
+          "mAP": -3.261071073180073,
+          "mINP": -1.642884237696272,
+          "Rank-1": -2.9904306220095727,
+          "Rank-5": -4.066985645933016,
+          "Rank-10": -3.5885167464114716,
+          "Rank-20": 0.0
+        },
+        "rescued": 32,
+        "harmed": 57
+      }
+    },
+    {
+      "dataset": "RGBNT100",
+      "improved": "L_axis_shared_s42/11",
+      "reference": "original_DeMo",
+      "negative_condition_counts": {
+        "mAP": 23,
+        "mINP": 28,
+        "Rank-1": 20,
+        "Rank-5": 12,
+        "Rank-10": 12,
+        "Rank-20": 12
+      },
+      "both_plus2_conditions": 17,
+      "groups": [
+        {
+          "group": "all49",
+          "conditions": 49,
+          "delta_pp": {
+            "mAP": 3.8923449081957453,
+            "mINP": 0.8236472455089745,
+            "Rank-1": 6.948295353126672,
+            "Rank-5": 8.264413637174986,
+            "Rank-10": 9.192598322127683,
+            "Rank-20": 10.528946272386506
+          },
+          "rescued": 10601,
+          "harmed": 4762,
+          "net_rescues": 5839,
+          "both_plus2_conditions": 17
+        },
+        {
+          "group": "same_availability",
+          "conditions": 7,
+          "delta_pp": {
+            "mAP": -0.6260886797618872,
+            "mINP": -0.6995277977083779,
+            "Rank-1": 0.00832986255726301,
+            "Rank-5": 2.0301221021717147e-15,
+            "Rank-10": 0.06663890045814266,
+            "Rank-20": -0.05830903790087356
+          },
+          "rescued": 288,
+          "harmed": 287,
+          "net_rescues": 1,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "overlap_mismatch",
+          "conditions": 30,
+          "delta_pp": {
+            "mAP": 6.626271681098015,
+            "mINP": 2.174638251696178,
+            "Rank-1": 11.385811467444118,
+            "Rank-5": 12.21379980563654,
+            "Rank-10": 12.678328474246838,
+            "Rank-20": 13.094266277939747
+          },
+          "rescued": 9906,
+          "harmed": 4048,
+          "net_rescues": 5858,
+          "both_plus2_conditions": 17
+        },
+        {
+          "group": "source_disjoint",
+          "conditions": 12,
+          "delta_pp": {
+            "mAP": -0.3067190977513098,
+            "mINP": -1.6653114947489114,
+            "Rank-1": -0.09718172983479106,
+            "Rank-5": 3.2118561710398446,
+            "Rank-10": 5.801749271137026,
+            "Rank-20": 10.291545189504374
+          },
+          "rescued": 407,
+          "harmed": 427,
+          "net_rescues": -20,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "partial_query_full_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": 12.791239986858734,
+            "mINP": 6.117605773458474,
+            "Rank-1": 19.88338192419825,
+            "Rank-5": 19.89310009718173,
+            "Rank-10": 20.09718172983479,
+            "Rank-20": 20.515063168124396
+          },
+          "rescued": 2466,
+          "harmed": 420,
+          "net_rescues": 2046,
+          "both_plus2_conditions": 5
+        },
+        {
+          "group": "full_query_partial_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": -3.6842340858573634,
+            "mINP": -2.5942886268063408,
+            "Rank-1": -5.996112730806612,
+            "Rank-5": -4.761904761904762,
+            "Rank-10": -3.7512147716229336,
+            "Rank-20": -3.1195335276967904
+          },
+          "rescued": 315,
+          "harmed": 932,
+          "net_rescues": -617,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "both_partial",
+          "conditions": 36,
+          "delta_pp": {
+            "mAP": 3.775468791524588,
+            "mINP": 0.5293980563394969,
+            "Rank-1": 7.142857142857141,
+            "Rank-5": 8.725299643666991,
+            "Rank-10": 9.784580498866212,
+            "Rank-20": 11.426951733074183
+          },
+          "rescued": 7817,
+          "harmed": 3407,
+          "net_rescues": 4410,
+          "both_plus2_conditions": 12
+        }
+      ],
+      "most_negative_mAP_condition": {
+        "condition": "q_RNT_g_R",
+        "delta_pp": {
+          "mAP": -7.631029571389959,
+          "mINP": -6.509358905539159,
+          "Rank-1": -12.244897959183689,
+          "Rank-5": -9.912536443148696,
+          "Rank-10": -8.629737609329439,
+          "Rank-20": -6.763848396501459
+        },
+        "rescued": 72,
+        "harmed": 282
+      }
+    },
+    {
+      "dataset": "RGBNT100",
+      "improved": "L_axis_shared_s42/11",
+      "reference": "L_axis_shared_s42/00",
+      "negative_condition_counts": {
+        "mAP": 24,
+        "mINP": 32,
+        "Rank-1": 24,
+        "Rank-5": 22,
+        "Rank-10": 23,
+        "Rank-20": 24
+      },
+      "both_plus2_conditions": 0,
+      "groups": [
+        {
+          "group": "all49",
+          "conditions": 49,
+          "delta_pp": {
+            "mAP": -0.06481158130405082,
+            "mINP": -0.10412463436233975,
+            "Rank-1": -0.08091866484203059,
+            "Rank-5": -0.014279764383887677,
+            "Rank-10": -0.2606057000059508,
+            "Rank-20": -0.2463259356220625
+          },
+          "rescued": 1293,
+          "harmed": 1361,
+          "net_rescues": -68,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "same_availability",
+          "conditions": 7,
+          "delta_pp": {
+            "mAP": -0.09784289589356579,
+            "mINP": -0.15480763885887225,
+            "Rank-1": 0.09162848812994387,
+            "Rank-5": 0.033319450229068286,
+            "Rank-10": 0.06663890045814266,
+            "Rank-20": 0.15826738858808856
+          },
+          "rescued": 93,
+          "harmed": 82,
+          "net_rescues": 11,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "overlap_mismatch",
+          "conditions": 30,
+          "delta_pp": {
+            "mAP": -0.10113401280871107,
+            "mINP": -0.13207323457908562,
+            "Rank-1": -0.050534499514091634,
+            "Rank-5": 0.08163265306122511,
+            "Rank-10": 0.042759961127306664,
+            "Rank-20": -0.10106899902818303
+          },
+          "rescued": 900,
+          "harmed": 926,
+          "net_rescues": -26,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "source_disjoint",
+          "conditions": 12,
+          "delta_pp": {
+            "mAP": 0.045262764301483537,
+            "mINP": -0.004688047864164453,
+            "Rank-1": -0.2575315840621964,
+            "Rank-5": -0.281827016520894,
+            "Rank-10": -1.209912536443149,
+            "Rank-20": -0.8454810495626827
+          },
+          "rescued": 300,
+          "harmed": 353,
+          "net_rescues": -53,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "partial_query_full_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": 0.14746045239225936,
+            "mINP": 0.1559551805516127,
+            "Rank-1": 0.07774538386783429,
+            "Rank-5": 0.0777453838678331,
+            "Rank-10": 0.09718172983479079,
+            "Rank-20": 0.30126336248785296
+          },
+          "rescued": 171,
+          "harmed": 163,
+          "net_rescues": 8,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "full_query_partial_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": -0.049989008958687485,
+            "mINP": -0.10613591690258121,
+            "Rank-1": 0.2623906705539376,
+            "Rank-5": 0.16520894071914682,
+            "Rank-10": 0.1457725947521856,
+            "Rank-20": -0.13605442176870972
+          },
+          "rescued": 141,
+          "harmed": 114,
+          "net_rescues": 27,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "both_partial",
+          "conditions": 36,
+          "delta_pp": {
+            "mAP": -0.10907201652330717,
+            "mINP": -0.1544860215250416,
+            "Rank-1": -0.16682863621639252,
+            "Rank-5": -0.06154842889536792,
+            "Rank-10": -0.3984450923226441,
+            "Rank-20": -0.36767087787495956
+          },
+          "rescued": 978,
+          "harmed": 1081,
+          "net_rescues": -103,
+          "both_plus2_conditions": 0
+        }
+      ],
+      "most_negative_mAP_condition": {
+        "condition": "q_NT_g_RN",
+        "delta_pp": {
+          "mAP": -0.7098128242467183,
+          "mINP": -0.23970652438149997,
+          "Rank-1": -1.3411078717201121,
+          "Rank-5": -1.2244897959183731,
+          "Rank-10": -0.5830903790087518,
+          "Rank-20": -0.6413994169096213
+        },
+        "rescued": 37,
+        "harmed": 60
+      }
+    },
+    {
+      "dataset": "RGBNT100",
+      "improved": "L_axis_shared_s42/11",
+      "reference": "L_frequency_shared_s42/11",
+      "negative_condition_counts": {
+        "mAP": 26,
+        "mINP": 35,
+        "Rank-1": 21,
+        "Rank-5": 17,
+        "Rank-10": 21,
+        "Rank-20": 22
+      },
+      "both_plus2_conditions": 0,
+      "groups": [
+        {
+          "group": "all49",
+          "conditions": 49,
+          "delta_pp": {
+            "mAP": -0.014087438391497658,
+            "mINP": -0.10505919348448894,
+            "Rank-1": 0.009519842922589665,
+            "Rank-5": 0.11780805616707267,
+            "Rank-10": -0.170167192241331,
+            "Rank-20": 0.2713155232938665
+          },
+          "rescued": 1355,
+          "harmed": 1347,
+          "net_rescues": 8,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "same_availability",
+          "conditions": 7,
+          "delta_pp": {
+            "mAP": -0.05733175597109051,
+            "mINP": -0.15781034346714456,
+            "Rank-1": 0.1499375260308154,
+            "Rank-5": 0.08329862557267884,
+            "Rank-10": 0.09995835068721094,
+            "Rank-20": 0.12494793835901621
+          },
+          "rescued": 92,
+          "harmed": 74,
+          "net_rescues": 18,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "overlap_mismatch",
+          "conditions": 30,
+          "delta_pp": {
+            "mAP": -0.05550062632193331,
+            "mINP": -0.1376206764074716,
+            "Rank-1": -0.038872691933918686,
+            "Rank-5": 0.1282798833819231,
+            "Rank-10": 0.08551992225461191,
+            "Rank-20": 0.013605442176872392
+          },
+          "rescued": 919,
+          "harmed": 939,
+          "net_rescues": -20,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "source_disjoint",
+          "conditions": 12,
+          "delta_pp": {
+            "mAP": 0.11467138335602063,
+            "mINP": 0.007116017979516924,
+            "Rank-1": 0.048590864917395525,
+            "Rank-5": 0.11175898931000972,
+            "Rank-10": -0.9669582118561711,
+            "Rank-20": 1.0009718172983477
+          },
+          "rescued": 344,
+          "harmed": 334,
+          "net_rescues": 10,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "partial_query_full_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": 0.11715931257471368,
+            "mINP": 0.08427668960888764,
+            "Rank-1": 0.08746355685130898,
+            "Rank-5": 0.1554907677356662,
+            "Rank-10": 0.12633624878522198,
+            "Rank-20": 0.39844509232264613
+          },
+          "rescued": 172,
+          "harmed": 163,
+          "net_rescues": 9,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "full_query_partial_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": 0.09797424978928267,
+            "mINP": -0.027530341302448136,
+            "Rank-1": 0.2915451895043688,
+            "Rank-5": 0.34985422740525013,
+            "Rank-10": 0.2526724975704558,
+            "Rank-20": 0.029154518950439485
+          },
+          "rescued": 152,
+          "harmed": 122,
+          "net_rescues": 30,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "both_partial",
+          "conditions": 36,
+          "delta_pp": {
+            "mAP": -0.059461764224278055,
+            "mINP": -0.15618816301869717,
+            "Rank-1": -0.050210560414643696,
+            "Rank-5": 0.0745059928733387,
+            "Rank-10": -0.2980239714933618,
+            "Rank-20": 0.2931648850016201
+          },
+          "rescued": 1028,
+          "harmed": 1059,
+          "net_rescues": -31,
+          "both_plus2_conditions": 0
+        }
+      ],
+      "most_negative_mAP_condition": {
+        "condition": "q_NT_g_RN",
+        "delta_pp": {
+          "mAP": -0.7271852052665295,
+          "mINP": -0.2741294579189102,
+          "Rank-1": -1.2827988338192426,
+          "Rank-5": -1.9241982507288782,
+          "Rank-10": -1.3411078717201264,
+          "Rank-20": -0.6997084548104908
+        },
+        "rescued": 31,
+        "harmed": 53
+      }
+    },
+    {
+      "dataset": "MSVR310",
+      "improved": "L_axis_shared_s42/11",
+      "reference": "original_DeMo",
+      "negative_condition_counts": {
+        "mAP": 26,
+        "mINP": 30,
+        "Rank-1": 29,
+        "Rank-5": 23,
+        "Rank-10": 23,
+        "Rank-20": 26
+      },
+      "both_plus2_conditions": 12,
+      "groups": [
+        {
+          "group": "all49",
+          "conditions": 49,
+          "delta_pp": {
+            "mAP": -0.41215961600879486,
+            "mINP": -0.5129538637003024,
+            "Rank-1": -0.6837252667564481,
+            "Rank-5": 2.1271452743533974,
+            "Rank-10": 3.0871231741427536,
+            "Rank-20": 3.3461100176111054
+          },
+          "rescued": 1726,
+          "harmed": 1924,
+          "net_rescues": -198,
+          "both_plus2_conditions": 12
+        },
+        {
+          "group": "same_availability",
+          "conditions": 7,
+          "delta_pp": {
+            "mAP": -2.0532731400793542,
+            "mINP": -1.4414342478959286,
+            "Rank-1": -2.6589315929417423,
+            "Rank-5": -2.6831036983321224,
+            "Rank-10": -2.997341068407057,
+            "Rank-20": -2.1754894851341544
+          },
+          "rescued": 103,
+          "harmed": 213,
+          "net_rescues": -110,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "overlap_mismatch",
+          "conditions": 30,
+          "delta_pp": {
+            "mAP": -0.47330518450644404,
+            "mINP": -0.6422587152414837,
+            "Rank-1": -0.4117315284827969,
+            "Rank-5": 2.876480541455162,
+            "Rank-10": 3.767625493513819,
+            "Rank-20": 4.450084602368866
+          },
+          "rescued": 1574,
+          "harmed": 1647,
+          "net_rescues": -73,
+          "both_plus2_conditions": 12
+        },
+        {
+          "group": "source_disjoint",
+          "conditions": 12,
+          "delta_pp": {
+            "mAP": 0.6980205276098214,
+            "mINP": 0.3519218226000995,
+            "Rank-1": -0.21150592216582073,
+            "Rank-5": 3.059785673998872,
+            "Rank-10": 4.935138183869149,
+            "Rank-20": 3.807106598984772
+          },
+          "rescued": 49,
+          "harmed": 64,
+          "net_rescues": -15,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "partial_query_full_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": 4.881617920436601,
+            "mINP": 1.4629071237721891,
+            "Rank-1": 8.629441624365484,
+            "Rank-5": 10.772701635645802,
+            "Rank-10": 11.167512690355329,
+            "Rank-20": 11.05470953186689
+          },
+          "rescued": 526,
+          "harmed": 220,
+          "net_rescues": 306,
+          "both_plus2_conditions": 5
+        },
+        {
+          "group": "full_query_partial_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": -5.049474638582432,
+            "mINP": -2.3533182892001965,
+            "Rank-1": -8.6858432036097,
+            "Rank-5": -5.781161872532427,
+            "Rank-10": -5.245346869712349,
+            "Rank-20": -4.512126339537509
+          },
+          "rescued": 140,
+          "harmed": 448,
+          "net_rescues": -308,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "both_partial",
+          "conditions": 36,
+          "delta_pp": {
+            "mAP": -0.5338288326754379,
+            "mINP": -0.5503036238798802,
+            "Rank-1": -0.9212257943222405,
+            "Rank-5": 2.063357774017673,
+            "Rank-10": 3.214890016920474,
+            "Rank-20": 3.4592968603120893
+          },
+          "rescued": 1060,
+          "harmed": 1256,
+          "net_rescues": -196,
+          "both_plus2_conditions": 7
+        }
+      ],
+      "most_negative_mAP_condition": {
+        "condition": "q_RNT_g_N",
+        "delta_pp": {
+          "mAP": -10.054969012964126,
+          "mINP": -4.335850159824393,
+          "Rank-1": -16.07445008460237,
+          "Rank-5": -6.768189509306261,
+          "Rank-10": -6.091370558375644,
+          "Rank-20": -5.752961082910318
+        },
+        "rescued": 29,
+        "harmed": 124
+      }
+    },
+    {
+      "dataset": "MSVR310",
+      "improved": "L_axis_shared_s42/11",
+      "reference": "L_axis_shared_s42/00",
+      "negative_condition_counts": {
+        "mAP": 36,
+        "mINP": 20,
+        "Rank-1": 31,
+        "Rank-5": 23,
+        "Rank-10": 20,
+        "Rank-20": 18
+      },
+      "both_plus2_conditions": 0,
+      "groups": [
+        {
+          "group": "all49",
+          "conditions": 49,
+          "delta_pp": {
+            "mAP": -0.06376550329482211,
+            "mINP": 0.03552094878018189,
+            "Rank-1": -0.19337684312303566,
+            "Rank-5": -0.0448910528678462,
+            "Rank-10": 0.05870368451949268,
+            "Rank-20": 0.26934631720708624
+          },
+          "rescued": 101,
+          "harmed": 157,
+          "net_rescues": -56,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "same_availability",
+          "conditions": 7,
+          "delta_pp": {
+            "mAP": 0.00020044877421985876,
+            "mINP": 0.03640978811299021,
+            "Rank-1": 0.024172105390380443,
+            "Rank-5": -0.09668842156151568,
+            "Rank-10": 0.024172105390377396,
+            "Rank-20": 0.024172105390380443
+          },
+          "rescued": 11,
+          "harmed": 10,
+          "net_rescues": 1,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "overlap_mismatch",
+          "conditions": 30,
+          "delta_pp": {
+            "mAP": -0.0969823171872797,
+            "mINP": -0.021865682669966167,
+            "Rank-1": -0.30456852791878136,
+            "Rank-5": -0.14100394811054523,
+            "Rank-10": -0.0733220530174845,
+            "Rank-20": -0.10716300056401569
+          },
+          "rescued": 44,
+          "harmed": 98,
+          "net_rescues": -54,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "source_disjoint",
+          "conditions": 12,
+          "delta_pp": {
+            "mAP": -0.018036940603952594,
+            "mINP": 0.17846903779474718,
+            "Rank-1": -0.042301184433164156,
+            "Rank-5": 0.22560631697687525,
+            "Rank-10": 0.40891144952058617,
+            "Rank-20": 1.3536379018612525
+          },
+          "rescued": 46,
+          "harmed": 49,
+          "net_rescues": -3,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "partial_query_full_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": -0.08116136184613731,
+            "mINP": 0.021046648974252458,
+            "Rank-1": -0.02820078962210933,
+            "Rank-5": -0.25380710659897804,
+            "Rank-10": -0.11280315848844029,
+            "Rank-20": -0.08460236886632562
+          },
+          "rescued": 11,
+          "harmed": 12,
+          "net_rescues": -1,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "full_query_partial_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": -0.1363647655310792,
+            "mINP": -0.08495056761319808,
+            "Rank-1": -0.42301184433164235,
+            "Rank-5": -0.05640157924421866,
+            "Rank-10": 0.14100394811054606,
+            "Rank-20": -0.22560631697687583
+          },
+          "rescued": 5,
+          "harmed": 20,
+          "net_rescues": -15,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "both_partial",
+          "conditions": 36,
+          "delta_pp": {
+            "mAP": -0.051347475160973786,
+            "mINP": 0.05848072626381357,
+            "Rank-1": -0.1880052641473955,
+            "Rank-5": -0.009400263207368987,
+            "Rank-10": 0.07520210565895852,
+            "Rank-20": 0.4136115811242716
+          },
+          "rescued": 85,
+          "harmed": 125,
+          "net_rescues": -40,
+          "both_plus2_conditions": 0
+        }
+      ],
+      "most_negative_mAP_condition": {
+        "condition": "q_R_g_N",
+        "delta_pp": {
+          "mAP": -0.3333514779008113,
+          "mINP": -0.3780124743076123,
+          "Rank-1": -0.8460236886632826,
+          "Rank-5": -1.0152284263959395,
+          "Rank-10": -0.33840947546531375,
+          "Rank-20": 4.39932318104907
+        },
+        "rescued": 2,
+        "harmed": 7
+      }
+    },
+    {
+      "dataset": "MSVR310",
+      "improved": "L_axis_shared_s42/11",
+      "reference": "L_frequency_shared_s42/11",
+      "negative_condition_counts": {
+        "mAP": 41,
+        "mINP": 32,
+        "Rank-1": 31,
+        "Rank-5": 20,
+        "Rank-10": 28,
+        "Rank-20": 23
+      },
+      "both_plus2_conditions": 0,
+      "groups": [
+        {
+          "group": "all49",
+          "conditions": 49,
+          "delta_pp": {
+            "mAP": -0.07296857641285548,
+            "mINP": -0.024744262194578946,
+            "Rank-1": -0.25898684346835177,
+            "Rank-5": -0.055250526606581654,
+            "Rank-10": -0.7493352671017652,
+            "Rank-20": -1.0946510583928997
+          },
+          "rescued": 74,
+          "harmed": 149,
+          "net_rescues": -75,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "same_availability",
+          "conditions": 7,
+          "delta_pp": {
+            "mAP": -0.030611766401300144,
+            "mINP": -0.00750869672547091,
+            "Rank-1": -0.07251631617113523,
+            "Rank-5": -0.07251631617114031,
+            "Rank-10": 0.07251631617113626,
+            "Rank-20": 0.07251631617114031
+          },
+          "rescued": 4,
+          "harmed": 7,
+          "net_rescues": -3,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "overlap_mismatch",
+          "conditions": 30,
+          "delta_pp": {
+            "mAP": -0.05554168919858971,
+            "mINP": -0.024180956287569666,
+            "Rank-1": -0.18048505358150102,
+            "Rank-5": -0.07332205301748403,
+            "Rank-10": -0.1522842639593912,
+            "Rank-20": -0.11280315848843732
+          },
+          "rescued": 25,
+          "harmed": 57,
+          "net_rescues": -32,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "source_disjoint",
+          "conditions": 12,
+          "delta_pp": {
+            "mAP": -0.1412439336219272,
+            "mINP": -0.03620660681908183,
+            "Rank-1": -0.5640157924421884,
+            "Rank-5": 1.4802973661668753e-16,
+            "Rank-10": -2.721376198533559,
+            "Rank-20": -4.230118443316412
+          },
+          "rescued": 45,
+          "harmed": 85,
+          "net_rescues": -40,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "partial_query_full_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": -0.06530529474218882,
+            "mINP": -0.007431307147121036,
+            "Rank-1": -0.19740552735476533,
+            "Rank-5": -0.11280315848843614,
+            "Rank-10": -0.14100394811054903,
+            "Rank-20": -0.14100394811054903
+          },
+          "rescued": 3,
+          "harmed": 10,
+          "net_rescues": -7,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "full_query_partial_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": -0.05061744196253507,
+            "mINP": -0.033209630940837696,
+            "Rank-1": -0.28200789622109596,
+            "Rank-5": -0.08460236886632799,
+            "Rank-10": 0.0846023688663274,
+            "Rank-20": 0.0
+          },
+          "rescued": 3,
+          "harmed": 13,
+          "net_rescues": -10,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "both_partial",
+          "conditions": 36,
+          "delta_pp": {
+            "mAP": -0.07999717717377651,
+            "mINP": -0.026415220042953404,
+            "Rank-1": -0.27730776461740947,
+            "Rank-5": -0.03760105282947906,
+            "Rank-10": -1.0105282947922545,
+            "Rank-20": -1.4711411919533735
+          },
+          "rescued": 67,
+          "harmed": 126,
+          "net_rescues": -59,
+          "both_plus2_conditions": 0
+        }
+      ],
+      "most_negative_mAP_condition": {
+        "condition": "q_T_g_N",
+        "delta_pp": {
+          "mAP": -0.40530203920605246,
+          "mINP": -0.3160949613834343,
+          "Rank-1": -1.5228426395939088,
+          "Rank-5": -5.2453468697123515,
+          "Rank-10": -6.260575296108291,
+          "Rank-20": -2.0304568527918754
+        },
+        "rescued": 0,
+        "harmed": 9
+      }
+    }
+  ],
+  "normal_all3_double_plus2_datasets": 1,
+  "double_plus2_counts_not_acceptance_gate": {
+    "RGBNT201": {
+      "versus_original_DeMo": 13,
+      "versus_own00": 2,
+      "versus_paired_ordinary": 2
+    },
+    "RGBNT100": {
+      "versus_original_DeMo": 17,
+      "versus_own00": 0,
+      "versus_paired_ordinary": 0
+    },
+    "MSVR310": {
+      "versus_original_DeMo": 12,
+      "versus_own00": 0,
+      "versus_paired_ordinary": 0
+    }
+  },
+  "N5_evidence": {
+    "source": "results/r201k_expert_N5_20261007/normal_seed_analysis/result.json",
+    "dataset": "RGBNT201",
+    "expert_seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "fixed_DeMo_anchor_seed": 42,
+    "seed42_reused": true,
+    "summary_mean_and_sample_sd": [
+      {
+        "kind": "value",
+        "model_or_reference": "frequency_shared",
+        "N": 5,
+        "mean_mAP": 75.95729427914391,
+        "sample_sd_mAP": 0.27593024265152316,
+        "mean_mINP": 62.83756066387255,
+        "sample_sd_mINP": 0.21663010203059313,
+        "mean_Rank-1": 80.64593301435407,
+        "sample_sd_Rank-1": 0.3912781634879504,
+        "mean_Rank-5": 89.66507177033493,
+        "sample_sd_Rank-5": 0.3647835091382029,
+        "mean_Rank-10": 93.6602870813397,
+        "sample_sd_Rank-10": 0.08458215085963225,
+        "mean_Rank-20": 95.11961722488039,
+        "sample_sd_Rank-20": 0.23008832609654709
+      },
+      {
+        "kind": "value",
+        "model_or_reference": "axis_shared",
+        "N": 5,
+        "mean_mAP": 78.16279470277755,
+        "sample_sd_mAP": 0.9142726651902081,
+        "mean_mINP": 64.39825324123109,
+        "sample_sd_mINP": 1.0372293370082635,
+        "mean_Rank-1": 83.80382775119617,
+        "sample_sd_Rank-1": 0.9250054990038882,
+        "mean_Rank-5": 91.29186602870813,
+        "sample_sd_Rank-5": 0.9621568206789601,
+        "mean_Rank-10": 93.82775119617224,
+        "sample_sd_Rank-10": 0.5046656246346678,
+        "mean_Rank-20": 95.50239234449761,
+        "sample_sd_Rank-20": 0.4362340317897268
+      },
+      {
+        "kind": "paired_axis_delta",
+        "model_or_reference": "frequency_shared",
+        "N": 5,
+        "mean_mAP": 2.2055004236336346,
+        "sample_sd_mAP": 0.9485977625717998,
+        "mean_mINP": 1.5606925773585332,
+        "sample_sd_mINP": 0.9958695741215107,
+        "mean_Rank-1": 3.157894736842104,
+        "sample_sd_Rank-1": 1.203922262209206,
+        "mean_Rank-5": 1.626794258373201,
+        "sample_sd_Rank-5": 1.212803048386279,
+        "mean_Rank-10": 0.16746411483254064,
+        "sample_sd_Rank-10": 0.5254995846050011,
+        "mean_Rank-20": 0.3827751196172272,
+        "sample_sd_Rank-20": 0.5944867770234072
+      },
+      {
+        "kind": "paired_axis_delta",
+        "model_or_reference": "original_DeMo42",
+        "N": 5,
+        "mean_mAP": 2.488219710450076,
+        "sample_sd_mAP": 0.9142726651902081,
+        "mean_mINP": 1.821160991458933,
+        "sample_sd_mINP": 1.0372293370082635,
+        "mean_Rank-1": 3.1818181818181785,
+        "sample_sd_Rank-1": 0.9250054990038882,
+        "mean_Rank-5": 2.057416267942574,
+        "sample_sd_Rank-5": 0.9621568206789601,
+        "mean_Rank-10": 0.047846889952157315,
+        "sample_sd_Rank-10": 0.5046656246346678,
+        "mean_Rank-20": 0.526315789473685,
+        "sample_sd_Rank-20": 0.4362340317897268
+      }
+    ],
+    "best_of_five_separate": [
+      {
+        "seed": 45,
+        "model": "frequency_shared",
+        "selected_epoch": 33,
+        "mAP": 76.36388985639657,
+        "mINP": 63.09823822442048,
+        "Rank-1": 81.3397129186603,
+        "Rank-5": 90.19138755980862,
+        "Rank-10": 93.77990430622009,
+        "Rank-20": 95.21531100478468
+      },
+      {
+        "seed": 42,
+        "model": "axis_shared",
+        "selected_epoch": 30,
+        "mAP": 79.6643146931862,
+        "mINP": 66.16064487219106,
+        "Rank-1": 85.16746411483254,
+        "Rank-5": 92.22488038277513,
+        "Rank-10": 94.377990430622,
+        "Rank-20": 95.33492822966507
+      }
+    ],
+    "paired_deltas": [
+      {
+        "seed": 42,
+        "reference": "frequency_shared",
+        "mAP": 3.6123012371752736,
+        "mINP": 3.1455448565408517,
+        "Rank-1": 4.665071770334933,
+        "Rank-5": 2.3923444976076667,
+        "Rank-10": 0.7177033492823028,
+        "Rank-20": -0.11961722488038617,
+        "rank1_rescued": 43,
+        "rank1_harmed": 4,
+        "both_plus2": true
+      },
+      {
+        "seed": 42,
+        "reference": "original_DeMo42",
+        "mAP": 3.9897397008587347,
+        "mINP": 3.5835526224189067,
+        "Rank-1": 4.545454545454547,
+        "Rank-5": 2.990430622009569,
+        "Rank-10": 0.5980861244019167,
+        "Rank-20": 0.3588516746411443,
+        "rank1_rescued": 43,
+        "rank1_harmed": 5,
+        "both_plus2": true
+      },
+      {
+        "seed": 43,
+        "reference": "frequency_shared",
+        "mAP": 1.9828642156062415,
+        "mINP": 1.5927240563951983,
+        "Rank-1": 3.4688995215310996,
+        "Rank-5": 2.15311004784688,
+        "Rank-10": 0.3588516746411585,
+        "Rank-20": 0.3588516746411443,
+        "rank1_rescued": 36,
+        "rank1_harmed": 7,
+        "both_plus2": false
+      },
+      {
+        "seed": 43,
+        "reference": "original_DeMo42",
+        "mAP": 2.2736992294852882,
+        "mINP": 1.8258349826791402,
+        "Rank-1": 3.3492822966507134,
+        "Rank-5": 2.5119617224880244,
+        "Rank-10": 0.23923444976077235,
+        "Rank-20": 0.4784688995215305,
+        "rank1_rescued": 35,
+        "rank1_harmed": 7,
+        "both_plus2": true
+      },
+      {
+        "seed": 44,
+        "reference": "frequency_shared",
+        "mAP": 2.5879006855650317,
+        "mINP": 1.5019366165360637,
+        "Rank-1": 2.631578947368425,
+        "Rank-5": 2.3923444976076382,
+        "Rank-10": 0.4784688995215447,
+        "Rank-20": 0.7177033492823028,
+        "rank1_rescued": 32,
+        "rank1_harmed": 10,
+        "both_plus2": true
+      },
+      {
+        "seed": 44,
+        "reference": "original_DeMo42",
+        "mAP": 2.6306141968818935,
+        "mINP": 1.5176673870786601,
+        "Rank-1": 2.5119617224880386,
+        "Rank-5": 2.3923444976076382,
+        "Rank-10": 0.3588516746411585,
+        "Rank-20": 0.5980861244019167,
+        "rank1_rescued": 31,
+        "rank1_harmed": 10,
+        "both_plus2": true
+      },
+      {
+        "seed": 45,
+        "reference": "frequency_shared",
+        "mAP": 1.1080502415374553,
+        "mINP": 0.4374567065858912,
+        "Rank-1": 1.4354066985645773,
+        "Rank-5": -0.4784688995215447,
+        "Rank-10": -0.5980861244019167,
+        "Rank-20": -0.23923444976075814,
+        "rank1_rescued": 27,
+        "rank1_harmed": 15,
+        "both_plus2": false
+      },
+      {
+        "seed": 45,
+        "reference": "original_DeMo42",
+        "mAP": 1.7973651056065592,
+        "mINP": 0.9586026812342183,
+        "Rank-1": 2.15311004784688,
+        "Rank-5": 0.4784688995215163,
+        "Rank-10": -0.5980861244019167,
+        "Rank-20": 0.0,
+        "rank1_rescued": 31,
+        "rank1_harmed": 13,
+        "both_plus2": false
+      },
+      {
+        "seed": 46,
+        "reference": "frequency_shared",
+        "mAP": 1.73638573828417,
+        "mINP": 1.1258006507346607,
+        "Rank-1": 3.5885167464114858,
+        "Rank-5": 1.6746411483253638,
+        "Rank-10": -0.11961722488038617,
+        "Rank-20": 1.1961722488038333,
+        "rank1_rescued": 38,
+        "rank1_harmed": 8,
+        "both_plus2": false
+      },
+      {
+        "seed": 46,
+        "reference": "original_DeMo42",
+        "mAP": 1.7496803194179051,
+        "mINP": 1.2201472838837404,
+        "Rank-1": 3.3492822966507134,
+        "Rank-5": 1.913875598086122,
+        "Rank-10": -0.3588516746411443,
+        "Rank-20": 1.1961722488038333,
+        "rank1_rescued": 36,
+        "rank1_harmed": 8,
+        "both_plus2": false
+      }
+    ],
+    "threshold_counts": {
+      "frequency_shared": {
+        "pairs": 5,
+        "positive_mAP_and_Rank1": 5,
+        "both_plus2": 2
+      },
+      "original_DeMo42": {
+        "pairs": 5,
+        "positive_mAP_and_Rank1": 5,
+        "both_plus2": 3
+      }
+    },
+    "interpretation": "Expert-only repeated training conditional on one frozen DeMo42, not five entire pipelines or all3 stability. Official benchmark selects each epoch and Best-of5.",
+    "mean_sample_sd_recomputed_from_per_seed_csv": true,
+    "fixed_Best5_missing_already_completed": {
+      "status": "ACTUAL_RGBNT201_NORMAL_BEST5_FIXED49_CPU_COMPLETE",
+      "completed_at": "2026-10-07T22:01:13",
+      "axis_seed": 42,
+      "ordinary_seed": 45,
+      "new_missing_control": 1,
+      "reused_missing_control": 1,
+      "conditions_per_control": 49,
+      "states_per_control": 196,
+      "axis_vs_best_ordinary_groups": [
+        {
+          "group": "all49",
+          "conditions": 49,
+          "delta_pp": {
+            "mAP": 0.13168920596175604,
+            "mINP": 0.3601756248953368,
+            "Rank-1": 0.09032321062396283,
+            "Rank-5": -0.08544087491455853,
+            "Rank-10": -0.06347036422224307,
+            "Rank-20": -0.7787325456498375
+          },
+          "rescued": 1446,
+          "harmed": 1409,
+          "net_rescues": 37,
+          "both_plus2_conditions": 2
+        },
+        {
+          "group": "same_availability",
+          "conditions": 7,
+          "delta_pp": {
+            "mAP": 0.6668588455599053,
+            "mINP": 0.7535374257217394,
+            "Rank-1": 0.6835269993164726,
+            "Rank-5": 0.4272043745727946,
+            "Rank-10": 0.1367053998632995,
+            "Rank-20": 0.03417634996582665
+          },
+          "rescued": 193,
+          "harmed": 153,
+          "net_rescues": 40,
+          "both_plus2_conditions": 1
+        },
+        {
+          "group": "overlap_mismatch",
+          "conditions": 30,
+          "delta_pp": {
+            "mAP": 0.004508651606868715,
+            "mINP": 0.27447974548583925,
+            "Rank-1": 0.039872408293461586,
+            "Rank-5": -0.2113237639553418,
+            "Rank-10": -0.2272727272727271,
+            "Rank-20": -0.8532695374800625
+          },
+          "rescued": 1126,
+          "harmed": 1116,
+          "net_rescues": 10,
+          "both_plus2_conditions": 1
+        },
+        {
+          "group": "source_disjoint",
+          "conditions": 12,
+          "delta_pp": {
+            "mAP": 0.13745830208338725,
+            "mINP": 0.34495427293701236,
+            "Rank-1": -0.1295853269537481,
+            "Rank-5": -0.06977671451355631,
+            "Rank-10": 0.22926634768740048,
+            "Rank-20": -1.066586921850079
+          },
+          "rescued": 127,
+          "harmed": 140,
+          "net_rescues": -13,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "partial_query_full_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": -0.005074918349279163,
+            "mINP": 0.3064436119554266,
+            "Rank-1": 0.21929824561403777,
+            "Rank-5": -0.7376395534290262,
+            "Rank-10": -0.976874003189792,
+            "Rank-20": -1.036682615629984
+          },
+          "rescued": 263,
+          "harmed": 252,
+          "net_rescues": 11,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "full_query_partial_gallery",
+          "conditions": 6,
+          "delta_pp": {
+            "mAP": 0.7116898064204277,
+            "mINP": 0.9087747068912778,
+            "Rank-1": 0.5980861244019161,
+            "Rank-5": 0.09968102073365277,
+            "Rank-10": 0.8771929824561392,
+            "Rank-20": 0.8572567783094117
+          },
+          "rescued": 180,
+          "harmed": 150,
+          "net_rescues": 30,
+          "both_plus2_conditions": 0
+        },
+        {
+          "group": "both_partial",
+          "conditions": 36,
+          "delta_pp": {
+            "mAP": -0.030203974252513248,
+            "mINP": 0.2026358071950193,
+            "Rank-1": -0.11961722488038301,
+            "Rank-5": -0.06645401382243432,
+            "Rank-10": -0.08639021796916418,
+            "Rank-20": -1.0333599149388608
+          },
+          "rescued": 966,
+          "harmed": 1002,
+          "net_rescues": -36,
+          "both_plus2_conditions": 1
+        }
+      ],
+      "not_paired_seed_average": true,
+      "does_not_establish_five_seed_missing_stability": true
+    }
+  },
+  "training_activity_and_counterfactual_margin06": {
+    "not_new_training": true,
+    "new_neural_calls": 0,
+    "new_optimizer_updates": 0,
+    "method": "Read original closed batch_orders.jsonl, epochs41..50. Let gap_i=d_an_i-d_ap_i. Mean hinge(.6)>=max(.6-mean(gap_i),0). A positive lower bound establishes some active anchor at those logged fixed features, not the exact active-anchor fraction, gradient, or result of a margin.6 training run.",
+    "records": [
+      {
+        "source": "results/r201k_relation_local_pi_20261007/RGBNT100/training/RGBNT100_r201k_axis_shared_s42/batch_orders.jsonl",
+        "formal_rows": 6357,
+        "window_epochs": [
+          41,
+          50
+        ],
+        "batches": 1270,
+        "zero_margin03_batches": 1221,
+        "zero_margin03_fraction": 0.9614173228346456,
+        "active_margin03_batches": 49,
+        "mean_primary03_loss": 2.9003776712563095e-05,
+        "mean_primary03_violating_anchors_per64": 0.07007874015748032,
+        "mean_logged_d_an_minus_d_ap": 0.5764987905663768,
+        "batch_mean_gap_min_median_max": [
+          0.42782074213027954,
+          0.5766547322273254,
+          0.7273065149784088
+        ],
+        "margin06_guaranteed_positive_fixed_feature_batches_lower_bound": 859,
+        "previously_zero03_batches_with_positive06_lower_bound": 810,
+        "mean_fixed_feature_margin06_hinge_lower_bound": 0.034134957400832576
+      },
+      {
+        "source": "results/r201l_uniform_k8_20261007/RGBNT100/training/RGBNT100_r201l_axis_shared_s42/batch_orders.jsonl",
+        "formal_rows": 6563,
+        "window_epochs": [
+          41,
+          50
+        ],
+        "batches": 1311,
+        "zero_margin03_batches": 1232,
+        "zero_margin03_fraction": 0.9397406559877955,
+        "active_margin03_batches": 79,
+        "mean_primary03_loss": 5.384304395199822e-05,
+        "mean_primary03_violating_anchors_per64": 0.10221205186880244,
+        "mean_logged_d_an_minus_d_ap": 0.5553723996509403,
+        "batch_mean_gap_min_median_max": [
+          0.45331886410713196,
+          0.5561603307723999,
+          0.6490682065486908
+        ],
+        "margin06_guaranteed_positive_fixed_feature_batches_lower_bound": 1219,
+        "previously_zero03_batches_with_positive06_lower_bound": 1140,
+        "mean_fixed_feature_margin06_hinge_lower_bound": 0.04554528809066584
+      },
+      {
+        "source": "results/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_axis_shared_s42/batch_orders.jsonl",
+        "formal_rows": 1000,
+        "window_epochs": [
+          41,
+          50
+        ],
+        "batches": 200,
+        "zero_margin03_batches": 3,
+        "zero_margin03_fraction": 0.015,
+        "active_margin03_batches": 197,
+        "mean_primary03_loss": 0.024505350938998163,
+        "mean_primary03_violating_anchors_per64": 20.065,
+        "mean_logged_d_an_minus_d_ap": 0.35462667092680933,
+        "batch_mean_gap_min_median_max": [
+          0.22871696949005127,
+          0.35368116199970245,
+          0.4603798985481262
+        ],
+        "margin06_guaranteed_positive_fixed_feature_batches_lower_bound": 200,
+        "previously_zero03_batches_with_positive06_lower_bound": 3,
+        "mean_fixed_feature_margin06_hinge_lower_bound": 0.24537332907319068
+      }
+    ]
+  },
+  "final_epoch_negative_evidence": [
+    {
+      "source": "results/r201l_uniform_k8_20261007/RGBNT100/training/RGBNT100_r201l_frequency_shared_s42/epochs.csv",
+      "dataset": "RGBNT100",
+      "model": "L_frequency_shared",
+      "selected_epoch": 1,
+      "selected_all_six_percent": {
+        "mAP": 85.77501804716096,
+        "mINP": 61.87199510726682,
+        "Rank-1": 96.61807580174927,
+        "Rank-5": 97.0262390670554,
+        "Rank-10": 97.37609329446065,
+        "Rank-20": 97.72594752186589
+      },
+      "final_epoch": 50,
+      "final_all_six_percent": {
+        "mAP": 85.64019759034841,
+        "mINP": 62.06350737588424,
+        "Rank-1": 95.8600583090379,
+        "Rank-5": 96.85131195335276,
+        "Rank-10": 97.25947521865889,
+        "Rank-20": 97.78425655976677
+      },
+      "final_minus_selected_pp": {
+        "mAP": -0.13482045681254817,
+        "mINP": 0.19151226861742288,
+        "Rank-1": -0.7580174927113745,
+        "Rank-5": -0.17492711370263692,
+        "Rank-10": -0.11661807580175321,
+        "Rank-20": 0.05830903790088371
+      },
+      "actual_updates": 6563,
+      "amp_skipped_steps": 0
+    },
+    {
+      "source": "results/r201l_uniform_k8_20261007/RGBNT100/training/RGBNT100_r201l_axis_shared_s42/epochs.csv",
+      "dataset": "RGBNT100",
+      "model": "L_axis_shared",
+      "selected_epoch": 9,
+      "selected_all_six_percent": {
+        "mAP": 85.9345557038676,
+        "mINP": 62.00639040536132,
+        "Rank-1": 96.61807580174927,
+        "Rank-5": 97.08454810495627,
+        "Rank-10": 97.49271137026238,
+        "Rank-20": 97.90087463556851
+      },
+      "final_epoch": 50,
+      "final_all_six_percent": {
+        "mAP": 84.51453762338107,
+        "mINP": 59.702926185724124,
+        "Rank-1": 96.0932944606414,
+        "Rank-5": 96.85131195335276,
+        "Rank-10": 97.25947521865889,
+        "Rank-20": 97.72594752186589
+      },
+      "final_minus_selected_pp": {
+        "mAP": -1.4200180804865283,
+        "mINP": -2.303464219637199,
+        "Rank-1": -0.5247813411078681,
+        "Rank-5": -0.23323615160350641,
+        "Rank-10": -0.2332361516034922,
+        "Rank-20": -0.1749271137026227
+      },
+      "actual_updates": 6563,
+      "amp_skipped_steps": 0
+    },
+    {
+      "source": "results/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_frequency_shared_s42/epochs.csv",
+      "dataset": "MSVR310",
+      "model": "L_frequency_shared",
+      "selected_epoch": 3,
+      "selected_all_six_percent": {
+        "mAP": 47.193870993733,
+        "mINP": 23.539294662785384,
+        "Rank-1": 63.7901861252115,
+        "Rank-5": 80.37225042301185,
+        "Rank-10": 84.77157360406092,
+        "Rank-20": 89.84771573604061
+      },
+      "final_epoch": 50,
+      "final_all_six_percent": {
+        "mAP": 46.03910130390301,
+        "mINP": 22.780548441545946,
+        "Rank-1": 62.43654822335025,
+        "Rank-5": 79.69543147208121,
+        "Rank-10": 84.26395939086294,
+        "Rank-20": 89.17089678510999
+      },
+      "final_minus_selected_pp": {
+        "mAP": -1.1547696898299904,
+        "mINP": -0.7587462212394378,
+        "Rank-1": -1.3536379018612479,
+        "Rank-5": -0.6768189509306382,
+        "Rank-10": -0.5076142131979822,
+        "Rank-20": -0.6768189509306239
+      },
+      "actual_updates": 1000,
+      "amp_skipped_steps": 0
+    },
+    {
+      "source": "results/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_axis_shared_s42/epochs.csv",
+      "dataset": "MSVR310",
+      "model": "L_axis_shared",
+      "selected_epoch": 3,
+      "selected_all_six_percent": {
+        "mAP": 47.19384554798738,
+        "mINP": 23.52161936532509,
+        "Rank-1": 63.95939086294417,
+        "Rank-5": 80.20304568527918,
+        "Rank-10": 84.77157360406092,
+        "Rank-20": 90.01692047377327
+      },
+      "final_epoch": 50,
+      "final_all_six_percent": {
+        "mAP": 41.53049835963826,
+        "mINP": 18.692733382768402,
+        "Rank-1": 58.206429780033844,
+        "Rank-5": 78.00338409475465,
+        "Rank-10": 81.89509306260575,
+        "Rank-20": 87.81725888324873
+      },
+      "final_minus_selected_pp": {
+        "mAP": -5.663347188349121,
+        "mINP": -4.828885982556688,
+        "Rank-1": -5.752961082910325,
+        "Rank-5": -2.199661590524528,
+        "Rank-10": -2.876480541455166,
+        "Rank-20": -2.199661590524542
+      },
+      "actual_updates": 1000,
+      "amp_skipped_steps": 0
+    }
+  ],
+  "disjoint_geometry_evidence": [
+    {
+      "dataset": "RGBNT201",
+      "model": "K_axis_shared_s42",
+      "conditions": 12,
+      "state_cases": 48,
+      "states": [
+        "00",
+        "10",
+        "01",
+        "11"
+      ],
+      "minimum_distance": 1.9999995231628418,
+      "maximum_distance": 2.000000476837158,
+      "max_abs_distance_from2": 4.76837158203125e-07,
+      "caution": "Ranks in nearly constant disjoint private-distance blocks cannot establish cross-source identity utility."
+    },
+    {
+      "dataset": "RGBNT100",
+      "model": "L_axis_shared_s42",
+      "conditions": 12,
+      "state_cases": 48,
+      "states": [
+        "00",
+        "10",
+        "01",
+        "11"
+      ],
+      "minimum_distance": 1.9999995231628418,
+      "maximum_distance": 2.000000476837158,
+      "max_abs_distance_from2": 4.76837158203125e-07,
+      "caution": "Ranks in nearly constant disjoint private-distance blocks cannot establish cross-source identity utility."
+    },
+    {
+      "dataset": "MSVR310",
+      "model": "L_axis_shared_s42",
+      "conditions": 12,
+      "state_cases": 48,
+      "states": [
+        "00",
+        "10",
+        "01",
+        "11"
+      ],
+      "minimum_distance": 1.9999995231628418,
+      "maximum_distance": 2.000000476837158,
+      "max_abs_distance_from2": 4.76837158203125e-07,
+      "caution": "Ranks in nearly constant disjoint private-distance blocks cannot establish cross-source identity utility."
+    }
+  ],
+  "execution_provenance": {
+    "status": "ACTUAL_ORIGINAL_L_MISSING_RECEIVER_EXIT0_AND_ALL49_GT_RAW_TEXT_CPU_COMPLETE",
+    "recorded_at": "2026-10-08T05:42:39.4405883+08:00",
+    "original_native_session": 99262,
+    "original_exit_code": 0,
+    "original_receiver_pid": 19856,
+    "local_wait_native_session": 8912,
+    "local_wait_exit_code": 0,
+    "terminal": "ACTUAL_L_ALL_NEW_FIXED_BEST_MISSING49_GT_RAW_CPU_COMPLETE_K201_REUSED",
+    "finished": "2026-10-08T05:37:54",
+    "new_controls": 4,
+    "new_full_conditions": 196,
+    "reused_full_conditions": 98,
+    "combined_conditions": 294,
+    "combined_state_cases": 1176,
+    "native_conditions": 4,
+    "native_state_cases": 16,
+    "model_state_metric_rows": 2107,
+    "comparisons": 1519,
+    "checked_condition_query_rows": 2289574,
+    "unique_queries": 3142,
+    "paired_query_rows": 307916,
+    "native_duplicate_raw_retired": 4,
+    "restored_normal_copies_cleared": true,
+    "unique_raw_lost": 0,
+    "new_neural_calls_for_receipt": 0,
+    "new_optimizer_updates": 0,
+    "goal": "ACTIVE_UNMET",
+    "limits": "Original missing receiver actual tool exit0 consumed; original earlier normal controller exit remainsUNATTESTED and its administrative recovery preserved. This record proves execution, not all3+2 or claims.",
+    "earlier_normal_controller_provenance": {
+      "source": "results/preflight/r201l_RGBNT100_closed_archive_recovery_actual_20261008.json",
+      "administrative_only": true,
+      "recorded_at": "2026-10-08T03:22:37",
+      "original_controller_result_was_absent": true,
+      "original_controller_exit_code": null,
+      "reason": "Original local receiver was absent; ordinary RAW already ACK-cleared, axis RAW remained. Training and GT audit original exits are0; interruption cause unverified.",
+      "new_neural_calls": 0,
+      "new_optimizer_updates": 0,
+      "distinct_from_later_missing_receiver_exit0": true
+    }
+  },
+  "trace": {
+    "prompt_source": "results/preflight/r201l_full49_result_to_claim_request_20261008.json",
+    "raw_semantic_judgment_embedded_in_this_JSON": true,
+    "skill": "C:/Users/gb/.codex/skills/result-to-claim/SKILL.md",
+    "policy": "C:/Users/gb/.codex/skills/shared-references/local-codex-policy.md",
+    "routing_action": "Keep full goal ACTIVE_UNMET; publish only existing complete evidence and this qualified review through the parent; prepare the prespecified final-margin proposal without treating it as launched or validated.",
+    "second_human_handoff_created": false,
+    "source_hash_framework_created": false,
+    "only_output": "results/preflight/r201l_full49_result_to_claim_20261008.json",
+    "pending_external_review": false,
+    "cross_family_review_status": "Not requested or performed; same-family semantic acceptance remains provisional."
+  }
+}

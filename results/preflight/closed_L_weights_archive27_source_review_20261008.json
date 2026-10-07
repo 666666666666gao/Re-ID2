@@ -1,0 +1,183 @@
+{
+  "status": "PASS",
+  "blocking_findings": [],
+  "non_blocking_findings": [],
+  "reviewed_at": "2026-10-08T06:04:20+08:00",
+  "source": "results/preflight/closed_L_weights_archive27_after_full49_20261008.py",
+  "source_sha256": "39433ed762d3641159e97612bf0f283e8e7957b716087c6232385092b5c5e155",
+  "review_kind": "experiment-bridge Phase 2.5 fresh source-only administrative archive review",
+  "reviewer_agent": "/root/review_closed_l_weight_archive_20261008",
+  "review_requested_model": "gpt-6-astra",
+  "review_requested_effort": "max",
+  "actual_backend": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "actual_backend_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "summary": "The exact script correctly limits this cleanup to four closed L best.pth source copies, preserves their unique bytes in a new server27 archive before source unlink, and leaves normal/full49 provenance and protected weights intact. No concrete source defect found.",
+  "scope_checks": {
+    "exact_targets": [
+      "runs/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_frequency_shared_s42/best.pth",
+      "runs/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_axis_shared_s42/best.pth",
+      "runs/r201l_uniform_k8_20261007/RGBNT100/training/RGBNT100_r201l_frequency_shared_s42/best.pth",
+      "runs/r201l_uniform_k8_20261007/RGBNT100/training/RGBNT100_r201l_axis_shared_s42/best.pth"
+    ],
+    "ownership": "Literal MSVR310/RGBNT100 x frequency_shared/axis_shared target construction; resolved server26 paths must remain below the exact L run prefix and retain basename best.pth. There is no glob or recursive deletion.",
+    "active_process_guard": "Before recording or copying targets, server26 /proc cmdline arguments must not contain the absolute L normal run prefix. The actual missing evaluator launcher supplies that prefix through --run-dir and --normal-arrays. Independently, the existing full49 terminal receipt is required before any SSH action.",
+    "closed_normal_preconditions": "Requires the completed four-run normal receipt; each remote result must be COMPLETE with 50 epochs, normal_cpu_audit PASS, and original per-run training exit_code 0. Local original training and GT-audit exit metadata also corroborate closure.",
+    "closed_missing_preconditions": "Requires original missing receiver actual exit0, 196 new conditions, 1176 combined states, and unique_raw_lost 0; existing local four-run full49 audits and CPU completion corroborate the prerequisite.",
+    "protected16": "The exact existing 16-entry original-teacher/I/K/Best45 map is disjoint from the four targets. All 16 SHA values are checked before archival, immediately before unlinking, and after unlinking. Other N5 runs are outside all mutation paths.",
+    "capacity_and_transport": "Destination is a new exact child under server27 project archives. Current free space must exceed all four current source sizes plus 1 GiB. scp -3 streams only these paths between 2026 and 2027, without a local D-drive weight file. collect_results.command uses subprocess check=True.",
+    "archive_before_deletion": "Copies all four files, then verifies all four destination sizes and SHA256 values and writes archive_manifest.json before returning the all-four ACK. Source deletion is reachable only after that ACK; all source sizes, SHA256 values and result.json hashes are rechecked first.",
+    "metadata_preservation": "Original normal/full49/controller/result/audit/exit metadata are read only. Server26 mutations are exactly four best.pth unlink calls. New writes are restricted to server27 archive directories/files/manifest and the separate local archival receipt.",
+    "provenance": "The normal aggregate exit_code 0 is administrative completion; its RGBNT100 original_controller_exit_code remains null. This script neither changes that input nor asserts an original normal controller exit0. The distinct full49 original receiver exit0 is supported by its consumed-terminal receipt.",
+    "no_experiment_work": "No training, model loading, NN/GPU calls, metric recomputation, checkpoint reselection, RAW/text/dataset/source deletion, or current teacher/I/K/N5/Best45 deletion occurs in this script."
+  },
+  "actual_review_evidence": {
+    "syntax": {
+      "outer_Python_AST": "PASS",
+      "embedded_remote_scripts_AST": 4,
+      "embedded_source_lines": [
+        40,
+        58,
+        67,
+        74
+      ],
+      "archive_manifest_newline_and_JSON_payload": "PASS; decoded suffix is newline U+000A"
+    },
+    "syntax_method": "AST only; reconstructed f-strings from literal paths and existing protected map, with dummy remote size/hash records solely for syntax parsing. No candidate import or candidate/remote-script execution.",
+    "local_interpreter": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.11.14-windows-x86_64-none/python.exe -X utf8 -B -S",
+    "review_request_source_sha_matches": true,
+    "reused_pattern": "results/preflight/closed_J_weights_archive27_for_L_20261007.py",
+    "normal_input": "results/preflight/r201l_uniform_k8_actual_session_20261007.json",
+    "normal_runs": [
+      {
+        "name": "MSVR310_r201l_frequency_shared_s42",
+        "target": "runs/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_frequency_shared_s42/best.pth",
+        "status": "COMPLETE",
+        "epochs": 50,
+        "optimizer_steps": 1000,
+        "selected_epoch": 3,
+        "normal_cpu_audit": "PASS",
+        "original_training_exit_code": 0,
+        "original_GT_audit_exit_code": 0
+      },
+      {
+        "name": "MSVR310_r201l_axis_shared_s42",
+        "target": "runs/r201l_uniform_k8_20261007/MSVR310/training/MSVR310_r201l_axis_shared_s42/best.pth",
+        "status": "COMPLETE",
+        "epochs": 50,
+        "optimizer_steps": 1000,
+        "selected_epoch": 3,
+        "normal_cpu_audit": "PASS",
+        "original_training_exit_code": 0,
+        "original_GT_audit_exit_code": 0
+      },
+      {
+        "name": "RGBNT100_r201l_frequency_shared_s42",
+        "target": "runs/r201l_uniform_k8_20261007/RGBNT100/training/RGBNT100_r201l_frequency_shared_s42/best.pth",
+        "status": "COMPLETE",
+        "epochs": 50,
+        "optimizer_steps": 6563,
+        "selected_epoch": 1,
+        "normal_cpu_audit": "PASS",
+        "original_training_exit_code": 0,
+        "original_GT_audit_exit_code": 0
+      },
+      {
+        "name": "RGBNT100_r201l_axis_shared_s42",
+        "target": "runs/r201l_uniform_k8_20261007/RGBNT100/training/RGBNT100_r201l_axis_shared_s42/best.pth",
+        "status": "COMPLETE",
+        "epochs": 50,
+        "optimizer_steps": 6563,
+        "selected_epoch": 9,
+        "normal_cpu_audit": "PASS",
+        "original_training_exit_code": 0,
+        "original_GT_audit_exit_code": 0
+      }
+    ],
+    "normal_successful_updates": 15126,
+    "normal_native_updates": 12,
+    "normal_additional_epochs": 200,
+    "normal_raw_files_exist_and_recorded_size_match": 4,
+    "original_normal_controller_exit_code": null,
+    "missing_completion_input": "results/preflight/r201l_missing49_complete_20261008_actual.json",
+    "original_missing_native_session": 99262,
+    "original_missing_exit_code": 0,
+    "full49_runs": [
+      {
+        "name": "MSVR310_r201l_frequency_shared_s42",
+        "status": "COMPLETE",
+        "selected_epoch": 3,
+        "conditions": 49,
+        "state_cases": 196,
+        "independent_cpu_audit": "PASS",
+        "condition_audits_PASS": 49,
+        "original_exit_code": 0
+      },
+      {
+        "name": "MSVR310_r201l_axis_shared_s42",
+        "status": "COMPLETE",
+        "selected_epoch": 3,
+        "conditions": 49,
+        "state_cases": 196,
+        "independent_cpu_audit": "PASS",
+        "condition_audits_PASS": 49,
+        "original_exit_code": 0
+      },
+      {
+        "name": "RGBNT100_r201l_frequency_shared_s42",
+        "status": "COMPLETE",
+        "selected_epoch": 1,
+        "conditions": 49,
+        "state_cases": 196,
+        "independent_cpu_audit": "PASS",
+        "condition_audits_PASS": 49,
+        "original_exit_code": 0
+      },
+      {
+        "name": "RGBNT100_r201l_axis_shared_s42",
+        "status": "COMPLETE",
+        "selected_epoch": 9,
+        "conditions": 49,
+        "state_cases": 196,
+        "independent_cpu_audit": "PASS",
+        "condition_audits_PASS": 49,
+        "original_exit_code": 0
+      }
+    ],
+    "full49_raw_files_exist_and_recorded_size_match": 196,
+    "collected_text_manifest_entries": 1852,
+    "cpu_result": "results/r201l_missing49_20261007/missing_analysis/result.json",
+    "cpu_completed_at": "2026-10-08T05:37:54",
+    "combined_conditions": 294,
+    "combined_state_cases": 1176,
+    "model_state_metric_rows": 2107,
+    "comparisons": 1519,
+    "checked_condition_query_rows": 2289574,
+    "paired_query_rows": 307916,
+    "unique_queries": 3142,
+    "protected_weights_input": "results/preflight/r201l_J_archive_protected_weights_20261007.json",
+    "protected_count": 16,
+    "archive_actual_receipt_exists_at_review": false
+  },
+  "limitations": [
+    "This is a source-only review. No SSH, SCP, remote command, archive copy, unlink, NN or GPU operation was executed.",
+    "Current remote process state, destination capacity/existence, weight sizes/SHA values, and actual archive ACK remain runtime checks of the exact reviewed script; PASS does not claim an archive already exists or cleanup completed.",
+    "Existing normal/full49 terminal, collection and CPU artifacts were read; four normal RAW and 196 missing RAW files were checked for presence and recorded size. Their large payloads were not rehashed or recomputed during this administrative source review.",
+    "The older original normal controller exit remains unattested. No original-controller exit0 or interruption cause is inferred from the administrative recovery or later full49 success.",
+    "Requested reviewer model/effort are recorded honestly; the available tools did not attest the serving backend or reasoning effort. Acceptance is same-family provisional."
+  ],
+  "review_execution": {
+    "candidate_executed": false,
+    "candidate_imported": false,
+    "ssh_calls": 0,
+    "scp_calls": 0,
+    "new_neural_calls": 0,
+    "new_optimizer_updates": 0,
+    "weight_copies": 0,
+    "weight_unlinks": 0,
+    "installs": 0,
+    "only_written_file": "results/preflight/closed_L_weights_archive27_source_review_20261008.json"
+  }
+}
