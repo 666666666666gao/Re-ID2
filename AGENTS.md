@@ -1,5 +1,11 @@
 # DeMo Dual-Axis experiment
 
+## Latest missing-evaluation override — 2026-10-09
+
+For new missing-modality evaluations, use only the six DeMo paper settings: missing R, N, T, RN, RT or NT, applied equally to query and gallery. Use every official query/gallery record and the fixed normal-input mAP-best checkpoint. Do not launch new 49-pair evaluations; keep the completed historical 49-pair evidence. Report all six metrics for each condition and the equal-condition mean, with negative cases retained. DeMo reports these missing settings for RGBNT201/RGBNT100; applying them to MSVR310 is our explicit extension.
+
+Keep the best K RGBNT201 checkpoint and its published evidence. Finish the already running M MSVR310/RGBNT100 normal experiment, then the registered paper-six queue; never duplicate their owners. Any new diagnostic neural work must wait until those jobs close and pass fresh source review. All neural work remains on 2026 physical GPU2/3, serialized per card, at most two models. These instructions supersede the older all-49 requirement below.
+
 ## Latest user override — 2026-10-04
 
 For all new experiments use the entire official training split and every official query/gallery record. Do not create or use an artificial fit/dev identity holdout. Historical subset experiments remain archived evidence. The full-data baseline stage follows the original highest benchmark mAP checkpoint principle, with earliest ties shared across models, and discloses benchmark-based selection. Missing evaluations use that fixed checkpoint, all 49 modality pairs, and original GT camera/scene exclusion. All neural jobs run only on 2026 physical GPU2/3, serialized per card, at most two concurrent. No temperature or power conditions. Rebuild complete DeMo and same-augmentation availability-correct DeMo references before advancing the pending M3b control-head experiment. Fresh source review and real preflight remain required.
