@@ -15,7 +15,7 @@ MISSING=('R','N','T','RN','RT','NT')
 
 
 def main():
-    review=load(PROJECT/'results/preflight/r201n_paper_missing6_source_review_20261009.json')
+    review=load(PROJECT/'results/preflight/r201n_paper_missing6_split_receivers_source_review_20261010.json')
     assert review['status']=='PASS' and not review['blocking_findings']
     assert all(hashlib.sha256((PROJECT/name).read_bytes()).hexdigest()==sha for name,sha in (review['sources_sha256']|review['directly_reused_sources_sha256']).items())
     controller=load(ROOT/'controller_full_result.json');registry=load(ROOT/'jobs.json')

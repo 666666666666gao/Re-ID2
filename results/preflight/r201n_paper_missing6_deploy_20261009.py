@@ -19,21 +19,34 @@ def main():
     pf=PROJECT/'results/preflight';load=lambda p:json.loads(p.read_text(encoding='utf-8'))
     proof=pf/'r201n_paper_missing6_actual_session_20261009.json'
     assert not proof.exists() and not LOCAL.exists() and all(not path.exists() for path in ARCHIVES.values())
-    review=load(pf/'r201n_paper_missing6_source_review_20261009.json')
+    review=load(pf/'r201n_paper_missing6_split_receivers_source_review_20261010.json')
     assert review['status']=='PASS' and not review['blocking_findings']
     sources,reuse=review['sources_sha256'],review['directly_reused_sources_sha256']
     assert set(sources)=={'evaluate_r201n_paper_missing6_stream.py','launch_r201n_paper_missing6_stream.py','analyze_r201n_paper_missing6.py','results/preflight/r201n_paper_missing6_deploy_20261009.py'}
     assert all(hashlib.sha256((PROJECT/n).read_bytes()).hexdigest()==sha for n,sha in (sources|reuse).items())
     original=load(pf/'r201n_bounded_identity_shift_actual_session_20261009.json')
-    assert original['status']=='ACTUAL_N_TWO_WEAK_NORMAL_DATASETS_FOUR_FULL50_GT_RAW_COMPLETE' and original['exit_code']==0
-    assert original['native_updates']==12 and original['successful_updates']==15126 and original['additional_epochs']==200
-    assert set(original['datasets'])=={'MSVR310','RGBNT100'}
+    assert original['status']=='ACTUAL_N_TWO_WEAK_FOUR_FULL50_GT_RAW_COMPLETE_SPLIT_RECEIVERS'
+    assert original['native_updates_closed']==12 and original['new_formal_updates_closed']==15126 and original['additional_epochs']==200
+    assert set(original['formal_datasets_closed'])=={'MSVR310','RGBNT100'}
+    assert original['original_receiver_exit_code']==1 and not original['original_controller_complete']
+    recovered=load(PROJECT/original['MSVR_recovered_receipt'])
+    assert recovered['status']=='ACTUAL_N_ORIGINAL_MSVR_POST_TRANSPORT_GT_RAW_TEXT_CPU_COMPLETE'
+    msvr=recovered['collection']
+    assert msvr['successful_updates']==2000 and msvr['native_updates']==6 and msvr['additional_epochs']==100
+    assert msvr['original_receiver_exit_code']==1 and not msvr['original_controller_complete'] and msvr['paired_sampling_exact']
+    rgb100=load(PROJECT/original['RGBNT100_receipt'])
+    assert rgb100['status']=='ACTUAL_N_TWO_FULL50_NORMAL_GT_AND_LOCAL_RAW' and rgb100['exit_code']==0
+    assert rgb100['dataset']=='RGBNT100' and rgb100['successful_updates']==13126 and rgb100['native_updates']==6 and rgb100['additional_epochs']==100
+    assert len(msvr['archives'])==len(rgb100['archives'])==2
+    normal_datasets={'MSVR310':msvr,'RGBNT100':rgb100}
     protocol=load(pf/'demo_missing_protocol_primary_six_20261009.json')
     assert protocol['new_missing_evaluation_scope'].startswith('Paper six only')
     assert hashlib.sha256((PROJECT/protocol['source_csv']).read_bytes()).hexdigest()==protocol['source_csv_sha256']
     replay=load(pf/'r201l_uniform_K8_sampler_cpu_replay_20261007.json')
     assert replay['status']=='ACTUAL_EXISTING_SAMPLER_CPU_FULL50_OLD_AND_K8_REPLAY_COMPLETE'
-    state=dict(status='N_WEAK_NORMAL_TERMINAL_PAPER6_SOURCE_CHECKED_NO_NN_STARTED',started=datetime.now().isoformat(timespec='seconds'),new_neural_calls=0,new_optimizer_updates=0)
+    state=dict(status='N_WEAK_NORMAL_TERMINAL_PAPER6_SOURCE_CHECKED_NO_NN_STARTED',started=datetime.now().isoformat(timespec='seconds'),new_neural_calls=0,new_optimizer_updates=0,
+        normal_collection_scope='Two actual receivers: MSVR original interrupted and independently recovered; RGBNT100 continuation complete',
+        original_MSVR_receiver_exit_code=1,original_MSVR_controller_complete=False)
     assert all(hashlib.sha256((PROJECT/n).read_bytes()).hexdigest()==sha for n,sha in (sources|reuse).items())
     jobs=[]
     def add(dataset,variant):
@@ -46,7 +59,7 @@ def main():
         assert data['anchor']['final_unit_descriptor_bound']['epsilon']==.10 and data['anchor']['final_unit_descriptor_bound']['parameter_change']==0
         assert data['training_heldout_identities']==0 and data['descriptor_dim']==5120
         assert load(folder/'normal_cpu_audit.json')['status']=='PASS'
-        raw=original['datasets'][dataset]['archives'][name];local=Path(raw['local'])
+        raw=normal_datasets[dataset]['archives'][name];local=Path(raw['local'])
         assert local.resolve().is_relative_to(ARCHIVE_BASES['frequency_shared'].resolve())
         assert local.stat().st_size==raw['file']['bytes'] and hashlib.sha256(local.read_bytes()).hexdigest()==raw['file']['sha256']
         assert data['arguments']['output'].startswith(REMOTE+'/runs/r201n_bounded_identity_shift_20261009/')
@@ -65,7 +78,7 @@ def main():
     registry=dict(jobs=jobs,reused_RGBNT201_paper6_csv=protocol['output_csv'],
         selected_at=datetime.now().isoformat(timespec='seconds'),missing_reselection=False,
         source_graph='relation_local_shared_PI',explicit_archive_roots={v:str(path) for v,path in ARCHIVES.items()},capacity=capacity,
-        limits='Only paper-six same source masks, K201selected42 preserved; new Nweak42 epsilon.10 on fixed .6 recipe. No missing epoch/seed selection; old201 results reused exactly, not new M201.')
+        limits='Only paper-six same source masks, K201selected42 preserved; new Nweak42 epsilon.10 on fixed .6 recipe. No missing epoch/seed selection; old201 results reused exactly, not new N201.')
     registry_path=LOCAL/'jobs.json';registry_path.write_text(json.dumps(registry,indent=2)+'\n',encoding='utf-8')
     variants={job['name']:job['variant'] for job in jobs}
     restores={j['run']+'/best_official_arrays_restore_N_paper6.npz':j['normal_file'] for j in jobs}
