@@ -1,0 +1,60 @@
+{
+  "arguments": {
+    "dataset": "MSVR310",
+    "variant": "frequency_shared",
+    "data_root": "/data/gaob/Re-ID/dataset",
+    "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+    "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201m_primary_margin06_20261008/MSVR310/training/MSVR310_r201m_frequency_shared_s42",
+    "anchor_run_dir": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/MSVR310_demo_s42",
+    "freeze_identity_encoder": 1,
+    "seed": 42,
+    "mode": "train"
+  },
+  "config": "DATALOADER:\n  NUM_INSTANCE: 8\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+  "classes": 155,
+  "camera_embeddings": 8,
+  "train_records": 1032,
+  "query_records": 591,
+  "gallery_records": 1055,
+  "training_heldout_identities": 0,
+  "parameters": 100821638,
+  "trainable_parameters": 3123846,
+  "descriptor_dim": 5120,
+  "started": 1791538707.9816623,
+  "torch": "2.5.1+cu121",
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "pretraining": "Full-official original MSVR310 DeMo50 bestE32 plus additional50/new Adam; original identity encoder fixed",
+  "anchor": {
+    "original_run": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/MSVR310_demo_s42",
+    "original_best_epoch": 32,
+    "anchor_training_epochs": 50,
+    "new_stage_epochs": 50,
+    "identity_modules": [
+      "BACKBONE",
+      "rgb_reduce",
+      "nir_reduce",
+      "tir_reduce",
+      "generalFusion"
+    ],
+    "descriptor_dim": 5120,
+    "bypass": false,
+    "selected_anchor_full_metrics": {
+      "mAP": 47.164688447227576,
+      "mINP": 23.502961234396178,
+      "Rank-1": 63.95939086294417,
+      "Rank-5": 80.20304568527918,
+      "Rank-10": 84.77157360406092,
+      "Rank-20": 89.84771573604061
+    },
+    "method": "R201M single final-primary margin factor relative to uniform L: final full-unit5120 batch-hard hinge margin0.3 becomes0.6, with truthful telemetry and same-feature margin0.3 diagnostic only. FusedCE0.25, auxiliary original soft Triplets/CE/contribution, partial0 forward/BN2/mining/two backwards, K shared relation-local PI/PM/PF/router/gates/residuals, frozen respective originalDeMo42 teacher50, fresh heads/Adam/lr/AMP/seed42/B64/P8K8/additional50 and5120D remain. Do not change MODEL.NO_MARGIN or global SOLVER.MARGIN. Train MSVR310/RGBNT100 only; preserve K201 margin0.3 best, explicitly dataset-specific training parameters. Full official train/query/gallery, normal mAP-best earliestties benchmark selected, samebest allsix/later paper-six masks. Known loss control, not new architecture, universal inactivity cause or guaranteed +1/generalization/calibration/causal mechanism. Native expert-gradient comparisons and detached route/gate statistics are diagnostics only.",
+    "optimizer_schedule": "Original50 plus additional50/freshAdam; fixed seed42",
+    "limits": "Common context remains auxiliary; coupled gate is not claimed calibrated. Twelve disjoint-source cases lack shared identity coordinates; missing evaluation deferred."
+  },
+  "checkpoint_rule": "Maximum full official query/gallery mAP across 50 epochs; ties keep earliest epoch",
+  "evaluation_scope": "Entire official training split and entire official query/gallery; no fit/dev holdout",
+  "selection_limitation": "Official benchmark is used for checkpoint selection; this is not an untouched independent final test",
+  "method_revision": "R201M single final-primary margin factor relative to uniform L: final full-unit5120 batch-hard hinge margin0.3 becomes0.6, with truthful telemetry and same-feature margin0.3 diagnostic only. FusedCE0.25, auxiliary original soft Triplets/CE/contribution, partial0 forward/BN2/mining/two backwards, K shared relation-local PI/PM/PF/router/gates/residuals, frozen respective originalDeMo42 teacher50, fresh heads/Adam/lr/AMP/seed42/B64/P8K8/additional50 and5120D remain. Do not change MODEL.NO_MARGIN or global SOLVER.MARGIN. Train MSVR310/RGBNT100 only; preserve K201 margin0.3 best, explicitly dataset-specific training parameters. Full official train/query/gallery, normal mAP-best earliestties benchmark selected, samebest allsix/later paper-six masks. Known loss control, not new architecture, universal inactivity cause or guaranteed +1/generalization/calibration/causal mechanism. Native expert-gradient comparisons and detached route/gate statistics are diagnostics only.",
+  "partial_training": "Unchanged L partial0 forward/BN2/mining/two backwards and auxiliarysoft; only final-primary hinge margin0.6.",
+  "amp_policy": "Native fp16 GradScaler512; actual optimizer updates and skipped steps recorded",
+  "retention": "Only best.pth; smoke strict reload in memory; no initial, last, or smoke weight files"
+}
