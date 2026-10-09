@@ -1,0 +1,156 @@
+{
+  "status": "PASS",
+  "reviewed_at": "2026-10-09T20:00:54+08:00",
+  "reviewer_task": "/root/review_msvr_cached_reference_blocks_cpu_20261009",
+  "request_path": "results/preflight/msvr_reference_blocks_cpu_source_review_request_20261009.json",
+  "request_sha256": "c40aaab7d7e2d69d126d2491b9dab0b5275ee1c259e0d20565ed7a06edecf766",
+  "sources_sha256": {
+    "diagnose_msvr_baseline_blocks.py": "81c32f675f5982b2782d3bc3bff8050e37d0955bfe41690459e076c3877cf316",
+    "results/preflight/msvr_reference_blocks_cpu_deploy_20261009.py": "3e73151f0cd4d06730e152a7e720d433de81fb635b72ee32340beae7edcf9325"
+  },
+  "directly_reused_sources_sha256": {
+    "diagnose_rgbnt201_baseline_blocks.py": "545551ea240e4fec18a1c9ce668afad3b7abd4bd6823dcfbed5f23012469cc15",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "official_training_data.py": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "run_full_official_experiment.py": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
+    "shared_identity_axis.py": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+    "run_shared_identity_experiment.py": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "data/datasets/RGBNT201.py": "1a3dda88f26efc2891322e2726c4f3591bfd0c040cdf5c717d0aabc55f349272",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+    "collect_results.py": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+    "data/datasets/msvr310.py": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+    "configs/MSVR310/DeMo.yml": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e"
+  },
+  "input_inventory": "results/preflight/r201m_MSVR_shared_reference_cpu_input_inventory_20261009.json",
+  "input_inventory_sha256": "8ca50624a375a88f6c7aca83fa4a19a15404c488a2eca2707b059c3518dfa28b",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_backend_model_and_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "same_family_provisional": true,
+  "scope": "Fresh source-only review of the four-system MSVR310 cached normal-reference block diagnosis and its one-run deployment/collection driver. No runtime or metric acceptance.",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "resolutions": [],
+  "evidence": [
+    {
+      "check": "Exact requested source and inventory bytes",
+      "result": "PASS",
+      "detail": "Independently recomputed all 2 new-source and 13 reused-source SHA256 values and the input-inventory SHA256; every value matches the request. All 14 requested Python files parse with stdlib AST. All three driver remote-code f-strings were rendered from the current literals/request/inventory and AST-parsed and compiled without executing them."
+    },
+    {
+      "check": "Fixed completed old baseline pair and installed official ground truth",
+      "result": "PASS_SOURCE",
+      "locations": [
+        "diagnose_msvr_baseline_blocks.py:33",
+        "official_training_data.py:14",
+        "official_training_data.py:20",
+        "full_evaluation.py:68",
+        "experiment_data.py:24",
+        "data/datasets/msvr310.py:67"
+      ],
+      "detail": "The worker is confined to MSVR310_demo_s42 and MSVR310_demo_shared_s42 beneath the supplied October4 baseline root. It requires COMPLETE, full50, seed42, 705 successful optimizer updates, no AMP skips, no identity holdout, and historical exit0. It rederives all train/query/gallery records, checks counts 1032/591/1055 and the entire saved split manifest, and checks every cached query/gallery ID, camera, scene and name against installed metadata and against the other baseline. Input inventory fixes the result, split and normal-NPZ bytes for both variants; worker checks those bytes before and after scoring."
+    },
+    {
+      "check": "Original checkpoint selection and cached descriptor provenance",
+      "result": "PASS_SOURCE",
+      "locations": [
+        "run_full_official_experiment.py:43",
+        "run_full_official_experiment.py:85",
+        "run_full_official_experiment.py:163",
+        "run_full_official_experiment.py:169",
+        "full_evaluation.py:83"
+      ],
+      "detail": "The reused producer selects maximum complete official normal mAP with strict greater-than replacement, so ties retain the earliest epoch; it reloads that best checkpoint, saves the normalized query/gallery arrays and distances, and checks all six metrics. The new worker uses those fixed saved arrays, with no reselection or weight load. Inventory identifies original epoch32 and shared epoch37 and NPZ sizes 33951284 and 37529195 bytes."
+    },
+    {
+      "check": "Four descriptor systems and reference reproduction gates",
+      "result": "PASS_SOURCE",
+      "locations": [
+        "diagnose_msvr_baseline_blocks.py:54",
+        "diagnose_msvr_baseline_blocks.py:60",
+        "diagnose_msvr_baseline_blocks.py:65",
+        "diagnose_msvr_baseline_blocks.py:73",
+        "shared_identity_axis.py:17",
+        "shared_identity_axis.py:20",
+        "shared_identity_axis.py:120",
+        "full_evaluation.py:106"
+      ],
+      "detail": "Feature arrays must be finite float32 with original dimension5120 or shared dimension5632. The shared private5120/public512 squared block norms must equal .75/.25 within 1e-5, consistent with the producer metric descriptor. Exactly four systems are evaluated: original, unchanged shared fused, shared private-only and shared public-only. Both extracted blocks are separately L2-renormalized. Original and fused full distance matrices must reproduce their saved matrices with np.array_equal; all six metrics must reproduce the corresponding old best values within 1e-8."
+    },
+    {
+      "check": "Scene exclusion, all-query outputs and harm/rescue accounting",
+      "result": "PASS_SOURCE",
+      "locations": [
+        "diagnose_msvr_baseline_blocks.py:81",
+        "diagnose_msvr_baseline_blocks.py:90",
+        "full_evaluation.py:20",
+        "utils/reid_evaluation.py:8"
+      ],
+      "detail": "The MSVR adaptation correctly supplies query_scenes/gallery_scenes as the exclusion arrays, removing only same-ID/same-scene gallery entries. Original camera and scene values remain available for grouping. full_metrics uses installed IDs and stable ranking to emit mAP, mINP, Rank1/5/10/20, CMC1-50, camera/scene/identity groups and all query rows, preserving invalid-query counts. The four comparisons assert 591 aligned rows and matching validity before counting Rank1 harms/rescues and AP improvements/worsenings among valid queries. Negative changes are retained."
+    },
+    {
+      "check": "CPU-only execution and no model construction through imports",
+      "result": "PASS_SOURCE",
+      "locations": [
+        "diagnose_msvr_baseline_blocks.py:27",
+        "diagnose_msvr_baseline_blocks.py:61",
+        "results/preflight/msvr_reference_blocks_cpu_deploy_20261009.py:54",
+        "run_experiment.py:24",
+        "run_experiment.py:44",
+        "modeling/clip/clip.py:27",
+        "modeling/clip/clip.py:86",
+        "modeling/clip/simple_tokenizer.py:62"
+      ],
+      "detail": "The driver sets CUDA_VISIBLE_DEVICES empty before Python imports and sets OMP/MKL/OpenBLAS threads to4; the worker requires the empty mask and sets torch intra-op threads to4. Tensor creation is from NumPy on CPU and only normalization, distance and scoring operations are reached. Static examination of 75 local modules in the worker/collector import closure found model definitions but no import-time model construction, weight load, forward, feature extraction, optimizer or job control. Existing imports construct configuration/tokenizer objects and read the packaged BPE vocabulary; clip has an import-time CUDA-availability default under the empty visibility mask, not neural execution. No project module was imported during this review."
+    },
+    {
+      "check": "Deployment, console and text collection scope",
+      "result": "PASS_SOURCE",
+      "locations": [
+        "results/preflight/msvr_reference_blocks_cpu_deploy_20261009.py:18",
+        "results/preflight/msvr_reference_blocks_cpu_deploy_20261009.py:32",
+        "results/preflight/msvr_reference_blocks_cpu_deploy_20261009.py:43",
+        "results/preflight/msvr_reference_blocks_cpu_deploy_20261009.py:54",
+        "results/preflight/msvr_reference_blocks_cpu_deploy_20261009.py:58",
+        "collect_results.py:23"
+      ],
+      "detail": "The driver requires this PASS with no blockers and exact reviewed local source hashes, verifies reused sources and inventoried closed caches remotely, and transfers only the new worker and input inventory. It runs one worker against the old October4 pair in a fresh ms vr reference output root (actual basename msvr_reference_blocks_p0_20261009). collect_results is imported only for OPTIONS and the checked command function; its collection, watcher, synchronization and publishing main are not invoked. Worker stdout is forwarded; the output-manifest command emits JSON only, so diagnostic stdout does not contaminate manifest parsing. Exactly four CSV plus four metric JSON files and result.json are produced; successful collection requires nine JSON/CSV files, exact local names, bytes and hashes, COMPLETE status and zero neural/optimizer counts. No baseline writes, new arrays/checkpoints, cleanup, GPU job queries, current M normal/paper-six/selected-gradient owner access or source mutation are on the executed path."
+    },
+    {
+      "check": "Interpretation limits",
+      "result": "PASS_SOURCE",
+      "locations": [
+        "diagnose_msvr_baseline_blocks.py:104"
+      ],
+      "detail": "The emitted result explicitly limits the work to fixed-descriptor reference geometry from single-seed benchmark-selected baselines. It makes no retraining, causal, new-method, dual-axis-increment or new-best claim, does not reselect the shared checkpoint for the private block, and launches no new missing49 evaluation or restoration of deleted weights."
+    }
+  ],
+  "verification": {
+    "new_source_hashes_verified": 2,
+    "directly_reused_hashes_verified": 13,
+    "input_inventory_hash_verified": true,
+    "requested_python_ast_files": 14,
+    "rendered_remote_code_blocks_parsed_and_compiled": 3,
+    "supplemental_local_import_graph_modules_statically_inspected": 75,
+    "project_modules_imported": 0,
+    "torch_or_numpy_imported": false,
+    "ssh_calls": 0,
+    "neural_calls": 0,
+    "scoring_calls": 0,
+    "deployment_calls": 0,
+    "source_edits": 0,
+    "artifact_writes": [
+      "results/preflight/msvr_reference_blocks_cpu_source_review_20261009.json"
+    ]
+  },
+  "limitations": [
+    "Source PASS is not runtime, metric, result, or publication acceptance. The planned CPU run must still pass installed-data, shape, norm, exact distance, six-metric, exit and nine-file collection gates.",
+    "The measured remote cache inventory was reviewed and its local bytes verified; this reviewer did not independently open or hash remote data, load NPZs, contact servers, import Torch/NumPy, execute project imports or run scoring. Runtime dependencies and actual remote cache availability remain runtime checks.",
+    "Model and reasoning effort attribution is UNATTESTED despite the requested gpt-6-astra/max route. This is fresh-context, same-family provisional review, not cross-family acceptance.",
+    "The private/public ablations describe this fixed old shared checkpoint only; they do not estimate retraining effects, establish causal mechanisms or justify a new method/best claim."
+  ]
+}
