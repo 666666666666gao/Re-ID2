@@ -1,0 +1,3321 @@
+{
+  "status": "ACTUAL_M_SELECTED_TRAIN_ONLY_FULL_TASK_GRADIENT_DIAGNOSIS",
+  "completed_at": "2026-10-09T21:06:18+08:00",
+  "source_run": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201m_primary_margin06_20261008/MSVR310/training/MSVR310_r201m_axis_shared_s42",
+  "dataset": "MSVR310",
+  "variant": "axis_shared",
+  "selected_epoch": 3,
+  "observation_seed": 43,
+  "training_records": 1032,
+  "batches": 4,
+  "neural_forwards": 4,
+  "optimizer_constructed": false,
+  "optimizer_updates": 0,
+  "checkpoint_writes": 0,
+  "official_query_gallery_neural_uses": 0,
+  "parameters_unchanged": true,
+  "frozen_identity_unchanged": true,
+  "protected_inputs": {
+    "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201m_primary_margin06_20261008/MSVR310/training/MSVR310_r201m_axis_shared_s42/best.pth": "8d6a94487fc2574baaa95f1c19e77ffd78945cc28a1cecc9982ee5dd14e36ba1",
+    "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201m_primary_margin06_20261008/MSVR310/training/MSVR310_r201m_axis_shared_s42/result.json": "08643f744c80d963076404f07937932d60033d58bb2b3f6fc66a1818b671cca0",
+    "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201m_primary_margin06_20261008/MSVR310/training/MSVR310_r201m_axis_shared_s42/official_split_manifest.json": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2"
+  },
+  "gradient_scale": 512.0,
+  "learned_residual_scales_at_load": [
+    0.10581088066101074,
+    0.055954985320568085,
+    0.055977024137973785
+  ],
+  "selected_loss_weights": [
+    1.0,
+    0.1,
+    0.1,
+    1.0,
+    0.25,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "temporary_buffer_version_changes": [
+    "bottleneck_moe.num_batches_tracked",
+    "bottleneck_r.num_batches_tracked",
+    "bottleneck_n.num_batches_tracked",
+    "bottleneck_t.num_batches_tracked",
+    "fused_neck.num_batches_tracked",
+    "modality_neck.num_batches_tracked",
+    "frequency_neck.num_batches_tracked",
+    "shared_neck.num_batches_tracked"
+  ],
+  "roles": {
+    "residual_scale": [
+      "residual_scale"
+    ],
+    "modality_projection": [
+      "modality_projection.0.weight",
+      "modality_projection.0.bias",
+      "modality_projection.1.weight",
+      "modality_projection.1.bias",
+      "modality_projection.3.weight",
+      "modality_projection.3.bias"
+    ],
+    "frequency_projection": [
+      "frequency_projection.0.weight",
+      "frequency_projection.0.bias",
+      "frequency_projection.1.weight",
+      "frequency_projection.1.bias",
+      "frequency_projection.3.weight",
+      "frequency_projection.3.bias"
+    ],
+    "interaction_projection": [
+      "interaction_projection.0.weight",
+      "interaction_projection.0.bias",
+      "interaction_projection.1.weight",
+      "interaction_projection.1.bias",
+      "interaction_projection.3.weight",
+      "interaction_projection.3.bias"
+    ],
+    "router": [
+      "router.to_modality_query.0.weight",
+      "router.to_modality_query.0.bias",
+      "router.to_modality_query.1.weight",
+      "router.to_modality_query.1.bias",
+      "router.to_frequency_query.0.weight",
+      "router.to_frequency_query.0.bias",
+      "router.to_frequency_query.1.weight",
+      "router.to_frequency_query.1.bias",
+      "router.relation_score.weight",
+      "router.band_score.weight",
+      "router.psi.0.weight",
+      "router.psi.0.bias",
+      "router.psi.2.weight"
+    ],
+    "calibrator": [
+      "calibrator.predictor.0.weight",
+      "calibrator.predictor.0.bias",
+      "calibrator.predictor.1.weight",
+      "calibrator.predictor.1.bias",
+      "calibrator.predictor.3.weight",
+      "calibrator.predictor.3.bias"
+    ],
+    "modality_expert": [
+      "modality_expert.source",
+      "modality_expert.query",
+      "modality_expert.band",
+      "modality_expert.value.0.weight",
+      "modality_expert.value.0.bias",
+      "modality_expert.value.1.weight",
+      "modality_expert.value.1.bias",
+      "modality_expert.attention.in_proj_weight",
+      "modality_expert.attention.in_proj_bias",
+      "modality_expert.attention.out_proj.weight",
+      "modality_expert.attention.out_proj.bias",
+      "modality_expert.output.0.weight",
+      "modality_expert.output.0.bias",
+      "modality_expert.output.1.weight",
+      "modality_expert.output.1.bias",
+      "modality_expert.pool_score.weight"
+    ],
+    "frequency_expert": [
+      "frequency_expert.source",
+      "frequency_expert.query",
+      "frequency_expert.values.0.0.weight",
+      "frequency_expert.values.0.0.bias",
+      "frequency_expert.values.0.1.weight",
+      "frequency_expert.values.0.1.bias",
+      "frequency_expert.values.1.0.weight",
+      "frequency_expert.values.1.0.bias",
+      "frequency_expert.values.1.1.weight",
+      "frequency_expert.values.1.1.bias",
+      "frequency_expert.values.2.0.weight",
+      "frequency_expert.values.2.0.bias",
+      "frequency_expert.values.2.1.weight",
+      "frequency_expert.values.2.1.bias",
+      "frequency_expert.attention.0.in_proj_weight",
+      "frequency_expert.attention.0.in_proj_bias",
+      "frequency_expert.attention.0.out_proj.weight",
+      "frequency_expert.attention.0.out_proj.bias",
+      "frequency_expert.attention.1.in_proj_weight",
+      "frequency_expert.attention.1.in_proj_bias",
+      "frequency_expert.attention.1.out_proj.weight",
+      "frequency_expert.attention.1.out_proj.bias",
+      "frequency_expert.attention.2.in_proj_weight",
+      "frequency_expert.attention.2.in_proj_bias",
+      "frequency_expert.attention.2.out_proj.weight",
+      "frequency_expert.attention.2.out_proj.bias",
+      "frequency_expert.cross_band.in_proj_weight",
+      "frequency_expert.cross_band.in_proj_bias",
+      "frequency_expert.cross_band.out_proj.weight",
+      "frequency_expert.cross_band.out_proj.bias",
+      "frequency_expert.output.0.weight",
+      "frequency_expert.output.0.bias",
+      "frequency_expert.output.1.weight",
+      "frequency_expert.output.1.bias",
+      "frequency_expert.pool_score.weight"
+    ],
+    "shared_projection": [
+      "shared_projection.0.weight",
+      "shared_projection.0.bias",
+      "shared_projection.1.weight",
+      "shared_projection.1.bias",
+      "shared_projection.3.weight",
+      "shared_projection.3.bias"
+    ],
+    "fused_neck": [
+      "fused_neck.weight"
+    ],
+    "fused_classifier": [
+      "fused_classifier.weight"
+    ]
+  },
+  "rows": [
+    {
+      "batch": 1,
+      "names": [
+        "0248_s029_v5_003.jpg",
+        "0248_s029_v2_001.jpg",
+        "0248_s029_v2_001.jpg",
+        "0248_s029_v2_001.jpg",
+        "0248_s029_v7_004.jpg",
+        "0248_s029_v2_001.jpg",
+        "0248_s029_v3_002.jpg",
+        "0248_s029_v3_002.jpg",
+        "0256_s000_v7_007.jpg",
+        "0256_s000_v0_000.jpg",
+        "0256_s000_v4_001.jpg",
+        "0256_s000_v3_005.jpg",
+        "0256_s000_v5_006.jpg",
+        "0256_s000_v2_002.jpg",
+        "0256_s000_v6_003.jpg",
+        "0256_s000_v1_004.jpg",
+        "0021_s003_v0_000.jpg",
+        "0021_s030_v6_007.jpg",
+        "0021_s003_v7_001.jpg",
+        "0021_s030_v7_008.jpg",
+        "0021_s030_v3_005.jpg",
+        "0021_s030_v2_004.jpg",
+        "0021_s030_v0_002.jpg",
+        "0021_s030_v5_006.jpg",
+        "0212_s022_v3_001.jpg",
+        "0212_s022_v0_000.jpg",
+        "0212_s022_v0_000.jpg",
+        "0212_s022_v3_001.jpg",
+        "0212_s022_v0_000.jpg",
+        "0212_s022_v0_000.jpg",
+        "0212_s022_v0_000.jpg",
+        "0212_s022_v0_000.jpg",
+        "0031_s004_v1_002.jpg",
+        "0031_s004_v1_002.jpg",
+        "0031_s004_v1_002.jpg",
+        "0031_s014_v0_000.jpg",
+        "0031_s014_v0_000.jpg",
+        "0031_s004_v7_003.jpg",
+        "0031_s004_v1_002.jpg",
+        "0031_s014_v1_001.jpg",
+        "0195_s000_v3_006.jpg",
+        "0195_s000_v1_005.jpg",
+        "0195_s000_v0_002.jpg",
+        "0195_s000_v6_004.jpg",
+        "0195_s022_v5_001.jpg",
+        "0195_s000_v4_003.jpg",
+        "0195_s022_v0_000.jpg",
+        "0195_s000_v7_008.jpg",
+        "0138_s015_v3_001.jpg",
+        "0138_s015_v1_000.jpg",
+        "0138_s021_v1_002.jpg",
+        "0138_s028_v5_005.jpg",
+        "0138_s015_v3_001.jpg",
+        "0138_s015_v1_000.jpg",
+        "0138_s015_v3_001.jpg",
+        "0138_s015_v3_001.jpg",
+        "0151_s016_v7_001.jpg",
+        "0151_s016_v1_000.jpg",
+        "0151_s016_v7_001.jpg",
+        "0151_s016_v1_000.jpg",
+        "0151_s022_v0_002.jpg",
+        "0151_s016_v1_000.jpg",
+        "0151_s016_v7_001.jpg",
+        "0151_s016_v7_001.jpg"
+      ],
+      "training_labels": [
+        113,
+        113,
+        113,
+        113,
+        113,
+        113,
+        113,
+        113,
+        117,
+        117,
+        117,
+        117,
+        117,
+        117,
+        117,
+        117,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        96,
+        96,
+        96,
+        96,
+        96,
+        96,
+        96,
+        96,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        91,
+        91,
+        91,
+        91,
+        91,
+        91,
+        91,
+        91,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        64,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "losses": {
+        "primary_CE": 0.7982124090194702,
+        "primary_hinge": 0.30248457193374634,
+        "modality_aux": 0.173149973154068,
+        "frequency_aux": 0.16593992710113525,
+        "other_full": 1.7222869396209717,
+        "contribution": 0.00028785326867364347
+      },
+      "deploy_parameter_roles": {
+        "residual_scale": {
+          "gradient_l2": {
+            "primary_CE": 0.08935616706616967,
+            "primary_hinge": 0.016672049625723665,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.10595792778796072,
+            "M_F_aux": 0.0,
+            "full_total": 0.10595792778796072
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 1,
+            "frequency_aux": 1,
+            "other_full": 1,
+            "contribution": 1,
+            "fused_primary": 0,
+            "M_F_aux": 1,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.08935616706616967,
+            "b_l2": 0.016672049625723665,
+            "dot": 0.001482300809584558,
+            "cosine": 0.9949994026861223
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.10595792778796072,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.10595792778796072,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.10595792778796072,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.10595792778796072,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "modality_projection": {
+          "gradient_l2": {
+            "primary_CE": 0.16973467836108225,
+            "primary_hinge": 0.04651132616504602,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.18033109084998428,
+            "M_F_aux": 0.0,
+            "full_total": 0.18033109084998428
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 6,
+            "contribution": 6,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.16973467836108225,
+            "b_l2": 0.04651132616504602,
+            "dot": 0.0007730695975212143,
+            "cosine": 0.09792403258899673
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.18033109084998428,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.18033109084998428,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.18033109084998428,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.18033109084998428,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "frequency_projection": {
+          "gradient_l2": {
+            "primary_CE": 0.10444702222817939,
+            "primary_hinge": 0.03323519702808083,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.11182688574198651,
+            "M_F_aux": 0.0,
+            "full_total": 0.11182688574198651
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 6,
+            "contribution": 6,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.10444702222817939,
+            "b_l2": 0.03323519702808083,
+            "dot": 0.00024574655943432333,
+            "cosine": 0.07079345785879104
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.11182688574198651,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.11182688574198651,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.11182688574198651,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.11182688574198651,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "interaction_projection": {
+          "gradient_l2": {
+            "primary_CE": 0.09251705509111181,
+            "primary_hinge": 0.02832398320444216,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.09960952407074238,
+            "M_F_aux": 0.0,
+            "full_total": 0.09960952407074238
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 6,
+            "contribution": 6,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.09251705509111181,
+            "b_l2": 0.02832398320444216,
+            "dot": 0.0002802016590459644,
+            "cosine": 0.10692877066902905
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.09960952407074238,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.09960952407074238,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.09960952407074238,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.09960952407074238,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "router": {
+          "gradient_l2": {
+            "primary_CE": 0.009823091798041859,
+            "primary_hinge": 0.001515676346433517,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.010925814670102193,
+            "M_F_aux": 0.0,
+            "full_total": 0.010925814670102193
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 13,
+            "frequency_aux": 13,
+            "other_full": 13,
+            "contribution": 13,
+            "fused_primary": 0,
+            "M_F_aux": 13,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.009823091798041859,
+            "b_l2": 0.001515676346433517,
+            "dot": 1.0283720126083554e-05,
+            "cosine": 0.6907097285283127
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.010925814670102193,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.010925814670102193,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.010925814670102193,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.010925814670102193,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "calibrator": {
+          "gradient_l2": {
+            "primary_CE": 0.10695580660210247,
+            "primary_hinge": 0.019126840147617317,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0248055382575175,
+            "fused_primary": 0.12595819539973924,
+            "M_F_aux": 0.0,
+            "full_total": 0.10154966491259357
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 6,
+            "contribution": 0,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.10695580660210247,
+            "b_l2": 0.019126840147617317,
+            "dot": 0.002029600306119317,
+            "cosine": 0.99211707493342
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.12595819539973924,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.12595819539973924,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.12595819539973924,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.12595819539973924,
+            "b_l2": 0.0248055382575175,
+            "dot": -0.003084005622874031,
+            "cosine": -0.9870520982337141
+          }
+        },
+        "modality_expert": {
+          "gradient_l2": {
+            "primary_CE": 0.03744520027790534,
+            "primary_hinge": 0.014441839810469002,
+            "modality_aux": 0.4019764102888073,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.04527163836551904,
+            "M_F_aux": 0.4019764102888073,
+            "full_total": 0.416492152871219
+          },
+          "unused_tensors": {
+            "primary_CE": 1,
+            "primary_hinge": 1,
+            "modality_aux": 0,
+            "frequency_aux": 16,
+            "other_full": 16,
+            "contribution": 16,
+            "fused_primary": 1,
+            "M_F_aux": 0,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.03744520027790534,
+            "b_l2": 0.014441839810469002,
+            "dot": 0.00021941196911837851,
+            "cosine": 0.40573421601757625
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.04527163836551904,
+            "b_l2": 0.4019764102888073,
+            "dot": 0.0049135309757865064,
+            "cosine": 0.2700019613393129
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.04527163836551904,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.04527163836551904,
+            "b_l2": 0.4019764102888073,
+            "dot": 0.0049135309757865064,
+            "cosine": 0.2700019613393129
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.04527163836551904,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "frequency_expert": {
+          "gradient_l2": {
+            "primary_CE": 0.024261715705125975,
+            "primary_hinge": 0.012186244150371051,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.3762159074837879,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.027915838767936362,
+            "M_F_aux": 0.3762159074837879,
+            "full_total": 0.38222314578483146
+          },
+          "unused_tensors": {
+            "primary_CE": 1,
+            "primary_hinge": 1,
+            "modality_aux": 35,
+            "frequency_aux": 0,
+            "other_full": 35,
+            "contribution": 35,
+            "fused_primary": 1,
+            "M_F_aux": 0,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.024261715705125975,
+            "b_l2": 0.012186244150371051,
+            "dot": 2.10673148326743e-05,
+            "cosine": 0.07125540307080422
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.027915838767936362,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.027915838767936362,
+            "b_l2": 0.3762159074837879,
+            "dot": 0.0018901517174311766,
+            "cosine": 0.17997361043450535
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.027915838767936362,
+            "b_l2": 0.3762159074837879,
+            "dot": 0.0018901517174311766,
+            "cosine": 0.17997361043450535
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.027915838767936362,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "shared_projection": {
+          "gradient_l2": {
+            "primary_CE": 0.0,
+            "primary_hinge": 0.0,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.07086875218230138,
+            "contribution": 0.0,
+            "fused_primary": 0.0,
+            "M_F_aux": 0.0,
+            "full_total": 0.07086875218230138
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 0,
+            "contribution": 6,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "fused_neck": {
+          "gradient_l2": {
+            "primary_CE": 0.0072396444403879726,
+            "primary_hinge": 0.0,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.0072396444403879726,
+            "M_F_aux": 0.0,
+            "full_total": 0.0072396444403879726
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 1,
+            "modality_aux": 1,
+            "frequency_aux": 1,
+            "other_full": 1,
+            "contribution": 1,
+            "fused_primary": 0,
+            "M_F_aux": 1,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.0072396444403879726,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.0072396444403879726,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.0072396444403879726,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.0072396444403879726,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.0072396444403879726,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "fused_classifier": {
+          "gradient_l2": {
+            "primary_CE": 3.686016107475369,
+            "primary_hinge": 0.0,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 3.686016107475369,
+            "M_F_aux": 0.0,
+            "full_total": 3.686016107475369
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 1,
+            "modality_aux": 1,
+            "frequency_aux": 1,
+            "other_full": 1,
+            "contribution": 1,
+            "fused_primary": 0,
+            "M_F_aux": 1,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 3.686016107475369,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 3.686016107475369,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 3.686016107475369,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 3.686016107475369,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 3.686016107475369,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        }
+      },
+      "residual_scale_gradients": {
+        "primary_CE": [
+          -0.04955616593360901,
+          -0.05745626986026764,
+          -0.047196269035339355
+        ],
+        "primary_hinge": [
+          -0.007966047152876854,
+          -0.0117829954251647,
+          -0.008698295801877975
+        ],
+        "modality_aux": null,
+        "frequency_aux": null,
+        "other_full": null,
+        "contribution": null,
+        "fused_primary": [
+          -0.057522211223840714,
+          -0.06923925876617432,
+          -0.05589456483721733
+        ],
+        "M_F_aux": null,
+        "full_total": [
+          -0.057522211223840714,
+          -0.06923925876617432,
+          -0.05589456483721733
+        ]
+      },
+      "gates": [
+        0.9049530029296875,
+        0.9004058837890625,
+        0.8746871948242188
+      ],
+      "route_relation_mass": [
+        0.15883496403694153,
+        0.14644251763820648,
+        0.12354674190282822,
+        0.15276086330413818,
+        0.14075084030628204,
+        0.1347089409828186,
+        0.14295512437820435
+      ],
+      "route_band_mass": [
+        0.5883952975273132,
+        0.22048333287239075,
+        0.1911213994026184
+      ],
+      "normalized_descriptor_shift_l2_mean": 0.04782893508672714,
+      "normalized_descriptor_angle_degrees_mean": 2.7406439781188965
+    },
+    {
+      "batch": 2,
+      "names": [
+        "0005_s030_v3_014.jpg",
+        "0005_s028_v1_008.jpg",
+        "0005_s017_v1_005.jpg",
+        "0005_s012_v1_003.jpg",
+        "0005_s017_v3_006.jpg",
+        "0005_s011_v1_018.jpg",
+        "0005_s011_v4_019.jpg",
+        "0005_s017_v4_007.jpg",
+        "0244_s029_v6_003.jpg",
+        "0244_s029_v0_000.jpg",
+        "0244_s029_v5_002.jpg",
+        "0244_s029_v5_002.jpg",
+        "0244_s029_v3_001.jpg",
+        "0244_s029_v6_003.jpg",
+        "0244_s029_v5_002.jpg",
+        "0244_s029_v5_002.jpg",
+        "0217_s022_v7_002.jpg",
+        "0217_s022_v1_000.jpg",
+        "0217_s022_v3_001.jpg",
+        "0217_s022_v3_001.jpg",
+        "0217_s022_v1_000.jpg",
+        "0217_s022_v7_002.jpg",
+        "0217_s022_v3_001.jpg",
+        "0217_s022_v1_000.jpg",
+        "0105_s023_v0_004.jpg",
+        "0105_s023_v6_006.jpg",
+        "0105_s011_v0_007.jpg",
+        "0105_s015_v3_001.jpg",
+        "0105_s015_v5_002.jpg",
+        "0105_s015_v7_003.jpg",
+        "0105_s015_v1_000.jpg",
+        "0105_s011_v3_008.jpg",
+        "0140_s024_v2_007.jpg",
+        "0140_s016_v5_004.jpg",
+        "0140_s024_v1_006.jpg",
+        "0140_s016_v0_002.jpg",
+        "0140_s015_v1_000.jpg",
+        "0140_s024_v6_008.jpg",
+        "0140_s015_v6_001.jpg",
+        "0140_s024_v0_005.jpg",
+        "0163_s017_v5_002.jpg",
+        "0163_s017_v5_002.jpg",
+        "0163_s017_v5_002.jpg",
+        "0163_s017_v3_001.jpg",
+        "0163_s017_v3_001.jpg",
+        "0163_s017_v1_000.jpg",
+        "0163_s017_v5_002.jpg",
+        "0163_s017_v3_001.jpg",
+        "0326_s000_v3_003.jpg",
+        "0326_s000_v1_002.jpg",
+        "0326_s000_v0_000.jpg",
+        "0326_s000_v0_000.jpg",
+        "0326_s000_v3_003.jpg",
+        "0326_s000_v0_000.jpg",
+        "0326_s000_v4_001.jpg",
+        "0326_s000_v3_003.jpg",
+        "0146_s016_v4_000.jpg",
+        "0146_s016_v7_001.jpg",
+        "0146_s016_v7_001.jpg",
+        "0146_s016_v4_000.jpg",
+        "0146_s016_v4_000.jpg",
+        "0146_s016_v7_001.jpg",
+        "0146_s016_v7_001.jpg",
+        "0146_s016_v4_000.jpg"
+      ],
+      "training_labels": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        111,
+        111,
+        111,
+        111,
+        111,
+        111,
+        111,
+        111,
+        98,
+        98,
+        98,
+        98,
+        98,
+        98,
+        98,
+        98,
+        48,
+        48,
+        48,
+        48,
+        48,
+        48,
+        48,
+        48,
+        65,
+        65,
+        65,
+        65,
+        65,
+        65,
+        65,
+        65,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        152,
+        152,
+        152,
+        152,
+        152,
+        152,
+        152,
+        152,
+        68,
+        68,
+        68,
+        68,
+        68,
+        68,
+        68,
+        68
+      ],
+      "losses": {
+        "primary_CE": 0.8269443511962891,
+        "primary_hinge": 0.2737436890602112,
+        "modality_aux": 0.1618303507566452,
+        "frequency_aux": 0.15172457695007324,
+        "other_full": 1.8169385194778442,
+        "contribution": 0.0003015327383764088
+      },
+      "deploy_parameter_roles": {
+        "residual_scale": {
+          "gradient_l2": {
+            "primary_CE": 0.06480966916174109,
+            "primary_hinge": 0.030643850395560238,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.09538478845959684,
+            "M_F_aux": 0.0,
+            "full_total": 0.09538478845959684
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 1,
+            "frequency_aux": 1,
+            "other_full": 1,
+            "contribution": 1,
+            "fused_primary": 0,
+            "M_F_aux": 1,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.06480966916174109,
+            "b_l2": 0.030643850395560238,
+            "dot": 0.0019794590771198273,
+            "cosine": 0.9966975478071857
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.09538478845959684,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.09538478845959684,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.09538478845959684,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.09538478845959684,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "modality_projection": {
+          "gradient_l2": {
+            "primary_CE": 0.15544808214832515,
+            "primary_hinge": 0.05797893528958593,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.1688425055548677,
+            "M_F_aux": 0.0,
+            "full_total": 0.1688425055548677
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 6,
+            "contribution": 6,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.15544808214832515,
+            "b_l2": 0.05797893528958593,
+            "dot": 0.0004910654110972246,
+            "cosine": 0.0544858513187098
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.1688425055548677,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.1688425055548677,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.1688425055548677,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.1688425055548677,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "frequency_projection": {
+          "gradient_l2": {
+            "primary_CE": 0.09985781795612453,
+            "primary_hinge": 0.040368640258773784,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.10934134819255292,
+            "M_F_aux": 0.0,
+            "full_total": 0.10934134819255292
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 6,
+            "contribution": 6,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.09985781795612453,
+            "b_l2": 0.040368640258773784,
+            "dot": 0.00017715957100916668,
+            "cosine": 0.04394793028001386
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.10934134819255292,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.10934134819255292,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.10934134819255292,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.10934134819255292,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "interaction_projection": {
+          "gradient_l2": {
+            "primary_CE": 0.08609157038829575,
+            "primary_hinge": 0.03351504214576882,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.09372801514863077,
+            "M_F_aux": 0.0,
+            "full_total": 0.09372801514863077
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 6,
+            "contribution": 6,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.08609157038829575,
+            "b_l2": 0.03351504214576882,
+            "dot": 0.00012496207606873394,
+            "cosine": 0.043308967696958856
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.09372801514863077,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.09372801514863077,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.09372801514863077,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.09372801514863077,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "router": {
+          "gradient_l2": {
+            "primary_CE": 0.0039711045688184165,
+            "primary_hinge": 0.0029110353901112556,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.006291130190568151,
+            "M_F_aux": 0.0,
+            "full_total": 0.006291130190568151
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 13,
+            "frequency_aux": 13,
+            "other_full": 13,
+            "contribution": 13,
+            "fused_primary": 0,
+            "M_F_aux": 13,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.0039711045688184165,
+            "b_l2": 0.0029110353901112556,
+            "dot": 7.6667611187275e-06,
+            "cosine": 0.6632131415682178
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.006291130190568151,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.006291130190568151,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.006291130190568151,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.006291130190568151,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "calibrator": {
+          "gradient_l2": {
+            "primary_CE": 0.07248278664477616,
+            "primary_hinge": 0.033176180203776405,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.02598598378755903,
+            "fused_primary": 0.10555797858374608,
+            "M_F_aux": 0.0,
+            "full_total": 0.07985472462239719
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 6,
+            "contribution": 0,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.07248278664477616,
+            "b_l2": 0.033176180203776405,
+            "dot": 0.002393355693183885,
+            "cosine": 0.9952816198199738
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.10555797858374608,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.10555797858374608,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.10555797858374608,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.10555797858374608,
+            "b_l2": 0.02598598378755903,
+            "dot": -0.002720759621571034,
+            "cosine": -0.9918818549420079
+          }
+        },
+        "modality_expert": {
+          "gradient_l2": {
+            "primary_CE": 0.023702816931758096,
+            "primary_hinge": 0.021622472809178374,
+            "modality_aux": 0.3818803179537378,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.034148964629340084,
+            "M_F_aux": 0.38188031795370053,
+            "full_total": 0.39086696513375996
+          },
+          "unused_tensors": {
+            "primary_CE": 1,
+            "primary_hinge": 1,
+            "modality_aux": 0,
+            "frequency_aux": 16,
+            "other_full": 16,
+            "contribution": 16,
+            "fused_primary": 1,
+            "M_F_aux": 0,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.023702816931758096,
+            "b_l2": 0.021622472809178374,
+            "dot": 6.845552797032917e-05,
+            "cosine": 0.13356823970330808
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.034148964629340084,
+            "b_l2": 0.3818803179537378,
+            "dot": 0.0028859163892714923,
+            "cosine": 0.22129873344307935
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.034148964629340084,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.034148964629340084,
+            "b_l2": 0.38188031795370053,
+            "dot": 0.002885916389272103,
+            "cosine": 0.22129873344314774
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.034148964629340084,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "frequency_expert": {
+          "gradient_l2": {
+            "primary_CE": 0.02118487351556695,
+            "primary_hinge": 0.01706053117946603,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.30961668373239865,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.031078494419475664,
+            "M_F_aux": 0.30961668373239865,
+            "full_total": 0.31895435863191324
+          },
+          "unused_tensors": {
+            "primary_CE": 1,
+            "primary_hinge": 1,
+            "modality_aux": 35,
+            "frequency_aux": 0,
+            "other_full": 35,
+            "contribution": 35,
+            "fused_primary": 1,
+            "M_F_aux": 0,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.02118487351556695,
+            "b_l2": 0.01706053117946603,
+            "dot": 0.00011297628925122788,
+            "cosine": 0.31258553849790705
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.031078494419475664,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.031078494419475664,
+            "b_l2": 0.30961668373239865,
+            "dot": 0.002459075120779197,
+            "cosine": 0.25555681671478914
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.031078494419475664,
+            "b_l2": 0.30961668373239865,
+            "dot": 0.002459075120779197,
+            "cosine": 0.25555681671478914
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.031078494419475664,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "shared_projection": {
+          "gradient_l2": {
+            "primary_CE": 0.0,
+            "primary_hinge": 0.0,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.08684209700119243,
+            "contribution": 0.0,
+            "fused_primary": 0.0,
+            "M_F_aux": 0.0,
+            "full_total": 0.08684209700119243
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 0,
+            "contribution": 6,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "fused_neck": {
+          "gradient_l2": {
+            "primary_CE": 0.00686186531104843,
+            "primary_hinge": 0.0,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.00686186531104843,
+            "M_F_aux": 0.0,
+            "full_total": 0.00686186531104843
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 1,
+            "modality_aux": 1,
+            "frequency_aux": 1,
+            "other_full": 1,
+            "contribution": 1,
+            "fused_primary": 0,
+            "M_F_aux": 1,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.00686186531104843,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.00686186531104843,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.00686186531104843,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.00686186531104843,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.00686186531104843,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "fused_classifier": {
+          "gradient_l2": {
+            "primary_CE": 3.696956728421209,
+            "primary_hinge": 0.0,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 3.696956728421209,
+            "M_F_aux": 0.0,
+            "full_total": 3.696956728421209
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 1,
+            "modality_aux": 1,
+            "frequency_aux": 1,
+            "other_full": 1,
+            "contribution": 1,
+            "fused_primary": 0,
+            "M_F_aux": 1,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 3.696956728421209,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 3.696956728421209,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 3.696956728421209,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 3.696956728421209,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 3.696956728421209,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        }
+      },
+      "residual_scale_gradients": {
+        "primary_CE": [
+          -0.03348543494939804,
+          -0.042603135108947754,
+          -0.03555266559123993
+        ],
+        "primary_hinge": [
+          -0.013862081803381443,
+          -0.02027290314435959,
+          -0.018327511847019196
+        ],
+        "modality_aux": null,
+        "frequency_aux": null,
+        "other_full": null,
+        "contribution": null,
+        "fused_primary": [
+          -0.04734751582145691,
+          -0.06287603825330734,
+          -0.053880177438259125
+        ],
+        "M_F_aux": null,
+        "full_total": [
+          -0.04734751582145691,
+          -0.06287603825330734,
+          -0.053880177438259125
+        ]
+      },
+      "gates": [
+        0.909942626953125,
+        0.90606689453125,
+        0.8828125
+      ],
+      "route_relation_mass": [
+        0.1540178507566452,
+        0.14242060482501984,
+        0.13079705834388733,
+        0.14816957712173462,
+        0.14365904033184052,
+        0.13747718930244446,
+        0.14345867931842804
+      ],
+      "route_band_mass": [
+        0.586279034614563,
+        0.22287413477897644,
+        0.1908467561006546
+      ],
+      "normalized_descriptor_shift_l2_mean": 0.04867028445005417,
+      "normalized_descriptor_angle_degrees_mean": 2.788857936859131
+    },
+    {
+      "batch": 3,
+      "names": [
+        "0280_s000_v3_003.jpg",
+        "0280_s000_v3_003.jpg",
+        "0280_s000_v0_000.jpg",
+        "0280_s000_v0_000.jpg",
+        "0280_s000_v0_000.jpg",
+        "0280_s000_v1_002.jpg",
+        "0280_s000_v4_001.jpg",
+        "0280_s000_v1_002.jpg",
+        "0242_s028_v6_003.jpg",
+        "0242_s028_v6_003.jpg",
+        "0242_s028_v1_001.jpg",
+        "0242_s028_v1_001.jpg",
+        "0242_s028_v1_001.jpg",
+        "0242_s028_v1_001.jpg",
+        "0242_s028_v1_001.jpg",
+        "0242_s028_v7_004.jpg",
+        "0097_s000_v6_011.jpg",
+        "0097_s013_v1_000.jpg",
+        "0097_s016_v1_002.jpg",
+        "0097_s000_v3_013.jpg",
+        "0097_s024_v4_005.jpg",
+        "0097_s000_v5_014.jpg",
+        "0097_s011_v1_007.jpg",
+        "0097_s000_v7_015.jpg",
+        "0184_s020_v0_000.jpg",
+        "0184_s020_v0_000.jpg",
+        "0184_s020_v5_002.jpg",
+        "0184_s020_v7_003.jpg",
+        "0184_s020_v7_003.jpg",
+        "0184_s020_v7_003.jpg",
+        "0184_s020_v5_002.jpg",
+        "0184_s020_v3_001.jpg",
+        "0027_s025_v6_004.jpg",
+        "0027_s025_v1_001.jpg",
+        "0027_s004_v0_006.jpg",
+        "0027_s025_v7_005.jpg",
+        "0027_s025_v5_003.jpg",
+        "0027_s025_v0_000.jpg",
+        "0027_s025_v4_002.jpg",
+        "0027_s004_v3_007.jpg",
+        "0144_s016_v3_001.jpg",
+        "0144_s016_v3_001.jpg",
+        "0144_s016_v3_001.jpg",
+        "0144_s016_v3_001.jpg",
+        "0144_s016_v1_000.jpg",
+        "0144_s016_v1_000.jpg",
+        "0144_s016_v3_001.jpg",
+        "0144_s016_v3_001.jpg",
+        "0071_s008_v3_001.jpg",
+        "0071_s008_v1_000.jpg",
+        "0071_s008_v1_000.jpg",
+        "0071_s009_v5_003.jpg",
+        "0071_s009_v5_003.jpg",
+        "0071_s008_v1_000.jpg",
+        "0071_s008_v1_000.jpg",
+        "0071_s008_v3_001.jpg",
+        "0101_s013_v0_000.jpg",
+        "0101_s011_v5_009.jpg",
+        "0101_s013_v3_001.jpg",
+        "0101_s015_v7_004.jpg",
+        "0101_s016_v1_006.jpg",
+        "0101_s016_v0_005.jpg",
+        "0101_s015_v1_003.jpg",
+        "0101_s011_v0_007.jpg"
+      ],
+      "training_labels": [
+        129,
+        129,
+        129,
+        129,
+        129,
+        129,
+        129,
+        129,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        44,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        86,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        33,
+        33,
+        33,
+        33,
+        33,
+        33,
+        33,
+        33,
+        46,
+        46,
+        46,
+        46,
+        46,
+        46,
+        46,
+        46
+      ],
+      "losses": {
+        "primary_CE": 0.8171173930168152,
+        "primary_hinge": 0.30772286653518677,
+        "modality_aux": 0.17748431861400604,
+        "frequency_aux": 0.17871078848838806,
+        "other_full": 1.9476220607757568,
+        "contribution": 0.00028894166462123394
+      },
+      "deploy_parameter_roles": {
+        "residual_scale": {
+          "gradient_l2": {
+            "primary_CE": 0.0705489580136273,
+            "primary_hinge": 0.008220389819315195,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.07859166955943489,
+            "M_F_aux": 0.0,
+            "full_total": 0.07859166955943489
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 1,
+            "frequency_aux": 1,
+            "other_full": 1,
+            "contribution": 1,
+            "fused_primary": 0,
+            "M_F_aux": 1,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.0705489580136273,
+            "b_l2": 0.008220389819315195,
+            "dot": 0.0005659605376422405,
+            "cosine": 0.975895092399691
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.07859166955943489,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.07859166955943489,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.07859166955943489,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.07859166955943489,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "modality_projection": {
+          "gradient_l2": {
+            "primary_CE": 0.16939390546190228,
+            "primary_hinge": 0.04984886547584348,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.18005065692895206,
+            "M_F_aux": 0.0,
+            "full_total": 0.18005065692895206
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 6,
+            "contribution": 6,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.16939390546190228,
+            "b_l2": 0.04984886547584348,
+            "dot": 0.0006195168134564,
+            "cosine": 0.073366877847524
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.18005065692895206,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.18005065692895206,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.18005065692895206,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.18005065692895206,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "frequency_projection": {
+          "gradient_l2": {
+            "primary_CE": 0.10066568963596033,
+            "primary_hinge": 0.028475614546200248,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.10682979121977962,
+            "M_F_aux": 0.0,
+            "full_total": 0.10682979121977962
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 6,
+            "contribution": 6,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.10066568963596033,
+            "b_l2": 0.028475614546200248,
+            "dot": 0.00023408134377600476,
+            "cosine": 0.08166053543844085
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.10682979121977962,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.10682979121977962,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.10682979121977962,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.10682979121977962,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "interaction_projection": {
+          "gradient_l2": {
+            "primary_CE": 0.09042134024258908,
+            "primary_hinge": 0.02662800298666443,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.09566167302325236,
+            "M_F_aux": 0.0,
+            "full_total": 0.09566167302325236
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 6,
+            "contribution": 6,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.09042134024258908,
+            "b_l2": 0.02662800298666443,
+            "dot": 0.0001330426817747199,
+            "cosine": 0.055256255806229865
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.09566167302325236,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.09566167302325236,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.09566167302325236,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.09566167302325236,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "router": {
+          "gradient_l2": {
+            "primary_CE": 0.007155885095564783,
+            "primary_hinge": 0.0016212659859900591,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.008639524147979772,
+            "M_F_aux": 0.0,
+            "full_total": 0.008639524147979772
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 13,
+            "frequency_aux": 13,
+            "other_full": 13,
+            "contribution": 13,
+            "fused_primary": 0,
+            "M_F_aux": 13,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.007155885095564783,
+            "b_l2": 0.0016212659859900591,
+            "dot": 1.03988387967856e-05,
+            "cosine": 0.8963285216597651
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.008639524147979772,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.008639524147979772,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.008639524147979772,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.008639524147979772,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "calibrator": {
+          "gradient_l2": {
+            "primary_CE": 0.08313946207890739,
+            "primary_hinge": 0.010311844991679755,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.02488650194019666,
+            "fused_primary": 0.09319828130579787,
+            "M_F_aux": 0.0,
+            "full_total": 0.06892599246001899
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 6,
+            "contribution": 0,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.08313946207890739,
+            "b_l2": 0.010311844991679755,
+            "dot": 0.0008333979776338207,
+            "cosine": 0.9720953281667597
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.09319828130579787,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.09319828130579787,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.09319828130579787,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.09319828130579787,
+            "b_l2": 0.02488650194019666,
+            "dot": -0.00227735052145972,
+            "cosine": -0.9818793378308872
+          }
+        },
+        "modality_expert": {
+          "gradient_l2": {
+            "primary_CE": 0.028312956143466926,
+            "primary_hinge": 0.01461590943268496,
+            "modality_aux": 0.40865277589652527,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.03378486136165077,
+            "M_F_aux": 0.40865277589652527,
+            "full_total": 0.4178834390486577
+          },
+          "unused_tensors": {
+            "primary_CE": 1,
+            "primary_hinge": 1,
+            "modality_aux": 0,
+            "frequency_aux": 16,
+            "other_full": 16,
+            "contribution": 16,
+            "fused_primary": 1,
+            "M_F_aux": 0,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.028312956143466926,
+            "b_l2": 0.01461590943268496,
+            "dot": 6.306150915603125e-05,
+            "cosine": 0.15238888814051607
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.03378486136165077,
+            "b_l2": 0.40865277589652527,
+            "dot": 0.00324493087112665,
+            "cosine": 0.23503300579261563
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.03378486136165077,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.03378486136165077,
+            "b_l2": 0.40865277589652527,
+            "dot": 0.00324493087112665,
+            "cosine": 0.23503300579261563
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.03378486136165077,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "frequency_expert": {
+          "gradient_l2": {
+            "primary_CE": 0.02258167772854395,
+            "primary_hinge": 0.009090532242485794,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.3902881203605939,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.02616636381894915,
+            "M_F_aux": 0.3902881203605939,
+            "full_total": 0.3943451862371492
+          },
+          "unused_tensors": {
+            "primary_CE": 1,
+            "primary_hinge": 1,
+            "modality_aux": 35,
+            "frequency_aux": 0,
+            "other_full": 35,
+            "contribution": 35,
+            "fused_primary": 1,
+            "M_F_aux": 0,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.02258167772854395,
+            "b_l2": 0.009090532242485794,
+            "dot": 4.596550934402206e-05,
+            "cosine": 0.22391673877709423
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.02616636381894915,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.02616636381894915,
+            "b_l2": 0.3902881203605939,
+            "dot": 0.0012452323712603408,
+            "cosine": 0.12193312214269954
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.02616636381894915,
+            "b_l2": 0.3902881203605939,
+            "dot": 0.0012452323712603408,
+            "cosine": 0.12193312214269954
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.02616636381894915,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "shared_projection": {
+          "gradient_l2": {
+            "primary_CE": 0.0,
+            "primary_hinge": 0.0,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.21569949034714384,
+            "contribution": 0.0,
+            "fused_primary": 0.0,
+            "M_F_aux": 0.0,
+            "full_total": 0.21569949034714384
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 0,
+            "contribution": 6,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "fused_neck": {
+          "gradient_l2": {
+            "primary_CE": 0.007000129552357066,
+            "primary_hinge": 0.0,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.007000129552357066,
+            "M_F_aux": 0.0,
+            "full_total": 0.007000129552357066
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 1,
+            "modality_aux": 1,
+            "frequency_aux": 1,
+            "other_full": 1,
+            "contribution": 1,
+            "fused_primary": 0,
+            "M_F_aux": 1,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.007000129552357066,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.007000129552357066,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.007000129552357066,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.007000129552357066,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.007000129552357066,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "fused_classifier": {
+          "gradient_l2": {
+            "primary_CE": 3.6972044926106893,
+            "primary_hinge": 0.0,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 3.6972044926106893,
+            "M_F_aux": 0.0,
+            "full_total": 3.6972044926106893
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 1,
+            "modality_aux": 1,
+            "frequency_aux": 1,
+            "other_full": 1,
+            "contribution": 1,
+            "fused_primary": 0,
+            "M_F_aux": 1,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 3.6972044926106893,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 3.6972044926106893,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 3.6972044926106893,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 3.6972044926106893,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 3.6972044926106893,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        }
+      },
+      "residual_scale_gradients": {
+        "primary_CE": [
+          -0.03615214675664902,
+          -0.043072931468486786,
+          -0.04260164499282837
+        ],
+        "primary_hinge": [
+          -0.005180302541702986,
+          -0.003536062315106392,
+          -0.0053137121722102165
+        ],
+        "modality_aux": null,
+        "frequency_aux": null,
+        "other_full": null,
+        "contribution": null,
+        "fused_primary": [
+          -0.04133244603872299,
+          -0.04660899192094803,
+          -0.04791535809636116
+        ],
+        "M_F_aux": null,
+        "full_total": [
+          -0.04133244603872299,
+          -0.04660899192094803,
+          -0.04791535809636116
+        ]
+      },
+      "gates": [
+        0.905548095703125,
+        0.9020309448242188,
+        0.8761978149414062
+      ],
+      "route_relation_mass": [
+        0.15646514296531677,
+        0.14793215692043304,
+        0.12355899810791016,
+        0.15239447355270386,
+        0.14013594388961792,
+        0.1362249255180359,
+        0.14328835904598236
+      ],
+      "route_band_mass": [
+        0.5806989073753357,
+        0.22381360828876495,
+        0.19548746943473816
+      ],
+      "normalized_descriptor_shift_l2_mean": 0.04868227243423462,
+      "normalized_descriptor_angle_degrees_mean": 2.789548397064209
+    },
+    {
+      "batch": 4,
+      "names": [
+        "0318_s000_v1_004.jpg",
+        "0318_s000_v4_001.jpg",
+        "0318_s000_v0_000.jpg",
+        "0318_s000_v6_003.jpg",
+        "0318_s000_v3_005.jpg",
+        "0318_s000_v7_007.jpg",
+        "0318_s000_v5_006.jpg",
+        "0318_s000_v2_002.jpg",
+        "0126_s013_v5_001.jpg",
+        "0126_s013_v5_001.jpg",
+        "0126_s013_v3_000.jpg",
+        "0126_s013_v3_000.jpg",
+        "0126_s013_v5_001.jpg",
+        "0126_s013_v5_001.jpg",
+        "0126_s013_v3_000.jpg",
+        "0126_s013_v3_000.jpg",
+        "0035_s004_v5_004.jpg",
+        "0035_s018_v7_001.jpg",
+        "0035_s005_v6_007.jpg",
+        "0035_s018_v5_000.jpg",
+        "0035_s005_v3_006.jpg",
+        "0035_s004_v7_005.jpg",
+        "0035_s018_v7_002.jpg",
+        "0035_s004_v3_003.jpg",
+        "0050_s005_v3_001.jpg",
+        "0050_s005_v3_001.jpg",
+        "0050_s005_v5_002.jpg",
+        "0050_s005_v1_000.jpg",
+        "0050_s005_v3_001.jpg",
+        "0050_s005_v5_002.jpg",
+        "0050_s005_v5_002.jpg",
+        "0050_s005_v5_002.jpg",
+        "0013_s010_v0_007.jpg",
+        "0013_s007_v3_006.jpg",
+        "0013_s028_v4_004.jpg",
+        "0013_s010_v3_008.jpg",
+        "0013_s002_v0_000.jpg",
+        "0013_s028_v3_003.jpg",
+        "0013_s007_v0_005.jpg",
+        "0013_s002_v4_001.jpg",
+        "0225_s024_v1_001.jpg",
+        "0225_s024_v3_002.jpg",
+        "0225_s024_v3_002.jpg",
+        "0225_s024_v3_002.jpg",
+        "0225_s024_v3_002.jpg",
+        "0225_s024_v3_002.jpg",
+        "0225_s024_v3_002.jpg",
+        "0225_s024_v3_002.jpg",
+        "0221_s023_v1_000.jpg",
+        "0221_s023_v7_001.jpg",
+        "0221_s023_v1_000.jpg",
+        "0221_s023_v7_001.jpg",
+        "0221_s023_v7_001.jpg",
+        "0221_s023_v7_001.jpg",
+        "0221_s023_v7_001.jpg",
+        "0221_s023_v1_000.jpg",
+        "0322_s000_v0_000.jpg",
+        "0322_s000_v4_001.jpg",
+        "0322_s000_v2_002.jpg",
+        "0322_s000_v6_003.jpg",
+        "0322_s000_v1_004.jpg",
+        "0322_s000_v5_006.jpg",
+        "0322_s000_v7_007.jpg",
+        "0322_s000_v3_005.jpg"
+      ],
+      "training_labels": [
+        148,
+        148,
+        148,
+        148,
+        148,
+        148,
+        148,
+        148,
+        58,
+        58,
+        58,
+        58,
+        58,
+        58,
+        58,
+        58,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        17,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        102,
+        102,
+        102,
+        102,
+        102,
+        102,
+        102,
+        102,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150
+      ],
+      "losses": {
+        "primary_CE": 0.7893524169921875,
+        "primary_hinge": 0.3100941777229309,
+        "modality_aux": 0.1635473221540451,
+        "frequency_aux": 0.16635511815547943,
+        "other_full": 1.8495157957077026,
+        "contribution": 0.0003097012813668698
+      },
+      "deploy_parameter_roles": {
+        "residual_scale": {
+          "gradient_l2": {
+            "primary_CE": 0.0893940191022968,
+            "primary_hinge": 0.013056612094093313,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.10237211988080888,
+            "M_F_aux": 0.0,
+            "full_total": 0.10237211988080888
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 1,
+            "frequency_aux": 1,
+            "other_full": 1,
+            "contribution": 1,
+            "fused_primary": 0,
+            "M_F_aux": 1,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.0893940191022968,
+            "b_l2": 0.013056612094093313,
+            "dot": 0.0011591428192332387,
+            "cosine": 0.9931114388196084
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.10237211988080888,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.10237211988080888,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.10237211988080888,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.10237211988080888,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "modality_projection": {
+          "gradient_l2": {
+            "primary_CE": 0.16746918297791702,
+            "primary_hinge": 0.05144463198800845,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.1804895376539568,
+            "M_F_aux": 0.0,
+            "full_total": 0.1804895376539568
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 6,
+            "contribution": 6,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.16746918297791702,
+            "b_l2": 0.05144463198800845,
+            "dot": 0.0009419983922001052,
+            "cosine": 0.10933902456916803
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.1804895376539568,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.1804895376539568,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.1804895376539568,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.1804895376539568,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "frequency_projection": {
+          "gradient_l2": {
+            "primary_CE": 0.09929045834971918,
+            "primary_hinge": 0.02993117577935843,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.10544774040166344,
+            "M_F_aux": 0.0,
+            "full_total": 0.10544774040166344
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 6,
+            "contribution": 6,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.09929045834971918,
+            "b_l2": 0.02993117577935843,
+            "dot": 0.00018237798432263475,
+            "cosine": 0.061367879717963085
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.10544774040166344,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.10544774040166344,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.10544774040166344,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.10544774040166344,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "interaction_projection": {
+          "gradient_l2": {
+            "primary_CE": 0.08933411083392784,
+            "primary_hinge": 0.026853775682413848,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.09571158922146787,
+            "M_F_aux": 0.0,
+            "full_total": 0.09571158922146787
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 6,
+            "contribution": 6,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.08933411083392784,
+            "b_l2": 0.026853775682413848,
+            "dot": 0.00022949995680487945,
+            "cosine": 0.09566651031109474
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.09571158922146787,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.09571158922146787,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.09571158922146787,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.09571158922146787,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "router": {
+          "gradient_l2": {
+            "primary_CE": 0.006495742325193882,
+            "primary_hinge": 0.0034745471497528322,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.009471471783510316,
+            "M_F_aux": 0.0,
+            "full_total": 0.009471471783510316
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 13,
+            "frequency_aux": 13,
+            "other_full": 13,
+            "contribution": 13,
+            "fused_primary": 0,
+            "M_F_aux": 13,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.006495742325193882,
+            "b_l2": 0.0034745471497528322,
+            "dot": 1.7711288546449298e-05,
+            "cosine": 0.7847352478155126
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.009471471783510316,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.009471471783510316,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.009471471783510316,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.009471471783510316,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "calibrator": {
+          "gradient_l2": {
+            "primary_CE": 0.10026786519464326,
+            "primary_hinge": 0.016030633108915324,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0265801191873054,
+            "fused_primary": 0.11600041865619137,
+            "M_F_aux": 0.0,
+            "full_total": 0.08982977576434509
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 6,
+            "contribution": 0,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.10026786519464326,
+            "b_l2": 0.016030633108915324,
+            "dot": 0.0015730914291909315,
+            "cosine": 0.9786818219638607
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.11600041865619137,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.11600041865619137,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.11600041865619137,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.11600041865619137,
+            "b_l2": 0.0265801191873054,
+            "dot": -0.0030473062143734353,
+            "cosine": -0.9883246257420183
+          }
+        },
+        "modality_expert": {
+          "gradient_l2": {
+            "primary_CE": 0.04712654189510026,
+            "primary_hinge": 0.01860863336355031,
+            "modality_aux": 0.35898167589978247,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.06030751361398642,
+            "M_F_aux": 0.3589816758997874,
+            "full_total": 0.38151516346680214
+          },
+          "unused_tensors": {
+            "primary_CE": 1,
+            "primary_hinge": 1,
+            "modality_aux": 0,
+            "frequency_aux": 16,
+            "other_full": 16,
+            "contribution": 16,
+            "fused_primary": 1,
+            "M_F_aux": 0,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.04712654189510026,
+            "b_l2": 0.01860863336355031,
+            "dot": 0.0005346260771010858,
+            "cosine": 0.6096352718585168
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.06030751361398642,
+            "b_l2": 0.35898167589978247,
+            "dot": 0.0065240811989421,
+            "cosine": 0.3013530930516362
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.06030751361398642,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.06030751361398642,
+            "b_l2": 0.3589816758997874,
+            "dot": 0.006524081198942433,
+            "cosine": 0.3013530930516474
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.06030751361398642,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "frequency_expert": {
+          "gradient_l2": {
+            "primary_CE": 0.026644872764808116,
+            "primary_hinge": 0.009368248883073393,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.33470175611432984,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.03210835443558009,
+            "M_F_aux": 0.33470175611432984,
+            "full_total": 0.34262354319276817
+          },
+          "unused_tensors": {
+            "primary_CE": 1,
+            "primary_hinge": 1,
+            "modality_aux": 35,
+            "frequency_aux": 0,
+            "other_full": 35,
+            "contribution": 35,
+            "fused_primary": 1,
+            "M_F_aux": 0,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.026644872764808116,
+            "b_l2": 0.009368248883073393,
+            "dot": 0.00011666540650208043,
+            "cosine": 0.4673798963330935
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.03210835443558009,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.03210835443558009,
+            "b_l2": 0.33470175611432984,
+            "dot": 0.002163157072786137,
+            "cosine": 0.2012852801895323
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.03210835443558009,
+            "b_l2": 0.33470175611432984,
+            "dot": 0.002163157072786137,
+            "cosine": 0.2012852801895323
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.03210835443558009,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "shared_projection": {
+          "gradient_l2": {
+            "primary_CE": 0.0,
+            "primary_hinge": 0.0,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.2780712887816006,
+            "contribution": 0.0,
+            "fused_primary": 0.0,
+            "M_F_aux": 0.0,
+            "full_total": 0.2780712887816006
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 0,
+            "modality_aux": 6,
+            "frequency_aux": 6,
+            "other_full": 0,
+            "contribution": 6,
+            "fused_primary": 0,
+            "M_F_aux": 6,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.0,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "fused_neck": {
+          "gradient_l2": {
+            "primary_CE": 0.007399258310643635,
+            "primary_hinge": 0.0,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 0.007399258310643635,
+            "M_F_aux": 0.0,
+            "full_total": 0.007399258310643635
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 1,
+            "modality_aux": 1,
+            "frequency_aux": 1,
+            "other_full": 1,
+            "contribution": 1,
+            "fused_primary": 0,
+            "M_F_aux": 1,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 0.007399258310643635,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 0.007399258310643635,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 0.007399258310643635,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 0.007399258310643635,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 0.007399258310643635,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        },
+        "fused_classifier": {
+          "gradient_l2": {
+            "primary_CE": 3.7655143246670115,
+            "primary_hinge": 0.0,
+            "modality_aux": 0.0,
+            "frequency_aux": 0.0,
+            "other_full": 0.0,
+            "contribution": 0.0,
+            "fused_primary": 3.7655143246670115,
+            "M_F_aux": 0.0,
+            "full_total": 3.7655143246670115
+          },
+          "unused_tensors": {
+            "primary_CE": 0,
+            "primary_hinge": 1,
+            "modality_aux": 1,
+            "frequency_aux": 1,
+            "other_full": 1,
+            "contribution": 1,
+            "fused_primary": 0,
+            "M_F_aux": 1,
+            "full_total": 0
+          },
+          "primary_CE_vs_hinge": {
+            "a_l2": 3.7655143246670115,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_aux": {
+            "a_l2": 3.7655143246670115,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_F_aux": {
+            "a_l2": 3.7655143246670115,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_M_F_aux": {
+            "a_l2": 3.7655143246670115,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          },
+          "fused_primary_vs_contribution": {
+            "a_l2": 3.7655143246670115,
+            "b_l2": 0.0,
+            "dot": 0.0,
+            "cosine": null
+          }
+        }
+      },
+      "residual_scale_gradients": {
+        "primary_CE": [
+          -0.045140840113162994,
+          -0.057639993727207184,
+          -0.051295485347509384
+        ],
+        "primary_hinge": [
+          -0.007687004283070564,
+          -0.007348580285906792,
+          -0.007575186900794506
+        ],
+        "modality_aux": null,
+        "frequency_aux": null,
+        "other_full": null,
+        "contribution": null,
+        "fused_primary": [
+          -0.05282784253358841,
+          -0.06498856842517853,
+          -0.058870673179626465
+        ],
+        "M_F_aux": null,
+        "full_total": [
+          -0.05282784253358841,
+          -0.06498856842517853,
+          -0.058870673179626465
+        ]
+      },
+      "gates": [
+        0.911224365234375,
+        0.9063873291015625,
+        0.8855438232421875
+      ],
+      "route_relation_mass": [
+        0.15705573558807373,
+        0.13954395055770874,
+        0.132011279463768,
+        0.14772389829158783,
+        0.14489272236824036,
+        0.13583016395568848,
+        0.14294220507144928
+      ],
+      "route_band_mass": [
+        0.5805476903915405,
+        0.22448283433914185,
+        0.19496949017047882
+      ],
+      "normalized_descriptor_shift_l2_mean": 0.050432492047548294,
+      "normalized_descriptor_angle_degrees_mean": 2.8898448944091797
+    }
+  ],
+  "limits": "Four full-view training forwards at a fixed benchmark-selected checkpoint, both actual final CE and hinge plus weighted auxiliaries. The zero-weight partial forward/BN call is not replayed here; this is a local full-objective gradient observation, not the entire two-forward optimizer step. No optimizer; temporary train-mode BN statistics are discarded and never saved; buffer-version changes are not a complete value-change detector. None/zero cosines explicitly reflect disconnected gradient paths, not a fallback. Does not establish sustained training conflict, late-checkpoint gradients, causal mechanism or new retrieval gain. Descriptor-angle measurements use normalized final-minus-base, not pre-normalization radial residual energy."
+}
