@@ -1,0 +1,99 @@
+{
+  "summary": {
+    "N_frequency_shared": {
+      "weight_matrix_numerical_ranks": {
+        "M": 64,
+        "F": 64,
+        "I": 64
+      },
+      "spaces": {
+        "M": {
+          "output_span_rank": 65,
+          "reference_query_energy_captured_mean": 0.14855747784169443,
+          "centered_query_energy_captured_mean": 0.14917205486663826,
+          "fixed_p_minus_n_energy_captured_mean": 0.1421954034310058
+        },
+        "F": {
+          "output_span_rank": 65,
+          "reference_query_energy_captured_mean": 0.1561269945053454,
+          "centered_query_energy_captured_mean": 0.15602657859077537,
+          "fixed_p_minus_n_energy_captured_mean": 0.1495986582952344
+        },
+        "I": {
+          "output_span_rank": 65,
+          "reference_query_energy_captured_mean": 0.15741683239894805,
+          "centered_query_energy_captured_mean": 0.15822080623292964,
+          "fixed_p_minus_n_energy_captured_mean": 0.14961357349991258
+        },
+        "M_F_I_union": {
+          "output_span_rank": 195,
+          "reference_query_energy_captured_mean": 0.4188368283519793,
+          "centered_query_energy_captured_mean": 0.41988223231814675,
+          "fixed_p_minus_n_energy_captured_mean": 0.4087294331313647
+        }
+      }
+    },
+    "N_axis_shared": {
+      "weight_matrix_numerical_ranks": {
+        "M": 64,
+        "F": 64,
+        "I": 64
+      },
+      "spaces": {
+        "M": {
+          "output_span_rank": 65,
+          "reference_query_energy_captured_mean": 0.15577004727523552,
+          "centered_query_energy_captured_mean": 0.15649903103310964,
+          "fixed_p_minus_n_energy_captured_mean": 0.1471128023858442
+        },
+        "F": {
+          "output_span_rank": 65,
+          "reference_query_energy_captured_mean": 0.1628692740238918,
+          "centered_query_energy_captured_mean": 0.163224972976918,
+          "fixed_p_minus_n_energy_captured_mean": 0.15440807752327143
+        },
+        "I": {
+          "output_span_rank": 65,
+          "reference_query_energy_captured_mean": 0.16461889321824003,
+          "centered_query_energy_captured_mean": 0.16591802114439866,
+          "fixed_p_minus_n_energy_captured_mean": 0.15408297355879563
+        },
+        "M_F_I_union": {
+          "output_span_rank": 195,
+          "reference_query_energy_captured_mean": 0.4247223138921286,
+          "centered_query_energy_captured_mean": 0.4260559994528216,
+          "fixed_p_minus_n_energy_captured_mean": 0.4137281573936852
+        }
+      }
+    }
+  },
+  "protected_inputs_unchanged": true,
+  "model_constructions": 0,
+  "neural_forwards": 0,
+  "new_optimizer_updates": 0,
+  "status": "ACTUAL_FIXED_N_MSVR_PROJECTION_SUBSPACE_CPU_COMPLETE",
+  "collected_at": "2026-10-10T02:49:37+08:00",
+  "reference": {
+    "local": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\msvr_reference_cache_preserved_20261009\\MSVR310_demo_s42\\best_official_arrays.npz",
+    "source": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/MSVR310_demo_s42/best_official_arrays.npz",
+    "bytes": 33951284,
+    "sha256": "996f8f754133701a4ad9f7029057cf46736a0ca4987e57a5ea5fb7f832b60dd8"
+  },
+  "weights": {
+    "N_frequency_shared": {
+      "path": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201n_bounded_identity_shift_20261009/MSVR310/training/MSVR310_r201n_frequency_shared_s42/best.pth",
+      "sha256": "b280d9f0667796f0f2f5c273e71e84e4029d40bb19de9142282ba0b38c2b68cb",
+      "selected_epoch": 3
+    },
+    "N_axis_shared": {
+      "path": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201n_bounded_identity_shift_20261009/MSVR310/training/MSVR310_r201n_axis_shared_s42/best.pth",
+      "sha256": "ea3105ccb48c0f2f4d8b35cba3916080611f8dd82556d283be8cc487cd964970",
+      "selected_epoch": 3
+    }
+  },
+  "rows": 56,
+  "singular_value_relative_rank_threshold": 1e-06,
+  "receiver_source_sha256": "7ada387c80ec382829ac32d5938d344611bb6bcff83a2302a106f32e041a3a14",
+  "remote_code_sha256": "ad8441397e0f069c5a3b38ea6ccbfb0b5ebc74115c2fdd43bf990c89dae64ed0",
+  "limits": "Only fixed normal E3 N weights and original E32 MSVR normal feature cache. CPU torch.load(weights_only,map_location=cpu) and NumPy SVD, no model construction or forward/CUDA. Each affine projection output is contained in span(W2,b); M/F/I union is a separate upper space, not the full identity descriptor. Reference query, centered query and fixed legal-nearest positive-minus-negative directions use all591 queries/1055gallery, same-ID/same-scene positive exclusion. Energy coverage is geometric compatibility, not actual projected expert features, identity accuracy, an instruction to copy teacher coordinates, or causal proof of failure/capacity insufficiency. Final normalization and frozen5120 base remain outside this individual-output-space claim. No retraining, source/checkpoint/selection changes or new missing conditions."
+}

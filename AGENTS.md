@@ -1,5 +1,9 @@
 # DeMo Dual-Axis experiment
 
+## User closure instruction — 2026-10-10
+
+Current N normal training and the six symmetric DeMo paper evaluations are closed. Finish publication, the single handoff and scoped artifact cleanup, then stop. Do not launch O, new seeds, new 49 evaluations or another training campaign unless the user explicitly resumes. Preserve K RGBNT201 best, needed reference/comparison best checkpoints and unique raw results. Research metric goals remain unmet.
+
 ## Latest missing-evaluation override — 2026-10-09
 
 For new missing-modality evaluations, use only the six DeMo paper settings: missing R, N, T, RN, RT or NT, applied equally to query and gallery. Use every official query/gallery record and the fixed normal-input mAP-best checkpoint. Do not launch new 49-pair evaluations; keep the completed historical 49-pair evidence. Report all six metrics for each condition and the equal-condition mean, with negative cases retained. DeMo reports these missing settings for RGBNT201/RGBNT100; applying them to MSVR310 is our explicit extension.
