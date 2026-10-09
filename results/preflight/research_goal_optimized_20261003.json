@@ -1,16 +1,16 @@
 {
-  "status": "PAUSED_USER_REQUEST_OBJECTIVE_UNMET",
-  "updated_at": "2026-10-08T07:29:27+08:00",
-  "execution_objective": "以完整DeMo为强基线，建立模态可用集合一致、能带来实际检索增益的双轴互补Re-ID方法；证明模态轴与频率轴分工及条件协作优于同增强、同有效参数和同输出维度的普通专家。先逐因素验证公共身份出口、身份关系保持和跨集合协作；明确候选后冻结结构，完成至少三个配对种子、完整官方评测下的身份分组核查、三个数据集、全部49种查询—图库模态组合和真实成本报告。保留统一方法在RGBNT201、RGBNT100、MSVR310上mAP和Rank-1均超过同协议完整DeMo至少2个百分点的内部目标。 最新用户要求覆盖完整官方训练集和全部官方query/gallery，不再人为留出fit/dev子集；保留历史子集负结果但不作为正式达标依据，全部基线/对照/统一方法在新完整协议重新建立。",
+  "status": "ACTIVE_UNMET",
+  "updated_at": "2026-10-09T17:42:34+08:00",
+  "execution_objective": "保留RGBNT201现有最佳79.664315 mAP/85.167464 Rank-1及权重，在同一DeMo双轴网络框架内优先提升RGBNT100和MSVR310；允许数据集专用训练参数，完整输入mAP和Rank-1相对同协议完整DeMo各至少+1个百分点。缺失评测参照DeMo论文六种双方相同缺失设置与平均，后续只做论文六种缺失条件和实际专家增量，不做新的49组合；排查模态/频域分工、路由、投影和训练梯度冲突。候选接近目标后允许五个配对专家seed并展示Best-of5，同时保留全seed统计与失败。最佳权重、唯一原始距离和必要参照保留，其余本项目无用副本及时清理。只维护一份交接，GitHub/桌面/26/27字节同步。",
   "platform_goal_original_objective": "监控训练正常进行，指标要全面超过DeMo两个点，包括缺失模态也要做",
-  "platform_objective_edit_supported": false,
-  "scope": "Refined execution objective persists in this JSON and the single handoff. The platform original objective is unchanged and was actually observed ACTIVE on 2026-10-04; completion still requires all specified evidence.",
+  "platform_objective_edit_supported": true,
+  "scope": "2026-10-09 user-edited platform goal observed ACTIVE; this replaces the old mandatory all3 uniform+2 execution acceptance, while prior results/history remain unchanged.",
   "acceptance": {
-    "normal": "同一统一方法在三个完整官方训练/query/gallery协议下，mAP与Rank-1分别超过重跑的同协议完整DeMo至少2个百分点；历史fit/dev基线不得直接计算正式涨点；至少3配对种子。",
-    "missing": "完整覆盖49种查询—图库集合条件，预先登记来源不相交、重叠、仅查询缺失、双方缺失等关键组；报告全部正负结果，并与正确屏蔽/同增强/同容量普通专家比较。不得用单个均值或污染基线替代全面证据。",
+    "normal": "RGBNT201保留现有最佳同一checkpoint六指标；RGBNT100/MSVR310分别相对完整官方DeMo mAP和Rank-1各至少+1pp。同网络框架可使用明确披露的数据集专用参数；公平普通专家同步使用相同参数与预算，不混合不同结构峰值。",
+    "missing": "最新用户取消本阶段新49推理；只按DeMo论文M(R),M(N),M(T),M(RN),M(RT),M(NT)六种全query/gallery相同缺失设置。逐条件mAP/mINP/R1/5/10/20及六条件等权平均，平均mAP/R1各+1pp主目标；各条件通过数量和负结果全部报告，MSVR310为对应扩展。固定正常mAP-best checkpoint，不按缺失条件挑权重。正确mask的00/公平普通专家单列，旧49结果留档不重算。",
     "mechanism": "公平普通专家对照稳定胜出，实际协作在预定义关键组带来可重复净收益，模块必要性由重训消融与逐查询机制证据支撑。",
-    "quantitative_interpretation": "保留原+2/+2内部验收；不额外要求每个模块都+2或在完整DeMo上再提高10点。49条件中的双+2达标数量持续报告，不能冒称全条件通过。",
-    "stability": "冻结结构、损失、超参和预先登记选点规则后做至少3配对种子；按身份统计置信区间。用户明确要求全训练，不再从官方训练身份另切fit/dev；官方benchmark参与checkpoint选择必须披露，不宣称独立未触碰测试。",
+    "quantitative_interpretation": "最新+1替代旧+2；缺失只六mask，六平均并不表示每条件均+1。RGBNT201保留最优，弱dataset只超原DeMo不等于双轴独特贡献。历史49事实不变。",
+    "stability": "候选接近目标再五个配对专家seed，普通对照相同N；同checkpoint所有指标，按最大mAP规则选Best-of5，并报告全部单seed、均值标准差/配对差值/最佳轮与末轮。固定teacher42条件seed不冒称整个两阶段五seed。官方benchmark参与选点如实披露。",
     "reporting": "全部条件报告mAP、mINP、Rank-1/5/10/20、CMC1..50、逐查询AP/INP/首末匹配、身份/相机/场景分组及误伤/恢复；同一实验所有指标固定使用同一完整官方query/gallery mAP最佳checkpoint。"
   },
   "milestones": [
@@ -43400,8 +43400,8 @@
   ],
   "next_action": {
     "milestone": "M_PRIMARY_MARGIN06_PREPARATION",
-    "status": "PAUSED_BY_USER_NO_NEW_EXPERIMENT",
-    "action": "用户要求做完当前训练就停止；当前已启动训练及L完整评测均结束，没有活动训练。M仅源代码准备，未审查/部署/native/正式训练，不再自动继续。恢复须用户明确要求。",
+    "status": "SOURCE_READY_FRESH_REVIEW_PENDING",
+    "action": "Only final unit5120 primary hinge margin .3 -> .6; truthful matching telemetry, auxiliary soft/CE/partial0-forward-BN2/two-backwards/Krelation-localPI/LB64P8K8/Adam/teachers/5120 unchanged; 按原计划RGB201→RGB100→MSVR新六50，先真实native，正常三集完成后固定best49。只2026物理2/3，每卡串行，不干扰占用者，不查询温度/功率。",
     "hardware_dependency": {
       "host": "2026",
       "physical_gpus": [
@@ -43491,5 +43491,22 @@
     "removed_bytes": 6681233264.0,
     "new_neural_calls": 0,
     "new_optimizer_updates": 0
+  },
+  "user_resume": {
+    "at": "2026-10-09T17:06:13+08:00",
+    "instruction": "继续使用26的服务器吧",
+    "stage": "M_SOURCE_REVIEW_THEN_REAL_NATIVE_BEFORE_NEW_FULL50"
+  },
+  "current_next_stage": {
+    "plan": "results/preflight/r201m_primary_margin06_plan_20261008.json",
+    "normal_order": [
+      "MSVR310",
+      "RGBNT100"
+    ],
+    "RGBNT201": "retain K42E30 primary.3",
+    "neural_started": true,
+    "current_dataset": "MSVR310",
+    "native_updates": 6,
+    "formal_complete": false
   }
 }

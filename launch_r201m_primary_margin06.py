@@ -26,14 +26,14 @@ def main():
     parser = argparse.ArgumentParser()
     for key in ('data-root', 'pretrained', 'anchor-root', 'output'):
         parser.add_argument('--' + key, required=True)
-    parser.add_argument('--dataset', choices=('RGBNT201','RGBNT100','MSVR310'), required=True)
+    parser.add_argument('--dataset', choices=('MSVR310','RGBNT100'), required=True)
     args = parser.parse_args()
     root, anchors = Path(args.output), Path(args.anchor_root)
     root.mkdir(parents=True, exist_ok=False)
     for phase in ('native', 'training', 'audit'):
         (root / phase).mkdir()
     save(root / 'controller_launch.json', dict(pid=os.getpid(), started=time.time(), arguments=vars(args),
-        gpus=[2,3], maximum_NN=2, temperature_power_control=False, experiment='M only final-primary margin0.6; unchanged K graph/LB64P8K8/auxsoft/params/5120/partial0; all3 train'))
+        gpus=[2,3], maximum_NN=2, temperature_power_control=False, experiment='M weakdatasets final-primary margin0.6; preserve K201 margin0.3 best; unchanged K graph/LB64P8K8/auxsoft/params/5120/partial0'))
     def argv(variant, mode, output):
         return [sys.executable, '-u', 'run_r201m_primary_margin06.py', '--dataset', args.dataset, '--variant', variant,
             '--freeze-identity-encoder', '1', '--seed', '42', '--mode', mode, '--data-root', args.data_root,
@@ -53,6 +53,8 @@ def main():
                    and d['sampling_identities']==8 and d['sampling_instances']==8 and d['sampling_batch']==64
                    and d['primary_margin']==.6 and d['primary_metric_coefficient']==1.
                    and d['primary_margin_definition_equal'] and d['primary_feature_gradient_finite']
+                   and set(d['primary_parameter_gradient_l1'])=={'PM','PF','PI','M','F'}
+                   and all(d['primary_vs_aux_'+n]['primary_norm']>=0 and d['primary_vs_aux_'+n]['weighted_auxiliary_norm']>=0 for n in ('M','F'))
                    and d['auxiliary_original_soft_triplet'] and d['PI_outlet']=='shared_relation_local'
                    and d['relation_PI_native']['pi_input_shape']==[64,7,1024]
                    and d['relation_PI_native']['pi_output_shape']==[64,7,512]
@@ -113,7 +115,7 @@ def main():
     updates=sum(json.loads((root/'training'/r['name']/'result.json').read_text())['optimizer_steps'] for r,_ in results)
     save(root / 'controller_result.json', dict(status='COMPLETE', dataset=args.dataset, controls=2, runs=[r for r,_ in results],
         additional_epochs=100, successful_updates=updates, native_updates=6, paired_sampling_exact=True,
-        normal_archives_local_verified=2, missing_evaluation='Deferred until candidate normal comparison and three-dataset stage',
+        normal_archives_local_verified=2, missing_evaluation='After weakdatasets normal closure; only DeMo paper six symmetric missing masks, no new49',
         limits='One seed, benchmark selected; original50 plus new50, fair paired frequency/axis, matched M batchsampling, partial BN/forward computation and zero partial gradient. Same uniformL sampler length and order; primarymargin changes; actual updates reported. No guaranteed normal/missing improvement.'))
     emit(dict(event='CONTROLLER_COMPLETE', controls=2, successful_updates=updates))
 

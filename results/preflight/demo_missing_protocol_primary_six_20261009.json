@@ -1,0 +1,180 @@
+{
+  "status": "ACTUAL_PRIMARY_PAPER_AND_AUTHOR_CODE_CHECKED_CPU_EXISTING_L_READOUT",
+  "observed_at": "2026-10-09T17:28:04+08:00",
+  "paper": "https://ojs.aaai.org/index.php/AAAI/article/view/32878/35033",
+  "paper_tables": [
+    3,
+    4
+  ],
+  "official_commit": "b4f323a430b32e3a1637c3e7acb25868cb52e9cd",
+  "official_sources": {
+    "modeling/make_model.py": {
+      "url": "https://raw.githubusercontent.com/924973292/DeMo/b4f323a430b32e3a1637c3e7acb25868cb52e9cd/modeling/make_model.py",
+      "bytes": 10473,
+      "sha256": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131"
+    },
+    "engine/processor.py": {
+      "url": "https://raw.githubusercontent.com/924973292/DeMo/b4f323a430b32e3a1637c3e7acb25868cb52e9cd/engine/processor.py",
+      "bytes": 9995,
+      "sha256": "02c3b1187b3974bd0ab3d119b6dd361df41f8ab73831af43544f08262a13aae8"
+    },
+    "test_net.py": {
+      "url": "https://raw.githubusercontent.com/924973292/DeMo/b4f323a430b32e3a1637c3e7acb25868cb52e9cd/test_net.py",
+      "bytes": 1599,
+      "sha256": "370ff11306b4bd2a8a1fa3c6ac68acca524294083cbde8a35531f860528ae064"
+    }
+  },
+  "paper_datasets": [
+    "RGBNT201",
+    "RGBNT100"
+  ],
+  "MSVR310": "Our extension, not a reported original missing table",
+  "primary_masks": [
+    {
+      "missing": "r",
+      "available": "NT",
+      "condition": "q_NT_g_NT"
+    },
+    {
+      "missing": "n",
+      "available": "RT",
+      "condition": "q_RT_g_RT"
+    },
+    {
+      "missing": "t",
+      "available": "RN",
+      "condition": "q_RN_g_RN"
+    },
+    {
+      "missing": "rn",
+      "available": "T",
+      "condition": "q_T_g_T"
+    },
+    {
+      "missing": "rt",
+      "available": "N",
+      "condition": "q_N_g_N"
+    },
+    {
+      "missing": "nt",
+      "available": "R",
+      "condition": "q_R_g_R"
+    }
+  ],
+  "scope": "Six same missing sets applied to all query/gallery records. Paper caption defines missing X; official TEST.MISS uses zeros_like normalized input tensors, one eval config/loader covering query+gallery. No query-only missing or source-disjoint pair claim for paper tables.",
+  "original_code_zero_input_keeps_backbone": true,
+  "our_availability_correct_path": "Explicit masks skip unavailable source/relations; label separately from original DeMo zero-input implementation. Use 00 and matched ordinary control to isolate generic masking from experts.",
+  "source_csv": "results/r201l_missing49_20261007/missing_analysis/six_metrics.csv",
+  "source_csv_sha256": "8763242b147ed3fe517b42ac78fe6ad1ce4f36987fd5a52bc2cfb91ccaab77d5",
+  "output_csv": "results/preflight/demo_missing_paper_six_existing_L_20261009.csv",
+  "six_condition_rows": 72,
+  "mean_rows": 12,
+  "comparisons": [
+    {
+      "dataset": "RGBNT201",
+      "reference": "original_DeMo",
+      "mAP": 1.1616523762050548,
+      "mINP": 1.286129266349775,
+      "Rank-1": 1.4553429027113225,
+      "Rank-5": 0.21929824561403422,
+      "Rank-10": -0.1993620414673103,
+      "Rank-20": -0.3389154704944133,
+      "both_plus1": true
+    },
+    {
+      "dataset": "RGBNT201",
+      "reference": "K_axis_shared_s42/00",
+      "mAP": 0.3311565653359523,
+      "mINP": 0.6548710831281568,
+      "Rank-1": 0.2791068580542273,
+      "Rank-5": 0.15948963317384823,
+      "Rank-10": 0.31897926634768226,
+      "Rank-20": -0.07974481658692412,
+      "both_plus1": false
+    },
+    {
+      "dataset": "RGBNT201",
+      "reference": "K_frequency_shared_s42/11",
+      "mAP": 0.42856593924246766,
+      "mINP": 0.5722760412842831,
+      "Rank-1": 0.2791068580542273,
+      "Rank-5": 0.4984051036682615,
+      "Rank-10": 0.01993620414673103,
+      "Rank-20": 0.2990430622009512,
+      "both_plus1": false
+    },
+    {
+      "dataset": "RGBNT100",
+      "reference": "original_DeMo",
+      "mAP": -0.7581015598385505,
+      "mINP": -0.8428627842939491,
+      "Rank-1": 0.009718172983468776,
+      "Rank-5": -0.009718172983468776,
+      "Rank-10": 0.05830903790088371,
+      "Rank-20": -0.09718172983480144,
+      "both_plus1": false
+    },
+    {
+      "dataset": "RGBNT100",
+      "reference": "L_axis_shared_s42/00",
+      "mAP": -0.14181612026567336,
+      "mINP": -0.20735459687745816,
+      "Rank-1": 0.10689990281827022,
+      "Rank-5": 0.02915451895044896,
+      "Rank-10": 0.05830903790088371,
+      "Rank-20": 0.15549076773565673,
+      "both_plus1": false
+    },
+    {
+      "dataset": "RGBNT100",
+      "reference": "L_frequency_shared_s42/11",
+      "mAP": -0.09347665808404315,
+      "mINP": -0.20651128372741567,
+      "Rank-1": 0.1749271137026085,
+      "Rank-5": 0.08746355685131846,
+      "Rank-10": 0.09718172983480144,
+      "Rank-20": 0.116618075801739,
+      "both_plus1": false
+    },
+    {
+      "dataset": "MSVR310",
+      "reference": "original_DeMo",
+      "mAP": -2.4003448468858792,
+      "mINP": -1.6847829777000705,
+      "Rank-1": -3.1020868584320382,
+      "Rank-5": -3.1302876480541357,
+      "Rank-10": -3.4968979131415665,
+      "Rank-20": -2.5662718556119586,
+      "both_plus1": false
+    },
+    {
+      "dataset": "MSVR310",
+      "reference": "L_axis_shared_s42/00",
+      "mAP": -0.004625511198753429,
+      "mINP": 0.03937077670427058,
+      "Rank-1": 0.0282007896221117,
+      "Rank-5": -0.11280315848843259,
+      "Rank-10": 0.028200789622104594,
+      "Rank-20": 0.0,
+      "both_plus1": false
+    },
+    {
+      "dataset": "MSVR310",
+      "reference": "L_frequency_shared_s42/11",
+      "mAP": -0.03570948651057648,
+      "mINP": -0.005814263269668274,
+      "Rank-1": -0.11280315848843969,
+      "Rank-5": -0.05640157924420919,
+      "Rank-10": 0.08460236886631378,
+      "Rank-20": 0.0564015792442234,
+      "both_plus1": false
+    }
+  ],
+  "baseline_retraining": false,
+  "new_neural_calls": 0,
+  "new_optimizer_updates": 0,
+  "selection": "Same original normal-mAP checkpoint for every missing condition; full official query/gallery/GT filters; no missing-specific checkpoint picking.",
+  "limitation": "Existing K/L fixed49 CPU extraction, not new M missing results, not reproduction of author printed numbers. Six-mean +1 is preregistered project target; all individual negatives and 49 supplement remain required.",
+  "latest_user_instruction_at": "2026-10-09T17:29:41+08:00",
+  "new_missing_evaluation_scope": "Paper six only, no new49; existing49 used only for already-finished CPU extraction/history."
+}

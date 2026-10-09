@@ -1,4 +1,4 @@
-"""Run reviewed M final-primary-margin0.6 controls on all three official datasets."""
+"""Run reviewed M weak-dataset controls; preserve the selected RGBNT201 weights."""
 from datetime import datetime
 import hashlib
 import json
@@ -18,7 +18,7 @@ REMOTE='/data/gaob/Re-ID/DeMo-DualAxis'
 PYTHON='/data/gaob/Re-ID/conda-envs/tri_reid/bin/python'
 ROOT=REMOTE+'/runs/r201m_primary_margin06_20261008'
 ARCHIVE=Path('D:/Program Files/UserCache/gb/ReID2-experiment-artifacts/r201m_primary_margin06_20261008')
-UPDATES={'RGBNT201':5294,'RGBNT100':13126,'MSVR310':2000}
+UPDATES={'MSVR310':2000,'RGBNT100':13126}
 
 
 def main():
@@ -35,7 +35,7 @@ def main():
     assert replay['status']=='ACTUAL_EXISTING_SAMPLER_CPU_FULL50_OLD_AND_K8_REPLAY_COMPLETE'
     assert all(replay['datasets'][d]['existing_K_50_epoch_orders_exact'] and 2*replay['datasets'][d]['8']['total_steps']==steps for d,steps in UPDATES.items())
     plan=load(pf/'r201m_primary_margin06_plan_20261008.json')
-    assert plan['datasets_in_order']==list(UPDATES) and plan['planned_formal_updates']==sum(UPDATES.values())==20420
+    assert plan['datasets_in_order']==list(UPDATES) and plan['planned_formal_updates']==sum(UPDATES.values())==15126
     review=load(pf/'r201m_primary_margin06_source_review_20261008.json')
     assert review['status']=='PASS' and not review['blocking_findings']
     expected={'run_r201m_primary_margin06.py','launch_r201m_primary_margin06.py','analyze_r201m_dataset_normal.py','results/preflight/r201m_primary_margin06_deploy_20261008.py','results/preflight/r201m_dataset_normal_complete_intake_20261008.py'}
@@ -44,20 +44,21 @@ def main():
     proof=pf/'r201m_primary_margin06_actual_session_20261008.json'
     assert not proof.exists() and not ARCHIVE.exists()
     assert shutil.disk_usage(ARCHIVE.parent).free>900_000_000
+    protected=archive['protected_anchors_and_I42_best']
+    assert len(protected)==16
     code=f'''import hashlib,json,shutil
 from pathlib import Path
 root=Path({REMOTE!r});output=Path({ROOT!r})
 assert not output.exists() and shutil.disk_usage(root).free>4_400_000_000
 assert all(hashlib.sha256((root/name).read_bytes()).hexdigest()==sha for name,sha in {reused!r}.items() if not name.startswith('results/'))
-anchors=list(root.glob('runs/full_official_baselines_20261004/training/*_demo_s42/best.pth'))+list(root.glob('runs/r201i_primary_margin_20261006/*/training/*/best.pth'))
-assert len(anchors)==9
-print(json.dumps(dict(status='ACTUAL_CLOSED_L_STORAGE_AND_M_REUSED_SOURCES_READY',free=shutil.disk_usage(root).free,protected_anchors={{str(path.relative_to(root)):hashlib.sha256(path.read_bytes()).hexdigest() for path in anchors}})))'''
+assert all(hashlib.sha256((root/name).read_bytes()).hexdigest()==sha for name,sha in {protected!r}.items())
+print(json.dumps(dict(status='ACTUAL_CLOSED_L_STORAGE_AND_M_REUSED_SOURCES_READY',free=shutil.disk_usage(root).free,protected_anchors={protected!r})))'''
     ready=json.loads(command(['ssh',*OPTIONS,'2026',shlex.quote(PYTHON)+' -'],input=code))
     assert ready['status']=='ACTUAL_CLOSED_L_STORAGE_AND_M_REUSED_SOURCES_READY'
     protected=ready['protected_anchors']
-    assert protected=={name:sha for name,sha in archive['protected_anchors_and_I42_best'].items() if name.startswith(('runs/full_official_baselines_20261004/','runs/r201i_primary_margin_20261006/'))}
+    assert protected==archive['protected_anchors_and_I42_best']
     (pf/'r201m_capacity_anchors_actual_20261008.json').write_text(json.dumps(ready,indent=2)+'\n',encoding='utf-8')
-    print('ACTUAL_M_CAPACITY_AND_NINE_ANCHORS_READY',ready['free'],flush=True)
+    print('ACTUAL_M_CAPACITY_AND_SIXTEEN_PROTECTED_WEIGHTS_READY',ready['free'],flush=True)
     for name in sources:
         if not name.startswith('results/'):
             command(['scp',*OPTIONS,str(PROJECT/name),'2026:'+REMOTE+'/'+name])
@@ -69,7 +70,8 @@ assert all(hashlib.sha256((root/name).read_bytes()).hexdigest()==sha for name,sh
 print('ACTUAL_REVIEWED_M_SOURCES_EXACT')'''
     print(command(['ssh',*OPTIONS,'2026',shlex.quote(PYTHON)+' -'],input=code),end='')
     outcomes={}
-    state=dict(status='ACTUAL_M_REVIEWED_CAPACITY_AND_SOURCES_READY',started=datetime.now().isoformat(timespec='seconds'),receiver_pid=os.getpid(),native_updates_closed=0,formal_datasets_closed=[],new_formal_updates_closed=0,all_three_datasets_new_training=True)
+    state=dict(status='ACTUAL_M_REVIEWED_CAPACITY_AND_SOURCES_READY',started=datetime.now().isoformat(timespec='seconds'),receiver_pid=os.getpid(),native_updates_closed=0,formal_datasets_closed=[],new_formal_updates_closed=0,all_three_datasets_new_training=False,
+        retained_RGBNT201='K_axis_shared_s42 E30, primary margin.3; no new201 training',protected_weights=protected)
     proof.write_text(json.dumps(state,indent=2)+'\n',encoding='utf-8')
     for dataset,updates in UPDATES.items():
         out=ROOT+'/'+dataset
@@ -121,7 +123,7 @@ print('ACTUAL_REVIEWED_M_SOURCES_EXACT')'''
         assert process.wait()==0 and native and finished and set(archives)==cleared and len(archives)==2
         value=dict(status='ACTUAL_M_TWO_FULL50_NORMAL_GT_AND_LOCAL_RAW',finished=datetime.now().isoformat(timespec='seconds'),
             exit_code=0,dataset=dataset,remote_root=out,archives=archives,native_updates=6,successful_updates=updates,
-            additional_epochs=100,sources_sha256=sources,limits='Only final primary hinge margin.3->.6, same L P8K8 orders/updates and K graph/auxsoft/partial0; paired M controls matched. No +2/missing/multiseed success assertion.')
+            additional_epochs=100,sources_sha256=sources,limits='Weakdatasets only final primary hinge margin.3->.6, same L P8K8 orders/updates and K graph/auxsoft/partial0; paired M controls matched. Preserve K201 margin.3 best. No +1/missing/multiseed success assertion.')
         receipt.write_text(json.dumps(value,indent=2)+'\n',encoding='utf-8')
         outcomes[dataset]=value
         print('ACTUAL_M_TWO_FULL50_CLOSED',dataset,flush=True)
@@ -129,11 +131,12 @@ print('ACTUAL_REVIEWED_M_SOURCES_EXACT')'''
         subprocess.run([sys.executable,'-X','utf8','-B','-S',str(PROJECT/'analyze_r201m_dataset_normal.py'),'--dataset',dataset],check=True)
         state.update(status='ACTUAL_M_DATASET_FULL50_GT_RAW_TEXT_CPU_CLOSED',formal_datasets_closed=list(outcomes),new_formal_updates_closed=sum(v['successful_updates'] for v in outcomes.values()))
         proof.write_text(json.dumps(state,indent=2)+'\n',encoding='utf-8')
-    result=dict(status='ACTUAL_M_THREE_NORMAL_DATASETS_SIX_FULL50_GT_RAW_COMPLETE',finished=datetime.now().isoformat(timespec='seconds'),
-        exit_code=0,datasets=outcomes,native_updates=18,successful_updates=20420,additional_epochs=300,
-        sources_sha256=sources,all_three_datasets_new_training=True,missing_evaluated=False,limits='M only final-primary hinge margin.3->.6 relative to uniform L recipe; all3 sixNEW50/20420updates, same L orders/auxsoft/graph/5120/teacher42. Normal first, fixed49 later. Known loss control, no all3+2/missing/stability/causality claim from closure.')
+    result=dict(status='ACTUAL_M_TWO_WEAK_NORMAL_DATASETS_FOUR_FULL50_GT_RAW_COMPLETE',finished=datetime.now().isoformat(timespec='seconds'),
+        exit_code=0,datasets=outcomes,native_updates=12,successful_updates=15126,additional_epochs=200,
+        sources_sha256=sources,all_three_datasets_new_training=False,missing_evaluated=False,retained_RGBNT201=state['retained_RGBNT201'],protected_weights=protected,
+        limits='Weakdatasets only primary margin.6, K201 best margin.3 retained under user-authorized dataset-specific training parameters. FourNEW50/15126updates, same L orders/auxsoft/graph/5120/teacher42. Normal first, only paper-six masks later, no new49. Known loss control, no +1/missing/stability/causality success claim from closure.')
     proof.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
-    print('ACTUAL_M_THREE_NORMAL_CONTROLLER_CLOSED',flush=True)
+    print('ACTUAL_M_TWO_WEAK_NORMAL_CONTROLLER_CLOSED',flush=True)
 
 
 if __name__=='__main__':main()

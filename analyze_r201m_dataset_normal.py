@@ -14,7 +14,7 @@ SAMPLER_K={'RGBNT201':8,'MSVR310':4,'RGBNT100':16}
 
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--dataset',choices=tuple(COUNTS),required=True)
+    parser=argparse.ArgumentParser();parser.add_argument('--dataset',choices=('MSVR310','RGBNT100'),required=True)
     dataset=parser.parse_args().dataset;pf=PROJECT/'results/preflight'
     review=load(pf/'r201m_primary_margin06_source_review_20261008.json')
     assert review['status']=='PASS' and not review['blocking_findings']
@@ -28,8 +28,8 @@ def main():
     assert controller['status']=='COMPLETE' and controller['dataset']==dataset and controller['controls']==2
     assert controller['successful_updates']==2*steps and controller['additional_epochs']==100 and controller['native_updates']==6
     assert controller['paired_sampling_exact'] and controller['normal_archives_local_verified']==2
-    parent_family='K' if dataset=='RGBNT201' else 'L'
-    parent_tag='r201k_relation_local_pi_20261007' if dataset=='RGBNT201' else 'r201l_uniform_k8_20261007'
+    parent_family='L'
+    parent_tag='r201l_uniform_k8_20261007'
     groot=PROJECT/'results'/parent_tag/dataset
     folders={'original_DeMo':PROJECT/'results/full_official_baselines_20261004/training'/(dataset+'_demo_s42')}
     for variant in ('frequency_shared','axis_shared'):
@@ -84,17 +84,18 @@ def main():
         delta={key:a[key]-b[key] for key in METRICS}
         rescue=sum(int(x['Rank-1'])==1 and int(y['Rank-1'])==0 for x,y in zip(arows,brows));harm=sum(int(x['Rank-1'])==0 and int(y['Rank-1'])==1 for x,y in zip(arows,brows))
         assert abs(delta['Rank-1']-100*(rescue-harm)/count)<1e-8
-        comparisons.append(dict(dataset=dataset,improved=improved,reference=reference,**delta,both_plus2=delta['mAP']>=2 and delta['Rank-1']>=2,
+        comparisons.append(dict(dataset=dataset,improved=improved,reference=reference,**delta,both_plus1=delta['mAP']>=1 and delta['Rank-1']>=1,both_plus2=delta['mAP']>=2 and delta['Rank-1']>=2,
             rank1_rescued=rescue,rank1_harmed=harm,AP_improved=sum(float(x['AP'])>float(y['AP']) for x,y in zip(arows,brows)),AP_worsened=sum(float(x['AP'])<float(y['AP']) for x,y in zip(arows,brows))))
         pairs.extend(dict(dataset=dataset,improved=improved,reference=reference,**{key:x[key] for key in ('query_index','name','identity','camera','scene')},delta_AP_pp=100*(float(x['AP'])-float(y['AP'])),delta_INP_pp=100*(float(x['INP'])-float(y['INP'])),delta_rank1=int(x['Rank-1'])-int(y['Rank-1'])) for x,y in zip(arows,brows))
     assert len(metrics)==5 and len(comparisons)==6 and len(pairs)==6*count and len(curves)==100
     output=root/'normal_analysis';output.mkdir(exist_ok=False)
     for name,rows in (('six_metrics',metrics),('group_metrics',groups),('comparisons',comparisons),('paired_query_changes',pairs),('training_curves',curves)):table(output/(name+'.csv'),rows)
     result=dict(status='ACTUAL_M_DATASET_TWO_FULL50_NORMAL_CPU_READOUT',completed_at=datetime.now().isoformat(timespec='seconds'),dataset=dataset,model_results=5,comparisons=comparisons,paired_query_rows=len(pairs),new_epoch_rows=100,new_stage_formal_updates=2*steps,training=training,
+        original_both_plus1=next(r['both_plus1'] for r in comparisons if r['improved']=='M_axis_shared' and r['reference']=='original_DeMo'),
         original_both_plus2=next(r['both_plus2'] for r in comparisons if r['improved']=='M_axis_shared' and r['reference']=='original_DeMo'),official_GT_six_CMC50_perquery_groups=True,paired_M_batch_orders_and_partial_sets=True,parent_L_recipe_orders_exact=True,new_neural_calls=0,new_optimizer_updates=0,
-        limits='One dataset/expertseed42 on frozen originalDeMo42. Only final primary hinge margin.3->.6 relative to uniform L recipe; original/auxiliary soft unchanged, B64P8K8/orders/steps/K graph/params/5120/partial0 match. L_recipe201 uses exact K201 because its config already K8; M201 is newly trained. All50 epochs, full official/benchmark-selected earliestmAP/same6/all49later; original50 versus expert-stage100 disclosed. CPU installedGT/CMC50/perquery/groups checks; no guaranteed +2, causal, missing, all3 or wholepipeline repeat claim.')
+        limits='Weak-dataset/expertseed42 on frozen originalDeMo42. Only final primary hinge margin.3->.6 relative to L; original/auxiliary soft unchanged, B64P8K8/orders/steps/K graph/params/5120/partial0 match. RGBNT201 K42 margin.3 best preserved, dataset-specific training parameters explicit. All50 epochs, full official/benchmark-selected earliestmAP/same6/paper-six masks later, no new49; original50 versus expert-stage100 disclosed. Native gradients and detached route statistics are diagnostics, not causal proof. No guaranteed +1, missing or wholepipeline repeat claim.')
     (output/'result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    print(json.dumps({k:result[k] for k in ('status','dataset','model_results','paired_query_rows','original_both_plus2')}),flush=True)
+    print(json.dumps({k:result[k] for k in ('status','dataset','model_results','paired_query_rows','original_both_plus1')}),flush=True)
 
 
 if __name__=='__main__':main()

@@ -19,7 +19,7 @@ PYTHON = '/data/gaob/Re-ID/conda-envs/tri_reid/bin/python'
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset',choices=tuple(COUNTS),required=True)
+    parser.add_argument('--dataset',choices=('MSVR310','RGBNT100'),required=True)
     dataset = parser.parse_args().dataset
     train,query,gallery,_ = COUNTS[dataset]
     steps = json.loads((PROJECT/'results/preflight/r201l_uniform_K8_sampler_cpu_replay_20261007.json').read_text())['datasets'][dataset]['8']['total_steps']
