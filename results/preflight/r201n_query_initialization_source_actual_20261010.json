@@ -1,0 +1,43 @@
+{
+  "status": "ACTUAL_LOCAL_SOURCE_OBSERVATION_WARM_DEMO_AND_FRESH_LOW_RANK_AXIS_QUERIES",
+  "observed_at": "2026-10-10T02:08:58.2079535+08:00",
+  "source_sha256": {
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "identity_coordinate_three_dataset.py": "de4128c5c5993e0766ba74a700870b13478af44d28440312287b0fe2e32bb415",
+    "rgbnt201_identity_outlet.py": "ee03a16de0e7f4beb28f4a78a4ab8c16e8f19014bfa4164482d59714e52de784",
+    "rgbnt201_projection_probe.py": "d6f6e0bddef26f5578818810b1c57415789f4e2e7b88dda8f6af1548eacaf583",
+    "original_identity_anchor.py": "847b6adf93eb44ff119585e5548e1ef52115bcd59d8e87cdb4735b541d390bcb",
+    "modeling/make_model.py": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+    "modeling/moe/AttnMOE.py": "91d594c86ba44a5ce9eb843afaba898d5f8b0515b542b2754004c85ca272d3b6"
+  },
+  "facts": [
+    {
+      "source": "axis_collaboration.py",
+      "lines": "12-19,49-56",
+      "fact": "ModalityAxisExpert default rank64 has fresh randn7x64 relation query; FrequencyAxisExpert has fresh randn3x64 band query. Both are added modules."
+    },
+    {
+      "source": "modeling/moe/AttnMOE.py",
+      "lines": "124-149",
+      "fact": "Original GeneralFusion defines seven distinct learned 1x1xfeat_dim HDM tokens and feat_dim attention; ViT-B-16 feat_dim is512 in modeling/make_model.py."
+    },
+    {
+      "source": "identity_coordinate_three_dataset.py",
+      "lines": "20-36",
+      "fact": "Original teacher state keys are a subset of current keys, shapes and dtypes are checked, all saved keys overwrite current, strict loading and exact tensor equality are asserted; newly added keys match NEW_MODULES."
+    },
+    {
+      "source": "rgbnt201_projection_probe.py",
+      "lines": "15-19,32-43",
+      "fact": "NEW_MODULES lists both axis experts; five original identity encoding modules are frozen and held in eval during training."
+    }
+  ],
+  "implication": "Directly copying original512D HDM query tensors into the new64D queries is shape-incompatible. This does not establish initialization as a failure cause or warrant changing the live N run. Preserve original warm identity path and all running reviewed bytes.",
+  "existing_fused_head_source_observation": "results/preflight/r201m_fused_head_initialization_source_actual_20261009.json",
+  "gradient_scope": "Authoritative completed M gradient summary is r201m_closed_selected_gradient_summary_actual_20261009.json. Coupled calibrator fused-primary/contribution mean norm ratios are4.515117 MSVRordinary,4.312263 MSVRaxis,0.812858 RGB100ordinary,1.185494 RGB100axis; corresponding mean cosines all approximately-.99. Do not substitute an older11-13 ratio or claim this is N/full-training causal evidence.",
+  "next_decision": "Await real N normal50 and paper-six closure before selecting another controlled factor; no model or optimizer changes from this observation.",
+  "new_neural_calls": 0,
+  "new_optimizer_updates": 0,
+  "checkpoint_writes": 0,
+  "implementation_changes": 0
+}
