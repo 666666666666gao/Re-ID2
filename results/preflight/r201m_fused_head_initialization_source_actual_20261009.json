@@ -1,0 +1,51 @@
+{
+  "status": "ACTUAL_LOCAL_SOURCE_OBSERVATION_FRESH_FUSED_HEAD_WITH_PRETRAINED_AUXILIARY_HEADS",
+  "observed_at": "2026-10-09T19:24:06+08:00",
+  "source_sha256": {
+    "rgbnt201_identity_outlet.py": "ee03a16de0e7f4beb28f4a78a4ab8c16e8f19014bfa4164482d59714e52de784",
+    "identity_coordinate_three_dataset.py": "de4128c5c5993e0766ba74a700870b13478af44d28440312287b0fe2e32bb415",
+    "rgbnt201_projection_probe.py": "d6f6e0bddef26f5578818810b1c57415789f4e2e7b88dda8f6af1548eacaf583",
+    "modeling/make_model.py": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+    "shared_identity_axis.py": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+    "configs/MSVR310/DeMo.yml": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+    "configs/RGBNT100/DeMo.yml": "e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c"
+  },
+  "observations": [
+    {
+      "file": "rgbnt201_identity_outlet.py",
+      "lines": "19-27",
+      "fact": "The 5120D fused BN and class head are newly initialized with seed+30000; fused_classifier uses weights_init_classifier."
+    },
+    {
+      "file": "identity_coordinate_three_dataset.py",
+      "lines": "20-36",
+      "fact": "Original DeMo teacher state overwrites matching original keys; newly added keys match NEW_MODULES. No original teacher fused_classifier key is loaded into the new fused head."
+    },
+    {
+      "file": "rgbnt201_projection_probe.py",
+      "lines": "14-18",
+      "fact": "fused_neck and fused_classifier are explicitly included among new modules."
+    },
+    {
+      "file": "modeling/make_model.py",
+      "lines": "46-75",
+      "fact": "ViT-B-16 uses feat_dim512, classifier_moe covers3584D; DIRECT=0 has separate class heads and BN for R/N/T512 each."
+    },
+    {
+      "file": "shared_identity_axis.py",
+      "lines": "94-104",
+      "fact": "Original MoE/shared and R/N/T scores remain full-view auxiliary supervision; fused classification is a separate new head."
+    },
+    {
+      "file": "configs/MSVR310/DeMo.yml; configs/RGBNT100/DeMo.yml",
+      "lines": "MODEL.DIRECT",
+      "fact": "Both weak dataset configs use DIRECT0, while the protected RGBNT201 config uses DIRECT1."
+    }
+  ],
+  "implications": "Freezing the five identity encoding modules preserves the base representation, but does not make the new final classification head a pretrained head. A later controlled head-initialization or warmup comparison would retain the retrieval graph and parameter shapes; whether it is worth running depends on the actual pending full-primary gradient diagnosis.",
+  "limits": "Local code observation only; no new model construction, tensor/weight inspection, classifier score measurement, training or performance result. Current fused features are globally normalized before BN; old auxiliary heads receive original raw blocks. Merely concatenating old weights/stats is not proven equivalent to teacher logits and must not be treated as a ready solution. No initializer or head was changed; pending jobs and source bindings remain unchanged.",
+  "new_neural_calls": 0,
+  "new_optimizer_updates": 0,
+  "checkpoint_writes": 0,
+  "implementation_changes": 0
+}
