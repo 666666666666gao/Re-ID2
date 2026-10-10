@@ -1,5 +1,10 @@
 # DeMo Dual-Axis experiment
 
+## O downstream stages — registered single owner, 2026-10-10
+
+Normal training remains with original native6107 / PID40912. The reviewed post-normal queue is now registered as native34488 / PID31776 (birth2026-10-10T09:42:29.887935+08). Its source is results/preflight/wait_original_o_normal_then_paper6_and_gradients_20261010.ps1; registration and current phase are recorded in results/preflight/r201o_post_normal_queue_registered_native_20261010.json and r201o_paper6_then_gradients_queue_actual_20261010.json. It waits for genuine O normal4full50/GT/raw/CPU closure, invokes the reviewed paper-six driver once, then invokes the reviewed selected-gradient driver once only after paper-six closure. Do not manually launch either downstream driver or register a duplicate queue. Preserve these original handles; observe at planned milestones or300seconds. Initial registration certifies only the waiting phase, not neural execution or results. The existing passive timer68733 / PID41660 and next11:12:20 observation remain.
+
+
 ## Active-goal resume — 2026-10-10
 
 The user explicitly resumed the full goal after N closure. The historical stop below no longer blocks new authorized work. Preserve K RGBNT201 best; work toward both weak datasets' full-official normal and DeMo paper-six mean mAP/Rank-1 +1 goals with fair ordinary controls. Prepared O changes only the contribution-score gallery reference relative to N. Fresh review and real native preflight are required before any O formal training. No new49 or failed-direction seed search, neural only2026 physicalGPU2/3, no temperature/power queries. Keep one consolidated handoff and verified scoped cleanup.
