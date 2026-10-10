@@ -1,5 +1,9 @@
 # DeMo Dual-Axis experiment
 
+## Active-goal resume — 2026-10-10
+
+The user explicitly resumed the full goal after N closure. The historical stop below no longer blocks new authorized work. Preserve K RGBNT201 best; work toward both weak datasets' full-official normal and DeMo paper-six mean mAP/Rank-1 +1 goals with fair ordinary controls. Prepared O changes only the contribution-score gallery reference relative to N. Fresh review and real native preflight are required before any O formal training. No new49 or failed-direction seed search, neural only2026 physicalGPU2/3, no temperature/power queries. Keep one consolidated handoff and verified scoped cleanup.
+
 ## User closure instruction — 2026-10-10
 
 Current N normal training and the six symmetric DeMo paper evaluations are closed. Finish publication, the single handoff and scoped artifact cleanup, then stop. Do not launch O, new seeds, new 49 evaluations or another training campaign unless the user explicitly resumes. Preserve K RGBNT201 best, needed reference/comparison best checkpoints and unique raw results. Research metric goals remain unmet.
