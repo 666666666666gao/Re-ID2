@@ -1,0 +1,1947 @@
+{
+  "audit_skill": "experiment-audit",
+  "review_type": "ACTUAL_RESULT_INTEGRITY_LOCAL_NORMAL_FOUR_MODELS",
+  "status": "WARN",
+  "overall_verdict": "WARN",
+  "integrity_status": "warn",
+  "reason_code": "normal_closure_verified_with_benchmark_selection_and_scope_limits",
+  "summary": "The four closed O normal-input results are internally consistent and independently reproducible from archived distances and dataset filename GT. All 72 immutable request hashes match; 498 intake files, 97 source bindings, four raw archives, 200 epochs and 15126 formal update records reconcile. No blocking integrity discrepancy was found. Benchmark-based checkpoint selection, one expert seed on one frozen teacher seed, unequal original-versus-expert total training budget and dormant historical evaluation paths limit claims. Both weak-dataset normal mAP/Rank-1 +1 goals are unmet.",
+  "scoped_verdict": {
+    "normal_input_record_and_metric_integrity": "PASS",
+    "semantic_claim_scope": "WARN",
+    "final_method_success": "NOT_CERTIFIED",
+    "binary_NN_replay": "NOT_PERFORMED",
+    "missing_input_or_gradient_stage": "OUT_OF_SCOPE_NOT_REVIEWED"
+  },
+  "scope": {
+    "primary_models": 4,
+    "datasets": [
+      "MSVR310",
+      "RGBNT100"
+    ],
+    "variants": [
+      "frequency_shared",
+      "axis_shared"
+    ],
+    "expert_seeds": [
+      42
+    ],
+    "teacher_seeds": [
+      42
+    ],
+    "input_condition": "normal full input only",
+    "reference_readouts": "Existing original DeMo and N paired normal results, used only to verify the comparisons in the requested O normal tables.",
+    "excluded": "Separately running paper-six/selected-gradient stages, new RGBNT201 training, multi-seed or complete-pipeline reruns, binary NN replay, final method success."
+  },
+  "requested_backend": "codex",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning": "max",
+  "actual_backend": "UNATTESTED",
+  "actual_model": "UNATTESTED",
+  "actual_effort": "UNATTESTED",
+  "actual_reasoning": "UNATTESTED",
+  "reviewer_backend": "UNATTESTED",
+  "reviewer_model": "UNATTESTED",
+  "reviewer_reasoning": "UNATTESTED",
+  "reviewer_family": "openai",
+  "executor_model": "UNATTESTED",
+  "executor_family": "openai",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "agent_id": "/root/audit_r201o_normal_closed_20261010",
+  "verdict_id": "r201o_normal_closed_integrity_20261010_same_family_provisional",
+  "attribution_limit": "Requested routing is not native backend/model/effort attestation. The native task identity is known; actual model/backend/effort are not attested by available tool metadata.",
+  "request_path": "results/preflight/r201o_normal_closed_integrity_audit_request_20261010.json",
+  "request_sha256": "14070fdf44cb3defe570fbdb4401747e1ba92ccd83e46e464d898d0b39eb275d",
+  "trace_path": ".aris/traces/experiment-audit/20261010_r201o_normal/response.json",
+  "output_path": "results/preflight/r201o_normal_closed_integrity_audit_20261010.json",
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    {
+      "id": "NB1",
+      "check": "D",
+      "severity": "WARN",
+      "kind": "stale_inherited_documentation",
+      "finding": "full_evaluation.py:1 describes dev-selected checkpoints and says the test never selects them. The active official runner instead selects the maximum benchmark mAP over 50 epochs. O run metadata correctly discloses this, so it does not invalidate the recorded metrics.",
+      "evidence": [
+        "full_evaluation.py:1",
+        "full_evaluation.py:110",
+        "run_full_official_frozen_anchor_experiment.py:84",
+        "run_full_official_frozen_anchor_experiment.py:166"
+      ],
+      "claim_impact": "Use the actual official-benchmark selection disclosure; do not cite the inherited dev-only header as evidence of an untouched test."
+    },
+    {
+      "id": "NB2",
+      "check": "E",
+      "severity": "WARN",
+      "kind": "selection_and_replication_limit",
+      "finding": "Two normal datasets and one expert seed42 on one frozen original seed42 teacher, with benchmark-selected checkpoints, support only this disclosed controlled result. They do not establish untouched-test generalization, multi-seed robustness or full-pipeline repeatability.",
+      "evidence": [
+        "results/preflight/r201o_same_state_plan_20261010.json:10",
+        "results/preflight/r201o_same_state_plan_20261010.json:13",
+        "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/result.json:403",
+        "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/result.json:403"
+      ],
+      "claim_impact": "Retain the benchmark-selection and one-teacher/one-expert-seed qualifications."
+    },
+    {
+      "id": "NB3",
+      "check": "E",
+      "severity": "WARN",
+      "kind": "training_budget_comparison_limit",
+      "finding": "Original DeMo uses 50 epochs; O uses a teacher selected from original50 plus fresh expert50. Paired O ordinary/axis budgets, config, parameter counts, batch names/orders/partial sets are equal, but the original comparator has different total training compute and sampler settings.",
+      "evidence": [
+        "identity_coordinate_three_dataset.py:39",
+        "run_r201l_uniform_k8.py:11",
+        "results/preflight/r201o_same_state_plan_20261010.json:13"
+      ],
+      "claim_impact": "The paired ordinary-frequency arm supports the matched-recipe comparison. Do not state equal total budget versus original DeMo."
+    },
+    {
+      "id": "NB4",
+      "check": "D",
+      "severity": "WARN",
+      "kind": "unexecuted_evaluation_paths",
+      "finding": "Historical utils/metrics wrappers, dev-only and 49/state-audit entrypoints are not evidence of O normal execution. The current normal path uses full_metrics/evaluate_reid and imports only installed_rows/recount/verify/summarize from the historical CPU audit modules.",
+      "evidence": [
+        "utils/metrics.py:13",
+        "full_evaluation.py:110",
+        "experiment_data.py:33",
+        "audit_full_official49.py:83",
+        "audit_shared_identity_states.py:149",
+        "audit_full_official_normal.py:9",
+        "audit_full_official_normal.py:48"
+      ],
+      "claim_impact": "Do not infer holdout evaluation, 49 missing conditions or historical state-audit execution from helper imports."
+    }
+  ],
+  "checks": {
+    "A": {
+      "status": "PASS",
+      "scope": "Dataset-origin GT and exclusion semantics for the four closed O normal-input runs on MSVR310 and RGBNT100; local archive/manifest reconstruction plus inspection of the historically executed installed-GT path.",
+      "details": [
+        "GT identities, cameras and scenes are parsed from dataset filenames. No retrieval GT is generated from embeddings, contribution predictions or model-ranked references.",
+        "Independent reviewer code parsed every train/query/gallery manifest filename, verified disjoint training/test identity sets and training label mappings, and matched all archived query/gallery metadata. Counts are MSVR310 1032/591/1055 and RGBNT100 8675/1715/8575.",
+        "Ranking excludes same identity AND same scene for MSVR310; same identity AND same camera for RGBNT100. Every selected query has at least one retained relevant gallery item: 591/591 and 1715/1715 per arm.",
+        "The model-derived stopped-gradient contribution targets are explicitly auxiliary training proxies; they do not replace dataset labels or define AP/INP ground truth."
+      ],
+      "evidence": [
+        {
+          "file": "data/datasets/msvr310.py",
+          "line": 30,
+          "reference": "data/datasets/msvr310.py:30",
+          "detail": "Official split directories, including query3."
+        },
+        {
+          "file": "data/datasets/msvr310.py",
+          "line": 81,
+          "reference": "data/datasets/msvr310.py:81",
+          "detail": "Identity, camera and scene parsed from filename."
+        },
+        {
+          "file": "data/datasets/RGBNT100.py",
+          "line": 63,
+          "reference": "data/datasets/RGBNT100.py:63",
+          "detail": "Filename regex parser, original identity and camera minus one."
+        },
+        {
+          "file": "official_training_data.py",
+          "line": 20,
+          "reference": "official_training_data.py:20",
+          "detail": "Full training records, deterministic training labels and manifests."
+        },
+        {
+          "file": "full_evaluation.py",
+          "line": 68,
+          "reference": "full_evaluation.py:68",
+          "detail": "Official query/gallery loaders and training/test identity disjointness."
+        },
+        {
+          "file": "run_full_official_frozen_anchor_experiment.py",
+          "line": 46,
+          "reference": "run_full_official_frozen_anchor_experiment.py:46",
+          "detail": "Dataset selector chooses scenes for MSVR310, cameras otherwise."
+        },
+        {
+          "file": "full_evaluation.py",
+          "line": 25,
+          "reference": "full_evaluation.py:25",
+          "detail": "Same-ID/same-selector junk exclusion."
+        },
+        {
+          "file": "audit_full_official49.py",
+          "line": 13,
+          "reference": "audit_full_official49.py:13",
+          "detail": "Independent installed filename enumeration; reused by normal audit."
+        },
+        {
+          "file": "audit_full_official49.py",
+          "line": 37,
+          "reference": "audit_full_official49.py:37",
+          "detail": "Independent lexicographic ranking and GT exclusions."
+        },
+        {
+          "file": "audit_full_official_normal.py",
+          "line": 21,
+          "reference": "audit_full_official_normal.py:21",
+          "detail": "Historically executed audit binds installed filenames to manifests and archived arrays."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/official_split_manifest.json",
+          "line": 6355,
+          "reference": "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/official_split_manifest.json:6355",
+          "detail": "Complete 591-query manifest."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/official_split_manifest.json",
+          "line": 52108,
+          "reference": "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/official_split_manifest.json:52108",
+          "detail": "Complete 1715-query manifest."
+        },
+        {
+          "file": "run_r201o_same_state_contribution.py",
+          "line": 23,
+          "reference": "run_r201o_same_state_contribution.py:23",
+          "detail": "Model-state proxy targets use training labels only to mine legal positive/negative indices."
+        },
+        {
+          "file": "rgbnt201_identity_outlet.py",
+          "line": 91,
+          "reference": "rgbnt201_identity_outlet.py:91",
+          "detail": "Normal inference returns fused descriptors before the training-only contribution-target call."
+        }
+      ],
+      "limitations": [
+        "The original dataset installation is remote and was not enumerated again by this reviewer. This review verifies local filename manifests, raw-array metadata and actual installed-GT audit provenance, not publisher release identity or image pixels."
+      ]
+    },
+    "B": {
+      "status": "PASS",
+      "scope": "Raw mAP, mINP and Rank-1/5/10/20, CMC1-50, per-query and grouped results for closed O normal input; arithmetic consistency of the two baseline and four N reference readouts used in comparisons.",
+      "details": [
+        "AP averages precision at GT-relevant ranks; INP is relevant count divided by last relevant rank; rank indicators are averaged over valid dataset queries and multiplied by 100. No reported retrieval score is divided by a model maximum, prediction mean or a control's own score.",
+        "L2 descriptor normalization is representation normalization, not performance-score rescaling. All six metrics come from one distance matrix and one GT mask.",
+        "Independent CPU sorting of all four SHA-verified NPZ distance matrices reproduced 4612 selected-query records with zero AP/INP error. Raw recount six-metric error versus independent CSV reduction is 0; cross-format floating-point differences are at most 1.4210854715202004e-14 percentage points for selected results.",
+        "All 200 epoch per-query CSVs were reduced independently: 230600 rows, maximum epoch metric discrepancy 2.842170943040401e-14 percentage points. The ten selected readouts' CMC50/groups and all 12 comparison rows / 13836 paired-query changes were reconciled.",
+        "Contribution loss and the zero-prediction loss are raw training diagnostics. They are not a benchmark score, evidence of calibrated confidence, or a causal effect."
+      ],
+      "evidence": [
+        {
+          "file": "full_evaluation.py",
+          "line": 20,
+          "reference": "full_evaluation.py:20",
+          "detail": "Raw AP/INP/rank computation and explicit invalid-query counts."
+        },
+        {
+          "file": "full_evaluation.py",
+          "line": 43,
+          "reference": "full_evaluation.py:43",
+          "detail": "Only valid-query arithmetic mean and percent scale."
+        },
+        {
+          "file": "full_evaluation.py",
+          "line": 48,
+          "reference": "full_evaluation.py:48",
+          "detail": "Independent CMC/mAP cross-check and export."
+        },
+        {
+          "file": "utils/reid_evaluation.py",
+          "line": 27,
+          "reference": "utils/reid_evaluation.py:27",
+          "detail": "Stable sort and raw GT precision arithmetic."
+        },
+        {
+          "file": "full_evaluation.py",
+          "line": 88,
+          "reference": "full_evaluation.py:88",
+          "detail": "Unit-feature normalization before ordinary squared Euclidean distance."
+        },
+        {
+          "file": "full_evaluation.py",
+          "line": 106,
+          "reference": "full_evaluation.py:106",
+          "detail": "Stored raw squared Euclidean distance."
+        },
+        {
+          "file": "audit_full_official49.py",
+          "line": 45,
+          "reference": "audit_full_official49.py:45",
+          "detail": "Independent lexsort, relevant-rank AP and INP."
+        },
+        {
+          "file": "audit_shared_identity_states.py",
+          "line": 53,
+          "reference": "audit_shared_identity_states.py:53",
+          "detail": "Only the raw summarize helper is reused by normal audit."
+        },
+        {
+          "file": "analyze_identity_coordinate_three_normal.py",
+          "line": 18,
+          "reference": "analyze_identity_coordinate_three_normal.py:18",
+          "detail": "CPU percentages reduced directly from per-query AP/INP and hits."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/six_metrics.csv",
+          "line": 4,
+          "reference": "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/six_metrics.csv:4",
+          "detail": "O frequency raw six metrics."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/six_metrics.csv",
+          "line": 6,
+          "reference": "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/six_metrics.csv:6",
+          "detail": "O axis raw six metrics."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/six_metrics.csv",
+          "line": 4,
+          "reference": "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/six_metrics.csv:4",
+          "detail": "O frequency raw six metrics."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/six_metrics.csv",
+          "line": 6,
+          "reference": "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/six_metrics.csv:6",
+          "detail": "O axis raw six metrics."
+        },
+        {
+          "file": "run_r201o_same_state_contribution.py",
+          "line": 54,
+          "reference": "run_r201o_same_state_contribution.py:54",
+          "detail": "Contribution prediction/target and raw zero-predictor comparison are exported separately."
+        }
+      ],
+      "limitations": [
+        "Saved distances were re-ranked on CPU; descriptors were not regenerated from weights/images. No neural inference or model import occurred."
+      ]
+    },
+    "C": {
+      "status": "PASS",
+      "scope": "Existence, consistency, training completion, optimizer accounting and same-selected-checkpoint metrics for four O runs; direct consistency checks of original DeMo and N comparison artifacts.",
+      "details": [
+        "All 72 request files exist and rehash exactly to the immutable request. The request's file list and hash map describe the same 72 unique files.",
+        "Both closed text intakes contain 249 files and all 498 size/SHA pairs match. All 97 source bindings in the prior source-review inventory still match; those prior judgments were not used to decide this audit.",
+        "Four O runs each contain epochs 1 through 50, matching epoch logs and raw per-query readouts. MSVR310 has 1000 successful updates per arm and RGBNT100 has 6563 per arm, totaling 15126; no recorded AMP skips. All recorded batch optimizer_updated flags, sequential steps and per-epoch cumulative counters agree. Historical native preflights record 3 updates per arm, totaling 12.",
+        "Earliest maximum normal mAP selects E3 for both MSVR310 arms, E3 for RGBNT100 frequency and E5 for RGBNT100 axis. Each selected epoch's six metrics equals best, strict_reload, full_metrics, best_per_query and the independent archive recount within existing 1e-8 tolerance.",
+        "run.json fields agree with terminal result.json; status.json equals result.json. Training exits and audit exits are zero with explicit terminal log lines. Entire eligible training filename sets were visited cumulatively.",
+        "The +1 normal-input performance goal is not achieved on either weak dataset. This negative scientific result is retained and is not an integrity failure."
+      ],
+      "evidence": [
+        {
+          "file": "results/preflight/r201o_normal_closed_integrity_audit_request_20261010.json",
+          "line": 1,
+          "reference": "results/preflight/r201o_normal_closed_integrity_audit_request_20261010.json:1",
+          "detail": "Immutable 72-file request, exact map preserved in inputs_sha256."
+        },
+        {
+          "file": "run_full_official_frozen_anchor_experiment.py",
+          "line": 139,
+          "reference": "run_full_official_frozen_anchor_experiment.py:139",
+          "detail": "All 50 epochs execute and produce epoch metrics."
+        },
+        {
+          "file": "run_full_official_frozen_anchor_experiment.py",
+          "line": 150,
+          "reference": "run_full_official_frozen_anchor_experiment.py:150",
+          "detail": "Step/update counters derive from optimizer_updated batch records."
+        },
+        {
+          "file": "run_full_official_frozen_anchor_experiment.py",
+          "line": 166,
+          "reference": "run_full_official_frozen_anchor_experiment.py:166",
+          "detail": "Strict greater-than mAP selection keeps earliest ties."
+        },
+        {
+          "file": "run_full_official_frozen_anchor_experiment.py",
+          "line": 172,
+          "reference": "run_full_official_frozen_anchor_experiment.py:172",
+          "detail": "Selected best is reloaded once; the same reload generates all six metrics and raw arrays."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/result.json",
+          "line": 82,
+          "reference": "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/result.json:82",
+          "detail": "COMPLETE, 50 epochs, 1000 updates, best epoch 3."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/result.json",
+          "line": 82,
+          "reference": "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/result.json:82",
+          "detail": "COMPLETE, 50 epochs, 6563 updates, best epoch 5."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42/epochs.csv",
+          "line": 51,
+          "reference": "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42/epochs.csv:51",
+          "detail": "Final E50 row; all preceding epochs verified."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/epochs.csv",
+          "line": 51,
+          "reference": "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/epochs.csv:51",
+          "detail": "Final E50 row; all preceding epochs verified."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42/epochs.csv",
+          "line": 51,
+          "reference": "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42/epochs.csv:51",
+          "detail": "Final E50 row; all preceding epochs verified."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/epochs.csv",
+          "line": 51,
+          "reference": "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/epochs.csv:51",
+          "detail": "Final E50 row; all preceding epochs verified."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42.log",
+          "line": 66,
+          "reference": "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42.log:66",
+          "detail": "Actual terminal training marker."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42.log",
+          "line": 66,
+          "reference": "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42.log:66",
+          "detail": "Actual terminal training marker."
+        },
+        {
+          "file": "results/preflight/r201o_same_state_contribution_actual_session_20261010.json",
+          "line": 79,
+          "reference": "results/preflight/r201o_same_state_contribution_actual_session_20261010.json:79",
+          "detail": "12 native / 15126 formal updates and 200 additional epochs."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/comparisons.csv",
+          "line": 2,
+          "reference": "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/comparisons.csv:2",
+          "detail": "Axis-vs-original: +0.018843459680759622 mAP, -0.1692047377326702 Rank-1."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/comparisons.csv",
+          "line": 2,
+          "reference": "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/comparisons.csv:2",
+          "detail": "Axis-vs-original: +0.20245939184766826 mAP, -0.3498542274052454 Rank-1."
+        }
+      ],
+      "limitations": [
+        "Optimizer execution and checkpoint reload are supported by original process logs/records and source paths, not a new optimizer or binary NN replay. Baseline/N raw binary distance matrices were not re-ranked in this audit; their selected CSV/JSON/GT/batch consistency was checked."
+      ]
+    },
+    "D": {
+      "status": "WARN",
+      "scope": "Executed normal metric/audit chain and classification of inherited code that is not executed for these results.",
+      "details": [
+        "The mandatory normal path is supported: run_r201o main passes O build/update into the frozen-anchor runner; its evaluate calls extract/distance/full_metrics; full_metrics calls evaluate_reid; each launcher then executes audit_full_official_normal, which calls installed_rows/recount/verify and the summarize helper. Actual launch JSON, exit JSON, logs and exported data match this chain.",
+        "The two analyzer readouts are CPU reductions after normal closure, not extra model evaluations.",
+        "Legacy metric wrappers/visualizations in utils/metrics.py, the dev-only main in full_evaluation.py, experiment_data.split_records, audit_full_official49.main, audit_shared_identity_states.main and analyze_identity_coordinate_three_normal.main do not establish execution in O normal. Only their explicitly imported helper functions participate where indicated.",
+        "The module header full_evaluation.py:1 still says test never selects checkpoints, while the current frozen-anchor runner explicitly selects maximum official benchmark mAP. This is stale inherited documentation; the executed code and O result metadata disclose the actual selection correctly.",
+        "No required normal metric was found to be phantom or supported only by an uncalled function."
+      ],
+      "evidence": [
+        {
+          "file": "run_r201o_same_state_contribution.py",
+          "line": 62,
+          "reference": "run_r201o_same_state_contribution.py:62",
+          "detail": "Actual normal runner wiring."
+        },
+        {
+          "file": "run_full_official_frozen_anchor_experiment.py",
+          "line": 39,
+          "reference": "run_full_official_frozen_anchor_experiment.py:39",
+          "detail": "Evaluation call chain."
+        },
+        {
+          "file": "launch_r201o_same_state_contribution.py",
+          "line": 102,
+          "reference": "launch_r201o_same_state_contribution.py:102",
+          "detail": "Training execute call and checked completion."
+        },
+        {
+          "file": "launch_r201o_same_state_contribution.py",
+          "line": 111,
+          "reference": "launch_r201o_same_state_contribution.py:111",
+          "detail": "Actual installed-GT normal audit subprocess call."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/MSVR310/audit/MSVR310_r201o_frequency_shared_s42_launch.json",
+          "line": 9,
+          "reference": "results/r201o_same_state_contribution_20261010/MSVR310/audit/MSVR310_r201o_frequency_shared_s42_launch.json:9",
+          "detail": "Recorded audit executable."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/RGBNT100/audit/RGBNT100_r201o_frequency_shared_s42_launch.json",
+          "line": 9,
+          "reference": "results/r201o_same_state_contribution_20261010/RGBNT100/audit/RGBNT100_r201o_frequency_shared_s42_launch.json:9",
+          "detail": "Recorded audit executable."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/MSVR310/audit/MSVR310_r201o_frequency_shared_s42.log",
+          "line": 1,
+          "reference": "results/r201o_same_state_contribution_20261010/MSVR310/audit/MSVR310_r201o_frequency_shared_s42.log:1",
+          "detail": "Actual normal audit terminal marker."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/MSVR310/audit/MSVR310_r201o_axis_shared_s42.log",
+          "line": 1,
+          "reference": "results/r201o_same_state_contribution_20261010/MSVR310/audit/MSVR310_r201o_axis_shared_s42.log:1",
+          "detail": "Actual normal audit terminal marker."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/RGBNT100/audit/RGBNT100_r201o_frequency_shared_s42.log",
+          "line": 1,
+          "reference": "results/r201o_same_state_contribution_20261010/RGBNT100/audit/RGBNT100_r201o_frequency_shared_s42.log:1",
+          "detail": "Actual normal audit terminal marker."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/RGBNT100/audit/RGBNT100_r201o_axis_shared_s42.log",
+          "line": 1,
+          "reference": "results/r201o_same_state_contribution_20261010/RGBNT100/audit/RGBNT100_r201o_axis_shared_s42.log:1",
+          "detail": "Actual normal audit terminal marker."
+        },
+        {
+          "file": "audit_full_official_normal.py",
+          "line": 48,
+          "reference": "audit_full_official_normal.py:48",
+          "detail": "Calls independent recount and verify before writing PASS."
+        },
+        {
+          "file": "audit_full_official49.py",
+          "line": 10,
+          "reference": "audit_full_official49.py:10",
+          "detail": "Normal recount imports only metrics/summarize from the historical state-audit module."
+        },
+        {
+          "file": "results/preflight/r201o_same_state_deploy_20261010.py",
+          "line": 130,
+          "reference": "results/preflight/r201o_same_state_deploy_20261010.py:130",
+          "detail": "Intake then CPU analysis run only after the actual dataset controller closes."
+        },
+        {
+          "file": "full_evaluation.py",
+          "line": 1,
+          "reference": "full_evaluation.py:1",
+          "detail": "Stale dev-selected/test-never-selects module header."
+        },
+        {
+          "file": "full_evaluation.py",
+          "line": 110,
+          "reference": "full_evaluation.py:110",
+          "detail": "Historical dev-only main is not invoked by O."
+        },
+        {
+          "file": "experiment_data.py",
+          "line": 33,
+          "reference": "experiment_data.py:33",
+          "detail": "Historical artificial holdout splitter, not called by official full_records."
+        },
+        {
+          "file": "utils/metrics.py",
+          "line": 13,
+          "reference": "utils/metrics.py:13",
+          "detail": "Historical MSVR ranking path; not the audited O full_metrics call path."
+        },
+        {
+          "file": "audit_full_official49.py",
+          "line": 83,
+          "reference": "audit_full_official49.py:83",
+          "detail": "Historical 49-condition main is not invoked by normal audit."
+        }
+      ],
+      "limitations": [
+        "Static call tracing and original command/exit/output evidence establish the audited path; they are not instruction-level execution tracing. Dormant code is classified, not globally declared unused across unrelated historical experiments."
+      ]
+    },
+    "E": {
+      "status": "WARN",
+      "scope": "Closed normal-input scope, full official split eligibility, paired control budget/sampling, seed/teacher disclosure and boundaries on subsequent missing-input claims.",
+      "details": [
+        "The four O runs cover two datasets, one ordinary-frequency/axis pair per dataset, expert seed42 on the frozen original DeMo seed42 teacher. No fresh RGBNT201 O training, multi-seed replication or complete-pipeline repeat is established.",
+        "Full official training eligibility and all query/gallery records are used. Every training name is visited across the 50-epoch campaign; P8K8 sampling does not imply each record appears in every epoch. There is no artificial fit/dev training identity holdout.",
+        "The ordinary and axis O arms have identical serialized configuration, P8K8 batch name/order/partial-set sequences, counts of active and total parameters, dimension5120 and stage updates. Their sequences also match the corresponding N arms exactly.",
+        "Original DeMo50 and frozen-teacher50 plus fresh-expert50 have different total training budgets and original samplers: MSVR310 original705 updates versus new1000; RGBNT100 original6357 versus new6563. A fair same-budget comparison is O axis versus O frequency, not a claim that original and O consumed equal training compute.",
+        "All checkpoints are chosen by highest official normal benchmark mAP among 50 epochs. This is disclosed benchmark selection and cannot substantiate an untouched-test generalization claim.",
+        "Ordinary/axis comparisons are mixed: MSVR axis minus frequency is -0.015128011806986308 mAP / +0.16920473773264888 Rank-1; RGBNT100 is +0.1701014275157604 / -0.23323615160350641. Both weak-dataset axis-versus-original +1 goals are false.",
+        "Missing-modality and selected-gradient stages are outside this normal-only audit. Their absence from this request is not evidence of failure or success; no normal closure receipt certifies their completion."
+      ],
+      "evidence": [
+        {
+          "file": "results/preflight/r201o_same_state_plan_20261010.json",
+          "line": 4,
+          "reference": "results/preflight/r201o_same_state_plan_20261010.json:4",
+          "detail": "Exactly two new weak datasets."
+        },
+        {
+          "file": "results/preflight/r201o_same_state_plan_20261010.json",
+          "line": 10,
+          "reference": "results/preflight/r201o_same_state_plan_20261010.json:10",
+          "detail": "Frozen teacher/new expert seed42, P8K8, additional50 scope."
+        },
+        {
+          "file": "results/preflight/r201o_same_state_plan_20261010.json",
+          "line": 13,
+          "reference": "results/preflight/r201o_same_state_plan_20261010.json:13",
+          "detail": "Benchmark selection and asymmetric original50/expert100 budget are disclosed."
+        },
+        {
+          "file": "official_training_data.py",
+          "line": 20,
+          "reference": "official_training_data.py:20",
+          "detail": "Full eligibility without the historical fit/dev splitter."
+        },
+        {
+          "file": "rgbnt201_projection_probe.py",
+          "line": 31,
+          "reference": "rgbnt201_projection_probe.py:31",
+          "detail": "Identity encoder frozen and held in eval mode."
+        },
+        {
+          "file": "original_identity_anchor.py",
+          "line": 45,
+          "reference": "original_identity_anchor.py:45",
+          "detail": "Historical runtime assertions check frozen encoder state equality."
+        },
+        {
+          "file": "identity_coordinate_three_dataset.py",
+          "line": 21,
+          "reference": "identity_coordinate_three_dataset.py:21",
+          "detail": "Loads the corresponding original DeMo checkpoint and records 50+50."
+        },
+        {
+          "file": "run_full_official_frozen_anchor_experiment.py",
+          "line": 84,
+          "reference": "run_full_official_frozen_anchor_experiment.py:84",
+          "detail": "Explicit benchmark selection limitation."
+        },
+        {
+          "file": "run_full_official_frozen_anchor_experiment.py",
+          "line": 141,
+          "reference": "run_full_official_frozen_anchor_experiment.py:141",
+          "detail": "Same epoch and loader/partial-set seeds."
+        },
+        {
+          "file": "run_r201l_uniform_k8.py",
+          "line": 11,
+          "reference": "run_r201l_uniform_k8.py:11",
+          "detail": "Original/new sampler differences and update counts are explicitly disclosed."
+        },
+        {
+          "file": "run_r201g_normal_priority.py",
+          "line": 60,
+          "reference": "run_r201g_normal_priority.py:60",
+          "detail": "Matched partial forward/mining retained, with zero effective partial loss."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/comparisons.csv",
+          "line": 4,
+          "reference": "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/comparisons.csv:4",
+          "detail": "Mixed axis-versus-frequency result."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/comparisons.csv",
+          "line": 4,
+          "reference": "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/comparisons.csv:4",
+          "detail": "Mixed axis-versus-frequency result."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/result.json",
+          "line": 396,
+          "reference": "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/result.json:396",
+          "detail": "No original-baseline both-plus1 success."
+        },
+        {
+          "file": "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/result.json",
+          "line": 396,
+          "reference": "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/result.json:396",
+          "detail": "No original-baseline both-plus1 success."
+        },
+        {
+          "file": "results/preflight/r201o_same_state_contribution_actual_session_20261010.json",
+          "line": 91,
+          "reference": "results/preflight/r201o_same_state_contribution_actual_session_20261010.json:91",
+          "detail": "No all-three new training / missing-evaluation claim in the normal closure."
+        }
+      ],
+      "limitations": [
+        "Fairness is established for the paired recipe and reported budget, not equal end-to-end FLOPs against the original baseline. Fixed-seed batch equality is not proof of multiple independent runs or causal mechanism."
+      ]
+    },
+    "F": {
+      "status": "PASS",
+      "scope": "Classification of evidence types and explicit limit of this local read-only audit.",
+      "classification": [
+        {
+          "evaluation": "Four O selected normal-input retrieval results",
+          "type": "real_gt",
+          "basis": "Dataset filename identities and camera/scene exclusions, all official recorded queries/gallery; independently recounted from stored distances."
+        },
+        {
+          "evaluation": "Original DeMo and N normal comparison readouts",
+          "type": "real_gt",
+          "basis": "Source/manifest/CSV/summary consistency checked locally; archived binary distance re-ranking was limited to the four O runs."
+        },
+        {
+          "evaluation": "O same-state contribution targets and zero-predictor loss",
+          "type": "synthetic_proxy",
+          "basis": "Stopped-gradient model states with training-label-positive/negative pairs; auxiliary training target, not AP/mAP GT."
+        },
+        {
+          "evaluation": "Bound geometry and target-algebra fixtures",
+          "type": "simulation_only",
+          "basis": "Deterministic constructed-vector/algebra checks; no dataset retrieval performance claim and not newly executed here."
+        }
+      ],
+      "details": [
+        "This is independent-context, same-family, provisional semantic review plus independently executed deterministic local arithmetic/hash checks.",
+        "No project entrypoint, project import, NN construction, CUDA/GPU operation, SSH, optimizer, training or neural Q/G inference was performed.",
+        "No binary weight replay, fresh installed image enumeration, author-protocol external certification, multi-seed robustness, missing-input success or final method success is certified."
+      ],
+      "evidence": [
+        {
+          "file": "full_evaluation.py",
+          "line": 20,
+          "reference": "full_evaluation.py:20",
+          "detail": "Dataset-GT retrieval metric implementation."
+        },
+        {
+          "file": "run_r201o_same_state_contribution.py",
+          "line": 16,
+          "reference": "run_r201o_same_state_contribution.py:16",
+          "detail": "Explicitly denies equating empirical training margin with dataset AP or causal effects."
+        },
+        {
+          "file": "run_r201o_same_state_contribution.py",
+          "line": 23,
+          "reference": "run_r201o_same_state_contribution.py:23",
+          "detail": "Synthetic model-state target definition."
+        },
+        {
+          "file": "bounded_identity_descriptor.py",
+          "line": 40,
+          "reference": "bounded_identity_descriptor.py:40",
+          "detail": "Constructed-vector geometry fixture."
+        },
+        {
+          "file": "results/preflight/r201o_same_state_plan_20261010.json",
+          "line": 14,
+          "reference": "results/preflight/r201o_same_state_plan_20261010.json:14",
+          "detail": "Source/fixture evidence separated from real native/formal evidence."
+        },
+        {
+          "file": "results/preflight/r201o_normal_closed_integrity_audit_request_20261010.json",
+          "line": 1,
+          "reference": "results/preflight/r201o_normal_closed_integrity_audit_request_20261010.json:1",
+          "detail": "Read-only scope and UNATTESTED routing requirement."
+        }
+      ],
+      "limitations": [
+        "Backend/model/effort are recorded as UNATTESTED because native attestation was not available; requested gpt-6-astra/max is recorded only as requested routing."
+      ]
+    }
+  },
+  "deterministic_verification": {
+    "execution_status": "PASS",
+    "interpreter": "D:/Program Files/UserCache/gb/xdg/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+    "python_version": "3.12.13",
+    "numpy_version": "2.3.5",
+    "execution_mode": "Reviewer-authored local stdin/inline scripts; standard-library file parsing and NumPy archive/ranking arithmetic only; no project imports or entrypoints.",
+    "requested_files_rehashed": 72,
+    "requested_file_hash_matches": 72,
+    "requested_file_hash_mismatches": [],
+    "request_file_set_equal_to_hash_map": true,
+    "source_bound_hashes_checked": 97,
+    "source_bound_hash_differences": [],
+    "archived_text_file_hashes_checked": 498,
+    "raw_archives_checked": 4,
+    "raw_archive_bytes": 562585942,
+    "selected_query_rows_recounted": 4612,
+    "selected_perquery_AP_INP_max_error": 0,
+    "saved_distance_recount_vs_CSV_sixmetric_max_error_pp": 0,
+    "all_epoch_query_rows_reduced": 230600,
+    "all_epoch_records_checked": 200,
+    "max_epoch_metric_error_pp": 2.842170943040401e-14,
+    "formal_optimizer_update_records_checked": 15126,
+    "observed_AMP_skipped_steps": 0,
+    "historical_native_updates_checked": 12,
+    "current_review_new_optimizer_updates": 0,
+    "current_review_neural_forwards": 0,
+    "current_review_SSH_calls": 0,
+    "current_review_project_imports": 0,
+    "dataset_evidence": {
+      "MSVR310": {
+        "text_intake_manifest_files": 249,
+        "text_intake_differences": [],
+        "counts": {
+          "train": 1032,
+          "query": 591,
+          "gallery": 1055
+        },
+        "models": {
+          "original_DeMo": {
+            "status": "COMPLETE",
+            "epochs": 50,
+            "steps": 705,
+            "optimizer_steps": 705,
+            "amp_skipped_steps": 0,
+            "selected_epoch": 32,
+            "same_selected_six_max_error_pp": 1.4210854715202004e-14,
+            "full_metrics": {
+              "mAP": 47.164688447227576,
+              "mINP": 23.502961234396178,
+              "Rank-1": 63.95939086294416,
+              "Rank-5": 80.20304568527919,
+              "Rank-10": 84.77157360406092,
+              "Rank-20": 89.84771573604061
+            },
+            "final_epoch_metrics": {
+              "mAP": 45.8097959324754,
+              "mINP": 22.52311847403095,
+              "Rank-1": 62.77495769881557,
+              "Rank-5": 79.35702199661591,
+              "Rank-10": 83.41793570219966,
+              "Rank-20": 88.83248730964468
+            },
+            "parameters": 98489856,
+            "trainable_parameters": 98484736,
+            "seed": 42,
+            "manifest_sha256": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2",
+            "train_id_count": 155,
+            "query_id_count": 52,
+            "gallery_id_count": 155
+          },
+          "N_recipe_frequency_shared": {
+            "status": "COMPLETE",
+            "epochs": 50,
+            "steps": 1000,
+            "optimizer_steps": 1000,
+            "amp_skipped_steps": 0,
+            "selected_epoch": 3,
+            "same_selected_six_max_error_pp": 7.105427357601002e-15,
+            "full_metrics": {
+              "mAP": 47.19174581514323,
+              "mINP": 23.548981643047284,
+              "Rank-1": 63.62098138747885,
+              "Rank-5": 80.37225042301185,
+              "Rank-10": 84.77157360406092,
+              "Rank-20": 89.84771573604061
+            },
+            "final_epoch_metrics": {
+              "mAP": 46.72077958629049,
+              "mINP": 23.423723135902407,
+              "Rank-1": 62.944162436548226,
+              "Rank-5": 80.03384094754654,
+              "Rank-10": 83.92554991539764,
+              "Rank-20": 89.5093062605753
+            },
+            "parameters": 100821638,
+            "trainable_parameters": 3123846,
+            "seed": 42,
+            "manifest_sha256": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2",
+            "train_id_count": 155,
+            "query_id_count": 52,
+            "gallery_id_count": 155,
+            "batch_records": 1000,
+            "all_batch_names_visited": 1032
+          },
+          "O_frequency_shared": {
+            "status": "COMPLETE",
+            "epochs": 50,
+            "steps": 1000,
+            "optimizer_steps": 1000,
+            "amp_skipped_steps": 0,
+            "selected_epoch": 3,
+            "same_selected_six_max_error_pp": 0,
+            "full_metrics": {
+              "mAP": 47.19865991871532,
+              "mINP": 23.547354921617444,
+              "Rank-1": 63.62098138747885,
+              "Rank-5": 80.37225042301185,
+              "Rank-10": 84.77157360406092,
+              "Rank-20": 89.84771573604061
+            },
+            "final_epoch_metrics": {
+              "mAP": 46.710426194613454,
+              "mINP": 23.390382791736446,
+              "Rank-1": 63.113367174280874,
+              "Rank-5": 79.86463620981388,
+              "Rank-10": 83.92554991539764,
+              "Rank-20": 89.5093062605753
+            },
+            "parameters": 100821638,
+            "trainable_parameters": 3123846,
+            "seed": 42,
+            "manifest_sha256": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2",
+            "train_id_count": 155,
+            "query_id_count": 52,
+            "gallery_id_count": 155,
+            "batch_records": 1000,
+            "all_batch_names_visited": 1032,
+            "bound_max": 0.0999828428030014,
+            "contribution_loss_mean": 0.00796634439325635,
+            "zero_prediction_loss_mean": 0.00004327980996915065,
+            "epoch_batch_counts": [
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20
+            ]
+          },
+          "N_recipe_axis_shared": {
+            "status": "COMPLETE",
+            "epochs": 50,
+            "steps": 1000,
+            "optimizer_steps": 1000,
+            "amp_skipped_steps": 0,
+            "selected_epoch": 3,
+            "same_selected_six_max_error_pp": 1.4210854715202004e-14,
+            "full_metrics": {
+              "mAP": 47.18722267510741,
+              "mINP": 23.53654133677367,
+              "Rank-1": 63.790186125211505,
+              "Rank-5": 80.20304568527919,
+              "Rank-10": 84.77157360406092,
+              "Rank-20": 89.84771573604061
+            },
+            "final_epoch_metrics": {
+              "mAP": 46.66895244123912,
+              "mINP": 23.688184078260768,
+              "Rank-1": 62.605752961082906,
+              "Rank-5": 80.37225042301185,
+              "Rank-10": 83.92554991539764,
+              "Rank-20": 89.84771573604061
+            },
+            "parameters": 100821638,
+            "trainable_parameters": 3123846,
+            "seed": 42,
+            "manifest_sha256": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2",
+            "train_id_count": 155,
+            "query_id_count": 52,
+            "gallery_id_count": 155,
+            "batch_records": 1000,
+            "all_batch_names_visited": 1032
+          },
+          "O_axis_shared": {
+            "status": "COMPLETE",
+            "epochs": 50,
+            "steps": 1000,
+            "optimizer_steps": 1000,
+            "amp_skipped_steps": 0,
+            "selected_epoch": 3,
+            "same_selected_six_max_error_pp": 7.105427357601002e-15,
+            "full_metrics": {
+              "mAP": 47.183531906908335,
+              "mINP": 23.536350631785258,
+              "Rank-1": 63.790186125211505,
+              "Rank-5": 80.03384094754654,
+              "Rank-10": 84.77157360406092,
+              "Rank-20": 89.84771573604061
+            },
+            "final_epoch_metrics": {
+              "mAP": 46.68460475781951,
+              "mINP": 23.688099256095466,
+              "Rank-1": 62.605752961082906,
+              "Rank-5": 80.37225042301185,
+              "Rank-10": 83.92554991539764,
+              "Rank-20": 89.84771573604061
+            },
+            "parameters": 100821638,
+            "trainable_parameters": 3123846,
+            "seed": 42,
+            "manifest_sha256": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2",
+            "train_id_count": 155,
+            "query_id_count": 52,
+            "gallery_id_count": 155,
+            "batch_records": 1000,
+            "all_batch_names_visited": 1032,
+            "bound_max": 0.10000000894069672,
+            "contribution_loss_mean": 0.005893361402690857,
+            "zero_prediction_loss_mean": 0.00006996548557134008,
+            "epoch_batch_counts": [
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20,
+              20
+            ]
+          }
+        },
+        "raw_recounts": {
+          "O_frequency_shared": {
+            "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201o_same_state_contribution_20261010\\MSVR310\\training\\MSVR310_r201o_frequency_shared_s42\\best_official_arrays.npz",
+            "sha256": "7ef96d4f7177b2ab214c3cf0d4a30bf89c287ffa4a3ace7bf6b4999cd7f1705f",
+            "bytes": 33850195,
+            "distance_shape": [
+              591,
+              1055
+            ],
+            "valid_queries": 591,
+            "max_perquery_AP_INP_error": 0,
+            "max_six_metric_error_pp": 0,
+            "features_finite_unit_5120": true,
+            "raw_metrics": {
+              "mAP": 47.19865991871532,
+              "mINP": 23.547354921617444,
+              "Rank-1": 63.62098138747885,
+              "Rank-5": 80.37225042301185,
+              "Rank-10": 84.77157360406092,
+              "Rank-20": 89.84771573604061
+            }
+          },
+          "O_axis_shared": {
+            "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201o_same_state_contribution_20261010\\MSVR310\\training\\MSVR310_r201o_axis_shared_s42\\best_official_arrays.npz",
+            "sha256": "2eb9017966be3326131888daf1421e596ad4a7d9df69f688981f37c6bb068109",
+            "bytes": 33848532,
+            "distance_shape": [
+              591,
+              1055
+            ],
+            "valid_queries": 591,
+            "max_perquery_AP_INP_error": 0,
+            "max_six_metric_error_pp": 0,
+            "features_finite_unit_5120": true,
+            "raw_metrics": {
+              "mAP": 47.183531906908335,
+              "mINP": 23.536350631785258,
+              "Rank-1": 63.790186125211505,
+              "Rank-5": 80.03384094754654,
+              "Rank-10": 84.77157360406092,
+              "Rank-20": 89.84771573604061
+            }
+          }
+        },
+        "paired_checks": {
+          "four_N_O_order_partial_sets_exact": true,
+          "paired_O_config_exact": true,
+          "all_N_O_parameter_counts_equal": true
+        },
+        "analysis_tables": {
+          "six_metrics": 5,
+          "group_metrics": 450,
+          "paired_query_changes": 3546,
+          "comparisons": 6,
+          "training_curves": 100,
+          "arithmetic_verified": true
+        },
+        "comparisons": [
+          {
+            "dataset": "MSVR310",
+            "improved": "O_axis_shared",
+            "reference": "original_DeMo",
+            "mAP": "0.018843459680759622",
+            "mINP": "0.03338939738907598",
+            "Rank-1": "-0.1692047377326702",
+            "Rank-5": "-0.16920473773264177",
+            "Rank-10": "0.0",
+            "Rank-20": "0.0",
+            "both_plus1": "False",
+            "both_plus2": "False",
+            "rank1_rescued": "0",
+            "rank1_harmed": "1",
+            "AP_improved": "226",
+            "AP_worsened": "195"
+          },
+          {
+            "dataset": "MSVR310",
+            "improved": "O_frequency_shared",
+            "reference": "original_DeMo",
+            "mAP": "0.03397147148774593",
+            "mINP": "0.04439368722126602",
+            "Rank-1": "-0.3384094754653191",
+            "Rank-5": "0.1692047377326702",
+            "Rank-10": "0.0",
+            "Rank-20": "0.0",
+            "both_plus1": "False",
+            "both_plus2": "False",
+            "rank1_rescued": "0",
+            "rank1_harmed": "2",
+            "AP_improved": "224",
+            "AP_worsened": "184"
+          },
+          {
+            "dataset": "MSVR310",
+            "improved": "O_axis_shared",
+            "reference": "O_frequency_shared",
+            "mAP": "-0.015128011806986308",
+            "mINP": "-0.01100428983219004",
+            "Rank-1": "0.16920473773264888",
+            "Rank-5": "-0.33840947546531197",
+            "Rank-10": "0.0",
+            "Rank-20": "0.0",
+            "both_plus1": "False",
+            "both_plus2": "False",
+            "rank1_rescued": "1",
+            "rank1_harmed": "0",
+            "AP_improved": "194",
+            "AP_worsened": "162"
+          },
+          {
+            "dataset": "MSVR310",
+            "improved": "O_axis_shared",
+            "reference": "N_recipe_axis_shared",
+            "mAP": "-0.003690768199071215",
+            "mINP": "-0.0001907049884195544",
+            "Rank-1": "0.0",
+            "Rank-5": "-0.16920473773264177",
+            "Rank-10": "0.0",
+            "Rank-20": "0.0",
+            "both_plus1": "False",
+            "both_plus2": "False",
+            "rank1_rescued": "0",
+            "rank1_harmed": "0",
+            "AP_improved": "22",
+            "AP_worsened": "19"
+          },
+          {
+            "dataset": "MSVR310",
+            "improved": "O_frequency_shared",
+            "reference": "N_recipe_frequency_shared",
+            "mAP": "0.0069141035720861055",
+            "mINP": "-0.0016267214298437693",
+            "Rank-1": "0.0",
+            "Rank-5": "0.0",
+            "Rank-10": "0.0",
+            "Rank-20": "0.0",
+            "both_plus1": "False",
+            "both_plus2": "False",
+            "rank1_rescued": "0",
+            "rank1_harmed": "0",
+            "AP_improved": "31",
+            "AP_worsened": "24"
+          },
+          {
+            "dataset": "MSVR310",
+            "improved": "O_axis_shared",
+            "reference": "N_recipe_frequency_shared",
+            "mAP": "-0.008213908234900202",
+            "mINP": "-0.012631011262033809",
+            "Rank-1": "0.16920473773264888",
+            "Rank-5": "-0.33840947546531197",
+            "Rank-10": "0.0",
+            "Rank-20": "0.0",
+            "both_plus1": "False",
+            "both_plus2": "False",
+            "rank1_rescued": "1",
+            "rank1_harmed": "0",
+            "AP_improved": "196",
+            "AP_worsened": "162"
+          }
+        ]
+      },
+      "RGBNT100": {
+        "text_intake_manifest_files": 249,
+        "text_intake_differences": [],
+        "counts": {
+          "train": 8675,
+          "query": 1715,
+          "gallery": 8575
+        },
+        "models": {
+          "original_DeMo": {
+            "status": "COMPLETE",
+            "epochs": 50,
+            "steps": 6357,
+            "optimizer_steps": 6357,
+            "amp_skipped_steps": 0,
+            "selected_epoch": 8,
+            "same_selected_six_max_error_pp": 1.4210854715202004e-14,
+            "full_metrics": {
+              "mAP": 85.76856710316946,
+              "mINP": 61.84590828355626,
+              "Rank-1": 96.61807580174927,
+              "Rank-5": 97.0262390670554,
+              "Rank-10": 97.37609329446065,
+              "Rank-20": 97.72594752186589
+            },
+            "final_epoch_metrics": {
+              "mAP": 85.09888117172326,
+              "mINP": 60.071807708444844,
+              "Rank-1": 96.20991253644316,
+              "Rank-5": 96.73469387755102,
+              "Rank-10": 97.25947521865889,
+              "Rank-20": 97.90087463556851
+            },
+            "parameters": 97952256,
+            "trainable_parameters": 97947136,
+            "seed": 42,
+            "manifest_sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+            "train_id_count": 50,
+            "query_id_count": 50,
+            "gallery_id_count": 50
+          },
+          "N_recipe_frequency_shared": {
+            "status": "COMPLETE",
+            "epochs": 50,
+            "steps": 6563,
+            "optimizer_steps": 6563,
+            "amp_skipped_steps": 0,
+            "selected_epoch": 3,
+            "same_selected_six_max_error_pp": 1.4210854715202004e-14,
+            "full_metrics": {
+              "mAP": 85.80083534691097,
+              "mINP": 61.9981126268685,
+              "Rank-1": 96.50145772594752,
+              "Rank-5": 96.96793002915452,
+              "Rank-10": 97.37609329446065,
+              "Rank-20": 97.66763848396502
+            },
+            "final_epoch_metrics": {
+              "mAP": 85.75632206218434,
+              "mINP": 62.03731560167621,
+              "Rank-1": 96.3265306122449,
+              "Rank-5": 96.96793002915452,
+              "Rank-10": 97.37609329446065,
+              "Rank-20": 97.90087463556851
+            },
+            "parameters": 99585158,
+            "trainable_parameters": 1887366,
+            "seed": 42,
+            "manifest_sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+            "train_id_count": 50,
+            "query_id_count": 50,
+            "gallery_id_count": 50,
+            "batch_records": 6563,
+            "all_batch_names_visited": 8675
+          },
+          "O_frequency_shared": {
+            "status": "COMPLETE",
+            "epochs": 50,
+            "steps": 6563,
+            "optimizer_steps": 6563,
+            "amp_skipped_steps": 0,
+            "selected_epoch": 3,
+            "same_selected_six_max_error_pp": 1.4210854715202004e-14,
+            "full_metrics": {
+              "mAP": 85.8009250675014,
+              "mINP": 61.99804004126172,
+              "Rank-1": 96.50145772594752,
+              "Rank-5": 96.96793002915452,
+              "Rank-10": 97.37609329446065,
+              "Rank-20": 97.66763848396502
+            },
+            "final_epoch_metrics": {
+              "mAP": 85.76182704429365,
+              "mINP": 62.04552498279854,
+              "Rank-1": 96.26822157434403,
+              "Rank-5": 97.0262390670554,
+              "Rank-10": 97.37609329446065,
+              "Rank-20": 97.90087463556851
+            },
+            "parameters": 99585158,
+            "trainable_parameters": 1887366,
+            "seed": 42,
+            "manifest_sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+            "train_id_count": 50,
+            "query_id_count": 50,
+            "gallery_id_count": 50,
+            "batch_records": 6563,
+            "all_batch_names_visited": 8675,
+            "bound_max": 0.09999900311231613,
+            "contribution_loss_mean": 0.002906040258560577,
+            "zero_prediction_loss_mean": 0.00006203177421894123,
+            "epoch_batch_counts": [
+              130,
+              132,
+              131,
+              132,
+              131,
+              131,
+              131,
+              131,
+              131,
+              133,
+              131,
+              132,
+              132,
+              132,
+              130,
+              130,
+              131,
+              132,
+              132,
+              131,
+              131,
+              130,
+              132,
+              131,
+              131,
+              132,
+              131,
+              132,
+              132,
+              130,
+              132,
+              132,
+              130,
+              132,
+              131,
+              132,
+              131,
+              131,
+              132,
+              131,
+              131,
+              131,
+              131,
+              132,
+              132,
+              131,
+              132,
+              131,
+              130,
+              130
+            ]
+          },
+          "N_recipe_axis_shared": {
+            "status": "COMPLETE",
+            "epochs": 50,
+            "steps": 6563,
+            "optimizer_steps": 6563,
+            "amp_skipped_steps": 0,
+            "selected_epoch": 5,
+            "same_selected_six_max_error_pp": 0,
+            "full_metrics": {
+              "mAP": 85.9702205261973,
+              "mINP": 62.432046291112876,
+              "Rank-1": 96.26822157434403,
+              "Rank-5": 96.96793002915452,
+              "Rank-10": 97.60932944606414,
+              "Rank-20": 98.07580174927114
+            },
+            "final_epoch_metrics": {
+              "mAP": 85.74628863322432,
+              "mINP": 62.009411765950084,
+              "Rank-1": 96.38483965014576,
+              "Rank-5": 97.31778425655978,
+              "Rank-10": 97.55102040816327,
+              "Rank-20": 97.84256559766764
+            },
+            "parameters": 99585158,
+            "trainable_parameters": 1887366,
+            "seed": 42,
+            "manifest_sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+            "train_id_count": 50,
+            "query_id_count": 50,
+            "gallery_id_count": 50,
+            "batch_records": 6563,
+            "all_batch_names_visited": 8675
+          },
+          "O_axis_shared": {
+            "status": "COMPLETE",
+            "epochs": 50,
+            "steps": 6563,
+            "optimizer_steps": 6563,
+            "amp_skipped_steps": 0,
+            "selected_epoch": 5,
+            "same_selected_six_max_error_pp": 1.4210854715202004e-14,
+            "full_metrics": {
+              "mAP": 85.97102649501716,
+              "mINP": 62.33230429767842,
+              "Rank-1": 96.26822157434403,
+              "Rank-5": 97.20116618075802,
+              "Rank-10": 97.78425655976676,
+              "Rank-20": 98.134110787172
+            },
+            "final_epoch_metrics": {
+              "mAP": 85.7492703151402,
+              "mINP": 62.009647389571086,
+              "Rank-1": 96.38483965014576,
+              "Rank-5": 97.25947521865889,
+              "Rank-10": 97.55102040816327,
+              "Rank-20": 97.95918367346938
+            },
+            "parameters": 99585158,
+            "trainable_parameters": 1887366,
+            "seed": 42,
+            "manifest_sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+            "train_id_count": 50,
+            "query_id_count": 50,
+            "gallery_id_count": 50,
+            "batch_records": 6563,
+            "all_batch_names_visited": 8675,
+            "bound_max": 0.10000001639127731,
+            "contribution_loss_mean": 0.0015536815556966863,
+            "zero_prediction_loss_mean": 0.00011771536320539322,
+            "epoch_batch_counts": [
+              130,
+              132,
+              131,
+              132,
+              131,
+              131,
+              131,
+              131,
+              131,
+              133,
+              131,
+              132,
+              132,
+              132,
+              130,
+              130,
+              131,
+              132,
+              132,
+              131,
+              131,
+              130,
+              132,
+              131,
+              131,
+              132,
+              131,
+              132,
+              132,
+              130,
+              132,
+              132,
+              130,
+              132,
+              131,
+              132,
+              131,
+              131,
+              132,
+              131,
+              131,
+              131,
+              131,
+              132,
+              132,
+              131,
+              132,
+              131,
+              130,
+              130
+            ]
+          }
+        },
+        "raw_recounts": {
+          "O_frequency_shared": {
+            "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201o_same_state_contribution_20261010\\RGBNT100\\training\\RGBNT100_r201o_frequency_shared_s42\\best_official_arrays.npz",
+            "sha256": "d58617a5c45f3369a76583fd77eafea4b32a8369b476506bedfce64124029f46",
+            "bytes": 247356511,
+            "distance_shape": [
+              1715,
+              8575
+            ],
+            "valid_queries": 1715,
+            "max_perquery_AP_INP_error": 0,
+            "max_six_metric_error_pp": 0,
+            "features_finite_unit_5120": true,
+            "raw_metrics": {
+              "mAP": 85.8009250675014,
+              "mINP": 61.99804004126172,
+              "Rank-1": 96.50145772594752,
+              "Rank-5": 96.96793002915452,
+              "Rank-10": 97.37609329446065,
+              "Rank-20": 97.66763848396502
+            }
+          },
+          "O_axis_shared": {
+            "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201o_same_state_contribution_20261010\\RGBNT100\\training\\RGBNT100_r201o_axis_shared_s42\\best_official_arrays.npz",
+            "sha256": "62eaa5d29df3dc849968f7fdc1bcc8e2332c44c16834751319f8864f71497393",
+            "bytes": 247530704,
+            "distance_shape": [
+              1715,
+              8575
+            ],
+            "valid_queries": 1715,
+            "max_perquery_AP_INP_error": 0,
+            "max_six_metric_error_pp": 0,
+            "features_finite_unit_5120": true,
+            "raw_metrics": {
+              "mAP": 85.97102649501716,
+              "mINP": 62.33230429767842,
+              "Rank-1": 96.26822157434403,
+              "Rank-5": 97.20116618075802,
+              "Rank-10": 97.78425655976676,
+              "Rank-20": 98.134110787172
+            }
+          }
+        },
+        "paired_checks": {
+          "four_N_O_order_partial_sets_exact": true,
+          "paired_O_config_exact": true,
+          "all_N_O_parameter_counts_equal": true
+        },
+        "analysis_tables": {
+          "six_metrics": 5,
+          "group_metrics": 295,
+          "paired_query_changes": 10290,
+          "comparisons": 6,
+          "training_curves": 100,
+          "arithmetic_verified": true
+        },
+        "comparisons": [
+          {
+            "dataset": "RGBNT100",
+            "improved": "O_axis_shared",
+            "reference": "original_DeMo",
+            "mAP": "0.20245939184766826",
+            "mINP": "0.48639601412215683",
+            "Rank-1": "-0.3498542274052454",
+            "Rank-5": "0.1749271137026085",
+            "Rank-10": "0.4081632653061291",
+            "Rank-20": "0.4081632653061291",
+            "both_plus1": "False",
+            "both_plus2": "False",
+            "rank1_rescued": "5",
+            "rank1_harmed": "11",
+            "AP_improved": "820",
+            "AP_worsened": "565"
+          },
+          {
+            "dataset": "RGBNT100",
+            "improved": "O_frequency_shared",
+            "reference": "original_DeMo",
+            "mAP": "0.03235796433190785",
+            "mINP": "0.15213175770545462",
+            "Rank-1": "-0.116618075801739",
+            "Rank-5": "-0.05830903790088371",
+            "Rank-10": "0.0",
+            "Rank-20": "-0.05830903790088371",
+            "both_plus1": "False",
+            "both_plus2": "False",
+            "rank1_rescued": "0",
+            "rank1_harmed": "2",
+            "AP_improved": "844",
+            "AP_worsened": "504"
+          },
+          {
+            "dataset": "RGBNT100",
+            "improved": "O_axis_shared",
+            "reference": "O_frequency_shared",
+            "mAP": "0.1701014275157604",
+            "mINP": "0.3342642564167022",
+            "Rank-1": "-0.23323615160350641",
+            "Rank-5": "0.2332361516034922",
+            "Rank-10": "0.4081632653061291",
+            "Rank-20": "0.46647230320701283",
+            "both_plus1": "False",
+            "both_plus2": "False",
+            "rank1_rescued": "5",
+            "rank1_harmed": "9",
+            "AP_improved": "790",
+            "AP_worsened": "586"
+          },
+          {
+            "dataset": "RGBNT100",
+            "improved": "O_axis_shared",
+            "reference": "N_recipe_axis_shared",
+            "mAP": "0.0008059688198471804",
+            "mINP": "-0.09974199343445633",
+            "Rank-1": "0.0",
+            "Rank-5": "0.2332361516034922",
+            "Rank-10": "0.17492711370263692",
+            "Rank-20": "0.05830903790088371",
+            "both_plus1": "False",
+            "both_plus2": "False",
+            "rank1_rescued": "1",
+            "rank1_harmed": "1",
+            "AP_improved": "674",
+            "AP_worsened": "650"
+          },
+          {
+            "dataset": "RGBNT100",
+            "improved": "O_frequency_shared",
+            "reference": "N_recipe_frequency_shared",
+            "mAP": "8.972059042378078e-05",
+            "mINP": "-7.258560678025106e-05",
+            "Rank-1": "0.0",
+            "Rank-5": "0.0",
+            "Rank-10": "0.0",
+            "Rank-20": "0.0",
+            "both_plus1": "False",
+            "both_plus2": "False",
+            "rank1_rescued": "0",
+            "rank1_harmed": "0",
+            "AP_improved": "460",
+            "AP_worsened": "302"
+          },
+          {
+            "dataset": "RGBNT100",
+            "improved": "O_axis_shared",
+            "reference": "N_recipe_frequency_shared",
+            "mAP": "0.1701911481061842",
+            "mINP": "0.33419167080992196",
+            "Rank-1": "-0.23323615160350641",
+            "Rank-5": "0.2332361516034922",
+            "Rank-10": "0.4081632653061291",
+            "Rank-20": "0.46647230320701283",
+            "both_plus1": "False",
+            "both_plus2": "False",
+            "rank1_rescued": "5",
+            "rank1_harmed": "9",
+            "AP_improved": "790",
+            "AP_worsened": "586"
+          }
+        ]
+      }
+    },
+    "all_epoch_and_launch_evidence": {
+      "MSVR310": {
+        "frequency_shared": {
+          "epoch_query_rows_reduced": 29550,
+          "epoch_results": 50,
+          "max_epoch_metric_error_pp": 1.4210854715202004e-14,
+          "all_curve_diagnostic_columns_reduced_from_batches": true,
+          "epoch_log_rows": 50,
+          "train_terminal_log_line": 66,
+          "train_launch_command_checked": true,
+          "audit_launch_exit_and_terminal_log_checked": true,
+          "historical_native_updates": 3,
+          "historical_native_strict_reload": true,
+          "native_identity_is_historical_receipt_not_new_replay": true
+        },
+        "axis_shared": {
+          "epoch_query_rows_reduced": 29550,
+          "epoch_results": 50,
+          "max_epoch_metric_error_pp": 1.4210854715202004e-14,
+          "all_curve_diagnostic_columns_reduced_from_batches": true,
+          "epoch_log_rows": 50,
+          "train_terminal_log_line": 66,
+          "train_launch_command_checked": true,
+          "audit_launch_exit_and_terminal_log_checked": true,
+          "historical_native_updates": 3,
+          "historical_native_strict_reload": true,
+          "native_identity_is_historical_receipt_not_new_replay": true
+        }
+      },
+      "RGBNT100": {
+        "frequency_shared": {
+          "epoch_query_rows_reduced": 85750,
+          "epoch_results": 50,
+          "max_epoch_metric_error_pp": 2.842170943040401e-14,
+          "all_curve_diagnostic_columns_reduced_from_batches": true,
+          "epoch_log_rows": 50,
+          "train_terminal_log_line": 66,
+          "train_launch_command_checked": true,
+          "audit_launch_exit_and_terminal_log_checked": true,
+          "historical_native_updates": 3,
+          "historical_native_strict_reload": true,
+          "native_identity_is_historical_receipt_not_new_replay": true
+        },
+        "axis_shared": {
+          "epoch_query_rows_reduced": 85750,
+          "epoch_results": 50,
+          "max_epoch_metric_error_pp": 2.842170943040401e-14,
+          "all_curve_diagnostic_columns_reduced_from_batches": true,
+          "epoch_log_rows": 50,
+          "train_terminal_log_line": 66,
+          "train_launch_command_checked": true,
+          "audit_launch_exit_and_terminal_log_checked": true,
+          "historical_native_updates": 3,
+          "historical_native_strict_reload": true,
+          "native_identity_is_historical_receipt_not_new_replay": true
+        }
+      }
+    },
+    "first_interpreter_attempt": "The PATH python command reported 'No pyvenv.cfg file' and did not run the inspection. The existing standalone runtime above ran the recorded checks successfully; no environment repair or installation was performed."
+  },
+  "claim_assessment": [
+    {
+      "claim": "Four O full50 normal-input runs closed with full official recorded GT, raw arrays and consistent six-metric readouts.",
+      "status": "SUPPORTED_WITHIN_AUDIT_SCOPE",
+      "basis": "Sources, command/exit logs, all-epoch/batch records, filename GT and raw-distance recount agree."
+    },
+    {
+      "claim": "Both weak datasets achieve normal mAP and Rank-1 at least +1 percentage point over original DeMo.",
+      "status": "NOT_SUPPORTED",
+      "basis": "MSVR axis delta +0.018843459680759622/-0.1692047377326702; RGBNT100 axis delta +0.20245939184766826/-0.3498542274052454. Negative Rank-1 changes are retained."
+    },
+    {
+      "claim": "Axis reliably beats the paired same-budget ordinary-frequency control.",
+      "status": "NOT_SUPPORTED",
+      "basis": "MSVR mAP decreases while Rank-1 increases; RGBNT100 mAP increases while Rank-1 decreases; one seed only."
+    },
+    {
+      "claim": "The contribution predictor is calibrated or the controlled target proves a causal contribution.",
+      "status": "NOT_SUPPORTED",
+      "basis": "Targets are model-state training proxies. Across the recorded training batches, mean contribution prediction loss exceeds the separately recorded zero-prediction loss for all four O runs; neither this aggregate diagnostic nor detached gradients establishes calibration or causality."
+    },
+    {
+      "claim": "Missing-input/paper-six or selected-gradient stages are complete or successful.",
+      "status": "OUT_OF_SCOPE",
+      "basis": "Only the immutable normal-input request was reviewed. No separately running stage was inspected or awaited."
+    },
+    {
+      "claim": "Binary selected checkpoint/model behavior was replayed independently.",
+      "status": "NOT_PERFORMED",
+      "basis": "Local archived arrays were re-ranked; no model was imported, constructed or inferred."
+    }
+  ],
+  "limitations": [
+    "Same-family independent-context review is provisional; actual backend, model and effort are UNATTESTED.",
+    "Local source inspection and archived process/receipt evidence do not provide a cryptographic attestation of every instruction executed remotely.",
+    "The four O saved distance matrices and their GT metadata were re-ranked. No neural descriptors were regenerated and no best.pth binary replay or binary-to-array linkage was independently executed.",
+    "The local manifests were independently parsed from filenames. Remote installed image files and dataset-publisher release identity were not freshly checked.",
+    "Original DeMo and N selected normal CSV/JSON, manifests, epoch selection and N batch controls were checked for comparison consistency; their raw binary matrices were outside the four-O raw recount.",
+    "No separately running paper-six/gradient stage, missing-input result, new RGBNT201 result, multi-seed claim, causal mechanism or final method-success claim is certified.",
+    "No project source, runtime phase, running process, handoff or actual result file was modified. Only the two expressly authorized audit JSON outputs were written."
+  ],
+  "trace_policy": "The canonical report and response trace contain the same complete review. Only the two explicitly authorized JSON paths are written; no Markdown, event log or additional trace files are generated.",
+  "inputs_sha256": {
+    "analyze_r201o_dataset_normal.py": "b997f8ab065c463ae393d3d9d45f3fb1a54e8331bc45ba1b90a854c955de7fc1",
+    "analyze_identity_coordinate_three_normal.py": "4d3e5805d3de3eaae58ff7027241e147e7f41c6eb935dc7f76e34865e7270d55",
+    "audit_full_official_normal.py": "ee26b0a29bea046db70d4072f88160b3d2ce726451accbd6b90dd44b0a1ee742",
+    "audit_full_official49.py": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+    "utils/metrics.py": "8f218e8c6e148d0397c81573858e3df58fc89bb1cf382ccbbf1d8339bf677d31",
+    "run_r201o_same_state_contribution.py": "0be224e44f2e092789b3a45984baf28a2b0d2f4f3c1979d46746633fcbc7fa29",
+    "run_r201n_bounded_identity_shift.py": "15c7f0b5e69c59813a6ce67c17646ee0aba9222874c5932c16fe69e1f4f9a55b",
+    "run_r201m_primary_margin06.py": "768852fc522c2d95d42b81d89930f27b6a83a9e6beb41c73e4994405f6fd2902",
+    "run_r201l_uniform_k8.py": "3ba60b1c3ee1612866c7b12c017372abef86aa29b38699e3cad93c5343bff824",
+    "run_r201k_relation_local_pi.py": "0c3fa388227070ef8818fda2c84a1deb8e2f04070b6870d4ec1b116f647d8b8f",
+    "run_r201i_primary_margin.py": "954c0af47e36a5c221d443e8d9b6965d749e169dd858b19fb64d78609116869c",
+    "run_r201g_normal_priority.py": "1ad85d62a1e5ecd12d52b069c58fdaba436ae7ef3ba27e61f3763191b4c6779e",
+    "identity_coordinate_three_dataset.py": "de4128c5c5993e0766ba74a700870b13478af44d28440312287b0fe2e32bb415",
+    "rgbnt201_identity_outlet.py": "ee03a16de0e7f4beb28f4a78a4ab8c16e8f19014bfa4164482d59714e52de784",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "data/datasets/msvr310.py": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+    "results/preflight/r201o_same_state_deploy_20261010.py": "84b564c4dff415a56a4dd23bd5e8f98c035bc09fb27cab58cded50a49fbdadc6",
+    "results/preflight/r201o_dataset_normal_complete_intake_20261010.py": "c3e7f90d5b165dbce013f84699de95cb404c574413e2e63baff5b663934a8945",
+    "results/preflight/r201o_same_state_plan_20261010.json": "86de09fc2148cdd73310c996cfe45ff4e5ce4038e2140c5aede8cab2969b0ee8",
+    "results/preflight/r201o_same_state_contribution_actual_session_20261010.json": "b4931264a7e46d7cedff531301d92b7e95528bc60be0a99bdbe9485f1b187db2",
+    "results/preflight/r201o_same_state_contribution_MSVR310_actual_session_20261010.json": "aedd9d82c4521f1c137012c2e312946ee6256acf7347ef9f46a42230b811f227",
+    "results/preflight/r201o_same_state_contribution_RGBNT100_actual_session_20261010.json": "f6ac28ec2b1b2848f9345f10c16ab85cafc551e19ff076e1c5969210d4185d0f",
+    "results/preflight/r201o_RGBNT100_normal_terminal_text_intake_20261010.json": "80d481847dba13a6f983b45611ec6ffbd931a7007ca1afa8bd7ec708c9d61685",
+    "results/preflight/r201o_same_state_source_review_20261010.json": "0ac2ddb289097d283a831a0cf062a0e35f763dca8c988cd3f6319be4a8976a3c",
+    "results/r201o_same_state_contribution_20261010/MSVR310/controller_result.json": "22cd50c8856b991be4e486b0e37726bbb9e6bf070ab0708bca6785d9c963d6ff",
+    "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/comparisons.csv": "25faae8f2c8a0fcd1417a295f13f808e6c8f80d187be91ae5e025f0bf1a97a9b",
+    "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/group_metrics.csv": "207c7d356d6ad32fed7d8fbc625a124bfe6ce32df3186f590b93eab8e650dab2",
+    "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/paired_query_changes.csv": "92a2e63a3c09fcd0c8a88b3befd70a254ce12c6bd630076697de108f3a24f5ac",
+    "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/result.json": "c0bdc782543c814833f68a4c058630847211200943aa196704cbd664eb1d7e07",
+    "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/six_metrics.csv": "08f450f61edd8ac77defd10545f72b3528fda21d9255b11b05f07e1a5132e301",
+    "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/training_curves.csv": "4cc9082c296d72de153d07259cfb1feb3242cd88542e5fff428ec07fc128b17c",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42/run.json": "7e2a294350cde145ce10f02f9c59bda882a2185fa519cd86783b28a1abe33157",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42/result.json": "7d9ff87145a605d8ec2fe7480425d76fe8a2c4272a9b8325c8cc40a355698556",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42/status.json": "7d9ff87145a605d8ec2fe7480425d76fe8a2c4272a9b8325c8cc40a355698556",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42/epochs.csv": "149a0a93477a4280b38dd4431a5a2cd9e25260b52d9e2bed91e015bc0c61ac2a",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42/official_split_manifest.json": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42/normal_cpu_audit.json": "f9bba838e72c68ea8e994c3b6921699a907294d4a255f2ae965137ebd094a44e",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42/normal_local_archive.json": "d4be3cc9fe4907c39070c0f9a8ee8f28a78a856c7f2741d37227dcfd6ab6829a",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42_exit.json": "9d77b46368c405a809a1657f8d3ef5949905fcab23ac3b2f237f53df89dd2027",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/run.json": "f2b682e11869648b59f314ee855a946ea479fb4957a2b3cf1e4ea9fc1cf5d603",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/result.json": "097475a0e2b31b58c627a10ad1c96a48bac3a38de5af712f8ad286d20777dce7",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/status.json": "097475a0e2b31b58c627a10ad1c96a48bac3a38de5af712f8ad286d20777dce7",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/epochs.csv": "f479691cbad5171fd00f87a2d426cf7a2185e68271c44e642e129cb6f0adac8d",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/official_split_manifest.json": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/normal_cpu_audit.json": "62e0034a8445f925119aa747f818668fb3c33676592f67c138876521f38a70ff",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/normal_local_archive.json": "3cae56244e015d2a7650a764cf797e61525ae0843723791be7fd2b76c8495852",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42_exit.json": "bfab14b859abe1fc5c9c8da7a840427f686d40037fc51b0e27cf5d240e34a502",
+    "results/full_official_baselines_20261004/training/MSVR310_demo_s42/result.json": "3968c2aa9a0fd0a0cd6cdb6ef761670d9471c29e7c2a93ef60238023cd092f3c",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/controller_result.json": "dc70c16be0ae1cb005084720864ce51cb622e0a0ce74464e13719beabf92a85a",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/comparisons.csv": "c7f7fca9ff9b02e1f92cb2827661d3212fb7d4e3aa05ea99e50c16be5c72f306",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/group_metrics.csv": "9a39e8d1d89b72fab4df6594dd7c251a352a8ef5a1090c6bcdaeb22b2251ce8e",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/paired_query_changes.csv": "5e94df50bb4fd954ff83d7e1d61abbc2b1651de43f82cc9447be31778b88fabf",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/result.json": "025eb2ab4a40e7c919b4e1a1056be335ae0afe99fa2631560dc82fff46673e8f",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/six_metrics.csv": "7c5b448fb29946ff8b4359bb286980326d81bbb617f5d877c62d6ae09b26d489",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/training_curves.csv": "bb383aba4b5ca6c5817c8ff43e549a62728347a39f30f77fcad344f471ceaec7",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42/run.json": "08e3ccb1c252cdff1edbf2590d3511562d1c1228563b1df0d246f100afdcea2b",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42/result.json": "6c312bcfc676c771a2325d1a790483346359491b9bf28fce64a67f6289edf2ed",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42/status.json": "6c312bcfc676c771a2325d1a790483346359491b9bf28fce64a67f6289edf2ed",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42/epochs.csv": "f4289cec5f7b3e495a92c40eb3bc27d25c36098f84a56174d47b2b4134d8873a",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42/official_split_manifest.json": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42/normal_cpu_audit.json": "56960fcfa81e60ac9114cec396e06c5e44bdef1425bded8c1729c3e2fd8a1734",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42/normal_local_archive.json": "a46f2a8a1577714b255b2e1692481efec87417b5a1f9cbc3b158fb1c0a33beda",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42_exit.json": "b9e3669b366adfe9bd0f130b10c8e434eadb51a7c1326b793dd488993dee15e0",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/run.json": "e47d972901cd6b035500c245ba29d7fbd5bfa7421783eafd264cb696be609b3d",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/result.json": "cfa2cfcf63c770c63598d194525ad8f43cd68ecbcffd76abce8603c76aa13ff5",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/status.json": "cfa2cfcf63c770c63598d194525ad8f43cd68ecbcffd76abce8603c76aa13ff5",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/epochs.csv": "2dec3e19b5c899b620ba545b69cd5cd8ca73ca3fcf6a3111dd5fb9268bb55cb8",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/official_split_manifest.json": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/normal_cpu_audit.json": "e246185fb02c6d3cbb764ec73fda6793c882683ef789e8c48f7df986db6fda80",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/normal_local_archive.json": "7f5a482a0054d9046dea28eecc651072386fe153e34253077e57e6ac3540c288",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42_exit.json": "cb78ac60974eb16e9bb292ad8b5d5ef6506b5796465dd94b5cacd343f42a2576",
+    "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/result.json": "6281020fab561c83e9d5d162bf692c3d2a7048923886e4750cb605d0dc1dc9f6"
+  },
+  "audited_input_hashes": {
+    "analyze_r201o_dataset_normal.py": "b997f8ab065c463ae393d3d9d45f3fb1a54e8331bc45ba1b90a854c955de7fc1",
+    "analyze_identity_coordinate_three_normal.py": "4d3e5805d3de3eaae58ff7027241e147e7f41c6eb935dc7f76e34865e7270d55",
+    "audit_full_official_normal.py": "ee26b0a29bea046db70d4072f88160b3d2ce726451accbd6b90dd44b0a1ee742",
+    "audit_full_official49.py": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+    "utils/metrics.py": "8f218e8c6e148d0397c81573858e3df58fc89bb1cf382ccbbf1d8339bf677d31",
+    "run_r201o_same_state_contribution.py": "0be224e44f2e092789b3a45984baf28a2b0d2f4f3c1979d46746633fcbc7fa29",
+    "run_r201n_bounded_identity_shift.py": "15c7f0b5e69c59813a6ce67c17646ee0aba9222874c5932c16fe69e1f4f9a55b",
+    "run_r201m_primary_margin06.py": "768852fc522c2d95d42b81d89930f27b6a83a9e6beb41c73e4994405f6fd2902",
+    "run_r201l_uniform_k8.py": "3ba60b1c3ee1612866c7b12c017372abef86aa29b38699e3cad93c5343bff824",
+    "run_r201k_relation_local_pi.py": "0c3fa388227070ef8818fda2c84a1deb8e2f04070b6870d4ec1b116f647d8b8f",
+    "run_r201i_primary_margin.py": "954c0af47e36a5c221d443e8d9b6965d749e169dd858b19fb64d78609116869c",
+    "run_r201g_normal_priority.py": "1ad85d62a1e5ecd12d52b069c58fdaba436ae7ef3ba27e61f3763191b4c6779e",
+    "identity_coordinate_three_dataset.py": "de4128c5c5993e0766ba74a700870b13478af44d28440312287b0fe2e32bb415",
+    "rgbnt201_identity_outlet.py": "ee03a16de0e7f4beb28f4a78a4ab8c16e8f19014bfa4164482d59714e52de784",
+    "axis_collaboration.py": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+    "data/datasets/msvr310.py": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+    "results/preflight/r201o_same_state_deploy_20261010.py": "84b564c4dff415a56a4dd23bd5e8f98c035bc09fb27cab58cded50a49fbdadc6",
+    "results/preflight/r201o_dataset_normal_complete_intake_20261010.py": "c3e7f90d5b165dbce013f84699de95cb404c574413e2e63baff5b663934a8945",
+    "results/preflight/r201o_same_state_plan_20261010.json": "86de09fc2148cdd73310c996cfe45ff4e5ce4038e2140c5aede8cab2969b0ee8",
+    "results/preflight/r201o_same_state_contribution_actual_session_20261010.json": "b4931264a7e46d7cedff531301d92b7e95528bc60be0a99bdbe9485f1b187db2",
+    "results/preflight/r201o_same_state_contribution_MSVR310_actual_session_20261010.json": "aedd9d82c4521f1c137012c2e312946ee6256acf7347ef9f46a42230b811f227",
+    "results/preflight/r201o_same_state_contribution_RGBNT100_actual_session_20261010.json": "f6ac28ec2b1b2848f9345f10c16ab85cafc551e19ff076e1c5969210d4185d0f",
+    "results/preflight/r201o_RGBNT100_normal_terminal_text_intake_20261010.json": "80d481847dba13a6f983b45611ec6ffbd931a7007ca1afa8bd7ec708c9d61685",
+    "results/preflight/r201o_same_state_source_review_20261010.json": "0ac2ddb289097d283a831a0cf062a0e35f763dca8c988cd3f6319be4a8976a3c",
+    "results/r201o_same_state_contribution_20261010/MSVR310/controller_result.json": "22cd50c8856b991be4e486b0e37726bbb9e6bf070ab0708bca6785d9c963d6ff",
+    "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/comparisons.csv": "25faae8f2c8a0fcd1417a295f13f808e6c8f80d187be91ae5e025f0bf1a97a9b",
+    "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/group_metrics.csv": "207c7d356d6ad32fed7d8fbc625a124bfe6ce32df3186f590b93eab8e650dab2",
+    "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/paired_query_changes.csv": "92a2e63a3c09fcd0c8a88b3befd70a254ce12c6bd630076697de108f3a24f5ac",
+    "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/result.json": "c0bdc782543c814833f68a4c058630847211200943aa196704cbd664eb1d7e07",
+    "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/six_metrics.csv": "08f450f61edd8ac77defd10545f72b3528fda21d9255b11b05f07e1a5132e301",
+    "results/r201o_same_state_contribution_20261010/MSVR310/normal_analysis/training_curves.csv": "4cc9082c296d72de153d07259cfb1feb3242cd88542e5fff428ec07fc128b17c",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42/run.json": "7e2a294350cde145ce10f02f9c59bda882a2185fa519cd86783b28a1abe33157",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42/result.json": "7d9ff87145a605d8ec2fe7480425d76fe8a2c4272a9b8325c8cc40a355698556",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42/status.json": "7d9ff87145a605d8ec2fe7480425d76fe8a2c4272a9b8325c8cc40a355698556",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42/epochs.csv": "149a0a93477a4280b38dd4431a5a2cd9e25260b52d9e2bed91e015bc0c61ac2a",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42/official_split_manifest.json": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42/normal_cpu_audit.json": "f9bba838e72c68ea8e994c3b6921699a907294d4a255f2ae965137ebd094a44e",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42/normal_local_archive.json": "d4be3cc9fe4907c39070c0f9a8ee8f28a78a856c7f2741d37227dcfd6ab6829a",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_frequency_shared_s42_exit.json": "9d77b46368c405a809a1657f8d3ef5949905fcab23ac3b2f237f53df89dd2027",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/run.json": "f2b682e11869648b59f314ee855a946ea479fb4957a2b3cf1e4ea9fc1cf5d603",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/result.json": "097475a0e2b31b58c627a10ad1c96a48bac3a38de5af712f8ad286d20777dce7",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/status.json": "097475a0e2b31b58c627a10ad1c96a48bac3a38de5af712f8ad286d20777dce7",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/epochs.csv": "f479691cbad5171fd00f87a2d426cf7a2185e68271c44e642e129cb6f0adac8d",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/official_split_manifest.json": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/normal_cpu_audit.json": "62e0034a8445f925119aa747f818668fb3c33676592f67c138876521f38a70ff",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42/normal_local_archive.json": "3cae56244e015d2a7650a764cf797e61525ae0843723791be7fd2b76c8495852",
+    "results/r201o_same_state_contribution_20261010/MSVR310/training/MSVR310_r201o_axis_shared_s42_exit.json": "bfab14b859abe1fc5c9c8da7a840427f686d40037fc51b0e27cf5d240e34a502",
+    "results/full_official_baselines_20261004/training/MSVR310_demo_s42/result.json": "3968c2aa9a0fd0a0cd6cdb6ef761670d9471c29e7c2a93ef60238023cd092f3c",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/controller_result.json": "dc70c16be0ae1cb005084720864ce51cb622e0a0ce74464e13719beabf92a85a",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/comparisons.csv": "c7f7fca9ff9b02e1f92cb2827661d3212fb7d4e3aa05ea99e50c16be5c72f306",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/group_metrics.csv": "9a39e8d1d89b72fab4df6594dd7c251a352a8ef5a1090c6bcdaeb22b2251ce8e",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/paired_query_changes.csv": "5e94df50bb4fd954ff83d7e1d61abbc2b1651de43f82cc9447be31778b88fabf",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/result.json": "025eb2ab4a40e7c919b4e1a1056be335ae0afe99fa2631560dc82fff46673e8f",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/six_metrics.csv": "7c5b448fb29946ff8b4359bb286980326d81bbb617f5d877c62d6ae09b26d489",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/normal_analysis/training_curves.csv": "bb383aba4b5ca6c5817c8ff43e549a62728347a39f30f77fcad344f471ceaec7",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42/run.json": "08e3ccb1c252cdff1edbf2590d3511562d1c1228563b1df0d246f100afdcea2b",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42/result.json": "6c312bcfc676c771a2325d1a790483346359491b9bf28fce64a67f6289edf2ed",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42/status.json": "6c312bcfc676c771a2325d1a790483346359491b9bf28fce64a67f6289edf2ed",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42/epochs.csv": "f4289cec5f7b3e495a92c40eb3bc27d25c36098f84a56174d47b2b4134d8873a",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42/official_split_manifest.json": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42/normal_cpu_audit.json": "56960fcfa81e60ac9114cec396e06c5e44bdef1425bded8c1729c3e2fd8a1734",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42/normal_local_archive.json": "a46f2a8a1577714b255b2e1692481efec87417b5a1f9cbc3b158fb1c0a33beda",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_frequency_shared_s42_exit.json": "b9e3669b366adfe9bd0f130b10c8e434eadb51a7c1326b793dd488993dee15e0",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/run.json": "e47d972901cd6b035500c245ba29d7fbd5bfa7421783eafd264cb696be609b3d",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/result.json": "cfa2cfcf63c770c63598d194525ad8f43cd68ecbcffd76abce8603c76aa13ff5",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/status.json": "cfa2cfcf63c770c63598d194525ad8f43cd68ecbcffd76abce8603c76aa13ff5",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/epochs.csv": "2dec3e19b5c899b620ba545b69cd5cd8ca73ca3fcf6a3111dd5fb9268bb55cb8",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/official_split_manifest.json": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/normal_cpu_audit.json": "e246185fb02c6d3cbb764ec73fda6793c882683ef789e8c48f7df986db6fda80",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42/normal_local_archive.json": "7f5a482a0054d9046dea28eecc651072386fe153e34253077e57e6ac3540c288",
+    "results/r201o_same_state_contribution_20261010/RGBNT100/training/RGBNT100_r201o_axis_shared_s42_exit.json": "cb78ac60974eb16e9bb292ad8b5d5ef6506b5796465dd94b5cacd343f42a2576",
+    "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/result.json": "6281020fab561c83e9d5d162bf692c3d2a7048923886e4750cb605d0dc1dc9f6"
+  },
+  "generated_at": "2026-10-10T11:35:35+08:00",
+  "additional_normal_scope_inputs_sha256": {
+    "run_full_official_frozen_anchor_experiment.py": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+    "official_training_data.py": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+    "audit_shared_identity_states.py": "e8cf168db43f36e36a40a66148f209a6b782775942ce7fcbdf9dce439d1fa8d0",
+    "data/datasets/RGBNT100.py": "cef47b0a1dcc9bc434f6c3612e547db41fd8af2b1d7e953323ea80ffb6eb705f",
+    "launch_r201o_same_state_contribution.py": "4b6bc44133d4c54bd26f4a574c5449548bcc2ccb3a05c4d8713e8d93a13213c6",
+    "launch_r201n_bounded_identity_shift.py": "6fe58dfcfc01cb87fd1ce3953e50fdc86ee969f2a79df96a1ea6e82cb762b9fc",
+    "launch_r201m_primary_margin06.py": "ed48b5886630494d729819a42019e0a60eb67f07e1ddd494cb0ea8296fbecc99",
+    "launch_r201l_uniform_k8.py": "e88fe7df84b01f02eaac644b83aa147968065a82d521d3644b28936cfba922eb",
+    "original_identity_anchor.py": "847b6adf93eb44ff119585e5548e1ef52115bcd59d8e87cdb4735b541d390bcb",
+    "rgbnt201_projection_probe.py": "d6f6e0bddef26f5578818810b1c57415789f4e2e7b88dda8f6af1548eacaf583",
+    "relation_local_identity_outlet.py": "c22d550b2618ec64d38c425c360c130e3286eb4cd28ef028dcef660cad9fd307",
+    "bounded_identity_descriptor.py": "2b90b78b077d6f730da70c6e89e0668a6b07dce2bc238807bfb459cbbf559d7a",
+    "gpu_thermal_execute.py": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+    "run_full_official_experiment.py": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "results/preflight/r201o_MSVR310_normal_terminal_text_intake_20261010.json": "c1a63147794fb3447203d6615e8710c4897879f7d1cd4191aec2972855e1aeb6"
+  },
+  "date": "2026-10-10",
+  "write_attempt_note": "The initial long inline write command was rejected before process creation by Windows error 206 (command length). No files were written by that attempt. The same prepared report was written using the native patch tool."
+}
