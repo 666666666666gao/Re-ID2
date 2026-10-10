@@ -1,8 +1,10 @@
 # DeMo Dual-Axis experiment
 
-## O downstream stages — registered single owner, 2026-10-10
+## O stages closed; P source draft only — 2026-10-10
 
-Normal training remains with original native6107 / PID40912. The reviewed post-normal queue is now registered as native34488 / PID31776 (birth2026-10-10T09:42:29.887935+08). Its source is results/preflight/wait_original_o_normal_then_paper6_and_gradients_20261010.ps1; registration and current phase are recorded in results/preflight/r201o_post_normal_queue_registered_native_20261010.json and r201o_paper6_then_gradients_queue_actual_20261010.json. It waits for genuine O normal4full50/GT/raw/CPU closure, invokes the reviewed paper-six driver once, then invokes the reviewed selected-gradient driver once only after paper-six closure. Do not manually launch either downstream driver or register a duplicate queue. Preserve these original handles; observe at planned milestones or300seconds. Initial registration certifies only the waiting phase, not neural execution or results. The existing passive timer68733 / PID41660 and next11:12:20 observation remain.
+O normal four full50 tasks closed at11:05:58, the fixed-best six symmetric missing settings at11:30:32, and the selected training-gradient diagnostic at11:31:44. The original normal native6107 / PID40912, passive timer68733 / PID41660 and downstream queue34488 / PID31776 all exited0 and their handles were consumed. Do not reconnect, poll or restart these completed owners. Closure evidence is in results/preflight/r201o_same_state_contribution_actual_session_20261010.json, r201o_paper_missing6_actual_session_20261010.json, r201o_selected_task_gradients_actual_20261010.json and r201o_paper6_then_gradients_queue_actual_20261010.json.
+
+run_r201p_auxiliary_balance.py is only an AST-checked, unreviewed source draft. P has no launcher/plan/deployer, real native preflight, training or performance result. Before any new neural work, complete the scoped plan and deployment artifacts, obtain a fresh source review and pass real native preflight. Preserve K201 best and all required reference/comparison best checkpoints and unique raw evidence. The full metric goal remains unmet.
 
 
 ## Active-goal resume — 2026-10-10
