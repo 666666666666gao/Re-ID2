@@ -1,3 +1,7 @@
+## Current instruction: PAUSED AND STOPPED — 2026-10-10T13:53:33+08:00
+
+The user explicitly requested pause, then stop. Goal status is paused. Our P local receiver30672 / SSH30744 and remote2026 controller1099978 were stopped with identity checks; no live project training/evaluation/controller remained. Do not launch, queue, poll, resume, or continue research until the user explicitly resumes. P only completed MSVR310 axis native3; ordinary native, paired native acceptance, all formal50, RGBNT100 and P paper-six did not start. Preserve all results, protected best weights and unique raw. The older active-goal resume and pre-launch instructions below are historical and superseded. Authoritative stop proof: results/preflight/reid2_user_pause_stop_actual_20261010.json.
+
 # DeMo Dual-Axis experiment
 
 ## O stages closed; P source draft only — 2026-10-10
