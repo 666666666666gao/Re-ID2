@@ -1,0 +1,102 @@
+{
+  "status": "ACTUAL_HISTORICAL_M_FULL_PRIMARY_GRADIENT_SOURCE_READ_FOR_O_DIAGNOSTIC_SCOPE",
+  "at": "2026-10-10T09:08:05+08:00",
+  "source": "results/preflight/r201m_closed_selected_gradient_summary_actual_20261009.json",
+  "source_sha256": "9c59f0faaac02ac2a2fb8ce7a2d833ae2347e45f31771317ad6d41e5e8173277",
+  "rows": [
+    {
+      "dataset": "MSVR310",
+      "variant": "frequency_shared",
+      "selected_epoch": 3,
+      "role": "modality_expert",
+      "observations": 4,
+      "fused_primary_gradient_L2_mean": 0.044258998671508315,
+      "M_F_aux_gradient_L2_mean": 0.4317953214060948,
+      "aux_to_fused_primary_ratio_mean": 10.558076664814894,
+      "fused_primary_vs_aux_cosine_mean": 0.2936708235724466
+    },
+    {
+      "dataset": "MSVR310",
+      "variant": "frequency_shared",
+      "selected_epoch": 3,
+      "role": "frequency_expert",
+      "observations": 4,
+      "fused_primary_gradient_L2_mean": 0.03233644990002614,
+      "M_F_aux_gradient_L2_mean": 0.42014574722476894,
+      "aux_to_fused_primary_ratio_mean": 13.39920345618073,
+      "fused_primary_vs_aux_cosine_mean": 0.18725292630294071
+    },
+    {
+      "dataset": "RGBNT100",
+      "variant": "frequency_shared",
+      "selected_epoch": 3,
+      "role": "modality_expert",
+      "observations": 4,
+      "fused_primary_gradient_L2_mean": 0.023665040991846287,
+      "M_F_aux_gradient_L2_mean": 0.04952995791669488,
+      "aux_to_fused_primary_ratio_mean": 1.950060538720921,
+      "fused_primary_vs_aux_cosine_mean": 0.03923421225658611
+    },
+    {
+      "dataset": "RGBNT100",
+      "variant": "frequency_shared",
+      "selected_epoch": 3,
+      "role": "frequency_expert",
+      "observations": 4,
+      "fused_primary_gradient_L2_mean": 0.018314498291773777,
+      "M_F_aux_gradient_L2_mean": 0.04020955868910535,
+      "aux_to_fused_primary_ratio_mean": 2.2326839604181106,
+      "fused_primary_vs_aux_cosine_mean": 0.15161693420654404
+    },
+    {
+      "dataset": "MSVR310",
+      "variant": "axis_shared",
+      "selected_epoch": 3,
+      "role": "modality_expert",
+      "observations": 4,
+      "fused_primary_gradient_L2_mean": 0.04337824449262408,
+      "M_F_aux_gradient_L2_mean": 0.3878727950097051,
+      "aux_to_fused_primary_ratio_mean": 9.527561414959576,
+      "fused_primary_vs_aux_cosine_mean": 0.25692169840668094
+    },
+    {
+      "dataset": "MSVR310",
+      "variant": "axis_shared",
+      "selected_epoch": 3,
+      "role": "frequency_expert",
+      "observations": 4,
+      "fused_primary_gradient_L2_mean": 0.02931726286048532,
+      "M_F_aux_gradient_L2_mean": 0.3527056169227776,
+      "aux_to_fused_primary_ratio_mean": 12.194743728769911,
+      "fused_primary_vs_aux_cosine_mean": 0.18968720737038158
+    },
+    {
+      "dataset": "RGBNT100",
+      "variant": "axis_shared",
+      "selected_epoch": 1,
+      "role": "modality_expert",
+      "observations": 4,
+      "fused_primary_gradient_L2_mean": 0.03920521227690588,
+      "M_F_aux_gradient_L2_mean": 0.17918031534694764,
+      "aux_to_fused_primary_ratio_mean": 4.490321090099413,
+      "fused_primary_vs_aux_cosine_mean": 0.24127643048228897
+    },
+    {
+      "dataset": "RGBNT100",
+      "variant": "axis_shared",
+      "selected_epoch": 1,
+      "role": "frequency_expert",
+      "observations": 4,
+      "fused_primary_gradient_L2_mean": 0.022962200860547594,
+      "M_F_aux_gradient_L2_mean": 0.16535998566825114,
+      "aux_to_fused_primary_ratio_mean": 7.136117945120291,
+      "fused_primary_vs_aux_cosine_mean": 0.1680766647780322
+    }
+  ],
+  "new_model_calls": 0,
+  "new_gradient_evaluations": 0,
+  "current_O_gradient_data": false,
+  "interpretation": "The completed M selected checkpoints measured actual CE.25+hinge.6; MSVR group ratios about9.53-13.40 and RGB100 about1.95-7.14, with positive mean cosines in these groups. This differs in scope from initial O native hinge-only output-parameter ratios51.79-137.08. Do not transfer these old M ratios to bounded O or infer global conflict. Future reviewed O probe must measure its own complete primary gradients before selecting auxiliary coefficients.",
+  "current_training_changed": false,
+  "followup": "Source-only O16 full-view training-gradient probe prepared, requires actual O normal and paper-six closure; not deployed."
+}
