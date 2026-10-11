@@ -1,0 +1,339 @@
+{
+  "launches": {
+    "MSVR310/controller_launch.json": {
+      "pid": 4070802,
+      "started": 1791759869.0324442,
+      "arguments": {
+        "data_root": "/data/gaob/Re-ID/dataset",
+        "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+        "anchor_root": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training",
+        "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201w_reduced_auxiliary_20261011/MSVR310",
+        "dataset": "MSVR310"
+      },
+      "gpus": [
+        0,
+        1
+      ],
+      "maximum_NN": 2,
+      "temperature_power_control": false,
+      "contribution_regression_weight": 0.0,
+      "final_full_CE_weight": 0.05,
+      "M_F_auxiliary_weight": 0.001,
+      "experiment": "W only reduces MFaux to.001; completedTMS uniform512/obsolete1024frozen andSRGB scored512 unchanged. MainCE/reg/5120/.10/.6/P8K8/seed42/teacher50+expert50 held. New pairednative3 thenfull50; no201NN/49/failedseedsearch."
+    },
+    "MSVR310/training/MSVR310_r201w_axis_shared_s42_launch.json": {
+      "pid": 4072178,
+      "process_group": 4072178,
+      "gpu": 1,
+      "started": 1791759893.0965333,
+      "command": [
+        "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+        "-u",
+        "run_r201w_reduced_auxiliary.py",
+        "--dataset",
+        "MSVR310",
+        "--variant",
+        "axis_shared",
+        "--freeze-identity-encoder",
+        "1",
+        "--seed",
+        "42",
+        "--mode",
+        "train",
+        "--data-root",
+        "/data/gaob/Re-ID/dataset",
+        "--pretrained",
+        "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+        "--anchor-run-dir",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/MSVR310_demo_s42",
+        "--output",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201w_reduced_auxiliary_20261011/MSVR310/training/MSVR310_r201w_axis_shared_s42"
+      ],
+      "initial_resources": {
+        "gpu": 1,
+        "memory_used_mib": 18.0,
+        "observed_at": 1791759893.0949764
+      },
+      "temperature_power_control": false
+    },
+    "MSVR310/training/MSVR310_r201w_frequency_shared_s42_launch.json": {
+      "pid": 4072177,
+      "process_group": 4072177,
+      "gpu": 0,
+      "started": 1791759893.0944977,
+      "command": [
+        "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+        "-u",
+        "run_r201w_reduced_auxiliary.py",
+        "--dataset",
+        "MSVR310",
+        "--variant",
+        "frequency_shared",
+        "--freeze-identity-encoder",
+        "1",
+        "--seed",
+        "42",
+        "--mode",
+        "train",
+        "--data-root",
+        "/data/gaob/Re-ID/dataset",
+        "--pretrained",
+        "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+        "--anchor-run-dir",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/MSVR310_demo_s42",
+        "--output",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201w_reduced_auxiliary_20261011/MSVR310/training/MSVR310_r201w_frequency_shared_s42"
+      ],
+      "initial_resources": {
+        "gpu": 0,
+        "memory_used_mib": 18.0,
+        "observed_at": 1791759893.0928252
+      },
+      "temperature_power_control": false
+    },
+    "MSVR310/native/MSVR310_r201w_frequency_shared_s42_smoke_launch.json": {
+      "pid": 4071077,
+      "process_group": 4071077,
+      "gpu": 0,
+      "started": 1791759869.129588,
+      "command": [
+        "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+        "-u",
+        "run_r201w_reduced_auxiliary.py",
+        "--dataset",
+        "MSVR310",
+        "--variant",
+        "frequency_shared",
+        "--freeze-identity-encoder",
+        "1",
+        "--seed",
+        "42",
+        "--mode",
+        "smoke",
+        "--data-root",
+        "/data/gaob/Re-ID/dataset",
+        "--pretrained",
+        "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+        "--anchor-run-dir",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/MSVR310_demo_s42",
+        "--output",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201w_reduced_auxiliary_20261011/MSVR310/native/MSVR310_r201w_frequency_shared_s42_smoke"
+      ],
+      "initial_resources": {
+        "gpu": 0,
+        "memory_used_mib": 18.0,
+        "observed_at": 1791759869.1277616
+      },
+      "temperature_power_control": false
+    },
+    "MSVR310/native/MSVR310_r201w_axis_shared_s42_smoke_launch.json": {
+      "pid": 4071078,
+      "process_group": 4071078,
+      "gpu": 1,
+      "started": 1791759869.1325788,
+      "command": [
+        "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+        "-u",
+        "run_r201w_reduced_auxiliary.py",
+        "--dataset",
+        "MSVR310",
+        "--variant",
+        "axis_shared",
+        "--freeze-identity-encoder",
+        "1",
+        "--seed",
+        "42",
+        "--mode",
+        "smoke",
+        "--data-root",
+        "/data/gaob/Re-ID/dataset",
+        "--pretrained",
+        "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+        "--anchor-run-dir",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/MSVR310_demo_s42",
+        "--output",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201w_reduced_auxiliary_20261011/MSVR310/native/MSVR310_r201w_axis_shared_s42_smoke"
+      ],
+      "initial_resources": {
+        "gpu": 1,
+        "memory_used_mib": 18.0,
+        "observed_at": 1791759869.1309674
+      },
+      "temperature_power_control": false
+    },
+    "RGBNT100/controller_launch.json": {
+      "pid": 4070696,
+      "started": 1791759869.0317628,
+      "arguments": {
+        "data_root": "/data/gaob/Re-ID/dataset",
+        "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+        "anchor_root": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training",
+        "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201w_reduced_auxiliary_20261011/RGBNT100",
+        "dataset": "RGBNT100"
+      },
+      "gpus": [
+        2,
+        3
+      ],
+      "maximum_NN": 2,
+      "temperature_power_control": false,
+      "contribution_regression_weight": 0.05,
+      "final_full_CE_weight": 0.25,
+      "M_F_auxiliary_weight": 0.001,
+      "experiment": "W only reduces MFaux to.001; completedTMS uniform512/obsolete1024frozen andSRGB scored512 unchanged. MainCE/reg/5120/.10/.6/P8K8/seed42/teacher50+expert50 held. New pairednative3 thenfull50; no201NN/49/failedseedsearch."
+    },
+    "RGBNT100/native/RGBNT100_r201w_frequency_shared_s42_smoke_launch.json": {
+      "pid": 4071079,
+      "process_group": 4071079,
+      "gpu": 2,
+      "started": 1791759869.1351097,
+      "command": [
+        "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+        "-u",
+        "run_r201w_reduced_auxiliary.py",
+        "--dataset",
+        "RGBNT100",
+        "--variant",
+        "frequency_shared",
+        "--freeze-identity-encoder",
+        "1",
+        "--seed",
+        "42",
+        "--mode",
+        "smoke",
+        "--data-root",
+        "/data/gaob/Re-ID/dataset",
+        "--pretrained",
+        "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+        "--anchor-run-dir",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+        "--output",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201w_reduced_auxiliary_20261011/RGBNT100/native/RGBNT100_r201w_frequency_shared_s42_smoke"
+      ],
+      "initial_resources": {
+        "gpu": 2,
+        "memory_used_mib": 18.0,
+        "observed_at": 1791759869.1330144
+      },
+      "temperature_power_control": false
+    },
+    "RGBNT100/native/RGBNT100_r201w_axis_shared_s42_smoke_launch.json": {
+      "pid": 4071080,
+      "process_group": 4071080,
+      "gpu": 3,
+      "started": 1791759869.1366632,
+      "command": [
+        "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+        "-u",
+        "run_r201w_reduced_auxiliary.py",
+        "--dataset",
+        "RGBNT100",
+        "--variant",
+        "axis_shared",
+        "--freeze-identity-encoder",
+        "1",
+        "--seed",
+        "42",
+        "--mode",
+        "smoke",
+        "--data-root",
+        "/data/gaob/Re-ID/dataset",
+        "--pretrained",
+        "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+        "--anchor-run-dir",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+        "--output",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201w_reduced_auxiliary_20261011/RGBNT100/native/RGBNT100_r201w_axis_shared_s42_smoke"
+      ],
+      "initial_resources": {
+        "gpu": 3,
+        "memory_used_mib": 117.0,
+        "observed_at": 1791759869.1336124
+      },
+      "temperature_power_control": false
+    }
+  },
+  "exits": {
+    "MSVR310/native/MSVR310_r201w_frequency_shared_s42_smoke_exit.json": {
+      "name": "MSVR310_r201w_frequency_shared_s42_smoke",
+      "exit_code": 0,
+      "finished": 1791759893.018884,
+      "gpu": 0,
+      "temperature_power_control": false,
+      "forced_own_group_cleanup": false
+    },
+    "MSVR310/native/MSVR310_r201w_axis_shared_s42_smoke_exit.json": {
+      "name": "MSVR310_r201w_axis_shared_s42_smoke",
+      "exit_code": 0,
+      "finished": 1791759892.7934484,
+      "gpu": 1,
+      "temperature_power_control": false,
+      "forced_own_group_cleanup": false
+    },
+    "RGBNT100/native/RGBNT100_r201w_frequency_shared_s42_smoke_exit.json": {
+      "name": "RGBNT100_r201w_frequency_shared_s42_smoke",
+      "exit_code": 1,
+      "finished": 1791759890.5766988,
+      "gpu": 2,
+      "temperature_power_control": false,
+      "forced_own_group_cleanup": false
+    },
+    "RGBNT100/native/RGBNT100_r201w_axis_shared_s42_smoke_exit.json": {
+      "name": "RGBNT100_r201w_axis_shared_s42_smoke",
+      "exit_code": 0,
+      "finished": 1791759892.4960825,
+      "gpu": 3,
+      "temperature_power_control": false,
+      "forced_own_group_cleanup": false
+    }
+  },
+  "processes": {
+    "MSVR310/controller_launch.json": {
+      "pid": 4070802,
+      "exists": true,
+      "command": "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python -u launch_r201w_reduced_auxiliary.py --dataset MSVR310 --data-root /data/gaob/Re-ID/dataset --pretrained /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt --anchor-root /data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training --output /data/gaob/Re-ID/DeMo-DualAxis/runs/r201w_reduced_auxiliary_20261011/MSVR310 "
+    },
+    "MSVR310/training/MSVR310_r201w_axis_shared_s42_launch.json": {
+      "pid": 4072178,
+      "exists": true,
+      "command": "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python -u run_r201w_reduced_auxiliary.py --dataset MSVR310 --variant axis_shared --freeze-identity-encoder 1 --seed 42 --mode train --data-root /data/gaob/Re-ID/dataset --pretrained /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt --anchor-run-dir /data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/MSVR310_demo_s42 --output /data/gaob/Re-ID/DeMo-DualAxis/runs/r201w_reduced_auxiliary_20261011/MSVR310/training/MSVR310_r201w_axis_shared_s42 "
+    },
+    "MSVR310/training/MSVR310_r201w_frequency_shared_s42_launch.json": {
+      "pid": 4072177,
+      "exists": true,
+      "command": "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python -u run_r201w_reduced_auxiliary.py --dataset MSVR310 --variant frequency_shared --freeze-identity-encoder 1 --seed 42 --mode train --data-root /data/gaob/Re-ID/dataset --pretrained /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt --anchor-run-dir /data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/MSVR310_demo_s42 --output /data/gaob/Re-ID/DeMo-DualAxis/runs/r201w_reduced_auxiliary_20261011/MSVR310/training/MSVR310_r201w_frequency_shared_s42 "
+    },
+    "MSVR310/native/MSVR310_r201w_frequency_shared_s42_smoke_launch.json": {
+      "pid": 4071077,
+      "exists": false,
+      "command": ""
+    },
+    "MSVR310/native/MSVR310_r201w_axis_shared_s42_smoke_launch.json": {
+      "pid": 4071078,
+      "exists": false,
+      "command": ""
+    },
+    "RGBNT100/controller_launch.json": {
+      "pid": 4070696,
+      "exists": false,
+      "command": ""
+    },
+    "RGBNT100/native/RGBNT100_r201w_frequency_shared_s42_smoke_launch.json": {
+      "pid": 4071079,
+      "exists": false,
+      "command": ""
+    },
+    "RGBNT100/native/RGBNT100_r201w_axis_shared_s42_smoke_launch.json": {
+      "pid": 4071080,
+      "exists": false,
+      "command": ""
+    }
+  },
+  "status": "ACTUAL_W_ORIGINAL_OWN_PROCESS_METADATA_OBSERVATION_NO_NEW_NN",
+  "at": "2026-10-12T07:05:32+08:00",
+  "native_session_id": 84945,
+  "receiver_pid": 7784,
+  "gpu_resources_or_training_metrics_queried": false,
+  "new_neural_calls": 0,
+  "new_optimizer_updates": 0
+}
