@@ -1,0 +1,223 @@
+{
+  "status": "ACTUAL_ST_NATIVE_ALL4_FULL_GT16_ACCEPTED_AND_FOUR_CARD_PAPER_SIX_FULL_STARTED",
+  "at": "2026-10-11T17:51:53+08:00",
+  "native_tool_session": 82024,
+  "receiver_pid": 33004,
+  "native": {
+    "status": "PASS",
+    "controls": 4,
+    "runs": [
+      {
+        "name": "MSVR310_r201t_frequency_shared_s42",
+        "dataset": "MSVR310",
+        "variant": "frequency_shared",
+        "seed": 42,
+        "selection_scope": "TMS/SRGB42 normal-best, epsilon.10 final bound on unchanged M margin.6; K201margin.3 retained",
+        "gpu": 0,
+        "result": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201st_paper_missing6_20261011/native/MSVR310_r201t_frequency_shared_s42/result.json"
+      },
+      {
+        "name": "MSVR310_r201t_axis_shared_s42",
+        "dataset": "MSVR310",
+        "variant": "axis_shared",
+        "seed": 42,
+        "selection_scope": "TMS/SRGB42 normal-best, epsilon.10 final bound on unchanged M margin.6; K201margin.3 retained",
+        "gpu": 1,
+        "result": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201st_paper_missing6_20261011/native/MSVR310_r201t_axis_shared_s42/result.json"
+      },
+      {
+        "name": "RGBNT100_r201s_frequency_shared_s42",
+        "dataset": "RGBNT100",
+        "variant": "frequency_shared",
+        "seed": 42,
+        "selection_scope": "TMS/SRGB42 normal-best, epsilon.10 final bound on unchanged M margin.6; K201margin.3 retained",
+        "gpu": 2,
+        "result": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201st_paper_missing6_20261011/native/RGBNT100_r201s_frequency_shared_s42/result.json"
+      },
+      {
+        "name": "RGBNT100_r201s_axis_shared_s42",
+        "dataset": "RGBNT100",
+        "variant": "axis_shared",
+        "seed": 42,
+        "selection_scope": "TMS/SRGB42 normal-best, epsilon.10 final bound on unchanged M margin.6; K201margin.3 retained",
+        "gpu": 3,
+        "result": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201st_paper_missing6_20261011/native/RGBNT100_r201s_axis_shared_s42/result.json"
+      }
+    ],
+    "normal_GT_state_cases": 16,
+    "missing_GT_state_cases": 0,
+    "raw_conditions": 4,
+    "all7_small_batch_checks_per_control": true,
+    "all_raw_local_verified": true,
+    "optimizer_updates": 0,
+    "new_weights": 0,
+    "normal_phase_preceded_missing": true,
+    "final_unit_shift_epsilon": 0.1,
+    "controlled_final_shift_bound": true,
+    "limits": "Only six symmetric paper masks, no new49. Frozen normal-mAP selected checkpoints; no missing-specific selection. MSVR is paper-protocol extension; preflight/closure does not establish +1 or multiseed gains."
+  },
+  "controller": {
+    "pid": 2244004,
+    "started": 1791711897.773682,
+    "arguments": {
+      "jobs": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201st_paper_missing6_jobs_20261011.json",
+      "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201st_paper_missing6_20261011",
+      "mode": "full"
+    },
+    "gpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "temperature_power_control": false,
+    "new_optimizer_updates": 0
+  },
+  "processes": {
+    "MSVR310_r201t_frequency_shared_s42": {
+      "launch": {
+        "pid": 2244269,
+        "process_group": 2244269,
+        "gpu": 0,
+        "command": [
+          "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+          "-u",
+          "evaluate_r201st_paper_missing6_stream.py",
+          "--run-dir",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201t_projected_auxiliary_20261011/MSVR310/training/MSVR310_r201t_frequency_shared_s42",
+          "--normal-arrays",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201t_projected_auxiliary_20261011/MSVR310/training/MSVR310_r201t_frequency_shared_s42/best_official_arrays_restore_ST_paper6.npz",
+          "--output",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201st_paper_missing6_20261011/full/MSVR310_r201t_frequency_shared_s42",
+          "--mode",
+          "full"
+        ],
+        "started": 1791711897.862091,
+        "initial_resources": {
+          "gpu": 0,
+          "memory_used_mib": 18.0,
+          "observed_at": 1791711897.8602772
+        },
+        "temperature_power_control": false
+      },
+      "actual_process_live": false,
+      "physical_gpu": 0,
+      "actual_exit": {
+        "name": "MSVR310_r201t_frequency_shared_s42",
+        "gpu": 0,
+        "exit_code": 0,
+        "finished": 1791712064.9135442,
+        "forced_own_group_cleanup": false
+      }
+    },
+    "MSVR310_r201t_axis_shared_s42": {
+      "launch": {
+        "pid": 2244272,
+        "process_group": 2244272,
+        "gpu": 1,
+        "command": [
+          "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+          "-u",
+          "evaluate_r201st_paper_missing6_stream.py",
+          "--run-dir",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201t_projected_auxiliary_20261011/MSVR310/training/MSVR310_r201t_axis_shared_s42",
+          "--normal-arrays",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201t_projected_auxiliary_20261011/MSVR310/training/MSVR310_r201t_axis_shared_s42/best_official_arrays_restore_ST_paper6.npz",
+          "--output",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201st_paper_missing6_20261011/full/MSVR310_r201t_axis_shared_s42",
+          "--mode",
+          "full"
+        ],
+        "started": 1791711897.8927975,
+        "initial_resources": {
+          "gpu": 1,
+          "memory_used_mib": 18.0,
+          "observed_at": 1791711897.8910303
+        },
+        "temperature_power_control": false
+      },
+      "actual_process_live": false,
+      "physical_gpu": 1,
+      "actual_exit": {
+        "name": "MSVR310_r201t_axis_shared_s42",
+        "gpu": 1,
+        "exit_code": 0,
+        "finished": 1791712068.141828,
+        "forced_own_group_cleanup": false
+      }
+    },
+    "RGBNT100_r201s_frequency_shared_s42": {
+      "launch": {
+        "pid": 2244271,
+        "process_group": 2244271,
+        "gpu": 2,
+        "command": [
+          "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+          "-u",
+          "evaluate_r201st_paper_missing6_stream.py",
+          "--run-dir",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201s_projected_auxiliary_20261011/RGBNT100/training/RGBNT100_r201s_frequency_shared_s42",
+          "--normal-arrays",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201s_projected_auxiliary_20261011/RGBNT100/training/RGBNT100_r201s_frequency_shared_s42/best_official_arrays_restore_ST_paper6.npz",
+          "--output",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201st_paper_missing6_20261011/full/RGBNT100_r201s_frequency_shared_s42",
+          "--mode",
+          "full"
+        ],
+        "started": 1791711897.8907664,
+        "initial_resources": {
+          "gpu": 2,
+          "memory_used_mib": 18.0,
+          "observed_at": 1791711897.8888505
+        },
+        "temperature_power_control": false
+      },
+      "actual_process_live": true,
+      "physical_gpu": 2,
+      "actual_cmdline": "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python -u evaluate_r201st_paper_missing6_stream.py --run-dir /data/gaob/Re-ID/DeMo-DualAxis/runs/r201s_projected_auxiliary_20261011/RGBNT100/training/RGBNT100_r201s_frequency_shared_s42 --normal-arrays /data/gaob/Re-ID/DeMo-DualAxis/runs/r201s_projected_auxiliary_20261011/RGBNT100/training/RGBNT100_r201s_frequency_shared_s42/best_official_arrays_restore_ST_paper6.npz --output /data/gaob/Re-ID/DeMo-DualAxis/runs/r201st_paper_missing6_20261011/full/RGBNT100_r201s_frequency_shared_s42 --mode full "
+    },
+    "RGBNT100_r201s_axis_shared_s42": {
+      "launch": {
+        "pid": 2244270,
+        "process_group": 2244270,
+        "gpu": 3,
+        "command": [
+          "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+          "-u",
+          "evaluate_r201st_paper_missing6_stream.py",
+          "--run-dir",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201s_projected_auxiliary_20261011/RGBNT100/training/RGBNT100_r201s_axis_shared_s42",
+          "--normal-arrays",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201s_projected_auxiliary_20261011/RGBNT100/training/RGBNT100_r201s_axis_shared_s42/best_official_arrays_restore_ST_paper6.npz",
+          "--output",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201st_paper_missing6_20261011/full/RGBNT100_r201s_axis_shared_s42",
+          "--mode",
+          "full"
+        ],
+        "started": 1791711897.8866894,
+        "initial_resources": {
+          "gpu": 3,
+          "memory_used_mib": 117.0,
+          "observed_at": 1791711897.8847084
+        },
+        "temperature_power_control": false
+      },
+      "actual_process_live": true,
+      "physical_gpu": 3,
+      "actual_cmdline": "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python -u evaluate_r201st_paper_missing6_stream.py --run-dir /data/gaob/Re-ID/DeMo-DualAxis/runs/r201s_projected_auxiliary_20261011/RGBNT100/training/RGBNT100_r201s_axis_shared_s42 --normal-arrays /data/gaob/Re-ID/DeMo-DualAxis/runs/r201s_projected_auxiliary_20261011/RGBNT100/training/RGBNT100_r201s_axis_shared_s42/best_official_arrays_restore_ST_paper6.npz --output /data/gaob/Re-ID/DeMo-DualAxis/runs/r201st_paper_missing6_20261011/full/RGBNT100_r201s_axis_shared_s42 --mode full "
+    }
+  },
+  "native_raw_local_verified": 4,
+  "native_normal_GT_state_cases": 16,
+  "full_start": "2026-10-11T17:44:57+08:00",
+  "first_full_near_end": "2026-10-11T18:09:57+08:00",
+  "estimate": "Around28-35min for sixmask feature extraction/GT and serialized localraw acknowledgements; first25min then240s. Estimated, not a completion assertion.",
+  "new_missing_conditions_planned": 24,
+  "new_missing_state_cases_planned": 96,
+  "missing_terminal_metrics_not_yet_read": true,
+  "new_optimizer_updates": 0,
+  "new_weights": 0,
+  "new49": false,
+  "K201_cached_paper_six_only": true,
+  "goal": "ACTIVE_UNMET"
+}
