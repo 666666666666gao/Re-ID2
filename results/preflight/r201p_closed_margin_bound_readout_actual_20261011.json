@@ -1,0 +1,88 @@
+{
+  "status": "ACTUAL_CLOSED_P_MSVR_CPU_MARGIN_BOUND_READOUT",
+  "at": "2026-10-11T10:14:37+08:00",
+  "scope": "Completed MSVR P only; no current Q/RGB epoch or live-model observation",
+  "inputs_sha256": {
+    "results\\r201p_auxiliary_balance_20261010\\MSVR310\\normal_analysis\\training_curves.csv": "55397be1fa7fd10306ff4c58aa9b2f5cd96fa786ed20d06f90b2e08dac4b9c7c",
+    "results\\r201p_auxiliary_balance_20261010\\MSVR310\\normal_analysis\\six_metrics.csv": "e27f6ec7522edd660e10b988f2b0e163107bab7d7c6c979a063b2447dee679d2",
+    "results\\r201p_auxiliary_balance_20261010\\MSVR310\\normal_analysis\\result.json": "74608eac2b9f4cf0eb194e287b01911b7ac5b0b4d28cc0f8a9af93f83094b5dc",
+    "results\\preflight\\r201p_auxiliary_balance_MSVR310_actual_session_20261010.json": "95992cc8792835bb06264a8b61b98c89ba962405b9df496648a6f050ae4f988c"
+  },
+  "original_curve_rows": 100,
+  "derived_checkpoint_rows": 10,
+  "models": {
+    "P_frequency_shared": {
+      "selected_epoch": 2,
+      "selected_clip_fraction": 0.0,
+      "selected_shift_mean": 0.0317222835496068,
+      "selected_mAP": 47.19210241953093,
+      "selected_Rank1": 63.95939086294417,
+      "last_mAP": 46.59603343237756,
+      "last_Rank1": 63.113367174280874,
+      "last_minus_selected_mAP": -0.5960689871533731,
+      "last_clip_fraction": 0.93359375,
+      "last_shift_mean": 0.0996005117893219,
+      "all50_primary06_active_fraction": 0.9995625,
+      "primary06_active_fraction_min": 0.99453125,
+      "primary06_all64_epoch_count": 41,
+      "detached_primary03_active_fraction_mean": 0.50415625,
+      "detached_primary03_active_fraction_min": 0.41328125,
+      "detached_primary03_active_fraction_max": 0.62265625,
+      "last_vs_first_loss_percent": -41.78911460717668
+    },
+    "P_axis_shared": {
+      "selected_epoch": 2,
+      "selected_clip_fraction": 0.0,
+      "selected_shift_mean": 0.031113529205322267,
+      "selected_mAP": 47.176418758591346,
+      "selected_Rank1": 63.95939086294417,
+      "last_mAP": 46.69933299107006,
+      "last_Rank1": 63.28257191201354,
+      "last_minus_selected_mAP": -0.47708576752128806,
+      "last_clip_fraction": 0.96171875,
+      "last_shift_mean": 0.09974590092897415,
+      "all50_primary06_active_fraction": 0.99946875,
+      "primary06_active_fraction_min": 0.99453125,
+      "primary06_all64_epoch_count": 40,
+      "detached_primary03_active_fraction_mean": 0.49471875,
+      "detached_primary03_active_fraction_min": 0.4046875,
+      "detached_primary03_active_fraction_max": 0.6234375,
+      "last_vs_first_loss_percent": -41.83894461417172
+    }
+  },
+  "findings": [
+    {
+      "id": 1,
+      "observation": "At selected epoch2 both controls have clipped_fraction0 and mean final shift~0.031; no boundary clipping at the selected best.",
+      "interpretation": "The0.10 cap is not an observed clipping explanation for the early near-zero retrieval gain.",
+      "implication": "Do not relax the cap based on the selected score alone.",
+      "next_step": "Await single-factor Q result and diagnose the direction/objective of its actual correction if still weak."
+    },
+    {
+      "id": 2,
+      "observation": "Late50 both controls clip>93% of train samples while mAP is below selectedbest and loss decreases~42%.",
+      "interpretation": "Continued optimization increases constrained correction, but does not sustain benchmark retrieval gain. This does not isolate a cause.",
+      "implication": "A larger correction allowance is not established as beneficial; retain best/last/all50 and harm/rescue.",
+      "next_step": "Compare completed Q same-budget curves before choosing a new intervention."
+    },
+    {
+      "id": 3,
+      "observation": "The trained hinge margin0.6 is active for~99.95% of anchors over all50 epoch averages for both controls; detached margin0.3 probe is active for only part of the same batches.",
+      "interpretation": "The two margins would apply different active-pair sets. Detached counterfactual loss is not a trained margin0.3 result.",
+      "implication": "The main loss stays active, so small improvement is not explained by zero hinge gradient. This does not prove the margin causes poor generalization.",
+      "next_step": "Audit previous margin trials; if Q fails, separately measure CE versus metric gradients on selected deploy paths before repeating or tuning margins."
+    },
+    {
+      "id": 4,
+      "observation": "Current-batch contribution raw regression exceeds its recorded zero-predictor reference at the sampled checkpoints.",
+      "interpretation": "This reinforces a limited regression/gate diagnostic; the values are losses rather than validation MAE.",
+      "implication": "Do not claim calibrated usefulness prediction.",
+      "next_step": "Use Q only to test removing regression influence; require real retrieval and missing metrics before any benefit claim."
+    }
+  ],
+  "raw_data_table": "results/r201p_auxiliary_balance_20261010/MSVR310/normal_analysis/training_curves.csv",
+  "derived_table": "results/r201p_auxiliary_balance_20261010/MSVR310/normal_analysis/closed_margin_bound_readout.csv",
+  "new_neural_calls": 0,
+  "new_optimizer_updates": 0,
+  "limits": "One expertseed42/reference42 pair, benchmark-selected. Epoch/batch anchors are repeated training observations, not independent samples; no multi-seed significance or global/causal conflict attribution. Margin0.3 is a detached same-feature probe, not a retrain."
+}
