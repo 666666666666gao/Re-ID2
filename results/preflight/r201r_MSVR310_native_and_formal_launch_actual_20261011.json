@@ -1,0 +1,150 @@
+{
+  "models": [
+    {
+      "variant": "frequency_shared",
+      "launch": {
+        "pid": 1002912,
+        "process_group": 1002912,
+        "gpu": 0,
+        "started": 1791687364.7672272,
+        "command": [
+          "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+          "-u",
+          "run_r201r_primary_ce.py",
+          "--dataset",
+          "MSVR310",
+          "--variant",
+          "frequency_shared",
+          "--freeze-identity-encoder",
+          "1",
+          "--seed",
+          "42",
+          "--mode",
+          "train",
+          "--data-root",
+          "/data/gaob/Re-ID/dataset",
+          "--pretrained",
+          "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+          "--anchor-run-dir",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/MSVR310_demo_s42",
+          "--output",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201r_primary_ce_20261011/MSVR310/training/MSVR310_r201r_frequency_shared_s42"
+        ],
+        "initial_resources": {
+          "gpu": 0,
+          "memory_used_mib": 18.0,
+          "observed_at": 1791687364.7655454
+        },
+        "temperature_power_control": false
+      },
+      "live": true,
+      "physical_gpu_env_equal": true,
+      "training_progress_queries": 0
+    },
+    {
+      "variant": "axis_shared",
+      "launch": {
+        "pid": 1002913,
+        "process_group": 1002913,
+        "gpu": 1,
+        "started": 1791687364.7698627,
+        "command": [
+          "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+          "-u",
+          "run_r201r_primary_ce.py",
+          "--dataset",
+          "MSVR310",
+          "--variant",
+          "axis_shared",
+          "--freeze-identity-encoder",
+          "1",
+          "--seed",
+          "42",
+          "--mode",
+          "train",
+          "--data-root",
+          "/data/gaob/Re-ID/dataset",
+          "--pretrained",
+          "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+          "--anchor-run-dir",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/MSVR310_demo_s42",
+          "--output",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201r_primary_ce_20261011/MSVR310/training/MSVR310_r201r_axis_shared_s42"
+        ],
+        "initial_resources": {
+          "gpu": 1,
+          "memory_used_mib": 18.0,
+          "observed_at": 1791687364.768347
+        },
+        "temperature_power_control": false
+      },
+      "live": true,
+      "physical_gpu_env_equal": true,
+      "training_progress_queries": 0
+    }
+  ],
+  "controller_launch": {
+    "pid": 1001107,
+    "started": 1791687342.882057,
+    "arguments": {
+      "data_root": "/data/gaob/Re-ID/dataset",
+      "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+      "anchor_root": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training",
+      "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201r_primary_ce_20261011/MSVR310",
+      "dataset": "MSVR310"
+    },
+    "gpus": [
+      0,
+      1
+    ],
+    "maximum_NN": 2,
+    "temperature_power_control": false,
+    "contribution_regression_weight": 0.0,
+    "final_full_CE_weight": 0.05,
+    "M_F_auxiliary_weight": 0.01,
+    "experiment": "R only final full-view CE .25->.05 relative to completed Q MSVR; same task-gate head/network/teacher42/fresh experts42/P8K8/MFaux.01/mainCE.05+hinge.6/cap.10/partial0/BN2/extra50; physical0/1 only, preserve liveP2/3 andK201"
+  },
+  "actual_native_updates": 6,
+  "status": "ACTUAL_R_NATIVE6_AND_TWO_FORMAL_LAUNCHES_LIVE",
+  "observed_at": "2026-10-11T11:00:12+08:00",
+  "original_local_receiver": {
+    "status": "ACTUAL_R_SINGLE_MSVR_ORIGINAL_RECEIVER_REGISTERED",
+    "recorded_at": "2026-10-11T10:55:49.0793152+08:00",
+    "native_session": 98499,
+    "receiver_pid": 51388,
+    "receiver_birth": "2026-10-11T10:55:19.5372560+08:00",
+    "source": "results/preflight/r201r_primary_ce_deploy_20261011.py",
+    "source_sha256": "3f608aba760ecfd7b2719a5d377ebc0ccacc2aa7977471e5e1fc05203d4c6b05",
+    "source_review": "results/preflight/r201r_primary_ce_source_review_20261011.json",
+    "review_sha256": "bc9e0378c8bfb5f253add6571ca0a8a2025b3f0218ad20aba8fd19bc254ca0cf",
+    "review": "SOURCE_ONLY_PASS_0_0",
+    "neural_server": "2026",
+    "dataset": "MSVR310",
+    "physical_gpus": [
+      0,
+      1
+    ],
+    "own_NN_maximum_including_P": 4,
+    "original_P_normal_receiver_pid": 14232,
+    "original_P_normal_native_session": 70938,
+    "original_P_paper6_queue_pid": 13452,
+    "original_P_paper6_queue_native_session": 63411,
+    "native_updates_planned": 6,
+    "formal_updates_planned": 2000,
+    "additional_epochs_planned": 100,
+    "no_new49": true,
+    "no_new_RGBNT201_NN": true,
+    "full50_not_yet_claimed": true,
+    "goal": "ACTIVE_UNMET"
+  },
+  "physical_gpus": [
+    0,
+    1
+  ],
+  "same_P_GPU23_untouched": true,
+  "whole_formal50_not_yet_complete": true,
+  "first_near_end_observation": "2026-10-11T11:21:04.767227+08:00",
+  "observation_rule": "Actual original terminal can arrive earlier; otherwise first near-end at start+25min then180-300s, no early epoch query",
+  "source_review_sha256": "bc9e0378c8bfb5f253add6571ca0a8a2025b3f0218ad20aba8fd19bc254ca0cf",
+  "new_neural_calls": 0
+}
