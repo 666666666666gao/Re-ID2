@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-10T23:24:34+08:00",
+  "scope": "Repeat exact readonly startup observation to capture primary stderr, no job restart",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 4, in <module>\n  File \"/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/pathlib.py\", line 1134, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors) as f:\n  File \"/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/pathlib.py\", line 1119, in open\n    return self._accessor.open(self, mode, buffering, encoding, errors,\nFileNotFoundError: [Errno 2] No such file or directory: '/data/gaob/Re-ID/DeMo-DualAxis/runs/r201p_auxiliary_balance_20261010/MSVR310/controller_resume_launch.json'\n",
+  "code": "import json,os\nfrom pathlib import Path\nroot=Path('/data/gaob/Re-ID/DeMo-DualAxis');run=root/'runs/r201p_auxiliary_balance_20261010/MSVR310'\nr=json.loads((run/'controller_resume_launch.json').read_text());pid=r['pid'];proc=Path('/proc')/str(pid)\nargv=[v.decode() for v in (proc/'cmdline').read_bytes().split(b'\\0') if v]\nassert (proc/'cwd').resolve()==root and 'launch_r201p_resume_20261010.py' in argv\nformal=[dict(file=p.relative_to(root).as_posix(),data=json.loads(p.read_text())) for p in (run/'training').glob('*_launch.json')]\nprint(json.dumps(dict(pid=pid,argv=argv,launch=r,formal_launch_records=formal,paired_native_acceptance=(run/'native_acceptance.json').exists())))"
+}

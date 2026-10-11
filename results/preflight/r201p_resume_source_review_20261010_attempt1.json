@@ -1,0 +1,169 @@
+{
+  "status": "WARN",
+  "review_type": "SOURCE_ONLY",
+  "review_round": 1,
+  "reviewed_at": "2026-10-10T23:13:37+08:00",
+  "summary": "The two resume sources have no execution-blocking finding. Independent same-arm native/formal flow, same-arm NORMAL_READY acceptance, paired closure and exact archive ACK path are sound in this bounded source review. One nonblocking stale current-dataset status field should be reset before the next dataset. Runtime execution and performance are not established.",
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    {
+      "id": "R1-N1",
+      "priority": "P2",
+      "file": "results/preflight/r201p_auxiliary_balance_resume_deploy_20261010.py",
+      "line": 103,
+      "title": "Clear accepted native arms when current_dataset changes",
+      "evidence": "state is shared across the dataset loop. MSVR NATIVE_ARM_PASS stores both names at line123; line103 switches to RGBNT100 without resetting native_arms_accepted, leaving stale accepted names until a new RGB arm event. The receiver-local arms set is separately reset at line108.",
+      "impact": "The live status JSON can temporarily attribute MSVR acceptance to RGBNT100. It does not bypass any launch, archive, pair-native or final-closure gate.",
+      "minimal_change": "Set native_arms_accepted=[] in the per-dataset state.update at line103."
+    }
+  ],
+  "checks": [
+    {
+      "check": "Bounded review scope and exact current bytes",
+      "status": "PASS",
+      "evidence": "Read the two new sources in full and their diffs against the original P launcher/deployer. Their two SHA256 values equal the request. The six unchanged P artifacts and 97 inherited context artifacts also equal their requested hashes; byte equality is not an all-context semantic audit."
+    },
+    {
+      "check": "New source and embedded-template syntax",
+      "status": "PASS",
+      "evidence": "Parsed only the two new source files and reconstructed both deployer remote f-string templates from AST nodes/current local data using stdlib, without executing templates. Template lines66/86 parse; no project imports or test runs."
+    },
+    {
+      "check": "Actual pause evidence and authorized resume boundary",
+      "status": "PASS",
+      "evidence": "Directly read reid2_user_pause_stop_actual_20261010.json: controller1099978 was identity-checked and stopped, local receiver30672/SSH30744 stopped, no survivor or formal record, zero deletions. The review request records the later user resume. The dedicated stop record and old remote controller_launch.json are not overwritten by these new sources."
+    },
+    {
+      "check": "Existing MSVR prefix and fresh RGB output",
+      "status": "PASS",
+      "evidence": "Launcher lines34-44 require the existing MSVR root, empty training/audit, old PID1099978 absent and no controller_resume_launch.json; it writes a separate resume launch record. RGBNT100 uses mkdir(exist_ok=False). Deployer checks the same stopped state, fresh RGB root and absent local archive/receipts. A recorded second invocation fails rather than silently resuming partial formal work."
+    },
+    {
+      "check": "Exact qualified smoke reuse",
+      "status": "PASS",
+      "evidence": "Only MSVR310 axis_shared reuses smoke. The launcher requires SHA816d661f63366d2c069be73ddea55159e29b28f9d658d6b9c8f995538a65e141 and original exit0, then runs all original native assertions. The stop artifact embeds that smoke data and the later readonly receipt records the same hash. Raw remote smoke is not a local file and was not freshly read over SSH in this review."
+    },
+    {
+      "check": "Retained native assertions match the old P gate",
+      "status": "PASS",
+      "evidence": "The entire original native validation tail is unchanged: SMOKE_PASS/three steps and attempts/zero skips, strict reload,111 true gradient flags in the retained artifact, B64P8K8, unit5120, zero partial objective/BN2, margin.6, primary gradients, M/F auxiliary coefficients, relation-local PI isolation, same-state contribution and cap.10 geometry/controlled-state bounds. Retained smoke contains three details satisfying the displayed values; no native execution was performed."
+    },
+    {
+      "check": "Independent same-arm native-to-formal sequence",
+      "status": "PASS",
+      "evidence": "Each of two train workers calls native for its assigned variant, emits NATIVE_ARM_PASS and then launches that same arm full50. CONTROLS fixes ordinary frequency_shared to physical2 and axis_shared to physical3. Pair validation is triggered when the second native result arrives, without blocking the first qualified arm on the other GPU."
+    },
+    {
+      "check": "Occupied GPU handling and concurrency",
+      "status": "PASS",
+      "evidence": "Read unchanged gpu_thermal_execute: it queries index and memory.used only, waits240s while memory>=500MiB and starts a subprocess with CUDA_VISIBLE_DEVICES set to the selected physical2/3. Two train workers run sequential native/formal/audit work per arm, datasets are serial and archives have one worker. No temperature/power queries, installation, fallback or OOM retry was added. Existing readonly23:04:36 receipt reports15561/15660MiB occupied and no project processes; no fresh GPU check here."
+    },
+    {
+      "check": "Pair native checks and emitted events",
+      "status": "PASS",
+      "evidence": "Under native_lock the launcher emits each arm once, then compares parameter/trainable counts and all native names/partial sets before saving native_acceptance and emitting NATIVE_PASS. The receiver checks arm identity, physical GPU, actual3 and correct reused/new3 or0 counts; pair NATIVE_PASS requires both accepted arms. Printed event constants and field names agree between producer and receiver."
+    },
+    {
+      "check": "NORMAL_READY before global native acceptance",
+      "status": "PASS",
+      "evidence": "Receiver line138 accepts exactly dataset_r201p_<accepted same-arm>_s42, independent of global native. Thus either arm may complete and archive while the other has no native pass, including the retained MSVR axis prefix. Unknown/nonaccepted names and duplicate archives fail. Subsequent pair and final acceptance remain required."
+    },
+    {
+      "check": "Raw size/SHA acknowledgement before exact duplicate deletion",
+      "status": "PASS",
+      "evidence": "The inherited copy_verified requires absent local destination, successful SCP and exact local size/SHA before receiver writes NORMAL_ARCHIVED. Serialized remote archive work waits for the exact name/file ACK, verifies path is inside the dataset root and unchanged size/SHA, then unlinks only that run best_official_arrays.npz. Best weights, stopped evidence and unique local raw remain. No archive transfer/deletion was executed by this review."
+    },
+    {
+      "check": "Fresh full50 starts and unchanged neural recipe",
+      "status": "PASS",
+      "evidence": "Resume argv still calls the unchanged run_r201p_auxiliary_balance.py with seed42/freeze1 and the original corresponding demo anchor. The inherited runner is a new subprocess/model/Adam/scheduler/GradScaler for smoke and formal; smoke state is never saved to .pth or passed into formal. Read P coefficient wrapper and relevant runner/L/M source: P graph/loss/budget files are unchanged, B64/K8/full50 and coefficient .01 MSVR/.05 RGB remain."
+    },
+    {
+      "check": "Full formal and paired sampler closure",
+      "status": "PASS",
+      "evidence": "Each train path requires COMPLETE/50 epochs/equal actual optimizer and step counters/zero AMP skips/full train coverage, runs the existing installed-GT CPU audit and requires PASS. Controller completion follows both train futures, both archive ACK futures and exact full epoch/step/name/partial-set order equality. Receiver requires exit0, native pair event, controller completion, and exactly two archived-and-cleared runs."
+    },
+    {
+      "check": "Installed GT, best checkpoint and complete metrics consumers",
+      "status": "PASS",
+      "evidence": "Read audit_full_official_normal, P intake and P analyzer. They require installed full split identities/metadata, exact full coverage,50 ordered epochs, earliest highest benchmark mAP, selected raw GT recount, six metrics/CMC50/per-query/groups, only best.pth and local raw archive checks. P analyzer also compares P orders to closed O orders and preserves all comparison signs/curves. These unchanged consumers accept the new controller fields and remain required before dataset/final closure."
+    },
+    {
+      "check": "Native and formal update arithmetic",
+      "status": "PASS",
+      "evidence": "Existing sampler receipt gives1000 MSVR and6563 RGBNT100 updates per full50 arm. New sources retain totals2000/13126=15126 formal updates and four50 epochs. MSVR native6 is historical3+new3; RGB native6 is new6; final native12 is reused3+new9. No claim that twelve native updates are newly executed. Counters are emitted only after the corresponding source gates; no new update was executed here."
+    },
+    {
+      "check": "Current-dataset state metadata",
+      "status": "WARN",
+      "evidence": "R1-N1: state survives across datasets. Starting RGBNT100 at deployer line103 changes current_dataset without clearing native_arms_accepted left by MSVR. It can temporarily show both arms accepted for RGB before any RGB native event. The independent receiver arms set is correctly reset at line108, so execution/final gates are unaffected."
+    },
+    {
+      "check": "Closed O dependencies and28 protected checkpoints",
+      "status": "PASS",
+      "evidence": "Read closure records for O normal15126/native12, O paper full24 conditions/96 state cases and16 selected gradient batches/zero optimizer updates. Reconstructing protected normal weights plus selected O best inputs yields28. New deployer retains pre/post source-copy protected SHA gates including K201 and never launches O/K owners or modifies their histories."
+    },
+    {
+      "check": "Remote paths and deployment gate",
+      "status": "PASS",
+      "evidence": "Two embedded templates preserve /data/gaob/Re-ID/DeMo-DualAxis and tri_reid interpreter paths, validate stored smoke/stopped PID/root/storage, inherited source bytes and28 protected hashes. Deployer requires substantive PASS/no blockers in both original and new review plus exact new source set/hashes before copying four top-level files; the three old top-level P files remain identical. No SSH or deployment was performed."
+    },
+    {
+      "check": "Later paper-six remains gated",
+      "status": "PASS",
+      "evidence": "The new resume sources launch no missing evaluator or new49. Directly read the existing P paper-six deployer entry gate: it requires final two-dataset normal closure, native12/formal15126/additional200 and both complete dataset receipts. Resume final normal closure is written only after both unchanged text intakes and analyzers succeed."
+    },
+    {
+      "check": "Review attribution and limits",
+      "status": "PASS",
+      "evidence": "Fresh direct-artifact review uses same-family independent context/provisional acceptance. Requested gpt-6-astra/max; actual routing/model/effort/backend UNATTESTED. Only local reads, diffs, hashes, JSON inspection, AST parsing and review-file writes occurred. No tests, project/Torch imports, models, NN/GPU operations, SSH, installs, deployment, publication or cleanup."
+    }
+  ],
+  "sources_sha256": {
+    "launch_r201p_resume_20261010.py": "2e695fa21368d6bc36368541b05912ea72a1ce8029f89cdcd8d4303f947c6afa",
+    "results/preflight/r201p_auxiliary_balance_resume_deploy_20261010.py": "639d5f61e69ad4bac49814bb7b5cd719438e1b5a548e4a1a2daf32a7f8ed76e7"
+  },
+  "unchanged_context_byte_verification": {
+    "normal_sources_count": 6,
+    "inherited_context_count": 97,
+    "all_request_hashes_match": true,
+    "semantic_scope": "Two new sources plus directly needed reused source/artifact paths described by checks; no all-context semantic audit."
+  },
+  "static_validation": {
+    "new_python_AST_parsed": 2,
+    "embedded_remote_templates_AST_parsed": 2,
+    "embedded_templates": [
+      {
+        "source_line": 66,
+        "sha256": "8df205a445673676769d1993bd881c771ef82a4c03e33089c2ed7833af4f16aa"
+      },
+      {
+        "source_line": 86,
+        "sha256": "84852ff9df5a0e47d7fa0b3db3e6c65b4b6b077c50f60bff3f05991c30b41d50"
+      }
+    ],
+    "templates_executed": false,
+    "tests_run": 0,
+    "project_imports": 0,
+    "neural_calls": 0,
+    "optimizer_updates": 0,
+    "SSH_calls": 0
+  },
+  "stopped_evidence": {
+    "path": "results/preflight/reid2_user_pause_stop_actual_20261010.json",
+    "sha256": "aa0132805365fe95a548bef6afd9cd26140e69fcd6e2cba1690319933b1b236b",
+    "retained_smoke_sha256": "816d661f63366d2c069be73ddea55159e29b28f9d658d6b9c8f995538a65e141",
+    "source": "Smoke data embedded in existing authoritative stop evidence; remote raw hash also recorded by existing readonly receipt, not refreshed by reviewer."
+  },
+  "request": "results/preflight/r201p_resume_source_review_request_20261010.json",
+  "request_sha256": "48879e30bed3cce0e8874275a1f08d587a640c8b5a03727ea6a6443cecdfe248",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_routing": "UNATTESTED",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "actual_backend": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer_task": "/root/review_r201p_resume_source_20261010"
+}
