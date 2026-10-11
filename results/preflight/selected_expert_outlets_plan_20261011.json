@@ -1,0 +1,45 @@
+{
+  "status": "SOURCE_ONLY_NOT_DEPLOYED",
+  "scope": "Four fixed P/R normal-best models; full official query and gallery; 13 intermediate retrieval stages per model",
+  "physical_gpus": {
+    "MSVR310": {
+      "frequency_shared": 0,
+      "axis_shared": 1
+    },
+    "RGBNT100": {
+      "frequency_shared": 2,
+      "axis_shared": 3
+    }
+  },
+  "new_optimizer_updates": 0,
+  "new_weights": 0,
+  "new49": false,
+  "protected_RGBNT201": "K42 E30 unchanged; no RGBNT201 neural work",
+  "stages": [
+    "base00",
+    "normal11",
+    "M_raw_pool",
+    "F_raw_pool",
+    "M_routed_pool",
+    "F_routed_pool",
+    "M_projection_input",
+    "F_projection_input",
+    "M_projection_output",
+    "F_projection_output",
+    "M_unit_direction",
+    "F_unit_direction",
+    "common_context"
+  ],
+  "checks": [
+    "Same fixed best all stages; no checkpoint/hyperparameter selection",
+    "Full installed GT independently recounted all6 plusCMC50/groups/perquery",
+    "Hooks only record; exact saved normal11 query/gallery features and distance",
+    "Parameter/buffer tensor versions and frozen reference byte unchanged",
+    "M/F actual projection input/output same3584D; raw/routed pools same512D",
+    "Raw-only D archive size/SHA acknowledgement before removing remote duplicate; restored normal copies removed after completion"
+  ],
+  "limits": "Independent residual retrieval can be weaker without proving useless fusion. P/R dataset-specific losses. Normal diagnostic only, no missing or lucky seeds; full performance goal remains unmet.",
+  "estimate_seconds": 600,
+  "first_progress_not_before_seconds": 480,
+  "later_wait_seconds": 240
+}

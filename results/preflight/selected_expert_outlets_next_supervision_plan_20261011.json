@@ -1,0 +1,51 @@
+{
+  "status": "PROPOSED_NOT_IMPLEMENTED_NOT_REVIEWED_NOT_DEPLOYED",
+  "motivation": "Current actual projected PM/PF direct auxiliary gradient0; same3584D projection loses MS9.635/9.695mAP andRGB29.314/22.062. Raw auxiliary representation is supervised but the deployed direction is not directly auxiliary-supervised.",
+  "single_factor": "Replace M/F auxiliary CE and soft-Triplet feature from independent pre-route rawpool512 to mean of actual normal11 routed per-relation PM/PF unit directions512. Reuse existing classifier/necks and unchanged weights; first actual projection call before controlled10/01, no extra projection/attention/head/BN forward. Do not use later controlled-state or partial call as full auxiliary evidence.",
+  "network_changes": 0,
+  "new_parameters": 0,
+  "normal_descriptor_dim": 5120,
+  "protected_RGBNT201": "K42 E30 normalbest remains unchanged/no new201NN",
+  "datasets": {
+    "MSVR310": {
+      "parent": "R",
+      "full_CE": 0.05,
+      "hinge": 0.6,
+      "auxiliary_weight": 0.01,
+      "contribution_regression": 0,
+      "gpus": [
+        0,
+        1
+      ]
+    },
+    "RGBNT100": {
+      "parent": "P",
+      "full_CE": 0.25,
+      "hinge": 0.6,
+      "auxiliary_weight": 0.05,
+      "contribution_regression": 0.05,
+      "gpus": [
+        2,
+        3
+      ]
+    }
+  },
+  "held_fixed": [
+    "OriginalDeMo42 frozen teacher and fresh heads/experts42/Adam/additional50",
+    "P8K8 sampleorder/augmentations",
+    "FFT/dualaxes/oneconditionalupdate/route/relationlocalPI",
+    "Unit5120 wholeupdate bound.10",
+    "partial0forward/BN2/twobackwards",
+    "Current auxiliary coefficients and auxiliary CE/softTriplet definitions"
+  ],
+  "checks_before_formal": [
+    "Fresh source-only review required; no trial source exists yet",
+    "Native3per matched ordinary/axis, finite realAMP no skipped updates; frozen teacher unchanged",
+    "Confirm both auxiliary CE/metric consume same actual first11 projectedpool; retain graph and nonzero direct PM/PF auxiliary gradients",
+    "No additional neck or projection call; same parameter and trainable parametercounts and5120 deployment",
+    "Normal inference graph/output unchanged at sameweights; this is supervision-position experiment"
+  ],
+  "formal_if_native_pass": "Both weak normalmatchedpairs full50 before DeMo sixmissing; highestnormalmAP earliesttie checkpoint/sameall6/CMC50/perquery/groups/best-last. No new49; no failedseed expansion.",
+  "limits": "Known projected/routed auxiliary-supervision principle was explored in old V6/V8 at different fit/dev or5632 interfaces, so do not present concept as untried or new novelty. This is a controlled current frozenprivate5120/relation-local application motivated by measured actual zero gradients and outlet loss. Independent residual discrimination alone is insufficient; judge actual11minus00 netrescue and matchedordinary comparisons. Common512MS diagnosticgain is not deployedperformance andRGBcommon is weak; no universal fixedpublicblock restoration.",
+  "goal": "ACTIVE_UNMET"
+}
