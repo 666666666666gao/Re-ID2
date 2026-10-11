@@ -1,0 +1,196 @@
+{
+  "status": "WARN",
+  "scope": "SOURCE_ONLY",
+  "phase": "experiment-bridge RESCUE_ON_FAILURE fresh second opinion",
+  "reviewed_at": "2026-10-11T15:08:44+08:00",
+  "reviewer_agent": "/root/rescue_r201s_msvr_native_poolscore_20261011",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "max",
+  "observed_backend": "UNATTESTED",
+  "observed_model": "UNATTESTED",
+  "observed_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "runtime_not_run": true,
+  "implementation_edited": false,
+  "recovery_source_review_completed": false,
+  "summary": "已确认旧 S MSVR ordinary 的 native all-trainable 检查失败；现有日志不足以分辨 pool_score.grad 是 None、零或非有限值，更不能证明 FP16 下溢。源码证明 projected-unit 自评分的梯度对关系方向差异二阶敏感。按追加授权，建议新 MS 恢复版本采用 first-main11 projected-unit uniform mean，并明确冻结已退出实际损失路径的两个 pool_score；完整 native gate 保留，ordinary/axis 同改、各重新 native3，通过后才 fresh full50。",
+  "primary_evidence": {
+    "aggregate_record": "results/preflight/r201s_native_failure_and_RGB_formal_launch_actual_20261011.json",
+    "full_text_intake_receipt": "results/preflight/r201s_MSVR_native_failure_text_intake_actual_20261011.json",
+    "primary_log": "results/r201s_projected_auxiliary_20261011/MSVR310/native/MSVR310_r201s_frequency_shared_s42_smoke.log",
+    "primary_log_lines": [16, 17, 18, 19, 20, 21],
+    "primary_exception_line": 21,
+    "primary_exception": "AssertionError: ['modality_expert.pool_score.weight']",
+    "failing_source": "run_full_official_frozen_anchor_experiment.py",
+    "failing_source_lines": [109, 110, 111],
+    "primary_log_bytes": 1709,
+    "primary_log_matches_existing_intake_sha256": true,
+    "ordinary_exit_code": 1,
+    "ordinary_physical_gpu": 0,
+    "ordinary_actual_optimizer_updates": 3,
+    "ordinary_update_count_basis": "程序到达 runner:111 前必经 runner:106-108 的第三次 optimizer_updated 与 count==3 检查；不是依据缺失的 smoke.json 猜测。",
+    "ordinary_attempts": null,
+    "ordinary_amp_skipped_steps": null,
+    "ordinary_missing_measurements": [
+      "失败 ordinary 未生成 smoke.json；attempts 和 AMP skip 数量没有落盘，不能从 axis 的通过记录转用。",
+      "日志仅记录综合梯度布尔断言失败；没有该权重的 grad_present、finite、L1 或范数。",
+      "没有失败 batch 的七个 projected-unit 关系差值、score logits、softmax Jacobian 或 AMP/FP32 对照。"
+    ],
+    "axis_smoke": {
+      "path": "results/r201s_projected_auxiliary_20261011/MSVR310/native/MSVR310_r201s_axis_shared_s42_smoke/smoke.json",
+      "status": "SMOKE_PASS",
+      "steps": 3,
+      "attempts": 3,
+      "amp_skipped_steps": 0,
+      "modality_pool_score_gradient_gate": true,
+      "frequency_pool_score_gradient_gate": true
+    },
+    "MSVR_formal_started": false,
+    "MSVR_controller_closure_basis": "保存的 full-text intake inventory 标明旧 controller1779177 absent 且 formal_MS_started=false；本审查未作任何远程进程查询。",
+    "RGBNT100_saved_state": "两控制 native3 均通过，保存的 formal launch PID 为 1781275/1781276；旧 original receiver local93159/PID50632 按委派上下文保留，审查未查询、停止或重启。"
+  },
+  "source_binding": {
+    "canonical_review": "results/preflight/r201s_projected_auxiliary_source_review_20261011.json",
+    "canonical_review_status": "PASS",
+    "declared_sources_checked": 7,
+    "reused_sources_checked": 116,
+    "all_existing_pins_match": true,
+    "new_fingerprint_scheme_added": false,
+    "live_S_sources_or_dependencies_modified": false
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "BLOCKS_UNCHANGED_MS_FORMAL",
+      "finding": "旧 S ordinary native 确实失败；不得复用 axis native3 来宣称 matched native6，也不得跳过 pool_score 的 trainable 检查后开始 formal。",
+      "evidence": ["primary_log:21", "run_full_official_frozen_anchor_experiment.py:103-111", "launch_r201s_projected_auxiliary.py:101"]
+    },
+    {
+      "id": "F2",
+      "severity": "DIAGNOSIS_LIMIT",
+      "finding": "当前 projected-unit scorer 有真实可微损失路径，未见 detach 或参数遗漏；失败的数值原因不能从已保存日志唯一确定。",
+      "evidence": ["routed_projected_auxiliary.py:19-21", "routed_projected_auxiliary.py:37-39", "routed_projected_auxiliary.py:48-50", "run_r201s_projected_auxiliary.py:48-61", "run_r201g_normal_priority.py:47-58"],
+      "details": "同一 first-main11 PM/PF unit tensor 进入加权池化、既有 neck/classifier 和原 CE+softTriplet。pool_score 只通过池化权重获得此 auxiliary 的导数；native 的 direct_PM_PF 检查只覆盖 projection[-1].weight，不检查 pool_score。到达 runner:111 说明此前 PM/PF direct-gradient 断言未触发，但不提供失败 pool_score 的数值。"
+    },
+    {
+      "id": "F3",
+      "severity": "SOURCE_PROVEN_SENSITIVITY",
+      "finding": "用 projected-unit 自身同时作 score 输入和值，会让 scorer 梯度由这些 unit directions 的关系间协方差决定。关系差异很小时，该梯度具有二阶衰减。",
+      "equations": [
+        "u_j = normalize(PM_j); a_j = softmax_j(w^T u_j); z = sum_j a_j u_j; g = dL/dz",
+        "dL/dw = sum_j a_j [g^T(u_j-z)] u_j = [sum_j a_j (u_j-z)(u_j-z)^T] g",
+        "u_j = c + epsilon_j 时，上式为 O(||epsilon||^2)；完全相同的 u_j 给出精确零梯度。"
+      ],
+      "evidence": ["routed_projected_auxiliary.py:37-39", "routed_projected_auxiliary.py:48-49"],
+      "qualification": "该推导是源码数学性质，不是失败 batch 的实测 collapse。BatchNorm 与 triplet 会改变 g；推导不声称实际梯度大小已知。"
+    },
+    {
+      "id": "F4",
+      "severity": "PLAUSIBLE_NOT_CONFIRMED",
+      "finding": "ordinary 的七个 modality relation 读取同一全来源 value 集合，source restriction 的差异被去掉；query[relation] 仍独立，因此源码不强制七个关系完全相同。",
+      "evidence": ["shared_identity_axis.py:133-137", "axis_collaboration.py:29-40", "axis_collaboration.py:169-172", "rgbnt201_identity_outlet.py:76-89"],
+      "qualification": "近似相等与二阶梯度缩小有结构动机，但缺少实际 tensors，不能判定其是否造成这次 native 失败。RGB ordinary 已通过 native，也反驳所有 ordinary 必然精确零梯度的强说法。"
+    },
+    {
+      "id": "F5",
+      "severity": "PRECISION_HYPOTHESIS_ONLY",
+      "finding": "frame 中的 projected units 是 FP32，但第二次辅助池化的 Linear/softmax 位于外层 CUDA autocast 中；FP32 input 不等于 scorer 运算整体禁用了 autocast。",
+      "evidence": ["routed_projected_auxiliary.py:21", "routed_projected_auxiliary.py:37", "routed_projected_auxiliary.py:48", "run_r201g_normal_priority.py:47-58", "run_full_official_frozen_anchor_experiment.py:96"],
+      "qualification": "这是可疑精度位置；没有 dtype/梯度对照便不能把 FP16 underflow 记为已证实根因。仅加 enabled=False 无法解决精确相同 unit directions 的 scorer 不可辨识性，也无法保证实际 native 通过。"
+    },
+    {
+      "id": "F6",
+      "severity": "SOURCE_PROVEN_RECOVERY_BASIS",
+      "finding": "若辅助池化改为 unit-direction uniform mean，两个 pool_score 将只参与 stopped controlled10/01 的计算，不再属于 normal11 retrieval 或任何实际 loss 的可训练路径。明确冻结它们具有源码依据。",
+      "evidence": ["rgbnt201_identity_outlet.py:55-70", "rgbnt201_identity_outlet.py:83-110", "axis_collaboration.py:117-130", "run_r201o_same_state_contribution.py:23-38", "run_r201q_task_gate.py:27-34", "solver/make_optimizer.py:6-8"],
+      "details": "normal11 从 router.route 生成 M/F，未读两个 expert.pool_score；常规 eval 在 controlled_states 前返回。controlled10/01 的 pool_score 输出只通向 @torch.no_grad 的 targets，且 MS R 的 contribution regression=0。移除辅助 scorer 后再 freeze 两权重，是明确移除无任务用途的优化变量；保留全部其余 trainable 参数的原有限且非零检查。"
+    },
+    {
+      "id": "F7",
+      "severity": "REQUIRED_NEW_READOUT_CORRECTION",
+      "finding": "uniform mean+freeze 会把 trainable 总数减去1024；旧 S readout:100 要求新旧 parent 的 trainable 数全相等，不能直接复用。",
+      "evidence": ["axis_collaboration.py:20", "axis_collaboration.py:58", "analyze_r201s_dataset_normal.py:100"],
+      "expected_counts": {"total_parameters": 100821638, "original_S_and_R_trainable_parameters": 3123846, "recovery_trainable_parameters": 3122822, "frozen_delta": 1024},
+      "minimal_correction": "仅新恢复 readout 校验总参数新旧均相等、新 ordinary/axis trainable 相等、相对各自 R parent 精确少1024，并列出两 frozen 参数。旧 S live readout 和原记录保持原样。"
+    }
+  ],
+  "candidate_comparison": [
+    {
+      "candidate": "FP32 projected-unit Linear+softmax",
+      "recommendation": "NOT_SELECTED_FROM_CURRENT_EVIDENCE",
+      "reason": "小改动保留所有 trainable 参数，但需要假定精度损失是失败原因；现有记录没有该证据，且无法解除 projected-unit covariance 的二阶敏感性。"
+    },
+    {
+      "candidate": "raw relation-band evidence scored with existing weights, then projected-unit values pooled",
+      "recommendation": "NOT_SELECTED_FROM_CURRENT_EVIDENCE",
+      "reason": "可以构造真实 cross-covariance 梯度，但需要明确 raw M 的7x3和raw F的3x3如何映射到7个unit值，改变 score 域与归一化规则。若值端七个unit完全相同，任何归一化权重仍无法产生有意义的 scorer 梯度；不能根据当前日志承诺修复。尤其不可在每relation内部归一化band权重后乘同一个unit值，该路径会代数抵消。"
+    },
+    {
+      "candidate": "uniform mean of actual first-main11 projected units; explicitly freeze both unused pool_score weights",
+      "recommendation": "SELECTED_SOURCE_ONLY_RECOVERY_PLAN",
+      "reason": "直接实现辅助 CE/softTriplet 监督真实 first-main11 PM/PF 的核心目标；不需要假定 FP16 故障。源码证明被移除的 scorer 在此新方案下无真实训练用途。须披露优化变量减少、不可宣称与旧 weighted S 完全相同的方法或原失败已被数值归因。"
+    }
+  ],
+  "minimal_suggested_patch": {
+    "application_scope": "建议仅在新 MS 恢复文件/结果命名空间实施；本报告未编辑任何 NN/launcher/deploy/readout 源码。",
+    "example_new_namespace": "r201s_MSVR_mean_recovery_20261011",
+    "build_before_optimizer": [
+      "model.modality_expert.pool_score.weight.requires_grad_(False)",
+      "model.frequency_expert.pool_score.weight.requires_grad_(False)"
+    ],
+    "mpool_second_call_replacement": [
+      "assert eligible.all()",
+      "result = frame['M']",
+      "frame['M_pooled'] = result.mean(1)",
+      "return result"
+    ],
+    "fpool_second_call_replacement": [
+      "assert available.all()",
+      "frame['F_pooled'] = frame['F'].mean(1)",
+      "return frame['F_pooled']"
+    ],
+    "first_pool_calls": "保持原 controlled10/01 的 first M/F pools，仍调用原方法；normal full 的 pool-wrapper call count仍为M2/F2。第二次辅助池化不再调用 pool_score，必须准确更新 metadata。",
+    "keep": [
+      "只取 first actual main11 PM/PF output；FP32 per-relation normalize 后进入原512维neck/classifier和feature losses。",
+      "projection调用数 native M3/F3、formal M2/F2；M/F neck各1；无额外 projection/expert/backbone/BN forward。",
+      "MS parent R mainCE=.05、contribution regression=0、M/F auxiliary=.01；P8K8、B64、seed42、冻结的原DeMo teacher42、fresh Adam/scheduler、additional50。",
+      "main5120、router、Fourier、relation-local PI、unit shift cap.10、partial0 forward、fusedBN2和两次backward。",
+      "state_dict keys、total parameter数与 normal inference graph；两 pool_score 权重仍存于 state_dict，但不进入 optimizer。",
+      "run_full_official_frozen_anchor_experiment.py:109-111 原始 all-trainable 检查，不添加例外名单、不允许零梯度通过。",
+      "run_r201s_projected_auxiliary.py:56-60 对真实 weighted auxiliary 的 direct PM/PF finite/nonzero native检查。"
+    ],
+    "required_disclosure": [
+      "辅助聚合为 uniform mean；不再写 existing-score relation pool 或 existing_pool_scores_reused=true。",
+      "冻结参数精确为 modality_expert.pool_score.weight 与 frequency_expert.pool_score.weight，各512；trainable delta=-1024，total delta=0。",
+      "这是有明确停用理由的恢复方法变更；失败旧 S、其通过的 MS axis native 与 RGB live 结果分开保留。",
+      "新 MS ordinary/axis完全同改；与历史 R 比较时披露 auxiliary outlet与无用途 scorer 停用，不能继续声称所有trainable参数数量与R相等。"
+    ],
+    "fresh_runtime_gate_after_fresh_source_review": [
+      "新 MS ordinary 和 axis 都必须从同一 frozen teacher42+fresh heads/optimizer重新 native3；不可复用旧 S axis native。",
+      "两控制均需 attempts3、actual optimizer updates3、AMP skipped0、剩余全部trainable finite/nonzero、direct PM/PF auxiliary gradient positive、strict reload和[8,5120] eval通过。",
+      "新方案核对两个指定权重冻结、optimizer未包含它们、总参数100821638/trainable3122822，并保持paired batch/partial orders。",
+      "全部真实 native 条件通过后才分别 fresh additional50；本报告不授予运行通过状态，也不保证训练收益。"
+    ],
+    "protected": [
+      "原 S 七源与116依赖及其review pins；原 RGB receiver和GPU2/3训练。",
+      "失败 MS native 全量文本、exit和原source审查记录。",
+      "K201最佳权重、原teacher42、所有需要的历史结果和唯一raw。",
+      "full official train/query/gallery；不新增49、不运行RGBNT201 NN、不做失败seed搜索。"
+    ]
+  },
+  "reviewer_execution": {
+    "allowed_work_done": ["读取本地源码", "读取保存的实际primary日志与native JSON", "核验既有7+116 source pins和primary-log intake hash", "数学推导", "写本救援报告与review trace"],
+    "project_or_torch_imports": 0,
+    "model_forwards": 0,
+    "optimizer_updates": 0,
+    "GPU_queries": 0,
+    "SSH_or_SCP_calls": 0,
+    "deployments": 0,
+    "process_stops_or_restarts": 0,
+    "neural_source_edits": 0,
+    "runtime_cause_identified": false,
+    "unchanged_retry_recommended": false,
+    "formal_admission": false
+  }
+}
