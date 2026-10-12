@@ -1,0 +1,230 @@
+{
+  "status": "ACTUAL_AD_GPU23_HARD_PAIR_FULL50_NORMAL_CPU_RANDOM_USER_STOPPED",
+  "completed_at": "2026-10-12T16:19:32",
+  "dataset": "RGBNT100",
+  "model_results": 3,
+  "comparisons": [
+    {
+      "dataset": "RGBNT100",
+      "improved": "AD_hard_axis_shared",
+      "reference": "original_DeMo",
+      "mAP": 0.31989254950228485,
+      "mINP": 0.5319435371184369,
+      "Rank-1": -0.1749271137026227,
+      "Rank-5": 0.2332361516034922,
+      "Rank-10": 0.116618075801739,
+      "Rank-20": 0.4664723032069986,
+      "both_plus1": false,
+      "both_plus2": false,
+      "rank1_rescued": 2,
+      "rank1_harmed": 5,
+      "AP_improved": 846,
+      "AP_worsened": 525
+    },
+    {
+      "dataset": "RGBNT100",
+      "improved": "AD_hard_frequency_shared",
+      "reference": "original_DeMo",
+      "mAP": 0.08884740076038611,
+      "mINP": 0.48687973065166545,
+      "Rank-1": -0.2915451895043759,
+      "Rank-5": 0.116618075801739,
+      "Rank-10": 0.0,
+      "Rank-20": 0.1749271137026227,
+      "both_plus1": false,
+      "both_plus2": false,
+      "rank1_rescued": 1,
+      "rank1_harmed": 6,
+      "AP_improved": 791,
+      "AP_worsened": 581
+    },
+    {
+      "dataset": "RGBNT100",
+      "improved": "AD_hard_axis_shared",
+      "reference": "AD_hard_frequency_shared",
+      "mAP": 0.23104514874189874,
+      "mINP": 0.04506380646677144,
+      "Rank-1": 0.11661807580175321,
+      "Rank-5": 0.11661807580175321,
+      "Rank-10": 0.116618075801739,
+      "Rank-20": 0.2915451895043759,
+      "both_plus1": false,
+      "both_plus2": false,
+      "rank1_rescued": 5,
+      "rank1_harmed": 3,
+      "AP_improved": 746,
+      "AP_worsened": 613
+    }
+  ],
+  "paired_query_rows": 5145,
+  "new_epoch_rows": 100,
+  "new_stage_formal_updates": 13126,
+  "user_stopped_random_controls": 2,
+  "training": {
+    "original_DeMo": {
+      "selected_epoch": 8,
+      "parameters": 97952256,
+      "trainable_parameters": 97947136,
+      "descriptor_dim": 5120,
+      "budget_epochs": 50,
+      "final_epoch": {
+        "mAP": 85.09888117172326,
+        "mINP": 60.071807708444844,
+        "Rank-1": 96.20991253644316,
+        "Rank-5": 96.73469387755102,
+        "Rank-10": 97.25947521865889,
+        "Rank-20": 97.90087463556851
+      },
+      "runtime": {
+        "end_to_end_seconds": 125.06608438491821,
+        "triplets": 10290,
+        "includes_decode_and_first_batch": true
+      },
+      "peak_memory": 12176379392
+    },
+    "AD_hard_frequency_shared": {
+      "selected_epoch": 16,
+      "parameters": 99585158,
+      "trainable_parameters": 1887366,
+      "descriptor_dim": 5120,
+      "budget_epochs": 100,
+      "final_epoch": {
+        "mAP": 85.81557642873283,
+        "mINP": 62.23197179663661,
+        "Rank-1": 96.38483965014576,
+        "Rank-5": 97.0262390670554,
+        "Rank-10": 97.37609329446065,
+        "Rank-20": 97.84256559766764
+      },
+      "runtime": {
+        "end_to_end_seconds": 92.02843523025513,
+        "triplets": 10290,
+        "includes_decode_and_first_batch": true,
+        "mean_route": [
+          [
+            0.11927875876426697,
+            0.011793495155870914,
+            0.011784892529249191
+          ],
+          [
+            0.11927875876426697,
+            0.011793495155870914,
+            0.011784892529249191
+          ],
+          [
+            0.11927875876426697,
+            0.011793495155870914,
+            0.011784892529249191
+          ],
+          [
+            0.11927875876426697,
+            0.011793495155870914,
+            0.011784892529249191
+          ],
+          [
+            0.11927875876426697,
+            0.011793495155870914,
+            0.011784892529249191
+          ],
+          [
+            0.11927875876426697,
+            0.011793495155870914,
+            0.011784892529249191
+          ],
+          [
+            0.11927875876426697,
+            0.011793495155870914,
+            0.011784892529249191
+          ]
+        ],
+        "mean_outer_gates": [
+          0.8265352845191956,
+          0.8126072287559509,
+          0.8528584837913513
+        ],
+        "mean_route_entropy": 2.507626533508301,
+        "mean_joint_minus_marginal_product_L1": 7.03201052942859e-08
+      },
+      "peak_memory": 1662587392,
+      "frozen_auxiliary_parameter_count": 0
+    },
+    "AD_hard_axis_shared": {
+      "selected_epoch": 5,
+      "parameters": 99585158,
+      "trainable_parameters": 1887366,
+      "descriptor_dim": 5120,
+      "budget_epochs": 100,
+      "final_epoch": {
+        "mAP": 85.87227495185188,
+        "mINP": 62.02366881600286,
+        "Rank-1": 96.26822157434403,
+        "Rank-5": 97.20116618075801,
+        "Rank-10": 97.55102040816327,
+        "Rank-20": 97.84256559766764
+      },
+      "runtime": {
+        "end_to_end_seconds": 97.24601793289185,
+        "triplets": 10290,
+        "includes_decode_and_first_batch": true,
+        "mean_route": [
+          [
+            0.8780210614204407,
+            0.00022369620273821056,
+            0.00012391951167955995
+          ],
+          [
+            0.002710683038458228,
+            1.0989252587023657e-05,
+            6.529652637254912e-06
+          ],
+          [
+            0.07448610663414001,
+            1.8737504433374852e-05,
+            1.0904753253271338e-05
+          ],
+          [
+            0.01166574563831091,
+            1.3216856132203247e-05,
+            7.918155461084098e-06
+          ],
+          [
+            0.024724476039409637,
+            2.0292305634939112e-05,
+            1.2399137631291524e-05
+          ],
+          [
+            0.0030208497773855925,
+            9.163221875496674e-06,
+            5.5869086281745695e-06
+          ],
+          [
+            0.004890792071819305,
+            1.0466646926943213e-05,
+            6.43753901385935e-06
+          ]
+        ],
+        "mean_outer_gates": [
+          0.8332288265228271,
+          0.815522313117981,
+          0.6271752119064331
+        ],
+        "mean_route_entropy": 0.2757316529750824,
+        "mean_joint_minus_marginal_product_L1": 0.00030498369596898556
+      },
+      "peak_memory": 1434543616,
+      "frozen_auxiliary_parameter_count": 0
+    }
+  },
+  "original_both_plus1": false,
+  "original_both_plus2": false,
+  "official_GT_six_CMC50_perquery_groups": true,
+  "paired_AD_hard_batch_orders_and_partial_sets": true,
+  "random_full50_sampling_comparison_available": false,
+  "hard_orders_match_CPU_replay": true,
+  "new_neural_calls": 0,
+  "new_optimizer_updates": 0,
+  "original_controller_complete": false,
+  "original_local_exit_code": null,
+  "original_terminal_consumed": false,
+  "limits": "Only the original AD hard ordinary/axis pair completed full50 on GPU2/3. Random pair on GPU0/1 was explicitly user-stopped and excluded from performance tables, not a negative method result. Therefore no completed random-vs-hard single-factor performance claim. Hard pair is matched M/F secondscorerFP32, same sampling/partial sets and runtime matches train-only CPU replay. All other X model/loss/teacher50+expert50/heads42/newAdam/BN2/cap.10/5120 held. OldX MAMP differs precision and is not sampling-only evidence. Benchmark mAP-best earliest tie, onecheckpoint sixmetrics/best-last/fullcurves. No missing专项/201NN/49/seed hunt, inherited teacher gains disclosed; exposure increase alone does not prove retrieval gain."
+}
