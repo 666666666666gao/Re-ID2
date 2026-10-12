@@ -1,0 +1,128 @@
+{
+  "status": "ACTUAL_AH_FULL5632_REFERENCE_GT_NATIVE6_PASS_TWO_FORMAL_GPU23_WORKERS_LIVE",
+  "at": "2026-10-12T22:47:31.144649+08:00",
+  "observed_at": 1791816359.3151436,
+  "controller_pid": 2284095,
+  "gates": {
+    "reference_acceptance.json": {
+      "status": "PASS",
+      "controls": 2,
+      "full_frozen00_teacher_GT_per_query_equal": true,
+      "metrics": {
+        "mAP": 49.42609434847925,
+        "mINP": 24.967713227642683,
+        "Rank-1": 69.03553299492386,
+        "Rank-5": 81.7258883248731,
+        "Rank-10": 86.29441624365482,
+        "Rank-20": 90.86294416243655
+      }
+    },
+    "native_acceptance.json": {
+      "status": "PASS",
+      "controls": 2,
+      "actual_updates": 6,
+      "paired_sampling": true,
+      "strict_reload_equal": true,
+      "all_active_gradients_positive": true,
+      "parameters": 100902022,
+      "trainable_parameters": 2674822,
+      "descriptor_dim": 5632
+    }
+  },
+  "formal": [
+    {
+      "launch": {
+        "pid": 2287481,
+        "process_group": 2287481,
+        "gpu": 2,
+        "started": 1791816225.5893724,
+        "command": [
+          "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+          "-u",
+          "run_r201ah_MS_full_identity.py",
+          "--dataset",
+          "MSVR310",
+          "--freeze-identity-encoder",
+          "1",
+          "--seed",
+          "42",
+          "--mode",
+          "train",
+          "--variant",
+          "frequency_shared",
+          "--data-root",
+          "/data/gaob/Re-ID/dataset",
+          "--pretrained",
+          "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+          "--anchor-run-dir",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/MSVR310_demo_s42",
+          "--output",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ah_MS_full_identity_20261012/MSVR310/training/MSVR310_r201ah_frequency_shared_s42"
+        ],
+        "initial_resources": {
+          "gpu": 2,
+          "memory_used_mib": 18.0,
+          "observed_at": 1791816225.5879178
+        },
+        "temperature_power_control": false
+      },
+      "alive": true,
+      "cmdline": "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python -u run_r201ah_MS_full_identity.py --dataset MSVR310 --freeze-identity-encoder 1 --seed 42 --mode train --variant frequency_shared --data-root /data/gaob/Re-ID/dataset --pretrained /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt --anchor-run-dir /data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/MSVR310_demo_s42 --output /data/gaob/Re-ID/DeMo-DualAxis/runs/r201ah_MS_full_identity_20261012/MSVR310/training/MSVR310_r201ah_frequency_shared_s42 ",
+      "CUDA_VISIBLE_DEVICES": [
+        "CUDA_VISIBLE_DEVICES=2"
+      ]
+    },
+    {
+      "launch": {
+        "pid": 2287479,
+        "process_group": 2287479,
+        "gpu": 3,
+        "started": 1791816225.587435,
+        "command": [
+          "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+          "-u",
+          "run_r201ah_MS_full_identity.py",
+          "--dataset",
+          "MSVR310",
+          "--freeze-identity-encoder",
+          "1",
+          "--seed",
+          "42",
+          "--mode",
+          "train",
+          "--variant",
+          "axis_shared",
+          "--data-root",
+          "/data/gaob/Re-ID/dataset",
+          "--pretrained",
+          "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+          "--anchor-run-dir",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/MSVR310_demo_s42",
+          "--output",
+          "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ah_MS_full_identity_20261012/MSVR310/training/MSVR310_r201ah_axis_shared_s42"
+        ],
+        "initial_resources": {
+          "gpu": 3,
+          "memory_used_mib": 117.0,
+          "observed_at": 1791816225.5859303
+        },
+        "temperature_power_control": false
+      },
+      "alive": true,
+      "cmdline": "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python -u run_r201ah_MS_full_identity.py --dataset MSVR310 --freeze-identity-encoder 1 --seed 42 --mode train --variant axis_shared --data-root /data/gaob/Re-ID/dataset --pretrained /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt --anchor-run-dir /data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/MSVR310_demo_s42 --output /data/gaob/Re-ID/DeMo-DualAxis/runs/r201ah_MS_full_identity_20261012/MSVR310/training/MSVR310_r201ah_axis_shared_s42 ",
+      "CUDA_VISIBLE_DEVICES": [
+        "CUDA_VISIBLE_DEVICES=3"
+      ]
+    }
+  ],
+  "first_metric_observation_not_before_epoch_seconds": 1791817485.5893724,
+  "estimated_formal_wall_seconds": 1500,
+  "physical_gpus": [
+    2,
+    3
+  ],
+  "maximum_NN": 2,
+  "epoch_metrics_read": false,
+  "neural_formal_complete": false,
+  "goal": "ACTIVE_UNMET"
+}
