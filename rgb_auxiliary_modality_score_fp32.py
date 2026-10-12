@@ -23,5 +23,5 @@ def install(model):
     scorer.forward=MethodType(forward,scorer)
     model.anchor_record['M_auxiliary_scorer_precision']=dict(scope='Actual second projected M relation scoring only',precision='FP32',parameters_added=0,
         unchanged_calls='All 4D independent/raw/controlled10 scoring uses the original method',normal_inference_graph_unchanged=True,
-        evidence='AC actual hard-sampler ordinary post3-success-update gate lacks a present finite nonzero modality_expert.pool_score.weight gradient; subtype unobserved; exact arithmetic cause unmeasured. Candidate precision repair only, new matched random/hard native admission required; no claim of proved underflow.')
+        evidence='Source-reviewed AC ordinary replay measured three actual updates: steps1/3 Mscore grad present finite allzero, step2 nonzero53; same actual Z/weight/upstream local FP32 VJP nonzero512. Gradients remain extremely small; supports precision sensitivity, not a proved individual underflow instruction or retrieval gain. Candidate numerical repair needs fresh matched random/hard native3 pervariant; no gate relaxation.')
     return model
