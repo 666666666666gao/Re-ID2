@@ -1,0 +1,21 @@
+{
+  "status": "ACTUAL_LOCAL_SOURCE_AUDIT_ONLY_NO_RUNTIME_REPLAY",
+  "at": "2026-10-13T03:24:33+08:00",
+  "source_sha256": {
+    "run_full_official_frozen_anchor_experiment.py": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+    "run_r201ag_RGB_coordinate_metric.py": "036464b3fed1738d1e733f67bc1bb4c47c4e2aaea2015eac76e905ef70b794f5",
+    "original_identity_anchor.py": "847b6adf93eb44ff119585e5548e1ef52115bcd59d8e87cdb4735b541d390bcb",
+    "rgbnt100_lastblock_staged.py": "453fbde6c93951f0de633e533523f03d2f2cdcb2d4d962a676ef85a02e82524c",
+    "run_r201ak_RGB_lastblock_staged.py": "6eb53d73cb3739763aa2f19e7e0e92dc6d6d6fba2d43bfb18a8fdef1328aab3f"
+  },
+  "observations": {
+    "formal_parent_guard": "run_full_official_frozen_anchor_experiment.py lines154-155 is outside batch loop, once per epoch; conditional on freeze_identity_encoder.",
+    "native_parent_guard": "Native loop lines104-105 checks after each update when flag is true.",
+    "AK_guard": "run_r201ak_RGB_lastblock_staged.record calls stage.assert_retained at RUNNING/COMPLETE/SMOKE_PASS records; stage.step also checks actual native attempts.",
+    "numerical_drift": "Formal first shared/full-loss differences at ordinary step4/5 and axis24 occur before first epoch guard; the end-of-epoch guard alone is not a direct explanation.",
+    "cause": "UNPROVEN; no current evidence selects CUDA nondeterminism, flag, pixel inputs, or another factor as sole cause."
+  },
+  "no_running_source_modified": true,
+  "new_neural_calls": 0,
+  "new_remote_training_metrics_reads": 0
+}

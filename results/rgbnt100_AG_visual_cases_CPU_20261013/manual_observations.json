@@ -1,0 +1,51 @@
+{
+  "status": "ACTUAL_MANUAL_INSPECTION_FOUR_CACHED_AG_CASES",
+  "at": "2026-10-13T03:24:33+08:00",
+  "images_inspected": [
+    "case0_query.jpg",
+    "case0_full_first.jpg",
+    "case0_positive.jpg",
+    "case0_frequency_first.jpg",
+    "case1_query.jpg",
+    "case1_full_first.jpg",
+    "case1_positive.jpg",
+    "case2_query.jpg",
+    "case2_full_first.jpg",
+    "case2_base_first.jpg",
+    "case3_query.jpg",
+    "case3_full_first.jpg",
+    "case3_positive.jpg"
+  ],
+  "observations": [
+    {
+      "case": 0,
+      "query": "0542_c0004_010.jpg",
+      "observation": "White hatchback side view and rear-quarter positive; full first result is a different white vehicle in front view. F_unit_direction retrieves a correct other-view gallery first; full rank108/base121. Glare and a foreground vehicle are visible in examples."
+    },
+    {
+      "case": 1,
+      "query": "0562_c0003_015.jpg",
+      "observation": "White SUV side-view query. Correct gallery has a vertical pole occluding part of the front; wrong gallery is another white SUV front view. Base first correct, full first positive rank9; examples alone do not identify which pixels caused the change."
+    },
+    {
+      "case": 2,
+      "query": "0600_c0002_010.jpg",
+      "observation": "Rear-view red vehicle query and side-view correct gallery. Base retrieves a different dark vehicle first, full retrieves the correct identity first. Full rescue12->1 coexists with poor F-only first-positive rank237; independent F accuracy is not a deployment selector."
+    },
+    {
+      "case": 3,
+      "query": "0506_c0005_000.jpg",
+      "observation": "White vehicle has visible side markings in query and correct gallery; shrubs/trees partially cover foreground. Wrong first gallery is a different white vehicle in rear view. Base rank135/full175/F-only3088. Existing source information is visible but this does not establish why attention failed."
+    }
+  ],
+  "native_per_modality_pixels": [
+    256,
+    128
+  ],
+  "current_input_height_width": [
+    128,
+    256
+  ],
+  "decision": "Do not justify larger input as recovery of discarded original pixels; stored image size already matches input. Retain four-case observations and full-population block accounting; wait for current AK full50 before changing training.",
+  "limitations": "Selected extreme examples of four roles/distinct identities, not representative prevalence, a causal network diagnosis, training test-identity selection, or evidence about AK. Original 17 JPEGs/271265B remain private on C; no dataset images uploaded publicly."
+}
