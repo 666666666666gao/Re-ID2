@@ -1,0 +1,768 @@
+{
+  "status": "WARN",
+  "source_rescue_status": "SOURCE_DIAGNOSIS_COMPLETE_CAUSE_UNRESOLVED_CONTROLLED_DIAGNOSTIC_REQUIRED",
+  "review_type": "experiment-bridge RESCUE_ON_FAILURE / SOURCE_ONLY",
+  "reviewed_at": "2026-10-12T07:17:38+08:00",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "max",
+  "observed_backend": "UNATTESTED",
+  "observed_model": "UNATTESTED",
+  "observed_effort": "UNATTESTED",
+  "review_independence": "same-family/provisional",
+  "acceptance_status": "Not runtime/native/performance/deployment admission",
+  "summary": "实际 W RGB ordinary native 在 terminal all-trainable-gradient gate 失败。源码确认 scorer 仍连接实际 F 辅助损失，不能判为结构无用；到达该断言说明直接 PF 辅助梯度检查已通过。当前记录无法区分最后一批次全零、数值消失或其他梯度状态。先做一次经独立源码审查的 RGB-only 诊断，不修改或放松验收，不触碰运行中的 MS。",
+  "runtime_blocking_count": 1,
+  "implementation_defect_proven_count": 0,
+  "runtime_gate": {
+    "RGB_ordinary": "ACTUAL_NATIVE_EXIT_1_UNRESOLVED",
+    "RGB_axis": "ACTUAL_NATIVE_EXIT_0_PASSED_ONLY_ITS_ORIGINAL_SCOPE",
+    "RGB_formal_admission": false,
+    "new_native_admission": false,
+    "unchanged_R3_source_PASS_does_not_override_native_failure": true
+  },
+  "scope": {
+    "dataset": "RGBNT100",
+    "variant_under_failure": "frequency_shared",
+    "parameter": "frequency_expert.pool_score.weight",
+    "analysis_only": true,
+    "generalization": "No conclusion about all losses, all parameters, full training, other datasets, or retrieval performance."
+  },
+  "integrity": {
+    "request_file": "results/preflight/r201w_reduced_auxiliary_source_review_request_20261011.json",
+    "request_digest": {
+      "bytes": 19302,
+      "sha256": "82858099783acba494a0c36af508bb8f46f363f6b1733410f748e902e08fe71f"
+    },
+    "R3_review_file": "results/preflight/r201w_reduced_auxiliary_source_review_20261011.json",
+    "R3_review_digest": {
+      "bytes": 34408,
+      "sha256": "a6b4fcbcd8d9791d3a9dc8d5421edd1fa32ab2629fc4580bd2046813110cbc6d"
+    },
+    "current_exact_source_pins_matched": 162,
+    "new_source_pins_matched": 6,
+    "reused_unchanged_source_pins_matched": 156,
+    "current_stdlib_AST_parses": 152,
+    "six_sources_sha256": {
+      "run_r201w_reduced_auxiliary.py": "48b9217b063e21d16ff84f6ad821770daf5fdc334fbd0a41f3c42a38dd5df624",
+      "launch_r201w_reduced_auxiliary.py": "04576c0b1b3710f8f507d48ef459e24809dd7f205e45146d87d552c0a3668bf2",
+      "analyze_r201w_dataset_normal.py": "157ec2bc4625c8ae3891b20a7468807a9cf9a8fdcecb19798b45414c45955df0",
+      "results/preflight/r201w_reduced_auxiliary_deploy_20261011.py": "9f2871d49abb37accd98ca66f310d3a0cbb11404c9a132916d3ce6c67bf73198",
+      "results/preflight/r201w_dataset_normal_complete_intake_20261011.py": "2f32b9053837980397cec2574f2e559b1d4cd7661abaaf3961be7dd3efe2b592",
+      "results/preflight/r201w_reduced_auxiliary_plan_20261011.json": "6c436f9ca8371d963259623c3b0d8e08a99aea50c8e5f0f44a56d17f1bc5040d"
+    },
+    "failure_collection_file": "results/preflight/r201w_RGB_native_failure_20261012/collection.json",
+    "failure_collection_digest": {
+      "bytes": 3993,
+      "sha256": "8457bbd0cef458ccdabd06394c88888b06715dafb1a87335bdacf65d8fa7c6a7"
+    },
+    "failure_manifest_files_size_sha256_matched": 12,
+    "failure_manifest": {
+      "controller_launch.json": {
+        "bytes": 852,
+        "sha256": "0b600605d7661f5146667221c5851409eabad61df4f3f5cfa23f2b23078b76e2"
+      },
+      "native/RGBNT100_r201w_frequency_shared_s42_smoke_launch.json": {
+        "bytes": 943,
+        "sha256": "4236744bd91b087b02cbb9b8273bfe186c52a8199a88b3e5f3f5d63ab6e2d9c2"
+      },
+      "native/RGBNT100_r201w_frequency_shared_s42_smoke_exit.json": {
+        "bytes": 197,
+        "sha256": "728717f643ad9da7a20106d68426a2cc6a213563df6ea34fad4a486579ed6105"
+      },
+      "native/RGBNT100_r201w_axis_shared_s42_smoke_exit.json": {
+        "bytes": 192,
+        "sha256": "f9aab8379b137007334fedb57a2496d410533ed4289382ac49b83ff505c79a8a"
+      },
+      "native/RGBNT100_r201w_frequency_shared_s42_smoke.log": {
+        "bytes": 1707,
+        "sha256": "40e0e1576525e86b05265644708eb58e79611c093d5257d8ee2dc47a2042e554"
+      },
+      "native/RGBNT100_r201w_axis_shared_s42_smoke_launch.json": {
+        "bytes": 934,
+        "sha256": "619916cef1dd11d14e9564669b7c5e46b0c62a8154b54f6febde24bbcf3737f2"
+      },
+      "native/RGBNT100_r201w_axis_shared_s42_smoke.log": {
+        "bytes": 1294,
+        "sha256": "b31c1bb562b5dd628349e7e643f5ae16fa93acb14aeaadd56f4aa75a1fc0f2e0"
+      },
+      "native/RGBNT100_r201w_axis_shared_s42_smoke/run.json": {
+        "bytes": 8594,
+        "sha256": "ae40a72a65a36286a4a13d416fa26cd8943506cbcdebba2383ae38c03309a8cd"
+      },
+      "native/RGBNT100_r201w_axis_shared_s42_smoke/official_split_manifest.json": {
+        "bytes": 2068069,
+        "sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203"
+      },
+      "native/RGBNT100_r201w_axis_shared_s42_smoke/smoke.json": {
+        "bytes": 57916,
+        "sha256": "b3ee47a6e50f5c8592e827bbff99ef57da1be76744e07ed71b7b6d2c267845a6"
+      },
+      "native/RGBNT100_r201w_frequency_shared_s42_smoke/run.json": {
+        "bytes": 8603,
+        "sha256": "35d72bc692e26884a7037c38bf99442ec462774747e4c028226068013b23acbc"
+      },
+      "native/RGBNT100_r201w_frequency_shared_s42_smoke/official_split_manifest.json": {
+        "bytes": 2068069,
+        "sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203"
+      }
+    },
+    "original_review_and_failure_files_modified": false
+  },
+  "actual_failure": {
+    "collection_status": "ACTUAL_W_RGB_NATIVE_PAIR_CLOSED_ORDINARY_EXIT1_AXIS_EXIT0_NO_FORMAL",
+    "collected_at": "2026-10-12T07:06:58+08:00",
+    "ordinary_exit": {
+      "name": "RGBNT100_r201w_frequency_shared_s42_smoke",
+      "exit_code": 1,
+      "finished": 1791759890.5766988,
+      "gpu": 2,
+      "temperature_power_control": false,
+      "forced_own_group_cleanup": false
+    },
+    "axis_exit": {
+      "name": "RGBNT100_r201w_axis_shared_s42_smoke",
+      "exit_code": 0,
+      "finished": 1791759892.4960825,
+      "gpu": 3,
+      "temperature_power_control": false,
+      "forced_own_group_cleanup": false
+    },
+    "ordinary_log_file": "results/preflight/r201w_RGB_native_failure_20261012/native/RGBNT100_r201w_frequency_shared_s42_smoke.log",
+    "ordinary_log_digest": {
+      "bytes": 1707,
+      "sha256": "40e0e1576525e86b05265644708eb58e79611c093d5257d8ee2dc47a2042e554"
+    },
+    "traceback_file": "run_full_official_frozen_anchor_experiment.py",
+    "traceback_line": 111,
+    "assertion": "assert all(gradients.values()), [n for n, good in gradients.items() if not good]",
+    "failed_parameter_names": [
+      "frequency_expert.pool_score.weight"
+    ],
+    "ordinary_run_file": "results/preflight/r201w_RGB_native_failure_20261012/native/RGBNT100_r201w_frequency_shared_s42_smoke/run.json",
+    "ordinary_run_digest": {
+      "bytes": 8603,
+      "sha256": "35d72bc692e26884a7037c38bf99442ec462774747e4c028226068013b23acbc"
+    },
+    "arguments": {
+      "dataset": "RGBNT100",
+      "variant": "frequency_shared",
+      "data_root": "/data/gaob/Re-ID/dataset",
+      "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+      "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201w_reduced_auxiliary_20261011/RGBNT100/native/RGBNT100_r201w_frequency_shared_s42_smoke",
+      "anchor_run_dir": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+      "freeze_identity_encoder": 1,
+      "seed": 42,
+      "mode": "smoke"
+    },
+    "torch_recorded": "2.5.1+cu121",
+    "gpu_recorded": "NVIDIA GeForce RTX 3090",
+    "parameters": 99585158,
+    "trainable_parameters": 1887366,
+    "auxiliary_weight": 0.001,
+    "previous_auxiliary_weight": 0.05,
+    "smoke_json_exists": false,
+    "weights_present_in_collection": {},
+    "inferable_successful_optimizer_updates": 3,
+    "ordinary_attempt_count": "NOT_RECORDED; source reaches this gate after three successful updates, not necessarily exactly three attempts",
+    "ordinary_amp_skipped_steps": "NOT_RECORDED",
+    "ordinary_gradient_failure_kind": "NOT_RECORDED; Boolean predicate merges None, nonfinite and zero L1",
+    "ordinary_strict_reload": "NOT_REACHED",
+    "ordinary_direct_PF_auxiliary_check": "Source reachability inference: S lines 58-59 passed on every returned smoke update before runner line111. Actual per-attempt numeric values were not persisted."
+  },
+  "comparison_evidence": {
+    "W_axis": {
+      "file": "results/preflight/r201w_RGB_native_failure_20261012/native/RGBNT100_r201w_axis_shared_s42_smoke/smoke.json",
+      "bytes": 57916,
+      "sha256": "b3ee47a6e50f5c8592e827bbff99ef57da1be76744e07ed71b7b6d2c267845a6",
+      "status": "SMOKE_PASS",
+      "real_updates": 3,
+      "attempts": 3,
+      "amp_skipped_steps": 0,
+      "total_parameters": 99585158,
+      "trainable_parameters": 1887366,
+      "terminal_frequency_pool_score_gradient_boolean": true,
+      "all_terminal_trainable_gradient_booleans": true,
+      "trainable_parameter_tensor_count": 111,
+      "strict_reload_equal": true,
+      "descriptor_shape": [
+        8,
+        5120
+      ],
+      "coefficient_per_attempt": [
+        0.001,
+        0.001,
+        0.001
+      ],
+      "amp_scale_after_attempt": [
+        512.0,
+        512.0,
+        512.0
+      ],
+      "direct_PF_weighted_auxiliary_norm_per_attempt": [
+        0.0031953086145222187,
+        0.003269696608185768,
+        0.003136242739856243
+      ],
+      "F_output_weight_primary_hinge_norm_per_attempt": [
+        0.0001257214753422886,
+        0.000177003035787493,
+        0.00012443982996046543
+      ],
+      "F_output_weight_weighted_auxiliary_norm_per_attempt": [
+        0.00034206436248496175,
+        0.00032676433329470456,
+        0.00030928972410038114
+      ],
+      "batch_name_order_sha256_per_attempt": [
+        "09de49018b2da9e778fc9203920208a15a074e4da4a68d173bc55956f4027d08",
+        "c836c6eae77bdb97c6968ba07e868bac5ecdaa9636f7930be82ee56bf01ef597",
+        "dadb4918527f7fc9d71716220be2be27d329a26b1d609c0b0719b29965091294"
+      ],
+      "scope": "Only terminal all-parameter gradient booleans are stored. Direct PF / F.output.1.weight norms are different parameters, not pool_score magnitudes."
+    },
+    "S_ordinary": {
+      "file": "results/r201s_projected_auxiliary_20261011/RGBNT100/native/RGBNT100_r201s_frequency_shared_s42_smoke/smoke.json",
+      "bytes": 58268,
+      "sha256": "cc27d84df3f2ea433ba0a9f995e07c0e3fb30cce1e07a6940c5ca3f352392234",
+      "status": "SMOKE_PASS",
+      "real_updates": 3,
+      "attempts": 3,
+      "amp_skipped_steps": 0,
+      "total_parameters": 99585158,
+      "trainable_parameters": 1887366,
+      "terminal_frequency_pool_score_gradient_boolean": true,
+      "all_terminal_trainable_gradient_booleans": true,
+      "trainable_parameter_tensor_count": 111,
+      "strict_reload_equal": true,
+      "descriptor_shape": [
+        8,
+        5120
+      ],
+      "coefficient_per_attempt": [
+        0.05,
+        0.05,
+        0.05
+      ],
+      "amp_scale_after_attempt": [
+        512.0,
+        512.0,
+        512.0
+      ],
+      "direct_PF_weighted_auxiliary_norm_per_attempt": [
+        0.21003378927707672,
+        0.22015559673309326,
+        0.2356768697500229
+      ],
+      "F_output_weight_primary_hinge_norm_per_attempt": [
+        0.00012955436250194907,
+        0.00017723743803799152,
+        0.0001427912648068741
+      ],
+      "F_output_weight_weighted_auxiliary_norm_per_attempt": [
+        0.017042579129338264,
+        0.015213701874017715,
+        0.01801128126680851
+      ],
+      "batch_name_order_sha256_per_attempt": [
+        "09de49018b2da9e778fc9203920208a15a074e4da4a68d173bc55956f4027d08",
+        "c836c6eae77bdb97c6968ba07e868bac5ecdaa9636f7930be82ee56bf01ef597",
+        "dadb4918527f7fc9d71716220be2be27d329a26b1d609c0b0719b29965091294"
+      ],
+      "scope": "Only terminal all-parameter gradient booleans are stored. Direct PF / F.output.1.weight norms are different parameters, not pool_score magnitudes."
+    },
+    "S_axis": {
+      "file": "results/r201s_projected_auxiliary_20261011/RGBNT100/native/RGBNT100_r201s_axis_shared_s42_smoke/smoke.json",
+      "bytes": 58277,
+      "sha256": "a603ad57c0f1ae34a1a455a1a46e8c5915b43b9d1b410bbd74293f00ebbdc5d1",
+      "status": "SMOKE_PASS",
+      "real_updates": 3,
+      "attempts": 3,
+      "amp_skipped_steps": 0,
+      "total_parameters": 99585158,
+      "trainable_parameters": 1887366,
+      "terminal_frequency_pool_score_gradient_boolean": true,
+      "all_terminal_trainable_gradient_booleans": true,
+      "trainable_parameter_tensor_count": 111,
+      "strict_reload_equal": true,
+      "descriptor_shape": [
+        8,
+        5120
+      ],
+      "coefficient_per_attempt": [
+        0.05,
+        0.05,
+        0.05
+      ],
+      "amp_scale_after_attempt": [
+        512.0,
+        512.0,
+        512.0
+      ],
+      "direct_PF_weighted_auxiliary_norm_per_attempt": [
+        0.18138843774795532,
+        0.20424504578113556,
+        0.2097616195678711
+      ],
+      "F_output_weight_primary_hinge_norm_per_attempt": [
+        0.0001257214753422886,
+        0.00018865610763896257,
+        0.00013996654888615012
+      ],
+      "F_output_weight_weighted_auxiliary_norm_per_attempt": [
+        0.013820854015648365,
+        0.014022210612893105,
+        0.015089052729308605
+      ],
+      "batch_name_order_sha256_per_attempt": [
+        "09de49018b2da9e778fc9203920208a15a074e4da4a68d173bc55956f4027d08",
+        "c836c6eae77bdb97c6968ba07e868bac5ecdaa9636f7930be82ee56bf01ef597",
+        "dadb4918527f7fc9d71716220be2be27d329a26b1d609c0b0719b29965091294"
+      ],
+      "scope": "Only terminal all-parameter gradient booleans are stored. Direct PF / F.output.1.weight norms are different parameters, not pool_score magnitudes."
+    }
+  },
+  "comparison_limits": [
+    "S ordinary and W axis demonstrate a nonzero terminal scorer gradient under their own runs, not that W ordinary should have a nonzero gradient on every batch.",
+    "The saved W axis and S ordinary/axis batch name orders match for all three attempts. The failed W ordinary details/names were never written, so their actual equality is not independently established.",
+    "Old F.output.1.weight primary-hinge versus weighted-auxiliary diagnostics do not measure pool_score.weight, omit primary CE and other parameters, and do not prove the cause of this failure.",
+    "An auxiliary weight ratio of 1/50 does not establish a particular gradient ratio or a numerical-underflow cause."
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "classification": "PROVEN_SOURCE_PATH",
+      "title": "RGB scorer remains connected to the actual F auxiliary objective",
+      "evidence": [
+        "routed_projected_auxiliary.py:42-50",
+        "rgbnt201_identity_outlet.py:104-108",
+        "run_r201g_normal_priority.py:47-58",
+        "layers/make_loss.py:37-55"
+      ],
+      "detail": "The second F pool scores first-main11 normalized [B,7,512] PF directions, pools them, and feeds frequency_neck/classifier plus the original feature triplet. For RGB W, the objective is .001*(.25*label-smoothed CE + 1.0*softTriplet). W overwrites parent weights and P reads the updated anchor; no stale .05 reset or duplicate weight multiplication was found.",
+      "implication": "Source does not justify requires_grad=False, deleting the scorer, or treating the failure as an unconnected parameter."
+    },
+    {
+      "id": "F2",
+      "classification": "PROVEN_SOURCE_PATH",
+      "title": "The scorer has no main11 or partial task-loss rescue path",
+      "evidence": [
+        "rgbnt201_identity_outlet.py:80-110",
+        "axis_collaboration.py:103-130",
+        "axis_collaboration.py:140-143",
+        "run_r201o_same_state_contribution.py:23-43"
+      ],
+      "detail": "Main11 uses router relation/band/psi scores and per-relation PF; it does not call frequency_expert.pool_score. The controlled pools and controlled01 band score use this scorer, but calibrator context is detached and O targets run under no_grad. Partial forward returns before the auxiliary pools. Hence this scorer receives task-loss gradient through the scored F auxiliary path only, while PF/output weights also have the main loss/value paths.",
+      "implication": "Nonzero direct PF gradients can coexist with zero scorer gradients. Changing the auxiliary coefficient is relevant context but is not a complete causal diagnosis."
+    },
+    {
+      "id": "F3",
+      "classification": "PROVEN_NEGATIVE_OF_STRUCTURAL_CLAIM",
+      "title": "Ordinary frequency pooling is not algebraically forced to be useless",
+      "evidence": [
+        "shared_identity_axis.py:133-135",
+        "axis_collaboration.py:60-83",
+        "axis_collaboration.py:103-129",
+        "rgbnt201_identity_outlet.py:80-89"
+      ],
+      "detail": "frequency_shared selects structured=False. It expands the shared candidate values across three source groups, but each group uses query[band]+source[group]. Conditional cross-band reads and relation/band routing can further differ. Those operations do not force all seven projected PF unit directions to be identical. Actual relation dispersion is not logged.",
+      "implication": "A finite-precision collapse or small directional variance is possible but unmeasured. The previous MS T mean/freeze rescue cannot be copied as proof that this RGB scorer is obsolete."
+    },
+    {
+      "id": "F4",
+      "classification": "CONCRETE_NUMERICAL_BOUNDARY_UNCONFIRMED_CAUSE",
+      "title": "FP32 pooled output does not certify FP32 scoring/backward",
+      "evidence": [
+        "relation_local_identity_outlet.py:13-29",
+        "routed_projected_auxiliary.py:21",
+        "routed_projected_auxiliary.py:48-49",
+        "run_r201g_normal_priority.py:47-58",
+        "run_full_official_frozen_anchor_experiment.py:96"
+      ],
+      "detail": "PF directions are captured and normalized in FP32, but the second scored pool calls its Linear and softmax outside a local autocast-disabled block, inside G full forward autocast. Existing feature_dtype reports the pooled FP32 result, not the scorer output, softmax, upstream gradient or backward dtype. Native scaler starts at512; actual W ordinary scaler history is absent.",
+      "implication": "The scorer precision boundary is a specific place to instrument. Neither AMP underflow nor cancellation is established by source alone."
+    },
+    {
+      "id": "F5",
+      "classification": "PROVEN_ACCEPTANCE_AND_DIAGNOSTIC_LIMIT",
+      "title": "The existing gate examines only the terminal update gradient",
+      "evidence": [
+        "run_r201g_normal_priority.py:45",
+        "run_r201g_normal_priority.py:69-77",
+        "run_full_official_frozen_anchor_experiment.py:98-111",
+        "run_full_official_frozen_anchor_experiment.py:124-127"
+      ],
+      "detail": "Each step zeroes gradients, and the runner tests p.grad only after accumulating three successful optimizer updates. The Boolean merges None, nonfinite and exact-zero L1; neither parameter-level values nor prior update history are written before the assertion. Reaching line111 also proves the earlier direct-PF finite/nonzero assertions did not fail. This is not evidence that the scorer was inactive throughout all three updates.",
+      "implication": "The terminal check is stronger than graph connectivity alone, but no evidence yet justifies declaring this agreed protocol inappropriate. Preserve its original failure and unchanged acceptance requirements."
+    },
+    {
+      "id": "F6",
+      "classification": "PROVEN_SCOPE_DIFFERENCE",
+      "title": "MS T mean and frozen scorer status do not apply to RGB",
+      "evidence": [
+        "run_r201w_reduced_auxiliary.py:7-17",
+        "run_r201t_projected_auxiliary_mean.py:29-31",
+        "routed_projected_auxiliary_mean.py:9-12",
+        "routed_projected_auxiliary_mean.py:35-52",
+        "launch_r201w_reduced_auxiliary.py:56-62"
+      ],
+      "detail": "Only MS selects T, which replaces both actual-loss score pools with means and therefore freezes exactly1024 obsolete score parameters. RGB selects unchanged S scored pools with both scorers trainable. RGB total99585158/trainable1887366 matches both current native metadata and the old S ordinary/axis records.",
+      "implication": "There is no current parameter-count blocker or missing MS frozen-parameter exception to fix, and no reason to edit the active MS code."
+    }
+  ],
+  "mathematical_local_check": {
+    "formula": "For z_j, a_j=softmax(w^T z_j), u=sum_j a_j z_j and g=dL/du, dL/dw=sum_j a_j*(g^T(z_j-u))*z_j; batch reduction applies.",
+    "scope": "Exact-arithmetic local score-pool Jacobian, with coefficient already included in g; derived from current score-pool source, not a measured tensor result.",
+    "interpretation": "Identical z_j, a locally orthogonal upstream gradient, cancellation, or finite-precision operations may produce a zero score gradient while the direct value/PF gradient remains nonzero. The saved evidence does not identify which occurred."
+  },
+  "causal_judgment": {
+    "permanently_inactive_parameter": "NOT_ESTABLISHED",
+    "structurally_useless_parameter": "NOT_SUPPORTED_BY_CURRENT_SOURCE",
+    "numerical_underflow_or_rounding_cancellation": "PLAUSIBLE_AT_IDENTIFIED_SCORER_BOUNDARY_BUT_NOT_MEASURED",
+    "legitimate_terminal_batch_zero_or_loss_cancellation": "NOT_EXCLUDED",
+    "acceptance_protocol_inappropriate": "NOT_ESTABLISHED; retain gate",
+    "entire_F_branch_dead": "CONTRADICTED_BY_REACHABLE_PASSED_DIRECT_PF_ASSERTIONS",
+    "low_weight_is_unique_cause": "NOT_ESTABLISHED"
+  },
+  "minimal_next_action": {
+    "recommendation": "One separately source-reviewed, isolated RGB ordinary diagnostic replay before selecting any training fix.",
+    "execution_now": false,
+    "source_review_required_before_replay": true,
+    "scope": "New RGB-only diagnostic entry/output; same original teacher, seed42, fresh heads and Adam, P8K8, .001, native AMP/scaler512, unchanged full/partial forward and two-backward path. Up to the original three successful-update native gate; keep original all-gradient/strict-reload requirements and truthful exit.",
+    "do_not_reuse_live_controller_or_receiver": true,
+    "measurements": [
+      "Record each attempt and actual optimizer update, scaler before/after, batch names, pool-score requires_grad, and separate None/finite/nnz/min/max/L1/L2 values for the actual scorer gradient before unscale and after unscale/step; persist before the unchanged final assertion.",
+      "Capture first-main11 PF unit directions and their cross-relation differences, second-F-pool logits/softmax/output dtypes and ranges, and the real auxiliary upstream gradient to the pooled PF. Identify only the second F pool; the controlled first pool and controlled01 scorer are different calls.",
+      "On the same captured z, score weights and upstream gradient, compare the native local score-pool VJP with a detached diagnostic-only FP32 local recomputation. Use the current scaler consistently and record scaled/unscaled values. This checks the pool Jacobian, not an alternate full-model loss.",
+      "If the combined gradient cancels, retain same-forward weighted CE and softTriplet gradient contributions separately to distinguish objective cancellation from a disconnected path. Do not re-run extra neck/model forwards or update from diagnostic branches.",
+      "Keep diagnostic autograd.grad/hook events separate from the actual scaled backward; existing S/M autograd probes must not be mistaken for real accumulated p.grad or change it."
+    ],
+    "diagnostic_result_is_not_admission": true,
+    "failure_preservation": "If the unchanged terminal gate fails, write diagnostic evidence first and keep nonzero exit; do not produce SMOKE_PASS or start formal RGB.",
+    "no_reproduction_rule": "A non-reproduction is a diagnostic result, not proof of the original cause or permission for seed/scale searches."
+  },
+  "conditional_minimal_fix_only_after_evidence": {
+    "if_same_tensor_FP32_restores_finite_nonzero_gradient_lost_in_native_pool": "Candidate: a new RGB-specific rescue entry/helper placing only the second F score/softmax/pool calculation in an autocast-disabled FP32 region, identically for ordinary and axis. Keep weights, graph shape/state keys, calls, optimizer and all native assertions. Review its exact source before fresh matched native acceptance.",
+    "scope_limit": "Do not apply this candidate without the diagnostic evidence. A precision change must be explicitly recorded; it is not silently identical to the original S numerical recipe or proof that lowering weights alone caused the failure.",
+    "not_supported_now": [
+      "Freeze frequency scorer while it remains on a real loss path",
+      "Replace RGB scored outlet with the MS T mean/freeze recipe merely to satisfy the gate",
+      "Raise auxiliary weight or scaler solely to make the check pass",
+      "Remove parameter from gradient predicate or replace terminal gate with any-step OR",
+      "Reuse prior S/W-axis native PASS as acceptance of a changed RGB rescue",
+      "Add fabricated gradients or fabricated SMOKE_PASS"
+    ]
+  },
+  "protected_work": {
+    "basis": "Parent-provided current process state; this review performed no process, SSH or GPU queries.",
+    "MS_original_receiver_session": 84945,
+    "MS_original_receiver_PID": 7784,
+    "MS_receiver_birth": "2026-10-12 07:03:57.683557",
+    "MS_status_parent_reported": "Both native exits0; formal50 active on GPU0/1; same receiver owns ACK",
+    "RGB_controller_parent_reported": 4070696,
+    "RGB_controller_and_native_processes_parent_reported": "terminated; no formal RGB",
+    "original_receiver_restarted_or_stopped": false,
+    "MS_source_graph_weights_process_changed": false
+  },
+  "source_evidence": {
+    "run_r201w_reduced_auxiliary.py": {
+      "bytes": 3012,
+      "sha256": "48b9217b063e21d16ff84f6ad821770daf5fdc334fbd0a41f3c42a38dd5df624",
+      "lines": [
+        7,
+        8,
+        9,
+        29,
+        33,
+        41,
+        44
+      ]
+    },
+    "run_r201s_projected_auxiliary.py": {
+      "bytes": 5005,
+      "sha256": "223e63fbca1656246293ec6ed364d2bd7afa21e146ed47377a8daf08bd36253f",
+      "lines": [
+        9,
+        31,
+        48,
+        55,
+        58,
+        59,
+        62
+      ]
+    },
+    "run_r201t_projected_auxiliary_mean.py": {
+      "bytes": 4958,
+      "sha256": "ee26f66ecfd7d3e79472b7951317fda0fe5583ab9e9bd8114f1b21e6bd143a48",
+      "lines": [
+        12,
+        29,
+        30
+      ]
+    },
+    "run_r201r_primary_ce.py": {
+      "bytes": 3507,
+      "sha256": "4d5bc9bff28ee2ab7ff2625d12d3f8a1cfb8fd747e42a79ed3300adf99a17eb4",
+      "lines": [
+        28,
+        38
+      ]
+    },
+    "run_r201p_auxiliary_balance.py": {
+      "bytes": 2611,
+      "sha256": "710e6f8a9387ae50705bde49b737a636c8feb871d8fdc14b0e0f4c8f0eff32ba",
+      "lines": [
+        24,
+        37,
+        38,
+        40
+      ]
+    },
+    "run_r201o_same_state_contribution.py": {
+      "bytes": 3602,
+      "sha256": "0be224e44f2e092789b3a45984baf28a2b0d2f4f3c1979d46746633fcbc7fa29",
+      "lines": [
+        23,
+        24,
+        41,
+        43,
+        49,
+        52
+      ]
+    },
+    "run_r201n_bounded_identity_shift.py": {
+      "bytes": 2739,
+      "sha256": "15c7f0b5e69c59813a6ce67c17646ee0aba9222874c5932c16fe69e1f4f9a55b",
+      "lines": [
+        23,
+        29
+      ]
+    },
+    "run_r201m_primary_margin06.py": {
+      "bytes": 7417,
+      "sha256": "768852fc522c2d95d42b81d89930f27b6a83a9e6beb41c73e4994405f6fd2902",
+      "lines": [
+        44,
+        47,
+        49,
+        52,
+        85,
+        104,
+        106
+      ]
+    },
+    "run_r201g_normal_priority.py": {
+      "bytes": 5314,
+      "sha256": "1ad85d62a1e5ecd12d52b069c58fdaba436ae7ef3ba27e61f3763191b4c6779e",
+      "lines": [
+        45,
+        47,
+        52,
+        58,
+        62,
+        66,
+        68,
+        69,
+        71,
+        77
+      ]
+    },
+    "run_full_official_frozen_anchor_experiment.py": {
+      "bytes": 11369,
+      "sha256": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+      "lines": [
+        96,
+        98,
+        103,
+        106,
+        108,
+        109,
+        111,
+        112,
+        124
+      ]
+    },
+    "routed_projected_auxiliary.py": {
+      "bytes": 5083,
+      "sha256": "018f9296f27a09d58f36adbfb98dae93514153066acd2c1df58daf7e10aef435",
+      "lines": [
+        14,
+        21,
+        42,
+        46,
+        48,
+        49,
+        52,
+        62,
+        63,
+        73,
+        83
+      ]
+    },
+    "routed_projected_auxiliary_mean.py": {
+      "bytes": 5368,
+      "sha256": "3816479c3843b725a1b2a5894a8fafc605ca51637c048da1fdbc333c0347fcf7",
+      "lines": [
+        9,
+        12,
+        35,
+        45,
+        51,
+        94
+      ]
+    },
+    "rgbnt201_identity_outlet.py": {
+      "bytes": 10205,
+      "sha256": "ee03a16de0e7f4beb28f4a78a4ab8c16e8f19014bfa4164482d59714e52de784",
+      "lines": [
+        55,
+        63,
+        72,
+        80,
+        85,
+        89,
+        91,
+        93,
+        95,
+        98,
+        104,
+        105,
+        106
+      ]
+    },
+    "relation_local_identity_outlet.py": {
+      "bytes": 4014,
+      "sha256": "c22d550b2618ec64d38c425c360c130e3286eb4cd28ef028dcef660cad9fd307",
+      "lines": [
+        9,
+        13,
+        28,
+        31
+      ]
+    },
+    "axis_collaboration.py": {
+      "bytes": 16939,
+      "sha256": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+      "lines": [
+        58,
+        60,
+        64,
+        66,
+        69,
+        71,
+        75,
+        78,
+        85,
+        103,
+        106,
+        113,
+        117,
+        133,
+        140,
+        142,
+        171
+      ]
+    },
+    "shared_identity_axis.py": {
+      "bytes": 13503,
+      "sha256": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+      "lines": [
+        131,
+        133,
+        139
+      ]
+    },
+    "rgbnt201_projection_probe.py": {
+      "bytes": 4399,
+      "sha256": "d6f6e0bddef26f5578818810b1c57415789f4e2e7b88dda8f6af1548eacaf583",
+      "lines": [
+        28,
+        31,
+        36,
+        39
+      ]
+    },
+    "identity_coordinate_three_dataset.py": {
+      "bytes": 3121,
+      "sha256": "de4128c5c5993e0766ba74a700870b13478af44d28440312287b0fe2e32bb415",
+      "lines": [
+        15,
+        19,
+        20,
+        22,
+        30,
+        35,
+        38,
+        46
+      ]
+    },
+    "solver/make_optimizer.py": {
+      "bytes": 1794,
+      "sha256": "09e8e36c78c78cda75daad52bbc48f77f4dc33b96568a06bc1c193132ffbeafc",
+      "lines": [
+        4,
+        6,
+        7,
+        10,
+        31,
+        37
+      ]
+    },
+    "layers/make_loss.py": {
+      "bytes": 3597,
+      "sha256": "232ef86081a76665225db4360ea67650230b1d5986818cabc23ce5db36340dec",
+      "lines": [
+        13,
+        18,
+        19,
+        37,
+        45,
+        52,
+        54
+      ]
+    },
+    "layers/triplet_loss.py": {
+      "bytes": 5839,
+      "sha256": "f502c44bec642bbf72ce6d0f58c9f9a0084beef9cbb451c2d2786bb13f94960a",
+      "lines": [
+        107,
+        113,
+        119,
+        121,
+        134
+      ]
+    },
+    "launch_r201w_reduced_auxiliary.py": {
+      "bytes": 15086,
+      "sha256": "04576c0b1b3710f8f507d48ef459e24809dd7f205e45146d87d552c0a3668bf2",
+      "lines": [
+        51,
+        56,
+        59,
+        60,
+        62,
+        78,
+        85,
+        90
+      ]
+    }
+  },
+  "actions": {
+    "read_only_local_source_JSON_log_reads": true,
+    "stdlib_only_hash_AST_JSON": true,
+    "torch_imports": 0,
+    "project_or_model_imports": 0,
+    "new_neural_calls": 0,
+    "new_optimizer_updates": 0,
+    "SSH_calls": 0,
+    "GPU_calls": 0,
+    "process_actions": 0,
+    "implementation_files_changed": 0,
+    "R3_review_or_failure_originals_changed": 0,
+    "publication_or_deployment_actions": 0,
+    "written_files": [
+      "results/preflight/r201w_RGB_native_pool_score_rescue_source_20261012.json"
+    ]
+  },
+  "skill": "C:/Users/gb/.codex/skills/experiment-bridge/SKILL.md",
+  "local_policy": "C:/Users/gb/.codex/skills/shared-references/local-codex-policy.md"
+}

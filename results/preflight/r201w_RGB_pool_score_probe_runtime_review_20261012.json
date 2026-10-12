@@ -1,0 +1,543 @@
+{
+  "status": "PASS",
+  "review_verdict": "PASS_READOUT_WITH_LIMITS",
+  "original_native_gate_verdict": "FAIL_REPRODUCED",
+  "reviewed_at": "2026-10-12T07:35:16+08:00",
+  "review_type": "experiment-bridge RESCUE_ON_FAILURE / SEALED_LOCAL_RUNTIME_READOUT_REVIEW",
+  "review_execution_scope": "CPU stdlib JSON/log/source/hash reads only; no new NN, torch import, SSH, GPU or process operations",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "max",
+  "observed_backend": "UNATTESTED",
+  "observed_model": "UNATTESTED",
+  "observed_effort": "UNATTESTED",
+  "review_independence": "same-family/provisional",
+  "summary": "Controlled RGB ordinary diagnostic reproduces the original terminal F pool_score rejection as a finite present-but-zero gradient. The actual scorer emits FP16 logits from nonidentical FP32 projected relation directions. Matched real scaled-full-backward events have native weight-gradient nnz [0,3,0], while same-Z/same-underlying-weight/same-real-pooled-upstream detached FP32 local VJPs are finite and nonzero in all512 components on all three attempts. This supports preparing a narrowly targeted FP32 second-F-scorer numerical repair for RGB and reviewing its exact source. It does not admit training, prove the precise failing arithmetic operation, establish useful learning, or guarantee native/retrieval success.",
+  "blocking_findings": [],
+  "readout_integrity_blocking_count": 0,
+  "original_native_runtime_blocker": {
+    "parameter": "frequency_expert.pool_score.weight",
+    "present": true,
+    "finite": true,
+    "terminal_nonzero_elements": 0,
+    "original_failure_preserved": true,
+    "diagnostic_is_native_PASS": false
+  },
+  "integrity": {
+    "actual_collection_file": "results/preflight/r201w_RGB_pool_score_probe_actual_20261012.json",
+    "actual_collection_digest": {
+      "bytes": 1019,
+      "sha256": "a6fbda6bf7731b4b7243fbfcc360a8b2784aa1be2ba470d6b0364d785b496fbe"
+    },
+    "actual_manifest": {
+      "ordinary_probe_launch.json": {
+        "bytes": 739,
+        "sha256": "bdf3f1c10381ec30728cf69773b2544a46e5e787af8ca808de0770cca698f6bb"
+      },
+      "ordinary_probe.log": {
+        "bytes": 1425470,
+        "sha256": "3c04a11129183b21357c1329debf9e7c0c2a503800d123c18fbf50095182ff55"
+      },
+      "ordinary_probe_exit.json": {
+        "bytes": 170,
+        "sha256": "c3858c5bf47c9ff94dd9dc85562242f0d5d5172e736ec079f3335d96057cd712"
+      },
+      "ordinary/diagnostic.json": {
+        "bytes": 2297058,
+        "sha256": "2ff2dd6a372cb1f404cf0b32e9e43ef80ab2e052df33877bffa74a28e16f5c4f"
+      },
+      "ordinary/attempts.json": {
+        "bytes": 122554,
+        "sha256": "672ac0557b6a89b4ffbed3a40e0c8c4f6accfd1c8c1463bc1ce138cd6763a5da"
+      }
+    },
+    "all_actual_manifest_files_verified": 5,
+    "source_request_file": "results/preflight/r201w_RGB_pool_score_probe_source_request_20261012.json",
+    "source_request_digest": {
+      "bytes": 34209,
+      "sha256": "d31b5066f065af924ee3f64944cbfbc702477f0c339ac3e73cbf7cb99ec700e6"
+    },
+    "source_review_file": "results/preflight/r201w_RGB_pool_score_probe_source_review_20261012.json",
+    "source_review_digest": {
+      "bytes": 47277,
+      "sha256": "87456a45c73fb41207807325f60f7148aa788cb5c2240ae7d7939c29e58e39b2"
+    },
+    "current_source_pins_unchanged": 164,
+    "new_probe_files_unchanged": 2,
+    "prior_W_and_reused_sources_unchanged": 162,
+    "runtime_sources_bound_by_review": 136,
+    "original_failure_collection_file": "results/preflight/r201w_RGB_native_failure_20261012/collection.json",
+    "original_failure_collection_digest": {
+      "bytes": 3993,
+      "sha256": "8457bbd0cef458ccdabd06394c88888b06715dafb1a87335bdacf65d8fa7c6a7"
+    },
+    "original_failure_manifest_files_verified_unchanged": 12,
+    "diagnostic_official_split_manifest_equals_original_W": true,
+    "stdout_terminal_JSON_equals_diagnostic_JSON": true,
+    "local_pth_files": 0,
+    "old_S_ordinary_smoke_file": "results/r201s_projected_auxiliary_20261011/RGBNT100/native/RGBNT100_r201s_frequency_shared_s42_smoke/smoke.json",
+    "old_S_ordinary_smoke_digest": {
+      "bytes": 58268,
+      "sha256": "cc27d84df3f2ea433ba0a9f995e07c0e3fb30cce1e07a6940c5ca3f352392234"
+    },
+    "three_diagnostic_batch_name_orders_equal_old_S_ordinary": true
+  },
+  "actual_execution": {
+    "launch": {
+      "pid": 4119361,
+      "process_group": 4119361,
+      "gpu": 2,
+      "started": 1791761163.8844829,
+      "command": [
+        "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+        "-u",
+        "diagnose_r201w_RGB_pool_score_native.py",
+        "--data-root",
+        "/data/gaob/Re-ID/dataset",
+        "--pretrained",
+        "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+        "--anchor-run-dir",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+        "--output",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201w_RGB_pool_score_probe_20261012/ordinary"
+      ],
+      "initial_resources": {
+        "gpu": 2,
+        "memory_used_mib": 18.0,
+        "observed_at": 1791761163.8831336
+      },
+      "temperature_power_control": false
+    },
+    "exit": {
+      "name": "ordinary_probe",
+      "exit_code": 0,
+      "finished": 1791761184.3022864,
+      "gpu": 2,
+      "temperature_power_control": false,
+      "forced_own_group_cleanup": false
+    },
+    "elapsed_native_seconds": 20.417803525924683,
+    "diagnostic_status": "DIAGNOSTIC_COMPLETE_NOT_NATIVE_ACCEPTANCE",
+    "arguments": {
+      "data_root": "/data/gaob/Re-ID/dataset",
+      "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+      "anchor_run_dir": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+      "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201w_RGB_pool_score_probe_20261012/ordinary",
+      "dataset": "RGBNT100",
+      "variant": "frequency_shared",
+      "freeze_identity_encoder": 1,
+      "seed": 42,
+      "mode": "smoke"
+    },
+    "total_parameters": 99585158,
+    "trainable_parameters": 1887366,
+    "successful_updates": 3,
+    "attempts": 3,
+    "amp_skipped_steps": 0,
+    "scaler_after_each_attempt": [
+      512.0,
+      512.0,
+      512.0
+    ],
+    "trainable_parameter_tensors_recorded_per_attempt": 111,
+    "final_native_rejected_parameters": [
+      "frequency_expert.pool_score.weight"
+    ],
+    "last_gradient_predicate_passed": false,
+    "strict_reload_equal": true,
+    "descriptor_shape": [
+      8,
+      5120
+    ],
+    "weights_saved": 0,
+    "formal_training_admitted": false,
+    "local_receiver_parent_reported": {
+      "session": 4564,
+      "PID": 46712,
+      "birth": "2026-10-12 07:25:54.374813",
+      "terminal": "true exit0 / b46a56"
+    },
+    "local_receiver_report_was_not_process_queried_by_this_reviewer": true
+  },
+  "steps": [
+    {
+      "attempt": 1,
+      "optimizer_updated": true,
+      "scale": 512.0,
+      "actual_second_F_scorer": {
+        "input_shape": [
+          64,
+          7,
+          512
+        ],
+        "input_dtype": "torch.float32",
+        "output_dtype": "torch.float16",
+        "candidate_spread_max": 0.0002333521842956543,
+        "score_spread_max": 5.667656660079956e-05,
+        "finite": true
+      },
+      "native_scaled_full_weight_gradient": {
+        "event": "native_scorer_weight_gradient",
+        "event_id": 4,
+        "phase": "scaled_full_backward",
+        "scale": 512.0,
+        "pool_backward_id": 3,
+        "dtype": "torch.float32",
+        "finite": true,
+        "l1": 0.0,
+        "norm": 0.0,
+        "nonzero_elements": 0
+      },
+      "same_Z_weight_real_incoming_FP32_local_VJP": {
+        "event": "same_Z_weight_incoming_FP32_local_VJP",
+        "event_id": 3,
+        "phase": "scaled_full_backward",
+        "scale": 512.0,
+        "pool_backward_id": 3,
+        "incoming_dtype": "torch.float32",
+        "incoming_norm": 0.10321959853172302,
+        "fp32_weight_VJP_finite": true,
+        "fp32_weight_VJP_l1": 1.030519456435286e-07,
+        "fp32_weight_VJP_norm": 5.738322705894916e-09,
+        "fp32_weight_VJP_nnz": 512,
+        "same_Z_weight_upstream": true,
+        "updates": 0
+      },
+      "native_post_unscale_F_weight_gradient": {
+        "present": true,
+        "finite": true,
+        "l1": 0.0,
+        "norm": 0.0,
+        "nonzero_elements": 0
+      },
+      "FP32_local_VJP_norm_divided_by_same_scale": 1.1207661534951008e-11,
+      "F_parameter_delta_l1": 0.017673591151833534,
+      "M_post_unscale_weight_gradient": {
+        "present": true,
+        "finite": true,
+        "l1": 0.0,
+        "norm": 0.0,
+        "nonzero_elements": 0
+      },
+      "terminal_predicate_rejected_on_this_attempt": [
+        "modality_expert.pool_score.weight",
+        "frequency_expert.pool_score.weight"
+      ],
+      "direct_PF_weighted_auxiliary_norm": 0.0038309581577777863,
+      "normal_priority_call_contract": {
+        "source": "First main11 actual PM/PF output, per512 unit direction, existing-score relation pool512",
+        "projection_calls": {
+          "M": 3,
+          "F": 3
+        },
+        "pool_calls": {
+          "M": 2,
+          "F": 2
+        },
+        "neck_calls": {
+          "M": 1,
+          "F": 1
+        },
+        "feature_shape": [
+          64,
+          512
+        ],
+        "feature_requires_grad": true,
+        "feature_dtype": "torch.float32",
+        "controlled_pool_first_unchanged": true,
+        "main11_first_projection_selected": true,
+        "extra_neck_projection_calls": 0,
+        "existing_pool_scores_reused": true
+      },
+      "batch_name_order_sha256": "09de49018b2da9e778fc9203920208a15a074e4da4a68d173bc55956f4027d08"
+    },
+    {
+      "attempt": 2,
+      "optimizer_updated": true,
+      "scale": 512.0,
+      "actual_second_F_scorer": {
+        "input_shape": [
+          64,
+          7,
+          512
+        ],
+        "input_dtype": "torch.float32",
+        "output_dtype": "torch.float16",
+        "candidate_spread_max": 0.00028792303055524826,
+        "score_spread_max": 6.53974711894989e-05,
+        "finite": true
+      },
+      "native_scaled_full_weight_gradient": {
+        "event": "native_scorer_weight_gradient",
+        "event_id": 4,
+        "phase": "scaled_full_backward",
+        "scale": 512.0,
+        "pool_backward_id": 3,
+        "dtype": "torch.float32",
+        "finite": true,
+        "l1": 1.7881393432617188e-07,
+        "norm": 1.0323827126512697e-07,
+        "nonzero_elements": 3
+      },
+      "same_Z_weight_real_incoming_FP32_local_VJP": {
+        "event": "same_Z_weight_incoming_FP32_local_VJP",
+        "event_id": 3,
+        "phase": "scaled_full_backward",
+        "scale": 512.0,
+        "pool_backward_id": 3,
+        "incoming_dtype": "torch.float32",
+        "incoming_norm": 0.09848407655954361,
+        "fp32_weight_VJP_finite": true,
+        "fp32_weight_VJP_l1": 1.2424911233210878e-07,
+        "fp32_weight_VJP_norm": 6.87645407282389e-09,
+        "fp32_weight_VJP_nnz": 512,
+        "same_Z_weight_upstream": true,
+        "updates": 0
+      },
+      "native_post_unscale_F_weight_gradient": {
+        "present": true,
+        "finite": true,
+        "l1": 3.4924596548080444e-10,
+        "norm": 2.016372485647011e-10,
+        "nonzero_elements": 3
+      },
+      "FP32_local_VJP_norm_divided_by_same_scale": 1.343057436098416e-11,
+      "F_parameter_delta_l1": 0.01766766980290413,
+      "M_post_unscale_weight_gradient": {
+        "present": true,
+        "finite": true,
+        "l1": 0.0,
+        "norm": 0.0,
+        "nonzero_elements": 0
+      },
+      "terminal_predicate_rejected_on_this_attempt": [
+        "modality_expert.pool_score.weight"
+      ],
+      "direct_PF_weighted_auxiliary_norm": 0.00355715025216341,
+      "normal_priority_call_contract": {
+        "source": "First main11 actual PM/PF output, per512 unit direction, existing-score relation pool512",
+        "projection_calls": {
+          "M": 3,
+          "F": 3
+        },
+        "pool_calls": {
+          "M": 2,
+          "F": 2
+        },
+        "neck_calls": {
+          "M": 1,
+          "F": 1
+        },
+        "feature_shape": [
+          64,
+          512
+        ],
+        "feature_requires_grad": true,
+        "feature_dtype": "torch.float32",
+        "controlled_pool_first_unchanged": true,
+        "main11_first_projection_selected": true,
+        "extra_neck_projection_calls": 0,
+        "existing_pool_scores_reused": true
+      },
+      "batch_name_order_sha256": "c836c6eae77bdb97c6968ba07e868bac5ecdaa9636f7930be82ee56bf01ef597"
+    },
+    {
+      "attempt": 3,
+      "optimizer_updated": true,
+      "scale": 512.0,
+      "actual_second_F_scorer": {
+        "input_shape": [
+          64,
+          7,
+          512
+        ],
+        "input_dtype": "torch.float32",
+        "output_dtype": "torch.float16",
+        "candidate_spread_max": 0.00019688205793499947,
+        "score_spread_max": 5.231797695159912e-05,
+        "finite": true
+      },
+      "native_scaled_full_weight_gradient": {
+        "event": "native_scorer_weight_gradient",
+        "event_id": 4,
+        "phase": "scaled_full_backward",
+        "scale": 512.0,
+        "pool_backward_id": 3,
+        "dtype": "torch.float32",
+        "finite": true,
+        "l1": 0.0,
+        "norm": 0.0,
+        "nonzero_elements": 0
+      },
+      "same_Z_weight_real_incoming_FP32_local_VJP": {
+        "event": "same_Z_weight_incoming_FP32_local_VJP",
+        "event_id": 3,
+        "phase": "scaled_full_backward",
+        "scale": 512.0,
+        "pool_backward_id": 3,
+        "incoming_dtype": "torch.float32",
+        "incoming_norm": 0.10159966349601746,
+        "fp32_weight_VJP_finite": true,
+        "fp32_weight_VJP_l1": 1.3257613318273798e-07,
+        "fp32_weight_VJP_norm": 7.211879093915741e-09,
+        "fp32_weight_VJP_nnz": 512,
+        "same_Z_weight_upstream": true,
+        "updates": 0
+      },
+      "native_post_unscale_F_weight_gradient": {
+        "present": true,
+        "finite": true,
+        "l1": 0.0,
+        "norm": 0.0,
+        "nonzero_elements": 0
+      },
+      "FP32_local_VJP_norm_divided_by_same_scale": 1.4085701355304181e-11,
+      "F_parameter_delta_l1": 0.017659924924373627,
+      "M_post_unscale_weight_gradient": {
+        "present": true,
+        "finite": true,
+        "l1": 1.1641532182693481e-10,
+        "norm": 1.1641532182693481e-10,
+        "nonzero_elements": 1
+      },
+      "terminal_predicate_rejected_on_this_attempt": [
+        "frequency_expert.pool_score.weight"
+      ],
+      "direct_PF_weighted_auxiliary_norm": 0.0035518875811249018,
+      "normal_priority_call_contract": {
+        "source": "First main11 actual PM/PF output, per512 unit direction, existing-score relation pool512",
+        "projection_calls": {
+          "M": 3,
+          "F": 3
+        },
+        "pool_calls": {
+          "M": 2,
+          "F": 2
+        },
+        "neck_calls": {
+          "M": 1,
+          "F": 1
+        },
+        "feature_shape": [
+          64,
+          512
+        ],
+        "feature_requires_grad": true,
+        "feature_dtype": "torch.float32",
+        "controlled_pool_first_unchanged": true,
+        "main11_first_projection_selected": true,
+        "extra_neck_projection_calls": 0,
+        "existing_pool_scores_reused": true
+      },
+      "batch_name_order_sha256": "dadb4918527f7fc9d71716220be2be27d329a26b1d609c0b0719b29965091294"
+    }
+  ],
+  "phase_pairing": {
+    "actual_phase": "scaled_full_backward",
+    "FP32_local_VJP_event_id": 3,
+    "native_parameter_hook_event_id": 4,
+    "pool_backward_id": 3,
+    "scale": 512.0,
+    "unscaled_auxiliary_probe_events": [
+      1,
+      2
+    ],
+    "pairing_verified_on_each_attempt": true,
+    "comparison_rule": "Use matched actual scaled-full events. The local FP32 values quoted here are on the same scaled incoming gradient, not the earlier unscaled S/M probe gradients. Post-unscale native gradient norms equal native hook norms/512."
+  },
+  "numerical_findings": [
+    {
+      "id": "N1",
+      "status": "OBSERVED",
+      "finding": "The originally ambiguous failed-gradient predicate is resolved to present, finite, exactly zero on the terminal attempt, rather than None or nonfinite.",
+      "evidence": "All three F parameter records are present/finite. Native scorer hook and final .grad nnz are [0,3,0]; diagnostic final rejection is exactly frequency_expert.pool_score.weight. This reproduces the original final failed parameter; the original run did not save its intermediate gradient history."
+    },
+    {
+      "id": "N2",
+      "status": "OBSERVED_AND_LOCAL_INFERENCE",
+      "finding": "The scored pool is locally sensitive to scorer weights in FP32 for the captured actual upstream gradients; it is not structurally obsolete in these samples.",
+      "evidence": "Each same-Z/underlying-weight/real-incoming FP32 local VJP has512 finite nonzero components. Actual scaled norms are [5.738322705894916e-09, 6.87645407282389e-09, 7.211879093915741e-09]. Candidate spread (max absolute deviation from per-sample relation mean) is [0.0002333521842956543, 0.00028792303055524826, 0.00019688205793499947], so captured directions are not exactly identical."
+    },
+    {
+      "id": "N3",
+      "status": "OBSERVED_AND_BOUNDED_INFERENCE",
+      "finding": "The native low-precision scored-pool path loses or strongly changes a very small local derivative compared with FP32 recomputation.",
+      "evidence": "Second F scorer inputs are FP32 [64,7,512], but outputs are FP16. Native scaled gradient norms are [0,1.0323827126512697e-7,0], while FP32 local norms are nonzero near6e-9 to7e-9. Step2 native norm is about15.0133 times its FP32 local counterpart, so this is not evidence of uniform attenuation alone.",
+      "quantization_consistency": {
+        "step2_native_scaled_l1": 1.7881393432617188e-07,
+        "two_to_minus_24": 5.960464477539063e-08,
+        "L1_divided_by_two_to_minus_24": 3.0,
+        "nnz": 3,
+        "norm_divided_by_sqrt3_times_two_to_minus_24": 0.9999999820517685
+      },
+      "scope": "These aggregate values are consistent with binary16 quantization near its smallest nonzero scale. The record does not save intermediate softmax/logit gradients or every component, so it does not isolate a specific rounding, cancellation, underflow or GEMM-backward step."
+    },
+    {
+      "id": "N4",
+      "status": "OBSERVED_LIMIT",
+      "finding": "Actual F parameter movement does not demonstrate a useful F scoring task gradient.",
+      "evidence": "Parameter delta L1 remains about.01766-.01767 on all three updates, including steps1 and3 with zero task gradient. Existing Adam weight decay/history can move parameters. The FP32 local unscaled norms are only about1.1e-11 to1.4e-11; their nonzero values establish a local derivative, not learning efficacy."
+    },
+    {
+      "id": "N5",
+      "status": "OBSERVED_SCOPE_LIMIT",
+      "finding": "M scorer also has finite zero gradients on attempts1 and2 but one nonzero component at the final attempt.",
+      "evidence": "M scorer post-unscale nnz=[0,0,1]. The agreed native gate evaluates the final update, so M is not an additional terminal rejection in this record. This observation neither justifies expanding the requested F-only change nor supports weakening the final all-trainable check."
+    }
+  ],
+  "proposed_minimal_numeric_repair_assessment": {
+    "evidence_support": "SUPPORTED_FOR_PREPARATION_AND_EXACT_SOURCE_REVIEW",
+    "supported_target": "Only RGB training actual second F auxiliary scoring on the 3D seven-relation PF input [64,7,512].",
+    "proposed_operation": "Compute that scorer in an autocast-disabled FP32 region using unchanged underlying weight and FP32 input; preserve FP32 score output into the existing softmax/weighted pool. Preserve all other scorer calls and module state.",
+    "why_targeted": "Observed raw independent scoring input is [64,3,3,512] with FP16 output; controlled01 scoring input is [64,7,3,512] with FP32 output; the failing actual auxiliary scoring call alone has [64,7,512] FP32 input but FP16 output.",
+    "not_supported": [
+      "Freeze a scorer still connected to actual auxiliary loss",
+      "Copy MS T uniform means/frozen1024 into RGB",
+      "Increase .001, scaler or seed-search to make the gradient predicate pass",
+      "Relax/remove the final all-trainable gradient or strict-reload gate",
+      "Declare the diagnostic exit0 a native PASS",
+      "Attribute all failure or retrieval behavior to the reduced auxiliary coefficient"
+    ],
+    "future_exact_source_review_required": true,
+    "new_helper_runner_launcher_deployer_intake_CPU_sources_reviewed": false,
+    "runtime_acceptance_required": "Both ordinary and axis must freshly pass their unchanged native3/all-trainable/direct PM-PF/call-count/BN2/strict8-reload checks under the same modified numeric recipe, from fresh seed42/teacher/optimizer, before any formal50. A previously passed W axis native does not certify the changed recipe."
+  },
+  "limits_for_next_source_review": [
+    "Use new RGB-specific files and a new output root. Do not edit the current MS/old W/shared source bytes or interfere with the original receiver84945/PID7784.",
+    "Make the targeted shape/training/domain condition exact. Leave both 4D controlled/independent scoring calls, M scoring, normal inference, partial path, projections and normalization behavior unchanged.",
+    "Keep unchanged state keys, initialization and matched RGB total99585158/trainable1887366; do not add/remove/freeze trainable parameters or add model/neck/BN calls.",
+    "Keep the original teacher, fresh seed42, P8K8, .001 auxiliary weights, mainCE.25, contribution.05, hinge.6, bound.10, optimizer/AMP/scaler512, two backwards, full records and unchanged benchmark selection.",
+    "Apply the same numeric repair to both RGB controls and require fresh native validation; preserve failed W evidence and diagnostic NON_ACCEPTANCE labels.",
+    "Record the numeric precision repair explicitly. The future RGB result has this additional precision difference from the historical exact S/W recipe and cannot be described as a pure auxiliary-weight-only comparison.",
+    "The detached FP32 local VJP fixes the upstream gradient from the old native forward. A real FP32 forward changes pooling and downstream gradients; this record cannot promise that all current final gradient predicates or future training checks will pass.",
+    "The proposed repair source and deployment/intake/analysis code have not yet been supplied or reviewed here. This readout supports their preparation, not execution or formal admission."
+  ],
+  "admission": {
+    "diagnostic_observation_completed": true,
+    "original_W_RGB_native_PASS": false,
+    "proposed_repair_source_PASS": false,
+    "new_native_PASS": false,
+    "formal_training": false,
+    "performance_or_retrieval_claim": false
+  },
+  "protected_MS": {
+    "parent_reported_state": "Original matched MS formal runs have reached50/50 with train exit0; strict full GT is proceeding under original receiver84945. This reviewer did not query or alter it.",
+    "receiver_session": 84945,
+    "receiver_PID": 7784,
+    "intervention": false
+  },
+  "actions": {
+    "torch_or_project_imports": 0,
+    "new_neural_calls": 0,
+    "new_optimizer_updates": 0,
+    "SSH_calls": 0,
+    "GPU_queries": 0,
+    "process_actions": 0,
+    "implementation_changes": 0,
+    "original_evidence_or_reviews_changed": 0,
+    "written_files": [
+      "results/preflight/r201w_RGB_pool_score_probe_runtime_review_20261012.json"
+    ]
+  },
+  "skill": "C:/Users/gb/.codex/skills/experiment-bridge/SKILL.md",
+  "local_policy": "C:/Users/gb/.codex/skills/shared-references/local-codex-policy.md"
+}

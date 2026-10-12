@@ -1,0 +1,159 @@
+{
+  "status": "ACTUAL_CLOSED_W_RGB_NATIVE_SCORER_LOCAL_PRECISION_READOUT",
+  "at": "2026-10-12T07:36:20+08:00",
+  "steps": [
+    {
+      "attempt": 1,
+      "native_unscaled": {
+        "present": true,
+        "finite": true,
+        "l1": 0.0,
+        "norm": 0.0,
+        "nonzero_elements": 0
+      },
+      "native_scaled": {
+        "event": "native_scorer_weight_gradient",
+        "event_id": 4,
+        "phase": "scaled_full_backward",
+        "scale": 512.0,
+        "pool_backward_id": 3,
+        "dtype": "torch.float32",
+        "finite": true,
+        "l1": 0.0,
+        "norm": 0.0,
+        "nonzero_elements": 0
+      },
+      "same_Z_weight_upstream_FP32": {
+        "event": "same_Z_weight_incoming_FP32_local_VJP",
+        "event_id": 3,
+        "phase": "scaled_full_backward",
+        "scale": 512.0,
+        "pool_backward_id": 3,
+        "incoming_dtype": "torch.float32",
+        "incoming_norm": 0.10321959853172302,
+        "fp32_weight_VJP_finite": true,
+        "fp32_weight_VJP_l1": 1.030519456435286e-07,
+        "fp32_weight_VJP_norm": 5.738322705894916e-09,
+        "fp32_weight_VJP_nnz": 512,
+        "same_Z_weight_upstream": true,
+        "updates": 0
+      },
+      "score": {
+        "input_shape": [
+          64,
+          7,
+          512
+        ],
+        "input_dtype": "torch.float32",
+        "output_dtype": "torch.float16",
+        "candidate_spread_max": 0.0002333521842956543,
+        "score_spread_max": 5.667656660079956e-05,
+        "finite": true
+      }
+    },
+    {
+      "attempt": 2,
+      "native_unscaled": {
+        "present": true,
+        "finite": true,
+        "l1": 3.4924596548080444e-10,
+        "norm": 2.016372485647011e-10,
+        "nonzero_elements": 3
+      },
+      "native_scaled": {
+        "event": "native_scorer_weight_gradient",
+        "event_id": 4,
+        "phase": "scaled_full_backward",
+        "scale": 512.0,
+        "pool_backward_id": 3,
+        "dtype": "torch.float32",
+        "finite": true,
+        "l1": 1.7881393432617188e-07,
+        "norm": 1.0323827126512697e-07,
+        "nonzero_elements": 3
+      },
+      "same_Z_weight_upstream_FP32": {
+        "event": "same_Z_weight_incoming_FP32_local_VJP",
+        "event_id": 3,
+        "phase": "scaled_full_backward",
+        "scale": 512.0,
+        "pool_backward_id": 3,
+        "incoming_dtype": "torch.float32",
+        "incoming_norm": 0.09848407655954361,
+        "fp32_weight_VJP_finite": true,
+        "fp32_weight_VJP_l1": 1.2424911233210878e-07,
+        "fp32_weight_VJP_norm": 6.87645407282389e-09,
+        "fp32_weight_VJP_nnz": 512,
+        "same_Z_weight_upstream": true,
+        "updates": 0
+      },
+      "score": {
+        "input_shape": [
+          64,
+          7,
+          512
+        ],
+        "input_dtype": "torch.float32",
+        "output_dtype": "torch.float16",
+        "candidate_spread_max": 0.00028792303055524826,
+        "score_spread_max": 6.53974711894989e-05,
+        "finite": true
+      }
+    },
+    {
+      "attempt": 3,
+      "native_unscaled": {
+        "present": true,
+        "finite": true,
+        "l1": 0.0,
+        "norm": 0.0,
+        "nonzero_elements": 0
+      },
+      "native_scaled": {
+        "event": "native_scorer_weight_gradient",
+        "event_id": 4,
+        "phase": "scaled_full_backward",
+        "scale": 512.0,
+        "pool_backward_id": 3,
+        "dtype": "torch.float32",
+        "finite": true,
+        "l1": 0.0,
+        "norm": 0.0,
+        "nonzero_elements": 0
+      },
+      "same_Z_weight_upstream_FP32": {
+        "event": "same_Z_weight_incoming_FP32_local_VJP",
+        "event_id": 3,
+        "phase": "scaled_full_backward",
+        "scale": 512.0,
+        "pool_backward_id": 3,
+        "incoming_dtype": "torch.float32",
+        "incoming_norm": 0.10159966349601746,
+        "fp32_weight_VJP_finite": true,
+        "fp32_weight_VJP_l1": 1.3257613318273798e-07,
+        "fp32_weight_VJP_norm": 7.211879093915741e-09,
+        "fp32_weight_VJP_nnz": 512,
+        "same_Z_weight_upstream": true,
+        "updates": 0
+      },
+      "score": {
+        "input_shape": [
+          64,
+          7,
+          512
+        ],
+        "input_dtype": "torch.float32",
+        "output_dtype": "torch.float16",
+        "candidate_spread_max": 0.00019688205793499947,
+        "score_spread_max": 5.231797695159912e-05,
+        "finite": true
+      }
+    }
+  ],
+  "paired_native_names_partial_sets_equal": true,
+  "original_third_gradient_failure_reproduced": true,
+  "strict_reload_equal": true,
+  "extra_weights": 0,
+  "new_neural_calls": 0,
+  "limits": "Three batches only. Matching local FP32 VJP restores scorer sensitivity; no identification of a unique rounding/cancellation/underflow operation or guaranteed new full-network success. No formal admission."
+}
