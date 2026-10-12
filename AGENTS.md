@@ -1,3 +1,7 @@
+# Current AF fixed-best RGB full diagnostic closed — 2026-10-12T18:57:22+08:00
+
+ONLY2026 physicalGPU2/3/max2NN one/card. AF actualnative32forward-recordexecutions, twofixedADbest full10290QG each/30GToutlets/currentweightedFP32aux, normalq/g/dexact, stateunchanged,0optimizer/newweights. Allchild0/controllerabsent;Draw2twiceSHA thenonlymatchingownremote raw/restores/pkgclear; unique0/protectedADbest/K201/teachers. No201NN/missing专项/49/seedhunt/T-P. Resultsdiagnosticonly/single42/benchmarkselection; dimensions512/3584/5120 separate, oraclecohortnotdeployment. AD/AEnegativehistorypreserved; performancegoalACTIVE_UNMET. OnehandoffGitDesktop26/27exact. Supersedes prior AEclosed-only/prepared/live headers below.
+
 # Current AF normal selected-outlet workers live — 2026-10-12T18:21:33+08:00
 
 ONLY2026 physicalGPU2/3/max2NN one/card. AFactualnative32recordforwards/0updates pairPASS; ordinaryGPU2PID1550950/axisGPU3PID1550951/controller1549473 live18:18:58. Full30outlets1715Q8575G pending, firstprogress>=18:25:09 then180–300s. FixedADbestE16/E5/currentFP32weightedaux/combinedcachebatches; R1boundaryFAILpreserved/R2SOURCE_ONLYPASS. Immutable4new+211reuse/nohotedit/restart/duplicatecollector. RawandownednormalrestoresretaineduntiltruecompleteDsizeSHA. K201/ADbest/teachersprotected/no201NN/missing专项/49/seedhunt/T-P; goalACTIVE_UNMET. OnehandoffGitDesktop26/27exact. Supersedes preceding AEallclosed/noNN headers.
