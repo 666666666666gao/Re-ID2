@@ -1,3 +1,7 @@
+# Current Re-ID status — 2026-10-12T11:11:57+08:00
+
+X55293true0/7da8f4 full2x50/13126/native6/allGT/raw2/249text/CPU10290; axis86.121926/96.618076 rescue5harm5 fails+1. AA65092true0/f2a94a full2x50/1410/native6/allGT/raw2/249text/CPU3546; axis47.356901/63.959391 rescue6harm6, ordinarygap .003829/.169205 fails+1. AB72814true0/18f503 trainonly8675/136forward/50classes/nooptim andD167MBfullSHA; Xtrainneighborcoverage37.45%. ACpureCPU50epoch6563batch swap3891/recordCounter exact/P8K8/RNG0 coverage47.52%, formaltrainer NOTimplemented yet. AllNNownersclosed. Next runtimehardidentitysample controlledsource/native3 before50; MSstrongsharedbaseline/teacher plusgradualadaptation, dimensions/inheritedgains explicit; no moreLRsweep. PreserveK201/teachers/unique raw; missing专项deferred/no49/failedseedhunt/noT-P. OnehandoffGitDesktop26/27, goalACTIVE_UNMET.
+
 # Current owned Re-ID continuation — 2026-10-12T10:17:15+08:00
 
 Z57884 true0/32c87c closed2x50/1410/native6/fullGT/raw2/249text/CPU3546, axis47.122165/63.620981 fails+1; Znormal4 34284 true0/9246d0 8GT strict11wholearrays/raw2/32text/CPU3546, axis11-00-.017078/0 rescue0harm0. AAonlyGFactualstepLR.1 sourcePASS, noNNatpublication; newnative3pairbefore50. Sameactive13M/allotherZrecipe. Xoriginal55293 GPU2/3 stayslive/firstepochs>=10:23:07/nohotedits/restarts. YtwohistoricalbestDfullSHAthenonly807303858remoteduplicatescleared/restorebeforeYNN. K201best/teachers/uniqueD rawprotected/no201NN/new49/failedseedhunt/noT-P. OnehandoffGitDesktop26/27/goalACTIVE_UNMET.
