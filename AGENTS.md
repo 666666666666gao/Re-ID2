@@ -1,3 +1,7 @@
+# Current owned Re-ID continuation — 2026-10-12T09:10:51+08:00
+
+Yoriginal52030 true0/56d74b consumed: MS2x50/1410updates/native6/fullGT/raw2/249text/CPUclosed, axis47.352633/63.620981 fails+1. ZexistingGF9958912gradients/evalmodes+buffers retained/frozen4/sourceR2PASS/newnative6/actual0-1formal; active3122822->13081734 totalunchanged, 00adapts/capcurrentbase notfixedteacher. Xoriginal55293 2/3 stayslive, firstepochs>=10:23:07. PreserveoriginalsingleACKreceiver/nohotedits/restarts/firstnearendthen240s ortrueevents. W2historicalbestDfullSHAthenonly807303858remoteduplicatesremoved,restorebeforeWNN. K201best/teachers/uniqueD rawprotected/no201NN/new49/failedseedhunt/noT-P. OnehandoffGitDesktop26/27/goalACTIVE_UNMET.
+
 # Current owned Re-ID continuation — 2026-10-12T08:12:23+08:00
 
 Woriginal84945 true1/7424da consumed: MS2x50/2000updates/native6/fullGT/raw2/249text/CPUclosed, RGBnoformal nativegradfailurepreserved. XRGB2/3 onlyactualFauxscoreFP32 andYMS0/1onlyK4/sourcePASS+freshnative6each/4actualformalowners perxylaunchproof. Do notmodify reviewed sources/restart ACK receivers. Firstepochquery onlynearenddeadline then240s/trueevents. K201best/teachers/uniqueD rawprotected; T2historicalbestDsizeSHAthenonly807303858remoteduplicatescleared,restorebeforeTNN. Weaknormalandsix+1unmet/no201NN/new49/failedseedhunt/noT-P. OnehandoffGitDesktop26/27; goalactive.
