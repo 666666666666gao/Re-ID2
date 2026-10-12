@@ -1,3 +1,7 @@
+# Current AG RGB coordinate metric GPU23 formal live — 2026-10-12T19:54:01+08:00
+
+Only2026 GPU2/3/max2 one/card. AGnative6 trueAdam/strictreload/allgrad PASS; ordinaryGPU2PID1769023/axisGPU3PID1769024/controller1766688. Two formal full50 pending/13126 planned updates. First metric observation >=1791814076.4842813 then180–300s. Freeze reviewed source/nohotedit/restart/duplicatecollector. Actual scored512CE/FP32 scorers retained; only first11 unit3584 auxiliary softTriplet changed versus completedADhard. Preserve full official GT/paired recordorder/benchmarkearliestmAP selection/negative curves; no201NN/missing专项/49/seedhunt/T-P/GPU01. K201/teachers/strongMS protected. Raw remote until terminal/Dverified thenmatchingduplicate cleanup. GoalACTIVE_UNMET/onehandoffGitDesktop26/27exact. Supersedes AFclosed/noNN state.
+
 # Current AF fixed-best RGB full diagnostic closed — 2026-10-12T18:57:22+08:00
 
 ONLY2026 physicalGPU2/3/max2NN one/card. AF actualnative32forward-recordexecutions, twofixedADbest full10290QG each/30GToutlets/currentweightedFP32aux, normalq/g/dexact, stateunchanged,0optimizer/newweights. Allchild0/controllerabsent;Draw2twiceSHA thenonlymatchingownremote raw/restores/pkgclear; unique0/protectedADbest/K201/teachers. No201NN/missing专项/49/seedhunt/T-P. Resultsdiagnosticonly/single42/benchmarkselection; dimensions512/3584/5120 separate, oraclecohortnotdeployment. AD/AEnegativehistorypreserved; performancegoalACTIVE_UNMET. OnehandoffGitDesktop26/27exact. Supersedes prior AEclosed-only/prepared/live headers below.

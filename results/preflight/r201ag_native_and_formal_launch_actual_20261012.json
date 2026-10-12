@@ -1,0 +1,115 @@
+{
+  "observed_at": 1791805994.9383516,
+  "controller_pid": 1766688,
+  "controller_alive": true,
+  "native_acceptance": {
+    "status": "PASS",
+    "controls": 2,
+    "actual_updates": 6,
+    "paired_sampling": true,
+    "parameters": 99585158,
+    "trainable_parameters": 1887366,
+    "descriptor_dim": 5120,
+    "scored512CE_retained": true,
+    "actual_first11_unit3584_metric": true,
+    "strict_reload_equal": true,
+    "all_active_gradients_positive": true
+  },
+  "formal": [
+    {
+      "pid": 1769023,
+      "process_group": 1769023,
+      "gpu": 2,
+      "started": 1791805976.4818432,
+      "command": [
+        "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+        "-u",
+        "run_r201ag_RGB_coordinate_metric.py",
+        "--dataset",
+        "RGBNT100",
+        "--variant",
+        "frequency_shared",
+        "--freeze-identity-encoder",
+        "1",
+        "--seed",
+        "42",
+        "--mode",
+        "train",
+        "--data-root",
+        "/data/gaob/Re-ID/dataset",
+        "--pretrained",
+        "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+        "--anchor-run-dir",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+        "--output",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ag_RGB_coordinate_metric_20261012/RGBNT100/training/RGBNT100_r201ag_frequency_shared_s42"
+      ],
+      "initial_resources": {
+        "gpu": 2,
+        "memory_used_mib": 18.0,
+        "observed_at": 1791805976.4800808
+      },
+      "temperature_power_control": false,
+      "alive": true,
+      "CUDA_VISIBLE_DEVICES": "2"
+    },
+    {
+      "pid": 1769024,
+      "process_group": 1769024,
+      "gpu": 3,
+      "started": 1791805976.4842813,
+      "command": [
+        "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+        "-u",
+        "run_r201ag_RGB_coordinate_metric.py",
+        "--dataset",
+        "RGBNT100",
+        "--variant",
+        "axis_shared",
+        "--freeze-identity-encoder",
+        "1",
+        "--seed",
+        "42",
+        "--mode",
+        "train",
+        "--data-root",
+        "/data/gaob/Re-ID/dataset",
+        "--pretrained",
+        "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+        "--anchor-run-dir",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+        "--output",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ag_RGB_coordinate_metric_20261012/RGBNT100/training/RGBNT100_r201ag_axis_shared_s42"
+      ],
+      "initial_resources": {
+        "gpu": 3,
+        "memory_used_mib": 117.0,
+        "observed_at": 1791805976.482601
+      },
+      "temperature_power_control": false,
+      "alive": true,
+      "CUDA_VISIBLE_DEVICES": "3"
+    }
+  ],
+  "native_exits": {
+    "RGBNT100_r201ag_frequency_shared_s42_smoke_exit.json": {
+      "name": "RGBNT100_r201ag_frequency_shared_s42_smoke",
+      "exit_code": 0,
+      "finished": 1791805976.0981505,
+      "gpu": 2,
+      "temperature_power_control": false,
+      "forced_own_group_cleanup": false
+    },
+    "RGBNT100_r201ag_axis_shared_s42_smoke_exit.json": {
+      "name": "RGBNT100_r201ag_axis_shared_s42_smoke",
+      "exit_code": 0,
+      "finished": 1791805976.4024372,
+      "gpu": 3,
+      "temperature_power_control": false,
+      "forced_own_group_cleanup": false
+    }
+  },
+  "status": "ACTUAL_AG_NATIVE6_PASS_TWO_FORMAL_GPU23_WORKERS_LIVE",
+  "first_metric_observation_not_before_epoch_seconds": 1791814076.4842813,
+  "local_at": "2026-10-12T19:53:05+08:00"
+}
