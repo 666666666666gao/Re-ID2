@@ -1,0 +1,52 @@
+{
+  "status": "COMPLETE_RUNTIME_PIPELINE_IMPLEMENTED_SOURCE_REVIEW_PENDING_NO_NN",
+  "dataset": "MSVR310",
+  "goal": "Normal complete RGB/NIR/TIR retrieval first; preserve K RGBNT201",
+  "controls": [
+    "axis_frozen",
+    "axis_staged",
+    "frequency_staged",
+    "demo_staged"
+  ],
+  "teacher": "Existing full-official shared DeMo seed42 E37 already trained50",
+  "interface": "5120D private identity coordinates; no fixed25 public block",
+  "reference": {
+    "private5120_mAP": 47.76343210879296,
+    "private5120_Rank1": 65.48223350253807,
+    "full5632_mAP": 49.42609434847925,
+    "full5632_Rank1": 69.03553299492386,
+    "attribution": "Existing initialization/baseline, not added-expert gain"
+  },
+  "stage": {
+    "outlet_epochs": 5,
+    "relation_epochs": 45,
+    "module": "generalFusion",
+    "relation_LR_factor": 0.1,
+    "backbone_and_three_reducers_frozen": true,
+    "all_identity_modules_eval": true,
+    "GF_buffers_retained": true
+  },
+  "native": "Each smoke is three successful updates; staged first outlet update then two actual relationship updates; axis_frozen all three outlet updates. Explicitly not a five-epoch maturity test. All activities/strictreload, stage checks before any formal launch.",
+  "budget": {
+    "epochs_each": 50,
+    "formal_updates_each": 705,
+    "controls": 4,
+    "formal_updates_total": 2820,
+    "native_updates_total": 12,
+    "batch": 64,
+    "P": 16,
+    "K": 4,
+    "train": 1032,
+    "query": 591,
+    "gallery": 1055,
+    "heldout": 0
+  },
+  "selection": "All six metrics from maximum normal benchmark mAP checkpoint, earliest ties; benchmark selection disclosed; best and last/full curves retained",
+  "comparison": "Frozen-axis vs staged-axis isolates limited relation stage with same strong private init; staged-ordinary vs staged-axis same architecture capacity/recipe; staged-DeMo has no new experts and fewer parameters, reports base-adaptation gains separately. Not all controls equal compute.",
+  "still_required": [
+    "Fresh source review of final pipeline and transitive reused sources",
+    "Current capacity/idle and genuine AD transport recovery closure before any AE NN",
+    "Actual four native3 stage boundaries/allactive/strict reload before any50"
+  ],
+  "limits": "Complete code pipeline, local AST/JSON only; no actual AE NN/update yet. Fixed5 epochs is a candidate, not a demonstrated maturity criterion. No new loss/margin/FFT/local region/public block/full visual unfreezing/49/missing专项/201NN/seed hunt. AD originalremote4 remain running; local83463/PID22276 actuallylost withunknownexit. AE requires truthful source-reviewed CPU recovery closure before launch. Capacity2.3GB guard may require archiving closed AD best to D before AE launch."
+}

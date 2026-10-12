@@ -1,0 +1,67 @@
+{
+  "status": "GPU23_TWO_WAVE_REVISION_IMPLEMENTED_FRESH_SOURCE_REVIEW_PENDING_NO_NN",
+  "dataset": "MSVR310",
+  "goal": "Normal complete RGB/NIR/TIR retrieval first; preserve K RGBNT201",
+  "controls": [
+    "axis_frozen",
+    "axis_staged",
+    "frequency_staged",
+    "demo_staged"
+  ],
+  "teacher": "Existing full-official shared DeMo seed42 E37 already trained50",
+  "interface": "5120D private identity coordinates; no fixed25 public block",
+  "reference": {
+    "private5120_mAP": 47.76343210879296,
+    "private5120_Rank1": 65.48223350253807,
+    "full5632_mAP": 49.42609434847925,
+    "full5632_Rank1": 69.03553299492386,
+    "attribution": "Existing initialization/baseline, not added-expert gain"
+  },
+  "stage": {
+    "outlet_epochs": 5,
+    "relation_epochs": 45,
+    "module": "generalFusion",
+    "relation_LR_factor": 0.1,
+    "backbone_and_three_reducers_frozen": true,
+    "all_identity_modules_eval": true,
+    "GF_buffers_retained": true
+  },
+  "native": "Each smoke is three successful updates; staged first outlet update then two actual relationship updates; axis_frozen all three outlet updates. Explicitly not a five-epoch maturity test. All activities/strictreload, stage checks before any formal launch.",
+  "budget": {
+    "epochs_each": 50,
+    "formal_updates_each": 705,
+    "controls": 4,
+    "formal_updates_total": 2820,
+    "native_updates_total": 12,
+    "batch": 64,
+    "P": 16,
+    "K": 4,
+    "train": 1032,
+    "query": 591,
+    "gallery": 1055,
+    "heldout": 0
+  },
+  "selection": "All six metrics from maximum normal benchmark mAP checkpoint, earliest ties; benchmark selection disclosed; best and last/full curves retained",
+  "comparison": "Frozen-axis vs staged-axis isolates limited relation stage with same strong private init; staged-ordinary vs staged-axis same architecture capacity/recipe; staged-DeMo has no new experts and fewer parameters, reports base-adaptation gains separately. Not all controls equal compute.",
+  "still_required": [
+    "Fresh review of two-card wave scheduling and updated admission/intake",
+    "Actual two hard AD full50 plus two user-stopped random controls recovered; original children closed; GPU2/3 idle and capacity",
+    "All four native3 phase boundaries/strict reload before any formal50"
+  ],
+  "limits": "Latest user GPU2/3 only. Four AE controls and scientific budgets unchanged; native and formal each use two waves, at most one worker per card, no GPU0/1 query or launch. AD random controls were explicitly user-stopped, not full50 or negative method results; hard pair retains original processes. Old four-full50 AD recovery is ineligible. Detached remote lifecycle avoids lost local ACK dependency; all raw preserved until verified local collection. No AE NN or new performance claim.",
+  "physical_gpus": [
+    2,
+    3
+  ],
+  "maximum_NN": 2,
+  "control_waves": [
+    [
+      "axis_frozen",
+      "axis_staged"
+    ],
+    [
+      "frequency_staged",
+      "demo_staged"
+    ]
+  ]
+}

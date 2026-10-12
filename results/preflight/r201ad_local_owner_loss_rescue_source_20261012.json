@@ -1,0 +1,165 @@
+{
+  "status": "SOURCE_ONLY_RESCUE_RECOMMENDATION",
+  "verdict": "WARN",
+  "reviewed_at": "2026-10-12T14:00:01+08:00",
+  "scope": "Original AD local ACK-owner loss; transport-only preservation and truthful completion. No recovery implementation or future runtime result is approved by this source-only report.",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "observed_model": "UNATTESTED",
+  "observed_reasoning_effort": "UNATTESTED",
+  "identity_limit": "The task requested gpt-6-astra/max. The reviewer has no independent runtime model/effort attestation; request metadata is not treated as observed identity.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "skill": "C:/Users/gb/.agents/skills/experiment-bridge/SKILL.md",
+  "local_policy": "C:/Users/gb/.agents/skills/shared-references/local-codex-policy.md",
+  "context_exposure": {
+    "task_context": "Fresh delegated source-review task and supplied failure facts, followed by the root's proposed end-of-run transport cleanup plan. Full parent conversation history was not supplied.",
+    "mandatory_workspace_context": [
+      "C:/Users/gb/SOUL.md",
+      "C:/Users/gb/USER.md",
+      "C:/Users/gb/memory/2026-10-12.md",
+      "C:/Users/gb/memory/2026-10-11.md",
+      "C:/Users/gb/projects/demo_dual_axis_20261002/AGENTS.md"
+    ],
+    "history_limit": "Daily files were requested in the mandatory read; their combined displayed output was truncated. Historical project status and prior recovery information were therefore visible. This is not a zero-history or blinded review. The actual AD loss record and direct source control this conclusion.",
+    "private_MEMORY_md_read": false,
+    "bootstrap_present": false
+  },
+  "primary_evidence": {
+    "path": "results/preflight/r201ad_original_local_receiver_loss_actual_20261012.json",
+    "observed_at": "2026-10-12T13:55:24+08:00",
+    "original_native_session": 83463,
+    "original_receiver_pid": 22276,
+    "original_receiver_birth": "2026-10-12T13:21:58.815575+08:00",
+    "local_process_absent": true,
+    "tool_handle_result": "Unknown process id 83463",
+    "original_local_exit_code": null,
+    "original_terminal_consumed": false,
+    "remote_controller_pid": 522680,
+    "remote_controller_live_at_recorded_observation": true,
+    "original_training_pids": [524171, 524172, 524173, 524174],
+    "all_original_training_live_at_recorded_observation": true,
+    "controller_result_exists_at_recorded_observation": false,
+    "all_train_exit_result_and_normal_raw_files_absent_at_recorded_observation": true,
+    "current_remote_terminal_status": "NOT_OBSERVED_BY_REVIEWER",
+    "conclusion": "Actual local transport-owner loss is established. Neither training failure, training completion, remote controller termination nor the original local exit code follows from this record. Existing native12/formal-launch evidence is not invalidated by the missing receiver."
+  },
+  "sources_read": [
+    "launch_r201ad_RGB_precision_matched.py",
+    "results/preflight/r201ad_RGB_precision_matched_deploy_20261012.py",
+    "results/preflight/r201ad_RGB_normal_complete_intake_20261012.py",
+    "analyze_r201ad_RGB_precision_matched_normal.py",
+    "gpu_01_diagnostic_execute.py",
+    "gpu_thermal_execute.py",
+    "audit_full_official_normal.py",
+    "audit_full_official49.py",
+    "audit_shared_identity_states.py (imports and summarize dependency)",
+    "analyze_identity_coordinate_three_normal.py (load/query_rows/table helpers)",
+    "results/preflight/full_official_anchor_stream_bridge_20261005.py (copy_verified and stream lifecycle)",
+    "run_r201ad_RGB_random.py",
+    "run_r201ad_RGB_hard.py",
+    "run_r201x_RGB_auxiliary_fp32.py (runner dependency)",
+    "run_r201w_reduced_auxiliary.py (runner dependency)",
+    "run_full_official_frozen_anchor_experiment.py (final checkpoint/array/result write order)",
+    "results/preflight/r201n_MSVR_post_transport_collection_20261009.py",
+    "analyze_r201n_MSVR_post_transport_normal.py (transport gates and shared numerical checks)",
+    "results/preflight/r201n_transport_interruption_actual_20261009.json",
+    "results/preflight/r201n_original_MSVR_after_transport_observation_20261009.json (first completed-model evidence only)"
+  ],
+  "source_lifecycle": [
+    {
+      "evidence": "launch_r201ad_RGB_precision_matched.py:129-138; deploy:80-85",
+      "finding": "archive() computes the existing raw size/SHA, emits NORMAL_READY, then requires exactly matching JSON on the original stdin. Only after that ACK and a repeated file check does it unlink the raw and write NORMAL_LOCAL_SIZE_SHA_VERIFIED_REMOTE_CLEARED. No lost-owner recovery endpoint exists in this handshake."
+    },
+    {
+      "evidence": "launch_r201ad_RGB_precision_matched.py:140-183",
+      "finding": "The four train workers first wait for their own training process, validate COMPLETE/full50, and run the CPU audit. They then submit archive work to a separate single-worker executor and return. The parent obtains all train futures before reading archive future results. An exception stored by an archive future does not itself cancel the other train futures."
+    },
+    {
+      "evidence": "launch_r201ad_RGB_precision_matched.py:129-138,179-196",
+      "finding": "If the lost SSH stream yields EOF, json.loads('') fails before unlink. If emitting to the lost stream raises BrokenPipeError, it fails earlier. If stdin remains open without an ACK, the archive worker can remain blocked and later archive tasks queue behind it. These are source-derived possible outcomes of this actual lost owner, not claims about the current remote process."
+    },
+    {
+      "evidence": "launch_r201ad_RGB_precision_matched.py:182-196",
+      "finding": "An archive exception propagates when its future.result() is read after train futures complete; a blocked archive also prevents normal finalization. controller_result.json and CONTROLLER_COMPLETE are written only after every archive future succeeds. Thus four genuine completed trainings can coexist with missing controller_result and no successful original transport closure."
+    },
+    {
+      "evidence": "gpu_01_diagnostic_execute.py:24-50; gpu_thermal_execute.py:24-50",
+      "finding": "Training stdout/stderr goes to each run log, and each child starts its own session. The wrapper waits and writes the actual child exit receipt. Its finally block can kill a still-live child if that execute call unwinds. Do not stop or disturb the controller while any original training/audit worker remains active; source separation is not a guarantee against unrelated external termination."
+    },
+    {
+      "evidence": "run_full_official_frozen_anchor_experiment.py:166-183",
+      "finding": "The trainer updates best.pth only on strictly higher benchmark mAP, then after all 50 epochs strictly reloads that best, evaluates to best_per_query and best_official_arrays.npz, and only then writes COMPLETE result.json. Copy final best/raw after true completion; an intermediate best file is not a completed-run receipt."
+    }
+  ],
+  "blocking_findings": [
+    {
+      "id": "B1",
+      "blocks": "Using the existing successful-stream intake/analyzer unchanged or fabricating their prerequisites",
+      "evidence": "r201ad_RGB_normal_complete_intake_20261012.py:28-31,50-67; analyze_r201ad_RGB_precision_matched_normal.py:23-30,64",
+      "finding": "The current intake requires original receiver exit0, controller_result COMPLETE and all four original ACK/remote-clear receipts. The analyzer repeats controller/ACK requirements. None can truthfully be supplied by a new collection process merely because it copied complete training artifacts.",
+      "minimal_fix": "Prepare a narrowly named AD post-transport collector and analyzer variant, following the existing N recovery pattern. Replace only transport provenance gates/statuses with actual post-transport evidence; preserve the original AD scripts and all AD numerical/comparison checks. Never synthesize controller_result.json or normal_local_archive.json."
+    },
+    {
+      "id": "B2",
+      "blocks": "Declaring any AD full50/GT/raw/CPU completion now",
+      "evidence": "r201ad_original_local_receiver_loss_actual_20261012.json",
+      "finding": "The supplied primary observation still has all four original trainers alive, and no training exit/result/raw artifacts. Recovery may be prepared now, but actual completion must be established from those original runs later.",
+      "minimal_fix": "Keep the original jobs untouched and perform the planned near-end observation. Accept only actual complete artifacts and child exit receipts. Missing/nonzero receipts remain unresolved; do not manufacture success or rerun training to fill this transport gap."
+    }
+  ],
+  "nonblocking_findings": [
+    {
+      "id": "N1",
+      "finding": "The original local exit code and terminal chunk may remain unavailable. Preserve null/false explicitly. This does not prevent independently verified scientific completion of the four original runs, but it prevents any claim that original receiver exit0/terminal consumption was proved. A recovery process exit code is a different fact."
+    },
+    {
+      "id": "N2",
+      "finding": "The N collector is directly useful as a provenance pattern, not a drop-in script. It hardcodes two MSVR controls, original receiver exit1 and controller absence. AD has four RGBNT100 controls and original receiver exit unknown; those historical facts must not be copied."
+    },
+    {
+      "id": "N3",
+      "finding": "Controller lifecycle closure is separate from artifact/scientific closure. The root's proposed targeted cleanup of a remaining old transport controller is appropriate only after actual completion and identity checks. A current source gap in a NN-only gate is that train() launches a separate-session CPU audit after NN exit. Four absent NN children alone do not prove the controller is archive-only. Establish the original audit workers are also terminal before controller cleanup or any replacement CPU audit."
+    }
+  ],
+  "what_is_correct": [
+    "The existing ACK-before-unlink ordering protects raw data from deletion merely because the receiver disappears before any ACK.",
+    "Separate archive futures permit already admitted original full50 workers to finish without requiring each preceding archive ACK; an ACK exception alone is not a reason to restart training.",
+    "The existing installed-GT CPU audit checks the complete official split, actual saved distances, six metrics, CMC50, every query and groups, training coverage, and earliest-tie mAP-best selection without a neural forward.",
+    "AD analysis retains all four new matched controls plus the original DeMo baseline, 200 epoch rows, six comparisons and 10290 paired query rows. Its hard/random batch-multiset, partial-set and closed-CPU-replay checks should all remain unchanged in the recovery readout.",
+    "Original AD loss/model/sampler/native/full50 scripts require no transport-motivated modification."
+  ],
+  "minimal_recovery_recommendation": [
+    "Prepare only the post-transport collection/readout sources locally and obtain the required source review. Do not restart the deployer, controller, native tests or any training/evaluation NN process; do not create a second live ACK receiver.",
+    "At the already planned near-end milestone, observe the same original controller and four run identities. Require each original training process absent with its actual exit0, COMPLETE epochs50, 6563 steps=optimizer_steps, zero AMP skips, strict-best reload, full 8675-train/1715-query/8575-gallery coverage and the original native12 evidence. Total 26252 updates and 200 additional epochs are accepted only after all four satisfy the evidence.",
+    "Retain and collect all native/launch/exit records, epochs.csv, batch_orders.jsonl, official_split_manifest.json, best.json, best_per_query JSON/CSV, result/status files, training/audit logs and actual CPU audit records. Preserve the failure record and any controller error evidence alongside them.",
+    "Use existing successful normal_cpu_audit.json plus its true audit exit record when present. If actual end evidence establishes a missing/unfinished audit and no audit owner remains, run the unchanged audit_full_official_normal.py once on the completed original run using the existing environment and its retained raw. Record this as a new CPU audit process, not an original audit success. Do not call the GPU execute wrappers for this CPU recovery.",
+    "If end evidence actually shows controller522680 still alive after all four original NN trainers and original audit workers are terminal, confirm its exact launch identity and command line/project arguments. Then a narrowly targeted stop of that remaining transport controller is a minimal recovery action: signal only that verified controller, never a process group or training children, and record the signal/observed disappearance in a distinct controller_recovery.json. The simplest admissible stale-controller path has all four original train exit0 and audit exit0/PASS records first. Do not classify a deliberate recovery stop as original controller COMPLETE or original receiver exit0. No controller stop or live-owner claim is made by this source review.",
+    "After completion, inventory each original best_official_arrays.npz and final best.pth and preserve all eight files. Use the existing copy_verified size/full-SHA mechanism to copy them into the AD D archive with their original run-relative names. Retain remote originals during recovery. Do not remove a unique raw or checkpoint, and do not regenerate either by a neural replay.",
+    "Write new post_transport_collection and per-run normal_post_transport_archive records identifying the original runs and verified copies. Keep original_local_exit_code=null and original_terminal_consumed=false unless the original terminal is actually recovered. Record the new collector exit separately. Describe original ACK/controller completion only from actual evidence; do not write success-shaped substitutes for missing original receipts.",
+    "Reuse AD's CPU metrics, earliest-best selection, matched sampling/parameter/precision checks, four-control comparisons and all negative outcomes in the new readout. Change only its transport provenance inputs and output status/limits so it says completion was independently collected after owner loss.",
+    "Close the recovered scientific result only after all four original full50 records, complete installed-GT audits, verified raw/best preservation, verified text intake and the CPU readout truly succeed. Preserve any unresolved original receiver/controller lifecycle fact explicitly. This requires zero new neural forwards and zero optimizer updates."
+  ],
+  "faithful_reuse": {
+    "audit_full_official_normal.py": "Unchanged installed-GT CPU recount when original training exit0/result/raw are present. Imports numpy and CPU audit helpers, not torch/model builders. Requires the original installed data-root filenames.",
+    "audit_full_official49.py": "Only existing installed_rows/recount/verify/METRICS helpers used by the normal audit; do not invoke its 49-condition main.",
+    "analyze_identity_coordinate_three_normal.py": "Reuse load/query_rows/table unchanged for six metrics, CMC50, per-query/group consistency and CSV output.",
+    "analyze_r201ad_RGB_precision_matched_normal.py": "Reuse numerical body and AD-specific checks faithfully; original main is not executable for this loss until its transport assumptions are replaced in the narrowly scoped recovery variant.",
+    "results/preflight/full_official_anchor_stream_bridge_20261005.py": "Reuse copy_verified unchanged for byte-preserving copies; its existing size/SHA verification already supplies the needed archive evidence. No new fingerprint scheme is proposed.",
+    "results/preflight/r201n_MSVR_post_transport_collection_20261009.py": "Reuse collection/provenance structure and remote-original-retained semantics. Do not reuse MSVR counts, two-control assumptions, exit1 or absent-controller claims as AD facts."
+  },
+  "review_actions": {
+    "source_reads_only": true,
+    "ssh_or_remote_calls": 0,
+    "gpu_queries": 0,
+    "neural_calls": 0,
+    "optimizer_updates": 0,
+    "training_restarts": 0,
+    "torch_or_model_imports": 0,
+    "package_installs": 0,
+    "implementation_edits": 0,
+    "reattachment_attempts": 0,
+    "duplicate_receivers": 0,
+    "report_only_write": "results/preflight/r201ad_local_owner_loss_rescue_source_20261012.json"
+  }
+}
