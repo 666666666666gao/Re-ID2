@@ -1,0 +1,26 @@
+{
+  "status": "IMPLEMENTED_SOURCE_REVIEW_PENDING_NO_NN_STARTED",
+  "at": "2026-10-13T17:58:07+08:00",
+  "hypothesis": "Existing ModalityAxisExpert uses freshly learned7x64 relation queries and cross-frequency conditions; frozen DeMo already computes source-constrained seven pre-ATMoE HDM relations but never uses them to guide M-band reads. Current AL gradients do not show global CE dominance or broad M/F auxiliary conflict; improve access to existing teacher-semantic structure rather than add blanket gradient arbitration or another scalar sweep.",
+  "single_factor": "Add .1 * existing router.to_modality_query(detached pre-ATMoE HDM relation) to each of the M expert initial and cross-conditioned queries, repeated over3bands. Capture existing HDM result via one method wrapper; no additional backbone/HDM forward. Keep band/source-specific attention values unchanged.",
+  "source_semantics": "Use actual pre-ATMoE HDM outputs, not post-MoE full-source slot context; each reference relation uses only its DeMo relation sources. No unfiltered semantic vector is used as a main attention value. Query guidance is not claimed to guarantee new frequency identity information.",
+  "matched_controls": "Ordinary mixed-source and structured dual-axis both use identical query guidance, parameter count99585158/trainable1887366, same heads/seed42/teacher50+extra50/freshAdam, T2, cap.10, fullCE.25/hinge.6/reg.05/MFaux.001/actual unit3584 aux/scorersFP32, hardP8K8/B64, BN2/partial0/two backwards.",
+  "data": "Full official RGBNT1008675train50IDs/1715Q8575G, no train holdout; preserveK201 and strongerMS.",
+  "sanity": "Two native3 real updates with finite/active gradients, strict reload, correct observed teacher-reference shapes and FP32 .1 query condition, parentT1/no-psi factorization fixtures, existing PI and PM/PF auxiliary checks; formal only after native6 PASS.",
+  "evaluation": "Two full50/13126 successful updates; highest normal benchmarkmAP earliesttie, all mAP/mINP/R1/5/10/20 from one checkpoint, CMC1-50/allquery/groups/curves/cost, 4state percontrol. Compare originalDeMo, AL and equal-budget ordinary. Benchmark participates in selection.",
+  "success": "RGBNT100 mAP andR1 >= original +1pp; same-framework expert utility additionally requires positive11-00 and fair-control comparison, no claim from inheritedteacher gain.",
+  "cleanup": "Retain per-run selected best; raw arrays D size/SHA archive before clearing exact remote duplicates; preserve uniqueK201/teachers/strongMS/D dependencies.",
+  "execution": "Only2026physicalGPU2/3, one/card/max2. NoGPU0/1, T/P read/control, new201NN, missing专项,49 or failedseed fishing.",
+  "polling": "Native once near estimated short completion; formal estimated2.75h, next observation near formal+9600s; no repeated epoch polling. Inspect the original controller if observation fails, never restart from timer/handle loss alone.",
+  "sources": [
+    "rgbnt100_hdm_query_guidance.py",
+    "run_r201ao_RGB_hdm_query_guidance.py",
+    "launch_r201ao_RGB_hdm_query_guidance.py",
+    "evaluate_r201ao_RGB_normal_states.py",
+    "analyze_r201ao_RGB_hdm_query_guidance_normal.py",
+    "results/preflight/r201ao_RGB_hdm_query_guidance_deploy_20261013.py",
+    "results/preflight/r201ao_RGB_hdm_query_guidance_complete_intake_20261013.py",
+    "results/preflight/r201ao_RGB_hdm_query_guidance_plan_20261013.json"
+  ],
+  "human_document": "Only existing docs/实验交接.md and byte-identical Desktop/Git/26/27 mirrors. This plan is machine JSON, not a second handoff."
+}
