@@ -1,0 +1,436 @@
+{
+  "status": "ACTUAL_AO_ONE_NEAR_END_OBSERVATION",
+  "at": "2026-10-13T20:53:05+08:00",
+  "observer_pid": 31948,
+  "scheduled_epoch": 1791895984.3539734,
+  "actual": {
+    "observed_epoch": 1791895996.010928,
+    "controller_pid": 4001049,
+    "controller_live": false,
+    "result": {
+      "status": "COMPLETE",
+      "dataset": "RGBNT100",
+      "runs": [
+        {
+          "name": "RGBNT100_r201ao_frequency_shared_s42",
+          "gpu": 2,
+          "train": {
+            "name": "RGBNT100_r201ao_frequency_shared_s42",
+            "exit_code": 0,
+            "finished": 1791895432.4753442,
+            "gpu": 2,
+            "temperature_power_control": false,
+            "forced_own_group_cleanup": false
+          },
+          "audit": {
+            "name": "RGBNT100_r201ao_frequency_shared_s42",
+            "exit_code": 0,
+            "finished": 1791895440.7400076,
+            "gpu": 2,
+            "temperature_power_control": false,
+            "forced_own_group_cleanup": false
+          },
+          "states": {
+            "name": "RGBNT100_r201ao_frequency_shared_s42",
+            "exit_code": 0,
+            "finished": 1791895591.5728521,
+            "gpu": 2,
+            "temperature_power_control": false,
+            "forced_own_group_cleanup": false
+          },
+          "states_raw": {
+            "path": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ao_RGB_hdm_query_guidance_20261013/RGBNT100/states/RGBNT100_r201ao_frequency_shared_s42/normal_states.npz",
+            "bytes": 397631525,
+            "sha256": "0d45b838936899c5c554544400667f4eb4efbdfd386cdf531c8e647363898330"
+          },
+          "raw": {
+            "path": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ao_RGB_hdm_query_guidance_20261013/RGBNT100/training/RGBNT100_r201ao_frequency_shared_s42/best_official_arrays.npz",
+            "bytes": 247189821,
+            "sha256": "d080c296f35f0850bb7401c0a34cf1e26ddb79a1513d645514d07d55c376378e"
+          }
+        },
+        {
+          "name": "RGBNT100_r201ao_axis_shared_s42",
+          "gpu": 3,
+          "train": {
+            "name": "RGBNT100_r201ao_axis_shared_s42",
+            "exit_code": 0,
+            "finished": 1791895401.7723417,
+            "gpu": 3,
+            "temperature_power_control": false,
+            "forced_own_group_cleanup": false
+          },
+          "audit": {
+            "name": "RGBNT100_r201ao_axis_shared_s42",
+            "exit_code": 0,
+            "finished": 1791895410.3254852,
+            "gpu": 3,
+            "temperature_power_control": false,
+            "forced_own_group_cleanup": false
+          },
+          "states": {
+            "name": "RGBNT100_r201ao_axis_shared_s42",
+            "exit_code": 0,
+            "finished": 1791895552.49071,
+            "gpu": 3,
+            "temperature_power_control": false,
+            "forced_own_group_cleanup": false
+          },
+          "states_raw": {
+            "path": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ao_RGB_hdm_query_guidance_20261013/RGBNT100/states/RGBNT100_r201ao_axis_shared_s42/normal_states.npz",
+            "bytes": 397589465,
+            "sha256": "df605b955ca47f98b983437a8ea75fc209c45cbd19247865ab2e8e488826f165"
+          },
+          "raw": {
+            "path": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ao_RGB_hdm_query_guidance_20261013/RGBNT100/training/RGBNT100_r201ao_axis_shared_s42/best_official_arrays.npz",
+            "bytes": 247519653,
+            "sha256": "303b2a91e26fd3ccdb3941108a3bfee1ece5cd27a9894187a9ee30df2aaf7831"
+          }
+        }
+      ],
+      "controls": 2,
+      "native_updates": 6,
+      "successful_updates": 13126,
+      "additional_epochs": 100,
+      "paired_sampling_exact": true,
+      "AG_training_record_order_exact": true,
+      "AL_training_record_order_exact": true,
+      "HDM_query_guidance": true,
+      "HDM_query_guidance_parameters_added": 0,
+      "correction_budget": 0.1,
+      "states_cases": 8,
+      "normal_state_forward_record_executions": 20580,
+      "routing_temperature": 2.0,
+      "routing_parameters_added": 0,
+      "physical_gpus": [
+        2,
+        3
+      ],
+      "maximum_NN": 2,
+      "raw_preserved_pending_local_archive": true,
+      "missing_evaluated": false,
+      "new49": false,
+      "limits": "Two full official normal50 controls; only source-specific frozen pre-ATMoE HDM context added to M queries; no filtered value change, new parameter or repeated teacher forward; all AL network/losses/heads/BN/sampling/5120 unchanged. Teacher50 plus extra50, benchmark used for checkpoint selection. OldU MS negative not retried."
+    },
+    "children": [
+      {
+        "phase": "native",
+        "launch": {
+          "pid": 4001397,
+          "process_group": 4001397,
+          "gpu": 2,
+          "started": 1791886361.8014402,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_r201ao_RGB_hdm_query_guidance.py",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "frequency_shared",
+            "--freeze-identity-encoder",
+            "1",
+            "--seed",
+            "42",
+            "--mode",
+            "smoke",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ao_RGB_hdm_query_guidance_20261013/RGBNT100/native/RGBNT100_r201ao_frequency_shared_s42_smoke"
+          ],
+          "initial_resources": {
+            "gpu": 2,
+            "memory_used_mib": 18.0,
+            "observed_at": 1791886361.7998765
+          },
+          "temperature_power_control": false
+        },
+        "live": false,
+        "exit": {
+          "name": "RGBNT100_r201ao_frequency_shared_s42_smoke",
+          "exit_code": 0,
+          "finished": 1791886384.2715852,
+          "gpu": 2,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "native",
+        "launch": {
+          "pid": 4001396,
+          "process_group": 4001396,
+          "gpu": 3,
+          "started": 1791886361.7993386,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_r201ao_RGB_hdm_query_guidance.py",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "axis_shared",
+            "--freeze-identity-encoder",
+            "1",
+            "--seed",
+            "42",
+            "--mode",
+            "smoke",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ao_RGB_hdm_query_guidance_20261013/RGBNT100/native/RGBNT100_r201ao_axis_shared_s42_smoke"
+          ],
+          "initial_resources": {
+            "gpu": 3,
+            "memory_used_mib": 117.0,
+            "observed_at": 1791886361.797424
+          },
+          "temperature_power_control": false
+        },
+        "live": false,
+        "exit": {
+          "name": "RGBNT100_r201ao_axis_shared_s42_smoke",
+          "exit_code": 0,
+          "finished": 1791886383.538344,
+          "gpu": 3,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "training",
+        "launch": {
+          "pid": 4002582,
+          "process_group": 4002582,
+          "gpu": 2,
+          "started": 1791886384.3519142,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_r201ao_RGB_hdm_query_guidance.py",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "frequency_shared",
+            "--freeze-identity-encoder",
+            "1",
+            "--seed",
+            "42",
+            "--mode",
+            "train",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ao_RGB_hdm_query_guidance_20261013/RGBNT100/training/RGBNT100_r201ao_frequency_shared_s42"
+          ],
+          "initial_resources": {
+            "gpu": 2,
+            "memory_used_mib": 18.0,
+            "observed_at": 1791886384.3500106
+          },
+          "temperature_power_control": false
+        },
+        "live": false,
+        "exit": {
+          "name": "RGBNT100_r201ao_frequency_shared_s42",
+          "exit_code": 0,
+          "finished": 1791895432.4753442,
+          "gpu": 2,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "training",
+        "launch": {
+          "pid": 4002583,
+          "process_group": 4002583,
+          "gpu": 3,
+          "started": 1791886384.3539734,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_r201ao_RGB_hdm_query_guidance.py",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "axis_shared",
+            "--freeze-identity-encoder",
+            "1",
+            "--seed",
+            "42",
+            "--mode",
+            "train",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ao_RGB_hdm_query_guidance_20261013/RGBNT100/training/RGBNT100_r201ao_axis_shared_s42"
+          ],
+          "initial_resources": {
+            "gpu": 3,
+            "memory_used_mib": 117.0,
+            "observed_at": 1791886384.35239
+          },
+          "temperature_power_control": false
+        },
+        "live": false,
+        "exit": {
+          "name": "RGBNT100_r201ao_axis_shared_s42",
+          "exit_code": 0,
+          "finished": 1791895401.7723417,
+          "gpu": 3,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "audit",
+        "launch": {
+          "pid": 185209,
+          "process_group": 185209,
+          "gpu": 2,
+          "started": 1791895435.4866335,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "audit_full_official_normal.py",
+            "--run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ao_RGB_hdm_query_guidance_20261013/RGBNT100/training/RGBNT100_r201ao_frequency_shared_s42"
+          ],
+          "initial_resources": {
+            "gpu": 2,
+            "memory_used_mib": 18.0,
+            "observed_at": 1791895435.4850857
+          },
+          "temperature_power_control": false
+        },
+        "live": false,
+        "exit": {
+          "name": "RGBNT100_r201ao_frequency_shared_s42",
+          "exit_code": 0,
+          "finished": 1791895440.7400076,
+          "gpu": 2,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "audit",
+        "launch": {
+          "pid": 183799,
+          "process_group": 183799,
+          "gpu": 3,
+          "started": 1791895404.982989,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "audit_full_official_normal.py",
+            "--run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ao_RGB_hdm_query_guidance_20261013/RGBNT100/training/RGBNT100_r201ao_axis_shared_s42"
+          ],
+          "initial_resources": {
+            "gpu": 3,
+            "memory_used_mib": 117.0,
+            "observed_at": 1791895404.981177
+          },
+          "temperature_power_control": false
+        },
+        "live": false,
+        "exit": {
+          "name": "RGBNT100_r201ao_axis_shared_s42",
+          "exit_code": 0,
+          "finished": 1791895410.3254852,
+          "gpu": 3,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "states",
+        "launch": {
+          "pid": 185483,
+          "process_group": 185483,
+          "gpu": 2,
+          "started": 1791895440.8150287,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "evaluate_r201ao_RGB_normal_states.py",
+            "--run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ao_RGB_hdm_query_guidance_20261013/RGBNT100/training/RGBNT100_r201ao_frequency_shared_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ao_RGB_hdm_query_guidance_20261013/RGBNT100/states/RGBNT100_r201ao_frequency_shared_s42"
+          ],
+          "initial_resources": {
+            "gpu": 2,
+            "memory_used_mib": 18.0,
+            "observed_at": 1791895440.8136156
+          },
+          "temperature_power_control": false
+        },
+        "live": false,
+        "exit": {
+          "name": "RGBNT100_r201ao_frequency_shared_s42",
+          "exit_code": 0,
+          "finished": 1791895591.5728521,
+          "gpu": 2,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "states",
+        "launch": {
+          "pid": 183988,
+          "process_group": 183988,
+          "gpu": 3,
+          "started": 1791895410.3875604,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "evaluate_r201ao_RGB_normal_states.py",
+            "--run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ao_RGB_hdm_query_guidance_20261013/RGBNT100/training/RGBNT100_r201ao_axis_shared_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201ao_RGB_hdm_query_guidance_20261013/RGBNT100/states/RGBNT100_r201ao_axis_shared_s42"
+          ],
+          "initial_resources": {
+            "gpu": 3,
+            "memory_used_mib": 117.0,
+            "observed_at": 1791895410.385837
+          },
+          "temperature_power_control": false
+        },
+        "live": false,
+        "exit": {
+          "name": "RGBNT100_r201ao_axis_shared_s42",
+          "exit_code": 0,
+          "finished": 1791895552.49071,
+          "gpu": 3,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      }
+    ]
+  },
+  "no_relaunch": true,
+  "no_epoch_polling": true
+}
