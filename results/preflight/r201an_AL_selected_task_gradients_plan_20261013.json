@@ -1,0 +1,34 @@
+{
+  "status": "PLANNED_TRAIN_ONLY_DIAGNOSIS_NOT_STARTED",
+  "at": "2026-10-13T17:21:45+08:00",
+  "purpose": "After AM budget .20 negative result, observe actual complete task gradients at selected AL RGBNT100 ordinary E15 and axis E20; distinguish primary CE/hinge, M/F actual projected auxiliaries and contribution supervision before choosing the next controlled training change.",
+  "dataset": "RGBNT100",
+  "training_universe": 8675,
+  "train_identities": 50,
+  "observation_seed": 43,
+  "sampling": "Existing train-only near-identity P8K8 loader; same names/labels in both controls. Four observed full training batches each, not all-record or training-wide gradient coverage.",
+  "actual_objectives": "Main CE.25 + unit5120 batch-hard hinge.6; weighted M/F aux .001, scored512 CE and actual main11 per512-unit/whole3584 softTriplet; contribution .05; existing other full losses. AL route T2, cap.10, frozen encoder, selected best unchanged.",
+  "sanity_first": {
+    "per_control_training_forwards": 1,
+    "optimizer_updates": 0
+  },
+  "main": {
+    "controls": 2,
+    "training_forwards_per_control": 4,
+    "optimizer_updates": 0,
+    "checkpoint_writes": 0,
+    "official_query_gallery_neural_uses": 0
+  },
+  "gradient_scope": "Actual deploy parameters and deployed5120 feature: CE-versus-hinge, primary-versus-M/F-aux, M-versus-F-aux, primary-versus-contribution/full-total; None is disconnected/zero gradient.",
+  "execution": "2026 physicalGPU2 ordinary/3axis only, one/card/max2; only memory admission, no temperature/power read or control. Restore exact selected AL bests from existing D archives, clear only verified restored remote duplicates after terminal intake.",
+  "polling": "No frontend repeated epoch polling. Short train-only task received once at expected completion; on observation failure inspect original controller/children/exit before any further action. Never restart due to missing observer alone.",
+  "decision_rule": "Use locally observed gradient directions/magnitudes to choose one already-authorized framework optimization; do not equate this diagnosis with sustained conflict, causal failure, gradient arbitration success or new mAP/R1. No new 201 training, missing专项,49 or seed search.",
+  "sources": [
+    "probe_r201an_AL_selected_task_gradients.py",
+    "launch_r201an_AL_selected_task_gradients.py",
+    "analyze_r201an_AL_selected_task_gradients.py",
+    "results/preflight/r201an_AL_selected_task_gradients_deploy_20261013.py",
+    "results/preflight/r201an_AL_selected_task_gradients_plan_20261013.json"
+  ],
+  "human_document": "Existing docs/实验交接.md only; Desktop/Git/26/27 mirrors unchanged until evidence publication; JSON/CSV machine outputs."
+}
