@@ -1,0 +1,20 @@
+{
+  "status": "ACTUAL_SOURCE_PEAK_MEMORY_SCOPE_AUDIT",
+  "at": "2026-10-13T21:52:10+08:00",
+  "source_sha256": {
+    "run_full_official_frozen_anchor_experiment.py": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+    "run_full_official_experiment.py": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
+    "profile_reid_models.py": "48277ee647372932eafda72755f7412bcb979c4dae1f7727b399497d57124b41"
+  },
+  "facts": [
+    "Both official training runners collect peak_memory at the end after full50, checkpoint reload and selected evaluation; they do not explicitly reset CUDA peak statistics before that evaluation.",
+    "peak_memory in their run/result and derived normal_analysis is the reported run/process maximum, not independently isolated inference peak.",
+    "profile_reid_models.py has separate explicit permeasurement resets; its own profiling measurements are a different scope."
+  ],
+  "implication": "Retain raw reported numbers, label process maximum. Do not claim original12.176GB versus AO1.439GB as an inference-memory reduction. The saved selected10290QG end_to_end_seconds includes decode/firstbatch and remains a measured pipeline timing, not standalone kernel/FLOPs evidence.",
+  "original_metrics_unchanged": true,
+  "NN_executed": 0,
+  "optimizer_updates": 0,
+  "source_edits": 0,
+  "new_benchmark_queries": 0
+}
