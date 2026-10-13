@@ -31,7 +31,8 @@ def main():
         limits='Each method uses its own normal mAP-best earliest-tie checkpoint and identical full10290QG scope. '
         'AG/AL matched frozen recipe; AK additionally permits visual-tail adaptation and is a historical reference. '
         'Entropy is mean per-sample entropy, not entropy of the mean table; supplied L1 is mean per-sample joint-minus-product. '
-        'No stored per-epoch route curve, same-parameter T1/T2 intervention, per-query route correlation or causal explanation. '
+        'No per-epoch full-query/gallery route curve, same-parameter T1/T2 intervention, per-query route correlation or causal explanation. '
+        'Saved full-training batch route telemetry is reconstructed separately by analyze_rgbnt100_AG_AL_training_signals.py. '
         'More diffuse routing does not prove retrieval utility; high-band evidence may flow through cross-band conditions.')
     (out/'result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(rows,ensure_ascii=False))

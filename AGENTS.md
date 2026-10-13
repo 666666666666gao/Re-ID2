@@ -1,4 +1,12 @@
-# Current AL native6 passed / two formal GPU23 live — 2026-10-13T08:27:38+08:00
+# Current AM R2 source PASS, not yet native/deployed — 2026-10-13
+
+Only2026 physicalGPU2/3 max2 one/card; no0/1/T-P. AM final5120 budget .10->.20 only versus closed AL T2, fresh R2 source PASS0blocks/275 hashes, native0/formal0. AL and AH best binaries now exactD-only; restore before relatedNN. Current AL train cap98.56%/all-QG median .099911 supports controlled test, not success claim. Fulltraining routing curves reconstructed; only per-epoch full-QG curves were not stored. PreserveK201/strongMS/originalteachers/Dunique; weaknormal+1 thenDeMopaper6+1 goalACTIVE_UNMET. Priorheaders historical.
+
+# Current AL closed / AM budget source preparation only — 2026-10-13
+
+Only2026 physicalGPU2/3 max2 one/card; no GPU0/1 or temperature/power. AL two full50/native6/eightGTstates, D archives and Git e0129917 closed; original16362/functions105, collector22998 and publisher21752 actually exit0. Dual86.058516/96.501458 misses normal+1, rescue5/harm7; more diffuse T2 routing is insufficient. Actual full-training JSONL yields200 AG/AL epoch traces: all primary batches nonzero; AL selected training clipping .985568. Full10290QG saved geometry meanqueryshift .095833/median .099911. AM source-only preparation tests exactly final bound .10->.20 on unchanged AL temperature2 recipe; no new NN/native/formal yet. Random fused-head initialization is a confirmed source fact but no new head treatment is implemented. PreserveK201/MSstrong/AH/teachers/uniqueD; normalweak+1 and later DeMo symmetricsix+1 remain ACTIVE_UNMET. Fresh source review and real native6 before formal50, one human handoff Git/Desktop/26/27 identical. Saved training route curves exist; per-epoch full-QG route curves were not stored. Older live/prepared headers below are superseded.
+
+# Historical AL native6 passed / two formal GPU23 live — 2026-10-13T08:27:38+08:00
 
 Only2026physicalGPU2/3/max2 one/card/no T-P. Actualnative6/noAMPskip/strictreload/all-activegrad and routingFP32 T1parent/no-psi factorization PASS; controller3045385 formal3045723,3045724 confirmedlive; formal50/13126/eightstates stillpending/noALmetrics. ALjointlogitsT2 only frozenAGrecipe/5120/noaddedparams/head/loss/BN/sampling. Firstadmission1 wasrealproject3.030GB below3.3/GPUsidle/allprotected+sourcesexact, noNN; AGbesttwo DsizeSHApreserved thenonlyremoteduplicates retired, restorebeforeAGNN. Onepassiveowner 2676 waitingnearend 2026-10-13T11:03:43+08:00/240s no earlymetricquery/duplicate/restart. PreserveK201/MSstrong/AH/teachers/uniqueD; goalACTIVE_UNMET/no201NN/missing专项/new49/failedseedhunt/GPU01. OnehandoffGit/Desktop/26/27same. Priorprepared/liveheaders below historical/superseded.
 
