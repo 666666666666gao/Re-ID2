@@ -1,0 +1,55 @@
+{
+  "status": "SOURCE_PREPARATION_ONLY_NOT_DEPLOYED",
+  "at": "2026-10-14T02:59:30+08:00",
+  "dataset": "RGBNT100",
+  "basis_sha256": {
+    "results/preflight/r201ar_AQ_spatial_attention_20261014_actual_session.json": "ca006af02b4193802d16cee8599809cbf88948dc653beade8305666665947588",
+    "results/r201ar_AQ_spatial_attention_20261014/analysis/result.json": "6389a89653d3a610b9cf96f57649b8a304b8814139a801655069d48d0d2c97e6",
+    "results/preflight/r201aq_RGB_attention_decay_20261013_complete_intake.json": "d83303bbfaa0f26e3cdd0ffc7d4a4c13ebf3c8b7783a48ca13e1986a5384d991",
+    "results/r201aq_RGB_attention_decay_20261013/RGBNT100/normal_analysis/result.json": "e0708e009ebfb4e4c8627ed6402230fa4bbea68dae851d5675e7590f8838a013",
+    "results/preflight/r201as_original_MHA_projection_path_CPU_20261014.json": "70f4818064ffe5a995a355d8720ac8223dea14ad12c3a2841bf3a5102b189a6e"
+  },
+  "evidence": "AR actual10290: M processed key spatial variance nonzero .00149/.01289/.01285 but projectedQ .0186-.0486, logitstd .000157-.000312 and headmean maximum lift1.00015-1.00044. AQ QK norms preserved yet +.171mAP/+.058R1, below+1. F high-band value weakness is distinct and is not changed in this experiment.",
+  "change": "Only existing new M spatial attention projectedQ per head L2-normalized then multiplied sqrt(head_dim=8) in FP32 before casting to existing AMP dtype and unchanged scaled_dot_product_attention. Keeps Q/K/V/out parameters, K/V projections, frequency/cross-band attention, data, seed/RNG draws, optimizer, FFT, losses, routing, cap and BN calls. Removes Q amplitude, not Q direction/conditional message direction. No learnable logit scale or temperature sweep.",
+  "parameters_added": 0,
+  "compared_models": [
+    "axis_shared",
+    "frequency_shared"
+  ],
+  "physical_gpus": [
+    2,
+    3
+  ],
+  "maximum_NN": 2,
+  "native": "3 actual Adam updates each; query RMS active finite pre/post telemetry, all old contracts/strict reload/GT/fullsplit/parameters/pairedsampler/QKtaskgrad intact. Formal admission only after source PASS and realnative6.",
+  "full": "50 additional epochs each,13126 formal updates,full8675train/1715Q/8575G,normal GT six/CMC1-50/perquery/groups/training curves/full8states. Highestnormalbenchmark mAP earliesttie selects one checkpoint. Teacher50+extra50 budget disclosed.",
+  "controls": "Same frozen teacher42/freshheads/newAdam/hardP8K8/B64/T2/cap.10/mainCE.25/hinge.6/reg.05/aux.001/actualunit3584+score512/BN2/partial0/twobackwards/5120; both ordinary mixed-source and structured controls receive same query math. Direct compare completedAQ without normalization and pairedAS controls.",
+  "reading": "84 actual M attention calls per update including existing full and partial forward; collect pre norm min/mean and FP32 postnorm range with no extra forward/loss/update. Frequency reading unchanged. At completion retain six metrics/11-00/rescue/harm; nonuniform probabilities are not themselves success.",
+  "sources": [
+    "run_r201as_RGB_query_normalization.py",
+    "launch_r201as_RGB_query_normalization.py",
+    "evaluate_r201as_RGB_normal_states.py",
+    "analyze_r201as_RGB_query_normalization_normal.py",
+    "results/preflight/r201as_RGB_query_normalization_deploy_20261014.py",
+    "results/preflight/r201as_RGB_query_normalization_complete_intake_20261014.py",
+    "results/preflight/r201as_RGB_query_normalization_plan_20261014.json"
+  ],
+  "estimated_GPU_hours": 6,
+  "estimated_training_hours": 3.0,
+  "waiting": "One native/formal admission near estimated native end; then one exact local hidden timer near11100s after actualformal starts. Do not poll epochs/peaks. If still live, subsequent necessary controller observations >=180-300s. No automatic relaunch after tool timeout.",
+  "storage": "Dunique assets and protected4 retained. Admission >3.3GB remote/D free, zero GPU2/3 compute apps. Retain one best/config; archive selected/state raw toD exact before clearing owned remote duplicates, clean own packages only.",
+  "limits": "Not full QKNorm or a novel contribution; inference scale manipulation alone does not guarantee identity selection. This may amplify nuisance signals; +1 mAP/R1 and ordinary/11-00 utility are acceptance, never entropy. No201NN/newmissing/new49/seedhunt/T-P/extra refactor.",
+  "references": [
+    {
+      "title": "Query-Key Normalization for Transformers",
+      "url": "https://aclanthology.org/2020.findings-emnlp.379/",
+      "borrow": "Projected per-head query normalization concept only; source paper normalizes both Q and K and learns scale. AS deliberately does neither K normalization nor learned scale."
+    },
+    {
+      "title": "Swin Transformer V2",
+      "url": "https://openaccess.thecvf.com/content/CVPR2022/html/Liu_Swin_Transformer_V2_Scaling_Up_Capacity_and_Resolution_CVPR_2022_paper.html",
+      "borrow": "Attention amplitude can be separated from matching direction; no source network or acceptance claim transferred."
+    }
+  ],
+  "original_projection_fidelity": "Actual installedTorch2.5.1+cu121 CPU-only inspect confirms nnMHA functional uses _in_projection_packed and key is value fastpath jointly projects K/V. AS preserves original sequence-first packed QKV and original 2D output linear path, intervenes only between projectedQ and SDPA. No CUDA initialization or model forward in source inspection; no compatibility fallback."
+}
