@@ -1,3 +1,7 @@
+# Current AS closed — 2026-10-14T07:08:58+08:00
+
+Only2026 physicalGPU2/3, max2 one/card; noGPU0/1 or T-P. AS two full50/native6/eight actual GT states and original collector/best archives have exited0, no active project NN or waiting owner. Do not rerun completed AS deployer/collector/observer. Preserve201K/original teachers/strongMS/unique D best/raw. NormalRGB+1 and later DeMo symmetric paper-six+1 remain ACTIVE_UNMET. Next NN only after scoped evidence, fresh source review and native checks; do not promote AS or search failing seeds. Sole human handoff is docs/实验交接.md, mirrored exactly to Desktop/Git/26/27. Earlier current headers below are historical.
+
 # Current AM native6 PASS / two full50 workers GPU23 live — 2026-10-13T12:57:08+08:00
 
 Only2026physicalGPU2/3/max2 one/card/noT-P. Actual12:55:03 native6/strictreload/allactivegrad/budget.20 fixturePASS; controller3341641/formalGPU2ordinary3343994/GPU3axis3343993 confirmedlive. Full50x2/13126/eightGTstates pending/noAMfinalmetrics. Only full5120 correction budget .10->.20 versus closedAL T2; heads/params/loss/BN/sampling/frozenrefs unchanged. Solelocal3384/native78754 waits15:32:30+08:00 nearend/240sleep/noearlymetricquery; original7194/functions170 terminal0/966ae5. PreserveK201/origteachers/strongMS/exactD-onlyAL/AHbest restorebeforeNN; normalRGB+1 andlaterpaper6+1 remainACTIVE_UNMET/no201NN/missing49/failedseedhunt. OnehandoffGitDesktop26/27same. Olderheaders historical.
