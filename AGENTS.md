@@ -1,3 +1,7 @@
+# Current AT closed — 2026-10-14T07:38:06+08:00
+
+AS and AT are closed. Only2026 physicalGPU2/3/max2/onepercard; noGPU0/1 or T-P, no201NN/missing49/failedseed hunt. AT actual two native64 and two full10290 fixed-selected probes, zero updates/writes, cache output exact; four identical remote restores retired after D proof. No active project NN/wait. Preserve201K/all protectedteachers and unique D best/raw. Next training only after evidence, scoped fresh review and native gate. Sole handoff docs/实验交接.md exact Desktop/Git/26/27 mirror. Earlier current headers are historical.
+
 # Current AS closed — 2026-10-14T07:08:58+08:00
 
 Only2026 physicalGPU2/3, max2 one/card; noGPU0/1 or T-P. AS two full50/native6/eight actual GT states and original collector/best archives have exited0, no active project NN or waiting owner. Do not rerun completed AS deployer/collector/observer. Preserve201K/original teachers/strongMS/unique D best/raw. NormalRGB+1 and later DeMo symmetric paper-six+1 remain ACTIVE_UNMET. Next NN only after scoped evidence, fresh source review and native checks; do not promote AS or search failing seeds. Sole human handoff is docs/实验交接.md, mirrored exactly to Desktop/Git/26/27. Earlier current headers below are historical.
