@@ -1,0 +1,1532 @@
+{
+  "arguments": {
+    "dataset": "RGBNT100",
+    "variant": "axis_shared",
+    "data_root": "/data/gaob/Re-ID/dataset",
+    "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+    "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201am_RGB_correction_budget_20261013/RGBNT100/training/RGBNT100_r201am_axis_shared_s42",
+    "anchor_run_dir": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+    "freeze_identity_encoder": 1,
+    "seed": 42,
+    "mode": "train"
+  },
+  "config": "DATALOADER:\n  NUM_INSTANCE: 8\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: RGBNT100\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 8\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 5\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 128\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+  "classes": 50,
+  "camera_embeddings": 8,
+  "train_records": 8675,
+  "query_records": 1715,
+  "gallery_records": 8575,
+  "training_heldout_identities": 0,
+  "parameters": 99585158,
+  "trainable_parameters": 1887366,
+  "descriptor_dim": 5120,
+  "started": 1791867163.471995,
+  "torch": "2.5.1+cu121",
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "pretraining": "Full-official original RGBNT100 DeMo50 bestE8 plus additional50/new Adam; original identity encoder fixed",
+  "anchor": {
+    "original_run": "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+    "original_best_epoch": 8,
+    "anchor_training_epochs": 50,
+    "new_stage_epochs": 50,
+    "identity_modules": [
+      "BACKBONE",
+      "rgb_reduce",
+      "nir_reduce",
+      "tir_reduce",
+      "generalFusion"
+    ],
+    "descriptor_dim": 5120,
+    "bypass": false,
+    "selected_anchor_full_metrics": {
+      "mAP": 85.76856710316947,
+      "mINP": 61.84590828355626,
+      "Rank-1": 96.61807580174927,
+      "Rank-5": 97.0262390670554,
+      "Rank-10": 97.37609329446065,
+      "Rank-20": 97.72594752186589
+    },
+    "method": "AM RGBNT100 final unit-descriptor correction budget epsilon0.10->0.20 versus completed AL. Only the existing bound parameter changes for both ordinary/axis controls; joint-logit temperature2, all existing network/modules/heads/parameters/frozen original teacher42, mainCE.25/hinge.6/reg.05/MFaux.001/hardP8K8/B64/BN2/partial0/two backwards/5120 and additional50/newAdam stay. Actual AL selected-epoch training clipping .985568 and active margin fraction .838263, plus saved full-QG shifts near .10, motivate a controlled budget test; not proof of causation or gain. No classifier initialization change, additional expert/loss/descriptor dimension, backbone adaptation or unbounded correction. Real native3 each, full50 and fixed8GTstates; highest normal benchmarkmAP earliesttie/sameweight all6. Only2026physicalGPU2/3/max2, keepK201/strongMS, no201NN/missing专项/new49/failedseedhunt or temperature-power read/control.",
+    "optimizer_schedule": "Original50 plus additional50/freshAdam; fixed seed42",
+    "limits": "Common context remains auxiliary; coupled gate is not claimed calibrated. Twelve disjoint-source cases lack shared identity coordinates; missing evaluation deferred.",
+    "final_unit_descriptor_bound": {
+      "epsilon": 0.2,
+      "placement": "After complete parent M/F/I aggregation, gates and relation weights; before final deployed return",
+      "inactive_output": "Exact original candidate bytes; 00 remains the existing frozen identity path",
+      "parameter_change": 0,
+      "geometry_fixture": {
+        "status": "PASS_CPU_GEOMETRY_FIXTURE",
+        "vectors": 4,
+        "neural_forwards": 0,
+        "active_and_inactive_cases": true,
+        "finite_derivatives": true,
+        "epsilon": 0.2,
+        "perturbation_radius": 0.198997487421324,
+        "clipped_fraction": 0.5,
+        "candidate_shift_mean": 0.6963409781455994,
+        "candidate_shift_max": 2.0,
+        "bounded_shift_mean": 0.05402987077832222,
+        "bounded_shift_max": 0.19612248241901398
+      },
+      "limits": "Known norm bound; not retrieval correctness or guaranteed +1. K PI10/01 native equality is checked before this new output bound."
+    },
+    "contribution_reference": "Stopped-gradient corresponding gallery state; fixed00 positive/negative indices",
+    "M_F_auxiliary_weight_previous": 0.05,
+    "M_F_auxiliary_weight": 0.001,
+    "M_F_auxiliary_outlet": {
+      "previous": "Independent pre-condition raw M/F pools512",
+      "current": "Actual first11 projected per-relation unit directions, existing-score relation pool512",
+      "heads_and_coefficients_unchanged": true,
+      "parameters_added": 0,
+      "extra_neck_projection_calls": 0,
+      "auxiliary_dtype": "FP32 deployed directions; previous raw pools under native AMP",
+      "metric_outlet": "AG softTriplet on actual first11 per512 units flattened+whole-normalized3584; scored512 CE unchanged",
+      "pooling_domain": "Existing M/F pool_score reused over seven projected relation directions, previously raw bands/source-band evidence; no new score parameters/calls",
+      "controlled10_01_pool": "Unchanged first independent pools",
+      "inference": "Hooks/pool replacement inactive in eval; original5120 graph"
+    },
+    "projected_auxiliary_parent_dataset": "RGBNT100",
+    "parent_main_CE_weight": 0.25,
+    "parent_contribution_regression_weight": 0.05,
+    "reduced_auxiliary_parent": "S",
+    "F_auxiliary_scorer_precision": {
+      "scope": "Actual second projected F relation scoring only",
+      "precision": "FP32",
+      "parameters_added": 0,
+      "unchanged_calls": "All 4D independent/raw/controlled01 scoring uses the original method",
+      "normal_inference_graph_unchanged": true,
+      "evidence": "W ordinary native3 nnz0/3/0 versus sameZ/weight/scaledfull upstream FP32 localVJP512/512/512; original native failure retained, new pair native required"
+    },
+    "hard_identity_sampling": {
+      "bank": "runs/r201ab_RGB_training_neighbors_20261012/result.json",
+      "bank_sha256": "6c07d282fdcb22b14e4ea2bae0953b4000c80e1e3c099384f7aabc088a184f8e",
+      "training_only": true,
+      "P": 8,
+      "K": 8,
+      "top_neighbors": 3,
+      "maximum_swaps_per_batch": 1,
+      "parameters_added": 0,
+      "original_sampler_RNG_consumed_first": true,
+      "epoch_record_multiset_preserved": true
+    },
+    "M_auxiliary_scorer_precision": {
+      "scope": "Actual second projected M relation scoring only",
+      "precision": "FP32",
+      "parameters_added": 0,
+      "unchanged_calls": "All 4D independent/raw/controlled10 scoring uses the original method",
+      "normal_inference_graph_unchanged": true,
+      "evidence": "Source-reviewed AC ordinary replay measured three actual updates: steps1/3 Mscore grad present finite allzero, step2 nonzero53; same actual Z/weight/upstream local FP32 VJP nonzero512. Gradients remain extremely small; supports precision sensitivity, not a proved individual underflow instruction or retrieval gain. Candidate numerical repair needs fresh matched random/hard native3 pervariant; no gate relaxation."
+    },
+    "sampling_treatment": "hard",
+    "auxiliary_metric_feature": "actual_first11_per512_unit_relation_coordinates3584",
+    "auxiliary_CE_feature": "unchanged_existing_score_FP32_pool512",
+    "auxiliary_metric_parameters_added": 0,
+    "routing_temperature": 2.0,
+    "routing_parameters_added": 0,
+    "routing_change": "All existing joint a_S+c_b+psi logits divided by2 before legal-relation masking and softmax. All other routing, conditioning, projections, gates, losses and frozen encoder behavior retain AG.",
+    "correction_budget_previous": 0.1,
+    "correction_budget": 0.2,
+    "correction_budget_parameters_added": 0
+  },
+  "checkpoint_rule": "Maximum full official query/gallery mAP across 50 epochs; ties keep earliest epoch",
+  "evaluation_scope": "Entire official training split and entire official query/gallery; no fit/dev holdout",
+  "selection_limitation": "Official benchmark is used for checkpoint selection; this is not an untouched independent final test",
+  "method_revision": "AM RGBNT100 final unit-descriptor correction budget epsilon0.10->0.20 versus completed AL. Only the existing bound parameter changes for both ordinary/axis controls; joint-logit temperature2, all existing network/modules/heads/parameters/frozen original teacher42, mainCE.25/hinge.6/reg.05/MFaux.001/hardP8K8/B64/BN2/partial0/two backwards/5120 and additional50/newAdam stay. Actual AL selected-epoch training clipping .985568 and active margin fraction .838263, plus saved full-QG shifts near .10, motivate a controlled budget test; not proof of causation or gain. No classifier initialization change, additional expert/loss/descriptor dimension, backbone adaptation or unbounded correction. Real native3 each, full50 and fixed8GTstates; highest normal benchmarkmAP earliesttie/sameweight all6. Only2026physicalGPU2/3/max2, keepK201/strongMS, no201NN/missing专项/new49/failedseedhunt or temperature-power read/control.",
+  "partial_training": "Exactly AL full/partial computation, BN2/two backwards/routerT2 retained; only existing final correction budget .10->.20.",
+  "amp_policy": "Native fp16 GradScaler512; actual optimizer updates and skipped steps recorded",
+  "retention": "Only best.pth; smoke strict reload in memory; no initial, last, or smoke weight files",
+  "status": "COMPLETE",
+  "epochs": 50,
+  "steps": 6563,
+  "optimizer_steps": 6563,
+  "amp_skipped_steps": 0,
+  "best": {
+    "epoch": 1,
+    "mAP": 85.81471110206851,
+    "mINP": 61.97739678064092,
+    "Rank-1": 96.61807580174927,
+    "Rank-5": 97.0262390670554,
+    "Rank-10": 97.43440233236151,
+    "Rank-20": 97.72594752186589,
+    "query_count": 1715,
+    "valid_queries": 1715,
+    "invalid_queries": 0,
+    "gallery_count": 8575,
+    "CMC_1_to_50": [
+      96.61807580174927,
+      96.73469387755102,
+      96.85131195335276,
+      96.90962099125365,
+      97.0262390670554,
+      97.20116618075801,
+      97.25947521865889,
+      97.31778425655978,
+      97.37609329446065,
+      97.43440233236151,
+      97.49271137026238,
+      97.49271137026238,
+      97.55102040816327,
+      97.55102040816327,
+      97.55102040816327,
+      97.60932944606414,
+      97.60932944606414,
+      97.667638483965,
+      97.72594752186589,
+      97.72594752186589,
+      97.72594752186589,
+      97.78425655976677,
+      97.90087463556851,
+      97.95918367346938,
+      98.19241982507289,
+      98.42565597667638,
+      98.54227405247813,
+      98.60058309037902,
+      98.71720116618076,
+      98.77551020408163,
+      98.83381924198251,
+      98.83381924198251,
+      98.89212827988338,
+      98.89212827988338,
+      98.89212827988338,
+      98.95043731778426,
+      98.95043731778426,
+      99.00874635568513,
+      99.00874635568513,
+      99.00874635568513,
+      99.00874635568513,
+      99.067055393586,
+      99.067055393586,
+      99.18367346938776,
+      99.18367346938776,
+      99.18367346938776,
+      99.18367346938776,
+      99.18367346938776,
+      99.18367346938776,
+      99.18367346938776
+    ],
+    "groups": {
+      "camera": [
+        {
+          "value": 0,
+          "queries": 245,
+          "mAP": 81.49814953417501,
+          "mINP": 56.39546302610393,
+          "Rank-1": 95.91836734693877,
+          "Rank-5": 96.73469387755102,
+          "Rank-10": 97.55102040816327,
+          "Rank-20": 97.55102040816327
+        },
+        {
+          "value": 1,
+          "queries": 225,
+          "mAP": 78.09548021795977,
+          "mINP": 54.46979486543822,
+          "Rank-1": 90.66666666666666,
+          "Rank-5": 91.55555555555556,
+          "Rank-10": 92.88888888888889,
+          "Rank-20": 93.77777777777779
+        },
+        {
+          "value": 2,
+          "queries": 200,
+          "mAP": 85.69886526689949,
+          "mINP": 61.506328956958846,
+          "Rank-1": 97.0,
+          "Rank-5": 97.0,
+          "Rank-10": 97.5,
+          "Rank-20": 98.0
+        },
+        {
+          "value": 3,
+          "queries": 175,
+          "mAP": 89.05732039243308,
+          "mINP": 63.85468961215247,
+          "Rank-1": 97.14285714285714,
+          "Rank-5": 97.14285714285714,
+          "Rank-10": 97.14285714285714,
+          "Rank-20": 97.14285714285714
+        },
+        {
+          "value": 4,
+          "queries": 240,
+          "mAP": 88.20634714541292,
+          "mINP": 64.36537752277748,
+          "Rank-1": 97.91666666666666,
+          "Rank-5": 97.91666666666666,
+          "Rank-10": 97.91666666666666,
+          "Rank-20": 97.91666666666666
+        },
+        {
+          "value": 5,
+          "queries": 230,
+          "mAP": 87.97140080862992,
+          "mINP": 67.3071082637633,
+          "Rank-1": 97.3913043478261,
+          "Rank-5": 97.82608695652173,
+          "Rank-10": 98.26086956521739,
+          "Rank-20": 98.26086956521739
+        },
+        {
+          "value": 6,
+          "queries": 205,
+          "mAP": 89.18773735574422,
+          "mINP": 65.17795385164517,
+          "Rank-1": 99.51219512195122,
+          "Rank-5": 99.51219512195122,
+          "Rank-10": 99.51219512195122,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 7,
+          "queries": 195,
+          "mAP": 88.32032858598173,
+          "mINP": 63.8615419150885,
+          "Rank-1": 97.94871794871794,
+          "Rank-5": 98.97435897435898,
+          "Rank-10": 98.97435897435898,
+          "Rank-20": 99.48717948717949
+        }
+      ],
+      "scene": [
+        {
+          "value": -1,
+          "queries": 1715,
+          "mAP": 85.81471110206851,
+          "mINP": 61.97739678064092,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.43440233236151,
+          "Rank-20": 97.72594752186589
+        }
+      ],
+      "identity": [
+        {
+          "value": 502,
+          "queries": 40,
+          "mAP": 82.90165979196746,
+          "mINP": 56.190049701824805,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 504,
+          "queries": 35,
+          "mAP": 96.39919986358797,
+          "mINP": 87.45468999004444,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 506,
+          "queries": 40,
+          "mAP": 71.43956123714041,
+          "mINP": 20.634418863535135,
+          "Rank-1": 87.5,
+          "Rank-5": 87.5,
+          "Rank-10": 87.5,
+          "Rank-20": 87.5
+        },
+        {
+          "value": 508,
+          "queries": 40,
+          "mAP": 83.27328304433644,
+          "mINP": 53.408828270298436,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 510,
+          "queries": 40,
+          "mAP": 57.21187340103937,
+          "mINP": 10.637840542951546,
+          "Rank-1": 85.0,
+          "Rank-5": 85.0,
+          "Rank-10": 85.0,
+          "Rank-20": 87.5
+        },
+        {
+          "value": 512,
+          "queries": 20,
+          "mAP": 90.73132922777147,
+          "mINP": 87.20140933688256,
+          "Rank-1": 95.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 514,
+          "queries": 40,
+          "mAP": 88.74509745903339,
+          "mINP": 69.58666558621597,
+          "Rank-1": 87.5,
+          "Rank-5": 87.5,
+          "Rank-10": 87.5,
+          "Rank-20": 87.5
+        },
+        {
+          "value": 516,
+          "queries": 20,
+          "mAP": 99.68339155467382,
+          "mINP": 96.9818077492128,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 518,
+          "queries": 25,
+          "mAP": 90.843210727629,
+          "mINP": 73.36754709397596,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 520,
+          "queries": 35,
+          "mAP": 99.96896721274837,
+          "mINP": 99.13931731251591,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 522,
+          "queries": 35,
+          "mAP": 78.82952894491787,
+          "mINP": 42.223743598646514,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 524,
+          "queries": 40,
+          "mAP": 93.0635642833183,
+          "mINP": 66.70649411881749,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 526,
+          "queries": 15,
+          "mAP": 82.38971370734973,
+          "mINP": 58.77320088678165,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 528,
+          "queries": 35,
+          "mAP": 89.1850065120852,
+          "mINP": 61.720023391166265,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 530,
+          "queries": 35,
+          "mAP": 93.89412291349208,
+          "mINP": 81.83151967156192,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 532,
+          "queries": 40,
+          "mAP": 89.26579180854019,
+          "mINP": 58.07100641522594,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 534,
+          "queries": 35,
+          "mAP": 100.0,
+          "mINP": 100.0,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 536,
+          "queries": 20,
+          "mAP": 44.59251545869762,
+          "mINP": 21.218993113392635,
+          "Rank-1": 75.0,
+          "Rank-5": 75.0,
+          "Rank-10": 80.0,
+          "Rank-20": 80.0
+        },
+        {
+          "value": 538,
+          "queries": 40,
+          "mAP": 82.68322160250474,
+          "mINP": 34.036829518091174,
+          "Rank-1": 97.5,
+          "Rank-5": 97.5,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 540,
+          "queries": 40,
+          "mAP": 75.65079883160666,
+          "mINP": 32.0407617868039,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 542,
+          "queries": 35,
+          "mAP": 41.48774873481227,
+          "mINP": 7.222414680250709,
+          "Rank-1": 74.28571428571429,
+          "Rank-5": 80.0,
+          "Rank-10": 80.0,
+          "Rank-20": 82.85714285714286
+        },
+        {
+          "value": 544,
+          "queries": 35,
+          "mAP": 95.08208985002075,
+          "mINP": 84.41643351364853,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 546,
+          "queries": 20,
+          "mAP": 92.48486951804837,
+          "mINP": 74.82757980582255,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 548,
+          "queries": 30,
+          "mAP": 63.50451220842027,
+          "mINP": 34.832796248683714,
+          "Rank-1": 83.33333333333334,
+          "Rank-5": 83.33333333333334,
+          "Rank-10": 83.33333333333334,
+          "Rank-20": 83.33333333333334
+        },
+        {
+          "value": 550,
+          "queries": 40,
+          "mAP": 55.47973242874142,
+          "mINP": 26.286925392027914,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 552,
+          "queries": 40,
+          "mAP": 88.49676638867685,
+          "mINP": 52.666221767239776,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 554,
+          "queries": 35,
+          "mAP": 85.44411601260703,
+          "mINP": 50.98571167710095,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 556,
+          "queries": 40,
+          "mAP": 88.26486501777858,
+          "mINP": 57.75800013603023,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 558,
+          "queries": 40,
+          "mAP": 79.79265735592756,
+          "mINP": 44.296466078754044,
+          "Rank-1": 97.5,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 560,
+          "queries": 35,
+          "mAP": 97.2756516439469,
+          "mINP": 85.31144629877741,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 562,
+          "queries": 15,
+          "mAP": 92.76425173378739,
+          "mINP": 85.16659342564051,
+          "Rank-1": 93.33333333333333,
+          "Rank-5": 93.33333333333333,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 564,
+          "queries": 35,
+          "mAP": 99.95665227812245,
+          "mINP": 98.18849938996405,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 566,
+          "queries": 40,
+          "mAP": 91.02874808295095,
+          "mINP": 63.007180640750015,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 568,
+          "queries": 15,
+          "mAP": 77.37388345624449,
+          "mINP": 72.87853076331704,
+          "Rank-1": 66.66666666666666,
+          "Rank-5": 80.0,
+          "Rank-10": 93.33333333333333,
+          "Rank-20": 93.33333333333333
+        },
+        {
+          "value": 570,
+          "queries": 35,
+          "mAP": 96.60374489898793,
+          "mINP": 83.03746398507941,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 572,
+          "queries": 40,
+          "mAP": 93.4625363177566,
+          "mINP": 70.83294798627729,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 574,
+          "queries": 35,
+          "mAP": 93.3197402014699,
+          "mINP": 70.66989256635638,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 576,
+          "queries": 35,
+          "mAP": 99.20412670079229,
+          "mINP": 94.49005932235404,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 578,
+          "queries": 40,
+          "mAP": 73.53883825205024,
+          "mINP": 40.29244779774235,
+          "Rank-1": 90.0,
+          "Rank-5": 92.5,
+          "Rank-10": 92.5,
+          "Rank-20": 95.0
+        },
+        {
+          "value": 580,
+          "queries": 40,
+          "mAP": 77.03453750404965,
+          "mINP": 53.828432554973624,
+          "Rank-1": 95.0,
+          "Rank-5": 95.0,
+          "Rank-10": 97.5,
+          "Rank-20": 97.5
+        },
+        {
+          "value": 582,
+          "queries": 40,
+          "mAP": 73.58169921081796,
+          "mINP": 35.18486436203402,
+          "Rank-1": 87.5,
+          "Rank-5": 87.5,
+          "Rank-10": 87.5,
+          "Rank-20": 90.0
+        },
+        {
+          "value": 584,
+          "queries": 40,
+          "mAP": 83.45506369873522,
+          "mINP": 50.13507917707386,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 586,
+          "queries": 40,
+          "mAP": 99.37723264973128,
+          "mINP": 93.97880460525437,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 588,
+          "queries": 40,
+          "mAP": 91.81956277908203,
+          "mINP": 67.77436431919558,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 590,
+          "queries": 35,
+          "mAP": 98.18219522677936,
+          "mINP": 84.53680504277187,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 592,
+          "queries": 30,
+          "mAP": 93.78765922157618,
+          "mINP": 65.05129920938259,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 594,
+          "queries": 35,
+          "mAP": 96.87883855281106,
+          "mINP": 88.15435972757702,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 596,
+          "queries": 40,
+          "mAP": 97.92764041750128,
+          "mINP": 84.36497262407772,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 598,
+          "queries": 25,
+          "mAP": 91.19598738726414,
+          "mINP": 63.861120856014395,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 600,
+          "queries": 40,
+          "mAP": 92.6256199736978,
+          "mINP": 66.49894610959485,
+          "Rank-1": 92.5,
+          "Rank-5": 92.5,
+          "Rank-10": 95.0,
+          "Rank-20": 97.5
+        }
+      ]
+    }
+  },
+  "strict_reload": {
+    "mAP": 85.81471110206851,
+    "mINP": 61.97739678064092,
+    "Rank-1": 96.61807580174927,
+    "Rank-5": 97.0262390670554,
+    "Rank-10": 97.43440233236151,
+    "Rank-20": 97.72594752186589,
+    "query_count": 1715,
+    "valid_queries": 1715,
+    "invalid_queries": 0,
+    "gallery_count": 8575,
+    "CMC_1_to_50": [
+      96.61807580174927,
+      96.73469387755102,
+      96.85131195335276,
+      96.90962099125365,
+      97.0262390670554,
+      97.20116618075801,
+      97.25947521865889,
+      97.31778425655978,
+      97.37609329446065,
+      97.43440233236151,
+      97.49271137026238,
+      97.49271137026238,
+      97.55102040816327,
+      97.55102040816327,
+      97.55102040816327,
+      97.60932944606414,
+      97.60932944606414,
+      97.667638483965,
+      97.72594752186589,
+      97.72594752186589,
+      97.72594752186589,
+      97.78425655976677,
+      97.90087463556851,
+      97.95918367346938,
+      98.19241982507289,
+      98.42565597667638,
+      98.54227405247813,
+      98.60058309037902,
+      98.71720116618076,
+      98.77551020408163,
+      98.83381924198251,
+      98.83381924198251,
+      98.89212827988338,
+      98.89212827988338,
+      98.89212827988338,
+      98.95043731778426,
+      98.95043731778426,
+      99.00874635568513,
+      99.00874635568513,
+      99.00874635568513,
+      99.00874635568513,
+      99.067055393586,
+      99.067055393586,
+      99.18367346938776,
+      99.18367346938776,
+      99.18367346938776,
+      99.18367346938776,
+      99.18367346938776,
+      99.18367346938776,
+      99.18367346938776
+    ],
+    "groups": {
+      "camera": [
+        {
+          "value": 0,
+          "queries": 245,
+          "mAP": 81.49814953417501,
+          "mINP": 56.39546302610393,
+          "Rank-1": 95.91836734693877,
+          "Rank-5": 96.73469387755102,
+          "Rank-10": 97.55102040816327,
+          "Rank-20": 97.55102040816327
+        },
+        {
+          "value": 1,
+          "queries": 225,
+          "mAP": 78.09548021795977,
+          "mINP": 54.46979486543822,
+          "Rank-1": 90.66666666666666,
+          "Rank-5": 91.55555555555556,
+          "Rank-10": 92.88888888888889,
+          "Rank-20": 93.77777777777779
+        },
+        {
+          "value": 2,
+          "queries": 200,
+          "mAP": 85.69886526689949,
+          "mINP": 61.506328956958846,
+          "Rank-1": 97.0,
+          "Rank-5": 97.0,
+          "Rank-10": 97.5,
+          "Rank-20": 98.0
+        },
+        {
+          "value": 3,
+          "queries": 175,
+          "mAP": 89.05732039243308,
+          "mINP": 63.85468961215247,
+          "Rank-1": 97.14285714285714,
+          "Rank-5": 97.14285714285714,
+          "Rank-10": 97.14285714285714,
+          "Rank-20": 97.14285714285714
+        },
+        {
+          "value": 4,
+          "queries": 240,
+          "mAP": 88.20634714541292,
+          "mINP": 64.36537752277748,
+          "Rank-1": 97.91666666666666,
+          "Rank-5": 97.91666666666666,
+          "Rank-10": 97.91666666666666,
+          "Rank-20": 97.91666666666666
+        },
+        {
+          "value": 5,
+          "queries": 230,
+          "mAP": 87.97140080862992,
+          "mINP": 67.3071082637633,
+          "Rank-1": 97.3913043478261,
+          "Rank-5": 97.82608695652173,
+          "Rank-10": 98.26086956521739,
+          "Rank-20": 98.26086956521739
+        },
+        {
+          "value": 6,
+          "queries": 205,
+          "mAP": 89.18773735574422,
+          "mINP": 65.17795385164517,
+          "Rank-1": 99.51219512195122,
+          "Rank-5": 99.51219512195122,
+          "Rank-10": 99.51219512195122,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 7,
+          "queries": 195,
+          "mAP": 88.32032858598173,
+          "mINP": 63.8615419150885,
+          "Rank-1": 97.94871794871794,
+          "Rank-5": 98.97435897435898,
+          "Rank-10": 98.97435897435898,
+          "Rank-20": 99.48717948717949
+        }
+      ],
+      "scene": [
+        {
+          "value": -1,
+          "queries": 1715,
+          "mAP": 85.81471110206851,
+          "mINP": 61.97739678064092,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.43440233236151,
+          "Rank-20": 97.72594752186589
+        }
+      ],
+      "identity": [
+        {
+          "value": 502,
+          "queries": 40,
+          "mAP": 82.90165979196746,
+          "mINP": 56.190049701824805,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 504,
+          "queries": 35,
+          "mAP": 96.39919986358797,
+          "mINP": 87.45468999004444,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 506,
+          "queries": 40,
+          "mAP": 71.43956123714041,
+          "mINP": 20.634418863535135,
+          "Rank-1": 87.5,
+          "Rank-5": 87.5,
+          "Rank-10": 87.5,
+          "Rank-20": 87.5
+        },
+        {
+          "value": 508,
+          "queries": 40,
+          "mAP": 83.27328304433644,
+          "mINP": 53.408828270298436,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 510,
+          "queries": 40,
+          "mAP": 57.21187340103937,
+          "mINP": 10.637840542951546,
+          "Rank-1": 85.0,
+          "Rank-5": 85.0,
+          "Rank-10": 85.0,
+          "Rank-20": 87.5
+        },
+        {
+          "value": 512,
+          "queries": 20,
+          "mAP": 90.73132922777147,
+          "mINP": 87.20140933688256,
+          "Rank-1": 95.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 514,
+          "queries": 40,
+          "mAP": 88.74509745903339,
+          "mINP": 69.58666558621597,
+          "Rank-1": 87.5,
+          "Rank-5": 87.5,
+          "Rank-10": 87.5,
+          "Rank-20": 87.5
+        },
+        {
+          "value": 516,
+          "queries": 20,
+          "mAP": 99.68339155467382,
+          "mINP": 96.9818077492128,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 518,
+          "queries": 25,
+          "mAP": 90.843210727629,
+          "mINP": 73.36754709397596,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 520,
+          "queries": 35,
+          "mAP": 99.96896721274837,
+          "mINP": 99.13931731251591,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 522,
+          "queries": 35,
+          "mAP": 78.82952894491787,
+          "mINP": 42.223743598646514,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 524,
+          "queries": 40,
+          "mAP": 93.0635642833183,
+          "mINP": 66.70649411881749,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 526,
+          "queries": 15,
+          "mAP": 82.38971370734973,
+          "mINP": 58.77320088678165,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 528,
+          "queries": 35,
+          "mAP": 89.1850065120852,
+          "mINP": 61.720023391166265,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 530,
+          "queries": 35,
+          "mAP": 93.89412291349208,
+          "mINP": 81.83151967156192,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 532,
+          "queries": 40,
+          "mAP": 89.26579180854019,
+          "mINP": 58.07100641522594,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 534,
+          "queries": 35,
+          "mAP": 100.0,
+          "mINP": 100.0,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 536,
+          "queries": 20,
+          "mAP": 44.59251545869762,
+          "mINP": 21.218993113392635,
+          "Rank-1": 75.0,
+          "Rank-5": 75.0,
+          "Rank-10": 80.0,
+          "Rank-20": 80.0
+        },
+        {
+          "value": 538,
+          "queries": 40,
+          "mAP": 82.68322160250474,
+          "mINP": 34.036829518091174,
+          "Rank-1": 97.5,
+          "Rank-5": 97.5,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 540,
+          "queries": 40,
+          "mAP": 75.65079883160666,
+          "mINP": 32.0407617868039,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 542,
+          "queries": 35,
+          "mAP": 41.48774873481227,
+          "mINP": 7.222414680250709,
+          "Rank-1": 74.28571428571429,
+          "Rank-5": 80.0,
+          "Rank-10": 80.0,
+          "Rank-20": 82.85714285714286
+        },
+        {
+          "value": 544,
+          "queries": 35,
+          "mAP": 95.08208985002075,
+          "mINP": 84.41643351364853,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 546,
+          "queries": 20,
+          "mAP": 92.48486951804837,
+          "mINP": 74.82757980582255,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 548,
+          "queries": 30,
+          "mAP": 63.50451220842027,
+          "mINP": 34.832796248683714,
+          "Rank-1": 83.33333333333334,
+          "Rank-5": 83.33333333333334,
+          "Rank-10": 83.33333333333334,
+          "Rank-20": 83.33333333333334
+        },
+        {
+          "value": 550,
+          "queries": 40,
+          "mAP": 55.47973242874142,
+          "mINP": 26.286925392027914,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 552,
+          "queries": 40,
+          "mAP": 88.49676638867685,
+          "mINP": 52.666221767239776,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 554,
+          "queries": 35,
+          "mAP": 85.44411601260703,
+          "mINP": 50.98571167710095,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 556,
+          "queries": 40,
+          "mAP": 88.26486501777858,
+          "mINP": 57.75800013603023,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 558,
+          "queries": 40,
+          "mAP": 79.79265735592756,
+          "mINP": 44.296466078754044,
+          "Rank-1": 97.5,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 560,
+          "queries": 35,
+          "mAP": 97.2756516439469,
+          "mINP": 85.31144629877741,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 562,
+          "queries": 15,
+          "mAP": 92.76425173378739,
+          "mINP": 85.16659342564051,
+          "Rank-1": 93.33333333333333,
+          "Rank-5": 93.33333333333333,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 564,
+          "queries": 35,
+          "mAP": 99.95665227812245,
+          "mINP": 98.18849938996405,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 566,
+          "queries": 40,
+          "mAP": 91.02874808295095,
+          "mINP": 63.007180640750015,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 568,
+          "queries": 15,
+          "mAP": 77.37388345624449,
+          "mINP": 72.87853076331704,
+          "Rank-1": 66.66666666666666,
+          "Rank-5": 80.0,
+          "Rank-10": 93.33333333333333,
+          "Rank-20": 93.33333333333333
+        },
+        {
+          "value": 570,
+          "queries": 35,
+          "mAP": 96.60374489898793,
+          "mINP": 83.03746398507941,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 572,
+          "queries": 40,
+          "mAP": 93.4625363177566,
+          "mINP": 70.83294798627729,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 574,
+          "queries": 35,
+          "mAP": 93.3197402014699,
+          "mINP": 70.66989256635638,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 576,
+          "queries": 35,
+          "mAP": 99.20412670079229,
+          "mINP": 94.49005932235404,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 578,
+          "queries": 40,
+          "mAP": 73.53883825205024,
+          "mINP": 40.29244779774235,
+          "Rank-1": 90.0,
+          "Rank-5": 92.5,
+          "Rank-10": 92.5,
+          "Rank-20": 95.0
+        },
+        {
+          "value": 580,
+          "queries": 40,
+          "mAP": 77.03453750404965,
+          "mINP": 53.828432554973624,
+          "Rank-1": 95.0,
+          "Rank-5": 95.0,
+          "Rank-10": 97.5,
+          "Rank-20": 97.5
+        },
+        {
+          "value": 582,
+          "queries": 40,
+          "mAP": 73.58169921081796,
+          "mINP": 35.18486436203402,
+          "Rank-1": 87.5,
+          "Rank-5": 87.5,
+          "Rank-10": 87.5,
+          "Rank-20": 90.0
+        },
+        {
+          "value": 584,
+          "queries": 40,
+          "mAP": 83.45506369873522,
+          "mINP": 50.13507917707386,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 586,
+          "queries": 40,
+          "mAP": 99.37723264973128,
+          "mINP": 93.97880460525437,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 588,
+          "queries": 40,
+          "mAP": 91.81956277908203,
+          "mINP": 67.77436431919558,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 590,
+          "queries": 35,
+          "mAP": 98.18219522677936,
+          "mINP": 84.53680504277187,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 592,
+          "queries": 30,
+          "mAP": 93.78765922157618,
+          "mINP": 65.05129920938259,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 594,
+          "queries": 35,
+          "mAP": 96.87883855281106,
+          "mINP": 88.15435972757702,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 596,
+          "queries": 40,
+          "mAP": 97.92764041750128,
+          "mINP": 84.36497262407772,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 598,
+          "queries": 25,
+          "mAP": 91.19598738726414,
+          "mINP": 63.861120856014395,
+          "Rank-1": 100.0,
+          "Rank-5": 100.0,
+          "Rank-10": 100.0,
+          "Rank-20": 100.0
+        },
+        {
+          "value": 600,
+          "queries": 40,
+          "mAP": 92.6256199736978,
+          "mINP": 66.49894610959485,
+          "Rank-1": 92.5,
+          "Rank-5": 92.5,
+          "Rank-10": 95.0,
+          "Rank-20": 97.5
+        }
+      ]
+    }
+  },
+  "full_metrics": {
+    "mAP": 85.81471110206851,
+    "mINP": 61.97739678064092,
+    "Rank-1": 96.61807580174927,
+    "Rank-5": 97.0262390670554,
+    "Rank-10": 97.43440233236151,
+    "Rank-20": 97.72594752186589
+  },
+  "training_coverage": {
+    "eligible": 8675,
+    "visited": 8675,
+    "unvisited": []
+  },
+  "runtime": {
+    "end_to_end_seconds": 101.06239342689514,
+    "triplets": 10290,
+    "includes_decode_and_first_batch": true,
+    "mean_route": [
+      [
+        0.09684138745069504,
+        0.02576730214059353,
+        0.03391379490494728
+      ],
+      [
+        0.08368409425020218,
+        0.022259555757045746,
+        0.02901568077504635
+      ],
+      [
+        0.0876900926232338,
+        0.023931415751576424,
+        0.031102480366826057
+      ],
+      [
+        0.0891689658164978,
+        0.023654671385884285,
+        0.031082186847925186
+      ],
+      [
+        0.08996475487947464,
+        0.024353444576263428,
+        0.03201931715011597
+      ],
+      [
+        0.08294600993394852,
+        0.02254245989024639,
+        0.02950795367360115
+      ],
+      [
+        0.08655066043138504,
+        0.023329585790634155,
+        0.030674176290631294
+      ]
+    ],
+    "mean_outer_gates": [
+      0.982791543006897,
+      0.9709950685501099,
+      0.9731528759002686
+    ],
+    "mean_route_entropy": 2.8693675994873047,
+    "mean_joint_minus_marginal_product_L1": 0.017086908221244812
+  },
+  "peak_memory": 1436378624,
+  "finished": 1791876133.3664904
+}
