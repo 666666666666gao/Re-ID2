@@ -1,0 +1,2090 @@
+{
+  "status": "WARN",
+  "overall_status": "WARN",
+  "overall_verdict": "WARN",
+  "integrity_status": "WARN",
+  "numerical_integrity_status": "PASS",
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    {
+      "id": "W1_CONTROLLER_RETURN_CODE_UNRECORDED",
+      "severity": "nonblocking",
+      "details": "Original controller COMPLETE and historical absence are evidenced; its process return code is not recorded. All eight child exits are recorded as 0.",
+      "evidence": [
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/controller_launch.json:2",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/controller_result.json:2",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/controller_result.json:96",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/controller.log:8",
+        "D:/Program Files/UserCache/gb/codex_tmp/AX_original_controller_near_end_fourth_actual_20261014.json:8",
+        "D:/Program Files/UserCache/gb/codex_tmp/AX_original_controller_near_end_fourth_actual_20261014.json:136"
+      ]
+    },
+    {
+      "id": "W2_CLAIM_CEILING",
+      "severity": "scope",
+      "details": "Single-seed, benchmark-selected teacher50+extra50 normal results do not establish +1 success, untouched-test generalization, missing-modality performance or a causal mechanism.",
+      "evidence": [
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/training/RGBNT100_r201ax_axis_shared_s42/result.json:159",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/training/RGBNT100_r201ax_axis_shared_s42/result.json:161",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/run_full_official_frozen_anchor_experiment.py:166",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/analyze_r201ax_RGB_frequency_query_normalization_normal.py:135",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/normal_analysis/comparisons.csv:2",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/normal_analysis/comparisons.csv:4",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/normal_analysis/comparisons.csv:5",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/normal_analysis/state_comparisons.csv:2",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/F_query_trace_CPU/result.json:102",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/preflight/r201ax_RGB_frequency_query_normalization_plan_20261014.json:25"
+      ]
+    },
+    {
+      "id": "W3_HISTORICAL_AND_REMOTE_COVERAGE",
+      "severity": "scope",
+      "details": "Current remote state/protected weights, external dataset bytes, and historical non-AX raw retrieval matrices were not rechecked. Recorded local receipt bindings are verified.",
+      "evidence": [
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/preflight/r201ax_RGB_frequency_query_normalization_20261014_complete_intake.json:1270",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/preflight/r201ax_RGB_frequency_query_normalization_20261014_actual_session.json:352"
+      ]
+    }
+  ],
+  "summary": "The AX reported retrieval metrics and complete 600-row terminal F trace are correct within the audited scope. No numerical/result-integrity defect was found. The original controller process return code is unrecorded; qualified single-seed benchmark-selected results remain provisional and the +1 target is unmet.",
+  "audit_skill": "experiment-audit",
+  "scope": "ACTUAL_AX_TWO_FULL_OFFICIAL50_AND_EIGHT_FIXED_NORMAL_STATES",
+  "generated_at": "2026-10-14T18:54:06+08:00",
+  "date": "2026-10-14",
+  "reviewer_task": "/root/audit_r201ax_closed_normal_20261014",
+  "agent_id": "/root/audit_r201ax_closed_normal_20261014",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "model_routing_attestation": "No independently attested runtime model/effort metadata was supplied. Requested routing is not claimed as actual routing.",
+  "reviewer_family": "openai",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "fresh_primary_artifact_review": true,
+  "executor_participates_in_judgment": false,
+  "deterministic_checks_status": "PASS",
+  "checks": {
+    "A_ground_truth_provenance": {
+      "status": "PASS",
+      "evaluation_type": "real_gt",
+      "findings": [
+        "Retrieval identities/cameras come from RGBNT100 official-split filenames, not predictions. Training labels are a sorted relabeling of the 50 training identities; those identities are disjoint from the 50 query/gallery identities.",
+        "One canonical manifest was independently decoded: 8,675 train, 1,715 query, 8,575 gallery records (18,965 filenames). Three other supplied manifests match it exactly. Four NPZ containers match the same query/gallery names, identities, cameras and scene=-1 metadata in 32 array comparisons.",
+        "All eight camera values 0..7 appear; scene=-1 is a constant placeholder, so its single group is not evidence of scene diversity.",
+        "Model-derived auxiliary contribution targets are training diagnostics/auxiliary supervision. They are not used as retrieval identity ground truth."
+      ],
+      "evidence": [
+        "C:/Users/gb/projects/demo_dual_axis_20261002/data/datasets/RGBNT100.py:63",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/experiment_data.py:24",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/official_training_data.py:20",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/full_evaluation.py:68",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/training/RGBNT100_r201ax_axis_shared_s42/official_split_manifest.json:56",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/training/RGBNT100_r201ax_axis_shared_s42/official_split_manifest.json:52108",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/training/RGBNT100_r201ax_axis_shared_s42/official_split_manifest.json:62400",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/axis_collaboration.py:147"
+      ],
+      "scope_limit": "Local manifest/raw-metadata provenance and archived installed-GT audit receipts were checked. No dataset image bytes, external dataset distribution, or current remote installation was accessed."
+    },
+    "B_score_normalization": {
+      "status": "PASS",
+      "findings": [
+        "mAP is mean relevant-rank precision; mINP is relevant count divided by last relevant rank. CMC and Rank-1/5/10/20 use the same same-identity/same-camera exclusion and stable ascending distance order. Percent conversion is multiplication by 100, not division by prediction extrema or a model-dependent denominator.",
+        "Feature normalization and FP32 per-head query normalization affect the model/distance calculation; they do not rescale reported retrieval metrics.",
+        "Independent saved-distance recount agrees with all corresponding six metrics, CMC1-50, complete per-query fields, and camera/identity/scene groups."
+      ],
+      "evidence": [
+        "C:/Users/gb/projects/demo_dual_axis_20261002/full_evaluation.py:20",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/full_evaluation.py:43",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/full_evaluation.py:48",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/utils/reid_evaluation.py:27",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/utils/reid_evaluation.py:46",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/run_r201as_RGB_query_normalization.py:35",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/training/RGBNT100_r201ax_axis_shared_s42/best_per_query.json:2",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/training/RGBNT100_r201ax_frequency_shared_s42/best_per_query.json:2"
+      ],
+      "max_six_metric_error_pp": 2.842170943040401e-14,
+      "max_CMC_error_pp": 1.4210854715202004e-14,
+      "max_group_error_pp": 4.263256414560601e-14,
+      "max_raw_perquery_error": 4.440892098500626e-16
+    },
+    "C_result_existence_and_execution": {
+      "status": "WARN",
+      "numerical_result_integrity": "PASS",
+      "findings": [
+        "All 341 supplied primary artifact paths exist. All 273 original terminal text-manifest entries match their captured byte counts and SHA256 values. Six original D archives match controller, intake and local archive receipts.",
+        "Both AX runs actually contain epochs 1..50 and 6,563 successful updates each (13,126 total), zero AMP skips and coverage of all 8,675 eligible training records. Each run has a fresh native3 record with strict reload and all 111 active parameter-gradient flags true; native total is six updates.",
+        "Both AX checkpoints select epoch 16 by maximum full normal benchmark mAP; the maxima are unique. All six metrics, strict reload, best.json, epoch16 and normal11 agree. Eight fixed state cases exist at those same selected checkpoints.",
+        "Original controller PID 1828887 has a matching launch record, COMPLETE result and terminal log marker, with historical absence recorded. All eight original native/train/audit/states child launch/exit receipts match the original observer and report exit_code=0 without forced cleanup.",
+        "The detached controller itself has no captured process return-code receipt. A COMPLETE marker plus an absent PID does not establish the controller process exit code. No controller exit_code=0 is asserted by this audit."
+      ],
+      "evidence": [
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/controller_launch.json:2",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/controller_result.json:2",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/controller_result.json:96",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/controller.log:8",
+        "D:/Program Files/UserCache/gb/codex_tmp/AX_original_controller_near_end_fourth_actual_20261014.json:8",
+        "D:/Program Files/UserCache/gb/codex_tmp/AX_original_controller_near_end_fourth_actual_20261014.json:136",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/training/RGBNT100_r201ax_axis_shared_s42/result.json:166",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/training/RGBNT100_r201ax_frequency_shared_s42/result.json:166",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/training/RGBNT100_r201ax_axis_shared_s42/epochs.csv:17",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/training/RGBNT100_r201ax_frequency_shared_s42/epochs.csv:17",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/native/RGBNT100_r201ax_axis_shared_s42_smoke/smoke.json:170",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/native/RGBNT100_r201ax_frequency_shared_s42_smoke/smoke.json:283",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/states/RGBNT100_r201ax_axis_shared_s42/result.json:2678",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/states/RGBNT100_r201ax_frequency_shared_s42/result.json:2678",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/preflight/r201ax_RGB_frequency_query_normalization_deploy_20261014.py:64"
+      ]
+    },
+    "D_executed_metric_paths_and_intervention": {
+      "status": "PASS",
+      "findings": [
+        "AX main passes its builder and update into the full-official runner. The runner calls full_metrics after each epoch and after selected-checkpoint strict reload; full_metrics calls evaluate_reid. The fixed-state evaluator calls the same metric path plus independent recount/verify. Terminal logs and saved outputs bind these actual paths.",
+        "The legacy full_evaluation.main dev-split path and audit_full_official49.main 49-condition path are not the AX execution entry points. No missing-49 or untouched-final-test result is inferred from those unused entry points.",
+        "Original launch-session seals exactly equal the source-review seal maps: 7 new plus 306 reused entries. This reviewer directly rehashed 22 listed original-sealed files (21 Python files and the plan JSON), not all 313 source files. The later closed-trace reducer was read and hashed separately; it is not presented as prelaunch source.",
+        "AX wraps only the three F spatial attention.forward methods with the existing AS projected-Q normalization. K/V/output projection operations and cross-band attention are untouched by that wrapper; M query normalization and AV two middle/high value-weight decay0 groups are retained. Both controls receive the same intervention.",
+        "All 13,126 AX formal batch records and six native records satisfy the recorded Q-normalization/call-count/zero-extra-update contracts; all 600 terminal AV/AX epoch-band rows reduce from 26,252 original batch records exactly. AV has no recorded F query norms; all 900 corresponding CSV cells are blank."
+      ],
+      "evidence": [
+        "C:/Users/gb/projects/demo_dual_axis_20261002/run_r201ax_RGB_frequency_query_normalization.py:27",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/run_r201ax_RGB_frequency_query_normalization.py:40",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/run_r201ax_RGB_frequency_query_normalization.py:60",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/run_r201as_RGB_query_normalization.py:25",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/run_r201av_RGB_frequency_value_decay.py:35",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/axis_collaboration.py:60",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/axis_collaboration.py:75",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/run_full_official_frozen_anchor_experiment.py:49",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/run_full_official_frozen_anchor_experiment.py:158",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/run_full_official_frozen_anchor_experiment.py:175",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/evaluate_r201ax_RGB_normal_states.py:53",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/launch_r201ax_RGB_frequency_query_normalization.py:115",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/preflight/r201ax_RGB_frequency_query_normalization_20261014_actual_session.json:35",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/analyze_r201ax_closed_F_query_trace_CPU.py:38",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/analyze_r201ax_closed_F_query_trace_CPU.py:73",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/F_query_trace_CPU/epoch_band_traces.csv:302"
+      ]
+    },
+    "E_scope_budget_selection_causality": {
+      "status": "WARN",
+      "findings": [
+        "Scope is one RGBNT100 normal full-modality benchmark, seed42, two controls, each with original teacher50 plus fresh extra50. Original DeMo alone has 50 epochs, so that baseline is not a matched total-compute comparison. AX/AV ordinary and structured controls have matched additional budgets and exactly matched epoch/step/name/partial-set order.",
+        "Epoch selection uses the same official normal Q/G benchmark later reported. The six metrics are from one selected checkpoint, but this is not an untouched independent final test or independent confirmation across seeds.",
+        "Eight state cases are frozen interventions on two selected checkpoints. Their 1,715 repeated queries, duplicated normal11 caches, and shared frozen00 are not independent runs or retrained ablations.",
+        "AX structured mAP/Rank-1 = 85.92371119067046/96.5597667638484. Its changes versus AV structured are -0.23093211094763433/-0.2332361516034922 pp; versus AX ordinary they are -0.09424600970130825/-0.2332361516034922 pp. AX ordinary mAP/Rank-1 = 86.01795720037177/96.7930029154519. Neither AX control reaches the required +1 mAP and +1 Rank-1 over original DeMo.",
+        "Gradient and pre/post query-norm traces establish recorded scale/gradient behavior, not foreground localization, identity usefulness, the cause of the retrieval deficit, or an old-Adam counterfactual replay. AV missing F-query norms preclude a measured AV-to-AX F-query-norm ratio.",
+        "The 15-model history and 20,580 paired-delta rows have checked internal arithmetic. Only five supplied primary training results and the AX raw matrices are directly tied here; old historical raw retrieval outputs were not reaudited. No new missing/49, multiseed, robustness, novelty or current remote-preservation claim is supported by this audit."
+      ],
+      "evidence": [
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/training/RGBNT100_r201ax_axis_shared_s42/result.json:159",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/training/RGBNT100_r201ax_axis_shared_s42/result.json:161",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/run_full_official_frozen_anchor_experiment.py:166",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/analyze_r201ax_RGB_frequency_query_normalization_normal.py:135",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/normal_analysis/comparisons.csv:2",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/normal_analysis/comparisons.csv:4",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/normal_analysis/comparisons.csv:5",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/RGBNT100/normal_analysis/state_comparisons.csv:2",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/r201ax_RGB_frequency_query_normalization_20261014/F_query_trace_CPU/result.json:102",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/results/preflight/r201ax_RGB_frequency_query_normalization_plan_20261014.json:25"
+      ]
+    },
+    "F_evaluation_type": {
+      "status": "PASS",
+      "classification": "real_gt",
+      "findings": [
+        "The reported retrieval evaluation uses dataset-provided filename identities/cameras. Frozen-state results remain real_gt evaluations with fixed-checkpoint intervention limits. Training query-norm/QKV traces are diagnostics, not a separate accuracy benchmark."
+      ],
+      "evidence": [
+        "C:/Users/gb/projects/demo_dual_axis_20261002/data/datasets/RGBNT100.py:76",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/official_training_data.py:14",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/full_evaluation.py:25",
+        "C:/Users/gb/projects/demo_dual_axis_20261002/evaluate_r201ax_RGB_normal_states.py:49"
+      ]
+    }
+  },
+  "evidence_coverage": {
+    "primary_request_files": 336,
+    "supplemental_primary_files": 5,
+    "total_primary_files": 341,
+    "request_documents": 2,
+    "total_input_hash_bindings": 343,
+    "original_terminal_manifest_files_SHA_bytes_verified": 273,
+    "source_attribution": {
+      "seal_entries_bound_to_original_session": 313,
+      "directly_rehashed_original_sealed_files": [
+        "analyze_identity_coordinate_three_normal.py",
+        "analyze_r201ax_RGB_frequency_query_normalization_normal.py",
+        "audit_full_official49.py",
+        "audit_full_official_condition.py",
+        "audit_full_official_normal.py",
+        "axis_collaboration.py",
+        "data/datasets/RGBNT100.py",
+        "evaluate_r201ax_RGB_normal_states.py",
+        "full_evaluation.py",
+        "gpu_thermal_execute.py",
+        "launch_r201ax_RGB_frequency_query_normalization.py",
+        "official_training_data.py",
+        "results/preflight/r201ax_RGB_frequency_query_normalization_complete_intake_20261014.py",
+        "results/preflight/r201ax_RGB_frequency_query_normalization_deploy_20261014.py",
+        "results/preflight/r201ax_RGB_frequency_query_normalization_plan_20261014.json",
+        "run_full_official_frozen_anchor_experiment.py",
+        "run_r201aq_RGB_attention_decay.py",
+        "run_r201as_RGB_query_normalization.py",
+        "run_r201av_RGB_frequency_value_decay.py",
+        "run_r201ax_RGB_frequency_query_normalization.py",
+        "utils/reid_evaluation.py",
+        "experiment_data.py"
+      ],
+      "directly_rehashed_original_sealed_file_count": 22,
+      "unread_sealed_source_entries": 291,
+      "postclosure_trace_reducer_separately_hashed": true
+    },
+    "GT_metadata": {
+      "manifests_compared": 4,
+      "canonical_filename_rows_decoded": 18965,
+      "train_records": 8675,
+      "query_records": 1715,
+      "gallery_records": 8575,
+      "train_identities": 50,
+      "evaluation_identities": 50,
+      "identity_sets_disjoint": true,
+      "cameras": 8,
+      "scene_values": [
+        -1
+      ],
+      "raw_metadata_array_comparisons": 32
+    },
+    "archives": {
+      "containers": 6,
+      "NPZ_containers": 4,
+      "NPZ_members": 50,
+      "checkpoint_ZIP_containers": 2,
+      "checkpoint_ZIP_members_each": 749,
+      "checkpoint_ZIP_members_total": 1498,
+      "total_members_CRC_and_payload_SHA_read": 1548,
+      "compressed_archive_bytes": 2087682372,
+      "uncompressed_member_bytes_read": 2232379456,
+      "no_pickle_or_torch_deserialization": true
+    },
+    "raw_rank_audit": {
+      "stored_distance_matrix_members": 10,
+      "stored_matrix_row_instances": 17150,
+      "unique_matrix_payloads_fully_ranked": 7,
+      "unique_query_rows_fully_ranked": 12005,
+      "distance_values_fully_ranked": 102942875,
+      "duplicate_payload_matrices_SHA_compared_only": 3,
+      "duplicate_payload_row_instances_compared_only": 5145,
+      "duplicate_detail": "Two selected-normal11 caches plus the second copy of common frozen00. They are not independent data.",
+      "shape_each": [
+        1715,
+        8575
+      ],
+      "all_corresponding_six_CMC50_perquery_groups_compared": true,
+      "matrices": [
+        {
+          "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100_r201ax_axis_shared_s42\\raw\\best_official_arrays.npz",
+          "member": "distances.npy",
+          "sha256": "a74c53cb418c25d3e34f421bf024ccc8b3950ef9ed771bc9692938a9abf7b299",
+          "rows": 1715,
+          "columns": 8575,
+          "recounted": true,
+          "duplicate_SHA_comparison_only": false,
+          "compared_csv": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\best_per_query.csv",
+          "six_metrics": {
+            "mAP": 85.92371119067046,
+            "mINP": 62.12571978612107,
+            "Rank-1": 96.5597667638484,
+            "Rank-5": 97.60932944606414,
+            "Rank-10": 97.72594752186589,
+            "Rank-20": 98.01749271137027
+          }
+        },
+        {
+          "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100_r201ax_axis_shared_s42\\states_raw\\normal_states.npz",
+          "member": "distances_00.npy",
+          "sha256": "f78b11a5f036d5dd85524d4381d27140b7bf1245ffcfbaef02a438b643d1de77",
+          "rows": 1715,
+          "columns": 8575,
+          "recounted": true,
+          "duplicate_SHA_comparison_only": false,
+          "compared_csv": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42\\state_00.csv",
+          "six_metrics": {
+            "mAP": 85.76856710316946,
+            "mINP": 61.84590828355626,
+            "Rank-1": 96.61807580174927,
+            "Rank-5": 97.0262390670554,
+            "Rank-10": 97.37609329446065,
+            "Rank-20": 97.72594752186589
+          }
+        },
+        {
+          "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100_r201ax_axis_shared_s42\\states_raw\\normal_states.npz",
+          "member": "distances_10.npy",
+          "sha256": "a8769fe405be761c5a935c5c3018b902dbb83a7a9521b2984e02eb5f66428916",
+          "rows": 1715,
+          "columns": 8575,
+          "recounted": true,
+          "duplicate_SHA_comparison_only": false,
+          "compared_csv": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42\\state_10.csv",
+          "six_metrics": {
+            "mAP": 85.75465587648422,
+            "mINP": 61.861737874437495,
+            "Rank-1": 96.61807580174927,
+            "Rank-5": 97.0262390670554,
+            "Rank-10": 97.43440233236151,
+            "Rank-20": 97.84256559766764
+          }
+        },
+        {
+          "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100_r201ax_axis_shared_s42\\states_raw\\normal_states.npz",
+          "member": "distances_01.npy",
+          "sha256": "8baf7d2fed7a787a80f0dc66eb5e8f7aa4da7e70038babda4d9b64ff47e75f4b",
+          "rows": 1715,
+          "columns": 8575,
+          "recounted": true,
+          "duplicate_SHA_comparison_only": false,
+          "compared_csv": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42\\state_01.csv",
+          "six_metrics": {
+            "mAP": 85.77445197411052,
+            "mINP": 61.862383924092306,
+            "Rank-1": 96.61807580174927,
+            "Rank-5": 97.0262390670554,
+            "Rank-10": 97.43440233236151,
+            "Rank-20": 97.72594752186589
+          }
+        },
+        {
+          "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100_r201ax_axis_shared_s42\\states_raw\\normal_states.npz",
+          "member": "distances.npy",
+          "sha256": "a74c53cb418c25d3e34f421bf024ccc8b3950ef9ed771bc9692938a9abf7b299",
+          "rows": 1715,
+          "columns": 8575,
+          "recounted": false,
+          "duplicate_SHA_comparison_only": true,
+          "compared_csv": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42\\state_11.csv",
+          "six_metrics": {
+            "mAP": 85.92371119067046,
+            "mINP": 62.12571978612107,
+            "Rank-1": 96.5597667638484,
+            "Rank-5": 97.60932944606414,
+            "Rank-10": 97.72594752186589,
+            "Rank-20": 98.01749271137027
+          }
+        },
+        {
+          "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100_r201ax_frequency_shared_s42\\raw\\best_official_arrays.npz",
+          "member": "distances.npy",
+          "sha256": "cab5c370f9124b2ae514cb26201de39ff7ce8e99b7b8364a9d93408189ccf62f",
+          "rows": 1715,
+          "columns": 8575,
+          "recounted": true,
+          "duplicate_SHA_comparison_only": false,
+          "compared_csv": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\best_per_query.csv",
+          "six_metrics": {
+            "mAP": 86.01795720037175,
+            "mINP": 62.557281251444756,
+            "Rank-1": 96.7930029154519,
+            "Rank-5": 97.49271137026238,
+            "Rank-10": 97.84256559766764,
+            "Rank-20": 98.19241982507289
+          }
+        },
+        {
+          "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100_r201ax_frequency_shared_s42\\states_raw\\normal_states.npz",
+          "member": "distances_00.npy",
+          "sha256": "f78b11a5f036d5dd85524d4381d27140b7bf1245ffcfbaef02a438b643d1de77",
+          "rows": 1715,
+          "columns": 8575,
+          "recounted": false,
+          "duplicate_SHA_comparison_only": true,
+          "compared_csv": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42\\state_00.csv",
+          "six_metrics": {
+            "mAP": 85.76856710316946,
+            "mINP": 61.84590828355626,
+            "Rank-1": 96.61807580174927,
+            "Rank-5": 97.0262390670554,
+            "Rank-10": 97.37609329446065,
+            "Rank-20": 97.72594752186589
+          }
+        },
+        {
+          "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100_r201ax_frequency_shared_s42\\states_raw\\normal_states.npz",
+          "member": "distances_10.npy",
+          "sha256": "18aaa699d9ca9a69cc8f74207ff75c8aad62d4b3df9c5217f2fc53de015292a7",
+          "rows": 1715,
+          "columns": 8575,
+          "recounted": true,
+          "duplicate_SHA_comparison_only": false,
+          "compared_csv": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42\\state_10.csv",
+          "six_metrics": {
+            "mAP": 85.79159828802686,
+            "mINP": 61.95002372469563,
+            "Rank-1": 96.61807580174927,
+            "Rank-5": 97.08454810495627,
+            "Rank-10": 97.43440233236151,
+            "Rank-20": 97.72594752186589
+          }
+        },
+        {
+          "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100_r201ax_frequency_shared_s42\\states_raw\\normal_states.npz",
+          "member": "distances_01.npy",
+          "sha256": "ffb39969c4ef5c2caeda0afbb85ba92073d8d50d99a521c048f6f79293b269ff",
+          "rows": 1715,
+          "columns": 8575,
+          "recounted": true,
+          "duplicate_SHA_comparison_only": false,
+          "compared_csv": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42\\state_01.csv",
+          "six_metrics": {
+            "mAP": 85.77647222884838,
+            "mINP": 61.870060748485365,
+            "Rank-1": 96.61807580174927,
+            "Rank-5": 97.0262390670554,
+            "Rank-10": 97.37609329446065,
+            "Rank-20": 97.72594752186589
+          }
+        },
+        {
+          "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100_r201ax_frequency_shared_s42\\states_raw\\normal_states.npz",
+          "member": "distances.npy",
+          "sha256": "cab5c370f9124b2ae514cb26201de39ff7ce8e99b7b8364a9d93408189ccf62f",
+          "rows": 1715,
+          "columns": 8575,
+          "recounted": false,
+          "duplicate_SHA_comparison_only": true,
+          "compared_csv": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42\\state_11.csv",
+          "six_metrics": {
+            "mAP": 86.01795720037175,
+            "mINP": 62.557281251444756,
+            "Rank-1": 96.7930029154519,
+            "Rank-5": 97.49271137026238,
+            "Rank-10": 97.84256559766764,
+            "Rank-20": 98.19241982507289
+          }
+        }
+      ]
+    },
+    "CSV_reduction": {
+      "files": 110,
+      "epoch_csv_files": 100,
+      "selected_csv_files": 2,
+      "state_csv_files": 8,
+      "rows_reduced": 188650,
+      "CMC_entries_checked": 5500,
+      "group_summaries_checked": 6490,
+      "CSV_reduction_is_not_raw_matrix_recount": true
+    },
+    "execution": {
+      "formal_runs": 2,
+      "epochs_each": 50,
+      "successful_updates_each": 6563,
+      "total_formal_updates": 13126,
+      "native_updates": 6,
+      "native_active_parameter_gradient_flags_each": 111,
+      "AX_training_record_visits": 840064,
+      "zero_AMP_skips": true,
+      "AX_pair_exact_order_rows": 6563,
+      "AV_AX_exact_order_rows_each": 6563,
+      "children": [
+        {
+          "phase": "native",
+          "name": "RGBNT100_r201ax_frequency_shared_s42_smoke",
+          "pid": 1829014,
+          "gpu": 2,
+          "exit_code": 0
+        },
+        {
+          "phase": "native",
+          "name": "RGBNT100_r201ax_axis_shared_s42_smoke",
+          "pid": 1829015,
+          "gpu": 3,
+          "exit_code": 0
+        },
+        {
+          "phase": "training",
+          "name": "RGBNT100_r201ax_axis_shared_s42",
+          "pid": 1829626,
+          "gpu": 3,
+          "exit_code": 0
+        },
+        {
+          "phase": "training",
+          "name": "RGBNT100_r201ax_frequency_shared_s42",
+          "pid": 1829625,
+          "gpu": 2,
+          "exit_code": 0
+        },
+        {
+          "phase": "audit",
+          "name": "RGBNT100_r201ax_axis_shared_s42",
+          "pid": 2613544,
+          "gpu": 3,
+          "exit_code": 0
+        },
+        {
+          "phase": "audit",
+          "name": "RGBNT100_r201ax_frequency_shared_s42",
+          "pid": 2624428,
+          "gpu": 2,
+          "exit_code": 0
+        },
+        {
+          "phase": "states",
+          "name": "RGBNT100_r201ax_axis_shared_s42",
+          "pid": 2613639,
+          "gpu": 3,
+          "exit_code": 0
+        },
+        {
+          "phase": "states",
+          "name": "RGBNT100_r201ax_frequency_shared_s42",
+          "pid": 2624524,
+          "gpu": 2,
+          "exit_code": 0
+        }
+      ],
+      "original_controller": {
+        "pid": 1828887,
+        "complete_marker": true,
+        "recorded_absent": true,
+        "actual_process_return_code": "NOT_RECORDED"
+      }
+    },
+    "trace": {
+      "original_AV_batches": 13126,
+      "original_AX_batches": 13126,
+      "total_original_batches": 26252,
+      "terminal_epoch_band_rows_reduced": 600,
+      "AV_rows": 300,
+      "AX_rows": 300,
+      "AV_missing_F_query_norm_cells": 900,
+      "max_reduction_error": 0.0,
+      "AX_QKV_curve_rows_reduced": 1500,
+      "AX_F_value_curve_rows_reduced": 200
+    },
+    "comparison_tables": {
+      "six_rows": 15,
+      "six_rows_tied_to_primary_training_results": 5,
+      "paired_rows_internal_aggregate_verified": 20580,
+      "paired_rows_directly_compared_to_both_original_AX_CSVs": 1715,
+      "comparisons_internal_arithmetic": 12,
+      "state_rows": 8,
+      "state_comparisons": 6,
+      "historical_primary_per_query_and_raw_matrices_not_reaudited": [
+        "AK",
+        "AG",
+        "AL",
+        "AQ",
+        "AS",
+        "AV",
+        "original_DeMo"
+      ]
+    },
+    "max_errors": {
+      "six_metrics": 2.842170943040401e-14,
+      "CMC50": 1.4210854715202004e-14,
+      "group_metrics": 4.263256414560601e-14,
+      "raw_per_query": 4.440892098500626e-16
+    }
+  },
+  "archive_and_cleanup": {
+    "status": "LOCAL_ARCHIVE_AND_HISTORICAL_RECEIPT_BINDINGS_PASS",
+    "archive_receipts": [
+      {
+        "key": "RGBNT100_r201ax_frequency_shared_s42/raw",
+        "bytes": 247526119,
+        "sha256": "d89f98354206086294596e3e4ec55dca866319ef544bab36535a3e056f95b3bc"
+      },
+      {
+        "key": "RGBNT100_r201ax_frequency_shared_s42/states_raw",
+        "bytes": 397614516,
+        "sha256": "2d44708b7fbdf3ea74150825c2968855960e37a5606e610ebad689f388f48fd7"
+      },
+      {
+        "key": "RGBNT100_r201ax_frequency_shared_s42/best",
+        "bytes": 398706009,
+        "sha256": "ef7188d4d6c5e6d7fde22f2d18353102afe9dc056d70368f4e4f7132e4cddc13"
+      },
+      {
+        "key": "RGBNT100_r201ax_axis_shared_s42/raw",
+        "bytes": 247530230,
+        "sha256": "38be76306e7603ca10c90e18781c9ba354e3339425cb133d47edfc2286a550cf"
+      },
+      {
+        "key": "RGBNT100_r201ax_axis_shared_s42/states_raw",
+        "bytes": 397599489,
+        "sha256": "79be348e5bc11792fd5f2ae8c02ee8bbf5c4490637d50ae91294f65e96192ef6"
+      },
+      {
+        "key": "RGBNT100_r201ax_axis_shared_s42/best",
+        "bytes": 398706009,
+        "sha256": "8efc9e9464126867b9f818bf37f51c8880a1436cf99cc658016c186848ea4ed4"
+      }
+    ],
+    "scoped_duplicate_count": 7,
+    "scoped_duplicate_bytes": 2109804758,
+    "scope": "Six matching remote run-owned archives plus the verified 22,122,386-byte text transport package; no unrelated paths are in the cleanup set.",
+    "protected_weight_hash_binding": {
+      "runs/full_official_baselines_20261004/training/RGBNT100_demo_s42/best.pth": "95852451d64cdb6741060fac82919e2ecfde9c5fa913c2e9a9ec384c3b046b2a",
+      "runs/full_official_baselines_20261004/training/MSVR310_demo_s42/best.pth": "fb1409ab5e958f70fae0fdf991a95c7dc59e3cefbaa31ba63630578c39e48572",
+      "runs/r201k_relation_local_pi_20261007/RGBNT201/training/RGBNT201_r201k_axis_shared_s42/best.pth": "fb055515125bb4e5418390e68ded4be10dc643040dfce34a19ddb8b4836aeb68",
+      "runs/full_official_baselines_20261004/training/MSVR310_demo_shared_s42/best.pth": "7744f4f7f796e17e778b2d23e5c025c2197029610634cac26c88ba9f73121fb3"
+    },
+    "protected_receipt_scope": "Four original session weight hashes are bound to the exact sealed collector source and its historical protected_bests_exact receipt. This audit did not access those current remote weights.",
+    "unique_best_deleted_reported": 0,
+    "current_remote_proof": false,
+    "evidence": [
+      "C:/Users/gb/projects/demo_dual_axis_20261002/results/preflight/r201ax_RGB_frequency_query_normalization_complete_intake_20261014.py:41",
+      "C:/Users/gb/projects/demo_dual_axis_20261002/results/preflight/r201ax_RGB_frequency_query_normalization_complete_intake_20261014.py:49",
+      "C:/Users/gb/projects/demo_dual_axis_20261002/results/preflight/r201ax_RGB_frequency_query_normalization_20261014_complete_intake.json:1232",
+      "C:/Users/gb/projects/demo_dual_axis_20261002/results/preflight/r201ax_RGB_frequency_query_normalization_20261014_complete_intake.json:1270"
+    ]
+  },
+  "claims": [
+    {
+      "claim": "Two actual full50 normal controls and eight fixed checkpoint states",
+      "assessment": "supported"
+    },
+    {
+      "claim": "Six same-checkpoint metrics, CMC1-50, per-query and group values",
+      "assessment": "supported",
+      "qualification": "Saved-distance rank recount, not neural re-evaluation"
+    },
+    {
+      "claim": "600-row terminal AV/AX F-Q/K/V trace",
+      "assessment": "supported",
+      "qualification": "AV F-query norm cells remain unrecorded"
+    },
+    {
+      "claim": "AX structured +1 success or advantage over AV/ordinary",
+      "assessment": "unsupported",
+      "reason": "Actual selected structured metrics regress against AV structured and AX ordinary; +1 over original is unmet"
+    },
+    {
+      "claim": "Controller actual exit_code=0",
+      "assessment": "not_established",
+      "reason": "No controller return-code receipt; terminal completion and historical process absence only"
+    },
+    {
+      "claim": "Causal identity mechanism, independent final test, multiseed or missing-modal success",
+      "assessment": "not_established"
+    }
+  ],
+  "scope_limitations": [
+    "No dataset images or current remote filesystem were read.",
+    "Rank metrics independently reconstructed from saved distance matrices; distances were not regenerated from feature dot products.",
+    "Checkpoint ZIP payloads CRC/SHA read only; no pickle/torch deserialization or architecture execution.",
+    "Duplicate normal11 cache and common frozen base00 matrices are comparisons, not independent data.",
+    "AV training traces fully reduced here; no AV original rank matrices were supplied or reaudited.",
+    "15-row history arithmetic is checked, but only five models have supplied primary training results; historical secondary tables are not elevated to independent raw evidence.",
+    "All checkpoints and data were read locally. No SSH, GPU query, model/optimizer construction, neural forward, training/evaluation entry point, installation, Git operation, source mutation or delegation was performed.",
+    "Only the 22 listed original-sealed files were directly rehashed against the full 313-entry original seal maps; the other 291 map entries were not opened by this reviewer.",
+    "All feature members were structurally inspected and CRC/SHA read; full feature norm or feature-dot-product distance regeneration was not performed.",
+    "A scene=-1 placeholder is not evidence of multiple scenes. Repeated query identities and cached matrices are not statistically independent samples."
+  ],
+  "input_hashes_unchanged": true,
+  "input_hash_comparison": {
+    "before_bindings": 343,
+    "after_bindings": 343,
+    "unchanged": 343,
+    "changed": []
+  },
+  "audited_input_hashes": {
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\r201ax_closed_normal_integrity_request_20261014.json": {
+      "sha256": "b30dff8bbf31eb64f4cb2c5e67fbe59d09aefb22079905307b3190b8fbff0ec9",
+      "bytes": 63352
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_identity_coordinate_three_normal.py": {
+      "sha256": "4d3e5805d3de3eaae58ff7027241e147e7f41c6eb935dc7f76e34865e7270d55",
+      "bytes": 9675
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_r201ax_RGB_frequency_query_normalization_normal.py": {
+      "sha256": "8b9a21ad807d518ef6b07200cf230b962e11218c340cd5c23df203b8ce730ffe",
+      "bytes": 13907
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_r201ax_closed_F_query_trace_CPU.py": {
+      "sha256": "2a80cb7b937dd1bca45d3c505b895f1e31590fc6d17f7e513dab40a3775eec75",
+      "bytes": 6171
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_full_official49.py": {
+      "sha256": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+      "bytes": 8118
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_full_official_condition.py": {
+      "sha256": "94ba9a65b399776fadbb7588a0c6bd70c04e569fa0f568729533bfc8ca751121",
+      "bytes": 5280
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_full_official_normal.py": {
+      "sha256": "ee26b0a29bea046db70d4072f88160b3d2ce726451accbd6b90dd44b0a1ee742",
+      "bytes": 3656
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\axis_collaboration.py": {
+      "sha256": "9146c6133f183c3a5f5867c72670168f6b97d31af00e80cf9dd751e2b03c8b69",
+      "bytes": 16939
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\RGBNT100.py": {
+      "sha256": "cef47b0a1dcc9bc434f6c3612e547db41fd8af2b1d7e953323ea80ffb6eb705f",
+      "bytes": 3407
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_r201ax_RGB_normal_states.py": {
+      "sha256": "6af58bf3774b720a8f5eff554d2d9a2ee851776dda5c7ba0a11e4a077b83340b",
+      "bytes": 5599
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py": {
+      "sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+      "bytes": 9448
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\gpu_thermal_execute.py": {
+      "sha256": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+      "bytes": 2203
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\launch_r201ax_RGB_frequency_query_normalization.py": {
+      "sha256": "5588fc86c1d52d5f0fc3771c5ffe59ef850ef7dc279345631ac1fff0cdc0137f",
+      "bytes": 12164
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\official_training_data.py": {
+      "sha256": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+      "bytes": 1528
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\full_official_baselines_20261004\\training\\RGBNT100_demo_s42\\epochs.csv": {
+      "sha256": "9e51659d3cd7c36686ab4a18c2fcb4898aee888aafedd960d5e9c510c3f97f36",
+      "bytes": 9026
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\full_official_baselines_20261004\\training\\RGBNT100_demo_s42\\result.json": {
+      "sha256": "6281020fab561c83e9d5d162bf692c3d2a7048923886e4750cb605d0dc1dc9f6",
+      "bytes": 37740
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\r201ax_RGB_frequency_query_normalization_20261014_actual_session.json": {
+      "sha256": "b3fc88a3ff8cc2f748e6bb6b9bac903c81ac68535bb7bd4a01d6c25114df6718",
+      "bytes": 43068
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\r201ax_RGB_frequency_query_normalization_20261014_complete_intake.json": {
+      "sha256": "ea207e2d39c4fa2da8e7938cc8653e5cf7217745a9de367425f8a1078e6c8ddc",
+      "bytes": 66631
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\r201ax_RGB_frequency_query_normalization_complete_intake_20261014.py": {
+      "sha256": "49979b9cf230c298335efc65379a24f77b88e184a43f14eff701d2aefa01609c",
+      "bytes": 6516
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\r201ax_RGB_frequency_query_normalization_deploy_20261014.py": {
+      "sha256": "d04eb41793738b01217c503d5c646bb857afa3f627992ad84eaa5250c7a21353",
+      "bytes": 6225
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\r201ax_RGB_frequency_query_normalization_plan_20261014.json": {
+      "sha256": "6013765d35ce49a649a83d6651d3ee31c2302be5ab69f3a7ac1badbf25251845",
+      "bytes": 3325
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\r201ax_RGB_frequency_query_normalization_source_review_20261014.json": {
+      "sha256": "09eb861fb1225f8303a44a2815b1264efcb3467f131a754d509a1ad5cf73bda3",
+      "bytes": 50303
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\r201ax_RGB_frequency_query_normalization_source_review_R1_description_20261014.json": {
+      "sha256": "8530da53172f5ea5400c24dcb189cf9479d821be5b1d63c1e8c4421e168c182c",
+      "bytes": 61691
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\r201ax_actual_CPU_import_aliases_20261014.json": {
+      "sha256": "237d10699f09da0ea953b73fdac724e5c0379a8ec837bb99d6d623fc8fbfa81a",
+      "bytes": 142
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\r201ax_native_gate_actual_20261014.json": {
+      "sha256": "7a0a83b7ae45b93312b14098cc04d1b289434f32569292e461e83a9196a4dadc",
+      "bytes": 209207
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\normal_analysis\\result.json": {
+      "sha256": "2c15e146c63666efdd09281b042255f2eb87df4e9a62944cc30db39f6a4be6e8",
+      "bytes": 31016
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\states\\RGBNT100_r201av_axis_shared_s42\\result.json": {
+      "sha256": "63d045b166c808a5f43cf709df879441bb8bb6dfb436a940c52002cb029dca7d",
+      "bytes": 74509
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\states\\RGBNT100_r201av_frequency_shared_s42\\result.json": {
+      "sha256": "d22fe111184e2b25e9fb511327d1ab1b60d5148ff1e1a1e6046916e03202a197",
+      "bytes": 74571
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\training\\RGBNT100_r201av_axis_shared_s42\\epochs.csv": {
+      "sha256": "ccd3821da22ac5b3e9f8bf611f3222a89f5bd8a91ea07efa2c6cd72692d86822",
+      "bytes": 9021
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\training\\RGBNT100_r201av_axis_shared_s42\\normal_cpu_audit.json": {
+      "sha256": "fb67dca7eefdf9149135db0e925930263cc9fb7f0b8e1624c754751b807f11bd",
+      "bytes": 655
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\training\\RGBNT100_r201av_axis_shared_s42\\result.json": {
+      "sha256": "eda348022fa64dda8e4bc3a19bac7140c02785b6f06e2a160a05d0b403c0637b",
+      "bytes": 48147
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\training\\RGBNT100_r201av_frequency_shared_s42\\epochs.csv": {
+      "sha256": "6bd61f33e1b1d24b0e1766bff65633066daed2f01cf0ac51a8737ecd13a0dade",
+      "bytes": 9041
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\training\\RGBNT100_r201av_frequency_shared_s42\\normal_cpu_audit.json": {
+      "sha256": "400a8287e39ed72403d7bd96af6ef308e16274672477fb93dc90aa048bebbb68",
+      "bytes": 656
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\training\\RGBNT100_r201av_frequency_shared_s42\\result.json": {
+      "sha256": "3137cd94efe784b5da54d1328d2651db9eafe3f9050eb5da84aba96394df5825",
+      "bytes": 48242
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\F_query_trace_CPU\\epoch_band_traces.csv": {
+      "sha256": "13c4b41c284ba3a2ecba27087333cfea3060c0e63897a6533eaff66765cae0d7",
+      "bytes": 162364
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\F_query_trace_CPU\\result.json": {
+      "sha256": "4c144a47763bbd36cc20a32d225d0e94d6f3695993051af49013ccef0cc4de74",
+      "bytes": 3259
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\audit\\RGBNT100_r201ax_axis_shared_s42.log": {
+      "sha256": "b824cb1da1e4d61ff3eb9d27cf02652c2cc40ab0e58da1eeac37ed5127978776",
+      "bytes": 45
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\audit\\RGBNT100_r201ax_axis_shared_s42_exit.json": {
+      "sha256": "01441b9c356d0d208ebc548069b84f259b4cf1c301765191bc5ab1611b8f6b2b",
+      "bytes": 187
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\audit\\RGBNT100_r201ax_axis_shared_s42_launch.json": {
+      "sha256": "72b90d6c705e3081bde54959b4792f6ae3b131cc20d8d015b9a9cb0c8d317037",
+      "bytes": 525
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\audit\\RGBNT100_r201ax_frequency_shared_s42.log": {
+      "sha256": "b824cb1da1e4d61ff3eb9d27cf02652c2cc40ab0e58da1eeac37ed5127978776",
+      "bytes": 45
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\audit\\RGBNT100_r201ax_frequency_shared_s42_exit.json": {
+      "sha256": "e86c0e0fcffd8b401f89026d3af3257c3ca3d76c52a8a8b4eb7490f689bfe9d8",
+      "bytes": 192
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\audit\\RGBNT100_r201ax_frequency_shared_s42_launch.json": {
+      "sha256": "8e6c79ce06008dd8faa3d393c950bf993da660a696e537dfa643839f12e4a5fd",
+      "bytes": 527
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\controller_launch.json": {
+      "sha256": "a735b8f9b72f1dc6a9c8ee87f33f27da9bec5e8157dea677fde7c37710f07500",
+      "bytes": 591
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\controller_result.json": {
+      "sha256": "dd0d896fce7bfc9da5a503742af7e2ae63bfc57618a04f891b51fc7a811cffa4",
+      "bytes": 5053
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\native\\RGBNT100_r201ax_axis_shared_s42_smoke.log": {
+      "sha256": "b31c1bb562b5dd628349e7e643f5ae16fa93acb14aeaadd56f4aa75a1fc0f2e0",
+      "bytes": 1294
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\native\\RGBNT100_r201ax_axis_shared_s42_smoke\\official_split_manifest.json": {
+      "sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+      "bytes": 2068069
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\native\\RGBNT100_r201ax_axis_shared_s42_smoke\\run.json": {
+      "sha256": "a7de36565e520c40ab2b4e21956cbaad9c44afb8d1496b610c23b187c60abb1c",
+      "bytes": 12538
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\native\\RGBNT100_r201ax_axis_shared_s42_smoke\\smoke.json": {
+      "sha256": "343d4b35b5390b4a082f07dd68321e3b512e91b861c3aedc3d1d1ca6dad52506",
+      "bytes": 84640
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\native\\RGBNT100_r201ax_axis_shared_s42_smoke_exit.json": {
+      "sha256": "e16864c0709d5055476c7f881a526f77916af4320d349882c1df8f6fd962ebf0",
+      "bytes": 193
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\native\\RGBNT100_r201ax_axis_shared_s42_smoke_launch.json": {
+      "sha256": "2d17d5c962072880389fbdefe2697247524e13bd2db3f9e2338eb023b95efb47",
+      "bytes": 969
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\native\\RGBNT100_r201ax_frequency_shared_s42_smoke.log": {
+      "sha256": "4ea435e5a61bddf32256e4096e277ed96b42fa8dc33eadf054fa9c10d1b93b09",
+      "bytes": 1299
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\native\\RGBNT100_r201ax_frequency_shared_s42_smoke\\official_split_manifest.json": {
+      "sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+      "bytes": 2068069
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\native\\RGBNT100_r201ax_frequency_shared_s42_smoke\\run.json": {
+      "sha256": "d73fb0f0e4de24d235249a0d684b7530fe86623f6b4b0cdeec9dfbd9ab0b4313",
+      "bytes": 12549
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\native\\RGBNT100_r201ax_frequency_shared_s42_smoke\\smoke.json": {
+      "sha256": "1977acb75f569601d6ae2edf3c129eab5d0f752316b60856f9edb9c71ef5ace4",
+      "bytes": 84604
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\native\\RGBNT100_r201ax_frequency_shared_s42_smoke_exit.json": {
+      "sha256": "5895179799e227f83079abd50812294e863fac3eed38dd70c85b5c9f9b28b04b",
+      "bytes": 197
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\native\\RGBNT100_r201ax_frequency_shared_s42_smoke_launch.json": {
+      "sha256": "f29a7cfac58855922205b7bbba12a10e2f21a5f2617315ba32085c54d1c65663",
+      "bytes": 978
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\native_acceptance.json": {
+      "sha256": "e2d92a7038677fe6f4f38fad19c919e8c672774b9fd9d7bdfd9478ca8228a649",
+      "bytes": 323
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\normal_analysis\\attention_selection_training_curves.csv": {
+      "sha256": "086df90d9d77d64ab93e98127d45346d09115ee7923e75a09255e132c803a115",
+      "bytes": 220014
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\normal_analysis\\comparisons.csv": {
+      "sha256": "8fdc71d7c8d83a76789a8611022c053c23793c27b9fefa58b5cea74a5a7b24fb",
+      "bytes": 2256
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\normal_analysis\\frequency_value_input_training_curves.csv": {
+      "sha256": "82a834d45fc961e3515788994014f1139f171e9f48eba6bae72c9a4f5380c4b0",
+      "bytes": 27540
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\normal_analysis\\group_metrics.csv": {
+      "sha256": "e8bf14d213dfa53e6c4f0bb6473d28ed83abf7ff1da5eb88746feaf33f5b5c4c",
+      "bytes": 89239
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\normal_analysis\\paired_query_changes.csv": {
+      "sha256": "973d6110de04d130187858f4c7eb69f527f1cd596c70f3c5fe0a5bcd7fa893ba",
+      "bytes": 2074830
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\normal_analysis\\result.json": {
+      "sha256": "c35ed11298d55f636ed988ca96b3e949775f0aa0c855e9e88bba58f945ea13ae",
+      "bytes": 36036
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\normal_analysis\\six_metrics.csv": {
+      "sha256": "f518450a56c309d3e5b06a47ddefaf138b7e9426d0b82b3fb46a38c680802a80",
+      "bytes": 1986
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\normal_analysis\\state_comparisons.csv": {
+      "sha256": "9bf378144e22ee081f989ca851d4817d078ef20c720d0c219ff5889d6c865293",
+      "bytes": 948
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\normal_analysis\\state_metrics.csv": {
+      "sha256": "50d33820defda6d5730cc9fb26a7e62d4c729e0dcf73ddc472042ff9d33538bc",
+      "bytes": 1081
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\normal_analysis\\training_curves.csv": {
+      "sha256": "bae0ead7183fddd9ea6eac987187dcafbba0a27931b6dd7ce7f5e64f777d8713",
+      "bytes": 15222
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42.log": {
+      "sha256": "999187432f29a63e0f752204326f415975fdcbe91f6c0ce75df30ffe8356febc",
+      "bytes": 1227
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42\\local_archive.json": {
+      "sha256": "126d311b5406301d90f8e9318ebb1d70532473aa8af0659d38a1008ec6683c5a",
+      "bytes": 530
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42\\result.json": {
+      "sha256": "ccd42c1bfdebd7732d55ed3817f0df527448d422b850289634be23d55c64ff67",
+      "bytes": 74507
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42\\state_00.csv": {
+      "sha256": "8c02dccd8da9f549791315d2eb3e03d811bd3ba3158116e2110c2872ace43f57",
+      "bytes": 159543
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42\\state_00.json": {
+      "sha256": "706f1eb2db0ec72e75d7c054faddfaf2a6ff72e20c3f4f9130a59432e2d902ba",
+      "bytes": 15651
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42\\state_01.csv": {
+      "sha256": "7ee6606867fe800b7af79eef545a7ff1cabf69b5aae8710e649caefe6a80d5c3",
+      "bytes": 159416
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42\\state_01.json": {
+      "sha256": "23a7af86f33b886eafe1428caac1739fda04080ff2c9dc8551f58eb9dde0569f",
+      "bytes": 15644
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42\\state_10.csv": {
+      "sha256": "b8bffe6c95535085c5c82b0cd371f1dd5bf377236a78a765e194801265a91864",
+      "bytes": 159548
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42\\state_10.json": {
+      "sha256": "3e6b4113e7101eac9a958574c58f251586a1539ff01460194d25d5adb8423cdb",
+      "bytes": 15644
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42\\state_11.csv": {
+      "sha256": "e47f9d6420ba9cb59ea83b9933c2674fb8d4229f540c76459e6851ce74691395",
+      "bytes": 158857
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42\\state_11.json": {
+      "sha256": "d30deeafb2bce656bcb42207146302ef60180f712d4ba106896d86d889a76ebd",
+      "bytes": 15608
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42_exit.json": {
+      "sha256": "7125630f005f7d549161a91a3500b71a719213ee072348d19644027aaa584872",
+      "bytes": 187
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_axis_shared_s42_launch.json": {
+      "sha256": "2a8d825e6462f6ece0253bfca0b001ffd7d22c74ef2911828fedd4f7bc7aca3f",
+      "bytes": 688
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42.log": {
+      "sha256": "a88fdf0d9129c582ad146b1636c30c67170368bd9b38222a7317f524dde16438",
+      "bytes": 1232
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42\\local_archive.json": {
+      "sha256": "c2e251120d42bdc7aa307bc42e9d102cf1a1331c68bcf5618261f613e7c349d7",
+      "bytes": 540
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42\\result.json": {
+      "sha256": "f7ea3d5d2ef551b93af81989ad8be83973ee73d28960caca3c5f5fdaa3d02636",
+      "bytes": 74505
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42\\state_00.csv": {
+      "sha256": "8c02dccd8da9f549791315d2eb3e03d811bd3ba3158116e2110c2872ace43f57",
+      "bytes": 159543
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42\\state_00.json": {
+      "sha256": "706f1eb2db0ec72e75d7c054faddfaf2a6ff72e20c3f4f9130a59432e2d902ba",
+      "bytes": 15651
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42\\state_01.csv": {
+      "sha256": "93709619250ac36daafc8b01f0be493f8e1dfce07d8f31d7487611f5d49e8fba",
+      "bytes": 159418
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42\\state_01.json": {
+      "sha256": "6c85cc704c075b1089f0a0371e06734d6d50e0912324356ee41e51bb344f2cda",
+      "bytes": 15648
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42\\state_10.csv": {
+      "sha256": "8fd6962bb39d13449713e46d5fb4d878936124cd9a05bf209e8309bff737562a",
+      "bytes": 159223
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42\\state_10.json": {
+      "sha256": "31aa4ec3787d3f9d42186be4126477d00b1bb2c02f9223707a4ac1992f4c158a",
+      "bytes": 15643
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42\\state_11.csv": {
+      "sha256": "41c38b3ee973ddd25224587b37feb6dee9bad5afafa6acdf13c551e1c3a00780",
+      "bytes": 158157
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42\\state_11.json": {
+      "sha256": "2475cb55b8934ba8da7d6a8e2caf712a2d789488a79757a5614c2edc2a637f6e",
+      "bytes": 15593
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42_exit.json": {
+      "sha256": "d232bea9edde694b29a8f80c0b61ecc692147edc9ddac98b375e072baf5c3f7e",
+      "bytes": 192
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\states\\RGBNT100_r201ax_frequency_shared_s42_launch.json": {
+      "sha256": "e7f7093c5bae400932310db4aa67fe71fc60abe271b482b6a8f5b4f57a1cea1a",
+      "bytes": 698
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42.log": {
+      "sha256": "e73d8ac02b41d361047537072e3ce1516079e8feec3857ff55373115a49e4fdb",
+      "bytes": 23080
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\batch_orders.jsonl": {
+      "sha256": "32ea2656f4d30073ae6ee69c4d4d926ab036fdbd0385bf0b9d1b8f656225c92c",
+      "bytes": 66722079
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\best.json": {
+      "sha256": "1a8e7f0521790fe7c54e1a415b32e124581c7314e63f6538e25f0ec417024446",
+      "bytes": 15623
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\best_per_query.csv": {
+      "sha256": "e47f9d6420ba9cb59ea83b9933c2674fb8d4229f540c76459e6851ce74691395",
+      "bytes": 158857
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\best_per_query.json": {
+      "sha256": "d30deeafb2bce656bcb42207146302ef60180f712d4ba106896d86d889a76ebd",
+      "bytes": 15608
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_1.csv": {
+      "sha256": "91e609a2340aa844410b27315b09142d2e05cfdb4e177ee6c22c3204e34911b8",
+      "bytes": 159426
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_1.json": {
+      "sha256": "7073a2e31387f21f9cf20fccf79b06cfa3c3847ecd536da9d57cbb31bcb43292",
+      "bytes": 15648
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_10.csv": {
+      "sha256": "3ba4609aea5f28eed64db2189cd0e741ab4771acdb8759ae83557448a7406406",
+      "bytes": 158962
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_10.json": {
+      "sha256": "1b9709aa2a5a342beff07294555ef32528a4d3d1917e8eb925f95808aed047f9",
+      "bytes": 15630
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_11.csv": {
+      "sha256": "d7e5ab1bf7c5d82b7dd9e4becec5bc9f976e6db62b582f61f0742e64563957c6",
+      "bytes": 159340
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_11.json": {
+      "sha256": "72d84012defa3ad1a2cc19c80b4c03aacc829d0845fef2f0304769ae0a4ac098",
+      "bytes": 15631
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_12.csv": {
+      "sha256": "200e61b7ab84afc359f41e1003244f668561e03872c4700b3076025f43ebe637",
+      "bytes": 159130
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_12.json": {
+      "sha256": "14e05d4c95f92a6de455a9020060193ba598df786d479a1c38f374bf7f8fb859",
+      "bytes": 15656
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_13.csv": {
+      "sha256": "99ef48717b3cbaccc45db65784102f7641528dc456bfecb36350d5cabc31eb26",
+      "bytes": 158964
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_13.json": {
+      "sha256": "0fd212f43db5acc76fd93a45d625e27d1bf21cf30289ee8ca9dd097844797bb1",
+      "bytes": 15648
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_14.csv": {
+      "sha256": "b7efa91ac9dbb4667d6e2bb56bcaa17c5f19d7cd567cde5e03ffefc6fbc89912",
+      "bytes": 159053
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_14.json": {
+      "sha256": "3bd61f75d53bf153d238fa9dcb7bee889f4f2e2fcb9ac6071e0a8a26a6fc6b4d",
+      "bytes": 15658
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_15.csv": {
+      "sha256": "32eed6566be975df187e81f6ae897bfe534efff1bcf9758d7cc6b36b0d552ae3",
+      "bytes": 158737
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_15.json": {
+      "sha256": "865696caeac527f97eeda14df7a982d43d586aaae59b8153eee35852bcdcddfa",
+      "bytes": 15678
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_16.csv": {
+      "sha256": "e47f9d6420ba9cb59ea83b9933c2674fb8d4229f540c76459e6851ce74691395",
+      "bytes": 158857
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_16.json": {
+      "sha256": "d30deeafb2bce656bcb42207146302ef60180f712d4ba106896d86d889a76ebd",
+      "bytes": 15608
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_17.csv": {
+      "sha256": "c92383594ca85f8c803f6f9b453401c0a0154c13341d81ad790ec18162bbfd4e",
+      "bytes": 158846
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_17.json": {
+      "sha256": "aca0d066b0560e135f3510048ae5476b145dee6eda2a82888634cbffaa08e200",
+      "bytes": 15662
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_18.csv": {
+      "sha256": "02d0d0b09a74a06d79eecfed8b2ad117e69b79eb156732e525b2668f2667b4d5",
+      "bytes": 158932
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_18.json": {
+      "sha256": "95078cb688a94047e50b30f10ba293e1892cc25f2527154482afce3b23259012",
+      "bytes": 15608
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_19.csv": {
+      "sha256": "8ceb5dc3efde8b1dd8b3fe90741eb72c172811942c8c278c6a36763d4c024db6",
+      "bytes": 159006
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_19.json": {
+      "sha256": "c2a79a59d83e3725c0af0f68450b0d06e1b8bbca17c93ee8c421502240114a1d",
+      "bytes": 15597
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_2.csv": {
+      "sha256": "ebda82727c71d2a6c2b9e1e4ba6bf817deff6e73ae98c985afdbb2c253ae1a7c",
+      "bytes": 159064
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_2.json": {
+      "sha256": "c480456c03afea32b12749a9d813011091b3cfe1696937bac78ba1d005227d42",
+      "bytes": 15604
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_20.csv": {
+      "sha256": "dc50aeadcc04ccf02cfc8d3a13ebc5b00f97dd07d792dd3682b30b3758f2cb8d",
+      "bytes": 158821
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_20.json": {
+      "sha256": "91db827ef39652ad314acb4e95b36d5490f3fcccd3cf477111dee16051ef51fb",
+      "bytes": 15625
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_21.csv": {
+      "sha256": "43d4915e7d292082e193bc79adfb0aa7a41bf13ba12e1307dde001c9f000b184",
+      "bytes": 158926
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_21.json": {
+      "sha256": "0f18bf74a836bf42990694563a30b906ef45224df1135ddb7dc05637d632b9a2",
+      "bytes": 15606
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_22.csv": {
+      "sha256": "486a60e39d8c181b56c9b52c3616a4306280e12f512f8cee1592814f805c7bdc",
+      "bytes": 159035
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_22.json": {
+      "sha256": "458e318ed2db32ef6f9e9d8e12a2c4598b42a02abe6f0a530e4e05d84f3ee171",
+      "bytes": 15619
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_23.csv": {
+      "sha256": "bb955f375a1e082fed6a8cb0551c9b7c9c3ae8aa820ae9d98eb969c3e2eece57",
+      "bytes": 158705
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_23.json": {
+      "sha256": "b37bb6c73eba9a247672a5fce06dc69fcec85c5ba70757565e53841da66a2691",
+      "bytes": 15631
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_24.csv": {
+      "sha256": "e1be08151324316097aca586ba6c4918194a53613a9889f401163bc1c80e3dc2",
+      "bytes": 159068
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_24.json": {
+      "sha256": "1a36a88480192a66d4a24195fe859cf85599e168780d315680e8089d8d65bed8",
+      "bytes": 15640
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_25.csv": {
+      "sha256": "498d38e592b1cec623015fe9bb941afaac42b3ef4bb8d7c068d87f22da2d3b55",
+      "bytes": 158763
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_25.json": {
+      "sha256": "7effbee74366b75664997dec708906a5b367e4d8af99e708e3afb65d3944f238",
+      "bytes": 15613
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_26.csv": {
+      "sha256": "407af072634b39c7359a799dded00a4858bafec9f9c1cc260377751908c3d912",
+      "bytes": 158728
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_26.json": {
+      "sha256": "83f2a7302302f1717a1cd6d91da470de04412f976022822250d1348b024740eb",
+      "bytes": 15639
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_27.csv": {
+      "sha256": "8bc99e0ac0d79d861eff696b969abc5bc2790f0c5f4ec2fe7639731cf7002375",
+      "bytes": 159161
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_27.json": {
+      "sha256": "04808870268c861e29534e2c3c896582fa57e860f249acc483f38c964ca298a3",
+      "bytes": 15662
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_28.csv": {
+      "sha256": "fe5e4a21de455e6861f316a1f488312093695a3ce97225775fdcf4e8c886ae60",
+      "bytes": 158595
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_28.json": {
+      "sha256": "5315b9ed8f0a934b64df02cac7a71cb56dca8e82e98d278216ace2eddbf4b657",
+      "bytes": 15637
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_29.csv": {
+      "sha256": "fb6ced18fd11a83e1eee3b082f5391487189eecff40b21269fb1c94a062e1d24",
+      "bytes": 159017
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_29.json": {
+      "sha256": "0ceb9e3ff8425250b5ff9348a410fc2d7952c017b841580c68397648e18e68d4",
+      "bytes": 15617
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_3.csv": {
+      "sha256": "060a65b6fabc89f40c2eae95de054127c98617df477aa7b9289fcbc63ed8b336",
+      "bytes": 158707
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_3.json": {
+      "sha256": "47358a437f4706ab0f0fd571fbe8719d7a53fbd16e953fd83fc7dedcdeb12bb7",
+      "bytes": 15609
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_30.csv": {
+      "sha256": "925dcd3d9d2b70e3d5bec506c85e087409127d9a5ceec3ad8d68e4e7f05f614d",
+      "bytes": 158953
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_30.json": {
+      "sha256": "7cc67ee01595b4da74c7cf32b2f090e0484ff7e58090efc5e9898851fa16be19",
+      "bytes": 15641
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_31.csv": {
+      "sha256": "909c451d19a64794df0acb9942e363826c80dcac2e75a25f55e4cffb88a5126f",
+      "bytes": 159000
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_31.json": {
+      "sha256": "1ab2e36d5d843f0db4e2736d5fbb180646d1d2907d98c0a3902e6a4eba008fe1",
+      "bytes": 15630
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_32.csv": {
+      "sha256": "d7850907520e8372474ed31c1150c7c27157493f46ddf5219d6d32159faa6683",
+      "bytes": 159028
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_32.json": {
+      "sha256": "17743944bec7e0f1e85e488be0a03408908142ebd980fb9a7209046920ba2f5d",
+      "bytes": 15644
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_33.csv": {
+      "sha256": "7b7151ba0ee7d5bc9c2ea7409a8660a99fc70d208a11baead3c7e3ea8bd85bd3",
+      "bytes": 158927
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_33.json": {
+      "sha256": "58467c154add960f207ccc536e428883fcab055a71eef5a1a13bb9d7ab04cf94",
+      "bytes": 15662
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_34.csv": {
+      "sha256": "200dfc7c12b13e382887e09e6466a3d870c41b8273ab77e9feaed1ad793acdeb",
+      "bytes": 159057
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_34.json": {
+      "sha256": "1e1e50040c79ad1f2c2b51412fc0b2900cf5d81c4c9acda87c8a35c0152f8d0e",
+      "bytes": 15664
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_35.csv": {
+      "sha256": "36baa07c88609b5ee05d228c8661971b823ea9b0f5f951fb7e4ad77a65d3fc45",
+      "bytes": 158961
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_35.json": {
+      "sha256": "555de29297b37bb118998e359c4d41d5b2a1ddaf7a9fe1d8f111e21bfafe0dc9",
+      "bytes": 15668
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_36.csv": {
+      "sha256": "e524ff9a340f72bab407c18307c972a964caf38de11d2ebe27ac1324f53695d8",
+      "bytes": 158855
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_36.json": {
+      "sha256": "2926d0e2e38e53ea14d7ad60c8478ddf4dabb8aacb2638c74cdda54e6544b1ff",
+      "bytes": 15648
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_37.csv": {
+      "sha256": "d7a62da9ab81d4754a9eeb4c8cf86dfe1cc4971ea607ec34a4e067bd51f95dc0",
+      "bytes": 158581
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_37.json": {
+      "sha256": "91ebe1e71276ecce88d9bf1890fb37c1777123d4d41b94d7eab5b8e611c19545",
+      "bytes": 15664
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_38.csv": {
+      "sha256": "2cda32fc12eda66a48effb855067b85007be96972aa41e83b21c519876ee8f7f",
+      "bytes": 158787
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_38.json": {
+      "sha256": "e2d34f1068272ed5555ac7e42dd2cce470bf5c36af0da65402ba4cff99e50a3b",
+      "bytes": 15639
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_39.csv": {
+      "sha256": "2ce34b8436dc63a053501d93467d24c6d95a8df0e0eabd487bc95b56d719c3ae",
+      "bytes": 158751
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_39.json": {
+      "sha256": "bbf39965f352620955d7e15baaf257ddbbae95c46eb58baf3b2fd0d16d6945f8",
+      "bytes": 15634
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_4.csv": {
+      "sha256": "47a173ea991d6d4a49a4e4e928f1d74fa8773ac19923ef39df5ef09fe60b8429",
+      "bytes": 158632
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_4.json": {
+      "sha256": "8215534b49801d632c4f72541150f6773295fa6582feff738a1c877ac13364d9",
+      "bytes": 15603
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_40.csv": {
+      "sha256": "24d77cc72ad167bc13dc5d27bbb6dcf635969eab7ff9a946729e2524fc4a1495",
+      "bytes": 158803
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_40.json": {
+      "sha256": "e916412b4af04bef2afcb8d576b74368bc38a061bb6a5a6ab7d0ef0584a86f79",
+      "bytes": 15684
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_41.csv": {
+      "sha256": "9d569df34cb40d1e6b192b619e24527be6ef6ab7b78accd631de086461361580",
+      "bytes": 158814
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_41.json": {
+      "sha256": "79f72b0100a2deb985c2a1048a0523b7374ca5bed9a499ab66e0050181fd170f",
+      "bytes": 15636
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_42.csv": {
+      "sha256": "0cefc7abff7e74222d9b5d5b35f91a9012bd0d894dc9bf667a9185fbb48e9b7c",
+      "bytes": 158863
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_42.json": {
+      "sha256": "b70fb1ac5a218bc3dcdf0bd5ec759a1e110cd815eadc38b31e70e2a9d55c065c",
+      "bytes": 15627
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_43.csv": {
+      "sha256": "0491a5f839023dd912d4fc38115e1fb37b24d83482af98057259d6159a4a8d9e",
+      "bytes": 158729
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_43.json": {
+      "sha256": "131ff8b62f9c3e6c2529f711a09e6abf5815de9998bbe49b450b10c1a474e80e",
+      "bytes": 15642
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_44.csv": {
+      "sha256": "b63495bda2a256afef4fe264024940c43fa575de5e07fe7a88ce008b6537130e",
+      "bytes": 158787
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_44.json": {
+      "sha256": "82e2c2512d3da82da91b11dbef1747b9035ecaedb77b65b048f743dc969933c7",
+      "bytes": 15646
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_45.csv": {
+      "sha256": "ef9be1239a6445e01d9b9856bc9cea8d04853f0678dacf804299e193a031c509",
+      "bytes": 158840
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_45.json": {
+      "sha256": "b990af49758b7845cb0fd6d67e8626ce9056d152642e768a9f2a2cae2db8cf7e",
+      "bytes": 15656
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_46.csv": {
+      "sha256": "c61cb89459929c99687a7cb612eb02cc7da07a417c316aabf1b82825977f94e7",
+      "bytes": 158877
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_46.json": {
+      "sha256": "30971d8a112c51f8839a6def5f22b80df35e1806c0b2f59eb24aea0a09f8c233",
+      "bytes": 15654
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_47.csv": {
+      "sha256": "a63c8eb37fc2a593a424762283cc186c1ed58e151af852a90b1ed2e1fba00861",
+      "bytes": 158741
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_47.json": {
+      "sha256": "c72e1b0ab0dfd690f5c87ee40b879aac9d62254daef9ab4bc4f5dbbcc8def278",
+      "bytes": 15648
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_48.csv": {
+      "sha256": "5b5f25c69322367c4752a4d425f2a329af1dfe8a131b5cc144e921843b414127",
+      "bytes": 158829
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_48.json": {
+      "sha256": "7bd3541285be2e5de7388ef942d2ee755bf972011ce3215375a8ffd4db81a53e",
+      "bytes": 15656
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_49.csv": {
+      "sha256": "efd1b04367d5a3dfe7fdd07cf3e141493a9e0ccebfcc7034707d27735725d08e",
+      "bytes": 158754
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_49.json": {
+      "sha256": "5e37e473bf70b20286bfaee1dc480e9568c3e115d04a4be62637d23de5040884",
+      "bytes": 15662
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_5.csv": {
+      "sha256": "be3b6d1b9e8b16a2d7de1545ebcf38564ba692ece313d1eb7772f28e80065f0e",
+      "bytes": 158748
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_5.json": {
+      "sha256": "1155f9254a328d77203948c428806f8a21586fe1e06361af18532db666763653",
+      "bytes": 15620
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_50.csv": {
+      "sha256": "5603c83f43d9388eba001ccd3be01b1a74c4145de4e1dc0b284a742d4c5a65ca",
+      "bytes": 158781
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_50.json": {
+      "sha256": "441015fdd713a1616478e718374eb2134f38e415465f7a42087680ac7ba72291",
+      "bytes": 15660
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_6.csv": {
+      "sha256": "dc6a4fff9d5214965a93d6e7a08697190d906704b31a1a21e7177bce6f2006f7",
+      "bytes": 158848
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_6.json": {
+      "sha256": "4d16c0ad88b5dd6b9deb046951c302220a5d75c8de5a5a4bc0b3d9f0192c109f",
+      "bytes": 15587
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_7.csv": {
+      "sha256": "7c41668311bc15bc0c85149785e6583ad1232bab6b7a31ab22c499a1917093c5",
+      "bytes": 158650
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_7.json": {
+      "sha256": "2ef69484661b6ecf5d2464aedb36e5781887900c63c2c05c7805841530dea383",
+      "bytes": 15597
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_8.csv": {
+      "sha256": "fa8290a127cddc9d91c11d92da2af2b16203f035116b0c44a69c69ec4e889542",
+      "bytes": 158584
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_8.json": {
+      "sha256": "87da80a17d43ffc8132e7bd44f196a1776fd1f4e40e7b9485ec6910a7e97c62d",
+      "bytes": 15597
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_9.csv": {
+      "sha256": "bd0fe76b885732bb2e0a2f2351879fcc5a74e854a81ef5c9cd6100edd7453249",
+      "bytes": 159133
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epoch_metrics\\epoch_9.json": {
+      "sha256": "297773bcdc5ab8a031025982f8f357a01fb25796e01e1afd283df3a49ac422f6",
+      "bytes": 15611
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\epochs.csv": {
+      "sha256": "3fc41caa1f46de15fe661a6279c47cfc372ff292db6b5ba4c7835bab6462b3e0",
+      "bytes": 9028
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\local_archive.json": {
+      "sha256": "a4db85f1988e9363eccc59ff2fbdc54995a6c2740055b3905e5c9e5d8d18caa6",
+      "bytes": 539
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\local_best_archive.json": {
+      "sha256": "53e2a5bdcc377090cc685729b36eee99a34d5ad0307a400252c93d62ccd3ef95",
+      "bytes": 508
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\normal_cpu_audit.json": {
+      "sha256": "c77283cf3d561478a2102502b4b54a0666e868bf5cae22eb5e26a83ebb562fa3",
+      "bytes": 656
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\official_split_manifest.json": {
+      "sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+      "bytes": 2068069
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\result.json": {
+      "sha256": "e6b57f18f7f17dc192ed654e9f15d121469b0346bcb3b495b2300488ad0d8569",
+      "bytes": 48046
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\run.json": {
+      "sha256": "86b6116d69fd8db89a281a3bf1baf03d4d2d875396ee1c9b30978106f469291d",
+      "bytes": 12535
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42\\status.json": {
+      "sha256": "e6b57f18f7f17dc192ed654e9f15d121469b0346bcb3b495b2300488ad0d8569",
+      "bytes": 48046
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42_exit.json": {
+      "sha256": "35bea7b87b3ae2cae89edcd472648a3c448feef5c723c52110d74258bf0c6887",
+      "bytes": 187
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_axis_shared_s42_launch.json": {
+      "sha256": "f3aad9c625ba74e9c9077f9a9e091d0608d375d85cf5213b0291b8cd94518610",
+      "bytes": 964
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42.log": {
+      "sha256": "1be940aea8638fbfda39f27abf8ff2b7e33beb0d2efb622bc8c04555c55b452c",
+      "bytes": 23080
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\batch_orders.jsonl": {
+      "sha256": "0e5a28444b5afb8394a82b2762996c75f1436d72f5e89e993b9290419ed2f76f",
+      "bytes": 66707210
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\best.json": {
+      "sha256": "cb1ff25b6292a37f347f8f1960f23688d8369e5cc36ac991a4d10cad8fe087e7",
+      "bytes": 15608
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\best_per_query.csv": {
+      "sha256": "41c38b3ee973ddd25224587b37feb6dee9bad5afafa6acdf13c551e1c3a00780",
+      "bytes": 158157
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\best_per_query.json": {
+      "sha256": "2475cb55b8934ba8da7d6a8e2caf712a2d789488a79757a5614c2edc2a637f6e",
+      "bytes": 15593
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_1.csv": {
+      "sha256": "c8edc3a6577785cda21827f24285969c9cc4d100cb9f6b94417629b188ed6bb3",
+      "bytes": 159414
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_1.json": {
+      "sha256": "f24304a386de0cdec86585b31b01bc948b46c66039b4c9cc3af62797728daae1",
+      "bytes": 15652
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_10.csv": {
+      "sha256": "2c566bf6e46a8954f5a519e4fdb0ea1012b7dbc6bd84aa3b8f31ca775a240850",
+      "bytes": 159060
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_10.json": {
+      "sha256": "b2932268462dcb094a2c7ff07fb72aec87470c203b76637979dfabe76ebc6096",
+      "bytes": 15649
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_11.csv": {
+      "sha256": "2b1f423301ce8157ab1b9c964154fa29cb19d77a3aecddf86104fcdc35751714",
+      "bytes": 159108
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_11.json": {
+      "sha256": "afad8f03b48e95e448405ddd1eb4c46286f9f57a31db214ac7970a7921aa8aaf",
+      "bytes": 15671
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_12.csv": {
+      "sha256": "0d5998b80b0ff3fc3f1f0258b0cf6c090e2d8fb380ae082d3ec73e4c0bf4ee12",
+      "bytes": 158868
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_12.json": {
+      "sha256": "f0635d9b6135baf32c3d482ee0b89f41feccededa3742badf556484d41369426",
+      "bytes": 15631
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_13.csv": {
+      "sha256": "e0fc8217b09e75ba6357b065c18a02983300ce3ef13f33f94686fc672768dc0e",
+      "bytes": 159157
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_13.json": {
+      "sha256": "43ad59be27bbc0762226a16861e5c8fa8df09eb8699ba8597254511103e659da",
+      "bytes": 15625
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_14.csv": {
+      "sha256": "90543abef6c86a4017fae9e1666e8386363ba4ee2a2e4fc1dd1145280f8eb057",
+      "bytes": 158875
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_14.json": {
+      "sha256": "d0af09de8cca14107138ab328b3c6fa2ea5a138927ef106f3c1436a8195a3f99",
+      "bytes": 15628
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_15.csv": {
+      "sha256": "5c8eea09f9c5f3bc9111a9515588337a9e91dec1fd8b4c3d0ff3d7d6d4447ac0",
+      "bytes": 158508
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_15.json": {
+      "sha256": "971c6e1fcc6ae87d0fb72ca2ae9e26be4fae7db24faadac00edc1e5094dfda7b",
+      "bytes": 15648
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_16.csv": {
+      "sha256": "41c38b3ee973ddd25224587b37feb6dee9bad5afafa6acdf13c551e1c3a00780",
+      "bytes": 158157
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_16.json": {
+      "sha256": "2475cb55b8934ba8da7d6a8e2caf712a2d789488a79757a5614c2edc2a637f6e",
+      "bytes": 15593
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_17.csv": {
+      "sha256": "18d2f693f2c7d4621f02aef67a5838b9aa435d31516935892ef1b956032b60c1",
+      "bytes": 158838
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_17.json": {
+      "sha256": "c61c16d2f1401ab2519581309e110443a094ca7da3fd4066e932d3152e80779f",
+      "bytes": 15675
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_18.csv": {
+      "sha256": "1d145430488e03c87fa58194846403fa47fa15fbacf830fa6f6ce9f44cdc8c88",
+      "bytes": 158656
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_18.json": {
+      "sha256": "5e67161b904ad48f89855751af13e9a628b15d3fd5cb379eefbd344410a5d09a",
+      "bytes": 15623
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_19.csv": {
+      "sha256": "8856d5a90846672c771d5a66a63f631e3b9d83136f6cae1d220c92b51d0f1392",
+      "bytes": 158519
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_19.json": {
+      "sha256": "b66779ee3df8657b08f05bf14a56a2e74ba82088ec879e683816ac28fc6c3972",
+      "bytes": 15612
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_2.csv": {
+      "sha256": "578a2d36cc40e260d947fc7cd6b8e87a8ab8a435cf497043affe75c2c29678fc",
+      "bytes": 158851
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_2.json": {
+      "sha256": "7ffaa618abd458112aa90fbcba385451a0707b199ca2a6520a9134be1881483f",
+      "bytes": 15674
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_20.csv": {
+      "sha256": "e2fc029f1515b3c2e6dda105278123642423ad79c0fbd53454d04976f1626f8d",
+      "bytes": 159112
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_20.json": {
+      "sha256": "941d060a8fbab47a576c8720b366a065e5a3246a1501046c2830a546229ca4bb",
+      "bytes": 15654
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_21.csv": {
+      "sha256": "47069ec98f70724821ccf4a400738e89f887a2a69855b408a087c647cf6626b4",
+      "bytes": 158755
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_21.json": {
+      "sha256": "2dae90890a585c28f61b115f0958c308abe845e2aebf4023be7d5a155cfc42f7",
+      "bytes": 15648
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_22.csv": {
+      "sha256": "2b5f66e96216a237ff3a7b26a8f0041082d32cb4ef20584a8770aff1a3bbc213",
+      "bytes": 159236
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_22.json": {
+      "sha256": "f179e7e95e86e0d1e91d42baec644f34146bbc726300bb6e36f1691e0c3f7aaf",
+      "bytes": 15614
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_23.csv": {
+      "sha256": "f4c118091f8d66c1ea6dd9814f48e43d824cf66d7ae9233db39dd75e413bdf80",
+      "bytes": 158724
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_23.json": {
+      "sha256": "f5f6a86cfa1d2434c91b26c023576d12f09d06a6908fd86ab4e17f67ec02fd6c",
+      "bytes": 15668
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_24.csv": {
+      "sha256": "7ac04802e9e137f1e1274a589ddffc0558af6dcd9c380571e34b5f7cdbe20036",
+      "bytes": 158747
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_24.json": {
+      "sha256": "df690d76080cf056c19ec7d9956a04a7c18cf7c8cddfb3395430e054958edc20",
+      "bytes": 15594
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_25.csv": {
+      "sha256": "2146dd1f651f7c9c34a49fd69ed5ebb87fa8e9427ccabce87c4f61516373c1af",
+      "bytes": 158614
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_25.json": {
+      "sha256": "95e62eafcb36ae8f853dbf406c7924940e31abd3d2b847041f21923441fd9bf0",
+      "bytes": 15663
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_26.csv": {
+      "sha256": "e1c4b9b076b8a7e21236e38934b8271d4590554a4f3aa6ecb87c144b10c6ad40",
+      "bytes": 158497
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_26.json": {
+      "sha256": "f823c18db0283ee4f29f4727a60ae3d64ffc18565e74aa709764b6ef5ddd0fc5",
+      "bytes": 15655
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_27.csv": {
+      "sha256": "6dfce5de2d364e00af54d51cbe49dc6b0f330d38634ec7cb6bf61f626409b853",
+      "bytes": 158849
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_27.json": {
+      "sha256": "b4a0f2d264fe814a7e6230ad15342e919dab1a1fdd599f5ae41fbeb0f5c55440",
+      "bytes": 15599
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_28.csv": {
+      "sha256": "e41dabc248ec8b51319bd819b0dbe8e3cb64f407465480e3ad4d5372e7eba51f",
+      "bytes": 158889
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_28.json": {
+      "sha256": "b2d434865a6ce328b8521882d942134c9c0dc61195428475575e5fbd746e47a7",
+      "bytes": 15633
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_29.csv": {
+      "sha256": "676f8e1a02970540eb0b2d712a72c2211f091a011e07d2a8bf926706dc6c0bf7",
+      "bytes": 158681
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_29.json": {
+      "sha256": "d2ec550686b0bb317468b1ebcbd75ee549f11f6639a3a973eb3c5367c974e282",
+      "bytes": 15639
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_3.csv": {
+      "sha256": "0d66aaabc35577e3528ab4e4410bac97e9295874ed8ccbf0e650d15419c2712a",
+      "bytes": 158903
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_3.json": {
+      "sha256": "42e1cb3111fd686958395741444c1575671abe6e266f7b97a6433ef3e8d2cb90",
+      "bytes": 15639
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_30.csv": {
+      "sha256": "c474022b1b51e679cb8365ddedf2a5b1d6234e1650eab6f3373339d8bd9a3905",
+      "bytes": 158943
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_30.json": {
+      "sha256": "f3efae68fb2fc910ba2d05c2f5d1bb33f09bb065ca3615f180b92b61672ae601",
+      "bytes": 15664
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_31.csv": {
+      "sha256": "100cba3d4fac6b6d0aaed36909f42462f3a703a9ff669cdeeec31011c8c42a92",
+      "bytes": 158457
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_31.json": {
+      "sha256": "911fdb3c425068c2988b36188f0ed225c972a0f44dff6fcefe10d5de06d1fe57",
+      "bytes": 15636
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_32.csv": {
+      "sha256": "d351399ea303e67c394b1454e6756bd79fab1ecd6ab79740e5b860d73f04a212",
+      "bytes": 158792
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_32.json": {
+      "sha256": "6659b13bc06a1647f9df5126510947a1cbe01807698916faedbc89b656408fb0",
+      "bytes": 15609
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_33.csv": {
+      "sha256": "08e3167f7d77bdaa5958eb00c5c5bde60c87ac4977cb862c831a668d0ecff3d3",
+      "bytes": 158833
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_33.json": {
+      "sha256": "c037a0815fd19154224c7794acf925b9f6b7b9ae375b29ff9732b3e31a7e4036",
+      "bytes": 15635
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_34.csv": {
+      "sha256": "d1889acc354eaf9ae1b0037ff09ce71351d492fc2d7c632b04c4164eaa7d2af2",
+      "bytes": 158854
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_34.json": {
+      "sha256": "2af4d7361f388d8b4a92c423e2a8b680c1ae6b2d154fbad1d61e488c75803732",
+      "bytes": 15644
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_35.csv": {
+      "sha256": "6b4fa91d55de85a3b471857ae4f2b4f12316b4af6af8ed5ba3237998ff409220",
+      "bytes": 158942
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_35.json": {
+      "sha256": "6b8d10863fb8e8d2735c2ad156f13b80944e6c6d4299d4e9364ea52820a1f100",
+      "bytes": 15637
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_36.csv": {
+      "sha256": "b0bcc0ae8eedc21912534214c0e4d19a2b75d99cbdac94e1cb7837e3b8c0fa8e",
+      "bytes": 158831
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_36.json": {
+      "sha256": "641c2b7180906f58414f791d8e6be94986819e85b240d48fb59703121d879c61",
+      "bytes": 15630
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_37.csv": {
+      "sha256": "16cbbcecabed5e9964a1aaeceebd0bdd1f4aac5ab25d5e51f77097ecf5e8b2f2",
+      "bytes": 158931
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_37.json": {
+      "sha256": "0c0e761b4a3851b16ecb61a09225a06f207be8dc264e788497d357bc1a95ae30",
+      "bytes": 15616
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_38.csv": {
+      "sha256": "883ceac054010febdcd66a177ebf6119d018c5d186ef24ce2c439c906a8b0172",
+      "bytes": 158688
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_38.json": {
+      "sha256": "0784255f9eaf58a170b9b2d8464ba9feddffef39f6ca37bd73766457ca371333",
+      "bytes": 15651
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_39.csv": {
+      "sha256": "e9b3d69ace635186eb36de2ab6a4bedec469e5c365743cb2cf23fccdfdced952",
+      "bytes": 158577
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_39.json": {
+      "sha256": "168a262d3c1ccd846b59a060d252e27b691f757dd803a8f6823c80e03ef6e06e",
+      "bytes": 15654
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_4.csv": {
+      "sha256": "a2d6cb4f8330a5bf0e910ba029d84872e36b964df390621baa27ec7b0adf54fd",
+      "bytes": 158925
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_4.json": {
+      "sha256": "234dc8bed048b894613db1348f0f2179322cfd408f3747a6cb8f5cdb45ed1769",
+      "bytes": 15681
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_40.csv": {
+      "sha256": "735fd68fb198fd0e87e61e76f263fb83fbdd7b63f817ecf11875c7f0ac6df13e",
+      "bytes": 158649
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_40.json": {
+      "sha256": "579fcd6c6b8f636256b5f64b87b3b4bf6db2536359e9f38c308fda8fb8e9f6ba",
+      "bytes": 15660
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_41.csv": {
+      "sha256": "eda418a7b6deddecf72efb0f85f949ade32a33872255a6d140cf40f1aaced6c1",
+      "bytes": 158757
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_41.json": {
+      "sha256": "2142cc6cdd08f8749bd3f951ec22d53035f897e599cc7568cf6f07fdd1aceab9",
+      "bytes": 15652
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_42.csv": {
+      "sha256": "86b7c161b2bf3c4379e408b4e8be4dbdc97b44355db37ddb23763a23648a6ee0",
+      "bytes": 158879
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_42.json": {
+      "sha256": "a2fd74f66f4bd9cdaaa821d5ac94cb17a3f726724c5302398e15fe95fc44e80a",
+      "bytes": 15637
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_43.csv": {
+      "sha256": "c871808cac882297adb2ad798ce68ff38a83155fd1f33a54c9ffa0648525cff6",
+      "bytes": 158780
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_43.json": {
+      "sha256": "82dc34db7515e8b972644a6fc528e5255709a29618158f978961ed3d155629db",
+      "bytes": 15646
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_44.csv": {
+      "sha256": "1d36b41c92efb1df22d98c7cb9a91fe9678ee7d9a3d125d48bb02492dd52b414",
+      "bytes": 158864
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_44.json": {
+      "sha256": "02e25974a43b5928625f0de045969d228c913f87287f1ce99d7a1254d30e8bd8",
+      "bytes": 15641
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_45.csv": {
+      "sha256": "a3ab55956e2dd10526d5b00864feed0abde5933d02564dbccff7a9917dd39d61",
+      "bytes": 158777
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_45.json": {
+      "sha256": "86aa31f97503d7a30b25f682bcbe478ed8c1e0cb875c248faa43e3bbc574a2d3",
+      "bytes": 15651
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_46.csv": {
+      "sha256": "0c533d716b391195fa66aae3bd673e59a6b43063ab7e05ba36570ab2002555a8",
+      "bytes": 158697
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_46.json": {
+      "sha256": "d8ffd040e3ad0a1ee9fa5ea2ceabef178c90d9b4a32e9fdb2c7c3604207fa716",
+      "bytes": 15643
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_47.csv": {
+      "sha256": "8fba5c36b8e2ac7c5f76cb928027d06a16519fc783b4f280bd62d317643086fc",
+      "bytes": 158677
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_47.json": {
+      "sha256": "9562e94af20db68a745ac4514e46bbb53fb20da9f30811a71c43045fb204de35",
+      "bytes": 15641
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_48.csv": {
+      "sha256": "fc978a80e0e794d8be5f01a64ce4143ebf81c807863b1ee458d644e2719535c8",
+      "bytes": 158848
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_48.json": {
+      "sha256": "cf053e4ee52a7cd62279030d13e7c992051915041e7e7600ac12226bca452028",
+      "bytes": 15627
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_49.csv": {
+      "sha256": "684337424406682eb90fb324f172fca370ed802390004859610467b782adb3f1",
+      "bytes": 158755
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_49.json": {
+      "sha256": "babaa38512515f04c9aa4c82c7c69997498c034f3e0ff09e18d9a8c35763c2d3",
+      "bytes": 15639
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_5.csv": {
+      "sha256": "f39f024fb6552eb4e3a4f5e73576e18a07e2cc68281f58724b2f4afa997994ed",
+      "bytes": 158379
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_5.json": {
+      "sha256": "6e651a28b5daf79640b93a43317d34f12ff89383314b4f2cbb779cb73781f238",
+      "bytes": 15640
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_50.csv": {
+      "sha256": "65d25d1eb88026f767ef13c4d03f92275f37e14e38d226e66a20571f3cab3f8f",
+      "bytes": 158813
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_50.json": {
+      "sha256": "00aea55fe883ac9bc86a85fcb6d77108b665cae155af11d168ebf95ee1ba50fa",
+      "bytes": 15644
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_6.csv": {
+      "sha256": "5f1019c22603a952837e3c5beadc7807ffa69492c6c4ac176052a92facdc72b0",
+      "bytes": 159011
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_6.json": {
+      "sha256": "b01d4c8bb5517de0809438952f0fa7fbfd4e6cae847a7ce9936562f6ffcdbd91",
+      "bytes": 15659
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_7.csv": {
+      "sha256": "39f64a2d1a1bb6fe69826fb71e81a2075d5c3cbd36d408b7e681b4c8de2092ad",
+      "bytes": 158789
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_7.json": {
+      "sha256": "b05139cd1a32935bedfeddca18f4bb5ed6d9f3616536a780233d6f7691ba452b",
+      "bytes": 15673
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_8.csv": {
+      "sha256": "62138a81643a644692aea31788cbd9f69e77a58df5ea2e94cb405fa9a60f46b0",
+      "bytes": 158762
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_8.json": {
+      "sha256": "c0157e44c067ad864950a0fe80659ea7bf7debcb88147bea84da429080cdbba0",
+      "bytes": 15629
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_9.csv": {
+      "sha256": "f0ef9cd20d0113ab39e7ef396b4713afe1cec0f192d1ecfd43081b13782c2521",
+      "bytes": 158619
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epoch_metrics\\epoch_9.json": {
+      "sha256": "084cbf90ad1b3586d90f22e957778ec12bf5de3ad51483719bd91cb4505f13ac",
+      "bytes": 15669
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\epochs.csv": {
+      "sha256": "2eebbcb98b4bc6f9c0b097aa7d1faf70d6d625cd07f271535153cabca42ef22b",
+      "bytes": 9020
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\local_archive.json": {
+      "sha256": "c1f993b6904ed49ee3b6fc967a5f24c6249620b6fe976ddd309b73c86903256c",
+      "bytes": 549
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\local_best_archive.json": {
+      "sha256": "6071409c4ee5f9758f1441ab8c06d8d9faf285393a13b4ff67c97f4522fb2d15",
+      "bytes": 518
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\normal_cpu_audit.json": {
+      "sha256": "75095f7e4dd7e91e215b1784dae0510fad95b74df15976fc956e195343fd46b5",
+      "bytes": 656
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\official_split_manifest.json": {
+      "sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+      "bytes": 2068069
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\result.json": {
+      "sha256": "5c19bf843224a9d6b615aad8b7661be5fdc0f238223009c4b8ca31a54ecb1a22",
+      "bytes": 48025
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\run.json": {
+      "sha256": "b8fe4325c93fd6a21cf18ac5714bf3bfadeff87c856562a508783b69f88b0915",
+      "bytes": 12545
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42\\status.json": {
+      "sha256": "5c19bf843224a9d6b615aad8b7661be5fdc0f238223009c4b8ca31a54ecb1a22",
+      "bytes": 48025
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42_exit.json": {
+      "sha256": "690cc5f6e9a6eae1d8c9bc6244d0975ea6aa5d404bfb470a62e96c11496d8379",
+      "bytes": 192
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100\\training\\RGBNT100_r201ax_frequency_shared_s42_launch.json": {
+      "sha256": "dd14f4082d101487603e8b2efe5e97d56a62ca97be4757b1a436dc6507378fe7",
+      "bytes": 974
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\controller.log": {
+      "sha256": "b46f57ac7eb85a9c54e656c9ee2ecbf41e77a959063a4d8dec21de6426e59a92",
+      "bytes": 927
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ax_RGB_frequency_query_normalization_20261014\\remote_owner.json": {
+      "sha256": "5f35cc4db323031ad790ff389aa40f04d25f2c4d911526bc72c089ea042a3ab7",
+      "bytes": 628
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_frozen_anchor_experiment.py": {
+      "sha256": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+      "bytes": 11369
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_r201aq_RGB_attention_decay.py": {
+      "sha256": "0c4391bc0ef98d0994e9d2efa1e41985746b8d67a71642e8b0506953e1cf5afa",
+      "bytes": 5002
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_r201as_RGB_query_normalization.py": {
+      "sha256": "7e3aacdb1462b93efc146c0b75c367cddc9645891b8eefa6f782a920d50d3d27",
+      "bytes": 5410
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_r201av_RGB_frequency_value_decay.py": {
+      "sha256": "1d2b950cf5faebc56665111dc457b3ea6b684a9d3cad23d41e022d78e435ac31",
+      "bytes": 4683
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_r201ax_RGB_frequency_query_normalization.py": {
+      "sha256": "99e2741a8f6d90abe605e6a1a02d20d1f282b4555c1df3c0627291b7d52a6cd6",
+      "bytes": 4355
+    },
+    "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100_r201ax_axis_shared_s42\\best\\best.pth": {
+      "sha256": "8efc9e9464126867b9f818bf37f51c8880a1436cf99cc658016c186848ea4ed4",
+      "bytes": 398706009
+    },
+    "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100_r201ax_axis_shared_s42\\raw\\best_official_arrays.npz": {
+      "sha256": "38be76306e7603ca10c90e18781c9ba354e3339425cb133d47edfc2286a550cf",
+      "bytes": 247530230
+    },
+    "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100_r201ax_axis_shared_s42\\states_raw\\normal_states.npz": {
+      "sha256": "79be348e5bc11792fd5f2ae8c02ee8bbf5c4490637d50ae91294f65e96192ef6",
+      "bytes": 397599489
+    },
+    "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100_r201ax_frequency_shared_s42\\best\\best.pth": {
+      "sha256": "ef7188d4d6c5e6d7fde22f2d18353102afe9dc056d70368f4e4f7132e4cddc13",
+      "bytes": 398706009
+    },
+    "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100_r201ax_frequency_shared_s42\\raw\\best_official_arrays.npz": {
+      "sha256": "d89f98354206086294596e3e4ec55dca866319ef544bab36535a3e056f95b3bc",
+      "bytes": 247526119
+    },
+    "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ax_RGB_frequency_query_normalization_20261014\\RGBNT100_r201ax_frequency_shared_s42\\states_raw\\normal_states.npz": {
+      "sha256": "2d44708b7fbdf3ea74150825c2968855960e37a5606e610ebad689f388f48fd7",
+      "bytes": 397614516
+    },
+    "D:\\Program Files\\UserCache\\gb\\codex_tmp\\AX_original_controller_near_end_fourth_actual_20261014.json": {
+      "sha256": "31ac842b7cfd8402eafd376b26f2a8d499aa3e01c379fa134b17d2d407638ae0",
+      "bytes": 17204
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\r201ax_closed_normal_integrity_supplement_20261014.json": {
+      "bytes": 930,
+      "sha256": "d80e6d3f68ba501cb86102801bb8d6cf112b02b61eee652f7b2071b937e31bbd"
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\controller_result.json": {
+      "bytes": 4804,
+      "sha256": "92621ef5e617a831f6406e6b8b685455089d941e6d09f8455146328c87a34944"
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\training\\RGBNT100_r201av_frequency_shared_s42\\batch_orders.jsonl": {
+      "bytes": 60294036,
+      "sha256": "e0e089a34c4eba7337bf3f6b4b80a7f6b2860ef62bdbdbb76951d6bd140c161f"
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\training\\RGBNT100_r201av_axis_shared_s42\\batch_orders.jsonl": {
+      "bytes": 60422879,
+      "sha256": "35842f7326336969251811264c889a39a4f07429ab17ed895897cd0dc3e9f065"
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\utils\\reid_evaluation.py": {
+      "bytes": 1947,
+      "sha256": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2"
+    },
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\experiment_data.py": {
+      "bytes": 4032,
+      "sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3"
+    }
+  },
+  "trace_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-14_AX_run01",
+  "deterministic_evidence_files": [
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-14_AX_run01\\raw_recount.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-14_AX_run01\\csv_recount.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-14_AX_run01\\archive_members.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-14_AX_run01\\runtime_verification.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-14_AX_run01\\supplement_and_tables.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-14_AX_run01\\input_hashes_before.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-14_AX_run01\\supplement_hashes_before.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-14_AX_run01\\input_hashes_after.json"
+  ],
+  "reviewer_actions": {
+    "SSH": 0,
+    "GPU_queries": 0,
+    "torch_imports": 0,
+    "models": 0,
+    "NN_calls": 0,
+    "optimizer_updates": 0,
+    "training_or_eval_entry_calls": 0,
+    "installs": 0,
+    "Git_operations": 0,
+    "source_mutations": 0,
+    "delegations": 0,
+    "public_human_MD_created": 0,
+    "outputs": "Only designated machine audit JSON and private trace directory"
+  }
+}
