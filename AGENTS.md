@@ -1,3 +1,7 @@
+# Current AV closed / AW source only — 2026-10-14T12:41:21+08:00
+
+AV native6/full50x2/13126/eightGTstates/D archive/freshresultaudit CLOSED. No active project NN/wait; do not rerun original observers/collectors. Only2026 physicalGPU2/3/max2/onepercard/noT-P/GPU01. RGB100 +.386076mAP/+.174927R1 remains +1 unmet; fixedfour-state GT oracle union9 is diagnosis only. AW source-only15outlets+275spatial planned, noAWNN/deploy until freshreview/native gates. Preserve201K/MSstrong/originalteachers/unique D best/raw; restore AV D-only selected binaries before dependent NN. No201NN/missing49/failedseed hunt. One human handoff exact Desktop/Git/26/27 static mirror. Earlier current headers historical.
+
 # Current AV native6 PASS, formal GPU23 started — 2026-10-14T08:46:06+08:00
 
 Only2026 physicalGPU2/3/max2 one/card; noGPU0/1 or T-P. AV controller 1354808, formal 1355646/1355647 actually admitted after native6. Full50/13126/eight GT states pending. Sole hidden local observer 30972 born 2026-10-14T08:44:15.3684770+08:00 waits until 2026-10-14T11:42:35+08:00, then one original-owner check. DO NOT poll epoch/peak/GPU or waiting handles before deadline; no duplicate observers/relaunch. Only F middle/high input Linear weight decay removed versus AS, all reviewed7+299 source unchanged. PreserveK201/MSstrong/teachers/running bests/unique D. No201NN/missing专项/49/failedseed hunt. GoalACTIVE_UNMET. Sole handoff docs/实验交接.md exact Desktop/Git/26/27. Earlier current headers historical.
