@@ -1,3 +1,7 @@
+# Current AW fixed AV full diagnostic CLOSED — 2026-10-14T14:43:47+08:00
+
+Original12282 trueexit0_4c6b04; native256/full20580/30GToutlets/275spatial/Dexact2raw COMPLETE/zerooptimizer-newweights/freshaudit WARN0blocks. No activeNN/observer; neverreopen70746/452/12282/oldcollectors. Only26physicalGPU2/3/max2 one/card/noT-P. PreserveK201/origteachers/strongMS/alluniqueD; AV temporary best/raw restores retired afterDproof, restorebeforedependentNN. Normalweak+1 thenDeMo symmetricsix+1 ACTIVE_UNMET; no201NN/missing49/failedseedhunt. User nofrequentpoll: estimatecompletion/necessarydiagnosis node, oneowner, noearlyepoch-log-GPU-handle checks, necessary180-300sec. AXnotimplemented/deployed/NN. Solehandoff exactDesktopGit26/27static; earlierheaders historical.
+
 # Current AW R2 changed original entry12282 started — 2026-10-14T13:53:06+08:00
 
 R1 original70746/functions452 consumedactualexit1 beforeNN (CPU import missingprojectpath), sources/failure preserved. R2freshSOURCEPASS0 and originalchanged helper12282 started, uses4existingexactrestores/no recopy/no neural-sourcechange. CPUwarm/native/full/30GToutlets/Dintake NOT yet observed complete. Next and only node2026-10-14T13:53:12+08:00: original12282 only; no early epoch/log/GPU/handle reads, no observer/restart/closedR1calls. Only26physical23/max2 one/card/noT-P; protectK201/MSstrong/teachers/alluniqueD and neededrestores. No newtraining/weights/201/missing49/seeds. Onehumanhandoff exactDesktopGit26/27static; earlierheaders historical.
