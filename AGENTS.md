@@ -1,3 +1,7 @@
+# Current AW R2 changed original entry12282 started — 2026-10-14T13:53:06+08:00
+
+R1 original70746/functions452 consumedactualexit1 beforeNN (CPU import missingprojectpath), sources/failure preserved. R2freshSOURCEPASS0 and originalchanged helper12282 started, uses4existingexactrestores/no recopy/no neural-sourcechange. CPUwarm/native/full/30GToutlets/Dintake NOT yet observed complete. Next and only node2026-10-14T13:53:12+08:00: original12282 only; no early epoch/log/GPU/handle reads, no observer/restart/closedR1calls. Only26physical23/max2 one/card/noT-P; protectK201/MSstrong/teachers/alluniqueD and neededrestores. No newtraining/weights/201/missing49/seeds. Onehumanhandoff exactDesktopGit26/27static; earlierheaders historical.
+
 # Current AW original warm failed beforeNN / R2 source PASS — 2026-10-14T13:26:04+08:00
 
 Original70746/functions452 consumedexit1_5d9e70 atCPU import cwd/home/gaob/no project module path; AWroot absent and noNN started. R1 sources/review retained. R2 two-new/215reuse minimalresume uses explicitprojectsys.path and same4 exactalreadyrestoredDinputs/no recopy, freshreviewPASS0; DO NOTcall original R1flow or closed452/70746 again. No currentprojectNN/wait. Only26physical23/max2 one/card/noT-P; retainK201/MSstrong/teachers/uniqueD and4needed remote restores until R2 completion. No newtraining/missing49/seeds/201. CPU58error15ID/all8cam diagnosis only; AV9rescue5IDs/6harm4IDs is not9independent runs/GT route. Solehandoff exactDesktopGit26/27 static. Earlierheaders historical.
