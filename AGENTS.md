@@ -1,3 +1,7 @@
+# Current BA native6 PASS / formal GPU23 admitted — 2026-10-15T01:09:21+08:00
+
+Only final existingclassifier initial directions use exact fullofficialTRAIN bank, oldrownorm/RNG retained, AVrecipe/params/5120 unchanged, no failedAZmetric. FreshR1TAGfixbeforeNN/R2SOURCEPASS/native6actualAdam/strictreload/allactivegrad. Formal50x2 pending; no newscore. Only26physical23/max2one/card/noT-P. Solehiddennearend2026-10-15T03:54:21+08:00; noearlyepoch-log-GPU-handlequery, necessary180-300s/no timeoutrestart. Preserve201K/AV/MSstrong/teachers/uniqueD; restoredbank isrequired build/eval dependency, retireonlyafterallconsumersandDproof. No201NN/missing49/failedseedhunt. SolehandoffGitDesktop26/27exact/goalACTIVE_UNMET; priorheaders historical.
+
 # Current AZ full50/eightstates CLOSED negative — 2026-10-15T00:46:42+08:00
 
 Native6/formal13126/allofficialGT/D6exact/freshWARN0blocks closed. Axis85.936761/96.501458 belowAV by.217883/.291545,+1unmet. ControllerCOMPLETEabsent/all8child0/controllerOSexitUNATTESTED. All NN/observer/collector closed; neverreopenoldowners. BA8sourcepreparedonly/no review-deploy-native-formal yet, parentAV/classifiertrain-onlyinitialdirections only. Preserve201K/AV/MSstrong/teachers/uniqueD. Only26physical23/max2one/card/noT-P; no201NN/missing49/failedseedhunt. Usernofrequentpoll: oneestimatedfinish/necessarynode/noearlyepoch-log-GPU-handlequeries/necessary180-300s/no timeoutrestart. SolehandoffGitDesktop26/27exact/goalACTIVE_UNMET; priorheaders historical.
