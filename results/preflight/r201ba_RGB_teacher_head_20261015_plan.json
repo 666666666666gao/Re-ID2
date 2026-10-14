@@ -1,0 +1,73 @@
+{
+  "status": "SUITE_SOURCE_PREPARED_NOT_REVIEWED_NOT_DEPLOYED_NOT_NN",
+  "at": "2026-10-15T00:43:20+08:00",
+  "tag": "r201ba_RGB_teacher_head_20261015",
+  "parent": "AV",
+  "factor": "BA only changes initial directions of the existing final 50x5120 classifier versus AV, using cached originalteacher42 full-official TRAIN class means centered/whitened by TRAIN population variance and existing BN epsilon/gamma, retaining original random row norms. The classifier remains trainable. Other heads/BN/experts/route/losses/optimizer/sampling/params/RNG and final5120 inference graph remain AV. Known prototype initialization; not evidence that random heads caused failure, no guaranteed loss/retrieval improvement. Required immutable AB8675 TRAIN bank; no QG features or labels, no new initialization encoder passes. Extra CPU preprocessing/bank I/O and existing cached-bank creation cost disclosed; no equal-startup-cost claim. Failed AZ metric change is not retained.",
+  "scope": "RGBNT100 full official normal only; preserve best201K/MSstrong/AV. Later DeMo paper six only; no missing training or49 now.",
+  "hypothesis": "Source confirms fresh random final CE head. Test deterministic training identity directions without changing weight row norms. This does not establish random heads caused failure; positive transfer requires actual normal ranking/paired controls.",
+  "bank": {
+    "local": "D:/Program Files/UserCache/gb/ReID2-experiment-artifacts/r201ab_RGB_training_neighbors_20261012/training_features.npz",
+    "remote_relative": "inputs/r201ba_RGB_training_bank_20261015/training_features.npz",
+    "bytes": 167098445,
+    "sha256": "9d1f92ec7b3755debf2cecee4980a574d70f3b6c1ce37ffc760d0a7197e2cba9",
+    "train_records": 8675,
+    "identities": 50,
+    "dim": 5120,
+    "query_gallery_forwards": 0,
+    "optimizer_updates": 0,
+    "new_weights": 0,
+    "existing_creation_cost": "AB cached teacher TRAIN extraction:8675 records/136 batches; not counted as new BA forwards, not free preprocessing."
+  },
+  "recipe": {
+    "frozen_teacher_seed": 42,
+    "new_expert_head_seed": 42,
+    "original_teacher_epochs": 50,
+    "additional_epochs_per_control": 50,
+    "controls": [
+      "frequency_shared",
+      "axis_shared"
+    ],
+    "physical_gpus": [
+      2,
+      3
+    ],
+    "max_NN": 2,
+    "temperature_power_reads": false,
+    "batch": 64,
+    "P": 8,
+    "K": 8,
+    "hard_sampling": true,
+    "route_temperature": 2,
+    "CE": 0.25,
+    "main_hinge": 0.6,
+    "contribution": 0.05,
+    "MF_aux": 0.001,
+    "metric": "AV main11 pure per512 unit3584",
+    "scored_CE_dim": 512,
+    "cap": 0.1,
+    "BN_calls": 2,
+    "partial_loss": 0,
+    "two_backwards": true,
+    "parameters": 99585158,
+    "trainable_parameters": 1887366,
+    "descriptor_dim": 5120,
+    "train_records": 8675,
+    "query_records": 1715,
+    "gallery_records": 8575
+  },
+  "sequence": [
+    "Fresh whole-suite source review",
+    "Explicit restore required D TRAIN bank, reviewed source transfer, CPU warm/noCUDA",
+    "Matched native3 actualAdam each/allactive finitegrad/AMP0/strictreload, head rows/RNG/bank exact, paired samples and first native Triplet/routing vsAV",
+    "Two additionalfull50/6563updates each",
+    "ALL normal QG, installedGT six/CMC50/perquery/groups, mAP best earliesttie and best/last",
+    "Same fixedbest fourstates each, main11 arrays exactnormal",
+    "D6 sizeSHA before matching remote duplicate retirement including restored bank",
+    "Fresh result audit and one exacthandoff Git/Desktop/26/27"
+  ],
+  "decision": "Require actual +1 mAP AND Rank1 versus original, compare matched AV and ordinary, rescue/harm and11-00. No failed seed search or candidate promotion based on CE alone.",
+  "selection_limit": "Official benchmark participates in epoch selection; teacher50+extra50 differs from original50. Frozen states not retrained ablation. Single seed; prototype init known technique.",
+  "observation": "One owner near predicted ~2.95h finish from actual prior epoch times plus postepoch overhead; no early epoch/peak/log/GPU/handle query. Necessary followup180-300s, no model restart from observer error.",
+  "runtime": "NOT_RUN"
+}

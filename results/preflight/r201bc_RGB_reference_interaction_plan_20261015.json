@@ -1,0 +1,36 @@
+{
+  "status": "FULL_EIGHT_FILE_SUITE_SOURCE_PREPARED_NOT_REVIEWED_NOT_DEPLOYED_NOT_NN",
+  "dataset": "RGBNT100",
+  "parent": "AV stronger retained recipe; BA final classifier initialization and AZ corrected-state metric are not retained",
+  "purpose": "Test whether interaction repair benefits from explicit frozen base identity semantics rather than only base relation norm and global task gates.",
+  "evidence_limits": "AV fixed-state single experts rescued none of original first-rank errors while full11 rescued9/harmed6; this suggests testing the joint path but does not isolate PI from conditional messages or routing. BA reduced initial CE without improving final retrieval. Neither observation proves conditioning will help.",
+  "single_factor": "Only existing PI hidden64 is multiplied by 2sigmoid(Wb normalize(stopgrad(base_relation512))) per relation. Shared Wb64x512 zero-initialized, no new expert/backbone/readout block.",
+  "parameters": {
+    "added": 32768,
+    "expected_total": 99617926,
+    "expected_trainable": 1920134,
+    "descriptor_dim": 5120
+  },
+  "controls": "Same exact conditional gate and additional capacity in ordinary mixed-source and dual-axis variants. Frozen originalteacher42, same fresh heads42, full50+extra50, same data/sampling/updates/loss/checkpoint rule.",
+  "initialization": "Zero Wb exactly preserves initial AV PI values and existing state/RNG. This is fresh training, not continuing selected AV best; reference encoder only loads original DeMo best.",
+  "native_required": "Matched3 actual Adam each; complete frozen reference/strict reload/zero AMP skips/current active gradient and sampling contracts, new gate nonzero task gradient, CPU/CUDA RNG preservation, initial zero-gate identity and relation-isolation checks before formal admission.",
+  "formal_required": "Two full50/all8675train1715Q8575G, normal mAP highest earliesttie, six metrics samebest, fullCMC50/perquery/groups/bestlast/all curves/00-10-01-11/equal-budget comparison; no partial fit/dev and no benchmark-as-untouched-test claim.",
+  "admission": "Original BB all12 workers/controller absent and intake complete, source fresh review PASS and actual native gates first; selectedGPU2/3 idle. Same max2 one/card formal protocol; no change to live BB sources.",
+  "scope": "Only26physicalGPU2/3; preserve201K/AV/MSstrong/uniqueD; no temperature/power/GPU01/new201NN/missing49 or failedseed hunt. Future concurrency follows actual BB total-throughput evidence.",
+  "missing": "Deferred DeMo paper six symmetric conditions only, after normal candidates improve.",
+  "runtime": "NOT_RUN",
+  "new_NN_calls": 0,
+  "new_optimizer_updates": 0,
+  "source_files": [
+    "identity_reference_interaction.py",
+    "run_r201bc_RGB_reference_interaction.py",
+    "launch_r201bc_RGB_reference_interaction.py",
+    "evaluate_r201bc_RGB_normal_states.py",
+    "analyze_r201bc_RGB_reference_interaction_normal.py",
+    "results/preflight/r201bc_RGB_reference_interaction_deploy_20261015.py",
+    "results/preflight/r201bc_RGB_reference_interaction_complete_intake_20261015.py",
+    "results/preflight/r201bc_RGB_reference_interaction_plan_20261015.json"
+  ],
+  "at": "2026-10-15T06:55:47+08:00",
+  "extra_TRAIN_feature_bank_required": false
+}
