@@ -1,3 +1,7 @@
+# Current AV native6 PASS, formal GPU23 started — 2026-10-14T08:46:06+08:00
+
+Only2026 physicalGPU2/3/max2 one/card; noGPU0/1 or T-P. AV controller 1354808, formal 1355646/1355647 actually admitted after native6. Full50/13126/eight GT states pending. Sole hidden local observer 30972 born 2026-10-14T08:44:15.3684770+08:00 waits until 2026-10-14T11:42:35+08:00, then one original-owner check. DO NOT poll epoch/peak/GPU or waiting handles before deadline; no duplicate observers/relaunch. Only F middle/high input Linear weight decay removed versus AS, all reviewed7+299 source unchanged. PreserveK201/MSstrong/teachers/running bests/unique D. No201NN/missing专项/49/failedseed hunt. GoalACTIVE_UNMET. Sole handoff docs/实验交接.md exact Desktop/Git/26/27. Earlier current headers historical.
+
 # Current AU closed — 2026-10-14T08:02:57+08:00
 
 AS/AT/AU are closed. Only2026 physicalGPU2/3/max2/onepercard; noGPU0/1 or T-P, no201NN/missing49/failedseed hunt. AU actual native1+main4 train batches per selected AS control, paired names/labels, zero optimizer/checkpoint/QG uses; two identical remote best restores retired after D proof. No active project NN/wait. Preserve201K/all protectedteachers and unique D best/raw. Next training only after evidence, scoped fresh review and native gate. Sole handoff docs/实验交接.md exact Desktop/Git/26/27 mirror. Earlier current headers are historical.
