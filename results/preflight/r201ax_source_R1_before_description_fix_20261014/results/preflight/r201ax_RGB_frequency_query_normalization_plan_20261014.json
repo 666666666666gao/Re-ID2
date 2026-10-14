@@ -1,0 +1,29 @@
+{
+  "status": "SOURCE_PREPARATION_ONLY_AX_NOT_DEPLOYED",
+  "at": "2026-10-14T14:54:17+08:00",
+  "dataset": "RGBNT100",
+  "evidence_paths": [
+    "results/r201aw_AV_frequency_outlets_20261014/CPU_analysis/F_query_key_reading_scale_CPU.json",
+    "results/r201aw_AV_frequency_outlets_20261014/CPU_analysis/F_spatial_processing.csv",
+    "results/r201aw_AV_frequency_outlets_20261014/CPU_analysis/outlet_identity_metrics.csv",
+    "results/preflight/r201aw_closed_outlets_integrity_audit_20261014.json"
+  ],
+  "change": "Only projectedQ of all three F spatial attention readers per-head FP32 L2*sqrt8, reuse existing AS function. K/V/output/crossband and entire AV recipe unchanged; M normalization retained. No params/extra forward/loss/update.",
+  "evidence": "AW selected AV E20 complete10290 records: processed F middle/high spatial variation retained, projected Q norms .133/.104/.099, nearuniform headmean maxlift1.0004/1.0013/1.0014. Local scale/identity diagnostics motivate test, not proof causal gain.",
+  "controls": "Both ordinary mixed-source and source-structured; original teacher42 frozen, fresh heads/expert42/newAdam/extra50/hardP8K8/B64/T2/cap.10/mainCE.25/hinge.6/reg.05/aux.001 actualunit3584+score512/AS M projectedQ unit/AQ5QKVdecay0/AV2valueWdecay0/BN2/partial0/twobackwards/5120.",
+  "native": "Three actual Adam updates each; strict reload/frozen anchor/active gradients, native shapes/groups/paired names/RNG and FP32 perheadQ norms observed before either formal50. Actual F prepare source runs once full+oncepartial, two calls per each band reader; no extra neural forwards for diagnostics.",
+  "full": "All8675 officialtrain/50IDs/full1715query8575gallery. Two extra50/13126 real updates, allsix/CMC1-50/perquery/groups/best-last/fullcurves/eightactualfrozenstates. No heldout or missing49. Highest normalbenchmarkmAP earliesttie/all six samebest; benchmark selection/teacher50+extra50 disclosed.",
+  "parameters_added": 0,
+  "physical_gpus": [
+    2,
+    3
+  ],
+  "maximum_NN": 2,
+  "estimated_training_hours": 2.5722222222222224,
+  "estimated_GPU_hours": 5.144444444444445,
+  "waiting": "One native/admission observation at original launch+180s, then one original near-end observer at actualformalstart+9140s; no interim epoch/GPU/log/handle queries. Necessary later180-300s, never restart on observation timeout.",
+  "acceptance": "PreserveK201 best79.664314693/85.167464115. RGB100 mAP>=86.768567103/R1>=97.618075802, samecheckpoint with meaningful paired ordinary/11-00 netutility. Small gains not promoted as +1; no failedseedhunt.",
+  "storage": "Warm reuse current26conda/no install. Admission selectedGPU2/3 idle, D/remote>3.3GB, protected4 exact. Full terminal text and six unique best/raw D archive before only exact remote duplicate cleanup. Restore old D-only best before its consumers.",
+  "limits": "Only normalRGB100; retain existing MSstrong route and goal+1, later DeMo paper6 symmetricmissing+1. No new201NN/49/T-P/refactor/novelty claim. Onehumanhandoff Desktop/Git/26/27static exact.",
+  "estimate_basis": "Actual AV native21.70/21.92sec and full training child9259.7884/9163.6196sec. AX native firstnode180s after admission; nearend formal+9140s allows states180s and checks ~300s before estimated total9440s. Estimates not deadline guarantees."
+}
