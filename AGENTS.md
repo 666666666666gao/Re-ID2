@@ -1,3 +1,7 @@
+# Current AU closed — 2026-10-14T08:02:57+08:00
+
+AS/AT/AU are closed. Only2026 physicalGPU2/3/max2/onepercard; noGPU0/1 or T-P, no201NN/missing49/failedseed hunt. AU actual native1+main4 train batches per selected AS control, paired names/labels, zero optimizer/checkpoint/QG uses; two identical remote best restores retired after D proof. No active project NN/wait. Preserve201K/all protectedteachers and unique D best/raw. Next training only after evidence, scoped fresh review and native gate. Sole handoff docs/实验交接.md exact Desktop/Git/26/27 mirror. Earlier current headers are historical.
+
 # Current AT closed — 2026-10-14T07:38:06+08:00
 
 AS and AT are closed. Only2026 physicalGPU2/3/max2/onepercard; noGPU0/1 or T-P, no201NN/missing49/failedseed hunt. AT actual two native64 and two full10290 fixed-selected probes, zero updates/writes, cache output exact; four identical remote restores retired after D proof. No active project NN/wait. Preserve201K/all protectedteachers and unique D best/raw. Next training only after evidence, scoped fresh review and native gate. Sole handoff docs/实验交接.md exact Desktop/Git/26/27 mirror. Earlier current headers are historical.
