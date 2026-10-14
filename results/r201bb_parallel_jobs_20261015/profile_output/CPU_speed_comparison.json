@@ -1,0 +1,65 @@
+{
+  "status": "ACTUAL_BB_CPU_SPEED_READOUT_NOT_METHOD_RESULT",
+  "comparisons": [
+    {
+      "repeat": 0,
+      "serial_seconds": 244.67358309286647,
+      "parallel_seconds": 254.65621431195177,
+      "speedup": 0.9607995773986624,
+      "seconds_saved": -9.982631219085306,
+      "serial_peak_reserved_bytes": 2101346304,
+      "parallel_sum_peak_reserved_bytes": 4202692608
+    },
+    {
+      "repeat": 1,
+      "serial_seconds": 269.4622447350994,
+      "parallel_seconds": 250.84215126209892,
+      "speedup": 1.0742303212570712,
+      "seconds_saved": 18.620093473000452,
+      "serial_peak_reserved_bytes": 2101346304,
+      "parallel_sum_peak_reserved_bytes": 4202692608
+    },
+    {
+      "repeat": 2,
+      "serial_seconds": 266.25651131989434,
+      "parallel_seconds": 248.39692985685542,
+      "speedup": 1.0718993647519353,
+      "seconds_saved": 17.85958146303892,
+      "serial_peak_reserved_bytes": 2101346304,
+      "parallel_sum_peak_reserved_bytes": 4202692608
+    }
+  ],
+  "aggregate_speedup": 1.0351468484782214,
+  "all_repeats_faster": false,
+  "all_measured_seconds_retained": true,
+  "new_NN_calls": 0,
+  "new_optimizer_updates": 0,
+  "instrumentation_changelog": [
+    {
+      "file": "profile_r201bb_BA_job.py",
+      "change": "created",
+      "purpose": "Standalone existing BA step and full-QG workload timing; no production edits."
+    },
+    {
+      "file": "profile_r201bb_parallel_jobs.py",
+      "change": "created",
+      "purpose": "Serial/concurrent job orchestration, CPU and selected-card memory at phase nodes."
+    },
+    {
+      "file": "analyze_r201bb_parallel_jobs.py",
+      "change": "created",
+      "purpose": "CPU-only comparison from complete evidence."
+    },
+    {
+      "file": "results/preflight/r201bb_parallel_jobs_deploy_20261015.py",
+      "change": "created",
+      "purpose": "Deferred reviewed admission and explicit TRAIN-bank restore, no existing training edits."
+    },
+    {
+      "file": "results/preflight/r201bb_parallel_jobs_complete_intake_20261015.py",
+      "change": "created",
+      "purpose": "Collect exact finite evidence, CPU reduction and retire only dependency/package duplicate."
+    }
+  ],
+  "limits": "Process-reserved peaks are PyTorch allocator measurements; their sum is conservative concurrent allocation, not sampled NVIDIA peak. Full micro-job includes startup/GT evaluation but19 updates, not full50. No temperature/power/SM occupancy claim. Throughput evidence supports only this tested workload/card; benchmark scores do not become model results."
+}
