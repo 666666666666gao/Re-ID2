@@ -1,3 +1,7 @@
+# Current AW source PASS / original flow70746 started — 2026-10-14T12:53:16+08:00
+
+Only2026 physicalGPU2/3/max2 one/card/noT-P. AV closed auditedWARN/nonblocks and Gitda08d85. AW4new+211reuse SOURCE_PASS0, original synchronous native70746 now restoring exactD2bests+2normal arrays and will run bothnative64 then bothfull10290 QG/15outlets+275spatial, then intake. NO completed AWNN/native/full/metrics claimed yet. First and only next observation at2026-10-14T13:08:02+08:00; do notpoll logs/GPU/handles before node, do notrelaunch. PreserveK201/teachers/MSstrong/alluniqueD; no training/newweights/new201/missing49/seeds. Source audit only and actual routeUNATTESTED/samefamilyprovisional. Onehandoff exactDesktopGit26/27static; olderheaders historical.
+
 # Current AV closed / AW source only — 2026-10-14T12:41:21+08:00
 
 AV native6/full50x2/13126/eightGTstates/D archive/freshresultaudit CLOSED. No active project NN/wait; do not rerun original observers/collectors. Only2026 physicalGPU2/3/max2/onepercard/noT-P/GPU01. RGB100 +.386076mAP/+.174927R1 remains +1 unmet; fixedfour-state GT oracle union9 is diagnosis only. AW source-only15outlets+275spatial planned, noAWNN/deploy until freshreview/native gates. Preserve201K/MSstrong/originalteachers/unique D best/raw; restore AV D-only selected binaries before dependent NN. No201NN/missing49/failedseed hunt. One human handoff exact Desktop/Git/26/27 static mirror. Earlier current headers historical.
