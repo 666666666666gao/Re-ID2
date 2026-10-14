@@ -1,0 +1,1900 @@
+{
+  "schema_version": 1,
+  "audit_skill": "experiment-audit",
+  "date": "2026-10-15",
+  "generated_at": "2026-10-15T07:54:47+08:00",
+  "project": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002",
+  "scope": "Strictly local saved MSVR310 CSV coverage and the 45 explicitly listed input files; no raw reranking or new NN.",
+  "verdict": "WARN",
+  "overall_verdict": "WARN",
+  "integrity_status": "warn",
+  "deterministic_verdict": "PASS",
+  "reason_code": "saved_csv_provenance_and_offline_comparison_limitations",
+  "summary": "All requested files and saved arithmetic pass. The overall warning preserves inherited raw-ranking provenance and the limits of post-hoc comparisons across trained models and outlets; no blocking discrepancy was found.",
+  "blocking_issue_count": 0,
+  "nonblocking_issue_count": 2,
+  "blocking_issues": [],
+  "nonblocking_issues": [
+    {
+      "id": "N1",
+      "check": "A",
+      "severity": "WARN",
+      "title": "Saved evidence audit inherits historical raw-ranking provenance",
+      "details": "Installed images, raw distance matrices, checkpoints and omitted block generator/audit artifacts were not examined. The 24 saved summaries and manifest consistency are verified; full AP rank sequences are not in CSV. 42 AP values per outlet are reconstructible from one/two relevant endpoints; the other 549 per outlet remain saved AP observations. Historical AH/R proofs are explicitly reused rather than presented as fresh ranking verification.",
+      "evidence": [
+        {
+          "file": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/result.json",
+          "line": 3897,
+          "reference": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/result.json:3897",
+          "detail": "Reused installed-GT proof record"
+        },
+        {
+          "file": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/independent_cpu_audit.json",
+          "line": 367,
+          "reference": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/independent_cpu_audit.json:367",
+          "detail": "Reused old raw audit proof"
+        },
+        {
+          "file": "analyze_msvr_strong_full_retention_cohorts.py",
+          "line": 12,
+          "reference": "analyze_msvr_strong_full_retention_cohorts.py:12",
+          "detail": "Omitted original block proof references"
+        }
+      ],
+      "required_action_for_current_scope": "Retain CSV-only qualification; no additional computation required for this authorized scope."
+    },
+    {
+      "id": "N2",
+      "check": "E",
+      "severity": "WARN",
+      "title": "Offline overlap and different trained models do not identify a causal or deployable gain",
+      "details": "No overclaim was found in the current coverage result limits. R common_context correct-on-strong-error counts and AH frozen-state changes cannot be relabeled expert benefit or causal new-model success. Preserve harm counts, unequal descriptor dimensions, fixed benchmark selection, single seed and distinct R/AH teachers/interfaces.",
+      "evidence": [
+        {
+          "file": "results/msvr_saved_evidence_coverage_CPU_20261015/result.json",
+          "line": 770,
+          "reference": "results/msvr_saved_evidence_coverage_CPU_20261015/result.json:770",
+          "detail": "Current artifact already states this boundary"
+        },
+        {
+          "file": "results/msvr_saved_evidence_coverage_CPU_20261015/vs_strong.csv",
+          "line": 20,
+          "reference": "results/msvr_saved_evidence_coverage_CPU_20261015/vs_strong.csv:20",
+          "detail": "R axis common_context rescue42/harm49"
+        },
+        {
+          "file": "results/msvr_saved_evidence_coverage_CPU_20261015/vs_strong.csv",
+          "line": 12,
+          "reference": "results/msvr_saved_evidence_coverage_CPU_20261015/vs_strong.csv:12",
+          "detail": "AH axis11 rescue2/harm5"
+        }
+      ],
+      "required_action_for_current_scope": "Carry the existing qualifiers into the canonical handoff; no second human report or source change is needed."
+    }
+  ],
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "reviewer_model": "UNATTESTED",
+  "reviewer_reasoning": "UNATTESTED",
+  "reviewer_family": "openai",
+  "executor_model": "UNATTESTED",
+  "executor_family": "openai",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "agent_id": "/root/audit_msvr_saved_evidence_coverage_20261015",
+  "verdict_id": "/root/audit_msvr_saved_evidence_coverage_20261015",
+  "agent_id_basis": "Exact task_name returned by parent spawn; host provided no separate opaque agent ID.",
+  "model_attribution_basis": "Requested model/effort recorded separately; actual routed model and effort were not attested by host metadata.",
+  "request_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_saved_evidence_coverage_integrity_request_20261015.json",
+  "request_sha256": "2e4d133b495ec38a1f288c08ba29ac60d75a0ff1fc31e453971223c32164a50d",
+  "trace_path": ".aris/traces/experiment-audit/2026-10-15_MS_saved_coverage_run01/",
+  "audited_input_count": 45,
+  "all_audited_inputs_unchanged": true,
+  "audited_input_hashes": {
+    "analyze_identity_coordinate_three_normal.py": "sha256:4d3e5805d3de3eaae58ff7027241e147e7f41c6eb935dc7f76e34865e7270d55",
+    "analyze_msvr_saved_evidence_coverage.py": "sha256:b0776f6767fdbd2d226ada194a3991a2e462a1857b44b6c22e3e3d5157ffcfa4",
+    "analyze_msvr_strong_full_retention_cohorts.py": "sha256:f27cb00ca8307222dab1933e14d431d10c4a900fafb84a871b6e2a32926a65c5",
+    "analyze_r201ah_MS_full_identity_normal.py": "sha256:1fd749b2cf2fb367c38dafcd3c14f71b64b9f9269a9f2c76b4e0947514373110",
+    "audit_full_official49.py": "sha256:04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+    "audit_full_official_condition.py": "sha256:94ba9a65b399776fadbb7588a0c6bd70c04e569fa0f568729533bfc8ca751121",
+    "evaluate_selected_expert_outlets.py": "sha256:4d67156a150dcf3d42652a44e87df56d93c23c43225155b40e0e912dbee1cd5a",
+    "full_evaluation.py": "sha256:a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "results/full_official_baselines_20261004/training/MSVR310_demo_s42/official_split_manifest.json": "sha256:2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2",
+    "results/msvr_reference_blocks_p0_20261009/original_DeMo.csv": "sha256:cdc427ca3fabe843f47c8c63a6ab5cecca4bf723e2eac40f27593f6a43ee3dd3",
+    "results/msvr_reference_blocks_p0_20261009/shared_fused.csv": "sha256:d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6",
+    "results/msvr_reference_blocks_p0_20261009/shared_private_only.csv": "sha256:15bdd42b4cdef5d46bf01b6867bbbf9239d3d9061b0a28a2b29a3b157f06cf8e",
+    "results/msvr_reference_blocks_p0_20261009/shared_public_only.csv": "sha256:80d60261ee09764146bb4a39b1818093bd9dc0840a55f10af7b2a6ebe88aa350",
+    "results/msvr_saved_evidence_coverage_CPU_20261015/coverage.csv": "sha256:f3d02a36217f308b45e5e1b0d552a4d71cdf8e9ffacec76fbff64f8a0c74ae99",
+    "results/msvr_saved_evidence_coverage_CPU_20261015/query_flags.csv": "sha256:ab16e9591f7a13b59f35acad941aac7714cb3f7a07af27604598e0ac90312daf",
+    "results/msvr_saved_evidence_coverage_CPU_20261015/result.json": "sha256:e3194ad271099758bfb76c74b5eaa8be99e6f690b13e948925802212ad015901",
+    "results/msvr_saved_evidence_coverage_CPU_20261015/six_metrics.csv": "sha256:c06ee5a67632c1a0fcc2dfd90b7932271a950a602564bf7db6f011876c85c57f",
+    "results/msvr_saved_evidence_coverage_CPU_20261015/vs_strong.csv": "sha256:69df1c3946074ffef618e3811f2032367e6aadf88c9a2bb1632bb11d719ebb0d",
+    "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/result.json": "sha256:511e1d10aefe6d28d37ddae2ac2987cf632547e9a85978255a06309070471f23",
+    "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/state_00.csv": "sha256:d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6",
+    "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/state_01.csv": "sha256:ca55c235e62e821adc8280d411b04cd68c2faf5e63cbb98a17245e1103b8cd14",
+    "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/state_10.csv": "sha256:e92351a3be3c8dd9a57d222ace2bc8395a375b4ce0388cc17f68aa26aaa7af17",
+    "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/state_11.csv": "sha256:08ed68e9f495cb6497e5d4fefc4b45459149359ec1edc80b6bae298f221a99c7",
+    "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_frequency_shared_s42/result.json": "sha256:4f34d6c5a2fc083364a4b8ab1deef7cb631e3c0aeb883b82851c7e399dcd93c6",
+    "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_frequency_shared_s42/state_00.csv": "sha256:d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6",
+    "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_frequency_shared_s42/state_01.csv": "sha256:5678269e8e01c5f0d19557fcd565d24c1851f034b7f34e377c852da626cb7421",
+    "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_frequency_shared_s42/state_10.csv": "sha256:a40840d1d105a136752993dfe8c855da68a3cf2d7c8ff018e95cd7cef2c43884",
+    "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_frequency_shared_s42/state_11.csv": "sha256:8962b95ae0df794be1e57a9043ba1f03e0aec1f956b368432fc9064d0c730857",
+    "results/selected_expert_outlets_20261011/jobs.json": "sha256:7307c1266dd2fcb2904885eeabc063bb70acef4a2c430a6a4946fff6e1b33492",
+    "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/common_context.csv": "sha256:45e0148a84d7143e6abef050520c914ed2ee72ea1e0d11afc52dde0fba6d8f33",
+    "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/F_projection_input.csv": "sha256:1e8dd49538ef7855562883e6240ba6508219ba1ca470b9090128406257aa903f",
+    "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/F_projection_output.csv": "sha256:e3a5d61780d60a25f95e8f164f4054b4367e01d4d76fb01736e88642ae017978",
+    "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/independent_cpu_audit.json": "sha256:a629b0016b2f07339012f813018256564508854273c01d0b757d8d657079d0fc",
+    "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/M_projection_input.csv": "sha256:7accf0a1ea289f5284e6978f330dfec694acac764c9d55b332ca871519d14e43",
+    "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/M_projection_output.csv": "sha256:e40e0acebc109fb0d92a80922adecad59e2263d533b3bfc32acf6c30f35d1db2",
+    "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/normal11.csv": "sha256:a19ad6f23c70964c41123d3d04e3d27c9168ce0df68b8048f654ad75745f3af3",
+    "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/result.json": "sha256:f81b593a89b5923df31fafd7bb5cc72a66c5e77b70398d180b404b4da2ab4e37",
+    "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/common_context.csv": "sha256:3a2f62b60b40139ed0995d5aac309c0f94da43ba4e2dfdee647a0b107a43dcef",
+    "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/F_projection_input.csv": "sha256:8ea37444011aeb6e303fd437b4e0da424a071d243c9051a14a8a881f986d8cca",
+    "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/F_projection_output.csv": "sha256:bcd922c616759cfca72f447728dc6e68de6bc8224092d6f25a185988f4ad7660",
+    "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/independent_cpu_audit.json": "sha256:fa146185dfaa51ba48cba7a977e0619051634989576398d542b76ec89ef3e09d",
+    "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/M_projection_input.csv": "sha256:f4217ce67094fa2859a0a013b3bbf6f671bb4227841f50bffc15090be5ff405e",
+    "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/M_projection_output.csv": "sha256:de0f9c28e7efaaeb4588dc47991760f89e5404352d545ddb71aad19a8cece348",
+    "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/normal11.csv": "sha256:886d98f4aedce400989167cdd4b0754d4ba81c196382a4e3bb2fe90fb9a55ea2",
+    "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/result.json": "sha256:4d2d095bc36552e2200a2662be53436322cb19380458ae495f4bad6615d3a121"
+  },
+  "audited_inputs": [
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_identity_coordinate_three_normal.py",
+      "relative_path": "analyze_identity_coordinate_three_normal.py",
+      "bytes": 9675,
+      "lines": 136,
+      "sha256_before": "4d3e5805d3de3eaae58ff7027241e147e7f41c6eb935dc7f76e34865e7270d55",
+      "requested_sha256": "4d3e5805d3de3eaae58ff7027241e147e7f41c6eb935dc7f76e34865e7270d55",
+      "sha256_after": "4d3e5805d3de3eaae58ff7027241e147e7f41c6eb935dc7f76e34865e7270d55",
+      "unchanged": true,
+      "sha256_final": "4d3e5805d3de3eaae58ff7027241e147e7f41c6eb935dc7f76e34865e7270d55"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_evidence_coverage.py",
+      "relative_path": "analyze_msvr_saved_evidence_coverage.py",
+      "bytes": 7391,
+      "lines": 120,
+      "sha256_before": "b0776f6767fdbd2d226ada194a3991a2e462a1857b44b6c22e3e3d5157ffcfa4",
+      "requested_sha256": "b0776f6767fdbd2d226ada194a3991a2e462a1857b44b6c22e3e3d5157ffcfa4",
+      "sha256_after": "b0776f6767fdbd2d226ada194a3991a2e462a1857b44b6c22e3e3d5157ffcfa4",
+      "unchanged": true,
+      "sha256_final": "b0776f6767fdbd2d226ada194a3991a2e462a1857b44b6c22e3e3d5157ffcfa4"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_strong_full_retention_cohorts.py",
+      "relative_path": "analyze_msvr_strong_full_retention_cohorts.py",
+      "bytes": 6516,
+      "lines": 82,
+      "sha256_before": "f27cb00ca8307222dab1933e14d431d10c4a900fafb84a871b6e2a32926a65c5",
+      "requested_sha256": "f27cb00ca8307222dab1933e14d431d10c4a900fafb84a871b6e2a32926a65c5",
+      "sha256_after": "f27cb00ca8307222dab1933e14d431d10c4a900fafb84a871b6e2a32926a65c5",
+      "unchanged": true,
+      "sha256_final": "f27cb00ca8307222dab1933e14d431d10c4a900fafb84a871b6e2a32926a65c5"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_r201ah_MS_full_identity_normal.py",
+      "relative_path": "analyze_r201ah_MS_full_identity_normal.py",
+      "bytes": 8509,
+      "lines": 90,
+      "sha256_before": "1fd749b2cf2fb367c38dafcd3c14f71b64b9f9269a9f2c76b4e0947514373110",
+      "requested_sha256": "1fd749b2cf2fb367c38dafcd3c14f71b64b9f9269a9f2c76b4e0947514373110",
+      "sha256_after": "1fd749b2cf2fb367c38dafcd3c14f71b64b9f9269a9f2c76b4e0947514373110",
+      "unchanged": true,
+      "sha256_final": "1fd749b2cf2fb367c38dafcd3c14f71b64b9f9269a9f2c76b4e0947514373110"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_full_official49.py",
+      "relative_path": "audit_full_official49.py",
+      "bytes": 8118,
+      "lines": 138,
+      "sha256_before": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+      "requested_sha256": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+      "sha256_after": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+      "unchanged": true,
+      "sha256_final": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_full_official_condition.py",
+      "relative_path": "audit_full_official_condition.py",
+      "bytes": 5280,
+      "lines": 88,
+      "sha256_before": "94ba9a65b399776fadbb7588a0c6bd70c04e569fa0f568729533bfc8ca751121",
+      "requested_sha256": "94ba9a65b399776fadbb7588a0c6bd70c04e569fa0f568729533bfc8ca751121",
+      "sha256_after": "94ba9a65b399776fadbb7588a0c6bd70c04e569fa0f568729533bfc8ca751121",
+      "unchanged": true,
+      "sha256_final": "94ba9a65b399776fadbb7588a0c6bd70c04e569fa0f568729533bfc8ca751121"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_selected_expert_outlets.py",
+      "relative_path": "evaluate_selected_expert_outlets.py",
+      "bytes": 10771,
+      "lines": 178,
+      "sha256_before": "4d67156a150dcf3d42652a44e87df56d93c23c43225155b40e0e912dbee1cd5a",
+      "requested_sha256": "4d67156a150dcf3d42652a44e87df56d93c23c43225155b40e0e912dbee1cd5a",
+      "sha256_after": "4d67156a150dcf3d42652a44e87df56d93c23c43225155b40e0e912dbee1cd5a",
+      "unchanged": true,
+      "sha256_final": "4d67156a150dcf3d42652a44e87df56d93c23c43225155b40e0e912dbee1cd5a"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py",
+      "relative_path": "full_evaluation.py",
+      "bytes": 9448,
+      "lines": 165,
+      "sha256_before": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+      "requested_sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+      "sha256_after": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+      "unchanged": true,
+      "sha256_final": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\full_official_baselines_20261004\\training\\MSVR310_demo_s42\\official_split_manifest.json",
+      "relative_path": "results/full_official_baselines_20261004/training/MSVR310_demo_s42/official_split_manifest.json",
+      "bytes": 297339,
+      "lines": 16235,
+      "sha256_before": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2",
+      "requested_sha256": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2",
+      "sha256_after": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2",
+      "unchanged": true,
+      "sha256_final": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_reference_blocks_p0_20261009\\original_DeMo.csv",
+      "relative_path": "results/msvr_reference_blocks_p0_20261009/original_DeMo.csv",
+      "bytes": 56888,
+      "lines": 592,
+      "sha256_before": "cdc427ca3fabe843f47c8c63a6ab5cecca4bf723e2eac40f27593f6a43ee3dd3",
+      "requested_sha256": "cdc427ca3fabe843f47c8c63a6ab5cecca4bf723e2eac40f27593f6a43ee3dd3",
+      "sha256_after": "cdc427ca3fabe843f47c8c63a6ab5cecca4bf723e2eac40f27593f6a43ee3dd3",
+      "unchanged": true,
+      "sha256_final": "cdc427ca3fabe843f47c8c63a6ab5cecca4bf723e2eac40f27593f6a43ee3dd3"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_reference_blocks_p0_20261009\\shared_fused.csv",
+      "relative_path": "results/msvr_reference_blocks_p0_20261009/shared_fused.csv",
+      "bytes": 56587,
+      "lines": 592,
+      "sha256_before": "d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6",
+      "requested_sha256": "d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6",
+      "sha256_after": "d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6",
+      "unchanged": true,
+      "sha256_final": "d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_reference_blocks_p0_20261009\\shared_private_only.csv",
+      "relative_path": "results/msvr_reference_blocks_p0_20261009/shared_private_only.csv",
+      "bytes": 56770,
+      "lines": 592,
+      "sha256_before": "15bdd42b4cdef5d46bf01b6867bbbf9239d3d9061b0a28a2b29a3b157f06cf8e",
+      "requested_sha256": "15bdd42b4cdef5d46bf01b6867bbbf9239d3d9061b0a28a2b29a3b157f06cf8e",
+      "sha256_after": "15bdd42b4cdef5d46bf01b6867bbbf9239d3d9061b0a28a2b29a3b157f06cf8e",
+      "unchanged": true,
+      "sha256_final": "15bdd42b4cdef5d46bf01b6867bbbf9239d3d9061b0a28a2b29a3b157f06cf8e"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_reference_blocks_p0_20261009\\shared_public_only.csv",
+      "relative_path": "results/msvr_reference_blocks_p0_20261009/shared_public_only.csv",
+      "bytes": 56881,
+      "lines": 592,
+      "sha256_before": "80d60261ee09764146bb4a39b1818093bd9dc0840a55f10af7b2a6ebe88aa350",
+      "requested_sha256": "80d60261ee09764146bb4a39b1818093bd9dc0840a55f10af7b2a6ebe88aa350",
+      "sha256_after": "80d60261ee09764146bb4a39b1818093bd9dc0840a55f10af7b2a6ebe88aa350",
+      "unchanged": true,
+      "sha256_final": "80d60261ee09764146bb4a39b1818093bd9dc0840a55f10af7b2a6ebe88aa350"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_saved_evidence_coverage_CPU_20261015\\coverage.csv",
+      "relative_path": "results/msvr_saved_evidence_coverage_CPU_20261015/coverage.csv",
+      "bytes": 21387,
+      "lines": 217,
+      "sha256_before": "f3d02a36217f308b45e5e1b0d552a4d71cdf8e9ffacec76fbff64f8a0c74ae99",
+      "requested_sha256": "f3d02a36217f308b45e5e1b0d552a4d71cdf8e9ffacec76fbff64f8a0c74ae99",
+      "sha256_after": "f3d02a36217f308b45e5e1b0d552a4d71cdf8e9ffacec76fbff64f8a0c74ae99",
+      "unchanged": true,
+      "sha256_final": "f3d02a36217f308b45e5e1b0d552a4d71cdf8e9ffacec76fbff64f8a0c74ae99"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_saved_evidence_coverage_CPU_20261015\\query_flags.csv",
+      "relative_path": "results/msvr_saved_evidence_coverage_CPU_20261015/query_flags.csv",
+      "bytes": 60170,
+      "lines": 592,
+      "sha256_before": "ab16e9591f7a13b59f35acad941aac7714cb3f7a07af27604598e0ac90312daf",
+      "requested_sha256": "ab16e9591f7a13b59f35acad941aac7714cb3f7a07af27604598e0ac90312daf",
+      "sha256_after": "ab16e9591f7a13b59f35acad941aac7714cb3f7a07af27604598e0ac90312daf",
+      "unchanged": true,
+      "sha256_final": "ab16e9591f7a13b59f35acad941aac7714cb3f7a07af27604598e0ac90312daf"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_saved_evidence_coverage_CPU_20261015\\result.json",
+      "relative_path": "results/msvr_saved_evidence_coverage_CPU_20261015/result.json",
+      "bytes": 24825,
+      "lines": 771,
+      "sha256_before": "e3194ad271099758bfb76c74b5eaa8be99e6f690b13e948925802212ad015901",
+      "requested_sha256": "e3194ad271099758bfb76c74b5eaa8be99e6f690b13e948925802212ad015901",
+      "sha256_after": "e3194ad271099758bfb76c74b5eaa8be99e6f690b13e948925802212ad015901",
+      "unchanged": true,
+      "sha256_final": "e3194ad271099758bfb76c74b5eaa8be99e6f690b13e948925802212ad015901"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_saved_evidence_coverage_CPU_20261015\\six_metrics.csv",
+      "relative_path": "results/msvr_saved_evidence_coverage_CPU_20261015/six_metrics.csv",
+      "bytes": 3445,
+      "lines": 25,
+      "sha256_before": "c06ee5a67632c1a0fcc2dfd90b7932271a950a602564bf7db6f011876c85c57f",
+      "requested_sha256": "c06ee5a67632c1a0fcc2dfd90b7932271a950a602564bf7db6f011876c85c57f",
+      "sha256_after": "c06ee5a67632c1a0fcc2dfd90b7932271a950a602564bf7db6f011876c85c57f",
+      "unchanged": true,
+      "sha256_final": "c06ee5a67632c1a0fcc2dfd90b7932271a950a602564bf7db6f011876c85c57f"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_saved_evidence_coverage_CPU_20261015\\vs_strong.csv",
+      "relative_path": "results/msvr_saved_evidence_coverage_CPU_20261015/vs_strong.csv",
+      "bytes": 3453,
+      "lines": 24,
+      "sha256_before": "69df1c3946074ffef618e3811f2032367e6aadf88c9a2bb1632bb11d719ebb0d",
+      "requested_sha256": "69df1c3946074ffef618e3811f2032367e6aadf88c9a2bb1632bb11d719ebb0d",
+      "sha256_after": "69df1c3946074ffef618e3811f2032367e6aadf88c9a2bb1632bb11d719ebb0d",
+      "unchanged": true,
+      "sha256_final": "69df1c3946074ffef618e3811f2032367e6aadf88c9a2bb1632bb11d719ebb0d"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ah_MS_full_identity_20261012\\MSVR310\\states\\MSVR310_r201ah_axis_shared_s42\\result.json",
+      "relative_path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/result.json",
+      "bytes": 112229,
+      "lines": 3927,
+      "sha256_before": "511e1d10aefe6d28d37ddae2ac2987cf632547e9a85978255a06309070471f23",
+      "requested_sha256": "511e1d10aefe6d28d37ddae2ac2987cf632547e9a85978255a06309070471f23",
+      "sha256_after": "511e1d10aefe6d28d37ddae2ac2987cf632547e9a85978255a06309070471f23",
+      "unchanged": true,
+      "sha256_final": "511e1d10aefe6d28d37ddae2ac2987cf632547e9a85978255a06309070471f23"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ah_MS_full_identity_20261012\\MSVR310\\states\\MSVR310_r201ah_axis_shared_s42\\state_00.csv",
+      "relative_path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/state_00.csv",
+      "bytes": 56587,
+      "lines": 592,
+      "sha256_before": "d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6",
+      "requested_sha256": "d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6",
+      "sha256_after": "d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6",
+      "unchanged": true,
+      "sha256_final": "d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ah_MS_full_identity_20261012\\MSVR310\\states\\MSVR310_r201ah_axis_shared_s42\\state_01.csv",
+      "relative_path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/state_01.csv",
+      "bytes": 56514,
+      "lines": 592,
+      "sha256_before": "ca55c235e62e821adc8280d411b04cd68c2faf5e63cbb98a17245e1103b8cd14",
+      "requested_sha256": "ca55c235e62e821adc8280d411b04cd68c2faf5e63cbb98a17245e1103b8cd14",
+      "sha256_after": "ca55c235e62e821adc8280d411b04cd68c2faf5e63cbb98a17245e1103b8cd14",
+      "unchanged": true,
+      "sha256_final": "ca55c235e62e821adc8280d411b04cd68c2faf5e63cbb98a17245e1103b8cd14"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ah_MS_full_identity_20261012\\MSVR310\\states\\MSVR310_r201ah_axis_shared_s42\\state_10.csv",
+      "relative_path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/state_10.csv",
+      "bytes": 56455,
+      "lines": 592,
+      "sha256_before": "e92351a3be3c8dd9a57d222ace2bc8395a375b4ce0388cc17f68aa26aaa7af17",
+      "requested_sha256": "e92351a3be3c8dd9a57d222ace2bc8395a375b4ce0388cc17f68aa26aaa7af17",
+      "sha256_after": "e92351a3be3c8dd9a57d222ace2bc8395a375b4ce0388cc17f68aa26aaa7af17",
+      "unchanged": true,
+      "sha256_final": "e92351a3be3c8dd9a57d222ace2bc8395a375b4ce0388cc17f68aa26aaa7af17"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ah_MS_full_identity_20261012\\MSVR310\\states\\MSVR310_r201ah_axis_shared_s42\\state_11.csv",
+      "relative_path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/state_11.csv",
+      "bytes": 56398,
+      "lines": 592,
+      "sha256_before": "08ed68e9f495cb6497e5d4fefc4b45459149359ec1edc80b6bae298f221a99c7",
+      "requested_sha256": "08ed68e9f495cb6497e5d4fefc4b45459149359ec1edc80b6bae298f221a99c7",
+      "sha256_after": "08ed68e9f495cb6497e5d4fefc4b45459149359ec1edc80b6bae298f221a99c7",
+      "unchanged": true,
+      "sha256_final": "08ed68e9f495cb6497e5d4fefc4b45459149359ec1edc80b6bae298f221a99c7"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ah_MS_full_identity_20261012\\MSVR310\\states\\MSVR310_r201ah_frequency_shared_s42\\result.json",
+      "relative_path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_frequency_shared_s42/result.json",
+      "bytes": 112298,
+      "lines": 3927,
+      "sha256_before": "4f34d6c5a2fc083364a4b8ab1deef7cb631e3c0aeb883b82851c7e399dcd93c6",
+      "requested_sha256": "4f34d6c5a2fc083364a4b8ab1deef7cb631e3c0aeb883b82851c7e399dcd93c6",
+      "sha256_after": "4f34d6c5a2fc083364a4b8ab1deef7cb631e3c0aeb883b82851c7e399dcd93c6",
+      "unchanged": true,
+      "sha256_final": "4f34d6c5a2fc083364a4b8ab1deef7cb631e3c0aeb883b82851c7e399dcd93c6"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ah_MS_full_identity_20261012\\MSVR310\\states\\MSVR310_r201ah_frequency_shared_s42\\state_00.csv",
+      "relative_path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_frequency_shared_s42/state_00.csv",
+      "bytes": 56587,
+      "lines": 592,
+      "sha256_before": "d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6",
+      "requested_sha256": "d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6",
+      "sha256_after": "d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6",
+      "unchanged": true,
+      "sha256_final": "d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ah_MS_full_identity_20261012\\MSVR310\\states\\MSVR310_r201ah_frequency_shared_s42\\state_01.csv",
+      "relative_path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_frequency_shared_s42/state_01.csv",
+      "bytes": 56328,
+      "lines": 592,
+      "sha256_before": "5678269e8e01c5f0d19557fcd565d24c1851f034b7f34e377c852da626cb7421",
+      "requested_sha256": "5678269e8e01c5f0d19557fcd565d24c1851f034b7f34e377c852da626cb7421",
+      "sha256_after": "5678269e8e01c5f0d19557fcd565d24c1851f034b7f34e377c852da626cb7421",
+      "unchanged": true,
+      "sha256_final": "5678269e8e01c5f0d19557fcd565d24c1851f034b7f34e377c852da626cb7421"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ah_MS_full_identity_20261012\\MSVR310\\states\\MSVR310_r201ah_frequency_shared_s42\\state_10.csv",
+      "relative_path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_frequency_shared_s42/state_10.csv",
+      "bytes": 56462,
+      "lines": 592,
+      "sha256_before": "a40840d1d105a136752993dfe8c855da68a3cf2d7c8ff018e95cd7cef2c43884",
+      "requested_sha256": "a40840d1d105a136752993dfe8c855da68a3cf2d7c8ff018e95cd7cef2c43884",
+      "sha256_after": "a40840d1d105a136752993dfe8c855da68a3cf2d7c8ff018e95cd7cef2c43884",
+      "unchanged": true,
+      "sha256_final": "a40840d1d105a136752993dfe8c855da68a3cf2d7c8ff018e95cd7cef2c43884"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ah_MS_full_identity_20261012\\MSVR310\\states\\MSVR310_r201ah_frequency_shared_s42\\state_11.csv",
+      "relative_path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_frequency_shared_s42/state_11.csv",
+      "bytes": 56346,
+      "lines": 592,
+      "sha256_before": "8962b95ae0df794be1e57a9043ba1f03e0aec1f956b368432fc9064d0c730857",
+      "requested_sha256": "8962b95ae0df794be1e57a9043ba1f03e0aec1f956b368432fc9064d0c730857",
+      "sha256_after": "8962b95ae0df794be1e57a9043ba1f03e0aec1f956b368432fc9064d0c730857",
+      "unchanged": true,
+      "sha256_final": "8962b95ae0df794be1e57a9043ba1f03e0aec1f956b368432fc9064d0c730857"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\jobs.json",
+      "relative_path": "results/selected_expert_outlets_20261011/jobs.json",
+      "bytes": 5290,
+      "lines": 115,
+      "sha256_before": "7307c1266dd2fcb2904885eeabc063bb70acef4a2c430a6a4946fff6e1b33492",
+      "requested_sha256": "7307c1266dd2fcb2904885eeabc063bb70acef4a2c430a6a4946fff6e1b33492",
+      "sha256_after": "7307c1266dd2fcb2904885eeabc063bb70acef4a2c430a6a4946fff6e1b33492",
+      "unchanged": true,
+      "sha256_final": "7307c1266dd2fcb2904885eeabc063bb70acef4a2c430a6a4946fff6e1b33492"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_axis_shared_s42\\common_context.csv",
+      "relative_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/common_context.csv",
+      "bytes": 57050,
+      "lines": 592,
+      "sha256_before": "45e0148a84d7143e6abef050520c914ed2ee72ea1e0d11afc52dde0fba6d8f33",
+      "requested_sha256": "45e0148a84d7143e6abef050520c914ed2ee72ea1e0d11afc52dde0fba6d8f33",
+      "sha256_after": "45e0148a84d7143e6abef050520c914ed2ee72ea1e0d11afc52dde0fba6d8f33",
+      "unchanged": true,
+      "sha256_final": "45e0148a84d7143e6abef050520c914ed2ee72ea1e0d11afc52dde0fba6d8f33"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_axis_shared_s42\\F_projection_input.csv",
+      "relative_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/F_projection_input.csv",
+      "bytes": 58136,
+      "lines": 592,
+      "sha256_before": "1e8dd49538ef7855562883e6240ba6508219ba1ca470b9090128406257aa903f",
+      "requested_sha256": "1e8dd49538ef7855562883e6240ba6508219ba1ca470b9090128406257aa903f",
+      "sha256_after": "1e8dd49538ef7855562883e6240ba6508219ba1ca470b9090128406257aa903f",
+      "unchanged": true,
+      "sha256_final": "1e8dd49538ef7855562883e6240ba6508219ba1ca470b9090128406257aa903f"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_axis_shared_s42\\F_projection_output.csv",
+      "relative_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/F_projection_output.csv",
+      "bytes": 59047,
+      "lines": 592,
+      "sha256_before": "e3a5d61780d60a25f95e8f164f4054b4367e01d4d76fb01736e88642ae017978",
+      "requested_sha256": "e3a5d61780d60a25f95e8f164f4054b4367e01d4d76fb01736e88642ae017978",
+      "sha256_after": "e3a5d61780d60a25f95e8f164f4054b4367e01d4d76fb01736e88642ae017978",
+      "unchanged": true,
+      "sha256_final": "e3a5d61780d60a25f95e8f164f4054b4367e01d4d76fb01736e88642ae017978"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_axis_shared_s42\\independent_cpu_audit.json",
+      "relative_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/independent_cpu_audit.json",
+      "bytes": 10834,
+      "lines": 373,
+      "sha256_before": "a629b0016b2f07339012f813018256564508854273c01d0b757d8d657079d0fc",
+      "requested_sha256": "a629b0016b2f07339012f813018256564508854273c01d0b757d8d657079d0fc",
+      "sha256_after": "a629b0016b2f07339012f813018256564508854273c01d0b757d8d657079d0fc",
+      "unchanged": true,
+      "sha256_final": "a629b0016b2f07339012f813018256564508854273c01d0b757d8d657079d0fc"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_axis_shared_s42\\M_projection_input.csv",
+      "relative_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/M_projection_input.csv",
+      "bytes": 58386,
+      "lines": 592,
+      "sha256_before": "7accf0a1ea289f5284e6978f330dfec694acac764c9d55b332ca871519d14e43",
+      "requested_sha256": "7accf0a1ea289f5284e6978f330dfec694acac764c9d55b332ca871519d14e43",
+      "sha256_after": "7accf0a1ea289f5284e6978f330dfec694acac764c9d55b332ca871519d14e43",
+      "unchanged": true,
+      "sha256_final": "7accf0a1ea289f5284e6978f330dfec694acac764c9d55b332ca871519d14e43"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_axis_shared_s42\\M_projection_output.csv",
+      "relative_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/M_projection_output.csv",
+      "bytes": 58982,
+      "lines": 592,
+      "sha256_before": "e40e0acebc109fb0d92a80922adecad59e2263d533b3bfc32acf6c30f35d1db2",
+      "requested_sha256": "e40e0acebc109fb0d92a80922adecad59e2263d533b3bfc32acf6c30f35d1db2",
+      "sha256_after": "e40e0acebc109fb0d92a80922adecad59e2263d533b3bfc32acf6c30f35d1db2",
+      "unchanged": true,
+      "sha256_final": "e40e0acebc109fb0d92a80922adecad59e2263d533b3bfc32acf6c30f35d1db2"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_axis_shared_s42\\normal11.csv",
+      "relative_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/normal11.csv",
+      "bytes": 56944,
+      "lines": 592,
+      "sha256_before": "a19ad6f23c70964c41123d3d04e3d27c9168ce0df68b8048f654ad75745f3af3",
+      "requested_sha256": "a19ad6f23c70964c41123d3d04e3d27c9168ce0df68b8048f654ad75745f3af3",
+      "sha256_after": "a19ad6f23c70964c41123d3d04e3d27c9168ce0df68b8048f654ad75745f3af3",
+      "unchanged": true,
+      "sha256_final": "a19ad6f23c70964c41123d3d04e3d27c9168ce0df68b8048f654ad75745f3af3"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_axis_shared_s42\\result.json",
+      "relative_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/result.json",
+      "bytes": 378640,
+      "lines": 12966,
+      "sha256_before": "f81b593a89b5923df31fafd7bb5cc72a66c5e77b70398d180b404b4da2ab4e37",
+      "requested_sha256": "f81b593a89b5923df31fafd7bb5cc72a66c5e77b70398d180b404b4da2ab4e37",
+      "sha256_after": "f81b593a89b5923df31fafd7bb5cc72a66c5e77b70398d180b404b4da2ab4e37",
+      "unchanged": true,
+      "sha256_final": "f81b593a89b5923df31fafd7bb5cc72a66c5e77b70398d180b404b4da2ab4e37"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_frequency_shared_s42\\common_context.csv",
+      "relative_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/common_context.csv",
+      "bytes": 56861,
+      "lines": 592,
+      "sha256_before": "3a2f62b60b40139ed0995d5aac309c0f94da43ba4e2dfdee647a0b107a43dcef",
+      "requested_sha256": "3a2f62b60b40139ed0995d5aac309c0f94da43ba4e2dfdee647a0b107a43dcef",
+      "sha256_after": "3a2f62b60b40139ed0995d5aac309c0f94da43ba4e2dfdee647a0b107a43dcef",
+      "unchanged": true,
+      "sha256_final": "3a2f62b60b40139ed0995d5aac309c0f94da43ba4e2dfdee647a0b107a43dcef"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_frequency_shared_s42\\F_projection_input.csv",
+      "relative_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/F_projection_input.csv",
+      "bytes": 59439,
+      "lines": 592,
+      "sha256_before": "8ea37444011aeb6e303fd437b4e0da424a071d243c9051a14a8a881f986d8cca",
+      "requested_sha256": "8ea37444011aeb6e303fd437b4e0da424a071d243c9051a14a8a881f986d8cca",
+      "sha256_after": "8ea37444011aeb6e303fd437b4e0da424a071d243c9051a14a8a881f986d8cca",
+      "unchanged": true,
+      "sha256_final": "8ea37444011aeb6e303fd437b4e0da424a071d243c9051a14a8a881f986d8cca"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_frequency_shared_s42\\F_projection_output.csv",
+      "relative_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/F_projection_output.csv",
+      "bytes": 59969,
+      "lines": 592,
+      "sha256_before": "bcd922c616759cfca72f447728dc6e68de6bc8224092d6f25a185988f4ad7660",
+      "requested_sha256": "bcd922c616759cfca72f447728dc6e68de6bc8224092d6f25a185988f4ad7660",
+      "sha256_after": "bcd922c616759cfca72f447728dc6e68de6bc8224092d6f25a185988f4ad7660",
+      "unchanged": true,
+      "sha256_final": "bcd922c616759cfca72f447728dc6e68de6bc8224092d6f25a185988f4ad7660"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_frequency_shared_s42\\independent_cpu_audit.json",
+      "relative_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/independent_cpu_audit.json",
+      "bytes": 10838,
+      "lines": 373,
+      "sha256_before": "fa146185dfaa51ba48cba7a977e0619051634989576398d542b76ec89ef3e09d",
+      "requested_sha256": "fa146185dfaa51ba48cba7a977e0619051634989576398d542b76ec89ef3e09d",
+      "sha256_after": "fa146185dfaa51ba48cba7a977e0619051634989576398d542b76ec89ef3e09d",
+      "unchanged": true,
+      "sha256_final": "fa146185dfaa51ba48cba7a977e0619051634989576398d542b76ec89ef3e09d"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_frequency_shared_s42\\M_projection_input.csv",
+      "relative_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/M_projection_input.csv",
+      "bytes": 59713,
+      "lines": 592,
+      "sha256_before": "f4217ce67094fa2859a0a013b3bbf6f671bb4227841f50bffc15090be5ff405e",
+      "requested_sha256": "f4217ce67094fa2859a0a013b3bbf6f671bb4227841f50bffc15090be5ff405e",
+      "sha256_after": "f4217ce67094fa2859a0a013b3bbf6f671bb4227841f50bffc15090be5ff405e",
+      "unchanged": true,
+      "sha256_final": "f4217ce67094fa2859a0a013b3bbf6f671bb4227841f50bffc15090be5ff405e"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_frequency_shared_s42\\M_projection_output.csv",
+      "relative_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/M_projection_output.csv",
+      "bytes": 59854,
+      "lines": 592,
+      "sha256_before": "de0f9c28e7efaaeb4588dc47991760f89e5404352d545ddb71aad19a8cece348",
+      "requested_sha256": "de0f9c28e7efaaeb4588dc47991760f89e5404352d545ddb71aad19a8cece348",
+      "sha256_after": "de0f9c28e7efaaeb4588dc47991760f89e5404352d545ddb71aad19a8cece348",
+      "unchanged": true,
+      "sha256_final": "de0f9c28e7efaaeb4588dc47991760f89e5404352d545ddb71aad19a8cece348"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_frequency_shared_s42\\normal11.csv",
+      "relative_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/normal11.csv",
+      "bytes": 56874,
+      "lines": 592,
+      "sha256_before": "886d98f4aedce400989167cdd4b0754d4ba81c196382a4e3bb2fe90fb9a55ea2",
+      "requested_sha256": "886d98f4aedce400989167cdd4b0754d4ba81c196382a4e3bb2fe90fb9a55ea2",
+      "sha256_after": "886d98f4aedce400989167cdd4b0754d4ba81c196382a4e3bb2fe90fb9a55ea2",
+      "unchanged": true,
+      "sha256_final": "886d98f4aedce400989167cdd4b0754d4ba81c196382a4e3bb2fe90fb9a55ea2"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_frequency_shared_s42\\result.json",
+      "relative_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/result.json",
+      "bytes": 380589,
+      "lines": 12966,
+      "sha256_before": "4d2d095bc36552e2200a2662be53436322cb19380458ae495f4bad6615d3a121",
+      "requested_sha256": "4d2d095bc36552e2200a2662be53436322cb19380458ae495f4bad6615d3a121",
+      "sha256_after": "4d2d095bc36552e2200a2662be53436322cb19380458ae495f4bad6615d3a121",
+      "unchanged": true,
+      "sha256_final": "4d2d095bc36552e2200a2662be53436322cb19380458ae495f4bad6615d3a121"
+    }
+  ],
+  "checks": {
+    "A": {
+      "name": "Ground truth provenance",
+      "status": "WARN",
+      "deterministic_status": "PASS",
+      "details": [
+        "All 24 CSVs contain the same 591 official query records in manifest order. Identity, camera and scene were independently parsed from all 2678 train/query/gallery filenames and checked against the manifest.",
+        "The 1032 train records and 591 query/1055 gallery records have disjoint training/evaluation identities. All 14184 CSV rows have dataset-derived relevant-gallery and kept-gallery counts under same-ID/same-scene exclusion.",
+        "All per-query INP values equal the independently counted relevant-gallery size divided by saved last-match rank. Rank-1/5/10/20 are recomputed from saved first-match rank. No model-output-generated label or reference was found.",
+        "Installed dataset files and raw distance matrices were deliberately not reopened. Historical installed-GT proofs are reused only as recorded in AH result.json and R independent_cpu_audit.json. This verifies saved evidence, not a new independent ranking run.",
+        "The supplied private/public reference CSVs have no corresponding generator/raw-audit report in this 45-file set. Their row metadata and arithmetic pass; upstream generation and checkpoint identity remain outside this audit."
+      ],
+      "evidence": [
+        {
+          "file": "results/full_official_baselines_20261004/training/MSVR310_demo_s42/official_split_manifest.json",
+          "line": 161,
+          "reference": "results/full_official_baselines_20261004/training/MSVR310_demo_s42/official_split_manifest.json:161",
+          "detail": "1032 train records and training-label mapping; full file parsed"
+        },
+        {
+          "file": "results/full_official_baselines_20261004/training/MSVR310_demo_s42/official_split_manifest.json",
+          "line": 6355,
+          "reference": "results/full_official_baselines_20261004/training/MSVR310_demo_s42/official_split_manifest.json:6355",
+          "detail": "591 official query3 rows; all checked"
+        },
+        {
+          "file": "results/full_official_baselines_20261004/training/MSVR310_demo_s42/official_split_manifest.json",
+          "line": 9903,
+          "reference": "results/full_official_baselines_20261004/training/MSVR310_demo_s42/official_split_manifest.json:9903",
+          "detail": "1055 gallery rows; all checked"
+        },
+        {
+          "file": "audit_full_official49.py",
+          "line": 13,
+          "reference": "audit_full_official49.py:13",
+          "detail": "Installed dataset filename metadata; MSVR310 query3 and same-ID/same-scene exclusion"
+        },
+        {
+          "file": "audit_full_official49.py",
+          "line": 37,
+          "reference": "audit_full_official49.py:37",
+          "detail": "Stable distance ranking, GT identity matches, AP and INP"
+        },
+        {
+          "file": "audit_full_official_condition.py",
+          "line": 13,
+          "reference": "audit_full_official_condition.py:13",
+          "detail": "Historical installed-context comparison against manifest"
+        },
+        {
+          "file": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/result.json",
+          "line": 3897,
+          "reference": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/result.json:3897",
+          "detail": "Historical installed-GT errors zero for all four states; analogous frequency report checked"
+        },
+        {
+          "file": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/independent_cpu_audit.json",
+          "line": 367,
+          "reference": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/independent_cpu_audit.json:367",
+          "detail": "Historical zero six-metric error and installed split counts; analogous frequency report checked"
+        },
+        {
+          "file": "analyze_msvr_strong_full_retention_cohorts.py",
+          "line": 12,
+          "reference": "analyze_msvr_strong_full_retention_cohorts.py:12",
+          "detail": "References older block result/JSON artifacts not included in this saved-CSV audit set"
+        }
+      ]
+    },
+    "B": {
+      "name": "Score normalization",
+      "status": "PASS",
+      "details": [
+        "Six metrics are 100 times arithmetic means across all 591 valid queries. Cohort AP/INP means use the explicit cohort size. No metric divides by a maximum, minimum or mean of its own predictions.",
+        "Per-query AP divides cumulative precision at GT-relevant ranks by the GT-relevant count; INP divides that count by the last relevant rank. 100 is a percent conversion.",
+        "Feature L2 normalization precedes distance computation in the historical outlet evaluator. This is descriptor normalization for ranking, not rescaling reported performance by model output statistics.",
+        "Independent 50-digit Decimal sums differ from current six-metric CSV and JSON by at most 7.105427357601002e-15 percentage points."
+      ],
+      "evidence": [
+        {
+          "file": "analyze_identity_coordinate_three_normal.py",
+          "line": 18,
+          "reference": "analyze_identity_coordinate_three_normal.py:18",
+          "detail": "Six-metric reducer and query denominator"
+        },
+        {
+          "file": "analyze_msvr_saved_evidence_coverage.py",
+          "line": 79,
+          "reference": "analyze_msvr_saved_evidence_coverage.py:79",
+          "detail": "Explicit cohort denominator"
+        },
+        {
+          "file": "full_evaluation.py",
+          "line": 25,
+          "reference": "full_evaluation.py:25",
+          "detail": "Dataset junk filtering and AP/INP definitions"
+        },
+        {
+          "file": "full_evaluation.py",
+          "line": 43,
+          "reference": "full_evaluation.py:43",
+          "detail": "Raw percent metrics; standard evaluator consistency checks"
+        },
+        {
+          "file": "evaluate_selected_expert_outlets.py",
+          "line": 85,
+          "reference": "evaluate_selected_expert_outlets.py:85",
+          "detail": "Descriptor L2 normalization before historical GT ranking"
+        },
+        {
+          "file": "full_evaluation.py",
+          "line": 106,
+          "reference": "full_evaluation.py:106",
+          "detail": "Squared Euclidean distance calculation"
+        }
+      ]
+    },
+    "C": {
+      "name": "Result existence and numerical agreement",
+      "status": "PASS",
+      "details": [
+        "All 45 requested files exist, were read directly and retain their requested SHA256 hashes. Eight Python sources were parsed without importing or executing production code.",
+        "All 24 six-metric summaries (144 numbers) match both current CSV and JSON. All 9 cohort counts/identity histograms, 5319 cohort membership flags, 14184 correct flags, 216 coverage rows and 23 rescue/harm comparisons match independent recomputation.",
+        "All 591 query flag rows retain exact index/name/identity/camera/scene. No missing or duplicate coverage pair was found.",
+        "Both AH state_00 CSV files are byte-identical to shared_fused.csv. Eight AH states and twelve supplied R outlet summaries match their historical result records; 22 full summaries including both R base00 numerical crosschecks also match CMC50 and all identity/camera/scene groups.",
+        "R result records and independent_cpu_audit records agree for all thirteen historical stages; only the six supplied stages per model were independently reduced from CSV. Two fixed-normal job metrics, selected epochs and recorded restored-array hashes match their historical results.",
+        "No current checkpoint, raw archive, training completion or active workload existence is attested. Such references are historical metadata and outside the authorized file set."
+      ],
+      "evidence": [
+        {
+          "file": "results/msvr_saved_evidence_coverage_CPU_20261015/six_metrics.csv",
+          "line": 1,
+          "reference": "results/msvr_saved_evidence_coverage_CPU_20261015/six_metrics.csv:1",
+          "detail": "All 24 rows independently reduced"
+        },
+        {
+          "file": "results/msvr_saved_evidence_coverage_CPU_20261015/coverage.csv",
+          "line": 1,
+          "reference": "results/msvr_saved_evidence_coverage_CPU_20261015/coverage.csv:1",
+          "detail": "All 216 rows checked"
+        },
+        {
+          "file": "results/msvr_saved_evidence_coverage_CPU_20261015/query_flags.csv",
+          "line": 1,
+          "reference": "results/msvr_saved_evidence_coverage_CPU_20261015/query_flags.csv:1",
+          "detail": "All 591 rows and all 33 flags per query checked"
+        },
+        {
+          "file": "results/msvr_saved_evidence_coverage_CPU_20261015/vs_strong.csv",
+          "line": 1,
+          "reference": "results/msvr_saved_evidence_coverage_CPU_20261015/vs_strong.csv:1",
+          "detail": "All 23 comparison rows checked"
+        },
+        {
+          "file": "results/msvr_saved_evidence_coverage_CPU_20261015/result.json",
+          "line": 6,
+          "reference": "results/msvr_saved_evidence_coverage_CPU_20261015/result.json:6",
+          "detail": "All 28 declared input SHA256 bindings checked"
+        },
+        {
+          "file": "results/msvr_saved_evidence_coverage_CPU_20261015/result.json",
+          "line": 36,
+          "reference": "results/msvr_saved_evidence_coverage_CPU_20261015/result.json:36",
+          "detail": "Current analyzer SHA256 binding checked"
+        },
+        {
+          "file": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/result.json",
+          "line": 7,
+          "reference": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/result.json:7",
+          "detail": "All saved per-state metrics, CMC50 and groups checked; analogous frequency report checked"
+        },
+        {
+          "file": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/result.json",
+          "line": 47,
+          "reference": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/result.json:47",
+          "detail": "Supplied outlet metrics and prior audit consistency checked; analogous frequency report checked"
+        },
+        {
+          "file": "results/selected_expert_outlets_20261011/jobs.json",
+          "line": 2,
+          "reference": "results/selected_expert_outlets_20261011/jobs.json:2",
+          "detail": "Historical R jobs bind run, selected epoch, six metrics and normal-array hash"
+        }
+      ]
+    },
+    "D": {
+      "name": "Called code and metric output linkage",
+      "status": "PASS",
+      "details": [
+        "The current analyzer imports six/table, calls six for every CSV, builds all nine cohorts, writes four CSVs and result.json, and invokes main under the __main__ guard. Its saved source hash and all numerical outputs match.",
+        "The historical outlet main calls extract, then distance, full_metrics, recount and verify for each named stage before writing audit and completion artifacts. Metrics are not merely defined in unused functions on this path.",
+        "The imported full_metrics helper writes per-query CSV/JSON and checks the project evaluator. audit_full_official49.verify checks six metrics, CMC50, per-query rows and groups.",
+        "The old full_evaluation.py standalone main describes a held-out-development protocol; that main is not called by the outlet analyzer. Only its distance/full_metrics helpers are imported, so the old docstring is not evidence that current checkpoints were selected on untouched development data.",
+        "This is static call-chain verification plus artifact agreement. It does not establish a new historical process-exit, checkpoint-load or training-budget attestation; the AH generating evaluator is not part of this request."
+      ],
+      "evidence": [
+        {
+          "file": "analyze_msvr_saved_evidence_coverage.py",
+          "line": 8,
+          "reference": "analyze_msvr_saved_evidence_coverage.py:8",
+          "detail": "Imports six/table"
+        },
+        {
+          "file": "analyze_msvr_saved_evidence_coverage.py",
+          "line": 49,
+          "reference": "analyze_msvr_saved_evidence_coverage.py:49",
+          "detail": "Calls six on every saved CSV"
+        },
+        {
+          "file": "analyze_msvr_saved_evidence_coverage.py",
+          "line": 101,
+          "reference": "analyze_msvr_saved_evidence_coverage.py:101",
+          "detail": "Writes all four output CSVs"
+        },
+        {
+          "file": "analyze_msvr_saved_evidence_coverage.py",
+          "line": 119,
+          "reference": "analyze_msvr_saved_evidence_coverage.py:119",
+          "detail": "Executable main entry point"
+        },
+        {
+          "file": "evaluate_selected_expert_outlets.py",
+          "line": 126,
+          "reference": "evaluate_selected_expert_outlets.py:126",
+          "detail": "Historical extract invocation"
+        },
+        {
+          "file": "evaluate_selected_expert_outlets.py",
+          "line": 137,
+          "reference": "evaluate_selected_expert_outlets.py:137",
+          "detail": "Stage loop invokes distance/full_metrics/recount/verify"
+        },
+        {
+          "file": "evaluate_selected_expert_outlets.py",
+          "line": 159,
+          "reference": "evaluate_selected_expert_outlets.py:159",
+          "detail": "Historical audit result writer"
+        },
+        {
+          "file": "full_evaluation.py",
+          "line": 61,
+          "reference": "full_evaluation.py:61",
+          "detail": "Metric helper writes per-query CSV and JSON"
+        },
+        {
+          "file": "audit_full_official49.py",
+          "line": 55,
+          "reference": "audit_full_official49.py:55",
+          "detail": "Historical independent verification helper"
+        },
+        {
+          "file": "analyze_r201ah_MS_full_identity_normal.py",
+          "line": 48,
+          "reference": "analyze_r201ah_MS_full_identity_normal.py:48",
+          "detail": "AH analysis consumes all four saved state summaries"
+        }
+      ]
+    },
+    "E": {
+      "name": "Honest scope and claim limits",
+      "status": "WARN",
+      "deterministic_status": "PASS",
+      "details": [
+        "The artifact honestly states saved MSVR310 normal-input coverage only, no new neural calls, optimizer updates, weights, selected model or missing-modality evaluation.",
+        "This is one dataset, official query3 with 591 queries from 52 identities, 8 cameras and 30 scenes, one recorded seed42. Twenty-four rows are descriptors/states across several historical models; they are not 24 independently trained experiments.",
+        "R frequency/axis use separately trained fixed selected checkpoints at epochs1/3; AH frequency/axis states use separately trained fixed checkpoints at epochs32/29. Within each model, outlet/state comparisons observe the same fixed checkpoint; cross-R/AH/strong comparisons also differ in training, teacher, interface and descriptor dimension.",
+        "Benchmark-mAP-best selection is expressly disclosed. This is not an untouched-test generalization estimate, a multi-seed result, a missing-modality result, a new +1 target claim or a matched causal ablation of a module.",
+        "Cohorts use GT and observed correctness after evaluation. Correct-on-error overlap gives offline complementarity, not an inference-time selector or demonstrated trained decoder gain. Rescue counts must retain the paired harm counts."
+      ],
+      "evidence": [
+        {
+          "file": "results/msvr_saved_evidence_coverage_CPU_20261015/result.json",
+          "line": 765,
+          "reference": "results/msvr_saved_evidence_coverage_CPU_20261015/result.json:765",
+          "detail": "Zero new NN/updates/weights and no newly selected model/missing evaluation"
+        },
+        {
+          "file": "results/msvr_saved_evidence_coverage_CPU_20261015/result.json",
+          "line": 770,
+          "reference": "results/msvr_saved_evidence_coverage_CPU_20261015/result.json:770",
+          "detail": "Explicit CSV-only, GT-conditioned, cross-model and fixed-best limits"
+        },
+        {
+          "file": "analyze_msvr_saved_evidence_coverage.py",
+          "line": 64,
+          "reference": "analyze_msvr_saved_evidence_coverage.py:64",
+          "detail": "GT-conditioned cohort definitions"
+        },
+        {
+          "file": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/result.json",
+          "line": 5,
+          "reference": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/result.json:5",
+          "detail": "Fixed historical selected epoch3; frequency result records epoch1"
+        },
+        {
+          "file": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/result.json",
+          "line": 6,
+          "reference": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/result.json:6",
+          "detail": "Fixed historical selected epoch29; frequency result records epoch32"
+        },
+        {
+          "file": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/result.json",
+          "line": 3926,
+          "reference": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/result.json:3926",
+          "detail": "Frozen interventions are not retrained ablations"
+        },
+        {
+          "file": "analyze_r201ah_MS_full_identity_normal.py",
+          "line": 85,
+          "reference": "analyze_r201ah_MS_full_identity_normal.py:85",
+          "detail": "Benchmark selection and teacher50+expert50 are source-declared limits"
+        },
+        {
+          "file": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/result.json",
+          "line": 12965,
+          "reference": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/result.json:12965",
+          "detail": "Diagnostic intermediate descriptors and benchmark-selected best explicitly disclosed"
+        }
+      ]
+    },
+    "F": {
+      "name": "Evaluation type",
+      "status": "PASS",
+      "evaluation_type": "real_gt",
+      "details": [
+        "All 24 saved descriptor/state retrieval evaluations use dataset identity and scene labels. Auxiliary descriptor evaluation remains real_gt because references are dataset labels, not model-generated pseudo-labels.",
+        "Coverage is post-hoc GT-conditioned offline analysis of those real_gt results. It is not itself a newly deployed retrieval system.",
+        "Auxiliary descriptor discrimination can serve only as a diagnostic indication of possible usefulness; there is no direct proof of causal expert benefit or recoverable production improvement. No synthetic_proxy, self_supervised_proxy, simulation_only or human_eval result is asserted in this audited artifact."
+      ],
+      "evidence": [
+        {
+          "file": "full_evaluation.py",
+          "line": 25,
+          "reference": "full_evaluation.py:25",
+          "detail": "Matches use dataset IDs after dataset exclusion"
+        },
+        {
+          "file": "audit_full_official49.py",
+          "line": 47,
+          "reference": "audit_full_official49.py:47",
+          "detail": "Historical independent relevant-rank construction from GT identities"
+        },
+        {
+          "file": "analyze_msvr_saved_evidence_coverage.py",
+          "line": 53,
+          "reference": "analyze_msvr_saved_evidence_coverage.py:53",
+          "detail": "Saved metadata must equal official query manifest"
+        },
+        {
+          "file": "analyze_msvr_saved_evidence_coverage.py",
+          "line": 64,
+          "reference": "analyze_msvr_saved_evidence_coverage.py:64",
+          "detail": "Post-hoc GT-conditioned cohorts"
+        },
+        {
+          "file": "results/msvr_saved_evidence_coverage_CPU_20261015/result.json",
+          "line": 770,
+          "reference": "results/msvr_saved_evidence_coverage_CPU_20261015/result.json:770",
+          "detail": "Explicit limits of auxiliary overlap"
+        }
+      ]
+    }
+  },
+  "evaluation_type": "real_gt",
+  "derived_analysis_type": "post_hoc_GT_conditioned_saved_csv_coverage",
+  "deterministic_evidence": {
+    "path": ".aris/traces/experiment-audit/2026-10-15_MS_saved_coverage_run01/independent_recomputation.json",
+    "sha256": "4c669a67f141d6a801eb56735cbb0b750ecbc9e34dd1826c1503f14e3b358f8f",
+    "verifier_path": ".aris/traces/experiment-audit/2026-10-15_MS_saved_coverage_run01/audit_verifier.py",
+    "verifier_sha256": "4e6083d48affbff4788bb305d81aee05149f26377129d57c2a5e8916b11f98bd",
+    "interpreter": "C:\\Users\\gb\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\python.exe",
+    "interpreter_flags": [
+      "-X",
+      "utf8",
+      "-B",
+      "-S"
+    ],
+    "stdlib_only": true,
+    "input_file_types": {
+      "python_sources": 8,
+      "json": 9,
+      "csv": 28
+    },
+    "total_asserted_checks": 198351,
+    "metric_summary_count": 24,
+    "perquery_metric_rows": 14184,
+    "cohort_count": 9,
+    "cohort_membership_flags": 5319,
+    "model_correct_flags": 14184,
+    "coverage_rows": 216,
+    "pairwise_vs_strong_rows": 23,
+    "max_errors": {
+      "INP_from_GT_count_and_last_rank": 0,
+      "AP_determined_by_endpoints": 0,
+      "six_metrics_csv": 7.105427357601002e-15,
+      "six_metrics_json": 7.105427357601002e-15,
+      "coverage_mean_AP": 7.105427357601002e-15,
+      "coverage_mean_INP": 3.552713678800501e-15,
+      "pairwise_csv_metrics": 7.105427357601002e-15,
+      "pairwise_json_metrics": 7.105427357601002e-15,
+      "pairwise_count_identity": 8.881784197001252e-15,
+      "prior_full_six_metrics": 1.4210854715202004e-14,
+      "prior_CMC50": 1.4210854715202004e-14,
+      "prior_group_metrics": 2.842170943040401e-14,
+      "R_prior_jobs_metrics": 1.4210854715202004e-14,
+      "R_independent_prior_six_metrics": 1.4210854715202004e-14,
+      "prior_change_delta": 2.1316282072803006e-14,
+      "R_prior_base00_equivalent_numbers": 1.4210854715202004e-14,
+      "R_prior_record_consistency_all13": 0
+    },
+    "historical_full_summaries_with_CMC50_groups_checked": 22,
+    "historical_group_rows_checked": 1980
+  },
+  "independently_recomputed_six_metrics": [
+    {
+      "model": "original_DeMo",
+      "dimension": 5120,
+      "path": "results/msvr_reference_blocks_p0_20261009/original_DeMo.csv",
+      "mAP": 47.164688447227576,
+      "mINP": 23.502961234396174,
+      "Rank-1": 63.95939086294416,
+      "Rank-5": 80.20304568527919,
+      "Rank-10": 84.77157360406092,
+      "Rank-20": 89.84771573604061
+    },
+    {
+      "model": "shared_private_only",
+      "dimension": 5120,
+      "path": "results/msvr_reference_blocks_p0_20261009/shared_private_only.csv",
+      "mAP": 47.763432108792955,
+      "mINP": 24.476264257292872,
+      "Rank-1": 65.48223350253807,
+      "Rank-5": 81.7258883248731,
+      "Rank-10": 86.29441624365482,
+      "Rank-20": 90.86294416243655
+    },
+    {
+      "model": "shared_public_only",
+      "dimension": 512,
+      "path": "results/msvr_reference_blocks_p0_20261009/shared_public_only.csv",
+      "mAP": 46.980073493014444,
+      "mINP": 21.352669903387117,
+      "Rank-1": 66.83587140439933,
+      "Rank-5": 80.37225042301185,
+      "Rank-10": 84.60236886632826,
+      "Rank-20": 89.00169204737733
+    },
+    {
+      "model": "shared_fused",
+      "dimension": 5632,
+      "path": "results/msvr_reference_blocks_p0_20261009/shared_fused.csv",
+      "mAP": 49.426094348479246,
+      "mINP": 24.967713227642687,
+      "Rank-1": 69.03553299492386,
+      "Rank-5": 81.7258883248731,
+      "Rank-10": 86.29441624365482,
+      "Rank-20": 90.86294416243655
+    },
+    {
+      "model": "AH_frequency_shared_00",
+      "dimension": 5632,
+      "path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_frequency_shared_s42/state_00.csv",
+      "mAP": 49.426094348479246,
+      "mINP": 24.967713227642687,
+      "Rank-1": 69.03553299492386,
+      "Rank-5": 81.7258883248731,
+      "Rank-10": 86.29441624365482,
+      "Rank-20": 90.86294416243655
+    },
+    {
+      "model": "AH_frequency_shared_10",
+      "dimension": 5632,
+      "path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_frequency_shared_s42/state_10.csv",
+      "mAP": 49.422676157369516,
+      "mINP": 24.923901201647674,
+      "Rank-1": 69.03553299492386,
+      "Rank-5": 81.7258883248731,
+      "Rank-10": 86.12521150592217,
+      "Rank-20": 90.69373942470389
+    },
+    {
+      "model": "AH_frequency_shared_01",
+      "dimension": 5632,
+      "path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_frequency_shared_s42/state_01.csv",
+      "mAP": 49.454456493083576,
+      "mINP": 25.0177328523645,
+      "Rank-1": 69.03553299492386,
+      "Rank-5": 81.7258883248731,
+      "Rank-10": 86.29441624365482,
+      "Rank-20": 90.86294416243655
+    },
+    {
+      "model": "AH_frequency_shared_11",
+      "dimension": 5632,
+      "path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_frequency_shared_s42/state_11.csv",
+      "mAP": 49.56177979502216,
+      "mINP": 25.1261741619852,
+      "Rank-1": 68.69712351945854,
+      "Rank-5": 81.89509306260575,
+      "Rank-10": 86.29441624365482,
+      "Rank-20": 90.69373942470389
+    },
+    {
+      "model": "AH_axis_shared_00",
+      "dimension": 5632,
+      "path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/state_00.csv",
+      "mAP": 49.426094348479246,
+      "mINP": 24.967713227642687,
+      "Rank-1": 69.03553299492386,
+      "Rank-5": 81.7258883248731,
+      "Rank-10": 86.29441624365482,
+      "Rank-20": 90.86294416243655
+    },
+    {
+      "model": "AH_axis_shared_10",
+      "dimension": 5632,
+      "path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/state_10.csv",
+      "mAP": 49.38024224822012,
+      "mINP": 24.912713328742697,
+      "Rank-1": 69.03553299492386,
+      "Rank-5": 81.7258883248731,
+      "Rank-10": 86.29441624365482,
+      "Rank-20": 90.69373942470389
+    },
+    {
+      "model": "AH_axis_shared_01",
+      "dimension": 5632,
+      "path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/state_01.csv",
+      "mAP": 49.45671499417545,
+      "mINP": 25.01713762695897,
+      "Rank-1": 69.03553299492386,
+      "Rank-5": 81.89509306260575,
+      "Rank-10": 86.12521150592217,
+      "Rank-20": 90.86294416243655
+    },
+    {
+      "model": "AH_axis_shared_11",
+      "dimension": 5632,
+      "path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/state_11.csv",
+      "mAP": 49.491506577172586,
+      "mINP": 25.223311422389322,
+      "Rank-1": 68.52791878172589,
+      "Rank-5": 81.55668358714044,
+      "Rank-10": 86.63282571912013,
+      "Rank-20": 91.37055837563452
+    },
+    {
+      "model": "R_frequency_shared_normal11",
+      "dimension": 5120,
+      "path": "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/normal11.csv",
+      "mAP": 47.195696656601115,
+      "mINP": 23.509500773882927,
+      "Rank-1": 63.95939086294416,
+      "Rank-5": 80.20304568527919,
+      "Rank-10": 84.77157360406092,
+      "Rank-20": 89.84771573604061
+    },
+    {
+      "model": "R_frequency_shared_common_context",
+      "dimension": 512,
+      "path": "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/common_context.csv",
+      "mAP": 47.16907109616599,
+      "mINP": 19.66186533350313,
+      "Rank-1": 66.1590524534687,
+      "Rank-5": 82.40270727580372,
+      "Rank-10": 85.95600676818951,
+      "Rank-20": 89.67851099830796
+    },
+    {
+      "model": "R_frequency_shared_M_projection_input",
+      "dimension": 3584,
+      "path": "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/M_projection_input.csv",
+      "mAP": 15.276343907558273,
+      "mINP": 2.9292067542501234,
+      "Rank-1": 30.456852791878173,
+      "Rank-5": 57.021996615905245,
+      "Rank-10": 66.32825719120136,
+      "Rank-20": 77.49576988155668
+    },
+    {
+      "model": "R_frequency_shared_F_projection_input",
+      "dimension": 3584,
+      "path": "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/F_projection_input.csv",
+      "mAP": 16.83938568212652,
+      "mINP": 4.844629602197655,
+      "Rank-1": 31.302876480541457,
+      "Rank-5": 52.96108291032149,
+      "Rank-10": 63.95939086294416,
+      "Rank-20": 73.9424703891709
+    },
+    {
+      "model": "R_frequency_shared_M_projection_output",
+      "dimension": 3584,
+      "path": "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/M_projection_output.csv",
+      "mAP": 11.513476188228937,
+      "mINP": 2.2826477764749225,
+      "Rank-1": 21.996615905245346,
+      "Rank-5": 46.02368866328257,
+      "Rank-10": 59.56006768189509,
+      "Rank-20": 72.08121827411168
+    },
+    {
+      "model": "R_frequency_shared_F_projection_output",
+      "dimension": 3584,
+      "path": "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/F_projection_output.csv",
+      "mAP": 11.91425955847208,
+      "mINP": 3.2776253996359856,
+      "Rank-1": 20.473773265651438,
+      "Rank-5": 41.96277495769881,
+      "Rank-10": 51.099830795262264,
+      "Rank-20": 65.31302876480541
+    },
+    {
+      "model": "R_axis_shared_normal11",
+      "dimension": 5120,
+      "path": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/normal11.csv",
+      "mAP": 47.204446715191715,
+      "mINP": 23.576556562416755,
+      "Rank-1": 63.95939086294416,
+      "Rank-5": 80.20304568527919,
+      "Rank-10": 84.77157360406092,
+      "Rank-20": 90.01692047377327
+    },
+    {
+      "model": "R_axis_shared_common_context",
+      "dimension": 512,
+      "path": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/common_context.csv",
+      "mAP": 48.21539410097042,
+      "mINP": 20.9793155663427,
+      "Rank-1": 67.85109983079526,
+      "Rank-5": 81.89509306260575,
+      "Rank-10": 85.78680203045685,
+      "Rank-20": 89.67851099830796
+    },
+    {
+      "model": "R_axis_shared_M_projection_input",
+      "dimension": 3584,
+      "path": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/M_projection_input.csv",
+      "mAP": 32.09277289617152,
+      "mINP": 10.295274843573162,
+      "Rank-1": 51.26903553299493,
+      "Rank-5": 73.77326565143824,
+      "Rank-10": 81.38747884940778,
+      "Rank-20": 90.01692047377327
+    },
+    {
+      "model": "R_axis_shared_F_projection_input",
+      "dimension": 3584,
+      "path": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/F_projection_input.csv",
+      "mAP": 30.85885441182237,
+      "mINP": 11.641938678127556,
+      "Rank-1": 46.36209813874788,
+      "Rank-5": 70.55837563451777,
+      "Rank-10": 78.68020304568527,
+      "Rank-20": 86.63282571912013
+    },
+    {
+      "model": "R_axis_shared_M_projection_output",
+      "dimension": 3584,
+      "path": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/M_projection_output.csv",
+      "mAP": 22.457558635811253,
+      "mINP": 7.013848232478246,
+      "Rank-1": 38.917089678511,
+      "Rank-5": 62.267343485617594,
+      "Rank-10": 72.58883248730965,
+      "Rank-20": 80.71065989847716
+    },
+    {
+      "model": "R_axis_shared_F_projection_output",
+      "dimension": 3584,
+      "path": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/F_projection_output.csv",
+      "mAP": 21.16341629328186,
+      "mINP": 7.484289281711061,
+      "Rank-1": 32.48730964467005,
+      "Rank-5": 57.021996615905245,
+      "Rank-10": 67.17428087986464,
+      "Rank-20": 78.84940778341793
+    }
+  ],
+  "cohort_counts": {
+    "strong_remaining_errors": 183,
+    "strong_harms_original": 26,
+    "strong_rescues_original": 56,
+    "public_block_rescues_private": 25,
+    "strong_correct_both_blocks_wrong": 4,
+    "strong_errors_R_axis_common_correct": 42,
+    "R_axis_common_correct_final_wrong": 53,
+    "strong_errors_AH_axis11_correct": 2,
+    "strong_correct_AH_axis11_wrong": 5
+  },
+  "cohort_membership_evidence": ".aris/traces/experiment-audit/2026-10-15_MS_saved_coverage_run01/independent_recomputation.json#/cohorts",
+  "coverage_evidence": ".aris/traces/experiment-audit/2026-10-15_MS_saved_coverage_run01/independent_recomputation.json#/coverage",
+  "pairwise_vs_strong": [
+    {
+      "model": "original_DeMo",
+      "reference": "shared_fused",
+      "mAP": -2.2614059012516705,
+      "mINP": -1.4647519932465123,
+      "Rank-1": -5.076142131979694,
+      "Rank-5": -1.5228426395939039,
+      "Rank-10": -1.5228426395939039,
+      "Rank-20": -1.015228426395936,
+      "rank1_rescued": 26,
+      "rank1_harmed": 56
+    },
+    {
+      "model": "shared_private_only",
+      "reference": "shared_fused",
+      "mAP": -1.6626622396862913,
+      "mINP": -0.49144897034981483,
+      "Rank-1": -3.55329949238579,
+      "Rank-5": 0.0,
+      "Rank-10": 0.0,
+      "Rank-20": 0.0,
+      "rank1_rescued": 4,
+      "rank1_harmed": 25
+    },
+    {
+      "model": "shared_public_only",
+      "reference": "shared_fused",
+      "mAP": -2.446020855464802,
+      "mINP": -3.61504332425557,
+      "Rank-1": -2.199661590524528,
+      "Rank-5": -1.3536379018612479,
+      "Rank-10": -1.6920473773265599,
+      "Rank-20": -1.8612521150592158,
+      "rank1_rescued": 17,
+      "rank1_harmed": 30
+    },
+    {
+      "model": "AH_frequency_shared_00",
+      "reference": "shared_fused",
+      "mAP": 0.0,
+      "mINP": 0.0,
+      "Rank-1": 0.0,
+      "Rank-5": 0.0,
+      "Rank-10": 0.0,
+      "Rank-20": 0.0,
+      "rank1_rescued": 0,
+      "rank1_harmed": 0
+    },
+    {
+      "model": "AH_frequency_shared_10",
+      "reference": "shared_fused",
+      "mAP": -0.0034181911097306283,
+      "mINP": -0.043812025995013215,
+      "Rank-1": 0.0,
+      "Rank-5": 0.0,
+      "Rank-10": -0.16920473773265599,
+      "Rank-20": -0.16920473773265599,
+      "rank1_rescued": 1,
+      "rank1_harmed": 1
+    },
+    {
+      "model": "AH_frequency_shared_01",
+      "reference": "shared_fused",
+      "mAP": 0.028362144604329842,
+      "mINP": 0.05001962472181276,
+      "Rank-1": 0.0,
+      "Rank-5": 0.0,
+      "Rank-10": 0.0,
+      "Rank-20": 0.0,
+      "rank1_rescued": 0,
+      "rank1_harmed": 0
+    },
+    {
+      "model": "AH_frequency_shared_11",
+      "reference": "shared_fused",
+      "mAP": 0.13568544654291514,
+      "mINP": 0.1584609343425143,
+      "Rank-1": -0.33840947546531197,
+      "Rank-5": 0.16920473773265599,
+      "Rank-10": 0.0,
+      "Rank-20": -0.16920473773265599,
+      "rank1_rescued": 2,
+      "rank1_harmed": 4
+    },
+    {
+      "model": "AH_axis_shared_00",
+      "reference": "shared_fused",
+      "mAP": 0.0,
+      "mINP": 0.0,
+      "Rank-1": 0.0,
+      "Rank-5": 0.0,
+      "Rank-10": 0.0,
+      "Rank-20": 0.0,
+      "rank1_rescued": 0,
+      "rank1_harmed": 0
+    },
+    {
+      "model": "AH_axis_shared_10",
+      "reference": "shared_fused",
+      "mAP": -0.04585210025912545,
+      "mINP": -0.054999898899989574,
+      "Rank-1": 0.0,
+      "Rank-5": 0.0,
+      "Rank-10": 0.0,
+      "Rank-20": -0.16920473773265599,
+      "rank1_rescued": 1,
+      "rank1_harmed": 1
+    },
+    {
+      "model": "AH_axis_shared_01",
+      "reference": "shared_fused",
+      "mAP": 0.03062064569620304,
+      "mINP": 0.049424399316283285,
+      "Rank-1": 0.0,
+      "Rank-5": 0.16920473773265599,
+      "Rank-10": -0.16920473773265599,
+      "Rank-20": 0.0,
+      "rank1_rescued": 1,
+      "rank1_harmed": 1
+    },
+    {
+      "model": "AH_axis_shared_11",
+      "reference": "shared_fused",
+      "mAP": 0.06541222869334007,
+      "mINP": 0.2555981947466357,
+      "Rank-1": -0.507614213197968,
+      "Rank-5": -0.16920473773265599,
+      "Rank-10": 0.33840947546531197,
+      "Rank-20": 0.507614213197968,
+      "rank1_rescued": 2,
+      "rank1_harmed": 5
+    },
+    {
+      "model": "R_frequency_shared_normal11",
+      "reference": "shared_fused",
+      "mAP": -2.2303976918781316,
+      "mINP": -1.45821245375976,
+      "Rank-1": -5.076142131979694,
+      "Rank-5": -1.5228426395939039,
+      "Rank-10": -1.5228426395939039,
+      "Rank-20": -1.015228426395936,
+      "rank1_rescued": 26,
+      "rank1_harmed": 56
+    },
+    {
+      "model": "R_frequency_shared_common_context",
+      "reference": "shared_fused",
+      "mAP": -2.257023252313253,
+      "mINP": -5.305847894139557,
+      "Rank-1": -2.8764805414551518,
+      "Rank-5": 0.6768189509306239,
+      "Rank-10": -0.33840947546531197,
+      "Rank-20": -1.184433164128592,
+      "rank1_rescued": 40,
+      "rank1_harmed": 57
+    },
+    {
+      "model": "R_frequency_shared_M_projection_input",
+      "reference": "shared_fused",
+      "mAP": -34.149750440920975,
+      "mINP": -22.038506473392562,
+      "Rank-1": -38.57868020304568,
+      "Rank-5": -24.703891708967852,
+      "Rank-10": -19.966159052453463,
+      "Rank-20": -13.367174280879865,
+      "rank1_rescued": 18,
+      "rank1_harmed": 246
+    },
+    {
+      "model": "R_frequency_shared_F_projection_input",
+      "reference": "shared_fused",
+      "mAP": -32.58670866635273,
+      "mINP": -20.123083625445034,
+      "Rank-1": -37.7326565143824,
+      "Rank-5": -28.76480541455161,
+      "Rank-10": -22.33502538071066,
+      "Rank-20": -16.920473773265655,
+      "rank1_rescued": 21,
+      "rank1_harmed": 244
+    },
+    {
+      "model": "R_frequency_shared_M_projection_output",
+      "reference": "shared_fused",
+      "mAP": -37.91261816025031,
+      "mINP": -22.685065451167766,
+      "Rank-1": -47.038917089678506,
+      "Rank-5": -35.70219966159053,
+      "Rank-10": -26.73434856175973,
+      "Rank-20": -18.78172588832487,
+      "rank1_rescued": 17,
+      "rank1_harmed": 295
+    },
+    {
+      "model": "R_frequency_shared_F_projection_output",
+      "reference": "shared_fused",
+      "mAP": -37.511834790007164,
+      "mINP": -21.6900878280067,
+      "Rank-1": -48.56175972927242,
+      "Rank-5": -39.763113367174284,
+      "Rank-10": -35.19458544839256,
+      "Rank-20": -25.54991539763114,
+      "rank1_rescued": 17,
+      "rank1_harmed": 304
+    },
+    {
+      "model": "R_axis_shared_normal11",
+      "reference": "shared_fused",
+      "mAP": -2.2216476332875317,
+      "mINP": -1.3911566652259317,
+      "Rank-1": -5.076142131979694,
+      "Rank-5": -1.5228426395939039,
+      "Rank-10": -1.5228426395939039,
+      "Rank-20": -0.8460236886632799,
+      "rank1_rescued": 25,
+      "rank1_harmed": 55
+    },
+    {
+      "model": "R_axis_shared_common_context",
+      "reference": "shared_fused",
+      "mAP": -1.210700247508825,
+      "mINP": -3.988397661299988,
+      "Rank-1": -1.184433164128592,
+      "Rank-5": 0.16920473773265599,
+      "Rank-10": -0.507614213197968,
+      "Rank-20": -1.184433164128592,
+      "rank1_rescued": 42,
+      "rank1_harmed": 49
+    },
+    {
+      "model": "R_axis_shared_M_projection_input",
+      "reference": "shared_fused",
+      "mAP": -17.33332145230773,
+      "mINP": -14.672438384069524,
+      "Rank-1": -17.766497461928928,
+      "Rank-5": -7.95262267343486,
+      "Rank-10": -4.906937394247038,
+      "Rank-20": -0.8460236886632799,
+      "rank1_rescued": 31,
+      "rank1_harmed": 136
+    },
+    {
+      "model": "R_axis_shared_F_projection_input",
+      "reference": "shared_fused",
+      "mAP": -18.567239936656875,
+      "mINP": -13.325774549515131,
+      "Rank-1": -22.673434856175973,
+      "Rank-5": -11.167512690355323,
+      "Rank-10": -7.614213197969548,
+      "Rank-20": -4.230118443316414,
+      "rank1_rescued": 25,
+      "rank1_harmed": 159
+    },
+    {
+      "model": "R_axis_shared_M_projection_output",
+      "reference": "shared_fused",
+      "mAP": -26.968535712667993,
+      "mINP": -17.95386499516444,
+      "Rank-1": -30.118443316412858,
+      "Rank-5": -19.458544839255502,
+      "Rank-10": -13.705583756345177,
+      "Rank-20": -10.152284263959388,
+      "rank1_rescued": 14,
+      "rank1_harmed": 192
+    },
+    {
+      "model": "R_axis_shared_F_projection_output",
+      "reference": "shared_fused",
+      "mAP": -28.262678055197387,
+      "mINP": -17.483423945931627,
+      "Rank-1": -36.54822335025381,
+      "Rank-5": -24.703891708967852,
+      "Rank-10": -19.120135363790183,
+      "Rank-20": -12.013536379018618,
+      "rank1_rescued": 17,
+      "rank1_harmed": 233
+    }
+  ],
+  "supplemental": {
+    "strong_correct": 408,
+    "original_correct": 378,
+    "private_correct": 387,
+    "public_correct": 395,
+    "strong_vs_original": {
+      "rescue": 56,
+      "harm": 26
+    },
+    "strong_vs_private": {
+      "rescue": 25,
+      "harm": 4
+    },
+    "public_private_both_correct": 357,
+    "public_rescue25_retained": {
+      "shared_fused": 25,
+      "AH_frequency_shared_11": 23,
+      "AH_axis_shared_11": 23
+    },
+    "R_axis_common_vs_final": {
+      "delta_pp": {
+        "mAP": 1.0109473857787066,
+        "mINP": -2.5972409960740563,
+        "Rank-1": 3.891708967851102,
+        "Rank-5": 1.6920473773265599,
+        "Rank-10": 1.015228426395936,
+        "Rank-20": -0.33840947546531197
+      },
+      "Rank1_harm_queries": 30,
+      "Rank1_rescue_queries": 53,
+      "AP_improved_queries": 322,
+      "AP_worsened_queries": 257,
+      "AP_unchanged_queries": 12,
+      "queries": 591
+    },
+    "query_identity_count": 52,
+    "query_camera_count": 8,
+    "query_scene_count": 30
+  },
+  "common_context_provenance": {
+    "finding": "The audited common_context outlet is the 512-D tail of the calibrator base input; it is not the F_projection_input or F_projection_output outlet.",
+    "frequency_expert_output_claim": "UNSUPPORTED_BY_AUDITED_SOURCE",
+    "source_expression": "common_context=captured['base'][:, 5120:]",
+    "dimension": 512,
+    "contrast_source_expressions": {
+      "F_projection_input": "captured['F_input'].flatten(1)",
+      "F_projection_output": "captured['F_output'].flatten(1)"
+    },
+    "frequency_projection_dimension": 3584,
+    "scope_limit": "The upstream construction of the base tensor is outside these 45 files. This audit identifies the actual extraction site and distinct tensors; it does not certify an unseen architecture graph.",
+    "numerical_finding": {
+      "R_axis_common_correct": 401,
+      "strong_errors_covered": 42,
+      "strong_correct_lost": 49,
+      "R_axis_final_errors_covered": 53,
+      "R_axis_final_correct_lost": 30
+    },
+    "interpretation": "Auxiliary base-context retrieval overlaps strong/final errors but has its own harms; no trainable fusion or frequency-expert gain was evaluated.",
+    "evidence": [
+      {
+        "file": "evaluate_selected_expert_outlets.py",
+        "line": 51,
+        "reference": "evaluate_selected_expert_outlets.py:51",
+        "detail": "Calibrator hook captures separate base/modality/frequency inputs"
+      },
+      {
+        "file": "evaluate_selected_expert_outlets.py",
+        "line": 56,
+        "reference": "evaluate_selected_expert_outlets.py:56",
+        "detail": "M and F projection hooks capture separate inputs/outputs"
+      },
+      {
+        "file": "evaluate_selected_expert_outlets.py",
+        "line": 75,
+        "reference": "evaluate_selected_expert_outlets.py:75",
+        "detail": "M/F projection inputs"
+      },
+      {
+        "file": "evaluate_selected_expert_outlets.py",
+        "line": 77,
+        "reference": "evaluate_selected_expert_outlets.py:77",
+        "detail": "M/F projection outputs"
+      },
+      {
+        "file": "evaluate_selected_expert_outlets.py",
+        "line": 81,
+        "reference": "evaluate_selected_expert_outlets.py:81",
+        "detail": "Actual common_context extraction"
+      },
+      {
+        "file": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/result.json",
+        "line": 32,
+        "reference": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/result.json:32",
+        "detail": "Reported stage dimensions"
+      },
+      {
+        "file": "results/msvr_saved_evidence_coverage_CPU_20261015/six_metrics.csv",
+        "line": 21,
+        "reference": "results/msvr_saved_evidence_coverage_CPU_20261015/six_metrics.csv:21",
+        "detail": "R axis common_context metrics"
+      },
+      {
+        "file": "results/msvr_saved_evidence_coverage_CPU_20261015/vs_strong.csv",
+        "line": 20,
+        "reference": "results/msvr_saved_evidence_coverage_CPU_20261015/vs_strong.csv:20",
+        "detail": "Against strong:42 rescues and49 harms"
+      }
+    ]
+  },
+  "previous_audits_explicitly_reused": [
+    {
+      "kind": "AH_fixed_states",
+      "path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_frequency_shared_s42/result.json",
+      "selected_epoch": 32,
+      "recomputed_saved_summaries": 4,
+      "reused_raw_ranking_proof": {
+        "00": {
+          "max_metric_error": 0.0,
+          "installed_query_rows": 591
+        },
+        "10": {
+          "max_metric_error": 0.0,
+          "installed_query_rows": 591
+        },
+        "01": {
+          "max_metric_error": 0.0,
+          "installed_query_rows": 591
+        },
+        "11": {
+          "max_metric_error": 0.0,
+          "installed_query_rows": 591
+        }
+      },
+      "raw_reranked_this_audit": false,
+      "limitation": "Historical installed-GT assertions only; AH generating evaluator, raw matrices, training record and checkpoints are outside the 45-file scope."
+    },
+    {
+      "kind": "R_fixed_outlets",
+      "path": "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/result.json",
+      "prior_audit_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_frequency_shared_s42/independent_cpu_audit.json",
+      "selected_epoch": 1,
+      "recomputed_saved_summaries": 6,
+      "prior_stage_count": 13,
+      "reused_raw_ranking_proof": {
+        "status": "PASS",
+        "installed_split_counts": {
+          "train": 1032,
+          "query": 591,
+          "gallery": 1055
+        },
+        "max_sixmetric_error_pp": 0.0
+      },
+      "original_inputs": {
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201r_primary_ce_20261011/MSVR310/training/MSVR310_r201r_frequency_shared_s42/best.pth": "1980936da64aa4e14fe38833cd4333aa1ae0b6136ae4c99674c1b5cc5a1707e3",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201r_primary_ce_20261011/MSVR310/training/MSVR310_r201r_frequency_shared_s42/result.json": "790abdfb436841f133b581bf954c3d680c56121a2de679d5a352b7ac3914b1d1",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201r_primary_ce_20261011/MSVR310/training/MSVR310_r201r_frequency_shared_s42/best_official_arrays_restore_outlets_20261011.npz": "91105d9b4d872b078aac9b9c9d0e6e56fe1d57698d19afd7d40dfd51e9557593"
+      },
+      "raw_record": {
+        "file": {
+          "bytes": 27052213,
+          "sha256": "afd16576e3fca735d8060d2171b35a3989ef69a728db64dc08c10e7a27b2bf3e"
+        },
+        "local_verified_acknowledged": true,
+        "server_copy_cleared": true
+      },
+      "raw_reranked_this_audit": false,
+      "limitation": "Six supplied outlet CSVs recomputed; seven unlisted stage CSV/raw files not read. Original DeMo matches base00 six metrics, CMC50, groups and relevant change numbers, but base00 byte/per-query identity is not established from an absent base00.csv."
+    },
+    {
+      "kind": "AH_fixed_states",
+      "path": "results/r201ah_MS_full_identity_20261012/MSVR310/states/MSVR310_r201ah_axis_shared_s42/result.json",
+      "selected_epoch": 29,
+      "recomputed_saved_summaries": 4,
+      "reused_raw_ranking_proof": {
+        "00": {
+          "max_metric_error": 0.0,
+          "installed_query_rows": 591
+        },
+        "10": {
+          "max_metric_error": 0.0,
+          "installed_query_rows": 591
+        },
+        "01": {
+          "max_metric_error": 0.0,
+          "installed_query_rows": 591
+        },
+        "11": {
+          "max_metric_error": 0.0,
+          "installed_query_rows": 591
+        }
+      },
+      "raw_reranked_this_audit": false,
+      "limitation": "Historical installed-GT assertions only; AH generating evaluator, raw matrices, training record and checkpoints are outside the 45-file scope."
+    },
+    {
+      "kind": "R_fixed_outlets",
+      "path": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/result.json",
+      "prior_audit_path": "results/selected_expert_outlets_20261011/MSVR310_r201r_axis_shared_s42/independent_cpu_audit.json",
+      "selected_epoch": 3,
+      "recomputed_saved_summaries": 6,
+      "prior_stage_count": 13,
+      "reused_raw_ranking_proof": {
+        "status": "PASS",
+        "installed_split_counts": {
+          "train": 1032,
+          "query": 591,
+          "gallery": 1055
+        },
+        "max_sixmetric_error_pp": 0.0
+      },
+      "original_inputs": {
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201r_primary_ce_20261011/MSVR310/training/MSVR310_r201r_axis_shared_s42/best.pth": "d6c4053880ed3caf17313107a4d5983d33a86d42a864c36d3edca61367872183",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201r_primary_ce_20261011/MSVR310/training/MSVR310_r201r_axis_shared_s42/result.json": "6a41df6dd3db296aec9e0662f35506cbe30df4ac263d925190bf547d19801c48",
+        "/data/gaob/Re-ID/DeMo-DualAxis/runs/r201r_primary_ce_20261011/MSVR310/training/MSVR310_r201r_axis_shared_s42/best_official_arrays_restore_outlets_20261011.npz": "448226eca6aa6adb4bd47d75c5beeb4b5642e6b57ea17b3dde509eb73c6030d4"
+      },
+      "raw_record": {
+        "file": {
+          "bytes": 28134653,
+          "sha256": "a81a7c49d9ae49f3bd6fa125c72f5419573ad3e73ecf0afedfb93d3b7a1af9f9"
+        },
+        "local_verified_acknowledged": true,
+        "server_copy_cleared": true
+      },
+      "raw_reranked_this_audit": false,
+      "limitation": "Six supplied outlet CSVs recomputed; seven unlisted stage CSV/raw files not read. Original DeMo matches base00 six metrics, CMC50, groups and relevant change numbers, but base00 byte/per-query identity is not established from an absent base00.csv."
+    }
+  ],
+  "prior_reference_provenance": [
+    {
+      "label": "shared_fused",
+      "status": "BYTE_AND_NUMBER_AGREEMENT",
+      "details": "Both AH state_00 CSVs have identical SHA256 and bytes, and all eight state result metrics were checked; historical installed-GT proof reused."
+    },
+    {
+      "label": "original_DeMo",
+      "status": "NUMERICAL_AGREEMENT_ONLY_TO_R_BASE00",
+      "details": "Matches both R base00 six metrics, CMC50, groups and supported changes. An absent base00.csv prevents a separate byte/per-query-identity attestation."
+    },
+    {
+      "label": "shared_private_only/shared_public_only",
+      "status": "CSV_AND_MANIFEST_REDUCTION_VERIFIED",
+      "details": "Their earlier block result/JSON/raw provenance is referenced by supplied source but not supplied; no fresh historical raw-generation proof claimed."
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "24 saved six-metric summaries and all coverage/rescue-harm counts are arithmetically correct.",
+      "impact": "supported_in_saved_CSV_scope"
+    },
+    {
+      "id": "C2",
+      "claim": "R axis common_context correctly retrieves42 of183 strong errors.",
+      "impact": "supported_offline_with49_strong_correct_queries_harmed"
+    },
+    {
+      "id": "C3",
+      "claim": "common_context is a frequency expert output or proves frequency expert utility.",
+      "impact": "unsupported; actual extraction is base[:,5120:]"
+    },
+    {
+      "id": "C4",
+      "claim": "AH axis11 improves strong by0.065412 mAP pp while changing Rank1 by-0.507614 pp.",
+      "impact": "supported_for_fixed_saved_checkpoint;2 rescues and5 harms;not target attainment"
+    },
+    {
+      "id": "C5",
+      "claim": "These overlaps establish a causal module benefit, deployable selector, missing robustness or newly trained winning model.",
+      "impact": "unsupported_and_not_asserted_by_current_coverage_result"
+    }
+  ],
+  "limitations": [
+    "No raw matrices were reranked. Saved AP means are independently recomputed; full AP ranking correctness relies on explicitly cited historical proofs and the scope limitations for omitted block proofs.",
+    "Only the supplied manifest and CSV metadata are checked locally; actual installed dataset images and external official reference implementation files were not opened.",
+    "No checkpoints, training traces, process exits, active BC files, observers, GPU state, remote systems or logs were read or modified.",
+    "Eight supplied evaluation/analysis sources were read line by line and parsed. Imports outside this list, the AH generating evaluator and upstream base construction were not inspected.",
+    "Fixed normal-input benchmark-selected checkpoints, seed42 and one dataset support descriptive saved-evidence comparisons only; no new training, deployment or target claim.",
+    "Requested Astra/max routing is UNATTESTED; fresh semantic review is same-family and provisional.",
+    "The only human-facing project narrative remains the canonical handoff; this audit writes machine JSON and forensic trace only."
+  ],
+  "execution": {
+    "read_scope": "45 listed artifact files plus required skill/session instructions",
+    "new_neural_calls": 0,
+    "new_optimizer_updates": 0,
+    "new_weights": 0,
+    "raw_distance_rankings": 0,
+    "network_calls": 0,
+    "SSH_calls": 0,
+    "source_or_input_mutations": 0,
+    "subagents_spawned": 0
+  }
+}
