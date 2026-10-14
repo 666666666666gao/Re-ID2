@@ -1,3 +1,7 @@
+# BC entry R2 source-only PASS / original BB ongoing — 2026-10-15T07:14:23+08:00
+
+Only one wrongmake_loader parent removed beforeanyBCNN; R1 full8/request/FAIL preserved, R2PASS0/current322. BC remains0models/NN/native/updates, sameAVplus32768 PIidentitygate, onlyafterBBcomplete/intake/GPU23idle/actualnative. OriginalBB3392200 soleobservernative57914 deadline2026-10-15T07:27:31+08:00, noearlyepoch/log/GPU/handlechecks/restart/T-P. BAclosednegative85.927053/96.501458; keepAV/K201/MSstrong/teachers/uniqueD. Only26physical23/max2one/card forfutureformal; no201NN/missing49/failedseedhunt, goalACTIVE_UNMET. SolehandoffDesktopGit26/27exact; priorheadershistorical.
+
 # BA CLOSED negative / BB finite actual admission — 2026-10-15T07:01:32+08:00
 
 BA native6/full13126/eightGTstates/D6exact/freshWARN0blocks closed; originalcollector1840 trueexit0_5eefd9. Axis85.927053/96.501458 belowAV; keep201K/AV/MSstrong/teachers/uniqueD. BB originalcontroller3392200 actuallystarted afterBAallclosed, notspeedresult; onephysicalGPU2/max2NN, GPU3 unusedbyBB, noGPU01/T-P/weightswrites. Only originalestimatedcompletion1800s observer; noearlyepoch/log/GPU/handlechecks/necessary180-300s/no timeoutrestart. Goalnormalweak+1 thenDeMo symmetricpaper6+1 ACTIVE_UNMET, no201NN/49/failedseedhunt. SolehandoffDesktopGit26/27exact; priorheadershistorical.

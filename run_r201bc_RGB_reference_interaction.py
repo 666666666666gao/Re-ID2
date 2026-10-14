@@ -53,6 +53,6 @@ if __name__=='__main__':
     runner.configuration=configuration
     runner.assert_anchor_unchanged=parent.parent.parent.parent.parent.parent.parent.x.w.assert_anchor_unchanged
     runner.write_json=parent.parent.parent.parent.parent.parent.parent.x.w.s.p.parent.parent.parent.k.parent.g.record
-    runner.make_loader=parent.parent.parent.parent.parent.parent.parent.parent.make_loader
+    runner.make_loader=parent.parent.parent.parent.parent.parent.parent.make_loader
     runner.main(builder=build,update=step,variants=VARIANTS,method_revision=REVISION,
         partial_training='Same AV BN2/partial0/two backwards; one32768-parameter identity reference gate inside existing PI only.')
