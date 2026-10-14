@@ -1,0 +1,38 @@
+{
+  "status": "SOURCE_PREPARED_ONLY_NOT_REVIEWED_NOT_DEPLOYED_NOT_NN",
+  "at": "2026-10-14T18:55:24+08:00",
+  "dataset": "RGBNT100",
+  "training_tag": "r201ax_RGB_frequency_query_normalization_20261014",
+  "fixed_selected_epochs": {
+    "frequency_shared": 16,
+    "axis_shared": 16
+  },
+  "optimizer_updates": 0,
+  "new_weights": 0,
+  "native_forward_record_executions": 256,
+  "full_forward_record_executions": 20580,
+  "official_counts": {
+    "train": 8675,
+    "query": 1715,
+    "gallery": 8575,
+    "train_identities": 50
+  },
+  "stages": 15,
+  "real_GT_outlets": 30,
+  "spatial_fields_per_record": 275,
+  "effective_query": "Actual AX FP32 per-head L2 times sqrt(8) for M and three F spatial readers; K/V/output and cross-band arithmetic unchanged.",
+  "native_gate": "Two fixed-checkpoint smoke runs, each64 records plus64 unhooked same-batch records; strict reload, hook/unhooked exact, cached selected normal exact, state versions and frozen anchor exact.",
+  "full_gate": "Only after both smoke exit0; full1715Q+8575G per control in original eval order/batch64; normal11 features/distance bit-exact selected AX cache; same-forward15 outlets and275 spatial fields; original GT sixmetrics/CMC50/perquery/groups.",
+  "restored_inputs": "Only AX two best.pth and two best_official_arrays.npz from proven D archives to exact original paths; no stateNPZ restore needed.",
+  "archival": "Archive two new diagnostic raw.npz to D with exact size/SHA, then retire only four temporary restored inputs plus matching two remote raw and transfer package; original D raw/bests and four protected reference weights remain.",
+  "physical_gpus": [
+    2,
+    3
+  ],
+  "maximum_NN": 2,
+  "temperature_power_control": false,
+  "estimated_wall_seconds": 900,
+  "first_observation_after_seconds": 900,
+  "observation": "One original foreground flow owner, no live epoch/GPU/log/wait queries before estimate; necessary near-end recheck180-300s, never relaunch on observer timeout.",
+  "scope": "Fixed AX outlet/spatial diagnostic only. No new training, model accuracy, hyperparameter selection, seeds, missing49, 201 NN or synthetic GT. Residual independent retrieval is not additive utility; branch rescue oracle remains offline GT diagnosis. Auxiliary512 is not deployment mandatory. Ordinary F slots are mixed-source readers, not physical modality experts."
+}
