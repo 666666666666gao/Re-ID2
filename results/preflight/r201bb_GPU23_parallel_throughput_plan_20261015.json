@@ -1,0 +1,66 @@
+{
+  "status": "FULL_PROFILING_SUITE_SOURCE_PREPARED_NOT_REVIEWED_NOT_DEPLOYED_NOT_NN",
+  "at": "2026-10-15T01:28:26+08:00",
+  "authorization": "User explicitly requested assess whether multiple tasks improve overall speed; preserve one task if slower or insufficient memory.",
+  "current_scope": "Current BA two matched50 retain one/card, do not benchmark during these original runs. Only26physicalGPU2/3; no temperature/power queries.",
+  "prerequisite": "Original BA full50/eightstates/allNN consumers closed, terminal audit/intake completed; restore required immutable AB TRAIN bank if retired.",
+  "workload": "Actual BA structured model/formal step/AMP/BN2/partial0/two backwards/hardP8K8/B64/TRAIN loader + full official normal evaluate. Scores only benchmark evidence, no method candidate selection or weight writes.",
+  "comparison": "Each arm runs two identical complete micro-jobs, either serially or concurrently on one physical card. Each job uses fresh BA model,3warm+16timed real updates, then ALL official10290QG NN and GT ranking. Same initialization/warm/train/eval work in both arms;3paired repeats alternate arm order. Overall phase wall time includes imports/startup/teardown/ranking/output. No speedup extrapolation to full50 without scope.",
+  "scope_limits": "Only after current BA full50/eightstates/all consumers closed; max2 benchmark NN same selected GPU2or3,othercardunused.192timed+36warm=228 actual updates/123480QG forward-records/29184 main+partial training record forwards, all separate from formal results. No model/source changes, no T/P/otherGPU.",
+  "cost": "Current data:80 CPUs busy9.4026%,available97740664832B; GPU2/3 free21784/21665MiB,utilmeans73/51%,peaks100. Headroom does not measure scaling.",
+  "decision": "Use observed overall completion speed and peak memory. If no reproducible total-throughput gain, keep one/card; if gain and capacity established, schedule independent tasks concurrently with recorded compute conditions. Do not invent a speedup from utilization.",
+  "estimated_minutes": "20-30 including12 builds and12full-QG evaluations; one terminal estimated node, no early polls.",
+  "new_NN_calls": 0,
+  "new_optimizer_updates": 0,
+  "implementation_rationale": "Serial twojobs vs parallel identical twojobs avoids unequal startup/warm or one-versus-two evaluation counts in initial32vs16 plan; covers actual GT ranking cost rather than kernel-only timing.",
+  "runtime": "NOT_RUN",
+  "sources": "Standalone workload/controller/CPU reducer plus explicit deferred bank restore/deployer/intake. Fresh source review required before deployment, and BA native/full/eightstates/intake/result audit must be closed.",
+  "output_layout": "runs/<BB>/profile_output -> results/<BB>/profile_output, structured logs and CPU_speed_comparison.json; sole human handoff only.",
+  "instrumentation_changelog": [
+    {
+      "file": "C:/Users/gb/.codex_tmp/profile_ReID_GPU23_resources_once_20261015.py",
+      "change": "created",
+      "purpose": "Prior user-authorized resource60-second sample; standalone, no production edits."
+    },
+    {
+      "file": "results/preflight/r201ba_resources_CPU_GPU23_actual_20261015.json",
+      "change": "created",
+      "purpose": "Actual prior six resource snapshots."
+    },
+    {
+      "file": "profile_r201bb_BA_job.py",
+      "change": "created",
+      "purpose": "Standalone current-BA workload/timing."
+    },
+    {
+      "file": "profile_r201bb_parallel_jobs.py",
+      "change": "created",
+      "purpose": "Serial/concurrent orchestration and phase CPU/selected memory."
+    },
+    {
+      "file": "analyze_r201bb_parallel_jobs.py",
+      "change": "created",
+      "purpose": "CPU-only reducer, all timings retained."
+    },
+    {
+      "file": "results/preflight/r201bb_parallel_jobs_deploy_20261015.py",
+      "change": "created",
+      "purpose": "Deferred reviewed explicit bank restore/admission."
+    },
+    {
+      "file": "results/preflight/r201bb_parallel_jobs_complete_intake_20261015.py",
+      "change": "created",
+      "purpose": "Exact evidence intake and duplicate retirement."
+    },
+    {
+      "file": "results/preflight/r201bb_GPU23_parallel_throughput_plan_20261015.json",
+      "change": "created",
+      "purpose": "Finite protocol, not runtime."
+    },
+    {
+      "file": "results/preflight/r201bb_parallel_jobs_review_request_20261015.json",
+      "change": "created",
+      "purpose": "Whole-suite source review request, not runtime."
+    }
+  ]
+}

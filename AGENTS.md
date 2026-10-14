@@ -1,3 +1,7 @@
+# Current BA original full50 + BB source-only PASS — 2026-10-15T01:49:20+08:00
+
+BA originalnative6/formal2 admitted, latestepoch/QG notqueried; sole24984 deadline2026-10-15T03:54:21+08:00, oneverifiedlocaljoin only/noearlyremotequery. BB6new+314reuse R2SOURCEPASS0blocks0observations/320seals/272AST/runtimeNOTRUN; exactBAthreadenv4, plannedserial2jobsvsparallel2samecard/includesfullQG/no methodscore. NoBBNN/deploy beforeBAfull50/eightstates/intake/freshresultauditallclosed. Only26physical23/currentone/card/max2/noT-P/GPU01. Preserve201K/AV/MSstrong/teachers/uniqueD, no201NN/missing49/failedseedhunt. Datasetmoduleinternalparams/layers andBestSingle allowedwhennear, allsixsamecheckpoint/actualtriesretained. SolehandoffGitDesktop26/27exact/goalACTIVE_UNMET; priorheadershistorical.
+
 # Current BA native6 PASS / formal GPU23 admitted — 2026-10-15T01:09:21+08:00
 
 Only final existingclassifier initial directions use exact fullofficialTRAIN bank, oldrownorm/RNG retained, AVrecipe/params/5120 unchanged, no failedAZmetric. FreshR1TAGfixbeforeNN/R2SOURCEPASS/native6actualAdam/strictreload/allactivegrad. Formal50x2 pending; no newscore. Only26physical23/max2one/card/noT-P. Solehiddennearend2026-10-15T03:54:21+08:00; noearlyepoch-log-GPU-handlequery, necessary180-300s/no timeoutrestart. Preserve201K/AV/MSstrong/teachers/uniqueD; restoredbank isrequired build/eval dependency, retireonlyafterallconsumersandDproof. No201NN/missing49/failedseedhunt. SolehandoffGitDesktop26/27exact/goalACTIVE_UNMET; priorheaders historical.
