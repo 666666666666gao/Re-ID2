@@ -1,3 +1,7 @@
+# Current AW original warm failed beforeNN / R2 source PASS — 2026-10-14T13:26:04+08:00
+
+Original70746/functions452 consumedexit1_5d9e70 atCPU import cwd/home/gaob/no project module path; AWroot absent and noNN started. R1 sources/review retained. R2 two-new/215reuse minimalresume uses explicitprojectsys.path and same4 exactalreadyrestoredDinputs/no recopy, freshreviewPASS0; DO NOTcall original R1flow or closed452/70746 again. No currentprojectNN/wait. Only26physical23/max2 one/card/noT-P; retainK201/MSstrong/teachers/uniqueD and4needed remote restores until R2 completion. No newtraining/missing49/seeds/201. CPU58error15ID/all8cam diagnosis only; AV9rescue5IDs/6harm4IDs is not9independent runs/GT route. Solehandoff exactDesktopGit26/27 static. Earlierheaders historical.
+
 # Current AW source PASS / original flow70746 started — 2026-10-14T12:53:16+08:00
 
 Only2026 physicalGPU2/3/max2 one/card/noT-P. AV closed auditedWARN/nonblocks and Gitda08d85. AW4new+211reuse SOURCE_PASS0, original synchronous native70746 now restoring exactD2bests+2normal arrays and will run bothnative64 then bothfull10290 QG/15outlets+275spatial, then intake. NO completed AWNN/native/full/metrics claimed yet. First and only next observation at2026-10-14T13:08:02+08:00; do notpoll logs/GPU/handles before node, do notrelaunch. PreserveK201/teachers/MSstrong/alluniqueD; no training/newweights/new201/missing49/seeds. Source audit only and actual routeUNATTESTED/samefamilyprovisional. Onehandoff exactDesktopGit26/27static; olderheaders historical.
