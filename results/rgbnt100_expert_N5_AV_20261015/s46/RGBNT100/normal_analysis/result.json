@@ -1,0 +1,225 @@
+{
+  "status": "ACTUAL_N5_ONE_COMPLETE_NORMAL_WAVE_CPU_READOUT",
+  "recipe": "AV",
+  "seed": 46,
+  "model_results": 2,
+  "metrics": [
+    {
+      "recipe": "AV",
+      "seed": 46,
+      "variant": "frequency_shared",
+      "selected_epoch": 40,
+      "successful_updates": 6563,
+      "mAP": 85.98516046207983,
+      "mINP": 62.6504883766819,
+      "Rank-1": 96.50145772594753,
+      "Rank-5": 97.31778425655978,
+      "Rank-10": 97.60932944606414,
+      "Rank-20": 98.07580174927114,
+      "run_dir": "results/rgbnt100_expert_N5_AV_20261015/s46/RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s46",
+      "both_plus1": false
+    },
+    {
+      "recipe": "AV",
+      "seed": 46,
+      "variant": "axis_shared",
+      "selected_epoch": 24,
+      "successful_updates": 6563,
+      "mAP": 86.00187334141778,
+      "mINP": 62.37658911451815,
+      "Rank-1": 96.38483965014576,
+      "Rank-5": 97.25947521865889,
+      "Rank-10": 97.72594752186589,
+      "Rank-20": 98.07580174927114,
+      "run_dir": "results/rgbnt100_expert_N5_AV_20261015/s46/RGBNT100/training/RGBNT100_n5_AV_axis_shared_s46",
+      "both_plus1": false
+    }
+  ],
+  "comparisons": [
+    {
+      "improved": "frequency_shared",
+      "improved_seed": 46,
+      "reference": "original_DeMo",
+      "reference_seed": 42,
+      "mAP": 0.2165933589103588,
+      "mINP": 0.8045800931256366,
+      "Rank-1": -0.116618075801739,
+      "Rank-5": 0.2915451895043759,
+      "Rank-10": 0.2332361516034922,
+      "Rank-20": 0.3498542274052454,
+      "rank1_rescued": 3,
+      "rank1_harmed": 5,
+      "AP_improved": 820,
+      "AP_worsened": 559
+    },
+    {
+      "improved": "axis_shared",
+      "improved_seed": 46,
+      "reference": "original_DeMo",
+      "reference_seed": 42,
+      "mAP": 0.23330623824830354,
+      "mINP": 0.5306808309618845,
+      "Rank-1": -0.23323615160350641,
+      "Rank-5": 0.2332361516034922,
+      "Rank-10": 0.3498542274052454,
+      "Rank-20": 0.3498542274052454,
+      "rank1_rescued": 5,
+      "rank1_harmed": 9,
+      "AP_improved": 765,
+      "AP_worsened": 618
+    },
+    {
+      "improved": "axis_shared",
+      "improved_seed": 46,
+      "reference": "frequency_shared",
+      "reference_seed": 46,
+      "mAP": 0.01671287933794474,
+      "mINP": -0.27389926216375216,
+      "Rank-1": -0.11661807580176742,
+      "Rank-5": -0.05830903790088371,
+      "Rank-10": 0.11661807580175321,
+      "Rank-20": 0.0,
+      "rank1_rescued": 5,
+      "rank1_harmed": 7,
+      "AP_improved": 636,
+      "AP_worsened": 731
+    }
+  ],
+  "training": [
+    {
+      "seed": 46,
+      "variant": "frequency_shared",
+      "selected_epoch": 40,
+      "last_six": {
+        "mAP": 85.94615443439298,
+        "mINP": 62.586451453634815,
+        "Rank-1": 96.61807580174927,
+        "Rank-5": 97.25947521865889,
+        "Rank-10": 97.49271137026238,
+        "Rank-20": 98.07580174927114
+      },
+      "teacher_seed": 42,
+      "teacher_epochs": 50,
+      "expert_epochs": 50,
+      "runtime": {
+        "end_to_end_seconds": 124.65158653259277,
+        "triplets": 10290,
+        "includes_decode_and_first_batch": true,
+        "mean_route": [
+          [
+            0.452374130487442,
+            0.05176044628024101,
+            0.051485080271959305
+          ],
+          [
+            0.04035918787121773,
+            0.0042437161318957806,
+            0.004232840146869421
+          ],
+          [
+            0.04143080860376358,
+            0.004360812716186047,
+            0.004353002179414034
+          ],
+          [
+            0.04041814059019089,
+            0.004250244703143835,
+            0.0042396364733576775
+          ],
+          [
+            0.05199268087744713,
+            0.005506305955350399,
+            0.0055901906453073025
+          ],
+          [
+            0.04050542041659355,
+            0.004260116256773472,
+            0.004249114077538252
+          ],
+          [
+            0.15000052750110626,
+            0.017183059826493263,
+            0.01720454730093479
+          ]
+        ],
+        "mean_outer_gates": [
+          0.776219367980957,
+          0.6102001667022705,
+          0.8448507785797119
+        ],
+        "mean_route_entropy": 2.004624366760254,
+        "mean_joint_minus_marginal_product_L1": 0.009111189283430576
+      },
+      "peak_memory": 1665325568
+    },
+    {
+      "seed": 46,
+      "variant": "axis_shared",
+      "selected_epoch": 24,
+      "last_six": {
+        "mAP": 85.93178690997057,
+        "mINP": 62.14423154309695,
+        "Rank-1": 96.50145772594753,
+        "Rank-5": 97.20116618075801,
+        "Rank-10": 97.60932944606414,
+        "Rank-20": 98.01749271137025
+      },
+      "teacher_seed": 42,
+      "teacher_epochs": 50,
+      "expert_epochs": 50,
+      "runtime": {
+        "end_to_end_seconds": 107.89718246459961,
+        "triplets": 10290,
+        "includes_decode_and_first_batch": true,
+        "mean_route": [
+          [
+            0.6357164978981018,
+            0.056089092046022415,
+            0.05548252910375595
+          ],
+          [
+            0.021951712667942047,
+            0.0010350123047828674,
+            0.0010298292618244886
+          ],
+          [
+            0.051271162927150726,
+            0.0034453077241778374,
+            0.003382266964763403
+          ],
+          [
+            0.03806762024760246,
+            0.001544527942314744,
+            0.0015334923518821597
+          ],
+          [
+            0.04823146015405655,
+            0.0021249353885650635,
+            0.002149274107068777
+          ],
+          [
+            0.01875031366944313,
+            0.000951601832639426,
+            0.0009476247359998524
+          ],
+          [
+            0.051111944019794464,
+            0.002534496830776334,
+            0.0026493226177990437
+          ]
+        ],
+        "mean_outer_gates": [
+          0.7676948308944702,
+          0.669806957244873,
+          0.8056367039680481
+        ],
+        "mean_route_entropy": 1.475379228591919,
+        "mean_joint_minus_marginal_product_L1": 0.0423569530248642
+      },
+      "peak_memory": 1434660352
+    }
+  ],
+  "new_neural_calls": 0,
+  "new_optimizer_updates": 0,
+  "limits": "One full50 matched pair, conditional expert seed on teacher42. BenchmarkmAP earliesttie; all six from the same checkpoint. No four states, missing, selected N5 main run or five-seed claim."
+}

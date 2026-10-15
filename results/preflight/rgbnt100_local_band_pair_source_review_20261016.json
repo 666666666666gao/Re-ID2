@@ -1,0 +1,247 @@
+{
+  "verdict": "PASS",
+  "status": "SOURCE_ONLY_PASS",
+  "scope": "Fresh source-only readiness review of the F-only RGBNT100 AV42 local-grid pair controller and its real dependency interfaces",
+  "skill": "experiment-bridge",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "runtime": "NOT_RUN",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "conclusion": "No concrete blocking defect found in the reviewed controller or the exercised source interfaces. Source PASS does not attest native parity, gradients, training, retrieval gain, server admission, or archive completion.",
+  "checks": [
+    {
+      "id": "N5_gate_and_reused_AV42_controls",
+      "result": "PASS",
+      "finding": "Before creating output or starting children, the controller requires ALL_FIVE_COMPLETE_SELECTED, exact expert seeds 42..46, fixed teacher42, AV, selected axis seed42, and main_axis_both_plus1 false. The selection producer emits that status only after ten full-run rows, paired orders, and all four new-wave archive/closure receipts pass. Its target-priority choice makes the false dual-threshold flag mean none of the five axis candidates met both original-DeMo+1 targets. The locked source maps reused seed42 ordinary and axis to the original AV run pair; the new grid2 pair is fixed seed42 and introduces no sixth seed.",
+      "evidence": [
+        "launch_rgbnt100_local_band_pair.py:23",
+        "launch_rgbnt100_local_band_pair.py:64",
+        "analyze_rgbnt100_expert_N5.py:66",
+        "analyze_rgbnt100_expert_N5.py:90",
+        "analyze_rgbnt100_expert_N5.py:107",
+        "lock_rgbnt100_expert_N5_recipe.py:9",
+        "lock_rgbnt100_expert_N5_recipe.py:35",
+        "results/preflight/rgbnt100_local_band_pair_preparation_20261016.json:30"
+      ]
+    },
+    {
+      "id": "F_only_matched_local_reading",
+      "result": "PASS",
+      "finding": "The only new installed neural methods are F.prepare and F.read. Grid2 partitions the existing 8x16 patch plane into four 4x8 regions; structured F retains source-local support while ordinary F uses the same image-coordinate regions with mixed-source values. Cross-band attention and existing nonlinear output operate before regional averaging. M.read is explicitly checked against its original implementation, and the existing AV M projected-query policy is preserved. The index buffer is nonpersistent, parameter identities and state keys remain unchanged, and output returns the old source/band/512 shape. This does not establish semantic or cross-sensor registration.",
+      "evidence": [
+        "local_patch_regions.py:4",
+        "local_band_evidence_reading.py:15",
+        "local_band_evidence_reading.py:36",
+        "local_band_evidence_reading.py:52",
+        "rgbnt100_local_band_recipe.py:18",
+        "axis_collaboration.py:26",
+        "axis_collaboration.py:60",
+        "shared_identity_axis.py:181"
+      ]
+    },
+    {
+      "id": "real_parity_native_and_pairing_gates",
+      "result": "PASS",
+      "finding": "Both grid1 parity subprocesses must finish successfully before either grid2 native subprocess starts; both native3 results and paired native names/partial sets must pass before either formal job starts. The parity implementation compares constructor state tensors, CPU/CUDA RNG states and four 8x5120 outputs in FP32 and autocast, including post-forward state and anchor invariance. Native3 uses real optimizer updates, requires three attempts/no AMP skip, checks every active parameter gradient, and performs strict in-memory reload equality. Formal paired epoch/step/names/partial-set order equality gates controller completion. Native contract keys are produced by the real AV step chain.",
+      "evidence": [
+        "launch_rgbnt100_local_band_pair.py:38",
+        "launch_rgbnt100_local_band_pair.py:70",
+        "launch_rgbnt100_local_band_pair.py:84",
+        "launch_rgbnt100_local_band_pair.py:124",
+        "check_rgbnt100_local_band_parity.py:36",
+        "check_rgbnt100_local_band_parity.py:54",
+        "run_full_official_frozen_anchor_experiment.py:98",
+        "rgbnt100_expert_seed_contracts.py:5",
+        "run_r201m_primary_margin06.py:106",
+        "relation_local_identity_outlet.py:55"
+      ]
+    },
+    {
+      "id": "full_official_training_GT_and_checkpoint",
+      "result": "PASS",
+      "finding": "The inherited runner executes epochs 1..50, uses all official training records with no identity holdout, and evaluates all official query+gallery records every epoch. The controller requires 8675 eligible/visited training records, 1715 queries and 8575 gallery records, no skipped updates, and the installed-GT CPU audit. Highest normal benchmark mAP selects the checkpoint with strict greater-than updates, preserving earliest ties; all six reported metrics are recomputed from that one strict-loaded best checkpoint. RGBNT100 metric exclusion is same identity plus same camera. Benchmark selection is explicitly disclosed.",
+      "evidence": [
+        "run_full_official_frozen_anchor_experiment.py:75",
+        "run_full_official_frozen_anchor_experiment.py:139",
+        "run_full_official_frozen_anchor_experiment.py:166",
+        "run_full_official_frozen_anchor_experiment.py:175",
+        "launch_rgbnt100_local_band_pair.py:95",
+        "rgbnt100_expert_seed_contracts.py:46",
+        "official_training_data.py:20",
+        "audit_full_official_normal.py:21",
+        "audit_full_official_normal.py:35",
+        "audit_full_official49.py:37",
+        "full_evaluation.py:20"
+      ]
+    },
+    {
+      "id": "frozen_local_grid_reconstruction_and_eight_states",
+      "result": "PASS",
+      "finding": "The evaluator rebuilds the selected AV recipe and the recorded local grid before strict-loading best.pth, which is necessary because regional indices/methods are not encoded in persistent weights. It requires successful training exit and normal audit, checks installed split equality, evaluates all 10290 official records and exactly 00/10/01/11, verifies cached full11 query features/gallery features/distances and all six metrics, compares all 1715 original00 per-query rows, and checks state-version/anchor invariance. Each pair arm produces four states, so eight is the correct total. Importing installed_rows/recount/verify from the legacy 49-named utility does not invoke its 49-condition CLI.",
+      "evidence": [
+        "evaluate_rgbnt100_local_band_states.py:29",
+        "evaluate_rgbnt100_local_band_states.py:45",
+        "evaluate_rgbnt100_local_band_states.py:52",
+        "evaluate_rgbnt100_local_band_states.py:59",
+        "evaluate_rgbnt100_local_band_states.py:69",
+        "evaluate_rgbnt100_local_band_states.py:83",
+        "evaluate_rgbnt100_local_band_states.py:86",
+        "evaluate_rgbnt100_local_band_states.py:97",
+        "launch_rgbnt100_local_band_pair.py:110",
+        "rgbnt201_identity_outlet.py:67"
+      ]
+    },
+    {
+      "id": "GPU_lanes_and_subprocess_lifecycle",
+      "result": "PASS",
+      "finding": "The only controller lanes are frequency_shared on physical GPU2 and axis_shared on physical GPU3, with two workers and sequential parity/native/formal phases. Within each formal lane, training, CPU audit and frozen evaluation run sequentially. execute sets CUDA_VISIBLE_DEVICES per child, queries only GPU index and used memory, waits 240 seconds while occupied, waits for the original child, records its exit, asserts exit zero, and cleans only that child's process group if it is still alive on exit. There is no temperature/power query, timeout-driven relaunch, or additional worker lane. Actual host2026 admission remains an external deployment obligation; this review did not contact a host.",
+      "evidence": [
+        "launch_rgbnt100_local_band_pair.py:15",
+        "launch_rgbnt100_local_band_pair.py:54",
+        "launch_rgbnt100_local_band_pair.py:84",
+        "launch_rgbnt100_local_band_pair.py:93",
+        "launch_rgbnt100_local_band_pair.py:124",
+        "gpu_thermal_execute.py:9",
+        "gpu_thermal_execute.py:24"
+      ]
+    },
+    {
+      "id": "counts_budget_and_cost_attribution",
+      "result": "PASS",
+      "finding": "The source schedules two parity, two native, two formal, two CPU-audit and two frozen-evaluation subprocesses. Each parity's four top-level model forwards over eight records yields 32 forward-record executions, hence 64 across controls; these are not full-Q/G equivalence results. Six native updates and 100 additional formal epochs are conditional on successful child checks. Formal successful updates are summed from actual results instead of assuming a fixed batch count. The inherited training result retains start/finish, full-Q/G extraction time and peak allocated memory; frozen evaluation records seconds. Equal parameter counts are explicitly not an efficiency claim. No runtime count or score was observed during this review.",
+      "evidence": [
+        "check_rgbnt100_local_band_parity.py:32",
+        "check_rgbnt100_local_band_parity.py:78",
+        "launch_rgbnt100_local_band_pair.py:88",
+        "launch_rgbnt100_local_band_pair.py:120",
+        "launch_rgbnt100_local_band_pair.py:131",
+        "run_full_official_frozen_anchor_experiment.py:78",
+        "run_full_official_frozen_anchor_experiment.py:177",
+        "full_evaluation.py:82",
+        "evaluate_rgbnt100_local_band_states.py:105",
+        "results/preflight/rgbnt100_local_band_pair_preparation_20261016.json:39"
+      ]
+    },
+    {
+      "id": "actual_aliases_arguments_and_result_shapes",
+      "result": "PASS",
+      "finding": "configure_runner installs the exact seed-factory alias used by g.build, the AV optimizer/configuration/step, the real hard-sampler make_loader, and g.record. g.record converts the inherited runner's descriptor metadata to the actual 5120 contract. build_selected writes expert_recipe and seed metadata; build_local restores the two stripped local options to args before the runner creates its info dictionary. Every controller smoke/result field and the local evaluator's argument field has a real producer. Four independent stdlib argparse checks reconstructed parser declarations and the controller command AST for both variants and modes; all local flags were stripped and all inherited required arguments parsed correctly. No project modules were imported.",
+      "evidence": [
+        "run_rgbnt100_local_band_reading.py:10",
+        "run_rgbnt100_local_band_reading.py:21",
+        "rgbnt100_expert_seed_recipe.py:26",
+        "rgbnt100_expert_seed_recipe.py:37",
+        "identity_coordinate_rgbnt100_expert_seeds.py:55",
+        "rgbnt100_local_band_recipe.py:24",
+        "run_r201g_normal_priority.py:30",
+        "run_full_official_frozen_anchor_experiment.py:124",
+        "run_full_official_frozen_anchor_experiment.py:177",
+        "run_r201ac_RGB_hard_identity.py:48"
+      ]
+    },
+    {
+      "id": "failure_visibility_paths_and_retention",
+      "result": "PASS",
+      "finding": "A missing/incomplete five-selection file stops before root creation. New outputs are rooted in an exclusively created experiment directory, with distinct phase logs, child exits, training results and frozen-state outputs. The evaluator's expected training exit path matches execute's sibling exit-file layout. Neither the seven new Python files nor the controller add exception swallowing, fallback, retries, deletion or moves. execute propagates failures after recording exit; ThreadPool results propagate exceptions and do not admit the next global phase on failure. The controller preserves six explicit best/raw/state artifacts and reports raw_preserved_pending_local_archive; archive verification, scoped duplicate cleanup and the fresh result audit are later work, not falsely claimed here.",
+      "evidence": [
+        "launch_rgbnt100_local_band_pair.py:23",
+        "launch_rgbnt100_local_band_pair.py:28",
+        "launch_rgbnt100_local_band_pair.py:59",
+        "launch_rgbnt100_local_band_pair.py:115",
+        "launch_rgbnt100_local_band_pair.py:136",
+        "evaluate_rgbnt100_local_band_states.py:35",
+        "gpu_thermal_execute.py:32",
+        "gpu_thermal_execute.py:40"
+      ]
+    }
+  ],
+  "planned_workload": {
+    "controller_controls": 2,
+    "expert_seed": 42,
+    "teacher_seed": 42,
+    "new_seed_values": 0,
+    "subprocess_calls": 10,
+    "neural_subprocess_calls": 8,
+    "CPU_audit_subprocess_calls": 2,
+    "grid1_top_level_model_forward_batches": 8,
+    "grid1_forward_record_executions": 64,
+    "native_optimizer_updates": 6,
+    "formal_training_runs": 2,
+    "formal_epochs_total": 100,
+    "formal_successful_updates": "Read actual per-arm steps/optimizer_steps; no runtime total observed",
+    "selected_frozen_state_cases": 8,
+    "selected_frozen_state_distance_cells": 117649000,
+    "preserved_best_weight_files": 2,
+    "preserved_normal_raw_files": 2,
+    "preserved_four_state_raw_files": 2,
+    "missing_evaluation_conditions": 0
+  },
+  "actual_review_activity": {
+    "project_module_imports": 0,
+    "Torch_imports": 0,
+    "local_package_installs": 0,
+    "SSH_calls": 0,
+    "GPU_queries": 0,
+    "NN_calls": 0,
+    "optimizer_updates": 0,
+    "current_N5_job_or_intake_queries": 0,
+    "current_N5_selection_file_reads": 0,
+    "stdlib_AST_based_argument_checks": 4,
+    "indexed_python37_AST_parses": 292,
+    "indexed_JSON_parses": 56,
+    "indexed_CSV_parses": 1,
+    "indexed_CSV_rows": 591,
+    "indexed_YAML_files_read_not_semantically_parsed": 3,
+    "interpretation": "These are reviewer-side static/read-only counts, not executor native or formal results."
+  },
+  "remaining_runtime_obligations": [
+    "Consume an actual ALL_FIVE_COMPLETE_SELECTED AV result satisfying the axis42/dual-target-failure gate after the bounded N5 closures; this review did not inspect current N5 evidence.",
+    "Use the authorized 2026 host and physical GPU2/3 lanes; run the real grid1 parity and both grid2 native3 checks before formal admission.",
+    "Finish both full50 jobs, installed-GT normal audits and all eight selected frozen states; report the actual counts, runtime and memory.",
+    "Compare with the retained original AV42 ordinary/axis controls, archive all six protected artifacts with verified receipts, and perform the fresh result audit before any scoped duplicate retirement."
+  ],
+  "constraints": "READ_ONLY_SOURCE_REVIEW; designated verdict and ignored .aris trace only; source bytes unchanged; no implementation changes; no deployment/native/formal/result claim.",
+  "trace_directory": ".aris/traces/experiment-bridge/2026-10-16_RGBNT100_F_local_pair_source_run01",
+  "at": "2026-10-15T17:39:10.610496+00:00",
+  "artifact_index": "results/preflight/rgbnt100_local_band_pair_source_review_request_20261016.json",
+  "plan": "results/preflight/rgbnt100_local_band_pair_preparation_20261016.json",
+  "hash_verification": {
+    "status": "PASS",
+    "index_sha256": "8ebe6cfdc36da38476b1aa31f4c43814f551ab4e50a3e2e8890fbd064bdd238c",
+    "indexed_files": 352,
+    "new_indexed_files": 8,
+    "reused_indexed_files": 344,
+    "indexed_bytes": 3333379,
+    "before_matches_index": 352,
+    "after_matches_before_and_index": 352,
+    "missing_files": 0,
+    "hash_mismatches": 0,
+    "mutated_indexed_files": 0,
+    "extension_counts": {
+      ".py": 292,
+      ".json": 56,
+      ".yml": 3,
+      ".csv": 1
+    },
+    "before_manifest": ".aris/traces/experiment-bridge/2026-10-16_RGBNT100_F_local_pair_source_run01/source_seal_before.json",
+    "after_manifest": ".aris/traces/experiment-bridge/2026-10-16_RGBNT100_F_local_pair_source_run01/source_seal_after.json"
+  },
+  "reviewer_environment": {
+    "python_executable": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe",
+    "python_flags": [
+      "-X",
+      "utf8",
+      "-B",
+      "-S"
+    ],
+    "verification": "Python stdlib and AST only; executor modules not imported or invoked",
+    "new_python_files_ast_checked_for_try_and_delete_move_calls": 7,
+    "new_python_try_statements": 0,
+    "new_python_delete_or_move_calls": 0
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "status": "ACTUAL_F_LOCAL_SINGLE_NATIVE_NODE_OBSERVATION",
+  "at": "2026-10-16T01:45:33+08:00",
+  "scheduled_epoch": 1792086332.4248245,
+  "actual": {
+    "observed_epoch": 1792086333.703563,
+    "controller_pid": 507129,
+    "controller_live": true,
+    "native": {
+      "status": "PASS",
+      "parent_recipe": "AV",
+      "seed": 42,
+      "grid": 2,
+      "actual_updates": 6,
+      "parity": [
+        {
+          "result": {
+            "status": "ACTUAL_LOCAL_GRID1_CONSTRUCTOR_RNG_FP32_AMP_FOUR_STATE_PARITY_PASS",
+            "parent_recipe": "AV",
+            "variant": "frequency_shared",
+            "teacher_seed": 42,
+            "expert_seed": 42,
+            "grid": 1,
+            "state_entries": 745,
+            "state_tensors_exact": true,
+            "CPU_CUDA_RNG_exact": true,
+            "fp32_four_states_exact": true,
+            "autocast_four_states_exact": true,
+            "identity_reference_unchanged": true,
+            "parameters": 99585158,
+            "trainable_parameters": 1887366,
+            "descriptor_dim": 5120,
+            "model_forward_batches": 4,
+            "forward_record_executions": 32,
+            "optimizer_updates": 0,
+            "checkpoint_writes": 0,
+            "limits": "Eight official query records, two constructors, FP32 and autocast evaluation only. Not whole-Q/G equality, a trained trajectory equivalence, grid2 gradient/native Adam, a retrieval score or launch authorization. No current experiment is inspected or modified."
+          },
+          "exit": {
+            "name": "RGBNT100_flocal_AV_frequency_shared_grid1_parity",
+            "exit_code": 0,
+            "finished": 1792086182.611306,
+            "gpu": 2,
+            "temperature_power_control": false,
+            "forced_own_group_cleanup": false
+          }
+        },
+        {
+          "result": {
+            "status": "ACTUAL_LOCAL_GRID1_CONSTRUCTOR_RNG_FP32_AMP_FOUR_STATE_PARITY_PASS",
+            "parent_recipe": "AV",
+            "variant": "axis_shared",
+            "teacher_seed": 42,
+            "expert_seed": 42,
+            "grid": 1,
+            "state_entries": 745,
+            "state_tensors_exact": true,
+            "CPU_CUDA_RNG_exact": true,
+            "fp32_four_states_exact": true,
+            "autocast_four_states_exact": true,
+            "identity_reference_unchanged": true,
+            "parameters": 99585158,
+            "trainable_parameters": 1887366,
+            "descriptor_dim": 5120,
+            "model_forward_batches": 4,
+            "forward_record_executions": 32,
+            "optimizer_updates": 0,
+            "checkpoint_writes": 0,
+            "limits": "Eight official query records, two constructors, FP32 and autocast evaluation only. Not whole-Q/G equality, a trained trajectory equivalence, grid2 gradient/native Adam, a retrieval score or launch authorization. No current experiment is inspected or modified."
+          },
+          "exit": {
+            "name": "RGBNT100_flocal_AV_axis_shared_grid1_parity",
+            "exit_code": 0,
+            "finished": 1792086182.1665661,
+            "gpu": 3,
+            "temperature_power_control": false,
+            "forced_own_group_cleanup": false
+          }
+        }
+      ],
+      "parity_forward_record_executions": 64,
+      "strict_reload": true,
+      "all_active_gradients": true,
+      "paired_sampling": true
+    },
+    "controller_result": null,
+    "launches": [
+      {
+        "phase": "parity",
+        "name": "RGBNT100_flocal_AV_axis_shared_grid1_parity_launch.json",
+        "pid": 507207,
+        "gpu": 3,
+        "started": 1792086156.4281433,
+        "live": false,
+        "exit": {
+          "name": "RGBNT100_flocal_AV_axis_shared_grid1_parity",
+          "exit_code": 0,
+          "finished": 1792086182.1665661,
+          "gpu": 3,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "parity",
+        "name": "RGBNT100_flocal_AV_frequency_shared_grid1_parity_launch.json",
+        "pid": 507206,
+        "gpu": 2,
+        "started": 1792086156.423846,
+        "live": false,
+        "exit": {
+          "name": "RGBNT100_flocal_AV_frequency_shared_grid1_parity",
+          "exit_code": 0,
+          "finished": 1792086182.611306,
+          "gpu": 2,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "native",
+        "name": "RGBNT100_flocal2_AV_axis_shared_s42_smoke_launch.json",
+        "pid": 507443,
+        "gpu": 3,
+        "started": 1792086182.6887562,
+        "live": false,
+        "exit": {
+          "name": "RGBNT100_flocal2_AV_axis_shared_s42_smoke",
+          "exit_code": 0,
+          "finished": 1792086204.781918,
+          "gpu": 3,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "native",
+        "name": "RGBNT100_flocal2_AV_frequency_shared_s42_smoke_launch.json",
+        "pid": 507444,
+        "gpu": 2,
+        "started": 1792086182.6907482,
+        "live": false,
+        "exit": {
+          "name": "RGBNT100_flocal2_AV_frequency_shared_s42_smoke",
+          "exit_code": 0,
+          "finished": 1792086204.3208256,
+          "gpu": 2,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "training",
+        "name": "RGBNT100_flocal2_AV_axis_shared_s42_launch.json",
+        "pid": 507760,
+        "gpu": 3,
+        "started": 1792086204.8603694,
+        "live": true,
+        "exit": null
+      },
+      {
+        "phase": "training",
+        "name": "RGBNT100_flocal2_AV_frequency_shared_s42_launch.json",
+        "pid": 507759,
+        "gpu": 2,
+        "started": 1792086204.8584335,
+        "live": true,
+        "exit": null
+      }
+    ]
+  },
+  "native_accepted": true,
+  "both_formal_models_live_at_observation": true,
+  "new_neural_calls": 0,
+  "training_progress_queries": 0,
+  "temperature_power_reads": 0,
+  "NN_restarts": 0,
+  "limits": "One scheduled parity/native/launch observation. Constructor32 records per control is not full trained trajectory equivalence; native6 is not a full result. Original controller only.",
+  "actual_formal_start_epoch": 1792086204.8603694,
+  "near_end_epoch": 1792097724.8603694
+}

@@ -1,0 +1,45 @@
+{
+  "status": "CONTROLLER_SOURCE_PREPARED_RUNTIME_NOT_RUN",
+  "at": "2026-10-16T01:29:51+08:00",
+  "neural_sources_sha256": {
+    "local_patch_regions.py": "c13e57993ae1ecb75bf10c6f169077e99c4455f9f3d4d0a1f66d0f9f22866146",
+    "local_band_evidence_reading.py": "970bde342cfdad4583345b4e005f0774e770a61848ede9f42bd7086b52a07461",
+    "rgbnt100_local_band_recipe.py": "a3a17b05ebebad64bbb67d3f8f0c577d3d6aea755a28d62be5fa238d26ac7d89",
+    "run_rgbnt100_local_band_reading.py": "4bcc29f8ffc0be19571c4e81bbefd71bb88463b45114d9a998b6d5a1883855c7",
+    "check_rgbnt100_local_band_parity.py": "690119828b66301bfd6ffc8852f0784a43c09bf826f66c17204d639c942409a9",
+    "evaluate_rgbnt100_local_band_states.py": "f79a6811d252c106c9e0267fd4d5761cd021309f5d641bc6f966eb703de3a86a",
+    "launch_rgbnt100_local_band_pair.py": "965514c006546f283460a2dff94161f2221d29585d30f2cff5a944af7db9543e"
+  },
+  "parent_recipe": "AV",
+  "teacher_seed": 42,
+  "expert_seed": 42,
+  "reading_grid": 2,
+  "regions": 4,
+  "parameters": 99585158,
+  "trainable_parameters": 1887366,
+  "descriptor_dim": 5120,
+  "physical_GPUs": [
+    2,
+    3
+  ],
+  "max_NN": 2,
+  "remote_family": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_F_local_grid2_AV_20261016",
+  "local_family": "results/rgbnt100_F_local_grid2_AV_20261016",
+  "admission": "Require actual final N5 allfour archives, ALL_FIVE_COMPLETE_SELECTED mainaxis42 and main_axis_both_plus1 false. Do not interrupt or inspect active jobs. New controller and no new model/method branch beyond the already reviewed F-only plan.",
+  "single_factor": "Only F.prepare/read preserve four within-source patch rectangles through cross-band attention/nonlinear output before mean. M remains old full-spatial; ordinary gets the same four image-coordinate regions, mixed-source per region. No assumption of matching sensor views or semantic parts. No parameter/state-key/outputdim/loss/optimizer/data change.",
+  "controls": "New grid2 ordinary/axis full50; explicitly reuse existing same-seed global AV42 ordinary/axis. Do not use ordinary Best-of5 as a same-seed structural comparison. Grid1 real FP32/AMP constructor/state/RNG parity covers eight queries per control only, not full trajectory identity.",
+  "phases": [
+    "two real grid1 constructor parity checks, 64 forward-record executions total, zero updates",
+    "two grid2 native3 realAdam/strictreload/allactivegrad/pairedsample,6total",
+    "two fullofficial50 training, all8675 train/1715Q/8575G",
+    "two CPU installed-GT audits and two fullQG fourstate inference with local-grid reconstruction before strictload,8states total",
+    "D six archives verified before exactremote duplicatecleanup; fresh resultaudit before retiring nonleaders"
+  ],
+  "checkpoint": "Same normal benchmarkmAP maximum/earliesttie over50, sixmetrics onecheckpoint; benchmark used forselection, not untouchedtest.",
+  "cost": "Must report real runtime/peak memory, not infer efficiency from equalparameters. No runtime or CUDA/native/formal observation yet.",
+  "temperature_power_reads": 0,
+  "NN_calls": 0,
+  "optimizer_updates": 0,
+  "missing_evaluated": false,
+  "limits": "Sourcepreparation only. Existing N5 intake pending; no new deployment or training admitted. PreserveRGBNT201K, originalteachers, MSstrong, currentleaderweights and unique rawarrays."
+}
