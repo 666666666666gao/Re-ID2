@@ -1,0 +1,69 @@
+{
+  "status": "ACTUAL_CLOSED_RECIPE_LOCKED_FOR_BOUNDED_EXPERT_N5",
+  "at": "2026-10-15T11:06:54+08:00",
+  "selected_recipe": "AV",
+  "expert_seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "teacher_seed": 42,
+  "seed42_reused": true,
+  "recipe_choice_rule": "BC only if its completed axis mAP is strictly above retained AV and its Rank-1 is at least AV; otherwise retain AV. No architecture or parameter retuning between seeds.",
+  "main_seed_selection_rule": "Among the five mAP-best checkpoints: prioritize satisfying both original-DeMo+1 thresholds, then larger mAP, then smaller seed. Apply the same tuple to ordinary and axis; retain all five rows and also disclose the unfiltered maximum-mAP run.",
+  "parent_axis_six": {
+    "AV": {
+      "mAP": 86.1546433016181,
+      "mINP": 62.56079466820975,
+      "Rank-1": 96.7930029154519,
+      "Rank-5": 97.43440233236151,
+      "Rank-10": 97.78425655976677,
+      "Rank-20": 98.25072886297376
+    },
+    "BC": {
+      "mAP": 86.01348552153648,
+      "mINP": 62.35968140232808,
+      "Rank-1": 96.67638483965014,
+      "Rank-5": 97.14285714285714,
+      "Rank-10": 97.60932944606414,
+      "Rank-20": 97.95918367346938
+    }
+  },
+  "original_DeMo_six": {
+    "mAP": 85.76856710316947,
+    "mINP": 61.84590828355626,
+    "Rank-1": 96.61807580174927,
+    "Rank-5": 97.0262390670554,
+    "Rank-10": 97.37609329446065,
+    "Rank-20": 97.72594752186589
+  },
+  "targets": {
+    "mAP": 86.76856710316947,
+    "Rank-1": 97.61807580174927
+  },
+  "remaining_gaps": {
+    "mAP": 0.6139238015513797,
+    "Rank-1": 0.8250728862973773
+  },
+  "parameters": 99585158,
+  "trainable_parameters": 1887366,
+  "descriptor_dim": 5120,
+  "local_family_root": "results/rgbnt100_expert_N5_AV_20261015",
+  "remote_family_root": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_expert_N5_AV_20261015",
+  "seed42_local_runs": {
+    "frequency_shared": "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_frequency_shared_s42",
+    "axis_shared": "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42"
+  },
+  "BC_intake_path": "results\\preflight\\r201bc_RGB_reference_interaction_20261015_complete_intake.json",
+  "BC_intake_sha256": "9b276ef56c58799ec8d6091c2221fcda27d0465081c3a6d37b66770369bcffa9",
+  "BC_audit_path": "results\\preflight\\r201bc_closed_normal_integrity_audit_20261015.json",
+  "BC_audit_sha256": "260ec5ecdb2cb931774187578ab30962951f9ef9ccf7bbce88907eed03595447",
+  "new_formal_models_max": 8,
+  "normal_only": true,
+  "missing_evaluated": false,
+  "new_neural_calls": 0,
+  "new_optimizer_updates": 0,
+  "limits": "Post-BC method lock, before any new seed43..46 result. Reuses one benchmark-selected original teacher42 and completed recipe42 pair; conditional repeats, not five end-to-end pipelines or an untouched final test. Selection and every actual attempt are disclosed."
+}
