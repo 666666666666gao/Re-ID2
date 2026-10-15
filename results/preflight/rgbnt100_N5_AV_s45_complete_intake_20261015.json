@@ -1,0 +1,1416 @@
+{
+  "status": "ACTUAL_N5_WAVE_D_ARCHIVED_COMPLETE",
+  "at": "2026-10-15T08:16:38-06:00",
+  "recipe": "AV",
+  "seed": 45,
+  "collector_pid": 42536,
+  "terminal": {
+    "controller": {
+      "status": "COMPLETE",
+      "recipe": "AV",
+      "seed": 45,
+      "teacher_seed": 42,
+      "controls": 2,
+      "runs": [
+        {
+          "name": "RGBNT100_n5_AV_frequency_shared_s45",
+          "variant": "frequency_shared",
+          "gpu": 2,
+          "train": {
+            "name": "RGBNT100_n5_AV_frequency_shared_s45",
+            "exit_code": 0,
+            "finished": 1792067846.9654992,
+            "gpu": 2,
+            "temperature_power_control": false,
+            "forced_own_group_cleanup": false
+          },
+          "audit": {
+            "name": "RGBNT100_n5_AV_frequency_shared_s45",
+            "exit_code": 0,
+            "finished": 1792067855.0450442,
+            "gpu": 2,
+            "temperature_power_control": false,
+            "forced_own_group_cleanup": false
+          },
+          "successful_updates": 6564,
+          "selected_epoch": 19,
+          "full_metrics": {
+            "mAP": 86.04451012121814,
+            "mINP": 62.65172478045411,
+            "Rank-1": 96.50145772594753,
+            "Rank-5": 97.31778425655978,
+            "Rank-10": 97.49271137026238,
+            "Rank-20": 98.07580174927114
+          },
+          "raw": {
+            "path": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_expert_N5_AV_20261015/s45/RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/best_official_arrays.npz",
+            "bytes": 247482212,
+            "sha256": "187dd7f69cecd5f8a7b1fce1f656e08f3bb7199b2dc679d2fcd3c21e37f1b13f"
+          },
+          "best": {
+            "path": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_expert_N5_AV_20261015/s45/RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/best.pth",
+            "bytes": 398706009,
+            "sha256": "acc87bee18171d62081d2564ee6dfb21c72ffe5f669bb8443ad1ee267aa66ab5"
+          }
+        },
+        {
+          "name": "RGBNT100_n5_AV_axis_shared_s45",
+          "variant": "axis_shared",
+          "gpu": 3,
+          "train": {
+            "name": "RGBNT100_n5_AV_axis_shared_s45",
+            "exit_code": 0,
+            "finished": 1792066742.8834949,
+            "gpu": 3,
+            "temperature_power_control": false,
+            "forced_own_group_cleanup": false
+          },
+          "audit": {
+            "name": "RGBNT100_n5_AV_axis_shared_s45",
+            "exit_code": 0,
+            "finished": 1792066750.5954642,
+            "gpu": 3,
+            "temperature_power_control": false,
+            "forced_own_group_cleanup": false
+          },
+          "successful_updates": 6564,
+          "selected_epoch": 2,
+          "full_metrics": {
+            "mAP": 86.00454480589991,
+            "mINP": 62.323075090475854,
+            "Rank-1": 96.44314868804665,
+            "Rank-5": 97.31778425655978,
+            "Rank-10": 97.43440233236151,
+            "Rank-20": 98.07580174927114
+          },
+          "raw": {
+            "path": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_expert_N5_AV_20261015/s45/RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/best_official_arrays.npz",
+            "bytes": 247559795,
+            "sha256": "06946f6d5e73c120c3dc5b22c99ce64d6c17e9ebe7cc91cfc85e1ae2e7c79140"
+          },
+          "best": {
+            "path": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_expert_N5_AV_20261015/s45/RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/best.pth",
+            "bytes": 398706009,
+            "sha256": "1a58ac46363b242d368419b7b124b2667c81ea4e47cc850b97d4169171ee1ad6"
+          }
+        }
+      ],
+      "native_updates": 6,
+      "successful_updates": 13128,
+      "additional_epochs": 100,
+      "paired_sampling_exact": true,
+      "physical_gpus": [
+        2,
+        3
+      ],
+      "maximum_NN": 2,
+      "full_training_coverage": true,
+      "normal_GT_audited": true,
+      "state_cases": 0,
+      "missing_evaluated": false,
+      "raw_preserved_pending_local_archive": true,
+      "parity_forward_record_executions": 0,
+      "limits": "One of four new waves after reusing seed42. Actual per-seed sampler updates, not seed42 order/count. Full50 normal, benchmarkmAP earliesttie; no selected final N5 seed or new whole-pipeline repeats."
+    },
+    "children": [
+      {
+        "phase": "native",
+        "launch": {
+          "pid": 213683,
+          "process_group": 213683,
+          "gpu": 2,
+          "started": 1792057187.9299529,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_rgbnt100_expert_N5.py",
+            "--expert-recipe",
+            "AV",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "frequency_shared",
+            "--seed",
+            "45",
+            "--mode",
+            "smoke",
+            "--freeze-identity-encoder",
+            "1",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_expert_N5_AV_20261015/s45/RGBNT100/native/RGBNT100_n5_AV_frequency_shared_s45_smoke"
+          ],
+          "initial_resources": {
+            "gpu": 2,
+            "memory_used_mib": 18.0,
+            "observed_at": 1792057187.9280736
+          },
+          "temperature_power_control": false
+        },
+        "exit": {
+          "name": "RGBNT100_n5_AV_frequency_shared_s45_smoke",
+          "exit_code": 0,
+          "finished": 1792057210.6959147,
+          "gpu": 2,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "native",
+        "launch": {
+          "pid": 213684,
+          "process_group": 213684,
+          "gpu": 3,
+          "started": 1792057187.933629,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_rgbnt100_expert_N5.py",
+            "--expert-recipe",
+            "AV",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "axis_shared",
+            "--seed",
+            "45",
+            "--mode",
+            "smoke",
+            "--freeze-identity-encoder",
+            "1",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_expert_N5_AV_20261015/s45/RGBNT100/native/RGBNT100_n5_AV_axis_shared_s45_smoke"
+          ],
+          "initial_resources": {
+            "gpu": 3,
+            "memory_used_mib": 117.0,
+            "observed_at": 1792057187.9320712
+          },
+          "temperature_power_control": false
+        },
+        "exit": {
+          "name": "RGBNT100_n5_AV_axis_shared_s45_smoke",
+          "exit_code": 0,
+          "finished": 1792057210.841755,
+          "gpu": 3,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "training",
+        "launch": {
+          "pid": 214314,
+          "process_group": 214314,
+          "gpu": 2,
+          "started": 1792057210.9199297,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_rgbnt100_expert_N5.py",
+            "--expert-recipe",
+            "AV",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "frequency_shared",
+            "--seed",
+            "45",
+            "--mode",
+            "train",
+            "--freeze-identity-encoder",
+            "1",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_expert_N5_AV_20261015/s45/RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45"
+          ],
+          "initial_resources": {
+            "gpu": 2,
+            "memory_used_mib": 18.0,
+            "observed_at": 1792057210.918427
+          },
+          "temperature_power_control": false
+        },
+        "exit": {
+          "name": "RGBNT100_n5_AV_frequency_shared_s45",
+          "exit_code": 0,
+          "finished": 1792067846.9654992,
+          "gpu": 2,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "training",
+        "launch": {
+          "pid": 214313,
+          "process_group": 214313,
+          "gpu": 3,
+          "started": 1792057210.9179063,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_rgbnt100_expert_N5.py",
+            "--expert-recipe",
+            "AV",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "axis_shared",
+            "--seed",
+            "45",
+            "--mode",
+            "train",
+            "--freeze-identity-encoder",
+            "1",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training/RGBNT100_demo_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_expert_N5_AV_20261015/s45/RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45"
+          ],
+          "initial_resources": {
+            "gpu": 3,
+            "memory_used_mib": 117.0,
+            "observed_at": 1792057210.9162483
+          },
+          "temperature_power_control": false
+        },
+        "exit": {
+          "name": "RGBNT100_n5_AV_axis_shared_s45",
+          "exit_code": 0,
+          "finished": 1792066742.8834949,
+          "gpu": 3,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "audit",
+        "launch": {
+          "pid": 380017,
+          "process_group": 380017,
+          "gpu": 2,
+          "started": 1792067848.6985633,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "audit_full_official_normal.py",
+            "--run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_expert_N5_AV_20261015/s45/RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45"
+          ],
+          "initial_resources": {
+            "gpu": 2,
+            "memory_used_mib": 18.0,
+            "observed_at": 1792067848.69696
+          },
+          "temperature_power_control": false
+        },
+        "exit": {
+          "name": "RGBNT100_n5_AV_frequency_shared_s45",
+          "exit_code": 0,
+          "finished": 1792067855.0450442,
+          "gpu": 2,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "audit",
+        "launch": {
+          "pid": 371180,
+          "process_group": 371180,
+          "gpu": 3,
+          "started": 1792066744.4288085,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "audit_full_official_normal.py",
+            "--run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_expert_N5_AV_20261015/s45/RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45"
+          ],
+          "initial_resources": {
+            "gpu": 3,
+            "memory_used_mib": 117.0,
+            "observed_at": 1792066744.427092
+          },
+          "temperature_power_control": false
+        },
+        "exit": {
+          "name": "RGBNT100_n5_AV_axis_shared_s45",
+          "exit_code": 0,
+          "finished": 1792066750.5954642,
+          "gpu": 3,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      }
+    ],
+    "all_children_and_controller_absent": true,
+    "manifest": {
+      "controller.log": {
+        "bytes": 951,
+        "sha256": "e6f0e26c7fdeb039bb81eecfdcefc4edb299f07569d9fbc64c54be27a15a6263"
+      },
+      "remote_owner.json": {
+        "bytes": 676,
+        "sha256": "23d2b20c8ba26a7ddcc26e6f6755944fd1158e1712941b848c5e699708ec3556"
+      },
+      "RGBNT100/controller_result.json": {
+        "bytes": 3724,
+        "sha256": "ff01ecd787b2e87c6b6fd2fdb8351a7b32c6a410de3d775556bdf76edde32b0e"
+      },
+      "RGBNT100/native_acceptance.json": {
+        "bytes": 2623,
+        "sha256": "e94c95474c8787b61b3b1d1f034a7a3666a3798397e8f301042417096c1f280b"
+      },
+      "RGBNT100/controller_launch.json": {
+        "bytes": 883,
+        "sha256": "9149108d17e1063f21b7132c5d2e6b5ededee5037160b737f576d69700cf21cf"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45_launch.json": {
+        "bytes": 966,
+        "sha256": "90acfd327bcb30abcaebb4c4e06fb76dacbec386c9b9e8cb2772bee8c4fd3646"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45_exit.json": {
+        "bytes": 186,
+        "sha256": "7df1ea08c1ae22fb1bf08413ff8489d273c69a790fa2759725fb62f89aee3b90"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45_launch.json": {
+        "bytes": 958,
+        "sha256": "fcfb17cea2c910a4c2ea144bfd5dd33636ed6286c6e82a376c3878be220532f0"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45.log": {
+        "bytes": 23051,
+        "sha256": "88fc64299b93dc47e87ea59b081aca21ee5079f036dcde9134e77aec20d77063"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45.log": {
+        "bytes": 23094,
+        "sha256": "159a8ca28195ec9e2721520a8aff19900bb348536e4ce47176c0a624bd82fb5c"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45_exit.json": {
+        "bytes": 191,
+        "sha256": "5c6013f542c2d721ec430e21d05f0d5684086e41343e97e09f1f396c4c2a5fcf"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/run.json": {
+        "bytes": 11956,
+        "sha256": "d77b15ca69669496787d257f299347f4ffa7c830f3fe419886cce92189c9d558"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/best_per_query.csv": {
+        "bytes": 158661,
+        "sha256": "20d24c0c960288e172cce5aa153adfd133ac57c97a43417493eff39af4452177"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/best.json": {
+        "bytes": 15681,
+        "sha256": "8e8145ae412a7c1a854afde7e5d3a418a7f723bd3dc5e12da6afe5fb3876e74c"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/official_split_manifest.json": {
+        "bytes": 2068069,
+        "sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/batch_orders.jsonl": {
+        "bytes": 60272413,
+        "sha256": "f59bb6a71c78bf778935c14fbaf23260237c3b48c52af4a3c5aab24e09c0e0a7"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epochs.csv": {
+        "bytes": 9039,
+        "sha256": "df13f1f6baa3cacbc3549f736041f88990cf25ee2769eb108c295e83935043da"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/best_per_query.json": {
+        "bytes": 15666,
+        "sha256": "5823903fac5b125753696ff52ff530f884e9bad682877f228e2b8c143ccd3e5d"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/normal_cpu_audit.json": {
+        "bytes": 657,
+        "sha256": "db8696c3009eae9f8aa5acfd76077f5fe0a1c7d0f602e8ab617e5a35d49da0ee"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/result.json": {
+        "bytes": 47584,
+        "sha256": "ee5406952a59bd6c56757a5a9816eb310692b745886e0d3da7f48d013fdb0318"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/status.json": {
+        "bytes": 47584,
+        "sha256": "ee5406952a59bd6c56757a5a9816eb310692b745886e0d3da7f48d013fdb0318"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_44.json": {
+        "bytes": 15655,
+        "sha256": "89f685ea13701e778ae9f9ac00c4c1eedef77b53c9d0a837feacd0b287f81d1b"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_3.csv": {
+        "bytes": 158933,
+        "sha256": "e346c3ed456e154b5d993f3f0ebb10ba74b2fbf3e8ea1ffd8681b86d74c9a740"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_37.json": {
+        "bytes": 15648,
+        "sha256": "55dba856815b344b3f203bc1017d194375b0bf3c4611dda39b087a7ee4532d9a"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_20.json": {
+        "bytes": 15650,
+        "sha256": "2e64d571194b62515531006af0183f1d8caed6a7f992de249956dfa293a7b212"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_40.json": {
+        "bytes": 15627,
+        "sha256": "d8c523f7c07668c21850dedbc3b136d1f171911fca80fea036575b9b024a067b"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_23.json": {
+        "bytes": 15678,
+        "sha256": "053e1d8e36a13398c7eb83552cab8c33d37c6bfa43cc1112d9b5001d9edd8c2e"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_27.csv": {
+        "bytes": 158860,
+        "sha256": "5159e44acc9a20a145e87a0ae41365fd76e6631b9843d8fbce859890aad85751"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_13.json": {
+        "bytes": 15658,
+        "sha256": "09f92dbe5f2fdb7a27d0370676e5a39528cd7173dc780a70b760d58cc2cd20c9"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_46.json": {
+        "bytes": 15643,
+        "sha256": "bd56ce39b2309a10b921283153c62d4b8496d7b5e777abdde0beaa0934897fb4"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_38.csv": {
+        "bytes": 158730,
+        "sha256": "a72c2ec52e938c7e0826d4f4ed700883dc972069afbc3d73bae018c7b0c081e9"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_36.json": {
+        "bytes": 15663,
+        "sha256": "3217f13e566f13d020537aa9c24ee305e92454730ff9da09823e1727f64cf9dd"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_12.json": {
+        "bytes": 15635,
+        "sha256": "50339a594d84c4848c92e4b90d8aad2b560ea5030e9f5ca8097d95a39315a490"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_23.csv": {
+        "bytes": 158807,
+        "sha256": "861b7b4a7bfd3c449a1954588c2b5c8c7d6c1a456eb190fd11a84269899a7cbf"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_28.csv": {
+        "bytes": 158879,
+        "sha256": "e8a699160221b0c5c98acf11fd0c95aaf33d05479e778981f500f7a8cd9d4e4b"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_14.json": {
+        "bytes": 15674,
+        "sha256": "c5ecbe0c6b9c724f80fa6404b10bb71be07b2d8e2ec5b33ee1f9259886eb77a7"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_24.json": {
+        "bytes": 15644,
+        "sha256": "521425cc574bd815a930c05c1fb51b7d7ff5c80d3a65dac93070dfbadca731a7"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_39.csv": {
+        "bytes": 159003,
+        "sha256": "4364ed9c5b17d7fe388537ecb324b550a3fb59fab8208579278cd50bb168f796"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_16.csv": {
+        "bytes": 158905,
+        "sha256": "7d5cc83c6fe6ad4e180779dde22f9ad3306a261e0ecde86fbf99ef0ba0917695"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_22.csv": {
+        "bytes": 158529,
+        "sha256": "f623bbd8c8d9dd980c9253099f6f66c31494f794f0372fae826891d3d62d01d0"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_45.json": {
+        "bytes": 15641,
+        "sha256": "72b8ac0544abad4d5b9877ac551c33cefacaf5bb02c1237da407c8b34ca27392"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_50.csv": {
+        "bytes": 158650,
+        "sha256": "60dfc998e60c016415fa16bbc427be3f93d1922bc6ed8a21e3504b52216eff1c"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_47.json": {
+        "bytes": 15652,
+        "sha256": "76113d000720ed154eb120a3a005c3e6fb5e8d6db9fd155e146b12e847d9b734"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_40.csv": {
+        "bytes": 159106,
+        "sha256": "1646dc1c428941c336c410d6dc183e80942cbf2076154520cf053702f7270243"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_1.json": {
+        "bytes": 15649,
+        "sha256": "9f9422724a4f08c5a2db6021ee6f2ebbca371cec00571fa6ab279bbec48f6c58"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_14.csv": {
+        "bytes": 158969,
+        "sha256": "1cb7b35d96ec573c0c14193cf1e11df2b13d9725e5f8fe4a8955b9c195f85168"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_33.csv": {
+        "bytes": 158732,
+        "sha256": "e7321278baeb29653def24ebd63001df27125626b0c82e21300fc648d5ee5f6f"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_2.csv": {
+        "bytes": 158910,
+        "sha256": "0f7489193a1228b94a8eb19df3a0fdc979839f9f1cf7d1449f9d41d919f02eb6"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_16.json": {
+        "bytes": 15683,
+        "sha256": "58d416e66f5d2d5b9dc4fd834b98f4f00ed92a5f0bd905652e137c9e9004dbba"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_36.csv": {
+        "bytes": 158623,
+        "sha256": "e6eb0cd2b8e9d87d8dc91726000a8deb3b73a15ecf7d3a63735ecb58af1cf439"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_25.json": {
+        "bytes": 15664,
+        "sha256": "f09f999e6921cb1a4d1fdf34be0dd5ddae9d0abfa5c0d05d5064d7528f8b8882"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_24.csv": {
+        "bytes": 158748,
+        "sha256": "b42d31f430f198450702076895305391e5af69685a61648752134f75a902e7f5"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_2.json": {
+        "bytes": 15676,
+        "sha256": "74f7424163befd79bf5ab8623f3d64121affb8ced164ff4fcb7d56b754eb4825"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_21.json": {
+        "bytes": 15637,
+        "sha256": "6729db6fe04d8c16c80728dc81241161eecd15f6358af19b355e873c942818bf"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_12.csv": {
+        "bytes": 159021,
+        "sha256": "ca495f39fcebe4fc23f175dd63cf900bea40111f20657469c64bd6ff48890814"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_1.csv": {
+        "bytes": 159362,
+        "sha256": "cd8b8c21cf39e97b75b47743562449789b103a8bbf3962d25c50ea045883e676"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_8.csv": {
+        "bytes": 159039,
+        "sha256": "49a683c63afbdae65b61f03475100c58edcc4e8013ba580ea026df9047dd0af0"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_30.csv": {
+        "bytes": 158945,
+        "sha256": "668c22346c92b93f3e7a621a78f2ff1142d48d7bde54bdf59d73140e47b2c19e"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_27.json": {
+        "bytes": 15653,
+        "sha256": "132faabbf2b59ed7ddaf461ad3a6cd04228568375bfe2292ec07079256022de5"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_19.json": {
+        "bytes": 15666,
+        "sha256": "5823903fac5b125753696ff52ff530f884e9bad682877f228e2b8c143ccd3e5d"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_29.json": {
+        "bytes": 15653,
+        "sha256": "42aff9dd7023ce966cfdd2558f9580adb555e5b38f142046a7495e54a353f536"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_34.csv": {
+        "bytes": 158607,
+        "sha256": "9f34b4245763a5da99f632368212365bc2c9a997fe6a3cde5887e0b08e152260"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_30.json": {
+        "bytes": 15664,
+        "sha256": "6295e34d2b63e34e6c307e4595b682ba91f4feb7828c90ed3e49c1e80efceb8d"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_11.csv": {
+        "bytes": 158313,
+        "sha256": "e7aaafecb470463db78d697ebc634ad2099057a6638128622ef226146b1278f7"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_9.csv": {
+        "bytes": 158661,
+        "sha256": "f65761f72f2220bd5d192ac302dda48f382713a91d6f537757995b91169c2a87"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_6.csv": {
+        "bytes": 158665,
+        "sha256": "c1e1dfee78e253674a5fa0f53ab6eebb448137a6a5884b7d093e8e8137b46c48"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_38.json": {
+        "bytes": 15633,
+        "sha256": "a26ed58a6b2dc72ce7445d03a0bd4d8e6928ec71d77bf5828711f663bd4509a3"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_26.csv": {
+        "bytes": 158918,
+        "sha256": "11cb34b0547af0572a7f44cc4b42c6b902ba58d6819f79031bd3072ed81e6e52"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_17.json": {
+        "bytes": 15683,
+        "sha256": "1d4de32d60e7697277866dd8f74161fe42be49ef3d7ad6569282fb6621f7d14e"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_29.csv": {
+        "bytes": 158919,
+        "sha256": "0e6cc4415130c031f8c6a07233266bc51bd429b63d3ddfb9193f2ce2c3eceec6"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_43.csv": {
+        "bytes": 158968,
+        "sha256": "78f5ff563628273b08296e038224ffa54c0003cb7b4b030eb8afcbfd0a3f00b8"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_46.csv": {
+        "bytes": 158633,
+        "sha256": "4281d8fc8d66f013e06ea02fa81b082ede4341be61962a8c21e5115a1f092222"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_32.csv": {
+        "bytes": 158771,
+        "sha256": "337321f8a2bc09b2f65a6cd5ceb734e62455f305bbee35d58c2e10314c81c3ac"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_49.json": {
+        "bytes": 15654,
+        "sha256": "7fe6a700cecd5ad8d3734845d30c669b814ebc15cedc3dda26cde9034115e2a6"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_5.csv": {
+        "bytes": 158817,
+        "sha256": "d5900d8d6116fcb85e861b62393308388d03d038fe419dc1e47c39b3608c32ab"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_48.csv": {
+        "bytes": 158679,
+        "sha256": "65fce4ab12dfec74f82453d30200355f911907ec134ef9ff93b3ea4779ace65b"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_42.csv": {
+        "bytes": 158661,
+        "sha256": "ded0c962424b48e80f231b63358c30fb3aa75df6d1a3b6dfb1dca67e1b722fb4"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_13.csv": {
+        "bytes": 158926,
+        "sha256": "03541bd253fa45b6bc2cef72b2f445dd0bc752e5859230025a1c01220918647e"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_35.json": {
+        "bytes": 15634,
+        "sha256": "0f1b7fe5f8ecce78c7e481d7c5a4566df9bfe7d6368e0c99f0c638ef0d9f0adf"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_9.json": {
+        "bytes": 15701,
+        "sha256": "d480a57cab67f6a03492e4f89e72a55857ebe6dbad362da6305b02cd476b3f20"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_10.csv": {
+        "bytes": 158634,
+        "sha256": "d3784a626246f3225ed1d46ea8d6ed77faf9fe839b6773c24ce86d20a7f4d626"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_15.csv": {
+        "bytes": 158431,
+        "sha256": "dc5aa2bc08339969d176c7b057995944a8ee76031d423ce464d85d0857f101bd"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_10.json": {
+        "bytes": 15684,
+        "sha256": "e733f6baf432985ef6f70c880cf3c342c3005a897835e298382fd11424a8dd52"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_18.csv": {
+        "bytes": 158574,
+        "sha256": "b0f6b3eece93153d10371747a26e4115ed0dc94b6c33fe12e9034d7150f6b4c8"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_26.json": {
+        "bytes": 15646,
+        "sha256": "6fa1df27de0e2303339df0da2eef9f69c021e15c0a5e24e5fa3f3c9cdf99dd64"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_3.json": {
+        "bytes": 15680,
+        "sha256": "873b1875280e7991fb29e716a9d18681a6a2e7d7de7d7888e309c090efa25830"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_15.json": {
+        "bytes": 15676,
+        "sha256": "59e0b12a0b73e9e15262ebb701f2e28fd892695ae799384760e65d67f7202f4c"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_35.csv": {
+        "bytes": 158600,
+        "sha256": "1fac7980b55428ef4c2fbd5ec51af7fab4ec5352de75014f0cea0117c3bbdd24"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_41.json": {
+        "bytes": 15638,
+        "sha256": "8c218848b2d492d94082a8bd3a3f7c2336e7c9666c8f737a7c8629a0d2a1985d"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_7.csv": {
+        "bytes": 158856,
+        "sha256": "399e713a136ed0e9f99a4027c972435adcaa254468ba9819b8e97591f765033f"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_33.json": {
+        "bytes": 15638,
+        "sha256": "cd2f2f7908ba603adcd25e2070501597fcdc6fe882e26ba284e82c9f7174ad86"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_45.csv": {
+        "bytes": 158595,
+        "sha256": "98d4c78e5d1c0f8e9b25067d972bc9ff4bf17fce51f9c3330086b8ac547e1876"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_47.csv": {
+        "bytes": 158637,
+        "sha256": "9e2d9ec06441ee8ff1ef2c391e9296624afe2edfa5d9bc80bd8b996dd488e67e"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_31.json": {
+        "bytes": 15669,
+        "sha256": "bbe0416b7f016d04dbf8ebc5880bc79a92273aa8d4c129bc2dadd2f97b9d1bfc"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_31.csv": {
+        "bytes": 158690,
+        "sha256": "2305c2f383e2f1543034a71bde7209f4c8c73fd0b410853ad1a26244b754cf26"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_50.json": {
+        "bytes": 15649,
+        "sha256": "f88e78c99845b65ee4fec7e8c79d31dd682fd7bd15053e89978d0c0c856d4d5a"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_43.json": {
+        "bytes": 15653,
+        "sha256": "572c9736586503628356f9ea0e0cb9f3b299ceed43212286c95396acf247c96c"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_5.json": {
+        "bytes": 15646,
+        "sha256": "f57c1bb79c8ac85e3c0063317efe5cb16c29dce9cd16ec94fc5636158f7605f9"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_19.csv": {
+        "bytes": 158661,
+        "sha256": "20d24c0c960288e172cce5aa153adfd133ac57c97a43417493eff39af4452177"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_22.json": {
+        "bytes": 15676,
+        "sha256": "a02f1ea87005e2604b6f94b46ffb121ed7e16a1ff7c3431cf1145b82979a11a9"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_32.json": {
+        "bytes": 15663,
+        "sha256": "c9b2c53443561c31c4e8399605a7f93d9320ab3b30f5abcf73a8bb903bc02e1b"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_11.json": {
+        "bytes": 15665,
+        "sha256": "5a647f6f0d2365dd7521b471e249b20aafa9e71d7e91202eb7017324d3907acf"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_34.json": {
+        "bytes": 15632,
+        "sha256": "15b3738f84c652ff3f2eeefd9e668d65e37feaea33dd5d26ddc67a7bef98fe4e"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_42.json": {
+        "bytes": 15652,
+        "sha256": "fbb4cc8bb39a47984d4d12a94498fa8420e07351d5c66c73b6f962119ddb522d"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_8.json": {
+        "bytes": 15663,
+        "sha256": "2ec296630dcfbbfa9d9d9c997adfbe73388369e4e67467c63071e0accb16c178"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_21.csv": {
+        "bytes": 158828,
+        "sha256": "f0c913f3b07ead95243cfac6476042379c6c109164bcc34e5802baa22c7cdd06"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_39.json": {
+        "bytes": 15652,
+        "sha256": "a4c28516f3d8357afd0cb66f87761e19c57ac199cf61f7ae60d7d7503d284fc6"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_48.json": {
+        "bytes": 15657,
+        "sha256": "439057b9233df6daa541263882ae8ef205514df901250b1feeca01a06d5782a9"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_28.json": {
+        "bytes": 15666,
+        "sha256": "43f36e927acf7f7eede703c80b7c8c00813660d580b387c2f9ba079fa6677ec5"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_4.csv": {
+        "bytes": 158560,
+        "sha256": "77328b6a8da0abfd6a5357cc744ec900880cce557633b0fc272f0d326532ea5c"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_7.json": {
+        "bytes": 15692,
+        "sha256": "cf6715ffcbc6ca23bee56a931f7ae2f9670f3d07954d58fa55694f60a1fa2188"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_49.csv": {
+        "bytes": 158641,
+        "sha256": "7168080205dd71f590294ff5f75efd304ad3e57200ee1aca2f05196ef842c862"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_37.csv": {
+        "bytes": 158726,
+        "sha256": "3c8dc1191a81e3f23647c69036210cb856440b8379235e972dae139f45e5af27"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_44.csv": {
+        "bytes": 158612,
+        "sha256": "73ef64e78bdd69e429d69a703d578d204b49313c3698827aa6daa1f7bcbad9f5"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_6.json": {
+        "bytes": 15651,
+        "sha256": "8dd6f96d0aed2c0af1bcdf2c522a128cd094f251cb51747f142f9d073ae597e6"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_25.csv": {
+        "bytes": 159030,
+        "sha256": "dad2f620a0d5b55e3c5a48eeb0ea7d72dfa8245b9495479c1dda9ec1a61076cf"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_17.csv": {
+        "bytes": 158455,
+        "sha256": "71bc343d039e1d5b0a2c0dba58be7f07b1a543ab427835a7cac4664d8b107cfc"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_18.json": {
+        "bytes": 15670,
+        "sha256": "d88b41591b7b7e971ca71e43d76c94ea94ad40e6bca0fc6020f647558529a899"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_41.csv": {
+        "bytes": 158778,
+        "sha256": "7f97caded6c486324353387510d009e2640cb229346bf7ef4b94f1108f5a24d5"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_4.json": {
+        "bytes": 15692,
+        "sha256": "c02c0952a510e4f3897947342caa2ab20e1b766a24049479ae7ec99d962a283d"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/epoch_metrics/epoch_20.csv": {
+        "bytes": 158552,
+        "sha256": "b34238937a71798b731d08f966d38d7334f2bc5ff133ad9f0b016d55e0e91f79"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/run.json": {
+        "bytes": 11946,
+        "sha256": "a9f407c0beffe775195eb370dd9b37579a08147f608e7ab9052de4ef5824876a"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/best_per_query.csv": {
+        "bytes": 158469,
+        "sha256": "6e454c8e4a228107092daaccd1344341b518c22ab07b7e3d55790c627ea45fa1"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/best.json": {
+        "bytes": 15617,
+        "sha256": "fabd3c0f01e9c69b4b525908c3892d23ea6e56985f8746eaa77874a65bbe2d30"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/official_split_manifest.json": {
+        "bytes": 2068069,
+        "sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/batch_orders.jsonl": {
+        "bytes": 60387170,
+        "sha256": "b465bc9684f78c7feb24d435401acfd4808dfc8ecbb404976485dc1f410519ac"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epochs.csv": {
+        "bytes": 9021,
+        "sha256": "dbae892504f7d35f677a4c399dcea67c69ed8ad139cea3f3d4b5a7750d47d4e5"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/best_per_query.json": {
+        "bytes": 15603,
+        "sha256": "5a768b14a8149defb2e2f547a481e3e8177e9718b6c00f8a7991e4998639fd4c"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/normal_cpu_audit.json": {
+        "bytes": 657,
+        "sha256": "11cbda7b40eb17a6d75a25416f5b522f099101b4466c6c18305a29e3e92cc7ae"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/result.json": {
+        "bytes": 47467,
+        "sha256": "bedb72678940404a1f8aee8b1d62375596579acbbae412cbb4c211fcf4e21ab1"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/status.json": {
+        "bytes": 47467,
+        "sha256": "bedb72678940404a1f8aee8b1d62375596579acbbae412cbb4c211fcf4e21ab1"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_44.json": {
+        "bytes": 15657,
+        "sha256": "c02b9c3fdd97d8b9a8fc9bb3a5041028d8abb027dd0e0f0552aad25ff118c01e"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_3.csv": {
+        "bytes": 158869,
+        "sha256": "efadccaa4bc15ec134392600b8cc24d347db79bd37a5f5624050e3649671a880"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_37.json": {
+        "bytes": 15632,
+        "sha256": "9d05f488d42858fbe3144ec269bf2efea76c22abbe12d1e64204ff125ab8db48"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_20.json": {
+        "bytes": 15626,
+        "sha256": "48aed4ac126aa7635362697a6930b4cbab4039be01d532c009c3631450a62732"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_40.json": {
+        "bytes": 15635,
+        "sha256": "f8b550f4005e0070c56fd2d2def9bc50a37f1bd318aa9363327c2dc14435dfb3"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_23.json": {
+        "bytes": 15648,
+        "sha256": "a2fe19e00ea5110cae1a32e5fbb0e106dcc531bf02db9b07185b69ec0faed102"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_27.csv": {
+        "bytes": 158937,
+        "sha256": "e2daeaf6c67c8a932ddc23e83b271224a052203045e20b10d5b3d2b04dfae204"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_13.json": {
+        "bytes": 15603,
+        "sha256": "be49f37e28eb48711005f3da647581e417e9db71a1f521d10c84042066380c3b"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_46.json": {
+        "bytes": 15627,
+        "sha256": "3c373c9dc2402b3cd45876d4bc1303c912e488fcafc2cf9ad51a619224881c34"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_38.csv": {
+        "bytes": 158977,
+        "sha256": "35eb3fdb135fb32961f4723147d529bdde2f337f42eab8e08bcf4088e22a4ba6"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_36.json": {
+        "bytes": 15628,
+        "sha256": "a52f9e6f2b44443bbf6f80073d675a8eab55ed31e78e5a0d33e191bb4a8777ae"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_12.json": {
+        "bytes": 15601,
+        "sha256": "f5c1f881ea2b7c15b3b5b7de198de9e84c85c7af2f49760ca63950ec4bf1bb58"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_23.csv": {
+        "bytes": 158803,
+        "sha256": "dd72f23746bd5108e87261e4ecdcded144d9605cc12ed4de3114ebea4238a6d9"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_28.csv": {
+        "bytes": 159144,
+        "sha256": "31623cd053fabfbc52aeb2b8b4cb2e081b0d8603bdc0788ec7360405cbf780aa"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_14.json": {
+        "bytes": 15622,
+        "sha256": "2b37dc6706288f889aa8e19b44be6feaa1a1edf5e9f21348d474f3cd081119d2"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_24.json": {
+        "bytes": 15573,
+        "sha256": "bfccd6563cbd8e7aabe858c2f323b9307e0aaeee3ecc9e2ad6c2e7ec4c52a247"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_39.csv": {
+        "bytes": 159355,
+        "sha256": "6c25a3e4fab1e37c02245c6eb3dbcd9ecc519a8ccba5939ff6c756e2c5834b13"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_16.csv": {
+        "bytes": 158869,
+        "sha256": "4dd33afa3ce81429d73f8078a84efb72f6ebcbc59f38a33d6366dd2656a04fd3"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_22.csv": {
+        "bytes": 159060,
+        "sha256": "ffc062950dd6689ad213b2c9cfa0cf04409b47a7cccb4504401aca57c8ff3d6e"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_45.json": {
+        "bytes": 15620,
+        "sha256": "9bcb7d23d13dcbebc8d0243390e858f69df26749b0a540350326054d13f94670"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_50.csv": {
+        "bytes": 159381,
+        "sha256": "0eb411b9779b8ef385338e46a86eaeca92e43a9ecde0f9d2279f538d9c58f8d4"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_47.json": {
+        "bytes": 15635,
+        "sha256": "394638c949a164370e192038d571b6cd111ab8ab0aee9b20e1c5ab4ab1ebdee2"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_40.csv": {
+        "bytes": 159167,
+        "sha256": "f58c18ca0d456709ae84ac3e8a2e39a5eb887c577a3b7962decb8d90c10ecaa8"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_1.json": {
+        "bytes": 15647,
+        "sha256": "c58fb19e16b85f63defd02016b36d7888e2db93d63f717ddb5ed54e65365fdf4"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_14.csv": {
+        "bytes": 158798,
+        "sha256": "9f6fde35bba60061932e1bc586e9627d5241444083953200af6d07e30e4c1168"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_33.csv": {
+        "bytes": 159099,
+        "sha256": "5d1cdb0510ee6aab8a20ad1ee2ed4debc4078ca4794ef7443648ba559d9fef3d"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_2.csv": {
+        "bytes": 158469,
+        "sha256": "6e454c8e4a228107092daaccd1344341b518c22ab07b7e3d55790c627ea45fa1"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_16.json": {
+        "bytes": 15613,
+        "sha256": "62f8704cee96f3ef4caa6d6198f9a6a45ca88cd9762eb5dfb754e138da7ae4c9"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_36.csv": {
+        "bytes": 158852,
+        "sha256": "b4feb788bdccfbfecb09897b1f8292ecce80b02fe83025b0dffcf2fb2af029b3"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_25.json": {
+        "bytes": 15630,
+        "sha256": "4eacf93e0da176eb7805572e9a01af4b989806bff61ac5f61b946aba7d68f3e5"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_24.csv": {
+        "bytes": 159110,
+        "sha256": "bb8d6751efbfeefaad4ee5610ba2f8f382139b7dabadf3e0fc9bc132adadc270"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_2.json": {
+        "bytes": 15603,
+        "sha256": "5a768b14a8149defb2e2f547a481e3e8177e9718b6c00f8a7991e4998639fd4c"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_21.json": {
+        "bytes": 15625,
+        "sha256": "e1363c9cb722d8922add434a109b10ce145e4741b4be73682887e8fefa7fe246"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_12.csv": {
+        "bytes": 159075,
+        "sha256": "bf89348f1160fb2c68cfd876bf1eb113659d5efbf98575fbe9d85bee0dcc47c0"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_1.csv": {
+        "bytes": 159379,
+        "sha256": "3178e952536a67fece9a11c8a827bd9be9f2035087de6f3b1eefdf5608f6daac"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_8.csv": {
+        "bytes": 159133,
+        "sha256": "b54374afb53871ccc76ee3a3dcaa36bbc869eb74d4269e963c7b4844791bd1aa"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_30.csv": {
+        "bytes": 159026,
+        "sha256": "805bca67aece21d072993a474b83fae052726161781e9ae5e8e552f03d46929e"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_27.json": {
+        "bytes": 15637,
+        "sha256": "b46a7f9f84868e19f6f9fa7a881d4fb5dce66408d0ad912bcbee5382b7a36711"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_19.json": {
+        "bytes": 15614,
+        "sha256": "cbf30e47f2f543a232f5bb50a149c19237e80dea4d6fa9868c638309f3e8fb11"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_29.json": {
+        "bytes": 15660,
+        "sha256": "9d3dcda321ac0ec779978c308166550f048836dc478778211a7ac271cf6870ea"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_34.csv": {
+        "bytes": 158821,
+        "sha256": "bfbdd1183c5e0860581700dbd7ba6c375d433e7d2a43c035f5cbfd138f2df3a3"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_30.json": {
+        "bytes": 15625,
+        "sha256": "18c2caf7018542d058b0e7134ff28daafd21792104163da41192b5b3c2e626eb"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_11.csv": {
+        "bytes": 159163,
+        "sha256": "c0e1f01ceb4ba668bc2914f6d8a016154ed80a4273b8aaffe05d3e51d0905e95"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_9.csv": {
+        "bytes": 159225,
+        "sha256": "0fe9cbc6f25a6e615973f2b40583c1f3715567c5587dda09701ec3a9fd5a4903"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_6.csv": {
+        "bytes": 159205,
+        "sha256": "a74b59398f56ac2faaf2f398b9ca921275875037ea09deb44d98529a2ac6bf23"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_38.json": {
+        "bytes": 15666,
+        "sha256": "0bcc63606f4b5fde4544adc4810d2f7e5866a7b8231369970df4d12bfa51380e"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_26.csv": {
+        "bytes": 159042,
+        "sha256": "f059673030fa0bb59d604f738ce1e7e93c672cd278bffe473df588385abde332"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_17.json": {
+        "bytes": 15636,
+        "sha256": "e0150b43af603c309833c36f0e2476d8000512855a7f92924ee4e4bdbeabf589"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_29.csv": {
+        "bytes": 159220,
+        "sha256": "d3a34839440ecb432748ffc8c05eede19e0f807df85aa1a21d701f12e7708137"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_43.csv": {
+        "bytes": 159165,
+        "sha256": "7f7b737f63398dbcf395b2884f98529ac9b5d84feb4689af8c94d55f6e7319d1"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_46.csv": {
+        "bytes": 159345,
+        "sha256": "7e012e1039afa60551a042ae33dacf8f64a30f05b53d7b6f4b522f6fde88580f"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_32.csv": {
+        "bytes": 158990,
+        "sha256": "588e803c100f59a01a4fe3cf490baebffbafec4026f63874ae1a37b0238ae9dc"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_49.json": {
+        "bytes": 15631,
+        "sha256": "9c370e0418bc1e0cf26d56b512880283c68c034c28d84d1878356c8babf32855"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_5.csv": {
+        "bytes": 158928,
+        "sha256": "2049c482d7a826496b1c778ea4afb0ebf5921aaaf93e7f2c725b5d4b810d173b"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_48.csv": {
+        "bytes": 159253,
+        "sha256": "599ea98d315672768d4af48e4f15dd19c863b21de39fa26b01d3473f944ecc1b"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_42.csv": {
+        "bytes": 159272,
+        "sha256": "f1ef532344ecc87cfa644f7a2e9c2fd3f7d0be548f6b1e926bdcb39dffca3730"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_13.csv": {
+        "bytes": 159142,
+        "sha256": "71ebfad3f9523eebbc46b54475205024374c91000ec4edc109312d28526b5d81"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_35.json": {
+        "bytes": 15658,
+        "sha256": "0a5d86ad67aca38a7a63d7430162cb4a8dc2aea5d877c9ccf28839e870bc36f7"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_9.json": {
+        "bytes": 15623,
+        "sha256": "0318acd5cb541bf5c5e652c20dee70b5e5d1fe27bc9a72f602c73ebc020cb830"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_10.csv": {
+        "bytes": 158937,
+        "sha256": "2ba1c95c4a70f03a1944cf6c426f5a88361a69a557ac666ddb8cb64ec5219396"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_15.csv": {
+        "bytes": 158531,
+        "sha256": "7e0c429e731f204c69939979efda7067b56b7e41487981799ca3490f96efa290"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_10.json": {
+        "bytes": 15598,
+        "sha256": "8332ab84118cd76a118c5749f608a336811f8681468c1a4f535db3852c2a1a27"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_18.csv": {
+        "bytes": 158870,
+        "sha256": "e8b10ec5ec38ce7b3660da3cc2381d59cce52f3afd8b810d87294a99fa54967f"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_26.json": {
+        "bytes": 15630,
+        "sha256": "c096f9b48385812f60c23671c14cc865f99ce6ce971a472125846ec90d3ddb9b"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_3.json": {
+        "bytes": 15615,
+        "sha256": "e85733085aeffdb57c280b2f7b99c35dc6cbe274fa6834234a545ce3b0f96116"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_15.json": {
+        "bytes": 15628,
+        "sha256": "6af75c3dee8549aa59282d633889cfa4594f37234fac78a2c4784f155e224882"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_35.csv": {
+        "bytes": 159093,
+        "sha256": "cedef39d0adde34d23a8a7342d9472316e6c435907fc2327480c94b7a2040a01"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_41.json": {
+        "bytes": 15636,
+        "sha256": "4d55cdc8c10cde78bf2a6a291a71da3b302e0517f0d1b834eab4237fd24a15f9"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_7.csv": {
+        "bytes": 159368,
+        "sha256": "c441dfa5b6a7ed393242e8154a19d6142079e320c31f73ad7850377a5e3ab8b6"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_33.json": {
+        "bytes": 15634,
+        "sha256": "ea002e0e8238d6c144496185dda40c553e70b955e756c240761b14d3cf6982b1"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_45.csv": {
+        "bytes": 159180,
+        "sha256": "8a133041e1e8a6f3d74dcc17eefb102a0fa471bdf46f45b20a6de4ddba8bcec0"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_47.csv": {
+        "bytes": 159325,
+        "sha256": "62a42a1587ff64ff31798a2a41e6a93fc9ffd44afac09903a2f3f7b5e0f18f20"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_31.json": {
+        "bytes": 15632,
+        "sha256": "c48384e3fc984e94b779243a12eee95a2f636ad039f44b5e8d91b31973b58d0c"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_31.csv": {
+        "bytes": 158953,
+        "sha256": "9696c14f8f5029a888c79478e728b539861c39eb25bccb6b022789ade96267ce"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_50.json": {
+        "bytes": 15633,
+        "sha256": "01a294c3cf471fd68789d5b79d94621da5dc9e05e4cf022ee19f33f8a980b1e0"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_43.json": {
+        "bytes": 15623,
+        "sha256": "7adcf8ec1344c3324c438c2459a7764fb31ba1ecde963207bc66c17b943eba26"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_5.json": {
+        "bytes": 15579,
+        "sha256": "b1faacf2bbc42a211e6701c199319e6146669bd14c1ae2b612a99de9493e4c79"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_19.csv": {
+        "bytes": 159101,
+        "sha256": "32f82db9728644d639c219e6bc32e4b0b0669a484beb25daf5cdd06a7c979a90"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_22.json": {
+        "bytes": 15641,
+        "sha256": "971f3f393eb98aa9ff059cb0bdc205420fde2b7776a28dedc8435d8f003e8f63"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_32.json": {
+        "bytes": 15639,
+        "sha256": "62b0f7f80b63ba0765c33c7f5ca32a966170bbdf8ac3fc6bdb62369b813d842b"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_11.json": {
+        "bytes": 15633,
+        "sha256": "49f406e84fdfe248aec737d59710f7157d4f4293f8d26b4cd5ddf3d52d001651"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_34.json": {
+        "bytes": 15610,
+        "sha256": "a6206d1b16158425cfe91748a3143bd0818352b4d481f3a1a12de150892a9541"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_42.json": {
+        "bytes": 15639,
+        "sha256": "d93b5dff8c4b4b829e0a0fecc67d90389996687df53d548bab47ff353c39f38c"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_8.json": {
+        "bytes": 15661,
+        "sha256": "649819e375e33c82aecd11ab543e012fe3f97102d9b42bc9ba3caa7890532b71"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_21.csv": {
+        "bytes": 158679,
+        "sha256": "cb33c9419352464519bdc22492240c2bc859139e166a83decb541b07f350c893"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_39.json": {
+        "bytes": 15636,
+        "sha256": "a1c53bfd1348a86c5f243a14d5c938633b45599110b505886adebaffff43f0b1"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_48.json": {
+        "bytes": 15633,
+        "sha256": "becfe8e287ab281e92b01c169b4f069df582a79b8e463e6eeb97186d07375758"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_28.json": {
+        "bytes": 15645,
+        "sha256": "6276327a40c4ff569053aa9fa0e6cca33e8428d77650442624de27cc0d847dd9"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_4.csv": {
+        "bytes": 158696,
+        "sha256": "9f54aeab8e54cd99b6b0dd1eb0e4b0ee58e51cf3b5dc0c5d849b1272465e7bd1"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_7.json": {
+        "bytes": 15607,
+        "sha256": "7376222023a5df2fba52747af53ac3766920f0d821f57185d76cac40c0284819"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_49.csv": {
+        "bytes": 159315,
+        "sha256": "22a0c26c27f783d06a68b5a2a3e80c3b26fc83dbbae96d86f7299f617149dac3"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_37.csv": {
+        "bytes": 158806,
+        "sha256": "3673af9192226b4400417996bf6d1f49971ff84ba1f26c10528d58703ff9666f"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_44.csv": {
+        "bytes": 159288,
+        "sha256": "74c82a2b6b56c7a51f73062a92aed9ff32c59b2cc816a81ef8f9fa6935a29a47"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_6.json": {
+        "bytes": 15613,
+        "sha256": "b0e2d523d79ebc07104e2b3b6e4fac845cbb722bc34d2ac39deaaec79702b65a"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_25.csv": {
+        "bytes": 158879,
+        "sha256": "b0447e765370646c19b82fb825b93d07e8b4b8d767809f7596600da3ba5dc603"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_17.csv": {
+        "bytes": 158744,
+        "sha256": "fa8a8860b8ddaca334825b98c9ec179fd8a4ee21825d0b44e5d8a02ec5b301cf"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_18.json": {
+        "bytes": 15586,
+        "sha256": "2b48952c9d495f391c9e88c16ad340858d3953a005a434d7dbeba233539e91a5"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_41.csv": {
+        "bytes": 159075,
+        "sha256": "49f04f9e7b5a305cf515545a7bf48940f28eb5825da90ce06c5cf06c76bdb3e1"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_4.json": {
+        "bytes": 15611,
+        "sha256": "bef67f7a2c7129ecd56cba9317cd781a0deb5606b318136f018688cb88c8aca3"
+      },
+      "RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/epoch_metrics/epoch_20.csv": {
+        "bytes": 158812,
+        "sha256": "b8298937a9812e5fc6a04542309c8074585e577f593f12c1ccef3f0c66fe3524"
+      },
+      "RGBNT100/native/RGBNT100_n5_AV_frequency_shared_s45_smoke.log": {
+        "bytes": 1299,
+        "sha256": "4ea435e5a61bddf32256e4096e277ed96b42fa8dc33eadf054fa9c10d1b93b09"
+      },
+      "RGBNT100/native/RGBNT100_n5_AV_axis_shared_s45_smoke.log": {
+        "bytes": 1294,
+        "sha256": "b31c1bb562b5dd628349e7e643f5ae16fa93acb14aeaadd56f4aa75a1fc0f2e0"
+      },
+      "RGBNT100/native/RGBNT100_n5_AV_frequency_shared_s45_smoke_launch.json": {
+        "bytes": 971,
+        "sha256": "2181c416dd2e05cb388cb6c61b63228a82c711983f3f375a69244f7b8870508f"
+      },
+      "RGBNT100/native/RGBNT100_n5_AV_frequency_shared_s45_smoke_exit.json": {
+        "bytes": 197,
+        "sha256": "1482bb1229776d652f1c5c8a12a7d04f410bc42b6088ed7ab3976904d75d8c70"
+      },
+      "RGBNT100/native/RGBNT100_n5_AV_axis_shared_s45_smoke_exit.json": {
+        "bytes": 191,
+        "sha256": "716e3ca84c579f12ed0ad85654c3540a0e1978b07d2a1dad3c51034121818016"
+      },
+      "RGBNT100/native/RGBNT100_n5_AV_axis_shared_s45_smoke_launch.json": {
+        "bytes": 961,
+        "sha256": "138332bee4cfd86197365c1bdcdcbe83fa89b2766973fba5221faeba86768840"
+      },
+      "RGBNT100/native/RGBNT100_n5_AV_axis_shared_s45_smoke/run.json": {
+        "bytes": 11951,
+        "sha256": "b800e6e2a827dc46bd34260bb9a3798867c44d8df24fc55d18b6cb3c2030588b"
+      },
+      "RGBNT100/native/RGBNT100_n5_AV_axis_shared_s45_smoke/official_split_manifest.json": {
+        "bytes": 2068069,
+        "sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203"
+      },
+      "RGBNT100/native/RGBNT100_n5_AV_axis_shared_s45_smoke/smoke.json": {
+        "bytes": 80018,
+        "sha256": "c093e02c5047ffee13522854c171e9b7724643b4bb24e922c4fe60eb49c5cf0d"
+      },
+      "RGBNT100/native/RGBNT100_n5_AV_frequency_shared_s45_smoke/run.json": {
+        "bytes": 11961,
+        "sha256": "0c8176e79aaa28b6b77dbb52d40f6f0cc888a901977db43e37f8ae370a739925"
+      },
+      "RGBNT100/native/RGBNT100_n5_AV_frequency_shared_s45_smoke/official_split_manifest.json": {
+        "bytes": 2068069,
+        "sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203"
+      },
+      "RGBNT100/native/RGBNT100_n5_AV_frequency_shared_s45_smoke/smoke.json": {
+        "bytes": 80019,
+        "sha256": "7b7730bb4f9404be5238bfde88f308590b68e690236379a848271c02804fa30b"
+      },
+      "RGBNT100/audit/RGBNT100_n5_AV_frequency_shared_s45_launch.json": {
+        "bytes": 509,
+        "sha256": "4765d0cbeeac5448838c48289726ac082904027ad0ed47e1af15daab49fd93ff"
+      },
+      "RGBNT100/audit/RGBNT100_n5_AV_axis_shared_s45_exit.json": {
+        "bytes": 186,
+        "sha256": "fa79f1935568f814278ba923d2cf1970d17e6ad96ba45b10ee1dcadf09224b0d"
+      },
+      "RGBNT100/audit/RGBNT100_n5_AV_axis_shared_s45_launch.json": {
+        "bytes": 506,
+        "sha256": "ca450149869e2568decc922cd5a4f0a6847a280296e1f952d5cb2ca5118f1fd2"
+      },
+      "RGBNT100/audit/RGBNT100_n5_AV_axis_shared_s45.log": {
+        "bytes": 45,
+        "sha256": "b824cb1da1e4d61ff3eb9d27cf02652c2cc40ab0e58da1eeac37ed5127978776"
+      },
+      "RGBNT100/audit/RGBNT100_n5_AV_frequency_shared_s45.log": {
+        "bytes": 45,
+        "sha256": "b824cb1da1e4d61ff3eb9d27cf02652c2cc40ab0e58da1eeac37ed5127978776"
+      },
+      "RGBNT100/audit/RGBNT100_n5_AV_frequency_shared_s45_exit.json": {
+        "bytes": 191,
+        "sha256": "799a99c545648087af41bab7a21a9e13b633ecffcc6f97e80c68221c8c216d0d"
+      }
+    },
+    "package": {
+      "bytes": 20597974,
+      "sha256": "31804e4e1ce82703629b5678990fa6a4257d1951957621d035f9620ebb064a54"
+    }
+  },
+  "archives": {
+    "RGBNT100_n5_AV_frequency_shared_s45/raw": {
+      "local": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_expert_N5_AV_20261015\\s45\\RGBNT100_n5_AV_frequency_shared_s45\\raw\\best_official_arrays.npz",
+      "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_expert_N5_AV_20261015/s45/RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/best_official_arrays.npz",
+      "bytes": 247482212,
+      "sha256": "187dd7f69cecd5f8a7b1fce1f656e08f3bb7199b2dc679d2fcd3c21e37f1b13f"
+    },
+    "RGBNT100_n5_AV_frequency_shared_s45/best": {
+      "local": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_expert_N5_AV_20261015\\s45\\RGBNT100_n5_AV_frequency_shared_s45\\best\\best.pth",
+      "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_expert_N5_AV_20261015/s45/RGBNT100/training/RGBNT100_n5_AV_frequency_shared_s45/best.pth",
+      "bytes": 398706009,
+      "sha256": "acc87bee18171d62081d2564ee6dfb21c72ffe5f669bb8443ad1ee267aa66ab5"
+    },
+    "RGBNT100_n5_AV_axis_shared_s45/raw": {
+      "local": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_expert_N5_AV_20261015\\s45\\RGBNT100_n5_AV_axis_shared_s45\\raw\\best_official_arrays.npz",
+      "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_expert_N5_AV_20261015/s45/RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/best_official_arrays.npz",
+      "bytes": 247559795,
+      "sha256": "06946f6d5e73c120c3dc5b22c99ce64d6c17e9ebe7cc91cfc85e1ae2e7c79140"
+    },
+    "RGBNT100_n5_AV_axis_shared_s45/best": {
+      "local": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_expert_N5_AV_20261015\\s45\\RGBNT100_n5_AV_axis_shared_s45\\best\\best.pth",
+      "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_expert_N5_AV_20261015/s45/RGBNT100/training/RGBNT100_n5_AV_axis_shared_s45/best.pth",
+      "bytes": 398706009,
+      "sha256": "1a58ac46363b242d368419b7b124b2667c81ea4e47cc850b97d4169171ee1ad6"
+    }
+  },
+  "cleanup": {
+    "matching_owned_duplicates_cleared": 5,
+    "bytes": 1313051999,
+    "protected_four_exact": true,
+    "project_free": 5311172608
+  },
+  "all_children_and_controller_absent": true,
+  "formal_updates": 13128,
+  "native_updates": 6,
+  "parity_forward_record_executions": 0,
+  "D_free": 8383569920,
+  "unique_best_deleted": 0,
+  "states_deferred": true,
+  "missing_evaluated": false,
+  "limits": "This wave is fully archived and remote duplicate files retired. The four-state evaluation is deferred to the final locked seed and matched control. Retire known nonleader local checkpoints by exact size/SHA only after reading the completed prefix under the fixed selection tuple; retain raw normal arrays and every result row before the next wave.",
+  "goal": "ACTIVE_UNMET",
+  "resume_after_observed_SCP255": "results/preflight/rgbnt100_N5_AV_s45_initial_intake_transport_failure_20261015.json"
+}
