@@ -1,0 +1,1328 @@
+{
+  "audit_skill": "experiment-audit",
+  "schema_version": 1,
+  "date": "2026-10-15",
+  "generated_at": "2026-10-15T11:40:16+08:00",
+  "project": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_saved_error_margin_integrity_request_20261015.json",
+  "request_sha256": "5b097c8648d62eca08cf84a51919aac655313df7c65291bb8f31a6a97518b73f",
+  "verdict": "WARN",
+  "overall_verdict": "WARN",
+  "integrity_status": "warn",
+  "deterministic_verdict": "PASS",
+  "semantic_verdict": "WARN",
+  "reason_code": "cached_analysis_verified_with_disclosed_scope_and_unattested_reviewer_route",
+  "summary": "All requested retained data, metrics, nearest matches, cohort distributions and deterministic selected cases independently reproduce. No blocking integrity findings. Scope and model-attribution limits remain.",
+  "blocking_findings": [],
+  "blocking_findings_count": 0,
+  "warning_findings": [
+    {
+      "id": "W_SCOPE",
+      "severity": "WARN",
+      "blocking": false,
+      "summary": "Single-dataset, single-seed, benchmark-selected normal-input cached evidence; different teachers/interfaces and uncalibrated distance geometry do not support causal or deployable-oracle claims.",
+      "disposition": "Existing source/result limitations are adequate; retain them whenever these diagnostics are quoted.",
+      "evidence": [
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:178",
+          "observation": "Explicit analysis limits."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_saved_error_cases_CPU_20261015\\result.json:569",
+          "observation": "Persisted scope statement."
+        }
+      ]
+    },
+    {
+      "id": "W_PROVENANCE_BOUNDARY",
+      "severity": "WARN",
+      "blocking": false,
+      "summary": "Current verification reaches retained matrices, all saved GT metadata, parser source and the executable CPU analysis. Original image/checkpoint bytes, historic GPU execution and a live dataset installation were not reloaded.",
+      "disposition": "Accept the deterministic cached analysis within this boundary; do not treat this audit as fresh neural/physical-dataset attestation.",
+      "evidence": [
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:72",
+          "observation": "Actual inputs are retained local archives."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-15_MS_saved_error_margin_run01\\verify.py:340",
+          "observation": "Only CPU analysis main was replayed."
+        }
+      ]
+    },
+    {
+      "id": "W_REVIEW_ROUTING",
+      "severity": "WARN",
+      "blocking": false,
+      "summary": "Astra/max is the requested route. Actual model and effort have no host attestation and remain UNATTESTED; same-family review remains provisional.",
+      "disposition": "Do not present requested model/effort as observed execution identity.",
+      "evidence": [
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_saved_error_margin_integrity_request_20261015.json:4",
+          "observation": "Request explicitly separates requested routing from actual UNATTESTED fields."
+        }
+      ]
+    }
+  ],
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "reviewer_model": "UNATTESTED",
+  "reviewer_reasoning_effort": "UNATTESTED",
+  "host_attested_model_effort": false,
+  "reviewer_family": "openai",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer_id": "/root/audit_msvr_saved_error_margins_20261015",
+  "agent_id": "/root/audit_msvr_saved_error_margins_20261015",
+  "verdict_id": "/root/audit_msvr_saved_error_margins_20261015",
+  "reviewer_task_name": "/root/audit_msvr_saved_error_margins_20261015",
+  "review_context": "Fresh delegated reviewer; primary artifacts inspected directly; no subreviewer or external model call.",
+  "checks": {
+    "A_ground_truth_provenance": {
+      "status": "PASS",
+      "classification": "real_gt",
+      "details": [
+        "Identity, camera and scene labels come from the official split manifest and installed dataset filename parser, never from a model prediction.",
+        "All 2,678 train/query/gallery manifest records match filename identity/camera/scene fields. Train has 155 identities and is disjoint from the evaluation identities; no artificial training holdout is present.",
+        "All eight metadata arrays in each retained NPZ exactly match the 591-query/1,055-gallery manifest; query identities number 52 and gallery identities 155.",
+        "Same-identity AND same-scene pairs are excluded. Exactly 2,603 query-gallery pairs are excluded; substituting camera would change the eligible set for 590 of 591 queries.",
+        "This verifies retained installed-GT metadata and parsing. Dataset image bytes and a current remote installation were not reloaded."
+      ],
+      "evidence": [
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\msvr310.py:31",
+          "observation": "MSVR310 query3 and bounding_box_test split paths."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\msvr310.py:81",
+          "observation": "Filename slices encode identity, camera and scene; query/gallery are not relabelled."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\full_official_baselines_20261004\\training\\MSVR310_demo_s42\\official_split_manifest.json:6355",
+          "observation": "Actual query manifest records."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:54",
+          "observation": "Manifest-to-filename validation."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:78",
+          "observation": "Both archives match every manifest metadata field."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:106",
+          "observation": "Positive galleries require equal identity and different scene; all different identities remain negatives."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:140",
+          "observation": "MSVR310 passes scene arrays to the exclusion-aware metric helper."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-15_MS_saved_error_margin_run01\\verify.py:158",
+          "observation": "Independent eligible gallery construction from dataset GT."
+        }
+      ]
+    },
+    "B_score_normalization": {
+      "status": "PASS",
+      "details": [
+        "Nearest positive and negative distances are the original retained float32 squared distances; the reported margin is negative distance minus positive distance with no rescaling, clipping, or prediction-statistic denominator.",
+        "Full AP is the mean of precision at all relevant ranks; INP is relevant count divided by the last relevant rank. CMC and aggregate metrics divide only by the number of valid queries.",
+        "The upstream descriptor L2 normalization is explicitly part of squared-distance computation, not self-normalization of performance metrics.",
+        "Cross-model distance scales are not calibrated confidence. The existing report correctly limits interpretation of margin magnitudes."
+      ],
+      "evidence": [
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_rgbnt100_saved_error_margins.py:44",
+          "observation": "Raw distance minimums with deterministic gallery-index ties."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_rgbnt100_saved_error_margins.py:51",
+          "observation": "Raw distance and signed difference fields."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:32",
+          "observation": "AP/INP use GT relevant ranks, without model-output normalizers."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:106",
+          "observation": "Squared Euclidean distance."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_selected_expert_outlets.py:83",
+          "observation": "Each observed descriptor is L2 normalized before distance generation."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_saved_error_cases_CPU_20261015\\result.json:569",
+          "observation": "Representation-dependent margin geometry is explicitly disclosed."
+        }
+      ]
+    },
+    "C_result_existence_and_arithmetic": {
+      "status": "PASS",
+      "details": [
+        "All 20 requested files exist and match the requested byte sizes and SHA-256 values before and after the audit. Total requested input bytes: 38,369,506.",
+        "Independently sorted all five 591-by-1,055 requested matrices, covering 3,117,525 saved distances. All 2,955 nearest rows and all 28 fields per row agree; nearest identities, indices, distances, margins, and first-positive ranks agree exactly.",
+        "Recomputed every field of all five saved 591-row per-query CSVs, including full AP, INP, first/last relevant rank, exclusion counts and Rank-1/5/10/20. AP/INP maximum absolute floating-point difference is 3.3306690738754696e-16; other row fields agree exactly.",
+        "All 250 requested CMC50 points agree with saved first-match ranks. As additional verification, all 13 R outlet full summaries, identity/camera/scene groups, 650 CMC points, and all R comparisons were recomputed from retained matrices; maximum summary difference is 2.842170943040401e-14 percentage points.",
+        "All 16 comparison/cohort rows, distinct-identity counts and 336 distribution scalar fields match exactly, including floor-index p10/p90 and the signed after-minus-before margin change.",
+        "All 35 selected cases and all 700 case fields match exactly. Selection is the first at most three distinct identities in query-index order in each non-correct cohort; the two-example AH rescue cohort is correctly not padded. Wrong and correct gallery filenames/labels are traced to the specified failing/successful outlet. No images were visually inspected."
+      ],
+      "evidence": [
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:90",
+          "observation": "Maps all five retained arrays to the actual saved GT CSVs."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_saved_error_cases_CPU_20261015\\all_outlet_nearest_margins.csv:1",
+          "observation": "Actual 28-column artifact with 2,955 data rows."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:127",
+          "observation": "Four explicit before/after comparisons and exhaustive Rank-1 cohorts."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:138",
+          "observation": "Per-cohort distributions and identity counts."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:144",
+          "observation": "Deterministic selection without visual inspection; model-specific positive/negative provenance."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_saved_error_cases_CPU_20261015\\selected_visual_cases.json:2",
+          "observation": "Selection disclosure and actual cases."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_saved_error_cases_CPU_20261015\\result.json:552",
+          "observation": "Reported 35 cases and input hashes."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-15_MS_saved_error_margin_run01\\deterministic.json:32",
+          "observation": "Completed independent verifier: zero failed checks."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-15_MS_saved_error_margin_run01\\deterministic.json:1271",
+          "observation": "Actual reconstruction scope and counts."
+        }
+      ]
+    },
+    "D_dead_code_and_executed_results": {
+      "status": "PASS",
+      "details": [
+        "The current analysis entry point actually calls the imported margin and distribution functions, validates every saved CSV, and writes all three artifacts.",
+        "Executed the inspected exact analysis main in this audit, with only OUTPUT rebound to a private trace directory. The two generated data artifacts are byte-identical to the requested originals; the generated result JSON equals the original except for the new timestamp.",
+        "A separate independent algorithm reconstructed full rankings and did not import or reuse the audited margin/statistic functions for its calculations.",
+        "The supplemental neural generators and legacy full_evaluation main were inspected, not executed. Historical neural execution is not re-attested by this CPU replay."
+      ],
+      "evidence": [
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:110",
+          "observation": "Main calls margins for each query/outlet."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:138",
+          "observation": "Main calls distribution for every cohort."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:162",
+          "observation": "All data outputs are written before the terminal result."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:185",
+          "observation": "Runnable main guard."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-15_MS_saved_error_margin_run01\\verify.py:180",
+          "observation": "Independent full ranking implementation."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-15_MS_saved_error_margin_run01\\verify.py:340",
+          "observation": "Actual exact-source replay in the private trace."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-15_MS_saved_error_margin_run01\\deterministic.json:6249",
+          "observation": "Replay returned successfully and reproduced CSV/case bytes."
+        }
+      ]
+    },
+    "E_scope_and_claim_ceiling": {
+      "status": "WARN",
+      "details": [
+        "This is one MSVR310 normal-input cached diagnostic with five outlets, 591 queries, 1,055 gallery items, 52 query identities, eight cameras, 30 observed query scenes, and historical seed 42. It is not a new method evaluation, new training run, missing-input result, or multi-seed confirmation.",
+        "R uses the original DeMo teacher and a 5,120D final descriptor. AH retains the separate full strong shared teacher and a 5,632D final interface. The source and retained metadata support treating their differences as cross-model comparisons rather than one-factor causal ablations.",
+        "R common_context is the 512D tail of the base identity descriptor captured at the calibrator input. It is separate from every F expert tensor and is not a frequency-expert result.",
+        "Historical checkpoints are benchmark-mAP selected. Reusing them is explicitly described; the diagnostic does not create an untouched-test claim.",
+        "Rescue/harm labels and image selection use evaluation GT offline. They do not establish an inference-time oracle, trained selector, causal fusion effect, or recoverability by a new decoder. The analysis already discloses these limits."
+      ],
+      "evidence": [
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_selected_expert_outlets.py:71",
+          "observation": "Base/private and F expert outlets are defined separately."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_selected_expert_outlets.py:81",
+          "observation": "common_context is captured base[:, 5120:]."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_axis_shared_s42\\result.json:12",
+          "observation": "R original DeMo anchor path."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_axis_shared_s42\\result.json:32",
+          "observation": "R base00/normal11 dimensions 5120 and common_context 512."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_r201ah_MS_full_identity.py:12",
+          "observation": "AH strong shared teacher, 5632 interface and training-recipe limits."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_r201ah_MS_normal_states.py:42",
+          "observation": "AH frozen00 references the shared DeMo teacher and validates its saved metrics/rows."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_evidence_coverage.py:114",
+          "observation": "Label-defined cohorts are diagnostic; teacher/interface differences and noncausal scope are disclosed."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:178",
+          "observation": "Actual current analysis explicitly qualifies all five-outlet interpretations."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_saved_error_cases_CPU_20261015\\result.json:569",
+          "observation": "Persisted limits match the source."
+        }
+      ]
+    },
+    "F_evaluation_type": {
+      "status": "PASS",
+      "classification": "real_gt",
+      "subtype": "offline_cached_distance_error_diagnostic",
+      "details": [
+        "Dataset identity and scene labels define relevance and Rank-1 errors; no pseudo-GT, prediction-derived reference, simulation or human label judgment is used.",
+        "Nearest-positive selection and rescue/harm grouping are GT-dependent offline operations. They are diagnostic evidence only and are not deployable prediction rules.",
+        "The original analysis carries AP/INP forward from saved per-query results; this reviewer independently recomputed them without changing the original artifacts."
+      ],
+      "evidence": [
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:104",
+          "observation": "Dataset GT defines positive and negative candidates."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:120",
+          "observation": "Original analysis copies saved AP/INP; current audit independently verifies them."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:131",
+          "observation": "GT-based saved Rank-1 values define offline cohorts."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py:165",
+          "observation": "Offline label-based diagnostic selection disclosure."
+        },
+        {
+          "location": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-15_MS_saved_error_margin_run01\\verify.py:186",
+          "observation": "Reviewer independently recomputed full AP and INP."
+        }
+      ]
+    }
+  },
+  "evaluation_type": "real_gt",
+  "evaluation_subtype": "offline_cached_distance_error_diagnostic",
+  "input_preservation": {
+    "requested_input_count": 20,
+    "requested_total_bytes": 38369506,
+    "all_requested_sizes_and_SHA256_match": true,
+    "all_requested_inputs_unchanged": true,
+    "request_unchanged": true,
+    "supplemental_source_count": 4,
+    "all_supplemental_sources_unchanged": true
+  },
+  "audited_inputs": [
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_error_margins.py",
+      "requested": {
+        "bytes": 10865,
+        "sha256": "f01609eda3749613e90f87043d3e3f42dc60252aba0689aa2145a812715339d3"
+      },
+      "before": {
+        "bytes": 10865,
+        "sha256": "f01609eda3749613e90f87043d3e3f42dc60252aba0689aa2145a812715339d3"
+      },
+      "after": {
+        "bytes": 10865,
+        "sha256": "f01609eda3749613e90f87043d3e3f42dc60252aba0689aa2145a812715339d3"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_rgbnt100_saved_error_margins.py",
+      "requested": {
+        "bytes": 11062,
+        "sha256": "1a14f615e65c80371f2cadacbaff9a905db692ddb68255b6f0a7a1d41ac80439"
+      },
+      "before": {
+        "bytes": 11062,
+        "sha256": "1a14f615e65c80371f2cadacbaff9a905db692ddb68255b6f0a7a1d41ac80439"
+      },
+      "after": {
+        "bytes": 11062,
+        "sha256": "1a14f615e65c80371f2cadacbaff9a905db692ddb68255b6f0a7a1d41ac80439"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_identity_coordinate_three_normal.py",
+      "requested": {
+        "bytes": 9675,
+        "sha256": "4d3e5805d3de3eaae58ff7027241e147e7f41c6eb935dc7f76e34865e7270d55"
+      },
+      "before": {
+        "bytes": 9675,
+        "sha256": "4d3e5805d3de3eaae58ff7027241e147e7f41c6eb935dc7f76e34865e7270d55"
+      },
+      "after": {
+        "bytes": 9675,
+        "sha256": "4d3e5805d3de3eaae58ff7027241e147e7f41c6eb935dc7f76e34865e7270d55"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_saved_evidence_coverage.py",
+      "requested": {
+        "bytes": 7391,
+        "sha256": "b0776f6767fdbd2d226ada194a3991a2e462a1857b44b6c22e3e3d5157ffcfa4"
+      },
+      "before": {
+        "bytes": 7391,
+        "sha256": "b0776f6767fdbd2d226ada194a3991a2e462a1857b44b6c22e3e3d5157ffcfa4"
+      },
+      "after": {
+        "bytes": 7391,
+        "sha256": "b0776f6767fdbd2d226ada194a3991a2e462a1857b44b6c22e3e3d5157ffcfa4"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py",
+      "requested": {
+        "bytes": 9448,
+        "sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427"
+      },
+      "before": {
+        "bytes": 9448,
+        "sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427"
+      },
+      "after": {
+        "bytes": 9448,
+        "sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_full_official_condition.py",
+      "requested": {
+        "bytes": 5280,
+        "sha256": "94ba9a65b399776fadbb7588a0c6bd70c04e569fa0f568729533bfc8ca751121"
+      },
+      "before": {
+        "bytes": 5280,
+        "sha256": "94ba9a65b399776fadbb7588a0c6bd70c04e569fa0f568729533bfc8ca751121"
+      },
+      "after": {
+        "bytes": 5280,
+        "sha256": "94ba9a65b399776fadbb7588a0c6bd70c04e569fa0f568729533bfc8ca751121"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\msvr310.py",
+      "requested": {
+        "bytes": 4457,
+        "sha256": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93"
+      },
+      "before": {
+        "bytes": 4457,
+        "sha256": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93"
+      },
+      "after": {
+        "bytes": 4457,
+        "sha256": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\full_official_baselines_20261004\\training\\MSVR310_demo_s42\\official_split_manifest.json",
+      "requested": {
+        "bytes": 297339,
+        "sha256": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2"
+      },
+      "before": {
+        "bytes": 297339,
+        "sha256": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2"
+      },
+      "after": {
+        "bytes": 297339,
+        "sha256": "2078034fb2f0071d493572f9600050a74a13c99436a361de0614ed333838baa2"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_reference_blocks_p0_20261009\\original_DeMo.csv",
+      "requested": {
+        "bytes": 56888,
+        "sha256": "cdc427ca3fabe843f47c8c63a6ab5cecca4bf723e2eac40f27593f6a43ee3dd3"
+      },
+      "before": {
+        "bytes": 56888,
+        "sha256": "cdc427ca3fabe843f47c8c63a6ab5cecca4bf723e2eac40f27593f6a43ee3dd3"
+      },
+      "after": {
+        "bytes": 56888,
+        "sha256": "cdc427ca3fabe843f47c8c63a6ab5cecca4bf723e2eac40f27593f6a43ee3dd3"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_reference_blocks_p0_20261009\\shared_fused.csv",
+      "requested": {
+        "bytes": 56587,
+        "sha256": "d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6"
+      },
+      "before": {
+        "bytes": 56587,
+        "sha256": "d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6"
+      },
+      "after": {
+        "bytes": 56587,
+        "sha256": "d48474561fd1e2d197d32bb393da147c2ef8893a659bbb9479b6008c3b5576b6"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ah_MS_full_identity_20261012\\MSVR310\\states\\MSVR310_r201ah_axis_shared_s42\\normal_local_archive.json",
+      "requested": {
+        "bytes": 479,
+        "sha256": "043dffb6d5406d9768edd302e6feb912b9693735be4d243c05c49b3bd6b21f89"
+      },
+      "before": {
+        "bytes": 479,
+        "sha256": "043dffb6d5406d9768edd302e6feb912b9693735be4d243c05c49b3bd6b21f89"
+      },
+      "after": {
+        "bytes": 479,
+        "sha256": "043dffb6d5406d9768edd302e6feb912b9693735be4d243c05c49b3bd6b21f89"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201ah_MS_full_identity_20261012\\MSVR310\\states\\MSVR310_r201ah_axis_shared_s42\\state_11.csv",
+      "requested": {
+        "bytes": 56398,
+        "sha256": "08ed68e9f495cb6497e5d4fefc4b45459149359ec1edc80b6bae298f221a99c7"
+      },
+      "before": {
+        "bytes": 56398,
+        "sha256": "08ed68e9f495cb6497e5d4fefc4b45459149359ec1edc80b6bae298f221a99c7"
+      },
+      "after": {
+        "bytes": 56398,
+        "sha256": "08ed68e9f495cb6497e5d4fefc4b45459149359ec1edc80b6bae298f221a99c7"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_axis_shared_s42\\result.json",
+      "requested": {
+        "bytes": 378640,
+        "sha256": "f81b593a89b5923df31fafd7bb5cc72a66c5e77b70398d180b404b4da2ab4e37"
+      },
+      "before": {
+        "bytes": 378640,
+        "sha256": "f81b593a89b5923df31fafd7bb5cc72a66c5e77b70398d180b404b4da2ab4e37"
+      },
+      "after": {
+        "bytes": 378640,
+        "sha256": "f81b593a89b5923df31fafd7bb5cc72a66c5e77b70398d180b404b4da2ab4e37"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_axis_shared_s42\\common_context.csv",
+      "requested": {
+        "bytes": 57050,
+        "sha256": "45e0148a84d7143e6abef050520c914ed2ee72ea1e0d11afc52dde0fba6d8f33"
+      },
+      "before": {
+        "bytes": 57050,
+        "sha256": "45e0148a84d7143e6abef050520c914ed2ee72ea1e0d11afc52dde0fba6d8f33"
+      },
+      "after": {
+        "bytes": 57050,
+        "sha256": "45e0148a84d7143e6abef050520c914ed2ee72ea1e0d11afc52dde0fba6d8f33"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\selected_expert_outlets_20261011\\MSVR310_r201r_axis_shared_s42\\normal11.csv",
+      "requested": {
+        "bytes": 56944,
+        "sha256": "a19ad6f23c70964c41123d3d04e3d27c9168ce0df68b8048f654ad75745f3af3"
+      },
+      "before": {
+        "bytes": 56944,
+        "sha256": "a19ad6f23c70964c41123d3d04e3d27c9168ce0df68b8048f654ad75745f3af3"
+      },
+      "after": {
+        "bytes": 56944,
+        "sha256": "a19ad6f23c70964c41123d3d04e3d27c9168ce0df68b8048f654ad75745f3af3"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_saved_error_cases_CPU_20261015\\result.json",
+      "requested": {
+        "bytes": 19742,
+        "sha256": "07cce9016c64b1653f46a1f8a381ddaf351e5f43906d034ea7ff5e6d8b6b0ad5"
+      },
+      "before": {
+        "bytes": 19742,
+        "sha256": "07cce9016c64b1653f46a1f8a381ddaf351e5f43906d034ea7ff5e6d8b6b0ad5"
+      },
+      "after": {
+        "bytes": 19742,
+        "sha256": "07cce9016c64b1653f46a1f8a381ddaf351e5f43906d034ea7ff5e6d8b6b0ad5"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_saved_error_cases_CPU_20261015\\all_outlet_nearest_margins.csv",
+      "requested": {
+        "bytes": 708756,
+        "sha256": "93312ff1426cfa4d0331386ac53d274984243d4bb9ecb2f7d884d970f16d24e8"
+      },
+      "before": {
+        "bytes": 708756,
+        "sha256": "93312ff1426cfa4d0331386ac53d274984243d4bb9ecb2f7d884d970f16d24e8"
+      },
+      "after": {
+        "bytes": 708756,
+        "sha256": "93312ff1426cfa4d0331386ac53d274984243d4bb9ecb2f7d884d970f16d24e8"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_saved_error_cases_CPU_20261015\\selected_visual_cases.json",
+      "requested": {
+        "bytes": 23693,
+        "sha256": "533fed15f2dfdfa26061d734945ef9a92dbd37be573846ccc7fdf4c9e50518d0"
+      },
+      "before": {
+        "bytes": 23693,
+        "sha256": "533fed15f2dfdfa26061d734945ef9a92dbd37be573846ccc7fdf4c9e50518d0"
+      },
+      "after": {
+        "bytes": 23693,
+        "sha256": "533fed15f2dfdfa26061d734945ef9a92dbd37be573846ccc7fdf4c9e50518d0"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ah_MS_full_identity_20261012\\MSVR310_r201ah_axis_shared_s42\\normal_states.npz",
+      "requested": {
+        "bytes": 8464159,
+        "sha256": "9713438e176f3b247257677a9fe0a3c4063f82e36c389cc04586d9d52aafe617"
+      },
+      "before": {
+        "bytes": 8464159,
+        "sha256": "9713438e176f3b247257677a9fe0a3c4063f82e36c389cc04586d9d52aafe617"
+      },
+      "after": {
+        "bytes": 8464159,
+        "sha256": "9713438e176f3b247257677a9fe0a3c4063f82e36c389cc04586d9d52aafe617"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\selected_expert_outlets_20261011\\MSVR310_r201r_axis_shared_s42\\raw.npz",
+      "requested": {
+        "bytes": 28134653,
+        "sha256": "a81a7c49d9ae49f3bd6fa125c72f5419573ad3e73ecf0afedfb93d3b7a1af9f9"
+      },
+      "before": {
+        "bytes": 28134653,
+        "sha256": "a81a7c49d9ae49f3bd6fa125c72f5419573ad3e73ecf0afedfb93d3b7a1af9f9"
+      },
+      "after": {
+        "bytes": 28134653,
+        "sha256": "a81a7c49d9ae49f3bd6fa125c72f5419573ad3e73ecf0afedfb93d3b7a1af9f9"
+      },
+      "read_directly": true,
+      "matches_request": true,
+      "unchanged": true
+    }
+  ],
+  "supplemental_source_inputs": [
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_selected_expert_outlets.py",
+      "purpose": "Read-only source provenance and metric semantics",
+      "before": {
+        "bytes": 10771,
+        "sha256": "4d67156a150dcf3d42652a44e87df56d93c23c43225155b40e0e912dbee1cd5a"
+      },
+      "after": {
+        "bytes": 10771,
+        "sha256": "4d67156a150dcf3d42652a44e87df56d93c23c43225155b40e0e912dbee1cd5a"
+      },
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_r201ah_MS_normal_states.py",
+      "purpose": "Read-only source provenance and metric semantics",
+      "before": {
+        "bytes": 5438,
+        "sha256": "047b30a57a9de1d8baeac8bfef467b9a0953d2d9748b50f34b0a42b014f7dbdc"
+      },
+      "after": {
+        "bytes": 5438,
+        "sha256": "047b30a57a9de1d8baeac8bfef467b9a0953d2d9748b50f34b0a42b014f7dbdc"
+      },
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_r201ah_MS_full_identity.py",
+      "purpose": "Read-only source provenance and metric semantics",
+      "before": {
+        "bytes": 11940,
+        "sha256": "4037ab6aafd23ba097434d289751db88ebc8ee10649ddb7153863483549b4c4e"
+      },
+      "after": {
+        "bytes": 11940,
+        "sha256": "4037ab6aafd23ba097434d289751db88ebc8ee10649ddb7153863483549b4c4e"
+      },
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\utils\\reid_evaluation.py",
+      "purpose": "Read-only source provenance and metric semantics",
+      "before": {
+        "bytes": 1947,
+        "sha256": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2"
+      },
+      "after": {
+        "bytes": 1947,
+        "sha256": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2"
+      },
+      "unchanged": true
+    }
+  ],
+  "deterministic_verification": {
+    "executed": true,
+    "exit_code": 0,
+    "interpreter": "C:\\Users\\gb\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\python.exe",
+    "interpreter_options": [
+      "-X",
+      "utf8",
+      "-B",
+      "-S"
+    ],
+    "python": "3.13.12 (main, Feb  3 2026, 22:53:26) [MSC v.1944 64 bit (AMD64)]",
+    "verifier": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-15_MS_saved_error_margin_run01\\verify.py",
+    "verifier_sha256": "ea17a40210a38b04b46fa74143a6e7f9c51b07bc338c618e9326ca1243e87820",
+    "result": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-15_MS_saved_error_margin_run01\\deterministic.json",
+    "result_sha256": "2eb70de70761cfd63413a52c39527389055cb8d7dd878ec1f2101c99a0c993ef",
+    "checks_executed": 321228,
+    "failed_checks": 0,
+    "failure_details": [],
+    "counts": {
+      "requested_nearest_rows": 2955,
+      "nearest_columns": 28,
+      "nearest_scalar_cells": 82740,
+      "saved_per_query_rows": 2955,
+      "saved_per_query_columns": 16,
+      "saved_per_query_scalar_cells": 47280,
+      "requested_distance_values": 3117525,
+      "requested_CMC_points": 250,
+      "additional_R_stage_full_rankings": 5910,
+      "R_stage_summary_groups": true,
+      "R_stage_comparisons": true,
+      "all_R_stage_CMC_points": 650,
+      "cohort_rows": 16,
+      "distribution_scalar_cells": 336,
+      "selected_cases": 35,
+      "selected_case_scalar_cells": 700
+    },
+    "max_numeric_errors": {
+      "source_csv": 3.3306690738754696e-16,
+      "nearest_csv": 3.3306690738754696e-16,
+      "CMC50_from_saved_csv": 0,
+      "R_saved_full_summary": 2.842170943040401e-14,
+      "R_saved_comparison": 2.1316282072803006e-14,
+      "cohort": 3.774758283725532e-15,
+      "cohort_distribution": 0,
+      "selected_case": 0,
+      "exact_source_replay": 0
+    },
+    "numeric_tolerances": {
+      "raw_nearest_fields": 0.0,
+      "cohort_distributions": 0.0,
+      "selected_case_fields": 0.0,
+      "AP_INP": 1e-12,
+      "R_summary_percentage_points": 1e-10,
+      "CMC_against_saved_first_match": 0.0
+    },
+    "sort_rule": "Ascending retained distance then original gallery index; equivalent to stable argsort.",
+    "percentile_rule": "p10=floor(0.1*(n-1)); p90=floor(0.9*(n-1)); no interpolation.",
+    "source_replay": {
+      "entry_point": "analyze_msvr_saved_error_margins.main",
+      "input_modifications": 0,
+      "output_redirected_to": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-15_MS_saved_error_margin_run01\\source_replay",
+      "main_returned": true,
+      "csv_and_cases_byte_exact": true,
+      "report_equal_except_timestamp": true,
+      "output_sha256": {
+        "all_outlet_nearest_margins.csv": "93312ff1426cfa4d0331386ac53d274984243d4bb9ecb2f7d884d970f16d24e8",
+        "selected_visual_cases.json": "533fed15f2dfdfa26061d734945ef9a92dbd37be573846ccc7fdf4c9e50518d0",
+        "result.json": "a4d868ab9e1bed310649cfe059cbd302f13cc0a72544d67eb8c60f6770b863eb"
+      }
+    }
+  },
+  "exact_scope": {
+    "dataset": "MSVR310",
+    "input": "normal",
+    "historical_seed": 42,
+    "requested_outlets": 5,
+    "train_records": 1032,
+    "query_records": 591,
+    "gallery_records": 1055,
+    "valid_queries": 591,
+    "train_identities": 155,
+    "query_identities": 52,
+    "gallery_identities": 155,
+    "query_cameras": 8,
+    "query_scenes": 30,
+    "current_diagnostic_new_models": 0,
+    "current_diagnostic_new_neural_calls": 0,
+    "current_diagnostic_new_fitting": 0,
+    "current_diagnostic_new_optimizer_updates": 0,
+    "current_diagnostic_training_progress_queries": 0,
+    "audit_new_neural_calls": 0,
+    "audit_optimizer_updates": 0,
+    "audit_fitting": 0,
+    "audit_SSH_calls": 0,
+    "audit_GPU_queries": 0,
+    "audit_training_log_or_controller_queries": 0,
+    "torch_numpy_installations": 0,
+    "original_dataset_images_inspected": 0,
+    "output_writes": [
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_saved_error_margin_integrity_audit_20261015.json",
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-15_MS_saved_error_margin_run01"
+    ],
+    "input_modifications": 0,
+    "independent_additional_R_stages": 10,
+    "newly_recomputed_saved_AP_INP": true
+  },
+  "exclusion": {
+    "rule": "same_identity_and_same_scene",
+    "excluded_pairs": 2603,
+    "camera_rule_differs_on_queries": 590
+  },
+  "tie_statistics": {
+    "strong": {
+      "adjacent_eligible_ties": 55,
+      "first_positive_negative_ties": 0,
+      "rows_with_ties": 53
+    },
+    "AH11": {
+      "adjacent_eligible_ties": 57,
+      "first_positive_negative_ties": 0,
+      "rows_with_ties": 56
+    },
+    "original": {
+      "adjacent_eligible_ties": 88,
+      "first_positive_negative_ties": 0,
+      "rows_with_ties": 84
+    },
+    "R_common": {
+      "adjacent_eligible_ties": 64,
+      "first_positive_negative_ties": 0,
+      "rows_with_ties": 61
+    },
+    "R_final": {
+      "adjacent_eligible_ties": 83,
+      "first_positive_negative_ties": 0,
+      "rows_with_ties": 74
+    }
+  },
+  "metrics_recomputed_percent": {
+    "strong": {
+      "mAP": 49.42609434847924,
+      "mINP": 24.96771322764269,
+      "Rank-1": 69.03553299492386,
+      "Rank-5": 81.7258883248731,
+      "Rank-10": 86.29441624365482,
+      "Rank-20": 90.86294416243655,
+      "CMC_1_to_50": [
+        69.03553299492386,
+        75.29610829103216,
+        78.68020304568527,
+        80.37225042301185,
+        81.7258883248731,
+        83.07952622673434,
+        83.75634517766497,
+        84.26395939086295,
+        85.44839255499154,
+        86.29441624365482,
+        86.80203045685279,
+        86.97123519458545,
+        88.15566835871404,
+        88.49407783417935,
+        88.83248730964468,
+        89.34010152284264,
+        89.5093062605753,
+        89.67851099830796,
+        89.84771573604061,
+        90.86294416243655,
+        91.37055837563452,
+        91.87817258883248,
+        92.04737732656514,
+        92.2165820642978,
+        92.38578680203045,
+        92.72419627749576,
+        93.23181049069375,
+        93.4010152284264,
+        93.73942470389171,
+        93.90862944162437,
+        93.90862944162437,
+        93.90862944162437,
+        93.90862944162437,
+        94.24703891708968,
+        94.585448392555,
+        94.75465313028765,
+        94.75465313028765,
+        94.75465313028765,
+        94.9238578680203,
+        94.9238578680203,
+        94.9238578680203,
+        95.09306260575296,
+        95.09306260575296,
+        95.09306260575296,
+        95.43147208121827,
+        95.43147208121827,
+        95.60067681895093,
+        95.60067681895093,
+        95.60067681895093,
+        95.60067681895093
+      ]
+    },
+    "AH11": {
+      "mAP": 49.491506577172586,
+      "mINP": 25.223311422389326,
+      "Rank-1": 68.52791878172589,
+      "Rank-5": 81.55668358714044,
+      "Rank-10": 86.63282571912013,
+      "Rank-20": 91.37055837563452,
+      "CMC_1_to_50": [
+        68.52791878172589,
+        74.95769881556683,
+        78.84940778341793,
+        80.37225042301185,
+        81.55668358714044,
+        82.91032148900169,
+        83.58714043993231,
+        84.77157360406092,
+        85.44839255499154,
+        86.63282571912013,
+        86.97123519458545,
+        87.30964467005076,
+        88.15566835871404,
+        88.66328257191202,
+        89.00169204737733,
+        89.5093062605753,
+        90.01692047377327,
+        90.35532994923858,
+        90.52453468697124,
+        91.37055837563452,
+        91.70896785109983,
+        91.87817258883248,
+        92.2165820642978,
+        92.72419627749576,
+        92.72419627749576,
+        92.72419627749576,
+        92.89340101522842,
+        93.23181049069375,
+        93.4010152284264,
+        93.4010152284264,
+        93.57021996615906,
+        93.90862944162437,
+        93.90862944162437,
+        93.90862944162437,
+        94.07783417935703,
+        94.585448392555,
+        94.585448392555,
+        94.75465313028765,
+        95.09306260575296,
+        95.09306260575296,
+        95.09306260575296,
+        95.09306260575296,
+        95.09306260575296,
+        95.43147208121827,
+        95.43147208121827,
+        95.43147208121827,
+        95.43147208121827,
+        95.60067681895093,
+        95.60067681895093,
+        95.60067681895093
+      ]
+    },
+    "original": {
+      "mAP": 47.164688447227576,
+      "mINP": 23.502961234396178,
+      "Rank-1": 63.95939086294416,
+      "Rank-5": 80.20304568527919,
+      "Rank-10": 84.77157360406092,
+      "Rank-20": 89.84771573604061,
+      "CMC_1_to_50": [
+        63.95939086294416,
+        70.72758037225043,
+        75.63451776649747,
+        77.834179357022,
+        80.20304568527919,
+        81.89509306260575,
+        82.23350253807106,
+        82.74111675126903,
+        83.58714043993231,
+        84.77157360406092,
+        85.44839255499154,
+        85.78680203045685,
+        86.29441624365482,
+        87.30964467005076,
+        87.98646362098138,
+        88.15566835871404,
+        88.66328257191202,
+        88.83248730964468,
+        89.34010152284264,
+        89.84771573604061,
+        90.35532994923858,
+        90.52453468697124,
+        90.69373942470389,
+        91.0321489001692,
+        91.0321489001692,
+        91.53976311336717,
+        91.70896785109983,
+        91.70896785109983,
+        91.87817258883248,
+        92.2165820642978,
+        92.38578680203045,
+        92.72419627749576,
+        92.89340101522842,
+        92.89340101522842,
+        92.89340101522842,
+        92.89340101522842,
+        93.23181049069375,
+        93.57021996615906,
+        93.73942470389171,
+        93.73942470389171,
+        93.73942470389171,
+        93.73942470389171,
+        93.73942470389171,
+        93.73942470389171,
+        94.24703891708968,
+        94.24703891708968,
+        94.24703891708968,
+        94.41624365482234,
+        94.585448392555,
+        94.585448392555
+      ]
+    },
+    "R_common": {
+      "mAP": 48.21539410097043,
+      "mINP": 20.9793155663427,
+      "Rank-1": 67.85109983079526,
+      "Rank-5": 81.89509306260575,
+      "Rank-10": 85.78680203045685,
+      "Rank-20": 89.67851099830796,
+      "CMC_1_to_50": [
+        67.85109983079526,
+        73.9424703891709,
+        76.98815566835871,
+        80.20304568527919,
+        81.89509306260575,
+        83.248730964467,
+        84.26395939086295,
+        85.27918781725889,
+        85.27918781725889,
+        85.78680203045685,
+        86.12521150592217,
+        86.46362098138748,
+        86.97123519458545,
+        87.47884940778341,
+        87.98646362098138,
+        88.49407783417935,
+        88.66328257191202,
+        89.5093062605753,
+        89.67851099830796,
+        89.67851099830796,
+        90.01692047377327,
+        90.69373942470389,
+        90.69373942470389,
+        90.69373942470389,
+        91.20135363790186,
+        91.20135363790186,
+        91.53976311336717,
+        91.53976311336717,
+        91.87817258883248,
+        91.87817258883248,
+        92.04737732656514,
+        92.2165820642978,
+        92.72419627749576,
+        92.72419627749576,
+        92.89340101522842,
+        92.89340101522842,
+        92.89340101522842,
+        93.23181049069375,
+        93.23181049069375,
+        93.57021996615906,
+        93.57021996615906,
+        93.73942470389171,
+        94.07783417935703,
+        94.24703891708968,
+        94.41624365482234,
+        94.41624365482234,
+        95.09306260575296,
+        95.26226734348562,
+        95.26226734348562,
+        95.60067681895093
+      ]
+    },
+    "R_final": {
+      "mAP": 47.204446715191715,
+      "mINP": 23.576556562416755,
+      "Rank-1": 63.95939086294416,
+      "Rank-5": 80.20304568527919,
+      "Rank-10": 84.77157360406092,
+      "Rank-20": 90.01692047377327,
+      "CMC_1_to_50": [
+        63.95939086294416,
+        70.72758037225043,
+        75.80372250423012,
+        77.834179357022,
+        80.20304568527919,
+        82.23350253807106,
+        82.40270727580372,
+        82.74111675126903,
+        83.75634517766497,
+        84.77157360406092,
+        85.27918781725889,
+        85.78680203045685,
+        86.29441624365482,
+        87.1404399323181,
+        87.81725888324873,
+        87.98646362098138,
+        88.49407783417935,
+        88.83248730964468,
+        89.17089678510999,
+        90.01692047377327,
+        90.35532994923858,
+        90.52453468697124,
+        90.86294416243655,
+        90.86294416243655,
+        90.86294416243655,
+        91.0321489001692,
+        91.53976311336717,
+        91.70896785109983,
+        91.70896785109983,
+        92.04737732656514,
+        92.38578680203045,
+        92.72419627749576,
+        92.72419627749576,
+        92.89340101522842,
+        92.89340101522842,
+        93.06260575296108,
+        93.23181049069375,
+        93.57021996615906,
+        93.73942470389171,
+        93.90862944162437,
+        93.90862944162437,
+        93.90862944162437,
+        93.90862944162437,
+        93.90862944162437,
+        94.07783417935703,
+        94.585448392555,
+        94.585448392555,
+        94.585448392555,
+        94.585448392555,
+        94.75465313028765
+      ]
+    }
+  },
+  "cohort_counts": [
+    {
+      "comparison": "original_to_strong",
+      "cohort": "both_wrong",
+      "queries": 157,
+      "identities": 37
+    },
+    {
+      "comparison": "original_to_strong",
+      "cohort": "rescued",
+      "queries": 56,
+      "identities": 32
+    },
+    {
+      "comparison": "original_to_strong",
+      "cohort": "harmed",
+      "queries": 26,
+      "identities": 20
+    },
+    {
+      "comparison": "original_to_strong",
+      "cohort": "both_correct",
+      "queries": 352,
+      "identities": 43
+    },
+    {
+      "comparison": "strong_to_AH11",
+      "cohort": "both_wrong",
+      "queries": 181,
+      "identities": 41
+    },
+    {
+      "comparison": "strong_to_AH11",
+      "cohort": "rescued",
+      "queries": 2,
+      "identities": 2
+    },
+    {
+      "comparison": "strong_to_AH11",
+      "cohort": "harmed",
+      "queries": 5,
+      "identities": 5
+    },
+    {
+      "comparison": "strong_to_AH11",
+      "cohort": "both_correct",
+      "queries": 403,
+      "identities": 43
+    },
+    {
+      "comparison": "strong_to_R_common",
+      "cohort": "both_wrong",
+      "queries": 141,
+      "identities": 34
+    },
+    {
+      "comparison": "strong_to_R_common",
+      "cohort": "rescued",
+      "queries": 42,
+      "identities": 26
+    },
+    {
+      "comparison": "strong_to_R_common",
+      "cohort": "harmed",
+      "queries": 49,
+      "identities": 27
+    },
+    {
+      "comparison": "strong_to_R_common",
+      "cohort": "both_correct",
+      "queries": 359,
+      "identities": 41
+    },
+    {
+      "comparison": "R_final_to_R_common",
+      "cohort": "both_wrong",
+      "queries": 160,
+      "identities": 38
+    },
+    {
+      "comparison": "R_final_to_R_common",
+      "cohort": "rescued",
+      "queries": 53,
+      "identities": 31
+    },
+    {
+      "comparison": "R_final_to_R_common",
+      "cohort": "harmed",
+      "queries": 30,
+      "identities": 22
+    },
+    {
+      "comparison": "R_final_to_R_common",
+      "cohort": "both_correct",
+      "queries": 348,
+      "identities": 44
+    }
+  ],
+  "selected_cases": {
+    "count": 35,
+    "all_fields_verified": true,
+    "selection": "At most three earliest-query-index distinct identities per non-correct comparison cohort.",
+    "image_bytes_read": false,
+    "visual_quality_or_semantic_similarity_judged": false
+  },
+  "claim_impact": [
+    {
+      "claim": "The saved five-outlet nearest-match, signed-margin and cohort analysis is numerically correct.",
+      "status": "supported"
+    },
+    {
+      "claim": "The 35 cases are exactly the declared deterministic GT-based diagnostic examples.",
+      "status": "supported"
+    },
+    {
+      "claim": "R common_context is a public identity block, distinct from F expert outputs.",
+      "status": "supported"
+    },
+    {
+      "claim": "Cross-model rescue overlap proves a frequency-module causal gain, recoverable learned fusion or a deployable oracle.",
+      "status": "unsupported_and_not_claimed"
+    },
+    {
+      "claim": "These cached diagnostics establish new neural scores, missing-modality robustness, multi-seed significance or untouched-test generalization.",
+      "status": "unsupported_and_not_claimed"
+    }
+  ],
+  "required_changes": [],
+  "trace_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-15_MS_saved_error_margin_run01"
+}

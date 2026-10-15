@@ -1,0 +1,132 @@
+{
+  "status": "ACTUAL_ASSISTANT_REVIEW_OF_ALL_SIX_FIXED_MSVR310_CONTACT_SHEETS",
+  "at": "2026-10-15T11:33:51+08:00",
+  "reviewer_type": "assistant_qualitative_not_independent_human",
+  "all_sheets_viewed": true,
+  "sheet_files": [
+    "sheet_001.png",
+    "sheet_002.png",
+    "sheet_003.png",
+    "sheet_004.png",
+    "sheet_005.png",
+    "sheet_006.png"
+  ],
+  "selected_cases": 35,
+  "unique_query_indices": 19,
+  "unique_query_names": 19,
+  "query_identities": {
+    "4": 6,
+    "6": 8,
+    "8": 11,
+    "14": 1,
+    "114": 1,
+    "141": 1,
+    "150": 1,
+    "10": 3,
+    "16": 2,
+    "12": 1
+  },
+  "source_entries": 315,
+  "unique_original_images": 162,
+  "all_copied_original_JPEG_bytes_verified": true,
+  "observations": [
+    {
+      "cases": [
+        1,
+        10,
+        13,
+        21,
+        30
+      ],
+      "observation": "The selected query for identity4 is a light SUV, with a tree near its body; candidate identities129/199 and same-ID positives show different viewpoints and illumination. Some same-ID RGB images are much darker than the query.",
+      "inference": "Viewpoint, occlusion and illumination differences coexist with similar overall body appearance. This does not establish which cue the model used."
+    },
+    {
+      "cases": [
+        2,
+        5,
+        7,
+        11,
+        18,
+        20,
+        22,
+        25,
+        28,
+        31,
+        33
+      ],
+      "observation": "Identity6 and identity10 examples are both reddish sedans in visible light. Selected queries/positives/negatives include front, rear and side views, and bright visible/NIR reflections in some frames.",
+      "inference": "These pairs combine similar overall appearance with large view changes; treating all their errors as a single missing local-detail problem is not supported."
+    },
+    {
+      "cases": [
+        3,
+        8,
+        12,
+        14,
+        19,
+        23,
+        24,
+        27,
+        32,
+        34
+      ],
+      "observation": "Identity8 and identity34 include light sedans with similar global silhouettes. Rear lamps, body/window shapes and perspectives differ among the selected examples; backgrounds and partial occlusion also vary.",
+      "inference": "Preserving localized evidence is a testable direction, but sheets do not demonstrate that a frequency expert can extract or generalize it."
+    },
+    {
+      "cases": [
+        15,
+        16,
+        17,
+        26,
+        29,
+        35
+      ],
+      "observation": "Selected harmed/both-wrong cases include front-to-rear matches, dark visible frames, stronger NIR/thermal visibility and backgrounds with other cars or trees. Some wrong candidates have visibly different body categories.",
+      "inference": "The sample contains more than same-model near duplicates. A universal fine-detail-only explanation would be too narrow."
+    },
+    {
+      "cases": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "observation": "Native source crops vary in size; RGB,NIR,TIR are separately captured views. Sheets preserve aspect ratio within display cells, without spatial registration.",
+      "inference": "No pixel-perfect cross-modal regional correspondence, sensor timing, true thermal temperature, label correction or image alignment is established by this inspection."
+    }
+  ],
+  "limits": "Fixed at most3 earliest distinct identities in each label-defined cohort/comparison; cases repeat across comparisons and are not independent random examples or all591queries. Only contact sheets were visually reviewed; original JPEG bytes were checked but not every original displayed at native scale. Independent numeric audit excludes this qualitative review. No new model, training, inference, missing evaluation, current run query, confidence calibration or causal claim."
+}
