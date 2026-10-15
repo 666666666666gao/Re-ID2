@@ -1,0 +1,68 @@
+{
+  "status": "LOCAL_READING_CORE_ONLY_PREPARED_NOT_REVIEWED_NO_RUNNER_NOT_DEPLOYED_NOT_NN",
+  "at": "2026-10-15T09:00:39+08:00",
+  "purpose": "Test whether local supports retained through frequency interaction produce useful vehicle identity evidence beyond current global band pooling.",
+  "source_files": [
+    "local_patch_regions.py",
+    "local_band_evidence_reading.py"
+  ],
+  "source_sha256": {
+    "local_patch_regions.py": "c13e57993ae1ecb75bf10c6f169077e99c4455f9f3d4d0a1f66d0f9f22866146",
+    "local_band_evidence_reading.py": "1afa824f07ecd13470fadf85aa76ab23552eb0e8d30ab1391f415630284abe17"
+  },
+  "hypothesis_not_conclusion": "Current F.prepare collapses each source-band to one global vector before cross_band. Keeping four fixed spatial regions until after cross-band attention and the existing nonlinear output may retain different identity cues; no proof this is a cause of current errors or an improvement.",
+  "source_basis": [
+    "axis_collaboration.py:60-83",
+    "run_r201as_RGB_query_normalization.py:28-44",
+    "run_r201av_RGB_frequency_value_decay.py:26-61"
+  ],
+  "intervention": {
+    "grid_controls": [
+      1,
+      2
+    ],
+    "patch_grid": [
+      8,
+      16
+    ],
+    "regions": 4,
+    "patches_per_region": 32,
+    "modality_reader": "Same relation/source access and existing query; region-packed KV batches, nonlinear existing output before region mean.",
+    "frequency_reader": "Same three source/band encoders; region-packed spatial read; L/M/H interact within the same source and region; existing nonlinear output before region mean.",
+    "ordinary": "Same region setting, existing mixed-source access, full unfiltered ordinary evidence; not relabeled as a literal DeMo+single-frequency baseline.",
+    "preserved": "Existing query normalization, FFT, cross-band weights, one global conditional round, 7x3 global router, PM/PF/PI, gates, descriptor dimensions, losses and optimizer policies; no region-specific routing or new learned query.",
+    "new_learned_parameters": 0,
+    "new_persistent_state_keys": 0,
+    "implementation": "Three process-local expert bound methods plus two nonpersistent integer-index buffers. Active source files unchanged."
+  },
+  "runtime_not_yet_verified": [
+    "Install on actual chosen parent; exact parameter identity/state key assertions.",
+    "Grid1 old/new strict tensor/state/CPU-CUDA RNG and four-state descriptor parity at native settings.",
+    "Grid2 actual finite independent/conditional outputs, all required parameter gradients, real native Adam updates/strict reload/frozen teacher and same paired sampler.",
+    "Actual full official training/checkpoint selection, six metrics, 11-00 rescue/harm, best/last curves and resource cost.",
+    "Ordinary matched setting and full final comparison; fixed regions are not semantic alignment."
+  ],
+  "data": {
+    "RGBNT100": {
+      "train": 8675,
+      "identities": 50,
+      "query": 1715,
+      "gallery": 8575
+    },
+    "MSVR310": {
+      "train": 1032,
+      "identities": 155,
+      "query": 591,
+      "gallery": 1055
+    }
+  },
+  "first_control": "One factor: existing global-grid1 vs region-grid2 on one actually closed and frozen parent recipe. Do not simultaneously change losses, widths, correction budget or teacher.",
+  "parent_recipe": "Not selected by this core. Current BC and its original observation must close first; bounded N5 confirmation when near remains prior admitted plan. No automatic launch from this artifact.",
+  "future_mechanism_controls": "Only after a positive first result: equal-capacity ordinary local reading, noFFT and broken across-band local correspondence. Not implemented or admitted by this core.",
+  "cost_limit": "No extra learned parameters or descriptor coordinates does not imply equal compute. Query/output work and F cross-band/output batches increase by region count; actual time/memory required.",
+  "CPU_proof": "results/preflight/local_band_reading_region_layout_CPU_actual_20261015.json",
+  "runtime": "NOT_RUN",
+  "new_neural_calls": 0,
+  "no_existing_source_edits": true,
+  "scope": "Normal vehicle investigation only. Preserve RGBNT201 K; only26physicalGPU2/3 one/card; no new training during BC, no missing design/49/T-P. Full goal remains ACTIVE_UNMET."
+}

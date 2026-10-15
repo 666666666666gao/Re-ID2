@@ -1,0 +1,45 @@
+{
+  "status": "ACTUAL_INSTALLED_TORCH_CPU_F_ONLY_INDEX_PASS_NO_MODEL_OR_NN",
+  "torch_version": "2.5.1+cu121",
+  "torch_threads": 1,
+  "device": "cpu",
+  "CUDA_VISIBLE_DEVICES": "",
+  "CUDA_initialized": false,
+  "model_constructions": 0,
+  "neural_calls": 0,
+  "optimizer_updates": 0,
+  "training_progress_queries": 0,
+  "cases": [
+    {
+      "grid": 1,
+      "regions": 1,
+      "patches_per_region": 128,
+      "exact_labeled_tensor_checks": 84,
+      "F_cross_band_shape": [
+        6,
+        3,
+        64
+      ],
+      "output_region_mean_exact": true
+    },
+    {
+      "grid": 2,
+      "regions": 4,
+      "patches_per_region": 32,
+      "exact_labeled_tensor_checks": 336,
+      "F_cross_band_shape": [
+        24,
+        3,
+        64
+      ],
+      "output_region_mean_exact": true
+    }
+  ],
+  "at": "2026-10-15T09:51:55+08:00",
+  "source_sha256": {
+    "local_patch_regions.py": "c13e57993ae1ecb75bf10c6f169077e99c4455f9f3d4d0a1f66d0f9f22866146",
+    "local_band_evidence_reading.py": "970bde342cfdad4583345b4e005f0774e770a61848ede9f42bd7086b52a07461"
+  },
+  "executed_CPU_script": "import json,os,torch\ntorch.set_num_threads(1)\nassert os.environ['CUDA_VISIBLE_DEVICES']=='' and not torch.cuda.is_initialized()\nns={}\nexec('\"\"\"Fixed patch-index groups shared across spatial frequency bands.\"\"\"\\n\\n\\ndef patch_regions(height, width, grid):\\n    assert grid in (1, 2) and height % grid == width % grid == 0\\n    rows, columns = height // grid, width // grid\\n    return tuple(\\n        tuple(y * width + x\\n              for y in range(row * rows, (row + 1) * rows)\\n              for x in range(column * columns, (column + 1) * columns))\\n        for row in range(grid) for column in range(grid)\\n    )\\n',ns)\nB,M,K,P,R=2,3,3,128,64\nvalues=torch.arange(B*M*K*P*R,device='cpu').reshape(B,M,K,P,R)\nproof=[]\nfor grid in (1,2):\n indices=torch.tensor(ns['patch_regions'](8,16,grid),device='cpu',dtype=torch.long)\n J=indices.shape[0]; checks=0\n for structured in (True,False):\n  for band in range(3):\n   value=values[:,:,band]; selected_indices=indices\n   if not structured:\n    value=value.flatten(1,2)[:,None].expand(-1,3,-1,-1)\n    selected_indices=torch.cat([indices+modality*P for modality in range(3)],1)\n   packed=value[:,:,selected_indices].reshape(B*3*J,-1,R)\n   base_query=torch.arange(3*R,device='cpu').reshape(3,R)+band*1000\n   queries=base_query[None,:,None].expand(B,-1,J,-1).reshape(B*3*J,1,R)\n   for sample in range(B):\n    for group in range(3):\n     for region in range(J):\n      sources=(group,) if structured else tuple(range(3))\n      expected=torch.cat([values[sample,modality,band,indices[region]] for modality in sources])\n      offset=(sample*3+group)*J+region\n      assert torch.equal(packed[offset],expected)\n      assert torch.equal(queries[offset,0],base_query[group])\n      checks+=2\n pooled=torch.arange(B*3*3*J*R,device='cpu',dtype=torch.float64).reshape(B,3,3,J,R)\n packed=pooled.permute(0,1,3,2,4).reshape(B*3*J,3,R)\n condition=torch.arange(B*3*3*R,device='cpu',dtype=torch.float64).reshape(B,3,3,R)\n context=condition[:,:,None].expand(-1,-1,J,-1,-1).reshape_as(packed)\n for sample in range(B):\n  for group in range(3):\n   for region in range(J):\n    offset=(sample*3+group)*J+region\n    assert torch.equal(packed[offset],pooled[sample,group,:,region])\n    assert torch.equal(context[offset],condition[sample,group])\n    checks+=2\n reduced=packed.reshape(B,3,J,3,R).mean(2)\n assert torch.equal(reduced,pooled.mean(3))\n if grid==1:\n  assert torch.equal(reduced,pooled.squeeze(3))\n proof.append(dict(grid=grid,regions=J,patches_per_region=128//J,\n  exact_labeled_tensor_checks=checks,F_cross_band_shape=list(packed.shape),\n  output_region_mean_exact=True))\nassert not torch.cuda.is_initialized()\nprint(json.dumps(dict(status='ACTUAL_INSTALLED_TORCH_CPU_F_ONLY_INDEX_PASS_NO_MODEL_OR_NN',\n torch_version=torch.__version__,torch_threads=torch.get_num_threads(),device='cpu',\n CUDA_VISIBLE_DEVICES=os.environ['CUDA_VISIBLE_DEVICES'],CUDA_initialized=False,\n model_constructions=0,neural_calls=0,optimizer_updates=0,training_progress_queries=0,cases=proof)))\n",
+  "limits": "Pure CPU integer/float64 tensor indexing/order only, no MHA/Linear/model install, state/RNG/AMP/gradients/Adam, retrieval or speed. M unchanged by code. No active BC logs/status/checkpoint/observer/GPU reads."
+}

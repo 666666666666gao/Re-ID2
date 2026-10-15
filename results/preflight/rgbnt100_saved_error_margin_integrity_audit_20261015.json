@@ -1,0 +1,1141 @@
+{
+  "audit_skill": "experiment-audit",
+  "date": "2026-10-15",
+  "generated_at": "2026-10-15T01:40:46.718276+00:00",
+  "verdict": "WARN",
+  "overall_verdict": "WARN",
+  "integrity_status": "warn",
+  "reason_code": "saved_arithmetic_pass_historical_and_visual_scope_qualified",
+  "summary": "No blocking integrity defect. Independent stdlib full-gallery recomputation matches every output CSV field, all cohorts and all 23 selected cases. WARN retains historical benchmark-selection, frozen-reference, source-only visual-stage and provisional-review limits.",
+  "blocking_findings": [],
+  "blocking_findings_count": 0,
+  "nonblocking_findings": [
+    {
+      "id": "N1",
+      "kind": "scope_limit",
+      "finding": "One dataset/seed and previously benchmark-selected checkpoints; reuse of cached00/11 is not a new model run or an independent final test.",
+      "required_action": "Retain the existing historical/benchmark-selected qualifiers."
+    },
+    {
+      "id": "N2",
+      "kind": "scope_limit",
+      "finding": "Cached00 is the retained frozen-teacher reference. No new original-binary or weight-tensor replay occurred.",
+      "required_action": "Keep the cached frozen-teacher provenance explicit."
+    },
+    {
+      "id": "N3",
+      "kind": "scope_limit",
+      "finding": "Collector reviewed as source only; image receipt, pixels and visual interpretation are outside this audit.",
+      "required_action": "Use an actual later receipt and direct image inspection before making image-content claims."
+    },
+    {
+      "id": "N4",
+      "kind": "review_attribution",
+      "finding": "Requested gpt-6-astra/max; actual model and effort lack host attestation. Fresh context is same-family and provisional.",
+      "required_action": "Do not relabel this as cross-family acceptance or attest an unavailable actual route."
+    }
+  ],
+  "simplest_fix": "No source or result fix is required for the audited saved analysis. Preserve the explicit scope qualifiers; audit an actual image receipt before image-content claims.",
+  "project_dir": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_saved_error_margin_integrity_request_20261015.json",
+  "trace_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-15_RGBNT100_saved_errors_run01",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "reviewer_model": "UNATTESTED",
+  "reviewer_reasoning": "UNATTESTED",
+  "reviewer_family": "openai",
+  "executor_model": "UNATTESTED",
+  "executor_family": "openai",
+  "agent_id": "UNATTESTED",
+  "agent_task": "/root/audit_rgbnt100_saved_error_margins_20261015",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "model_attestation_limit": "Requested route is not host attestation of the actual model or reasoning effort. No cross-family acceptance is claimed.",
+  "review_basis": "Direct reads of all requested artifacts, static dependency inspection, and an independent stdlib NPY decoder/full-gallery sorting implementation. Prior audit verdicts were historical witnesses, not the basis for the present numerical verdict.",
+  "checks": {
+    "A": {
+      "name": "Ground-truth provenance and official exclusion",
+      "status": "PASS",
+      "details": [
+        "The dataset loader parses identity/camera from dataset filenames, retains original query/gallery identities and subtracts one from camera numbers. Labels are not generated from model predictions.",
+        "Independently checked all 10,290 cached query/gallery names against cached IDs/cameras and all 3,430 saved original/AV query rows against those metadata. Names are unique and sorted within each split; scenes are -1.",
+        "The independent ranking removes only same-identity AND same-camera gallery entries, matching the official-style scorer. Every query excludes 25 entries, keeps 8,550 and has 50 to 175 eligible positives. Same-camera different-identity negatives remain eligible.",
+        "Cached00 is the retained AV frozen original-teacher state. Its provenance record identifies original DeMo seed42 epoch8; the state writer uses the frozen00 feature branch and checks anchor equality/tensor versions. Its complete ranking agrees with the historical original per-query metrics. This is not a new independent original-binary inference."
+      ],
+      "evidence": [
+        "data/datasets/RGBNT100.py:63",
+        "data/datasets/RGBNT100.py:76",
+        "data/datasets/RGBNT100.py:82",
+        "official_training_data.py:14",
+        "official_training_data.py:24",
+        "full_evaluation.py:68",
+        "utils/reid_evaluation.py:27",
+        "utils/reid_evaluation.py:33",
+        "analyze_rgbnt100_saved_error_margins.py:92",
+        "analyze_rgbnt100_saved_error_margins.py:101",
+        "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42/result.json:27",
+        "evaluate_r201av_RGB_normal_states.py:34",
+        "evaluate_r201av_RGB_normal_states.py:44",
+        "evaluate_r201av_RGB_normal_states.py:61",
+        "original_identity_anchor.py:45"
+      ],
+      "scope_limits": [
+        "Current remote dataset images/directories and original checkpoint tensors were not reopened. This is a local saved-metadata/protocol/ranking audit; frozen-weight execution remains qualified historical provenance."
+      ]
+    },
+    "B": {
+      "name": "Score normalization and manipulation",
+      "status": "PASS",
+      "details": [
+        "Each margin is the unscaled nearest-negative squared distance minus nearest-positive squared distance. The change is AV margin minus cached00 margin. Every distance and margin field matches raw float32 values exactly after Python float conversion.",
+        "AP divides precision sums by the dataset-relevant count, INP uses relevant count / last-positive rank, and CMC divides correct-query counts by valid-query count. Multiplication by 100 is a fixed percentage conversion. No reported metric denominator uses the model prediction maximum, minimum or mean.",
+        "The auditor independently sorted the full eligible gallery for every query/state and recomputed AP, INP, first/last positive ranks and CMC. Maximum per-query AP difference from saved CSV is 4.440892098500626e-16; INP and last ranks match exactly. Feature L2 normalization is a representation choice, not self-normalized performance.",
+        "All 29,412,250 examined distances are finite. There are no positive-vs-negative nearest-distance ties or nearest-positive/nearest-negative ties in either state. Stable gallery-index tie ordering matches the scorer."
+      ],
+      "evidence": [
+        "analyze_rgbnt100_saved_error_margins.py:44",
+        "analyze_rgbnt100_saved_error_margins.py:119",
+        "analyze_rgbnt100_saved_error_margins.py:171",
+        "full_evaluation.py:22",
+        "full_evaluation.py:33",
+        "full_evaluation.py:43",
+        "full_evaluation.py:106",
+        "utils/reid_evaluation.py:40",
+        "analyze_identity_coordinate_three_normal.py:18",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/all_query_nearest_margins.csv:1",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/result.json:32"
+      ]
+    },
+    "C": {
+      "name": "Files, numbers, coverage and execution claims",
+      "status": "PASS",
+      "details": [
+        "All 18 listed artifacts exist, were read directly and match the request byte counts/SHA-256. The request and all 18 inputs are unchanged before and after the audit and at final report creation.",
+        "The retained archive is 397,604,472 bytes with SHA-256 9ed30d96dfa334c7749cb3880b01c03352b8dbe6b99c0fa88bfba5a788ce4be6, matching both completed intake and analysis result. Both selected matrices are complete 1,715 x 8,575 float32 arrays.",
+        "Independent full-gallery ranking covers 3,430 query-states and exactly matches all 72,030 fields in the 1,715-row, 42-column output CSV. The 3,430 historical rows have matching GT metadata, valid flags, eligible/relevant counts, first/last ranks, Rank-1/5/10/20, AP and INP within stated numeric precision.",
+        "All four complete cohort summaries match: both_wrong 49 queries/14 identities, rescued_by_AV 9/5, harmed_by_AV 6/4, both_correct 1651/50. Every camera set, count, mean, median, minimum, maximum, p10/p90, margin-improvement count and AP-improvement count agrees.",
+        "All 23 selected case records match all fields and order: 14 both-wrong identities, 5 rescued identities and 4 harmed identities. Each is the lowest query index for that identity within its cohort. This is 23 cohort/identity cases, not 23 distinct independent identities.",
+        "Historical six-metric values match saved per-query reductions, best_per_query JSON and run best/full_metrics. CMC1..50 and all identity/camera/scene group metrics also match. Both referenced historical runs record COMPLETE. Their neural execution is not newly repeated or inferred from elapsed time.",
+        "The analyzer result reports zero new neural calls/optimizer updates/fitting/progress queries. Its static call path and the independently reproduced artifact values support the CPU saved-analysis scope. The auditor did not rerun analyzer main or collector main."
+      ],
+      "evidence": [
+        "results/rgbnt100_saved_error_cases_CPU_20261015/all_query_nearest_margins.csv:1",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/all_query_nearest_margins.csv:1716",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/result.json:33",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/result.json:197",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/result.json:199",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/selected_visual_cases.json:3",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/selected_visual_cases.json:402",
+        "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/best_per_query.csv:1716",
+        "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42/best_per_query.csv:1716",
+        "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/best_per_query.json:2",
+        "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42/best_per_query.json:2",
+        "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/result.json:31",
+        "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42/result.json:158",
+        "results/preflight/r201av_RGB_frequency_value_decay_20261014_complete_intake.json:1253",
+        "analyze_rgbnt100_saved_error_margins.py:67",
+        "analyze_rgbnt100_saved_error_margins.py:166"
+      ]
+    },
+    "D": {
+      "name": "Called computation and collector source",
+      "status": "PASS",
+      "details": [
+        "Analyzer main reads the fixed archive and saved query tables, calls margins for cached00 and full11 for every query, calls distribution for every cohort, and writes the CSV/selection/result. The imported load/query_rows/table helper is stdlib-only and has no import-time main execution. Independently reproduced outputs match these reachable computations.",
+        "The historical trainer evaluate path calls full_evaluation.full_metrics, which calls evaluate_reid and writes per-query CSV/JSON. The AV state writer also calls full_metrics and writes distances_00/distances to the saved archive. utils.metrics has legacy/visualization helpers, but none is the source of these new margin claims.",
+        "The collector consumes the fixed selected_visual_cases.json without reselection. Query images resolve to query/ and wrong/correct images to bounding_box_test/ under the RGBNT100/rgbir dataset root. Selected wrong names equal the corresponding state top1; correct names are nearest eligible positives using original for harmed cases and AV for the other cases.",
+        "Collector source uses the current Triplets RGB/NI/TI montage order, enforces 768x128 decoded RGB images, and pastes whole images without resizing. Captions/dividers are outside the image area. The SSH body disables CUDA and imports PIL but no model/Torch; imported collect_results contributes OPTIONS and does not run its collector main.",
+        "The source checks basenames, records original source hashes, verifies copied sheet bytes/hashes and removes only the newly created named diagnostic sheet directory after local verification. It does not write dataset images, weights, training state or current progress files.",
+        "Collector execution and visual image content are not audited here. No actual collection receipt is an input; no image-fetch, pixel-content, perceptual error-category or human-evaluation claim is supported by this source review."
+      ],
+      "evidence": [
+        "analyze_rgbnt100_saved_error_margins.py:65",
+        "analyze_rgbnt100_saved_error_margins.py:104",
+        "analyze_rgbnt100_saved_error_margins.py:138",
+        "analyze_rgbnt100_saved_error_margins.py:162",
+        "analyze_rgbnt100_saved_error_margins.py:182",
+        "analyze_identity_coordinate_three_normal.py:24",
+        "analyze_identity_coordinate_three_normal.py:45",
+        "analyze_identity_coordinate_three_normal.py:135",
+        "run_full_official_frozen_anchor_experiment.py:40",
+        "run_full_official_frozen_anchor_experiment.py:175",
+        "full_evaluation.py:48",
+        "full_evaluation.py:61",
+        "evaluate_r201av_RGB_normal_states.py:53",
+        "evaluate_r201av_RGB_normal_states.py:58",
+        "utils/metrics.py:111",
+        "collect_rgbnt100_saved_error_images_CPU.py:31",
+        "collect_rgbnt100_saved_error_images_CPU.py:35",
+        "collect_rgbnt100_saved_error_images_CPU.py:50",
+        "collect_rgbnt100_saved_error_images_CPU.py:70",
+        "collect_rgbnt100_saved_error_images_CPU.py:75",
+        "collect_rgbnt100_saved_error_images_CPU.py:81",
+        "collect_rgbnt100_saved_error_images_CPU.py:95",
+        "experiment_data.py:64",
+        "experiment_data.py:85",
+        "collect_results.py:19",
+        "collect_results.py:161"
+      ]
+    },
+    "E": {
+      "name": "Historical-vs-new scope and claim ceilings",
+      "status": "WARN",
+      "details": [
+        "The new work is a complete saved-data diagnosis on one RGBNT100 normal-input query/gallery split: two cached states over the same 1,715 queries and 8,575 gallery entries. It adds zero neural experiments, training runs, optimizer updates or fitted parameters.",
+        "The original seed42 model was selected at epoch8 from 50 epochs; AV axis seed42 was selected at epoch20 after an additional50 stage from that teacher. Both selected maximum official query/gallery mAP. All six metrics in each row refer to its single historical selected checkpoint.",
+        "The reported original/AV six values are inherited historical results, independently verified from saved arrays/tables here. They are benchmark-selected, not an untouched final test. Recounting the full saved matrices does not remove checkpoint selection or repeated-benchmark exposure.",
+        "The diagnostic sample is deterministic but label-selected and concentrated by error cohort/identity. It cannot establish random-sample prevalence, causal failure mechanism, local-frequency repair efficacy, deployable ground-truth routing, missing-modality performance, multiple-seed stability or other-dataset generalization.",
+        "The analyzer and selection file explicitly state these limits. The unexecuted collector/visual stage and same-family provisional review are scope qualifications, not numerical defects requiring a source fix."
+      ],
+      "evidence": [
+        "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/result.json:25",
+        "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/result.json:27",
+        "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/result.json:37",
+        "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42/result.json:27",
+        "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42/result.json:151",
+        "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42/result.json:153",
+        "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42/result.json:164",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/result.json:16",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/result.json:24",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/result.json:203",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/selected_visual_cases.json:2",
+        "analyze_rgbnt100_saved_error_margins.py:147",
+        "analyze_rgbnt100_saved_error_margins.py:177",
+        "collect_rgbnt100_saved_error_images_CPU.py:95"
+      ]
+    },
+    "F": {
+      "name": "Evaluation type",
+      "status": "PASS",
+      "classification": "real_gt",
+      "details": [
+        "Retrieval correctness, nearest-positive/negative labels, first-match ranks and error cohorts use dataset identity/camera GT: real_gt, with offline diagnostic scope.",
+        "Using cached00 teacher distances as a reference state does not make identity GT model-generated. Teacher equality and input-hash equality are consistency checks, not substitute identity labels or additional independent accuracy experiments.",
+        "The selected list is a real-GT label-selected diagnostic sample. It is not human_eval: no images or human visual judgments were supplied or executed in this audit. No simulation or self-supervised proxy score is being reported."
+      ],
+      "evidence": [
+        "data/datasets/RGBNT100.py:76",
+        "analyze_rgbnt100_saved_error_margins.py:101",
+        "analyze_rgbnt100_saved_error_margins.py:106",
+        "analyze_rgbnt100_saved_error_margins.py:147",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/selected_visual_cases.json:2",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/result.json:203",
+        "collect_rgbnt100_saved_error_images_CPU.py:95"
+      ]
+    }
+  },
+  "claims": [
+    {
+      "claim": "All-query cached00/11 nearest eligible positive/negative, top1, first-positive rank and signed distance margins",
+      "impact": "supported",
+      "evidence": [
+        "analyze_rgbnt100_saved_error_margins.py:44",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/all_query_nearest_margins.csv:1"
+      ]
+    },
+    {
+      "claim": "All four cohort summaries and 23 deterministic lowest-query-per-cohort/identity cases",
+      "impact": "supported",
+      "evidence": [
+        "results/rgbnt100_saved_error_cases_CPU_20261015/result.json:33",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/selected_visual_cases.json:2"
+      ]
+    },
+    {
+      "claim": "Original and AV six retrieval metrics",
+      "impact": "qualified",
+      "qualification": "Verified saved historical metrics for seed42, official-benchmark-selected originalE8 and AVE20; no new inference.",
+      "evidence": [
+        "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/result.json:37",
+        "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42/result.json:164",
+        "results/rgbnt100_saved_error_cases_CPU_20261015/result.json:203"
+      ]
+    },
+    {
+      "claim": "Frozen00 teacher reference equals historical original retrieval behavior",
+      "impact": "qualified",
+      "qualification": "Complete saved GT rankings/metrics agree; weight equality remains historical runtime provenance. No independent original binary inference was performed.",
+      "evidence": [
+        "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42/result.json:27",
+        "evaluate_r201av_RGB_normal_states.py:34",
+        "evaluate_r201av_RGB_normal_states.py:63"
+      ]
+    },
+    {
+      "claim": "No new neural/fitting/progress work in this saved-data analysis and audit",
+      "impact": "supported_for_scoped_local_work",
+      "evidence": [
+        "results/rgbnt100_saved_error_cases_CPU_20261015/result.json:199",
+        "analyze_rgbnt100_saved_error_margins.py:1"
+      ]
+    },
+    {
+      "claim": "Collector source preserves the prescribed selection and decoded montage layout",
+      "impact": "qualified_source_only",
+      "qualification": "No executed collector receipt or pixel review is included.",
+      "evidence": [
+        "collect_rgbnt100_saved_error_images_CPU.py:33",
+        "collect_rgbnt100_saved_error_images_CPU.py:54",
+        "collect_rgbnt100_saved_error_images_CPU.py:95"
+      ]
+    },
+    {
+      "claim": "New inference results, visually established error causes, effective local-frequency fixes, deployable label oracle, or generalization",
+      "impact": "unsupported_and_not_claimed_by_audited_analysis",
+      "evidence": [
+        "results/rgbnt100_saved_error_cases_CPU_20261015/result.json:203"
+      ]
+    }
+  ],
+  "execution_boundary": {
+    "actual_python": "C:\\Users\\gb\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\python.exe",
+    "python_version": "3.13.12 (main, Feb  3 2026, 22:53:26) [MSC v.1944 64 bit (AMD64)]",
+    "flags": [
+      "-X",
+      "utf8",
+      "-B",
+      "-S"
+    ],
+    "execution": "Local stdlib CPU/AST only; project source was read, never imported or executed.",
+    "new_neural_calls": 0,
+    "new_optimizer_updates": 0,
+    "new_fitting": 0,
+    "new_image_collection": 0,
+    "numpy_imports": 0,
+    "torch_imports": 0,
+    "package_installs": 0,
+    "ssh_calls": 0,
+    "gpu_queries": 0,
+    "model_or_weight_loads": 0,
+    "analyzer_main_calls": 0,
+    "collector_main_calls": 0,
+    "active_BC_N5_progress_or_observer_queries": 0,
+    "handles_793_87011_accesses": 0,
+    "writes": [
+      "This single public audit JSON",
+      "Ignored audit-local trace and numerical reproduction artifacts"
+    ],
+    "excluded": [
+      "New inference or training validation",
+      "New remote dataset enumeration",
+      "Feature dot-product or weight-tensor recomputation",
+      "Other cached states10/01 ranking",
+      "Collector execution/receipt/pixels/human visual review",
+      "Current BC/N5 state or progress"
+    ]
+  },
+  "deterministic_checks": {
+    "status": "PASS",
+    "requested_artifact_count": 18,
+    "all_requested_inputs_directly_read": true,
+    "all_requested_hashes_match_request": true,
+    "input_files_before": {
+      "analyze_rgbnt100_saved_error_margins.py": {
+        "bytes": 11062,
+        "sha256": "1a14f615e65c80371f2cadacbaff9a905db692ddb68255b6f0a7a1d41ac80439"
+      },
+      "collect_rgbnt100_saved_error_images_CPU.py": {
+        "bytes": 6114,
+        "sha256": "157261034c718ffe875d3c1b451c54106492cdb8508a2d13d858189b45e6495c"
+      },
+      "results/rgbnt100_saved_error_cases_CPU_20261015/result.json": {
+        "bytes": 6775,
+        "sha256": "9e683641121f52cd0f6863523670efe2e13ea4e237c0e8bbd72b3d7ae4b4b066"
+      },
+      "results/rgbnt100_saved_error_cases_CPU_20261015/all_query_nearest_margins.csv": {
+        "bytes": 689463,
+        "sha256": "c502bc93abc38ad7e7f4693ed7fd5e0fb7e7e16828bd48a0cac45cac98631491"
+      },
+      "results/rgbnt100_saved_error_cases_CPU_20261015/selected_visual_cases.json": {
+        "bytes": 12544,
+        "sha256": "6e9a9081ac725cf0dbd6764d9598e86ecb3294b19297184403a52a46f7fb5217"
+      },
+      "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/result.json": {
+        "bytes": 37740,
+        "sha256": "6281020fab561c83e9d5d162bf692c3d2a7048923886e4750cb605d0dc1dc9f6"
+      },
+      "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/best_per_query.csv": {
+        "bytes": 159543,
+        "sha256": "8c02dccd8da9f549791315d2eb3e03d811bd3ba3158116e2110c2872ace43f57"
+      },
+      "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/best_per_query.json": {
+        "bytes": 15651,
+        "sha256": "706f1eb2db0ec72e75d7c054faddfaf2a6ff72e20c3f4f9130a59432e2d902ba"
+      },
+      "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42/result.json": {
+        "bytes": 48147,
+        "sha256": "eda348022fa64dda8e4bc3a19bac7140c02785b6f06e2a160a05d0b403c0637b"
+      },
+      "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42/best_per_query.csv": {
+        "bytes": 158670,
+        "sha256": "8f5236bb9d661bdc84dce00b5012b9d18ae707b2e385d54b22536c35c19c4799"
+      },
+      "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42/best_per_query.json": {
+        "bytes": 15610,
+        "sha256": "c0eaea9c6b22147ab175d79790cbfc8c3dcd54f5d1bdae32c2c96d045b5b36f3"
+      },
+      "results/preflight/r201av_RGB_frequency_value_decay_20261014_complete_intake.json": {
+        "bytes": 66266,
+        "sha256": "2116351db0fe9dbe01005ce88c4da100cb85eb0234fe73a3cdef20fe13e51b4c"
+      },
+      "results/preflight/r201av_closed_normal_integrity_audit_20261014.json": {
+        "bytes": 178730,
+        "sha256": "4a277db4b49ad9cf0db252f84b40925e27fe218bbb0b69dd138241fd98e90f62"
+      },
+      "data/datasets/RGBNT100.py": {
+        "bytes": 3407,
+        "sha256": "cef47b0a1dcc9bc434f6c3612e547db41fd8af2b1d7e953323ea80ffb6eb705f"
+      },
+      "experiment_data.py": {
+        "bytes": 4032,
+        "sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3"
+      },
+      "official_training_data.py": {
+        "bytes": 1528,
+        "sha256": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e"
+      },
+      "utils/metrics.py": {
+        "bytes": 17912,
+        "sha256": "8f218e8c6e148d0397c81573858e3df58fc89bb1cf382ccbbf1d8339bf677d31"
+      },
+      "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100_r201av_axis_shared_s42\\states_raw\\normal_states.npz": {
+        "bytes": 397604472,
+        "sha256": "9ed30d96dfa334c7749cb3880b01c03352b8dbe6b99c0fa88bfba5a788ce4be6"
+      }
+    },
+    "input_files_after": {
+      "analyze_rgbnt100_saved_error_margins.py": {
+        "bytes": 11062,
+        "sha256": "1a14f615e65c80371f2cadacbaff9a905db692ddb68255b6f0a7a1d41ac80439"
+      },
+      "collect_rgbnt100_saved_error_images_CPU.py": {
+        "bytes": 6114,
+        "sha256": "157261034c718ffe875d3c1b451c54106492cdb8508a2d13d858189b45e6495c"
+      },
+      "results/rgbnt100_saved_error_cases_CPU_20261015/result.json": {
+        "bytes": 6775,
+        "sha256": "9e683641121f52cd0f6863523670efe2e13ea4e237c0e8bbd72b3d7ae4b4b066"
+      },
+      "results/rgbnt100_saved_error_cases_CPU_20261015/all_query_nearest_margins.csv": {
+        "bytes": 689463,
+        "sha256": "c502bc93abc38ad7e7f4693ed7fd5e0fb7e7e16828bd48a0cac45cac98631491"
+      },
+      "results/rgbnt100_saved_error_cases_CPU_20261015/selected_visual_cases.json": {
+        "bytes": 12544,
+        "sha256": "6e9a9081ac725cf0dbd6764d9598e86ecb3294b19297184403a52a46f7fb5217"
+      },
+      "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/result.json": {
+        "bytes": 37740,
+        "sha256": "6281020fab561c83e9d5d162bf692c3d2a7048923886e4750cb605d0dc1dc9f6"
+      },
+      "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/best_per_query.csv": {
+        "bytes": 159543,
+        "sha256": "8c02dccd8da9f549791315d2eb3e03d811bd3ba3158116e2110c2872ace43f57"
+      },
+      "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/best_per_query.json": {
+        "bytes": 15651,
+        "sha256": "706f1eb2db0ec72e75d7c054faddfaf2a6ff72e20c3f4f9130a59432e2d902ba"
+      },
+      "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42/result.json": {
+        "bytes": 48147,
+        "sha256": "eda348022fa64dda8e4bc3a19bac7140c02785b6f06e2a160a05d0b403c0637b"
+      },
+      "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42/best_per_query.csv": {
+        "bytes": 158670,
+        "sha256": "8f5236bb9d661bdc84dce00b5012b9d18ae707b2e385d54b22536c35c19c4799"
+      },
+      "results/r201av_RGB_frequency_value_decay_20261014/RGBNT100/training/RGBNT100_r201av_axis_shared_s42/best_per_query.json": {
+        "bytes": 15610,
+        "sha256": "c0eaea9c6b22147ab175d79790cbfc8c3dcd54f5d1bdae32c2c96d045b5b36f3"
+      },
+      "results/preflight/r201av_RGB_frequency_value_decay_20261014_complete_intake.json": {
+        "bytes": 66266,
+        "sha256": "2116351db0fe9dbe01005ce88c4da100cb85eb0234fe73a3cdef20fe13e51b4c"
+      },
+      "results/preflight/r201av_closed_normal_integrity_audit_20261014.json": {
+        "bytes": 178730,
+        "sha256": "4a277db4b49ad9cf0db252f84b40925e27fe218bbb0b69dd138241fd98e90f62"
+      },
+      "data/datasets/RGBNT100.py": {
+        "bytes": 3407,
+        "sha256": "cef47b0a1dcc9bc434f6c3612e547db41fd8af2b1d7e953323ea80ffb6eb705f"
+      },
+      "experiment_data.py": {
+        "bytes": 4032,
+        "sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3"
+      },
+      "official_training_data.py": {
+        "bytes": 1528,
+        "sha256": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e"
+      },
+      "utils/metrics.py": {
+        "bytes": 17912,
+        "sha256": "8f218e8c6e148d0397c81573858e3df58fc89bb1cf382ccbbf1d8339bf677d31"
+      },
+      "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100_r201av_axis_shared_s42\\states_raw\\normal_states.npz": {
+        "bytes": 397604472,
+        "sha256": "9ed30d96dfa334c7749cb3880b01c03352b8dbe6b99c0fa88bfba5a788ce4be6"
+      }
+    },
+    "inputs_before_after_unchanged": true,
+    "request_before": {
+      "bytes": 6100,
+      "sha256": "45b988f86b2221976ef58ac938e2964c5d2067eada56e57d4d1485cefe21057d"
+    },
+    "request_after": {
+      "bytes": 6100,
+      "sha256": "45b988f86b2221976ef58ac938e2964c5d2067eada56e57d4d1485cefe21057d"
+    },
+    "request_unchanged": true,
+    "supplemental_sources_read_static_only": {
+      "analyze_identity_coordinate_three_normal.py": {
+        "bytes": 9675,
+        "sha256": "4d3e5805d3de3eaae58ff7027241e147e7f41c6eb935dc7f76e34865e7270d55",
+        "read_mode": "static_source_only_no_import"
+      },
+      "full_evaluation.py": {
+        "bytes": 9448,
+        "sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+        "read_mode": "static_source_only_no_import"
+      },
+      "utils/reid_evaluation.py": {
+        "bytes": 1947,
+        "sha256": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+        "read_mode": "static_source_only_no_import"
+      },
+      "evaluate_r201av_RGB_normal_states.py": {
+        "bytes": 5601,
+        "sha256": "3758c7f115096c532e5c1c9a35d1143e3af824412a1c81d9dcc6b85131af38f7",
+        "read_mode": "static_source_only_no_import"
+      },
+      "evaluate_r201as_RGB_normal_states.py": {
+        "bytes": 5461,
+        "sha256": "7650f48c47b65ae3ca059cd1bb2e88bc3151361f77061e35ab780fcb9af6154a",
+        "read_mode": "static_source_only_no_import"
+      },
+      "run_full_official_frozen_anchor_experiment.py": {
+        "bytes": 11369,
+        "sha256": "8741f124c3f30c338ee7dbd887d30b003f36e1c6b9dbb27525bfb8ed22a8afe4",
+        "read_mode": "static_source_only_no_import"
+      },
+      "original_identity_anchor.py": {
+        "bytes": 5079,
+        "sha256": "847b6adf93eb44ff119585e5548e1ef52115bcd59d8e87cdb4735b541d390bcb",
+        "read_mode": "static_source_only_no_import"
+      },
+      "run_r201av_RGB_frequency_value_decay.py": {
+        "bytes": 4683,
+        "sha256": "1d2b950cf5faebc56665111dc457b3ea6b684a9d3cad23d41e022d78e435ac31",
+        "read_mode": "static_source_only_no_import"
+      },
+      "collect_results.py": {
+        "bytes": 9129,
+        "sha256": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+        "read_mode": "static_source_only_no_import"
+      },
+      "bounded_identity_descriptor.py": {
+        "bytes": 3783,
+        "sha256": "2b90b78b077d6f730da70c6e89e0668a6b07dce2bc238807bfb459cbbf559d7a",
+        "read_mode": "static_source_only_no_import"
+      }
+    },
+    "raw_archive": {
+      "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100_r201av_axis_shared_s42\\states_raw\\normal_states.npz",
+      "bytes": 397604472,
+      "sha256": "9ed30d96dfa334c7749cb3880b01c03352b8dbe6b99c0fa88bfba5a788ce4be6",
+      "arrays_ranked": [
+        "distances_00.npy",
+        "distances.npy"
+      ],
+      "shape_each": [
+        1715,
+        8575
+      ],
+      "dtype": "<f4"
+    },
+    "distance_elements_recomputed": 29412250,
+    "query_state_rankings": 3430,
+    "output_rows": 1715,
+    "output_columns": 42,
+    "output_fields_compared": 72030,
+    "per_output_field_coverage": {
+      "query_index": 1715,
+      "name": 1715,
+      "identity": 1715,
+      "camera": 1715,
+      "original_Rank1": 1715,
+      "original_first_match": 1715,
+      "original_margin": 1715,
+      "original_AP": 1715,
+      "original_top1_index": 1715,
+      "original_top1_name": 1715,
+      "original_top1_identity": 1715,
+      "original_top1_camera": 1715,
+      "original_positive_index": 1715,
+      "original_positive_name": 1715,
+      "original_positive_identity": 1715,
+      "original_positive_camera": 1715,
+      "original_negative_index": 1715,
+      "original_negative_name": 1715,
+      "original_negative_identity": 1715,
+      "original_negative_camera": 1715,
+      "original_positive_distance": 1715,
+      "original_negative_distance": 1715,
+      "AV_Rank1": 1715,
+      "AV_first_match": 1715,
+      "AV_margin": 1715,
+      "AV_AP": 1715,
+      "AV_top1_index": 1715,
+      "AV_top1_name": 1715,
+      "AV_top1_identity": 1715,
+      "AV_top1_camera": 1715,
+      "AV_positive_index": 1715,
+      "AV_positive_name": 1715,
+      "AV_positive_identity": 1715,
+      "AV_positive_camera": 1715,
+      "AV_negative_index": 1715,
+      "AV_negative_name": 1715,
+      "AV_negative_identity": 1715,
+      "AV_negative_camera": 1715,
+      "AV_positive_distance": 1715,
+      "AV_negative_distance": 1715,
+      "cohort": 1715,
+      "margin_change": 1715
+    },
+    "comparisons_by_category": {
+      "npy_header": 40,
+      "scope": 9,
+      "metadata": 6,
+      "filename_gt": 30870,
+      "saved_csv_raw_query_index": 3430,
+      "saved_csv_raw_identity": 3430,
+      "saved_csv_raw_camera": 3430,
+      "saved_csv_raw_scene": 3430,
+      "saved_csv_raw_kept_gallery": 3430,
+      "saved_csv_raw_relevant_gallery": 3430,
+      "saved_csv_raw_first_match": 3430,
+      "saved_csv_raw_name": 3430,
+      "saved_csv_raw_valid": 3430,
+      "saved_csv_raw_CMC": 13720,
+      "output_csv_schema": 1715,
+      "output_csv_field_query_index": 1715,
+      "output_csv_field_name": 1715,
+      "output_csv_field_identity": 1715,
+      "output_csv_field_camera": 1715,
+      "output_csv_field_original_Rank1": 1715,
+      "output_csv_field_original_first_match": 1715,
+      "output_csv_field_original_margin": 1715,
+      "output_csv_field_original_AP": 1715,
+      "output_csv_field_original_top1_index": 1715,
+      "output_csv_field_original_top1_name": 1715,
+      "output_csv_field_original_top1_identity": 1715,
+      "output_csv_field_original_top1_camera": 1715,
+      "output_csv_field_original_positive_index": 1715,
+      "output_csv_field_original_positive_name": 1715,
+      "output_csv_field_original_positive_identity": 1715,
+      "output_csv_field_original_positive_camera": 1715,
+      "output_csv_field_original_negative_index": 1715,
+      "output_csv_field_original_negative_name": 1715,
+      "output_csv_field_original_negative_identity": 1715,
+      "output_csv_field_original_negative_camera": 1715,
+      "output_csv_field_original_positive_distance": 1715,
+      "output_csv_field_original_negative_distance": 1715,
+      "output_csv_field_AV_Rank1": 1715,
+      "output_csv_field_AV_first_match": 1715,
+      "output_csv_field_AV_margin": 1715,
+      "output_csv_field_AV_AP": 1715,
+      "output_csv_field_AV_top1_index": 1715,
+      "output_csv_field_AV_top1_name": 1715,
+      "output_csv_field_AV_top1_identity": 1715,
+      "output_csv_field_AV_top1_camera": 1715,
+      "output_csv_field_AV_positive_index": 1715,
+      "output_csv_field_AV_positive_name": 1715,
+      "output_csv_field_AV_positive_identity": 1715,
+      "output_csv_field_AV_positive_camera": 1715,
+      "output_csv_field_AV_negative_index": 1715,
+      "output_csv_field_AV_negative_name": 1715,
+      "output_csv_field_AV_negative_identity": 1715,
+      "output_csv_field_AV_negative_camera": 1715,
+      "output_csv_field_AV_positive_distance": 1715,
+      "output_csv_field_AV_negative_distance": 1715,
+      "output_csv_field_cohort": 1715,
+      "output_csv_field_margin_change": 1715,
+      "cohort_full_summary": 4,
+      "selection_wrong_equals_top1": 23,
+      "selection_count": 1,
+      "selection_all_fields": 1,
+      "selection_identity_consistency": 2,
+      "historical_status": 2,
+      "historical_six_summary": 12,
+      "historical_six_run_best": 12,
+      "historical_six_run_full_metrics": 12,
+      "historical_six_analysis": 12,
+      "historical_CMC50": 100,
+      "historical_valid_queries": 2,
+      "historical_group_values": 6,
+      "historical_group_count": 118,
+      "historical_group_metrics": 708,
+      "archive_provenance": 3,
+      "source_provenance": 1,
+      "analysis_execution_claims": 4,
+      "analysis_scope": 1,
+      "input_unchanged": 19,
+      "runtime_import_boundary": 1
+    },
+    "comparisons_total": 150304,
+    "max_absolute_errors": {
+      "historical_six_summary": 1.4210854715202004e-14,
+      "historical_six_run_best": 1.4210854715202004e-14,
+      "historical_six_run_full_metrics": 1.4210854715202004e-14,
+      "historical_six_analysis": 1.4210854715202004e-14,
+      "historical_CMC50": 1.4210854715202004e-14,
+      "historical_group_metrics": 2.842170943040401e-14
+    },
+    "mismatch_count": 0,
+    "states": {
+      "original": {
+        "queries": 1715,
+        "distances_examined": 14706125,
+        "nonfinite": 0,
+        "minimum_distance": 3.4809112548828125e-05,
+        "maximum_distance": 1.4195560216903687,
+        "top1_errors": 58,
+        "positive_negative_distance_ties": 0,
+        "nearest_positive_ties": 0,
+        "nearest_negative_ties": 0,
+        "first_match_max_error": 0,
+        "raw_AP_max_error_vs_saved": 4.440892098500626e-16,
+        "raw_INP_max_error_vs_saved": 0.0,
+        "raw_AP_nonidentical_rows": 502,
+        "raw_AP_rows_over_1e_10": 0,
+        "raw_INP_rows_over_1e_10": 0,
+        "raw_last_match_mismatches": 0
+      },
+      "AV": {
+        "queries": 1715,
+        "distances_examined": 14706125,
+        "nonfinite": 0,
+        "minimum_distance": 3.409385681152344e-05,
+        "maximum_distance": 1.4259471893310547,
+        "top1_errors": 55,
+        "positive_negative_distance_ties": 0,
+        "nearest_positive_ties": 0,
+        "nearest_negative_ties": 0,
+        "first_match_max_error": 0,
+        "raw_AP_max_error_vs_saved": 3.3306690738754696e-16,
+        "raw_INP_max_error_vs_saved": 0.0,
+        "raw_AP_nonidentical_rows": 495,
+        "raw_AP_rows_over_1e_10": 0,
+        "raw_INP_rows_over_1e_10": 0,
+        "raw_last_match_mismatches": 0
+      }
+    },
+    "eligibility": [
+      {
+        "excluded_same_ID_same_camera": 25,
+        "kept": 8550,
+        "relevant": 50,
+        "queries": 45
+      },
+      {
+        "excluded_same_ID_same_camera": 25,
+        "kept": 8550,
+        "relevant": 75,
+        "queries": 80
+      },
+      {
+        "excluded_same_ID_same_camera": 25,
+        "kept": 8550,
+        "relevant": 100,
+        "queries": 50
+      },
+      {
+        "excluded_same_ID_same_camera": 25,
+        "kept": 8550,
+        "relevant": 125,
+        "queries": 60
+      },
+      {
+        "excluded_same_ID_same_camera": 25,
+        "kept": 8550,
+        "relevant": 150,
+        "queries": 560
+      },
+      {
+        "excluded_same_ID_same_camera": 25,
+        "kept": 8550,
+        "relevant": 175,
+        "queries": 920
+      }
+    ],
+    "cohorts": {
+      "both_wrong": {
+        "queries": 49,
+        "identities": 14,
+        "cameras": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          7
+        ],
+        "original_margin": {
+          "count": 49,
+          "mean": -0.043877008009930045,
+          "median": -0.03578054904937744,
+          "minimum": -0.15101468563079834,
+          "maximum": -0.000889897346496582,
+          "p10": -0.1117391586303711,
+          "p90": -0.011521458625793457
+        },
+        "AV_margin": {
+          "count": 49,
+          "mean": -0.04502631693470235,
+          "median": -0.03659498691558838,
+          "minimum": -0.15108978748321533,
+          "maximum": -0.0016758441925048828,
+          "p10": -0.11026811599731445,
+          "p90": -0.009403228759765625
+        },
+        "margin_change": {
+          "count": 49,
+          "mean": -0.0011493089247723014,
+          "median": 0.0004891157150268555,
+          "minimum": -0.027634382247924805,
+          "maximum": 0.03181886672973633,
+          "p10": -0.024443864822387695,
+          "p90": 0.015403509140014648
+        },
+        "margin_improved": 26,
+        "AP_improved": 33
+      },
+      "rescued_by_AV": {
+        "queries": 9,
+        "identities": 5,
+        "cameras": [
+          1,
+          5,
+          6,
+          7
+        ],
+        "original_margin": {
+          "count": 9,
+          "mean": -0.015166348881191678,
+          "median": -0.012195467948913574,
+          "minimum": -0.029291152954101562,
+          "maximum": -0.004773259162902832,
+          "p10": -0.029291152954101562,
+          "p90": -0.00639188289642334
+        },
+        "AV_margin": {
+          "count": 9,
+          "mean": 0.0061414506700303816,
+          "median": 0.004630446434020996,
+          "minimum": 0.0008046627044677734,
+          "maximum": 0.018166661262512207,
+          "p10": 0.0008046627044677734,
+          "p90": 0.013097405433654785
+        },
+        "margin_change": {
+          "count": 9,
+          "mean": 0.02130779955122206,
+          "median": 0.028807520866394043,
+          "minimum": 0.007196545600891113,
+          "maximum": 0.030990123748779297,
+          "p10": 0.007196545600891113,
+          "p90": 0.030417919158935547
+        },
+        "margin_improved": 9,
+        "AP_improved": 9
+      },
+      "harmed_by_AV": {
+        "queries": 6,
+        "identities": 4,
+        "cameras": [
+          0,
+          1,
+          2
+        ],
+        "original_margin": {
+          "count": 6,
+          "mean": 0.005102574825286865,
+          "median": 0.0038906335830688477,
+          "minimum": 0.0022388696670532227,
+          "maximum": 0.01052999496459961,
+          "p10": 0.0022388696670532227,
+          "p90": 0.007816433906555176
+        },
+        "AV_margin": {
+          "count": 6,
+          "mean": -0.008024235566457113,
+          "median": -0.00984203815460205,
+          "minimum": -0.010943055152893066,
+          "maximum": -0.0013434886932373047,
+          "p10": -0.010943055152893066,
+          "p90": -0.005257010459899902
+        },
+        "margin_change": {
+          "count": 6,
+          "mean": -0.013126810391743978,
+          "median": -0.013174295425415039,
+          "minimum": -0.02011740207672119,
+          "maximum": -0.004673600196838379,
+          "p10": -0.02011740207672119,
+          "p90": -0.013073444366455078
+        },
+        "margin_improved": 0,
+        "AP_improved": 0
+      },
+      "both_correct": {
+        "queries": 1651,
+        "identities": 50,
+        "cameras": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "original_margin": {
+          "count": 1651,
+          "mean": 0.15031921177615115,
+          "median": 0.14666080474853516,
+          "minimum": 0.0017524957656860352,
+          "maximum": 0.44707632064819336,
+          "p10": 0.0497208833694458,
+          "p90": 0.25481104850769043
+        },
+        "AV_margin": {
+          "count": 1651,
+          "mean": 0.1584146510175616,
+          "median": 0.15419316291809082,
+          "minimum": 0.0002110004425048828,
+          "maximum": 0.422666072845459,
+          "p10": 0.05584216117858887,
+          "p90": 0.27010297775268555
+        },
+        "margin_change": {
+          "count": 1651,
+          "mean": 0.008095439241410457,
+          "median": 0.005815267562866211,
+          "minimum": -0.026069998741149902,
+          "maximum": 0.07383203506469727,
+          "p10": -0.005318164825439453,
+          "p90": 0.024746417999267578
+        },
+        "margin_improved": 1185,
+        "AP_improved": 768
+      }
+    },
+    "selected_case_count": 23,
+    "historical": {
+      "original": {
+        "six_reduced_from_saved_csv": {
+          "mAP": 85.76856710316946,
+          "mINP": 61.84590828355626,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.37609329446065,
+          "Rank-20": 97.72594752186589
+        },
+        "six_from_independent_raw_ranking": {
+          "mAP": 85.76856710316946,
+          "mINP": 61.84590828355626,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.37609329446065,
+          "Rank-20": 97.72594752186589
+        },
+        "selected_epoch": 8,
+        "seed": 42,
+        "status": "COMPLETE",
+        "epochs": 50,
+        "checkpoint_rule": "Maximum full official query/gallery mAP across 50 epochs; ties keep earliest epoch",
+        "selection_limitation": "Official benchmark is used for checkpoint selection; this is not an untouched independent final test"
+      },
+      "AV": {
+        "six_reduced_from_saved_csv": {
+          "mAP": 86.1546433016181,
+          "mINP": 62.560794668209745,
+          "Rank-1": 96.7930029154519,
+          "Rank-5": 97.43440233236151,
+          "Rank-10": 97.78425655976676,
+          "Rank-20": 98.25072886297376
+        },
+        "six_from_independent_raw_ranking": {
+          "mAP": 86.1546433016181,
+          "mINP": 62.560794668209745,
+          "Rank-1": 96.7930029154519,
+          "Rank-5": 97.43440233236151,
+          "Rank-10": 97.78425655976676,
+          "Rank-20": 98.25072886297376
+        },
+        "selected_epoch": 20,
+        "seed": 42,
+        "status": "COMPLETE",
+        "epochs": 50,
+        "checkpoint_rule": "Maximum full official query/gallery mAP across 50 epochs; ties keep earliest epoch",
+        "selection_limitation": "Official benchmark is used for checkpoint selection; this is not an untouched independent final test"
+      }
+    },
+    "saved_per_query_rows_checked": 3430,
+    "saved_per_query_fields_per_row": 16,
+    "raw_AP_tolerance": 1e-10,
+    "raw_INP_tolerance": 1e-10,
+    "margin_output_comparison": "exact_float_equality",
+    "selection_all_fields_and_order_exact": true,
+    "selection_rule": "Minimum query_index within each non-correct cohort and identity; cohort order both_wrong/rescued_by_AV/harmed_by_AV, then ascending identity.",
+    "selection_indices": [
+      {
+        "case": 1,
+        "cohort": "both_wrong",
+        "identity": 506,
+        "query_index": 95
+      },
+      {
+        "case": 2,
+        "cohort": "both_wrong",
+        "identity": 510,
+        "query_index": 160
+      },
+      {
+        "case": 3,
+        "cohort": "both_wrong",
+        "identity": 512,
+        "query_index": 210
+      },
+      {
+        "case": 4,
+        "cohort": "both_wrong",
+        "identity": 514,
+        "query_index": 215
+      },
+      {
+        "case": 5,
+        "cohort": "both_wrong",
+        "identity": 536,
+        "query_index": 585
+      },
+      {
+        "case": 6,
+        "cohort": "both_wrong",
+        "identity": 542,
+        "query_index": 680
+      },
+      {
+        "case": 7,
+        "cohort": "both_wrong",
+        "identity": 548,
+        "query_index": 765
+      },
+      {
+        "case": 8,
+        "cohort": "both_wrong",
+        "identity": 558,
+        "query_index": 953
+      },
+      {
+        "case": 9,
+        "cohort": "both_wrong",
+        "identity": 562,
+        "query_index": 1029
+      },
+      {
+        "case": 10,
+        "cohort": "both_wrong",
+        "identity": 568,
+        "query_index": 1110
+      },
+      {
+        "case": 11,
+        "cohort": "both_wrong",
+        "identity": 578,
+        "query_index": 1276
+      },
+      {
+        "case": 12,
+        "cohort": "both_wrong",
+        "identity": 580,
+        "query_index": 1315
+      },
+      {
+        "case": 13,
+        "cohort": "both_wrong",
+        "identity": 582,
+        "query_index": 1360
+      },
+      {
+        "case": 14,
+        "cohort": "both_wrong",
+        "identity": 600,
+        "query_index": 1684
+      },
+      {
+        "case": 15,
+        "cohort": "rescued_by_AV",
+        "identity": 510,
+        "query_index": 162
+      },
+      {
+        "case": 16,
+        "cohort": "rescued_by_AV",
+        "identity": 536,
+        "query_index": 588
+      },
+      {
+        "case": 17,
+        "cohort": "rescued_by_AV",
+        "identity": 538,
+        "query_index": 596
+      },
+      {
+        "case": 18,
+        "cohort": "rescued_by_AV",
+        "identity": 542,
+        "query_index": 701
+      },
+      {
+        "case": 19,
+        "cohort": "rescued_by_AV",
+        "identity": 600,
+        "query_index": 1682
+      },
+      {
+        "case": 20,
+        "cohort": "harmed_by_AV",
+        "identity": 558,
+        "query_index": 951
+      },
+      {
+        "case": 21,
+        "cohort": "harmed_by_AV",
+        "identity": 560,
+        "query_index": 989
+      },
+      {
+        "case": 22,
+        "cohort": "harmed_by_AV",
+        "identity": 562,
+        "query_index": 1028
+      },
+      {
+        "case": 23,
+        "cohort": "harmed_by_AV",
+        "identity": 578,
+        "query_index": 1275
+      }
+    ],
+    "numeric_script": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-15_RGBNT100_saved_errors_run01\\audit_independent.py",
+    "numeric_script_sha256": "6f1338e0517b5be3f49a8d86e059868e7ffd4f0a61fe555877dd96e553d2dd3d",
+    "numeric_report": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-15_RGBNT100_saved_errors_run01\\independent_recomputation.json",
+    "numeric_report_sha256": "03dd918d101a8c7e80782ed97b46102420ee6db20ed80660e9692958692f6923",
+    "numeric_execution_exit_code": 0
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "status": "F_ONLY_LOCAL_READING_CORE_PREPARED_NOT_REVIEWED_NO_RUNNER_NO_NN",
+  "at": "2026-10-15T09:42:19+08:00",
+  "purpose": "Test whether local supports retained through frequency interaction produce useful vehicle identity evidence beyond current global band pooling.",
+  "source_files": [
+    "local_patch_regions.py",
+    "local_band_evidence_reading.py"
+  ],
+  "source_sha256": {
+    "local_patch_regions.py": "c13e57993ae1ecb75bf10c6f169077e99c4455f9f3d4d0a1f66d0f9f22866146",
+    "local_band_evidence_reading.py": "970bde342cfdad4583345b4e005f0774e770a61848ede9f42bd7086b52a07461"
+  },
+  "hypothesis_not_conclusion": "Current F.prepare collapses each source-band to one global vector before cross_band. Keeping four fixed spatial regions until after cross-band attention and the existing nonlinear output may retain different identity cues; no proof this is a cause of current errors or an improvement.",
+  "source_basis": [
+    "axis_collaboration.py:60-83",
+    "run_r201as_RGB_query_normalization.py:28-44",
+    "run_r201av_RGB_frequency_value_decay.py:26-61"
+  ],
+  "intervention": {
+    "grid_controls": [
+      1,
+      2
+    ],
+    "patch_grid": [
+      8,
+      16
+    ],
+    "regions": 4,
+    "patches_per_region": 32,
+    "modality_reader": "Original all-position ModalityAxisExpert.read unchanged, including existing projected-query normalization.",
+    "frequency_reader": "Structured F: L/M/H from the same source and region. Ordinary control: same-index region mixed across sources. Both use existing nonlinear output before region mean; no semantic part alignment claim.",
+    "ordinary": "Same region setting, existing mixed-source access, full unfiltered ordinary evidence; not relabeled as a literal DeMo+single-frequency baseline.",
+    "preserved": "M reader/parameters, source/band value encoders and attention weights, FFT, global conditional round/router, PM/PF/PI, gates, descriptor, loss, optimizer. Ordinary receives the same region setting.",
+    "new_learned_parameters": 0,
+    "new_persistent_state_keys": 0,
+    "implementation": "Two process-local F.prepare/F.read bindings and one nonpersistent integer-index buffer. No M binding or buffer."
+  },
+  "runtime_not_yet_verified": [
+    "Install on actual chosen parent; exact parameter identity/state key assertions.",
+    "Grid1 old/new strict tensor/state/CPU-CUDA RNG and four-state descriptor parity at native settings.",
+    "Grid2 actual finite independent/conditional outputs, all required parameter gradients, real native Adam updates/strict reload/frozen teacher and same paired sampler.",
+    "Actual full official training/checkpoint selection, six metrics, 11-00 rescue/harm, best/last curves and resource cost.",
+    "Ordinary matched setting and full final comparison; fixed regions are not semantic alignment."
+  ],
+  "data": {
+    "RGBNT100": {
+      "train": 8675,
+      "identities": 50,
+      "query": 1715,
+      "gallery": 8575
+    },
+    "MSVR310": {
+      "train": 1032,
+      "identities": 155,
+      "query": 591,
+      "gallery": 1055
+    }
+  },
+  "first_control": "One factor: existing global-grid1 vs region-grid2 on one actually closed and frozen parent recipe. Do not simultaneously change losses, widths, correction budget or teacher.",
+  "parent_recipe": "Not selected by this core. Current BC and its original observation must close first; bounded N5 confirmation when near remains prior admitted plan. No automatic launch from this artifact.",
+  "future_mechanism_controls": "Only after a positive first result: equal-capacity ordinary local reading, noFFT and broken across-band local correspondence. Not implemented or admitted by this core.",
+  "cost_limit": "No added learned parameters or descriptor dimensions; F spatial query/output and cross-band batches increase with region count. M unchanged. Runtime cost unmeasured.",
+  "CPU_proof": "results/preflight/local_band_reading_F_only_region_layout_CPU_actual_20261015.json",
+  "runtime": "NOT_RUN",
+  "new_neural_calls": 0,
+  "no_existing_source_edits": false,
+  "scope": "Normal vehicle investigation only. Preserve RGBNT201 K; only26physicalGPU2/3 one/card; no new training during BC, no missing design/49/T-P. Full goal remains ACTIVE_UNMET.",
+  "revision": "R2_F_ONLY",
+  "scope_change_basis": {
+    "visual_observations": "results/rgbnt100_saved_error_cases_CPU_20261015/visual_observations.json",
+    "reason": "Actual fixed-case montages contain differing vehicle views across RGB/NIR and TIR. Paired augmentations do not prove cross-sensor part registration. Preserve the original global M reader; test local correspondence only within each source across spatial bands.",
+    "limit": "23 selected visual cases; qualitative assistant inspection, no label correction or proof that local reading improves retrieval.",
+    "R1_history": "results/preflight/local_band_reading_core_R1_before_F_only_scope_20261015/retained_R1_manifest.json",
+    "R1_verdict": "Source-correct and untrained R1 retained. R2 narrows the hypothesis from data, not a retrospective R1 failure."
+  },
+  "active_BC_and_N5_and_original_axis_sources_unchanged": true,
+  "metadata_correction": "R2 edits its own previously published local core; active BC/N5/original axis sources remain unchanged. Structured F is source-preserving; ordinary control mixes same-index regions across sources without a semantic correspondence claim. Tensor logic unchanged."
+}
