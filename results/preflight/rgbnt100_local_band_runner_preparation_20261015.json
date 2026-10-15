@@ -1,0 +1,59 @@
+{
+  "status": "LOCAL_BAND_TRAIN_PARITY_EVAL_ENTRY_SOURCE_PREPARED_NOT_REVIEWED_NOT_DEPLOYED_NOT_RUN",
+  "at": "2026-10-15T10:05:12+08:00",
+  "source_files": [
+    "rgbnt100_local_band_recipe.py",
+    "run_rgbnt100_local_band_reading.py",
+    "check_rgbnt100_local_band_parity.py",
+    "evaluate_rgbnt100_local_band_states.py"
+  ],
+  "source_sha256": {
+    "rgbnt100_local_band_recipe.py": "a3a17b05ebebad64bbb67d3f8f0c577d3d6aea755a28d62be5fa238d26ac7d89",
+    "run_rgbnt100_local_band_reading.py": "4bcc29f8ffc0be19571c4e81bbefd71bb88463b45114d9a998b6d5a1883855c7",
+    "check_rgbnt100_local_band_parity.py": "690119828b66301bfd6ffc8852f0784a43c09bf826f66c17204d639c942409a9",
+    "evaluate_rgbnt100_local_band_states.py": "f79a6811d252c106c9e0267fd4d5761cd021309f5d641bc6f966eb703de3a86a"
+  },
+  "parent": "AV or BC only, pending actual BC closure/audit and prior finite N5 decision; no automatic selection or launch.",
+  "single_factor": "F internal grid1/global vs grid2/four image rectangles. Existing structured and mixed-source ordinary both get the same grid, fixed teacher42/expert42. No change to M, loss, sampler, optimizer or output5120.",
+  "normal_data": {
+    "train": 8675,
+    "identities": 50,
+    "query": 1715,
+    "gallery": 8575,
+    "training_holdout": 0
+  },
+  "architecture": {
+    "new_learned_parameters": 0,
+    "new_persistent_state_keys": 0,
+    "region_buffer": "Nonpersistent, rebuilt from recorded local_reading_grid.",
+    "region_semantics": "Fixed within-source image coordinates; ordinary mixes same-index regions across sensors, no semantic part alignment claim."
+  },
+  "cost": "Parameter and descriptor equality do not imply equal latency/memory. Grid2 increases F query/cross-band/output batches. Runtime not measured.",
+  "train_entry": "run_rgbnt100_local_band_reading.py reuses configure_runner/full official 50-epoch loop and exact parent.step; both --local-parent-recipe and --local-reading-grid are required. Builder records resolved values in training arguments and anchor.",
+  "checkpoint_rule": "Normal benchmark mAP maximum over all50, earliest tie; all six from one checkpoint, complete curves/per-query/groups/CMC50 retained. Benchmark-selected, not an untouched test.",
+  "native_parity_entry": {
+    "source": "check_rgbnt100_local_band_parity.py",
+    "grid": 1,
+    "models": 2,
+    "records_per_batch": 8,
+    "forward_batches": 4,
+    "record_executions": 32,
+    "optimizer_updates": 0,
+    "checks": "Old selected recipe vs installed grid1, strict state/key/RNG equality and00/10/01/11 outputs in FP32 and autocast. Eight query records are only a model-consistency diagnostic, not complete evaluation or gradient/trajectory proof."
+  },
+  "native_updates": "Existing --mode smoke produces three real Adam updates per ordinary/axis; all active gradients, strict in-memory reload, unchanged reference and paired sample order required. Not run.",
+  "final_inference": "evaluate_rgbnt100_local_band_states.py reads actual recorded parent/grid, rebuilds F reading BEFORE strict loading best.pth, covers ALL official Q/G four states, verifies11 features/distance/six against selected normal arrays and00 per-query against original reference, installed GT CPU recount, no optimizer/new checkpoint.",
+  "known_interface_risk": "Runtime bound F methods/nonpersistent grid are not represented by checkpoint state keys. Reusing a global parent evaluator could strict-load successfully but evaluate the wrong readout. Use the local evaluator; no generic fallback.",
+  "first_comparison": "After actual model/native admission, choose one closed parent recipe before local results; compare grid2 ordinary/axis against that same-seed/same-budget existing global parent pair. Reuse completed global controls explicitly; grid1 checks establish only measured initial/eval equivalence, not an unmeasured full trajectory identity.",
+  "execution_priority": "Do not interrupt/change/query BC. Original functions793 only after10:24:26.904. The bounded N5 plan remains prior admitted path when near target; local entries are source preparation, not queue admission.",
+  "incomplete": [
+    "Fresh runner source review",
+    "Actual imports/model/grid1 parity",
+    "Grid2 native/paired control admission",
+    "Concrete controller/deploy/intake with actual selected-parent paths and capacity/cost",
+    "Full formal training/evaluation and result audit"
+  ],
+  "limits": "No new model/NN, checkpoint, optimizer update, local or server GPU query, missing/49 run or retrieval result. Preserve RGBNT201 K and strong MSVR teachers/bests. Only26physicalGPU2/3 one/card/max2, no T/P queries.",
+  "core_plan": "results/preflight/local_band_reading_F_only_core_preparation_20261015.json",
+  "AST_proof": "results/preflight/rgbnt100_local_band_runner_AST_actual_20261015.json"
+}
