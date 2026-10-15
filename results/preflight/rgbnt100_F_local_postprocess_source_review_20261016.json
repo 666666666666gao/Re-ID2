@@ -1,0 +1,144 @@
+{
+  "skill": "experiment-bridge",
+  "phase": "2.5",
+  "verdict": "PASS",
+  "source_verdict": "PASS_SOURCE_ONLY",
+  "status": "FINAL",
+  "reviewed_at": "2026-10-15T18:07:31.963861+00:00",
+  "reviewer_agent": "/root/review_rgbnt100_f_local_postprocess_20261016",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_F_local_postprocess_source_review_request_20261016.json",
+  "review_scope": "SOURCE_ONLY local CPU result reduction and terminal-only archive intake; no remote query or NN execution permitted during review",
+  "reviewed_sources": {
+    "C:/Users/gb/projects/demo_dual_axis_20261002/analyze_rgbnt100_local_band_normal.py": {
+      "bytes": 8920,
+      "sha256": "c05809f7cb10051516a89a5d3a2f3b7ca23ad2b108583a324f57b62b756e0b4d"
+    },
+    "C:/Users/gb/.codex_tmp/intake_RGBNT100_F_local_complete_once_20261016.py": {
+      "bytes": 7273,
+      "sha256": "748f3fe3ae621dab673706563fa1fde9c8bc5207566f8aef5f4c154c903008c2"
+    }
+  },
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "correct_findings": [
+    {
+      "id": "C1",
+      "subject": "Full official data, checkpoint selection and six metrics",
+      "evidence": [
+        "analyze_rgbnt100_local_band_normal.py:35-59",
+        "analyze_identity_coordinate_three_normal.py:24-42",
+        "run_full_official_frozen_anchor_experiment.py:139-180"
+      ],
+      "assessment": "The reader uses original teacher42 plus same-seed AV42 ordinary/axis and new F-local ordinary/axis. It enforces COMPLETE, all 8675/1715/8575 records, no heldout identities, full train coverage, descriptor5120, 50 ordered epochs and no AMP skips. Python max over ordered epochs picks the earliest mAP tie, matching the producer strict > update. All six metrics must agree with that one selected epoch, final summary and per-query CSV. It does not use ordinary45 Best-of5."
+    },
+    {
+      "id": "C2",
+      "subject": "CMC, groups, comparisons and training order",
+      "evidence": [
+        "analyze_rgbnt100_local_band_normal.py:15-27",
+        "analyze_rgbnt100_local_band_normal.py:60-83",
+        "analyze_identity_coordinate_three_normal.py:24-42"
+      ],
+      "assessment": "The reused stdlib reducer reconstructs six metrics, CMC1..50 and identity/camera/scene groups from all valid queries. Compare aligns all eight GT row identifiers before AP, INP and rank-1 deltas; rescue minus harm is checked against the rank-1 delta. The four expert records must have 6563 successful updates, identical epoch/step/names/partial_set order, full-only losses and PASS normal audit. New F-local loss curves reconstruct each of its 50 epoch means. Existing original/AV curves remain the reference inputs; new_epoch_rows describes only 100 new epoch rows."
+    },
+    {
+      "id": "C3",
+      "subject": "Eight frozen states and producer guarantees",
+      "evidence": [
+        "analyze_rgbnt100_local_band_normal.py:84-102",
+        "evaluate_rgbnt100_local_band_states.py:47-106",
+        "launch_rgbnt100_local_band_pair.py:109-122"
+      ],
+      "assessment": "The state reader expects two completed four-state cases. The actual producer rebuilds the trained grid from arguments, strictly reloads the selected best, checks full official split metadata and installed GT, independently audits every state, establishes 11 feature/distance equality with its own selected normal cache, checks every 00 row against original DeMo, and proves tensor versions unchanged. The new reader checks 00 against original DeMo and 11 against its own normal row and derives the three 11-minus-state comparisons. The output explicitly disclaims retrained ablation or missing-modality evidence."
+    },
+    {
+      "id": "C4",
+      "subject": "Parameter and cost scope",
+      "evidence": [
+        "analyze_rgbnt100_local_band_normal.py:57-69",
+        "analyze_rgbnt100_local_band_normal.py:108-111",
+        "full_evaluation.py:80-96",
+        "run_full_official_frozen_anchor_experiment.py:175-180"
+      ],
+      "assessment": "F-local is required to have 99585158 total / 1887366 trainable parameters, 5120 dimensions, grid2/four regions and zero added learned parameters. Cost records retain producer runtime and peak_memory with 50 original versus 100 teacher-plus-expert epochs. The runtime field is selected full-Q/G extraction including decode and first batch, not whole training duration; peak_memory is CUDA max_memory_allocated. The text correctly avoids claiming equal latency from equal parameter count."
+    },
+    {
+      "id": "C5",
+      "subject": "Time and terminal admission",
+      "evidence": [
+        "intake_RGBNT100_F_local_complete_once_20261016.py:18-21",
+        "intake_RGBNT100_F_local_complete_once_20261016.py:34-65",
+        "launch_rgbnt100_local_band_pair.py:30-138",
+        "gpu_thermal_execute.py:32-49"
+      ],
+      "assessment": "The transitive transport import chain only defines/imports helpers and adjusts local sys.path; guarded publication mains are not called. The local receipt epoch gate precedes the first remote call. Intake requires original controller507129 absent, COMPLETE with exact F-grid/seed/GPU/native/update/state facts, and exactly ten phase launch records whose children are absent and paired exit records are zero. The producer writes two children per parity/native/training/audit/states phase. Controller OS exit remains honestly UNATTESTED. No retry, new observer or NN restart is present."
+    },
+    {
+      "id": "C6",
+      "subject": "Archive integrity and bounded cleanup",
+      "evidence": [
+        "intake_RGBNT100_F_local_complete_once_20261016.py:61-108",
+        "launch_rgbnt100_local_band_pair.py:115-122"
+      ],
+      "assessment": "The text package is size/SHA checked, its members match the generated manifest, extraction uses the data filter, and all text members are checked. Each of the six normal-raw/state-raw/best files goes to its own local D directory and must match producer size/SHA before CPU analysis and cleanup. Cleanup rechecks those exact remote duplicates plus its owned package, requires every target inside the owned root and the original controller still absent, checks all four protected weights before and after, and unlinks only those seven files. Local best/raw/state archives remain. There is no blanket directory deletion or transport retry."
+    },
+    {
+      "id": "C7",
+      "subject": "Active source invariants and correct completion scope",
+      "evidence": [
+        "intake_RGBNT100_F_local_complete_once_20261016.py:42-44",
+        "intake_RGBNT100_F_local_complete_once_20261016.py:88-89",
+        "intake_RGBNT100_F_local_complete_once_20261016.py:106-108"
+      ],
+      "assessment": "The existing 8+344=352 source map is checked before intake and again before remote cleanup. Review independently verified all 352 currently match. Neither source claims runtime success merely from AST review; execution would emit ACTUAL only after real terminal/data checks. The goal remains ACTIVE_UNMET."
+    }
+  ],
+  "validation": {
+    "status": "PASS",
+    "deterministic_checks": 104,
+    "existing_source_seals": 352,
+    "existing_Python_AST": 292,
+    "new_Python_AST": 2,
+    "existing_JSON_parse": 56,
+    "existing_CSV_parse": 1,
+    "generated_remote_payload_AST": 2,
+    "captured_source_and_historical_inputs": 384,
+    "captured_inputs_revalidated_unchanged": true,
+    "historical_model_results": 3,
+    "historical_epoch_rows": 150,
+    "historical_state_cases": 8,
+    "historical_AV_orders_per_control": 6563,
+    "validation_script": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_RGBNT100_F_local_postprocess_source_run01\\source_checks.py",
+    "validation_result": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_RGBNT100_F_local_postprocess_source_run01\\source_checks.json"
+  },
+  "scope_counters": {
+    "new_NN_calls": 0,
+    "new_optimizer_updates": 0,
+    "reviewed_workflow_main_calls": 0,
+    "remote_queries": 0,
+    "process_queries": 0,
+    "GPU_queries": 0,
+    "current_training_log_or_epoch_reads": 0,
+    "transfers": 0,
+    "deletions": 0,
+    "implementation_edits": 0
+  },
+  "limits": [
+    "Neither reviewed entrypoint was imported or invoked. Runtime_status is NOT_RUN. This is an independent source review, not a completed F-local postprocessing or intake.",
+    "The 104 executed checks use stdlib and only already-complete original DeMo/AV42 local data, immutable startup/schedule metadata, and source files. No current F training/result directory, process, log, epoch, observer, SSH or GPU status was read.",
+    "The eight historical AV42 state CSVs and their metrics/CMC/groups were independently reduced, but no NPZ distance matrices, model weights, new NN outputs or current installed remote datasets were recomputed here.",
+    "Both generated remote payload strings were AST-parsed only using frozen startup metadata and an explicit schema-only archive placeholder. Neither payload was executed.",
+    "Historical AV42 establishes the existing producer/schema contract; actual F-local order, 6563 updates per control, 00/11 equality, archives and timings remain future assertions. Any later assertion failure must be investigated without automatic retry or NN restart.",
+    "Requested gpt-6-astra/max is request metadata only. Actual model and reasoning effort are UNATTESTED; this fresh-context same-family review remains provisional."
+  ],
+  "runtime_status": "NOT_RUN",
+  "goal": "ACTIVE_UNMET",
+  "trace_root": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_RGBNT100_F_local_postprocess_source_run01",
+  "disposition": "Both prepared sources are correct for their stated producer contracts. No source patch requested. Source review passes; actual invocation remains subject to the scheduled terminal gate and future runtime assertions."
+}
