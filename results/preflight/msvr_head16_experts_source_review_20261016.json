@@ -1,0 +1,400 @@
+{
+  "status": "FINAL",
+  "verdict": "PASS",
+  "gate": "SOURCE_ONLY",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_head16_experts_source_request_20261016.json",
+  "request_sha256": "0c123bb9b0d80d05dd32131b3026e8e8f9f075aa3281b2b95415305693f42788",
+  "generated_at": "2026-10-16T18:44:21+08:00",
+  "agent_id": "/root/review_msvr_head16_experts_20261016",
+  "skill": "experiment-bridge",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "actual_routing": {
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "max",
+    "model": "UNATTESTED",
+    "reasoning_effort": "UNATTESTED",
+    "host_attestation": false
+  },
+  "scope": "Existing AH ordinary/dual experts; only head16 full5632 selected reference changes. GPU3 serialized, current RGBNT100 GPU2 not inspected or altered.",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "summary": "No blocking source defect found. Explicit head16 loading preserves the existing AH model/objective and source-isolated controls. Source/CPU gate PASS only; actual head16 expert parity/native/training/performance remain unverified.",
+  "source_assessment": [
+    {
+      "area": "Explicit head16 teacher initialization",
+      "verdict": "PASS",
+      "evidence": [
+        {
+          "path": "run_msvr_head16_experts.py",
+          "line": 34,
+          "symbol": "configuration"
+        },
+        {
+          "path": "run_msvr_head16_experts.py",
+          "line": 42,
+          "symbol": "reference_build"
+        }
+      ],
+      "rationale": "HEAD is set to16 before construction. The new reference_build directly constructs the dispatched existing StrongFullRelationAxis, validates the completed head16 shared-DeMo50/E32/seed42 teacher, full manifest, exit and existing weight digest. It excludes only the fused classifier/neck from teacher copying, validates every saved shape/dtype, merges into the complete current state and loads strict=True. Both copied tensors and remaining fresh tensors are checked. The old original-head8 loader and old strong-head8 install are not called."
+    },
+    {
+      "area": "Process-local AH model and loss reuse",
+      "verdict": "PASS",
+      "evidence": [
+        {
+          "path": "run_msvr_head16_experts.py",
+          "line": 87,
+          "symbol": "build"
+        },
+        {
+          "path": "run_r201y_MS_K4.py",
+          "line": 106,
+          "symbol": "build"
+        },
+        {
+          "path": "run_r201k_relation_local_pi.py",
+          "line": 23,
+          "symbol": "build"
+        }
+      ],
+      "rationale": "The new build sets y.m.k.RelationLocalPIAxis, g.coordinate_build and y.margin_step before y.build. Followed chain y -> w -> t -> r -> q -> p -> o -> n -> m.margin_build -> k -> i -> g -> new reference_build reaches the intended class/loader. AH.step reuses the unchanged full5632 margin step through the same process-local dispatch. Existing Fourier/readers/rank64/one condition/joint route/relation-local PI/cap.10/public weighting and all objective coefficients remain as AH. No inherited source changes or new architecture/loss were introduced."
+    },
+    {
+      "area": "Frozen reference and matched controls",
+      "verdict": "PASS",
+      "evidence": [
+        {
+          "path": "original_identity_anchor.py",
+          "line": 45,
+          "symbol": "assert_anchor_unchanged"
+        },
+        {
+          "path": "msvr_full_identity_reference.py",
+          "line": 103,
+          "symbol": "assert_retained"
+        },
+        {
+          "path": "msvr_full_identity_reference.py",
+          "line": 14,
+          "symbol": "StrongFullRelationAxis"
+        }
+      ],
+      "rationale": "The five identity modules are frozen/eval through OriginalProjectionProbe; anchor_encoder_state covers the selected identity tensors. The learned shared projection is frozen/eval and copied into retained_public_state. assert_retained checks both at construction, native updates, epoch checkpoints, reload and state evaluation. Both variants share HEAD16, teacher, seed42, fresh5632 fused-head seed, P16K4/B64, optimizer/schedule and50epochs; source/native gates assert predicted total100787334/trainable2674822. The frozen head change accounts for a114688 parameter reduction from old AH; actual construction remains a runtime check."
+    },
+    {
+      "area": "Full official00 parity before native work",
+      "verdict": "PASS",
+      "evidence": [
+        {
+          "path": "evaluate_msvr_head16_reference.py",
+          "line": 21,
+          "symbol": "main"
+        },
+        {
+          "path": "launch_msvr_head16_experts.py",
+          "line": 44,
+          "symbol": "main"
+        }
+      ],
+      "rationale": "Both controls must independently finish full1032train/591Q/1055G manifest/GT-aligned teacher00 evaluation, in-memory strict reload,5632 finite features and exact per-query CSV/six-metric parity before either native job. Feature max absolute error must be below3e-5 and metrics below1e-8; distance-derived per-query metrics are equal, not a claim of bitwise teacher distance equality. There are no optimizer updates or checkpoint files in this phase."
+    },
+    {
+      "area": "Native3, active gradients and dynamic AMP accounting",
+      "verdict": "PASS",
+      "evidence": [
+        {
+          "path": "run_full_official_frozen_anchor_experiment.py",
+          "line": 57,
+          "symbol": "main"
+        },
+        {
+          "path": "run_r201ah_MS_full_identity.py",
+          "line": 29,
+          "symbol": "full_step"
+        },
+        {
+          "path": "launch_msvr_head16_experts.py",
+          "line": 17,
+          "symbol": "verify_detail"
+        }
+      ],
+      "rationale": "Original GradScaler512 step/update scales determine the boolean actual update flag. Native exits only after three actual successful updates, records attempts/skips, verifies every active parameter has finite nonzero gradients and exact reload, and checks projected auxiliary/PI/fused-BN contracts. New controller requires both native results and common-attempt-prefix paired samples. Formal accounting is705 attempted batches per control, actual successful updates and skips separately; no assertion equates all attempts with updates. The reused CPU audit reconciles per-batch, per-epoch and final counters and reports successful-update record coverage."
+    },
+    {
+      "area": "Serial full50, real GT and eight fixed states",
+      "verdict": "PASS",
+      "evidence": [
+        {
+          "path": "launch_msvr_head16_experts.py",
+          "line": 44,
+          "symbol": "main"
+        },
+        {
+          "path": "audit_vehicle_atmoe_head_normal.py",
+          "line": 13,
+          "symbol": "main"
+        },
+        {
+          "path": "evaluate_msvr_head16_states.py",
+          "line": 15,
+          "symbol": "main"
+        },
+        {
+          "path": "full_evaluation.py",
+          "line": 20,
+          "symbol": "full_metrics"
+        }
+      ],
+      "rationale": "The single controller runs both reference jobs, both natives, then ordinary and axis full50 sequentially on physicalGPU3; every execute waits for true child exit0. Each formal run must cover1032 training records, all705 paired order rows, complete official Q/G, CPU installed-GT audit and its four frozen states before advancing. MS GT excludes same-ID/same-scene. Best selection uses full-normal benchmark mAP with earliest ties; all six metrics derive from one strict-reloaded selected weight. State11 features/distances must exactly match selected normal arrays; state00 six/per-query rows match the new teacher; tensor versions/frozen state stay unchanged. Two runs yield eight normal state cases, with no missing-condition or retrained-ablation claim."
+    },
+    {
+      "area": "Scoped deployment and scheduled observer",
+      "verdict": "PASS",
+      "evidence": [
+        {
+          "path": "results/preflight/msvr_head16_experts_deploy_20261016.py",
+          "line": 43,
+          "symbol": "main"
+        },
+        {
+          "path": "results/preflight/observe_msvr_head16_experts_20261016.py",
+          "line": 17,
+          "symbol": "main"
+        },
+        {
+          "path": "gpu_thermal_execute.py",
+          "line": 24,
+          "symbol": "execute"
+        }
+      ],
+      "rationale": "Deployment requires this exact request/final PASS and existing47/376 source checks, the final teacher audit, retained protected-weight digests and selected teacher status/hash/CPU audit. It checks onlyGPU3 occupancy/capacity, creates a new run root, installs four new files only if absent, verifies remote source identity, compiles and launches one new controller. The observer waits until the caller-supplied due time using300s sleeps, performs one MS-root-only observation per phase, reads no currentRGB run and reads a controller failure tail only after that MS controller is absent. GPU launcher waits240s only when selected-card memory is occupied; no temperature/power query exists. Seven private helper modules and collect_results were inspected statically; network work is guarded in functions/main and connection/secret values were not exposed. No helper was executed."
+    }
+  ],
+  "actual_checks": {
+    "input_preservation": {
+      "status": "PASS",
+      "supplied_inputs_unchanged": 47,
+      "inherited_inputs_unchanged": 376,
+      "unique_supplied_or_inherited_paths": 387,
+      "request_unchanged": true,
+      "supplied_source_mutations": 0,
+      "verified_again_at_final_write": true
+    },
+    "supplied_python_compiled": 43,
+    "inherited_python_compiled": 308,
+    "independent_cpu_check_count": 27,
+    "independent_cpu_checks": [
+      {
+        "check": "real_old_AH_native_detail_acceptance",
+        "status": "PASS",
+        "variant": "frequency_shared",
+        "attempts": 3,
+        "actual_updates": 3
+      },
+      {
+        "check": "dynamic_AMP_skipped_attempt_preserved",
+        "status": "PASS",
+        "variant": "frequency_shared"
+      },
+      {
+        "check": "gate_rejects_wrong_private_dimension",
+        "status": "PASS",
+        "variant": "frequency_shared"
+      },
+      {
+        "check": "gate_rejects_nonzero_partial_loss",
+        "status": "PASS",
+        "variant": "frequency_shared"
+      },
+      {
+        "check": "gate_rejects_nonboolean_update_flag",
+        "status": "PASS",
+        "variant": "frequency_shared"
+      },
+      {
+        "check": "gate_rejects_nonfinite_loss",
+        "status": "PASS",
+        "variant": "frequency_shared"
+      },
+      {
+        "check": "gate_rejects_changed_auxiliary_weight",
+        "status": "PASS",
+        "variant": "frequency_shared"
+      },
+      {
+        "check": "gate_rejects_bad_native_auxiliary_gradient",
+        "status": "PASS",
+        "variant": "frequency_shared"
+      },
+      {
+        "check": "real_old_AH_formal_detail_acceptance",
+        "status": "PASS",
+        "variant": "frequency_shared",
+        "attempts": 705,
+        "actual_updates": 705
+      },
+      {
+        "check": "real_old_AH_native_detail_acceptance",
+        "status": "PASS",
+        "variant": "axis_shared",
+        "attempts": 3,
+        "actual_updates": 3
+      },
+      {
+        "check": "dynamic_AMP_skipped_attempt_preserved",
+        "status": "PASS",
+        "variant": "axis_shared"
+      },
+      {
+        "check": "gate_rejects_wrong_private_dimension",
+        "status": "PASS",
+        "variant": "axis_shared"
+      },
+      {
+        "check": "gate_rejects_nonzero_partial_loss",
+        "status": "PASS",
+        "variant": "axis_shared"
+      },
+      {
+        "check": "gate_rejects_nonboolean_update_flag",
+        "status": "PASS",
+        "variant": "axis_shared"
+      },
+      {
+        "check": "gate_rejects_nonfinite_loss",
+        "status": "PASS",
+        "variant": "axis_shared"
+      },
+      {
+        "check": "gate_rejects_changed_auxiliary_weight",
+        "status": "PASS",
+        "variant": "axis_shared"
+      },
+      {
+        "check": "gate_rejects_bad_native_auxiliary_gradient",
+        "status": "PASS",
+        "variant": "axis_shared"
+      },
+      {
+        "check": "real_old_AH_formal_detail_acceptance",
+        "status": "PASS",
+        "variant": "axis_shared",
+        "attempts": 705,
+        "actual_updates": 705
+      },
+      {
+        "check": "real_old_AH_paired_native_and_formal_sampling",
+        "status": "PASS",
+        "native_attempts": 3,
+        "formal_attempts": 705
+      },
+      {
+        "check": "completed_head16_teacher_metadata_matches_loader",
+        "status": "PASS",
+        "best_epoch": 32,
+        "attempts": 705,
+        "actual_updates": 705,
+        "train": 1032,
+        "query": 591,
+        "gallery": 1055
+      },
+      {
+        "check": "head16_teacher_six_metrics_match_fresh_integrity_audit",
+        "status": "PASS",
+        "metrics": {
+          "mAP": 51.43026480300702,
+          "mINP": 26.538876996464772,
+          "Rank-1": 68.35871404399323,
+          "Rank-5": 82.23350253807106,
+          "Rank-10": 87.30964467005076,
+          "Rank-20": 92.04737732656514
+        }
+      },
+      {
+        "check": "existing_archived_head16_teacher_hash_matches_explicit_loader",
+        "status": "PASS",
+        "bytes": 399933266,
+        "sha256": "a126eb25b42daf9c0b731b731242895a12a0918852361caf893ce71e636f02c9"
+      },
+      {
+        "check": "static_head8_to_head16_frozen_expert_parameter_difference",
+        "status": "PASS",
+        "reduction": 114688,
+        "predicted_total": 100787334,
+        "actual_model_construction": false
+      },
+      {
+        "check": "embedded_remote_script_compilation",
+        "status": "PASS",
+        "source": "results/preflight/msvr_head16_experts_deploy_20261016.py",
+        "assignment": "admission",
+        "remote_execution": false
+      },
+      {
+        "check": "embedded_remote_script_compilation",
+        "status": "PASS",
+        "source": "results/preflight/msvr_head16_experts_deploy_20261016.py",
+        "assignment": "launch",
+        "remote_execution": false
+      },
+      {
+        "check": "embedded_remote_script_compilation",
+        "status": "PASS",
+        "source": "results/preflight/observe_msvr_head16_experts_20261016.py",
+        "assignment": "script",
+        "remote_execution": false
+      },
+      {
+        "check": "original_dynamic_scaler_attempt_update_skip_semantics_static",
+        "status": "PASS"
+      }
+    ],
+    "private_helper_static_import_chain": "Seven helper modules plus collect_results inspected; no import/execution performed; connection strings suppressed"
+  },
+  "input_preservation": {
+    "status": "PASS",
+    "supplied_inputs_unchanged": 47,
+    "inherited_inputs_unchanged": 376,
+    "unique_supplied_or_inherited_paths": 387,
+    "request_unchanged": true,
+    "supplied_source_mutations": 0,
+    "verified_again_at_final_write": true
+  },
+  "reference": {
+    "selected_epoch": 32,
+    "descriptor_dim": 5632,
+    "identity_heads": 16,
+    "mAP": 51.43026480300702,
+    "Rank_1": 68.35871404399323,
+    "attribution": "Existing independently audited shared-DeMo baseline; not Ours/dual-axis contribution",
+    "teacher_sha256": "a126eb25b42daf9c0b731b731242895a12a0918852361caf893ce71e636f02c9"
+  },
+  "limits": [
+    "No head16 expert was constructed or run in this review. Source PASS does not imply runtime, native, numerical parity, full50 completion or performance PASS.",
+    "Future actual full00 parity and three successful native updates per control are required before formal training; the source controller enforces this order.",
+    "Dynamic AMP may yield different successful update counts despite matched attempts/epochs; report actual skips and successful-update coverage, not equal successful-update budget or numeric health from source alone.",
+    "The baseline51.430264803mAP/68.358714044Rank1 exceeds the registered MS paper targets50.2/60.8 but establishes no new expert gain. RGBNT100 targets87.2/98.6 remain separate; preserve201K.",
+    "One seed and benchmark-based checkpoint selection remain disclosed. Fixed00/10/01/11 interventions do not establish retrained ablation or missing robustness.",
+    "Requested Astra/max routing is recorded; actual model/effort lacks host attestation and remains UNATTESTED. This is same-family provisional review."
+  ],
+  "execution": {
+    "local_stdlib_only": true,
+    "Torch_imports": 0,
+    "NumPy_imports": 0,
+    "dependency_installs": 0,
+    "neural_calls": 0,
+    "optimizer_updates": 0,
+    "new_weights": 0,
+    "SSH_calls": 0,
+    "GPU_queries": 0,
+    "current_RGBNT100_log_progress_PID_handle_queries": 0,
+    "supplied_input_mutations": 0
+  },
+  "runtime_admitted": false,
+  "native_passed": false,
+  "formal_training_completed": false,
+  "performance_passed": false,
+  "trace_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MS_head16_experts_source_run01",
+  "CPU_trace": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MS_head16_experts_source_run01\\independent_CPU_checks.json"
+}
