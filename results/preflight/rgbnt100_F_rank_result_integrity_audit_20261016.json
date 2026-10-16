@@ -1,0 +1,1418 @@
+{
+  "status": "FINAL",
+  "verdict": "WARN",
+  "overall_verdict": "WARN",
+  "deterministic_integrity_status": "PASS",
+  "integrity_status": "WARN",
+  "audit_skill": "experiment-audit",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_F_rank_result_integrity_request_20261016.json",
+  "output": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_F_rank_result_integrity_audit_20261016.json",
+  "trace_root": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_F_rank128_full_normal_run01",
+  "generated_at": "2026-10-16T08:22:13.097639+00:00",
+  "summary": "No blocking integrity defect found. All new normal/state distances and requested saved records agree. Paper RGBNT10087.2mAP/98.6Rank-1 goal remains unmet; scope and provenance qualifiers are required.",
+  "blocking_findings": [],
+  "blocking_count": 0,
+  "required_source_changes": [],
+  "minimal_fix_required": null,
+  "nonblocking_findings": [
+    {
+      "id": "NUMERICAL_ACCEPTANCE_UNMET",
+      "evidence": "Rank128 ordinary E22:85.9896624324mAP/96.5014577259R1; axis E3:86.0017353777/96.4431486880; both below87.2/98.6.",
+      "action": "Retain failure/selection/cost records; do not declare goal complete."
+    },
+    {
+      "id": "EVIDENCE_SCOPE_LIMITS",
+      "evidence": "One dataset and one fixed teacher42/expert42; benchmark-selected checkpoints, historical rank64 reuse and frozen interventions.",
+      "action": "Retain the explicit limitations; no integrity source patch is required."
+    }
+  ],
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer_family": "openai",
+  "agent_id": "/root/audit_rgbnt100_f_rank128_full_normal_20261016",
+  "reviewer_context": "Fresh delegated reviewer; supplied request/scope/checklist were independently checked against primary indexed files. No executor conclusion is used as a substitute for deterministic checks. Personal session notes are not audit evidence.",
+  "evaluation_type": "real_gt",
+  "checks": {
+    "A_ground_truth_provenance": {
+      "status": "PASS",
+      "classification": "real_gt",
+      "details": "Saved splits contain8675train/1715query/8575gallery,50 train identities and50 disjoint test identities. Every name-derived identity/camera/scene matches; all four NPZ metadata sets match the manifest. Same identity AND same camera exclusion is applied before ranks/AP/INP.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\experiment_data.py:24",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\RGBNT100.py:63",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\official_training_data.py:20",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_full_official49.py:13",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_full_official49.py:37",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_F_rank128_full_normal_run01\\raw_recount.json:1"
+      ]
+    },
+    "B_score_validity": {
+      "status": "PASS",
+      "details": "No prediction-max/min/mean denominator enters retrieval metrics. Stable ascending distance sort preserves gallery-index ties; AP averages j/positive_rank, INP uses relevant_count/last_positive_rank, CMC uses first hit, and query/group means are multiplied by100. Descriptor L2 normalization is a declared representation operation, not score inflation. 147061250 finite distance values/17150 query rows reranked; maximum AP/INP CSV error4.44e-16.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:20",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:43",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:106",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\utils\\reid_evaluation.py:27",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_F_rank128_full_normal_run01\\raw_recount.json:1"
+      ]
+    },
+    "C_artifact_claim_match": {
+      "status": "PASS",
+      "details": "All757 indexed files exist and match expected bytes/SHA. Independently checked100 epoch CSVs and JSONs, all six/CMC1-50/all59 groups, earliest-mAP selection, last epoch, best/status/reload records, archived100 log epoch rows,9 analysis tables,8575 paired-query comparison rows,100 loss/order curves,13126 current updates/full coverage and8 new frozen-state reports. Numerical target is explicitly unmet.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_frozen_anchor_experiment.py:139",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_frozen_anchor_experiment.py:166",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_rgbnt100_frequency_rank_normal.py:108",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_F_rank128_full_normal_run01\\table_order_recount.json:1",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_F_rank128_full_normal_run01\\lifecycle_storage_native_recount.json:1"
+      ]
+    },
+    "D_active_call_chain": {
+      "status": "PASS",
+      "details": "Controller calls rank runner for native/full training, then installed-GT audit and rank-aware frozen-state evaluator. configure_runner installs AV builder/update/optimizer aliases; runner.evaluate invokes full_records metadata, extract, distance and full_metrics, which calls evaluate_reid. Current result and call receipts match these outputs. No phantom/dead metric is required by the current claims. Historical full_evaluation.main/dev-split entry point is not this active path; explicit current benchmark-selection statements govern.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\launch_rgbnt100_frequency_rank_pair.py:66",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_rgbnt100_frequency_rank.py:15",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\rgbnt100_expert_seed_recipe.py:37",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_frozen_anchor_experiment.py:40",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:48",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_rgbnt100_frequency_rank_states.py:78"
+      ]
+    },
+    "E_scope_and_acceptance": {
+      "status": "WARN",
+      "details": "Full official normal evaluation for one dataset, one fixed teacher/expert seed42, two matched width128 controls and8 frozen states is supported. Historical AV42 is a reused rank64 control; paper+1 targets87.2/98.6 are unmet by both new candidates. Benchmark selection/two-stage costs and all attempts must remain disclosed. No missing/generalized-gain/retrained-ablation/bottleneck/equal-compute/whole-goal completion claim is supported.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\rgbnt100_frequency_rank.py:15",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_rgbnt100_frequency_rank_states.py:104",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_rgbnt100_frequency_rank_normal.py:108",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\reid2_paper_reference_targets_20261016.json:1",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_F_rank128_full_normal_run01\\table_order_recount.json:1"
+      ]
+    },
+    "F_evaluation_type": {
+      "status": "PASS",
+      "classification": "real_gt",
+      "details": "Formal normal and frozen-state retrieval use dataset-derived identities/cameras. Native gradient/reload/default-constructor checks are execution diagnostics and have no retrieval-performance classification. Training teacher-based contribution targets are not substituted for evaluation GT.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\official_training_data.py:14",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:20",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_rgbnt100_frequency_rank_states.py:49",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\check_rgbnt100_frequency_rank_parity.py:85"
+      ]
+    }
+  },
+  "input_integrity": {
+    "status": "PASS",
+    "input_count": 757,
+    "input_bytes": 2377456754,
+    "all_expected_sizes_sha256_exact": true,
+    "types": {
+      ".py": 311,
+      ".json": 263,
+      ".yml": 3,
+      ".csv": 136,
+      ".log": 32,
+      ".jsonl": 4,
+      ".npz": 4,
+      ".pth": 2,
+      ".ps1": 1,
+      ".write_failed_empty": 1
+    },
+    "utf8_texts_read": true,
+    "source_ASTs": 311,
+    "source_reading_limit": "AST inventory reads all indexed Python text; detailed semantic review is restricted to the current active rank128 evaluation/training/data/model/storage chain. Historical scripts are not recertified.",
+    "request_sha256": "d9d4cc92cd3a061153333007715c1afcbd61a30474bc4268dbcc4af307237967",
+    "seconds": 2.7706263065338135,
+    "final_all757_expected_sizes_sha256_exact": true,
+    "final_recheck_at": "2026-10-16T08:22:14.776915+00:00"
+  },
+  "independent_execution": {
+    "local_stdlib_only": true,
+    "python": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe -X utf8 -B -S",
+    "target_source_imports": 0,
+    "Torch_imports": 0,
+    "NumPy_imports": 0,
+    "package_installations": 0,
+    "neural_calls": 0,
+    "optimizer_updates": 0,
+    "remote_calls": 0,
+    "current_process_GPU_runtime_queries": 0,
+    "indexed_source_result_weight_edits": 0,
+    "artifact_deletions": 0,
+    "matrix_count": 10,
+    "distance_values_reranked": 147061250,
+    "raw_query_rows": 17150,
+    "epoch_query_rows": 171500,
+    "new_epoch_CSVs": 100,
+    "all_epoch_six_CMC50_and59groups": true,
+    "all_tables_rows": {
+      "six_metrics": 5,
+      "CMC_1_to_50": 250,
+      "group_metrics": 295,
+      "training_curves": 100,
+      "comparisons": 5,
+      "paired_query_changes": 8575,
+      "state_metrics": 8,
+      "state_comparisons": 6,
+      "paper_acceptance": 5
+    },
+    "raw_per_query_max_error": 4.440892098500626e-16,
+    "reused_verifier_code": "Prior local band-range stdlib audit helpers, read after direct current input/source inspection; adapted paths/actual rank128 shapes/target table. One verifier PI input-shape assumption was corrected from512 to1024 using original source; retained in verifier_correction.json. No experiment input changed."
+  },
+  "normal_same_checkpoint_results": {
+    "original_DeMo": {
+      "selected": {
+        "model": "original_DeMo",
+        "selected_epoch": 8,
+        "mAP": 85.76856710316946,
+        "mINP": 61.84590828355626,
+        "Rank-1": 96.61807580174927,
+        "Rank-5": 97.0262390670554,
+        "Rank-10": 97.37609329446065,
+        "Rank-20": 97.72594752186589
+      },
+      "final": {
+        "mAP": 85.09888117172326,
+        "mINP": 60.071807708444844,
+        "Rank-1": 96.20991253644316,
+        "Rank-5": 96.73469387755102,
+        "Rank-10": 97.25947521865889,
+        "Rank-20": 97.90087463556851
+      },
+      "training_process_seconds": 9685.604719638824,
+      "selected_QG_seconds": 125.06608438491821,
+      "peak_allocated_bytes_whole_process": 12176379392,
+      "parameters": 97952256,
+      "trainable_parameters": 97947136,
+      "total_stage_epochs": 50
+    },
+    "AV_frequency_shared": {
+      "selected": {
+        "model": "AV_frequency_shared",
+        "selected_epoch": 6,
+        "mAP": 85.96873759608015,
+        "mINP": 62.438827112517,
+        "Rank-1": 96.50145772594752,
+        "Rank-5": 97.08454810495627,
+        "Rank-10": 97.37609329446065,
+        "Rank-20": 97.84256559766764
+      },
+      "final": {
+        "mAP": 85.72686189156894,
+        "mINP": 62.08084791458307,
+        "Rank-1": 96.44314868804665,
+        "Rank-5": 97.14285714285714,
+        "Rank-10": 97.49271137026238,
+        "Rank-20": 97.90087463556851
+      },
+      "training_process_seconds": 9245.579464673996,
+      "selected_QG_seconds": 88.8834056854248,
+      "peak_allocated_bytes_whole_process": 1665325568,
+      "parameters": 99585158,
+      "trainable_parameters": 1887366,
+      "total_stage_epochs": 100
+    },
+    "F_rank_frequency_shared": {
+      "selected": {
+        "model": "F_rank_frequency_shared",
+        "selected_epoch": 22,
+        "mAP": 85.98966243236072,
+        "mINP": 62.573477947330296,
+        "Rank-1": 96.50145772594752,
+        "Rank-5": 97.25947521865889,
+        "Rank-10": 97.55102040816327,
+        "Rank-20": 98.01749271137027
+      },
+      "final": {
+        "mAP": 85.7979951749389,
+        "mINP": 62.12556812277496,
+        "Rank-1": 96.38483965014576,
+        "Rank-5": 97.14285714285714,
+        "Rank-10": 97.667638483965,
+        "Rank-20": 97.90087463556851
+      },
+      "training_process_seconds": 9790.67335677147,
+      "selected_QG_seconds": 99.60976433753967,
+      "peak_allocated_bytes_whole_process": 1768049664,
+      "parameters": 99947398,
+      "trainable_parameters": 2249606,
+      "total_stage_epochs": 100
+    },
+    "AV_axis_shared": {
+      "selected": {
+        "model": "AV_axis_shared",
+        "selected_epoch": 20,
+        "mAP": 86.1546433016181,
+        "mINP": 62.560794668209745,
+        "Rank-1": 96.7930029154519,
+        "Rank-5": 97.43440233236151,
+        "Rank-10": 97.78425655976676,
+        "Rank-20": 98.25072886297376
+      },
+      "final": {
+        "mAP": 85.79570154190885,
+        "mINP": 61.93358760115122,
+        "Rank-1": 96.3265306122449,
+        "Rank-5": 97.20116618075801,
+        "Rank-10": 97.49271137026238,
+        "Rank-20": 97.95918367346938
+      },
+      "training_process_seconds": 9149.184046030045,
+      "selected_QG_seconds": 91.79868245124817,
+      "peak_allocated_bytes_whole_process": 1437281792,
+      "parameters": 99585158,
+      "trainable_parameters": 1887366,
+      "total_stage_epochs": 100
+    },
+    "F_rank_axis_shared": {
+      "selected": {
+        "model": "F_rank_axis_shared",
+        "selected_epoch": 3,
+        "mAP": 86.0017353777414,
+        "mINP": 62.14306826843601,
+        "Rank-1": 96.44314868804665,
+        "Rank-5": 97.43440233236151,
+        "Rank-10": 97.90087463556851,
+        "Rank-20": 98.30903790087464
+      },
+      "final": {
+        "mAP": 85.82695581703568,
+        "mINP": 62.08037568366539,
+        "Rank-1": 96.38483965014576,
+        "Rank-5": 97.20116618075801,
+        "Rank-10": 97.60932944606414,
+        "Rank-20": 98.13411078717202
+      },
+      "training_process_seconds": 9174.489785671234,
+      "selected_QG_seconds": 86.16342759132385,
+      "peak_allocated_bytes_whole_process": 1480302592,
+      "parameters": 99947398,
+      "trainable_parameters": 2249606,
+      "total_stage_epochs": 100
+    }
+  },
+  "comparisons": [
+    {
+      "improved": "F_rank_axis_shared",
+      "reference": "original_DeMo",
+      "mAP": 0.23316827457193767,
+      "mINP": 0.29715998487974815,
+      "Rank-1": -0.1749271137026227,
+      "Rank-5": 0.4081632653061149,
+      "Rank-10": 0.5247813411078681,
+      "Rank-20": 0.5830903790087518,
+      "rank1_rescued": 4,
+      "rank1_harmed": 7,
+      "AP_improved": 779,
+      "AP_worsened": 606,
+      "paired_both_metrics_ge1": false
+    },
+    {
+      "improved": "F_rank_frequency_shared",
+      "reference": "original_DeMo",
+      "mAP": 0.2210953291912574,
+      "mINP": 0.7275696637740339,
+      "Rank-1": -0.11661807580175321,
+      "Rank-5": 0.2332361516034922,
+      "Rank-10": 0.1749271137026227,
+      "Rank-20": 0.2915451895043759,
+      "rank1_rescued": 4,
+      "rank1_harmed": 6,
+      "AP_improved": 790,
+      "AP_worsened": 580,
+      "paired_both_metrics_ge1": false
+    },
+    {
+      "improved": "F_rank_axis_shared",
+      "reference": "F_rank_frequency_shared",
+      "mAP": 0.012072945380680267,
+      "mINP": -0.4304096788942857,
+      "Rank-1": -0.0583090379008695,
+      "Rank-5": 0.1749271137026227,
+      "Rank-10": 0.3498542274052454,
+      "Rank-20": 0.2915451895043759,
+      "rank1_rescued": 6,
+      "rank1_harmed": 7,
+      "AP_improved": 687,
+      "AP_worsened": 666,
+      "paired_both_metrics_ge1": false
+    },
+    {
+      "improved": "F_rank_axis_shared",
+      "reference": "AV_axis_shared",
+      "mAP": -0.15290792387669683,
+      "mINP": -0.41772639977373416,
+      "Rank-1": -0.3498542274052454,
+      "Rank-5": 0.0,
+      "Rank-10": 0.11661807580175321,
+      "Rank-20": 0.05830903790088371,
+      "rank1_rescued": 0,
+      "rank1_harmed": 6,
+      "AP_improved": 638,
+      "AP_worsened": 713,
+      "paired_both_metrics_ge1": false
+    },
+    {
+      "improved": "F_rank_frequency_shared",
+      "reference": "AV_frequency_shared",
+      "mAP": 0.020924836280570958,
+      "mINP": 0.13465083481329998,
+      "Rank-1": 0.0,
+      "Rank-5": 0.1749271137026227,
+      "Rank-10": 0.1749271137026227,
+      "Rank-20": 0.1749271137026227,
+      "rank1_rescued": 6,
+      "rank1_harmed": 6,
+      "AP_improved": 652,
+      "AP_worsened": 705,
+      "paired_both_metrics_ge1": false
+    }
+  ],
+  "frozen_state_metrics": [
+    {
+      "model": "frequency_shared",
+      "state": "00",
+      "mAP": 85.76856710316946,
+      "mINP": 61.84590828355626,
+      "Rank-1": 96.61807580174927,
+      "Rank-5": 97.0262390670554,
+      "Rank-10": 97.37609329446065,
+      "Rank-20": 97.72594752186589
+    },
+    {
+      "model": "frequency_shared",
+      "state": "10",
+      "mAP": 85.83914785662772,
+      "mINP": 62.04312731777869,
+      "Rank-1": 96.5597667638484,
+      "Rank-5": 97.0262390670554,
+      "Rank-10": 97.43440233236151,
+      "Rank-20": 97.78425655976676
+    },
+    {
+      "model": "frequency_shared",
+      "state": "01",
+      "mAP": 85.76506203363928,
+      "mINP": 61.836782452059154,
+      "Rank-1": 96.61807580174927,
+      "Rank-5": 97.0262390670554,
+      "Rank-10": 97.37609329446065,
+      "Rank-20": 97.72594752186589
+    },
+    {
+      "model": "frequency_shared",
+      "state": "11",
+      "mAP": 85.98966243236072,
+      "mINP": 62.573477947330296,
+      "Rank-1": 96.50145772594752,
+      "Rank-5": 97.25947521865889,
+      "Rank-10": 97.55102040816327,
+      "Rank-20": 98.01749271137027
+    },
+    {
+      "model": "axis_shared",
+      "state": "00",
+      "mAP": 85.76856710316946,
+      "mINP": 61.84590828355626,
+      "Rank-1": 96.61807580174927,
+      "Rank-5": 97.0262390670554,
+      "Rank-10": 97.37609329446065,
+      "Rank-20": 97.72594752186589
+    },
+    {
+      "model": "axis_shared",
+      "state": "10",
+      "mAP": 85.97972762393154,
+      "mINP": 62.32894353412033,
+      "Rank-1": 96.50145772594752,
+      "Rank-5": 97.0262390670554,
+      "Rank-10": 97.49271137026238,
+      "Rank-20": 97.90087463556851
+    },
+    {
+      "model": "axis_shared",
+      "state": "01",
+      "mAP": 85.7891363374081,
+      "mINP": 61.88951453091411,
+      "Rank-1": 96.61807580174927,
+      "Rank-5": 97.0262390670554,
+      "Rank-10": 97.43440233236151,
+      "Rank-20": 97.72594752186589
+    },
+    {
+      "model": "axis_shared",
+      "state": "11",
+      "mAP": 86.0017353777414,
+      "mINP": 62.14306826843601,
+      "Rank-1": 96.44314868804665,
+      "Rank-5": 97.43440233236151,
+      "Rank-10": 97.90087463556851,
+      "Rank-20": 98.30903790087464
+    }
+  ],
+  "frozen_state_comparisons": [
+    {
+      "improved": "frequency_shared_11",
+      "reference": "frequency_shared_00",
+      "mAP": 0.2210953291912574,
+      "mINP": 0.7275696637740339,
+      "Rank-1": -0.11661807580175321,
+      "Rank-5": 0.2332361516034922,
+      "Rank-10": 0.1749271137026227,
+      "Rank-20": 0.2915451895043759,
+      "rank1_rescued": 4,
+      "rank1_harmed": 6,
+      "AP_improved": 790,
+      "AP_worsened": 580,
+      "paired_both_metrics_ge1": false
+    },
+    {
+      "improved": "frequency_shared_11",
+      "reference": "frequency_shared_10",
+      "mAP": 0.15051457573299842,
+      "mINP": 0.5303506295516058,
+      "Rank-1": -0.05830903790088371,
+      "Rank-5": 0.2332361516034922,
+      "Rank-10": 0.11661807580175321,
+      "Rank-20": 0.23323615160350641,
+      "rank1_rescued": 4,
+      "rank1_harmed": 5,
+      "AP_improved": 749,
+      "AP_worsened": 606,
+      "paired_both_metrics_ge1": false
+    },
+    {
+      "improved": "frequency_shared_11",
+      "reference": "frequency_shared_01",
+      "mAP": 0.2246003987214351,
+      "mINP": 0.7366954952711424,
+      "Rank-1": -0.11661807580175321,
+      "Rank-5": 0.2332361516034922,
+      "Rank-10": 0.1749271137026227,
+      "Rank-20": 0.2915451895043759,
+      "rank1_rescued": 4,
+      "rank1_harmed": 6,
+      "AP_improved": 793,
+      "AP_worsened": 579,
+      "paired_both_metrics_ge1": false
+    },
+    {
+      "improved": "axis_shared_11",
+      "reference": "axis_shared_00",
+      "mAP": 0.23316827457193767,
+      "mINP": 0.29715998487974815,
+      "Rank-1": -0.1749271137026227,
+      "Rank-5": 0.4081632653061149,
+      "Rank-10": 0.5247813411078681,
+      "Rank-20": 0.5830903790087518,
+      "rank1_rescued": 4,
+      "rank1_harmed": 7,
+      "AP_improved": 779,
+      "AP_worsened": 606,
+      "paired_both_metrics_ge1": false
+    },
+    {
+      "improved": "axis_shared_11",
+      "reference": "axis_shared_10",
+      "mAP": 0.02200775380985931,
+      "mINP": -0.18587526568431656,
+      "Rank-1": -0.0583090379008695,
+      "Rank-5": 0.4081632653061149,
+      "Rank-10": 0.4081632653061291,
+      "Rank-20": 0.4081632653061291,
+      "rank1_rescued": 4,
+      "rank1_harmed": 5,
+      "AP_improved": 716,
+      "AP_worsened": 638,
+      "paired_both_metrics_ge1": false
+    },
+    {
+      "improved": "axis_shared_11",
+      "reference": "axis_shared_01",
+      "mAP": 0.21259904033330201,
+      "mINP": 0.2535537375218979,
+      "Rank-1": -0.1749271137026227,
+      "Rank-5": 0.4081632653061149,
+      "Rank-10": 0.4664723032069986,
+      "Rank-20": 0.5830903790087518,
+      "rank1_rescued": 4,
+      "rank1_harmed": 7,
+      "AP_improved": 775,
+      "AP_worsened": 610,
+      "paired_both_metrics_ge1": false
+    }
+  ],
+  "paper_acceptance": [
+    {
+      "model": "original_DeMo",
+      "selected_epoch": 8,
+      "paper_mAP": 86.2,
+      "paper_Rank1": 97.6,
+      "target_mAP": 87.2,
+      "target_Rank1": 98.6,
+      "mAP": 85.76856710316946,
+      "Rank1": 96.61807580174927,
+      "delta_paper_mAP": -0.4314328968305432,
+      "delta_paper_Rank1": -0.9819241982507236,
+      "gap_target_mAP": 1.4314328968305432,
+      "gap_target_Rank1": 1.9819241982507236,
+      "paper_both_plus1": false
+    },
+    {
+      "model": "AV_frequency_shared",
+      "selected_epoch": 6,
+      "paper_mAP": 86.2,
+      "paper_Rank1": 97.6,
+      "target_mAP": 87.2,
+      "target_Rank1": 98.6,
+      "mAP": 85.96873759608015,
+      "Rank1": 96.50145772594752,
+      "delta_paper_mAP": -0.23126240391985675,
+      "delta_paper_Rank1": -1.0985422740524768,
+      "gap_target_mAP": 1.2312624039198568,
+      "gap_target_Rank1": 2.098542274052477,
+      "paper_both_plus1": false
+    },
+    {
+      "model": "F_rank_frequency_shared",
+      "selected_epoch": 22,
+      "paper_mAP": 86.2,
+      "paper_Rank1": 97.6,
+      "target_mAP": 87.2,
+      "target_Rank1": 98.6,
+      "mAP": 85.98966243236072,
+      "Rank1": 96.50145772594752,
+      "delta_paper_mAP": -0.2103375676392858,
+      "delta_paper_Rank1": -1.0985422740524768,
+      "gap_target_mAP": 1.2103375676392858,
+      "gap_target_Rank1": 2.098542274052477,
+      "paper_both_plus1": false
+    },
+    {
+      "model": "AV_axis_shared",
+      "selected_epoch": 20,
+      "paper_mAP": 86.2,
+      "paper_Rank1": 97.6,
+      "target_mAP": 87.2,
+      "target_Rank1": 98.6,
+      "mAP": 86.1546433016181,
+      "Rank1": 96.7930029154519,
+      "delta_paper_mAP": -0.0453566983819087,
+      "delta_paper_Rank1": -0.8069970845481009,
+      "gap_target_mAP": 1.0453566983819087,
+      "gap_target_Rank1": 1.806997084548101,
+      "paper_both_plus1": false
+    },
+    {
+      "model": "F_rank_axis_shared",
+      "selected_epoch": 3,
+      "paper_mAP": 86.2,
+      "paper_Rank1": 97.6,
+      "target_mAP": 87.2,
+      "target_Rank1": 98.6,
+      "mAP": 86.0017353777414,
+      "Rank1": 96.44314868804665,
+      "delta_paper_mAP": -0.19826462225860553,
+      "delta_paper_Rank1": -1.1568513119533463,
+      "gap_target_mAP": 1.1982646222586055,
+      "gap_target_Rank1": 2.1568513119533463,
+      "paper_both_plus1": false
+    }
+  ],
+  "formal_acceptance_met": false,
+  "goal": "ACTIVE_UNMET",
+  "raw_verification": {
+    "manifest": {
+      "counts": {
+        "train": 8675,
+        "query": 1715,
+        "gallery": 8575
+      },
+      "filename_pid_camera_scene_exact": true,
+      "train_ids": 50,
+      "test_ids": 50,
+      "train_test_identity_disjoint": true
+    },
+    "features": {
+      "frequency_shared_normal": {
+        "query_features": {
+          "shape": [
+            1715,
+            5120
+          ],
+          "finite": true,
+          "maximum_norm_error": 9.536175782365319e-08,
+          "uncompressed_payload_sha256": "267a9b8cd3dd1e98542c10e536b14f4efd4eb1f156ace6dd470b7c7d5f743c7d"
+        },
+        "gallery_features": {
+          "shape": [
+            8575,
+            5120
+          ],
+          "finite": true,
+          "maximum_norm_error": 1.1143308809025143e-07,
+          "uncompressed_payload_sha256": "6a3d8cd07ab681245d3fd011975733618264d729172aca4b407ef0cae5231658"
+        }
+      },
+      "frequency_shared_base": {
+        "base_query_features": {
+          "shape": [
+            1715,
+            5120
+          ],
+          "finite": true,
+          "maximum_norm_error": 1.0223346880167128e-07,
+          "uncompressed_payload_sha256": "01f2172f68b3157790b1304fbbc0b1e275f4c8c49f583786ed8ff4ae20d42c67"
+        },
+        "base_gallery_features": {
+          "shape": [
+            8575,
+            5120
+          ],
+          "finite": true,
+          "maximum_norm_error": 1.157404675433682e-07,
+          "uncompressed_payload_sha256": "4b5954da73540598e65b3412412daa8d5f6018cd4266b7ff9722789fed0bd3be"
+        }
+      },
+      "axis_shared_normal": {
+        "query_features": {
+          "shape": [
+            1715,
+            5120
+          ],
+          "finite": true,
+          "maximum_norm_error": 1.0374414638469887e-07,
+          "uncompressed_payload_sha256": "1be0fb70775d71802e6d5c8c11332c3a743c4d27b22a9c1dcef6549580d84dbc"
+        },
+        "gallery_features": {
+          "shape": [
+            8575,
+            5120
+          ],
+          "finite": true,
+          "maximum_norm_error": 1.0959772223095854e-07,
+          "uncompressed_payload_sha256": "5201e13e905a567f0a7d7217cf86701bfcbc798ecfbb0a4a32b466471853de19"
+        }
+      },
+      "axis_shared_base": {
+        "base_query_features": {
+          "shape": [
+            1715,
+            5120
+          ],
+          "finite": true,
+          "maximum_norm_error": 1.0223346880167128e-07,
+          "uncompressed_payload_sha256": "01f2172f68b3157790b1304fbbc0b1e275f4c8c49f583786ed8ff4ae20d42c67"
+        },
+        "base_gallery_features": {
+          "shape": [
+            8575,
+            5120
+          ],
+          "finite": true,
+          "maximum_norm_error": 1.157404675433682e-07,
+          "uncompressed_payload_sha256": "4b5954da73540598e65b3412412daa8d5f6018cd4266b7ff9722789fed0bd3be"
+        }
+      }
+    },
+    "binding": {
+      "frequency_shared_distance_feature_samples": {
+        "count": 6,
+        "max_error": 3.9251448891164387e-07,
+        "all_pairs_reconstructed": false
+      },
+      "frequency_shared": {
+        "11_distance_equal_best": true,
+        "00_per_query_equal_original_csv": true,
+        "00_distance_and_features_equal_other_local_control": true,
+        "11_features_byte_comparison_limit": "State archive stores only base00 features; actual producer assertion is indexed but 11 features not independently retained."
+      },
+      "axis_shared_distance_feature_samples": {
+        "count": 6,
+        "max_error": 2.693694443056671e-07,
+        "all_pairs_reconstructed": false
+      },
+      "axis_shared": {
+        "11_distance_equal_best": true,
+        "00_per_query_equal_original_csv": true,
+        "00_distance_and_features_equal_other_local_control": true,
+        "11_features_byte_comparison_limit": "State archive stores only base00 features; actual producer assertion is indexed but 11 features not independently retained."
+      }
+    },
+    "matrix_summaries": [
+      {
+        "variant": "frequency_shared",
+        "state": "normal_best",
+        "metrics": {
+          "mAP": 85.98966243236072,
+          "mINP": 62.573477947330296,
+          "Rank-1": 96.50145772594752,
+          "Rank-5": 97.25947521865889,
+          "Rank-10": 97.55102040816327,
+          "Rank-20": 98.01749271137027
+        },
+        "ranking": {
+          "values": 14706125,
+          "min": 3.3974647521972656e-05,
+          "max": 1.4274957180023193,
+          "adjacent_equal_distance_pairs": 13558,
+          "stable_order": true
+        },
+        "per_query_max_error": 4.440892098500626e-16
+      },
+      {
+        "variant": "frequency_shared",
+        "state": "00",
+        "metrics": {
+          "mAP": 85.76856710316946,
+          "mINP": 61.84590828355626,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.37609329446065,
+          "Rank-20": 97.72594752186589
+        },
+        "ranking": {
+          "values": 14706125,
+          "min": 3.4809112548828125e-05,
+          "max": 1.4195560216903687,
+          "adjacent_equal_distance_pairs": 13400,
+          "stable_order": true
+        },
+        "per_query_max_error": 4.440892098500626e-16
+      },
+      {
+        "variant": "frequency_shared",
+        "state": "10",
+        "metrics": {
+          "mAP": 85.83914785662772,
+          "mINP": 62.04312731777869,
+          "Rank-1": 96.5597667638484,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.43440233236151,
+          "Rank-20": 97.78425655976676
+        },
+        "ranking": {
+          "values": 14706125,
+          "min": 3.504753112792969e-05,
+          "max": 1.4195287227630615,
+          "adjacent_equal_distance_pairs": 13675,
+          "stable_order": true
+        },
+        "per_query_max_error": 4.440892098500626e-16
+      },
+      {
+        "variant": "frequency_shared",
+        "state": "01",
+        "metrics": {
+          "mAP": 85.76506203363928,
+          "mINP": 61.836782452059154,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.37609329446065,
+          "Rank-20": 97.72594752186589
+        },
+        "ranking": {
+          "values": 14706125,
+          "min": 3.4928321838378906e-05,
+          "max": 1.419339895248413,
+          "adjacent_equal_distance_pairs": 13527,
+          "stable_order": true
+        },
+        "per_query_max_error": 3.3306690738754696e-16
+      },
+      {
+        "variant": "frequency_shared",
+        "state": "11",
+        "metrics": {
+          "mAP": 85.98966243236072,
+          "mINP": 62.573477947330296,
+          "Rank-1": 96.50145772594752,
+          "Rank-5": 97.25947521865889,
+          "Rank-10": 97.55102040816327,
+          "Rank-20": 98.01749271137027
+        },
+        "ranking": {
+          "values": 14706125,
+          "min": 3.3974647521972656e-05,
+          "max": 1.4274957180023193,
+          "adjacent_equal_distance_pairs": 13558,
+          "stable_order": true
+        },
+        "per_query_max_error": 4.440892098500626e-16
+      },
+      {
+        "variant": "axis_shared",
+        "state": "normal_best",
+        "metrics": {
+          "mAP": 86.0017353777414,
+          "mINP": 62.14306826843601,
+          "Rank-1": 96.44314868804665,
+          "Rank-5": 97.43440233236151,
+          "Rank-10": 97.90087463556851,
+          "Rank-20": 98.30903790087464
+        },
+        "ranking": {
+          "values": 14706125,
+          "min": 3.421306610107422e-05,
+          "max": 1.4447698593139648,
+          "adjacent_equal_distance_pairs": 13438,
+          "stable_order": true
+        },
+        "per_query_max_error": 4.440892098500626e-16
+      },
+      {
+        "variant": "axis_shared",
+        "state": "00",
+        "metrics": {
+          "mAP": 85.76856710316946,
+          "mINP": 61.84590828355626,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.37609329446065,
+          "Rank-20": 97.72594752186589
+        },
+        "ranking": {
+          "values": 14706125,
+          "min": 3.4809112548828125e-05,
+          "max": 1.4195560216903687,
+          "adjacent_equal_distance_pairs": 13400,
+          "stable_order": true
+        },
+        "per_query_max_error": 4.440892098500626e-16
+      },
+      {
+        "variant": "axis_shared",
+        "state": "10",
+        "metrics": {
+          "mAP": 85.97972762393154,
+          "mINP": 62.32894353412033,
+          "Rank-1": 96.50145772594752,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.49271137026238,
+          "Rank-20": 97.90087463556851
+        },
+        "ranking": {
+          "values": 14706125,
+          "min": 3.4689903259277344e-05,
+          "max": 1.4307982921600342,
+          "adjacent_equal_distance_pairs": 13474,
+          "stable_order": true
+        },
+        "per_query_max_error": 4.440892098500626e-16
+      },
+      {
+        "variant": "axis_shared",
+        "state": "01",
+        "metrics": {
+          "mAP": 85.7891363374081,
+          "mINP": 61.88951453091411,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.43440233236151,
+          "Rank-20": 97.72594752186589
+        },
+        "ranking": {
+          "values": 14706125,
+          "min": 3.457069396972656e-05,
+          "max": 1.4197750091552734,
+          "adjacent_equal_distance_pairs": 13631,
+          "stable_order": true
+        },
+        "per_query_max_error": 4.440892098500626e-16
+      },
+      {
+        "variant": "axis_shared",
+        "state": "11",
+        "metrics": {
+          "mAP": 86.0017353777414,
+          "mINP": 62.14306826843601,
+          "Rank-1": 96.44314868804665,
+          "Rank-5": 97.43440233236151,
+          "Rank-10": 97.90087463556851,
+          "Rank-20": 98.30903790087464
+        },
+        "ranking": {
+          "values": 14706125,
+          "min": 3.421306610107422e-05,
+          "max": 1.4447698593139648,
+          "adjacent_equal_distance_pairs": 13438,
+          "stable_order": true
+        },
+        "per_query_max_error": 4.440892098500626e-16
+      }
+    ]
+  },
+  "training_order_verification": {
+    "all4_equal_epoch_step_names_partialset": true,
+    "models": {
+      "AV_frequency_shared": {
+        "attempts": 6563,
+        "updates": 6563,
+        "record_positions": 420032,
+        "eligible_visited": 8675,
+        "partial_loss_all_zero": true,
+        "full_loss_equals_loss": true,
+        "paired_positive_negative_identity_legality": true,
+        "epoch_loss_coverage_counters_exact": true
+      },
+      "F_rank_frequency_shared": {
+        "attempts": 6563,
+        "updates": 6563,
+        "record_positions": 420032,
+        "eligible_visited": 8675,
+        "partial_loss_all_zero": true,
+        "full_loss_equals_loss": true,
+        "paired_positive_negative_identity_legality": true,
+        "epoch_loss_coverage_counters_exact": true
+      },
+      "AV_axis_shared": {
+        "attempts": 6563,
+        "updates": 6563,
+        "record_positions": 420032,
+        "eligible_visited": 8675,
+        "partial_loss_all_zero": true,
+        "full_loss_equals_loss": true,
+        "paired_positive_negative_identity_legality": true,
+        "epoch_loss_coverage_counters_exact": true
+      },
+      "F_rank_axis_shared": {
+        "attempts": 6563,
+        "updates": 6563,
+        "record_positions": 420032,
+        "eligible_visited": 8675,
+        "partial_loss_all_zero": true,
+        "full_loss_equals_loss": true,
+        "paired_positive_negative_identity_legality": true,
+        "epoch_loss_coverage_counters_exact": true
+      }
+    },
+    "new_updates": 13126,
+    "historical_reference_updates_read": 13126
+  },
+  "checkpoint_verification": {
+    "state_tensors_per_checkpoint": 745,
+    "total_parameters_from_state_excluding_source_defined_buffers": 99947398,
+    "parameter_tensors": 549,
+    "active_gradient_parameter_tensors": 111,
+    "trainable_numel_from_active_names": 2249606,
+    "frozen_identity_tensors_byte_equal": 601,
+    "different_tensors": 135,
+    "actual_saved_FFT_mask_bins": [
+      7,
+      18,
+      103
+    ],
+    "unexpected_local_grid_buffer_absent": true,
+    "persistent_mask_all384_values_exact_geometry": true,
+    "complete_disjoint_conjugate_symmetric": true,
+    "all_saved_float_values_finite": true,
+    "limits": "Both new best weights compared directly using restricted stdlib pickle reconstruction and archive storage bytes. Original teacher weight is not indexed and was not reopened; no claim of a fresh teacher-checkpoint tensor comparison. Recorded per-epoch frozen checks and current00 equality provide separate evidence.",
+    "actual_key_shapes": {
+      "frequency_expert.query": [
+        3,
+        128
+      ],
+      "frequency_expert.source": [
+        3,
+        128
+      ],
+      "frequency_expert.values.0.1.weight": [
+        128,
+        512
+      ],
+      "frequency_expert.values.1.1.weight": [
+        128,
+        512
+      ],
+      "frequency_expert.values.2.1.weight": [
+        128,
+        512
+      ],
+      "frequency_expert.attention.0.in_proj_weight": [
+        384,
+        128
+      ],
+      "frequency_expert.attention.1.in_proj_weight": [
+        384,
+        128
+      ],
+      "frequency_expert.attention.2.in_proj_weight": [
+        384,
+        128
+      ],
+      "frequency_expert.cross_band.in_proj_weight": [
+        384,
+        128
+      ],
+      "router.to_frequency_query.1.weight": [
+        128,
+        512
+      ],
+      "modality_expert.query": [
+        7,
+        64
+      ],
+      "modality_projection.1.weight": [
+        64,
+        512
+      ],
+      "frequency_projection.1.weight": [
+        64,
+        512
+      ],
+      "interaction_projection.1.weight": [
+        64,
+        1024
+      ],
+      "frequency_expert.pool_score.weight": [
+        1,
+        512
+      ]
+    },
+    "rank128_child_replacement_preserves_installed_pool_scorer_and_AG_closure_source": {
+      "status": "PASS_SOURCE_WITH_NATIVE_RECORD_CORROBORATION",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\rgbnt100_frequency_rank.py:30",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\rgbnt100_frequency_rank.py:35",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\routed_projected_auxiliary_rgb_coordinate_metric.py:7",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\routed_projected_auxiliary_rgb_coordinate_metric.py:42",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\routed_projected_auxiliary_rgb_coordinate_metric.py:82",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\rgb_auxiliary_frequency_score_fp32.py:6"
+      ],
+      "details": "The existing frequency_expert object, installed bound pool and scorer remain; only rank-shaped children and router.to_frequency_query[1] change. Original M read and F prepare/read methods are asserted, original global FFT masks retained, PM/PF/PI hidden64 retained. Actual111 gradient records and AG pool/projection/scorer records remain active. State dict alone cannot serialize or prove Python closure identity."
+    }
+  },
+  "lifecycle_native_storage": {
+    "native_and_children": {
+      "native_updates": 6,
+      "all111_active_parameter_gradients_per_control": true,
+      "strict_reload": true,
+      "paired_native_records": true,
+      "default64_forward_record_executions": 64,
+      "default64_scope": "8 query records x 2 constructors x FP32/AMP x 2 controls, no optimizer updates or full-QG performance evidence",
+      "actual_children": [
+        {
+          "phase": "parity",
+          "name": "RGBNT100_frank128_AV_frequency_shared_default_parity",
+          "pid": 661822,
+          "gpu": 2,
+          "started": 1792120918.5556805,
+          "finished": 1792120945.2724996,
+          "exit_code": 0
+        },
+        {
+          "phase": "native",
+          "name": "RGBNT100_frank128_AV_frequency_shared_s42_smoke",
+          "pid": 662556,
+          "gpu": 2,
+          "started": 1792120946.8924916,
+          "finished": 1792120969.8058465,
+          "exit_code": 0
+        },
+        {
+          "phase": "training",
+          "name": "RGBNT100_frank128_AV_frequency_shared_s42",
+          "pid": 663214,
+          "gpu": 2,
+          "started": 1792120970.0162022,
+          "finished": 1792130775.6291602,
+          "exit_code": 0
+        },
+        {
+          "phase": "audit",
+          "name": "RGBNT100_frank128_AV_frequency_shared_s42",
+          "pid": 875294,
+          "gpu": 2,
+          "started": 1792130777.4312725,
+          "finished": 1792130783.5194852,
+          "exit_code": 0
+        },
+        {
+          "phase": "states",
+          "name": "RGBNT100_frank128_AV_frequency_shared_s42",
+          "pid": 875409,
+          "gpu": 2,
+          "started": 1792130783.5897224,
+          "finished": 1792130949.764434,
+          "exit_code": 0
+        },
+        {
+          "phase": "parity",
+          "name": "RGBNT100_frank128_AV_axis_shared_default_parity",
+          "pid": 661823,
+          "gpu": 3,
+          "started": 1792120918.558829,
+          "finished": 1792120946.8165643,
+          "exit_code": 0
+        },
+        {
+          "phase": "native",
+          "name": "RGBNT100_frank128_AV_axis_shared_s42_smoke",
+          "pid": 662557,
+          "gpu": 3,
+          "started": 1792120946.8940067,
+          "finished": 1792120969.9530196,
+          "exit_code": 0
+        },
+        {
+          "phase": "training",
+          "name": "RGBNT100_frank128_AV_axis_shared_s42",
+          "pid": 663215,
+          "gpu": 3,
+          "started": 1792120970.032371,
+          "finished": 1792130160.202437,
+          "exit_code": 0
+        },
+        {
+          "phase": "audit",
+          "name": "RGBNT100_frank128_AV_axis_shared_s42",
+          "pid": 862187,
+          "gpu": 3,
+          "started": 1792130161.955492,
+          "finished": 1792130168.1585245,
+          "exit_code": 0
+        },
+        {
+          "phase": "states",
+          "name": "RGBNT100_frank128_AV_axis_shared_s42",
+          "pid": 862290,
+          "gpu": 3,
+          "started": 1792130168.2288177,
+          "finished": 1792130313.1054113,
+          "exit_code": 0
+        }
+      ],
+      "archived_training_log_epoch_records": 100,
+      "all10_recorded_child_exits_zero": true,
+      "native_limit": "Saved real-update/gradient/reload records verified against producing source; no new Adam execution or runtime model inspection."
+    },
+    "observer": {
+      "original_session": 34653,
+      "scheduled_observation_epoch": 1792134170.032371,
+      "actual_observation_epoch": 1792134171.029324,
+      "consume_not_before_BJT": "2026-10-16T15:03:10.032371+08:00",
+      "root_recorded_tool_chunk": "707df6",
+      "root_recorded_exit_code": 0,
+      "controller_complete_and_recorded_absent": true,
+      "all10_children_recorded_exit0_and_absent": true,
+      "detached_controller_OS_exit": "UNATTESTED",
+      "limit": "Read indexed captured observation and owner reference to root tool707df6; no remote/process query. The reviewer does not independently possess a host-signed transcript proving root consumption time or all absence-of-polling history."
+    },
+    "intake": {
+      "original_intake_session": 87387,
+      "original_exit_code": 1,
+      "root_original_exit_chunk": "673c11",
+      "primary_failure": "OSError28 during C text-tar extraction; first2 transport subprocesses exit0, before raw transfer/cleanup branch.",
+      "preserved_failed_owner_bytes": 0,
+      "explicit_continuation_exit_code": 0,
+      "root_continuation_exit_chunk": "762b52",
+      "transport_receipts": 10,
+      "all_receipts_and_primary_capture_binding_exact": true,
+      "text_manifest_files": 281,
+      "text_manifest_bytes": 151876578,
+      "six_D_archives_bytes": 2090564504,
+      "all_six_local_archives_exact_index_controller_and_markers": true,
+      "seven_remote_duplicates_recorded_cleared_bytes": 2111216489,
+      "original_text_tar_size": 20651985,
+      "unique_best_deleted_recorded": 0,
+      "limitation": "Text tar was consumed and removed by completed continuation; its old size/hash and the 281 extracted files are preserved in primary terminal capture. No tar re-open or remote cleanup re-query. Source PASS alone is not credited as runtime proof."
+    },
+    "closed_text_storage": {
+      "files": 1042,
+      "bytes": 589629419,
+      "original_C_path_is_junction_to_named_D_destination": true,
+      "all_original_path_size_sha256_freshly_rechecked": true,
+      "original_C_free_before": 152735744,
+      "original_C_free_after": 743469056,
+      "scope": "Storage preservation only; old N5 experiment conclusions are not freshly recertified."
+    },
+    "historical_AV_states": {
+      "cases": [
+        {
+          "variant": "frequency_shared",
+          "state": "00",
+          "mAP": 85.76856710316946,
+          "mINP": 61.84590828355626,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.37609329446065,
+          "Rank-20": 97.72594752186589
+        },
+        {
+          "variant": "frequency_shared",
+          "state": "10",
+          "mAP": 85.78711809631564,
+          "mINP": 61.90525601451247,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.49271137026238,
+          "Rank-20": 97.84256559766764
+        },
+        {
+          "variant": "frequency_shared",
+          "state": "01",
+          "mAP": 85.76586522854163,
+          "mINP": 61.84274800800916,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.37609329446065,
+          "Rank-20": 97.72594752186589
+        },
+        {
+          "variant": "frequency_shared",
+          "state": "11",
+          "mAP": 85.96873759608015,
+          "mINP": 62.438827112517,
+          "Rank-1": 96.50145772594752,
+          "Rank-5": 97.08454810495627,
+          "Rank-10": 97.37609329446065,
+          "Rank-20": 97.84256559766764
+        },
+        {
+          "variant": "axis_shared",
+          "state": "00",
+          "mAP": 85.76856710316946,
+          "mINP": 61.84590828355626,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.37609329446065,
+          "Rank-20": 97.72594752186589
+        },
+        {
+          "variant": "axis_shared",
+          "state": "10",
+          "mAP": 85.84028645856357,
+          "mINP": 62.0218804509823,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.43440233236151,
+          "Rank-20": 97.90087463556851
+        },
+        {
+          "variant": "axis_shared",
+          "state": "01",
+          "mAP": 85.77176104898467,
+          "mINP": 61.858044900179465,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.43440233236151,
+          "Rank-20": 97.72594752186589
+        },
+        {
+          "variant": "axis_shared",
+          "state": "11",
+          "mAP": 86.1546433016181,
+          "mINP": 62.560794668209745,
+          "Rank-1": 96.7930029154519,
+          "Rank-5": 97.43440233236151,
+          "Rank-10": 97.78425655976676,
+          "Rank-20": 98.25072886297376
+        }
+      ],
+      "CSV_six_CMC50_groups_reaggregated": true,
+      "raw_distance_reranked_in_this_audit": false,
+      "frozen00_and11_CSV_binding": true,
+      "reuse_receipt_has_no_new_NN": true,
+      "scope": "Historical selected AV42 artifacts reused; current audit does not repeat old full training or old raw/weight verification."
+    },
+    "deployed_five_sources_match": true,
+    "elapsed_seconds": 1.8923251628875732
+  },
+  "claims": [
+    {
+      "claim": "Two new full50 normal models, matched13126 updates and8 frozen full-QG states",
+      "impact": "supported_by_saved_primary_evidence_and_fresh_recounts"
+    },
+    {
+      "claim": "All six metrics/CMC/groups from each earliest full-normal-mAP-best whole checkpoint",
+      "impact": "supported"
+    },
+    {
+      "claim": "RGBNT100 paper DeMo plus1 in both mAP and Rank-1",
+      "impact": "not_achieved"
+    },
+    {
+      "claim": "Width128 confirms F capacity bottleneck or improves structured retrieval over matched AV42",
+      "impact": "unsupported; axis loses0.1529079239mAP/0.3498542274R1 against AV42"
+    },
+    {
+      "claim": "Frozen states are retrained ablations, or current results establish missing/general robustness",
+      "impact": "unsupported_scope"
+    },
+    {
+      "claim": "601 frozen identity tensors newly compared to original teacher file",
+      "impact": "not_performed; only between-new-control equality freshly established"
+    },
+    {
+      "claim": "Original intake succeeded without failure, or controller OSexit0 is attested",
+      "impact": "false; initial intake failed1 and detached controller OSexit remains UNATTESTED"
+    }
+  ],
+  "limitations": [
+    "Semantic review is a fresh delegated Codex review in the same model family and is provisional. Requested model gpt-6-astra and reasoning max are recorded separately; actual model and reasoning effort are UNATTESTED by the host evidence available to this reviewer. No cross-family or host-attested routing claim.",
+    "All 757 indexed artifacts were read for size/hash verification; all 311 Python files were parsed and indexed and all 263 JSON files parsed. Detailed semantic source review follows the current rank128 builder, runner, metric/data, state, hook, controller and intake/recovery call chains. Historical auxiliary scripts are not all newly certified line by line.",
+    "GT provenance is reconstructed from the saved official split manifest, filename identity/camera parsing, all raw-array metadata, installed-dataset loader/auditor source and successful archived installed-GT receipts. The reviewer did not reopen the remote installed image dataset or independently certify its image bytes.",
+    "Every distance in the two new selected-normal matrices and eight new frozen-state matrices was independently reranked. All 100 epoch per-query CSVs were reaggregated and checked, but per-epoch raw distances were not retained in this index; nonselected-epoch AP is therefore not freshly reranked from distances.",
+    "All retained normal and base00 feature values were checked finite and unit norm. Twelve deterministic normal feature-pair distances were recomputed, maximum absolute error below 3.93e-7; the full feature matrix product was not reconstructed. State archives retain base00 features only, so state11 feature equality relies on the producer assertion and exact independently checked state11/normal distance equality.",
+    "Both new checkpoints were read via restricted stdlib pickle reconstruction and their actual storage payloads checked. All 601 frozen identity tensors are byte-equal BETWEEN THE TWO NEW CONTROLS. Original teacher and old AV42 weights are not indexed and were not reopened. No fresh original-teacher-to-new tensor comparison is claimed; source frozen assertions and current00/original per-query equality provide separate supporting evidence.",
+    "Original DeMo and matched AV42 best/epoch CSVs, old AV42 order logs and eight historical AV42 state CSVs were checked. Historical AV42 raw distances/weights and earlier N5 training are reused evidence, not new raw recounts or new full reruns. The 1042-file storage check certifies preservation, not old experiment conclusions.",
+    "The current experiment has one fixed teacher42, previously trained50, plus two fresh expert42/Adam stages of50 epochs. Official benchmark mAP selects the earliest maximum epoch and the experiment is part of recorded recipe selection. This is not an untouched final test or an independent end-to-end multiseed robustness result.",
+    "Native3+3 successful-update/gradient/strict-reload records and default64 parity64 forward-record executions are validated against their producer sources and archived child exits. They are not fresh execution by this reviewer, whole-QG rank64 parity, formal retrieval evidence, or learned-path causal attribution.",
+    "The eight new states are frozen interventions on two selected weights, not retrained module ablations. No missing-modality, 49-condition, other-dataset or new-seed experiment was run in this audit or supported as new rank128 evidence.",
+    "Root observer return707df6 exit0 is referenced in the indexed continuation-owner record; captured observation proves recorded controller COMPLETE/absent and all10 children exit0/absent. The reviewer does not independently have a host-signed transcript for root consumption timing or the entire no-early-polling history. Detached controller OS exit remains UNATTESTED, distinct from observer/transport/child exit codes.",
+    "Original intake87387 failed1 at tar extraction with primary OSError28; it is not relabeled successful. First2 transport exits0, explicit continuation63120 recorded exit0, per-step primary captures, extracted manifest and six current D archives support recovery. The consumed text tar and remote duplicates are no longer reopened; remote cleanup and protected-weight assertions are preserved transport evidence, not a current remote re-query. Prior source PASS records prove only source review.",
+    "Reported process duration, selected-QG runtime and peak allocated bytes are different measurements. Both controls share the nominal schedule and order but width128 adds362240 parameters each; no equal-time/equal-compute claim or confirmed F bottleneck follows. Peak memory is allocator-reported whole-process peak, not exclusive training peak or reserved device memory.",
+    "Paper target87.2mAP/98.6Rank-1 is taken from the indexed user-corrected canonical target record (published DeMo86.2/97.6 plus1). No web check was performed under this local-only request. Legacy relative-to-own-reproduction booleans remain diagnostics, not final acceptance."
+  ],
+  "verification_tool_returns": [
+    {
+      "check": "input seal",
+      "chunk": "d5a10c",
+      "exit_code": 0
+    },
+    {
+      "check": "all raw matrices",
+      "session_id": 84723,
+      "start_chunk": "6d7ca8",
+      "completion_chunk": "ed897f",
+      "exit_code": 0
+    },
+    {
+      "check": "tables/epoch/order",
+      "chunk": "2b88ce",
+      "exit_code": 0
+    },
+    {
+      "check": "checkpoint verifier first PI-shape assumption",
+      "chunk": "265d90",
+      "exit_code": 1,
+      "experiment_defect": false
+    },
+    {
+      "check": "corrected checkpoint verifier",
+      "chunk": "f3c8b8",
+      "exit_code": 0
+    },
+    {
+      "check": "lifecycle/native/storage",
+      "chunk": "0ce1e4",
+      "exit_code": 0
+    }
+  ],
+  "source_provenance_limit": "Indexed deployment hash checks and current source seals bind the reviewed files. Saved producer assertions/receipts are corroborated by current raw/tensor/table checks but are not a live remote execution or binary-level proof of all historical runtime actions. Source-only review PASS is never promoted to runtime proof.",
+  "audit_artifacts": [
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_F_rank128_full_normal_run01\\input_seal_check.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_F_rank128_full_normal_run01\\raw_recount.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_F_rank128_full_normal_run01\\table_order_recount.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_F_rank128_full_normal_run01\\checkpoint_tensor_comparison.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_F_rank128_full_normal_run01\\lifecycle_storage_native_recount.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_F_rank128_full_normal_run01\\verifier_correction.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_F_rank128_full_normal_run01\\source_index.json"
+  ]
+}

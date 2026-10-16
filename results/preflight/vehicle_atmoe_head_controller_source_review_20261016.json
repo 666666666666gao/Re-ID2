@@ -1,0 +1,190 @@
+{
+  "status": "FINAL",
+  "verdict": "SOURCE_ONLY_PASS",
+  "reviewed_revision": "R3",
+  "review_context": "Source-only followup by the same reviewer; this is not a fresh-agent restart.",
+  "reviewer_task": "/root/review_vehicle_atmoe_heads_source_20261016",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "routing_attestation": "Actual serving-model and reasoning metadata are not exposed. Requested Astra/max routing is recorded without claiming actual attestation.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "deployment_authorized": false,
+  "request": "results/preflight/vehicle_atmoe_head_controller_source_review_request_20261016.json",
+  "addendum": "results/preflight/vehicle_atmoe_head_controller_source_review_addendum_R3_20261016.json",
+  "prior_source_review": "results/preflight/vehicle_atmoe_head_source_review_20261016.json",
+  "reviewed_new_source": "launch_vehicle_atmoe_head_baselines.py",
+  "directly_read_relevant_sources": [
+    "gpu_thermal_execute.py",
+    "run_full_official_experiment.py",
+    "audit_full_official_normal.py",
+    "audit_msvr_full_identity_normal.py",
+    "check_vehicle_atmoe_head_default_parity.py",
+    "vehicle_atmoe_head_configuration.py",
+    "run_vehicle_atmoe_head_baseline.py",
+    "results/preflight/rgbnt100_F_rank_complete_intake_20261016.py",
+    "results/full_official_baselines_20261004/training/MSVR310_demo_shared_s42/result.json"
+  ],
+  "blocking_issues": [],
+  "nonblocking_issues": [],
+  "resolved_findings": [
+    {
+      "id": "C1",
+      "severity": "BLOCKING",
+      "revision_found": "R1",
+      "title": "The fixed5120 auditor rejects the planned5632D MSVR310 baseline after formal training",
+      "evidence": [
+        ".aris/traces/experiment-bridge/2026-10-16_vehicle_ATMoE_heads_controller_source_run01/R1_sources/launch_vehicle_atmoe_head_baselines.py:107",
+        "audit_full_official_normal.py:46",
+        "launch_vehicle_atmoe_head_baselines.py:17",
+        "shared_identity_axis.py:108"
+      ],
+      "failure_path": "R1 used audit_full_official_normal.py for both cases. The MSVR310/demo_shared model returns5632D and is checked as such by the controller, but the selected auditor asserted every feature row had5120 columns. That audit would fail after full50, preventing its component receipt and controller completion. This was a source defect found before execution, not a claimed runtime failure.",
+      "minimal_fix": "Select the existing audit_full_official_normal.py for RGBNT100 and the existing audit_msvr_full_identity_normal.py for MSVR310. Do not change either existing auditor.",
+      "resolution": "R3 adds audit_script constants to the two CASES and passes case['audit_script'] to execute. Reviewer directly read both auditors, checked the MS auditor's705-update condition against the preserved original shared baseline result, and confirmed the remaining controller AST equals R1.",
+      "revision_history": "R1 controller/request preserved. An R2 scoped auditor copy was prepared, then withdrawn without execution when existing5632D audit reuse was identified; R2 drafts remain archived. R3 is the reviewed final revision.",
+      "preserved_R1": ".aris/traces/experiment-bridge/2026-10-16_vehicle_ATMoE_heads_controller_source_run01/R1_sources",
+      "preserved_R2_draft": ".aris/traces/experiment-bridge/2026-10-16_vehicle_ATMoE_heads_controller_source_run01/R2_draft_sources"
+    }
+  ],
+  "checks": [
+    {
+      "check": "Prior intake and result-audit input contracts",
+      "verdict": "PASS_SOURCE_CONTRACT",
+      "evidence": [
+        "launch_vehicle_atmoe_head_baselines.py:32",
+        "results/preflight/rgbnt100_F_rank_complete_intake_20261016.py:125"
+      ],
+      "conclusion": "The controller requires the complete F128 intake status, formal_updates13126, state_cases8 and seven cleared owned duplicate artifacts. These field names and values match the original intake producer source. It also requires the supplied result audit to be FINAL, PASS/WARN, blocking_findings empty and bound by request filename to rgbnt100_F_rank_result_integrity_request_20261016.json. Parent explicitly confirmed that future reviewer output contract. Checks precede output-root creation and every child call.",
+      "limitation": "The reviewer did not read actual current intake/recovery/audit artifacts or verify their existence, completion or content. Prerequisite satisfaction is not established by this review."
+    },
+    {
+      "check": "Finite cases, resource scope and preserved baseline semantics",
+      "verdict": "PASS",
+      "evidence": [
+        "launch_vehicle_atmoe_head_baselines.py:13",
+        "gpu_thermal_execute.py:9",
+        "gpu_thermal_execute.py:24"
+      ],
+      "conclusion": "The only cases are physicalGPU2 RGBNT100/demo/head32 and physicalGPU3 MSVR310/demo_shared/head16. Each phase has at most two workers and one case per card. Existing execute sets each child's CUDA_VISIBLE_DEVICES to the specified physical card, restricts cards to2/3 and polls only memory at240s while admission is unavailable. No GPU0/1, RGBNT201, temperature/power setting, environment install or network transport is added. Actual launch-server/resource admission remains external and pending."
+    },
+    {
+      "check": "Exact parity result fields and phase barrier",
+      "verdict": "PASS",
+      "evidence": [
+        "launch_vehicle_atmoe_head_baselines.py:49",
+        "launch_vehicle_atmoe_head_baselines.py:64",
+        "check_vehicle_atmoe_head_default_parity.py:62"
+      ],
+      "conclusion": "The parity consumer uses the exact existing status and fields for config/state/CPU-CUDA-RNG/FP32/AMP equality, original parameter counts and descriptor widths. It requires32 forward-record executions, zero updates and zero checkpoint writes per case. list(pool.map(...)) must finish both successful parities before native starts; the aggregate64 count is correct. No runtime parity was executed in this review."
+    },
+    {
+      "check": "Native3 gates and formal-training barrier",
+      "verdict": "PASS",
+      "evidence": [
+        "launch_vehicle_atmoe_head_baselines.py:78",
+        "launch_vehicle_atmoe_head_baselines.py:84",
+        "launch_vehicle_atmoe_head_baselines.py:93",
+        "run_full_official_experiment.py:99"
+      ],
+      "conclusion": "The native consumer uses the parent's actual smoke fields: SMOKE_PASS, steps=attempts=3, zero AMP skips, strict_reload_equal, every trainable gradient true and descriptor_shape8x5120/5632. It checks the selected head, actual parameters, exact full split counts, zero holdout and no smoke pth. Both natives must finish successfully before either formal run; the native_acceptance receipt correctly totals6 updates."
+    },
+    {
+      "check": "Formal50, complete data coverage and CPU GT audit",
+      "verdict": "PASS",
+      "evidence": [
+        "launch_vehicle_atmoe_head_baselines.py:100",
+        "run_full_official_experiment.py:169",
+        "audit_full_official_normal.py:18",
+        "audit_msvr_full_identity_normal.py:11"
+      ],
+      "conclusion": "The controller requires COMPLETE/50epochs, positive steps equal optimizer_steps, zero AMP skips, exact record counts and every eligible training record visited. Each existing auditor independently reads the training exit0 receipt, installed GT and manifest, verifies50 epoch rows and earliest maximum-mAP selection, and recounts all six metrics/per-query/CMC/group data from fullQG artifacts. RGB audit accepts5120D; MS audit accepts5632D and verifies.75/.25 shared descriptor block mass. MS's705 updates match the preserved original demo_shared baseline and unchanged data/sampler/seeding/50epoch schedule."
+    },
+    {
+      "check": "Child lifetime, failure propagation and independent component receipts",
+      "verdict": "PASS",
+      "evidence": [
+        "gpu_thermal_execute.py:33",
+        "gpu_thermal_execute.py:39",
+        "gpu_thermal_execute.py:45",
+        "launch_vehicle_atmoe_head_baselines.py:107",
+        "launch_vehicle_atmoe_head_baselines.py:121",
+        "launch_vehicle_atmoe_head_baselines.py:124"
+      ],
+      "conclusion": "execute waits for each child, writes its real exit record and asserts exit0 before returning. Training result checks precede the CPU audit; audit exit0 and normal_cpu_audit PASS precede each component receipt. A shorter completed dataset can therefore be collected separately after its train/audit children exit, without waiting for the longer formal run. A failed stage prevents later barriers/controller COMPLETE and is not retried. The final controller_result appears only after both components return successfully.",
+      "limitation": "A component receipt covers that component's child closure. controller_result is written before the controller itself exits; any future final collector must still observe the original controller's terminal event. This review did not inspect any process or session."
+    },
+    {
+      "check": "Retention, metrics and interpretation",
+      "verdict": "PASS",
+      "evidence": [
+        "launch_vehicle_atmoe_head_baselines.py:110",
+        "launch_vehicle_atmoe_head_baselines.py:115",
+        "launch_vehicle_atmoe_head_baselines.py:126",
+        "run_full_official_experiment.py:163"
+      ],
+      "conclusion": "The inherited run saves only best.pth, reloads it strictly and computes all six normal metrics at the same selected checkpoint. The controller records existing best/raw artifact receipts, keeps archive completion pending, and performs no deletion or collection. Paper targets remain RGBNT10087.2/98.6 and MSVR31050.2/60.8. These are fresh identity baselines with historical head8 controls; neither a dual-axis gain nor a missing-modality claim is made."
+    },
+    {
+      "check": "Minimal R3 fix and source isolation",
+      "verdict": "PASS",
+      "evidence": [
+        ".aris/traces/experiment-bridge/2026-10-16_vehicle_ATMoE_heads_controller_source_run01/source_static_validation_R3.json",
+        "results/preflight/vehicle_atmoe_head_controller_source_review_addendum_R3_20261016.json"
+      ],
+      "conclusion": "AST normalization confirms the only R1-to-R3 controller changes are two per-case existing-auditor filenames and using the corresponding case field. There are no new try/except blocks, compatibility paths or fallback paths. The reviewer did not edit implementation code or add any hash/binding machinery. The earlier three head sources retain their prior source-only review; current F sources and runtime were outside execution scope."
+    }
+  ],
+  "historical_MS_audit_compatibility": {
+    "source": "results/full_official_baselines_20261004/training/MSVR310_demo_shared_s42/result.json",
+    "status": "COMPLETE",
+    "epochs": 50,
+    "steps": 705,
+    "optimizer_steps": 705,
+    "amp_skipped_steps": 0,
+    "descriptor_dim": 5632,
+    "train_records": 1032,
+    "query_records": 591,
+    "gallery_records": 1055,
+    "interpretation": "A preserved historical baseline contract check; no current F progress/artifact was read."
+  },
+  "static_validation": {
+    "status": "PASS",
+    "method": "Local Python3.13 stdlib ast.parse, AST comparison and JSON reads using -X utf8 -B -S; no project-code execution.",
+    "current_python_sources_parsed": 7,
+    "archived_R1_controller_parsed": 1,
+    "remaining_controller_AST_exactly_matches_R1": true,
+    "artifact": ".aris/traces/experiment-bridge/2026-10-16_vehicle_ATMoE_heads_controller_source_run01/source_static_validation_R3.json",
+    "superseded_draft_note": "An attempted R2 AST comparison encountered FileNotFoundError because the parent withdrew that draft during review. No project code was executed. The final R3 source comparison completed successfully."
+  },
+  "still_pending": [
+    "Complete actual F128 intake/archive recovery and receive its requested fresh result-audit FINAL with no blocking findings; not inspected by this reviewer.",
+    "Parent decision and fresh server2026 physicalGPU2/3 resource admission before any invocation. Source PASS does not queue the controller.",
+    "Actual head8 parity for both cases, then candidate native3/no AMP skips/full gradients/strict reload.",
+    "Actual fresh50/fullQG selected-checkpoint GT audits, child/controller terminal receipts and later archive intake.",
+    "Any future expert comparison or missing-modality evaluation requires its own matched-reference plan and review."
+  ],
+  "review_activity": {
+    "same_reviewer_followup": true,
+    "fresh_agent_restart": false,
+    "model_imports": 0,
+    "torch_imports": 0,
+    "model_constructions": 0,
+    "neural_forward_calls": 0,
+    "optimizer_updates": 0,
+    "checkpoint_writes": 0,
+    "ssh_calls": 0,
+    "gpu_queries": 0,
+    "process_or_session_queries": 0,
+    "current_F_progress_or_result_artifact_reads": 0,
+    "current_intake_recovery_or_audit_artifact_reads": 0,
+    "installs": 0,
+    "implementation_edits_by_reviewer": 0,
+    "deployments": 0
+  },
+  "trace_root": ".aris/traces/experiment-bridge/2026-10-16_vehicle_ATMoE_heads_controller_source_run01",
+  "final_conclusion": "R3 resolves the real R1 auditor-dimension defect by reusing the correct unchanged auditors. No remaining source blocker was found. This same-reviewer, same-family/provisional SOURCE_ONLY_PASS does not authorize execution or deployment.",
+  "review_completed_at": "2026-10-16T16:08:56.468770+08:00"
+}
