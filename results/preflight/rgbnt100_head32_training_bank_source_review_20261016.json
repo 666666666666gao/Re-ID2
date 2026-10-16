@@ -1,0 +1,446 @@
+{
+  "status": "FINAL",
+  "verdict": "PASS",
+  "scope": "SOURCE_ONLY",
+  "at": "2026-10-16T20:37:50+08:00",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_head32_training_bank_source_request_20261016.json",
+  "report": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_head32_training_bank_source_review_20261016.json",
+  "trace_root": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_RGB_head32_training_bank_source_run01",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning": "max",
+  "actual_routing": "UNATTESTED",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer_task": "/root/review_rgbnt100_head32_training_bank_source_20261016",
+  "summary": "Correct minimal HEAD32 adaptation of the existing complete train-only bank builder. No blocking or non-blocking source defect found. PASS does not admit neural execution or assert current baseline completion/quality.",
+  "blocking_findings": [],
+  "non_blocking_findings": [],
+  "findings": [
+    {
+      "id": "S1",
+      "status": "PASS_SOURCE",
+      "topic": "Same HEAD32 configuration path and exact saved-config guard",
+      "assessment": "The baseline entry calls vehicle_atmoe_head_configuration.configuration with the selected head count; the official runner persists that cfg.dump() and the mutated atmoe_heads argument. The bank requires demo/RGBNT100/seed42/atmoe_heads32, reconstructs through that same helper, and asserts cfg.dump()==trained[config] before constructing a model. The helper changes only MODEL.HEAD on the original frozen configuration. Actual saved-config equality was not executed or observed in this source-only review.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_vehicle_atmoe_head_baseline.py:15",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_vehicle_atmoe_head_baseline.py:23",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\vehicle_atmoe_head_configuration.py:5",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\vehicle_atmoe_head_configuration.py:13",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_experiment.py:31",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:75",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:79",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:25"
+      ]
+    },
+    {
+      "id": "S2",
+      "status": "PASS_SOURCE",
+      "topic": "Selected builder actually respects HEAD32",
+      "assessment": "The bank imports run_experiment.build. For the asserted demo variant it dispatches directly to make_model(cfg,classes,cameras), not an expert wrapper that reconstructs another config. DeMo stores cfg.MODEL.HEAD and forwards it to GeneralFusion/MoM. With the RGBNT100 ViT-B-16 config, feature width is512, ATMoE has32 partitions of16 channels and7 experts per partition, while the seven HDM readers retain8 attention heads. The original inference concatenation remains1536+3584=5120. verify_partition checks these structural contracts before strict load.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:9",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:34",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_experiment.py:44",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\configs\\RGBNT100\\DeMo.yml:2",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\make_model.py:18",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\make_model.py:35",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\make_model.py:46",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\make_model.py:170",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\moe\\AttnMOE.py:85",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\moe\\AttnMOE.py:142",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\moe\\AttnMOE.py:151",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\vehicle_atmoe_head_configuration.py:19"
+      ]
+    },
+    {
+      "id": "S3",
+      "status": "PASS_SOURCE",
+      "topic": "Full official train-only records and stable identity labels",
+      "assessment": "source_records reads the official RGBNT100 bounding_box_train list with relabel=False and sorts records. full_records relabels only the training identities in sorted raw-ID order, retains every training record, enforces unique training names, and records raw IDs plus their contiguous label map. Query/gallery identities are disjoint from train by official_records. The bank requires8675 train/1715 query/8575 gallery/50 classes, exact equality to the selected teacher manifest, disjoint train/test names, and all50 contiguous labels. Query/gallery metadata is read for protocol validation but is not used to build centers or neighbor rankings. The bounded fixture checked8675 synthetic train records; installed data was not opened.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\experiment_data.py:24",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\RGBNT100.py:63",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\official_training_data.py:20",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:68",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:28",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:48"
+      ]
+    },
+    {
+      "id": "S4",
+      "status": "PASS_SOURCE",
+      "topic": "All8675 train forwards, zero query/gallery forwards and zero updates",
+      "assessment": "The candidate has exactly one extract call, with train. extract is no_grad, uses make_loader(training=False), normalizes every descriptor and preserves loader order. That loader has no identity sampler, shuffle=False and drop_last=False, so8675 records form136 batches with35 records in the last batch. The model is in eval mode with gradients disabled; hook totals, feature shape and finiteness are asserted. No optimizer, backward, update, or weight-save call is made by the bank. These are source guarantees and retained runtime assertions, not completed neural measurements.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:37",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:39",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:43",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:82",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\experiment_data.py:48",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\experiment_data.py:88"
+      ]
+    },
+    {
+      "id": "S5",
+      "status": "PASS_SOURCE",
+      "topic": "Correct centers and complete stable neighbor lists",
+      "assessment": "The bank averages the normalized record features separately for each contiguous training label, then L2-normalizes each center. It computes2-2*center_dot_product, places infinity on the diagonal, and uses stable ascending argsort to select49 identities. Every row is checked to contain exactly the other49 labels. The label/center/distance/neighbor statements are AST-identical to the old complete bank builder. A50-label scalar tie fixture preserves ascending label order; actual Torch/NumPy numerics were not run.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:48",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:49",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:51",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:52",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_training_neighbors.py:45"
+      ]
+    },
+    {
+      "id": "S6",
+      "status": "PASS_SOURCE",
+      "topic": "Strict selected weights, unchanged state, and preserved old bank",
+      "assessment": "The candidate reads anchor/best.pth, loads its full state strictly, freezes and evaluates the model, then requires exact equality of every state tensor against the loaded CPU state and an unchanged checkpoint-file SHA. All persisted bank files go under the explicit new output directory, whose creation uses exist_ok=False; an existing old bank directory cannot be overwritten. There are no source edits, checkpoint writes, deletions, or live-task controls in this candidate. Actual strict load/state/file parity remains unexecuted.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:32",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:36",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:46",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:54",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:55",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_experiment.py:24"
+      ]
+    },
+    {
+      "id": "S7",
+      "status": "PASS_SOURCE",
+      "topic": "Original hard-sampler teacher binding independently verified",
+      "assessment": "The actual original consumer pins runs/r201ab_RGB_training_neighbors_20261012/result.json and requires SHA(anchor_run_dir/best.pth)==BANK[teacher_sha256]. It also validates complete neighbor rows and maps each raw manifest identity through BANK[training_labels] before comparing all record names/labels/cameras/scenes. Therefore its old bank cannot silently be used with a different HEAD32 teacher. The new bank preserves that schema, but this bank-only source does not redirect the existing consumer; later expert work is explicitly unimplemented/unadmitted. rewrite_epoch still preserves the epoch record multiset/P8K8 and deterministically swaps at most one future group per batch. Isolated existing teacher-assert fixtures accept a matching synthetic teacher and reject a different one; four bounded schedule fixtures preserve duplicates, ordering contracts and Python RNG.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_r201ac_RGB_hard_identity.py:25",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_r201ac_RGB_hard_identity.py:54",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_r201ac_RGB_hard_identity.py:57",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_r201ac_RGB_hard_identity.py:61",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_r201ac_RGB_hard_identity.py:62",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\neighbor_identity_schedule.py:14",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\neighbor_identity_schedule.py:34",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\neighbor_identity_schedule.py:39",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_head32_training_bank_plan_20261016.json:18"
+      ]
+    },
+    {
+      "id": "S8",
+      "status": "PASS_SOURCE",
+      "topic": "Selection and claim scope remain limited",
+      "assessment": "The source requires an existing COMPLETE/50-epoch teacher and successful child exit and records the selected mAP-best epoch. The baseline producer selects on full official mAP with strict greater-than, retaining the earliest tie, then reloads that single best checkpoint. The plan further requires actual baseline closure, intake/fresh result review, selection and resource admission before bank execution; those operational conditions are not established by this review. Bank metadata is correctly described as train-only sampling information, not a method score, a hard-sampling benefit, an independent test result or evidence that the current HEAD32 baseline is complete/strong.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:20",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:24",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:59",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py:65",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:163",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:169",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\resume_vehicle_atmoe_head_baselines.py:80",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\resume_vehicle_atmoe_head_baselines.py:88",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_head32_training_bank_plan_20261016.json:19",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\reid2_paper_reference_targets_20261016.json:86"
+      ]
+    }
+  ],
+  "validation": {
+    "requested_sources_read": 13,
+    "requested_total_bytes": 62782,
+    "additional_primary_sources_read": 11,
+    "source_AST_parses": 21,
+    "requested_JSON_parses": 2,
+    "config_YAML_read_as_text": 1,
+    "bounded_check_groups": 11,
+    "check_results": [
+      {
+        "name": "13_requested_inputs",
+        "status": "PASS",
+        "detail": {
+          "count": 13,
+          "total_bytes": 62782,
+          "python_AST": 11,
+          "JSON": 2,
+          "expected_seals_exact": true
+        }
+      },
+      {
+        "name": "primary_dependencies_read_and_parsed",
+        "status": "PASS",
+        "detail": {
+          "count": 11,
+          "python_AST": 10,
+          "yaml_read_as_text": true
+        }
+      },
+      {
+        "name": "centroid_and_neighbor_algorithm_unchanged",
+        "status": "PASS",
+        "detail": "Exact AST equality from training label construction through stable neighbor argsort."
+      },
+      {
+        "name": "candidate_call_and_write_scope",
+        "status": "PASS",
+        "detail": "One extraction of train only; exact config comparison; strict load; eval/frozen; no optimizer/backward/torch.save; output creation rejects an existing directory."
+      },
+      {
+        "name": "head_configuration_and_partition_pure_fixture",
+        "status": "PASS",
+        "detail": "Executed only two extracted pure functions with plain Python config/structure fixtures; baseline/bank config paths agree; HEAD32 gives 32 x 7 experts with width16 and unchanged eight-head HDM. This is not YACS, a model, or a real checkpoint test."
+      },
+      {
+        "name": "demo_branch_forwards_HEAD32_cfg",
+        "status": "PASS",
+        "detail": "Extracted build dispatch executed with a plain Python sentinel; no model creation/CUDA. Direct make_model receives the unchanged HEAD32 config, 50 classes, and 8 cameras."
+      },
+      {
+        "name": "full_official_record_and_label_pure_fixture",
+        "status": "PASS",
+        "detail": {
+          "records": [
+            8675,
+            1715,
+            8575
+          ],
+          "labels": 50,
+          "cameras": 8,
+          "complete_train_order": true,
+          "raw_to_contiguous_label_mapping": true,
+          "manifest_and_metadata_agree": true,
+          "physical_dataset_read": false,
+          "numpy_import": false
+        }
+      },
+      {
+        "name": "evaluation_loader_pure_spy",
+        "status": "PASS",
+        "detail": "No training sampler/augmentation requested; sequential 64-record batches with drop_last=False, hence 135 full batches plus35 records. This checks call arguments, not actual DataLoader execution."
+      },
+      {
+        "name": "original_hard_sampler_teacher_and_label_binding",
+        "status": "PASS",
+        "detail": "Actual source pins the old bank path; isolated existing SHA assertion accepts matching synthetic bytes and rejects other teacher bytes. Bank raw-ID manifest maps exactly to contiguous training labels. No real weight read or build executed."
+      },
+      {
+        "name": "unchanged_hard_grouping_bounded_pure_fixtures",
+        "status": "PASS",
+        "detail": [
+          {
+            "duplicate_sample_positions": false,
+            "no_swap_fixture": true,
+            "one_future_group_swap": true,
+            "deterministic": true,
+            "multiset_exact": true
+          },
+          {
+            "duplicate_sample_positions": true,
+            "no_swap_fixture": true,
+            "one_future_group_swap": true,
+            "deterministic": true,
+            "multiset_exact": true
+          }
+        ]
+      },
+      {
+        "name": "stable_tie_scalar_reference",
+        "status": "PASS",
+        "detail": "50-label orthogonal-center fixture: diagonal infinity leaves all49 other IDs and ties keep ascending label order. Scalar reference only; NumPy/Torch math was not executed."
+      }
+    ],
+    "additional_primary_sources": [
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py",
+        "bytes": 10596,
+        "sha256": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e"
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\config\\__init__.py",
+        "bytes": 32,
+        "sha256": "ff27847384f82ad53a61a80147c38a8282d9bd5af852593aef7c653e48a5d11b"
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\config\\defaults.py",
+        "bytes": 6412,
+        "sha256": "41d6e21de28ffca68104954c52dcba3d0f3c16249980c70107d6c72e1117c6ba"
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\configs\\RGBNT100\\DeMo.yml",
+        "bytes": 767,
+        "sha256": "e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c"
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\make_model.py",
+        "bytes": 10473,
+        "sha256": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131"
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\moe\\AttnMOE.py",
+        "bytes": 10226,
+        "sha256": "91d594c86ba44a5ce9eb843afaba898d5f8b0515b542b2754004c85ca272d3b6"
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\RGBNT100.py",
+        "bytes": 3407,
+        "sha256": "cef47b0a1dcc9bc434f6c3612e547db41fd8af2b1d7e953323ea80ffb6eb705f"
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\launch_vehicle_atmoe_head_baselines.py",
+        "bytes": 8103,
+        "sha256": "ab8abe3c35b8c163517e70b5ccac82160483c769544b7ee59f22b6ca9a076c6e"
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\meta_arch.py",
+        "bytes": 5100,
+        "sha256": "f9b93fba00f534debecebcd72f974320cd978e1619f1460674cbfc3afc961eec"
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_r201x_RGB_auxiliary_fp32.py",
+        "bytes": 2097,
+        "sha256": "c1528c7d0f98dfaed38bddd7a8ff663ced6e69e6407b450e486b4e2d1a2a7dad"
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\sampler.py",
+        "bytes": 2436,
+        "sha256": "579b45b767960b7ca8a373808d890493e6ac8d152c0fe13dbe0f4dc02ed9f068"
+      }
+    ],
+    "additional_primary_sources_ending_unchanged": true,
+    "test_execution": "E:/python.exe -I -S; source AST plus bounded pure Python fixtures/spies only",
+    "checks_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_RGB_head32_training_bank_source_run01\\001-source-review.checks.json",
+    "initial_interpreter_issue": "PATH python resolved to E:/Scripts/python.exe and failed before script execution with No pyvenv.cfg file. uv python find --system --no-managed-python located E:/python.exe; no install or model/backend fallback occurred."
+  },
+  "limitations": [
+    "No project/model-bearing module, Torch or NumPy was imported; no model instantiated, main executed, CUDA/NN operation, optimizer step, or inference occurred.",
+    "No SSH, current RGB logs/epochs/status, GPU/resource/process/owner query, or cleanup occurred. The current original RGB baseline and its observer were not touched.",
+    "Actual selected result.json/config dump, checkpoint tensors/bytes, installed dataset, model outputs, state parity, and all8675 actual forwards were not accessed or verified. Source paths/guards and synthetic fixtures are distinguished from runtime evidence.",
+    "Actual HEAD32 baseline full50/full-QG closure, raw intake, fresh result audit, selection, baseline strength and paper-target achievement remain unobserved. No current baseline complete/strong claim is made.",
+    "The existing hard sampler still hardcodes its old bank. This review covers generation of a new bank only; it does not implement or admit later experts or certify full00/native parity for them.",
+    "Runtime admission remains false. The plan-required baseline closure/fresh result audit and actual resource admission must occur in the executor workflow before any bank neural run.",
+    "Requested Astra/max is recorded; the host did not attest actual routing/model/effort. This is an independent-context same-family provisional review."
+  ],
+  "runtime_admitted": false,
+  "new_NN": 0,
+  "project_module_imports": 0,
+  "third_party_imports": 0,
+  "optimizer_updates": 0,
+  "query_gallery_forwards": 0,
+  "progress_queries": 0,
+  "resource_process_owner_queries": 0,
+  "SSH_calls": 0,
+  "cleanup_actions": 0,
+  "reviewed_source_edits": 0,
+  "ending_input_verification": {
+    "at": "2026-10-16T20:37:50+08:00",
+    "input_count": 13,
+    "total_bytes": 62782,
+    "all_exact": true,
+    "old_sources_preserved": true,
+    "files": [
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py",
+        "expected_bytes": 5258,
+        "actual_bytes": 5258,
+        "expected_sha256": "ed2f758742fa3ee95672c6de8c54b3458f48e0d21f00b8a958435d7ad94db37f",
+        "actual_sha256": "ed2f758742fa3ee95672c6de8c54b3458f48e0d21f00b8a958435d7ad94db37f",
+        "exact": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_training_neighbors.py",
+        "expected_bytes": 4845,
+        "actual_bytes": 4845,
+        "expected_sha256": "3f71e552c3822976973aa9be2ee490770ce8d5b378efafed187172ff9839b27a",
+        "actual_sha256": "3f71e552c3822976973aa9be2ee490770ce8d5b378efafed187172ff9839b27a",
+        "exact": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\vehicle_atmoe_head_configuration.py",
+        "expected_bytes": 1327,
+        "actual_bytes": 1327,
+        "expected_sha256": "64a49c490665856e273af509f0bb5543f1d8a9fc257b8a642f59224bce190b80",
+        "actual_sha256": "64a49c490665856e273af509f0bb5543f1d8a9fc257b8a642f59224bce190b80",
+        "exact": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_vehicle_atmoe_head_baseline.py",
+        "expected_bytes": 1260,
+        "actual_bytes": 1260,
+        "expected_sha256": "d840b0bc92bde91389f63eaf7513b0686675755df42a0b883bd4317933c838d3",
+        "actual_sha256": "d840b0bc92bde91389f63eaf7513b0686675755df42a0b883bd4317933c838d3",
+        "exact": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\resume_vehicle_atmoe_head_baselines.py",
+        "expected_bytes": 8515,
+        "actual_bytes": 8515,
+        "expected_sha256": "e3d6d6b26d056baf2584254c3b4fc60a2bcbb653056cc15a4df47ac35aa79e4a",
+        "actual_sha256": "e3d6d6b26d056baf2584254c3b4fc60a2bcbb653056cc15a4df47ac35aa79e4a",
+        "exact": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_experiment.py",
+        "expected_bytes": 14298,
+        "actual_bytes": 14298,
+        "expected_sha256": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+        "actual_sha256": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+        "exact": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\experiment_data.py",
+        "expected_bytes": 4032,
+        "actual_bytes": 4032,
+        "expected_sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+        "actual_sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+        "exact": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\official_training_data.py",
+        "expected_bytes": 1528,
+        "actual_bytes": 1528,
+        "expected_sha256": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+        "actual_sha256": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+        "exact": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py",
+        "expected_bytes": 9448,
+        "actual_bytes": 9448,
+        "expected_sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+        "actual_sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+        "exact": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_r201ac_RGB_hard_identity.py",
+        "expected_bytes": 5004,
+        "actual_bytes": 5004,
+        "expected_sha256": "e3c9256e07beae60e1d016a18fac8b56e0ab4235a7c0576b7fc7c93954187aed",
+        "actual_sha256": "e3c9256e07beae60e1d016a18fac8b56e0ab4235a7c0576b7fc7c93954187aed",
+        "exact": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\neighbor_identity_schedule.py",
+        "expected_bytes": 2270,
+        "actual_bytes": 2270,
+        "expected_sha256": "3f973bdacf839384915009f97a5c21c02e265366bf77bd570b8f0f616d0295fb",
+        "actual_sha256": "3f973bdacf839384915009f97a5c21c02e265366bf77bd570b8f0f616d0295fb",
+        "exact": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\reid2_paper_reference_targets_20261016.json",
+        "expected_bytes": 2748,
+        "actual_bytes": 2748,
+        "expected_sha256": "58b12204b5d01e8dcabcdbcc14c3cb18b6880621989d6eb47ec45ddf55e03469",
+        "actual_sha256": "58b12204b5d01e8dcabcdbcc14c3cb18b6880621989d6eb47ec45ddf55e03469",
+        "exact": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_head32_training_bank_plan_20261016.json",
+        "expected_bytes": 2249,
+        "actual_bytes": 2249,
+        "expected_sha256": "ea269f3d6b1271bc5c98c50dd1e91913048328b3ebe19312bd24a1b863bb4867",
+        "actual_sha256": "ea269f3d6b1271bc5c98c50dd1e91913048328b3ebe19312bd24a1b863bb4867",
+        "exact": true
+      }
+    ]
+  }
+}
