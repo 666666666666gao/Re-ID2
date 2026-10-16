@@ -1,0 +1,4314 @@
+{
+  "status": "FINAL",
+  "audit_skill": "experiment-audit",
+  "verdict": "WARN",
+  "overall_verdict": "WARN",
+  "integrity_status": "warn",
+  "blocking_findings": [],
+  "deterministic_verification": "PASS",
+  "reason_code": "verified_cached_results_with_scope_and_replay_limits",
+  "summary": "Both original-DeMo B128 full50 normal-input results reconcile with installedGT, complete cached distance matrices, features, tensor files, epoch exports and comparisons. Paper targets remain unmet; qualified identity-baseline evidence only.",
+  "generated_at": "2026-10-17T01:08:49.613367+08:00",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_result_integrity_request_20261016.json",
+  "request_identity": {
+    "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_result_integrity_request_20261016.json",
+    "bytes": 101943,
+    "sha256": "4c03468b1222c82fbd3b189135f0273ba81f4ceaf0768eecc65225b7c245e2f8"
+  },
+  "project": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002",
+  "scope": "Two finite original-DeMo B128 identity baselines: heads8 and32,50epochs each from publicCLIP,seed42,P8K16,all8675train/50IDs and1715Q8575G. Not new dual-axis experts or missing results.",
+  "reviewer_task": "/root/audit_rgbnt100_paper_batch_full_normal_20261017",
+  "requested_reviewer_model": "gpt-6-astra",
+  "requested_reviewer_reasoning_effort": "max",
+  "actual_reviewer_model": "UNATTESTED",
+  "actual_reviewer_reasoning_effort": "UNATTESTED",
+  "reviewer_model": "UNATTESTED",
+  "reviewer_family": "openai",
+  "reviewer_backend": "native_codex_agent",
+  "review_context": "fresh delegated reviewer; executor summaries not used as evidence",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "actual_route_evidence": "No host attestation available; requested labels are not treated as proof of actual routing.",
+  "checks": {
+    "A_ground_truth_provenance": {
+      "status": "PASS",
+      "evaluation_type": "real_gt",
+      "details": [
+        "Fresh NumPy-only read enumerated installed RGBNT100 JPEG filenames in the official train/query/gallery folders and parsed identity/camera independently of model outputs.",
+        "8675 train records, 1715 query records and 8575 gallery records; 50 train identities, 50 evaluation identities; train/evaluation identities disjoint. Both manifests, raw NPZ metadata, all new epoch exports and all five selected comparison exports match this metadata.",
+        "For each full 1715x8575 saved distance matrix, exactly 42875 same-ID/same-camera query-gallery pairs are removed. All 1715 queries have valid positives; six metrics, CMC1..50 and identity/camera/scene groups reconcile."
+      ],
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\RGBNT100.py:63",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\official_training_data.py:20",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:68",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:24",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_B128_full_normal_run01\\remote_cpu_attempt02.stdout.private.json#/ground_truth"
+      ]
+    },
+    "B_score_normalization": {
+      "status": "PASS",
+      "details": [
+        "AP averages precision at relevant ranks; INP is relevant-count/last-relevant-rank. Reported percentages divide sums by the valid query count, not prediction maxima, minima or means.",
+        "Feature L2 normalization is part of retrieval distance construction and is not post-hoc metric rescaling. Full 5120D feature norms lie within 1.23e-7 of one.",
+        "Fresh cached-distance reductions agree with reported raw six metrics to numerical summation precision. Reconstructing distances from saved features has separately disclosed float32 arithmetic differences."
+      ],
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:20",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:43",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:88",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:106",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\utils\\reid_evaluation.py:25",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_B128_full_normal_run01\\text_exports_verification.json#/errors"
+      ]
+    },
+    "C_result_file_existence_and_values": {
+      "status": "PASS",
+      "details": [
+        "All 309 requested inputs exist and match the exact requested bytes and SHA-256 at audit start and end. Request identity is also unchanged. Four local D archives and their remote selected copies match; remote selected files were hashed before and after pure CPU reads.",
+        "Both terminal runs and all six native/training/audit child exit records are present and consistent. Detached controller is recorded COMPLETE and absent at the terminal observation; its OS exit code is not attested.",
+        "All 100 epoch JSON/CSV exports and curves were reconciled, including 171500 epoch query rows. Selected raw arrays were independently recounted; checkpoint tensors were decoded without importing Torch.",
+        "Earliest benchmark mAP-best selection is E24 for head8 and E16 for head32; all six metrics, best.json, recorded strict reload and selected exports belong to that same checkpoint."
+      ],
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:138",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:163",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:169",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\result.json:1",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\result.json:1",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_B128_full_normal_run01\\start_input_seals.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_B128_full_normal_run01\\end_input_seals.json"
+      ]
+    },
+    "D_metric_code_reachability": {
+      "status": "PASS",
+      "details": [
+        "The admitted wrapper calls run_full_official_experiment.main, whose per-epoch evaluate calls full_metrics and whose final strict reload repeats full query/gallery evaluation. There are 50 EPOCH log entries plus one terminal completion per run, corresponding exported metrics and successful audit child exits.",
+        "mAP, mINP, Rank-1/5/10/20, CMC50, and groups all have actual output and independently checked consumers.",
+        "Legacy dev-split and missing49 command-line mains in imported utility files were not invoked by this normal-input runner; their existence does not imply this task evaluated dev holdouts or missing modalities."
+      ],
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_rgbnt100_paper_batch_baseline.py:36",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:43",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:155",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:170",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_rgbnt100_paper_batch_normal.py:82",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_rgbnt100_paper_batch_normal.py:93"
+      ]
+    },
+    "E_scope_and_claim_ceiling": {
+      "status": "WARN",
+      "details": [
+        "One dataset, normal three-modality input, one seed42, two new existing-DeMo head configurations and 50 epochs each. Six native updates are engineering checks, separate from 6270 formal updates.",
+        "Both epochs and the selected head configuration use this benchmark. These are selected single-run results, not an untouched final test or multiseed evidence.",
+        "Only the new B128 head8/head32 pair is freshly matched for the head setting, seed, batch composition, sampled record order and attempted update budget. Head count also changes parameter count by172032.",
+        "Historical original/B64 head32 use B64/K16/P4 and6357 updates, versus B128/K16/P8 and3135 updates. AV adds an expert50 stage to the original50 teacher (6563 expert updates); five-row comparisons are diagnostic, not uniformly single-factor or equal-total-compute.",
+        "Cumulative forward and successful-update coverage both reach8675 records, but identity sampling does not consume every record in every epoch.",
+        "Both new baselines remain below the required paper-relative87.2mAP/98.6Rank-1. Head8 is the better selected baseline among these two, not evidence for dual-axis/Ours contribution. No new missing49/paper6, robustness or multiseed claims are supported."
+      ],
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_rgbnt100_paper_batch_baseline.py:37",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:85",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_rgbnt100_paper_batch_normal.py:43",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_rgbnt100_paper_batch_normal.py:86",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_rgbnt100_paper_batch_normal.py:99",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\normal_analysis\\result.json:1"
+      ]
+    },
+    "F_evaluation_type": {
+      "status": "PASS",
+      "classification": "real_gt",
+      "details": [
+        "Dataset identity/camera labels determine retrieval relevance and junk exclusion. No model-produced pseudo-ground-truth, self-supervised proxy, simulation or human rating is used.",
+        "This fresh audit is an independent deterministic replay of cached distances/features and a tensor-file inspection. It is not independent network inference from the selected weights."
+      ],
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\RGBNT100.py:63",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:25",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_B128_full_normal_run01\\remote_numpy_audit.py:29"
+      ]
+    }
+  },
+  "warnings": [
+    {
+      "id": "BENCHMARK_SELECTED_SINGLE_SEED",
+      "blocking": false,
+      "details": "Seed42 only; earliest maximum benchmarkmAP selects epoch, and completed benchmark results select head8. No independent final-test or multiseed claim."
+    },
+    {
+      "id": "PAPER_TARGETS_UNMET",
+      "blocking": false,
+      "details": "Acceptance remains87.2mAP/98.6Rank-1; both new original-DeMo baselines fail both targets. Own historical reproduction is diagnostic only."
+    },
+    {
+      "id": "HISTORICAL_BUDGETS_DIFFER",
+      "blocking": false,
+      "details": "B64/P4K16/6357 differs fromB128/P8K16/3135; AV adds expert50 to teacher50. Pairwise rescue/harm is descriptive on the same1715queries."
+    },
+    {
+      "id": "FLOAT32_RECONSTRUCTION_ROUNDING",
+      "blocking": false,
+      "details": "Full saved-feature CPU remultiplication differs from saved distances by at most1.7881393432617188e-6. All four reported ranks and first-match positions stay unchanged; AP changes for45/52queries and last-match position for1query each. Metric deltas are retained in each model record, not silently rounded to zero."
+    },
+    {
+      "id": "NO_INDEPENDENT_WEIGHT_FORWARD",
+      "blocking": false,
+      "details": "Actual tensor parsing/finiteness/head-shape/count checks and recorded native/formal strict reloads do not constitute an independent model construction or best-weight forward replay."
+    },
+    {
+      "id": "PUBLIC_CLIP_ORIGIN_SCOPE",
+      "blocking": false,
+      "details": "Read launch/config/native and formal load logs and source chain directly. Pretraining asset bytes are outside the permitted selected-archive/GT remote read scope; no fresh cryptographic public-asset authentication or initial-state comparison was performed. The current pretrained loader is not included in the prior inherited source hash map; five other supplemental dependencies match that map. No source mutation is inferred."
+    },
+    {
+      "id": "CONTROLLER_OS_EXIT_UNATTESTED",
+      "blocking": false,
+      "details": "A completed controller record, recorded absence and observer exit0 do not attest the detached controller OS return code; no live process queries made."
+    },
+    {
+      "id": "REVIEW_ROUTE_UNATTESTED",
+      "blocking": false,
+      "details": "Fresh native Codex reviewer task requested gpt-6-astra/max; this host supplies no auditable actual model/effort routing proof. Record UNATTESTED, same-family, provisional."
+    }
+  ],
+  "models": {
+    "B128_head8": {
+      "selected_epoch": 24,
+      "six_metrics": {
+        "mAP": 85.86419608674906,
+        "mINP": 62.13129994602527,
+        "Rank-1": 97.0262390670554,
+        "Rank-5": 97.78425655976676,
+        "Rank-10": 97.84256559766764,
+        "Rank-20": 98.07580174927114
+      },
+      "attempts": 3135,
+      "updates": 3135,
+      "skips": 0,
+      "parameters": 97952256,
+      "trainable_parameters": 97947136,
+      "stage_epochs": 50,
+      "pipeline_epochs": 50,
+      "training_seconds": 9238.256244897842,
+      "batch_config": [
+        "NUM_INSTANCE: 16",
+        "HEAD: 8",
+        "IMS_PER_BATCH: 128",
+        "IMS_PER_BATCH: 128"
+      ],
+      "forward_coverage": 8675,
+      "successful_update_coverage": 8675,
+      "forward_row_visits": 401280,
+      "successful_update_row_visits": 401280,
+      "epoch_details": [
+        {
+          "epoch": 1,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8064
+        },
+        {
+          "epoch": 2,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8609
+        },
+        {
+          "epoch": 3,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 4,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 5,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 6,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 7,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 8,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 9,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 10,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 11,
+          "attempts": 64,
+          "successful_updates": 64,
+          "unique_records": 8192,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 12,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 13,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 14,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 15,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 16,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 17,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 18,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 19,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 20,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 21,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 22,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 23,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 24,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 25,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 26,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 27,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 28,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 29,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 30,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 31,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 32,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 33,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 34,
+          "attempts": 64,
+          "successful_updates": 64,
+          "unique_records": 8192,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 35,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 36,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 37,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 38,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 39,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 40,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 41,
+          "attempts": 64,
+          "successful_updates": 64,
+          "unique_records": 8192,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 42,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 43,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 44,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 45,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 46,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 47,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 48,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 49,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 50,
+          "attempts": 64,
+          "successful_updates": 64,
+          "unique_records": 8192,
+          "cumulative_records": 8675
+        }
+      ],
+      "epoch_export_rows": 85750,
+      "loss_min": 0.718410074710846,
+      "loss_max": 15.85439395904541,
+      "checkpoint": {
+        "tensor_count": 625,
+        "state_elements": 97970749,
+        "buffer_elements": 18493,
+        "parameters": 97952256,
+        "trainable_parameters_by_source_freeze": 97947136,
+        "expert_count": 56,
+        "head_count": 8,
+        "per_head_experts": 7,
+        "expert_weight_shape": [
+          64,
+          64
+        ],
+        "all_tensors_finite": true
+      },
+      "arrays": {
+        "array_shapes": {
+          "query": [
+            1715,
+            5120
+          ],
+          "gallery": [
+            8575,
+            5120
+          ],
+          "distance": [
+            1715,
+            8575
+          ]
+        },
+        "array_dtypes": {
+          "query": "float32",
+          "gallery": "float32",
+          "distance": "float32"
+        },
+        "all_arrays_finite": true,
+        "feature_norms": {
+          "query": {
+            "min": 0.9999998940406536,
+            "max": 1.000000110124558
+          },
+          "gallery": {
+            "min": 0.999999888474884,
+            "max": 1.0000001223929822
+          }
+        },
+        "distance_min": 6.854534149169922e-05,
+        "distance_max": 1.8753057718276978,
+        "distance_cells": 14706125,
+        "same_identity_same_camera_excluded_pairs": 42875
+      },
+      "raw_distance_metrics": {
+        "mAP": 85.86419608674906,
+        "mINP": 62.13129994602527,
+        "Rank-1": 97.0262390670554,
+        "Rank-5": 97.78425655976676,
+        "Rank-10": 97.84256559766764,
+        "Rank-20": 98.07580174927114
+      },
+      "full_feature_distance_reconstruction": {
+        "max_absolute_error": 1.7881393432617188e-06,
+        "mean_absolute_error": 1.7139601027338358e-07,
+        "cells_exact": 3927519,
+        "cells_total": 14706125,
+        "six_metrics": {
+          "mAP": 85.86420991316035,
+          "mINP": 62.1312581308856,
+          "Rank-1": 97.0262390670554,
+          "Rank-5": 97.78425655976676,
+          "Rank-10": 97.84256559766764,
+          "Rank-20": 98.07580174927114
+        },
+        "metric_delta": {
+          "mAP": 1.3826411290551732e-05,
+          "mINP": -4.181513967438377e-05,
+          "Rank-1": 0.0,
+          "Rank-5": 0.0,
+          "Rank-10": 0.0,
+          "Rank-20": 0.0
+        },
+        "rank1_changed_queries": 0,
+        "AP_changed_queries": 45,
+        "first_match_changed_queries": 0,
+        "last_match_changed_queries": 1,
+        "interpretation": "All saved features re-multiplied on CPU in float32; arithmetic rounding may perturb ties; not a weight-forward replay."
+      },
+      "native": {
+        "attempts": 3,
+        "successful_updates": 3,
+        "skips": 0,
+        "active_parameter_tensors": 438,
+        "strict_reload_equal": true,
+        "scope": "Recorded three-update native same-model in-memory strict reload on eight queries; not independent best-weight forward replay."
+      },
+      "archives": {
+        "local": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_paper_batch_baselines_20261016\\head8\\raw\\best_official_arrays.npz",
+        "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_paper_batch_baselines_20261016/experiments/training/RGBNT100_B128_atmoe8_demo_s42/best_official_arrays.npz",
+        "bytes": 248735553,
+        "sha256": "f32c8f7bd36b20e5aa323e28986bebcf9e2e4a7f150b91f6a48d8185e39c84c4",
+        "kind": "raw"
+      },
+      "selected_weight": {
+        "local": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_paper_batch_baselines_20261016\\head8\\best\\best.pth",
+        "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_paper_batch_baselines_20261016/experiments/training/RGBNT100_B128_atmoe8_demo_s42/best.pth",
+        "bytes": 392086065,
+        "sha256": "b4deeb334580a1ad705ee64296dd5050d3ae081fb5f24e7c201b662f922dc0f7"
+      },
+      "paper_target": {
+        "mAP": 87.2,
+        "Rank_1": 98.6
+      },
+      "paper_target_shortfall_pp": {
+        "mAP": 1.3358039132509418,
+        "Rank_1": 1.5737609329445945
+      },
+      "paper_both_targets_met": false,
+      "role": "original_DeMo_identity_baseline_not_Ours",
+      "raw_recount_evidence": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_B128_full_normal_run01\\remote_cpu_attempt02.stdout.private.json#/models/head8",
+      "text_reconciliation_evidence": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_B128_full_normal_run01\\text_exports_verification.json#/models/B128_head8"
+    },
+    "B128_head32": {
+      "selected_epoch": 16,
+      "six_metrics": {
+        "mAP": 85.35574625755422,
+        "mINP": 61.11420665727197,
+        "Rank-1": 96.50145772594752,
+        "Rank-5": 97.20116618075802,
+        "Rank-10": 97.49271137026238,
+        "Rank-20": 98.07580174927114
+      },
+      "attempts": 3135,
+      "updates": 3135,
+      "skips": 0,
+      "parameters": 97780224,
+      "trainable_parameters": 97775104,
+      "stage_epochs": 50,
+      "pipeline_epochs": 50,
+      "training_seconds": 8695.85279250145,
+      "batch_config": [
+        "NUM_INSTANCE: 16",
+        "HEAD: 32",
+        "IMS_PER_BATCH: 128",
+        "IMS_PER_BATCH: 128"
+      ],
+      "forward_coverage": 8675,
+      "successful_update_coverage": 8675,
+      "forward_row_visits": 401280,
+      "successful_update_row_visits": 401280,
+      "epoch_details": [
+        {
+          "epoch": 1,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8064
+        },
+        {
+          "epoch": 2,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8609
+        },
+        {
+          "epoch": 3,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 4,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 5,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 6,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 7,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 8,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 9,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 10,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 11,
+          "attempts": 64,
+          "successful_updates": 64,
+          "unique_records": 8192,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 12,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 13,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 14,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 15,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 16,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 17,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 18,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 19,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 20,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 21,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 22,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 23,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 24,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 25,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 26,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 27,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 28,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 29,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 30,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 31,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 32,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 33,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 34,
+          "attempts": 64,
+          "successful_updates": 64,
+          "unique_records": 8192,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 35,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 36,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 37,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 38,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 39,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 40,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 41,
+          "attempts": 64,
+          "successful_updates": 64,
+          "unique_records": 8192,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 42,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 43,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 44,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 45,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 46,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 47,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 48,
+          "attempts": 63,
+          "successful_updates": 63,
+          "unique_records": 8064,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 49,
+          "attempts": 62,
+          "successful_updates": 62,
+          "unique_records": 7936,
+          "cumulative_records": 8675
+        },
+        {
+          "epoch": 50,
+          "attempts": 64,
+          "successful_updates": 64,
+          "unique_records": 8192,
+          "cumulative_records": 8675
+        }
+      ],
+      "epoch_export_rows": 85750,
+      "loss_min": 0.7181146144866943,
+      "loss_max": 15.785003662109375,
+      "checkpoint": {
+        "tensor_count": 1801,
+        "state_elements": 97798885,
+        "buffer_elements": 18661,
+        "parameters": 97780224,
+        "trainable_parameters_by_source_freeze": 97775104,
+        "expert_count": 224,
+        "head_count": 32,
+        "per_head_experts": 7,
+        "expert_weight_shape": [
+          16,
+          16
+        ],
+        "all_tensors_finite": true
+      },
+      "arrays": {
+        "array_shapes": {
+          "query": [
+            1715,
+            5120
+          ],
+          "gallery": [
+            8575,
+            5120
+          ],
+          "distance": [
+            1715,
+            8575
+          ]
+        },
+        "array_dtypes": {
+          "query": "float32",
+          "gallery": "float32",
+          "distance": "float32"
+        },
+        "all_arrays_finite": true,
+        "feature_norms": {
+          "query": {
+            "min": 0.9999999032498201,
+            "max": 1.0000001074077691
+          },
+          "gallery": {
+            "min": 0.9999998881589434,
+            "max": 1.0000001209472154
+          }
+        },
+        "distance_min": 6.711483001708984e-05,
+        "distance_max": 1.7355144023895264,
+        "distance_cells": 14706125,
+        "same_identity_same_camera_excluded_pairs": 42875
+      },
+      "raw_distance_metrics": {
+        "mAP": 85.35574625755422,
+        "mINP": 61.11420665727197,
+        "Rank-1": 96.50145772594752,
+        "Rank-5": 97.20116618075802,
+        "Rank-10": 97.49271137026238,
+        "Rank-20": 98.07580174927114
+      },
+      "full_feature_distance_reconstruction": {
+        "max_absolute_error": 1.7881393432617188e-06,
+        "mean_absolute_error": 1.8999705275746237e-07,
+        "cells_exact": 3497242,
+        "cells_total": 14706125,
+        "six_metrics": {
+          "mAP": 85.35574498361977,
+          "mINP": 61.11423114687199,
+          "Rank-1": 96.50145772594752,
+          "Rank-5": 97.20116618075802,
+          "Rank-10": 97.49271137026238,
+          "Rank-20": 98.07580174927114
+        },
+        "metric_delta": {
+          "mAP": -1.273934444157021e-06,
+          "mINP": 2.4489600015442647e-05,
+          "Rank-1": 0.0,
+          "Rank-5": 0.0,
+          "Rank-10": 0.0,
+          "Rank-20": 0.0
+        },
+        "rank1_changed_queries": 0,
+        "AP_changed_queries": 52,
+        "first_match_changed_queries": 0,
+        "last_match_changed_queries": 1,
+        "interpretation": "All saved features re-multiplied on CPU in float32; arithmetic rounding may perturb ties; not a weight-forward replay."
+      },
+      "native": {
+        "attempts": 3,
+        "successful_updates": 3,
+        "skips": 0,
+        "active_parameter_tensors": 1110,
+        "strict_reload_equal": true,
+        "scope": "Recorded three-update native same-model in-memory strict reload on eight queries; not independent best-weight forward replay."
+      },
+      "archives": {
+        "local": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_paper_batch_baselines_20261016\\head32\\raw\\best_official_arrays.npz",
+        "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_paper_batch_baselines_20261016/experiments/training/RGBNT100_B128_atmoe32_demo_s42/best_official_arrays.npz",
+        "bytes": 248256064,
+        "sha256": "70bcd02c03e2cb36d5efb88653d9828545278f4c2189477039d42f87d4c5526e",
+        "kind": "raw"
+      },
+      "selected_weight": {
+        "local": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_paper_batch_baselines_20261016\\head32\\best\\best.pth",
+        "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_paper_batch_baselines_20261016/experiments/training/RGBNT100_B128_atmoe32_demo_s42/best.pth",
+        "bytes": 391794586,
+        "sha256": "73365f794de7a932d9c5bc891e259f4683361963fdc79b3b0cf8bba51efc6321"
+      },
+      "paper_target": {
+        "mAP": 87.2,
+        "Rank_1": 98.6
+      },
+      "paper_target_shortfall_pp": {
+        "mAP": 1.8442537424457868,
+        "Rank_1": 2.098542274052477
+      },
+      "paper_both_targets_met": false,
+      "role": "original_DeMo_identity_baseline_not_Ours",
+      "raw_recount_evidence": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_B128_full_normal_run01\\remote_cpu_attempt02.stdout.private.json#/models/head32",
+      "text_reconciliation_evidence": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_B128_full_normal_run01\\text_exports_verification.json#/models/B128_head32"
+    }
+  },
+  "training_reconciliation": {
+    "status": "PASS",
+    "models": {
+      "original_DeMo": {
+        "selected_epoch": 8,
+        "six_metrics": {
+          "mAP": 85.76856710316946,
+          "mINP": 61.84590828355626,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.37609329446065,
+          "Rank-20": 97.72594752186589
+        },
+        "attempts": 6357,
+        "updates": 6357,
+        "skips": 0,
+        "parameters": 97952256,
+        "trainable_parameters": 97947136,
+        "stage_epochs": 50,
+        "pipeline_epochs": 50,
+        "training_seconds": 9685.604719638824,
+        "batch_config": [
+          "NUM_INSTANCE: 16",
+          "HEAD: 8",
+          "IMS_PER_BATCH: 64",
+          "IMS_PER_BATCH: 128"
+        ]
+      },
+      "AV_axis": {
+        "selected_epoch": 20,
+        "six_metrics": {
+          "mAP": 86.1546433016181,
+          "mINP": 62.560794668209745,
+          "Rank-1": 96.7930029154519,
+          "Rank-5": 97.43440233236151,
+          "Rank-10": 97.78425655976676,
+          "Rank-20": 98.25072886297376
+        },
+        "attempts": 6563,
+        "updates": 6563,
+        "skips": 0,
+        "parameters": 99585158,
+        "trainable_parameters": 1887366,
+        "stage_epochs": 50,
+        "pipeline_epochs": 100,
+        "training_seconds": 9149.184046030045,
+        "batch_config": [
+          "NUM_INSTANCE: 8",
+          "HEAD: 8",
+          "IMS_PER_BATCH: 64",
+          "IMS_PER_BATCH: 128"
+        ]
+      },
+      "B64_head32": {
+        "selected_epoch": 17,
+        "six_metrics": {
+          "mAP": 85.44494748234042,
+          "mINP": 61.9873907473052,
+          "Rank-1": 96.90962099125365,
+          "Rank-5": 97.37609329446065,
+          "Rank-10": 97.72594752186589,
+          "Rank-20": 97.95918367346938
+        },
+        "attempts": 6357,
+        "updates": 6357,
+        "skips": 0,
+        "parameters": 97780224,
+        "trainable_parameters": 97775104,
+        "stage_epochs": 50,
+        "pipeline_epochs": 50,
+        "training_seconds": 10504.708506345749,
+        "batch_config": [
+          "NUM_INSTANCE: 16",
+          "HEAD: 32",
+          "IMS_PER_BATCH: 64",
+          "IMS_PER_BATCH: 128"
+        ]
+      },
+      "B128_head8": {
+        "selected_epoch": 24,
+        "six_metrics": {
+          "mAP": 85.86419608674906,
+          "mINP": 62.13129994602527,
+          "Rank-1": 97.0262390670554,
+          "Rank-5": 97.78425655976676,
+          "Rank-10": 97.84256559766764,
+          "Rank-20": 98.07580174927114
+        },
+        "attempts": 3135,
+        "updates": 3135,
+        "skips": 0,
+        "parameters": 97952256,
+        "trainable_parameters": 97947136,
+        "stage_epochs": 50,
+        "pipeline_epochs": 50,
+        "training_seconds": 9238.256244897842,
+        "batch_config": [
+          "NUM_INSTANCE: 16",
+          "HEAD: 8",
+          "IMS_PER_BATCH: 128",
+          "IMS_PER_BATCH: 128"
+        ],
+        "forward_coverage": 8675,
+        "successful_update_coverage": 8675,
+        "forward_row_visits": 401280,
+        "successful_update_row_visits": 401280,
+        "epoch_details": [
+          {
+            "epoch": 1,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8064
+          },
+          {
+            "epoch": 2,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8609
+          },
+          {
+            "epoch": 3,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 4,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 5,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 6,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 7,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 8,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 9,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 10,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 11,
+            "attempts": 64,
+            "successful_updates": 64,
+            "unique_records": 8192,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 12,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 13,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 14,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 15,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 16,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 17,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 18,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 19,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 20,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 21,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 22,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 23,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 24,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 25,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 26,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 27,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 28,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 29,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 30,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 31,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 32,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 33,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 34,
+            "attempts": 64,
+            "successful_updates": 64,
+            "unique_records": 8192,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 35,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 36,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 37,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 38,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 39,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 40,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 41,
+            "attempts": 64,
+            "successful_updates": 64,
+            "unique_records": 8192,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 42,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 43,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 44,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 45,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 46,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 47,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 48,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 49,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 50,
+            "attempts": 64,
+            "successful_updates": 64,
+            "unique_records": 8192,
+            "cumulative_records": 8675
+          }
+        ],
+        "epoch_export_rows": 85750,
+        "loss_min": 0.718410074710846,
+        "loss_max": 15.85439395904541
+      },
+      "B128_head32": {
+        "selected_epoch": 16,
+        "six_metrics": {
+          "mAP": 85.35574625755422,
+          "mINP": 61.11420665727197,
+          "Rank-1": 96.50145772594752,
+          "Rank-5": 97.20116618075802,
+          "Rank-10": 97.49271137026238,
+          "Rank-20": 98.07580174927114
+        },
+        "attempts": 3135,
+        "updates": 3135,
+        "skips": 0,
+        "parameters": 97780224,
+        "trainable_parameters": 97775104,
+        "stage_epochs": 50,
+        "pipeline_epochs": 50,
+        "training_seconds": 8695.85279250145,
+        "batch_config": [
+          "NUM_INSTANCE: 16",
+          "HEAD: 32",
+          "IMS_PER_BATCH: 128",
+          "IMS_PER_BATCH: 128"
+        ],
+        "forward_coverage": 8675,
+        "successful_update_coverage": 8675,
+        "forward_row_visits": 401280,
+        "successful_update_row_visits": 401280,
+        "epoch_details": [
+          {
+            "epoch": 1,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8064
+          },
+          {
+            "epoch": 2,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8609
+          },
+          {
+            "epoch": 3,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 4,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 5,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 6,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 7,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 8,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 9,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 10,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 11,
+            "attempts": 64,
+            "successful_updates": 64,
+            "unique_records": 8192,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 12,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 13,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 14,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 15,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 16,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 17,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 18,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 19,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 20,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 21,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 22,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 23,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 24,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 25,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 26,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 27,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 28,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 29,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 30,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 31,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 32,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 33,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 34,
+            "attempts": 64,
+            "successful_updates": 64,
+            "unique_records": 8192,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 35,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 36,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 37,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 38,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 39,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 40,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 41,
+            "attempts": 64,
+            "successful_updates": 64,
+            "unique_records": 8192,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 42,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 43,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 44,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 45,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 46,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 47,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 48,
+            "attempts": 63,
+            "successful_updates": 63,
+            "unique_records": 8064,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 49,
+            "attempts": 62,
+            "successful_updates": 62,
+            "unique_records": 7936,
+            "cumulative_records": 8675
+          },
+          {
+            "epoch": 50,
+            "attempts": 64,
+            "successful_updates": 64,
+            "unique_records": 8192,
+            "cumulative_records": 8675
+          }
+        ],
+        "epoch_export_rows": 85750,
+        "loss_min": 0.7181146144866943,
+        "loss_max": 15.785003662109375
+      }
+    },
+    "native": {
+      "8": {
+        "attempts": 3,
+        "successful_updates": 3,
+        "skips": 0,
+        "active_parameter_tensors": 438,
+        "strict_reload_equal": true,
+        "scope": "Recorded three-update native same-model in-memory strict reload on eight queries; not independent best-weight forward replay."
+      },
+      "32": {
+        "attempts": 3,
+        "successful_updates": 3,
+        "skips": 0,
+        "active_parameter_tensors": 1110,
+        "strict_reload_equal": true,
+        "scope": "Recorded three-update native same-model in-memory strict reload on eight queries; not independent best-weight forward replay."
+      }
+    },
+    "paired_sample_orders_exact": true,
+    "formal_exits": [
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\audit\\RGBNT100_B128_atmoe32_demo_s42_exit.json",
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\audit\\RGBNT100_B128_atmoe8_demo_s42_exit.json",
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe32_demo_s42_smoke_exit.json",
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe8_demo_s42_smoke_exit.json",
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42_exit.json",
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42_exit.json"
+    ],
+    "comparisons": [
+      {
+        "model": "B128_head8",
+        "reference": "original_DeMo",
+        "mAP": 0.09562898357960137,
+        "mINP": 0.28539166246901004,
+        "Rank-1": 0.4081632653061291,
+        "Rank-5": 0.7580174927113603,
+        "Rank-10": 0.4664723032069986,
+        "Rank-20": 0.3498542274052454,
+        "rank1_rescued": 29,
+        "rank1_harmed": 22,
+        "AP_improved": 734,
+        "AP_declined": 769
+      },
+      {
+        "model": "B128_head32",
+        "reference": "B64_head32",
+        "mAP": -0.0892012247862084,
+        "mINP": -0.8731840900332273,
+        "Rank-1": -0.4081632653061291,
+        "Rank-5": -0.1749271137026227,
+        "Rank-10": -0.23323615160350641,
+        "Rank-20": 0.11661807580175321,
+        "rank1_rescued": 27,
+        "rank1_harmed": 34,
+        "AP_improved": 718,
+        "AP_declined": 732
+      },
+      {
+        "model": "B128_head32",
+        "reference": "B128_head8",
+        "mAP": -0.5084498291948449,
+        "mINP": -1.0170932887533013,
+        "Rank-1": -0.5247813411078823,
+        "Rank-5": -0.5830903790087376,
+        "Rank-10": -0.3498542274052596,
+        "Rank-20": 0.0,
+        "rank1_rescued": 26,
+        "rank1_harmed": 35,
+        "AP_improved": 722,
+        "AP_declined": 742
+      },
+      {
+        "model": "B128_head8",
+        "reference": "AV_axis",
+        "mAP": -0.29044721486903313,
+        "mINP": -0.42949472218447227,
+        "Rank-1": 0.23323615160350641,
+        "Rank-5": 0.3498542274052454,
+        "Rank-10": 0.05830903790088371,
+        "Rank-20": -0.1749271137026227,
+        "rank1_rescued": 30,
+        "rank1_harmed": 26,
+        "AP_improved": 685,
+        "AP_declined": 803
+      },
+      {
+        "model": "B128_head32",
+        "reference": "AV_axis",
+        "mAP": -0.7988970440638781,
+        "mINP": -1.4465880109377736,
+        "Rank-1": -0.2915451895043759,
+        "Rank-5": -0.2332361516034922,
+        "Rank-10": -0.2915451895043759,
+        "Rank-20": -0.1749271137026227,
+        "rank1_rescued": 30,
+        "rank1_harmed": 35,
+        "AP_improved": 672,
+        "AP_declined": 773
+      },
+      {
+        "model": "B128_head32",
+        "reference": "original_DeMo",
+        "mAP": -0.41282084561524357,
+        "mINP": -0.7317016262842913,
+        "Rank-1": -0.11661807580175321,
+        "Rank-5": 0.1749271137026227,
+        "Rank-10": 0.116618075801739,
+        "Rank-20": 0.3498542274052454,
+        "rank1_rescued": 29,
+        "rank1_harmed": 31,
+        "AP_improved": 711,
+        "AP_declined": 752
+      }
+    ],
+    "errors": {
+      "per_query_INP": 0.0,
+      "best_export_six": 1.4210854715202004e-14,
+      "best_export_CMC": 1.4210854715202004e-14,
+      "best_export_groups": 2.842170943040401e-14,
+      "terminal_six": 1.4210854715202004e-14,
+      "selected_six": 1.4210854715202004e-14,
+      "best_six": 1.4210854715202004e-14,
+      "native_strict_reload_six": 1.4210854715202004e-14,
+      "raw_to_export_AP": 4.440892098500626e-16,
+      "raw_to_export_INP": 0.0,
+      "raw_to_six": 0.0,
+      "epoch_loss": 0.0,
+      "epoch_amp_scale": 0.0,
+      "epoch_exports_six": 2.842170943040401e-14,
+      "epoch_exports_CMC": 1.4210854715202004e-14,
+      "epoch_exports_groups": 4.263256414560601e-14,
+      "epoch_curve_six": 2.842170943040401e-14,
+      "training_log_curve": 0.0,
+      "analysis_six": 1.4210854715202004e-14,
+      "analysis_groups": 0.0,
+      "analysis_CMC": 0.0,
+      "analysis_curves": 0.0,
+      "analysis_comparisons": 2.842170943040401e-14,
+      "analysis_paired": 0.0
+    },
+    "all_100_epoch_exports_reduced": true,
+    "epoch_query_rows": 171500,
+    "analysis_rows": {
+      "metrics": 5,
+      "groups": 295,
+      "cmc": 250,
+      "curves": 250,
+      "comparisons": 6,
+      "paired": 10290
+    },
+    "selected_baseline": "B128_head8",
+    "new_neural_calls": 0,
+    "new_optimizer_updates": 0
+  },
+  "final_artifact_links": {
+    "status": "PASS",
+    "links": [
+      {
+        "head": 8,
+        "run_json_matches_terminal": true,
+        "best_json_matches_terminal": true,
+        "selected_epoch_perquery_equal_best": true,
+        "native_manifest_equals_installedGT": true,
+        "native_embedded_result_equal_file": true,
+        "recorded_normal_cpu_audit_matches_fresh_check": true,
+        "all_expected_log_termination_markers": true
+      },
+      {
+        "head": 32,
+        "run_json_matches_terminal": true,
+        "best_json_matches_terminal": true,
+        "selected_epoch_perquery_equal_best": true,
+        "native_manifest_equals_installedGT": true,
+        "native_embedded_result_equal_file": true,
+        "recorded_normal_cpu_audit_matches_fresh_check": true,
+        "all_expected_log_termination_markers": true
+      }
+    ],
+    "native_record_orders_exact": true,
+    "actual_native_successful_updates": 6,
+    "selected_epoch_full_perquery_export_equal_best": true
+  },
+  "historical_comparisons": {
+    "scope": "Five selected CSV exports; historical weights/raw not independently replayed in this audit.",
+    "rows": [
+      {
+        "model": "B128_head8",
+        "reference": "original_DeMo",
+        "mAP": 0.09562898357960137,
+        "mINP": 0.28539166246901004,
+        "Rank-1": 0.4081632653061291,
+        "Rank-5": 0.7580174927113603,
+        "Rank-10": 0.4664723032069986,
+        "Rank-20": 0.3498542274052454,
+        "rank1_rescued": 29,
+        "rank1_harmed": 22,
+        "AP_improved": 734,
+        "AP_declined": 769
+      },
+      {
+        "model": "B128_head32",
+        "reference": "B64_head32",
+        "mAP": -0.0892012247862084,
+        "mINP": -0.8731840900332273,
+        "Rank-1": -0.4081632653061291,
+        "Rank-5": -0.1749271137026227,
+        "Rank-10": -0.23323615160350641,
+        "Rank-20": 0.11661807580175321,
+        "rank1_rescued": 27,
+        "rank1_harmed": 34,
+        "AP_improved": 718,
+        "AP_declined": 732
+      },
+      {
+        "model": "B128_head32",
+        "reference": "B128_head8",
+        "mAP": -0.5084498291948449,
+        "mINP": -1.0170932887533013,
+        "Rank-1": -0.5247813411078823,
+        "Rank-5": -0.5830903790087376,
+        "Rank-10": -0.3498542274052596,
+        "Rank-20": 0.0,
+        "rank1_rescued": 26,
+        "rank1_harmed": 35,
+        "AP_improved": 722,
+        "AP_declined": 742
+      },
+      {
+        "model": "B128_head8",
+        "reference": "AV_axis",
+        "mAP": -0.29044721486903313,
+        "mINP": -0.42949472218447227,
+        "Rank-1": 0.23323615160350641,
+        "Rank-5": 0.3498542274052454,
+        "Rank-10": 0.05830903790088371,
+        "Rank-20": -0.1749271137026227,
+        "rank1_rescued": 30,
+        "rank1_harmed": 26,
+        "AP_improved": 685,
+        "AP_declined": 803
+      },
+      {
+        "model": "B128_head32",
+        "reference": "AV_axis",
+        "mAP": -0.7988970440638781,
+        "mINP": -1.4465880109377736,
+        "Rank-1": -0.2915451895043759,
+        "Rank-5": -0.2332361516034922,
+        "Rank-10": -0.2915451895043759,
+        "Rank-20": -0.1749271137026227,
+        "rank1_rescued": 30,
+        "rank1_harmed": 35,
+        "AP_improved": 672,
+        "AP_declined": 773
+      },
+      {
+        "model": "B128_head32",
+        "reference": "original_DeMo",
+        "mAP": -0.41282084561524357,
+        "mINP": -0.7317016262842913,
+        "Rank-1": -0.11661807580175321,
+        "Rank-5": 0.1749271137026227,
+        "Rank-10": 0.116618075801739,
+        "Rank-20": 0.3498542274052454,
+        "rank1_rescued": 29,
+        "rank1_harmed": 31,
+        "AP_improved": 711,
+        "AP_declined": 752
+      }
+    ]
+  },
+  "closure": {
+    "controller_status": "COMPLETE",
+    "six_children_exit0": true,
+    "prior_terminal_observation_all_absent": true,
+    "controller_OS_exit": "UNATTESTED",
+    "observer_transport_exit": 0,
+    "limitation": "A completed controller record, recorded absence and observer exit0 do not attest the detached controller OS return code; no live process queries made."
+  },
+  "public_CLIP_provenance": [
+    {
+      "phase": "native",
+      "heads": 8,
+      "pretrained_path": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+      "cli_configuration_and_actual_all_keys_matched_log": true,
+      "public_asset_hash_independently_verified": false,
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe8_demo_s42_smoke_launch.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe8_demo_s42_smoke\\run.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe8_demo_s42_smoke.log:10"
+      ]
+    },
+    {
+      "phase": "training",
+      "heads": 8,
+      "pretrained_path": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+      "cli_configuration_and_actual_all_keys_matched_log": true,
+      "public_asset_hash_independently_verified": false,
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42_launch.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\run.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42.log:10"
+      ]
+    },
+    {
+      "phase": "native",
+      "heads": 32,
+      "pretrained_path": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+      "cli_configuration_and_actual_all_keys_matched_log": true,
+      "public_asset_hash_independently_verified": false,
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe32_demo_s42_smoke_launch.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe32_demo_s42_smoke\\run.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe32_demo_s42_smoke.log:10"
+      ]
+    },
+    {
+      "phase": "training",
+      "heads": 32,
+      "pretrained_path": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+      "cli_configuration_and_actual_all_keys_matched_log": true,
+      "public_asset_hash_independently_verified": false,
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42_launch.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\run.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42.log:10"
+      ]
+    }
+  ],
+  "ground_truth": {
+    "root": "/data/gaob/Re-ID/dataset",
+    "dataset": "RGBNT100",
+    "counts": {
+      "train": 8675,
+      "query": 1715,
+      "gallery": 8575
+    },
+    "train_identities": 50,
+    "query_identities": 50,
+    "source": "Installed official split filenames, independently enumerated by pure CPU read",
+    "synthetic": false
+  },
+  "input_integrity": {
+    "requested_count": 309,
+    "start_match": true,
+    "end_match": true,
+    "start_end_equal": true,
+    "total_input_bytes": 1328386693,
+    "audited_input_hashes": [
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_intake_actual_20261016.json",
+        "bytes": 60173,
+        "sha256": "4d5ef569e35dca4626bf343630f7b99be8b61a2ad8bdbe1443804fb007c7b5de",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\controller.log",
+        "bytes": 73,
+        "sha256": "2231a52e7be391b85cb87022d44ea9b9e69205c85ba6dc514cce9e3674405fa7",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\remote_owner.json",
+        "bytes": 712,
+        "sha256": "8922983552f734a2f997e411173462810eeb228341032d7a72a39d4d0c4970f6",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\controller_launch.json",
+        "bytes": 1030,
+        "sha256": "be612912e41e57a6d62892f87557caefbaed6f1a3e519decfe3308d8bfeea4ba",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\controller_result.json",
+        "bytes": 4323,
+        "sha256": "ec9ab5a5ccafd609fb582d2c38a6fa54fc135451670ccbfd1554ab41b32a8676",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native_acceptance.json",
+        "bytes": 147075,
+        "sha256": "236d628134b96ea1602d4285edf0fc081c20a62c1e4f219381558a57c4b5d811",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\prerequisites\\previous_audit.json",
+        "bytes": 63991,
+        "sha256": "ea0b7a83cc26e38c7b7ca789232835f4ffdd4c3021f32e6e8271b0e08fe9b510",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\prerequisites\\previous_intake.json",
+        "bytes": 27408,
+        "sha256": "5c13b8acaf9bd5566efb278b4952fc5d4f2f78458d614e7b629cd9271a7b79cd",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\audit\\RGBNT100_B128_atmoe32_demo_s42.log",
+        "bytes": 66,
+        "sha256": "70bf36ad9739bb538d55b73edc7f88175edff72339a3663193de39198a2b0b18",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\audit\\RGBNT100_B128_atmoe32_demo_s42_exit.json",
+        "bytes": 186,
+        "sha256": "05d430c23b75a540c7c51445ff7cd2182ff4722a997061fc29cd5e8723f7b6e7",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\audit\\RGBNT100_B128_atmoe32_demo_s42_launch.json",
+        "bytes": 524,
+        "sha256": "521f5727848426829c0df6238d3d34bc8dc48c5471d9fb04a75b2c6e3e4eb41c",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\audit\\RGBNT100_B128_atmoe8_demo_s42.log",
+        "bytes": 66,
+        "sha256": "70bf36ad9739bb538d55b73edc7f88175edff72339a3663193de39198a2b0b18",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\audit\\RGBNT100_B128_atmoe8_demo_s42_exit.json",
+        "bytes": 185,
+        "sha256": "0c257be85bc6f4f255b4c75541c4b80cf8909f85494c62420c2fb57b978dbb45",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\audit\\RGBNT100_B128_atmoe8_demo_s42_launch.json",
+        "bytes": 522,
+        "sha256": "ff87f20f4f67a437a7c982f2feeb4d00ba43ba7f806cb7d7cea55ee6f283c393",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe32_demo_s42_smoke.log",
+        "bytes": 1323,
+        "sha256": "6fc003f2ec52a481e975c3f4ade6e8a58d78c9ab9f89ba586f9de055cf8e5e76",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe32_demo_s42_smoke_exit.json",
+        "bytes": 192,
+        "sha256": "da8e35bac84b73c0a9a715809ca74481a4273b97b6f07474269d72ba76e10311",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe32_demo_s42_smoke_launch.json",
+        "bytes": 805,
+        "sha256": "a867ed896e51044520c2f1134072d820eb696c5bbb8c89b286428da04ed8b7f9",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe8_demo_s42_smoke.log",
+        "bytes": 1323,
+        "sha256": "6fc003f2ec52a481e975c3f4ade6e8a58d78c9ab9f89ba586f9de055cf8e5e76",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe8_demo_s42_smoke_exit.json",
+        "bytes": 191,
+        "sha256": "02f81df806678c1de502ca6f6189763aaa56d9d23bf669e72427fd91806c5dd8",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe8_demo_s42_smoke_launch.json",
+        "bytes": 802,
+        "sha256": "0303393dd9b66be689f1644320d58e4552c300097ea3d639f5f84295c53203b6",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\normal_analysis\\cmc.csv",
+        "bytes": 8252,
+        "sha256": "ef9b97c2b54958c22056fbcaabf7fae52a3e185d835db9e7cbd32bff8bf8c1d1",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\normal_analysis\\comparisons.csv",
+        "bytes": 1029,
+        "sha256": "db19464a398a5b02ac22169cf770e0b5d414ab2086acf1c12c71c20ff80816d8",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\normal_analysis\\group_metrics.csv",
+        "bytes": 27673,
+        "sha256": "de38b2cbe07c1402effbecadaae14bb6eeb03901cde6030952a278df20946421",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\normal_analysis\\paired_query_changes.csv",
+        "bytes": 941444,
+        "sha256": "a19c53f36c319657ff4e5dbe954e4fcde9215808fe87a3174fd470cccc935ec4",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\normal_analysis\\result.json",
+        "bytes": 9537,
+        "sha256": "8063358192301890fbbb754511ccf590caa97bf39032d38e485f7230026a3d1d",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\normal_analysis\\six_metrics.csv",
+        "bytes": 674,
+        "sha256": "0b7b081cc9f1ed9ec7bb61729aa8fc60db360b6445037f2fe5fd1b2ca8364d9d",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\normal_analysis\\training_curves.csv",
+        "bytes": 47199,
+        "sha256": "f91c1e58ebcd376c0d37fda47efcbc783ce123e21fbdf7ec311c069de61e9791",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42.log",
+        "bytes": 23096,
+        "sha256": "9759a5d0b9e883c4261930df9774847ebaf55bf7c8dca8b2480378d841e962ee",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42_exit.json",
+        "bytes": 186,
+        "sha256": "c1643ec1df91ccc579e23fec540a5c4446898afb926307c4e5069d3f4f74303c",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42_launch.json",
+        "bytes": 797,
+        "sha256": "bb1a381c89a6fa1849413880d2ebc2963429d92cb4e548ce5d213620dd8ad717",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42.log",
+        "bytes": 23090,
+        "sha256": "153c6b6e380ab42509778549cf6d45c0ee59f4fff7741759e78be8ba6cb225e8",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42_exit.json",
+        "bytes": 185,
+        "sha256": "2bda095986b11b231c7d29d575e99a6b079796bd1fa4aa9d98ddca6dd172a41d",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42_launch.json",
+        "bytes": 797,
+        "sha256": "f7c5876d8d7bcf87c2123d133ac7fe5be4a9ee0e435e3f398373d8ed8eb230a4",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\batch_orders.jsonl",
+        "bytes": 9184440,
+        "sha256": "760de51d5de46757d6fa5cf8bca55cdd43a9a9010a02ed77abb22e7e2f78d850",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\best.json",
+        "bytes": 15607,
+        "sha256": "b70528bf24cdc2df1c623e6ec113f2ee836679a15e8841294b48f574bb66db3a",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\best_per_query.csv",
+        "bytes": 159353,
+        "sha256": "e7adb0cb714ab199a9acc09bc2b538017f3ed73c69f1299b12003a158c28a725",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\best_per_query.json",
+        "bytes": 15592,
+        "sha256": "36cf3806c85913c4f6241976b1c2660d7b7a87a8815ed54ba9433c29ce1e9038",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epochs.csv",
+        "bytes": 9000,
+        "sha256": "90516f9ab124495fa856a3cf525bf0759979e3d72a8bd960b871c3a14f627e87",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\normal_cpu_audit.json",
+        "bytes": 1122,
+        "sha256": "719c3e46ac8c0f7c2172b31e1933b0a56782361420d5db9aac0ff07443d927c0",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\official_split_manifest.json",
+        "bytes": 2068069,
+        "sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\result.json",
+        "bytes": 38286,
+        "sha256": "5a6469604467e24fae6855a7818886d22360021d1fff25ce936a929d64f16321",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\run.json",
+        "bytes": 3792,
+        "sha256": "1a3c990f90691f4963977a02ab6699ece93bcd2bbceafed9a78de4d7f73d1844",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\status.json",
+        "bytes": 38286,
+        "sha256": "5a6469604467e24fae6855a7818886d22360021d1fff25ce936a929d64f16321",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\batch_orders.jsonl",
+        "bytes": 9184495,
+        "sha256": "fb7a5cf1c57c93923e9c2c2fa4123a7208d66ae52334ac0a6a389a44f068473d",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\best.json",
+        "bytes": 15531,
+        "sha256": "67d0eda4bd0b42be69022220ddc18f3f9140da30e0a362d453d0e3d0a3647a93",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\best_per_query.csv",
+        "bytes": 159218,
+        "sha256": "015314382ffc871fa10a6c7edb89bb38ccf6b6c119721b3e58a4765600919b18",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\best_per_query.json",
+        "bytes": 15516,
+        "sha256": "8a63514573308ff3443e86886ebdb50d92c93c9e00ea144f7651e8cd11b75724",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epochs.csv",
+        "bytes": 8992,
+        "sha256": "3cf5e3e252639e55326c81fd16f696b7a38fae9632a2ee890cb9e420c9888a23",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\normal_cpu_audit.json",
+        "bytes": 1119,
+        "sha256": "f923c0dc80313a310b9fac14849d309f38e5475637ae13a3c27ef951bbbc1473",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\official_split_manifest.json",
+        "bytes": 2068069,
+        "sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\result.json",
+        "bytes": 38128,
+        "sha256": "2de27be964581015ae19a7c540b874221c90d1f1ebecf52938ed265f5db844e8",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\run.json",
+        "bytes": 3787,
+        "sha256": "80efb499b5e210f76aa27c9d244636d838a631f4f882182b942eeed776803dc0",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\status.json",
+        "bytes": 38128,
+        "sha256": "2de27be964581015ae19a7c540b874221c90d1f1ebecf52938ed265f5db844e8",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_1.csv",
+        "bytes": 169192,
+        "sha256": "99a56d793c95eca581e3e74f4e497c2ea3a04c2472958e1b17ea5598a7505736",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_1.json",
+        "bytes": 15851,
+        "sha256": "fea8ed4ed578f93bf7f6693ac0ef8a88efd69f104a112140cbf8a8bde6522d18",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_10.csv",
+        "bytes": 159670,
+        "sha256": "7cbae9c5984446d42959b7409b0beeca7a47dede0cf9a423f3ae356370de5607",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_10.json",
+        "bytes": 15533,
+        "sha256": "ffcfaf5afd47be367b2acbfa6a6142aee628da1e4d314e53a80ac121ead29841",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_11.csv",
+        "bytes": 159840,
+        "sha256": "dd1dc8d38a3208eeb94666b3b2121bfbc2f670e8aaf7a7c269144abef00ba0d0",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_11.json",
+        "bytes": 15590,
+        "sha256": "110569764f69bb45842297862c99d638df4b105de329e0446d38694d70e58680",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_12.csv",
+        "bytes": 159555,
+        "sha256": "dab23b54bbac855beaeed17176aa04aa1dc53cae744f48255c5fc67b18ed24a3",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_12.json",
+        "bytes": 15549,
+        "sha256": "33f873c64843b2e579331d9d4e466c2bc397a0b03802ec2ea9975629c314a04a",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_13.csv",
+        "bytes": 159753,
+        "sha256": "9be2b375690c56872e48982f2b8e4f77ba78d7c9ecaba64bda550ccf74974567",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_13.json",
+        "bytes": 15559,
+        "sha256": "437abf74dbcab74e739b64eb0e7571cb7f89298281295c11149f220f321c2f4c",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_14.csv",
+        "bytes": 159544,
+        "sha256": "1e6322fe521bf7c8344e58645c0fbae3004c2d88778bcb20b2fa6bdb3850c39f",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_14.json",
+        "bytes": 15556,
+        "sha256": "b8346092ec3ceee0d8e60b3818bc2b0a0efa3d78e9805f7d06ac1bc15cc7cad5",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_15.csv",
+        "bytes": 160203,
+        "sha256": "faa02b79b42d4c35d65019096a631f086c9ecc08bdf30178a876905c92bd1f4c",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_15.json",
+        "bytes": 15531,
+        "sha256": "219022dffc844394ae5bd591023a0f12f083a815611208dabfcdf5d7f22c0a56",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_16.csv",
+        "bytes": 159422,
+        "sha256": "5ffbe0dab1fa2f6917bbdc45b2bf2fc63d97b8a28d8111e4baf86efd493e1bdf",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_16.json",
+        "bytes": 15547,
+        "sha256": "6b4ae7349fad733df941e1d9144d2a0b9bc9bb3fba43c6480f8cc407ac9490a7",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_17.csv",
+        "bytes": 159856,
+        "sha256": "af7508d931d56850af36e3094c9f78605d8ea9e7c8aa29d48604f1a3e66df79d",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_17.json",
+        "bytes": 15574,
+        "sha256": "8c61b19558f212f0e6f72aaeb7ac979618889adfebf308f34383888f8ca0a430",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_18.csv",
+        "bytes": 159269,
+        "sha256": "18d58101e76f3c85f0c52a7693551c4f10e5f5f2d61c77f514f189fb948035da",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_18.json",
+        "bytes": 15559,
+        "sha256": "6378c526267f70495ea4bdc14467301581a1835888a3d6c601ecd54b682bbabf",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_19.csv",
+        "bytes": 159682,
+        "sha256": "82e4f1ad1d6b597dbbc0192945b03a7b3bb00b4c91ab45980543e15d6b698179",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_19.json",
+        "bytes": 15496,
+        "sha256": "183594d8aa334a12b6ef171b03c26d1db1079ec58e52f980c6fa5cd39935dace",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_2.csv",
+        "bytes": 162687,
+        "sha256": "a3f5ffddb0fa387141324c5fb15dc57e9e0682e479a441417fe63f1fa2ece6d4",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_2.json",
+        "bytes": 15767,
+        "sha256": "6bdef17ca1a6a6bdc498b6a02ea88a02e6a5bff7ce0a08cef29eee1ae32ff9bf",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_20.csv",
+        "bytes": 159261,
+        "sha256": "43a51cbd9afe559c59129629405fb76eed4b1dd9b53b28c82ab7cbe66a55e5d9",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_20.json",
+        "bytes": 15579,
+        "sha256": "62d146900b3e137067234e3a152363eb544bc46201b7f4f8c285cd19c32a7df5",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_21.csv",
+        "bytes": 160383,
+        "sha256": "c6609d4df8fc5d48e07d3206c71322c253fc7c9eda0e16112892964188e5d776",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_21.json",
+        "bytes": 15518,
+        "sha256": "676c127685056d9b877e82205d881f2aa965dbad2472a2cd8b3593cec04efad8",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_22.csv",
+        "bytes": 159939,
+        "sha256": "c9ebeda409676e614b6ffcf93912b314497d66af50b943843884e636cba57de0",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_22.json",
+        "bytes": 15499,
+        "sha256": "742812ae9d9511d42845e5331a96fdb0922d59e61a2b14b28808f3e235c1d1a9",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_23.csv",
+        "bytes": 159253,
+        "sha256": "51a0fecafd03aa0e5f705970fb5aa51ae9b99c5387661fdfaf953040816ffbb5",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_23.json",
+        "bytes": 15539,
+        "sha256": "62b215ec1ae0457dd4c0c5b71a038cc75cea445b1760d90f7b53c9c4d60af7fe",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_24.csv",
+        "bytes": 159218,
+        "sha256": "015314382ffc871fa10a6c7edb89bb38ccf6b6c119721b3e58a4765600919b18",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_24.json",
+        "bytes": 15516,
+        "sha256": "8a63514573308ff3443e86886ebdb50d92c93c9e00ea144f7651e8cd11b75724",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_25.csv",
+        "bytes": 159498,
+        "sha256": "f1ad6d5ad64f1641e08c6764fe434a00b3818883740d91feaf7c27a3d1d6f0ac",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_25.json",
+        "bytes": 15519,
+        "sha256": "9e8d051debbdb769aa8f9c634808b23643324745597de30d803d400a67a6ec92",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_26.csv",
+        "bytes": 159600,
+        "sha256": "a3caa32257c6fdbf363346ae4e32f42075e042271560eb886dbf0aeccf920627",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_26.json",
+        "bytes": 15607,
+        "sha256": "a03a6be4bed37d6330110c129b01421bb39ec45c1256e062deb220aa96e4c7cc",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_27.csv",
+        "bytes": 159792,
+        "sha256": "851d4f54498f4bd9dd5d965f1ab28d41f6db70ec1127eae55b4c77bf9301746e",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_27.json",
+        "bytes": 15533,
+        "sha256": "489d90c1e660708aa36784d882c8d5de5a8e4b21f60b40c02707c856abe9c893",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_28.csv",
+        "bytes": 159280,
+        "sha256": "b874ed518eb0f39c0f834740b0eebc3a23db2a7fbccb16dc8818bc5691c3ddab",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_28.json",
+        "bytes": 15543,
+        "sha256": "1578aa9f12a0bc73f40b45672ebf57f08a45df894696093b7e04d9472499a18f",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_29.csv",
+        "bytes": 159736,
+        "sha256": "cc38240dfc4801d498b96ce0b42299c800310323994171dbcaaed5d719241910",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_29.json",
+        "bytes": 15583,
+        "sha256": "6d16a849e21a51b1eff8050d491c0834ecb7c2df381f7b4c8fd80fb5e9688223",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_3.csv",
+        "bytes": 163205,
+        "sha256": "978adb1fe8259b4a3768ca8c36c78ad6c6e21bd8931e45040cb6a9dba695aea8",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_3.json",
+        "bytes": 15793,
+        "sha256": "32b019f21ad4c011bdc36b01d684f57fec45e5c3908cf5326f24db09f4919a46",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_30.csv",
+        "bytes": 159493,
+        "sha256": "ec6f4215a4655f750c6aabdadc4ae34cc2977d9a73b7ff2d272fdb711d4a80e7",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_30.json",
+        "bytes": 15546,
+        "sha256": "c895831ac95fb6f30a4d1d5b3a7be81b8e508ebe22fef1d245618915112f2f61",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_31.csv",
+        "bytes": 159399,
+        "sha256": "0c9055efb75c4203dd1b733caf3d7f32f1f1301773eb8ed313305ce46d54855a",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_31.json",
+        "bytes": 15567,
+        "sha256": "ac89c6ad95d5c7ff0d88c9dfdf9bcbfa0e4fe67004bea5218a38b882d233b897",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_32.csv",
+        "bytes": 159007,
+        "sha256": "77c6bbd257d96f677e31420d80a2555d990a89a7393654860fb2a8ad9e89ddb3",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_32.json",
+        "bytes": 15570,
+        "sha256": "40646a4d4266121b1e615e2148862afee295dcb866394dfc83e14bf5197fac00",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_33.csv",
+        "bytes": 159117,
+        "sha256": "a1d16f572baef581f0f6a3a3b6112901c6fdbd8ac0c040aed471f69e70135814",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_33.json",
+        "bytes": 15543,
+        "sha256": "ff3aaf26c14b243eef61cad40b408d764630b9be9d9a0ecbf1ca71106a7cb851",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_34.csv",
+        "bytes": 159466,
+        "sha256": "fd1770c08fd5f79a3521e88445a60f6e7634309d2fa4738a645fec8232ca748f",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_34.json",
+        "bytes": 15554,
+        "sha256": "ee68aeb4ece415dca6c20331213267aa74250c0f2a262c987fc7ff7215a1f458",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_35.csv",
+        "bytes": 159506,
+        "sha256": "5f6c40ac65149b8b8908d6a1262d105965e475ccd72e4bf62c04d9937effd1ff",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_35.json",
+        "bytes": 15566,
+        "sha256": "4c2c0e5abd7bdbc3f06c3247cc2aa3e4d6f3672ccc0e2f9f9a4f502445b96f39",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_36.csv",
+        "bytes": 159439,
+        "sha256": "6edd15f6f526ca4a4ad4c6cce26ead5a480acfc6c62ba6aa7b3527364684efe0",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_36.json",
+        "bytes": 15556,
+        "sha256": "61bb1d19b26c61e127fbaf02529fc7b6c71c706a73fd3c006dc6a16a9396e8c0",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_37.csv",
+        "bytes": 159137,
+        "sha256": "99aaf5cade9c44c2855603f9418c012ca6801758c489f97bbc552a18a8c6dfa7",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_37.json",
+        "bytes": 15583,
+        "sha256": "82b7c23ada3b9a5e4dd541aad78d7384d6e946e05d5314ce4037362b65a0ca46",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_38.csv",
+        "bytes": 159343,
+        "sha256": "c45cfff066f04c18901520177f53deb8ce301138253fa13ba09908558dd316e4",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_38.json",
+        "bytes": 15563,
+        "sha256": "cdf7a4f8ddfd4269b7f56e1d2a9e9fc4f4663c1e03275d830f9387794eb8a4e8",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_39.csv",
+        "bytes": 159485,
+        "sha256": "b24120a7448ee7a1fbdf58e9159ad329bef7e0b8a5b8cac28675936ebfc2eed1",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_39.json",
+        "bytes": 15540,
+        "sha256": "24055b1e7a3b8c17ada675d32f3ee2d88d6c485c1118bebd01ec3b498f599810",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_4.csv",
+        "bytes": 161142,
+        "sha256": "9f387e5457cbd9a9b6a257d6035470888d465d6c451119ab2909cc079a50b436",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_4.json",
+        "bytes": 15660,
+        "sha256": "3a6386cd5d5a180fa3760a6bc7c9b4fb97f58925bdacd9123f9f007afa99fe82",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_40.csv",
+        "bytes": 159227,
+        "sha256": "fdb9deca8eb2612e4a0ac3a815644d0fde7e1bf369316fcfa90ab041db14e7e5",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_40.json",
+        "bytes": 15566,
+        "sha256": "ccc174bec0335cee9f23a9c4d9b8729d017dd586ba1593d8a070f1f7393b0a22",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_41.csv",
+        "bytes": 159333,
+        "sha256": "34a82768794cf511043a46a894a1f7f1e2aa3fa0b5e6599ef9b4360eaef2afb8",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_41.json",
+        "bytes": 15558,
+        "sha256": "97a98d9a72c40989929cbea4b0145e41bbca58a0a07a0274da3577d6161ef82b",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_42.csv",
+        "bytes": 159434,
+        "sha256": "ea50250102e4a5c7511dae8487eb7bc49aa5caf6f5c9e4df0c719aa2abdfd841",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_42.json",
+        "bytes": 15546,
+        "sha256": "4741390c29781c6df60474dd71fe8dccaf21efdce9e80003984d4772bd85b104",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_43.csv",
+        "bytes": 159195,
+        "sha256": "2ead948056b2ccbfd28ca884c85f6c047c9c31b5fa5257a2cfc806134979c30e",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_43.json",
+        "bytes": 15538,
+        "sha256": "4cbb9276391a23c18c2bf485980b0d10885b7bf656bd86a7f9dfc8d718e56c62",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_44.csv",
+        "bytes": 159140,
+        "sha256": "8f190951811601d6ee37366e0f1dab97143e12442ec44e0612994893c35ffa4d",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_44.json",
+        "bytes": 15537,
+        "sha256": "fa01b4d0c63857986f99fd4502cdf483d496ccdef8d853306aa3fc24b0023199",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_45.csv",
+        "bytes": 159464,
+        "sha256": "8a7b785b506edfe4ce9f68f46d17509b2d3e474c2c994ec05c4ac5f062056aa8",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_45.json",
+        "bytes": 15550,
+        "sha256": "b605060a113ff34222a0a57fee3d7780d05d3e33ae8d07d115dabff16c0f5c99",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_46.csv",
+        "bytes": 159524,
+        "sha256": "0c71190ea6bb87a96a7ebb8e27cfa8ff25558dec8242bf70add2bef386afc87a",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_46.json",
+        "bytes": 15558,
+        "sha256": "3b5bc179798d4949bd6f9c5f392e35dada0166b06cbbcbe99ba5a5cc8f933bc7",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_47.csv",
+        "bytes": 159422,
+        "sha256": "a79cd159a7e770865714cb53fde6f4463d74db9b5a588a74a6e68e37402a8d56",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_47.json",
+        "bytes": 15550,
+        "sha256": "7118e43cd2487f8098cc61ae9341d679204a306a300db7d9d894fe06d7620699",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_48.csv",
+        "bytes": 159707,
+        "sha256": "56fd79f524ea1bdc789bb7054609d6ada276f2a3101a44f952cd39979718d6a8",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_48.json",
+        "bytes": 15537,
+        "sha256": "b10a92f83eb7b9183d8a4f01d309d7ae515c11fea2710822bc8fb109af0c537d",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_49.csv",
+        "bytes": 159351,
+        "sha256": "cf2f444d26030f692345ee7cfd6ab3fa716fbbe38871ac2658c9f7329876fd76",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_49.json",
+        "bytes": 15523,
+        "sha256": "0e839cfaa89e83b42e94063f3b0c4fe096755b6016095e4393c9e7491c307371",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_5.csv",
+        "bytes": 159257,
+        "sha256": "c16d976ccfd7d4875ea0f3a3efdfded07c63fe39a19d4f8b33eb83f0cd8c7eee",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_5.json",
+        "bytes": 15637,
+        "sha256": "04adc7046e230dcc33e6d6f453c6baf0abe2f5d098683ee2860db012b12be927",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_50.csv",
+        "bytes": 159166,
+        "sha256": "9e57434ef407954bc3aeda9f97d3b63424013ed00ed3e506c23213d7ab915304",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_50.json",
+        "bytes": 15564,
+        "sha256": "1f051a24acad14fe00af6bad1af51f31fb5be76ced3cd44e7e77fecaf42c9b3a",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_6.csv",
+        "bytes": 159678,
+        "sha256": "effd7f92bd773848a60baa9866135a561681ac928ed92b6f18417ad591956100",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_6.json",
+        "bytes": 15510,
+        "sha256": "c4a371fca4871665f996fd7209c1aae7c3983102371f36136c8ad9e805813a4a",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_7.csv",
+        "bytes": 159701,
+        "sha256": "58b109e5fd7a39b5014f5a1f5f9ef7501a6184507df378dd48854c57aa19d5b1",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_7.json",
+        "bytes": 15559,
+        "sha256": "6ea8e58397ce5c81273484b400d457ee67847a0dd0cb117a7f5a0e01006255e7",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_8.csv",
+        "bytes": 160495,
+        "sha256": "a719d718be38b94f609d79f0d8c216badbf834f4b9034fccb51ab76bd55e3177",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_8.json",
+        "bytes": 15551,
+        "sha256": "5462ffbfa36bc1074916a5e42e234969432c5b15856dd47007599d6ab03c26a0",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_9.csv",
+        "bytes": 159234,
+        "sha256": "ecd9f80ce076ed4a8afc5a014c6a0840ead9ce45d621936b09bd297b68b4300b",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\epoch_metrics\\epoch_9.json",
+        "bytes": 15577,
+        "sha256": "3997bc9966120e7ff998e7fe754e2d02ad546bfb71819f1846d601cae51c39f0",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_1.csv",
+        "bytes": 169240,
+        "sha256": "f97a5a06cb369a7e8cd4728998df7ed3daa39b15645987c525b975a9015c3f36",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_1.json",
+        "bytes": 15824,
+        "sha256": "a45dee0ca9ac0c35072944d83b3fd7843053205170a10d630b8f27b407cd198f",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_10.csv",
+        "bytes": 159179,
+        "sha256": "692fdf68b637b2287337060b83ac5ab09e14d08a3b78f78664961e5e1f3eb607",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_10.json",
+        "bytes": 15531,
+        "sha256": "95689972c631382ae7432f16fd107863770b2b2ce087a49a74fd4f1ea118345e",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_11.csv",
+        "bytes": 158908,
+        "sha256": "63fe49e9c1bf46d757f1018d50595de4c6ff834efd594cf6fc400e4f06165109",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_11.json",
+        "bytes": 15491,
+        "sha256": "e0acdb98dbe76942eeb48fe132c6bef00256648569e796b1dfe1bbd61e103eee",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_12.csv",
+        "bytes": 158766,
+        "sha256": "651ca882af9f35bbffff7ea9e56ce6281039dfa50cd42a371cc31f5c9ec33ec2",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_12.json",
+        "bytes": 15511,
+        "sha256": "44d77947408166afc893c2b392e5993c91e4c8fef2d1c69774c079113ac2960b",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_13.csv",
+        "bytes": 159171,
+        "sha256": "66666c4cdd2b91c3e35b35ded82108cb839f687d618c5d0d8ec09279ed444d70",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_13.json",
+        "bytes": 15527,
+        "sha256": "6a43cfc8dd1eedaf3571e0d04344d47c3558ec2a2d79e282c8da93c7f9ddb6f5",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_14.csv",
+        "bytes": 159410,
+        "sha256": "a19b3a60bbefe2f4527698bbf08f8730e200ee07cb218d67566c3f3c13063ef9",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_14.json",
+        "bytes": 15526,
+        "sha256": "5401cc53698248c21658c6dc8ef02c021aedeb9df7e78eb12a61b84281e75c9c",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_15.csv",
+        "bytes": 159714,
+        "sha256": "25239e2337602f4682c4956136b4227e744bf4f9db8ef286ace165dbf9d16c63",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_15.json",
+        "bytes": 15537,
+        "sha256": "9b0179731ad06a8feafff59622aef99352ac1661386b6cdc6661c03693e23ac3",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_16.csv",
+        "bytes": 159353,
+        "sha256": "e7adb0cb714ab199a9acc09bc2b538017f3ed73c69f1299b12003a158c28a725",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_16.json",
+        "bytes": 15592,
+        "sha256": "36cf3806c85913c4f6241976b1c2660d7b7a87a8815ed54ba9433c29ce1e9038",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_17.csv",
+        "bytes": 159762,
+        "sha256": "2be1a789c39cedf55a4e00a1056d886c8dd4322b628e89de2d0a6254b463b327",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_17.json",
+        "bytes": 15508,
+        "sha256": "bd3e883acdaf8701d3c7f26c9792786772263dbfbe482dfd2cf57c2ab835a3bd",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_18.csv",
+        "bytes": 159403,
+        "sha256": "ee079574f94bf460ae171d7dfeff2b36fb5ffdeafb96649a5f837c9e02dce793",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_18.json",
+        "bytes": 15519,
+        "sha256": "ea0129e8ffabbd2a87c0373c0e3e58dfd99ab73fa209472785f859fe179c1007",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_19.csv",
+        "bytes": 159586,
+        "sha256": "e43298ea8bfb34800189ac1d56e0f470568132368ef81a7817f0115222d86d4d",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_19.json",
+        "bytes": 15566,
+        "sha256": "4fc8ade944c6a337801c73c513d8391f7a7baa007cd3595c9d2d36e85728651a",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_2.csv",
+        "bytes": 163316,
+        "sha256": "49dbaea1a90bc0671dea13e2a7028adc3f0b14faed2d5ffebb7448b1097f3df8",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_2.json",
+        "bytes": 15523,
+        "sha256": "41e4fbf2fe131f293511bf68feace513dd138a8bb323b4b7e93b1e23ada82c15",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_20.csv",
+        "bytes": 159647,
+        "sha256": "aeb0a50fc188e4a8f70607d28d3ca91bed707223bbec9972fc71b4810dbb3337",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_20.json",
+        "bytes": 15539,
+        "sha256": "98d01c635cd3814eebf31b00444f925604430353cb15d0d9ca9883a6f21679b7",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_21.csv",
+        "bytes": 159529,
+        "sha256": "a11adef1eea4372adbd53e79f36e7a5d8da72782e0243f69df3cef4683c4fa7a",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_21.json",
+        "bytes": 15523,
+        "sha256": "7ac6adc95941dcc4960a92f57b3291ad3ab2c5f96415df240eace9065ad4f6ac",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_22.csv",
+        "bytes": 159771,
+        "sha256": "caf1322a53323693bd400e93a7bfdc971b6d7a501d90eb48c4558f5b0c69e0c7",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_22.json",
+        "bytes": 15504,
+        "sha256": "c54f303ef67dbd1fdbfe9d65670b874813d9a2037bc72cd31877b47f5b999555",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_23.csv",
+        "bytes": 159706,
+        "sha256": "2c177e06a0aa428b0d491697b71f1a568cd11a498edc8c3cc041ffd56cdff0ff",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_23.json",
+        "bytes": 15450,
+        "sha256": "270ff10358aa5db4dba6f3c794dcfdb909a6f667eda35d9d4572cc3012fbae4a",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_24.csv",
+        "bytes": 159586,
+        "sha256": "419d2381a977751ef9b542c14e787c9b0ef1032d1e69828fcbe0e0d42d93abc2",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_24.json",
+        "bytes": 15482,
+        "sha256": "7ceacb677f5a8a5c04bc6ab5cfc394caef6f89a1a84ca025b015c7692938aff8",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_25.csv",
+        "bytes": 159615,
+        "sha256": "bb1777d16079f332dd796c7cf4eb28d719938a39e56efcd4fa7cfd55b0ea63f5",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_25.json",
+        "bytes": 15482,
+        "sha256": "35003363c17db8207bb907b0a885226d46dff8a4e9c8af9901018946855b5764",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_26.csv",
+        "bytes": 159749,
+        "sha256": "5c4288659c12bfcd6a28a319611232738f4b2e8d1d25048fa42d31d5df0f777f",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_26.json",
+        "bytes": 15481,
+        "sha256": "69f8c374c1b858ce6ae7874bbe3875683e4052d8ab9514cd4e8c28c0679481e1",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_27.csv",
+        "bytes": 159784,
+        "sha256": "0c5cdbcf2ba067a2a1ce9044a564e63c8f93e9ab83fe70fa9e511c19f7cb9047",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_27.json",
+        "bytes": 15460,
+        "sha256": "754be0283c0d6f307bf115d6f55cdc3c9927a53b9dc4997558ce28eebd0b8027",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_28.csv",
+        "bytes": 159544,
+        "sha256": "597cfe007fc363b093fd3888db19709141d88a5cf211cf95a77a90a68d158a4c",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_28.json",
+        "bytes": 15501,
+        "sha256": "5ef07e83ba7715c807243afc78f862c1b40bc3c2aceb894b4a16e31dcf5fef0d",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_29.csv",
+        "bytes": 159269,
+        "sha256": "742c7b380527702e39bd53648280f07413b67af4e196798f4f88aebb2ded97d9",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_29.json",
+        "bytes": 15502,
+        "sha256": "dc3b5a1a18326bd967a1f35c852b2acd8458962e102e4693b559d11e1db1bcb0",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_3.csv",
+        "bytes": 163210,
+        "sha256": "7aa34e179e1c34e002088d70d9afeacfcb2b06732af5d4cd0efc9e322aa9feab",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_3.json",
+        "bytes": 15674,
+        "sha256": "e316afed75c94bf70c65c8129efabd2d70ae92fda6e1ea8ab8ca8b50aed530ed",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_30.csv",
+        "bytes": 159430,
+        "sha256": "f4ab4f2e82c46c619b8b66ecb11c7ad931f1c702956e866e136c85118d260467",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_30.json",
+        "bytes": 15541,
+        "sha256": "0114fd3b9c6c12880b5931766b9940953cf3d729e424cc7ab9f2de478471de48",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_31.csv",
+        "bytes": 159335,
+        "sha256": "2f2c7e8eed62d73739526dc2caaee5c162b0a5d48c52ab5589ded60797f561d3",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_31.json",
+        "bytes": 15544,
+        "sha256": "e5236d8cf3fc9e167e6ddb4a0ce1d8b3aa2452fc999bcbeb3a66d0d626354f65",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_32.csv",
+        "bytes": 158933,
+        "sha256": "a68e27b51978fdd7028a84a3c4a22cbcac0dfd5532b615e491a41414754c66c1",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_32.json",
+        "bytes": 15482,
+        "sha256": "ed3f64d877c8094c32ef4b30367079567202bcb5b04b860c1a2ac5972a53c87f",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_33.csv",
+        "bytes": 159262,
+        "sha256": "7a20c20aeb9fd5beb1b20f6db1b1ab74a5f775ca0454d33f037a2f6c4d3c68b9",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_33.json",
+        "bytes": 15466,
+        "sha256": "ac6e650e41bcf5ca47bb0f953bacb6f78d5a7bec1da18b59005b079e29d15c0f",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_34.csv",
+        "bytes": 159323,
+        "sha256": "d45b2294222fed384d179ab2d4cd4e8d2601386de93c945e0ba53d496bd67b71",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_34.json",
+        "bytes": 15489,
+        "sha256": "a3f355ddad5828e2ddbf0731e0e5cfd0b3947f7b219c314cc96945a28d4fed4a",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_35.csv",
+        "bytes": 159323,
+        "sha256": "eb5239ddb3d7bc9b53c190334e82773f28bc3bbdc44e02eea6c00974b43805f0",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_35.json",
+        "bytes": 15484,
+        "sha256": "0d4dd9963f037cb9eec460c4782135c5ebfee01395a3db1b61e33b686588547d",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_36.csv",
+        "bytes": 159474,
+        "sha256": "581b1b5b01ff984161c08d278c7b1633508850bea8644b2637ee0a46179cea6d",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_36.json",
+        "bytes": 15486,
+        "sha256": "7f085d4f957a86b19f7d9d48961c4ac64d998c092d77de63334c4e8d2dd9791d",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_37.csv",
+        "bytes": 159369,
+        "sha256": "3afe318e61e39de8a90b49b40265171066024e332e7bf0a7ae4c969a2c3bf959",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_37.json",
+        "bytes": 15501,
+        "sha256": "0116cd5bc8ad8f25371c40a573f4ac26d3482c4b34a132b37f87619f29b6523d",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_38.csv",
+        "bytes": 159339,
+        "sha256": "aedbbcf50287dfd177878038aa55ccdfbc65befc6bd104e0e08e592b24311f64",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_38.json",
+        "bytes": 15483,
+        "sha256": "5cd2925c4a7366e0f96ae8571c8caf350a7d60f73f50b66d29ee88259e804471",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_39.csv",
+        "bytes": 159601,
+        "sha256": "ab98c41687e63136a38c6050375d07c350cfb119f4bf1d321b22f2b626e88dde",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_39.json",
+        "bytes": 15500,
+        "sha256": "10238de52e54cb13360583e17852f7e6484cb3b803f39399769df00599c01194",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_4.csv",
+        "bytes": 161890,
+        "sha256": "5645a26ca7a2f01b7abd3f67187824b11ade52f6752c8d8bc7863f20e10d2302",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_4.json",
+        "bytes": 15707,
+        "sha256": "11c932a8c32f2dee9f5fa3d0f3aa7111465578d3ec175d351534b8613cc412f5",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_40.csv",
+        "bytes": 159300,
+        "sha256": "b9a2464aedfe6b263de4319cf91a630c94174b5b195269cd376ee9fd3e66862b",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_40.json",
+        "bytes": 15512,
+        "sha256": "06a1feca518365f1487d093d2997c704c087ebe2b319aac4dfaa49b8bf71f701",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_41.csv",
+        "bytes": 159498,
+        "sha256": "a78e2bcd742584bf3bd9949ddf804de81807d4724b44d07f1c5f27518533c783",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_41.json",
+        "bytes": 15494,
+        "sha256": "827a4fe648904ed4a9fce0e00eeb12c9b65822a34907e69290f7e108fa18a25c",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_42.csv",
+        "bytes": 159174,
+        "sha256": "e1068d0ce25738eed51442c3a3b6ed83af1ad4d9ab9c8f1147d0bbd1c44e608a",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_42.json",
+        "bytes": 15531,
+        "sha256": "353264879b79781abb7be9aa142d054334f67bb56cd693c6ff79da8c48d7d961",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_43.csv",
+        "bytes": 159141,
+        "sha256": "68d2576c864330c6d129f12be296cd8172f8771eca31167c32edb5440fee98d3",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_43.json",
+        "bytes": 15535,
+        "sha256": "7998f98864ab6380b84c62c673b03868c6e8e26941df675cb68964cf5c0f1623",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_44.csv",
+        "bytes": 159329,
+        "sha256": "e3410e6a692e5d39ade73455bf8449d1bcf2dedbc365259ee3d0cfb2b30bd4be",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_44.json",
+        "bytes": 15523,
+        "sha256": "c7d334cd74334824402aa750cbfa625835c72dd81bdf4013bfac475c5c32fe7c",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_45.csv",
+        "bytes": 159491,
+        "sha256": "2326beabb103690f9fdaa1b950609c3e82a16a278b97ae767055b0831ac7d6d4",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_45.json",
+        "bytes": 15493,
+        "sha256": "e5e17fad9bb27ef125974d60e840e0b60b0e28e66dce88cae05d3c82cd5bffed",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_46.csv",
+        "bytes": 159305,
+        "sha256": "eba342a420f89405af28403e03580e39574150c01ff01ba350230668e6683019",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_46.json",
+        "bytes": 15456,
+        "sha256": "4c98312260e31ef70c4c0851b950e4382f04de22f754dbe5d35c74bb0f3802cf",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_47.csv",
+        "bytes": 159427,
+        "sha256": "f741e432a695c02dc0f735e8b58cb6c396264943cc8f644709411e6b5cda81f3",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_47.json",
+        "bytes": 15496,
+        "sha256": "1c73c7796a8d4d3e262cd86f69a5f8e8465d1a55bb971ebe27e390b557068cc2",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_48.csv",
+        "bytes": 159355,
+        "sha256": "3317cd2348e941ed1bbb830a29f2cc51079b5c0dc0b2b4c36d9b92d714e4aeb3",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_48.json",
+        "bytes": 15519,
+        "sha256": "4c5442818f79be9af2cae4257c45c6ef15ac6b71549a197e5333b1b10449fd58",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_49.csv",
+        "bytes": 159300,
+        "sha256": "40a44a987b76d6eca085c68cd79c6abb205eec160a51c1b7b47148fcefb9486e",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_49.json",
+        "bytes": 15475,
+        "sha256": "27e3768c7329beb8c63d277a3734bb166eee5336b4933ccb1d518f237962a767",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_5.csv",
+        "bytes": 159193,
+        "sha256": "50645e6997c6a4c4971b82a711a08bd0893f908a584322893f4b3ac997f8a42b",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_5.json",
+        "bytes": 15605,
+        "sha256": "d19b47969d17e77ecf0423375531a590dbb55da63c11ec56b7dbdf3c8fab413f",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_50.csv",
+        "bytes": 159191,
+        "sha256": "bf1639354dbef1b9c1eb35cf61e1e2f9f3c58aa1e7d0548b7bdedc083db97fde",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_50.json",
+        "bytes": 15491,
+        "sha256": "6699b4369ed52ff0a605a31c7c324b185600a2244431908ba8a5b17ee5197a6b",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_6.csv",
+        "bytes": 160063,
+        "sha256": "1c8f6df2b370b900e80665d58c8686e5a51a2053356d33a730699f8644071e35",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_6.json",
+        "bytes": 15491,
+        "sha256": "a8e5cc78fb2ac483c320c27950398b7c11897df600217a513a778d85906111bc",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_7.csv",
+        "bytes": 158852,
+        "sha256": "c7294c78f4126c2850509681dd8873ef454d3e69ae27a59d414ffda1664ac5ca",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_7.json",
+        "bytes": 15509,
+        "sha256": "12b92579a53a5cf2fcfbbaa98321b3b22ed2449da9f09643023b0c4e1eb22489",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_8.csv",
+        "bytes": 160531,
+        "sha256": "22c706706d0df57f87df9327e1c6a77e497475d834ef65081d150ef9f5956698",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_8.json",
+        "bytes": 15544,
+        "sha256": "73c1ace2930138452b18f6f6d1fa0025e558b18432345292f5ecb068c8f38298",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_9.csv",
+        "bytes": 159634,
+        "sha256": "43675aac6e21d7c4b3044a74cd152851ef4fc39b35c60c3987cafbd75c710f2d",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe32_demo_s42\\epoch_metrics\\epoch_9.json",
+        "bytes": 15561,
+        "sha256": "1b0d9a35efbebe1a29089deea3407e15ff15f615f783a25769f3e09323f84e9c",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe32_demo_s42_smoke\\official_split_manifest.json",
+        "bytes": 2068069,
+        "sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe32_demo_s42_smoke\\run.json",
+        "bytes": 3796,
+        "sha256": "7bd5cdbbfe05b58b54bc1f5c38c2dd05824ed62ca8ad8f9e00fb5d901de3204f",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe32_demo_s42_smoke\\smoke.json",
+        "bytes": 88214,
+        "sha256": "01596b282f40b9bd2d7886f46bf3f3e85e3faabacd96f008ed22e9d422ad17a4",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe8_demo_s42_smoke\\official_split_manifest.json",
+        "bytes": 2068069,
+        "sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe8_demo_s42_smoke\\run.json",
+        "bytes": 3792,
+        "sha256": "9fbf73da04c034a37e32993a3c5ad9683d2e5608164d6cb67a31b8d446212a50",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\native\\RGBNT100_B128_atmoe8_demo_s42_smoke\\smoke.json",
+        "bytes": 43242,
+        "sha256": "ca8ad8e101a04ef4c129faeef09bc3d8eeaf40588cf8bdf4e8f265f0e644159c",
+        "matches_requested": true
+      },
+      {
+        "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_paper_batch_baselines_20261016\\head8\\raw\\best_official_arrays.npz",
+        "bytes": 248735553,
+        "sha256": "f32c8f7bd36b20e5aa323e28986bebcf9e2e4a7f150b91f6a48d8185e39c84c4",
+        "matches_requested": true
+      },
+      {
+        "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_paper_batch_baselines_20261016\\head8\\best\\best.pth",
+        "bytes": 392086065,
+        "sha256": "b4deeb334580a1ad705ee64296dd5050d3ae081fb5f24e7c201b662f922dc0f7",
+        "matches_requested": true
+      },
+      {
+        "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_paper_batch_baselines_20261016\\head32\\raw\\best_official_arrays.npz",
+        "bytes": 248256064,
+        "sha256": "70bcd02c03e2cb36d5efb88653d9828545278f4c2189477039d42f87d4c5526e",
+        "matches_requested": true
+      },
+      {
+        "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_paper_batch_baselines_20261016\\head32\\best\\best.pth",
+        "bytes": 391794586,
+        "sha256": "73365f794de7a932d9c5bc891e259f4683361963fdc79b3b0cf8bba51efc6321",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_source_request_20261016.json",
+        "bytes": 51245,
+        "sha256": "1dcaefd97340b418fade93c738c37e873ca70f62fee163cb2f3b1f53ae5fcd25",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_rgbnt100_paper_batch_baseline.py",
+        "bytes": 1991,
+        "sha256": "543e70b4c368dfb5247f6d021137dcb872ffbb59a4369dfe220feb306692043b",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_rgbnt100_paper_batch_normal.py",
+        "bytes": 6571,
+        "sha256": "7231a6f095de160df7d2defdc575e6fd0db0315355b668db68c8a322ae4999c7",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\launch_rgbnt100_paper_batch_baselines.py",
+        "bytes": 7692,
+        "sha256": "c1f6528de5d239c61a26fd556843194d5db34cce8032da74601f06d01eff0026",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_deploy_20261016.py",
+        "bytes": 8325,
+        "sha256": "e8b61f34c35a8674c4bcd98b1575e338e80a721b678c37366dc5a070c4566dcc",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\observe_rgbnt100_paper_batch_20261016.py",
+        "bytes": 4032,
+        "sha256": "cf2023f60aa015dc9cf7e6868af41e6ad8ebde0b3756f95f2fa896d0ca499fe2",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_plan_20261016.json",
+        "bytes": 2813,
+        "sha256": "eca1605f2777aa09afa487d48c5c541be764b0210f61d170d8493278ac1c3485",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py",
+        "bytes": 10596,
+        "sha256": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_experiment.py",
+        "bytes": 14298,
+        "sha256": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\vehicle_atmoe_head_configuration.py",
+        "bytes": 1327,
+        "sha256": "64a49c490665856e273af509f0bb5543f1d8a9fc257b8a642f59224bce190b80",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_vehicle_atmoe_head_normal.py",
+        "bytes": 6240,
+        "sha256": "d282bf47f2cf7d355789d4a78f5c7ce52d9224896bc2092e0f5b91f0dd2de6d0",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\gpu_thermal_execute.py",
+        "bytes": 2203,
+        "sha256": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\official_training_data.py",
+        "bytes": 1528,
+        "sha256": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\experiment_data.py",
+        "bytes": 4032,
+        "sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py",
+        "bytes": 9448,
+        "sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\sampler.py",
+        "bytes": 2436,
+        "sha256": "579b45b767960b7ca8a373808d890493e6ac8d152c0fe13dbe0f4dc02ed9f068",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_author_recipe_crosscheck_20261016.json",
+        "bytes": 2622,
+        "sha256": "0fa95d2394f97d65a248562dca437a6e4577fec8711cdc8db61f7a417b049f27",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_dynamic_amp_RGBNT100_completion_node_actual_20261016.json",
+        "bytes": 9790,
+        "sha256": "eb6923c8967e4d3e75a91d6a6841ad8a3fde408e3cdba6b13174e190e146fdec",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_head_dynamic_amp_RGBNT100_intake_actual_20261016.json",
+        "bytes": 27408,
+        "sha256": "5c13b8acaf9bd5566efb278b4952fc5d4f2f78458d614e7b629cd9271a7b79cd",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\reid2_paper_reference_targets_20261016.json",
+        "bytes": 2748,
+        "sha256": "58b12204b5d01e8dcabcdbcc14c3cb18b6880621989d6eb47ec45ddf55e03469",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_request_preparation_path_failure_20261016.json",
+        "bytes": 553,
+        "sha256": "6f92343170ea7bb30459f539dd1cf8b90c246226155c6a272e201b9ac97d90a8",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_postprocess_source_request_20261016.json",
+        "bytes": 4262,
+        "sha256": "1c97ad82f563decfa2b5556284e5bbceb5244f3c84a2b9cfc4e2802e064674af",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_rgbnt100_paper_batch_20261016.py",
+        "bytes": 7223,
+        "sha256": "9e40a5e17459f0cd7e78275bf91f3d2aade280261ad9c775e511b42ad783c203",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_rgbnt100_paper_batch_normal.py",
+        "bytes": 8625,
+        "sha256": "7e954696543f24afc4e56a3eae26f562d5875cf08870bcf45504234a6b4adab2",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_identity_coordinate_three_normal.py",
+        "bytes": 9675,
+        "sha256": "4d3e5805d3de3eaae58ff7027241e147e7f41c6eb935dc7f76e34865e7270d55",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_vehicle_atmoe_dynamic_amp_component_20261016.py",
+        "bytes": 8360,
+        "sha256": "d804103ac2f52f9cc2a72f17be2072f595382fb80ef483d78c603de2fb0c7793",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_source_review_20261016.json",
+        "bytes": 68834,
+        "sha256": "df509dfe79214a138bd01353d16a216b1de0f119f55cb1d2154c917cafe17a0d",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_actual_session_20261016.json",
+        "bytes": 4081,
+        "sha256": "44949105999701ea9eeeec7a6be5187415c780999b4e7fa647dfeaf74be1f999",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_completion_actual_20261016.json",
+        "bytes": 167946,
+        "sha256": "99991ea65d27f10d0b17fad95cebb6a18611b63d2f8a7f72945ae9ad36636692",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_postprocess_source_review_20261016.json",
+        "bytes": 25504,
+        "sha256": "8993c9774095ccb3c13663f2f0446615936aae6cd349de302716478bd90fbaed",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_head_RGBNT100_result_integrity_audit_20261016.json",
+        "bytes": 63991,
+        "sha256": "ea0b7a83cc26e38c7b7ca789232835f4ffdd4c3021f32e6e8271b0e08fe9b510",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_full_official49.py",
+        "bytes": 8118,
+        "sha256": "04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\make_model.py",
+        "bytes": 10473,
+        "sha256": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\configs\\RGBNT100\\DeMo.yml",
+        "bytes": 767,
+        "sha256": "e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\full_official_baselines_20261004\\training\\RGBNT100_demo_s42\\result.json",
+        "bytes": 37740,
+        "sha256": "6281020fab561c83e9d5d162bf692c3d2a7048923886e4750cb605d0dc1dc9f6",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\full_official_baselines_20261004\\training\\RGBNT100_demo_s42\\best_per_query.json",
+        "bytes": 15651,
+        "sha256": "706f1eb2db0ec72e75d7c054faddfaf2a6ff72e20c3f4f9130a59432e2d902ba",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\full_official_baselines_20261004\\training\\RGBNT100_demo_s42\\best_per_query.csv",
+        "bytes": 159543,
+        "sha256": "8c02dccd8da9f549791315d2eb3e03d811bd3ba3158116e2110c2872ace43f57",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\full_official_baselines_20261004\\training\\RGBNT100_demo_s42\\epochs.csv",
+        "bytes": 9026,
+        "sha256": "9e51659d3cd7c36686ab4a18c2fcb4898aee888aafedd960d5e9c510c3f97f36",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\training\\RGBNT100_r201av_axis_shared_s42\\result.json",
+        "bytes": 48147,
+        "sha256": "eda348022fa64dda8e4bc3a19bac7140c02785b6f06e2a160a05d0b403c0637b",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\training\\RGBNT100_r201av_axis_shared_s42\\best_per_query.json",
+        "bytes": 15610,
+        "sha256": "c0eaea9c6b22147ab175d79790cbfc8c3dcd54f5d1bdae32c2c96d045b5b36f3",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\training\\RGBNT100_r201av_axis_shared_s42\\best_per_query.csv",
+        "bytes": 158670,
+        "sha256": "8f5236bb9d661bdc84dce00b5012b9d18ae707b2e385d54b22536c35c19c4799",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\training\\RGBNT100_r201av_axis_shared_s42\\epochs.csv",
+        "bytes": 9021,
+        "sha256": "ccd3821da22ac5b3e9f8bf611f3222a89f5bd8a91ea07efa2c6cd72692d86822",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\result.json",
+        "bytes": 37644,
+        "sha256": "c7ebccb33cd10c100873cfd32bed360512bc0e481a8149ea32269ba35c81aa6b",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\best_per_query.json",
+        "bytes": 15430,
+        "sha256": "619ccbebab690ce11a2cbc710637c5c47f0d69d61128c5c80bb9edf65e636826",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\best_per_query.csv",
+        "bytes": 156917,
+        "sha256": "2609406cec68793d8755d62faf3bc47237cabaf7e912f19f2b850989b7e1cf9d",
+        "matches_requested": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epochs.csv",
+        "bytes": 9026,
+        "sha256": "b9b1abb1eb59d7555346577bc93dd91e8f75200d100d58e53b6672f3b5b14c22",
+        "matches_requested": true
+      }
+    ],
+    "supplemental_sources": [
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\RGBNT100.py",
+        "bytes": 3407,
+        "sha256": "cef47b0a1dcc9bc434f6c3612e547db41fd8af2b1d7e953323ea80ffb6eb705f",
+        "matches_prerun_source_request": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\utils\\reid_evaluation.py",
+        "bytes": 1947,
+        "sha256": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+        "matches_prerun_source_request": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\meta_arch.py",
+        "bytes": 5100,
+        "sha256": "f9b93fba00f534debecebcd72f974320cd978e1619f1460674cbfc3afc961eec",
+        "matches_prerun_source_request": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\moe\\AttnMOE.py",
+        "bytes": 10226,
+        "sha256": "91d594c86ba44a5ce9eb843afaba898d5f8b0515b542b2754004c85ca272d3b6",
+        "matches_prerun_source_request": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\clip\\model.py",
+        "bytes": 33488,
+        "sha256": "2596d2e964b6951260fa6e0810a68b120c7d4fa14be00b63e9e3093350cec9ba",
+        "matches_prerun_source_request": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\make_model_clipreid.py",
+        "bytes": 9929,
+        "sha256": "eda949ce202c8adf9fc9c0d4763bccbbdaec7140ebced7d9b7f0b6eebd8dc846",
+        "prerun_source_request_seal": "ABSENT; current supplemental read only"
+      }
+    ],
+    "start_evidence": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_B128_full_normal_run01\\start_input_seals.json",
+    "end_evidence": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_B128_full_normal_run01\\end_input_seals.json"
+  },
+  "actual_failures_preserved": [
+    {
+      "id": "PREEXISTING_REQUEST_PATH_PREPARATION_FAILURE",
+      "stage": "executor request collection",
+      "exit_code": 1,
+      "evidence": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_request_preparation_path_failure_20261016.json",
+      "details": "Actual FileNotFoundError for datasets/sampler.py; collection corrected to data/datasets/sampler.py before review/NN. Original failure retained."
+    },
+    {
+      "id": "AUDIT_REMOTE_ATTEMPT01",
+      "stage": "pureCPU reviewer helper",
+      "exit_code": 1,
+      "evidence": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_B128_full_normal_run01\\remote_cpu.stderr.private.txt",
+      "details": "AttributeError: module hashlib has no attribute file_digest in the installed remote interpreter. Failed before archive hashing/recount; original211-byte stderr and empty stdout retained. Direct streaming hashlib.sha256 replaced this unavailable API, with no install/fallback/NN."
+    },
+    {
+      "id": "AUDIT_SUPPLEMENTAL_SEAL_ATTEMPT01",
+      "stage": "local provenance helper",
+      "exit_code": 1,
+      "evidence": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_B128_full_normal_run01\\provenance_attempt01.failure.private.txt",
+      "details": "KeyError for modeling/make_model_clipreid.py in prior inherited hash map. Corrected the audit claim: five dependencies are prerun-sealed, this loader is a separately hashed current read. No silent missing-seal acceptance."
+    }
+  ],
+  "verification_limits": [
+    "Raw distance replay covers two selected best checkpoints only. All100epoch CSV/JSON tables are reconciled; unretained per-epoch distances and neural forwards cannot be independently replayed.",
+    "All four archives read remotely are byte-identical to local D copies. Tensor contents and all saved feature rows are actually parsed; weight-to-feature causal linkage uses the original strict-load execution evidence, not a new network run.",
+    "Recorded no AMP skips and finite final tensors/native gradients do not establish global numerical health at every intermediate operation.",
+    "No independent cryptographic authentication of external publicCLIP asset; no claim of an exact original-author paper reproduction.",
+    "Full means entire official eligible training pool with cumulative sampling coverage, and every officialQ/G record. It does not mean every eligible training record was consumed in every epoch."
+  ],
+  "new_neural_calls": 0,
+  "new_optimizer_updates": 0,
+  "torch_imported_by_audit": false,
+  "remote_writes": 0,
+  "remote_deletions": 0,
+  "dependency_installations": 0,
+  "resource_process_temperature_power_current_training_queries": 0,
+  "allowed_remote_access": "Read only four selected terminal archive files and officialRGBNT100GT filenames via2026; pureNumPy/stdlib.",
+  "trace_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_B128_full_normal_run01",
+  "transport_receipt": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_RGBNT100_B128_full_normal_run01\\remote_transport_attempt02_receipt.json",
+  "trace_git_ignored": true
+}

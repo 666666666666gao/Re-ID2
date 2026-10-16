@@ -1,0 +1,733 @@
+{
+  "status": "FINAL",
+  "verdict": "PASS",
+  "review_type": "SOURCE_ONLY",
+  "at": "2026-10-17T01:08:55+08:00",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_B128_bank_source_request_20261017.json",
+  "plan": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_B128_bank_plan_20261017.json",
+  "reviewer_task": "/root/review_rgbnt100_b128_bank_source_20261017",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "actual_route": "UNATTESTED",
+  "route_attribution": "Astra/max requested;no exact host-attested route/model/effort is available.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "blocking_findings": [],
+  "non_blocking_findings": [],
+  "summary": "PASS after the one-character launch-template escaping correction. The12 requested inputs remain unchanged and the B128/head8 training-only bank is correct within this source scope. Both added launch sources were reviewed;no unresolved concrete defect remains. This does not mean that the bank ran or that baseline results were accepted.",
+  "resolved_findings": [
+    {
+      "id": "R1_LAUNCH_TEMPLATE_NEWLINE",
+      "severity": "BLOCKING",
+      "status": "RESOLVED_BEFORE_EXECUTION",
+      "source": "C:/Users/gb/.codex_tmp/launch_rgbnt100_B128_training_bank_20261017.py",
+      "line": 46,
+      "finding": "Embedded remote source had an unescaped newline in a single-quoted string.",
+      "error": "SyntaxError: unterminated string literal (detected at line 16)",
+      "retained_source": {
+        "path": "C:\\Users\\gb\\.codex_tmp\\launch_rgbnt100_B128_training_bank_20261017_R1_template_failure.py",
+        "bytes": 4932,
+        "sha256": "400f17bdd0c118042939f234d11c0dc57cdaf8683413da0b7e89771e1fb1a3e9"
+      },
+      "minimal_change": "One extra backslash in the outer f-string template.",
+      "exact_single_edit": true,
+      "observed_failed_render": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-17_RGBNT100_B128_bank_source_run01\\launcher_R1_rendered_remote.py"
+    }
+  ],
+  "positive_findings": [
+    {
+      "topic": "Minimal source delta",
+      "conclusion": "Eight exact intended text replacements adapt the old head32/B64 bank to head8/B128. All remaining extraction/centroid/neighbor/export text is unchanged. No new fallback,try/except,compatibility layer or unrelated refactor.",
+      "evidence": [
+        "diagnose_rgbnt100_B128_training_neighbors.py:11",
+        "diagnose_rgbnt100_B128_training_neighbors.py:26",
+        "diagnose_rgbnt100_B128_training_neighbors.py:36"
+      ]
+    },
+    {
+      "topic": "Rebuilt training configuration",
+      "conclusion": "Calls run_rgbnt100_paper_batch_baseline.configuration(arguments,8),then requires exact cfg.dump equality to trained config. Static reconstruction from defaults,YAML and three configuration layers matched all77 saved leaf fields,including HEAD8,B128,K16,50epochs,seed42 and normal TEST.MISS=nothing. Archived COMPLETE/exit0/epoch24/path fields agree;this is not the separate full-result audit.",
+      "evidence": [
+        "diagnose_rgbnt100_B128_training_neighbors.py:21",
+        "diagnose_rgbnt100_B128_training_neighbors.py:27",
+        "run_rgbnt100_paper_batch_baseline.py:9",
+        "vehicle_atmoe_head_configuration.py:5",
+        "run_experiment.py:31"
+      ]
+    },
+    {
+      "topic": "Complete training-only records",
+      "conclusion": "full_records retains every official training record and sorted identity relabels;manifest equality is required. Archived text independently recounts8675train/1715query/8575gallery,50 training IDs,correct filename ID/camera metadata and train/test name+ID disjointness. The sole extract call receives train only. training=False selects sequential inference batch64,drop_last=False:expected136 batches,last35,all8675 once.",
+      "evidence": [
+        "official_training_data.py:20",
+        "experiment_data.py:88",
+        "full_evaluation.py:82",
+        "diagnose_rgbnt100_B128_training_neighbors.py:29",
+        "diagnose_rgbnt100_B128_training_neighbors.py:44"
+      ]
+    },
+    {
+      "topic": "Strict partition and frozen-state contract",
+      "conclusion": "build selects original demo. verify_partition enforces ATMoE8 with64 dimensions/head,8 gating heads,7 experts per partition and unchanged8-head relation readers. strict=True loads best.pth;eval(),requires_grad_(False) and no_grad precede extraction. Every state_dict parameter and buffer is compared to the loaded state after extraction,and existing best.pth SHA is rechecked. These are reviewed runtime requirements,not executed tensor checks.",
+      "evidence": [
+        "vehicle_atmoe_head_configuration.py:19",
+        "run_experiment.py:44",
+        "diagnose_rgbnt100_B128_training_neighbors.py:35",
+        "diagnose_rgbnt100_B128_training_neighbors.py:47"
+      ]
+    },
+    {
+      "topic": "5120 output and original49-neighbor algorithm",
+      "conclusion": "Original evaluation concatenates3+7 descriptors of512 dimensions;hook and finite shape assertions require8675x5120. Normalized record features are averaged by training label,centers normalized,self-distance set to infinity,and stable argsort returns all49 nonself labels. Exported metadata uses the same train list and retains original-ID relabel map. No optimizer,backward,weight save or Q/G forward is invoked.",
+      "evidence": [
+        "modeling/make_model.py:170",
+        "diagnose_rgbnt100_B128_training_neighbors.py:40",
+        "diagnose_rgbnt100_B128_training_neighbors.py:49",
+        "diagnose_rgbnt100_B128_training_neighbors.py:58"
+      ]
+    },
+    {
+      "topic": "Resolved launcher syntax defect",
+      "conclusion": "R1 rendered remote Python actually failed compilation with an unterminated string at line16 because the outer f-string consumed a newline escape. The executor added exactly one backslash. R1 source is retained byte-exact;R2 outer source,remote payload and nested controller all compile. No embedded code was executed.",
+      "evidence": [
+        "C:/Users/gb/.codex_tmp/launch_rgbnt100_B128_training_bank_20261017.py:46",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-17_RGBNT100_B128_bank_source_run01\\launcher_R1_rendered_remote.py",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-17_RGBNT100_B128_bank_source_run01\\launcher_R2_rendered_remote.py",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-17_RGBNT100_B128_bank_source_run01\\launcher_R2_controller.py"
+      ]
+    },
+    {
+      "topic": "Single-launch gates and scope",
+      "conclusion": "Before SCP/SSH,requires source FINAL/PASS/no blockers,baseline-result FINAL/PASS-or-WARN/no blockers,the12 source SHA values,and all result-request input sizes/SHA. SCP copies only the new bank source. Generated remote code checks12 source hashes and archived head8 teacher bytes/SHA,unused distinct bank/controller paths,GPU2 memory/utilization/apps with no temperature/power,and starts one controller invoking existing execute once. Existing helper retains CUDA_VISIBLE_DEVICES=2,240-second memory waits and true child exit capture. Observation node is start+300seconds;no observer is registered.",
+      "evidence": [
+        "C:/Users/gb/.codex_tmp/launch_rgbnt100_B128_training_bank_20261017.py:15",
+        "C:/Users/gb/.codex_tmp/launch_rgbnt100_B128_training_bank_20261017.py:29",
+        "C:/Users/gb/.codex_tmp/launch_rgbnt100_B128_training_bank_20261017.py:34",
+        "C:/Users/gb/.codex_tmp/launch_rgbnt100_B128_training_bank_20261017.py:48",
+        "gpu_thermal_execute.py:24"
+      ]
+    },
+    {
+      "topic": "Import and scientific reporting boundary",
+      "conclusion": "Nine transport dependency modules were AST-inspected;network actions remain inside guarded functions. Importing the B128 wrapper does not call its training main. Bank metadata explicitly credits the benchmark-selected baseline and training-only sampling diagnostic;it claims no expert-training gain,method score or attained paper target.",
+      "evidence": [
+        "run_rgbnt100_paper_batch_baseline.py:47",
+        "diagnose_rgbnt100_B128_training_neighbors.py:60",
+        "diagnose_rgbnt100_B128_training_neighbors.py:66",
+        "results/preflight/reid2_paper_reference_targets_20261016.json"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_B128_training_neighbors.py",
+      "expected_bytes": 5389,
+      "expected_sha256": "70222811733b3182ee3c730746ab0ee2fafeacbf330ffdfceae748a1bf9b6253",
+      "start": {
+        "bytes": 5389,
+        "sha256": "70222811733b3182ee3c730746ab0ee2fafeacbf330ffdfceae748a1bf9b6253"
+      },
+      "end": {
+        "bytes": 5389,
+        "sha256": "70222811733b3182ee3c730746ab0ee2fafeacbf330ffdfceae748a1bf9b6253"
+      },
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt100_head32_training_neighbors.py",
+      "expected_bytes": 5258,
+      "expected_sha256": "ed2f758742fa3ee95672c6de8c54b3458f48e0d21f00b8a958435d7ad94db37f",
+      "start": {
+        "bytes": 5258,
+        "sha256": "ed2f758742fa3ee95672c6de8c54b3458f48e0d21f00b8a958435d7ad94db37f"
+      },
+      "end": {
+        "bytes": 5258,
+        "sha256": "ed2f758742fa3ee95672c6de8c54b3458f48e0d21f00b8a958435d7ad94db37f"
+      },
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_rgbnt100_paper_batch_baseline.py",
+      "expected_bytes": 1991,
+      "expected_sha256": "543e70b4c368dfb5247f6d021137dcb872ffbb59a4369dfe220feb306692043b",
+      "start": {
+        "bytes": 1991,
+        "sha256": "543e70b4c368dfb5247f6d021137dcb872ffbb59a4369dfe220feb306692043b"
+      },
+      "end": {
+        "bytes": 1991,
+        "sha256": "543e70b4c368dfb5247f6d021137dcb872ffbb59a4369dfe220feb306692043b"
+      },
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\vehicle_atmoe_head_configuration.py",
+      "expected_bytes": 1327,
+      "expected_sha256": "64a49c490665856e273af509f0bb5543f1d8a9fc257b8a642f59224bce190b80",
+      "start": {
+        "bytes": 1327,
+        "sha256": "64a49c490665856e273af509f0bb5543f1d8a9fc257b8a642f59224bce190b80"
+      },
+      "end": {
+        "bytes": 1327,
+        "sha256": "64a49c490665856e273af509f0bb5543f1d8a9fc257b8a642f59224bce190b80"
+      },
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py",
+      "expected_bytes": 9448,
+      "expected_sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+      "start": {
+        "bytes": 9448,
+        "sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427"
+      },
+      "end": {
+        "bytes": 9448,
+        "sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427"
+      },
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\official_training_data.py",
+      "expected_bytes": 1528,
+      "expected_sha256": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+      "start": {
+        "bytes": 1528,
+        "sha256": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e"
+      },
+      "end": {
+        "bytes": 1528,
+        "sha256": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e"
+      },
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\experiment_data.py",
+      "expected_bytes": 4032,
+      "expected_sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+      "start": {
+        "bytes": 4032,
+        "sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3"
+      },
+      "end": {
+        "bytes": 4032,
+        "sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3"
+      },
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_experiment.py",
+      "expected_bytes": 14298,
+      "expected_sha256": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+      "start": {
+        "bytes": 14298,
+        "sha256": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154"
+      },
+      "end": {
+        "bytes": 14298,
+        "sha256": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154"
+      },
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\make_model.py",
+      "expected_bytes": 10473,
+      "expected_sha256": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+      "start": {
+        "bytes": 10473,
+        "sha256": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131"
+      },
+      "end": {
+        "bytes": 10473,
+        "sha256": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131"
+      },
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\configs\\RGBNT100\\DeMo.yml",
+      "expected_bytes": 767,
+      "expected_sha256": "e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c",
+      "start": {
+        "bytes": 767,
+        "sha256": "e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c"
+      },
+      "end": {
+        "bytes": 767,
+        "sha256": "e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c"
+      },
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_postprocess_source_review_20261016.json",
+      "expected_bytes": 25504,
+      "expected_sha256": "8993c9774095ccb3c13663f2f0446615936aae6cd349de302716478bd90fbaed",
+      "start": {
+        "bytes": 25504,
+        "sha256": "8993c9774095ccb3c13663f2f0446615936aae6cd349de302716478bd90fbaed"
+      },
+      "end": {
+        "bytes": 25504,
+        "sha256": "8993c9774095ccb3c13663f2f0446615936aae6cd349de302716478bd90fbaed"
+      },
+      "matches_request": true,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\reid2_paper_reference_targets_20261016.json",
+      "expected_bytes": 2748,
+      "expected_sha256": "58b12204b5d01e8dcabcdbcc14c3cb18b6880621989d6eb47ec45ddf55e03469",
+      "start": {
+        "bytes": 2748,
+        "sha256": "58b12204b5d01e8dcabcdbcc14c3cb18b6880621989d6eb47ec45ddf55e03469"
+      },
+      "end": {
+        "bytes": 2748,
+        "sha256": "58b12204b5d01e8dcabcdbcc14c3cb18b6880621989d6eb47ec45ddf55e03469"
+      },
+      "matches_request": true,
+      "unchanged": true
+    }
+  ],
+  "additional_sources": [
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\launch_rgbnt100_B128_training_bank_20261017.py",
+      "start": {
+        "bytes": 4933,
+        "sha256": "ba87526b767f403396855f1f179209d4e58cfa73748f016e38146cbc48199afe"
+      },
+      "end": {
+        "bytes": 4933,
+        "sha256": "ba87526b767f403396855f1f179209d4e58cfa73748f016e38146cbc48199afe"
+      },
+      "unchanged_since_final_revision_review": true,
+      "superseded_R1_start": {
+        "bytes": 4932,
+        "sha256": "400f17bdd0c118042939f234d11c0dc57cdaf8683413da0b7e89771e1fb1a3e9"
+      }
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\gpu_thermal_execute.py",
+      "start": {
+        "bytes": 2203,
+        "sha256": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511"
+      },
+      "end": {
+        "bytes": 2203,
+        "sha256": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511"
+      },
+      "unchanged_since_final_revision_review": true
+    }
+  ],
+  "supplementary_files": [
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_B128_bank_source_request_20261017.json",
+      "bytes": 3871,
+      "sha256": "c90b1bb2e33327fc6b9ede8d77b015822f2f0cd1fe4c0d17c619f792ab5dfc5b"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_B128_bank_plan_20261017.json",
+      "bytes": 1015,
+      "sha256": "d995da41ff6fc9a1f87d27b5ceefc4d934c9b2006beee00fc5d68fdf9ae54772"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\result.json",
+      "bytes": 38128,
+      "sha256": "2de27be964581015ae19a7c540b874221c90d1f1ebecf52938ed265f5db844e8"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42\\official_split_manifest.json",
+      "bytes": 2068069,
+      "sha256": "6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\rgbnt100_paper_batch_baselines_20261016\\experiments\\training\\RGBNT100_B128_atmoe8_demo_s42_exit.json",
+      "bytes": 185,
+      "sha256": "2bda095986b11b231c7d29d575e99a6b079796bd1fa4aa9d98ddca6dd172a41d"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\config\\defaults.py",
+      "bytes": 6412,
+      "sha256": "41d6e21de28ffca68104954c52dcba3d0f3c16249980c70107d6c72e1117c6ba"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\config\\__init__.py",
+      "bytes": 32,
+      "sha256": "ff27847384f82ad53a61a80147c38a8282d9bd5af852593aef7c653e48a5d11b"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\RGBNT100.py",
+      "bytes": 3407,
+      "sha256": "cef47b0a1dcc9bc434f6c3612e547db41fd8af2b1d7e953323ea80ffb6eb705f"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\moe\\AttnMOE.py",
+      "bytes": 10226,
+      "sha256": "91d594c86ba44a5ce9eb843afaba898d5f8b0515b542b2754004c85ca272d3b6"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py",
+      "bytes": 10596,
+      "sha256": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_shared_identity_experiment.py",
+      "bytes": 12402,
+      "sha256": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\gpu_thermal_execute.py",
+      "bytes": 2203,
+      "sha256": "a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_head32_training_bank_source_review_20261016.json",
+      "bytes": 28362,
+      "sha256": "ac256daf40f376b8ac014664998d3fd1651ee9898dba033f640c1f47725f422f"
+    }
+  ],
+  "transport_dependencies": [
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_vehicle_atmoe_dynamic_amp_component_20261016.py",
+      "bytes": 8360,
+      "sha256": "d804103ac2f52f9cc2a72f17be2072f595382fb80ef483d78c603de2fb0c7793"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_RGBNT100_N5_s44_closed_s45_started_20261015.py",
+      "bytes": 15045,
+      "sha256": "fa6f5a2f4afb3b4b32a1ce6b03f9f54d2433e451db7d930ebe88d3c341d9d79a"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_RGBNT100_N5_s43_closed_s44_started_20261015.py",
+      "bytes": 15218,
+      "sha256": "0098a67e4cc9b8a849eb184f3642e8a69eddea6c9ff98d2584cf343329b7d58e"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_MSVR310_saved_errors_CPU_20261015.py",
+      "bytes": 12186,
+      "sha256": "7ed38b9b1814d1c36d5b59ce083ea4696bd4545df1a48bd331ecfec21f99faee"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_BC_closed_AV_N5_seed43_actual_20261015.py",
+      "bytes": 14604,
+      "sha256": "3ccb8d9526681300c314056e0a1c6592103d1b15e024dafc49c9997517c0f46f"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_RGBNT100_local_band_runner_sources_20261015.py",
+      "bytes": 11318,
+      "sha256": "6eb7753f63629b372189d7755ade1bfca13668eb80158c002329b7fc57460248"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_saved_RGBNT100_errors_F_only_core_20261015.py",
+      "bytes": 14204,
+      "sha256": "2d4c9bba670cb14bce2bad428817f29d7046984b9a837bfd4aac12f05bfae86c"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_closed_AX_AZ_cleanup_20261015.py",
+      "bytes": 9235,
+      "sha256": "987a60f58ccae16af85bb399fc74b2f829c5129fa444b033022c8cdfb688ce8d"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\collect_results.py",
+      "bytes": 9129,
+      "sha256": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c"
+    }
+  ],
+  "archived_intake": {
+    "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_intake_actual_20261016.json",
+    "bytes": 60173,
+    "sha256": "4d5ef569e35dca4626bf343630f7b99be8b61a2ad8bdbe1443804fb007c7b5de"
+  },
+  "actual_checks": {
+    "bank_checks": [
+      {
+        "name": "requested_inputs_and_syntax",
+        "status": "PASS",
+        "inputs": 12,
+        "python_ast": 9,
+        "json": 2
+      },
+      {
+        "name": "archived_teacher_contract",
+        "status": "PASS",
+        "selected_epoch": 24,
+        "teacher": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_paper_batch_baselines_20261016/experiments/training/RGBNT100_B128_atmoe8_demo_s42",
+        "archived_status": "COMPLETE",
+        "epochs": 50,
+        "heads": 8,
+        "training_batch": 128,
+        "exit_code": 0,
+        "limitation": "Archived terminal fields only; independent full-result audit remains separate."
+      },
+      {
+        "name": "static_full_config_reconstruction",
+        "status": "PASS",
+        "matching_leaf_fields": 77,
+        "overrides": [
+          {
+            "source": "run_experiment.py",
+            "line": 34,
+            "field": "MODEL.PRETRAIN_PATH_T",
+            "value": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt"
+          },
+          {
+            "source": "run_experiment.py",
+            "line": 35,
+            "field": "DATASETS.ROOT_DIR",
+            "value": "/data/gaob/Re-ID/dataset"
+          },
+          {
+            "source": "run_experiment.py",
+            "line": 36,
+            "field": "SOLVER.SEED",
+            "value": 42
+          },
+          {
+            "source": "run_experiment.py",
+            "line": 37,
+            "field": "SOLVER.IMS_PER_BATCH",
+            "value": 64
+          },
+          {
+            "source": "run_experiment.py",
+            "line": 38,
+            "field": "SOLVER.MAX_EPOCHS",
+            "value": 50
+          },
+          {
+            "source": "run_experiment.py",
+            "line": 39,
+            "field": "DATALOADER.NUM_WORKERS",
+            "value": 4
+          },
+          {
+            "source": "vehicle_atmoe_head_configuration.py",
+            "line": 13,
+            "field": "MODEL.HEAD",
+            "value": 8
+          },
+          {
+            "source": "run_rgbnt100_paper_batch_baseline.py",
+            "line": 15,
+            "field": "SOLVER.IMS_PER_BATCH",
+            "value": 128
+          }
+        ],
+        "exact_dump_guard_in_source": true,
+        "limitation": "Reconstructed field values via AST literals/assignments and archived dump text; no YACS object or project configuration function was imported or run."
+      },
+      {
+        "name": "archived_full_manifest_consistency",
+        "status": "PASS",
+        "train": 8675,
+        "query": 1715,
+        "gallery": 8575,
+        "total_rows_recounted": 18965,
+        "training_identities": 50,
+        "relabels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49
+        ],
+        "training_names_and_original_ids_disjoint_from_query_gallery": true,
+        "limitation": "Archived text records, not a fresh installed-dataset scan."
+      },
+      {
+        "name": "complete_source_delta",
+        "status": "PASS",
+        "exact_intended_replacements": 8,
+        "all_other_text_unchanged": true
+      },
+      {
+        "name": "train_only_no_update_call_path",
+        "status": "PASS",
+        "extract_calls": 1,
+        "inference_batch": 64,
+        "expected_forward_batches": 136,
+        "expected_last_batch": 35,
+        "no_grad_decorator": true,
+        "actual_forwards_executed": 0,
+        "actual_updates": 0
+      },
+      {
+        "name": "strict_partition_freeze_parity_and_export_contract",
+        "status": "PASS",
+        "verified_source_guards": 8,
+        "descriptor_dimension": 5120,
+        "neighbors_per_identity": 49,
+        "runtime_model_or_tensor_validation": false
+      },
+      {
+        "name": "ending_immutability_and_execution_boundary",
+        "status": "PASS",
+        "direct_files": 12,
+        "supplementary_files": 13,
+        "all_unchanged": true,
+        "project_imports": 0,
+        "third_party_imports": 0,
+        "neural_calls": 0,
+        "ssh_calls": 0,
+        "progress_resource_process_handle_queries": 0
+      }
+    ],
+    "launcher_checks": {
+      "launcher_AST": true,
+      "gpu_execute_AST": true,
+      "rendered_remote_compile": true,
+      "nested_controller_compile": true,
+      "embedded_scripts_executed": 0,
+      "source_and_result_review_gates_before_transport": true,
+      "source_hash_count": 12,
+      "result_inputs_bytes_and_hash_gate": true,
+      "archived_teacher_path_matches_plan": true,
+      "source_only_SCP": true,
+      "one_remote_controller_one_execute": true,
+      "controller_and_bank_paths_distinct": true,
+      "GPU2_only_memory_utilization_apps": true,
+      "temperature_power_queries": 0,
+      "inherited_execute_memory_wait_seconds": 240,
+      "observation_deadline_offset_seconds": 300,
+      "no_observer_registration": true,
+      "import_chain_AST": 9,
+      "import_chain_no_top_level_transport": true,
+      "no_retry_loop_in_launcher": true,
+      "project_imports": 0,
+      "ssh_calls": 0,
+      "neural_calls": 0,
+      "progress_resource_process_handle_queries": 0
+    },
+    "bank_check_command": {
+      "interpreter": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe",
+      "flags": [
+        "-X",
+        "utf8",
+        "-B",
+        "-S"
+      ],
+      "script": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-17_RGBNT100_B128_bank_source_run01\\source_checks.py",
+      "exit_code": 0,
+      "tool_chunk": "463f21"
+    },
+    "launcher_check_command": {
+      "interpreter": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe",
+      "flags": [
+        "-X",
+        "utf8",
+        "-B",
+        "-S"
+      ],
+      "script": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-17_RGBNT100_B128_bank_source_run01\\launcher_source_checks.py",
+      "exit_code": 0,
+      "tool_chunk": "b5b6b7"
+    },
+    "check_result_files": [
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-17_RGBNT100_B128_bank_source_run01\\source_checks_actual.json",
+        "bytes": 19039,
+        "sha256": "8e60635fe86e57b1a455c407db30744529db91611bb74e50948ab8f86a2e267f"
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-17_RGBNT100_B128_bank_source_run01\\launcher_source_checks_actual.json",
+        "bytes": 5579,
+        "sha256": "cf8ad2e32c4e3b54bacbc7e9e46547113ca33c7e2c2d1ed17494e44aec801b94"
+      }
+    ],
+    "original12_start_end_exact": true,
+    "additional2_final_revision_start_end_exact": true
+  },
+  "performed": {
+    "SSH_calls": 0,
+    "neural_calls": 0,
+    "optimizer_updates": 0,
+    "query_gallery_forwards": 0,
+    "bank_forwards": 0,
+    "project_imports": 0,
+    "Torch_imports": 0,
+    "NumPy_imports": 0,
+    "YACS_imports": 0,
+    "installs": 0,
+    "training_progress_queries": 0,
+    "resource_queries": 0,
+    "process_queries": 0,
+    "handle_queries": 0,
+    "observer_registrations": 0,
+    "source_input_edits_by_reviewer": 0
+  },
+  "runtime_admitted": false,
+  "result_acceptance": "NOT_PERFORMED: separate fresh baseline full-result review must be FINAL with no blocking findings before execution;this report is only the source gate.",
+  "limitations": [
+    "No actual YACS cfg object was constructed;all77 reconstructed field values match archived config text and exact cfg.dump equality is enforced by source.",
+    "No model,checkpoint tensors,live installed dataset or actual bank features were loaded;strict state parity,finite features,136 actual batches and final bank artifacts remain runtime requirements.",
+    "Archived result/exit/manifest fields are source-contract evidence only;they do not replace independent full-result integrity review.",
+    "Remote source/teacher/resource checks were reviewed and compiled but never run;no SSH,SCP,controller,NN,observer or progress/handle query occurred.",
+    "Original launcher R1 failure and exact source were retained;only its one-character template correction was accepted in R2.",
+    "Existing execute also performs its own GPU2 memory check and may wait240seconds;launcher has no retry or observation loop.",
+    "Scope is bank generation and its single launcher,not later matched ordinary/axis expert training or scientific improvement.",
+    "Independent-context same-family acceptance is provisional;actual model and effort are UNATTESTED."
+  ],
+  "trace_root": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-17_RGBNT100_B128_bank_source_run01",
+  "new_NN": 0,
+  "new_SSH": 0,
+  "goal": "ACTIVE_UNMET",
+  "delivery_note": "Initial report-write command had a mistyped interpreter path and failed before Python started;corrected to the requested interpreter without changing reviewed inputs."
+}

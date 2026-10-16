@@ -1,0 +1,653 @@
+{
+  "audit_skill": "experiment-audit",
+  "status": "FINAL",
+  "verdict": "WARN",
+  "overall_verdict": "WARN",
+  "integrity_status": "warn",
+  "reason_code": "qualified_single_seed_benchmark_selected_result_with_disclosed_numerical_replay_drift",
+  "summary": "No blocking integrity finding. Full installed-GT selected normal metrics and actual formal update accounting pass; one-seed benchmark selection, paper-recipe scope and small CPU feature-replay rounding differences require qualification.",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_head_RGBNT100_result_integrity_request_20261016.json",
+  "request_sha256": "dd254cce5ae16842c3fd25005b5fa3d0c446e9e7f5f66b0d55d9deb49d35cc04",
+  "project": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002",
+  "report": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_head_RGBNT100_result_integrity_audit_20261016.json",
+  "trace_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01",
+  "generated_at": "2026-10-16T13:04:22.478970+00:00",
+  "date": "2026-10-16",
+  "agent_id": "/root/audit_rgbnt100_head32_full_normal_20261016",
+  "verdict_id": "/root/audit_rgbnt100_head32_full_normal_20261016",
+  "requested_reviewer_model": "gpt-6-astra",
+  "requested_reviewer_reasoning": "max",
+  "reviewer_model": "UNATTESTED",
+  "reviewer_reasoning": "UNATTESTED",
+  "actual_routing": "UNATTESTED",
+  "reviewer_family": "openai",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "blocking_findings": [],
+  "warning_findings": [
+    {
+      "id": "W1",
+      "blocking": false,
+      "topic": "Benchmark selection and causal scope",
+      "finding": "Epoch17 is the earliest maximum official benchmark mAP among 50 epochs. One seed and historical head8 controls support a qualified selected normal score, not untouched-test generalization, head-count causal improvement, new dual-axis contribution or robustness across seeds/settings.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:163",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\result.json:28",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\local_verification.json"
+      ]
+    },
+    {
+      "id": "W2",
+      "blocking": false,
+      "topic": "Feature-distance precision",
+      "finding": "Saved distances reproduce every selected metric and per-query field exactly. Recomputing all 14,706,125 distances from the saved features is numerically close but not bitwise identical. Float32 changes AP for85 queries and mAP by +0.0000049090001113pp; float64 changes AP for65 queries and INP for1, with mAP -0.0000001748973375pp and mINP +0.0001145213534244pp. First-match ranks and CMC1-50 are unchanged. Every observed ordering inversion is bounded by the measured distance-rounding perturbation. Preserve the original saved-distance metric row; do not relabel feature replay as exact.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\remote_stdout.private.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\remote_summary.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\replay_supplement.json"
+      ]
+    },
+    {
+      "id": "W3",
+      "blocking": false,
+      "topic": "Paper target and recipe",
+      "finding": "Primary DeMo CLIP Table2 reports RGBNT10086.2mAP/97.6Rank1;87.2/98.6 is the requested +1pp target. This candidate85.4449474823/96.9096209913 is below both. Executed training uses batch64, whereas the paper specifies batch128 for RGBNT100; this is a project baseline recipe, not an exact paper training reproduction. Same50epochs alone does not establish a matched update budget with a historical run.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_experiment.py:31",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\run.json:11",
+        "https://arxiv.org/html/2412.10650v1#S4.T2",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\paper_reference_check.json"
+      ]
+    },
+    {
+      "id": "W4",
+      "blocking": false,
+      "topic": "Reviewer and replay assurance",
+      "finding": "Requested gpt-6-astra/max routing is UNATTESTED by the child host. This fresh review is same-family and provisional. Current selected checkpoint tensors and stored metrics were checked without Torch/model/CUDA; no new weight-forward or optimizer-state replay was performed. Reused native8-query strict reload and recorded final full-Q/G strict reload remain historical execution evidence.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\run.meta.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\remote_pass_receipt.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:111",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:169"
+      ]
+    }
+  ],
+  "checks": {
+    "A_ground_truth_provenance": {
+      "status": "PASS",
+      "evaluation_type": "real_gt",
+      "details": "Directly enumerated installed RGBNT100 JPG filenames in official bounding_box_train/query/bounding_box_test, parsed identity and camera independently, and matched every record against the saved manifest and all NPZ labels/names. Train and test identity sets are disjoint. The scene value is the sentinel -1, not an independently annotated scene.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\experiment_data.py:24",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\official_training_data.py:20",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:68",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\RGBNT100.py:63",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\remote_pass_receipt.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\remote_summary.json"
+      ],
+      "counts": {
+        "train_records": 8675,
+        "train_IDs": 50,
+        "query_records": 1715,
+        "gallery_records": 8575,
+        "test_IDs": 50,
+        "cameras": 8,
+        "scene_sentinel": -1
+      },
+      "limitations": [
+        "Installation origin, official download signature and image pixels were not reauthenticated. The GT check establishes identity with the installed official split, not an end-to-end dataset supply-chain attestation."
+      ]
+    },
+    "B_score_normalization": {
+      "status": "PASS",
+      "details": "Raw AP and INP are averages of GT-positive retrieval ranks after same-ID/same-camera removal. CMC uses the first remaining GT match. Only multiplication by 100 converts to percentage points; no denominator is a model maximum/minimum/mean. L2 descriptor normalization is part of distance construction and is not score normalization.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:20",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:82",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:106",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\utils\\reid_evaluation.py:25",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\remote_executed.py"
+      ]
+    },
+    "C_result_existence_and_numbers": {
+      "status": "PASS",
+      "details": "All 139 request inputs exist and match their byte counts and SHA-256. Completed training and audit launch/exit records, 50 logged epochs, result/status, selected CSV/JSON, archived checkpoint and NPZ are coherent. Six metrics, CMC50, all 1715 selected per-query rows and all 8 camera/1 sentinel-scene/50 identity groups reproduce exactly from saved distances plus directly installed GT. All 50 epoch per-query tables, CMC50 and groups independently aggregate to epochs.csv. The selected CSV and JSON are byte-identical to epoch 17. No per-metric checkpoint splicing.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42_launch.json:1",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42_exit.json:1",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\audit\\RGBNT100_atmoe32_demo_s42_exit.json:1",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\result.json:33",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epochs.csv:18",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\best_per_query.json:2",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\best_per_query.json:64",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\local_verification.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\remote_summary.json"
+      ]
+    },
+    "D_actual_call_chain": {
+      "status": "PASS",
+      "details": "The recorded training argv invokes run_vehicle_atmoe_head_baseline.py with --atmoe-heads 32, --variant demo, --seed 42 and --mode train. That entry sets configuration and calls run_full_official_experiment.main; its evaluate calls extract, distance and full_metrics every epoch and after loading the selected checkpoint. Per-epoch/selected output files and the completion log provide actual call evidence. The separate normal CPU audit has an actual exit-0 record and expected completion line. Historical development main functions and the unused all49 main were inspected as source dependencies, not executed or credited as evaluation evidence.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_vehicle_atmoe_head_baseline.py:23",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:42",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:155",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:169",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\resume_vehicle_atmoe_head_baselines.py:76",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\resume_vehicle_atmoe_head_baselines.py:88",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42.log:1",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\audit\\RGBNT100_atmoe32_demo_s42.log:1"
+      ],
+      "limitations": [
+        "The audit does not independently forward the selected weights. The exact executed full source tree at training time is not cryptographically attested by this request: it supplies current source seals, launch/log evidence and two explicit deployment-source hashes. Do not promote that to a complete runtime source attestation."
+      ]
+    },
+    "E_scope": {
+      "status": "WARN",
+      "details": "One RGBNT100 normal-input baseline configuration, seed42, full official eligible training data and full official Q/G; 50 epochs with benchmark-mAP checkpoint selection. No missing-modality results, new module, dual-axis result, matched retrained head8 ablation or multi-seed robustness follows. Historical head8 references are not a contemporaneously retrained control. This is an original DeMo identity baseline, with no teacher50+expert50 dependency or four-state ablation in this run.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\result.json:26",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\result.json:28",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_vehicle_atmoe_head_baseline.py:24",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\resume_vehicle_atmoe_head_baselines.py:97",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\paper_reference_check.json"
+      ]
+    },
+    "F_evaluation_type": {
+      "status": "PASS",
+      "classification": "real_gt",
+      "details": "Installed benchmark identity/camera annotations supply GT; feature-derived similarities provide predictions. The model does not manufacture reference labels. One normal full-Q/G condition, with official-benchmark selection explicitly disclosed.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\official_training_data.py:14",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:49",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\remote_summary.json"
+      ]
+    }
+  },
+  "selected_result": {
+    "dataset": "RGBNT100",
+    "variant": "demo",
+    "seed": 42,
+    "ATMoE_heads": 32,
+    "descriptor_dim": 5120,
+    "selected_epoch": 17,
+    "selection": "Earliest maximum official benchmark mAP over epochs1..50",
+    "six_metrics": {
+      "mAP": 85.44494748234041,
+      "mINP": 61.987390747305206,
+      "Rank-1": 96.90962099125365,
+      "Rank-5": 97.37609329446065,
+      "Rank-10": 97.72594752186589,
+      "Rank-20": 97.95918367346938
+    },
+    "checkpoint_archive": {
+      "local": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100_atmoe32_demo_s42\\best\\best.pth",
+      "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/vehicle_atmoe_head_dynamic_amp_20261016/experiments/training/RGBNT100_atmoe32_demo_s42/best.pth",
+      "bytes": 391794586,
+      "sha256": "001f2cd823a76c191cb2c556c242867201dfcd08f363e221579962ec6b77d293"
+    },
+    "raw_archive": {
+      "local": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100_atmoe32_demo_s42\\raw\\best_official_arrays.npz",
+      "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/vehicle_atmoe_head_dynamic_amp_20261016/experiments/training/RGBNT100_atmoe32_demo_s42/best_official_arrays.npz",
+      "bytes": 246854088,
+      "sha256": "c06f718d320c49128a39bac364b0f72770a8be34cb07f79dc55f48d94cb924aa"
+    }
+  },
+  "training_accounting": {
+    "formal_epochs": 50,
+    "formal_attempts": 6357,
+    "formal_successful_optimizer_updates": 6357,
+    "formal_AMP_skips": 0,
+    "formal_forward_record_executions": 406848,
+    "eligible_training_records": 8675,
+    "forward_visited_records": 8675,
+    "successful_update_visited_records": 8675,
+    "unvisited_records": [],
+    "per_epoch_unique_record_range": [
+      7936,
+      8192
+    ],
+    "native_reused": {
+      "attempts": 4,
+      "successful_optimizer_updates": 3,
+      "AMP_skips": 1,
+      "skipped_attempt": 3,
+      "strict_reload_queries": 8,
+      "gradient_tensors": 1110
+    },
+    "native_and_formal_total": {
+      "attempts": 6361,
+      "successful_optimizer_updates": 6360,
+      "AMP_skips": 1
+    },
+    "new_audit_optimizer_updates": 0,
+    "scale_transitions": [
+      {
+        "step": 2000,
+        "before": 512.0,
+        "after": 1024.0,
+        "updated": true
+      },
+      {
+        "step": 4000,
+        "before": 1024.0,
+        "after": 2048.0,
+        "updated": true
+      },
+      {
+        "step": 6000,
+        "before": 2048.0,
+        "after": 4096.0,
+        "updated": true
+      }
+    ],
+    "limits": "Full training means the full8675-record split was eligible and every record participated in successful updates over the run. It does not mean each record appears once in every identity-sampled epoch. Update counts follow the recorded GradScaler transition semantics; optimizer states were not replayed."
+  },
+  "all_epoch_verification": {
+    "epochs": 50,
+    "epoch_perquery_rows": 85750,
+    "selected_reload_perquery_rows": 1715,
+    "total_checked_rows": 87465,
+    "all50_six_metrics_CMC50_and_groups": true,
+    "maximum_aggregate_error_pp": 2.842170943040401e-14,
+    "selected_reload_CSV_JSON_byte_identical_to_epoch17": true,
+    "last_epoch50": {
+      "epoch": 50,
+      "attempts": 128,
+      "updates": 128,
+      "unique_records": 8192,
+      "mAP": 84.91430136472793,
+      "mINP": 61.50948764605685,
+      "Rank-1": 96.0932944606414,
+      "Rank-5": 96.67638483965014,
+      "Rank-10": 96.7930029154519,
+      "Rank-20": 96.85131195335276
+    },
+    "limitation": "Saved features/distances are available for the selected checkpoint only. The other49 epoch curves were independently aggregated and GT-metadata checked from their actual CSV rows; they were not reconstructed from unavailable raw distances."
+  },
+  "selected_GT_recount": {
+    "installed_GT_counts": {
+      "train": 8675,
+      "query": 1715,
+      "gallery": 8575
+    },
+    "installed_GT_ID_counts": {
+      "train": 50,
+      "query": 50,
+      "gallery": 50
+    },
+    "installed_manifest_exact": true,
+    "same_identity_same_camera_excluded": true,
+    "valid_queries": 1715,
+    "invalid_queries": 0,
+    "group_counts": {
+      "camera": 8,
+      "scene": 1,
+      "identity": 50
+    },
+    "scene_is_sentinel_minus1": true,
+    "sixmetric_error_pp": 0.0,
+    "perquery_error": 0.0,
+    "CMC50_error_pp": 0.0,
+    "group_error_pp": 0.0
+  },
+  "checkpoint_tensor_verification": {
+    "tensor_entries": 1801,
+    "storages": 1801,
+    "parameter_numel": 97780224,
+    "total_tensor_numel": 97798885,
+    "all_storages_finite": true,
+    "ATMoE_partitions": 32,
+    "experts_per_partition": 7,
+    "expert_input_output_width": 16,
+    "expert_linear_weights": 224,
+    "minimum_running_variance": 3.848014966933988e-05,
+    "BN_num_batches_tracked_values": [
+      2162
+    ],
+    "selected_epoch_BN_batch_counter_matches_actual_cumulative_attempts": 2162,
+    "observed_trainable_parameter_count_in_run_metadata": 97775104,
+    "HDM_attention_head_count": 8,
+    "HDM_head_count_evidence": "Source GeneralFusion derives512//64; tensor matrices alone do not encode num_heads.",
+    "limitation": "Metadata/storage validation only; model construction, Torch deserialization, new forward and new strict reload were not run."
+  },
+  "feature_replay": {
+    "float32": {
+      "six_metrics": {
+        "mAP": 85.44495239134052,
+        "mINP": 61.987390747305206,
+        "Rank-1": 96.90962099125365,
+        "Rank-5": 97.37609329446065,
+        "Rank-10": 97.72594752186589,
+        "Rank-20": 97.95918367346938
+      },
+      "metric_deltas_pp": {
+        "mAP": 4.909000111297246e-06,
+        "mINP": 0.0,
+        "Rank-1": 0.0,
+        "Rank-5": 0.0,
+        "Rank-10": 0.0,
+        "Rank-20": 0.0
+      },
+      "distance_max_absolute_error": 1.9073486328125e-06,
+      "perquery_changed_count": 85,
+      "order_inversion_count": 21155,
+      "maximum_inversion_saved_gap": 1.5497207641601562e-06,
+      "all_inversions_bounded_by_observed_distance_roundoff": true
+    },
+    "float64": {
+      "six_metrics": {
+        "mAP": 85.44494730744307,
+        "mINP": 61.98750526865863,
+        "Rank-1": 96.90962099125365,
+        "Rank-5": 97.37609329446065,
+        "Rank-10": 97.72594752186589,
+        "Rank-20": 97.95918367346938
+      },
+      "metric_deltas_pp": {
+        "mAP": -1.748973375015339e-07,
+        "mINP": 0.00011452135342437941,
+        "Rank-1": 0.0,
+        "Rank-5": 0.0,
+        "Rank-10": 0.0,
+        "Rank-20": 0.0
+      },
+      "distance_max_absolute_error": 1.4953731908295964e-06,
+      "perquery_changed_count": 65,
+      "order_inversion_count": 13564,
+      "maximum_inversion_saved_gap": 1.0728836059570312e-06,
+      "all_inversions_bounded_by_observed_distance_roundoff": true
+    },
+    "supplement": {
+      "float32": {
+        "AP_changed": 85,
+        "INP_changed": 0,
+        "first_rank_changed": 0,
+        "last_rank_changed": 0,
+        "max_abs_AP_change": 6.676867436361533e-05,
+        "max_abs_INP_change": 0.0,
+        "CMC1_to50_exact": true
+      },
+      "float64": {
+        "AP_changed": 65,
+        "INP_changed": 1,
+        "first_rank_changed": 0,
+        "last_rank_changed": 1,
+        "max_abs_AP_change": 5.488297013717114e-05,
+        "max_abs_INP_change": 0.001964041211196088,
+        "CMC1_to50_exact": true
+      }
+    }
+  },
+  "source_and_pretraining": {
+    "active_entry": "run_vehicle_atmoe_head_baseline.py -> run_full_official_experiment.main -> run_experiment.build/step and full_evaluation.extract/distance/full_metrics",
+    "configured_pretraining": "Public CLIP ViT-B/16 path in run.json; fresh identity heads by source construction",
+    "evidence": [
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_experiment.py:31",
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_experiment.py:44",
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\meta_arch.py:66",
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\make_model_clipreid.py:174",
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42.log:7"
+    ],
+    "limits": "The pretrained archive hash/download provenance was not reauthenticated in the permitted selected-artifact pass. Current local source seals and launch/log witnesses do not attest all historical runtime source bytes."
+  },
+  "runtime_scope": {
+    "recorded_extraction_seconds": 106.45322513580322,
+    "records": 10290,
+    "includes_decode_and_first_batch": true,
+    "includes": "Single recorded final selected extraction of concatenated query+gallery, transforms/loading, model feature forwards and final CUDA synchronization.",
+    "excludes": "Distance matrix construction, ranking/metric calculation and output/NPZ/checkpoint serialization occur outside extract timing.",
+    "recorded_training_wall_seconds": 10504.708506345749,
+    "sum_epoch_train_plus_eval_seconds": 10349.468494415283,
+    "recorded_process_peak_memory_bytes": 12174917120,
+    "peak_limitation": "No peak-memory reset separates training and final inference; this is the process CUDA peak, not independently isolated inference memory. No new benchmark/cost measurement.",
+    "evidence": [
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:82",
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:47",
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:175",
+      "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\result.json:1376"
+    ]
+  },
+  "paper_reference": {
+    "source": "https://arxiv.org/html/2412.10650v1",
+    "table": 2,
+    "row": "DeMo dagger / CLIP",
+    "paper": {
+      "mAP": 86.2,
+      "Rank_1": 97.6
+    },
+    "required_plus1": {
+      "mAP": 87.2,
+      "Rank_1": 98.6
+    },
+    "achieved": false,
+    "shortfall_pp": {
+      "mAP": 1.7550525176595926,
+      "Rank_1": 1.6903790087463477
+    },
+    "paper_batch": 128,
+    "executed_batch": 64,
+    "no_RGBNT201_target_inference": true
+  },
+  "claims": [
+    {
+      "claim": "Full official normal selected RGBNT100 head32 seed42 metrics",
+      "impact": "supported_with_benchmark_selection_qualifier"
+    },
+    {
+      "claim": "Paper+1mAP and Rank1 target",
+      "impact": "not_achieved"
+    },
+    {
+      "claim": "Independent untouched-test result or multi-seed robustness",
+      "impact": "unsupported"
+    },
+    {
+      "claim": "Causal improvement from heads32 or a new dual-axis contribution",
+      "impact": "unsupported"
+    },
+    {
+      "claim": "Exact CPU feature-derived rank replay",
+      "impact": "unsupported; bounded numerical differences retained"
+    },
+    {
+      "claim": "Exact saved-distance GT recount and all50 CSV aggregate consistency",
+      "impact": "supported"
+    }
+  ],
+  "actual_action_receipts": {
+    "initial_inputs": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\initial_input_seals.json",
+    "all_epoch_and_accounting": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\local_verification.json",
+    "AMP_transition_supplement": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\amp_transition_supplement.json",
+    "read_only_remote_pass": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\remote_pass_receipt.json",
+    "remote_stdout_private": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\remote_stdout.private.json",
+    "remote_stderr_private": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\remote_stderr.private.log",
+    "executed_remote_script": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\remote_executed.py",
+    "remote_pass_count": 1,
+    "remote_exit_code": 0,
+    "remote_elapsed_seconds": 19.883399486541748,
+    "remote_stdout_sha256": "8138719b442e941240871e83b759bc0d234937745a078966ceaa6a72ded688bd",
+    "remote_stderr_bytes": 0,
+    "local_call_status": "Actual local stdlib verifier invocations returned PASS artifacts; first local shell return metadata was not separately persisted. Remote transport receipt retains exact argv, timing, exit0 and private output hashes.",
+    "paper_source_check": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\paper_reference_check.json"
+  },
+  "audit_activity": {
+    "new_neural_calls": 0,
+    "new_optimizer_updates": 0,
+    "new_training": 0,
+    "torch_imports": 0,
+    "CUDA_calls": 0,
+    "GPU_queries": 0,
+    "resource_queries": 0,
+    "process_queries": 0,
+    "owner_queries": 0,
+    "current_other_job_queries": 0,
+    "remote_writes": 0,
+    "cleanup_actions": 0,
+    "input_writes": 0,
+    "local_installs": 0,
+    "remote_CPU_threads_configured": 4,
+    "thread_environment": {
+      "OMP_NUM_THREADS": "4",
+      "MKL_NUM_THREADS": "4",
+      "OPENBLAS_NUM_THREADS": "4",
+      "NUMEXPR_NUM_THREADS": "4"
+    }
+  },
+  "action_items": [
+    "Retain one-seed/benchmark-selection and historical-control qualifiers.",
+    "Keep the saved-distance metrics as the reported row and retain precision-drift evidence.",
+    "Keep native and formal attempt/update/skip budgets separate and report the unmet paper+1 target.",
+    "Do not describe recorded extraction timing as a complete retrieval latency measurement."
+  ],
+  "audited_input_hashes": {
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_head_dynamic_amp_RGBNT100_intake_actual_20261016.json": "sha256:5c13b8acaf9bd5566efb278b4952fc5d4f2f78458d614e7b629cd9271a7b79cd",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\controller_launch.json": "sha256:483f240a6e0a3cd6d07157864fb304a722489c1df8658c5347e16145620d35a5",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\native_acceptance.json": "sha256:3076e1c17f4ba8ac3ecef5895898a6020ef6bfcb1cd3a815230fefd1c914d798",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\RGBNT100_component_complete.json": "sha256:5f5bfcc8cd1a407a2ce93b5bf5f53257b361e5ee6f5df4bb957fcdb7eada45a8",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\audit\\RGBNT100_atmoe32_demo_s42.log": "sha256:70bf36ad9739bb538d55b73edc7f88175edff72339a3663193de39198a2b0b18",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\audit\\RGBNT100_atmoe32_demo_s42_exit.json": "sha256:2d7d4a612b1ed8520fb0f1a8b26330e1cdcd91bc77d64c3bfefacff2955c33eb",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\audit\\RGBNT100_atmoe32_demo_s42_launch.json": "sha256:6a1af60fd6df792a6f43e5d40e3f73a2c808000b900cc998ff26a3b92ce4ff25",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42.log": "sha256:22d445bfa86c2fc9e460205e4dfbe4522c589a19f6b61e97c7155d4aa10147cb",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42_exit.json": "sha256:fc0a48e17e9c6aaafbeb589208bf5a7e3241667756b3ef9867582ec12616dcba",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42_launch.json": "sha256:f730ef24da4b1ead6640235270ff6c48fcda848a0d5f6bf66694eb2a710ecc1a",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\batch_orders.jsonl": "sha256:47f650df413d71712c58b82ec82fe3460924366989f333cf484ffd10eb6e268d",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\best.json": "sha256:2eb61643221d53c2c4878a2ba76a31a538962ed08ba97f054ede9fe555aefd65",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\best_per_query.csv": "sha256:2609406cec68793d8755d62faf3bc47237cabaf7e912f19f2b850989b7e1cf9d",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\best_per_query.json": "sha256:619ccbebab690ce11a2cbc710637c5c47f0d69d61128c5c80bb9edf65e636826",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epochs.csv": "sha256:b9b1abb1eb59d7555346577bc93dd91e8f75200d100d58e53b6672f3b5b14c22",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\normal_cpu_audit.json": "sha256:1097b925cb28d42e486c0040dec563b92891a66962dfce2fee885ea4761ebbfb",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\official_split_manifest.json": "sha256:6e1e6549d2f788e0cf029ab9d9310df61aaab3e7e5564d8ed602bce023b37203",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\result.json": "sha256:c7ebccb33cd10c100873cfd32bed360512bc0e481a8149ea32269ba35c81aa6b",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\run.json": "sha256:366822e5d3c9e3e7be6d81b7bda422336b8c006a2f324f16c5ea5edf0c35a5f3",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\status.json": "sha256:c7ebccb33cd10c100873cfd32bed360512bc0e481a8149ea32269ba35c81aa6b",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_1.csv": "sha256:09793c22aaa13d709008eb8de721d57a231358642b3926aa91e8d3d97a9c25dd",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_1.json": "sha256:6fd638074a99df66525152ab3812e1eb69adb57ec3db9250e70ca4342eafe7d0",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_10.csv": "sha256:3bda56352650f6a58f26f2e883a2fa18d402332dcbc1ef1b7a29aa3d30a4a5ac",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_10.json": "sha256:ec30932bfae015ecc8cf176f945de5a43c4fe4d2fe331dba9f1d20aa9c4ff975",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_11.csv": "sha256:d4c891b8f0719c927e26a8ddc33af4159dda663b40e3c0d2dc451aa235f3793c",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_11.json": "sha256:f4955bc7b59595a20f972736040e2b61669d1e8f197cc88cadd94679df1bd2c5",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_12.csv": "sha256:5b3939e90aa1b5e9a05e121951b0d89c7fff96442274c5e2906be28540bea7e2",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_12.json": "sha256:b1e8d7c26e5d33b25b937d0e068f01aa186e22548ee0923a73003342ef5671f7",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_13.csv": "sha256:ac5c3a9376212d9776ae892069e5d26579d40c00ec1b4b8ca654e3f4f7838015",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_13.json": "sha256:b78ee040befc02b6116fb04b84ccb5d337ea65f46856134ea590e1bc0ac09543",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_14.csv": "sha256:8ed8375ae2fbe73b8af77b6a325d44951281ec986d12fc9762a8a8ae87ac6313",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_14.json": "sha256:443f775fe8ad2ebbdb8466b5bbccfa0317a651798bc8919eaf2cb51b79d85730",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_15.csv": "sha256:6f913885557eef15d76142e734eed3878a4969cd5a5a73109fda40c1f2d09105",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_15.json": "sha256:49a08f6c037a43076ca09fb2a27a701191bc4d7981fd2b7490e3ffab715031fc",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_16.csv": "sha256:bccbd15766a3e18660c27455a04b739eb9627e4653de74af7d1e60ac19a005a3",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_16.json": "sha256:633353e767ad6a5d54ec364fe5cb2cc62949a52eb1b815983aa63bcc62b87623",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_17.csv": "sha256:2609406cec68793d8755d62faf3bc47237cabaf7e912f19f2b850989b7e1cf9d",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_17.json": "sha256:619ccbebab690ce11a2cbc710637c5c47f0d69d61128c5c80bb9edf65e636826",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_18.csv": "sha256:e7e867c176cdd977cafc41ad8a17826cbbc4aa7ac57f619b60b2a16c6dcf48ee",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_18.json": "sha256:d079cebe12c4a4fd7b2232e1e2f77cdc58a204b1a45114ee6e8c38814954d37c",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_19.csv": "sha256:5a5712a77c487d07da65cb1c591b4ccfacd980f087acbb76f8875d53c6bbe330",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_19.json": "sha256:596ac631ca950d04352a4db6153550b32603075ade4682a0bdebd625fa6f0261",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_2.csv": "sha256:114d976fb4d94a03aad8d23e19c2bba23864ff923297f346281194571b9bcd30",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_2.json": "sha256:e1a949a9a35d8582605ccadc64bb059313f666f44a36a4440ad982d6636981bf",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_20.csv": "sha256:a0430671f35d6cc291337fa556def7eae79bceaed66190d2db5d45c486ef44d5",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_20.json": "sha256:81c2f48791ac30c7a092d6d629c6db55fd6da15fcaedba7979b423451f83d5c2",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_21.csv": "sha256:5c228bdb3f0e2c5394e38a2a4839bd82cef55b7f0d8ede640911419ab4460467",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_21.json": "sha256:aa6a497df5a4c35275c4d72a526f1caf14724d00defc20b2b0aa350a29806ab2",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_22.csv": "sha256:09a55b402f3011edd9e9080a257837afd808c214ca66451c3db6cfdda2ae70e2",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_22.json": "sha256:7ce0c92f437887709fac6ce0ba8717988a5ac20455ab09358186703c0ba9a99c",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_23.csv": "sha256:290109550db58598161bfca95ff6209e580abfc14f556a493453fb21fcbe5c98",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_23.json": "sha256:812ec4896ac895e1320368addbd2d82182ac98c4f321f712f4701b9a0a47f76a",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_24.csv": "sha256:e09e3b94fcc5bc5524084e98fa67f4f694caab9b84f5e71e3a6d3976e804e746",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_24.json": "sha256:87060614ec7a94ddaa63c1d62b99d7ff01789f6e5d2a8f154274a801253d075d",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_25.csv": "sha256:511488a58044fa325757e1812fe20883967b3c0637ff36a2532b9ed61e03084c",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_25.json": "sha256:e65d59e8fa73584572deb99811f18f6831921b127d80b26fb1465576aee1ff75",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_26.csv": "sha256:66fd079ba6acc533dfe198ac458ca16e5c02e3d13b6cd7be647d5fb32a9066d1",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_26.json": "sha256:2a080c323a50aa4b75a78dbc32e2bbb0671f4a2c8f4e8a2cc484d7ee26334eeb",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_27.csv": "sha256:1616304e75a9f17943597022cab34692c5d679b42c85a2f1d205654cfb5713b2",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_27.json": "sha256:e62649873e82918bb0cf83fea9040154d4cf04bdc959ba4f13c41cebc99c7180",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_28.csv": "sha256:93718ab9a569252b69730d7db0da471a0a62bd485db95737203979109c9838dd",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_28.json": "sha256:a3c0a8fff35d0322ad73c816fdf4a70d2d4507926a516e051a42e303857871e3",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_29.csv": "sha256:15a34fdf451ecb1303d83d74a2db7aa48d4f49446ee99f1c4157d824338cf1bd",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_29.json": "sha256:bba49720764333efef3056773c884edeadb55ea05822e22155da9fc70487e7ed",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_3.csv": "sha256:496ecc3cf3545ca8513997a4d5c258eaa4fdd214c464acbb37e510519709f9cc",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_3.json": "sha256:ad5f919a4a41bf0257734b9a7a6509a4401d86113b782494b4788731437db0f4",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_30.csv": "sha256:5250646cbec3d49712a68001d2fd4bdf34a49cdbfa3d7381b850d3ae56553872",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_30.json": "sha256:5c102d862c7a52e1d55fdbe7568cd7a03f642b8acd9878ef9614fc1c1e247716",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_31.csv": "sha256:5b474cc2c52fd5bec5d214aa7fd7e703ac5d841c4b8cf9681ebed09e637a51d5",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_31.json": "sha256:8521ea5c7bf26ecd989114ad2195eff8f7d9c4f6c4747eb4826fbf59a3117175",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_32.csv": "sha256:c073a2fe5cb6365dca09cd091ad852987f7e795c4ccd08dc4f7fdd595ce8e4f6",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_32.json": "sha256:82fb4085b25b68281cc0b3f0c69e9887c69f3fede7c762aab1c8786729a6fefb",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_33.csv": "sha256:4299c6bfff56d72c5c3e94f1d4452ce96389f93bf0d49e7f4c9ac5f71af2917b",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_33.json": "sha256:881163084aed723efb46fc622b1e1775c5291aca1303c4b5905e9991ef92041c",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_34.csv": "sha256:3077f475c3310a2d62cabbd4f66622292d7dea4a3dd68924eb32d5c225f7b411",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_34.json": "sha256:16117972ddabdc8fed07b51e1293968d08a7e14aabbaf5751a3c03baf8b78d59",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_35.csv": "sha256:0abaf8b9ae865135109c1bd6d4caf3b87d893dabd251d1a062269e44f23fc86f",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_35.json": "sha256:047912f2e0310841db607affa52220669b42deb1a4e25d34576830175daf1b06",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_36.csv": "sha256:b0dd74a5e1ea1f8bff7fdeacda0d866c8c9eb1e953c57ab90185388cf7ab8f48",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_36.json": "sha256:904b1f0451ef554f93e86b9ba44ef3f73367b6d4a3086f6b6807403aece9a153",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_37.csv": "sha256:e2f58ee266a1a866ebd892baa9c09daaff9e1c71311a624a68ba3ed2362f16e5",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_37.json": "sha256:c1bf4ee436aa3490ada0e7ddca45ccc392f5802af736e9758b5b53f4b1b71f1c",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_38.csv": "sha256:5a38e3bb8507c44e7b34e3662a6663df8a231bae50f746789de6baab6b228199",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_38.json": "sha256:ca852138703077d3f55858626bbf51e860e94fcd3b87ba5ae447c641736ddeac",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_39.csv": "sha256:8f4ae93dfb63aaf5b2dba3d2c25b714d3452751436f4ffc85dec8425512804dd",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_39.json": "sha256:cb07a05711c87225dc80a3716f4a433814003c2893ddc19b0637eb0f883387ce",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_4.csv": "sha256:3eaf02469cb7ef290aaa4ee517ee8475f0b15be3db2b104de7ac55b66d49e4fc",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_4.json": "sha256:f37ccbf321fc3094bb6189c9dea98e4adc70e697198545e505a75d5e41e45b8b",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_40.csv": "sha256:baa758ad2161b9951be4793ba8adcfbe654d400f16173b858d533d774138a509",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_40.json": "sha256:3de3e9ed4091db06fb618143826e6c33026198de4c449ef812c8aac5ed4a62a9",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_41.csv": "sha256:694a78cd88435257a7ad9d692a0937a619edffd92592ae4615018f90fb7f6e45",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_41.json": "sha256:b2fd3e9d6be547d953124a2fdfa23c773f5547b6beb4cb2bf0726090e11000e7",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_42.csv": "sha256:50638eb7556d26cb1c35383b5a7d1859260751716cf0fbc8bca50f1deda0fc44",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_42.json": "sha256:f41c644fa29fc552f9c3158581433ff61035367800d9c7ddeb8befa938ca5720",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_43.csv": "sha256:6ae8558a58774604203cfa34f3d139820d23a706985717527aa74a655409c095",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_43.json": "sha256:1da973df65f247525f4d1db6535dcc31b69edf680fc0f72a4f7e769e1d70e8a7",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_44.csv": "sha256:fc266512589f4cab33bdc0341e2b22fab94f09339b0e5fd9631a483db872872f",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_44.json": "sha256:f812aed6fc7fe97984502d5b998051c34f51d9df40b3fbd5f175c8067dbc2525",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_45.csv": "sha256:ba041ffc4001ca5890fbab7a75ee943e9873dfcf180fca8ee9c40ce9129983cc",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_45.json": "sha256:8211181045ba1cabdf07d305c4d5232438bbc4efc80d2493283685617bf45dff",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_46.csv": "sha256:54881655ca0a80956ef3ca5fd8101e2d4ff6230db7b6a57baf14315c439e9da9",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_46.json": "sha256:93a77ff10d00857f26ffc67d8c3eef95510c69287713228dc0ab74ec97dbe299",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_47.csv": "sha256:0980b7b20e4be094c270fdef9c4b94a605bc59d81eec6d29c99fa6263155b29c",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_47.json": "sha256:477d911c6ec4a580b4d498af88236c5523052aca4b171f740739c5343dfa4f03",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_48.csv": "sha256:7cd04515951c6e1f306c379581ce9134f12159851544a0209e9548de5d5d011f",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_48.json": "sha256:a251b43c4d9b6d95d7187ab7f045c609f2a8510e5cb82f896b7991e92f320f00",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_49.csv": "sha256:6d508dc8eef022b6cfe906972136c3a7e900cad350cdf91e57a814ac5ca0c441",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_49.json": "sha256:bb64413b2ce06bf857401604382304c3869240440818dc918cd2469edb6d0a55",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_5.csv": "sha256:df3d0145d161055547f29269b3dce880c9924cf554671a7e92ea3c33074a5d2a",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_5.json": "sha256:cbe52cca3ec17216a5e6cfe7364d0255d94573ca09e2804364663b785900be50",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_50.csv": "sha256:2544a599062dca745d2c67ebdf03c0f540013084adc432a772bad2a772f22b3b",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_50.json": "sha256:a62f25de1e12356eea9f99289efcd5424ac6d87b4f8a71daaff7d64d53256d3f",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_6.csv": "sha256:56b7591502a6208009277206ef8841b9c3c3d2d883729c73f43cfc440da2b77c",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_6.json": "sha256:650cd54eda6923aec5dff3108c6e462da4371f8f65fdf8ce353cce93089787e7",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_7.csv": "sha256:663c00fd85bee1909b95ca63af1ede24f147ed11533574d521d49c7fd67ada51",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_7.json": "sha256:ab93511e3f621792c898cc084c76d46d9a183badbbfc0b009050488fe81cc2b1",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_8.csv": "sha256:2c09e62905adc6662aab2b3cff672300575360a02855ed96c3822d58041ece7e",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_8.json": "sha256:2139b33e22cfc1f94e7b0ad4d79c7c819b2c2f9ad08da66ffcb01abb7bf95f1e",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_9.csv": "sha256:4efc7abd37b9b935f19dbaaefbe5221ef5ecf92932108dfcb5e6ef3abf5c0e13",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42\\epoch_metrics\\epoch_9.json": "sha256:c31485851215eb8e686b64d1b0305faf1ff9b259a88b0ba5d59a9755348a0dc9",
+    "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100_atmoe32_demo_s42\\raw\\best_official_arrays.npz": "sha256:c06f718d320c49128a39bac364b0f72770a8be34cb07f79dc55f48d94cb924aa",
+    "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100_atmoe32_demo_s42\\best\\best.pth": "sha256:001f2cd823a76c191cb2c556c242867201dfcd08f363e221579962ec6b77d293",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\official_training_data.py": "sha256:c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py": "sha256:a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\experiment_data.py": "sha256:70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_experiment.py": "sha256:6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_full_official49.py": "sha256:04153146e28291a82f127ab22d66dd2aff98d2a643675fdb1c1ea96ccdb54b56",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_vehicle_atmoe_head_normal.py": "sha256:d282bf47f2cf7d355789d4a78f5c7ce52d9224896bc2092e0f5b91f0dd2de6d0",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\gpu_thermal_execute.py": "sha256:a4c8397ba66faf0b9b20adc3faaae44cf1e11ba523aee02a24b8826bd3c84511",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\make_model.py": "sha256:3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\configs\\RGBNT100\\DeMo.yml": "sha256:e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_vehicle_atmoe_head_baseline.py": "sha256:d840b0bc92bde91389f63eaf7513b0686675755df42a0b883bd4317933c838d3",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\vehicle_atmoe_head_configuration.py": "sha256:64a49c490665856e273af509f0bb5543f1d8a9fc257b8a642f59224bce190b80",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py": "sha256:f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_shared_identity_experiment.py": "sha256:7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\resume_vehicle_atmoe_head_baselines.py": "sha256:e3d6d6b26d056baf2584254c3b4fc60a2bcbb653056cc15a4df47ac35aa79e4a",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\reid2_paper_reference_targets_20261016.json": "sha256:58b12204b5d01e8dcabcdbcc14c3cb18b6880621989d6eb47ec45ddf55e03469",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_head_dynamic_amp_actual_session_20261016.json": "sha256:6a5670931530e9e2c75d900bf66741dd415f13bd3fe9e63c484f3b745fc918cc",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_dynamic_amp_RGBNT100_completion_node_actual_20261016.json": "sha256:eb6923c8967e4d3e75a91d6a6841ad8a3fde408e3cdba6b13174e190e146fdec"
+  },
+  "ending_input_seal_check": {
+    "status": "PASS",
+    "checked_at": "2026-10-16T13:04:22.937751+00:00",
+    "inputs": 139,
+    "bytes": 659669978,
+    "every_size_and_SHA256_matches_request": true,
+    "initial_to_final_unchanged": true,
+    "request_sha256": "dd254cce5ae16842c3fd25005b5fa3d0c446e9e7f5f66b0d55d9deb49d35cc04",
+    "manifest": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_RGBNT100_32_full_normal_run01\\final_input_seals.json"
+  }
+}
