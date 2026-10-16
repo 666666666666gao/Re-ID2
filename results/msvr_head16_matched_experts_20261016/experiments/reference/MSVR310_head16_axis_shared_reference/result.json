@@ -1,0 +1,144 @@
+{
+  "status": "COMPLETE_HEAD16_FULL5632_FROZEN00_OFFICIAL_TEACHER_PARITY",
+  "variant": "axis_shared",
+  "finished": 1792147570.3021333,
+  "train_records": 1032,
+  "query_records": 591,
+  "gallery_records": 1055,
+  "descriptor_dim": 5632,
+  "strict_reload_equal": true,
+  "per_query_equal": true,
+  "feature_max_abs_difference": {
+    "query": 0.0,
+    "gallery": 0.0
+  },
+  "metrics": {
+    "mAP": 51.43026480300702,
+    "mINP": 26.538876996464772,
+    "Rank-1": 68.35871404399323,
+    "Rank-5": 82.23350253807106,
+    "Rank-10": 87.30964467005076,
+    "Rank-20": 92.04737732656514
+  },
+  "anchor": {
+    "original_run": "/data/gaob/Re-ID/DeMo-DualAxis/runs/vehicle_atmoe_head_dynamic_amp_20261016/experiments/training/MSVR310_atmoe16_demo_shared_s42",
+    "original_best_epoch": 32,
+    "anchor_training_epochs": 50,
+    "new_stage_epochs": 50,
+    "identity_modules": [
+      "BACKBONE",
+      "rgb_reduce",
+      "nir_reduce",
+      "tir_reduce",
+      "generalFusion"
+    ],
+    "descriptor_dim": 5632,
+    "bypass": false,
+    "selected_anchor_full_metrics": {
+      "mAP": 51.43026480300702,
+      "mINP": 26.538876996464772,
+      "Rank-1": 68.35871404399323,
+      "Rank-5": 82.23350253807106,
+      "Rank-10": 87.30964467005076,
+      "Rank-20": 92.04737732656514
+    },
+    "teacher_variant": "demo_shared",
+    "teacher_descriptor_dim": 5632,
+    "deployed_descriptor_dim": 5632,
+    "optimizer_schedule": "Head16 shared-DeMo50 bestE32 plus additional50/freshAdam; fixed seed42",
+    "strong_teacher": {
+      "weight_sha256": "a126eb25b42daf9c0b731b731242895a12a0918852361caf893ce71e636f02c9",
+      "identity_heads": 16,
+      "copied_tensors": 1029,
+      "excluded_teacher_prefixes": [
+        "fused_classifier",
+        "fused_neck"
+      ],
+      "fresh_student_tensors": 108,
+      "private_reference": "Complete5632 .75private/.25public; both trained teacher projections retained",
+      "limits": "Teacher performance is baseline credit. Require full00 parity and matched ordinary/axis incremental utility."
+    },
+    "method": "Same AH expert model, normal objectives and full5632 .75private/.25public metric; initialize both controls directly from the independently audited MSVR310 head16 shared-DeMo50 bestE32. No intermediate head8 load. Five identity modules and learned public projection frozen; same fresh matched5632 fused head, extra50/newAdam, seed42/P16K4/B64/GradScaler512/BN2/partial0/two backwards. Existing FFT/M/F/rank64/ one condition/joint routing/relation-local PI/private cap.10 unchanged. Full official1032train591Q1055G, benchmark mAP-best earliest ties and same-checkpoint six metrics. Baseline51.430265/68.358714 is inherited credit, not an expert gain. Require complete00 teacher parity/native3 per control before formal50. Only physicalGPU3 serialized while original RGBNT100 stays onGPU2; no new missing evaluation, RGBNT201 training, seed search or temperature/power queries.",
+    "final_unit_descriptor_bound": {
+      "epsilon": 0.1,
+      "placement": "Private5120 after M/F/I; retained public512 at .25 metric weight",
+      "inactive_output": "Exact original candidate bytes; 00 remains the existing frozen identity path",
+      "parameter_change": 0,
+      "geometry_fixture": {
+        "status": "PASS_CPU_GEOMETRY_FIXTURE",
+        "vectors": 4,
+        "neural_forwards": 0,
+        "active_and_inactive_cases": true,
+        "finite_derivatives": true,
+        "epsilon": 0.1,
+        "perturbation_radius": 0.0998749217771909,
+        "clipped_fraction": 0.5,
+        "candidate_shift_mean": 0.6963409781455994,
+        "candidate_shift_max": 2.0,
+        "bounded_shift_mean": 0.028901761397719383,
+        "bounded_shift_max": 0.09561004489660263
+      },
+      "limits": "Known norm bound; not retrieval correctness or guaranteed +1. K PI10/01 native equality is checked before this new output bound.",
+      "complete_descriptor_bound": 0.08660254037844387
+    },
+    "contribution_reference": "Stopped-gradient corresponding gallery state; fixed00 positive/negative indices",
+    "M_F_auxiliary_weight_previous": 0.01,
+    "M_F_auxiliary_weight": 0.001,
+    "contribution_regression_weight_previous": 0.05,
+    "contribution_regression_weight": 0.0,
+    "final_full_CE_weight_previous": 0.25,
+    "final_full_CE_weight": 0.05,
+    "auxiliary_config_ID_LOSS_WEIGHT": 0.25,
+    "zero_weight_partial_CE_not_rescaled": true,
+    "M_F_auxiliary_outlet": {
+      "previous": "Independent pre-condition raw M/F pools512",
+      "current": "Actual first11 projected per-relation unit directions, uniform relation mean512",
+      "heads_and_coefficients_unchanged": true,
+      "parameters_added": 0,
+      "extra_neck_projection_calls": 0,
+      "auxiliary_dtype": "FP32 deployed directions; previous raw pools under native AMP",
+      "pooling_domain": "Uniform mean over seven actual projected relation directions; old independent auxiliary pool_score weights frozen because only stopped controlled targets still use them",
+      "frozen_parameter_names": [
+        "modality_expert.pool_score.weight",
+        "frequency_expert.pool_score.weight"
+      ],
+      "frozen_parameter_count": 1024,
+      "controlled10_01_pool": "Unchanged first independent pools",
+      "inference": "Eval hooks inactive; full5632 .75private/.25public descriptor"
+    },
+    "projected_auxiliary_parent_dataset": "MSVR310",
+    "parent_main_CE_weight": 0.05,
+    "parent_contribution_regression_weight": 0.0,
+    "reduced_auxiliary_parent": "T",
+    "sampler_control": {
+      "parent_K": 8,
+      "current_K": 4,
+      "batch_size": 64,
+      "identities_per_batch": 16,
+      "old_updates_per_arm": 1000,
+      "new_updates_per_arm": 705,
+      "same_epochs_not_equal_updates": true
+    },
+    "complete_reference": {
+      "private_dimension": 5120,
+      "public_dimension": 512,
+      "metric_weights": [
+        0.75,
+        0.25
+      ],
+      "public_projection_frozen": true,
+      "public_projection_parameters": 527872,
+      "fresh_fused_head_dimension": 5632,
+      "private_correction_bound": 0.1,
+      "complete_correction_bound": 0.08660254037844387
+    }
+  },
+  "runtime": {
+    "end_to_end_seconds": 12.95960545539856,
+    "triplets": 1646,
+    "includes_decode_and_first_batch": true
+  },
+  "optimizer_updates": 0,
+  "new_weights": 0,
+  "scope": "Actual full5632 frozen00 equals the existing selected teacher fullnormal six metrics and all per-query rows. No expert gain or training admission is implied."
+}

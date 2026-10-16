@@ -1,0 +1,148 @@
+{
+  "arguments": {
+    "dataset": "MSVR310",
+    "variant": "axis_shared",
+    "data_root": "/data/gaob/Re-ID/dataset",
+    "pretrained": "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+    "output": "/data/gaob/Re-ID/DeMo-DualAxis/runs/msvr_head16_matched_experts_20261016/experiments/training/MSVR310_head16_axis_shared_s42",
+    "anchor_run_dir": "/data/gaob/Re-ID/DeMo-DualAxis/runs/vehicle_atmoe_head_dynamic_amp_20261016/experiments/training/MSVR310_atmoe16_demo_shared_s42",
+    "freeze_identity_encoder": 1,
+    "seed": 42,
+    "mode": "train",
+    "atmoe_heads": 16
+  },
+  "config": "DATALOADER:\n  NUM_INSTANCE: 4\n  NUM_WORKERS: 4\n  SAMPLER: softmax_triplet\nDATASETS:\n  NAMES: MSVR310\n  ROOT_DIR: /data/gaob/Re-ID/dataset\nINPUT:\n  PADDING: 10\n  PIXEL_MEAN:\n  - 0.5\n  - 0.5\n  - 0.5\n  PIXEL_STD:\n  - 0.5\n  - 0.5\n  - 0.5\n  PROB: 0.5\n  RE_PROB: 0.5\n  SIZE_TEST:\n  - 128\n  - 256\n  SIZE_TRAIN:\n  - 128\n  - 256\nMODEL:\n  ADAPTER: false\n  ATM: true\n  ATT_DROP_RATE: 0.0\n  DEVICE: cuda\n  DEVICE_ID: '0'\n  DIRECT: 0\n  DIST_TRAIN: false\n  DROP_OUT: 0.0\n  DROP_PATH: 0.1\n  FROZEN: false\n  GLOBAL_LOCAL: true\n  HDM: true\n  HEAD: 16\n  ID_LOSS_TYPE: softmax\n  ID_LOSS_WEIGHT: 0.25\n  IF_LABELSMOOTH: 'on'\n  IF_WITH_CENTER: 'no'\n  METRIC_LOSS_TYPE: triplet\n  NAME: DeMo\n  NECK: bnneck\n  NO_MARGIN: true\n  PRETRAIN_PATH_T: /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt\n  PROMPT: false\n  SIE_CAMERA: true\n  SIE_COE: 1.0\n  SIE_VIEW: false\n  STRIDE_SIZE:\n  - 16\n  - 16\n  TRANSFORMER_TYPE: ViT-B-16\n  TRIPLET_LOSS_WEIGHT: 1.0\nOUTPUT_DIR: ..\nSOLVER:\n  BASE_LR: 0.00035\n  BIAS_LR_FACTOR: 2\n  CENTER_LOSS_WEIGHT: 0.0005\n  CENTER_LR: 0.5\n  CHECKPOINT_PERIOD: 10\n  CLUSTER_MARGIN: 0.3\n  COSINE_MARGIN: 0.5\n  COSINE_SCALE: 30\n  EVAL_PERIOD: 1\n  GAMMA: 0.1\n  IMS_PER_BATCH: 64\n  LARGE_FC_LR: false\n  LOG_PERIOD: 10\n  MARGIN: 0.3\n  MAX_EPOCHS: 50\n  MOMENTUM: 0.9\n  OPTIMIZER_NAME: Adam\n  RANGE_ALPHA: 0\n  RANGE_BETA: 1\n  RANGE_K: 2\n  RANGE_LOSS_WEIGHT: 1\n  RANGE_MARGIN: 0.3\n  SEED: 42\n  STEPS:\n  - 40\n  - 70\n  WARMUP_FACTOR: 0.01\n  WARMUP_ITERS: 10\n  WARMUP_METHOD: linear\n  WEIGHT_DECAY: 0.0001\n  WEIGHT_DECAY_BIAS: 0.0001\nTEST:\n  FEAT_NORM: 'yes'\n  IMS_PER_BATCH: 64\n  MISS: nothing\n  NECK_FEAT: before\n  RE_RANKING: 'no'\n  WEIGHT: ''\n",
+  "classes": 155,
+  "camera_embeddings": 8,
+  "train_records": 1032,
+  "query_records": 591,
+  "gallery_records": 1055,
+  "training_heldout_identities": 0,
+  "parameters": 100787334,
+  "trainable_parameters": 2674822,
+  "descriptor_dim": 5632,
+  "started": 1792149012.3902984,
+  "torch": "2.5.1+cu121",
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "pretraining": "Full official MSVR310 head16 shared-DeMo50 bestE32, complete5632 retained; additional50/fresh matched fused head/newAdam",
+  "anchor": {
+    "original_run": "/data/gaob/Re-ID/DeMo-DualAxis/runs/vehicle_atmoe_head_dynamic_amp_20261016/experiments/training/MSVR310_atmoe16_demo_shared_s42",
+    "original_best_epoch": 32,
+    "anchor_training_epochs": 50,
+    "new_stage_epochs": 50,
+    "identity_modules": [
+      "BACKBONE",
+      "rgb_reduce",
+      "nir_reduce",
+      "tir_reduce",
+      "generalFusion"
+    ],
+    "descriptor_dim": 5632,
+    "bypass": false,
+    "selected_anchor_full_metrics": {
+      "mAP": 51.43026480300702,
+      "mINP": 26.538876996464772,
+      "Rank-1": 68.35871404399323,
+      "Rank-5": 82.23350253807106,
+      "Rank-10": 87.30964467005076,
+      "Rank-20": 92.04737732656514
+    },
+    "teacher_variant": "demo_shared",
+    "teacher_descriptor_dim": 5632,
+    "deployed_descriptor_dim": 5632,
+    "optimizer_schedule": "Head16 shared-DeMo50 bestE32 plus additional50/freshAdam; fixed seed42",
+    "strong_teacher": {
+      "weight_sha256": "a126eb25b42daf9c0b731b731242895a12a0918852361caf893ce71e636f02c9",
+      "identity_heads": 16,
+      "copied_tensors": 1029,
+      "excluded_teacher_prefixes": [
+        "fused_classifier",
+        "fused_neck"
+      ],
+      "fresh_student_tensors": 108,
+      "private_reference": "Complete5632 .75private/.25public; both trained teacher projections retained",
+      "limits": "Teacher performance is baseline credit. Require full00 parity and matched ordinary/axis incremental utility."
+    },
+    "method": "Same AH expert model, normal objectives and full5632 .75private/.25public metric; initialize both controls directly from the independently audited MSVR310 head16 shared-DeMo50 bestE32. No intermediate head8 load. Five identity modules and learned public projection frozen; same fresh matched5632 fused head, extra50/newAdam, seed42/P16K4/B64/GradScaler512/BN2/partial0/two backwards. Existing FFT/M/F/rank64/ one condition/joint routing/relation-local PI/private cap.10 unchanged. Full official1032train591Q1055G, benchmark mAP-best earliest ties and same-checkpoint six metrics. Baseline51.430265/68.358714 is inherited credit, not an expert gain. Require complete00 teacher parity/native3 per control before formal50. Only physicalGPU3 serialized while original RGBNT100 stays onGPU2; no new missing evaluation, RGBNT201 training, seed search or temperature/power queries.",
+    "final_unit_descriptor_bound": {
+      "epsilon": 0.1,
+      "placement": "Private5120 after M/F/I; retained public512 at .25 metric weight",
+      "inactive_output": "Exact original candidate bytes; 00 remains the existing frozen identity path",
+      "parameter_change": 0,
+      "geometry_fixture": {
+        "status": "PASS_CPU_GEOMETRY_FIXTURE",
+        "vectors": 4,
+        "neural_forwards": 0,
+        "active_and_inactive_cases": true,
+        "finite_derivatives": true,
+        "epsilon": 0.1,
+        "perturbation_radius": 0.0998749217771909,
+        "clipped_fraction": 0.5,
+        "candidate_shift_mean": 0.6963409781455994,
+        "candidate_shift_max": 2.0,
+        "bounded_shift_mean": 0.028901761397719383,
+        "bounded_shift_max": 0.09561004489660263
+      },
+      "limits": "Known norm bound; not retrieval correctness or guaranteed +1. K PI10/01 native equality is checked before this new output bound.",
+      "complete_descriptor_bound": 0.08660254037844387
+    },
+    "contribution_reference": "Stopped-gradient corresponding gallery state; fixed00 positive/negative indices",
+    "M_F_auxiliary_weight_previous": 0.01,
+    "M_F_auxiliary_weight": 0.001,
+    "contribution_regression_weight_previous": 0.05,
+    "contribution_regression_weight": 0.0,
+    "final_full_CE_weight_previous": 0.25,
+    "final_full_CE_weight": 0.05,
+    "auxiliary_config_ID_LOSS_WEIGHT": 0.25,
+    "zero_weight_partial_CE_not_rescaled": true,
+    "M_F_auxiliary_outlet": {
+      "previous": "Independent pre-condition raw M/F pools512",
+      "current": "Actual first11 projected per-relation unit directions, uniform relation mean512",
+      "heads_and_coefficients_unchanged": true,
+      "parameters_added": 0,
+      "extra_neck_projection_calls": 0,
+      "auxiliary_dtype": "FP32 deployed directions; previous raw pools under native AMP",
+      "pooling_domain": "Uniform mean over seven actual projected relation directions; old independent auxiliary pool_score weights frozen because only stopped controlled targets still use them",
+      "frozen_parameter_names": [
+        "modality_expert.pool_score.weight",
+        "frequency_expert.pool_score.weight"
+      ],
+      "frozen_parameter_count": 1024,
+      "controlled10_01_pool": "Unchanged first independent pools",
+      "inference": "Eval hooks inactive; full5632 .75private/.25public descriptor"
+    },
+    "projected_auxiliary_parent_dataset": "MSVR310",
+    "parent_main_CE_weight": 0.05,
+    "parent_contribution_regression_weight": 0.0,
+    "reduced_auxiliary_parent": "T",
+    "sampler_control": {
+      "parent_K": 8,
+      "current_K": 4,
+      "batch_size": 64,
+      "identities_per_batch": 16,
+      "old_updates_per_arm": 1000,
+      "new_updates_per_arm": 705,
+      "same_epochs_not_equal_updates": true
+    },
+    "complete_reference": {
+      "private_dimension": 5120,
+      "public_dimension": 512,
+      "metric_weights": [
+        0.75,
+        0.25
+      ],
+      "public_projection_frozen": true,
+      "public_projection_parameters": 527872,
+      "fresh_fused_head_dimension": 5632,
+      "private_correction_bound": 0.1,
+      "complete_correction_bound": 0.08660254037844387
+    }
+  },
+  "checkpoint_rule": "Maximum full official query/gallery mAP across 50 epochs; ties keep earliest epoch",
+  "evaluation_scope": "Entire official training split and entire official query/gallery; no fit/dev holdout",
+  "selection_limitation": "Official benchmark is used for checkpoint selection; this is not an untouched independent final test",
+  "method_revision": "Same AH expert model, normal objectives and full5632 .75private/.25public metric; initialize both controls directly from the independently audited MSVR310 head16 shared-DeMo50 bestE32. No intermediate head8 load. Five identity modules and learned public projection frozen; same fresh matched5632 fused head, extra50/newAdam, seed42/P16K4/B64/GradScaler512/BN2/partial0/two backwards. Existing FFT/M/F/rank64/ one condition/joint routing/relation-local PI/private cap.10 unchanged. Full official1032train591Q1055G, benchmark mAP-best earliest ties and same-checkpoint six metrics. Baseline51.430265/68.358714 is inherited credit, not an expert gain. Require complete00 teacher parity/native3 per control before formal50. Only physicalGPU3 serialized while original RGBNT100 stays onGPU2; no new missing evaluation, RGBNT201 training, seed search or temperature/power queries.",
+  "partial_training": "Same AH partial0 forwards/mining/BN2/two backwards. Only the selected frozen identity reference changes to head16/E32; missing performance not claimed.",
+  "amp_policy": "Native fp16 GradScaler512; actual optimizer updates and skipped steps recorded",
+  "retention": "Only best.pth; smoke strict reload in memory; no initial, last, or smoke weight files"
+}

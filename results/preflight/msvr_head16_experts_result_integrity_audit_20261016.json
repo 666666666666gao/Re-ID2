@@ -1,0 +1,1256 @@
+{
+  "status": "FINAL",
+  "audit_skill": "experiment-audit",
+  "verdict": "WARN",
+  "overall_verdict": "WARN",
+  "integrity_status": "warn",
+  "deterministic_checks": "PASS",
+  "reason_code": "valid_scoped_results_with_benchmark_selection_single_seed_and_attribution_limits",
+  "summary": "No integrity defect or blocking mismatch found in the completed MS head16 expert scope. Actual raw distances, installed GT, selected tensors, formal ledgers and CPU reductions pass independent checks. Keep baseline attribution and single-seed/benchmark-selected/fixed-state qualifications; dual does not outperform matched ordinary on both mAP and Rank-1.",
+  "blocking_findings": [],
+  "findings": [],
+  "required_code_fixes": [],
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_head16_experts_result_integrity_request_20261016.json",
+  "request_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_head16_experts_result_integrity_request_20261016.json",
+  "request_sha256": "4c29e1761ba79d58a8f08f8e85bbf0ea4720f448ac64c18a16e309d6ce13255f",
+  "project": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002",
+  "report": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_head16_experts_result_integrity_audit_20261016.json",
+  "trace_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_MS_head16_experts_full_normal_run01",
+  "agent_id": "/root/audit_msvr_head16_experts_full_normal_20261016",
+  "verdict_id": "/root/audit_msvr_head16_experts_full_normal_20261016",
+  "generated_at": "2026-10-16T20:15:39+08:00",
+  "date": "2026-10-16",
+  "reviewer_family": "openai",
+  "reviewer_model_requested": "gpt-6-astra",
+  "reviewer_reasoning_requested": "max",
+  "reviewer_model_actual": "UNATTESTED",
+  "reviewer_reasoning_actual": "UNATTESTED",
+  "actual_routing": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "fresh_reviewer_context": true,
+  "input_verification": {
+    "count": 487,
+    "bytes": 1363030964,
+    "all_exact_before_and_after": true,
+    "mismatches": [],
+    "request_preserved": true,
+    "manifest": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_MS_head16_experts_full_normal_run01\\final_input_verification.json"
+  },
+  "checks": {
+    "A_ground_truth_provenance": {
+      "status": "PASS",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\msvr310.py:67",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\official_training_data.py:20",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:68",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_full_official49.py:13",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_MS_head16_experts_full_normal_run01\\remote_cpu_actual_stdout.txt"
+      ],
+      "details": "The auditor independently enumerated installed MSVR310 bounding_box_train, query3 and bounding_box_test vis files and verified corresponding ni/th files. Identity, camera and scene came from dataset filenames. The 1032/591/1055 rows exactly match all selected manifests and saved NPZ metadata; 155 train identities are disjoint from evaluation identities. All 591 official query3 queries (52 identities) are valid against the 1055-gallery split (155 identities). Same-identity/same-scene exclusions were independently applied. GT was not obtained from model outputs. This verifies installed annotations and protocol, not an external dataset-download chain of custody."
+    },
+    "B_score_normalization": {
+      "status": "PASS",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:20",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:106",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\utils\\reid_evaluation.py:25",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\shared_identity_axis.py:20",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\msvr_full_identity_reference.py:30"
+      ],
+      "details": "AP averages precision at each relevant retained rank; INP is relevant count divided by last relevant rank; CMC and six metrics use valid-query counts and percentage scaling. There is no denominator based on the model own maximum/minimum/mean score. Feature L2 normalization and fixed .75 private/.25 public squared-norm weights define the descriptor metric and do not normalize reported performance. Saved feature norms/block energies and independently recomputed squared distances pass for teacher and both full11 results."
+    },
+    "C_result_file_existence_and_consistency": {
+      "status": "PASS",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_head16_experts_result_integrity_request_20261016.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_MS_head16_experts_full_normal_run01\\initial_input_verification.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_MS_head16_experts_full_normal_run01\\final_input_verification.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_MS_head16_experts_full_normal_run01\\local_text_audit.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_MS_head16_experts_full_normal_run01\\remote_cpu_actual_receipt.json"
+      ],
+      "details": "All 487 sealed inputs exist and retain exact size/SHA before and after this review (1,363,030,964 bytes). Eight saved binaries on 2026 also match the sealed local archives. Independent recount verifies eight fixed states plus teacher and the two fullnormal copies; all six metrics, CMC50, per-query rows and identity/camera/scene groups agree. All supplied JSON/CSV/JSONL parse, 46 Python files parse, 150 epoch per-query exports and six CPU analysis tables reconcile. Selected checkpoints are teacher E32, ordinary E7 and dual E5; each six-metric vector is from one selected checkpoint, with no per-metric splice."
+    },
+    "D_called_pipeline_and_runtime_evidence": {
+      "status": "PASS",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\launch_msvr_head16_experts.py:61",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\launch_msvr_head16_experts.py:75",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\launch_msvr_head16_experts.py:107",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_msvr_head16_experts.py:122",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_frozen_anchor_experiment.py:39",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_frozen_anchor_experiment.py:157",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_msvr_head16_reference.py:21",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_msvr_head16_states.py:15",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_MS_head16_experts_full_normal_run01\\local_text_audit.json"
+      ],
+      "details": "Completed launch/exit records name the new head16 reference, smoke, training, normal CPU audit and state evaluator; all 10 selected child exits are 0. Full frozen00 checks and both fresh three-update native runs preceded formal training. The selected runner calls the actual full_records/evaluate/full_metrics chain, selects strict higher normal mAP and reloads best.pth before exporting fullnormal features and six metrics. Historical head8 evaluators, full_evaluation.main dev-selection text and audit_full_official49.main are not the entrypoints for this result. Imported metric functions are called and their outputs are present. Source PASS and wrapper receipts are supporting evidence, not independent neural replay."
+    },
+    "E_scope_and_claim_strength": {
+      "status": "WARN",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_msvr_head16_experts.py:19",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_frozen_anchor_experiment.py:85",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_msvr_head16_states.py:67",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_msvr_head16_experts.py:71",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\reid2_paper_reference_targets_20261016.json:32"
+      ],
+      "details": "The completed scope is MSVR310 normal input, one fixed seed42, two matched additional50 runs and eight fixed-checkpoint interventions. The selected head16 teacher was trained50; each expert pipeline therefore costs teacher50+expert50 and was selected on the official benchmark. This does not establish untouched-test generalization, multiseed stability, missing-modal robustness or independently retrained single-expert ablations. The dual row meets MS paper+1 targets50.2/60.8, but the teacher already meets them. Dual gain over teacher is +0.05728316091636 mAP/+0.16920473773266 R1; relative to matched ordinary it is +0.01645586778098 mAP/-0.16920473773266 R1. Substantial architectural superiority or simultaneous mAP/R1 superiority to ordinary is not supported."
+    },
+    "F_evaluation_type_classification": {
+      "status": "PASS",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:20",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_r201o_same_state_contribution.py:23",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_r201q_task_gate.py:38",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_msvr_head16_reference.py:32",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\bounded_identity_descriptor.py:40"
+      ],
+      "classifications": [
+        {
+          "evaluation": "Teacher, fullnormal experts and all eight fixed-state retrieval metrics; GT-based rescue/harm comparisons",
+          "type": "real_gt",
+          "qualification": "Directly independently recounted from saved distances and installed official filenames in this audit."
+        },
+        {
+          "evaluation": "Original_DeMo reproduction row used by comparisons",
+          "type": "real_gt",
+          "qualification": "Declared full-official evaluation; CSV six metrics/CMC/groups and identity ordering independently reduced here. Its historical raw-distance/weight archive is not among this audit request inputs and was not re-evaluated."
+        },
+        {
+          "evaluation": "Frozen00 feature/cache/teacher-output parity and cached11 equality",
+          "type": "synthetic_proxy",
+          "qualification": "Explicit model-output agreement/engineering consistency, not a substitute for GT performance. Its accompanying retrieval metrics separately use real_gt."
+        },
+        {
+          "evaluation": "Same-state contribution targets/raw regression diagnostics",
+          "type": "synthetic_proxy",
+          "qualification": "Model-derived similarity margins, with official training labels used only for positive/negative mining. Regression weight is0 in these MS runs; these targets are not AP, calibrated causal contributions or evaluation GT."
+        },
+        {
+          "evaluation": "Route/gate entropy, nonindependence and descriptor geometry diagnostics",
+          "type": "self_supervised_proxy",
+          "qualification": "No external performance GT; internal deterministic statistics only. Native gradients/reload and toy-vector geometry are engineering checks, not an additional performance evaluation."
+        }
+      ]
+    }
+  },
+  "scope": {
+    "dataset": "MSVR310",
+    "input_setting": "normal all modalities",
+    "seed": 42,
+    "expert_controls": 2,
+    "fixed_state_cases": 8,
+    "train_records": 1032,
+    "query_records": 591,
+    "gallery_records": 1055,
+    "train_identities": 155,
+    "query_identities": 52,
+    "gallery_identities": 155,
+    "expert_stage_epochs_each": 50,
+    "expert_stage_epochs_sum": 100,
+    "selected_teacher_epochs": 50,
+    "selected_pipeline_epochs_per_expert": 100,
+    "formal_attempts": 1410,
+    "formal_updates": 1410,
+    "amp_skips": 0,
+    "fresh_expert_native_updates": 6,
+    "fresh_expert_native_attempts": 6,
+    "fresh_expert_native_skips": 0,
+    "paired_formal_orders": 705,
+    "all_1032_train_records_have_successful_updates_each": true,
+    "selected_epochs": {
+      "teacher": 32,
+      "frequency_shared": 7,
+      "axis_shared": 5
+    },
+    "missing_evaluation": false,
+    "multiseed_confirmation": false
+  },
+  "official_GT": {
+    "counts": {
+      "train": 1032,
+      "query": 591,
+      "gallery": 1055
+    },
+    "train_identities": 155,
+    "query_identities": 52,
+    "gallery_identities": 155,
+    "disjoint_train_evaluation": true,
+    "manifest_exact": true,
+    "all_three_modality_paths_exist": true,
+    "source": "installed filename annotations"
+  },
+  "raw_distance_cases": {
+    "teacher": {
+      "metrics": {
+        "mAP": 51.430264803007034,
+        "mINP": 26.538876996464776,
+        "Rank-1": 68.35871404399323,
+        "Rank-5": 82.23350253807106,
+        "Rank-10": 87.30964467005076,
+        "Rank-20": 92.04737732656514
+      },
+      "valid_queries": 591,
+      "metric_max_error_pp": 1.4210854715202004e-14,
+      "cmc50_max_error_pp": 1.4210854715202004e-14,
+      "perquery_max_error": 0.0,
+      "group_max_error_pp": 2.842170943040401e-14,
+      "tie_adjacent_pairs": 67,
+      "tie_protocol": "ascending distance then original sorted gallery index"
+    },
+    "frequency_shared": {
+      "metrics": {
+        "mAP": 51.471092096142385,
+        "mINP": 26.54590039294072,
+        "Rank-1": 68.69712351945854,
+        "Rank-5": 82.06429780033841,
+        "Rank-10": 87.1404399323181,
+        "Rank-20": 91.70896785109983
+      },
+      "valid_queries": 591,
+      "metric_max_error_pp": 7.105427357601002e-15,
+      "cmc50_max_error_pp": 1.4210854715202004e-14,
+      "perquery_max_error": 0.0,
+      "group_max_error_pp": 2.842170943040401e-14,
+      "tie_adjacent_pairs": 47,
+      "tie_protocol": "ascending distance then original sorted gallery index"
+    },
+    "frequency_shared_00": {
+      "metrics": {
+        "mAP": 51.430264803007034,
+        "mINP": 26.538876996464776,
+        "Rank-1": 68.35871404399323,
+        "Rank-5": 82.23350253807106,
+        "Rank-10": 87.30964467005076,
+        "Rank-20": 92.04737732656514
+      },
+      "valid_queries": 591,
+      "metric_max_error_pp": 1.4210854715202004e-14,
+      "cmc50_max_error_pp": 1.4210854715202004e-14,
+      "perquery_max_error": 0.0,
+      "group_max_error_pp": 2.842170943040401e-14,
+      "tie_adjacent_pairs": 67,
+      "tie_protocol": "ascending distance then original sorted gallery index",
+      "teacher_distance_max_abs": 0.0,
+      "teacher_distance_bitwise_equal": true
+    },
+    "frequency_shared_10": {
+      "metrics": {
+        "mAP": 51.391496206874706,
+        "mINP": 26.493265966147007,
+        "Rank-1": 68.18950930626058,
+        "Rank-5": 82.06429780033841,
+        "Rank-10": 87.30964467005076,
+        "Rank-20": 91.87817258883248
+      },
+      "valid_queries": 591,
+      "metric_max_error_pp": 7.105427357601002e-15,
+      "cmc50_max_error_pp": 1.4210854715202004e-14,
+      "perquery_max_error": 0.0,
+      "group_max_error_pp": 2.842170943040401e-14,
+      "tie_adjacent_pairs": 39,
+      "tie_protocol": "ascending distance then original sorted gallery index"
+    },
+    "frequency_shared_01": {
+      "metrics": {
+        "mAP": 51.42169082231816,
+        "mINP": 26.56415529820813,
+        "Rank-1": 68.18950930626058,
+        "Rank-5": 82.23350253807106,
+        "Rank-10": 87.30964467005076,
+        "Rank-20": 92.04737732656514
+      },
+      "valid_queries": 591,
+      "metric_max_error_pp": 7.105427357601002e-15,
+      "cmc50_max_error_pp": 1.4210854715202004e-14,
+      "perquery_max_error": 0.0,
+      "group_max_error_pp": 2.842170943040401e-14,
+      "tie_adjacent_pairs": 60,
+      "tie_protocol": "ascending distance then original sorted gallery index"
+    },
+    "frequency_shared_11": {
+      "metrics": {
+        "mAP": 51.471092096142385,
+        "mINP": 26.54590039294072,
+        "Rank-1": 68.69712351945854,
+        "Rank-5": 82.06429780033841,
+        "Rank-10": 87.1404399323181,
+        "Rank-20": 91.70896785109983
+      },
+      "valid_queries": 591,
+      "metric_max_error_pp": 7.105427357601002e-15,
+      "cmc50_max_error_pp": 1.4210854715202004e-14,
+      "perquery_max_error": 0.0,
+      "group_max_error_pp": 2.842170943040401e-14,
+      "tie_adjacent_pairs": 47,
+      "tie_protocol": "ascending distance then original sorted gallery index",
+      "selected_normal_distance_bitwise_equal": true
+    },
+    "axis_shared": {
+      "metrics": {
+        "mAP": 51.48754796392338,
+        "mINP": 26.856383780972475,
+        "Rank-1": 68.52791878172589,
+        "Rank-5": 82.23350253807106,
+        "Rank-10": 87.64805414551607,
+        "Rank-20": 92.2165820642978
+      },
+      "valid_queries": 591,
+      "metric_max_error_pp": 7.105427357601002e-15,
+      "cmc50_max_error_pp": 1.4210854715202004e-14,
+      "perquery_max_error": 0.0,
+      "group_max_error_pp": 2.1316282072803006e-14,
+      "tie_adjacent_pairs": 49,
+      "tie_protocol": "ascending distance then original sorted gallery index"
+    },
+    "axis_shared_00": {
+      "metrics": {
+        "mAP": 51.430264803007034,
+        "mINP": 26.538876996464776,
+        "Rank-1": 68.35871404399323,
+        "Rank-5": 82.23350253807106,
+        "Rank-10": 87.30964467005076,
+        "Rank-20": 92.04737732656514
+      },
+      "valid_queries": 591,
+      "metric_max_error_pp": 1.4210854715202004e-14,
+      "cmc50_max_error_pp": 1.4210854715202004e-14,
+      "perquery_max_error": 0.0,
+      "group_max_error_pp": 2.842170943040401e-14,
+      "tie_adjacent_pairs": 67,
+      "tie_protocol": "ascending distance then original sorted gallery index",
+      "teacher_distance_max_abs": 0.0,
+      "teacher_distance_bitwise_equal": true
+    },
+    "axis_shared_10": {
+      "metrics": {
+        "mAP": 51.34742073048164,
+        "mINP": 26.563360131590237,
+        "Rank-1": 68.02030456852792,
+        "Rank-5": 82.06429780033841,
+        "Rank-10": 87.47884940778341,
+        "Rank-20": 91.70896785109983
+      },
+      "valid_queries": 591,
+      "metric_max_error_pp": 7.105427357601002e-15,
+      "cmc50_max_error_pp": 1.4210854715202004e-14,
+      "perquery_max_error": 0.0,
+      "group_max_error_pp": 2.842170943040401e-14,
+      "tie_adjacent_pairs": 54,
+      "tie_protocol": "ascending distance then original sorted gallery index"
+    },
+    "axis_shared_01": {
+      "metrics": {
+        "mAP": 51.39812912824282,
+        "mINP": 26.560279124441536,
+        "Rank-1": 68.18950930626058,
+        "Rank-5": 82.23350253807106,
+        "Rank-10": 87.47884940778341,
+        "Rank-20": 91.87817258883248
+      },
+      "valid_queries": 591,
+      "metric_max_error_pp": 3.552713678800501e-15,
+      "cmc50_max_error_pp": 1.4210854715202004e-14,
+      "perquery_max_error": 0.0,
+      "group_max_error_pp": 2.842170943040401e-14,
+      "tie_adjacent_pairs": 47,
+      "tie_protocol": "ascending distance then original sorted gallery index"
+    },
+    "axis_shared_11": {
+      "metrics": {
+        "mAP": 51.48754796392338,
+        "mINP": 26.856383780972475,
+        "Rank-1": 68.52791878172589,
+        "Rank-5": 82.23350253807106,
+        "Rank-10": 87.64805414551607,
+        "Rank-20": 92.2165820642978
+      },
+      "valid_queries": 591,
+      "metric_max_error_pp": 7.105427357601002e-15,
+      "cmc50_max_error_pp": 1.4210854715202004e-14,
+      "perquery_max_error": 0.0,
+      "group_max_error_pp": 2.1316282072803006e-14,
+      "tie_adjacent_pairs": 49,
+      "tie_protocol": "ascending distance then original sorted gallery index",
+      "selected_normal_distance_bitwise_equal": true
+    }
+  },
+  "feature_distance_consistency": {
+    "teacher": {
+      "float64_distance_max_abs_error": 9.536743155180716e-07,
+      "features_normalized": true,
+      "block_energy_errors": {
+        "query": {
+          "norm_error": 1.1920928955078125e-07,
+          "private_energy_error": 2.384185791015625e-07,
+          "public_energy_error": 8.940696716308594e-08
+        },
+        "gallery": {
+          "norm_error": 1.1920928955078125e-07,
+          "private_energy_error": 2.384185791015625e-07,
+          "public_energy_error": 8.940696716308594e-08
+        }
+      },
+      "float64_vs_saved_metric_delta_pp": {
+        "mAP": 0.0,
+        "mINP": 0.0,
+        "Rank-1": 0.0,
+        "Rank-5": 0.0,
+        "Rank-10": 0.0,
+        "Rank-20": 0.0
+      },
+      "float64_vs_saved_changed_AP_queries": 0
+    },
+    "frequency_shared": {
+      "float64_distance_max_abs_error": 9.949852568524875e-07,
+      "features_normalized": true,
+      "block_energy_errors": {
+        "query": {
+          "norm_error": 1.1920928955078125e-07,
+          "private_energy_error": 2.384185791015625e-07,
+          "public_energy_error": 5.960464477539063e-08
+        },
+        "gallery": {
+          "norm_error": 1.1920928955078125e-07,
+          "private_energy_error": 2.384185791015625e-07,
+          "public_energy_error": 5.960464477539063e-08
+        }
+      },
+      "float64_vs_saved_metric_delta_pp": {
+        "mAP": 0.0,
+        "mINP": 0.0,
+        "Rank-1": 0.0,
+        "Rank-5": 0.0,
+        "Rank-10": 0.0,
+        "Rank-20": 0.0
+      },
+      "float64_vs_saved_changed_AP_queries": 0
+    },
+    "axis_shared": {
+      "float64_distance_max_abs_error": 9.536743168503392e-07,
+      "features_normalized": true,
+      "block_energy_errors": {
+        "query": {
+          "norm_error": 1.1920928955078125e-07,
+          "private_energy_error": 1.7881393432617188e-07,
+          "public_energy_error": 8.940696716308594e-08
+        },
+        "gallery": {
+          "norm_error": 1.1920928955078125e-07,
+          "private_energy_error": 2.384185791015625e-07,
+          "public_energy_error": 8.940696716308594e-08
+        }
+      },
+      "float64_vs_saved_metric_delta_pp": {
+        "mAP": 0.0,
+        "mINP": 0.0,
+        "Rank-1": 0.0,
+        "Rank-5": 0.0,
+        "Rank-10": 0.0,
+        "Rank-20": 0.0
+      },
+      "float64_vs_saved_changed_AP_queries": 0
+    }
+  },
+  "selected_tensor_checks": {
+    "teacher": {
+      "tensors": 1035,
+      "all_elements": 99898487,
+      "finite": true,
+      "parameter_elements_unique_storage_excluding_known_buffers": 99867648,
+      "known_buffer_tensors": 357,
+      "active_native_parameter_names": 0,
+      "active_parameter_elements": 0,
+      "descriptor_head_shape": [
+        155,
+        5632
+      ],
+      "teacher_generalFusion_example_shapes": {},
+      "prefix_tensor_counts": {
+        "BACKBONE": 153,
+        "rgb_reduce": 4,
+        "nir_reduce": 4,
+        "tir_reduce": 4,
+        "generalFusion": 828,
+        "classifier_moe": 1,
+        "bottleneck_moe": 5,
+        "classifier_r": 1,
+        "bottleneck_r": 5,
+        "classifier_n": 1,
+        "bottleneck_n": 5,
+        "classifier_t": 1,
+        "bottleneck_t": 5,
+        "shared_projection": 6,
+        "shared_neck": 5,
+        "shared_classifier": 1,
+        "fused_neck": 5,
+        "fused_classifier": 1
+      }
+    },
+    "frequency_shared": {
+      "tensors": 1137,
+      "all_elements": 100820607,
+      "finite": true,
+      "parameter_elements_unique_storage_excluding_known_buffers": 100787334,
+      "known_buffer_tensors": 364,
+      "active_native_parameter_names": 103,
+      "active_parameter_elements": 2674822,
+      "descriptor_head_shape": [
+        155,
+        5632
+      ],
+      "teacher_generalFusion_example_shapes": {},
+      "prefix_tensor_counts": {
+        "residual_scale": 1,
+        "BACKBONE": 153,
+        "rgb_reduce": 4,
+        "nir_reduce": 4,
+        "tir_reduce": 4,
+        "generalFusion": 828,
+        "classifier_moe": 1,
+        "bottleneck_moe": 5,
+        "classifier_r": 1,
+        "bottleneck_r": 5,
+        "classifier_n": 1,
+        "bottleneck_n": 5,
+        "classifier_t": 1,
+        "bottleneck_t": 5,
+        "bands": 1,
+        "modality_expert": 16,
+        "frequency_expert": 35,
+        "router": 13,
+        "calibrator": 6,
+        "modality_projection": 6,
+        "frequency_projection": 6,
+        "interaction_projection": 6,
+        "fused_neck": 5,
+        "fused_classifier": 1,
+        "modality_neck": 5,
+        "modality_classifier": 1,
+        "frequency_neck": 5,
+        "frequency_classifier": 1,
+        "shared_projection": 6,
+        "shared_neck": 5,
+        "shared_classifier": 1
+      }
+    },
+    "axis_shared": {
+      "tensors": 1137,
+      "all_elements": 100820607,
+      "finite": true,
+      "parameter_elements_unique_storage_excluding_known_buffers": 100787334,
+      "known_buffer_tensors": 364,
+      "active_native_parameter_names": 103,
+      "active_parameter_elements": 2674822,
+      "descriptor_head_shape": [
+        155,
+        5632
+      ],
+      "teacher_generalFusion_example_shapes": {},
+      "prefix_tensor_counts": {
+        "residual_scale": 1,
+        "BACKBONE": 153,
+        "rgb_reduce": 4,
+        "nir_reduce": 4,
+        "tir_reduce": 4,
+        "generalFusion": 828,
+        "classifier_moe": 1,
+        "bottleneck_moe": 5,
+        "classifier_r": 1,
+        "bottleneck_r": 5,
+        "classifier_n": 1,
+        "bottleneck_n": 5,
+        "classifier_t": 1,
+        "bottleneck_t": 5,
+        "bands": 1,
+        "modality_expert": 16,
+        "frequency_expert": 35,
+        "router": 13,
+        "calibrator": 6,
+        "modality_projection": 6,
+        "frequency_projection": 6,
+        "interaction_projection": 6,
+        "fused_neck": 5,
+        "fused_classifier": 1,
+        "modality_neck": 5,
+        "modality_classifier": 1,
+        "frequency_neck": 5,
+        "frequency_classifier": 1,
+        "shared_projection": 6,
+        "shared_neck": 5,
+        "shared_classifier": 1
+      }
+    }
+  },
+  "frozen_teacher_tensor_equality": {
+    "frequency_shared": {
+      "BACKBONE": {
+        "tensors": 153,
+        "elements": 86146560,
+        "all_tensor_bytes_equal": true
+      },
+      "rgb_reduce": {
+        "tensors": 4,
+        "elements": 526848,
+        "all_tensor_bytes_equal": true
+      },
+      "nir_reduce": {
+        "tensors": 4,
+        "elements": 526848,
+        "all_tensor_bytes_equal": true
+      },
+      "tir_reduce": {
+        "tensors": 4,
+        "elements": 526848,
+        "all_tensor_bytes_equal": true
+      },
+      "generalFusion": {
+        "tensors": 828,
+        "elements": 9852529,
+        "all_tensor_bytes_equal": true
+      },
+      "shared_projection": {
+        "tensors": 6,
+        "elements": 527872,
+        "all_tensor_bytes_equal": true
+      }
+    },
+    "axis_shared": {
+      "BACKBONE": {
+        "tensors": 153,
+        "elements": 86146560,
+        "all_tensor_bytes_equal": true
+      },
+      "rgb_reduce": {
+        "tensors": 4,
+        "elements": 526848,
+        "all_tensor_bytes_equal": true
+      },
+      "nir_reduce": {
+        "tensors": 4,
+        "elements": 526848,
+        "all_tensor_bytes_equal": true
+      },
+      "tir_reduce": {
+        "tensors": 4,
+        "elements": 526848,
+        "all_tensor_bytes_equal": true
+      },
+      "generalFusion": {
+        "tensors": 828,
+        "elements": 9852529,
+        "all_tensor_bytes_equal": true
+      },
+      "shared_projection": {
+        "tensors": 6,
+        "elements": 527872,
+        "all_tensor_bytes_equal": true
+      }
+    }
+  },
+  "actual_head16_structure": {
+    "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\msvr_head16_matched_experts_20261016\\frequency_shared\\best\\best.pth": {
+      "head_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "head_count": 16,
+      "source_derived_active_parameter_name_count": 103,
+      "exact_native_gradient_key_match": true
+    },
+    "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\msvr_head16_matched_experts_20261016\\axis_shared\\best\\best.pth": {
+      "head_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "head_count": 16,
+      "source_derived_active_parameter_name_count": 103,
+      "exact_native_gradient_key_match": true
+    },
+    "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\vehicle_atmoe_head_dynamic_amp_20261016\\MSVR310_atmoe16_demo_shared_s42\\best\\best.pth": {
+      "head_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "head_count": 16
+    }
+  },
+  "paired_weight_structure_equal": true,
+  "frozen_pool_score_paired_equal": {
+    "modality_expert.pool_score.weight": true,
+    "frequency_expert.pool_score.weight": true
+  },
+  "weight_reader": "Restricted pickle metadata + ZIP storage NumPy reader; no torch/model import. Dtypes, shapes, storage sizes, all numeric finiteness and actual frozen tensor bytes checked.",
+  "binary_seal_checks": [
+    {
+      "key": "frequency_shared/raw",
+      "bytes": 37096619,
+      "sha256": "eb8107b15e64e20bcfd574f0a7c4d61306f39a6629c2268c3787f8258c32225f",
+      "matches_sealed_local": true
+    },
+    {
+      "key": "frequency_shared/best",
+      "bytes": 403650618,
+      "sha256": "457e4a9f22599ca7ce97c30c5ba1ffea2c614ac6f5c2f9c11c66729a3bfbba25",
+      "matches_sealed_local": true
+    },
+    {
+      "key": "frequency_shared/states_raw",
+      "bytes": 8473258,
+      "sha256": "55ba29fcfe05daee20b098ef7f1e144fd5add991d8fbdaad57d7b5f258c1bdbb",
+      "matches_sealed_local": true
+    },
+    {
+      "key": "axis_shared/raw",
+      "bytes": 37137747,
+      "sha256": "8eba62c73293b1c65469fbc8c781f68f17db9fb340d0e17d4b7143147053017a",
+      "matches_sealed_local": true
+    },
+    {
+      "key": "axis_shared/best",
+      "bytes": 403650618,
+      "sha256": "f75355e885088cee287a4240faee9e9faa54f54f2649cf7a25c25770ecb66d7e",
+      "matches_sealed_local": true
+    },
+    {
+      "key": "axis_shared/states_raw",
+      "bytes": 8473637,
+      "sha256": "be3b207aabcd500b24e5cae21ed70d208c9469b38e98402dd599af30c285dbbb",
+      "matches_sealed_local": true
+    },
+    {
+      "key": "teacher/raw",
+      "bytes": 37573826,
+      "sha256": "b4257c85ed7ecb07ceab1663302be07c00e597fba6c3e499b4503fb2e53ffa80",
+      "matches_sealed_local": true
+    },
+    {
+      "key": "teacher/best",
+      "bytes": 399933266,
+      "sha256": "a126eb25b42daf9c0b731b731242895a12a0918852361caf893ce71e636f02c9",
+      "matches_sealed_local": true
+    }
+  ],
+  "training_best_and_last": {
+    "original_DeMo": {
+      "selected_epoch": 32,
+      "last": {
+        "mAP": 45.8097959324754,
+        "mINP": 22.52311847403095,
+        "Rank-1": 62.77495769881557,
+        "Rank-5": 79.35702199661591,
+        "Rank-10": 83.41793570219966,
+        "Rank-20": 88.83248730964468
+      },
+      "best": {
+        "mAP": 47.164688447227576,
+        "mINP": 23.502961234396178,
+        "Rank-1": 63.95939086294417,
+        "Rank-5": 80.20304568527918,
+        "Rank-10": 84.77157360406092,
+        "Rank-20": 89.84771573604061
+      },
+      "parameters": 98489856,
+      "trainable_parameters": 98484736,
+      "stage_epochs": 50,
+      "pipeline_epochs": 50,
+      "benchmark_selected": true,
+      "earliest_max_mAP": true
+    },
+    "strong_full5632": {
+      "selected_epoch": 32,
+      "last": {
+        "mAP": 50.390921106416684,
+        "mINP": 25.694459118289643,
+        "Rank-1": 68.02030456852792,
+        "Rank-5": 81.7258883248731,
+        "Rank-10": 87.1404399323181,
+        "Rank-20": 90.35532994923858
+      },
+      "best": {
+        "mAP": 51.43026480300702,
+        "mINP": 26.538876996464772,
+        "Rank-1": 68.35871404399323,
+        "Rank-5": 82.23350253807106,
+        "Rank-10": 87.30964467005076,
+        "Rank-20": 92.04737732656514
+      },
+      "parameters": 99867648,
+      "trainable_parameters": 99856384,
+      "stage_epochs": 50,
+      "pipeline_epochs": 50,
+      "benchmark_selected": true,
+      "earliest_max_mAP": true,
+      "attempts": 705,
+      "actual_updates": 705,
+      "amp_skips": 0,
+      "forward_coverage": 1032,
+      "successful_update_coverage": 1032,
+      "full_epoch_cumulative_accounting": true
+    },
+    "AH_frequency_shared": {
+      "selected_epoch": 7,
+      "last": {
+        "mAP": 51.22659847795994,
+        "mINP": 26.38307351255296,
+        "Rank-1": 68.02030456852792,
+        "Rank-5": 81.89509306260575,
+        "Rank-10": 86.80203045685279,
+        "Rank-20": 91.87817258883248
+      },
+      "best": {
+        "mAP": 51.47109209614239,
+        "mINP": 26.54590039294072,
+        "Rank-1": 68.69712351945854,
+        "Rank-5": 82.06429780033841,
+        "Rank-10": 87.1404399323181,
+        "Rank-20": 91.70896785109983
+      },
+      "parameters": 100787334,
+      "trainable_parameters": 2674822,
+      "stage_epochs": 50,
+      "pipeline_epochs": 100,
+      "benchmark_selected": true,
+      "earliest_max_mAP": true,
+      "attempts": 705,
+      "actual_updates": 705,
+      "amp_skips": 0,
+      "forward_coverage": 1032,
+      "successful_update_coverage": 1032,
+      "full_epoch_cumulative_accounting": true
+    },
+    "AH_axis_shared": {
+      "selected_epoch": 5,
+      "last": {
+        "mAP": 51.22783723534222,
+        "mINP": 26.574635806083275,
+        "Rank-1": 68.18950930626058,
+        "Rank-5": 81.7258883248731,
+        "Rank-10": 87.30964467005076,
+        "Rank-20": 91.70896785109983
+      },
+      "best": {
+        "mAP": 51.487547963923376,
+        "mINP": 26.856383780972475,
+        "Rank-1": 68.52791878172589,
+        "Rank-5": 82.23350253807106,
+        "Rank-10": 87.64805414551607,
+        "Rank-20": 92.2165820642978
+      },
+      "parameters": 100787334,
+      "trainable_parameters": 2674822,
+      "stage_epochs": 50,
+      "pipeline_epochs": 100,
+      "benchmark_selected": true,
+      "earliest_max_mAP": true,
+      "attempts": 705,
+      "actual_updates": 705,
+      "amp_skips": 0,
+      "forward_coverage": 1032,
+      "successful_update_coverage": 1032,
+      "full_epoch_cumulative_accounting": true
+    }
+  },
+  "native_records": {
+    "AH_frequency_shared": {
+      "attempts": 3,
+      "updates": 3,
+      "skips": 0,
+      "strict_reload_recorded": true,
+      "positive_finite_gradient_names": 103,
+      "recorded_contracts_checked": true,
+      "warm_full00_recorded_feature_max_abs_difference": {
+        "query": 0.0,
+        "gallery": 0.0
+      }
+    },
+    "AH_axis_shared": {
+      "attempts": 3,
+      "updates": 3,
+      "skips": 0,
+      "strict_reload_recorded": true,
+      "positive_finite_gradient_names": 103,
+      "recorded_contracts_checked": true,
+      "warm_full00_recorded_feature_max_abs_difference": {
+        "query": 0.0,
+        "gallery": 0.0
+      }
+    }
+  },
+  "epoch_export_checks": {
+    "strong_full5632": {
+      "epochs": 50,
+      "perquery_rows": 29550,
+      "CMC50_groups_and_six_metrics": true,
+      "max_error_pp": 4.263256414560601e-14
+    },
+    "AH_frequency_shared": {
+      "epochs": 50,
+      "perquery_rows": 29550,
+      "CMC50_groups_and_six_metrics": true,
+      "max_error_pp": 4.263256414560601e-14
+    },
+    "AH_axis_shared": {
+      "epochs": 50,
+      "perquery_rows": 29550,
+      "CMC50_groups_and_six_metrics": true,
+      "max_error_pp": 2.842170943040401e-14
+    }
+  },
+  "independent_CPU_reduction": {
+    "six_metrics": {
+      "rows": 4,
+      "all_fields_recomputed": true,
+      "max_numeric_error": 0.0
+    },
+    "group_metrics": {
+      "rows": 360,
+      "all_fields_recomputed": true,
+      "max_numeric_error": 0.0
+    },
+    "state_metrics": {
+      "rows": 8,
+      "all_fields_recomputed": true,
+      "max_numeric_error": 0.0
+    },
+    "training_curves": {
+      "rows": 100,
+      "all_fields_recomputed": true,
+      "max_numeric_error": 0.0
+    },
+    "comparisons": {
+      "rows": 11,
+      "all_fields_recomputed": true,
+      "max_numeric_error": 2.1316282072803006e-14
+    },
+    "paired_query_changes": {
+      "rows": 6501,
+      "all_fields_recomputed": true,
+      "max_numeric_error": 0.0
+    }
+  },
+  "independent_comparisons": [
+    {
+      "model": "AH_frequency_shared",
+      "reference": "original_DeMo",
+      "mAP": 4.306403648914809,
+      "mINP": 3.0429391585445416,
+      "Rank-1": 4.737732656514382,
+      "Rank-5": 1.8612521150592158,
+      "Rank-10": 2.368866328257184,
+      "Rank-20": 1.8612521150592158,
+      "rank1_rescued": 52,
+      "rank1_harmed": 24,
+      "AP_improved": 370,
+      "AP_worsened": 204
+    },
+    {
+      "model": "AH_frequency_shared",
+      "reference": "strong_full5632",
+      "mAP": 0.04082729313535083,
+      "mINP": 0.007023396475943855,
+      "Rank-1": 0.33840947546531197,
+      "Rank-5": -0.16920473773265599,
+      "Rank-10": -0.16920473773265599,
+      "Rank-20": -0.33840947546531197,
+      "rank1_rescued": 3,
+      "rank1_harmed": 1,
+      "AP_improved": 272,
+      "AP_worsened": 234
+    },
+    {
+      "model": "AH_frequency_shared_10",
+      "reference": "AH_frequency_shared_00",
+      "mAP": -0.038768596132328526,
+      "mINP": -0.04561103031776881,
+      "Rank-1": -0.16920473773265599,
+      "Rank-5": -0.16920473773265599,
+      "Rank-10": 0.0,
+      "Rank-20": -0.16920473773265599,
+      "rank1_rescued": 0,
+      "rank1_harmed": 1,
+      "AP_improved": 177,
+      "AP_worsened": 218
+    },
+    {
+      "model": "AH_frequency_shared_01",
+      "reference": "AH_frequency_shared_00",
+      "mAP": -0.008573980688872496,
+      "mINP": 0.02527830174335577,
+      "Rank-1": -0.16920473773265599,
+      "Rank-5": 0.0,
+      "Rank-10": 0.0,
+      "Rank-20": 0.0,
+      "rank1_rescued": 0,
+      "rank1_harmed": 1,
+      "AP_improved": 203,
+      "AP_worsened": 165
+    },
+    {
+      "model": "AH_frequency_shared_11",
+      "reference": "AH_frequency_shared_00",
+      "mAP": 0.04082729313535083,
+      "mINP": 0.007023396475943855,
+      "Rank-1": 0.33840947546531197,
+      "Rank-5": -0.16920473773265599,
+      "Rank-10": -0.16920473773265599,
+      "Rank-20": -0.33840947546531197,
+      "rank1_rescued": 3,
+      "rank1_harmed": 1,
+      "AP_improved": 272,
+      "AP_worsened": 234
+    },
+    {
+      "model": "AH_axis_shared",
+      "reference": "original_DeMo",
+      "mAP": 4.322859516695807,
+      "mINP": 3.3534225465762972,
+      "Rank-1": 4.568527918781726,
+      "Rank-5": 2.030456852791872,
+      "Rank-10": 2.8764805414551518,
+      "Rank-20": 2.368866328257184,
+      "rank1_rescued": 50,
+      "rank1_harmed": 23,
+      "AP_improved": 380,
+      "AP_worsened": 195
+    },
+    {
+      "model": "AH_axis_shared",
+      "reference": "strong_full5632",
+      "mAP": 0.05728316091634866,
+      "mINP": 0.31750678450769954,
+      "Rank-1": 0.16920473773265599,
+      "Rank-5": 0.0,
+      "Rank-10": 0.33840947546531197,
+      "Rank-20": 0.16920473773265599,
+      "rank1_rescued": 2,
+      "rank1_harmed": 1,
+      "AP_improved": 291,
+      "AP_worsened": 190
+    },
+    {
+      "model": "AH_axis_shared_10",
+      "reference": "AH_axis_shared_00",
+      "mAP": -0.08284407252539694,
+      "mINP": 0.024483135125461075,
+      "Rank-1": -0.33840947546531197,
+      "Rank-5": -0.16920473773265599,
+      "Rank-10": 0.16920473773265599,
+      "Rank-20": -0.33840947546531197,
+      "rank1_rescued": 0,
+      "rank1_harmed": 2,
+      "AP_improved": 216,
+      "AP_worsened": 181
+    },
+    {
+      "model": "AH_axis_shared_01",
+      "reference": "AH_axis_shared_00",
+      "mAP": -0.03213567476421275,
+      "mINP": 0.02140212797676,
+      "Rank-1": -0.16920473773265599,
+      "Rank-5": 0.0,
+      "Rank-10": 0.16920473773265599,
+      "Rank-20": -0.16920473773265599,
+      "rank1_rescued": 0,
+      "rank1_harmed": 1,
+      "AP_improved": 185,
+      "AP_worsened": 134
+    },
+    {
+      "model": "AH_axis_shared_11",
+      "reference": "AH_axis_shared_00",
+      "mAP": 0.05728316091634866,
+      "mINP": 0.31750678450769954,
+      "Rank-1": 0.16920473773265599,
+      "Rank-5": 0.0,
+      "Rank-10": 0.33840947546531197,
+      "Rank-20": 0.16920473773265599,
+      "rank1_rescued": 2,
+      "rank1_harmed": 1,
+      "AP_improved": 291,
+      "AP_worsened": 190
+    },
+    {
+      "model": "AH_axis_shared",
+      "reference": "AH_frequency_shared",
+      "mAP": 0.016455867780997835,
+      "mINP": 0.3104833880317557,
+      "Rank-1": -0.16920473773265599,
+      "Rank-5": 0.16920473773265599,
+      "Rank-10": 0.507614213197968,
+      "Rank-20": 0.507614213197968,
+      "rank1_rescued": 2,
+      "rank1_harmed": 3,
+      "AP_improved": 263,
+      "AP_worsened": 240
+    }
+  ],
+  "paper_target_checks": {
+    "original_DeMo": {
+      "met": false,
+      "mAP_margin_pp": -3.035311552772427,
+      "Rank_1_margin_pp": 3.1593908629441714
+    },
+    "strong_full5632": {
+      "met": true,
+      "mAP_margin_pp": 1.2302648030070173,
+      "Rank_1_margin_pp": 7.558714043993234
+    },
+    "AH_frequency_shared": {
+      "met": true,
+      "mAP_margin_pp": 1.2710920961423895,
+      "Rank_1_margin_pp": 7.897123519458546
+    },
+    "AH_axis_shared": {
+      "met": true,
+      "mAP_margin_pp": 1.2875479639233731,
+      "Rank_1_margin_pp": 7.72791878172589
+    }
+  },
+  "fixed_state_interpretation": {
+    "00": "Frozen teacher full5632 descriptor: private5120/public512 with .75/.25 metric weights; actual distances and all query rows equal teacher.",
+    "10": "Independent pre-condition m0 pooled across bands; calibrator recomputed with zero frequency, own relation routing, private M correction only; no joint condition/psi/PI path.",
+    "01": "Independent pre-condition f0; separately recomputed gate and relation mass, using explicitly frozen frequency_expert.pool_score for independent band pooling; private F correction only.",
+    "11": "Conditioned m1/f1, joint relation-band route, recomputed gates and relation-local M/F/PI corrections; private cap.10 followed by frozen public512 block.",
+    "qualification": "All are interventions of the same selected joint checkpoint. They are not separately trained single experts and do not isolate the causal effect of conditional messages, psi or PI. Ordinary frequency_shared is a matched two-expert control with unstructured source pooling, not a trained F-only model."
+  },
+  "objective_and_freeze_contract": {
+    "main": "actual full5632 unit batch-hard hinge margin.6 + CE.05",
+    "M_F_auxiliary": "weight.001 each on first11 projected per-relation normalized mean512; original auxiliary CE/soft triplet retained",
+    "contribution_regression_weight": 0,
+    "partial_CE_and_triplet_weights": [
+      0,
+      0
+    ],
+    "partial_forward_and_mining_retained": true,
+    "two_backwards_and_fused_BN_calls": 2,
+    "sampling": "P16/K4/B64",
+    "optimizer": "fresh Adam; GradScaler initial512",
+    "frozen": [
+      "BACKBONE",
+      "rgb_reduce",
+      "nir_reduce",
+      "tir_reduce",
+      "generalFusion",
+      "shared_projection",
+      "modality_expert.pool_score.weight",
+      "frequency_expert.pool_score.weight",
+      "source-declared BN biases"
+    ],
+    "identity_plus_public_frozen_tensors_per_arm": 999,
+    "native_active_names_each": 103,
+    "total_parameters_each": 100787334,
+    "trainable_parameters_each": 2674822
+  },
+  "claims": [
+    {
+      "claim": "Completed full50 per arm/eight normal fixed states with full official GT",
+      "impact": "supported"
+    },
+    {
+      "claim": "MSVR310 paper+1 numerical targets50.2/60.8 are met by this selected dual row",
+      "impact": "supported",
+      "qualification": "The selected teacher already meets the targets; baseline credit."
+    },
+    {
+      "claim": "Expert incremental effect over head16 teacher at the selected single seed",
+      "impact": "supported_as_small_descriptive_gain",
+      "delta_mAP_pp": 0.05728316091635577,
+      "delta_Rank1_pp": 0.16920473773265599,
+      "rank1_rescues": 2,
+      "rank1_harms": 1
+    },
+    {
+      "claim": "Dual improves both mAP and Rank1 versus matched ordinary",
+      "impact": "unsupported",
+      "reason": "mAP +.01645586778098 pp; Rank1 -.16920473773266 pp; 2 rescues and3 harms."
+    },
+    {
+      "claim": "Fixed10/01 prove retrained single-expert quality or causal conditional/psi/PI contribution",
+      "impact": "unsupported"
+    },
+    {
+      "claim": "Missing-modal success, multiseed robustness or untouched-test generalization",
+      "impact": "outside_scope_not_established"
+    }
+  ],
+  "minimal_actions": [
+    "Retain the existing explicit single-seed, benchmark-selection, teacher50+expert50 and baseline-credit qualifiers when publishing these results.",
+    "Describe10/01 as fixed joint-checkpoint diagnostics with independent pre-condition evidence/gates/routes and frozen F pool scorer. No source change or new defensive code is indicated by this audit."
+  ],
+  "limitations": [
+    "The reviewer imported no torch, model, or CUDA and ran no neural inference, optimizer step, fresh training, missing-state evaluation or checkpoint re-evaluation. Native gradients/reload and warm full00 feature comparisons are producer-recorded evidence checked against source and actual saved tensors, not independently replayed neural runs.",
+    "Only teacher and both full11 query/gallery feature arrays are stored. Their distance consistency was independently recomputed in float64; 10/01 store distances but no feature vectors, so feature-to-distance replay or an independent weight-to-feature replay is unavailable for those states.",
+    "State00 distances are byte-identical to teacher distances and state11 distances are byte-identical to selected fullnormal distances. Warm original feature parity and runtime tensor-version invariance remain recorded checks; no historical runtime was reopened.",
+    "Every expert epoch and every selected-teacher epoch has per-query CSV, six metrics, groups and CMC50 checked, but raw distances and checkpoint tensors for each intermediate/last epoch are not retained here. Last-epoch metrics are validated exports, not a retained last checkpoint.",
+    "The independent count of active parameter elements uses actual tensor metadata and a source-derived frozen-parameter set that exactly matches each native gradient-name set. PyTorch state_dict does not itself store requires_grad execution history.",
+    "The official installed files and their three-modality existence were checked; independent external re-download identity and original author dataset archive hashes were not part of this bounded request.",
+    "The official benchmark selected each best checkpoint; teacher50+expert50, one seed, selected head16 setting and the completed trial scope must remain disclosed. This audit does not count or certify all historical research search budget.",
+    "The paper targets are audited against the sealed project policy50.2/60.8, separately from original_DeMo reproduction47.164688/63.959391. No other dataset acceptance threshold is created by this report.",
+    "Actual host/model/reasoning route was not independently attested. Requested gpt-6-astra/max; actual routing UNATTESTED; same-family semantic review remains provisional."
+  ],
+  "execution": {
+    "local_python": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe -X utf8 -B -S",
+    "local_dependency_installations": 0,
+    "readonly_remote_CPU_invocations": 1,
+    "remote_exit_code": 0,
+    "remote_wall_seconds": 14.08090877532959,
+    "thread_limits": 4,
+    "private_transport_receipt": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_MS_head16_experts_full_normal_run01\\remote_cpu_actual_receipt.json",
+    "actual_stdout_preserved": true,
+    "actual_stderr_preserved": true,
+    "actual_stderr_bytes": 0,
+    "new_neural_calls": 0,
+    "new_optimizer_updates": 0,
+    "torch_model_CUDA_imports": 0,
+    "remote_writes": 0,
+    "input_mutations": 0,
+    "cleanup_actions": 0,
+    "current_RGB_queries": 0,
+    "GPU_temperature_power_process_resource_queries": 0
+  },
+  "cleanup_authorization": "No cleanup performed or authorized by this report; stop before any cleanup."
+}
