@@ -1,0 +1,96 @@
+{
+  "status": "USER_CORRECTED_ACCEPTANCE_REFERENCE_PAPER_NOT_OWN_REPRODUCTION",
+  "at": "2026-10-16T08:54:41+08:00",
+  "source": {
+    "title": "DeMo: Decoupled Feature-Based Mixture of Experts for Multi-Modal Object Re-Identification",
+    "url": "https://arxiv.org/html/2412.10650v1",
+    "normal_tables": [
+      1,
+      2
+    ],
+    "missing_tables": [
+      3,
+      4
+    ],
+    "row": "DeMo dagger / CLIP; primary reported configuration, not separate metric maxima from head sweeps"
+  },
+  "normal": {
+    "RGBNT201": {
+      "paper": {
+        "mAP": 79.0,
+        "Rank_1": 82.3,
+        "Rank_5": 88.8,
+        "Rank_10": 92.0
+      },
+      "action": "Preserve existing K whole checkpoint and six metrics; no new training"
+    },
+    "RGBNT100": {
+      "paper": {
+        "mAP": 86.2,
+        "Rank_1": 97.6
+      },
+      "required_gain_points": 1.0,
+      "target": {
+        "mAP": 87.2,
+        "Rank_1": 98.6
+      }
+    },
+    "MSVR310": {
+      "paper": {
+        "mAP": 49.2,
+        "Rank_1": 59.8
+      },
+      "required_gain_points": 1.0,
+      "target": {
+        "mAP": 50.2,
+        "Rank_1": 60.8
+      }
+    }
+  },
+  "symmetric_missing_paper6": {
+    "available_sets": [
+      "NT",
+      "RT",
+      "RN",
+      "T",
+      "N",
+      "R"
+    ],
+    "query_gallery_same_set": true,
+    "RGBNT201": {
+      "paper_mean": {
+        "mAP": 50.7,
+        "Rank_1": 50.8
+      },
+      "target_mean": {
+        "mAP": 51.7,
+        "Rank_1": 51.8
+      }
+    },
+    "RGBNT100": {
+      "paper_mean": {
+        "mAP": 68.7,
+        "Rank_1": 85.5
+      },
+      "target_mean": {
+        "mAP": 69.7,
+        "Rank_1": 86.5
+      }
+    },
+    "MSVR310": {
+      "paper_value_reported": false,
+      "paper_target_established": false,
+      "scope": "Same-setting project extension; report all six conditions and same-protocol DeMo control. Do not invent a paper number."
+    }
+  },
+  "reporting": "BestSingle, all six metrics from one run/checkpoint, actual search budget and selection retained; dataset-internal settings allowed, matched ordinary budget.",
+  "implementation": "Do not alter the admitted cutoff training, source seals, selection rule, observer or historical reports. Any legacy both_plus1 field relative to our reproduction is historical diagnostic only; assess final acceptance separately against this paper policy.",
+  "status_of_preserved_candidates": {
+    "RGBNT100": "AV below paper targets; unchanged",
+    "MSVR310": "AH below paper+1 mAP target; numerical acceptance remains unmet",
+    "RGBNT201": "K retained"
+  },
+  "new_neural_calls": 0,
+  "training_progress_queries": 0,
+  "goal": "ACTIVE_UNMET"
+}
