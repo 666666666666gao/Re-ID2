@@ -1,0 +1,137 @@
+{
+  "verdict": "PASS",
+  "status": "PASS_SOURCE_ONLY",
+  "scope": "NEURAL_SOURCE_ONLY; exactly five new neural drivers; R2 re-review",
+  "blocking_findings": [],
+  "non_blocking_findings": [],
+  "resolved_R1_findings": [
+    {
+      "id": "F_RANK_R1_001",
+      "resolution": "RESOLVED_AT_SOURCE_LEVEL",
+      "new_source": "rgbnt100_frequency_rank.py:35-47",
+      "evidence": [
+        "The already configured FrequencyAxisExpert instance is retained in expert; its pool MethodType, pool_score Linear, installed scorer.forward wrapper, auxiliary_fp32_calls counter and AG original_fpool binding all remain attached to the same objects.",
+        "Only values/source/query/attention/cross_band/output are replaced from a same-class rank128 instance. The unchanged AG pool uses the preserved self.pool_score and shared frame to populate F_pooled before the existing neck hook.",
+        "The router.to_frequency_query Sequential is retained; only Linear[1] changes to output128. Its LayerNorm and Tanh remain intact.",
+        "Identity assertions check the existing F/pool/pool_score/router container objects after replacement. These assertions are source code only and have not been executed in this review.",
+        "No additional wrappers/hooks were found on the replaced F components in the inspected AV dependencies; the M projected-query normalization stays on M attention.",
+        "run_r201x_RGB_auxiliary_fp32.step:23 can now access the preserved scorer counter, and its auxiliary FP32 call audit is consistent with the preserved AG F pooling path."
+      ]
+    }
+  ],
+  "R2_actual_checks": [
+    "Read R2 preparation JSON and complete new builder; compared all five current files against the exact R1 archived copies.",
+    "Recomputed all five SHA256/byte seals, matched R2 preparation, AST-parsed all five; four files are byte-identical to R1.",
+    "Verified all five R1 archive SHA256 values equal the immutable R1 report.",
+    "AST comparison after removing only the rank128 conditional body proves the rest of rgbnt100_frequency_rank.py is unchanged.",
+    "Re-read actual AG projected-auxiliary pool/frame/neck hooks, X F scorer installer and step, FrequencyAxisExpert constructor/prepare/read/pool and router conditioning code.",
+    "Traced preserved MethodType and captured original_fpool references to the retained F instance; no stale old-F object or removed scorer wrapper remains in the R2 path.",
+    "Checked registered parameter layout: replacements retain existing parameter/module names and order; the temporary expanded expert is local, not registered as another model branch. Its unused pool_score is not part of model.parameters. Source parameter totals therefore remain the independently derived R1 totals.",
+    "Checked both new constructors draw CPU initialization before .to(device) inside the CPU RNG fork, with no added seed call or CUDA random draw. M, PM/PF/PI, frozen identity objects and all other registered parameters are unchanged.",
+    "Retained the full R1 five-file contract review for the byte-identical runner/parity/evaluator/controller and unchanged optimizer/core code: exact seven decay exclusions, rank64 old/new parity, native3 per control, all-active/reload gates, paired sampling, full50, full official Q/G/GT, same best checkpoint six metrics, default masks and eight frozen states.",
+    "No implementation files were changed by this reviewer; no source functions, constructors, Torch imports, NN/native runs or GPU/process/network queries were executed."
+  ],
+  "approval": {
+    "neural_source_approved": true,
+    "neural_source_approval_scope": "R2 exact five seals only; provisional source correctness",
+    "deployment_approved": false,
+    "runtime_approved": false
+  },
+  "limitations": [
+    "PASS is source-only and does not certify actual constructor/parameter counts, the 601 frozen identity tensor count, optimizer numerical parity, CPU/CUDA RNG parity, native gradients/updates/reload, time/memory, full Q/G or retrieval results.",
+    "Default64 parity and rank128 native3 per control remain unexecuted prerequisites before formal50.",
+    "Predecessor cutoff intake56037 was not queried; its full intake/raw/archive closure and fresh result audit remain mandatory before any new native/formal work.",
+    "Runtime/deployer and future unreviewed material are outside this review. The controller COMPLETE metadata check does not substitute for external intake/result-audit admission.",
+    "No SSH/network/GPU/process queries, additional agents, Torch/NN imports or installs, deployment or source edits/deletes were performed.",
+    "Requested Astra/max; actual model and effort UNATTESTED; same-family review, provisional acceptance."
+  ],
+  "recorded_at": "2026-10-16T09:56:54.539761+08:00",
+  "reviewer": {
+    "agent_id": "/root/review_rgbnt100_f_rank_neural_20261016",
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "max",
+    "actual_model": "UNATTESTED",
+    "actual_reasoning_effort": "UNATTESTED",
+    "review_independence": "same-family",
+    "acceptance_status": "provisional"
+  },
+  "R1_review": "results/preflight/rgbnt100_F_rank_neural_source_review_20261016.json",
+  "R1_immutable_trace": ".aris/traces/experiment-bridge/2026-10-16_RGBNT100_F_rank_neural_run01/001-neural-source-review.response.md",
+  "source_files": [
+    "rgbnt100_frequency_rank.py",
+    "run_rgbnt100_frequency_rank.py",
+    "check_rgbnt100_frequency_rank_parity.py",
+    "evaluate_rgbnt100_frequency_rank_states.py",
+    "launch_rgbnt100_frequency_rank_pair.py"
+  ],
+  "arithmetic": {
+    "derivation": "F: three LN512/Linear512->r branches + source/query + four MHA(r,8) + LN(r)/Linear(r,512) + pool Linear512->1 =16*r*r+2075*r+4096; router F projection=1024+513*r.",
+    "F_rank64": 202432,
+    "F_rank128": 531840,
+    "F_delta": 329408,
+    "router_delta": 32832,
+    "total_delta": 362240,
+    "baseline_total": 99585158,
+    "baseline_trainable": 1887366,
+    "expected_total": 99947398,
+    "expected_trainable": 2249606,
+    "verification": "Independent stdlib integer arithmetic from constructor source; actual Torch model counts NOT RUN."
+  },
+  "retained_full_contract_review": [
+    "Read all five new sources and both requested F-rank plan/preparation JSON files.",
+    "AST-parsed all five new sources without importing or executing them; all PASS.",
+    "Compared exact SHA256 and byte lengths of five sources against the suite preparation; all match. Final readback comparison performed before output.",
+    "AST-parsed 82 existing local files reached through explicit imports from AV and the fixed-teacher seed factory, and inspected frequency_expert/to_frequency_query/default-device references.",
+    "Directly compared original AV/AQ optimizer wrappers with solver.make_optimizer and the new scoped optimizer: same per-parameter base groups and seven exact no-decay targets; M packed QKV remains192x64; four F packed QKV tensors follow3r x r; mid/high value weights followr x512. Parent step gradient telemetry is width-independent.",
+    "Checked default64 parity code uses the actual original AV builder and optimizer versus new rank64; compares ordered name/lr/decay groups, state tensors, CPU/CUDA RNG, and FP32/AMP four states. Dummy center ParameterList(torch.zeros(1)) supplies a real center parameter without random initialization or optimizer updates. Optimizers and original model are deleted, followed by gc.collect and empty_cache; retained snapshots/output tensors are CPU clones.",
+    "Checked rank128 constructors create CPU parameters before .to(device) under CPU fork_rng and contain no added manual_seed or CUDA random draw; no default-device/type override found in inspected parent imports. Unchanged non-F parameters remain in their original objects. R2 additionally preserves the F training wrappers as detailed in resolved_R1_findings.",
+    "Direct source diffs against predecessor cutoff runner/evaluator/controller confirm the rank argument, artifact names, statuses and frequency_hidden_width fields agree among producers/consumers.",
+    "Traced inherited full-official runner: extra50, strict best reload, earliest maximum-mAP checkpoint, six metrics from one checkpoint, three successful native updates per control, all-active-gradient gate, paired order and full8675-record coverage assertions.",
+    "Checked evaluator rebuilds rank128, strict-loads selected best, compares masks with default construction, verifies full1715Q/8575G manifests and installed GT rows, selected11 feature/distance equality, original00 per-query equality and frozen state versions; four states per control/eight total.",
+    "Traced frozen identity mapping through unchanged IDENTITY_MODULES/teacher state and assert_anchor_unchanged; no protected module is part of the replacement.",
+    "Read terminal cutoff evidence and paper target policy as local files only: cutoff axis86.07970129749621/96.61807580174927 does not replace AV; target87.2/98.6 and same-checkpoint BestSingle policy are correctly described. Full cutoff result audit was not performed."
+  ],
+  "retained_full_contract_review_note": "These source checks were completed in R1 and remain applicable after the verified rank128-only branch repair; they are not claims of runtime execution.",
+  "sources_sha256": {
+    "rgbnt100_frequency_rank.py": "38aff5f73b58d6197a9178ca4c3705d89f3daf527d166c788484c25fb37b78fe",
+    "run_rgbnt100_frequency_rank.py": "a37f4de4d2cba6910d407a3741394862c927ab346a59102c8aaa296116295c12",
+    "check_rgbnt100_frequency_rank_parity.py": "69e1dcd69d0d3031a627008b0cf72c0b4c26fe02fbae945c36db2ff9a51d3a1d",
+    "evaluate_rgbnt100_frequency_rank_states.py": "6560822768d55dd7953657dcf51b19a022101f511f719f820fae0807cf688276",
+    "launch_rgbnt100_frequency_rank_pair.py": "d300ad8a16220b467a2d665521b752bdee0b643315263f6f9baf77225f33de64"
+  },
+  "exact_five_seals": {
+    "rgbnt100_frequency_rank.py": {
+      "sha256": "38aff5f73b58d6197a9178ca4c3705d89f3daf527d166c788484c25fb37b78fe",
+      "bytes": 4824,
+      "AST": "PASS",
+      "changed_from_R1": true
+    },
+    "run_rgbnt100_frequency_rank.py": {
+      "sha256": "a37f4de4d2cba6910d407a3741394862c927ab346a59102c8aaa296116295c12",
+      "bytes": 1361,
+      "AST": "PASS",
+      "changed_from_R1": false
+    },
+    "check_rgbnt100_frequency_rank_parity.py": {
+      "sha256": "69e1dcd69d0d3031a627008b0cf72c0b4c26fe02fbae945c36db2ff9a51d3a1d",
+      "bytes": 5835,
+      "AST": "PASS",
+      "changed_from_R1": false
+    },
+    "evaluate_rgbnt100_frequency_rank_states.py": {
+      "sha256": "6560822768d55dd7953657dcf51b19a022101f511f719f820fae0807cf688276",
+      "bytes": 7225,
+      "AST": "PASS",
+      "changed_from_R1": false
+    },
+    "launch_rgbnt100_frequency_rank_pair.py": {
+      "sha256": "d300ad8a16220b467a2d665521b752bdee0b643315263f6f9baf77225f33de64",
+      "bytes": 9641,
+      "AST": "PASS",
+      "changed_from_R1": false
+    }
+  },
+  "source_edits": 0,
+  "runtime_calls": 0,
+  "trace_directory": ".aris/traces/experiment-bridge/2026-10-16_RGBNT100_F_rank_neural_run01/"
+}

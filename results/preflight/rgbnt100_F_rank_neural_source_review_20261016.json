@@ -1,0 +1,114 @@
+{
+  "verdict": "FAIL",
+  "status": "FAIL_SOURCE_ONLY",
+  "scope": "neural SOURCE_ONLY; exactly five new drivers",
+  "reviewer": {
+    "agent_id": "/root/review_rgbnt100_f_rank_neural_20261016",
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "max",
+    "actual_model": "UNATTESTED",
+    "actual_reasoning_effort": "UNATTESTED",
+    "review_independence": "same-family",
+    "acceptance_status": "provisional"
+  },
+  "blocking_findings": [
+    {
+      "id": "F_RANK_R1_001",
+      "severity": "P1",
+      "file": "rgbnt100_frequency_rank.py",
+      "line": 39,
+      "title": "Whole-object F replacement discards required AV auxiliary wrappers",
+      "evidence": [
+        "build_rank first calls build_selected('AV') at line30, then replaces model.frequency_expert with a fresh FrequencyAxisExpert at line39.",
+        "run_r201x_RGB_auxiliary_fp32.py:15-18 installs rgb_auxiliary_frequency_score_fp32.install; that installer at lines7-23 stores auxiliary_fp32_calls and overrides the existing pool_score.forward.",
+        "run_r201x_RGB_auxiliary_fp32.py:23 reads scorer.auxiliary_fp32_calls before its parent training step. The new plain Linear constructed at axis_collaboration.py:58 has no such attribute.",
+        "run_r201ag_RGB_coordinate_metric.py:7-9 installs routed_projected_auxiliary_rgb_coordinate_metric.install_projected_auxiliary through the S builder. Its lines42-50/87 bind the stateful F pool; lines24-28/85 retain a frequency_neck pre-hook that reads frame['F_pooled'].",
+        "Replacing F also discards this bound pool while leaving the model/projection/neck hooks installed. The projected F auxiliary loss contract and frame counters are therefore broken even if only the missing scorer attribute were repaired."
+      ],
+      "impact": "Both rank128 controls would stop before their first optimizer update with AttributeError: 'Linear' object has no attribute 'auxiliary_fp32_calls'. The lost AG pool is a second consequence of the same replacement. This is a source-derived failure path, not an executed traceback.",
+      "minimal_repair": "Keep the already configured frequency_expert object, its bound pool method, and the existing dim512 pool_score with its FP32 wrapper and weights. Replace only values/source/query/attention/cross_band/output with the configured same-class rank128 children/parameters; replace only Linear[1] inside existing router.to_frequency_query. No new installer layer is required.",
+      "additional_wrapper_check": "The inspected static AV/seed local dependency closure has no other installed wrappers/hooks on F values/source/query/attention/cross_band/output or router.to_frequency_query. AG original_fpool remains bound to the existing F object, so preserving that instance retains its correct self and closure."
+    }
+  ],
+  "non_blocking_findings": [],
+  "arithmetic": {
+    "derivation": "F: three LN512/Linear512->r branches + source/query + four MHA(r,8) + LN(r)/Linear(r,512) + pool Linear512->1 =16*r*r+2075*r+4096; router F projection=1024+513*r.",
+    "F_rank64": 202432,
+    "F_rank128": 531840,
+    "F_delta": 329408,
+    "router_delta": 32832,
+    "total_delta": 362240,
+    "baseline_total": 99585158,
+    "baseline_trainable": 1887366,
+    "expected_total": 99947398,
+    "expected_trainable": 2249606,
+    "verification": "Independent stdlib integer arithmetic from constructor source; actual Torch model counts NOT RUN."
+  },
+  "actual_checks": [
+    "Read all five new sources and both requested F-rank plan/preparation JSON files.",
+    "AST-parsed all five new sources without importing or executing them; all PASS.",
+    "Compared exact SHA256 and byte lengths of five sources against the suite preparation; all match. Final readback comparison performed before output.",
+    "AST-parsed 82 existing local files reached through explicit imports from AV and the fixed-teacher seed factory, and inspected frequency_expert/to_frequency_query/default-device references.",
+    "Directly compared original AV/AQ optimizer wrappers with solver.make_optimizer and the new scoped optimizer: same per-parameter base groups and seven exact no-decay targets; M packed QKV remains192x64; four F packed QKV tensors follow3r x r; mid/high value weights followr x512. Parent step gradient telemetry is width-independent.",
+    "Checked default64 parity code uses the actual original AV builder and optimizer versus new rank64; compares ordered name/lr/decay groups, state tensors, CPU/CUDA RNG, and FP32/AMP four states. Dummy center ParameterList(torch.zeros(1)) supplies a real center parameter without random initialization or optimizer updates. Optimizers and original model are deleted, followed by gc.collect and empty_cache; retained snapshots/output tensors are CPU clones.",
+    "Checked rank128 constructors create CPU parameters before .to(device) under CPU fork_rng and contain no added manual_seed or CUDA random draw; no default-device/type override found in inspected parent imports. Unchanged non-F parameters remain in their original objects. This does not repair the removed F training wrappers.",
+    "Direct source diffs against predecessor cutoff runner/evaluator/controller confirm the rank argument, artifact names, statuses and frequency_hidden_width fields agree among producers/consumers.",
+    "Traced inherited full-official runner: extra50, strict best reload, earliest maximum-mAP checkpoint, six metrics from one checkpoint, three successful native updates per control, all-active-gradient gate, paired order and full8675-record coverage assertions.",
+    "Checked evaluator rebuilds rank128, strict-loads selected best, compares masks with default construction, verifies full1715Q/8575G manifests and installed GT rows, selected11 feature/distance equality, original00 per-query equality and frozen state versions; four states per control/eight total.",
+    "Traced frozen identity mapping through unchanged IDENTITY_MODULES/teacher state and assert_anchor_unchanged; no protected module is part of the replacement.",
+    "Read terminal cutoff evidence and paper target policy as local files only: cutoff axis86.07970129749621/96.61807580174927 does not replace AV; target87.2/98.6 and same-checkpoint BestSingle policy are correctly described. Full cutoff result audit was not performed."
+  ],
+  "limitations": [
+    "Source-only review cannot certify constructors, actual parameter/tensor counts (including the 601 frozen identity tensors), optimizer numerical parity, FP32/AMP parity, native gradients/Adam/reload, memory/time, full Q/G or retrieval results.",
+    "Rank64 parity cannot expose this rank128-only object-replacement bug.",
+    "Predecessor cutoff intake continuation/session56037 was not queried. Its full result audit and intake/raw/archive closure remain mandatory before new native/formal admission.",
+    "The five-file controller checks predecessor COMPLETE metadata; independent intake/full result audit and deployment admission remain external prerequisites. Runtime/deployer material is out of this approval scope.",
+    "No Torch/NN imports or installations, model calls, updates, SSH/network/GPU/process queries, source edits/deletes, deployment, or additional agents were performed.",
+    "Requested Astra/max route is UNATTESTED; review independence is same-family and acceptance provisional."
+  ],
+  "approval": {
+    "neural_source_approved": false,
+    "deployment_approved": false,
+    "runtime_approved": false
+  },
+  "trace_directory": ".aris/traces/experiment-bridge/2026-10-16_RGBNT100_F_rank_neural_run01/",
+  "source_files": [
+    "rgbnt100_frequency_rank.py",
+    "run_rgbnt100_frequency_rank.py",
+    "check_rgbnt100_frequency_rank_parity.py",
+    "evaluate_rgbnt100_frequency_rank_states.py",
+    "launch_rgbnt100_frequency_rank_pair.py"
+  ],
+  "recorded_at": "2026-10-16T09:52:26.880518+08:00",
+  "sources_sha256": {
+    "rgbnt100_frequency_rank.py": "e96531c718b947d11ae4e8e1bb3c2059ae6486c9383d18214bca937721490bb3",
+    "run_rgbnt100_frequency_rank.py": "a37f4de4d2cba6910d407a3741394862c927ab346a59102c8aaa296116295c12",
+    "check_rgbnt100_frequency_rank_parity.py": "69e1dcd69d0d3031a627008b0cf72c0b4c26fe02fbae945c36db2ff9a51d3a1d",
+    "evaluate_rgbnt100_frequency_rank_states.py": "6560822768d55dd7953657dcf51b19a022101f511f719f820fae0807cf688276",
+    "launch_rgbnt100_frequency_rank_pair.py": "d300ad8a16220b467a2d665521b752bdee0b643315263f6f9baf77225f33de64"
+  },
+  "exact_five_seals": {
+    "rgbnt100_frequency_rank.py": {
+      "sha256": "e96531c718b947d11ae4e8e1bb3c2059ae6486c9383d18214bca937721490bb3",
+      "bytes": 4481
+    },
+    "run_rgbnt100_frequency_rank.py": {
+      "sha256": "a37f4de4d2cba6910d407a3741394862c927ab346a59102c8aaa296116295c12",
+      "bytes": 1361
+    },
+    "check_rgbnt100_frequency_rank_parity.py": {
+      "sha256": "69e1dcd69d0d3031a627008b0cf72c0b4c26fe02fbae945c36db2ff9a51d3a1d",
+      "bytes": 5835
+    },
+    "evaluate_rgbnt100_frequency_rank_states.py": {
+      "sha256": "6560822768d55dd7953657dcf51b19a022101f511f719f820fae0807cf688276",
+      "bytes": 7225
+    },
+    "launch_rgbnt100_frequency_rank_pair.py": {
+      "sha256": "d300ad8a16220b467a2d665521b752bdee0b643315263f6f9baf77225f33de64",
+      "bytes": 9641
+    }
+  },
+  "source_edits": 0,
+  "actual_runtime_calls": 0
+}
