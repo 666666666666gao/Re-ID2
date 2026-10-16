@@ -1,0 +1,410 @@
+{
+  "status": "FINAL",
+  "verdict": "FAIL",
+  "review_scope": "SOURCE_ONLY",
+  "review_round": "R1",
+  "at": "2026-10-16T11:40:42+08:00",
+  "skill": "experiment-bridge CODE_REVIEW",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_public_metric_weight_CPU_source_review_request_20261016.json",
+  "output": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_public_metric_weight_CPU_source_review_20261016.json",
+  "trace_root": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_run01",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "blocking_findings": [
+    {
+      "id": "B1",
+      "priority": "P1",
+      "title": "Model-bearing imports perform a GPU availability query before CPU main begins",
+      "location": {
+        "path": "diagnose_msvr_public_metric_weights_CPU.py",
+        "line": 13
+      },
+      "evidence": [
+        "diagnose_msvr_public_metric_weights_CPU.py:13-15 imports full_evaluation, official_training_data and run_experiment at module import time.",
+        "full_evaluation.py:16 imports run_experiment; official_training_data.py:7 also imports full_evaluation.",
+        "run_experiment.py:12 imports modeling.make_model; modeling/make_model.py:8 imports modeling.meta_arch; modeling/meta_arch.py:4 imports modeling.make_model_clipreid.",
+        "modeling/make_model_clipreid.py:4 imports the modeling.clip package, whose __init__.py:1 imports .clip; make_model_clipreid.py:173 also imports .clip.clip.",
+        "modeling/clip/clip.py:86 defines load(..., device=\"cuda\" if torch.cuda.is_available() else \"cpu\", ...). Python evaluates this default expression when importing the module, even though load() is never called."
+      ],
+      "impact": "The proposed compute process invokes torch.cuda.is_available() before analyzer main(), violating the explicit no-GPU-query CPU-only scope. CUDA_VISIBLE_DEVICES being empty masks visibility but does not remove this query call. The final torch.cuda.is_initialized() assertion checks a different property and cannot establish zero GPU queries. This is a static reachable-call finding; no GPU query was executed during review.",
+      "minimum_fix": "Keep changes confined to the new CPU analyzer. Remove its imports of full_evaluation, official_training_data and run_experiment; make the required pure distance/GT metric/metadata/JSON code available without importing model-bearing modules, and enumerate installed MSVR filenames with the same reader semantics and ordering. Preserve the existing FP32 Torch CPU distance expression, stable ranking, scene exclusion and parity assertions. Do not edit old or live model/training sources. Re-seal and perform a fresh source review before any execution.",
+      "verification_after_fix": "Inspect the new analyzer import closure for any model or GPU-availability calls; compare the self-contained pure helpers and installed filename parsing/order with the reviewed originals. Runtime parity remains a later separate gate."
+    }
+  ],
+  "nonblocking_findings": [],
+  "correctness_evidence": [
+    {
+      "topic": "Metric weight scaling",
+      "status": "CORRECT_SOURCE",
+      "locations": [
+        "diagnose_msvr_public_metric_weights_CPU.py:46",
+        "diagnose_msvr_public_metric_weights_CPU.py:55",
+        "shared_identity_axis.py:17",
+        "shared_identity_axis.py:20",
+        "msvr_full_identity_reference.py:30"
+      ],
+      "detail": "Private5120 and public512 block squared norms are asserted to .75/.25. Rescaling uses sqrt((1-w)/.75) and sqrt(w/.25), giving the requested metric weights under squared Euclidean distance. The original w=.25 directly reuses the original tensor, asserts np.array_equal against the stored distances and compares all six stored metrics at 1e-8 tolerance; this is exact distance parity plus tight numeric metric parity, not an observed runtime result."
+    },
+    {
+      "topic": "Fixed checkpoints and equal budget",
+      "status": "CORRECT_SOURCE",
+      "locations": [
+        "results/preflight/msvr_public_metric_weight_candidate_plan_20261016.json:6",
+        "diagnose_msvr_public_metric_weights_CPU.py:38",
+        "diagnose_msvr_public_metric_weights_CPU.py:89"
+      ],
+      "detail": "Exactly strong_DeMo E37, AH_frequency_shared E32 and AH_axis_shared E29 are recorded, each from one fixed cache and each evaluated at .125/.25/.5. There is no checkpoint/epoch/seed reselection, per-query weight routing, neural call or optimizer call in analyzer main. Nine cases and same-weight cross-model deltas are explicit."
+    },
+    {
+      "topic": "Installed GT and full metrics",
+      "status": "CORRECT_SOURCE",
+      "locations": [
+        "official_training_data.py:14",
+        "official_training_data.py:20",
+        "full_evaluation.py:20",
+        "full_evaluation.py:68",
+        "data/datasets/msvr310.py:67",
+        "utils/reid_evaluation.py:8",
+        "diagnose_msvr_public_metric_weights_CPU.py:31",
+        "diagnose_msvr_public_metric_weights_CPU.py:71"
+      ],
+      "detail": "Full installed counts 1032/591/1055 are required; query/gallery names, IDs, cameras and scenes must exactly match every cache. Both exclusion arguments use scenes. Same-ID AND same-scene junk is removed, stable sorting is shared, invalid queries are reported, AP/INP and Rank1/5/10/20 use actual GT identities, and each case writes per-query CSV plus six metrics, CMC1-50 and camera/scene/identity groups. No teacher predictions supply GT."
+    },
+    {
+      "topic": "Selection and cached-vs-deployed limits",
+      "status": "CORRECT_SOURCE",
+      "locations": [
+        "diagnose_msvr_public_metric_weights_CPU.py:106",
+        "results/preflight/msvr_public_metric_weight_candidate_plan_20261016.json:67",
+        "run_full_official_experiment.py:85"
+      ],
+      "detail": "The finite benchmark weight search and original .25-selected/trained checkpoints are disclosed; no untouched-test, causal expert or deployed-equivalence claim is made. A chosen weight explicitly requires actual descriptor-path implementation/parity before replacing the preserved model."
+    },
+    {
+      "topic": "CPU scope aside from B1",
+      "status": "PARTIAL_SOURCE_BLOCKED_BY_B1",
+      "locations": [
+        "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py:87",
+        "diagnose_msvr_public_metric_weights_CPU.py:26",
+        "diagnose_msvr_public_metric_weights_CPU.py:98"
+      ],
+      "detail": "Remote compute sets empty CUDA_VISIBLE_DEVICES and OMP/MKL/OPENBLAS thread limits of four, and analyzer sets Torch CPU threads to four. Features stay on CPU. Analyzer main does not construct models, load images/checkpoints, run NN/training or read F-rank logs/status/PIDs/GPU state. The import-time GPU query in B1 prevents overall CPU-boundary acceptance."
+    },
+    {
+      "topic": "Transport capture and command quoting",
+      "status": "NO_ADDITIONAL_BLOCKER_FOUND_SOURCE_ONLY",
+      "locations": [
+        "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py:23",
+        "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py:38",
+        "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py:42"
+      ],
+      "detail": "Each completed subprocess gets its real returncode and distinct captured stdout/stderr files; nonzero exits are recorded before check_returncode aborts. Thirteen planned calls are accounted for. argv lists are used locally, remote interpreter/cwd/compute argv are shlex-quoted, and generated Python path literals use repr. No retry or fallback is implemented. Existing local transport captures/proof/results/archive and remote input/output directories guard ordinary reruns. A timeout or local launch exception would abort before a completed-step receipt; no real exit code can be claimed for that path."
+    },
+    {
+      "topic": "Archive-before-cleanup and ownership",
+      "status": "CORRECT_SOURCE",
+      "locations": [
+        "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py:92",
+        "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py:105",
+        "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py:119",
+        "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py:125"
+      ],
+      "detail": "Nineteen text results are copied and size/SHA checked; three new raw NPZs are then archived on D and size/SHA checked before cleanup. The remote deletion dictionary is the three archived new NPZs, two uploaded AH cache copies, and one text tar: six files. Every candidate resolves below one of the two named fresh MSVR roots and matches size/SHA before any unlink. The original strong cache is checked before/after and lies outside those roots; original AH D caches are only read/checked and no checkpoint is in the deletion set. Local tar is removed only after verified extraction and raw archive. No recursive cleanup occurs."
+    },
+    {
+      "topic": "Private transport import closure",
+      "status": "NO_ADDITIONAL_BLOCKER_FOUND_SOURCE_ONLY",
+      "detail": "The seven private publication helper source files were inspected/AST-parsed for import-time behavior. They resolve P to the intended project, load JSON with utf-8-sig, supply streaming SHA via hashlib.file_digest, and obtain the existing fixed SSH OPTIONS from collect_results. Their publication/progress routines remain inside guarded main functions and are not called by import. No private helper was imported or executed in review."
+    }
+  ],
+  "source_checks": {
+    "requested_sources": 17,
+    "present_sources": 17,
+    "matching_source_seals": 17,
+    "python_AST_parsed": 15,
+    "JSON_parsed": 1,
+    "YAML_text_read": 1,
+    "supplementary_python_AST_parsed": 12,
+    "input_sources_modified": false,
+    "input_plan_modified": false
+  },
+  "sources_sha256": {
+    "diagnose_msvr_public_metric_weights_CPU.py": "e750e696751b41e4ff15885f8ab5f1a4528ccc57d96a791c77ba17a0432b902a",
+    "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py": "3817e7934a851aab7a66fd7231c6a79f573202e07d3b437aebde966b09dec98b",
+    "results/preflight/msvr_public_metric_weight_candidate_plan_20261016.json": "17b726d50264138bef32c859bcce3ce16fc38abac9f791604667bbe609714b9b"
+  },
+  "directly_reused_sources_sha256": {
+    "diagnose_rgbnt201_baseline_blocks.py": "545551ea240e4fec18a1c9ce668afad3b7abd4bd6823dcfbed5f23012469cc15",
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "official_training_data.py": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "run_full_official_experiment.py": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
+    "shared_identity_axis.py": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+    "run_shared_identity_experiment.py": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "data/datasets/RGBNT201.py": "1a3dda88f26efc2891322e2726c4f3591bfd0c040cdf5c717d0aabc55f349272",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+    "collect_results.py": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+    "data/datasets/msvr310.py": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+    "configs/MSVR310/DeMo.yml": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+    "msvr_full_identity_reference.py": "31334d09d24e20288862f13699dadd7cf1e6a053d83533b8ab23197bca682e13"
+  },
+  "all_17_seals": [
+    {
+      "path": "diagnose_msvr_public_metric_weights_CPU.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_msvr_public_metric_weights_CPU.py",
+      "bytes": 6629,
+      "expected_sha256": "e750e696751b41e4ff15885f8ab5f1a4528ccc57d96a791c77ba17a0432b902a",
+      "actual_sha256": "e750e696751b41e4ff15885f8ab5f1a4528ccc57d96a791c77ba17a0432b902a",
+      "match": true
+    },
+    {
+      "path": "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_public_metric_weight_deploy_CPU_20261016.py",
+      "bytes": 10271,
+      "expected_sha256": "3817e7934a851aab7a66fd7231c6a79f573202e07d3b437aebde966b09dec98b",
+      "actual_sha256": "3817e7934a851aab7a66fd7231c6a79f573202e07d3b437aebde966b09dec98b",
+      "match": true
+    },
+    {
+      "path": "results/preflight/msvr_public_metric_weight_candidate_plan_20261016.json",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_public_metric_weight_candidate_plan_20261016.json",
+      "bytes": 2954,
+      "expected_sha256": "17b726d50264138bef32c859bcce3ce16fc38abac9f791604667bbe609714b9b",
+      "actual_sha256": "17b726d50264138bef32c859bcce3ce16fc38abac9f791604667bbe609714b9b",
+      "match": true
+    },
+    {
+      "path": "diagnose_rgbnt201_baseline_blocks.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_rgbnt201_baseline_blocks.py",
+      "bytes": 6133,
+      "expected_sha256": "545551ea240e4fec18a1c9ce668afad3b7abd4bd6823dcfbed5f23012469cc15",
+      "actual_sha256": "545551ea240e4fec18a1c9ce668afad3b7abd4bd6823dcfbed5f23012469cc15",
+      "match": true
+    },
+    {
+      "path": "full_evaluation.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py",
+      "bytes": 9448,
+      "expected_sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+      "actual_sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+      "match": true
+    },
+    {
+      "path": "official_training_data.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\official_training_data.py",
+      "bytes": 1528,
+      "expected_sha256": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+      "actual_sha256": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+      "match": true
+    },
+    {
+      "path": "run_experiment.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_experiment.py",
+      "bytes": 14298,
+      "expected_sha256": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+      "actual_sha256": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+      "match": true
+    },
+    {
+      "path": "run_full_official_experiment.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py",
+      "bytes": 10596,
+      "expected_sha256": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
+      "actual_sha256": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e",
+      "match": true
+    },
+    {
+      "path": "shared_identity_axis.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\shared_identity_axis.py",
+      "bytes": 13503,
+      "expected_sha256": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+      "actual_sha256": "e3d32c26c0801a03a7de78d656994aeb9a71bc38e4cad922f568c3c50ab1d3fb",
+      "match": true
+    },
+    {
+      "path": "run_shared_identity_experiment.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_shared_identity_experiment.py",
+      "bytes": 12402,
+      "expected_sha256": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+      "actual_sha256": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390",
+      "match": true
+    },
+    {
+      "path": "experiment_data.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\experiment_data.py",
+      "bytes": 4032,
+      "expected_sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+      "actual_sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+      "match": true
+    },
+    {
+      "path": "data/datasets/RGBNT201.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\RGBNT201.py",
+      "bytes": 3518,
+      "expected_sha256": "1a3dda88f26efc2891322e2726c4f3591bfd0c040cdf5c717d0aabc55f349272",
+      "actual_sha256": "1a3dda88f26efc2891322e2726c4f3591bfd0c040cdf5c717d0aabc55f349272",
+      "match": true
+    },
+    {
+      "path": "utils/reid_evaluation.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\utils\\reid_evaluation.py",
+      "bytes": 1947,
+      "expected_sha256": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+      "actual_sha256": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+      "match": true
+    },
+    {
+      "path": "collect_results.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\collect_results.py",
+      "bytes": 9129,
+      "expected_sha256": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+      "actual_sha256": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c",
+      "match": true
+    },
+    {
+      "path": "data/datasets/msvr310.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\msvr310.py",
+      "bytes": 4457,
+      "expected_sha256": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+      "actual_sha256": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+      "match": true
+    },
+    {
+      "path": "configs/MSVR310/DeMo.yml",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\configs\\MSVR310\\DeMo.yml",
+      "bytes": 762,
+      "expected_sha256": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+      "actual_sha256": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+      "match": true
+    },
+    {
+      "path": "msvr_full_identity_reference.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\msvr_full_identity_reference.py",
+      "bytes": 7172,
+      "expected_sha256": "31334d09d24e20288862f13699dadd7cf1e6a053d83533b8ab23197bca682e13",
+      "actual_sha256": "31334d09d24e20288862f13699dadd7cf1e6a053d83533b8ab23197bca682e13",
+      "match": true
+    }
+  ],
+  "supplementary_source_evidence": [
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\make_model.py",
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_run01\\supplementary_source_evidence\\project\\modeling\\make_model.py",
+      "purpose": "CPU import boundary"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\meta_arch.py",
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_run01\\supplementary_source_evidence\\project\\modeling\\meta_arch.py",
+      "purpose": "CPU import boundary"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\make_model_clipreid.py",
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_run01\\supplementary_source_evidence\\project\\modeling\\make_model_clipreid.py",
+      "purpose": "CPU import boundary"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\clip\\__init__.py",
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_run01\\supplementary_source_evidence\\project\\modeling\\clip\\__init__.py",
+      "purpose": "CPU import boundary"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\clip\\clip.py",
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_run01\\supplementary_source_evidence\\project\\modeling\\clip\\clip.py",
+      "purpose": "CPU import boundary"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_RGBNT100_N5_s44_closed_s45_started_20261015.py",
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_run01\\supplementary_source_evidence\\private_transport\\publish_RGBNT100_N5_s44_closed_s45_started_20261015.py",
+      "purpose": "Transport import-time constants/helper chain"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_RGBNT100_N5_s43_closed_s44_started_20261015.py",
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_run01\\supplementary_source_evidence\\private_transport\\publish_RGBNT100_N5_s43_closed_s44_started_20261015.py",
+      "purpose": "Transport import-time constants/helper chain"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_MSVR310_saved_errors_CPU_20261015.py",
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_run01\\supplementary_source_evidence\\private_transport\\publish_MSVR310_saved_errors_CPU_20261015.py",
+      "purpose": "Transport import-time constants/helper chain"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_BC_closed_AV_N5_seed43_actual_20261015.py",
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_run01\\supplementary_source_evidence\\private_transport\\publish_BC_closed_AV_N5_seed43_actual_20261015.py",
+      "purpose": "Transport import-time constants/helper chain"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_RGBNT100_local_band_runner_sources_20261015.py",
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_run01\\supplementary_source_evidence\\private_transport\\publish_RGBNT100_local_band_runner_sources_20261015.py",
+      "purpose": "Transport import-time constants/helper chain"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_saved_RGBNT100_errors_F_only_core_20261015.py",
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_run01\\supplementary_source_evidence\\private_transport\\publish_saved_RGBNT100_errors_F_only_core_20261015.py",
+      "purpose": "Transport import-time constants/helper chain"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_closed_AX_AZ_cleanup_20261015.py",
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_run01\\supplementary_source_evidence\\private_transport\\publish_closed_AX_AZ_cleanup_20261015.py",
+      "purpose": "Transport import-time constants/helper chain"
+    }
+  ],
+  "local_cache_path_stat_only": [
+    {
+      "model": "AH_frequency_shared",
+      "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ah_MS_full_identity_20261012\\MSVR310_r201ah_frequency_shared_s42\\best_official_arrays.npz",
+      "exists": true,
+      "bytes": 37115119,
+      "expected_bytes": 37115119,
+      "size_matches": true,
+      "content_read": false,
+      "sha256_recomputed": false
+    },
+    {
+      "model": "AH_axis_shared",
+      "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\r201ah_MS_full_identity_20261012\\MSVR310_r201ah_axis_shared_s42\\best_official_arrays.npz",
+      "exists": true,
+      "bytes": 37228769,
+      "expected_bytes": 37228769,
+      "size_matches": true,
+      "content_read": false,
+      "sha256_recomputed": false
+    }
+  ],
+  "planned_output_paths_stat_only": [
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\msvr_public_metric_weights_CPU_20261016",
+      "exists_at_review": false
+    },
+    {
+      "path": "D:/Program Files/UserCache/gb/ReID2-experiment-artifacts/msvr_public_metric_weights_CPU_20261016",
+      "exists_at_review": false
+    }
+  ],
+  "runtime_status": "NOT_RUN",
+  "runtime_or_metrics_approval": false,
+  "deployment_approval": false,
+  "review_actions": {
+    "network_calls": 0,
+    "torch_imports": 0,
+    "model_imports": 0,
+    "model_constructions": 0,
+    "neural_calls": 0,
+    "CUDA_calls": 0,
+    "GPU_queries": 0,
+    "live_process_or_training_progress_queries": 0,
+    "raw_binary_content_reads": 0,
+    "source_or_plan_edits": 0
+  },
+  "limits": [
+    "This is a final source review only. It does not establish actual cached metrics, .25 runtime parity, installed remote dataset counts, remote source state, successful archive/cleanup, deployment equivalence, or completed transport exits.",
+    "The two existing local raw cache paths were stat-checked for existence and exact planned byte lengths only. Their bytes/SHA were not read/recomputed; no remote paths were queried.",
+    "Requested Astra/max routing is recorded, but the active model and effort were not independently exposed; actual routing remains UNATTESTED. Same-family independent-context review remains provisional.",
+    "Existing F-rank RGBNT100 training and sole original34653 observer are outside scope. No log/epoch/status/PID/GPU/observer artifact was queried or touched.",
+    "No speculative fallback, try/except, framework or additional hash scheme is proposed. All source seals are the existing requested seventeen seals."
+  ]
+}

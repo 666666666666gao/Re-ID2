@@ -1,0 +1,323 @@
+{
+  "status": "FINAL",
+  "verdict": "PASS",
+  "review_scope": "SOURCE_ONLY",
+  "review_round": "R2",
+  "at": "2026-10-16T11:44:39+08:00",
+  "skill": "experiment-bridge CODE_REVIEW",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_public_metric_weight_CPU_source_review_request_R2_20261016.json",
+  "output": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_public_metric_weight_CPU_source_review_R2_20261016.json",
+  "trace_root": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_R2_run01",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "prior_review": {
+    "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_public_metric_weight_CPU_source_review_20261016.json",
+    "preserved_verdict": "FAIL",
+    "finding": "B1",
+    "resolution": "RESOLVED_IN_R2_SOURCE",
+    "evidence": "The new analyzer no longer imports full_evaluation, official_training_data or run_experiment. Its only project import is utils.reid_evaluation, which imports only NumPy plus future annotations; the local utils namespace has no __init__.py. The previous CLIP import-time torch.cuda.is_available() path is unreachable from this analyzer import closure."
+  },
+  "checks": [
+    {
+      "topic": "Concrete CPU import/call boundary",
+      "status": "PASS_SOURCE_ONLY",
+      "locations": [
+        "diagnose_msvr_public_metric_weights_CPU.py:2",
+        "diagnose_msvr_public_metric_weights_CPU.py:14",
+        "diagnose_msvr_public_metric_weights_CPU.py:101",
+        "diagnose_msvr_public_metric_weights_CPU.py:176",
+        "utils/reid_evaluation.py:3"
+      ],
+      "detail": "Imports are stdlib, NumPy, Torch and the pure local ReID evaluator. No model-bearing package is imported, no model/checkpoint/image is loaded, and no neural forward or optimizer call is present. The sole torch.cuda reference is is_initialized(), a state-flag assertion rather than a hardware-availability query. Empty CUDA_VISIBLE_DEVICES and four Torch/OMP/MKL/OpenBLAS CPU threads remain explicit. No F-rank log/status/epoch/PID/GPU/observer query appears."
+    },
+    {
+      "topic": "Copied metric helpers",
+      "status": "PASS_SOURCE_ONLY",
+      "detail": "write_json, distance and full_metrics are AST-identical to the sealed original functions. No algorithm, tie order, distance precision expression or output schema changed.",
+      "literal_AST_comparisons": [
+        {
+          "function": "write_json",
+          "reference": "run_experiment.py",
+          "AST_identical": true
+        },
+        {
+          "function": "distance",
+          "reference": "full_evaluation.py",
+          "AST_identical": true
+        },
+        {
+          "function": "full_metrics",
+          "reference": "full_evaluation.py",
+          "AST_identical": true
+        }
+      ]
+    },
+    {
+      "topic": "Installed MSVR filename enumeration and metadata",
+      "status": "PASS_SOURCE_ONLY",
+      "locations": [
+        "diagnose_msvr_public_metric_weights_CPU.py:77",
+        "diagnose_msvr_public_metric_weights_CPU.py:90",
+        "diagnose_msvr_public_metric_weights_CPU.py:106",
+        "data/datasets/msvr310.py:67",
+        "experiment_data.py:24",
+        "full_evaluation.py:68",
+        "official_training_data.py:14"
+      ],
+      "detail": "The remote POSIX paths are the same vis/ni/th tuples, with identity=name[:4], scene=name[6:9], camera=name[11], camera range0..7 and sorting by str(tuple_paths), matching the existing MSVR reader plus source_records/official_records ordering. New is_file checks stat the three modality paths without reading image content. Entire bounding_box_train/query3/bounding_box_test counts are asserted as1032/591/1055, training IDs are disjoint from Q/G, and all query/gallery names/IDs/cameras/scenes must exactly match every fixed cache. Relabeling of unused training rows is unnecessary for this readout."
+    },
+    {
+      "topic": "Sqrt weight scaling and original point parity",
+      "status": "PASS_SOURCE_ONLY",
+      "locations": [
+        "diagnose_msvr_public_metric_weights_CPU.py:124",
+        "diagnose_msvr_public_metric_weights_CPU.py:133",
+        "msvr_full_identity_reference.py:30"
+      ],
+      "detail": "The private5120/public512 blocks must have squared norms .75/.25. Factors sqrt((1-w)/.75) and sqrt(w/.25) implement weights1-w/w for squared Euclidean distance. At.25 the original tensor is used without rescaling, all stored distances must satisfy np.array_equal, and six original metrics must agree within1e-8. This is a source guarantee/gate, not an observed runtime parity result."
+    },
+    {
+      "topic": "Fixed checkpoints, GT metrics and equal finite budget",
+      "status": "PASS_SOURCE_ONLY",
+      "locations": [
+        "results/preflight/msvr_public_metric_weight_candidate_plan_20261016.json:6",
+        "diagnose_msvr_public_metric_weights_CPU.py:116",
+        "diagnose_msvr_public_metric_weights_CPU.py:149",
+        "diagnose_msvr_public_metric_weights_CPU.py:167"
+      ],
+      "detail": "Unchanged records use strong_DeMo E37, ordinary AH_frequency_shared E32 and AH_axis_shared E29, each at exactly.125/.25/.5, for nine full591Q1055G cases. No seed/checkpoint/epoch reselection or per-query GT weight routing occurs. Both exclusion arguments are scenes; same-ID AND same-scene junk removal, stable ranking, AP/INP and Rank1/5/10/20 use actual installed GT. Each case preserves full per-query CSV, six metrics, CMC1-50 and identity/camera/scene groups, with same-weight model comparisons."
+    },
+    {
+      "topic": "Selection and deployment limits",
+      "status": "PASS_SOURCE_ONLY",
+      "locations": [
+        "diagnose_msvr_public_metric_weights_CPU.py:184",
+        "results/preflight/msvr_public_metric_weight_candidate_plan_20261016.json:67"
+      ],
+      "detail": "Benchmark weight search, original.25-trained/selected checkpoints and the complete finite nine-case budget are disclosed. No untouched-test, causal expert or deployed-equivalence claim is made. Any selected weight requires separate actual descriptor-path implementation/parity before replacing the preserved deployed model."
+    },
+    {
+      "topic": "R2 transport gate and real captures",
+      "status": "PASS_SOURCE_ONLY",
+      "locations": [
+        "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py:24",
+        "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py:43",
+        "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py:87"
+      ],
+      "detail": "The only substantive deployer change is reading the R2 request/report paths. It requires PASS with no blockers and validates all ten existing seals. Thirteen planned subprocess calls use separate real stdout/stderr capture files and actual child returncodes; nonzero returns are recorded before abort. Local argv lists, shlex remote command quoting and repr Python literals remain correct for these fixed paths. No retry/fallback exists; prior proof/capture/output/archive or remote input/output directory existence prevents ordinary reruns. A timeout/launch exception aborts without a completed-step receipt; no real exit claim is made for that path."
+    },
+    {
+      "topic": "Archive-before-owned-cleanup",
+      "status": "PASS_SOURCE_ONLY",
+      "locations": [
+        "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py:92",
+        "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py:105",
+        "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py:120",
+        "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py:125"
+      ],
+      "detail": "Unchanged code verifies nineteen local text results and all three unique raw NPZs archived to D by size/SHA before remote cleanup. The deletion dictionary has exactly three new raw outputs, two uploaded AH cache copies and one text tar. All six must resolve below the two named fresh MSVR roots and match size/SHA before any unlink. Original strong cache is checked before/after and is outside these roots; original AH D caches and all checkpoint paths are outside the deletion set. Local tar is removed only after verified text extraction and raw archive. No recursive deletion occurs."
+    },
+    {
+      "topic": "Transport import closure unchanged",
+      "status": "PASS_SOURCE_ONLY",
+      "detail": "Seven private helper sources and collect_results.py are byte-identical to preserved R1 sources. Their import-time code only imports modules/sets fixed paths/helpers (and inserts the project path); guarded publication/collection main routines are not called. The existing helpers supply the intended P, utf-8-sig JSON loader, streaming SHA and SSH OPTIONS. No helper was imported/executed during review."
+    }
+  ],
+  "analyzer_imports": [
+    "import argparse",
+    "import csv",
+    "import hashlib",
+    "import json",
+    "import math",
+    "import os",
+    "from pathlib import Path",
+    "import time",
+    "import numpy as np",
+    "import torch",
+    "from utils.reid_evaluation import evaluate_reid"
+  ],
+  "pure_metric_imports": [
+    "from __future__ import annotations",
+    "import numpy as np"
+  ],
+  "utils_init_exists": false,
+  "source_checks": {
+    "requested_sources": 10,
+    "present_sources": 10,
+    "matching_source_seals": 10,
+    "python_AST_parsed": 9,
+    "JSON_parsed": 1,
+    "literal_helper_AST_matches": 3,
+    "reused_reference_sources_byte_identical_to_R1": 7,
+    "unchanged_transport_supplementary_sources": 8,
+    "input_sources_modified": false,
+    "input_plan_modified": false
+  },
+  "sources_sha256": {
+    "diagnose_msvr_public_metric_weights_CPU.py": "5604c8b096ed75bea54bf6bd8e40e6f6428f0483fbb401a07593b2726b94f182",
+    "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py": "54d41afdbacb3e243020e543bb38bb9285abf9120d10e9768bf6413aff6f3a99",
+    "results/preflight/msvr_public_metric_weight_candidate_plan_20261016.json": "5869851ba088394ed6e0085a8e5c1086f81770ad5e3c1885a3e2fa0a5320b45a"
+  },
+  "directly_reused_sources_sha256": {
+    "full_evaluation.py": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+    "run_experiment.py": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+    "official_training_data.py": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+    "experiment_data.py": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+    "data/datasets/msvr310.py": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+    "utils/reid_evaluation.py": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+    "msvr_full_identity_reference.py": "31334d09d24e20288862f13699dadd7cf1e6a053d83533b8ab23197bca682e13"
+  },
+  "all_10_seals": [
+    {
+      "path": "diagnose_msvr_public_metric_weights_CPU.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\diagnose_msvr_public_metric_weights_CPU.py",
+      "bytes": 11148,
+      "expected_sha256": "5604c8b096ed75bea54bf6bd8e40e6f6428f0483fbb401a07593b2726b94f182",
+      "actual_sha256": "5604c8b096ed75bea54bf6bd8e40e6f6428f0483fbb401a07593b2726b94f182",
+      "match": true
+    },
+    {
+      "path": "results/preflight/msvr_public_metric_weight_deploy_CPU_20261016.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_public_metric_weight_deploy_CPU_20261016.py",
+      "bytes": 10431,
+      "expected_sha256": "54d41afdbacb3e243020e543bb38bb9285abf9120d10e9768bf6413aff6f3a99",
+      "actual_sha256": "54d41afdbacb3e243020e543bb38bb9285abf9120d10e9768bf6413aff6f3a99",
+      "match": true
+    },
+    {
+      "path": "results/preflight/msvr_public_metric_weight_candidate_plan_20261016.json",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_public_metric_weight_candidate_plan_20261016.json",
+      "bytes": 3467,
+      "expected_sha256": "5869851ba088394ed6e0085a8e5c1086f81770ad5e3c1885a3e2fa0a5320b45a",
+      "actual_sha256": "5869851ba088394ed6e0085a8e5c1086f81770ad5e3c1885a3e2fa0a5320b45a",
+      "match": true
+    },
+    {
+      "path": "full_evaluation.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py",
+      "bytes": 9448,
+      "expected_sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+      "actual_sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427",
+      "match": true
+    },
+    {
+      "path": "run_experiment.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_experiment.py",
+      "bytes": 14298,
+      "expected_sha256": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+      "actual_sha256": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154",
+      "match": true
+    },
+    {
+      "path": "official_training_data.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\official_training_data.py",
+      "bytes": 1528,
+      "expected_sha256": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+      "actual_sha256": "c4172b1cc7c47fafc9864011cd9f7be64172613e8ccdb865d85c2aba7f69af0e",
+      "match": true
+    },
+    {
+      "path": "experiment_data.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\experiment_data.py",
+      "bytes": 4032,
+      "expected_sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+      "actual_sha256": "70775c156c0ab8d31c89dbc08e5544405ca42dfdb015f4f39149f1d034b7c4d3",
+      "match": true
+    },
+    {
+      "path": "data/datasets/msvr310.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\msvr310.py",
+      "bytes": 4457,
+      "expected_sha256": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+      "actual_sha256": "72479005b7405afd4162b3a249f09c1c7e3953f01d052e5587833a6b66dfcd93",
+      "match": true
+    },
+    {
+      "path": "utils/reid_evaluation.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\utils\\reid_evaluation.py",
+      "bytes": 1947,
+      "expected_sha256": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+      "actual_sha256": "96dd0c93d61b67be1944bdb90d59c64ef2246a0c65c776f1e24c27ca858560f2",
+      "match": true
+    },
+    {
+      "path": "msvr_full_identity_reference.py",
+      "absolute_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\msvr_full_identity_reference.py",
+      "bytes": 7172,
+      "expected_sha256": "31334d09d24e20288862f13699dadd7cf1e6a053d83533b8ab23197bca682e13",
+      "actual_sha256": "31334d09d24e20288862f13699dadd7cf1e6a053d83533b8ab23197bca682e13",
+      "match": true
+    }
+  ],
+  "supplementary_source_evidence": [
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_RGBNT100_N5_s44_closed_s45_started_20261015.py",
+      "unchanged_from_R1": true,
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_R2_run01\\supplementary_source_evidence\\private_transport\\publish_RGBNT100_N5_s44_closed_s45_started_20261015.py"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_RGBNT100_N5_s43_closed_s44_started_20261015.py",
+      "unchanged_from_R1": true,
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_R2_run01\\supplementary_source_evidence\\private_transport\\publish_RGBNT100_N5_s43_closed_s44_started_20261015.py"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_MSVR310_saved_errors_CPU_20261015.py",
+      "unchanged_from_R1": true,
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_R2_run01\\supplementary_source_evidence\\private_transport\\publish_MSVR310_saved_errors_CPU_20261015.py"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_BC_closed_AV_N5_seed43_actual_20261015.py",
+      "unchanged_from_R1": true,
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_R2_run01\\supplementary_source_evidence\\private_transport\\publish_BC_closed_AV_N5_seed43_actual_20261015.py"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_RGBNT100_local_band_runner_sources_20261015.py",
+      "unchanged_from_R1": true,
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_R2_run01\\supplementary_source_evidence\\private_transport\\publish_RGBNT100_local_band_runner_sources_20261015.py"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_saved_RGBNT100_errors_F_only_core_20261015.py",
+      "unchanged_from_R1": true,
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_R2_run01\\supplementary_source_evidence\\private_transport\\publish_saved_RGBNT100_errors_F_only_core_20261015.py"
+    },
+    {
+      "path": "C:\\Users\\gb\\.codex_tmp\\publish_closed_AX_AZ_cleanup_20261015.py",
+      "unchanged_from_R1": true,
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_R2_run01\\supplementary_source_evidence\\private_transport\\publish_closed_AX_AZ_cleanup_20261015.py"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\collect_results.py",
+      "unchanged_from_R1": true,
+      "snapshot": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MSVR_public_metric_weights_CPU_R2_run01\\supplementary_source_evidence\\collect_results.py"
+    }
+  ],
+  "runtime_status": "NOT_RUN",
+  "runtime_or_metrics_approval": false,
+  "deployment_approval": false,
+  "review_actions": {
+    "network_calls": 0,
+    "torch_imports": 0,
+    "model_imports": 0,
+    "model_constructions": 0,
+    "neural_calls": 0,
+    "CUDA_calls": 0,
+    "GPU_queries": 0,
+    "live_process_or_training_progress_queries": 0,
+    "raw_binary_content_reads": 0,
+    "source_or_plan_edits": 0
+  },
+  "limits": [
+    "PASS means only that this sealed R2 source has no identified blocker in the requested finite CPU cached-analysis scope. No actual metrics, installed remote dataset counts, .25 distance/metric parity, remote input hashes/state, completed transport exit, archive/cleanup or deployment equivalence was verified.",
+    "No source module, Torch, model or remote command was imported/executed. Review used only source/text reads, source hashing/diffs, AST comparisons and trace writes. Raw NPZ/checkpoint/image contents were not read.",
+    "The actual installed external NumPy/Torch binaries were not imported or inspected; this finding closes the evidenced project-level CLIP import path, not an empirical runtime attestation.",
+    "Requested Astra/max routing is not independently exposed; actual model/effort remain UNATTESTED. This continuation review is same-family/provisional and does not claim a newly spawned R2 reviewer or cross-family acceptance.",
+    "Existing F-rank RGBNT100 training and sole original34653 observer were not queried or touched. R1 remains preserved as FINAL FAIL; R2 resolves its one evidenced import-boundary blocker.",
+    "No speculative fallback, try/except, framework or new hash scheme is proposed. All ten report seals are those already supplied in the R2 request."
+  ]
+}

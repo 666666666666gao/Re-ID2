@@ -1,5 +1,6 @@
 """Finite cached-descriptor metric-weight comparison; no neural inference or fitting."""
 import argparse
+import csv
 import hashlib
 import json
 import math
@@ -10,12 +11,86 @@ import time
 import numpy as np
 import torch
 
-from full_evaluation import distance, full_metrics
-from official_training_data import full_records, metadata
-from run_experiment import write_json
+from utils.reid_evaluation import evaluate_reid
 
 METRICS = ('mAP', 'mINP', 'Rank-1', 'Rank-5', 'Rank-10', 'Rank-20')
 WEIGHTS = (.125, .25, .5)
+
+
+# Literal pure metric helpers from the existing evaluator, without its model imports.
+def write_json(path, value):
+    path = Path(path)
+    temporary = path.with_suffix(path.suffix + '.tmp')
+    temporary.write_text(json.dumps(value, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+    temporary.replace(path)
+
+def distance(q, g):
+    return (q.square().sum(1, keepdim=True) + g.square().sum(1)[None] - 2 * q @ g.T).numpy()
+
+def full_metrics(distances, qids, gids, qexclude, gexclude, names, cameras, scenes, output):
+    """INP = relevant count / last relevant rank, after the SAME junk exclusion."""
+    ranked = np.argsort(distances, axis=1, kind='stable')
+    rows = []
+    for i, order in enumerate(ranked):
+        junk = (gids[order] == qids[i]) & (gexclude[order] == qexclude[i])
+        matches = gids[order][~junk] == qids[i]
+        positives = np.flatnonzero(matches) + 1
+        valid = len(positives) > 0
+        row = {'query_index': i, 'name': str(names[i]), 'identity': int(qids[i]),
+               'camera': int(cameras[i]), 'scene': int(scenes[i]), 'valid': valid,
+               'relevant_gallery': len(positives), 'kept_gallery': len(matches)}
+        if valid:
+            row.update(AP=float(np.mean(np.arange(1, len(positives) + 1) / positives)),
+                       INP=float(len(positives) / positives[-1]), first_match=int(positives[0]),
+                       last_match=int(positives[-1]))
+            row.update({f'Rank-{r}': int(positives[0] <= r) for r in (1, 5, 10, 20)})
+        else:
+            row.update(AP=None, INP=None, first_match=None, last_match=None)
+            row.update({f'Rank-{r}': None for r in (1, 5, 10, 20)})
+        rows.append(row)
+    valid = [r for r in rows if r['valid']]
+    assert valid
+    summary = {'mAP': 100 * float(np.mean([r['AP'] for r in valid])),
+               'mINP': 100 * float(np.mean([r['INP'] for r in valid])),
+               **{f'Rank-{k}': 100 * float(np.mean([r[f'Rank-{k}'] for r in valid])) for k in (1, 5, 10, 20)},
+               'query_count': len(rows), 'valid_queries': len(valid), 'invalid_queries': len(rows) - len(valid),
+               'gallery_count': len(gids)}
+    cmc, map_ = evaluate_reid(distances, qids, gids, qexclude, gexclude)
+    assert abs(summary['mAP'] - 100 * map_) < 1e-8
+    assert all(abs(summary[f'Rank-{r}'] - 100 * cmc[r - 1]) < 1e-8 for r in (1, 5, 10, 20))
+    summary['CMC_1_to_50'] = (100 * cmc).tolist()
+    summary['groups'] = {}
+    for key in ('camera', 'scene', 'identity'):
+        summary['groups'][key] = []
+        for value in sorted({r[key] for r in valid}):
+            group = [r for r in valid if r[key] == value]
+            summary['groups'][key].append({'value': value, 'queries': len(group),
+                                         'mAP': 100 * float(np.mean([r['AP'] for r in group])),
+                                         'mINP': 100 * float(np.mean([r['INP'] for r in group])),
+                                         **{f'Rank-{k}': 100 * float(np.mean([r[f'Rank-{k}'] for r in group])) for k in (1, 5, 10, 20)}})
+    with output.with_suffix('.csv').open('w', encoding='utf-8', newline='') as table:
+        writer = csv.DictWriter(table, fieldnames=list(rows[0]))
+        writer.writeheader(); writer.writerows(rows)
+    write_json(output.with_suffix('.json'), summary)
+    return summary
+
+def installed_records(root, directory):
+    rows = []
+    for identity in (Path(root)/'MSVR310'/directory).iterdir():
+        for image in (identity/'vis').iterdir():
+            name = image.name
+            paths = tuple(str(identity/source/name) for source in ('vis', 'ni', 'th'))
+            assert all(Path(path).is_file() for path in paths)
+            camera, scene, label = int(name[11]), int(name[6:9]), int(name[:4])
+            assert 0 <= camera <= 7
+            rows.append((paths, label, camera, scene))
+    return sorted(rows, key=lambda row: str(row[0]))
+
+
+def metadata(records, prefix):
+    return {prefix+'_'+key: np.asarray(values) for key, values in {
+        'ids': [row[1] for row in records], 'cameras': [row[2] for row in records],
+        'scenes': [row[3] for row in records], 'names': [Path(row[0][0]).name for row in records]}.items()}
 
 
 def main():
@@ -28,7 +103,10 @@ def main():
     proof = json.loads(Path(args.input_proof).read_text('utf-8'))
     assert proof['status'] == 'FINITE_MSVR_EXISTING_PUBLIC_METRIC_WEIGHT_PLAN_NOT_RUN'
     assert proof['public_metric_weights'] == list(WEIGHTS)
-    train, query, gallery, _, _, manifest = full_records(proof['data_root'], 'MSVR310')
+    train = installed_records(proof['data_root'], 'bounding_box_train')
+    query = installed_records(proof['data_root'], 'query3')
+    gallery = installed_records(proof['data_root'], 'bounding_box_test')
+    assert {row[1] for row in train}.isdisjoint({row[1] for row in query+gallery})
     assert (len(train), len(query), len(gallery)) == (1032, 591, 1055)
     installed = metadata(query, 'query') | metadata(gallery, 'gallery')
     output = Path(args.output)
