@@ -1,0 +1,78 @@
+{
+  "status": "ACTUAL_F_RANK128_CONTROLLER_STARTED_NATIVE_NOT_YET_CONFIRMED",
+  "at": "2026-10-16T11:21:54+08:00",
+  "remote_root": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_F_rank128_AV_20261016",
+  "remote_owner": {
+    "pid": 661657,
+    "started": 1792120914.5499651,
+    "argv": [
+      "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+      "-u",
+      "launch_rgbnt100_frequency_rank_pair.py",
+      "--previous-controller",
+      "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_band_ranges_AV_20261016/RGBNT100/controller_result.json",
+      "--data-root",
+      "/data/gaob/Re-ID/dataset",
+      "--pretrained",
+      "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+      "--anchor-root",
+      "/data/gaob/Re-ID/DeMo-DualAxis/runs/full_official_baselines_20261004/training",
+      "--output",
+      "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_F_rank128_AV_20261016/RGBNT100"
+    ]
+  },
+  "capacity": {
+    "project_free": 4543205376,
+    "selected_GPU_processes": {
+      "2": "",
+      "3": ""
+    },
+    "memory_and_utilization_snapshot": "2, 15, 24576, 0\n3, 114, 24576, 0",
+    "protected_four_exact": true,
+    "previous24_sources_exact": true,
+    "previous_controller_exact": true,
+    "temperature_power_read": false
+  },
+  "CPU_main_aliases": {
+    "status": "ACTUAL_F_RANK_MAIN_ALIASES_CPU_PASS",
+    "sources_exact": true,
+    "models": 0,
+    "NN_calls": 0,
+    "CUDA_initialized": false
+  },
+  "sources_sha256": {
+    "rgbnt100_frequency_rank.py": "38aff5f73b58d6197a9178ca4c3705d89f3daf527d166c788484c25fb37b78fe",
+    "run_rgbnt100_frequency_rank.py": "a37f4de4d2cba6910d407a3741394862c927ab346a59102c8aaa296116295c12",
+    "check_rgbnt100_frequency_rank_parity.py": "69e1dcd69d0d3031a627008b0cf72c0b4c26fe02fbae945c36db2ff9a51d3a1d",
+    "evaluate_rgbnt100_frequency_rank_states.py": "6560822768d55dd7953657dcf51b19a022101f511f719f820fae0807cf688276",
+    "launch_rgbnt100_frequency_rank_pair.py": "d300ad8a16220b467a2d665521b752bdee0b643315263f6f9baf77225f33de64"
+  },
+  "source_review_sha256": "e459b01cc5caa915de2a31ece77c975adbd1530b64fb266e91d723ac4571c4e0",
+  "source_request_sha256": "25c7cd4f01a16f88039c7a5e2dbf4773e066b3e55a7a92a88c6085e08b9d3eb0",
+  "previous_controller_sha256": "bcbf3d10301efdec287c610418e8a8b0cff74d2d68d2fef259010c15b43c39f5",
+  "protected_weights": {
+    "runs/full_official_baselines_20261004/training/RGBNT100_demo_s42/best.pth": "95852451d64cdb6741060fac82919e2ecfde9c5fa913c2e9a9ec384c3b046b2a",
+    "runs/full_official_baselines_20261004/training/MSVR310_demo_s42/best.pth": "fb1409ab5e958f70fae0fdf991a95c7dc59e3cefbaa31ba63630578c39e48572",
+    "runs/r201k_relation_local_pi_20261007/RGBNT201/training/RGBNT201_r201k_axis_shared_s42/best.pth": "fb055515125bb4e5418390e68ded4be10dc643040dfce34a19ddb8b4836aeb68",
+    "runs/full_official_baselines_20261004/training/MSVR310_demo_shared_s42/best.pth": "7744f4f7f796e17e778b2d23e5c025c2197029610634cac26c88ba9f73121fb3"
+  },
+  "physical_gpus": [
+    2,
+    3
+  ],
+  "maximum_NN": 2,
+  "first_native_node_seconds": 180,
+  "near_end_after_actual_formal_start_seconds": 13200,
+  "necessary_followup_seconds": 300,
+  "formal_complete": false,
+  "new_metrics_claimed": false,
+  "frequency_rank": 128,
+  "expected_parameters": 99947398,
+  "expected_trainable_parameters": 2249606,
+  "paper_target": {
+    "mAP": 87.2,
+    "Rank_1": 98.6
+  },
+  "source_changes": "Only existing F hidden width64 to128 and existing conditioning Linear output, original global AV42 readers/default FFT and original module responsibilities; same change both controls. F/scorer/pooling installed hooks and non-F RNG retained by R2. No failed cutoff/local stacking or new seed sweep.",
+  "goal": "ACTIVE_UNMET"
+}
