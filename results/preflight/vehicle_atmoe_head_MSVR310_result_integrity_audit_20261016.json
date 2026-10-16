@@ -1,0 +1,269 @@
+{
+  "status": "FINAL",
+  "verdict": "WARN",
+  "blocking_findings": [],
+  "audit_skill": "experiment-audit",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_head_MSVR310_result_integrity_request_20261016.json",
+  "request_sha256": "d5c00d1e0e115675c7b48c220f108548226098233eb46f932f7002c340f0746a",
+  "generated_at": "2026-10-16T10:22:12.700774+00:00",
+  "agent_id": "/root/audit_msvr_head16_full_normal_20261016",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "actual_routing": {
+    "model": "UNATTESTED",
+    "reasoning_effort": "UNATTESTED",
+    "host_attestation": false,
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "max"
+  },
+  "scope": "Completed MSVR310_atmoe16_demo_shared_s42 only: full50, one normal RNT/RNT checkpoint, seed42; original inputs read-only.",
+  "evaluation_type": "real_gt",
+  "deterministic_artifact_checks": "PASS",
+  "summary": "Selected MS normal results reproduce from real installed GT and stored distances. No blocking integrity discrepancy found. Scientific acceptance remains qualified: benchmark selection, one seed, historical controls, no missing-condition or dual-axis evidence.",
+  "result": {
+    "selected_epoch": 32,
+    "six_metrics_percent": {
+      "mAP": 51.43026480300702,
+      "mINP": 26.538876996464772,
+      "Rank-1": 68.35871404399323,
+      "Rank-5": 82.23350253807106,
+      "Rank-10": 87.30964467005076,
+      "Rank-20": 92.04737732656514
+    },
+    "last_epoch_six_percent": {
+      "mAP": 50.390921106416684,
+      "mINP": 25.694459118289643,
+      "Rank-1": 68.02030456852792,
+      "Rank-5": 81.7258883248731,
+      "Rank-10": 87.1404399323181,
+      "Rank-20": 90.35532994923858
+    },
+    "query_count": 591,
+    "gallery_count": 1055,
+    "valid_queries": 591,
+    "descriptor_dim": 5632,
+    "registered_paper_normal_targets": {
+      "mAP": 50.2,
+      "Rank_1": 60.8
+    },
+    "passes_registered_both_plus1": true,
+    "margin_over_plus1_target_pp": {
+      "mAP": 1.2302648030070173,
+      "Rank-1": 7.558714043993234
+    }
+  },
+  "checks": {
+    "A_ground_truth": {
+      "status": "PASS",
+      "details": "Read installed bounding_box_train/query3/bounding_box_test filenames directly. Exact ordered names/IDs/cameras/scenes match manifest and raw NPZ; all paired ni/th files exist and are nonempty. GT comes from dataset filenames, not predictions.",
+      "counts": {
+        "train": 1032,
+        "query": 591,
+        "gallery": 1055
+      },
+      "identity_counts": {
+        "train": 155,
+        "query": 52,
+        "gallery": 155
+      },
+      "training_test_ID_disjoint": true,
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\data\\datasets\\msvr310.py:67",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\official_training_data.py:20",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_MSVR16_full_normal_run01\\remote_numpy_result.json"
+      ]
+    },
+    "B_metrics_and_normalization": {
+      "status": "PASS",
+      "details": "Independent Python sorting of all 623505 stored distances with gallery ordinal tie-break and same-ID/same-scene junk removal. Recomputed AP/INP, four ranks, all 591 CSV rows, CMC1-50 and 8 camera/30 scene/52 identity groups. Only standard per-query arithmetic and percent conversion; no prediction-dependent metric rescaling.",
+      "max_metric_or_group_error_pp": 2.842170943040401e-14,
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:20",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\utils\\reid_evaluation.py:27",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_MSVR16_full_normal_run01\\remote_local_comparison.json"
+      ]
+    },
+    "C_artifact_existence_and_identity": {
+      "status": "PASS",
+      "sealed_files_verified": 140,
+      "mismatches": 0,
+      "local_remote_completed_artifact_hash_matches": 7,
+      "local_remote_source_hash_matches": 11,
+      "raw_sha256": "b4257c85ed7ecb07ceab1663302be07c00e597fba6c3e499b4503fb2e53ffa80",
+      "best_sha256": "a126eb25b42daf9c0b731b731242895a12a0918852361caf893ce71e636f02c9",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_MSVR16_full_normal_run01\\verified_input_hashes.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_MSVR16_full_normal_run01\\remote_artifact_hashes.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_MSVR16_full_normal_run01\\source_dependencies_compared.json"
+      ]
+    },
+    "D_executed_metric_path": {
+      "status": "PASS",
+      "details": "The selected full-official runner calls evaluate/full_metrics every epoch and after strict best reload; 50 JSON/CSV pairs, 50 matching EPOCH log entries, selected raw NPZ and terminal COMPLETE/exit0 support this path. The standalone dev evaluator main and 49-condition audit main are separate routes and are not credited as executed for this result.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_vehicle_atmoe_head_baseline.py:24",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:155",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:169",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_MSVR16_full_normal_run01\\saved_text_and_weights_checks.json"
+      ]
+    },
+    "E_training_and_selection": {
+      "status": "PASS",
+      "epochs": 50,
+      "selected_earliest_highest_mAP_epoch": 32,
+      "ledger_attempts": 705,
+      "ledger_successful_updates": 705,
+      "ledger_amp_skips": 0,
+      "all_epoch_cumulative_accounts_consistent": true,
+      "batch_size": 64,
+      "identities_per_batch": 16,
+      "records_per_identity": 4,
+      "forward_and_successful_update_unique_record_coverage": 1032,
+      "per_epoch_unique_records_min_max": [
+        801,
+        878
+      ],
+      "partial_batch_counts": {
+        "RN": 119,
+        "N": 124,
+        "R": 116,
+        "NT": 108,
+        "T": 125,
+        "RT": 113
+      },
+      "details": "All positive/negative indices follow training GT and exclude positive self; all recorded losses/scales finite. Coverage means all eligible records used across the run, not every record each epoch. Update evidence is the recorded GradScaler transition/ledger, not optimizer-state replay.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_shared_identity_experiment.py:34",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:131",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_MSVR16_full_normal_run01\\saved_text_and_weights_checks.json"
+      ]
+    },
+    "F_stored_features_and_distances": {
+      "status": "PASS",
+      "details": "All query/gallery float32 features finite. Whole squared norms=1, private5120 squared norms=.75, common512 squared norms=.25 within measured error. Full stored squared-Euclidean matrix is consistent with both FP64 and NumPy FP32 recomputation.",
+      "norm_max_errors": {
+        "query": {
+          "whole_squared_norm": 2.1875483602329382e-07,
+          "private_squared_norm_vs_075": 1.8663352840952996e-07,
+          "common_squared_norm_vs_025": 7.857785455644972e-08
+        },
+        "gallery": {
+          "whole_squared_norm": 2.1875483602329382e-07,
+          "private_squared_norm_vs_075": 1.8663352840952996e-07,
+          "common_squared_norm_vs_025": 7.875637980658823e-08
+        }
+      },
+      "distance_elements_checked": 623505,
+      "max_distance_error_fp64": 9.536743155180716e-07,
+      "max_distance_error_numpy_fp32": 1.3113021850585938e-06,
+      "stored_distance_min_max": [
+        -8.344650268554688e-07,
+        1.9966471195220947
+      ],
+      "positive_rank_changes_under_fp64_recompute": 0,
+      "details_rounding": "Small negative self distances and 67 exact equal-distance pairs are retained; positive ranks are unchanged by FP64 recomputation.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\shared_identity_axis.py:20",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:106",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_MSVR16_full_normal_run01\\remote_numpy_result.json"
+      ]
+    },
+    "G_checkpoint_head_and_runtime_boundary": {
+      "status": "WARN",
+      "checkpoint_tensor_count": 1035,
+      "finite_float_elements": 99898368,
+      "parameters_excluding_buffers": 99867648,
+      "source_consistent_trainable_parameters": 99856384,
+      "binary_ATMoE_partition_count": 16,
+      "experts_per_partition": 7,
+      "expert_linear_shape": [
+        32,
+        32
+      ],
+      "BN_counters_matched": 119,
+      "selected_epoch_batches": 450,
+      "fused_and_gate_BN_counter": 900,
+      "details": "Restricted stdlib pickle metadata decoding plus direct storage reads inspected every saved tensor without importing Torch. The binary contains 16 partitions and no dual-axis expert/router/calibrator keys; all BN counters match the selected epoch ledger. Runtime launch/config and saved full strict-reload metrics are consistent.",
+      "limits": "No new forward/strict load was run. Weight-to-feature execution, fresh-initialization provenance and historical FP32/AMP parity remain recorded runtime evidence, not independently replayed facts. requires_grad and HDM/gating num_heads are not serialized; trainable count and unchanged HDM8 follow source/config, not direct runtime attestation.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\vehicle_atmoe_head_configuration.py:19",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\moe\\AttnMOE.py:85",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_MSVR16_full_normal_run01\\checkpoint_tensor_descriptors.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_MSVR16_full_normal_run01\\checkpoint_bn_counters_check.json"
+      ]
+    },
+    "H_historical_and_supplement": {
+      "status": "WARN",
+      "supplement_sha256": "017e41b8f73acbfefe0eb69f58544db780449d732d825bae1b1b2dd18b4d6034",
+      "saved_query_change_arithmetic": "PASS",
+      "historical_head8_six_percent": {
+        "mAP": 49.426094348479246,
+        "mINP": 24.96771322764269,
+        "Rank-1": 69.03553299492386,
+        "Rank-5": 81.7258883248731,
+        "Rank-10": 86.29441624365482,
+        "Rank-20": 90.86294416243655
+      },
+      "delta_six_vs_historical_pp": {
+        "mAP": 2.0041704545277668,
+        "mINP": 1.571163768822089,
+        "Rank-1": -0.6768189509306239,
+        "Rank-5": 0.507614213197968,
+        "Rank-10": 1.015228426395936,
+        "Rank-20": 1.184433164128592
+      },
+      "Rank1_rescue_harm_net": [
+        26,
+        30,
+        -4
+      ],
+      "AP_improved_worsened_tied": [
+        331,
+        242,
+        18
+      ],
+      "details": "Both text configs differ only at HEAD8->16; both report705 updates. Old head8 NPZ/PTH and old strong candidate binaries were not reopened. This is a noncontemporaneous text comparison, not a causal head-count ablation or equality-of-runtime-budget proof.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_MSVR16_full_normal_run01\\supplement_and_provenance_checks.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_head_MSVR310_saved_query_change_20261016.json"
+      ]
+    },
+    "I_scope_and_claim_ceiling": {
+      "status": "WARN",
+      "details": "The same epoch32 whole checkpoint passes registered MS normal targets50.2 mAP/60.8 Rank1. It was selected using official query/gallery mAP over50 epochs. One dataset/seed/normal condition supports that qualified numerical baseline result only. No untouched-test, robustness, paper-six/49 missing gains, new dual-axis/expert contribution, or overall project-complete claim.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:85",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py:163",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\reid2_paper_reference_targets_20261016.json"
+      ]
+    }
+  },
+  "limits": [
+    "Installed filename GT and modality presence were checked; dataset image bytes/download provenance and external publisher authenticity were not re-audited.",
+    "Only the selected raw distance/features archive exists in this request; all50 epoch tables were reconciled, but their50 neural evaluations were not replayed.",
+    "Paper values were checked against the registered policy only; no fresh citation audit was performed.",
+    "Prior head8 parity and selected-head smoke are reused historical receipts; their old runtime tensors were not reopened/replayed.",
+    "A fixed-checkpoint normal baseline does not establish dual-axis contribution or missing-modality benefit.",
+    "Reviewer actual model/effort routing is UNATTESTED; same-family/provisional does not mean cross-family acceptance."
+  ],
+  "execution": {
+    "readonly_remote_CPU_calls": 1,
+    "remote_actual_exit_code": 0,
+    "new_neural_calls": 0,
+    "new_optimizer_updates": 0,
+    "new_weights": 0,
+    "Torch_imports": 0,
+    "CUDA_GPU_queries": 0,
+    "RGBNT100_current_progress_log_PID_resource_queries": 0,
+    "input_mutations": 0,
+    "dependency_installs": 0,
+    "automatic_retries_or_fallbacks": 0
+  },
+  "trace_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_MSVR16_full_normal_run01",
+  "command_trace": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_MSVR16_full_normal_run01\\commands.jsonl",
+  "primary_remote_trace": {
+    "stdout": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_MSVR16_full_normal_run01\\10_remote.primary.stdout",
+    "stderr": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_MSVR16_full_normal_run01\\10_remote.primary.stderr",
+    "exit": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-16_vehicle_ATMoE_MSVR16_full_normal_run01\\10_remote.exit.json"
+  }
+}

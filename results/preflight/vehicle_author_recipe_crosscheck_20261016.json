@@ -1,0 +1,60 @@
+{
+  "status": "SOURCE_ONLY_RECHECK_HISTORICALLY_DISCLOSED_RECIPE_DIFFERENCES",
+  "at": "2026-10-16T17:38:48.586761+08:00",
+  "paper_url": "https://arxiv.org/html/2412.10650v1#S4.SS2",
+  "paper_section": "Implementation Details",
+  "datasets": {
+    "RGBNT100": {
+      "paper_text": {
+        "batch": 128,
+        "instances_per_identity": 16,
+        "epochs": 50
+      },
+      "author_master_config": {
+        "url": "https://raw.githubusercontent.com/924973292/DeMo/master/configs/RGBNT100/DeMo.yml",
+        "sha256": "e320b01c5bef89eb06905a07b92954e87a0b1602857530f7c360635f9133dc4c",
+        "batch": 128,
+        "instances_per_identity": 16,
+        "epochs": 30
+      },
+      "local_config_byte_equal": true,
+      "current_locked_runner_source": {
+        "batch": 64,
+        "instances_per_identity": 16,
+        "epochs": 50,
+        "identities_per_batch": 4,
+        "classification": "Source-derived fixed configuration; no current run.json or training-progress query"
+      }
+    },
+    "MSVR310": {
+      "paper_text": {
+        "batch": 64,
+        "instances_per_identity": 8,
+        "epochs": 50
+      },
+      "author_master_config": {
+        "url": "https://raw.githubusercontent.com/924973292/DeMo/master/configs/MSVR310/DeMo.yml",
+        "sha256": "099085c58f031a9edfb86be60d801e7a9f48e080cb0629c11a63d9d3b7a59b1e",
+        "batch": 64,
+        "instances_per_identity": 4,
+        "epochs": 50
+      },
+      "local_config_byte_equal": true,
+      "current_locked_runner_source": {
+        "batch": 64,
+        "instances_per_identity": 4,
+        "epochs": 50,
+        "identities_per_batch": 16,
+        "classification": "Source-derived fixed configuration; no current run.json or training-progress query"
+      }
+    }
+  },
+  "interpretation": "Paper and author repository themselves differ for RGBNT100epochs andMSVR310K. Our own reproduced scores are not the paper recipe. B128/P8K16 is different from priorP8K8; no performance causal claim. Currenthead32/head16 runs remain unchanged. Decide a future controlled configuration only after currentfull50 results; no queued job.",
+  "historical_disclosure": "docs/实验交接.md already recorded RGB100author batch128/30 versusfixed64/50; this is a primary-source recheck, not a newly discovered bug.",
+  "new_neural_calls": 0,
+  "GPU_queries": 0,
+  "SSH_calls": 0,
+  "training_progress_queries": 0,
+  "current_sources_modified": false,
+  "initial_lookup_note": "main branch rawURLs404; actual official defaultbranchmaster verified and fetched; no silent source fallback."
+}
