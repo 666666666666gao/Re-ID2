@@ -1,0 +1,162 @@
+{
+  "status": "FINAL",
+  "verdict": "PASS",
+  "gate": "SOURCE_ONLY",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_head16_experts_postprocess_source_request_20261016.json",
+  "request_sha256": "45ce88ea8ca62b51d11dbb4cbc5b7dc4d4095a84c377e14c14940e50b87baaba",
+  "generated_at": "2026-10-16T18:56:03+08:00",
+  "agent_id": "/root/review_msvr_head16_experts_20261016",
+  "skill": "experiment-bridge",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "actual_routing": {
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "max",
+    "model": "UNATTESTED",
+    "reasoning_effort": "UNATTESTED",
+    "host_attestation": false
+  },
+  "scope": "Terminal-only existing MS head16 expert archive and actual-results CPU readout. No changes to6sealedNN/deployment sources or runningjobs.",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "minimal_required_corrections": [],
+  "summary": "No blocking source defect found. The collector is scoped to the completed new MS pair and preserves all six binary artifacts; the CPU readout uses the actual head16 baseline, paired controls and paper targets. SOURCE_ONLY PASS does not establish runtime, archive or performance acceptance.",
+  "source_assessment": [
+    {
+      "area": "Completed MS pair only",
+      "verdict": "PASS",
+      "source": "C:/Users/gb/.codex_tmp/intake_msvr_head16_experts_20261016.py:main/export",
+      "rationale": "The collector consumes only the new MS session/completion node. Locally it requires controller_result COMPLETE, absent controller and absent exit0 children. The remote export rechecks the MS controller and every reference/native/training/audit/states child as absent/exit0, requires two controls,1410 formal attempts,eight states,paired samples and physicalGPU3. The unchanged producer reaches this result only after both full00/native3 gates, full50 runs, installed-GT CPU audits and exact fixed-state checks. No currentRGB directory, observer or runtime handle is read."
+    },
+    {
+      "area": "Captured transport reuse",
+      "verdict": "PASS",
+      "source": "intake_msvr_head16_experts_20261016.py and results/preflight/intake_vehicle_atmoe_dynamic_amp_component_20261016.py:command",
+      "rationale": "The existing verified transfer module is imported under a non-main name, its DATASET global is set only to the explicit receipt label MSVR_head16_pair, and only command/prior/CAPTURES are reused. Its dataset-specific main is never called. Each attempted transfer writes a pre-call receipt and captures stdout/stderr/actual return code, with timeout300 and check_returncode; no catch, retry or fallback was added. The private helper import chain was already statically inspected in the prior source review; credentials are not emitted."
+    },
+    {
+      "area": "Six direct-D archives and capacity",
+      "verdict": "PASS",
+      "source": "intake_msvr_head16_experts_20261016.py:main/export",
+      "rationale": "The controller exposes raw,best,states_raw for each of the two variants; export requires exactly six distinct entries, verifies each resolved path lies inside the MS run root, and checks recorded path/size/SHA against actual bytes. Before local transfers, D free space must exceed all six binaries plus100MB and C space must exceed all extracted text plus compressed text package plus100MB. Only text is staged on C; all six binaries transfer directly to fresh D paths and are immediately size/SHA checked. The package has exact manifest members and extraction targets are contained in the fresh selected local root."
+    },
+    {
+      "area": "Text-only retirement and raw preservation",
+      "verdict": "PASS",
+      "source": "intake_msvr_head16_experts_20261016.py:retire",
+      "rationale": "Retirement occurs only after all local text and six D archives verify. It rechecks the remote package and all six remote binaries, removes only the identified remote text package, then removes only its local text package. No best/raw/state cleanup exists. The proof retains all transport receipts and marks fresh independent result audit pending; unique evidence and teacher/K201 artifacts are untouched."
+    },
+    {
+      "area": "Correct actual head16 reference and all-query readout",
+      "verdict": "PASS",
+      "source": "analyze_msvr_head16_experts.py:main; analyze_identity_coordinate_three_normal.py:query_rows/six",
+      "rationale": "The analysis uses the original DeMo baseline, the actual independently audited MSVR310_atmoe16_demo_shared_s42 teacher, and the two new head16 AH run names under the collector-produced experiments layout. It validates50epochs/705attempts,coverage,earliest maximum-mAP checkpoint and all six metrics. Reused pure CSV checks require591 ordered valid queries,1055 gallery records,CMC50 and complete identity/camera/scene group agreement. Actual completed original and head16 teacher inputs passed these checks locally without any project module import or new inference."
+    },
+    {
+      "area": "Matched ordinary, 00/11, loss curves and AMP disclosure",
+      "verdict": "PASS",
+      "source": "analyze_msvr_head16_experts.py:main/compare",
+      "rationale": "Both new controls require2674822 trainable/100787334 total parameters,GT PASS,705 detail rows and actual boolean update-count reconciliation. Nonzero AMP skips remain allowed and aggregate actual updates/skips come from the sealed controller. Every epoch contributes its measured loss/primary-triplet/six metrics. Four states per control are reconciled to per-query and reported measurements;11 equals selected normal rows and00 equals the head16 teacher rows. Paired batch order and GT metadata are checked, then all six deltas,Rank1 rescue/harm and per-query AP/INP changes are reported for both controls against references and00 plus axis versus ordinary."
+    },
+    {
+      "area": "Paper policy and scientific scope",
+      "verdict": "PASS",
+      "source": "analyze_msvr_head16_experts.py:paper_targets/result",
+      "rationale": "Acceptance is evaluated against absolute paper targets50.2mAP/60.8Rank1, with axis explicitly labelled dual_axis and baselines/ordinary labelled control_or_reference. The obsolete own-baseline-plus1,AE sample-order requirement and old25-query head8 cohort are removed. Baseline51.430264803/68.358714044 stays baseline credit. Outputs disclose single seed,teacher50+expert50,benchmark selection and frozen interventions; missing evaluation is false and RGBNT100 acceptance remains separate."
+    }
+  ],
+  "actual_checks": [
+    {
+      "check": "all10_supplied_inputs_match_and_parse",
+      "status": "PASS",
+      "python_sources": 6,
+      "json_inputs": 4
+    },
+    {
+      "check": "original47_and_inherited376_preserved",
+      "status": "PASS",
+      "original_source_review_preserved": true
+    },
+    {
+      "check": "collector_uses_capture_helper_without_dataset_main_or_catches",
+      "status": "PASS"
+    },
+    {
+      "check": "embedded_remote_code_compile",
+      "status": "PASS",
+      "section": "export",
+      "executed": false
+    },
+    {
+      "check": "embedded_remote_code_compile",
+      "status": "PASS",
+      "section": "retire",
+      "executed": false
+    },
+    {
+      "check": "only_local_and_remote_text_packages_are_deleted",
+      "status": "PASS"
+    },
+    {
+      "check": "terminal_5phase_6binary_export_scope_static",
+      "status": "PASS"
+    },
+    {
+      "check": "real_completed_reference_CSV_CMC50_groups_metadata",
+      "status": "PASS",
+      "reference": "original_DeMo",
+      "queries": 591,
+      "gallery": 1055,
+      "selected_epoch": 32
+    },
+    {
+      "check": "real_completed_reference_CSV_CMC50_groups_metadata",
+      "status": "PASS",
+      "reference": "head16_teacher",
+      "queries": 591,
+      "gallery": 1055,
+      "selected_epoch": 32
+    },
+    {
+      "check": "new_teacher_paper_threshold_and_actual_update_fields_static",
+      "status": "PASS"
+    }
+  ],
+  "independent_check_count": 10,
+  "input_preservation": {
+    "status": "PASS",
+    "postprocess_inputs_unchanged": 10,
+    "original_experiment_inputs_unchanged": 47,
+    "inherited_inputs_unchanged": 376,
+    "original_experiment_review_unchanged": true,
+    "six_original_NN_deployment_observer_sources_unchanged": true,
+    "supplied_input_mutations": 0,
+    "request_unchanged": true,
+    "verified_again_at_final_write": true
+  },
+  "execution": {
+    "project_imports": 0,
+    "Torch_imports": 0,
+    "NumPy_imports": 0,
+    "SSH_calls": 0,
+    "GPU_queries": 0,
+    "current_job_log_progress_PID_handle_queries": 0,
+    "new_neural_calls": 0,
+    "production_archive_transfers": 0,
+    "production_analysis_results": 0,
+    "input_mutations": 0
+  },
+  "limits": [
+    "No collector or analysis main was executed; no current head16 expert result, completion receipt, process, log or observer was read.",
+    "No SSH, NN, GPU/resource query, transfer, dependency installation or production artifact deletion occurred.",
+    "The local historical CSV checks validate input/schema compatibility; they are not new expert results or an independent installed-GT distance rerun.",
+    "The collector gates on the sealed producer completion and its GT/state checks; fresh independent actual-result review is still required after real archival.",
+    "Requested Astra/max is recorded, while actual model and effort remain UNATTESTED. This followup has the same reviewer context as the original source review; review independence is same-family/provisional."
+  ],
+  "runtime_admitted": false,
+  "actual_archives_verified": false,
+  "new_expert_performance_passed": false,
+  "original_source_review": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_head16_experts_source_review_20261016.json",
+  "trace_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MS_head16_experts_postprocess_run01",
+  "CPU_trace": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_MS_head16_experts_postprocess_run01\\independent_source_checks.json"
+}
