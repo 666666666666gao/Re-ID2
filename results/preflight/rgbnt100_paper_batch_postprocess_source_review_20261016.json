@@ -1,0 +1,578 @@
+{
+  "status": "FINAL",
+  "verdict": "PASS",
+  "review_type": "SOURCE_ONLY",
+  "at": "2026-10-16T21:50:24+08:00",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_postprocess_source_request_20261016.json",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "actual_route": "UNATTESTED",
+  "route_attribution": "The requested route was Astra/max. No exact host-attested model or effort is available to this reviewer; request parameters are not actual-route proof.",
+  "reviewer_task": "/root/review_rgbnt100_paper_batch_postprocess_20261016",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "blocking_findings": [],
+  "non_blocking_findings": [],
+  "summary": "PASS: the two new postprocessing sources correctly consume the sealed terminal controller/result schema, archive four selected raw/best binaries and complete text outputs, and reduce matched complete records with explicit baseline attribution. No concrete blocking or nonblocking defect found. This is source-only acceptance, not runtime or result acceptance.",
+  "positive_findings": [
+    {
+      "topic": "Terminal gate and read-only source import chain",
+      "conclusion": "Correct. Before the first SSH command the collector requires FINAL/PASS/no blockers, the twelve requested source SHA values, the original completion artifact, controller COMPLETE and absent, and exactly six absent child processes with exit_code 0. The imported transfer main is never called; the seven private transport modules and collect_results contain no top-level transport execution. Only the future collector main performs SSH/SCP.",
+      "evidence": [
+        "results/preflight/intake_rgbnt100_paper_batch_20261016.py:17",
+        "results/preflight/intake_rgbnt100_paper_batch_20261016.py:25",
+        "results/preflight/intake_rgbnt100_paper_batch_20261016.py:34",
+        "results/preflight/intake_rgbnt100_paper_batch_20261016.py:59",
+        "results/preflight/observe_rgbnt100_paper_batch_20261016.py:24"
+      ]
+    },
+    {
+      "topic": "Controller producer/consumer schema and real AMP accounting",
+      "conclusion": "Correct. The collector consumes the actual runs/head/raw/best controller schema, two heads 8/32, 100 combined formal epochs, 6270 attempted batches and 3135 per run. Successful updates and skips are allowed to differ and must sum to attempted batches. The analyzer checks each full50 result, all 3135 batch records, actual optimizer_updated booleans, per-epoch loss and cumulative attempt/update/skip totals, exact paired epoch/step/name streams, and controller aggregate updates/skips.",
+      "evidence": [
+        "launch_rgbnt100_paper_batch_baselines.py:82",
+        "launch_rgbnt100_paper_batch_baselines.py:111",
+        "results/preflight/intake_rgbnt100_paper_batch_20261016.py:41",
+        "analyze_rgbnt100_paper_batch_normal.py:16",
+        "analyze_rgbnt100_paper_batch_normal.py:50",
+        "analyze_rgbnt100_paper_batch_normal.py:59"
+      ]
+    },
+    {
+      "topic": "Text archive layout and four preserved binaries",
+      "conclusion": "Correct. Exported text names are relative to the remote run root, so experiments/training is retained below the new local TAG. All JSON/CSV/JSONL/log outputs under that root enter the text manifest and are checked by size/SHA after extraction. Each head raw and best file is copied directly into its distinct D:/Program Files/UserCache/gb/ReID2-experiment-artifacts/TAG/head{8,32}/{raw,best} path and verified. The retirement script removes only the verified temporary text tarball after rechecking all four remote binaries; it leaves every raw/best binary in place for fresh result review.",
+      "evidence": [
+        "results/preflight/intake_rgbnt100_paper_batch_20261016.py:15",
+        "results/preflight/intake_rgbnt100_paper_batch_20261016.py:47",
+        "results/preflight/intake_rgbnt100_paper_batch_20261016.py:60",
+        "results/preflight/intake_rgbnt100_paper_batch_20261016.py:71",
+        "results/preflight/intake_rgbnt100_paper_batch_20261016.py:79",
+        "results/preflight/intake_rgbnt100_paper_batch_20261016.py:86"
+      ]
+    },
+    {
+      "topic": "Full official records and inherited installed-GT audit",
+      "conclusion": "Correct source contract. All five analyzer rows require 8675 train / 1715 query / 8575 gallery records, no held-out training identities, and complete cumulative training coverage. New B128 results require the completed B128/P8K16 normal audit. The unchanged producer audit checks installed split equality, P8K16 on every attempt, training record coverage, query/gallery names and labels in raw arrays, and recounts distances against dataset identities/cameras. This review did not execute that NumPy/installed-GT audit or claim new B128 results.",
+      "evidence": [
+        "analyze_rgbnt100_paper_batch_normal.py:25",
+        "analyze_rgbnt100_paper_batch_normal.py:53",
+        "audit_rgbnt100_paper_batch_normal.py:26",
+        "audit_rgbnt100_paper_batch_normal.py:40",
+        "audit_rgbnt100_paper_batch_normal.py:72"
+      ]
+    },
+    {
+      "topic": "Actual historical reference paths",
+      "conclusion": "Correct. The original DeMo path is full_official_baselines_20261004/training; AV is r201av_RGB_frequency_value_decay_20261014/RGBNT100/training; historical B64/head32 is vehicle_atmoe_head_dynamic_amp_20261016/RGBNT100/training with no experiments component. Only new B128 paths use TAG/experiments/training. The three exact historical folders were independently read and all requested result/per-query/epochs fields passed.",
+      "evidence": [
+        "analyze_rgbnt100_paper_batch_normal.py:14",
+        "analyze_rgbnt100_paper_batch_normal.py:19",
+        "analyze_rgbnt100_paper_batch_normal.py:23"
+      ]
+    },
+    {
+      "topic": "One earliest mAP-best checkpoint and complete six-metric reductions",
+      "conclusion": "Correct. The analyzer requires ordered epochs 1..50, uses the first maximum mAP, checks its selected epoch and all six metrics against the run/full per-query summary, and keeps epoch50 metrics separate. The common helper independently reduces all1715 query AP/INP/rank fields, CMC ranks1..50 and identity/camera/scene groups. The unchanged runner saves on strictly greater mAP then strictly reloads that same best checkpoint before exporting raw arrays and all six metrics. Historical selected epochs 8/20/17 independently matched.",
+      "evidence": [
+        "analyze_rgbnt100_paper_batch_normal.py:31",
+        "analyze_rgbnt100_paper_batch_normal.py:35",
+        "analyze_rgbnt100_paper_batch_normal.py:42",
+        "analyze_identity_coordinate_three_normal.py:24",
+        "run_full_official_experiment.py:163",
+        "run_full_official_experiment.py:169"
+      ]
+    },
+    {
+      "topic": "Full curves, measured cost and schema compatibility",
+      "conclusion": "Correct. All50 rows per model are retained, including measured epoch seconds, loss, AMP scale, update/skip counts, coverage and all six metrics. Parameters/trainable parameters, observed peak memory, full-QG measured runtime, actual attempts/updates/skips and best/last values are preserved. AV is explicitly original50 plus expert50. The three historical CSV schemas are the same15 columns; writing all150 historical rows through the same DictWriter shape succeeded in memory, and the new B128 runner emits exactly those columns.",
+      "evidence": [
+        "analyze_rgbnt100_paper_batch_normal.py:42",
+        "analyze_rgbnt100_paper_batch_normal.py:47",
+        "analyze_rgbnt100_paper_batch_normal.py:93",
+        "run_full_official_experiment.py:133"
+      ]
+    },
+    {
+      "topic": "Paired rescue/harm and paper-baseline attribution",
+      "conclusion": "Correct. Each comparison first requires matching query index/name/identity/camera/scene/valid/relevant/kept-gallery fields across all1715 rows, then reports both rescue and harm plus AP improvement/decline and per-query AP/INP/Rank1 deltas. Rank1 delta is reconciled with100*(rescued-harmed)/1715. Paper targets are87.2 mAP and98.6 Rank1; selection chooses a whole completed B128 run, never metric maxima from different checkpoints. Both new runs are labeled identity baselines, with explicit limits on benchmark selection, one seed, B64 update-budget changes and no dual-axis contribution.",
+      "evidence": [
+        "analyze_rgbnt100_paper_batch_normal.py:70",
+        "analyze_rgbnt100_paper_batch_normal.py:74",
+        "analyze_rgbnt100_paper_batch_normal.py:86",
+        "analyze_rgbnt100_paper_batch_normal.py:90",
+        "analyze_rgbnt100_paper_batch_normal.py:101",
+        "results/preflight/reid2_paper_reference_targets_20261016.json"
+      ]
+    }
+  ],
+  "request_start": {
+    "bytes": 4262,
+    "sha256": "1c97ad82f563decfa2b5556284e5bbceb5244f3c84a2b9cfc4e2802e064674af"
+  },
+  "request_end": {
+    "bytes": 4262,
+    "sha256": "1c97ad82f563decfa2b5556284e5bbceb5244f3c84a2b9cfc4e2802e064674af"
+  },
+  "request_unchanged": true,
+  "sources": [
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_rgbnt100_paper_batch_20261016.py",
+      "request": {
+        "bytes": 7223,
+        "sha256": "9e40a5e17459f0cd7e78275bf91f3d2aade280261ad9c775e511b42ad783c203"
+      },
+      "start": {
+        "bytes": 7223,
+        "sha256": "9e40a5e17459f0cd7e78275bf91f3d2aade280261ad9c775e511b42ad783c203"
+      },
+      "end": {
+        "bytes": 7223,
+        "sha256": "9e40a5e17459f0cd7e78275bf91f3d2aade280261ad9c775e511b42ad783c203"
+      },
+      "unchanged": true,
+      "matches_request": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_rgbnt100_paper_batch_normal.py",
+      "request": {
+        "bytes": 8625,
+        "sha256": "7e954696543f24afc4e56a3eae26f562d5875cf08870bcf45504234a6b4adab2"
+      },
+      "start": {
+        "bytes": 8625,
+        "sha256": "7e954696543f24afc4e56a3eae26f562d5875cf08870bcf45504234a6b4adab2"
+      },
+      "end": {
+        "bytes": 8625,
+        "sha256": "7e954696543f24afc4e56a3eae26f562d5875cf08870bcf45504234a6b4adab2"
+      },
+      "unchanged": true,
+      "matches_request": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\analyze_identity_coordinate_three_normal.py",
+      "request": {
+        "bytes": 9675,
+        "sha256": "4d3e5805d3de3eaae58ff7027241e147e7f41c6eb935dc7f76e34865e7270d55"
+      },
+      "start": {
+        "bytes": 9675,
+        "sha256": "4d3e5805d3de3eaae58ff7027241e147e7f41c6eb935dc7f76e34865e7270d55"
+      },
+      "end": {
+        "bytes": 9675,
+        "sha256": "4d3e5805d3de3eaae58ff7027241e147e7f41c6eb935dc7f76e34865e7270d55"
+      },
+      "unchanged": true,
+      "matches_request": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_vehicle_atmoe_dynamic_amp_component_20261016.py",
+      "request": {
+        "bytes": 8360,
+        "sha256": "d804103ac2f52f9cc2a72f17be2072f595382fb80ef483d78c603de2fb0c7793"
+      },
+      "start": {
+        "bytes": 8360,
+        "sha256": "d804103ac2f52f9cc2a72f17be2072f595382fb80ef483d78c603de2fb0c7793"
+      },
+      "end": {
+        "bytes": 8360,
+        "sha256": "d804103ac2f52f9cc2a72f17be2072f595382fb80ef483d78c603de2fb0c7793"
+      },
+      "unchanged": true,
+      "matches_request": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\launch_rgbnt100_paper_batch_baselines.py",
+      "request": {
+        "bytes": 7692,
+        "sha256": "c1f6528de5d239c61a26fd556843194d5db34cce8032da74601f06d01eff0026"
+      },
+      "start": {
+        "bytes": 7692,
+        "sha256": "c1f6528de5d239c61a26fd556843194d5db34cce8032da74601f06d01eff0026"
+      },
+      "end": {
+        "bytes": 7692,
+        "sha256": "c1f6528de5d239c61a26fd556843194d5db34cce8032da74601f06d01eff0026"
+      },
+      "unchanged": true,
+      "matches_request": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_rgbnt100_paper_batch_baseline.py",
+      "request": {
+        "bytes": 1991,
+        "sha256": "543e70b4c368dfb5247f6d021137dcb872ffbb59a4369dfe220feb306692043b"
+      },
+      "start": {
+        "bytes": 1991,
+        "sha256": "543e70b4c368dfb5247f6d021137dcb872ffbb59a4369dfe220feb306692043b"
+      },
+      "end": {
+        "bytes": 1991,
+        "sha256": "543e70b4c368dfb5247f6d021137dcb872ffbb59a4369dfe220feb306692043b"
+      },
+      "unchanged": true,
+      "matches_request": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_rgbnt100_paper_batch_normal.py",
+      "request": {
+        "bytes": 6571,
+        "sha256": "7231a6f095de160df7d2defdc575e6fd0db0315355b668db68c8a322ae4999c7"
+      },
+      "start": {
+        "bytes": 6571,
+        "sha256": "7231a6f095de160df7d2defdc575e6fd0db0315355b668db68c8a322ae4999c7"
+      },
+      "end": {
+        "bytes": 6571,
+        "sha256": "7231a6f095de160df7d2defdc575e6fd0db0315355b668db68c8a322ae4999c7"
+      },
+      "unchanged": true,
+      "matches_request": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\observe_rgbnt100_paper_batch_20261016.py",
+      "request": {
+        "bytes": 4032,
+        "sha256": "cf2023f60aa015dc9cf7e6868af41e6ad8ebde0b3756f95f2fa896d0ca499fe2"
+      },
+      "start": {
+        "bytes": 4032,
+        "sha256": "cf2023f60aa015dc9cf7e6868af41e6ad8ebde0b3756f95f2fa896d0ca499fe2"
+      },
+      "end": {
+        "bytes": 4032,
+        "sha256": "cf2023f60aa015dc9cf7e6868af41e6ad8ebde0b3756f95f2fa896d0ca499fe2"
+      },
+      "unchanged": true,
+      "matches_request": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_source_request_20261016.json",
+      "request": {
+        "bytes": 51245,
+        "sha256": "1dcaefd97340b418fade93c738c37e873ca70f62fee163cb2f3b1f53ae5fcd25"
+      },
+      "start": {
+        "bytes": 51245,
+        "sha256": "1dcaefd97340b418fade93c738c37e873ca70f62fee163cb2f3b1f53ae5fcd25"
+      },
+      "end": {
+        "bytes": 51245,
+        "sha256": "1dcaefd97340b418fade93c738c37e873ca70f62fee163cb2f3b1f53ae5fcd25"
+      },
+      "unchanged": true,
+      "matches_request": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_source_review_20261016.json",
+      "request": {
+        "bytes": 68834,
+        "sha256": "df509dfe79214a138bd01353d16a216b1de0f119f55cb1d2154c917cafe17a0d"
+      },
+      "start": {
+        "bytes": 68834,
+        "sha256": "df509dfe79214a138bd01353d16a216b1de0f119f55cb1d2154c917cafe17a0d"
+      },
+      "end": {
+        "bytes": 68834,
+        "sha256": "df509dfe79214a138bd01353d16a216b1de0f119f55cb1d2154c917cafe17a0d"
+      },
+      "unchanged": true,
+      "matches_request": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_paper_batch_plan_20261016.json",
+      "request": {
+        "bytes": 2813,
+        "sha256": "eca1605f2777aa09afa487d48c5c541be764b0210f61d170d8493278ac1c3485"
+      },
+      "start": {
+        "bytes": 2813,
+        "sha256": "eca1605f2777aa09afa487d48c5c541be764b0210f61d170d8493278ac1c3485"
+      },
+      "end": {
+        "bytes": 2813,
+        "sha256": "eca1605f2777aa09afa487d48c5c541be764b0210f61d170d8493278ac1c3485"
+      },
+      "unchanged": true,
+      "matches_request": true
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\reid2_paper_reference_targets_20261016.json",
+      "request": {
+        "bytes": 2748,
+        "sha256": "58b12204b5d01e8dcabcdbcc14c3cb18b6880621989d6eb47ec45ddf55e03469"
+      },
+      "start": {
+        "bytes": 2748,
+        "sha256": "58b12204b5d01e8dcabcdbcc14c3cb18b6880621989d6eb47ec45ddf55e03469"
+      },
+      "end": {
+        "bytes": 2748,
+        "sha256": "58b12204b5d01e8dcabcdbcc14c3cb18b6880621989d6eb47ec45ddf55e03469"
+      },
+      "unchanged": true,
+      "matches_request": true
+    }
+  ],
+  "original_seals": {
+    "primary_count": 20,
+    "inherited_count": 376,
+    "start_matches_original_request": true,
+    "end_matches_start": true,
+    "changed_files": [],
+    "start_manifest": {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_RGBNT100_paper_batch_postprocess_run01\\sealed_start_manifest.json",
+      "bytes": 111315,
+      "sha256": "f26194b0391fd00dd2e244db5ea73f97a9502e90324e9c34125b4885d489b2a1"
+    },
+    "end_manifest": {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_RGBNT100_paper_batch_postprocess_run01\\sealed_end_manifest.json",
+      "bytes": 111315,
+      "sha256": "f26194b0391fd00dd2e244db5ea73f97a9502e90324e9c34125b4885d489b2a1"
+    },
+    "scope": "Integrity preservation only; no claim to a fresh semantic re-review of all376 historical files."
+  },
+  "actual_checks": {
+    "listed_python_AST": 8,
+    "listed_JSON": 4,
+    "embedded_scripts_compiled": 2,
+    "embedded_scripts_executed": 0,
+    "private_transport_chain_AST": 7,
+    "collect_results_top_level_read": true,
+    "existing_sha_function_matches": 12,
+    "historical_models": 3,
+    "historical_queries": 5145,
+    "historical_epochs": 150,
+    "CMC50_per_model": true,
+    "groups_per_model": 59,
+    "three_historical_pair_alignments": true,
+    "historical_curve_rows_written_in_memory": 150,
+    "new_B128_curve_schema_matches": true,
+    "historical_inputs_unchanged": true,
+    "check_script": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_RGBNT100_paper_batch_postprocess_run01\\source_checks.py",
+    "check_result": {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_RGBNT100_paper_batch_postprocess_run01\\source_checks_actual.json",
+      "bytes": 12399,
+      "sha256": "1f05dffcce5230ae5ccac5f6a11fa50f5f6fe24530f7e9125abcb86ca88b178b"
+    },
+    "actual_command": {
+      "interpreter": "C:\\Users\\gb\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\python.exe",
+      "flags": [
+        "-X",
+        "utf8",
+        "-B",
+        "-S"
+      ],
+      "exit_code": 0,
+      "tool_chunk": "580f3d"
+    }
+  },
+  "historical_checks": [
+    {
+      "model": "original_DeMo",
+      "folder": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\full_official_baselines_20261004\\training\\RGBNT100_demo_s42",
+      "query_count": 1715,
+      "gallery_count": 8575,
+      "train_records": 8675,
+      "epochs": 50,
+      "epoch_fields": [
+        "epoch",
+        "steps",
+        "optimizer_steps",
+        "amp_skipped_steps",
+        "amp_scale",
+        "loss",
+        "mAP",
+        "mINP",
+        "Rank-1",
+        "Rank-5",
+        "Rank-10",
+        "Rank-20",
+        "epoch_unique_train_records",
+        "cumulative_unique_train_records",
+        "seconds"
+      ],
+      "selected_epoch": 8,
+      "attempts": 6357,
+      "updates": 6357,
+      "skips": 0,
+      "six": {
+        "mAP": 85.76856710316947,
+        "mINP": 61.84590828355626,
+        "Rank-1": 96.61807580174927,
+        "Rank-5": 97.0262390670554,
+        "Rank-10": 97.37609329446065,
+        "Rank-20": 97.72594752186589
+      },
+      "CMC50": true,
+      "groups": {
+        "camera": 8,
+        "scene": 1,
+        "identity": 50
+      },
+      "measured_stage_epoch_seconds": 9530.154612541199
+    },
+    {
+      "model": "AV_axis",
+      "folder": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\r201av_RGB_frequency_value_decay_20261014\\RGBNT100\\training\\RGBNT100_r201av_axis_shared_s42",
+      "query_count": 1715,
+      "gallery_count": 8575,
+      "train_records": 8675,
+      "epochs": 50,
+      "epoch_fields": [
+        "epoch",
+        "steps",
+        "optimizer_steps",
+        "amp_skipped_steps",
+        "amp_scale",
+        "loss",
+        "mAP",
+        "mINP",
+        "Rank-1",
+        "Rank-5",
+        "Rank-10",
+        "Rank-20",
+        "epoch_unique_train_records",
+        "cumulative_unique_train_records",
+        "seconds"
+      ],
+      "selected_epoch": 20,
+      "attempts": 6563,
+      "updates": 6563,
+      "skips": 0,
+      "six": {
+        "mAP": 86.1546433016181,
+        "mINP": 62.56079466820975,
+        "Rank-1": 96.7930029154519,
+        "Rank-5": 97.43440233236151,
+        "Rank-10": 97.78425655976677,
+        "Rank-20": 98.25072886297376
+      },
+      "CMC50": true,
+      "groups": {
+        "camera": 8,
+        "scene": 1,
+        "identity": 50
+      },
+      "measured_stage_epoch_seconds": 9033.463645935059
+    },
+    {
+      "model": "B64_head32",
+      "folder": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\vehicle_atmoe_head_dynamic_amp_20261016\\RGBNT100\\training\\RGBNT100_atmoe32_demo_s42",
+      "query_count": 1715,
+      "gallery_count": 8575,
+      "train_records": 8675,
+      "epochs": 50,
+      "epoch_fields": [
+        "epoch",
+        "steps",
+        "optimizer_steps",
+        "amp_skipped_steps",
+        "amp_scale",
+        "loss",
+        "mAP",
+        "mINP",
+        "Rank-1",
+        "Rank-5",
+        "Rank-10",
+        "Rank-20",
+        "epoch_unique_train_records",
+        "cumulative_unique_train_records",
+        "seconds"
+      ],
+      "selected_epoch": 17,
+      "attempts": 6357,
+      "updates": 6357,
+      "skips": 0,
+      "six": {
+        "mAP": 85.44494748234041,
+        "mINP": 61.987390747305206,
+        "Rank-1": 96.90962099125365,
+        "Rank-5": 97.37609329446065,
+        "Rank-10": 97.72594752186589,
+        "Rank-20": 97.95918367346938
+      },
+      "CMC50": true,
+      "groups": {
+        "camera": 8,
+        "scene": 1,
+        "identity": 50
+      },
+      "measured_stage_epoch_seconds": 10349.468494415283
+    }
+  ],
+  "historical_pair_checks": [
+    {
+      "candidate": "AV_axis",
+      "reference": "original_DeMo",
+      "queries": 1715,
+      "GT_identity_order_exact": true,
+      "rank1_rescued": 9,
+      "rank1_harmed": 6
+    },
+    {
+      "candidate": "B64_head32",
+      "reference": "original_DeMo",
+      "queries": 1715,
+      "GT_identity_order_exact": true,
+      "rank1_rescued": 27,
+      "rank1_harmed": 22
+    },
+    {
+      "candidate": "B64_head32",
+      "reference": "AV_axis",
+      "queries": 1715,
+      "GT_identity_order_exact": true,
+      "rank1_rescued": 26,
+      "rank1_harmed": 24
+    }
+  ],
+  "actual_calls": {
+    "SSH": 0,
+    "SCP": 0,
+    "NN": 0,
+    "GPU": 0,
+    "training_log_reads": 0,
+    "PID_queries": 0,
+    "training_handle_reads": 0,
+    "progress_queries": 0,
+    "observer_queries": 0,
+    "localtimer_queries": 0,
+    "dependency_installs": 0,
+    "collector_main": 0,
+    "analyzer_main": 0,
+    "project_module_imports": 0,
+    "science_source_edits": 0,
+    "new_source_edits": 0,
+    "Git_mutations": 0
+  },
+  "environment_note": {
+    "initial_bare_python_exit_code": 1,
+    "initial_error": "No pyvenv.cfg file",
+    "initial_tool_chunk": "817a23",
+    "impact": "Bare python resolved to E:/Scripts/python.exe and failed before any snapshot/check script ran. All actual checks subsequently used the already-installed explicit interpreter; no dependencies were installed. This is an environment-launch issue, not a finding against the reviewed sources."
+  },
+  "limitations": [
+    "No current B128 session, completion artifact, logs, child state, model, GPU or observer/handle was queried. No claim that either B128 full50 has completed or met targets is made.",
+    "Only root may consume original observer54042 at2026-10-17T00:42:38.056921+08:00. That observer and the original20+376 scientific/operational files remain unchanged.",
+    "3135 attempts per B128 run,6270 combined, six successful native updates and two full50 completions are source acceptance requirements here, not newly witnessed runtime counts.",
+    "Historical checks reduce archived CSV/JSON with actual source helper functions. They are not independent installed-dataset/raw-distance recounts or a new neural evaluation.",
+    "Future intake must satisfy actual terminal gates and archive size/SHA checks; the two retained best/raw pairs still require the planned fresh independent result audit before result acceptance.",
+    "Same-family fresh-context review is provisional. Exact route and effort remain UNATTESTED."
+  ],
+  "trace_root": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_RGBNT100_paper_batch_postprocess_run01",
+  "runtime_admitted": false,
+  "result_acceptance": false,
+  "new_NN": 0,
+  "new_SSH": 0,
+  "formal_updates": 0,
+  "goal": "ACTIVE_UNMET"
+}
