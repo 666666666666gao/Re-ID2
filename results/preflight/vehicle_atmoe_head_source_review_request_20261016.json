@@ -1,0 +1,28 @@
+{
+  "status": "SOURCE_REVIEW_REQUEST_NOT_DEPLOYMENT_AUTHORIZATION",
+  "project": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002",
+  "new_files": [
+    "vehicle_atmoe_head_configuration.py",
+    "run_vehicle_atmoe_head_baseline.py",
+    "results/preflight/vehicle_atmoe_head_candidate_plan_20261016.json"
+  ],
+  "read_sources": [
+    "run_full_official_experiment.py",
+    "run_experiment.py",
+    "run_shared_identity_experiment.py",
+    "shared_identity_axis.py",
+    "modeling/make_model.py",
+    "modeling/moe/AttnMOE.py",
+    "gpu_thermal_execute.py",
+    "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/run.json",
+    "results/full_official_baselines_20261004/training/MSVR310_demo_shared_s42/run.json",
+    "results/preflight/reid2_paper_reference_targets_20261016.json"
+  ],
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "scope": "Read sources directly and compare against preserved run configs. Check sole cfg.MODEL.HEAD delta, correct wrapper closure behavior and inheritance, number/width of ATMoE partition experts vs unchanged HDM attention, expected parameter arithmetic, native/fresh50/fullQG semantics, no existing F source mutation or early execution. Do not deploy/run/import model/Torch, do not query GPU/server/process/job/session, no new fallback/try-except/compat/refactor/hash machinery. Need an honest source-only verdict; runtime parity/native/field cost are pending future gates.",
+  "output": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_head_source_review_20261016.json",
+  "trace_root": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_vehicle_ATMoE_heads_source_run01"
+}

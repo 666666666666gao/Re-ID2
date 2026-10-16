@@ -1,0 +1,82 @@
+{
+  "status": "PREPARED_SOURCE_ONLY_NOT_ADMITTED_NOT_QUEUED_NO_NEW_NEURAL_RUN",
+  "at": "2026-10-16T12:14:12+08:00",
+  "rationale": "Published DeMo appendix reports dataset-specific ATMoE count sensitivity. Current saved vehicle runs already use eight ATMoE heads. Examine the existing modality-relation expert parameterization as a finite stronger-reference configuration, without adding modules or changing RGBNT201.",
+  "paper_source": "https://arxiv.org/html/2412.10650v1",
+  "paper_appendix": {
+    "RGBNT100": {
+      "heads32_mAP": 87.7,
+      "heads8_Rank1": 98.2
+    },
+    "MSVR310": {
+      "heads16_mAP": 51.4,
+      "heads8_Rank1": 63.4
+    },
+    "limitation": "Separate head configurations and metrics; never combine these as one result or change the primary-table acceptance reference."
+  },
+  "candidates": [
+    {
+      "dataset": "RGBNT100",
+      "variant": "demo",
+      "original_run": "results\\full_official_baselines_20261004\\training\\RGBNT100_demo_s42\\run.json",
+      "original_heads": 8,
+      "candidate_heads": 32,
+      "parameters_reference": 97952256,
+      "parameters_candidate_source_arithmetic": 97780224,
+      "head_partition_parameter_delta": -172032,
+      "train_records": 8675,
+      "query_records": 1715,
+      "gallery_records": 8575,
+      "training_batch": 64,
+      "K": 16,
+      "epochs": 50,
+      "base_lr": 0.00035,
+      "warmup_epochs": 5,
+      "configured_eval_batch": 128,
+      "effective_eval_batch": 64
+    },
+    {
+      "dataset": "MSVR310",
+      "variant": "demo_shared",
+      "original_run": "results\\full_official_baselines_20261004\\training\\MSVR310_demo_shared_s42\\run.json",
+      "original_heads": 8,
+      "candidate_heads": 16,
+      "parameters_reference": 99982336,
+      "parameters_candidate_source_arithmetic": 99867648,
+      "head_partition_parameter_delta": -114688,
+      "train_records": 1032,
+      "query_records": 591,
+      "gallery_records": 1055,
+      "training_batch": 64,
+      "K": 4,
+      "epochs": 50,
+      "base_lr": 0.00035,
+      "warmup_epochs": 10,
+      "configured_eval_batch": 64,
+      "effective_eval_batch": 64
+    }
+  ],
+  "scope": "Only cfg.MODEL.HEAD changes relative to each saved full-official baseline. HDM relation attention remains8; existing new M/F heads and current F128 training are not changed. Head8 is supported only as a parity/reference case, not another search point.",
+  "defaults": "Same B64, sampler/K, public CLIP, seed42, optimizer/losses, existing shared baseline training and all50epochs/fullQG. No fit/dev, no missing evaluation, no seed sweep. Candidate32 original RGBNT100 is5120D, candidate16 MS shared is5632D.",
+  "acceptance": {
+    "RGBNT100": {
+      "mAP": 87.2,
+      "Rank_1": 98.6
+    },
+    "MSVR310": {
+      "mAP": 50.2,
+      "Rank_1": 60.8
+    }
+  },
+  "interpretation": "These are identity baselines, not Ours dual-axis. Compare historical head8 with disclosed non-contemporaneous control; preserve original records. Any later expert experiment requires the same new identity reference for ordinary and dual-axis, native strict reload and explicit cfg/head binding. Do not count baseline gains as expert gains.",
+  "admission": "No execution or automatic queue. Await current F128 actual terminal, full intake/audit and decision, then source review plus actual head8 default parity and candidate3-Adam/strict-reload/full-active-grad gates before formal50. Existing parent smoke writes no weights; retain only selected best for formal runs.",
+  "resource_policy": "Only2026physicalGPU2/3 one per card max2. No GPU0/1, no2027 NN, no temperature/power, no early query of F34653 before15:03:10.032371BJT; no installation/environment change.",
+  "current_nn_calls": 0,
+  "training_progress_queries": 0,
+  "current_F_source_mutations": 0,
+  "files": [
+    "vehicle_atmoe_head_configuration.py",
+    "run_vehicle_atmoe_head_baseline.py"
+  ],
+  "eval_batch_label_correction": "Fresh reviewer traced full_evaluation.extract to experiment_data.make_loader:91: evaluation batch is fixed64 regardless of cfg.TEST.IMS_PER_BATCH. Original plan preserved in review trace. Only documentation corrected; no loader or live source changed."
+}

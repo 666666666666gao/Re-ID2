@@ -1,0 +1,236 @@
+{
+  "status": "FINAL",
+  "verdict": "SOURCE_ONLY_PASS",
+  "scope": "Local source, preserved-run configuration and finite-plan review only; no runtime admission or deployment authorization.",
+  "deployment_authorized": false,
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "routing_attestation": "The fresh reviewer task is observable; actual serving model and reasoning metadata are not exposed to this reviewer. Requested routing is not claimed as verified actual routing.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "reviewer_task": "/root/review_vehicle_atmoe_heads_source_20261016",
+  "request": "results/preflight/vehicle_atmoe_head_source_review_request_20261016.json",
+  "addendum": "results/preflight/vehicle_atmoe_head_source_review_addendum_20261016.json",
+  "reviewed_new_python": [
+    "vehicle_atmoe_head_configuration.py",
+    "run_vehicle_atmoe_head_baseline.py",
+    "check_vehicle_atmoe_head_default_parity.py"
+  ],
+  "reviewed_plan": "results/preflight/vehicle_atmoe_head_candidate_plan_20261016.json",
+  "directly_read_sources": [
+    "run_full_official_experiment.py",
+    "run_experiment.py",
+    "run_shared_identity_experiment.py",
+    "shared_identity_axis.py",
+    "modeling/make_model.py",
+    "modeling/moe/AttnMOE.py",
+    "gpu_thermal_execute.py",
+    "official_training_data.py",
+    "full_evaluation.py",
+    "experiment_data.py",
+    "configs/RGBNT100/DeMo.yml",
+    "configs/MSVR310/DeMo.yml",
+    "config/defaults.py",
+    "solver/make_optimizer.py",
+    "solver/scheduler_factory.py",
+    "layers/make_loss.py",
+    "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/run.json",
+    "results/full_official_baselines_20261004/training/MSVR310_demo_shared_s42/run.json",
+    "results/preflight/reid2_paper_reference_targets_20261016.json"
+  ],
+  "blocking_issues": [],
+  "nonblocking_issues": [],
+  "resolved_findings": [
+    {
+      "id": "R1",
+      "severity": "NON_BLOCKING_PLAN_LABEL",
+      "finding": "The original RGBNT100 candidate plan labeled eval_batch as 128, but that is the saved TEST.IMS_PER_BATCH configuration value. The actual inherited evaluation loader uses batch_size=64.",
+      "evidence": [
+        "full_evaluation.py:86",
+        "experiment_data.py:91",
+        "results/full_official_baselines_20261004/training/RGBNT100_demo_s42/run.json"
+      ],
+      "minimal_fix": "Keep the loader and all existing experiment code unchanged. Distinguish configured_eval_batch from effective_eval_batch in the candidate plan.",
+      "resolution": "Parent corrected the plan to RGBNT100 configured=128/effective=64 and MSVR310 configured=64/effective=64. Reviewer reread and confirmed the final plan.",
+      "original_plan_preserved": ".aris/traces/experiment-bridge/2026-10-16_vehicle_ATMoE_heads_source_run01/candidate_plan_before_eval_batch_label_fix.json"
+    }
+  ],
+  "checks": [
+    {
+      "check": "Sole configuration change and finite scope",
+      "verdict": "PASS",
+      "evidence": [
+        "vehicle_atmoe_head_configuration.py:5",
+        "vehicle_atmoe_head_configuration.py:9",
+        "vehicle_atmoe_head_configuration.py:13",
+        "vehicle_atmoe_head_configuration.py:15"
+      ],
+      "conclusion": "The helper clones the original frozen configuration, changes only cfg.MODEL.HEAD, freezes it again, and records args.atmoe_heads. It allows RGBNT100/demo heads8 or32 and MSVR310/demo_shared heads8 or16, seed42 only. RGBNT201 cannot reach model construction through this helper. Head8 is a documented parity/historical reference, not an additional planned training search point."
+    },
+    {
+      "check": "Runner globals, closure behavior and inheritance",
+      "verdict": "PASS",
+      "evidence": [
+        "run_vehicle_atmoe_head_baseline.py:15",
+        "run_vehicle_atmoe_head_baseline.py:18",
+        "run_vehicle_atmoe_head_baseline.py:23",
+        "run_full_official_experiment.py:30",
+        "run_full_official_experiment.py:75",
+        "run_shared_identity_experiment.py:25",
+        "shared_identity_axis.py:108"
+      ],
+      "conclusion": "The wrapper replaces the configuration global in the module whose main uses it and explicitly passes its builder closure. It does not rebind runner.build, so the closure delegates to the original builder without recursion. RGBNT100 builds DeMo; MSVR310 builds SharedIdentityDeMo, which directly inherits DeMo and receives the selected cfg."
+    },
+    {
+      "check": "ATMoE partitions, HDM attention and output widths",
+      "verdict": "PASS",
+      "evidence": [
+        "modeling/make_model.py:35",
+        "modeling/make_model.py:46",
+        "modeling/moe/AttnMOE.py:85",
+        "modeling/moe/AttnMOE.py:104",
+        "modeling/moe/AttnMOE.py:142",
+        "shared_identity_axis.py:53",
+        "shared_identity_axis.py:90"
+      ],
+      "conclusion": "HEAD selects the number of ATMoE channel partitions and the gating attention heads. Each partition still contains seven relation experts. RGBNT100 heads32 uses width16; MSVR310 heads16 uses width32. The seven HDM attention readers remain 512/64=8 heads. Concatenated ATMoE output remains 7*512=3584, so original DeMo remains5120D and SharedIdentityDeMo remains5632D. Shared availability-aware fusion reads the variable moe.head and gate.num_heads correctly."
+    },
+    {
+      "check": "Preserved training configuration and baseline semantics",
+      "verdict": "PASS",
+      "evidence": [
+        "run_experiment.py:31",
+        "run_shared_identity_experiment.py:34",
+        "run_full_official_experiment.py:35",
+        "configs/RGBNT100/DeMo.yml",
+        "configs/MSVR310/DeMo.yml"
+      ],
+      "conclusion": "The selected baselines retain B64, seed42, K16/K4, public-CLIP argument, Adam, base_lr0.00035, warmup5/10 and50epochs. MSVR310 retains its shared identity/full-plus-partial training and stopped full-view gallery. No new modality/frequency model, loss or dual-axis branch is selected."
+    },
+    {
+      "check": "Full official splits, GT metrics, selection and strict reload",
+      "verdict": "PASS",
+      "evidence": [
+        "official_training_data.py:20",
+        "full_evaluation.py:68",
+        "run_full_official_experiment.py:43",
+        "run_full_official_experiment.py:138",
+        "run_full_official_experiment.py:155",
+        "run_full_official_experiment.py:163",
+        "run_full_official_experiment.py:169"
+      ],
+      "conclusion": "The chosen main uses all official training records and every official query/gallery record with no fit/dev split. Metrics use dataset identity and camera/scene ground truth. Training runs50epochs, selects highest full-official mAP with earliest ties, retains only best.pth, strictly reloads it and re-evaluates allQG. Benchmark-based selection remains explicitly disclosed. No missing-modality evaluation is added."
+    },
+    {
+      "check": "Native smoke path",
+      "verdict": "PASS_SOURCE_ONLY",
+      "evidence": [
+        "run_full_official_experiment.py:99",
+        "run_full_official_experiment.py:105",
+        "run_full_official_experiment.py:108",
+        "run_full_official_experiment.py:119",
+        "run_full_official_experiment.py:122"
+      ],
+      "conclusion": "The inherited smoke path requires three actual optimizer updates, records AMP attempts/skips, checks all trainable gradients and performs strict in-memory state reload with exact FP32 descriptor equality. It writes no smoke checkpoint. No smoke was executed during this review."
+    },
+    {
+      "check": "Head8 default parity addendum",
+      "verdict": "PASS_SOURCE_ONLY",
+      "evidence": [
+        "check_vehicle_atmoe_head_default_parity.py:38",
+        "check_vehicle_atmoe_head_default_parity.py:45",
+        "check_vehicle_atmoe_head_default_parity.py:48",
+        "check_vehicle_atmoe_head_default_parity.py:51",
+        "check_vehicle_atmoe_head_default_parity.py:53",
+        "check_vehicle_atmoe_head_default_parity.py:57",
+        "check_vehicle_atmoe_head_default_parity.py:59",
+        "experiment_data.py:17"
+      ],
+      "conclusion": "The parity script compares exact config dumps, all state tensors and post-constructor CPU/CUDA RNG. Both builds use the same existing seed_all constructor path. The saved RNG precedes first-model outputs; the second build reseeds and reconstructs before its RNG comparison. Both models then receive the same8 full-input records in FP32 and AMP, with exact per-mode output comparison and5120/5632D assertions. The planned32 forward-record executions are per dataset invocation (2models*2modes*8records), not32 for both datasets together. Models are constructed sequentially and no optimizer/checkpoint is created. Actual parity remains pending."
+    },
+    {
+      "check": "Historical control, future matching and paper acceptance",
+      "verdict": "PASS",
+      "evidence": [
+        "results/preflight/vehicle_atmoe_head_candidate_plan_20261016.json",
+        "results/preflight/reid2_paper_reference_targets_20261016.json",
+        "run_vehicle_atmoe_head_baseline.py:25"
+      ],
+      "conclusion": "The plan calls these identity baselines, discloses historical head8 as a non-contemporaneous control, and requires the same new identity reference for any later ordinary/dual-axis experiment. Gains cannot be counted as new expert gains. Acceptance remains paper+1 targets RGBNT10087.2mAP/98.6Rank1 and MSVR31050.2/60.8, consistent with the supplied local policy. Separate appendix head-sweep metrics are not combined into one result or used to replace the acceptance target. External paper contents were not independently fetched in this source-only review."
+    },
+    {
+      "check": "Current F128 and protected RGBNT201 scope",
+      "verdict": "PASS_SOURCE_ONLY",
+      "evidence": [
+        "vehicle_atmoe_head_configuration.py:6",
+        "results/preflight/vehicle_atmoe_head_candidate_plan_20261016.json",
+        "results/preflight/vehicle_atmoe_head_source_review_addendum_20261016.json"
+      ],
+      "conclusion": "The reviewed additions define isolated entry points, with no scheduler, deployment or edits to active F sources. RGBNT201/K is excluded from the candidate configurations. The reviewer did not inspect processes, sessions, GPUs or remote state, and did not edit implementation files."
+    }
+  ],
+  "parameter_arithmetic": {
+    "formula": "For width d=512/H, the relation expert bank has 7*H*(d*d+3*d) parameters: Linear weight+bias plus BatchNorm weight+bias. The other ATMoE gate matrices and HDM parameters keep their dimensions.",
+    "head8_expert_bank_parameters": 240128,
+    "RGBNT100": {
+      "candidate_heads": 32,
+      "partition_width": 16,
+      "candidate_expert_bank_parameters": 68096,
+      "delta": -172032,
+      "historical_total": 97952256,
+      "candidate_total_source_arithmetic": 97780224,
+      "candidate_trainable_source_arithmetic": 97775104,
+      "descriptor_dim": 5120,
+      "total_parameter_reduction_percent": 0.17562842044189364
+    },
+    "MSVR310": {
+      "candidate_heads": 16,
+      "partition_width": 32,
+      "candidate_expert_bank_parameters": 125440,
+      "delta": -114688,
+      "historical_total": 99982336,
+      "candidate_total_source_arithmetic": 99867648,
+      "candidate_trainable_source_arithmetic": 99856384,
+      "descriptor_dim": 5632,
+      "total_parameter_reduction_percent": 0.11470826206741158
+    },
+    "limitation": "These are static parameter counts, not measured latency/FLOPs/VRAM or accuracy gains. More partitions reduce the expert-bank weight count but do not establish faster execution."
+  },
+  "local_static_validation": {
+    "status": "PASS",
+    "method": "Python3.13 stdlib ast.parse and integer arithmetic only, using -X utf8 -B -S; no project code was imported or executed.",
+    "parsed_python_files": 17,
+    "new_python_files": 3,
+    "sole_cfg_assignment": "cfg.MODEL.HEAD",
+    "new_try_except_blocks": 0,
+    "saved_record_counts_and_parameter_totals_match_plan": true
+  },
+  "runtime_gates_pending": [
+    "Actual current F128 terminal, complete intake/audit and parent decision; this review did not query or attest that state.",
+    "Fresh resource admission on2026 physicalGPU2/3 only, max2 with one model per card; no2027, GPU0/1 or temperature/power queries.",
+    "Execute and retain head8 default config/state/RNG/FP32/AMP parity results for both selected dataset/variant combinations.",
+    "Execute each candidate's real native3 Adam, finite active gradients and strict-reload check before any formal50.",
+    "Measure actual parameter/output/runtime/resource behavior and verify full official split counts at admission; static source arithmetic does not substitute for these measurements.",
+    "Any later ordinary-versus-dual-axis experiment needs its explicitly bound new identity reference and a separate reviewed admission; this baseline source review covers neither an expert claim nor missing-modality deployment."
+  ],
+  "review_activity": {
+    "project_module_imports": 0,
+    "torch_imports": 0,
+    "model_constructions": 0,
+    "neural_forward_calls": 0,
+    "optimizer_updates": 0,
+    "new_checkpoint_writes": 0,
+    "ssh_calls": 0,
+    "gpu_queries": 0,
+    "process_or_session_queries": 0,
+    "training_progress_queries": 0,
+    "installs_or_environment_changes": 0,
+    "implementation_files_edited_by_reviewer": 0,
+    "deployment_calls": 0
+  },
+  "trace_root": ".aris/traces/experiment-bridge/2026-10-16_vehicle_ATMoE_heads_source_run01",
+  "final_conclusion": "The three new Python sources and corrected finite plan have no remaining identified source defect. SOURCE_ONLY_PASS is same-family/provisional and does not authorize execution, queueing or deployment.",
+  "review_completed_at": "2026-10-16T12:20:15.518310+08:00"
+}
