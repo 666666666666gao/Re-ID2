@@ -1,0 +1,66 @@
+{
+  "status": "FRESH_RESCUE_DIAGNOSIS_REQUEST_NO_NEW_NN",
+  "at": "2026-10-16T16:58:39+08:00",
+  "project": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002",
+  "sources": [
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_head_native_failure_actual_20261016.json",
+      "bytes": 160629,
+      "sha256": "13a35458ff1391c8cc3b81f89bf12038fffd934ee71188a485d2a3671dd52bc7"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_head_native_gate_actual_20261016.json",
+      "bytes": 3735,
+      "sha256": "124f39b882cd995e3d0211728e653a5ae431f1c8806e7b328c10ed529b170436"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py",
+      "bytes": 10596,
+      "sha256": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_experiment.py",
+      "bytes": 14298,
+      "sha256": "6efe9bc31912e90a2381678941a6b209aaba5949a824d02163fb783ba6869154"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_shared_identity_experiment.py",
+      "bytes": 12402,
+      "sha256": "7ab72cbe6f049dd9413c4ad23dafb7f6def8712666e26d0f127d10990fb5a390"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\launch_vehicle_atmoe_head_baselines.py",
+      "bytes": 8103,
+      "sha256": "ab8abe3c35b8c163517e70b5ccac82160483c769544b7ee59f22b6ca9a076c6e"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_vehicle_atmoe_head_baseline.py",
+      "bytes": 1260,
+      "sha256": "d840b0bc92bde91389f63eaf7513b0686675755df42a0b883bd4317933c838d3"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\vehicle_atmoe_head_configuration.py",
+      "bytes": 1327,
+      "sha256": "64a49c490665856e273af509f0bb5543f1d8a9fc257b8a642f59224bce190b80"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_head_candidate_plan_20261016.json",
+      "bytes": 4266,
+      "sha256": "28a2c834bae4c07e2181846b6885a9e8d78669f4ad7b3d5ed9758bda27ac93bc"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\reid2_paper_reference_targets_20261016.json",
+      "bytes": 2748,
+      "sha256": "58b12204b5d01e8dcabcdbcc14c3cb18b6880621989d6eb47ec45ddf55e03469"
+    }
+  ],
+  "question": "Independently diagnose whether the RGBNT100 head32 native result reflects a model/training defect needing numerical change, or an overstrict scheduler interpretation of existing AMP-native SMOKE_PASS. Do not presuppose either. User never independently required zero AMP skips; existing plan/controller did. Read actual producer semantics, successful updates vs attempts/scaler, finite loss/final gradients/reload. Is initial256 experiment justified, is unchanged AMP512 with correct accounting legitimate, or is a targeted gradient diagnostic necessary? Explain smallest correct next action and genuine risks with evidence. No new heads/seeds/modules, no lowering paper performance acceptance or silently counting skippedsteps as updates.",
+  "facts": "Both original8 model/config/RNG/FP32AMP parity passed64record executions. MS3attempt3updates0skip; RGB4attempt3updates1skip, finite losses; thirdscale512to256 skipped, fourthupdated256. Strict reload/all active finalgradients pass. Original scheduler stopped before anyformal50. All4childexit0 andabsent/controllerabsent observed16:49:25; noNNactive or timer. Failedweights alreadyunrelatedF128 retiredafterFINAL; no originalnativeweights saved.",
+  "scope": "Read listed artifacts directly; localstdlib only. No project main/Torch/model/optimizer/NN imports or execution, SSH, GPU/process/resource or progress query, no source/result edits or deletion. You may consult primary PyTorch AMP docs withweb if necessary. Do not re-audit F757 or duplicate oldfullscores. No speculative fallback/tryexcept/compat/refactor/hash machinery. Preserve independent reasoning and actual source evidence; source recommendation is not actual numericalfix proof or permission.",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "output": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_head_native_rescue_review_20261016.json",
+  "trace_root": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_vehicle_ATMoE_native_block_rescue_run01"
+}

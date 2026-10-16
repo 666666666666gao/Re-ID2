@@ -1,0 +1,253 @@
+{
+  "status": "FINAL",
+  "verdict": "WARN",
+  "diagnosis": "SCHEDULER_CONTRACT_MISMATCH_NO_MODEL_DEFECT_DEMONSTRATED",
+  "request": "C:/Users/gb/projects/demo_dual_axis_20261002/results/preflight/vehicle_atmoe_head_native_rescue_review_request_20261016.json",
+  "trace_root": "C:/Users/gb/projects/demo_dual_axis_20261002/.aris/traces/experiment-bridge/2026-10-16_vehicle_ATMoE_native_block_rescue_run01",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "actual_routing": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "model_or_training_numerical_defect_demonstrated": false,
+  "existing_dynamic_amp_producer_correct": true,
+  "skipped_steps_counted_as_updates_in_actual_runner": false,
+  "existing_native_smoke_valid_under_parent_contract": true,
+  "existing_controller_native_acceptance": false,
+  "numerical_health": "Bounded recovery evidence only; one non-finite-gradient event occurred. No claim of global numeric health or full50 stability.",
+  "recommendation": {
+    "primary": "Keep original init_scale512 and original model/loss/seed/full50 recipe. Correct the candidate's controller gate and successful-update reporting, and provide a candidate-scoped dynamic-AMP-aware CPU auditor while preserving the two historical auditors.",
+    "init256_experiment": "Not justified as the next action by this trace alone; fourth attempt is a different batch and is not a controlled replay of the third.",
+    "additional_neural_gradient_diagnostic_required_now": false,
+    "next_action": "Prepare source-only controller/accounting and candidate-auditor changes; validate counts against existing smoke evidence and focused accounting cases, then obtain the required fresh source review. Re-adjudicate existing native evidence transparently; do not rerun unchanged smoke merely to hunt zero skips.",
+    "formal_training_admitted_by_this_review": false,
+    "changes_executed_by_this_review": false,
+    "preserve_paper_performance_acceptance": true
+  },
+  "actual_evidence": {
+    "RGBNT100": {
+      "heads": 32,
+      "variant": "demo",
+      "status": "SMOKE_PASS",
+      "updates": 3,
+      "attempts": 4,
+      "amp_skipped_steps": 1,
+      "optimizer_updated": [
+        true,
+        true,
+        false,
+        true
+      ],
+      "post_update_scale": [
+        512,
+        512,
+        256,
+        256
+      ],
+      "losses": [
+        13.744926452636719,
+        11.635784149169922,
+        10.741130828857422,
+        10.304997444152832
+      ],
+      "final_active_gradient_tensors_true": 1110,
+      "final_active_gradient_tensors_total": 1110,
+      "strict_reload_equal": true,
+      "descriptor_shape": [
+        8,
+        5120
+      ],
+      "parameters": 97780224,
+      "trainable_parameters": 97775104,
+      "third_and_fourth_batch_names_identical": false
+    },
+    "MSVR310": {
+      "heads": 16,
+      "variant": "demo_shared",
+      "status": "SMOKE_PASS",
+      "updates": 3,
+      "attempts": 3,
+      "amp_skipped_steps": 0,
+      "optimizer_updated": [
+        true,
+        true,
+        true
+      ],
+      "post_update_scale": [
+        512,
+        512,
+        512
+      ],
+      "losses": [
+        18.250490188598633,
+        16.295804977416992,
+        14.842964172363281
+      ],
+      "final_active_gradient_tensors_true": 672,
+      "final_active_gradient_tensors_total": 672,
+      "strict_reload_equal": true,
+      "descriptor_shape": [
+        8,
+        5632
+      ],
+      "parameters": 99867648,
+      "trainable_parameters": 99856384
+    },
+    "total_native_updates": 6,
+    "total_native_attempts": 7,
+    "total_native_skips": 1,
+    "default8_parity_forward_record_executions": 64,
+    "default8_parity_optimizer_updates": 0,
+    "formal_training_children_in_failure_artifact": 0,
+    "last_saved_observation": "2026-10-16T16:49:25+08:00",
+    "four_children_saved_exit_codes": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "four_children_saved_live": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "controller_saved_live": false,
+    "controller_os_exit_code": "UNATTESTED",
+    "no_current_runtime_observation_performed": true
+  },
+  "blocking_findings": [
+    {
+      "id": "B1",
+      "scope": "Before reusing native gate",
+      "file": "launch_vehicle_atmoe_head_baselines.py",
+      "lines": [
+        87,
+        88
+      ],
+      "finding": "Controller requires attempts==steps==3 and zero skips; actual runner correctly reaches three successful updates in four attempts.",
+      "correction": "Retain SMOKE_PASS/three actual updates/strict reload/all active gradients/config/data/shape checks; reconcile attempts and skipped count with details without zero-skip equality."
+    },
+    {
+      "id": "B2",
+      "scope": "Before any full50 launch under corrected dynamic-AMP acceptance",
+      "file": "launch_vehicle_atmoe_head_baselines.py",
+      "lines": [
+        104,
+        117,
+        128
+      ],
+      "finding": "Formal gate repeats zero-skip restriction; successful_updates uses train.steps (attempts), so simply removing equality would misreport skipped attempts as updates.",
+      "correction": "Use optimizer_steps for successful_updates and formal_updates; retain steps as attempts and disclose skips. Verify attempts=updates+skips. No false formal count has yet been emitted because training never started."
+    },
+    {
+      "id": "B3",
+      "scope": "Before full50, to avoid downstream rejection",
+      "files": [
+        "audit_full_official_normal.py",
+        "audit_msvr_full_identity_normal.py"
+      ],
+      "lines": [
+        [
+          33,
+          34
+        ],
+        [
+          21,
+          22
+        ]
+      ],
+      "finding": "Historical CPU auditors reject any skip; MS also binds 705 to both attempts and successful updates.",
+      "correction": "Keep historical auditors unchanged. Use a candidate-scoped CPU audit entry reusing existing pure GT functions, preserve all split/GT/fullQG/descriptor/earliest-best/metric checks, and recount attempts/updates/skips plus per-epoch cumulative totals. Treat any retained 705 budget as attempts only."
+    }
+  ],
+  "correct_existing_implementation": [
+    "Single ordinary Adam per scaler iteration; full and shared step producers use unscale/step/update and scale comparison correctly under the actual source.",
+    "Shared full/partial backwards produce one optimizer_updated flag, not two updates.",
+    "Full-official smoke counts only optimizer_updated=true and requires three; the skipped RGB attempt was not counted.",
+    "Full-official train separately records attempts, optimizer_steps, skips, per-batch details and epoch cumulative totals.",
+    "Existing strict model-state reload and final active-gradient checks passed within their documented scope."
+  ],
+  "limitations": [
+    "Finite loss does not imply finite gradients; the third attempt triggered non-finite detection. Its affected tensors and inf-versus-NaN origin are unrecorded.",
+    "Final gradients check covers only last backward; strict reload covers eight query outputs/model.state_dict, not optimizer/scaler or universal parameter/buffer finiteness.",
+    "Actual RGB training BatchNorm buffers update in forward before skip. RGB eval bypasses classification BN, so reload equality is not evidence that every BN buffer is healthy. No buffer corruption was demonstrated.",
+    "Fourth batch differs from third; successful scale256 does not prove the failed batch would succeed at256 or justify changing initial scale.",
+    "Full training starts fresh at512 and uses per-epoch seeds/scheduler; smoke recovery scale is not carried over.",
+    "Fixed50epochs means fixed scheduled batch attempts, not fixed successful optimizer updates; no automatic retry or budget compensation is recommended.",
+    "Existing visited/coverage includes skipped batches. Report it as forward coverage; derive successful-update record coverage from true rows if claiming effective update coverage.",
+    "Default8 parity does not establish candidate32 FP32 backward equivalence.",
+    "No head16/head32 formal performance exists yet; paper targets and same-checkpoint reporting remain unfulfilled."
+  ],
+  "remaining_needed_diagnostics": {
+    "required_before_new_formal": "CPU verification of revised native/accounting contract and candidate auditor, plus fresh source review; preserve old failure and audit evidence.",
+    "mandatory_new_nn_now": "None supported by this isolated recovered skip.",
+    "unknowns": [
+      "Non-finite gradient names/root cause on attempt3",
+      "Same-batch same-state lower-scale/FP32 outcome",
+      "Full50 stability, actual successful update counts and paper performance"
+    ],
+    "escalation_trigger": "Actual subsequent sustained backoff without recovery, non-finite loss/parameters/buffers, or materially insufficient successful training updates.",
+    "conditional_targeted_diagnostic": "If such evidence occurs, compare one fixed failing batch from identical pre-step model/optimizer/RNG/input state at AMP512, a lower scale and FP32; locate first non-finite gradient and inspect parameters/buffers. Preserve actual failures and do not sweep heads/seeds."
+  },
+  "acceptance": {
+    "RGBNT100": {
+      "mAP": 87.2,
+      "Rank_1": 98.6
+    },
+    "MSVR310": {
+      "mAP": 50.2,
+      "Rank_1": 60.8
+    },
+    "same_checkpoint_all_metrics": true,
+    "historical_head8_control": "Non-contemporaneous; disclose",
+    "scope": "Identity baselines only, not dual-axis contribution or missing-modality results"
+  },
+  "additional_static_dependencies_read": [
+    "modeling/make_model.py (actual training BatchNorm and eval paths)",
+    "solver/make_optimizer.py (actual ordinary Adam configuration)",
+    "audit_full_official_normal.py (parent explicitly added dependency)",
+    "audit_msvr_full_identity_normal.py (parent explicitly added dependency)"
+  ],
+  "primary_sources": [
+    {
+      "url": "https://github.com/pytorch/pytorch/blob/v2.5.1/torch/amp/grad_scaler.py",
+      "supports": "Matched-runtime GradScaler step/update semantics"
+    },
+    {
+      "url": "https://github.com/pytorch/pytorch/blob/v2.5.1/torch/optim/adam.py",
+      "supports": "No-closure Adam returns None"
+    },
+    {
+      "url": "https://github.com/pytorch/pytorch/blob/v2.5.1/torch/nn/modules/batchnorm.py",
+      "supports": "Forward updates tracked buffers independently of optimizer"
+    }
+  ],
+  "performed": {
+    "new_neural_calls": 0,
+    "project_imports": 0,
+    "torch_imports": 0,
+    "model_imports": 0,
+    "optimizer_imports": 0,
+    "ssh_calls": 0,
+    "gpu_queries": 0,
+    "process_queries": 0,
+    "resource_queries": 0,
+    "progress_queries": 0,
+    "source_edits": 0,
+    "existing_result_edits": 0,
+    "deletions": 0,
+    "external_model_calls": 0
+  },
+  "check_trace_file": "C:/Users/gb/projects/demo_dual_axis_20261002/.aris/traces/experiment-bridge/2026-10-16_vehicle_ATMoE_native_block_rescue_run01/001-rescue-review.checks.json",
+  "rationale_file": "C:/Users/gb/projects/demo_dual_axis_20261002/.aris/traces/experiment-bridge/2026-10-16_vehicle_ATMoE_native_block_rescue_run01/001-rescue-review.response.md",
+  "at": "2026-10-16T17:08:18.7029906+08:00",
+  "inputs_preserved": {
+    "count": 10,
+    "direct_bytes_unchanged": true,
+    "byte_lengths_match_request": true,
+    "hashes_recomputed": false
+  }
+}

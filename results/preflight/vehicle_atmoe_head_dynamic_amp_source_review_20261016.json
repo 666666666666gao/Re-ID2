@@ -1,0 +1,169 @@
+{
+  "status": "FINAL",
+  "verdict": "PASS",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_head_dynamic_amp_source_request_20261016.json",
+  "at": "2026-10-16T17:27:40.622259+08:00",
+  "scope": "SOURCE_ONLY: original four new files plus the separately requested completion observer; source acceptance is not runtime evidence.",
+  "reviewer_task": "/root/review_vehicle_heads_dynamic_amp_20261016",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "actual_routing": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "blocking_findings": [],
+  "non_blocking_findings": [],
+  "minimal_required_corrections": [],
+  "resolved_prior_blockers": [
+    {
+      "id": "B1",
+      "status": "RESOLVED",
+      "evidence": "Exact current controller AST accepted actual original RGB3updates/4attempts/1skip and MS3/3/0, while preserving strict reload/active gradients/config/count/seed checks.",
+      "source": "resume_vehicle_atmoe_head_baselines.py",
+      "lines": [
+        35,
+        59
+      ]
+    },
+    {
+      "id": "B2",
+      "status": "RESOLVED",
+      "evidence": "Formal components and aggregate separately report steps as attempts, optimizer_steps as successful updates, amp_skipped_steps as skips; no skip compensation or rerun.",
+      "source": "resume_vehicle_atmoe_head_baselines.py",
+      "lines": [
+        80,
+        117
+      ]
+    },
+    {
+      "id": "B3",
+      "status": "RESOLVED",
+      "evidence": "New candidate-scoped GT auditor accepts dynamic AMP accounting and recounts all50 epoch cumulative totals. Historical auditors remain unchanged.6357/705 are attempts only.",
+      "source": "audit_vehicle_atmoe_head_normal.py",
+      "lines": [
+        35,
+        93
+      ]
+    }
+  ],
+  "acceptance": {
+    "original_native_reusable_under_parent_contract": true,
+    "new_native_updates_in_source_plan": 0,
+    "original_GradScaler_init512_unchanged": true,
+    "formal_training": "Two fresh public-CLIP runs, each50 epochs, original data/sampler/seed/loss",
+    "counts": {
+      "RGBNT100": {
+        "train": 8675,
+        "query": 1715,
+        "gallery": 8575,
+        "attempts": 6357,
+        "heads": 32,
+        "dimension": 5120
+      },
+      "MSVR310": {
+        "train": 1032,
+        "query": 591,
+        "gallery": 1055,
+        "attempts": 705,
+        "heads": 16,
+        "dimension": 5632
+      }
+    },
+    "paper_targets": {
+      "RGBNT100": {
+        "mAP": 87.2,
+        "Rank_1": 98.6
+      },
+      "MSVR310": {
+        "mAP": 50.2,
+        "Rank_1": 60.8
+      }
+    },
+    "same_earliest_max_mAP_checkpoint_for_all_six": true,
+    "installed_GT_recount_preserved": true,
+    "forward_and_successful_update_coverage_separate": true,
+    "historical_head8_controls": "Non-contemporaneous; disclosed"
+  },
+  "deployment_static": {
+    "transport_calls": 3,
+    "pre_call_receipts": "Exact command function tested with inert subprocess stub; each ATTEMPT_STARTED existed and parsed before invocation",
+    "no_automatic_retry": true,
+    "old376_local_sources_exact": true,
+    "old_runtime_source_count": 312,
+    "new_existing_runtime_count_including_vehicle_four": 316,
+    "retired_F_failed_bests": 2,
+    "blind_all757_revalidation": false,
+    "newroot_required": true,
+    "old_owner_and_four_children_termination_checks_present": true,
+    "old_controller_OS_exit_code": "UNATTESTED",
+    "physical_gpus": [
+      2,
+      3
+    ],
+    "maximum_NN": 2,
+    "one_per_card": true,
+    "temperature_power_reads": false,
+    "warm_existing_conda": true
+  },
+  "observation_static": {
+    "start_delay_seconds": 180,
+    "start_training_epoch_queries": 0,
+    "completion_observer_addendum": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\vehicle_atmoe_head_dynamic_amp_source_addendum_20261016.json",
+    "completion_observer_source": {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\observe_vehicle_atmoe_dynamic_amp_completion_20261016.py",
+      "bytes": 4561,
+      "sha256": "6bd0ede876e554010aeb11132b53090ffc6a8e0cda241d1c365af46878867f4b"
+    },
+    "completion_due": "Selected dataset own estimated-completion node",
+    "other_dataset_child_and_epoch_globs": false,
+    "observer_or_timer_started_by_review": false
+  },
+  "checks": {
+    "independent_CPU_check_count": 20,
+    "independent_CPU_status": "PASS",
+    "original_python_sources_parsed": 16,
+    "additional_python_sources_parsed": 1,
+    "exact_embedded_remote_codes_compiled": 5,
+    "installed_data_runtime_audit": false,
+    "check_file": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_vehicle_ATMoE_dynamic_AMP_run01\\reviewer_cpu_checks.json",
+    "additional_static_check_file": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_vehicle_ATMoE_dynamic_AMP_run01\\additional_static_dependency_checks.json",
+    "transport_import_chain_file": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_vehicle_ATMoE_dynamic_AMP_run01\\transport_import_chain_static.json"
+  },
+  "inputs_preserved": {
+    "original_request_count": 23,
+    "all23_byte_lengths_and_SHA256_match": true,
+    "request_bytes_unchanged": true,
+    "additional_source_bytes_and_SHA256_match": true,
+    "addendum_bytes_unchanged": true,
+    "old376_sources_match": true,
+    "snapshot_file": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_vehicle_ATMoE_dynamic_AMP_run01\\review_input_snapshot.json"
+  },
+  "limitations": [
+    "Source PASS does not establish current remote admission, launch, GPU availability, full50 stability or performance.",
+    "The20 checks use actual saved native artifacts and synthetic formal ledgers; no installed GT or NN execution was performed.",
+    "Original recovered skip is bounded evidence; final-gradient/eight-query reload checks do not prove global numeric or BatchNorm-buffer health.",
+    "Formal true update/skip counts and successful-update record coverage remain unknown until actual output.",
+    "Official benchmark selects the best checkpoint; historical head8 references are not newly matched controls.",
+    "No runtime start/completion or paper-target success is claimed.",
+    "Actual reviewer routing remains UNATTESTED; same-family acceptance is provisional."
+  ],
+  "performed": {
+    "new_neural_calls": 0,
+    "project_imports": 0,
+    "torch_imports": 0,
+    "model_imports": 0,
+    "SSH_calls": 0,
+    "GPU_queries": 0,
+    "process_queries": 0,
+    "resource_queries": 0,
+    "progress_queries": 0,
+    "candidate_source_edits": 0,
+    "historical_result_edits": 0,
+    "deletions": 0,
+    "external_model_calls": 0
+  },
+  "trace_root": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_vehicle_ATMoE_dynamic_AMP_run01",
+  "rationale_file": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_vehicle_ATMoE_dynamic_AMP_run01\\001-reviewer-rationale.md",
+  "check_trace_file": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-16_vehicle_ATMoE_dynamic_AMP_run01\\reviewer_cpu_checks.json"
+}
