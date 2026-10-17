@@ -1,0 +1,195 @@
+{
+  "status": "ACTUAL_SCHEDULED_MS_RETENTION_STARTUP_OBSERVED",
+  "at": "2026-10-17T08:04:45.058503+08:00",
+  "actual": {
+    "at": 1792195484.9449856,
+    "controller_live": true,
+    "controller_cmdline": "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python -u launch_msvr_head16_axis_retention_replay.py --data-root /data/gaob/Re-ID/dataset --pretrained /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt --anchor-run-dir /data/gaob/Re-ID/DeMo-DualAxis/runs/vehicle_atmoe_head_dynamic_amp_20261016/experiments/training/MSVR310_atmoe16_demo_shared_s42 --output /data/gaob/Re-ID/DeMo-DualAxis/runs/msvr_head16_axis_retention_replay_20261017/experiments ",
+    "children": [
+      {
+        "phase": "reference",
+        "launch": {
+          "pid": 1240326,
+          "process_group": 1240326,
+          "gpu": 3,
+          "started": 1792195307.8962972,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "evaluate_msvr_head16_reference.py",
+            "--variant",
+            "axis_shared",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/vehicle_atmoe_head_dynamic_amp_20261016/experiments/training/MSVR310_atmoe16_demo_shared_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/msvr_head16_axis_retention_replay_20261017/experiments/reference/MSVR310_head16_axis_shared_reference"
+          ],
+          "initial_resources": {
+            "gpu": 3,
+            "memory_used_mib": 117.0,
+            "observed_at": 1792195307.8945363
+          },
+          "temperature_power_control": false
+        },
+        "live": false,
+        "cmdline": null,
+        "exit": {
+          "name": "MSVR310_head16_axis_shared_reference",
+          "exit_code": 0,
+          "finished": 1792195340.7560828,
+          "gpu": 3,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "native",
+        "launch": {
+          "pid": 1240448,
+          "process_group": 1240448,
+          "gpu": 3,
+          "started": 1792195340.8284135,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_msvr_head16_experts.py",
+            "--dataset",
+            "MSVR310",
+            "--freeze-identity-encoder",
+            "1",
+            "--seed",
+            "42",
+            "--mode",
+            "smoke",
+            "--variant",
+            "axis_shared",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/vehicle_atmoe_head_dynamic_amp_20261016/experiments/training/MSVR310_atmoe16_demo_shared_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/msvr_head16_axis_retention_replay_20261017/experiments/native/MSVR310_head16_axis_shared_s42_smoke"
+          ],
+          "initial_resources": {
+            "gpu": 3,
+            "memory_used_mib": 117.0,
+            "observed_at": 1792195340.8268683
+          },
+          "temperature_power_control": false
+        },
+        "live": false,
+        "cmdline": null,
+        "exit": {
+          "name": "MSVR310_head16_axis_shared_s42_smoke",
+          "exit_code": 0,
+          "finished": 1792195365.8455434,
+          "gpu": 3,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "training",
+        "launch": {
+          "pid": 1240667,
+          "process_group": 1240667,
+          "gpu": 3,
+          "started": 1792195365.9112287,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_msvr_head16_experts.py",
+            "--dataset",
+            "MSVR310",
+            "--freeze-identity-encoder",
+            "1",
+            "--seed",
+            "42",
+            "--mode",
+            "train",
+            "--variant",
+            "axis_shared",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/vehicle_atmoe_head_dynamic_amp_20261016/experiments/training/MSVR310_atmoe16_demo_shared_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/msvr_head16_axis_retention_replay_20261017/experiments/training/MSVR310_head16_axis_shared_s42"
+          ],
+          "initial_resources": {
+            "gpu": 3,
+            "memory_used_mib": 117.0,
+            "observed_at": 1792195365.9097297
+          },
+          "temperature_power_control": false
+        },
+        "live": true,
+        "cmdline": "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python -u run_msvr_head16_experts.py --dataset MSVR310 --freeze-identity-encoder 1 --seed 42 --mode train --variant axis_shared --data-root /data/gaob/Re-ID/dataset --pretrained /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt --anchor-run-dir /data/gaob/Re-ID/DeMo-DualAxis/runs/vehicle_atmoe_head_dynamic_amp_20261016/experiments/training/MSVR310_atmoe16_demo_shared_s42 --output /data/gaob/Re-ID/DeMo-DualAxis/runs/msvr_head16_axis_retention_replay_20261017/experiments/training/MSVR310_head16_axis_shared_s42 ",
+        "exit": null
+      }
+    ],
+    "reference_acceptance.json": {
+      "status": "PASS",
+      "controls": 1,
+      "full00_teacher_parity": true,
+      "references": [
+        {
+          "variant": "axis_shared",
+          "exit": {
+            "name": "MSVR310_head16_axis_shared_reference",
+            "exit_code": 0,
+            "finished": 1792195340.7560828,
+            "gpu": 3,
+            "temperature_power_control": false,
+            "forced_own_group_cleanup": false
+          },
+          "metrics": {
+            "mAP": 51.43026480300702,
+            "mINP": 26.538876996464772,
+            "Rank-1": 68.35871404399323,
+            "Rank-5": 82.23350253807106,
+            "Rank-10": 87.30964467005076,
+            "Rank-20": 92.04737732656514
+          }
+        }
+      ]
+    },
+    "native_acceptance.json": {
+      "status": "PASS",
+      "controls": 1,
+      "actual_updates": 3,
+      "attempts": 3,
+      "amp_skips": 0,
+      "paired_controls": false,
+      "strict_reload_equal": true,
+      "all_active_gradients_positive": true,
+      "parameters": 100787334,
+      "trainable_parameters": 2674822,
+      "descriptor_dim": 5632,
+      "finished": 1792195365.8492916
+    },
+    "controller_result.json": null
+  },
+  "actual_transport_captures": [
+    {
+      "status": "RETURNED",
+      "started": 1792195483.8425179,
+      "finished": 1792195485.0530698,
+      "exit_code": 0,
+      "stdout": "C:\\Users\\gb\\.codex_tmp\\vehicle_head_dynamic_amp_MS_retention_startup_observe_intake_01_20261016.stdout.log",
+      "stderr": "C:\\Users\\gb\\.codex_tmp\\vehicle_head_dynamic_amp_MS_retention_startup_observe_intake_01_20261016.stderr.log"
+    }
+  ],
+  "prior_axis_train_and_states_seconds": 1321.9171013832092,
+  "next_completion_observation_epoch": 1792197132.2117503,
+  "forecast_only": true,
+  "goal": "ACTIVE_UNMET"
+}

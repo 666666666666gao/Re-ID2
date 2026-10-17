@@ -1,0 +1,575 @@
+{
+  "status": "FINAL",
+  "verdict": "PASS",
+  "gate": "SOURCE_ONLY",
+  "summary": "No blocking source defect found. The minimal single-axis terminal intake correctly consumes the actual nested session and completion-producer schemas, copies and verifies one best/raw/states set plus text, and removes only verified text transfer packages after successful roundtrips. Actual replay completion, intake and result integrity remain unverified here.",
+  "generated_at": "2026-10-17T08:12:57+08:00",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_head16_axis_retention_postprocess_source_request_20261017.json",
+  "request_sha256": "2dd27a814fe7f986faf460e3c9d6026a13c8d0f293681276ef0c8c08e37c6767",
+  "report": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_head16_axis_retention_postprocess_source_review_20261017.json",
+  "agent_id": "/root/review_msvr_axis_retention_replay_source_20261017",
+  "skill": "experiment-bridge Phase2.5 CODE_REVIEW",
+  "skill_path": "C:\\Users\\gb\\.codex\\skills\\experiment-bridge\\SKILL.md",
+  "policy_path": "C:\\Users\\gb\\.codex\\skills\\shared-references\\local-codex-policy.md",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "actual_routing": {
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "max",
+    "model": "UNATTESTED",
+    "reasoning_effort": "UNATTESTED",
+    "host_attestation": "NOT_PROVIDED"
+  },
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "review_context": "Additional bounded source review by the existing independent controller reviewer; prior controller FINAL report preserved unchanged.",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "required_code_fixes": [],
+  "source_assessment": [
+    {
+      "area": "Actual request/session/completion contracts",
+      "status": "PASS",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_axis_retention_replay_20261017.py:28",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_axis_retention_replay_20261017.py:32",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_axis_retention_replay_20261017.py:36",
+        "C:\\Users\\gb\\.codex_tmp\\observe_msvr_retention_completion_20261017.py:27",
+        "C:\\Users\\gb\\.codex_tmp\\observe_msvr_retention_completion_20261017.py:37"
+      ],
+      "detail": "The supplied source request uses sources/path/sha256, matching the adapter. Actual session has remote_root under actual; the adapter reads that exact location. The completion producer emits actual.controller_result and enforces five children with live=false and exit0 before writing a complete receipt. Its five-child guard passes5 and rejects4 in an AST-only fixture. The startup snapshot has a different controller_result.json key but is not substituted for completion."
+    },
+    {
+      "area": "Terminal-only complete-run admission",
+      "status": "PASS",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_axis_retention_replay_20261017.py:26",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_axis_retention_replay_20261017.py:34",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_axis_retention_replay_20261017.py:39"
+      ],
+      "detail": "Existing intake output is rejected. FINAL/PASS source review and all12 hashes gate transport. Local completion must report COMPLETE, controller absent and every child closed0. Export then rechecks the scoped controller and child absence/exit0, and single-control705attempt/4states/paired=false/GPU3 completion contract. A live controller or failed child blocks all transport in fixtures; a live remote child blocks export. No training restart or NN command is present."
+    },
+    {
+      "area": "Three binary and text exact roundtrips",
+      "status": "PASS",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_axis_retention_replay_20261017.py:46",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_axis_retention_replay_20261017.py:48",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_axis_retention_replay_20261017.py:59",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_axis_retention_replay_20261017.py:68",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_axis_retention_replay_20261017.py:79"
+      ],
+      "detail": "The controller supplies exactly raw/best/states_raw for the single axis run. Paths must lie within this replay root; remote size/SHA must match recorded artifacts. Full JSON/CSV/JSONL/log manifest and its transfer package are checked by size/SHA and tar membership, extracted paths are confined to LOCAL, every copied text file is rechecked, and all three D files receive exact size/SHA receipts. The actual D parent exists. Same-size copied-text and copied-best corruption fixtures stop before successful intake or removal."
+    },
+    {
+      "area": "Narrow removal and retained recovery evidence",
+      "status": "PASS",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_axis_retention_replay_20261017.py:85",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_axis_retention_replay_20261017.py:91",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_axis_retention_replay_20261017.py:93"
+      ],
+      "detail": "Only the scoped remote text_intake.tar.gz and the local temporary text tar are removed. Before remote removal, package size/SHA and all three source binaries are rechecked; local receipts already passed. The success fixture verifies both packages absent, every remote dummy binary unchanged,13 text files and3 local binaries exact. New controller content, selected-weight hash and exact-to-retired flag are copied without promoting the replay to old byte-exact recovery."
+    },
+    {
+      "area": "Minimal adapter and unchanged scientific code",
+      "status": "PASS",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_axis_retention_replay_20261017.py",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_experts_20261016.py"
+      ],
+      "detail": "Diff is confined to replay tags/paths, new request/session/completion names, actual.remote_root nesting, one-control counts and3-binary retention wording. No architecture, training, seed, evaluation or scientific source is edited. The old controller review,12 requested inputs,47+376 source sets and reused transport helpers remain exact."
+    }
+  ],
+  "actual_checks": [
+    {
+      "name": "requested12_start_end_exact",
+      "status": "PASS",
+      "count": 12
+    },
+    {
+      "name": "requested_python_AST",
+      "status": "PASS",
+      "count": 8
+    },
+    {
+      "name": "unchanged47_plus376_sources",
+      "status": "PASS",
+      "counts": [
+        47,
+        376
+      ]
+    },
+    {
+      "name": "one_export_and_one_retire_embedded_script",
+      "status": "PASS",
+      "count": 2
+    },
+    {
+      "name": "actual_D_retained_parent_exists",
+      "status": "PASS",
+      "path": "D:\\Program Files\\UserCache\\gb\\ReID2-retained",
+      "parent_only_static_check": true
+    },
+    {
+      "name": "unchanged_statically_reviewed_transport_import_chain",
+      "status": "PASS",
+      "helper_count": 8,
+      "collect_results_count": 1,
+      "source_imports_executed": false
+    },
+    {
+      "name": "complete_adapter_exact_roundtrip_text_and_three_binaries",
+      "status": "PASS",
+      "expected_rejection": false,
+      "mock_transport_calls": [
+        "ssh_export",
+        "scp_text",
+        "scp_raw",
+        "scp_best",
+        "scp_states_raw",
+        "ssh_retire"
+      ],
+      "rendered_AST": [
+        {
+          "role": "export",
+          "bytes": 1815,
+          "sha256": "0e644d2ef58bc08a2f53001b28adb3ca543b5b4a45437994436dd7e5c0c96fdf"
+        },
+        {
+          "role": "retire",
+          "bytes": 2376,
+          "sha256": "5cc07c9fd7dec850f18075197e0269eb4ac6822ba4b6b00c2a6edcb5bd16ef8f"
+        }
+      ],
+      "real_process_queries": 0,
+      "mock_proc_lookups": 6,
+      "remote_dummy_binaries_unchanged": true,
+      "archive_count": 3,
+      "exact_text_count": 13,
+      "removed_only_mock_local_and_remote_text_packages": true,
+      "old_weight_available_or_exact_recovery_claimed": false
+    },
+    {
+      "name": "controller_live_blocks_all_transport",
+      "status": "PASS",
+      "expected_rejection": true,
+      "mock_transport_calls": [],
+      "rendered_AST": [],
+      "real_process_queries": 0,
+      "mock_proc_lookups": 0,
+      "remote_dummy_binaries_unchanged": true
+    },
+    {
+      "name": "nonzero_child_exit_blocks_all_transport",
+      "status": "PASS",
+      "expected_rejection": true,
+      "mock_transport_calls": [],
+      "rendered_AST": [],
+      "real_process_queries": 0,
+      "mock_proc_lookups": 0,
+      "remote_dummy_binaries_unchanged": true
+    },
+    {
+      "name": "remote_live_child_blocks_export_and_archive",
+      "status": "PASS",
+      "expected_rejection": true,
+      "mock_transport_calls": [
+        "ssh_export"
+      ],
+      "rendered_AST": [
+        {
+          "role": "export",
+          "bytes": 1815,
+          "sha256": "9e9351fc2b92803f8da4651ec97541fc62039d00a67fe05ca779148ce7d0fe17"
+        }
+      ],
+      "real_process_queries": 0,
+      "mock_proc_lookups": 6,
+      "remote_dummy_binaries_unchanged": true
+    },
+    {
+      "name": "same_size_corrupted_binary_blocks_receipt_and_removal",
+      "status": "PASS",
+      "expected_rejection": true,
+      "mock_transport_calls": [
+        "ssh_export",
+        "scp_text",
+        "scp_raw",
+        "scp_best"
+      ],
+      "rendered_AST": [
+        {
+          "role": "export",
+          "bytes": 1815,
+          "sha256": "d72d122140cda8cb31318457b5df93ee8f13c81edafef01c7a82cda52d584658"
+        }
+      ],
+      "real_process_queries": 0,
+      "mock_proc_lookups": 6,
+      "remote_dummy_binaries_unchanged": true
+    },
+    {
+      "name": "same_size_corrupted_text_package_blocks_extraction",
+      "status": "PASS",
+      "expected_rejection": true,
+      "mock_transport_calls": [
+        "ssh_export",
+        "scp_text"
+      ],
+      "rendered_AST": [
+        {
+          "role": "export",
+          "bytes": 1815,
+          "sha256": "4faddfe27b7c9c063a6690354d58b85d72f8073cad7b4de255f3dada3ea307fb"
+        }
+      ],
+      "real_process_queries": 0,
+      "mock_proc_lookups": 6,
+      "remote_dummy_binaries_unchanged": true
+    },
+    {
+      "name": "actual_completion_producer_requires_five_successful_closed_children",
+      "status": "PASS"
+    },
+    {
+      "name": "actual_session_nested_remote_root_contract",
+      "status": "PASS"
+    },
+    {
+      "name": "rendered_export_with_actual_session_root_AST",
+      "status": "PASS",
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-17_MS_retention_postprocess_source_run01\\export_actual_root_AST_ONLY.py",
+      "bytes": 1752,
+      "sha256": "934b6ba176f0f8eb4e486ae7aea6dcb2243dca5d49b90fc3c7fec169772dcecd",
+      "executed": false
+    }
+  ],
+  "actual_check_count": 15,
+  "input_preservation": {
+    "status": "PASS",
+    "supplied_count": 12,
+    "supplied_sources_start_end": [
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_axis_retention_replay_20261017.py",
+        "requested": {
+          "bytes": 7133,
+          "sha256": "dbccff8050a737d873ae7281548035c4e3bc0e0540a1406dc3aee7ec46a304a7"
+        },
+        "start": {
+          "bytes": 7133,
+          "sha256": "dbccff8050a737d873ae7281548035c4e3bc0e0540a1406dc3aee7ec46a304a7"
+        },
+        "end": {
+          "bytes": 7133,
+          "sha256": "dbccff8050a737d873ae7281548035c4e3bc0e0540a1406dc3aee7ec46a304a7"
+        },
+        "unchanged": true,
+        "matches_request": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_msvr_head16_experts_20261016.py",
+        "requested": {
+          "bytes": 6917,
+          "sha256": "3574d71d7dcd11a5df514959b30f76a25aab650df788f29cf5fc428e0f607471"
+        },
+        "start": {
+          "bytes": 6917,
+          "sha256": "3574d71d7dcd11a5df514959b30f76a25aab650df788f29cf5fc428e0f607471"
+        },
+        "end": {
+          "bytes": 6917,
+          "sha256": "3574d71d7dcd11a5df514959b30f76a25aab650df788f29cf5fc428e0f607471"
+        },
+        "unchanged": true,
+        "matches_request": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_vehicle_atmoe_dynamic_amp_component_20261016.py",
+        "requested": {
+          "bytes": 8360,
+          "sha256": "d804103ac2f52f9cc2a72f17be2072f595382fb80ef483d78c603de2fb0c7793"
+        },
+        "start": {
+          "bytes": 8360,
+          "sha256": "d804103ac2f52f9cc2a72f17be2072f595382fb80ef483d78c603de2fb0c7793"
+        },
+        "end": {
+          "bytes": 8360,
+          "sha256": "d804103ac2f52f9cc2a72f17be2072f595382fb80ef483d78c603de2fb0c7793"
+        },
+        "unchanged": true,
+        "matches_request": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\launch_msvr_head16_axis_retention_replay.py",
+        "requested": {
+          "bytes": 10290,
+          "sha256": "9946be781256601dd34c4602ebebc84aacf121c44b07ece77d9f71af76914850"
+        },
+        "start": {
+          "bytes": 10290,
+          "sha256": "9946be781256601dd34c4602ebebc84aacf121c44b07ece77d9f71af76914850"
+        },
+        "end": {
+          "bytes": 10290,
+          "sha256": "9946be781256601dd34c4602ebebc84aacf121c44b07ece77d9f71af76914850"
+        },
+        "unchanged": true,
+        "matches_request": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_msvr_head16_experts.py",
+        "requested": {
+          "bytes": 7516,
+          "sha256": "aca05fcf4e0f8bc9698bae3889fb7e3b1d1d2311a09027377110d81e60de7913"
+        },
+        "start": {
+          "bytes": 7516,
+          "sha256": "aca05fcf4e0f8bc9698bae3889fb7e3b1d1d2311a09027377110d81e60de7913"
+        },
+        "end": {
+          "bytes": 7516,
+          "sha256": "aca05fcf4e0f8bc9698bae3889fb7e3b1d1d2311a09027377110d81e60de7913"
+        },
+        "unchanged": true,
+        "matches_request": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_msvr_head16_reference.py",
+        "requested": {
+          "bytes": 4597,
+          "sha256": "b0233b3f0b33b9db662ff8e32a2a261e49c690e839a59561763449d22f03d9e8"
+        },
+        "start": {
+          "bytes": 4597,
+          "sha256": "b0233b3f0b33b9db662ff8e32a2a261e49c690e839a59561763449d22f03d9e8"
+        },
+        "end": {
+          "bytes": 4597,
+          "sha256": "b0233b3f0b33b9db662ff8e32a2a261e49c690e839a59561763449d22f03d9e8"
+        },
+        "unchanged": true,
+        "matches_request": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_msvr_head16_states.py",
+        "requested": {
+          "bytes": 5465,
+          "sha256": "bf2b0a4665dc3872a07a00d316bad0a18f5bf282bc05a645ae3bbd5ba946b367"
+        },
+        "start": {
+          "bytes": 5465,
+          "sha256": "bf2b0a4665dc3872a07a00d316bad0a18f5bf282bc05a645ae3bbd5ba946b367"
+        },
+        "end": {
+          "bytes": 5465,
+          "sha256": "bf2b0a4665dc3872a07a00d316bad0a18f5bf282bc05a645ae3bbd5ba946b367"
+        },
+        "unchanged": true,
+        "matches_request": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\audit_vehicle_atmoe_head_normal.py",
+        "requested": {
+          "bytes": 6240,
+          "sha256": "d282bf47f2cf7d355789d4a78f5c7ce52d9224896bc2092e0f5b91f0dd2de6d0"
+        },
+        "start": {
+          "bytes": 6240,
+          "sha256": "d282bf47f2cf7d355789d4a78f5c7ce52d9224896bc2092e0f5b91f0dd2de6d0"
+        },
+        "end": {
+          "bytes": 6240,
+          "sha256": "d282bf47f2cf7d355789d4a78f5c7ce52d9224896bc2092e0f5b91f0dd2de6d0"
+        },
+        "unchanged": true,
+        "matches_request": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_head16_axis_retention_replay_source_request_20261017.json",
+        "requested": {
+          "bytes": 4643,
+          "sha256": "267fc28206659c1fe2c2adb0121539da5c901fc47418536f266ff567156dea8a"
+        },
+        "start": {
+          "bytes": 4643,
+          "sha256": "267fc28206659c1fe2c2adb0121539da5c901fc47418536f266ff567156dea8a"
+        },
+        "end": {
+          "bytes": 4643,
+          "sha256": "267fc28206659c1fe2c2adb0121539da5c901fc47418536f266ff567156dea8a"
+        },
+        "unchanged": true,
+        "matches_request": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_head16_axis_retention_replay_source_review_20261017.json",
+        "requested": {
+          "bytes": 34980,
+          "sha256": "e319f55160155825253d82f4a74b0a94e6a8a12716efcc7c2bf9270b5ee5a3c0"
+        },
+        "start": {
+          "bytes": 34980,
+          "sha256": "e319f55160155825253d82f4a74b0a94e6a8a12716efcc7c2bf9270b5ee5a3c0"
+        },
+        "end": {
+          "bytes": 34980,
+          "sha256": "e319f55160155825253d82f4a74b0a94e6a8a12716efcc7c2bf9270b5ee5a3c0"
+        },
+        "unchanged": true,
+        "matches_request": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_head16_axis_retention_replay_actual_session_20261017.json",
+        "requested": {
+          "bytes": 5595,
+          "sha256": "506434699c75a671d02f5da38da3bc00e0e83823a0e09579324cd5702d380d48"
+        },
+        "start": {
+          "bytes": 5595,
+          "sha256": "506434699c75a671d02f5da38da3bc00e0e83823a0e09579324cd5702d380d48"
+        },
+        "end": {
+          "bytes": 5595,
+          "sha256": "506434699c75a671d02f5da38da3bc00e0e83823a0e09579324cd5702d380d48"
+        },
+        "unchanged": true,
+        "matches_request": true
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\msvr_head16_axis_retention_replay_startup_actual_20261017.json",
+        "requested": {
+          "bytes": 7698,
+          "sha256": "ef6d94e69996f8a206c1ff8309eb7282227ed006c2abbfaec92ecad3a975f942"
+        },
+        "start": {
+          "bytes": 7698,
+          "sha256": "ef6d94e69996f8a206c1ff8309eb7282227ed006c2abbfaec92ecad3a975f942"
+        },
+        "end": {
+          "bytes": 7698,
+          "sha256": "ef6d94e69996f8a206c1ff8309eb7282227ed006c2abbfaec92ecad3a975f942"
+        },
+        "unchanged": true,
+        "matches_request": true
+      }
+    ],
+    "additional_completion_producer": {
+      "path": "C:\\Users\\gb\\.codex_tmp\\observe_msvr_retention_completion_20261017.py",
+      "start": {
+        "bytes": 3880,
+        "sha256": "0ef59675aa85cd5ff1e4fdf81c17979c0f5c172d1eedd1f1814ee0be317ef517"
+      },
+      "end": {
+        "bytes": 3880,
+        "sha256": "0ef59675aa85cd5ff1e4fdf81c17979c0f5c172d1eedd1f1814ee0be317ef517"
+      },
+      "unchanged": true,
+      "scope": "Static producer-contract inspection only; not executed"
+    },
+    "transport_dependencies": [
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\intake_vehicle_atmoe_dynamic_amp_component_20261016.py",
+        "bytes": 8360,
+        "sha256": "d804103ac2f52f9cc2a72f17be2072f595382fb80ef483d78c603de2fb0c7793"
+      },
+      {
+        "path": "C:\\Users\\gb\\.codex_tmp\\publish_RGBNT100_N5_s44_closed_s45_started_20261015.py",
+        "bytes": 15045,
+        "sha256": "fa6f5a2f4afb3b4b32a1ce6b03f9f54d2433e451db7d930ebe88d3c341d9d79a"
+      },
+      {
+        "path": "C:\\Users\\gb\\.codex_tmp\\publish_RGBNT100_N5_s43_closed_s44_started_20261015.py",
+        "bytes": 15218,
+        "sha256": "0098a67e4cc9b8a849eb184f3642e8a69eddea6c9ff98d2584cf343329b7d58e"
+      },
+      {
+        "path": "C:\\Users\\gb\\.codex_tmp\\publish_MSVR310_saved_errors_CPU_20261015.py",
+        "bytes": 12186,
+        "sha256": "7ed38b9b1814d1c36d5b59ce083ea4696bd4545df1a48bd331ecfec21f99faee"
+      },
+      {
+        "path": "C:\\Users\\gb\\.codex_tmp\\publish_BC_closed_AV_N5_seed43_actual_20261015.py",
+        "bytes": 14604,
+        "sha256": "3ccb8d9526681300c314056e0a1c6592103d1b15e024dafc49c9997517c0f46f"
+      },
+      {
+        "path": "C:\\Users\\gb\\.codex_tmp\\publish_RGBNT100_local_band_runner_sources_20261015.py",
+        "bytes": 11318,
+        "sha256": "6eb7753f63629b372189d7755ade1bfca13668eb80158c002329b7fc57460248"
+      },
+      {
+        "path": "C:\\Users\\gb\\.codex_tmp\\publish_saved_RGBNT100_errors_F_only_core_20261015.py",
+        "bytes": 14204,
+        "sha256": "2d4c9bba670cb14bce2bad428817f29d7046984b9a837bfd4aac12f05bfae86c"
+      },
+      {
+        "path": "C:\\Users\\gb\\.codex_tmp\\publish_closed_AX_AZ_cleanup_20261015.py",
+        "bytes": 9235,
+        "sha256": "987a60f58ccae16af85bb399fc74b2f829c5129fa444b033022c8cdfb688ce8d"
+      },
+      {
+        "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\collect_results.py",
+        "bytes": 9129,
+        "sha256": "8294ddd2bb508a83c51bc6d127b80102e145b57e93c68fcfc124aabe99ac454c"
+      }
+    ],
+    "transport_dependency_count": 9,
+    "NN_source_sets": {
+      "direct": 47,
+      "inherited": 376,
+      "all_exact_start_end": true,
+      "manifest": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-17_MS_retention_postprocess_source_run01\\NN_sources_final.json"
+    },
+    "mock_template": {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-17_MS_axis_retention_replay_source_run01\\f\\01\\controller_result.json",
+      "bytes": 3274,
+      "sha256": "7e59d3220106d4e2d67826bb6bbf45a744c6f2bd177cbf90802611c7c0d88d6c",
+      "role": "Prior AST-controller mock output; not current runtime result"
+    },
+    "original_controller_FINAL_report_unchanged": true,
+    "original_controller_FINAL_sha256": "e319f55160155825253d82f4a74b0a94e6a8a12716efcc7c2bf9270b5ee5a3c0",
+    "supplied_source_mutations": 0,
+    "verified_again_at_final_write": true
+  },
+  "execution": {
+    "interpreter": "C:\\Users\\gb\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\python.exe",
+    "flags": [
+      "-X",
+      "utf8",
+      "-B",
+      "-S"
+    ],
+    "local_stdlib_only": true,
+    "adapter_or_transport_imported": false,
+    "SSH_calls": 0,
+    "neural_calls": 0,
+    "Torch_imports": 0,
+    "NumPy_imports": 0,
+    "dependency_installs": 0,
+    "GPU_or_disk_capacity_queries": 0,
+    "process_progress_PID_handle_queries": 0,
+    "subagents_spawned": 0,
+    "actual_binary_deletions": 0,
+    "real_checkpoint_or_raw_writes": 0,
+    "fixture_note": "All mock transports, /proc existence answers and disk capacity are supplied in memory; only labelled dummy files and test text packages inside ignored trace were created/removed."
+  },
+  "limitations": [
+    "Source-only same-family PASS is provisional; requested Astra/max routing has no host attestation and is recorded UNATTESTED.",
+    "No current controller/training state was queried. Supplied startup/session snapshots were read only for their recorded contract. This review does not certify actual complete50, selected weight availability, archive success or a new metric.",
+    "The completion producer supplies the five-child completeness guarantee; the adapter additionally rejects a live controller and rechecks remote child exits. Controller OS exit code remains UNATTESTED; absence and COMPLETE are not an independently observed OS exit0.",
+    "The three binaries_preserved claim applies only to the new replay artifacts verified by the adapter. It does not claim retired old expert weights/raw or the historical487-input binary set still exist.",
+    "Exact recovery is conditional on the actual new selected-weight SHA matching the old receipt; unequal SHA remains a new replay. Actual result integrity audit stays pending after intake as encoded in the output.",
+    "Fixtures use the earlier AST-controller mock output and labelled dummy binary bytes, not the current running experiment or reconstructed historical weights."
+  ],
+  "runtime_admitted": false,
+  "actual_postprocess_executed": false,
+  "actual_replay_completion_verified": false,
+  "actual_result_audit_complete": false,
+  "trace_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-17_MS_retention_postprocess_source_run01",
+  "independent_check_trace": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-17_MS_retention_postprocess_source_run01\\independent_postprocess_checks.json",
+  "human_handoff_created": false
+}
