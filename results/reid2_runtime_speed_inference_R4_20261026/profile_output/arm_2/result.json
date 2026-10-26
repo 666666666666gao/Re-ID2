@@ -1,0 +1,61 @@
+{
+  "status": "COMPLETE_FULL_QG_RUNTIME_SCREEN_NOT_NEW_METHOD_RESULT",
+  "arms": [
+    {
+      "arm": 2,
+      "threads": 4,
+      "workers": 4,
+      "batch": 256,
+      "full_official_triplets": 10290,
+      "query_records": 1715,
+      "gallery_records": 8575,
+      "extract_seconds": 99.3437342189718,
+      "triplets_per_second": 103.57975851118051,
+      "metric_seconds": 3.4297748550307006,
+      "total_seconds": 102.7735090740025,
+      "data_wait_seconds": 2.611104272073135,
+      "metadata_H2D_model_normalize_CUDA_event_seconds": 94.79564697265624,
+      "peak_allocated_bytes": 3956563456,
+      "peak_reserved_bytes": 5437915136,
+      "resources": {
+        "host_CPU_busy_percent": 6.111482694901996,
+        "host_CPU_iowait_percent": 0.0427006458000325,
+        "NVML_sampling": "Not collected: inference sampling thread removed after actual R3 timeout/stall"
+      },
+      "metrics": {
+        "mAP": 86.11974955660116,
+        "mINP": 62.70948723339765,
+        "Rank-1": 97.08454810495627,
+        "Rank-5": 97.667638483965,
+        "Rank-10": 97.78425655976677,
+        "Rank-20": 98.01749271137025
+      },
+      "metric_difference_from_original": {
+        "mAP": 5.306209374111859e-06,
+        "mINP": -4.4277317812202455e-07,
+        "Rank-1": 0.0,
+        "Rank-5": 0.0,
+        "Rank-10": 0.0,
+        "Rank-20": 0.0
+      },
+      "per_query_changes": {
+        "AP": 53,
+        "INP": 1,
+        "first_match": 0,
+        "last_match": 1
+      },
+      "all_six_exact": false,
+      "per_query_rank_exact": false,
+      "warm_triplets": 64,
+      "inference_precision": "Original FP32; no autocast/TF32/compile changes",
+      "checkpoint_writes": 0,
+      "raw_array_writes": 0
+    }
+  ],
+  "selected_run": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_normfix_20261026/experiments/training/RGBNT100_B128ref_AV_axis_shared_s42",
+  "total_full_QG_passes": 1,
+  "checkpoint_writes": 0,
+  "raw_array_writes": 0,
+  "selection_rule": "Speed only among arms preserving all six exact metrics and per-query ranks; runtime screen once per nonbaseline setting; first/last baseline expose drift, not isolated repeated proof.",
+  "limitation": "Dataset/current fixed model only. Inference batch changes may alter floating-point ties; every arm has full installed official GT ranking, changes are retained, no checkpoint or seed selection. No training batch changes."
+}

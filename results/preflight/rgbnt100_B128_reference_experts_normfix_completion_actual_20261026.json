@@ -1,0 +1,352 @@
+{
+  "status": "ACTUAL_SCHEDULED_GPU23_NORMFIX_PAIR_NEAREND_OBSERVED",
+  "at": "2026-10-26T21:26:14.457814+08:00",
+  "actual": {
+    "at": 1793021174.456844,
+    "controller_live": true,
+    "controller_cmdline": "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python -u launch_rgbnt100_B128_reference_experts_normfix.py --data-root /data/gaob/Re-ID/dataset --pretrained /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt --anchor-run-dir /data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_paper_batch_baselines_20261016/experiments/training/RGBNT100_B128_atmoe8_demo_s42 --output /data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_normfix_20261026/experiments ",
+    "children": [
+      {
+        "phase": "reference",
+        "launch": {
+          "pid": 378937,
+          "process_group": 378937,
+          "gpu": 3,
+          "started": 1793011835.3506126,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "evaluate_rgbnt100_B128_reference_normfix.py",
+            "--variant",
+            "axis_shared",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_paper_batch_baselines_20261016/experiments/training/RGBNT100_B128_atmoe8_demo_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_normfix_20261026/experiments/reference/RGBNT100_B128ref_axis_shared_reference"
+          ],
+          "initial_resources": {
+            "gpu": 3,
+            "memory_used_mib": 176.0,
+            "observed_at": 1793011835.349056
+          },
+          "temperature_power_control": false
+        },
+        "live": false,
+        "cmdline": null,
+        "exit": {
+          "name": "RGBNT100_B128ref_axis_shared_reference",
+          "exit_code": 0,
+          "finished": 1793011933.3856912,
+          "gpu": 3,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "reference",
+        "launch": {
+          "pid": 378936,
+          "process_group": 378936,
+          "gpu": 2,
+          "started": 1793011835.3484585,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "evaluate_rgbnt100_B128_reference_normfix.py",
+            "--variant",
+            "frequency_shared",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_paper_batch_baselines_20261016/experiments/training/RGBNT100_B128_atmoe8_demo_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_normfix_20261026/experiments/reference/RGBNT100_B128ref_frequency_shared_reference"
+          ],
+          "initial_resources": {
+            "gpu": 2,
+            "memory_used_mib": 18.0,
+            "observed_at": 1793011835.3469093
+          },
+          "temperature_power_control": false
+        },
+        "live": false,
+        "cmdline": null,
+        "exit": {
+          "name": "RGBNT100_B128ref_frequency_shared_reference",
+          "exit_code": 0,
+          "finished": 1793011930.6354375,
+          "gpu": 2,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "native",
+        "launch": {
+          "pid": 381631,
+          "process_group": 381631,
+          "gpu": 3,
+          "started": 1793011933.4708345,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_rgbnt100_B128_reference_experts.py",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "axis_shared",
+            "--freeze-identity-encoder",
+            "1",
+            "--seed",
+            "42",
+            "--mode",
+            "smoke",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_paper_batch_baselines_20261016/experiments/training/RGBNT100_B128_atmoe8_demo_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_normfix_20261026/experiments/native/RGBNT100_B128ref_AV_axis_shared_s42_smoke"
+          ],
+          "initial_resources": {
+            "gpu": 3,
+            "memory_used_mib": 176.0,
+            "observed_at": 1793011933.4693093
+          },
+          "temperature_power_control": false
+        },
+        "live": false,
+        "cmdline": null,
+        "exit": {
+          "name": "RGBNT100_B128ref_AV_axis_shared_s42_smoke",
+          "exit_code": 0,
+          "finished": 1793011962.709965,
+          "gpu": 3,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "native",
+        "launch": {
+          "pid": 381630,
+          "process_group": 381630,
+          "gpu": 2,
+          "started": 1793011933.467071,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_rgbnt100_B128_reference_experts.py",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "frequency_shared",
+            "--freeze-identity-encoder",
+            "1",
+            "--seed",
+            "42",
+            "--mode",
+            "smoke",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_paper_batch_baselines_20261016/experiments/training/RGBNT100_B128_atmoe8_demo_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_normfix_20261026/experiments/native/RGBNT100_B128ref_AV_frequency_shared_s42_smoke"
+          ],
+          "initial_resources": {
+            "gpu": 2,
+            "memory_used_mib": 18.0,
+            "observed_at": 1793011933.4655461
+          },
+          "temperature_power_control": false
+        },
+        "live": false,
+        "cmdline": null,
+        "exit": {
+          "name": "RGBNT100_B128ref_AV_frequency_shared_s42_smoke",
+          "exit_code": 0,
+          "finished": 1793011962.4928212,
+          "gpu": 2,
+          "temperature_power_control": false,
+          "forced_own_group_cleanup": false
+        }
+      },
+      {
+        "phase": "training",
+        "launch": {
+          "pid": 382660,
+          "process_group": 382660,
+          "gpu": 3,
+          "started": 1793011962.8233297,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_rgbnt100_B128_reference_experts.py",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "axis_shared",
+            "--freeze-identity-encoder",
+            "1",
+            "--seed",
+            "42",
+            "--mode",
+            "train",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_paper_batch_baselines_20261016/experiments/training/RGBNT100_B128_atmoe8_demo_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_normfix_20261026/experiments/training/RGBNT100_B128ref_AV_axis_shared_s42"
+          ],
+          "initial_resources": {
+            "gpu": 3,
+            "memory_used_mib": 176.0,
+            "observed_at": 1793011962.821871
+          },
+          "temperature_power_control": false
+        },
+        "live": true,
+        "cmdline": "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python -u run_rgbnt100_B128_reference_experts.py --dataset RGBNT100 --variant axis_shared --freeze-identity-encoder 1 --seed 42 --mode train --data-root /data/gaob/Re-ID/dataset --pretrained /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt --anchor-run-dir /data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_paper_batch_baselines_20261016/experiments/training/RGBNT100_B128_atmoe8_demo_s42 --output /data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_normfix_20261026/experiments/training/RGBNT100_B128ref_AV_axis_shared_s42 ",
+        "exit": null
+      },
+      {
+        "phase": "training",
+        "launch": {
+          "pid": 382659,
+          "process_group": 382659,
+          "gpu": 2,
+          "started": 1793011962.821294,
+          "command": [
+            "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python",
+            "-u",
+            "run_rgbnt100_B128_reference_experts.py",
+            "--dataset",
+            "RGBNT100",
+            "--variant",
+            "frequency_shared",
+            "--freeze-identity-encoder",
+            "1",
+            "--seed",
+            "42",
+            "--mode",
+            "train",
+            "--data-root",
+            "/data/gaob/Re-ID/dataset",
+            "--pretrained",
+            "/data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt",
+            "--anchor-run-dir",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_paper_batch_baselines_20261016/experiments/training/RGBNT100_B128_atmoe8_demo_s42",
+            "--output",
+            "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_normfix_20261026/experiments/training/RGBNT100_B128ref_AV_frequency_shared_s42"
+          ],
+          "initial_resources": {
+            "gpu": 2,
+            "memory_used_mib": 18.0,
+            "observed_at": 1793011962.8195527
+          },
+          "temperature_power_control": false
+        },
+        "live": true,
+        "cmdline": "/data/gaob/Re-ID/conda-envs/tri_reid/bin/python -u run_rgbnt100_B128_reference_experts.py --dataset RGBNT100 --variant frequency_shared --freeze-identity-encoder 1 --seed 42 --mode train --data-root /data/gaob/Re-ID/dataset --pretrained /data/gaob/Re-ID/Trifusion/pertrained-model/ViT-B-16.pt --anchor-run-dir /data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_paper_batch_baselines_20261016/experiments/training/RGBNT100_B128_atmoe8_demo_s42 --output /data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_normfix_20261026/experiments/training/RGBNT100_B128ref_AV_frequency_shared_s42 ",
+        "exit": null
+      }
+    ],
+    "reference_acceptance.json": {
+      "status": "PASS",
+      "controls": 2,
+      "full00_teacher_parity": true,
+      "references": [
+        {
+          "variant": "frequency_shared",
+          "exit": {
+            "name": "RGBNT100_B128ref_frequency_shared_reference",
+            "exit_code": 0,
+            "finished": 1793011930.6354375,
+            "gpu": 2,
+            "temperature_power_control": false,
+            "forced_own_group_cleanup": false
+          },
+          "metrics": {
+            "mAP": 85.86419608674905,
+            "mINP": 62.13129994602527,
+            "Rank-1": 97.0262390670554,
+            "Rank-5": 97.78425655976677,
+            "Rank-10": 97.84256559766764,
+            "Rank-20": 98.07580174927114
+          }
+        },
+        {
+          "variant": "axis_shared",
+          "exit": {
+            "name": "RGBNT100_B128ref_axis_shared_reference",
+            "exit_code": 0,
+            "finished": 1793011933.3856912,
+            "gpu": 3,
+            "temperature_power_control": false,
+            "forced_own_group_cleanup": false
+          },
+          "metrics": {
+            "mAP": 85.86419608674905,
+            "mINP": 62.13129994602527,
+            "Rank-1": 97.0262390670554,
+            "Rank-5": 97.78425655976677,
+            "Rank-10": 97.84256559766764,
+            "Rank-20": 98.07580174927114
+          }
+        }
+      ]
+    },
+    "native_acceptance.json": {
+      "status": "PASS",
+      "controls": 2,
+      "actual_updates": 6,
+      "paired_sampling": true,
+      "parameters": 99585158,
+      "trainable_parameters": 1887366,
+      "descriptor_dim": 5120,
+      "scored512CE_retained": true,
+      "actual_first11_unit3584_metric": true,
+      "strict_reload_equal": true,
+      "all_active_gradients_positive": true
+    },
+    "controller_result.json": null
+  },
+  "actual_transport_captures": [
+    {
+      "status": "RETURNED",
+      "started": 1793021173.5956655,
+      "finished": 1793021174.4490921,
+      "exit_code": 0,
+      "stdout": "C:\\Users\\gb\\.codex_tmp\\vehicle_head_dynamic_amp_RGB_B128_AV_normfix_completion_20261026_intake_01_20261016.stdout.log",
+      "stderr": "C:\\Users\\gb\\.codex_tmp\\vehicle_head_dynamic_amp_RGB_B128_AV_normfix_completion_20261026_intake_01_20261016.stderr.log"
+    }
+  ],
+  "forecast_only": true,
+  "prior_actual_AV_train_and_states_seconds": {
+    "frequency_shared": 9390.767002344131,
+    "axis_shared": 9281.192114591599
+  },
+  "next_completion_observation_epoch": 1793021414.456844,
+  "physical_GPUs": [
+    2,
+    3
+  ],
+  "maximum_own_NN": 2,
+  "new_NN": 0,
+  "temperature_power_read": false,
+  "goal": "ACTIVE_UNMET"
+}

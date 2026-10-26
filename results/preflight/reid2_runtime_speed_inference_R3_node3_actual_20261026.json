@@ -1,0 +1,84 @@
+{
+  "status": "ACTUAL_R3_INFERENCE_MILESTONE",
+  "at_utc": "2026-10-26T15:12:10.003570+00:00",
+  "actual": {
+    "observed_epoch": 1793027529.9891071,
+    "wrapper_live": false,
+    "child_live": false,
+    "child_exit": {
+      "pid": 820429,
+      "exit_code": -15,
+      "finished": 1793027498.8962488
+    },
+    "inference_arms_complete": 1,
+    "completed_arm_timings": [
+      {
+        "arm": 0,
+        "threads": 4,
+        "workers": 4,
+        "batch": 64,
+        "extract_seconds": 68.1948186440859,
+        "metric_seconds": 3.466560311964713,
+        "total_seconds": 71.66137895605061,
+        "data_wait_seconds": 0.46311551600228995,
+        "peak_allocated_bytes": 1296303104,
+        "all_six_exact": true,
+        "resources": {
+          "samples": [],
+          "host_CPU_busy_percent": 5.351158291946099,
+          "host_CPU_iowait_percent": 0.10388103969136686
+        }
+      }
+    ],
+    "new_NN": 0,
+    "restarted": false,
+    "status": "FAILED",
+    "next_epoch": null,
+    "manifest": {
+      "child_exit.json": {
+        "bytes": 65,
+        "sha256": "a9b60bbdd5874cf33bbeddc0e0845423281712f0316849b53febd5317b62602c"
+      },
+      "child_launch.json": {
+        "bytes": 510,
+        "sha256": "17819d87c62ad2c1a63d2b231677332b1843d4b601cc012c7e10de7814e239d2"
+      },
+      "remote_owner.json": {
+        "bytes": 1210,
+        "sha256": "935e309dc9befe70b8e4e4f0e5d12a26a844953725982659cb9209c8abee0d36"
+      },
+      "inference.log": {
+        "bytes": 2667,
+        "sha256": "2a793bfbd76b950dd7ba8ad9e10a7a14aeea76ebaa682031a4d760fcb8a27ea1"
+      },
+      "profile_output/inference/arm_0.json": {
+        "bytes": 15506,
+        "sha256": "b33fba40915524b74da0236d89df60cfc026063029546192fd2965f00d280d46"
+      },
+      "profile_output/inference/arm_0_timing.json": {
+        "bytes": 1312,
+        "sha256": "f6dae50d1188ecd98c4056f011d67a1c47ad69f10216057853568b59d987585c"
+      },
+      "profile_output/inference/arm_0.csv": {
+        "bytes": 158771,
+        "sha256": "16dce70249aa390cff418d31c6b22c406023694198f679e9f2f009b100b57259"
+      }
+    },
+    "package": {
+      "path": "/data/gaob/Re-ID/DeMo-DualAxis/runs/reid2_runtime_speed_inference_R3_20261026/runtime_inference_R3_texts.tar.gz",
+      "bytes": 42495,
+      "sha256": "c827fc0b5b6ecde29a6e1fbee4d67c3da50037cf860a1f4b00c3e71b74cd01ca"
+    },
+    "failure_log": "/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/helpers.py:7: FutureWarning: Importing from timm.models.helpers is deprecated, please import via timm.models\n  warnings.warn(f\"Importing from {__name__} is deprecated, please import via timm.models\", FutureWarning)\n/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models\n  warnings.warn(f\"Importing from {__name__} is deprecated, please import via timm.models\", FutureWarning)\n/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers\n  warnings.warn(f\"Importing from {__name__} is deprecated, please import via timm.layers\", FutureWarning)\nusing Transformer_type: ViT-B-16 as a backbone\nResized position embedding: %s to %s torch.Size([197, 768]) torch.Size([129, 768])\nPosition embedding resize to height:8 width: 16\nSuccessfully load ckpt!\n<All keys matched successfully>\nLoading pretrained model from CLIP\ncamera number is : 8\nException in thread Thread-2 (collect):\nTraceback (most recent call last):\n  File \"/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/threading.py\", line 1016, in _bootstrap_inner\n    self.run()\n  File \"/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/threading.py\", line 953, in run\n    self._target(*self._args, **self._kwargs)\n  File \"/data/gaob/Re-ID/DeMo-DualAxis/profile_rgbnt100_runtime_speed_R3_20261026.py\", line 45, in collect\n    raw = subprocess.check_output(['nvidia-smi', '-i', str(self.gpu),\n  File \"/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/subprocess.py\", line 421, in check_output\n    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n  File \"/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/subprocess.py\", line 505, in run\n    stdout, stderr = process.communicate(input, timeout=timeout)\n  File \"/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/subprocess.py\", line 1154, in communicate\n    stdout, stderr = self._communicate(input, endtime, timeout)\n  File \"/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/subprocess.py\", line 2022, in _communicate\n    self._check_timeout(endtime, orig_timeout, stdout, stderr)\n  File \"/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/subprocess.py\", line 1198, in _check_timeout\n    raise TimeoutExpired(\nsubprocess.TimeoutExpired: Command '['nvidia-smi', '-i', '2', '--query-gpu=memory.used,utilization.gpu,utilization.memory', '--format=csv,noheader,nounits']' timed out after 15 seconds"
+  },
+  "transport": [
+    {
+      "status": "RETURNED",
+      "started": 1793027529.0761955,
+      "finished": 1793027530.0025792,
+      "exit_code": 0,
+      "stdout": "C:\\Users\\gb\\.codex_tmp\\vehicle_head_dynamic_amp_GPU2_runtime_R3_node3_20261026_intake_01_20261016.stdout.log",
+      "stderr": "C:\\Users\\gb\\.codex_tmp\\vehicle_head_dynamic_amp_GPU2_runtime_R3_node3_20261026_intake_01_20261016.stderr.log"
+    }
+  ]
+}

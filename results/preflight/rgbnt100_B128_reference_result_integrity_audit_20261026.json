@@ -1,0 +1,1019 @@
+{
+  "audit_skill": "experiment-audit",
+  "status": "FINAL",
+  "verdict": "WARN",
+  "overall_verdict": "WARN",
+  "integrity_status": "warn",
+  "reason_code": "raw_metrics_verified_with_benchmark_selection_scope_and_execution_attestation_limits",
+  "generated_at": "2026-10-26T14:09:13.130372+00:00",
+  "date": "2026-10-26",
+  "auditor": "fresh Codex reviewer",
+  "agent_id": "/root/audit_rgbnt100_b128_reference_full_normal_20261026",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_routing": "UNATTESTED",
+  "actual_reviewer_model": "UNATTESTED",
+  "actual_reviewer_reasoning": "UNATTESTED",
+  "reviewer_family": "openai",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "summary": "No blocking integrity finding in the completed RGBNT100 normal pair. All saved distance cases and selected feature arithmetic independently reproduce installed-GT results. Paper target and robust superiority are not achieved.",
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    {
+      "id": "W1",
+      "blocking": false,
+      "category": "benchmark_selection_and_scope",
+      "detail": "The benchmark selected teacher/configuration and earliest mAP-best epochs. Current experiment is one seed42 RGBNT100 normal-input pair on complete official data. It does not establish missing-modality, RGBNT201/MSVR310, multiseed, SOTA or generalization success.",
+      "evidence": [
+        "run_full_official_frozen_anchor_experiment.py:84",
+        "run_full_official_frozen_anchor_experiment.py:166",
+        "analyze_rgbnt100_B128_reference_experts_normal.py:140"
+      ]
+    },
+    {
+      "id": "W2",
+      "blocking": false,
+      "category": "target_not_met_and_control_tradeoffs",
+      "detail": "Neither candidate meets paper-governed 87.2 mAP / 98.6 Rank-1. Dual E23 versus ordinary E39 changes mAP by +0.039702796 pp but Rank-1 by -0.058309038 pp (1 rescued, 2 harmed); mINP and Rank-10 also decrease. Teacher-relative changes must be separated from stronger-reference credit.",
+      "evidence": [
+        "results/rgbnt100_B128_reference_experts_normfix_20261026/experiments/normal_analysis/six_metrics.csv:6",
+        "results/rgbnt100_B128_reference_experts_normfix_20261026/experiments/normal_analysis/comparisons.csv:2",
+        "analyze_rgbnt100_B128_reference_experts_normal.py:118"
+      ]
+    },
+    {
+      "id": "W3",
+      "blocking": false,
+      "category": "forward_and_checkpoint_provenance_limit",
+      "detail": "Weights, saved features/distances and archive/source bindings were independently read on CPU. This is not an independent neural weight-to-feature replay. Selected-epoch/checkpoint provenance, native3+3 positive gradients and strict reload execution rely on called-source guards plus saved records. State11 distances are independently exact; normal_states.npz has no second saved state11 feature array, so its feature equality is source-guarded producer execution evidence.",
+      "evidence": [
+        "run_full_official_frozen_anchor_experiment.py:168",
+        "run_full_official_frozen_anchor_experiment.py:172",
+        "evaluate_rgbnt100_B128_reference_states.py:46",
+        "evaluate_rgbnt100_B128_reference_states.py:58",
+        "evaluate_rgbnt100_B128_reference_states.py:61"
+      ]
+    },
+    {
+      "id": "W4",
+      "blocking": false,
+      "category": "budget_and_causal_scope",
+      "detail": "Each candidate is teacher50 plus expert50 with a fresh optimizer; ordinary and dual share the same teacher/bank and matched additional50. Historical AV changes teacher weights and teacher-derived neighbor arrangement together. Frozen00/10/01/11 interventions are not retrained ablations or isolated causal module contributions; comparison to original DeMo50 is not an equal total-compute claim.",
+      "evidence": [
+        "run_rgbnt100_B128_reference_experts.py:13",
+        "run_rgbnt100_B128_reference_experts.py:23",
+        "evaluate_rgbnt100_B128_reference_states.py:70",
+        "analyze_rgbnt100_B128_reference_experts_normal.py:71"
+      ]
+    },
+    {
+      "id": "W5",
+      "blocking": false,
+      "category": "historical_precision_failure",
+      "detail": "The original full00 reference failure and fixed-cache arithmetic receipt are retained inputs/evidence, not a new trained score. Source diff removes the duplicate normalization only. The historical second CUDA normalization changed 16 per-query rows with maximum distance change 9.5367431640625e-7; that CUDA path was not rerun by this CPU-only auditor. Current saved teacher and two normal feature arithmetic replays have exact distance equality and no changed query rows.",
+      "evidence": [
+        "rgbnt201_identity_outlet.py:67",
+        "full_evaluation.py:88",
+        "evaluate_rgbnt100_B128_reference_normfix.py:47",
+        "results/preflight/rgbnt100_B128_cached_normalization_arithmetic_actual_20261026.json"
+      ]
+    },
+    {
+      "id": "W6",
+      "blocking": false,
+      "category": "controller_exit_limit",
+      "detail": "Ten selected reference/native/training/audit/state child exit receipts are zero and controller_result.json is COMPLETE. An OS exit code for the detached controller itself is not independently attested; no live process/status/resource queries were made.",
+      "evidence": [
+        "results/rgbnt100_B128_reference_experts_normfix_20261026/experiments/controller_result.json",
+        "results/preflight/rgbnt100_B128_reference_normfix_intake_actual_20261026.json"
+      ]
+    },
+    {
+      "id": "W7",
+      "blocking": false,
+      "category": "review_attribution",
+      "detail": "Fresh same-family audit is provisional. Requested gpt-6-astra/max is not independent host attestation; actual model/reasoning routing remains UNATTESTED."
+    }
+  ],
+  "checks": {
+    "A_ground_truth_provenance": {
+      "status": "PASS",
+      "evaluation_type": "real_gt",
+      "detail": "Independently enumerated installed RGBNT100 JPG filenames and parsed identity/camera labels; all 8675 train, 1715 query and 8575 gallery records exactly match manifests and NPZ metadata. Train/test identity sets are disjoint. Every saved distance case uses same-identity AND same-camera exclusion. No model output supplies evaluation GT.",
+      "evidence": [
+        "data/datasets/RGBNT100.py:63",
+        "official_training_data.py:20",
+        "full_evaluation.py:25",
+        "audit_full_official49.py:13",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-26_RGBNT100_B128_reference_full_normal_run01\\remote_recount.py"
+      ]
+    },
+    "B_score_normalization": {
+      "status": "PASS",
+      "detail": "AP averages precision over dataset positives; INP is relevant-count/last-relevant-rank; CMC averages valid query hits. Only fixed percent scaling is applied. Feature L2 normalization is representation preprocessing, not division of metrics by a model-output maximum/minimum/mean. Stable gallery-index tie order is reproduced independently.",
+      "evidence": [
+        "full_evaluation.py:20",
+        "full_evaluation.py:43",
+        "utils/reid_evaluation.py:27",
+        "utils/reid_evaluation.py:46",
+        "full_evaluation.py:106"
+      ]
+    },
+    "C_result_existence_and_values": {
+      "status": "PASS",
+      "detail": "735 supplied inputs exist with exact requested bytes/SHA before and after; 396 execution/inherited source/data bindings and all eight selected/teacher binary archives also match remotely before/after. Recomputed teacher + two normals + eight states match all AP/INP/query fields, six metrics, CMC1-50, validity, identity/camera/scene groups and selected exports. All six main table rows and 12005 paired cohort rows are arithmetically consistent.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-26_RGBNT100_B128_reference_full_normal_run01\\inputs_before.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-26_RGBNT100_B128_reference_full_normal_run01\\inputs_after.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-26_RGBNT100_B128_reference_full_normal_run01\\remote_recomputed.json",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-26_RGBNT100_B128_reference_full_normal_run01\\local_validation.json",
+        "launch_rgbnt100_B128_reference_experts_normfix.py:124"
+      ]
+    },
+    "D_called_code": {
+      "status": "PASS",
+      "detail": "Current controller invokes normfix reference, B128 runner, installed-GT normal audit and four-state evaluator. B128 runner patches configuration/builder/update/record/loader into the full-official runner; its evaluate calls extract/distance/full_metrics at all50 epochs and selected reload. Intake invokes the selected analyzer. The preserved full_evaluation.main fit/dev entry and audit_full_official49.main are not this run; their reusable metric/GT helpers are called.",
+      "evidence": [
+        "launch_rgbnt100_B128_reference_experts_normfix.py:21",
+        "launch_rgbnt100_B128_reference_experts_normfix.py:35",
+        "launch_rgbnt100_B128_reference_experts_normfix.py:112",
+        "run_rgbnt100_B128_reference_experts.py:64",
+        "run_full_official_frozen_anchor_experiment.py:39",
+        "run_full_official_frozen_anchor_experiment.py:158",
+        "results/preflight/intake_rgbnt100_B128_reference_normfix_20261026.py:97"
+      ]
+    },
+    "E_scope": {
+      "status": "WARN",
+      "detail": "Supported scope is the completed RGBNT100 normal pair and same-checkpoint frozen interventions. Current result text discloses one seed, benchmark selection, shared teacher/bank, teacher50+expert50 and target failure. Historical comparison rows are validated CSV reductions; all historical/per-epoch raw distances are not supplied for a new rank replay. No new49, missing6, RGBNT201, MSVR310, multiseed or retrained-ablation result is established.",
+      "evidence": [
+        "analyze_rgbnt100_B128_reference_experts_normal.py:135",
+        "evaluate_rgbnt100_B128_reference_states.py:70",
+        "run_rgbnt100_B128_reference_experts.py:11"
+      ]
+    },
+    "F_evaluation_type": {
+      "status": "PASS",
+      "classification": "real_gt",
+      "detail": "Dataset identity/camera-labelled retrieval on the entire installed query/gallery split. Frozen states are inference interventions on selected normal checkpoints; they do not convert reference outputs into evaluation targets.",
+      "evidence": [
+        "full_evaluation.py:25",
+        "evaluate_rgbnt100_B128_reference_states.py:53"
+      ]
+    }
+  },
+  "input_integrity": {
+    "request_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_B128_reference_result_integrity_request_20261026.json",
+    "request_sha256": "234397fbb326ec679348e74926b83894e5871fc6727f4f031f5bd48f95ee1d56",
+    "count": 735,
+    "before_after_identical": true,
+    "requested_bytes_and_sha256_exact": true,
+    "parsed_types": {
+      "JSON": 254,
+      "archived_text_logs": 13,
+      "CSV": 134,
+      "AST": 321,
+      "YAML_text": 3
+    },
+    "full_before_manifest": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-26_RGBNT100_B128_reference_full_normal_run01\\inputs_before.json",
+    "full_after_manifest": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-26_RGBNT100_B128_reference_full_normal_run01\\inputs_after.json",
+    "remote_source_bindings": 396,
+    "remote_sources_before_after_exact": true,
+    "selected_and_teacher_archives": 8,
+    "remote_archives_before_after_exact": true,
+    "selected_archive_bindings": {
+      "RGBNT100_B128ref_AV_frequency_shared_s42/raw": {
+        "local": "D:\\Program Files\\UserCache\\gb\\ReID2-retained\\RGBNT100_B128_reference_experts_20261026\\RGBNT100_B128ref_AV_frequency_shared_s42\\raw\\best_official_arrays.npz",
+        "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_normfix_20261026/experiments/training/RGBNT100_B128ref_AV_frequency_shared_s42/best_official_arrays.npz",
+        "bytes": 247496325,
+        "sha256": "b64a015968cd2956f748c4b9a952e522792d5093230edc64a9d0c031192b6b22"
+      },
+      "RGBNT100_B128ref_AV_frequency_shared_s42/states_raw": {
+        "local": "D:\\Program Files\\UserCache\\gb\\ReID2-retained\\RGBNT100_B128_reference_experts_20261026\\RGBNT100_B128ref_AV_frequency_shared_s42\\states_raw\\normal_states.npz",
+        "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_normfix_20261026/experiments/states/RGBNT100_B128ref_AV_frequency_shared_s42/normal_states.npz",
+        "bytes": 398094963,
+        "sha256": "0f4ffb8fcfc7667e8c347768ecca90c57a7628701681b62ce90cd0e03eb0251f"
+      },
+      "RGBNT100_B128ref_AV_frequency_shared_s42/best": {
+        "local": "D:\\Program Files\\UserCache\\gb\\ReID2-retained\\RGBNT100_B128_reference_experts_20261026\\RGBNT100_B128ref_AV_frequency_shared_s42\\best\\best.pth",
+        "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_normfix_20261026/experiments/training/RGBNT100_B128ref_AV_frequency_shared_s42/best.pth",
+        "bytes": 398706009,
+        "sha256": "4a1c62289cab6b95803a0cee5c91e02ce80e45ba50085256c9f4c980cdccfefd"
+      },
+      "RGBNT100_B128ref_AV_axis_shared_s42/raw": {
+        "local": "D:\\Program Files\\UserCache\\gb\\ReID2-retained\\RGBNT100_B128_reference_experts_20261026\\RGBNT100_B128ref_AV_axis_shared_s42\\raw\\best_official_arrays.npz",
+        "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_normfix_20261026/experiments/training/RGBNT100_B128ref_AV_axis_shared_s42/best_official_arrays.npz",
+        "bytes": 247657651,
+        "sha256": "59e984e0132685ba011589edf145ebc05880b80689cef585a12f5be725dd8762"
+      },
+      "RGBNT100_B128ref_AV_axis_shared_s42/states_raw": {
+        "local": "D:\\Program Files\\UserCache\\gb\\ReID2-retained\\RGBNT100_B128_reference_experts_20261026\\RGBNT100_B128ref_AV_axis_shared_s42\\states_raw\\normal_states.npz",
+        "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_normfix_20261026/experiments/states/RGBNT100_B128ref_AV_axis_shared_s42/normal_states.npz",
+        "bytes": 398092496,
+        "sha256": "db770597ff8c60e48dda7a0ed6767834f6d65d572a80c9f659067200d99e4393"
+      },
+      "RGBNT100_B128ref_AV_axis_shared_s42/best": {
+        "local": "D:\\Program Files\\UserCache\\gb\\ReID2-retained\\RGBNT100_B128_reference_experts_20261026\\RGBNT100_B128ref_AV_axis_shared_s42\\best\\best.pth",
+        "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_normfix_20261026/experiments/training/RGBNT100_B128ref_AV_axis_shared_s42/best.pth",
+        "bytes": 398706009,
+        "sha256": "57f1b29a863918bbf4535bfe63b6409b797db3a26ba9a11894feee47466f9805"
+      }
+    },
+    "teacher_archive_bindings": {
+      "head8/best": {
+        "local": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_paper_batch_baselines_20261016\\head8\\best\\best.pth",
+        "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_paper_batch_baselines_20261016/experiments/training/RGBNT100_B128_atmoe8_demo_s42/best.pth",
+        "bytes": 392086065,
+        "sha256": "b4deeb334580a1ad705ee64296dd5050d3ae081fb5f24e7c201b662f922dc0f7"
+      },
+      "head8/raw": {
+        "local": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_paper_batch_baselines_20261016\\head8\\raw\\best_official_arrays.npz",
+        "remote": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_paper_batch_baselines_20261016/experiments/training/RGBNT100_B128_atmoe8_demo_s42/best_official_arrays.npz",
+        "bytes": 248735553,
+        "sha256": "f32c8f7bd36b20e5aa323e28986bebcf9e2e4a7f150b91f6a48d8185e39c84c4"
+      }
+    }
+  },
+  "raw_recomputed": {
+    "installed_dataset": "RGBNT100",
+    "counts": {
+      "train": 8675,
+      "train_identities": 50,
+      "query": 1715,
+      "gallery": 8575,
+      "test_identities": 50,
+      "cameras": 8
+    },
+    "train_test_identities_disjoint": true,
+    "evaluation": "real_gt",
+    "exclusion": "same identity AND same camera",
+    "tie_rule": "ascending distance then original gallery index",
+    "raw_distance_cases": 11,
+    "raw_case_query_rows": 18865,
+    "normal_candidate_cases": 2,
+    "teacher_cases": 1,
+    "frozen_state_cases": 8,
+    "all_query_rows_AP_INP_ranks_CMC50_validity_groups_match": true,
+    "absolute_metric_tolerance_pp": 1e-08,
+    "AP_INP_tolerance": 1e-12,
+    "normal_six_rows": [
+      {
+        "model": "original_DeMo",
+        "selected_epoch": 8,
+        "mAP": 85.76856710316946,
+        "mINP": 61.84590828355626,
+        "Rank-1": 96.61807580174927,
+        "Rank-5": 97.0262390670554,
+        "Rank-10": 97.37609329446065,
+        "Rank-20": 97.72594752186589
+      },
+      {
+        "model": "B128_head8_teacher",
+        "selected_epoch": 24,
+        "mAP": 85.86419608674906,
+        "mINP": 62.13129994602527,
+        "Rank-1": 97.0262390670554,
+        "Rank-5": 97.78425655976676,
+        "Rank-10": 97.84256559766764,
+        "Rank-20": 98.07580174927114
+      },
+      {
+        "model": "AV_ordinary",
+        "selected_epoch": 6,
+        "mAP": 85.96873759608015,
+        "mINP": 62.438827112517,
+        "Rank-1": 96.50145772594752,
+        "Rank-5": 97.08454810495627,
+        "Rank-10": 97.37609329446065,
+        "Rank-20": 97.84256559766764
+      },
+      {
+        "model": "AV_dual",
+        "selected_epoch": 20,
+        "mAP": 86.1546433016181,
+        "mINP": 62.560794668209745,
+        "Rank-1": 96.7930029154519,
+        "Rank-5": 97.43440233236151,
+        "Rank-10": 97.78425655976676,
+        "Rank-20": 98.25072886297376
+      },
+      {
+        "model": "new_ordinary",
+        "selected_epoch": 39,
+        "mAP": 86.08004145468685,
+        "mINP": 62.78151677970328,
+        "Rank-1": 97.14285714285714,
+        "Rank-5": 97.66763848396502,
+        "Rank-10": 97.84256559766764,
+        "Rank-20": 98.01749271137027
+      },
+      {
+        "model": "new_dual",
+        "selected_epoch": 23,
+        "mAP": 86.11974425039179,
+        "mINP": 62.709487676170845,
+        "Rank-1": 97.08454810495627,
+        "Rank-5": 97.66763848396502,
+        "Rank-10": 97.78425655976676,
+        "Rank-20": 98.01749271137027
+      }
+    ],
+    "state_six_rows": [
+      {
+        "model": "new_ordinary",
+        "state": "00",
+        "mAP": 85.86419608674906,
+        "mINP": 62.13129994602527,
+        "Rank-1": 97.0262390670554,
+        "Rank-5": 97.78425655976676,
+        "Rank-10": 97.84256559766764,
+        "Rank-20": 98.07580174927114
+      },
+      {
+        "model": "new_ordinary",
+        "state": "10",
+        "mAP": 85.94738042476689,
+        "mINP": 62.3410317938436,
+        "Rank-1": 97.0262390670554,
+        "Rank-5": 97.78425655976676,
+        "Rank-10": 97.84256559766764,
+        "Rank-20": 98.01749271137027
+      },
+      {
+        "model": "new_ordinary",
+        "state": "01",
+        "mAP": 85.86101415238457,
+        "mINP": 62.12461574669201,
+        "Rank-1": 97.0262390670554,
+        "Rank-5": 97.78425655976676,
+        "Rank-10": 97.84256559766764,
+        "Rank-20": 98.07580174927114
+      },
+      {
+        "model": "new_ordinary",
+        "state": "11",
+        "mAP": 86.08004145468685,
+        "mINP": 62.78151677970328,
+        "Rank-1": 97.14285714285714,
+        "Rank-5": 97.66763848396502,
+        "Rank-10": 97.84256559766764,
+        "Rank-20": 98.01749271137027
+      },
+      {
+        "model": "new_dual",
+        "state": "00",
+        "mAP": 85.86419608674906,
+        "mINP": 62.13129994602527,
+        "Rank-1": 97.0262390670554,
+        "Rank-5": 97.78425655976676,
+        "Rank-10": 97.84256559766764,
+        "Rank-20": 98.07580174927114
+      },
+      {
+        "model": "new_dual",
+        "state": "10",
+        "mAP": 85.88739317909648,
+        "mINP": 62.18647457670122,
+        "Rank-1": 97.0262390670554,
+        "Rank-5": 97.72594752186589,
+        "Rank-10": 97.84256559766764,
+        "Rank-20": 98.01749271137027
+      },
+      {
+        "model": "new_dual",
+        "state": "01",
+        "mAP": 85.86815894264224,
+        "mINP": 62.14159121951818,
+        "Rank-1": 97.0262390670554,
+        "Rank-5": 97.78425655976676,
+        "Rank-10": 97.84256559766764,
+        "Rank-20": 98.07580174927114
+      },
+      {
+        "model": "new_dual",
+        "state": "11",
+        "mAP": 86.11974425039179,
+        "mINP": 62.709487676170845,
+        "Rank-1": 97.08454810495627,
+        "Rank-5": 97.66763848396502,
+        "Rank-10": 97.78425655976676,
+        "Rank-20": 98.01749271137027
+      }
+    ],
+    "paired_comparisons": [
+      {
+        "model": "new_dual",
+        "reference": "new_ordinary",
+        "mAP": 0.039702795704940286,
+        "mINP": -0.07202910353243652,
+        "Rank-1": -0.0583090379008695,
+        "Rank-5": 0.0,
+        "Rank-10": -0.05830903790088371,
+        "Rank-20": 0.0,
+        "rank1_rescued": 1,
+        "rank1_harmed": 2,
+        "AP_improved": 704,
+        "AP_declined": 650
+      },
+      {
+        "model": "new_dual",
+        "reference": "B128_head8_teacher",
+        "mAP": 0.2555481636427288,
+        "mINP": 0.5781877301455722,
+        "Rank-1": 0.0583090379008695,
+        "Rank-5": -0.116618075801739,
+        "Rank-10": -0.05830903790088371,
+        "Rank-20": -0.0583090379008695,
+        "rank1_rescued": 2,
+        "rank1_harmed": 1,
+        "AP_improved": 823,
+        "AP_declined": 540
+      },
+      {
+        "model": "new_ordinary",
+        "reference": "B128_head8_teacher",
+        "mAP": 0.21584536793778852,
+        "mINP": 0.6502168336780088,
+        "Rank-1": 0.116618075801739,
+        "Rank-5": -0.116618075801739,
+        "Rank-10": 0.0,
+        "Rank-20": -0.0583090379008695,
+        "rank1_rescued": 4,
+        "rank1_harmed": 2,
+        "AP_improved": 920,
+        "AP_declined": 442
+      },
+      {
+        "model": "new_dual",
+        "reference": "original_DeMo",
+        "mAP": 0.3511771472223302,
+        "mINP": 0.8635793926145823,
+        "Rank-1": 0.4664723032069986,
+        "Rank-5": 0.6413994169096213,
+        "Rank-10": 0.4081632653061149,
+        "Rank-20": 0.2915451895043759,
+        "rank1_rescued": 28,
+        "rank1_harmed": 20,
+        "AP_improved": 754,
+        "AP_declined": 744
+      },
+      {
+        "model": "new_ordinary",
+        "reference": "original_DeMo",
+        "mAP": 0.3114743515173899,
+        "mINP": 0.9356084961470188,
+        "Rank-1": 0.5247813411078681,
+        "Rank-5": 0.6413994169096213,
+        "Rank-10": 0.4664723032069986,
+        "Rank-20": 0.2915451895043759,
+        "rank1_rescued": 29,
+        "rank1_harmed": 20,
+        "AP_improved": 756,
+        "AP_declined": 741
+      },
+      {
+        "model": "new_dual",
+        "reference": "AV_dual",
+        "mAP": -0.03489905122630432,
+        "mINP": 0.14869300796109997,
+        "Rank-1": 0.2915451895043759,
+        "Rank-5": 0.23323615160350641,
+        "Rank-10": 0.0,
+        "Rank-20": -0.2332361516034922,
+        "rank1_rescued": 29,
+        "rank1_harmed": 24,
+        "AP_improved": 697,
+        "AP_declined": 785
+      },
+      {
+        "model": "new_ordinary",
+        "reference": "AV_ordinary",
+        "mAP": 0.11130385860670344,
+        "mINP": 0.3426896671862849,
+        "Rank-1": 0.6413994169096213,
+        "Rank-5": 0.5830903790087518,
+        "Rank-10": 0.4664723032069986,
+        "Rank-20": 0.1749271137026227,
+        "rank1_rescued": 31,
+        "rank1_harmed": 20,
+        "AP_improved": 699,
+        "AP_declined": 787
+      }
+    ],
+    "frozen_state_comparisons": [
+      {
+        "model": "new_ordinary/11",
+        "reference": "new_ordinary/00",
+        "mAP": 0.21584536793778852,
+        "mINP": 0.6502168336780088,
+        "Rank-1": 0.116618075801739,
+        "Rank-5": -0.116618075801739,
+        "Rank-10": 0.0,
+        "Rank-20": -0.0583090379008695,
+        "rank1_rescued": 4,
+        "rank1_harmed": 2,
+        "AP_improved": 920,
+        "AP_declined": 442
+      },
+      {
+        "model": "new_ordinary/11",
+        "reference": "new_ordinary/10",
+        "mAP": 0.13266102991995865,
+        "mINP": 0.4404849858596833,
+        "Rank-1": 0.116618075801739,
+        "Rank-5": -0.116618075801739,
+        "Rank-10": 0.0,
+        "Rank-20": 0.0,
+        "rank1_rescued": 3,
+        "rank1_harmed": 1,
+        "AP_improved": 856,
+        "AP_declined": 493
+      },
+      {
+        "model": "new_ordinary/11",
+        "reference": "new_ordinary/01",
+        "mAP": 0.21902730230227974,
+        "mINP": 0.6569010330112732,
+        "Rank-1": 0.116618075801739,
+        "Rank-5": -0.116618075801739,
+        "Rank-10": 0.0,
+        "Rank-20": -0.0583090379008695,
+        "rank1_rescued": 4,
+        "rank1_harmed": 2,
+        "AP_improved": 920,
+        "AP_declined": 440
+      },
+      {
+        "model": "new_dual/11",
+        "reference": "new_dual/00",
+        "mAP": 0.2555481636427288,
+        "mINP": 0.5781877301455722,
+        "Rank-1": 0.0583090379008695,
+        "Rank-5": -0.116618075801739,
+        "Rank-10": -0.05830903790088371,
+        "Rank-20": -0.0583090379008695,
+        "rank1_rescued": 2,
+        "rank1_harmed": 1,
+        "AP_improved": 823,
+        "AP_declined": 540
+      },
+      {
+        "model": "new_dual/11",
+        "reference": "new_dual/10",
+        "mAP": 0.2323510712953123,
+        "mINP": 0.5230130994696225,
+        "Rank-1": 0.0583090379008695,
+        "Rank-5": -0.0583090379008695,
+        "Rank-10": -0.05830903790088371,
+        "Rank-20": 0.0,
+        "rank1_rescued": 2,
+        "rank1_harmed": 1,
+        "AP_improved": 836,
+        "AP_declined": 524
+      },
+      {
+        "model": "new_dual/11",
+        "reference": "new_dual/01",
+        "mAP": 0.2515853077495507,
+        "mINP": 0.5678964566526616,
+        "Rank-1": 0.0583090379008695,
+        "Rank-5": -0.116618075801739,
+        "Rank-10": -0.05830903790088371,
+        "Rank-20": -0.0583090379008695,
+        "rank1_rescued": 2,
+        "rank1_harmed": 1,
+        "AP_improved": 826,
+        "AP_declined": 535
+      }
+    ],
+    "paired_normal_cohort_rows": 12005,
+    "feature_arithmetic": {
+      "frequency_shared": {
+        "max_distance_error": 0.0,
+        "unequal_distance_entries": 0,
+        "changed_query_rows": 0,
+        "rank1_changes": 0,
+        "max_AP_error": 0.0,
+        "max_INP_error": 0.0,
+        "metric_deltas": {
+          "mAP": 0.0,
+          "mINP": 0.0,
+          "Rank-1": 0.0,
+          "Rank-5": 0.0,
+          "Rank-10": 0.0,
+          "Rank-20": 0.0
+        }
+      },
+      "axis_shared": {
+        "max_distance_error": 0.0,
+        "unequal_distance_entries": 0,
+        "changed_query_rows": 0,
+        "rank1_changes": 0,
+        "max_AP_error": 0.0,
+        "max_INP_error": 0.0,
+        "metric_deltas": {
+          "mAP": 0.0,
+          "mINP": 0.0,
+          "Rank-1": 0.0,
+          "Rank-5": 0.0,
+          "Rank-10": 0.0,
+          "Rank-20": 0.0
+        }
+      },
+      "B128_head8_teacher": {
+        "max_distance_error": 0.0,
+        "unequal_distance_entries": 0,
+        "changed_query_rows": 0,
+        "rank1_changes": 0,
+        "max_AP_error": 0.0,
+        "max_INP_error": 0.0,
+        "metric_deltas": {
+          "mAP": 0.0,
+          "mINP": 0.0,
+          "Rank-1": 0.0,
+          "Rank-5": 0.0,
+          "Rank-10": 0.0,
+          "Rank-20": 0.0
+        }
+      }
+    },
+    "state00_saved_features_and_distances_exact_teacher": true,
+    "state11_saved_distances_exact_selected_normal": true,
+    "state11_separately_saved_features": false,
+    "state11_feature_equality_evidence": "Called-source guard and saved completion records only; no independent second feature array or NN replay",
+    "full_recount_trace": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-26_RGBNT100_B128_reference_full_normal_run01\\remote_recomputed.json"
+  },
+  "training": {
+    "current_models": 2,
+    "formal_epochs_each": 50,
+    "formal_updates_each": 6563,
+    "formal_updates_total": 13126,
+    "native_updates_separate": 6,
+    "native_updates_each": 3,
+    "formal_AMP_skips": 0,
+    "native_AMP_skips": 0,
+    "record_positions_each": 420032,
+    "unique_train_records_each": 8675,
+    "paired_epoch_step_name_partial_set_orders_exact": true,
+    "paired_configuration_exact": true,
+    "B64_P8_K8": true,
+    "all50_epoch_losses_and_coverage_reduced_from_batches": true,
+    "all100_current_epoch_query_exports_checked": true,
+    "current_epoch_query_rows": 171500,
+    "checkpoint_selection": "Earliest maximum full-normal benchmark mAP across all50 epochs; all six metrics from the same selected checkpoint",
+    "current_selected_epochs": {
+      "ordinary": 39,
+      "dual": 23
+    },
+    "selected_and_last": {
+      "original_DeMo": {
+        "selected_epoch": 8,
+        "best": {
+          "mAP": 85.76856710316946,
+          "mINP": 61.84590828355626,
+          "Rank-1": 96.61807580174927,
+          "Rank-5": 97.0262390670554,
+          "Rank-10": 97.37609329446065,
+          "Rank-20": 97.72594752186589
+        },
+        "last": {
+          "mAP": 85.09888117172326,
+          "mINP": 60.071807708444844,
+          "Rank-1": 96.20991253644316,
+          "Rank-5": 96.73469387755102,
+          "Rank-10": 97.25947521865889,
+          "Rank-20": 97.90087463556851
+        },
+        "stage_epochs": 50,
+        "pipeline_epochs": 50,
+        "updates": 6357,
+        "attempts": 6357,
+        "skips": 0,
+        "parameters": 97952256,
+        "trainable_parameters": 97947136
+      },
+      "B128_head8_teacher": {
+        "selected_epoch": 24,
+        "best": {
+          "mAP": 85.86419608674906,
+          "mINP": 62.13129994602527,
+          "Rank-1": 97.0262390670554,
+          "Rank-5": 97.78425655976676,
+          "Rank-10": 97.84256559766764,
+          "Rank-20": 98.07580174927114
+        },
+        "last": {
+          "mAP": 85.68255577325912,
+          "mINP": 61.785333854455594,
+          "Rank-1": 96.85131195335276,
+          "Rank-5": 97.20116618075801,
+          "Rank-10": 97.43440233236151,
+          "Rank-20": 97.60932944606414
+        },
+        "stage_epochs": 50,
+        "pipeline_epochs": 50,
+        "updates": 3135,
+        "attempts": 3135,
+        "skips": 0,
+        "parameters": 97952256,
+        "trainable_parameters": 97947136
+      },
+      "AV_ordinary": {
+        "selected_epoch": 6,
+        "best": {
+          "mAP": 85.96873759608015,
+          "mINP": 62.438827112517,
+          "Rank-1": 96.50145772594752,
+          "Rank-5": 97.08454810495627,
+          "Rank-10": 97.37609329446065,
+          "Rank-20": 97.84256559766764
+        },
+        "last": {
+          "mAP": 85.72686189156894,
+          "mINP": 62.08084791458307,
+          "Rank-1": 96.44314868804665,
+          "Rank-5": 97.14285714285714,
+          "Rank-10": 97.49271137026238,
+          "Rank-20": 97.90087463556851
+        },
+        "stage_epochs": 50,
+        "pipeline_epochs": 100,
+        "updates": 6563,
+        "attempts": 6563,
+        "skips": 0,
+        "parameters": 99585158,
+        "trainable_parameters": 1887366
+      },
+      "AV_dual": {
+        "selected_epoch": 20,
+        "best": {
+          "mAP": 86.1546433016181,
+          "mINP": 62.560794668209745,
+          "Rank-1": 96.7930029154519,
+          "Rank-5": 97.43440233236151,
+          "Rank-10": 97.78425655976676,
+          "Rank-20": 98.25072886297376
+        },
+        "last": {
+          "mAP": 85.79570154190885,
+          "mINP": 61.93358760115122,
+          "Rank-1": 96.3265306122449,
+          "Rank-5": 97.20116618075801,
+          "Rank-10": 97.49271137026238,
+          "Rank-20": 97.95918367346938
+        },
+        "stage_epochs": 50,
+        "pipeline_epochs": 100,
+        "updates": 6563,
+        "attempts": 6563,
+        "skips": 0,
+        "parameters": 99585158,
+        "trainable_parameters": 1887366
+      },
+      "new_ordinary": {
+        "selected_epoch": 39,
+        "best": {
+          "mAP": 86.08004145468685,
+          "mINP": 62.78151677970328,
+          "Rank-1": 97.14285714285714,
+          "Rank-5": 97.66763848396502,
+          "Rank-10": 97.84256559766764,
+          "Rank-20": 98.01749271137027
+        },
+        "last": {
+          "mAP": 86.04504320208665,
+          "mINP": 62.7478729218944,
+          "Rank-1": 97.14285714285714,
+          "Rank-5": 97.667638483965,
+          "Rank-10": 97.84256559766764,
+          "Rank-20": 98.01749271137025
+        },
+        "stage_epochs": 50,
+        "pipeline_epochs": 100,
+        "updates": 6563,
+        "attempts": 6563,
+        "skips": 0,
+        "parameters": 99585158,
+        "trainable_parameters": 1887366
+      },
+      "new_dual": {
+        "selected_epoch": 23,
+        "best": {
+          "mAP": 86.11974425039179,
+          "mINP": 62.709487676170845,
+          "Rank-1": 97.08454810495627,
+          "Rank-5": 97.66763848396502,
+          "Rank-10": 97.78425655976676,
+          "Rank-20": 98.01749271137027
+        },
+        "last": {
+          "mAP": 86.07033782122025,
+          "mINP": 62.677996148552694,
+          "Rank-1": 96.96793002915452,
+          "Rank-5": 97.667638483965,
+          "Rank-10": 97.72594752186589,
+          "Rank-20": 98.07580174927114
+        },
+        "stage_epochs": 50,
+        "pipeline_epochs": 100,
+        "updates": 6563,
+        "attempts": 6563,
+        "skips": 0,
+        "parameters": 99585158,
+        "trainable_parameters": 1887366
+      }
+    },
+    "current_native_evidence": {
+      "frequency_shared": {
+        "updates": 3,
+        "attempts": 3,
+        "AMP_skips": 0,
+        "strict_reload_record": true,
+        "reload_examples": 8,
+        "positive_active_gradients": 111,
+        "descriptor_dim": 5120,
+        "source_assertions_and_saved_native_records": true,
+        "independent_NN_replay": false
+      },
+      "axis_shared": {
+        "updates": 3,
+        "attempts": 3,
+        "AMP_skips": 0,
+        "strict_reload_record": true,
+        "reload_examples": 8,
+        "positive_active_gradients": 111,
+        "descriptor_dim": 5120,
+        "source_assertions_and_saved_native_records": true,
+        "independent_NN_replay": false
+      }
+    },
+    "actual_checkpoint_counts": {
+      "frequency_shared": {
+        "parameters": 99585158,
+        "trainable_parameters": 1887366,
+        "state_tensors": 745,
+        "state_tensor_elements": 99617351,
+        "persistent_buffer_tensors": 196,
+        "persistent_buffer_elements": 32193,
+        "FFT_boolean_mask_elements": 384,
+        "frozen_identity_tensors_exact_to_teacher": 601
+      },
+      "axis_shared": {
+        "parameters": 99585158,
+        "trainable_parameters": 1887366,
+        "state_tensors": 745,
+        "state_tensor_elements": 99617351,
+        "persistent_buffer_tensors": 196,
+        "persistent_buffer_elements": 32193,
+        "FFT_boolean_mask_elements": 384,
+        "frozen_identity_tensors_exact_to_teacher": 601
+      }
+    },
+    "both_checkpoint_key_shape_dtype_inventories_equal": true,
+    "frozen_identity_modules": [
+      "BACKBONE",
+      "rgb_reduce",
+      "nir_reduce",
+      "tir_reduce",
+      "generalFusion"
+    ],
+    "frozen_identity_tensors_each_byte_exact": 601,
+    "all_saved_checkpoint_tensors_finite_CPU": true,
+    "teacher_other_classifier_and_BN_tensors_expected_to_change": 20,
+    "train_only_bank": {
+      "records": 8675,
+      "identities": 50,
+      "metadata_matches_installed_train": true,
+      "teacher_SHA_matches_selected_checkpoint": true,
+      "identity_heads": 8,
+      "teacher_training_batch": 128,
+      "query_gallery_forwards_recorded": 0,
+      "optimizer_updates_recorded": 0,
+      "limitation": "Bank metadata/teacher binding and called sampling code checked; original bank neural extraction was not replayed"
+    },
+    "budget": {
+      "teacher_epochs": 50,
+      "teacher_formal_updates": 3135,
+      "extra_expert_epochs_each": 50,
+      "extra_expert_updates_each": 6563,
+      "teacher_shared_by_pair": true,
+      "ordinary_extra_budget_matched": true,
+      "historical_AV_changes_teacher_and_neighbor_bank": true,
+      "equal_total_compute_vs_original50_claim": false
+    },
+    "identity_raw_tensor_byte_check": {
+      "RGBNT100_B128ref_AV_frequency_shared_s42/best": {
+        "identity_tensors": 601,
+        "identity_tensor_bytes": 390777288,
+        "all_raw_tensor_bytes_exact": true
+      },
+      "RGBNT100_B128ref_AV_axis_shared_s42/best": {
+        "identity_tensors": 601,
+        "identity_tensor_bytes": 390777288,
+        "all_raw_tensor_bytes_exact": true
+      }
+    }
+  },
+  "normalization_fix": {
+    "source_replacement_exact": true,
+    "original_failure_preserved": true,
+    "actual_source": "evaluate_rgbnt100_B128_reference_normfix.py:47",
+    "cached_arithmetic_evidence": {
+      "cached_features_no_second_normalize": {
+        "metrics": {
+          "mAP": 85.86419608674905,
+          "mINP": 62.13129994602527,
+          "Rank-1": 97.0262390670554,
+          "Rank-5": 97.78425655976677,
+          "Rank-10": 97.84256559766764,
+          "Rank-20": 98.07580174927114
+        },
+        "saved_distance_max_abs_difference": 0.0,
+        "changed_queries_vs_original": 0,
+        "changed_queries_vs_failed_actual": 16,
+        "all_rows_equal_original": true,
+        "all_rows_equal_failed_actual": false
+      },
+      "cached_features_second_cuda_normalize": {
+        "metrics": {
+          "mAP": 85.86419745898644,
+          "mINP": 62.13123570186782,
+          "Rank-1": 97.0262390670554,
+          "Rank-5": 97.78425655976677,
+          "Rank-10": 97.84256559766764,
+          "Rank-20": 98.07580174927114
+        },
+        "saved_distance_max_abs_difference": 9.5367431640625e-07,
+        "changed_queries_vs_original": 16,
+        "changed_queries_vs_failed_actual": 0,
+        "all_rows_equal_original": false,
+        "all_rows_equal_failed_actual": true
+      }
+    },
+    "evidence_level": "Exact source delta + archived fixed-cache arithmetic receipt; no new trained score and no repeated CUDA calculation in this audit",
+    "current_independent_feature_distance_replay_max_error": 0.0
+  },
+  "acceptance": {
+    "paper_target": {
+      "mAP": 87.2,
+      "Rank_1": 98.6
+    },
+    "candidate_targets_met": {
+      "ordinary": false,
+      "dual": false
+    },
+    "own_reproduction_role": "diagnostic control only",
+    "teacher_increment_vs_original": {
+      "mAP": 0.09562898357960137,
+      "mINP": 0.28539166246901004,
+      "Rank-1": 0.4081632653061291,
+      "Rank-5": 0.7580174927113603,
+      "Rank-10": 0.4664723032069986,
+      "Rank-20": 0.3498542274052454
+    },
+    "BestSingle": "All six metrics bound to one earliest mAP-best checkpoint per model; no epoch/seed metric stitching",
+    "claim_boundary": "Teacher strength, expert increment and matched ordinary comparison are separate; current dual is not uniformly superior",
+    "goal": "ACTIVE_UNMET"
+  },
+  "execution_scope": {
+    "readonly_remote_CPU": true,
+    "CUDA_VISIBLE_DEVICES": "",
+    "torch_load": "map_location=cpu, weights_only=True",
+    "torch": "2.5.1+cu121",
+    "numpy": "1.24.4",
+    "new_NN": 0,
+    "new_optimizer_updates": 0,
+    "new_weights": 0,
+    "model_instantiations": 0,
+    "remote_writes": 0,
+    "input_mutations": 0,
+    "remote_deletions": 0,
+    "new_installs": 0,
+    "GPU_or_resource_queries": 0,
+    "current_job_process_log_PID_handle_queries": 0,
+    "external_messages": 0,
+    "archived_local_log_reads": 13,
+    "closed_source_manifest_files_hashed": true,
+    "reviewer_cpu_attempts": 2,
+    "first_attempt": "Audit-only parameter tally omitted 384-element registered bool FFT mask buffer; assertion stopped it. Source/tensor inventory resolved this counting mistake; both private captures retained.",
+    "controller_children_exit0": 10,
+    "detached_controller_OS_exit": "UNATTESTED",
+    "reviewer_cpu_transport_calls": 3
+  },
+  "trace_path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-26_RGBNT100_B128_reference_full_normal_run01",
+  "actual_transport_captures": [
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-26_RGBNT100_B128_reference_full_normal_run01\\remote_transport.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-26_RGBNT100_B128_reference_full_normal_run01\\cpu02_remote_transport.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-audit\\2026-10-26_RGBNT100_B128_reference_full_normal_run01\\identity_bytes.transport.json"
+  ],
+  "limitations": [
+    "Epoch exports and historical comparison rows lack all independent per-epoch raw distances in this input set; only their reductions, official metadata, curves and earliest selection are checked.",
+    "Native strict reload and positive gradients are saved execution records plus called-source guards; no independent NN or optimizer replay.",
+    "No independent host attestation of requested reviewer model/effort.",
+    "No fresh NN or optimizer execution; the audit verifies stored numeric artifacts and their source/record bindings."
+  ],
+  "recommendations": [
+    "Retain the stated scope and paper target failure when reporting these completed results."
+  ]
+}

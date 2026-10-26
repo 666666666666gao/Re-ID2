@@ -1,0 +1,17 @@
+{
+  "status": "PLAN_NOT_EXECUTED",
+  "revision": "R4_ONE_PROCESS_PER_INFERENCE_ARM_NO_INTERNAL_NVML_THREAD",
+  "observed": "R3 completed arm0 full1715Q8575G in68.194819 extract+3.466560 metric/all6exact, but GPU samples empty after internalNVMLsubprocess15stimeout. Two300s nodes still1arm, parentfutex with4waitingworkers. Ownedwrapper/child/workers scopedSIGTERM verifiedallabsent and child-15,7texts archived.",
+  "cause_limit": "Specific lock/call chain of inter-arm stall is not proven. Avoid observer interference by removing inference NVML thread and using one fresh process per existing timing arm. No CUDA reset, library install or scientificsource change.",
+  "changes": "Only standalone profiler runtime isolation. Same8settings/fullGT/precision/timing/selectedweight; no internalSamples.start/finish in inference. Preserve Torch allocated/reserved andCPU counters. No inference NVMLutil claim. Existing5trainingarms135updates retained, not repeated.",
+  "physical_GPU": 2,
+  "max_NN": 1,
+  "optimizer_updates": 0,
+  "checkpoint_writes": 0,
+  "raw_array_writes": 0,
+  "temperature_power_read": false,
+  "other_GPU_queries": 0,
+  "first_observation_seconds": 300,
+  "expected_seconds": 1000,
+  "retries": "No automatic retry or fallback. NewR4root/names only afterfreshsource/rescue and selectedGPU2idle gate; retain all prior failures."
+}

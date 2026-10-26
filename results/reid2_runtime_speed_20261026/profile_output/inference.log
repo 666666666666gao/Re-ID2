@@ -1,0 +1,61 @@
+/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/helpers.py:7: FutureWarning: Importing from timm.models.helpers is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+using Transformer_type: ViT-B-16 as a backbone
+Resized position embedding: %s to %s torch.Size([197, 768]) torch.Size([129, 768])
+Position embedding resize to height:8 width: 16
+Successfully load ckpt!
+<All keys matched successfully>
+Loading pretrained model from CLIP
+camera number is : 8
+Traceback (most recent call last):
+  File "/data/gaob/Re-ID/DeMo-DualAxis/profile_rgbnt100_runtime_speed_20261026.py", line 216, in <module>
+    if __name__=='__main__':main()
+  File "/data/gaob/Re-ID/DeMo-DualAxis/profile_rgbnt100_runtime_speed_20261026.py", line 210, in main
+    else:inference(args,cfg,query,gallery,classes,cameras,out)
+  File "/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/data/gaob/Re-ID/DeMo-DualAxis/profile_rgbnt100_runtime_speed_20261026.py", line 126, in inference
+    model=recipe.build(args,cfg,classes,cameras)
+  File "/data/gaob/Re-ID/DeMo-DualAxis/run_rgbnt100_B128_reference_experts.py", line 53, in build
+    model=recipe.build(args,cfg,classes,cameras)
+  File "/data/gaob/Re-ID/DeMo-DualAxis/run_r201av_RGB_frequency_value_decay.py", line 28, in build
+    model=parent.build(args,cfg,classes,cameras)
+  File "/data/gaob/Re-ID/DeMo-DualAxis/run_r201as_RGB_query_normalization.py", line 47, in build
+    model=parent.build(args,cfg,classes,cameras)
+  File "/data/gaob/Re-ID/DeMo-DualAxis/run_r201aq_RGB_attention_decay.py", line 27, in build
+    model=parent.build(args,cfg,classes,cameras)
+  File "/data/gaob/Re-ID/DeMo-DualAxis/run_r201al_RGB_route_temperature.py", line 21, in build
+    model = tempered.build(args, cfg, classes, cameras)
+  File "/data/gaob/Re-ID/DeMo-DualAxis/rgbnt100_tempered_router.py", line 34, in build
+    model = parent.build(args, cfg, classes, cameras)
+  File "/data/gaob/Re-ID/DeMo-DualAxis/run_r201ag_RGB_coordinate_metric.py", line 25, in build
+    model=parent.build(args,cfg,classes,cameras)
+  File "/data/gaob/Re-ID/DeMo-DualAxis/run_r201ad_RGB_hard.py", line 14, in build
+    model=install(parent.build(args,cfg,classes,cameras))
+  File "/data/gaob/Re-ID/DeMo-DualAxis/run_rgbnt100_B128_reference_experts.py", line 26, in selected_bank_build
+    model=sampling.x.build(args,cfg,classes,cameras)
+  File "/data/gaob/Re-ID/DeMo-DualAxis/run_r201x_RGB_auxiliary_fp32.py", line 17, in build
+    model=install(w.build(args,cfg,classes,cameras))
+  File "/data/gaob/Re-ID/DeMo-DualAxis/run_r201w_reduced_auxiliary.py", line 30, in build
+    model=PARENTS[args.dataset].build(args,cfg,classes,cameras)
+  File "/data/gaob/Re-ID/DeMo-DualAxis/run_r201s_projected_auxiliary.py", line 32, in build
+    model=install_projected_auxiliary(PARENTS[args.dataset].build(args,cfg,classes,cameras))
+  File "/data/gaob/Re-ID/DeMo-DualAxis/run_r201p_auxiliary_balance.py", line 25, in build
+    model = parent.build(args, cfg, classes, cameras)
+  File "/data/gaob/Re-ID/DeMo-DualAxis/run_r201o_same_state_contribution.py", line 42, in build
+    model=parent.build(args,cfg,classes,cameras)
+  File "/data/gaob/Re-ID/DeMo-DualAxis/run_r201n_bounded_identity_shift.py", line 24, in build
+    model=install_bound(parent.build(args,cfg,classes,cameras))
+  File "/data/gaob/Re-ID/DeMo-DualAxis/bounded_identity_descriptor.py", line 73, in install_bound
+    model.descriptor_bound_fixture=geometry_fixture()
+  File "/data/gaob/Re-ID/DeMo-DualAxis/bounded_identity_descriptor.py", line 51, in geometry_fixture
+    derivative=torch.autograd.grad(output.sum(),candidate)[0]
+  File "/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/torch/autograd/__init__.py", line 496, in grad
+    result = _engine_run_backward(
+  File "/data/gaob/Re-ID/conda-envs/tri_reid/lib/python3.10/site-packages/torch/autograd/graph.py", line 825, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: element 0 of tensors does not require grad and does not have a grad_fn

@@ -1,0 +1,18 @@
+{
+  "status": "PLAN_NOT_EXECUTED",
+  "revision": "R3_INFERENCE_ONLY_RESCUE",
+  "cause": "R2 whole inference @no_grad included recipe.build, whose existing install_bound geometry_fixture calls autograd.grad. Actual inference failed before fullQG; all5trainingarms completed135updates and remain valid, not repeated.",
+  "minimal_fix": "Remove whole-function no_grad; wrap only warm model call and timed model+normalize calls. Original scientific sources, weights, batch settings, precision/timing/metrics unchanged.",
+  "failed_receipt": "results/preflight/reid2_runtime_speed_intake_actual_20261026.json",
+  "training": "Reuse all5 completed original training arms; no optimizer in R3 inference invocation.",
+  "workload": "Same8full1715Q8575G FP32 inference arms, warm64/arm, original timing/sourceR2,6metrics+everyquery checks, runtimeonlyspeeddecision.",
+  "physical_GPU": 2,
+  "max_NN": 1,
+  "checkpoint_writes": 0,
+  "raw_array_writes": 0,
+  "temperature_power_read": false,
+  "other_GPU_queries": 0,
+  "expected_seconds": 750,
+  "first_observation_seconds": 300,
+  "failures": "Stop/retain on real failure; no automatic retry/fallback. Build-time existing geometry selfcheck keeps normal autograd, NN forward only no_grad."
+}

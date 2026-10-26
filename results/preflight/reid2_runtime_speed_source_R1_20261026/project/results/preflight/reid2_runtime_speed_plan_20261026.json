@@ -1,0 +1,120 @@
+{
+  "status": "PLAN_NOT_EXECUTED",
+  "scope": "User-requested VRAM versus speed evaluation on2026 physicalGPU2/3 only.",
+  "workload": "Current completed RGBNT100 B128-reference AV axis model; warm unchanged torch2.5.1cu121 environment.",
+  "training": {
+    "gpu": 3,
+    "batch": 64,
+    "P": 8,
+    "K": 8,
+    "settings": [
+      [
+        4,
+        4
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        8,
+        4
+      ],
+      [
+        4,
+        8
+      ],
+      [
+        4,
+        4
+      ]
+    ],
+    "settings_columns": [
+      "torch_CPU_threads",
+      "loader_workers"
+    ],
+    "warm_updates_per_arm": 3,
+    "timed_updates_per_arm": 24,
+    "total_disposable_updates": 135,
+    "policy": "Fresh original initialized model/Adam/scaler per arm, original real BN2/partial0/two backwards retained. Compare same27 identity/partial orders. Worker-count arm is only throughput screen, augmentation assignment can differ. No formal adoption without convergence evidence."
+  },
+  "inference": {
+    "gpu": 2,
+    "settings": [
+      [
+        4,
+        4,
+        64
+      ],
+      [
+        4,
+        4,
+        128
+      ],
+      [
+        4,
+        4,
+        256
+      ],
+      [
+        4,
+        4,
+        512
+      ],
+      [
+        1,
+        4,
+        256
+      ],
+      [
+        8,
+        4,
+        256
+      ],
+      [
+        4,
+        8,
+        256
+      ],
+      [
+        4,
+        4,
+        64
+      ]
+    ],
+    "settings_columns": [
+      "torch_CPU_threads",
+      "loader_workers",
+      "batch"
+    ],
+    "full_official_query": 1715,
+    "full_official_gallery": 8575,
+    "FP32": true,
+    "per_setting_warm_triplets": 64,
+    "metrics": "Same installed GT/camera exclusion; all six and every query checked against saved current original selected checkpoint. No new checkpoint/score selection.",
+    "adoption": "Speed only; all six metrics exactly equal and per-query ranks unchanged. Retain all floating-point/AP/INP/rank differences. First/last B64 expose cache/host-load drift; screen alone is not full50 or isolated repeat scaling."
+  },
+  "measurement": [
+    "End-to-end extract",
+    "CUDA event forward",
+    "DataLoader wait",
+    "HostCPU busy/iowait",
+    "GPU2/3 NVML memory/util only sampled internally2s",
+    "torch peak allocated/reserved",
+    "same fullQG GT six metrics"
+  ],
+  "limits": {
+    "max_NN": 2,
+    "one_per_card": true,
+    "checkpoint_writes": 0,
+    "raw_array_writes": 0,
+    "other_GPU_queries": 0,
+    "temperature_power_read": false,
+    "environment_installs": 0,
+    "scientific_source_mutations": 0
+  },
+  "first_expected_node_seconds": 300,
+  "estimated_total_seconds": 900,
+  "scope_notes": "Inference/readout speed is separate from training learning batch. OldBB3paired serial-v-parallel total1.035147 with one slowerrepeat does not justify more same-card jobs just because memory free. Current no training active; preserve all selectedweights/teachers/K201/Darchives. Stop on real failure; no OOM fallback/retry.",
+  "acceptance": "Paper targets unchanged10087.2/98.6,MS50.2/60.8; profiler is not a method score."
+}
