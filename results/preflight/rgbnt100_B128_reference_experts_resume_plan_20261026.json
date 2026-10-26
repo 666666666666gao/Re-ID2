@@ -1,0 +1,54 @@
+{
+  "status": "PREPARED_NEW_RUN_AFTER_EXTERNAL_CUDA_RECOVERY_SOURCE_REVIEW_REQUIRED",
+  "at_utc": "2026-10-26T10:17:44.388336+00:00",
+  "parent_plan": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_B128_reference_experts_plan_20261017.json",
+  "parent_review": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_B128_reference_experts_source_review_20261017.json",
+  "new_private_launcher": "C:\\Users\\gb\\.codex_tmp\\launch_rgbnt100_B128_reference_pair_20261026.py",
+  "controller": "launch_rgbnt100_B128_reference_experts.py",
+  "remote_root": "/data/gaob/Re-ID/DeMo-DualAxis/runs/rgbnt100_B128_reference_experts_20261026",
+  "physical_gpus": [
+    2,
+    3
+  ],
+  "maximum_own_NN": 2,
+  "scientific_source_changes": 0,
+  "experiment": "Same reviewed AV ordinary versus dual-axis pair on selected head8/B128 teacher and rebuilt train-only bank. This experiment never reached native in the Oct17 GPU2 serial attempt. Preserve all failures and run anew; no checkpoint resume claim.",
+  "data": {
+    "train_records": 8675,
+    "classes": 50,
+    "query": 1715,
+    "gallery": 8575,
+    "heldout_train_identities": 0
+  },
+  "training": {
+    "seed": 42,
+    "expert_batch": 64,
+    "P": 8,
+    "K": 8,
+    "reference_training_batch": 128,
+    "reference_heads": 8,
+    "epochs_per_control": 50,
+    "expected_native_updates": 6,
+    "predicted_formal_updates_per_control": 6563,
+    "descriptor_dim": 5120
+  },
+  "acceptance": {
+    "reference": "DeMo paper CLIP Table2",
+    "paper_mAP": 86.2,
+    "paper_Rank_1": 97.6,
+    "target_mAP": 87.2,
+    "target_Rank_1": 98.6,
+    "same_run_checkpoint_all_six_metrics": true
+  },
+  "runtime_admission": "Fresh per-physical-device UUID CUDA driver and actual seeded matmul/backward/FFT witness, free GPUs2/3, existing source/teacher/bank/protected-weight and 3GB disk admission. Actual full00 and native3 per control still mandatory before formal.",
+  "milestones": "One scheduled startup observation at launch+300s. If full00/native6 pass and formal starts, estimate one near-end from prior actual AV durations; no frequent polls or timeout restarts.",
+  "deliverables": [
+    "Full official normal six metrics from one selected checkpoint",
+    "CMC1-50 and all-query AP/INP/groups",
+    "Complete50 best/last curves, real updates and record coverage",
+    "00/10/01/11 with rescues/harms and paired sampling",
+    "Archive unique weights/raw locally before scoped duplicate cleanup",
+    "One handoff Desktop/GitHub/26/27 byte-identical"
+  ],
+  "limits": "No new module, loss, seed, missing training/evaluation,49-pair,201 neural work, temperature/power access, GPU0/1 or27 training. New teacher and its deterministic bank together differ from historical AV; do not call pure one-factor ablation."
+}

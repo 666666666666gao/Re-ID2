@@ -1,0 +1,144 @@
+{
+  "status": "FINAL",
+  "verdict": "FAIL_CURRENT_REFERENCE_EXTRACTION_CONTRACT",
+  "at_utc": "2026-10-26T10:44:30.034887+00:00",
+  "review_type": "RUNTIME_RESCUE_SOURCE_DIAGNOSIS_NO_PATCH",
+  "reviewer_task": "/root/review_rgbnt100_post_cuda_recovery_20261026",
+  "review_context": "Continuation of the original independent reviewer, newly reading primary runtime failures; not a newly spawned fresh-context agent.",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "source_defect_confirmed": true,
+  "sole_numerical_cause_proven": false,
+  "blocking_findings": [
+    {
+      "id": "B1",
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_rgbnt100_B128_reference.py",
+      "line": 47,
+      "finding": "OnlyBaseState.forward returns the already-normalized controlled_states['00']; full_evaluation.extract applies F.normalize again. This differs from both the once-normalized DeMo teacher descriptor and the existing four-state00 evaluator. With strict metric/per-query parity, the mismatched extraction contract is a real current defect.",
+      "evidence": [
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_rgbnt100_B128_reference.py:19,47",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\rgbnt201_identity_outlet.py:67",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py:88",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_rgbnt100_B128_reference_states.py:44",
+        "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\make_model.py:178"
+      ]
+    }
+  ],
+  "observed_runtime": {
+    "failed_phase": "Both full-QG reference evaluations at six-metric parity assertion line53",
+    "preceding_gates": "Shape/finite and maximum feature error<3e-5 assertions were reached and passed; actual maximum error was not written because result.json was never produced.",
+    "both_actual00_csv_byte_equal": true,
+    "variants": {
+      "frequency_shared": {
+        "delta_percentage_points": {
+          "mAP": 1.3722373921609687e-06,
+          "mINP": -6.424415744987755e-05,
+          "Rank-1": 0.0,
+          "Rank-5": 0.0,
+          "Rank-10": 0.0,
+          "Rank-20": 0.0
+        },
+        "changed_AP_queries": 16,
+        "changed_INP_and_last_rank_queries": 2,
+        "cmc50_equal": true,
+        "rank1_changes": 0
+      },
+      "axis_shared": {
+        "delta_percentage_points": {
+          "mAP": 1.3722373921609687e-06,
+          "mINP": -6.424415744987755e-05,
+          "Rank-1": 0.0,
+          "Rank-5": 0.0,
+          "Rank-10": 0.0,
+          "Rank-20": 0.0
+        },
+        "changed_AP_queries": 16,
+        "changed_INP_and_last_rank_queries": 2,
+        "cmc50_equal": true,
+        "rank1_changes": 0
+      }
+    },
+    "native_admitted": false,
+    "formal_admitted": false
+  },
+  "reasoning": "Finite-precision normalization need not be bitwise idempotent. The mismatch can perturb close gallery distances and ranks despite small feature error. Identical outputs in both controls,16 AP changes,2 last-rank/INP changes and unchanged CMC1-50 fit this mechanism, but source/log evidence alone does not prove that it is the sole source of every observed difference.",
+  "minimum_correction": {
+    "scope": "New isolated reference evaluator plus controller/private-launcher paths that select it; retain all old sealed artifacts.",
+    "change": "Replace the generic extract(wrapper,query+gallery,cfg,seed) call with a small evaluator-local00-only collection loop. Use the same make_loader(query+gallery,cfg,False,seed), CUDA input/camera/scene transfer, torch.no_grad, wrapper(...).float().cpu(), torch.cat and synchronization/timing fields, but do not call F.normalize on the returned00. This matches the existing state evaluator00 path.",
+    "preserve": [
+      "OnlyBaseState and the actual model forward",
+      "Original teacher and bank inputs",
+      "Feature shape/finite/error<3e-5 gates",
+      "Six-metric<1e-8 and exact per-query row gates",
+      "Full official GT and query/gallery order",
+      "Native3,full50 and four-state acceptance",
+      "All model/loss/optimizer/scientific source and the shared full_evaluation.extract behavior"
+    ]
+  },
+  "required_next_evidence": [
+    "Root cached-teacher arithmetic test may establish whether one additional normalization reproduces the failed metrics/per-query rows; it does not substitute for a real corrected full00 run.",
+    "Review the isolated evaluator/controller/private-launcher revision once supplied before any changed NN launch.",
+    "Both corrected actual full00 checks must satisfy the original exact metrics and rows; no tolerance widening, cached-output substitution or silent acceptance."
+  ],
+  "local_test": {
+    "label": "ACTUAL_FUNCTION_BODIES_WITH_FAKE_TENSOR_NORMALIZATION_COUNTERS_NO_NUMERICAL_OR_NN_CLAIM",
+    "teacher_path_normalization_count": 1,
+    "reference00_path_normalization_count": 2,
+    "existing_four_state00_path_normalization_count": 1,
+    "real_torch_import": false,
+    "NN": 0
+  },
+  "primary_artifacts": [
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_B128_reference_experts_startup_actual_20261026.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_B128_reference_experts_terminal_diagnosis_actual_20261026.json",
+    "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_B128_reference_saved_metric_delta_actual_20261026.json"
+  ],
+  "source_inputs": [
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\full_evaluation.py",
+      "sha256": "a5fe4bf2927bdc43df80a73098685a90281aaaf68f7d8e838b322508c5957427"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\rgbnt201_identity_outlet.py",
+      "sha256": "ee03a16de0e7f4beb28f4a78a4ab8c16e8f19014bfa4164482d59714e52de784"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_rgbnt100_B128_reference.py",
+      "sha256": "0bcebd2777ef0daf291cbfe50265bc00cbb27297941fde04362ba0ed9359280a"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\evaluate_rgbnt100_B128_reference_states.py",
+      "sha256": "d4c68c5d312b28c3aee22e7b49696e59194d9bdc4b249177370ae3ceaa7ad766"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\modeling\\make_model.py",
+      "sha256": "3aa4b3056475e5b2662465d2ef732872882909a8f17a574dece9465e8391a131"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_full_official_experiment.py",
+      "sha256": "f83e67e194f612a3ddb201e6bd847d3208d18fd12876f1dbe819feed511a118e"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\run_rgbnt100_paper_batch_baseline.py",
+      "sha256": "543e70b4c368dfb5247f6d021137dcb872ffbb59a4369dfe220feb306692043b"
+    }
+  ],
+  "prior_review_preserved": {
+    "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_B128_reference_experts_resume_source_review_20261026.json",
+    "sha256": "ab9ddf24925f91e59e962161ba6c3ab5388a8e8dcf34d46efcee5be2fafacc11",
+    "unchanged": true,
+    "source_entries_unchanged": 404
+  },
+  "actual_calls": {
+    "remote_commands": 0,
+    "NN": 0,
+    "optimizer_updates": 0,
+    "real_Torch_imports": 0,
+    "source_edits": 0
+  },
+  "runtime_admitted": false
+}

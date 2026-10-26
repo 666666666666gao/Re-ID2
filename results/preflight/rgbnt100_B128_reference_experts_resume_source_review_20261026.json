@@ -1,0 +1,256 @@
+{
+  "status": "FINAL",
+  "verdict": "PASS",
+  "review_type": "FRESH_SOURCE_ONLY_POST_CUDA_RECOVERY",
+  "at_utc": "2026-10-26T10:27:55.014928+00:00",
+  "request": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_B128_reference_experts_resume_source_request_20261026.json",
+  "request_sha256": "64471f3950c63338c34ca6e1a92557793b86bce98c2482cb95bce2e32613be8f",
+  "plan": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_B128_reference_experts_resume_plan_20261026.json",
+  "parent_review": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\results\\preflight\\rgbnt100_B128_reference_experts_source_review_20261017.json",
+  "reviewer_task": "/root/review_rgbnt100_post_cuda_recovery_20261026",
+  "requested_model": "gpt-6-astra",
+  "requested_reasoning_effort": "max",
+  "actual_model": "UNATTESTED",
+  "actual_reasoning_effort": "UNATTESTED",
+  "actual_routing": "UNATTESTED",
+  "route_attribution": "Fresh delegated reviewer; requested route is not independent host attestation. No model/effort attestation was available in this review.",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "blocking_findings": [],
+  "non_blocking_findings": [
+    {
+      "id": "N1",
+      "category": "INHERITED_ARTIFACT_LIMITATION",
+      "finding": "The six historical old AV D-archive binaries remain absent. This is the parent R2 nonblocking limitation, independently rechecked. The new run consumes the present B128/head8 teacher and its bank, not these missing old AV weights/raw files.",
+      "evidence": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-26_RGB_B128_resume_source_run01\\input_checks.json",
+      "action": "Keep historical AV metrics labelled historical; do not claim checkpoint/raw replayability or use missing historical copies to authorize deletion."
+    }
+  ],
+  "summary": "PASS with no blocking source findings. The exact 27 direct scientific/evidence entries and 376 inherited seals match the parent R2 request. The private launcher differs only by six stated naming replacements and the four-line saved CUDA witness gate. It creates a fresh Oct26 run, uses the unchanged AV recipe and full reference/native/formal/GT/state gates, and does not resume either Oct17 failure. This is source acceptance, not runtime admission, completion or performance evidence.",
+  "exact_delta": {
+    "scientific_source_changes": 0,
+    "direct_parent_equality": true,
+    "inherited_parent_equality": true,
+    "naming_replacements": {
+      "t.DATASET='RGB_B128_AV_pair_launch'": "t.DATASET='RGB_B128_AV_pair_resume_20261026'",
+      "rgbnt100_B128_reference_experts_actual_session_20261017.json": "rgbnt100_B128_reference_experts_actual_session_20261026.json",
+      "rgbnt100_B128_reference_experts_source_request_20261017.json": "rgbnt100_B128_reference_experts_resume_source_request_20261026.json",
+      "rgbnt100_B128_reference_experts_source_review_20261017.json": "rgbnt100_B128_reference_experts_resume_source_review_20261026.json",
+      "rgbnt100_B128_AV_reviewed_sources_20261017.tar.gz": "rgbnt100_B128_AV_reviewed_sources_20261026.tar.gz",
+      "BASE+'/runs/rgbnt100_B128_reference_experts_20261017'": "BASE+'/runs/rgbnt100_B128_reference_experts_20261026'"
+    },
+    "only_added_code": "    witness=t.prior.load(PF/'reid2_gpu23_seeded_compute_witness_actual_20261026.json')\n    devices=witness['actual']['devices'];assert [r['physical_gpu'] for r in devices]==[2,3]\n    assert all(r['witness'] is not None and r['witness']['returncode']==0 for r in devices)\n    assert all(json.loads(r['witness']['stdout'])['status']=='SEEDED_CUDA_MATMUL_BACKWARD_FFT_WITNESS_PASS' for r in devices)\n",
+    "normalized_source_exact": true,
+    "generated_remote_exact_parent_after_package_and_root_replacements": true,
+    "new_private_launcher": {
+      "path": "C:\\Users\\gb\\.codex_tmp\\launch_rgbnt100_B128_reference_pair_20261026.py",
+      "bytes": 6303,
+      "sha256": "144dfb9ee89f286ba1d53c2b9a200816a9ac86314f8c6f6434795a7a719efa64"
+    },
+    "prior_private_launcher": {
+      "path": "C:\\Users\\gb\\.codex_tmp\\launch_rgbnt100_B128_reference_pair_20261017.py",
+      "kind": "private",
+      "bytes": 5950,
+      "sha256": "2dd25272338afe9b543579b70b08bfb608f1657c34f82d96485b2307154b1424",
+      "matches_start": true,
+      "matches_request": true
+    }
+  },
+  "positive_findings": [
+    {
+      "topic": "Witness rejects failures before transport",
+      "evidence": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-26_RGB_B128_resume_source_run01\\resume_fixture_checks.json",
+      "checked": "The actual unedited private main rejects non-FINAL/FAIL/blocking reviews; missing/wrong/reversed physical devices; null, failed-exit or wrong-status witnesses on either GPU; malformed witness JSON; and direct/inherited source mismatch before any transport. The positive branch renders the actual remote code and 27-member source/text archive under intercepted SCP/SSH."
+    },
+    {
+      "topic": "Fresh output and GPU admission",
+      "evidence": "Private launcher main and launch_rgbnt100_B128_reference_experts.py:8-38,82-137; gpu_thermal_execute.py:24-50",
+      "checked": "Generated launch rejects an existing root, requires both physical GPUs2/3 to have no compute process and memory below500MiB, retains >3000000000-byte disk admission, and launches one controller. Fixed one-control-per-card mappings and blocking child.wait serialize reference/native/train/audit/state work on each card. No GPU0/1, temperature/power or retry/resume path was added."
+    },
+    {
+      "topic": "Unchanged scientific contract and budget",
+      "evidence": "run_rgbnt100_B128_reference_experts.py:23-73 and launch_rgbnt100_B128_reference_experts.py:40-136",
+      "checked": "Selected full50 B128/head8 teacher and matching 8675-record train-only bank; expert seed42/P8K8/B64, routingT2/cap.10, existing AV architecture/loss/optimizer policy, frozen identity encoder, 5120 descriptor,99585158 total/1887366 trainable parameters. Both full00 teacher checks precede both native3 checks; native pairing/strictreload/all-active-gradients/zeroAMPskip gate two fresh50 runs with6563 updates each. Teacher50 plus expert50 and benchmark selection are disclosed."
+    },
+    {
+      "topic": "GT, checkpoint and state acceptance",
+      "evidence": "evaluate_rgbnt100_B128_reference.py; evaluate_rgbnt100_B128_reference_states.py; audit_full_official_normal.py; actual controller fixtures",
+      "checked": "All8675train/1715query/8575gallery and no heldout train identities. Installed filename GT/camera exclusions, earliest normal mAP-best checkpoint, all six metrics from that checkpoint, complete coverage/order/AMP audits, four states per control, exact selected11 features/distances and teacher00 per-query rows remain mandatory. NN numerical execution was not performed by this reviewer."
+    },
+    {
+      "topic": "Actual saved recovery evidence is scoped correctly",
+      "evidence": "reid2_gpu23_backend_revalidation_actual_20261026.json and reid2_gpu23_seeded_compute_witness_actual_20261026.json",
+      "checked": "Saved receipts consistently map physical2/3 to their UUIDs, successful cuInit/device_count1 and seed42 matmul/backward/FFT status with one visible device and zero models/optimizer updates. The new gate checks this receipt before source packaging. These receipts do not replace model full00/native or establish future current capacity."
+    },
+    {
+      "topic": "Input and failure preservation",
+      "evidence": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-26_RGB_B128_resume_source_run01\\ending_checks.json",
+      "checked": "All404 request entries unchanged; five current local teacher/raw/bank/K201/MS-head16 backups size/SHA-exact before and after review; all13 Oct17 failed-run text files match their existing archive receipt. New launcher writes a different root and uses the selected teacher only, with a fresh optimizer/scheduler and no Oct17 checkpoint resume. No science, weight or existing artifact was edited."
+    }
+  ],
+  "actual_tests": {
+    "local_python": "C:/Users/gb/AppData/Roaming/uv/python/cpython-3.13-windows-x86_64-none/python.exe -X utf8 -B -S",
+    "unique_python_sources_compiled": 314,
+    "syntax_grammar": "Python3.10",
+    "private_main_intercepted_transport_cases": 16,
+    "generated_GPU_assertion_cases": 6,
+    "generated_disk_assertion_cases": 6,
+    "generated_fresh_root_assertion_cases": 2,
+    "actual_controller_with_labelled_fake_dependencies_cases": 16,
+    "controller_fixture_source": "Byte-identical copy of the parent R1 stdlib fixture, executed again against current source; one positive and15 negative cases.",
+    "local_archive_rehashes": 5,
+    "old_failed_run_text_checks": 13,
+    "bank_metadata_and_complete_50_identity_neighbor_lists": true,
+    "actual_source_archive_members": 27,
+    "archive_has_weights_or_raw": false,
+    "fixture_harness_correction": "First reviewer-harness query-field assertion assumed ast.walk source order. Sorted AST calls by line, preserved attempt1 and reran in fresh v2 fixture directories; all tests pass. No experiment-source defect or change."
+  },
+  "parent_scientific_review_reuse": {
+    "parent_final_round": 2,
+    "parent_scientific_inputs_byte_identical": true,
+    "scope": "Parent R1/R2 transitive builder and tensor-schema checks remain relevant because all scientific sources and local input bytes are unchanged. Current review independently reread reference/state evaluators, runner/controller/GT gates and tested actual controller flow. It did not rerun parent fake transitive-model tests or actual tensor numerics."
+  },
+  "ending_source_checks": {
+    "all_source_entries_match_request": true,
+    "all_source_entries_unchanged_from_start": true,
+    "entries": 404,
+    "unique_paths": 395,
+    "direct_entries": 27,
+    "inherited_entries": 376,
+    "private_entries": 1,
+    "extra_review_inputs_unchanged": 8,
+    "local_binary_inputs_unchanged": 5,
+    "old_failed_run_texts_match_existing_receipt": 13
+  },
+  "local_archives": [
+    {
+      "role": "teacher",
+      "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_paper_batch_baselines_20261016\\head8\\best\\best.pth",
+      "exists": true,
+      "bytes": 392086065,
+      "sha256": "b4deeb334580a1ad705ee64296dd5050d3ae081fb5f24e7c201b662f922dc0f7",
+      "matches_prior": true,
+      "unchanged": true
+    },
+    {
+      "role": "teacher_raw",
+      "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_paper_batch_baselines_20261016\\head8\\raw\\best_official_arrays.npz",
+      "exists": true,
+      "bytes": 248735553,
+      "sha256": "f32c8f7bd36b20e5aa323e28986bebcf9e2e4a7f150b91f6a48d8185e39c84c4",
+      "matches_prior": true,
+      "unchanged": true
+    },
+    {
+      "role": "bank_raw",
+      "path": "D:\\Program Files\\UserCache\\gb\\ReID2-experiment-artifacts\\rgbnt100_B128_training_neighbors_20261017\\training_features.npz",
+      "exists": true,
+      "bytes": 168905356,
+      "sha256": "0f86b55c09181f97cf83c78d36567e0af4ef371b4275e6730a957d5f9e52104d",
+      "matches_prior": true,
+      "unchanged": true
+    },
+    {
+      "role": "RGBNT201_K/best.pth",
+      "path": "D:\\Program Files\\UserCache\\gb\\ReID2-retained\\RGBNT201_K\\best.pth",
+      "exists": true,
+      "bytes": 405242089,
+      "sha256": "fb055515125bb4e5418390e68ded4be10dc643040dfce34a19ddb8b4836aeb68",
+      "matches_prior": true,
+      "unchanged": true
+    },
+    {
+      "role": "MSVR310_head16_teacher/best.pth",
+      "path": "D:\\Program Files\\UserCache\\gb\\ReID2-retained\\MSVR310_head16_teacher\\best.pth",
+      "exists": true,
+      "bytes": 399933266,
+      "sha256": "a126eb25b42daf9c0b731b731242895a12a0918852361caf893ce71e636f02c9",
+      "matches_prior": true,
+      "unchanged": true
+    }
+  ],
+  "remaining_runtime_requirements": [
+    "At actual launch, satisfy existing current remote source/teacher/bank/protected-weight, GPU2/3 and >3GB free-space assertions. This reviewer made no current remote observations.",
+    "Both actual full00 evaluations and native3 per control must pass before the controller may begin either fresh full50 run.",
+    "Complete6563updates per control, all official GT audits and eight state cases, then archive unique best/raw/state artifacts and perform fresh result review before any scientific acceptance.",
+    "Keep all negative/failure evidence and the declared teacher50+expert50/benchmark-selection limitations. The new teacher plus its rebuilt bank is not a pure one-factor comparison with historical AV."
+  ],
+  "actual_calls": {
+    "SSH": 0,
+    "SCP": 0,
+    "remote_commands": 0,
+    "GPU_queries": 0,
+    "process_queries": 0,
+    "real_numpy_imports": 0,
+    "real_Torch_imports": 0,
+    "NN": 0,
+    "optimizer_updates": 0,
+    "experiment_source_mutations": 0,
+    "protected_weight_mutations": 0,
+    "library_installs": 0,
+    "model_delegations": 0
+  },
+  "runtime_admitted": false,
+  "result_acceptance": false,
+  "new_NN": 0,
+  "formal_updates": 0,
+  "limitations": [
+    "Source review and labelled stdlib fake dependencies do not prove CUDA numerics, actual gradients, throughput or future completion.",
+    "Same-family provisional review; actual model and reasoning effort remain UNATTESTED.",
+    "Saved recovery receipts and historical capacity figures are evidence at their recorded time, not a current launch observation."
+  ],
+  "trace_root": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-26_RGB_B128_resume_source_run01",
+  "goal": "ACTIVE_UNMET",
+  "trace_files": [
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-26_RGB_B128_resume_source_run01\\check_controller.py",
+      "bytes": 10563,
+      "sha256": "192fa662afde55068561d59ef82cc909837859bf10770267646478c5bc75b896"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-26_RGB_B128_resume_source_run01\\check_resume.py",
+      "bytes": 11001,
+      "sha256": "e3f4b5b27df2b3fea3b420e92cc05a595c7e94b49511ef03be02fefefc358403"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-26_RGB_B128_resume_source_run01\\controller_flow_checks.json",
+      "bytes": 31407,
+      "sha256": "e3257d7d98e3bf1c8f0c2aa67771eba7f934545040466b1b8a8297d4fc659591"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-26_RGB_B128_resume_source_run01\\ending_checks.json",
+      "bytes": 140986,
+      "sha256": "b88dc3ce68027131fedbe45d68c020dd0eb2826c0df886de475e2d0de70be417"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-26_RGB_B128_resume_source_run01\\finalize_review.py",
+      "bytes": 14261,
+      "sha256": "16c51cc436a72c09edfa5d521370a7c16018e4ace7c170fc2abfefa6c0920678"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-26_RGB_B128_resume_source_run01\\fixture_attempt1.json",
+      "bytes": 524,
+      "sha256": "1c9eb4f0d9f4964bc8fbbc226b3398647f682bda89dcdea60096283e620e7a1c"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-26_RGB_B128_resume_source_run01\\input_checks.json",
+      "bytes": 5483,
+      "sha256": "ebdc2612b9dd7809f3d1903c83c7a91132a61fe806678886277557b7d560bea9"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-26_RGB_B128_resume_source_run01\\rendered_remote.py.txt",
+      "bytes": 51033,
+      "sha256": "881fd9fac7d9fe306f30ba6ae3e843750ab34ca736c9e9537e33a2a99787312f"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-26_RGB_B128_resume_source_run01\\resume_fixture_checks.json",
+      "bytes": 6307,
+      "sha256": "1c9e62ab7e4a4727746aac6287e340205e6c499abfa46875bc00138611c6bb08"
+    },
+    {
+      "path": "C:\\Users\\gb\\projects\\demo_dual_axis_20261002\\.aris\\traces\\experiment-bridge\\2026-10-26_RGB_B128_resume_source_run01\\starting_seals.json",
+      "bytes": 113780,
+      "sha256": "0a5751a805d4df67226c1bc342493322367e17cb889e34a85b26be5d3e3cf7a2"
+    }
+  ]
+}
